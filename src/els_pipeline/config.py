@@ -12,8 +12,9 @@ class Config:
     S3_EMBEDDINGS_BUCKET = os.getenv("ELS_EMBEDDINGS_BUCKET", "els-embeddings")
     
     # Bedrock Model IDs
-    # Use cross-region inference profile for Claude Sonnet 4.5
-    BEDROCK_LLM_MODEL_ID = os.getenv("BEDROCK_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
+    # Use cross-region inference profile for Anthropic models
+    BEDROCK_DETECTOR_LLM_MODEL_ID = os.getenv("BEDROCK_DETECTOR_LLM_MODEL_ID", "us.anthropic.claude-opus-4-6-v1")
+    BEDROCK_PARSER_LLM_MODEL_ID = os.getenv("BEDROCK_PARSER_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
     BEDROCK_EMBEDDING_MODEL_ID = os.getenv("BEDROCK_EMBEDDING_MODEL_ID", "amazon.titan-embed-text-v1")
     
     # Confidence Threshold

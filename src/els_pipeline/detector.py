@@ -165,13 +165,19 @@ EXAMPLES OF LABEL-TO-LEVEL MAPPING (these are illustrative, not exhaustive):
 - A document labels top sections as "Domains" with "Standards" directly containing "Indicators":
   → Domain = domain, Standard = sub_strand (no strand), Indicator = indicator
 
-AGE-SPECIFIC DESCRIPTIONS:
-Age-band text (e.g., "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "By 36 months", "By 48 months") are NOT separate structural elements. Include all age-specific text as part of the parent indicator's description field.
+CRITICAL — SIDE-BY-SIDE AGE-GROUP OUTCOMES ARE SEPARATE INDICATORS:
+Some documents present outcomes for different age groups (e.g., PK3 and PK4, "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "By 36 months", "By 48 months") in side-by-side table columns. Each column represents a DISTINCT indicator and MUST be extracted as its own separate element. Do NOT merge them into a single indicator.
+
+For example, if you see a table with a "PK3 Outcome" column and a "PK4 Outcome" column:
+- "PK3.I.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted." → one indicator with code "PK3.I.A.2"
+- "PK4.I.A.2 Child shows self-awareness of physical attributes, personal preferences, and own abilities." → a SEPARATE indicator with code "PK4.I.A.2"
+
+These are NOT the same indicator. They have different codes, different titles, and different descriptions. The fact that they appear on the same row or page does not make them one element. Always emit one JSON object per age-group outcome.
 
 FIELD INSTRUCTIONS:
 - "level": One of "domain", "strand", "sub_strand", or "indicator".
 - "code": The code or number from the document (e.g., "1.0", "1.1", "ATL"). If the document does not assign a code, assign an appropriate one.
-- "title": The exact title as written in the document. Do NOT paraphrase or shorten it.
+- "title": The exact title as written in the document. Only shorten it if it has redundent leading/trailing text like "STRAND" or "DOMAIN"
 - "description": The full descriptive text associated with this element, including any age-band details. Combine all age-specific text into one description. If there is no description beyond the title, use an empty string "".
 - "confidence": A float between 0.0 and 1.0 reflecting how certain you are about the classification:
   - 0.95+ : Nesting position is unambiguous and the element clearly maps to this level.
@@ -443,7 +449,7 @@ def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str
     for attempt in range(max_retries + 1):
         try:
             response = bedrock.invoke_model(
-                modelId=Config.BEDROCK_LLM_MODEL_ID,
+                modelId=Config.BEDROCK_DETECTOR_LLM_MODEL_ID,
                 body=json.dumps(request_body)
             )
             

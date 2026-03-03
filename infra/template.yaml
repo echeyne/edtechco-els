@@ -218,6 +218,14 @@ Resources:
                 Action:
                   - s3:PutObject
                 Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/parsing/*"
+        - PolicyName: BedrockInvokeAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                Resource: "*"
       Tags:
         - Key: Environment
           Value: !Ref EnvironmentName
@@ -429,8 +437,8 @@ Resources:
       Runtime: python3.11
       Handler: els_pipeline.handlers.parsing_handler
       Role: !GetAtt HierarchyParserLambdaRole.Arn
-      Timeout: 180
-      MemorySize: 512
+      Timeout: 600
+      MemorySize: 1024
       Environment:
         Variables:
           ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket

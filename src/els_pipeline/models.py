@@ -123,6 +123,7 @@ class NormalizedStandard(BaseModel):
     strand: Optional[HierarchyLevel] = None
     sub_strand: Optional[HierarchyLevel] = None
     indicator: HierarchyLevel
+    age_band: Optional[str] = None
     source_page: int = Field(gt=0)
     source_text: str
     

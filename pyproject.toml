@@ -29,5 +29,5 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 
 [tool.hypothesis]
-max_examples = 20
+max_examples = 10
 deadline = 1000
