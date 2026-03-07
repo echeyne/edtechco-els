@@ -333,6 +333,12 @@ def parsing_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         logger.info(f"Starting hierarchy parsing: run_id={event.get('run_id')}, country={event.get('country')}")
 
+        # Validate required fields
+        required_fields = ["output_artifact", "country", "state", "version_year", "age_band", "run_id"]
+        missing = [f for f in required_fields if f not in event]
+        if missing:
+            raise ValueError(f"Missing required field(s) in event: {', '.join(missing)}")
+
         # Load detection output from S3
         detection_key = event["output_artifact"]
 

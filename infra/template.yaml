@@ -1026,7 +1026,8 @@ Resources:
                   "output_artifact.$": "$.detection_result.Payload.output_artifact",
                   "country.$": "$.country",
                   "state.$": "$.state",
-                  "version_year.$": "$.version_year"
+                  "version_year.$": "$.version_year",
+                  "age_band.$": "$.age_band"
                 }
               },
               "ResultPath": "$.parsing_result",
@@ -1084,6 +1085,7 @@ Resources:
                   "country.$": "$.country",
                   "state.$": "$.state",
                   "version_year.$": "$.version_year",
+                  "age_band.$": "$.age_band",
                   "source_url.$": "$.source_url",
                   "publishing_agency.$": "$.publishing_agency"
                 }
