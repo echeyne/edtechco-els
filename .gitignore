@@ -51,3 +51,7 @@ Thumbs.db
 scratches.txt
 extraction_sample.json
 *test_output.json
+test_parser_local.py
+
+#Kiro
+.kiro/

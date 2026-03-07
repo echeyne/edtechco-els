@@ -140,7 +140,7 @@ def persist_standard(standard: NormalizedStandard, document_meta: Dict[str, Any]
                     VALUES (%s, %s, %s, %s)
                     ON CONFLICT (document_id, code) DO UPDATE
                     SET name = EXCLUDED.name,
-                        description = EXCLUDED.description
+                        description = COALESCE(EXCLUDED.description, domains.description)
                     RETURNING id
                 """, (document_id, standard.domain.code, standard.domain.name, standard.domain.description))
                 domain_id = cur.fetchone()[0]
@@ -153,7 +153,7 @@ def persist_standard(standard: NormalizedStandard, document_meta: Dict[str, Any]
                         VALUES (%s, %s, %s, %s)
                         ON CONFLICT (domain_id, code) DO UPDATE
                         SET name = EXCLUDED.name,
-                            description = EXCLUDED.description
+                            description = COALESCE(EXCLUDED.description, strands.description)
                         RETURNING id
                     """, (domain_id, standard.strand.code, standard.strand.name, standard.strand.description))
                     strand_id = cur.fetchone()[0]
@@ -166,7 +166,7 @@ def persist_standard(standard: NormalizedStandard, document_meta: Dict[str, Any]
                         VALUES (%s, %s, %s, %s)
                         ON CONFLICT (strand_id, code) DO UPDATE
                         SET name = EXCLUDED.name,
-                            description = EXCLUDED.description
+                            description = COALESCE(EXCLUDED.description, sub_strands.description)
                         RETURNING id
                     """, (strand_id, standard.sub_strand.code, standard.sub_strand.name, standard.sub_strand.description))
                     sub_strand_id = cur.fetchone()[0]

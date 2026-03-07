@@ -8,6 +8,14 @@ This directory contains SQL migration scripts for the ELS Normalization Pipeline
 
 The initial database schema including all tables, indexes, and the pgvector extension. This schema includes country support from the start.
 
+### 002_add_descriptions_and_age_band.sql
+
+Adds `description` columns to `domains`, `strands`, and `sub_strands` tables, and `age_band` to `indicators`. Required for storing hierarchy-level descriptions from the parser.
+
+### 003_add_indicator_title.sql
+
+Adds `title` column to `indicators` table to store the indicator's name separately from its description.
+
 ## Running Migrations
 
 ### For a New Database
@@ -19,10 +27,21 @@ The initial database schema including all tables, indexes, and the pgvector exte
    createdb els_pipeline
    ```
 
-3. Run the initial schema:
+3. Run all migrations in order:
    ```bash
    psql -d els_pipeline -f 001_initial_schema.sql
+   psql -d els_pipeline -f 002_add_descriptions_and_age_band.sql
+   psql -d els_pipeline -f 003_add_indicator_title.sql
    ```
+
+### For an Existing Database
+
+If you already have the initial schema, run the newer migrations:
+
+```bash
+psql -d els_pipeline -f 002_add_descriptions_and_age_band.sql
+psql -d els_pipeline -f 003_add_indicator_title.sql
+```
 
 ## Environment Variables
 
