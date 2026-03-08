@@ -4,8 +4,8 @@ import pytest
 from hypothesis import given, strategies as st
 from typing import List
 
-from src.els_pipeline.models import TextBlock
-from src.els_pipeline.extractor import _sort_blocks_by_reading_order
+from els_pipeline.models import TextBlock
+from els_pipeline.extractor import _sort_blocks_by_reading_order
 
 
 # Strategy for generating TextBlock objects

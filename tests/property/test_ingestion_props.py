@@ -11,8 +11,8 @@ from pathlib import Path
 from hypothesis import given, strategies as st, assume
 from unittest.mock import patch, MagicMock
 
-from src.els_pipeline.ingester import ingest_document, validate_format, SUPPORTED_FORMATS
-from src.els_pipeline.models import IngestionRequest
+from els_pipeline.ingester import ingest_document, validate_format, SUPPORTED_FORMATS
+from els_pipeline.models import IngestionRequest
 
 
 # Strategy for generating country codes (ISO 3166-1 alpha-2)
@@ -94,7 +94,7 @@ def test_property_2_ingestion_metadata_completeness(
         )
         
         # Mock S3 client to avoid actual AWS calls
-        with patch("src.els_pipeline.ingester.boto3.client") as mock_boto3:
+        with patch("els_pipeline.ingester.boto3.client") as mock_boto3:
             mock_s3 = MagicMock()
             mock_s3.put_object.return_value = {"VersionId": "test-version-123"}
             mock_boto3.return_value = mock_s3

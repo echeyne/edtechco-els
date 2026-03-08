@@ -11,12 +11,12 @@ import json
 import pytest
 from unittest.mock import patch
 from hypothesis import given, strategies as st, assume, settings
-from src.els_pipeline.models import (
+from els_pipeline.models import (
     DetectedElement,
     HierarchyLevelEnum,
     ParseResult,
 )
-from src.els_pipeline.parser import (
+from els_pipeline.parser import (
     parse_hierarchy,
     generate_standard_id,
 )
@@ -347,7 +347,7 @@ def test_property_9_canonical_level_normalization(elements, country, state, year
     Validates: Requirements 4.1
     """
     fake = _mock_bedrock_generic(elements)
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
         result = parse_hierarchy(elements, country, state, year)
 
     for standard in result.standards:
@@ -372,7 +372,7 @@ def test_property_10_depth_based_hierarchy_mapping_2_levels(elements, country, s
     Validates: Requirements 4.2, 4.3, 4.4
     """
     fake = _mock_bedrock_two_level(elements)
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
         result = parse_hierarchy(elements, country, state, year)
 
     for standard in result.standards:
@@ -395,7 +395,7 @@ def test_property_10_depth_based_hierarchy_mapping_3_levels(elements, country, s
     Validates: Requirements 4.2, 4.3, 4.4
     """
     fake = _mock_bedrock_three_level(elements)
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
         result = parse_hierarchy(elements, country, state, year)
 
     for standard in result.standards:
@@ -418,7 +418,7 @@ def test_property_10_depth_based_hierarchy_mapping_4_levels(elements, country, s
     Validates: Requirements 4.2, 4.3, 4.4
     """
     fake = _mock_bedrock_four_level(elements)
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
         result = parse_hierarchy(elements, country, state, year)
 
     for standard in result.standards:
@@ -476,7 +476,7 @@ def test_property_12_no_orphaned_indicators(elements, country, state, year):
     Validates: Requirements 4.6
     """
     fake = _mock_bedrock_generic(elements)
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
         result = parse_hierarchy(elements, country, state, year)
 
     for standard in result.standards:
@@ -515,7 +515,7 @@ def test_property_12_orphaned_indicators_without_domain(country, state, year):
     )
 
     fake = json.dumps([])
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
         result = parse_hierarchy([orphan_indicator], country, state, year)
 
     assert len(result.standards) == 0
@@ -590,7 +590,7 @@ def test_property_2_3_age_band_fallback_and_passthrough(
         "age_band": None, "source_page": 1, "source_text": "source",
     }])
 
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake_response):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake_response):
         result = parse_hierarchy(
             [domain, indicator], country, state, year, age_band=age_band
         )
@@ -621,7 +621,7 @@ def test_property_1_parse_hierarchy_always_returns_parse_result(
     indicators = [e for e in valid_elements if e.level == HierarchyLevelEnum.INDICATOR]
     fake_response = _mock_bedrock_generic(elements) if indicators else "[]"
 
-    with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake_response):
+    with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake_response):
         result = parse_hierarchy(elements, country, state, year, age_band=age_band)
 
     assert isinstance(result, ParseResult)
@@ -634,7 +634,7 @@ def test_property_1_parse_hierarchy_always_returns_parse_result(
 
 from unittest.mock import MagicMock
 from botocore.exceptions import ClientError
-from src.els_pipeline.parser import MAX_PARSE_RETRIES, MAX_BEDROCK_RETRIES
+from els_pipeline.parser import MAX_PARSE_RETRIES, MAX_BEDROCK_RETRIES
 
 
 @given(
@@ -670,7 +670,7 @@ def test_property_5_json_parse_retry_exhaustion_returns_error(
     ]
 
     with patch(
-        "src.els_pipeline.parser.call_bedrock_llm",
+        "els_pipeline.parser.call_bedrock_llm",
         return_value="not valid json",
     ) as mock_llm:
         result = parse_hierarchy(elements, country, state, year, age_band=age_band)
@@ -720,7 +720,7 @@ def test_property_6_client_error_retry_exhaustion_returns_error(
     mock_bedrock_client = MagicMock()
     mock_bedrock_client.invoke_model.side_effect = client_error
 
-    with patch("src.els_pipeline.parser.boto3") as mock_boto3:
+    with patch("els_pipeline.parser.boto3") as mock_boto3:
         mock_boto3.client.return_value = mock_bedrock_client
         result = parse_hierarchy(elements, country, state, year, age_band=age_band)
 

@@ -8,7 +8,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from datetime import datetime
 
-from src.els_pipeline.db import (
+from els_pipeline.db import (
     DatabaseConnection,
     persist_standard,
     persist_embedding,
@@ -16,7 +16,7 @@ from src.els_pipeline.db import (
     query_similar_indicators,
     get_indicators_by_country_state
 )
-from src.els_pipeline.models import (
+from els_pipeline.models import (
     NormalizedStandard,
     HierarchyLevel,
     EmbeddingRecord,
@@ -75,7 +75,7 @@ class TestDatabaseConnectionPooling:
     
     def test_connection_pool_initialization(self):
         """Test that connection pool initializes correctly."""
-        with patch('src.els_pipeline.db.SimpleConnectionPool') as mock_pool:
+        with patch('els_pipeline.db.SimpleConnectionPool') as mock_pool:
             DatabaseConnection._pool = None
             DatabaseConnection.initialize_pool(
                 host='testhost',
@@ -95,7 +95,7 @@ class TestDatabaseConnectionPooling:
     
     def test_connection_pool_reuse(self):
         """Test that connection pool is reused if already initialized."""
-        with patch('src.els_pipeline.db.SimpleConnectionPool') as mock_pool:
+        with patch('els_pipeline.db.SimpleConnectionPool') as mock_pool:
             DatabaseConnection._pool = MagicMock()
             DatabaseConnection.initialize_pool()
             

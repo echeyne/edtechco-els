@@ -6,8 +6,8 @@ Feature: els-normalization-pipeline
 import pytest
 from hypothesis import given, strategies as st
 
-from src.els_pipeline.models import DetectedElement, HierarchyLevelEnum
-from src.els_pipeline.config import Config
+from els_pipeline.models import DetectedElement, HierarchyLevelEnum
+from els_pipeline.config import Config
 
 
 # Strategy for generating valid hierarchy levels

@@ -17,8 +17,8 @@ project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
 import json
-from src.els_pipeline.models import DetectedElement, HierarchyLevelEnum
-from src.els_pipeline.parser import parse_hierarchy, generate_standard_id
+from els_pipeline.models import DetectedElement, HierarchyLevelEnum
+from els_pipeline.parser import parse_hierarchy, generate_standard_id
 
 
 def print_section(title):

@@ -4,8 +4,8 @@ import pytest
 from unittest.mock import patch, MagicMock
 from botocore.exceptions import ClientError
 
-from src.els_pipeline.extractor import extract_text, _parse_textract_response, _sort_blocks_by_reading_order
-from src.els_pipeline.models import TextBlock
+from els_pipeline.extractor import extract_text, _parse_textract_response, _sort_blocks_by_reading_order
+from els_pipeline.models import TextBlock
 
 
 @pytest.fixture
@@ -113,7 +113,7 @@ def mock_textract_response_no_text():
 
 def test_successful_extraction_with_mocked_textract(mock_textract_response):
     """Test successful extraction with mocked Textract responses."""
-    with patch('src.els_pipeline.extractor.boto3.client') as mock_boto_client:
+    with patch('els_pipeline.extractor.boto3.client') as mock_boto_client:
         # Mock S3 client for head_object
         mock_s3 = MagicMock()
         mock_s3.head_object.return_value = {'ContentLength': 1024 * 1024}  # 1MB
@@ -215,7 +215,7 @@ def test_reading_order_sorting():
 
 def test_error_handling_empty_response(mock_empty_textract_response):
     """Test error handling for empty Textract responses."""
-    with patch('src.els_pipeline.extractor.boto3.client') as mock_boto_client:
+    with patch('els_pipeline.extractor.boto3.client') as mock_boto_client:
         # Mock S3 client
         mock_s3 = MagicMock()
         mock_s3.head_object.return_value = {'ContentLength': 1024 * 1024}
@@ -248,7 +248,7 @@ def test_error_handling_empty_response(mock_empty_textract_response):
 
 def test_error_handling_invalid_response(mock_textract_response_no_text):
     """Test error handling for invalid Textract responses (no text blocks)."""
-    with patch('src.els_pipeline.extractor.boto3.client') as mock_boto_client:
+    with patch('els_pipeline.extractor.boto3.client') as mock_boto_client:
         # Mock S3 client
         mock_s3 = MagicMock()
         mock_s3.head_object.return_value = {'ContentLength': 1024 * 1024}
@@ -280,7 +280,7 @@ def test_error_handling_invalid_response(mock_textract_response_no_text):
 
 def test_error_handling_s3_access_failure():
     """Test error handling when S3 access fails."""
-    with patch('src.els_pipeline.extractor.boto3.client') as mock_boto_client:
+    with patch('els_pipeline.extractor.boto3.client') as mock_boto_client:
         # Mock S3 client that raises an error
         mock_s3 = MagicMock()
         mock_s3.head_object.side_effect = ClientError(
@@ -300,7 +300,7 @@ def test_error_handling_s3_access_failure():
 
 def test_error_handling_textract_failure():
     """Test error handling when Textract API fails."""
-    with patch('src.els_pipeline.extractor.boto3.client') as mock_boto_client:
+    with patch('els_pipeline.extractor.boto3.client') as mock_boto_client:
         # Mock S3 client
         mock_s3 = MagicMock()
         mock_s3.head_object.return_value = {'ContentLength': 1024 * 1024}

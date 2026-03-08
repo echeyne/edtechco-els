@@ -36,8 +36,8 @@ from pathlib import Path
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.els_pipeline.extractor import extract_text
-from src.els_pipeline.config import Config
+from els_pipeline.extractor import extract_text
+from els_pipeline.config import Config
 
 
 def print_section(title: str):

@@ -7,7 +7,7 @@ Property 1: S3 Path Construction
 import re
 from hypothesis import given, strategies as st
 
-from src.els_pipeline.ingester import construct_s3_path
+from els_pipeline.ingester import construct_s3_path
 
 
 # Strategy for generating valid country codes (2-letter uppercase ISO 3166-1 alpha-2)

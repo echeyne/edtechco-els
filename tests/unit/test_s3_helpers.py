@@ -5,7 +5,7 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 from botocore.exceptions import ClientError
 
-from src.els_pipeline.s3_helpers import (
+from els_pipeline.s3_helpers import (
     save_json_to_s3,
     load_json_from_s3,
     construct_intermediate_key
@@ -15,7 +15,7 @@ from src.els_pipeline.s3_helpers import (
 @pytest.fixture
 def mock_s3_client():
     """Create a mock S3 client."""
-    with patch('src.els_pipeline.s3_helpers.boto3.client') as mock_client:
+    with patch('els_pipeline.s3_helpers.boto3.client') as mock_client:
         client = MagicMock()
         mock_client.return_value = client
         yield client

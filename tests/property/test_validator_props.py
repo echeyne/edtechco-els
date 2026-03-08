@@ -5,12 +5,12 @@ Feature: els-normalization-pipeline
 
 import pytest
 from hypothesis import given, strategies as st
-from src.els_pipeline.validator import (
+from els_pipeline.validator import (
     validate_record,
     serialize_record,
     deserialize_record,
 )
-from src.els_pipeline.models import NormalizedStandard, HierarchyLevel
+from els_pipeline.models import NormalizedStandard, HierarchyLevel
 
 
 # Strategies for generating test data

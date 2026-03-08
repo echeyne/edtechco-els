@@ -5,7 +5,7 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 from botocore.exceptions import ClientError
 
-from src.els_pipeline.detector import (
+from els_pipeline.detector import (
     detect_structure,
     chunk_text_blocks,
     build_detection_prompt,
@@ -13,7 +13,7 @@ from src.els_pipeline.detector import (
     call_bedrock_llm,
     estimate_tokens
 )
-from src.els_pipeline.models import TextBlock, DetectedElement, HierarchyLevelEnum
+from els_pipeline.models import TextBlock, DetectedElement, HierarchyLevelEnum
 
 
 @pytest.fixture
@@ -286,7 +286,7 @@ def test_confidence_threshold_flagging(sample_text_blocks):
     assert elements[0].needs_review is True
 
 
-@patch('src.els_pipeline.detector.boto3.client')
+@patch('els_pipeline.detector.boto3.client')
 def test_call_bedrock_llm_success(mock_boto_client, mock_bedrock_response):
     """Test successful Bedrock LLM call."""
     mock_client = Mock()
@@ -300,7 +300,7 @@ def test_call_bedrock_llm_success(mock_boto_client, mock_bedrock_response):
     mock_client.invoke_model.assert_called_once()
 
 
-@patch('src.els_pipeline.detector.boto3.client')
+@patch('els_pipeline.detector.boto3.client')
 def test_call_bedrock_llm_retry(mock_boto_client):
     """Test Bedrock LLM call with retry."""
     mock_client = Mock()
@@ -323,7 +323,7 @@ def test_call_bedrock_llm_retry(mock_boto_client):
     assert mock_client.invoke_model.call_count == 2
 
 
-@patch('src.els_pipeline.detector.boto3.client')
+@patch('els_pipeline.detector.boto3.client')
 def test_call_bedrock_llm_max_retries_exceeded(mock_boto_client):
     """Test Bedrock LLM call exceeding max retries."""
     mock_client = Mock()
@@ -336,7 +336,7 @@ def test_call_bedrock_llm_max_retries_exceeded(mock_boto_client):
         call_bedrock_llm("Test prompt", max_retries=2)
 
 
-@patch('src.els_pipeline.detector.call_bedrock_llm')
+@patch('els_pipeline.detector.call_bedrock_llm')
 def test_detect_structure_success(mock_call_bedrock, sample_text_blocks):
     """Test successful structure detection."""
     mock_call_bedrock.return_value = json.dumps([
@@ -368,7 +368,7 @@ def test_detect_structure_success(mock_call_bedrock, sample_text_blocks):
     assert result.document_s3_key == "test-doc.pdf"
 
 
-@patch('src.els_pipeline.detector.call_bedrock_llm')
+@patch('els_pipeline.detector.call_bedrock_llm')
 def test_detect_structure_empty_blocks(mock_call_bedrock):
     """Test structure detection with empty blocks."""
     result = detect_structure([], "test-doc.pdf")
@@ -378,7 +378,7 @@ def test_detect_structure_empty_blocks(mock_call_bedrock):
     assert len(result.elements) == 0
 
 
-@patch('src.els_pipeline.detector.call_bedrock_llm')
+@patch('els_pipeline.detector.call_bedrock_llm')
 def test_detect_structure_json_parse_retry(mock_call_bedrock, sample_text_blocks):
     """Test structure detection with JSON parsing retry."""
     # First two calls return invalid JSON, third succeeds
@@ -404,7 +404,7 @@ def test_detect_structure_json_parse_retry(mock_call_bedrock, sample_text_blocks
     assert len(result.elements) == 1
 
 
-@patch('src.els_pipeline.detector.call_bedrock_llm')
+@patch('els_pipeline.detector.call_bedrock_llm')
 def test_detect_structure_json_parse_failure(mock_call_bedrock, sample_text_blocks):
     """Test structure detection with persistent JSON parsing failure."""
     # All calls return invalid JSON
@@ -417,7 +417,7 @@ def test_detect_structure_json_parse_failure(mock_call_bedrock, sample_text_bloc
     assert len(result.elements) == 0  # No valid elements parsed
 
 
-@patch('src.els_pipeline.detector.call_bedrock_llm')
+@patch('els_pipeline.detector.call_bedrock_llm')
 def test_detect_structure_bedrock_exception(mock_call_bedrock, sample_text_blocks):
     """Test structure detection with Bedrock exception."""
     mock_call_bedrock.side_effect = Exception("Bedrock error")

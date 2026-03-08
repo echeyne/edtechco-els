@@ -44,7 +44,7 @@ load_dotenv()
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.els_pipeline.db import (
+from els_pipeline.db import (
     DatabaseConnection,
     persist_standard,
     persist_embedding,
@@ -52,7 +52,7 @@ from src.els_pipeline.db import (
     query_similar_indicators,
     get_indicators_by_country_state
 )
-from src.els_pipeline.models import (
+from els_pipeline.models import (
     NormalizedStandard,
     HierarchyLevel,
     EmbeddingRecord,

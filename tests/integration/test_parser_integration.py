@@ -10,8 +10,8 @@ from unittest.mock import patch, MagicMock
 
 from botocore.exceptions import ClientError
 
-from src.els_pipeline.models import DetectedElement, HierarchyLevelEnum
-from src.els_pipeline.parser import (
+from els_pipeline.models import DetectedElement, HierarchyLevelEnum
+from els_pipeline.parser import (
     parse_hierarchy,
     generate_standard_id,
     MAX_PARSE_RETRIES,
@@ -70,7 +70,7 @@ class TestDepthNormalization:
              "age_band": None, "source_page": 3, "source_text": "LLD.2 indicator text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert result.status == "success"
@@ -134,7 +134,7 @@ class TestDepthNormalization:
              "age_band": None, "source_page": 4, "source_text": "LLD.A.2 indicator text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert result.status == "success"
@@ -208,7 +208,7 @@ class TestDepthNormalization:
              "age_band": None, "source_page": 5, "source_text": "LLD.A.1.b indicator text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert result.status == "success"
@@ -277,7 +277,7 @@ class TestStandardIDGeneration:
              "age_band": None, "source_page": 2, "source_text": "LLD.1 indicator text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert len(result.standards) == 1
@@ -307,7 +307,7 @@ class TestOrphanDetection:
         # LLM returns empty array — no hierarchy could be resolved
         fake = _bedrock_response([])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert len(result.standards) == 0
@@ -341,7 +341,7 @@ class TestOrphanDetection:
              "age_band": None, "source_page": 2, "source_text": "valid text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert len(result.standards) == 1
@@ -402,7 +402,7 @@ class TestTreeAssembly:
              "age_band": None, "source_page": 4, "source_text": "CD.1 indicator text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert result.status == "success"
@@ -447,7 +447,7 @@ class TestTreeAssembly:
              "age_band": None, "source_page": 2, "source_text": "valid text"},
         ])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert len(result.standards) == 1
@@ -478,7 +478,7 @@ class TestTreeAssembly:
 
         fake = _bedrock_response([])
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm", return_value=fake):
+        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert len(result.standards) == 0
@@ -506,7 +506,7 @@ class TestAllReviewInput:
             ),
         ]
 
-        with patch("src.els_pipeline.parser.call_bedrock_llm") as mock_bedrock:
+        with patch("els_pipeline.parser.call_bedrock_llm") as mock_bedrock:
             result = parse_hierarchy(elements, "US", "CA", 2021)
 
         assert result.status == "error"
@@ -538,7 +538,7 @@ class TestJsonParseRetry:
         ]
 
         with patch(
-            "src.els_pipeline.parser.call_bedrock_llm",
+            "els_pipeline.parser.call_bedrock_llm",
             return_value="this is not valid json at all",
         ) as mock_bedrock:
             result = parse_hierarchy(elements, "US", "CA", 2021)
@@ -573,7 +573,7 @@ class TestClientErrorRetry:
         client_error = ClientError(error_response, "InvokeModel")
 
         with patch(
-            "src.els_pipeline.parser.call_bedrock_llm",
+            "els_pipeline.parser.call_bedrock_llm",
             side_effect=client_error,
         ) as mock_bedrock:
             result = parse_hierarchy(elements, "US", "CA", 2021)

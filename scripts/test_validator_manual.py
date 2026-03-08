@@ -27,14 +27,14 @@ from datetime import datetime
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 import boto3
-from src.els_pipeline.validator import (
+from els_pipeline.validator import (
     validate_record,
     serialize_record,
     deserialize_record,
     store_validated_record,
 )
-from src.els_pipeline.models import NormalizedStandard, HierarchyLevel
-from src.els_pipeline.config import Config
+from els_pipeline.models import NormalizedStandard, HierarchyLevel
+from els_pipeline.config import Config
 
 
 def print_section(title):

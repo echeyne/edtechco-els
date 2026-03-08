@@ -9,7 +9,7 @@ from hypothesis import given, strategies as st, settings, HealthCheck
 from unittest.mock import patch, MagicMock
 import random
 
-from src.els_pipeline.db import query_similar_indicators
+from els_pipeline.db import query_similar_indicators
 
 
 # Strategies for generating test data
@@ -74,7 +74,7 @@ class TestProperty19VectorSimilarityOrdering:
     )
     def test_results_ordered_by_decreasing_similarity(self, query_vector, mock_results):
         """Test that query results are ordered by decreasing similarity."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -106,7 +106,7 @@ class TestProperty19VectorSimilarityOrdering:
     )
     def test_similarity_ordering_with_random_scores(self, query_vector, count):
         """Test ordering property with completely random similarity scores."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -164,7 +164,7 @@ class TestProperty20QueryFilterCorrectness:
     )
     def test_country_filter_correctness(self, query_vector, filter_country, count):
         """Test that country filter is correctly applied."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -210,7 +210,7 @@ class TestProperty20QueryFilterCorrectness:
     )
     def test_state_filter_correctness(self, query_vector, filter_state, count):
         """Test that state filter is correctly applied."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -256,7 +256,7 @@ class TestProperty20QueryFilterCorrectness:
     )
     def test_age_band_filter_correctness(self, query_vector, filter_age_band, count):
         """Test that age_band filter is correctly applied."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -302,7 +302,7 @@ class TestProperty20QueryFilterCorrectness:
     )
     def test_domain_filter_correctness(self, query_vector, filter_domain, count):
         """Test that domain filter is correctly applied."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -348,7 +348,7 @@ class TestProperty20QueryFilterCorrectness:
     )
     def test_version_year_filter_correctness(self, query_vector, filter_year, count):
         """Test that version_year filter is correctly applied."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -396,7 +396,7 @@ class TestProperty20QueryFilterCorrectness:
     )
     def test_multiple_filters_correctness(self, query_vector, filter_country, filter_state, filter_age_band, count):
         """Test that multiple filters are correctly applied together."""
-        with patch('src.els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
+        with patch('els_pipeline.db.DatabaseConnection.get_connection') as mock_get_conn:
             # Setup mock
             mock_conn = MagicMock()
             mock_cursor = MagicMock()

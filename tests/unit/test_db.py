@@ -4,7 +4,7 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 from datetime import datetime
 
-from src.els_pipeline.db import (
+from els_pipeline.db import (
     DatabaseConnection,
     persist_standard,
     persist_embedding,
@@ -12,7 +12,7 @@ from src.els_pipeline.db import (
     query_similar_indicators,
     get_indicators_by_country_state
 )
-from src.els_pipeline.models import (
+from els_pipeline.models import (
     NormalizedStandard,
     HierarchyLevel,
     EmbeddingRecord,
@@ -88,7 +88,7 @@ class TestDatabaseConnection:
     
     def test_initialize_pool(self):
         """Test connection pool initialization."""
-        with patch('src.els_pipeline.db.SimpleConnectionPool') as mock_pool:
+        with patch('els_pipeline.db.SimpleConnectionPool') as mock_pool:
             DatabaseConnection._pool = None
             DatabaseConnection.initialize_pool(
                 host='testhost',
@@ -103,7 +103,7 @@ class TestDatabaseConnection:
     
     def test_initialize_pool_with_env_vars(self):
         """Test connection pool initialization with environment variables."""
-        with patch('src.els_pipeline.db.SimpleConnectionPool') as mock_pool, \
+        with patch('els_pipeline.db.SimpleConnectionPool') as mock_pool, \
              patch.dict('os.environ', {
                  'DB_HOST': 'envhost',
                  'DB_PORT': '5433',

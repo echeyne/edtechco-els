@@ -22,9 +22,9 @@ from pathlib import Path
 # Add src to path so we can import the module
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from src.els_pipeline.ingester import ingest_document
-from src.els_pipeline.models import IngestionRequest
-from src.els_pipeline.config import Config
+from els_pipeline.ingester import ingest_document
+from els_pipeline.models import IngestionRequest
+from els_pipeline.config import Config
 
 
 def print_config():
