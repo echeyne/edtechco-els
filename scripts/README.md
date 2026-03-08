@@ -209,7 +209,7 @@ pip install moto[s3]
 pytest tests/integration/test_ingester_integration.py -v
 
 # Run with coverage
-pytest tests/integration/test_ingester_integration.py --cov=src.els_pipeline.ingester
+pytest tests/integration/test_ingester_integration.py --cov=els_pipeline.ingester
 ```
 
 These tests use mocked S3 and don't require AWS credentials or deployed infrastructure.
