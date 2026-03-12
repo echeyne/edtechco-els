@@ -7,7 +7,6 @@ export interface Document {
   title: string;
   versionYear: number;
   sourceUrl: string | null;
-  ageBand: string;
   publishingAgency: string;
   createdAt: Date;
 }
@@ -60,9 +59,9 @@ export interface Indicator {
   code: string;
   title: string | null;
   description: string;
-  ageBand: string | null;
-  sourcePage: number | null;
-  sourceText: string | null;
+  ageBand: string;
+  sourcePage: number;
+  sourceText: string;
   humanVerified: boolean;
   verifiedAt: Date | null;
   verifiedBy: string | null;
