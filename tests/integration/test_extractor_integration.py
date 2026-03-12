@@ -295,7 +295,7 @@ def test_error_handling_s3_access_failure():
         
         # Verify error handling
         assert result.status == 'error'
-        assert 'Failed to access document' in result.error
+        assert 'Textract extraction failed' in result.error
 
 
 def test_error_handling_textract_failure():

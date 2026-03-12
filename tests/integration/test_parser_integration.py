@@ -71,7 +71,7 @@ class TestDepthNormalization:
         ])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "success"
         assert len(result.standards) == 2
@@ -135,7 +135,7 @@ class TestDepthNormalization:
         ])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "success"
         assert len(result.standards) == 2
@@ -209,7 +209,7 @@ class TestDepthNormalization:
         ])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "success"
         assert len(result.standards) == 2
@@ -278,7 +278,7 @@ class TestStandardIDGeneration:
         ])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 1
         assert result.standards[0].standard_id == "US-CA-2021-LLD-LLD.1"
@@ -308,7 +308,7 @@ class TestOrphanDetection:
         fake = _bedrock_response([])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 0
 
@@ -342,7 +342,7 @@ class TestOrphanDetection:
         ])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 1
         assert result.standards[0].indicator.code == "LLD.1"
@@ -385,7 +385,8 @@ class TestTreeAssembly:
             ),
         ]
 
-        fake = _bedrock_response([
+        # Create separate responses for each domain chunk
+        lld_response = _bedrock_response([
             {"domain_code": "LLD", "domain_name": "Language and Literacy Development",
              "domain_description": "Language domain",
              "strand_code": None, "strand_name": None, "strand_description": None,
@@ -393,6 +394,9 @@ class TestTreeAssembly:
              "indicator_code": "LLD.1", "indicator_name": "Listening Skills",
              "indicator_description": "Child demonstrates listening skills",
              "age_band": None, "source_page": 2, "source_text": "LLD.1 indicator text"},
+        ])
+        
+        cd_response = _bedrock_response([
             {"domain_code": "CD", "domain_name": "Cognitive Development",
              "domain_description": "Cognitive domain",
              "strand_code": None, "strand_name": None, "strand_description": None,
@@ -402,8 +406,8 @@ class TestTreeAssembly:
              "age_band": None, "source_page": 4, "source_text": "CD.1 indicator text"},
         ])
 
-        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+        with patch("els_pipeline.parser.call_bedrock_llm", side_effect=[lld_response, cd_response]):
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "success"
         assert len(result.standards) == 2
@@ -448,14 +452,14 @@ class TestTreeAssembly:
         ])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 1
         assert result.standards[0].indicator.code == "LLD.1"
 
     def test_empty_elements_list(self):
         """Test parsing with an empty elements list."""
-        result = parse_hierarchy([], "US", "CA", 2021)
+        result = parse_hierarchy([], "US", "CA", 2021, "PK")
         assert result.status == "error"
         assert len(result.standards) == 0
         assert result.error is not None
@@ -479,7 +483,7 @@ class TestTreeAssembly:
         fake = _bedrock_response([])
 
         with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 0
 
@@ -507,7 +511,7 @@ class TestAllReviewInput:
         ]
 
         with patch("els_pipeline.parser.call_bedrock_llm") as mock_bedrock:
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "error"
         assert len(result.standards) == 0
@@ -541,7 +545,7 @@ class TestJsonParseRetry:
             "els_pipeline.parser.call_bedrock_llm",
             return_value="this is not valid json at all",
         ) as mock_bedrock:
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "error"
         assert mock_bedrock.call_count == MAX_PARSE_RETRIES + 1
@@ -576,7 +580,7 @@ class TestClientErrorRetry:
             "els_pipeline.parser.call_bedrock_llm",
             side_effect=client_error,
         ) as mock_bedrock:
-            result = parse_hierarchy(elements, "US", "CA", 2021)
+            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert result.status == "error"
         # ClientError from call_bedrock_llm is caught by the top-level except
