@@ -41,6 +41,7 @@ function mapDocument(row: Record<string, unknown>): Document {
     title: row.title as string,
     versionYear: row.version_year as number,
     sourceUrl: (row.source_url as string) ?? null,
+    ageBand: (row.age_band as string) ?? "",
     publishingAgency: (row.publishing_agency as string) ?? "",
     createdAt: new Date(row.created_at as string),
   };
