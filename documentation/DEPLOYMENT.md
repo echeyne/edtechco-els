@@ -64,6 +64,66 @@ aws cloudformation deploy \
   --capabilities CAPABILITY_NAMED_IAM
 ```
 
+## App Deployment (Frontend + API)
+
+The app deployment script (`scripts/deploy_app.sh`) handles the frontend (S3 + CloudFront) and API (Lambda + API Gateway) as a separate stack from the pipeline infrastructure.
+
+### Prerequisites
+
+In addition to the general prerequisites above, the app deployment requires:
+
+- Node.js
+- pnpm
+
+### Usage
+
+```bash
+# Full deploy to dev (default)
+./scripts/deploy_app.sh
+
+# Deploy to production
+./scripts/deploy_app.sh -e prod -r us-east-2
+
+# Redeploy code only (skip CloudFormation)
+./scripts/deploy_app.sh --skip-infra
+
+# Frontend only
+./scripts/deploy_app.sh --skip-infra --skip-api
+
+# API only
+./scripts/deploy_app.sh --skip-infra --skip-frontend
+```
+
+### Options
+
+| Flag                  | Description                                      | Default     |
+| --------------------- | ------------------------------------------------ | ----------- |
+| `-e`, `--environment` | Target environment (`dev`, `staging`, `prod`)    | `dev`       |
+| `-r`, `--region`      | AWS region                                       | `us-east-1` |
+| `--skip-infra`        | Skip CloudFormation stack deployment             |             |
+| `--skip-frontend`     | Skip frontend build and S3/CloudFront deployment |             |
+| `--skip-api`          | Skip API build and Lambda deployment             |             |
+
+### What It Does
+
+The script runs three stages (each skippable):
+
+1. **Infrastructure** — Deploys the `els-app-{env}` CloudFormation stack from `infra/app-template.yaml`
+2. **API** — Builds the API (`@els/shared` + `@els/api`), bundles with esbuild for Lambda, and updates the function code
+3. **Frontend** — Builds the frontend (`@els/shared` + `@els/frontend`), syncs to S3, and invalidates the CloudFront cache
+
+### App Stack Naming
+
+| Environment | Stack Name        |
+| ----------- | ----------------- |
+| Development | `els-app-dev`     |
+| Staging     | `els-app-staging` |
+| Production  | `els-app-prod`    |
+
+### App Stack Outputs
+
+After deployment, the script prints the frontend URL (CloudFront) and API URL (API Gateway). The API is also accessible at `https://{cloudfront-domain}/api/*`.
+
 ## Post-Deployment
 
 1. Get stack outputs:
