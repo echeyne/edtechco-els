@@ -35,6 +35,7 @@ htmlcov/
 # Environment Variables
 .env
 .env.dev
+.env.local
 
 # IDE
 .vscode/

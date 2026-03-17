@@ -105,12 +105,16 @@ check_prerequisites() {
 deploy_infra() {
     print_header "Deploying App Infrastructure"
 
+    PIPELINE_STACK="els-pipeline-${ENVIRONMENT}"
     print_message "$YELLOW" "Stack: $STACK_NAME | Env: $ENVIRONMENT | Region: $REGION"
+    print_message "$YELLOW" "Pipeline stack: $PIPELINE_STACK"
 
     aws cloudformation deploy \
         --template-file "$TEMPLATE_FILE" \
         --stack-name "$STACK_NAME" \
-        --parameter-overrides EnvironmentName="$ENVIRONMENT" \
+        --parameter-overrides \
+            EnvironmentName="$ENVIRONMENT" \
+            PipelineStackName="$PIPELINE_STACK" \
         --capabilities CAPABILITY_NAMED_IAM \
         --no-fail-on-empty-changeset \
         --region "$REGION"
