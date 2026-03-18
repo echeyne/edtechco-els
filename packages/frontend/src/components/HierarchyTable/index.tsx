@@ -58,6 +58,8 @@ export interface HierarchyTableProps {
     type: string,
   ) => void;
   onDelete?: (id: number, type: string) => void;
+  onVerify?: (id: number, type: string, verified: boolean) => Promise<void>;
+  onDataLoaded?: (documents: Document[], hierarchies: Map<number, HierarchyResponse>) => void;
 }
 
 type SortField = "code" | "name" | "status";
@@ -108,8 +110,14 @@ function compareField(
 // VerifiedBadge
 // ---------------------------------------------------------------------------
 
-function VerifiedBadge({ verified }: { verified: boolean }) {
-  return verified ? (
+function VerifiedBadge({
+  verified,
+  onClick,
+}: {
+  verified: boolean;
+  onClick?: () => void;
+}) {
+  const badge = verified ? (
     <Badge className="bg-green-100 text-green-800 border-green-200 hover:bg-green-100">
       <ShieldCheck className="mr-1 h-3 w-3" />
       Verified
@@ -119,6 +127,23 @@ function VerifiedBadge({ verified }: { verified: boolean }) {
       Unverified
     </Badge>
   );
+
+  if (onClick) {
+    return (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+        className="cursor-pointer hover:opacity-80"
+        aria-label={verified ? "Mark as unverified" : "Mark as verified"}
+      >
+        {badge}
+      </button>
+    );
+  }
+
+  return badge;
 }
 
 // ---------------------------------------------------------------------------
@@ -321,6 +346,8 @@ export function HierarchyTable({
   onFilterChange,
   onEdit,
   onDelete,
+  onVerify,
+  onDataLoaded,
 }: HierarchyTableProps) {
   const { hasEditPermission } = useAuth();
 
@@ -378,12 +405,13 @@ export function HierarchyTable({
         if (entry) map.set(entry[0], entry[1]);
       }
       setHierarchies(map);
+      onDataLoaded?.(docs, map);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load data");
     } finally {
       setLoading(false);
     }
-  }, [filters.country, filters.state]);
+  }, [filters.country, filters.state, onDataLoaded]);
 
   useEffect(() => {
     fetchFilters();
@@ -467,7 +495,7 @@ export function HierarchyTable({
           </TableCell>
           <TableCell>{doc.versionYear}</TableCell>
           <TableCell />
-          <TableCell />
+          {hasEditPermission && <TableCell />}
         </TableRow>,
       );
 
@@ -490,6 +518,7 @@ export function HierarchyTable({
     hasEditPermission,
     onEdit,
     onDelete,
+    onVerify,
     toggleExpand,
   ]);
 
@@ -566,16 +595,19 @@ export function HierarchyTable({
         <TableCell />
         <TableCell />
         <TableCell>
-          <VerifiedBadge verified={domain.humanVerified} />
+          <VerifiedBadge
+            verified={domain.humanVerified}
+            onClick={onVerify ? () => onVerify(domain.id, "domain", !domain.humanVerified) : undefined}
+          />
         </TableCell>
-        <TableCell>
-          {hasEditPermission && (
+        {hasEditPermission && (
+          <TableCell>
             <ActionButtons
               onEdit={onEdit ? () => onEdit(domain, "domain") : undefined}
               onDelete={onDelete ? () => onDelete(domain.id, "domain") : undefined}
             />
-          )}
-        </TableCell>
+          </TableCell>
+        )}
       </TableRow>,
     );
 
@@ -619,16 +651,19 @@ export function HierarchyTable({
         <TableCell />
         <TableCell />
         <TableCell>
-          <VerifiedBadge verified={strand.humanVerified} />
+          <VerifiedBadge
+            verified={strand.humanVerified}
+            onClick={onVerify ? () => onVerify(strand.id, "strand", !strand.humanVerified) : undefined}
+          />
         </TableCell>
-        <TableCell>
-          {hasEditPermission && (
+        {hasEditPermission && (
+          <TableCell>
             <ActionButtons
               onEdit={onEdit ? () => onEdit(strand, "strand") : undefined}
               onDelete={onDelete ? () => onDelete(strand.id, "strand") : undefined}
             />
-          )}
-        </TableCell>
+          </TableCell>
+        )}
       </TableRow>,
     );
 
@@ -672,18 +707,21 @@ export function HierarchyTable({
         <TableCell />
         <TableCell />
         <TableCell>
-          <VerifiedBadge verified={subStrand.humanVerified} />
+          <VerifiedBadge
+            verified={subStrand.humanVerified}
+            onClick={onVerify ? () => onVerify(subStrand.id, "sub_strand", !subStrand.humanVerified) : undefined}
+          />
         </TableCell>
-        <TableCell>
-          {hasEditPermission && (
+        {hasEditPermission && (
+          <TableCell>
             <ActionButtons
               onEdit={onEdit ? () => onEdit(subStrand, "sub_strand") : undefined}
               onDelete={
                 onDelete ? () => onDelete(subStrand.id, "sub_strand") : undefined
               }
             />
-          )}
-        </TableCell>
+          </TableCell>
+        )}
       </TableRow>,
     );
 
@@ -728,18 +766,21 @@ export function HierarchyTable({
         </TableCell>
         <TableCell />
         <TableCell>
-          <VerifiedBadge verified={indicator.humanVerified} />
+          <VerifiedBadge
+            verified={indicator.humanVerified}
+            onClick={onVerify ? () => onVerify(indicator.id, "indicator", !indicator.humanVerified) : undefined}
+          />
         </TableCell>
-        <TableCell>
-          {hasEditPermission && (
+        {hasEditPermission && (
+          <TableCell>
             <ActionButtons
               onEdit={onEdit ? () => onEdit(indicator, "indicator") : undefined}
               onDelete={
                 onDelete ? () => onDelete(indicator.id, "indicator") : undefined
               }
             />
-          )}
-        </TableCell>
+          </TableCell>
+        )}
       </TableRow>,
     );
   }

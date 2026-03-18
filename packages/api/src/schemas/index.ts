@@ -6,18 +6,21 @@ export const UpdateDomainSchema = z.object({
   code: z.string().max(20).optional(),
   name: z.string().optional(),
   description: z.string().nullable().optional(),
+  documentId: z.number().int().positive().optional(),
 });
 
 export const UpdateStrandSchema = z.object({
   code: z.string().max(30).optional(),
   name: z.string().optional(),
   description: z.string().nullable().optional(),
+  domainId: z.number().int().positive().optional(),
 });
 
 export const UpdateSubStrandSchema = z.object({
   code: z.string().max(40).optional(),
   name: z.string().optional(),
   description: z.string().nullable().optional(),
+  strandId: z.number().int().positive().optional(),
 });
 
 export const UpdateIndicatorSchema = z.object({
@@ -27,6 +30,7 @@ export const UpdateIndicatorSchema = z.object({
   ageBand: z.string().max(20).nullable().optional(),
   sourcePage: z.number().int().positive().nullable().optional(),
   sourceText: z.string().nullable().optional(),
+  subStrandId: z.number().int().positive().nullable().optional(),
 });
 
 // --- Verify Schema ---

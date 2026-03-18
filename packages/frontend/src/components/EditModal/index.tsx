@@ -1,9 +1,11 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import type {
+  Document,
   Domain,
   Strand,
   SubStrand,
   Indicator,
+  HierarchyResponse,
   UpdateDomainRequest,
   UpdateStrandRequest,
   UpdateSubStrandRequest,
@@ -22,6 +24,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   updateDomain,
   updateStrand,
@@ -42,6 +51,10 @@ export interface EditModalProps {
   record: Domain | Strand | SubStrand | Indicator;
   recordType: RecordType;
   onSave: (updated: Domain | Strand | SubStrand | Indicator) => void;
+  /** All loaded documents — needed for parent selectors */
+  documents?: Document[];
+  /** All loaded hierarchies keyed by document id — needed for parent selectors */
+  hierarchies?: Map<number, HierarchyResponse>;
 }
 
 const RECORD_TYPE_LABELS: Record<RecordType, string> = {
@@ -57,6 +70,8 @@ export function EditModal({
   record,
   recordType,
   onSave,
+  documents,
+  hierarchies,
 }: EditModalProps) {
   const { token } = useAuth();
 
@@ -70,6 +85,12 @@ export function EditModal({
   const [sourceText, setSourceText] = useState("");
   const [humanVerified, setHumanVerified] = useState(false);
 
+  // Parent ID state for re-parenting
+  const [parentDocumentId, setParentDocumentId] = useState<number | null>(null);
+  const [parentDomainId, setParentDomainId] = useState<number | null>(null);
+  const [parentStrandId, setParentStrandId] = useState<number | null>(null);
+  const [parentSubStrandId, setParentSubStrandId] = useState<number | null>(null);
+
   // UI state
   const [saving, setSaving] = useState(false);
   const [verifying, setVerifying] = useState(false);
@@ -82,19 +103,71 @@ export function EditModal({
     setHumanVerified(record.humanVerified ?? false);
     setError(null);
 
-    if (recordType === "indicator") {
+    if (recordType === "domain") {
+      const dom = record as Domain;
+      setName(dom.name ?? "");
+      setDescription(dom.description ?? "");
+      setParentDocumentId(dom.documentId);
+    } else if (recordType === "strand") {
+      const s = record as Strand;
+      setName(s.name ?? "");
+      setDescription(s.description ?? "");
+      setParentDomainId(s.domainId);
+    } else if (recordType === "sub_strand") {
+      const ss = record as SubStrand;
+      setName(ss.name ?? "");
+      setDescription(ss.description ?? "");
+      setParentStrandId(ss.strandId);
+    } else if (recordType === "indicator") {
       const ind = record as Indicator;
       setTitle(ind.title ?? "");
       setDescription(ind.description ?? "");
       setAgeBand(ind.ageBand ?? "");
       setSourcePage(ind.sourcePage != null ? String(ind.sourcePage) : "");
       setSourceText(ind.sourceText ?? "");
-    } else {
-      const rec = record as Domain | Strand | SubStrand;
-      setName(rec.name ?? "");
-      setDescription(rec.description ?? "");
+      setParentSubStrandId(ind.subStrandId ?? null);
     }
   }, [record, recordType]);
+
+  // Build parent option lists from hierarchies
+  const allDomains = useMemo(() => {
+    if (!hierarchies) return [];
+    const result: { id: number; label: string }[] = [];
+    for (const [, h] of hierarchies) {
+      for (const d of h.domains) {
+        result.push({ id: d.id, label: `${d.code} — ${d.name}` });
+      }
+    }
+    return result;
+  }, [hierarchies]);
+
+  const allStrands = useMemo(() => {
+    if (!hierarchies) return [];
+    const result: { id: number; label: string }[] = [];
+    for (const [, h] of hierarchies) {
+      for (const d of h.domains) {
+        for (const s of d.strands) {
+          result.push({ id: s.id, label: `${s.code} — ${s.name}` });
+        }
+      }
+    }
+    return result;
+  }, [hierarchies]);
+
+  const allSubStrands = useMemo(() => {
+    if (!hierarchies) return [];
+    const result: { id: number; label: string }[] = [];
+    for (const [, h] of hierarchies) {
+      for (const d of h.domains) {
+        for (const s of d.strands) {
+          for (const ss of s.subStrands) {
+            result.push({ id: ss.id, label: `${ss.code} — ${ss.name}` });
+          }
+        }
+      }
+    }
+    return result;
+  }, [hierarchies]);
 
   const handleVerifyChange = useCallback(
     async (checked: boolean) => {
@@ -136,24 +209,34 @@ export function EditModal({
           ageBand: ageBand || null,
           sourcePage: sourcePage ? Number(sourcePage) : null,
           sourceText: sourceText || null,
+          subStrandId: parentSubStrandId,
         };
         updated = await updateIndicator(record.id, data, token);
-      } else {
-        const data: UpdateDomainRequest | UpdateStrandRequest | UpdateSubStrandRequest = {
+      } else if (recordType === "domain") {
+        const data: UpdateDomainRequest = {
           code,
           name,
           description: description || null,
+          documentId: parentDocumentId ?? undefined,
         };
-        const updateFn = {
-          domain: updateDomain,
-          strand: updateStrand,
-          sub_strand: updateSubStrand,
-        }[recordType] as (
-          id: number,
-          data: UpdateDomainRequest,
-          token: string,
-        ) => Promise<Domain | Strand | SubStrand>;
-        updated = await updateFn(record.id, data, token);
+        updated = await updateDomain(record.id, data, token);
+      } else if (recordType === "strand") {
+        const data: UpdateStrandRequest = {
+          code,
+          name,
+          description: description || null,
+          domainId: parentDomainId ?? undefined,
+        };
+        updated = await updateStrand(record.id, data, token);
+      } else {
+        // sub_strand
+        const data: UpdateSubStrandRequest = {
+          code,
+          name,
+          description: description || null,
+          strandId: parentStrandId ?? undefined,
+        };
+        updated = await updateSubStrand(record.id, data, token);
       }
 
       onSave(updated);
@@ -174,13 +257,17 @@ export function EditModal({
     ageBand,
     sourcePage,
     sourceText,
+    parentDocumentId,
+    parentDomainId,
+    parentStrandId,
+    parentSubStrandId,
     onSave,
     onOpenChange,
   ]);
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg">
+      <DialogContent className="sm:max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Edit {RECORD_TYPE_LABELS[recordType]}</DialogTitle>
           <DialogDescription>
@@ -189,6 +276,94 @@ export function EditModal({
         </DialogHeader>
 
         <div className="grid gap-4 py-4">
+          {/* Parent selector — domain → document */}
+          {recordType === "domain" && documents && documents.length > 0 && (
+            <div className="grid gap-2">
+              <Label htmlFor="edit-parent-document">Parent Document</Label>
+              <Select
+                value={parentDocumentId != null ? String(parentDocumentId) : ""}
+                onValueChange={(v) => setParentDocumentId(Number(v))}
+              >
+                <SelectTrigger id="edit-parent-document">
+                  <SelectValue placeholder="Select document" />
+                </SelectTrigger>
+                <SelectContent>
+                  {documents.map((doc) => (
+                    <SelectItem key={doc.id} value={String(doc.id)}>
+                      {doc.title} ({doc.country}/{doc.state})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {/* Parent selector — strand → domain */}
+          {recordType === "strand" && allDomains.length > 0 && (
+            <div className="grid gap-2">
+              <Label htmlFor="edit-parent-domain">Parent Domain</Label>
+              <Select
+                value={parentDomainId != null ? String(parentDomainId) : ""}
+                onValueChange={(v) => setParentDomainId(Number(v))}
+              >
+                <SelectTrigger id="edit-parent-domain">
+                  <SelectValue placeholder="Select domain" />
+                </SelectTrigger>
+                <SelectContent>
+                  {allDomains.map((d) => (
+                    <SelectItem key={d.id} value={String(d.id)}>
+                      {d.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {/* Parent selector — sub_strand → strand */}
+          {recordType === "sub_strand" && allStrands.length > 0 && (
+            <div className="grid gap-2">
+              <Label htmlFor="edit-parent-strand">Parent Strand</Label>
+              <Select
+                value={parentStrandId != null ? String(parentStrandId) : ""}
+                onValueChange={(v) => setParentStrandId(Number(v))}
+              >
+                <SelectTrigger id="edit-parent-strand">
+                  <SelectValue placeholder="Select strand" />
+                </SelectTrigger>
+                <SelectContent>
+                  {allStrands.map((s) => (
+                    <SelectItem key={s.id} value={String(s.id)}>
+                      {s.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
+          {/* Parent selector — indicator → sub_strand */}
+          {recordType === "indicator" && allSubStrands.length > 0 && (
+            <div className="grid gap-2">
+              <Label htmlFor="edit-parent-substrand">Parent Sub-Strand</Label>
+              <Select
+                value={parentSubStrandId != null ? String(parentSubStrandId) : ""}
+                onValueChange={(v) => setParentSubStrandId(Number(v))}
+              >
+                <SelectTrigger id="edit-parent-substrand">
+                  <SelectValue placeholder="Select sub-strand" />
+                </SelectTrigger>
+                <SelectContent>
+                  {allSubStrands.map((ss) => (
+                    <SelectItem key={ss.id} value={String(ss.id)}>
+                      {ss.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          )}
+
           {/* Code field — all record types */}
           <div className="grid gap-2">
             <Label htmlFor="edit-code">Code</Label>

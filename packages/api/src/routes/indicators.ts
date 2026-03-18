@@ -77,6 +77,8 @@ indicators.put("/:id", requireAuth, requireEditPermission, async (c) => {
     fields.source_page = parsed.data.sourcePage;
   if (parsed.data.sourceText !== undefined)
     fields.source_text = parsed.data.sourceText;
+  if (parsed.data.subStrandId !== undefined)
+    fields.sub_strand_id = parsed.data.subStrandId;
 
   const row = await updateRow("indicators", id, fields, {
     edited_at: "NOW()",

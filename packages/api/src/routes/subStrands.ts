@@ -62,6 +62,8 @@ subStrands.put("/:id", requireAuth, requireEditPermission, async (c) => {
   if (parsed.data.name !== undefined) fields.name = parsed.data.name;
   if (parsed.data.description !== undefined)
     fields.description = parsed.data.description;
+  if (parsed.data.strandId !== undefined)
+    fields.strand_id = parsed.data.strandId;
 
   const row = await updateRow("sub_strands", id, fields, {
     edited_at: "NOW()",

@@ -97,18 +97,21 @@ export interface UpdateDomainRequest {
   code?: string;
   name?: string;
   description?: string | null;
+  documentId?: number;
 }
 
 export interface UpdateStrandRequest {
   code?: string;
   name?: string;
   description?: string | null;
+  domainId?: number;
 }
 
 export interface UpdateSubStrandRequest {
   code?: string;
   name?: string;
   description?: string | null;
+  strandId?: number;
 }
 
 export interface UpdateIndicatorRequest {
@@ -118,6 +121,7 @@ export interface UpdateIndicatorRequest {
   ageBand?: string | null;
   sourcePage?: number | null;
   sourceText?: string | null;
+  subStrandId?: number | null;
 }
 
 export interface VerifyRequest {

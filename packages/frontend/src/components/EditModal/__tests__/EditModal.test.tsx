@@ -147,6 +147,7 @@ describe("EditModal", () => {
           code: "D1",
           name: "Language Development",
           description: "Language skills",
+          documentId: 1,
         },
         "test-token",
       );
@@ -176,6 +177,7 @@ describe("EditModal", () => {
           ageBand: "3-5",
           sourcePage: 42,
           sourceText: "Source text here",
+          subStrandId: 30,
         },
         "test-token",
       );

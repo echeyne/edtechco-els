@@ -62,6 +62,8 @@ domains.put("/:id", requireAuth, requireEditPermission, async (c) => {
   if (parsed.data.name !== undefined) fields.name = parsed.data.name;
   if (parsed.data.description !== undefined)
     fields.description = parsed.data.description;
+  if (parsed.data.documentId !== undefined)
+    fields.document_id = parsed.data.documentId;
 
   const row = await updateRow("domains", id, fields, {
     edited_at: "NOW()",

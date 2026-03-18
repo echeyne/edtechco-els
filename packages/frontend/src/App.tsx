@@ -1,9 +1,11 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { AuthContextProvider } from "@/contexts/AuthContext";
+import { LoginButton } from "@/components/LoginButton";
 import HomePage from "@/pages/HomePage";
 import DocumentsPage from "@/pages/DocumentsPage";
 import PDFViewerPage from "@/pages/PDFViewerPage";
 import InfoPage from "@/pages/InfoPage";
+import LoginPage from "@/pages/LoginPage";
 
 function App() {
   return (
@@ -46,6 +48,7 @@ function App() {
               >
                 Info
               </NavLink>
+              <LoginButton />
             </nav>
           </div>
         </header>
@@ -55,6 +58,7 @@ function App() {
             <Route path="/documents" element={<DocumentsPage />} />
             <Route path="/documents/:id/view" element={<PDFViewerPage />} />
             <Route path="/info" element={<InfoPage />} />
+            <Route path="/login" element={<LoginPage />} />
           </Routes>
         </main>
       </div>
