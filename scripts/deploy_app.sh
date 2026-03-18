@@ -34,6 +34,8 @@ print_header() {
 SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
+CUSTOM_DOMAIN=""
+HOSTED_ZONE_ID=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -53,6 +55,12 @@ while [[ $# -gt 0 ]]; do
         --skip-api)
             SKIP_API=true
             shift ;;
+        -d|--domain)
+            CUSTOM_DOMAIN="$2"
+            shift 2 ;;
+        --hosted-zone-id)
+            HOSTED_ZONE_ID="$2"
+            shift 2 ;;
         -h|--help)
             echo "Usage: $0 [OPTIONS]"
             echo ""
@@ -62,11 +70,14 @@ while [[ $# -gt 0 ]]; do
             echo "  --skip-infra             Skip CloudFormation deployment"
             echo "  --skip-frontend          Skip frontend build & deploy"
             echo "  --skip-api               Skip API build & deploy"
+            echo "  -d, --domain DOMAIN      Custom domain name (e.g. app.example.com)"
+            echo "  --hosted-zone-id ID      Route53 Hosted Zone ID for custom domain"
             echo "  -h, --help               Show this help"
             echo ""
             echo "Examples:"
             echo "  $0                                # Full deploy to dev"
             echo "  $0 -e prod                        # Full deploy to prod"
+            echo "  $0 -e prod -d app.example.com --hosted-zone-id Z1234  # Prod with custom domain"
             echo "  $0 --skip-infra                   # Redeploy code only"
             echo "  $0 --skip-infra --skip-api        # Frontend only"
             exit 0 ;;
@@ -109,12 +120,24 @@ deploy_infra() {
     print_message "$YELLOW" "Stack: $STACK_NAME | Env: $ENVIRONMENT | Region: $REGION"
     print_message "$YELLOW" "Pipeline stack: $PIPELINE_STACK"
 
+    if [ -z "$DESCOPE_PROJECT_ID" ]; then
+        print_message "$RED" "❌ DESCOPE_PROJECT_ID environment variable is required"
+        exit 1
+    fi
+
+    PARAM_OVERRIDES="EnvironmentName=$ENVIRONMENT PipelineStackName=$PIPELINE_STACK DescopeProjectId=$DESCOPE_PROJECT_ID"
+    if [ -n "$CUSTOM_DOMAIN" ]; then
+        PARAM_OVERRIDES="$PARAM_OVERRIDES CustomDomainName=$CUSTOM_DOMAIN"
+        print_message "$YELLOW" "Custom domain: $CUSTOM_DOMAIN"
+    fi
+    if [ -n "$HOSTED_ZONE_ID" ]; then
+        PARAM_OVERRIDES="$PARAM_OVERRIDES HostedZoneId=$HOSTED_ZONE_ID"
+    fi
+
     aws cloudformation deploy \
         --template-file "$TEMPLATE_FILE" \
         --stack-name "$STACK_NAME" \
-        --parameter-overrides \
-            EnvironmentName="$ENVIRONMENT" \
-            PipelineStackName="$PIPELINE_STACK" \
+        --parameter-overrides $PARAM_OVERRIDES \
         --capabilities CAPABILITY_NAMED_IAM \
         --no-fail-on-empty-changeset \
         --region "$REGION"

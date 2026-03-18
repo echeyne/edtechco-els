@@ -10,10 +10,13 @@ on:
 
 env:
   PYTHON_VERSION: "3.11"
+  NODE_VERSION: "24"
+  PNPM_VERSION: "9"
 
 jobs:
-  test:
-    name: Run Tests
+  # ─── Python pipeline tests ───
+  test-pipeline:
+    name: Test Pipeline (Python)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -38,10 +41,47 @@ jobs:
       - name: Run integration tests
         run: pytest tests/integration -v
 
-  deploy-dev:
-    name: Deploy to Dev
+  # ─── Frontend & API tests ───
+  test-app:
+    name: Test App (Frontend + API)
     runs-on: ubuntu-latest
-    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build shared package
+        run: pnpm --filter @els/shared run build
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Run API tests
+        run: pnpm --filter @els/api run test
+
+      - name: Run frontend tests
+        run: pnpm --filter @els/frontend run test
+
+      - name: Build all packages
+        run: pnpm run build
+
+  # ─── Deploy pipeline to dev ───
+  deploy-pipeline-dev:
+    name: Deploy Pipeline to Dev
+    runs-on: ubuntu-latest
+    needs: [test-pipeline, test-app]
     if: github.event_name == 'push'
     environment: dev
 
@@ -100,32 +140,111 @@ jobs:
               --output json > /dev/null
           done
 
+  # ─── Deploy app to dev ───
+  deploy-app-dev:
+    name: Deploy App to Dev
+    runs-on: ubuntu-latest
+    needs: [test-pipeline, test-app]
+    if: github.event_name == 'push'
+    environment: dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy app infrastructure
+        run: |
+          aws cloudformation deploy \
+            --template-file infra/app-template.yaml \
+            --stack-name els-app-${{ secrets.ENVIRONMENT_NAME }} \
+            --parameter-overrides \
+              EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} \
+              PipelineStackName=els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
+              DescopeProjectId=${{ secrets.DESCOPE_PROJECT_ID }} \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --no-fail-on-empty-changeset
+
+      - name: Build packages
+        run: pnpm run build
+
+      - name: Deploy API Lambda
+        run: |
+          STACK_NAME="els-app-${{ secrets.ENVIRONMENT_NAME }}"
+          LAMBDA_NAME=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiLambdaFunctionName'].OutputValue" \
+            --output text)
+
+          npx esbuild packages/api/dist/lambda.js \
+            --bundle \
+            --platform=node \
+            --target=node20 \
+            --format=esm \
+            --outfile=build/api-lambda/index.mjs \
+            --external:@aws-sdk/* \
+            --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+
+          cd build/api-lambda && zip -r ../api-lambda.zip .
+          cd ../..
+
+          aws lambda update-function-code \
+            --function-name "$LAMBDA_NAME" \
+            --zip-file fileb://build/api-lambda.zip > /dev/null
+
+          aws lambda wait function-updated --function-name "$LAMBDA_NAME"
+
+      - name: Deploy frontend to S3
+        run: |
+          STACK_NAME="els-app-${{ secrets.ENVIRONMENT_NAME }}"
+          FRONTEND_BUCKET=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
+            --output text)
+          DISTRIBUTION_ID=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
+            --output text)
+
+          aws s3 sync packages/frontend/dist/ "s3://$FRONTEND_BUCKET/" --delete
+          aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/*" > /dev/null
+
       - name: Deployment summary
         run: |
-          STACK_NAME="els-pipeline-${{ secrets.ENVIRONMENT_NAME }}"
-          RAW_BUCKET=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`RawDocumentsBucketName`].OutputValue' \
+          STACK_NAME="els-app-${{ secrets.ENVIRONMENT_NAME }}"
+          CF_DOMAIN=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDomainName'].OutputValue" \
             --output text)
-          PROCESSED_BUCKET=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`ProcessedJsonBucketName`].OutputValue' \
-            --output text)
-          STATE_MACHINE=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`PipelineStateMachineArn`].OutputValue' \
-            --output text)
-          echo "✅ Dev deployment completed successfully!"
-          echo "Environment: ${{ secrets.ENVIRONMENT_NAME }}"
-          echo "Region: ${{ secrets.AWS_REGION }}"
-          echo "Raw Documents Bucket: $RAW_BUCKET"
-          echo "Processed JSON Bucket: $PROCESSED_BUCKET"
-          echo "State Machine: $STATE_MACHINE"
+          echo "✅ App deployed to dev"
+          echo "Frontend: https://$CF_DOMAIN"
 
-  deploy-prod:
-    name: Deploy to Prod
+  # ─── Deploy pipeline to prod ───
+  deploy-pipeline-prod:
+    name: Deploy Pipeline to Prod
     runs-on: ubuntu-latest
-    needs: deploy-dev
+    needs: [deploy-pipeline-dev, deploy-app-dev]
     if: github.event_name == 'push'
     environment: prod
 
@@ -184,24 +303,111 @@ jobs:
               --output json > /dev/null
           done
 
+  # ─── Deploy app to prod ───
+  deploy-app-prod:
+    name: Deploy App to Prod
+    runs-on: ubuntu-latest
+    needs: [deploy-pipeline-dev, deploy-app-dev]
+    if: github.event_name == 'push'
+    environment: prod
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy app infrastructure with custom domain
+        run: |
+          PARAMS="EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} PipelineStackName=els-pipeline-${{ secrets.ENVIRONMENT_NAME }} DescopeProjectId=${{ secrets.DESCOPE_PROJECT_ID }}"
+          if [ -n "${{ secrets.CUSTOM_DOMAIN }}" ]; then
+            PARAMS="$PARAMS CustomDomainName=${{ secrets.CUSTOM_DOMAIN }} HostedZoneId=${{ secrets.HOSTED_ZONE_ID }}"
+          fi
+
+          aws cloudformation deploy \
+            --template-file infra/app-template.yaml \
+            --stack-name els-app-${{ secrets.ENVIRONMENT_NAME }} \
+            --parameter-overrides $PARAMS \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --no-fail-on-empty-changeset
+
+      - name: Build packages
+        run: pnpm run build
+
+      - name: Deploy API Lambda
+        run: |
+          STACK_NAME="els-app-${{ secrets.ENVIRONMENT_NAME }}"
+          LAMBDA_NAME=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='ApiLambdaFunctionName'].OutputValue" \
+            --output text)
+
+          npx esbuild packages/api/dist/lambda.js \
+            --bundle \
+            --platform=node \
+            --target=node20 \
+            --format=esm \
+            --outfile=build/api-lambda/index.mjs \
+            --external:@aws-sdk/* \
+            --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
+
+          cd build/api-lambda && zip -r ../api-lambda.zip .
+          cd ../..
+
+          aws lambda update-function-code \
+            --function-name "$LAMBDA_NAME" \
+            --zip-file fileb://build/api-lambda.zip > /dev/null
+
+          aws lambda wait function-updated --function-name "$LAMBDA_NAME"
+
+      - name: Deploy frontend to S3
+        run: |
+          STACK_NAME="els-app-${{ secrets.ENVIRONMENT_NAME }}"
+          FRONTEND_BUCKET=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='FrontendBucketName'].OutputValue" \
+            --output text)
+          DISTRIBUTION_ID=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
+            --output text)
+
+          aws s3 sync packages/frontend/dist/ "s3://$FRONTEND_BUCKET/" --delete
+          aws cloudfront create-invalidation \
+            --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/*" > /dev/null
+
       - name: Deployment summary
         run: |
-          STACK_NAME="els-pipeline-${{ secrets.ENVIRONMENT_NAME }}"
-          RAW_BUCKET=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`RawDocumentsBucketName`].OutputValue' \
+          STACK_NAME="els-app-${{ secrets.ENVIRONMENT_NAME }}"
+          CF_DOMAIN=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDomainName'].OutputValue" \
             --output text)
-          PROCESSED_BUCKET=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`ProcessedJsonBucketName`].OutputValue' \
-            --output text)
-          STATE_MACHINE=$(aws cloudformation describe-stacks \
-            --stack-name $STACK_NAME \
-            --query 'Stacks[0].Outputs[?OutputKey==`PipelineStateMachineArn`].OutputValue' \
-            --output text)
-          echo "✅ Prod deployment completed successfully!"
-          echo "Environment: ${{ secrets.ENVIRONMENT_NAME }}"
-          echo "Region: ${{ secrets.AWS_REGION }}"
-          echo "Raw Documents Bucket: $RAW_BUCKET"
-          echo "Processed JSON Bucket: $PROCESSED_BUCKET"
-          echo "State Machine: $STATE_MACHINE"
+          CUSTOM_URL=$(aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --query "Stacks[0].Outputs[?OutputKey=='CustomDomainUrl'].OutputValue" \
+            --output text 2>/dev/null || echo "")
+          echo "✅ App deployed to prod"
+          echo "Frontend: https://$CF_DOMAIN"
+          if [ -n "$CUSTOM_URL" ] && [ "$CUSTOM_URL" != "None" ]; then
+            echo "Custom domain: $CUSTOM_URL"
+          fi

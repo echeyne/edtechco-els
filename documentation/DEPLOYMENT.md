@@ -22,14 +22,16 @@ All buckets use a country-based path layout (ISO 3166-1 alpha-2 codes):
 
 Configure these in `Settings > Secrets and variables > Actions`:
 
-| Secret                  | Description                                     |
-| ----------------------- | ----------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | IAM access key with deployment permissions      |
-| `AWS_SECRET_ACCESS_KEY` | IAM secret key                                  |
-| `AWS_REGION`            | Target region (e.g. `us-east-1`)                |
-| `ENVIRONMENT_NAME`      | Target environment: `dev`, `staging`, or `prod` |
+| Secret                  | Description                                              |
+| ----------------------- | -------------------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | IAM access key with deployment permissions               |
+| `AWS_SECRET_ACCESS_KEY` | IAM secret key                                           |
+| `AWS_REGION`            | Target region (e.g. `us-east-1`)                         |
+| `ENVIRONMENT_NAME`      | Target environment: `dev`, `staging`, or `prod`          |
+| `CUSTOM_DOMAIN`         | (prod only) Custom domain name, e.g. `app.example.com`   |
+| `HOSTED_ZONE_ID`        | (prod only) Route53 Hosted Zone ID for the custom domain |
 
-The IAM user needs permissions for CloudFormation, S3, Lambda, IAM, and SSM.
+The IAM user needs permissions for CloudFormation, S3, Lambda, IAM, SSM, CloudFront, API Gateway, ACM, and Route53.
 
 ## Automated Deployment (CI/CD)
 

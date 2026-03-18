@@ -94,7 +94,6 @@ afterAll(() => server.close());
 
 // Set VITE_DESCOPE_PROJECT_ID so AuthContextProvider doesn't short-circuit
 // to the unauthenticated fallback. Must be set before AuthContext module loads.
-// @ts-expect-error -- vitest env shim
 import.meta.env.VITE_DESCOPE_PROJECT_ID = "test-project-id";
 
 // ---- Lazy imports (after mocks) ----

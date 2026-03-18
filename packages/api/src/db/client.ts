@@ -1,116 +1,158 @@
-import pg from "pg";
 import {
-  SecretsManagerClient,
-  GetSecretValueCommand,
-} from "@aws-sdk/client-secrets-manager";
+  RDSDataClient,
+  ExecuteStatementCommand,
+  type Field,
+} from "@aws-sdk/client-rds-data";
+import pg from "pg";
 
 const { Pool } = pg;
 
-// --- Secrets Manager integration ---
+// ---- RDS Data API client (lazy singleton) ----
 
-interface DbSecret {
-  host: string;
-  port: number;
-  dbname: string;
-  username: string;
-  password: string;
+let _rdsClient: RDSDataClient | null = null;
+
+function getRdsClient(): RDSDataClient {
+  if (!_rdsClient) _rdsClient = new RDSDataClient({});
+  return _rdsClient;
 }
 
-let _secretCache: DbSecret | null = null;
+/** Allow tests to inject a mock RDS Data client */
+export function setRdsClient(client: RDSDataClient | null): void {
+  _rdsClient = client;
+}
 
-async function getDbSecret(): Promise<DbSecret> {
-  if (_secretCache) return _secretCache;
+// ---- Helpers ----
 
+/**
+ * Convert a JS value to an RDS Data API Field.
+ */
+function toField(value: unknown): Field {
+  if (value === null || value === undefined) return { isNull: true };
+  if (typeof value === "boolean") return { booleanValue: value };
+  if (typeof value === "number") {
+    return Number.isInteger(value)
+      ? { longValue: value }
+      : { doubleValue: value };
+  }
+  return { stringValue: String(value) };
+}
+
+/**
+ * Convert an RDS Data API Field back to a plain JS value.
+ */
+function fromField(field: Field): unknown {
+  if (field.isNull) return null;
+  if (field.booleanValue !== undefined) return field.booleanValue;
+  if (field.longValue !== undefined) return field.longValue;
+  if (field.doubleValue !== undefined) return field.doubleValue;
+  if (field.stringValue !== undefined) return field.stringValue;
+  if (field.blobValue !== undefined) return field.blobValue;
+  return null;
+}
+
+/**
+ * Execute a parameterised SQL statement via the RDS Data API.
+ * Parameters use $1, $2, ... positional syntax (same as pg).
+ * Internally they are converted to :p1, :p2, ... for the Data API.
+ */
+async function executeStatement(
+  sql: string,
+  params: unknown[] = [],
+): Promise<Record<string, unknown>[]> {
+  const clusterArn = process.env.DB_CLUSTER_ARN;
   const secretArn = process.env.DB_SECRET_ARN;
-  if (!secretArn) {
-    throw new Error("DB_SECRET_ARN is not set");
+  const database = process.env.DB_NAME ?? "els_pipeline";
+
+  if (!clusterArn || !secretArn) {
+    throw new Error("DB_CLUSTER_ARN and DB_SECRET_ARN must be set");
   }
 
-  const client = new SecretsManagerClient({});
-  const resp = await client.send(
-    new GetSecretValueCommand({ SecretId: secretArn }),
+  // Replace $1, $2, ... with :p1, :p2, ...
+  const convertedSql = sql.replace(/\$(\d+)/g, ":p$1");
+
+  const parameters = params.map((v, i) => ({
+    name: `p${i + 1}`,
+    value: toField(v),
+  }));
+
+  const resp = await getRdsClient().send(
+    new ExecuteStatementCommand({
+      resourceArn: clusterArn,
+      secretArn,
+      database,
+      sql: convertedSql,
+      parameters,
+      includeResultMetadata: true,
+    }),
   );
 
-  if (!resp.SecretString) {
-    throw new Error("Database secret has no SecretString");
-  }
+  const columns = (resp.columnMetadata ?? []).map((c) => c.name ?? "");
+  const rows = (resp.records ?? []).map((record) => {
+    const row: Record<string, unknown> = {};
+    record.forEach((field, i) => {
+      row[columns[i]] = fromField(field);
+    });
+    return row;
+  });
 
-  _secretCache = JSON.parse(resp.SecretString) as DbSecret;
-  return _secretCache;
+  return rows;
 }
 
-// --- Pool initialisation ---
+// ---- Local pg pool (dev only) ----
 
 let _pool: pg.Pool | null = null;
 
 async function getPool(): Promise<pg.Pool> {
   if (_pool) return _pool;
-
-  if (process.env.DB_SECRET_ARN) {
-    const secret = await getDbSecret();
-    _pool = new Pool({
-      host: secret.host,
-      port: secret.port,
-      database: secret.dbname ?? "els_pipeline",
-      user: secret.username,
-      password: secret.password,
-      max: 5, // Lambda-friendly pool size
-      idleTimeoutMillis: 30_000,
-      connectionTimeoutMillis: 5_000,
-    });
-  } else {
-    // Local development — use env vars directly
-    _pool = new Pool({
-      host: process.env.DB_HOST ?? "localhost",
-      port: Number(process.env.DB_PORT ?? 5432),
-      database: process.env.DB_NAME ?? "els_corpus",
-      user: process.env.DB_USER ?? "postgres",
-      password: process.env.DB_PASSWORD ?? "",
-      max: 20,
-      idleTimeoutMillis: 30_000,
-      connectionTimeoutMillis: 5_000,
-    });
-  }
-
+  _pool = new Pool({
+    host: process.env.DB_HOST ?? "localhost",
+    port: Number(process.env.DB_PORT ?? 5432),
+    database: process.env.DB_NAME ?? "els_corpus",
+    user: process.env.DB_USER ?? "postgres",
+    password: process.env.DB_PASSWORD ?? "",
+    max: 20,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 5_000,
+  });
   return _pool;
 }
 
-// --- Low-level helpers ---
+/** Expose pool getter for tests or advanced usage */
+export { getPool };
 
-export async function query<T extends pg.QueryResultRow = pg.QueryResultRow>(
-  text: string,
-  params?: unknown[],
-): Promise<pg.QueryResult<T>> {
+// ---- Public query helpers ----
+// These keep the same interface as before so routes don't need to change.
+// In production (DB_CLUSTER_ARN set) they use the RDS Data API.
+// In local dev they fall back to a direct pg connection.
+
+export async function query<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(text: string, params?: unknown[]): Promise<{ rows: T[]; rowCount: number }> {
+  if (process.env.DB_CLUSTER_ARN) {
+    const rows = await executeStatement(text, params);
+    return { rows: rows as T[], rowCount: rows.length };
+  }
   const pool = await getPool();
-  return pool.query<T>(text, params);
+  const result = await pool.query<T>(text, params as never[]);
+  return { rows: result.rows, rowCount: result.rowCount ?? 0 };
 }
 
-export async function queryOne<T extends pg.QueryResultRow = pg.QueryResultRow>(
-  text: string,
-  params?: unknown[],
-): Promise<T | null> {
-  const pool = await getPool();
-  const result = await pool.query<T>(text, params);
+export async function queryOne<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(text: string, params?: unknown[]): Promise<T | null> {
+  const result = await query<T>(text, params);
   return result.rows[0] ?? null;
 }
 
 export async function queryMany<
-  T extends pg.QueryResultRow = pg.QueryResultRow,
+  T extends Record<string, unknown> = Record<string, unknown>,
 >(text: string, params?: unknown[]): Promise<T[]> {
-  const pool = await getPool();
-  const result = await pool.query<T>(text, params);
+  const result = await query<T>(text, params);
   return result.rows;
 }
 
-// --- CRUD helpers ---
-
-/**
- * Build and execute a dynamic UPDATE statement.
- * Only columns present in `fields` are updated.
- * Returns the updated row or null if not found.
- */
 export async function updateRow<
-  T extends pg.QueryResultRow = pg.QueryResultRow,
+  T extends Record<string, unknown> = Record<string, unknown>,
 >(
   table: string,
   id: number,
@@ -130,19 +172,11 @@ export async function updateRow<
   return queryOne<T>(sql, [id, ...values]);
 }
 
-/**
- * Delete a row by id. Returns true if a row was deleted.
- */
 export async function deleteRow(table: string, id: number): Promise<boolean> {
   const result = await query(`DELETE FROM ${table} WHERE id = $1`, [id]);
   return (result.rowCount ?? 0) > 0;
 }
 
-// --- Lifecycle ---
-
 export async function closePool(): Promise<void> {
   if (_pool) await _pool.end();
 }
-
-/** Expose pool getter for tests or advanced usage */
-export { getPool };
