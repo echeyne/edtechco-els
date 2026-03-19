@@ -206,7 +206,9 @@ describe("GET /api/documents/:id/hierarchy", () => {
     const body = await res.json();
     expect(body.document.id).toBe(1);
     expect(body.domains).toHaveLength(1);
+    expect(body.domains[0].indicators).toHaveLength(0);
     expect(body.domains[0].strands).toHaveLength(1);
+    expect(body.domains[0].strands[0].indicators).toHaveLength(0);
     expect(body.domains[0].strands[0].subStrands).toHaveLength(1);
     expect(body.domains[0].strands[0].subStrands[0].indicators).toHaveLength(1);
     expect(

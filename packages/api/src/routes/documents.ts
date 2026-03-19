@@ -244,18 +244,25 @@ documents.get("/:id/hierarchy", async (c) => {
 
   const strandMap = new Map<number, StrandWithChildren>();
   for (const s of strands) {
-    strandMap.set(s.id, { ...s, subStrands: [] });
+    strandMap.set(s.id, { ...s, subStrands: [], indicators: [] });
   }
 
   const domainMap = new Map<number, DomainWithChildren>();
   for (const d of domains) {
-    domainMap.set(d.id, { ...d, strands: [] });
+    domainMap.set(d.id, { ...d, strands: [], indicators: [] });
   }
 
-  // Attach indicators to sub_strands (or leave unattached if sub_strand_id is null)
+  // Attach indicators to the appropriate level based on their foreign keys
   for (const ind of indicators) {
     if (ind.subStrandId && subStrandMap.has(ind.subStrandId)) {
+      // domain -> strand -> sub_strand -> indicator
       subStrandMap.get(ind.subStrandId)!.indicators.push(ind);
+    } else if (ind.strandId && strandMap.has(ind.strandId)) {
+      // domain -> strand -> indicator (no sub_strand)
+      strandMap.get(ind.strandId)!.indicators.push(ind);
+    } else if (ind.domainId && domainMap.has(ind.domainId)) {
+      // domain -> indicator (no strand or sub_strand)
+      domainMap.get(ind.domainId)!.indicators.push(ind);
     }
   }
 
@@ -272,12 +279,6 @@ documents.get("/:id/hierarchy", async (c) => {
       domainMap.get(s.domainId)!.strands.push(s);
     }
   }
-
-  // Attach indicators directly to strands that have no sub_strand
-  // (indicators with strandId but no subStrandId go into an empty sub_strand-less path)
-  // Actually, per the hierarchy: indicators always sit under sub_strands.
-  // Indicators without a sub_strand_id but with a strand_id are edge cases;
-  // we still include them in the response by attaching to the domain level.
 
   const hierarchy: HierarchyResponse = {
     document,

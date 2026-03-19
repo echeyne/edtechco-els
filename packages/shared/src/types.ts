@@ -89,10 +89,12 @@ export interface Indicator {
 
 export interface DomainWithChildren extends Domain {
   strands: StrandWithChildren[];
+  indicators: Indicator[];
 }
 
 export interface StrandWithChildren extends Strand {
   subStrands: SubStrandWithChildren[];
+  indicators: Indicator[];
 }
 
 export interface SubStrandWithChildren extends SubStrand {

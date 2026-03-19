@@ -71,10 +71,12 @@ const mockHierarchy: HierarchyResponse = {
           editedAt: null,
           editedBy: null,
           subStrands: [],
+          indicators: [],
           deletedAt: null,
           deletedBy: null
         },
       ],
+      indicators: [],
       deleted: false,
       deletedAt: null,
       deletedBy: null

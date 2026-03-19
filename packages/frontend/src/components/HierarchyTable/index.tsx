@@ -39,6 +39,7 @@ import {
   Search,
   Edit,
   Trash2,
+  X,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -61,9 +62,15 @@ export interface HierarchyTableProps {
   ) => void;
   onDelete?: (id: number, type: string) => Promise<void>;
   onVerify?: (id: number, type: string, verified: boolean) => Promise<void>;
-  onDataLoaded?: (documents: Document[], hierarchies: Map<number, HierarchyResponse>) => void;
+  onDataLoaded?: (
+    documents: Document[],
+    hierarchies: Map<number, HierarchyResponse>,
+  ) => void;
   /** Pass an updated record to patch it in-place without a full reload */
-  updateRecord?: { record: Domain | Strand | SubStrand | Indicator; type: string } | null;
+  updateRecord?: {
+    record: Domain | Strand | SubStrand | Indicator;
+    type: string;
+  } | null;
 }
 
 type SortField = "code" | "name" | "status" | "ageBand";
@@ -78,13 +85,21 @@ function matchesSearch(text: string, query: string): boolean {
 }
 
 function recordMatchesSearch(
-  record: { code?: string; name?: string; title?: string | null; description?: string | null },
+  record: {
+    code?: string;
+    name?: string;
+    title?: string | null;
+    description?: string | null;
+  },
   query: string,
 ): boolean {
   if (!query) return true;
-  const fields = [record.code, record.name, record.title, record.description].filter(
-    Boolean,
-  ) as string[];
+  const fields = [
+    record.code,
+    record.name,
+    record.title,
+    record.description,
+  ].filter(Boolean) as string[];
   return fields.some((f) => matchesSearch(f, query));
 }
 
@@ -241,8 +256,17 @@ function FilterBar({
             onChange={(e) =>
               onFilterChange({ ...filters, searchQuery: e.target.value })
             }
-            className="pl-9 h-9"
+            className="pl-9 pr-8 h-9"
           />
+          {filters.searchQuery && (
+            <button
+              onClick={() => onFilterChange({ ...filters, searchQuery: "" })}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label="Clear search"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
 
         <div className="flex items-center gap-2">
@@ -344,7 +368,11 @@ function SortableHeader({
       onClick={() => onSort(field)}
     >
       {label}
-      {active && <span className="text-xs text-primary">{sortDir === "asc" ? "↑" : "↓"}</span>}
+      {active && (
+        <span className="text-xs text-primary">
+          {sortDir === "asc" ? "↑" : "↓"}
+        </span>
+      )}
     </button>
   );
 }
@@ -366,69 +394,156 @@ export function HierarchyTable({
 
   // Data state
   const [documents, setDocuments] = useState<Document[]>([]);
-  const [hierarchies, setHierarchies] = useState<Map<number, HierarchyResponse>>(
-    new Map(),
-  );
+  const [hierarchies, setHierarchies] = useState<
+    Map<number, HierarchyResponse>
+  >(new Map());
 
   /** Patch a single record's humanVerified flag in the hierarchy map */
-  const patchVerified = useCallback((id: number, type: string, verified: boolean) => {
-    setHierarchies((prev) => {
-      const next = new Map(prev);
-      for (const [docId, h] of next) {
-        let changed = false;
-        const newH: HierarchyResponse = {
-          ...h,
-          domains: h.domains.map((d) => {
-            if (type === "domain" && d.id === id) { changed = true; return { ...d, humanVerified: verified }; }
-            const newStrands = d.strands.map((s) => {
-              if (type === "strand" && s.id === id) { changed = true; return { ...s, humanVerified: verified }; }
-              const newSubStrands = s.subStrands.map((ss) => {
-                if (type === "sub_strand" && ss.id === id) { changed = true; return { ...ss, humanVerified: verified }; }
-                const newIndicators = ss.indicators.map((ind) =>
-                  type === "indicator" && ind.id === id ? (changed = true, { ...ind, humanVerified: verified }) : ind
-                );
-                return changed ? { ...ss, indicators: newIndicators } : ss;
+  const patchVerified = useCallback(
+    (id: number, type: string, verified: boolean) => {
+      setHierarchies((prev) => {
+        const next = new Map(prev);
+        for (const [docId, h] of next) {
+          let changed = false;
+          const patchIndicators = (indicators: Indicator[]) =>
+            indicators.map((ind) =>
+              type === "indicator" && ind.id === id
+                ? ((changed = true), { ...ind, humanVerified: verified })
+                : ind,
+            );
+          const newH: HierarchyResponse = {
+            ...h,
+            domains: h.domains.map((d) => {
+              if (type === "domain" && d.id === id) {
+                changed = true;
+                return { ...d, humanVerified: verified };
+              }
+              const domainIndicators = patchIndicators(d.indicators);
+              const newStrands = d.strands.map((s) => {
+                if (type === "strand" && s.id === id) {
+                  changed = true;
+                  return { ...s, humanVerified: verified };
+                }
+                const strandIndicators = patchIndicators(s.indicators);
+                const newSubStrands = s.subStrands.map((ss) => {
+                  if (type === "sub_strand" && ss.id === id) {
+                    changed = true;
+                    return { ...ss, humanVerified: verified };
+                  }
+                  const newIndicators = patchIndicators(ss.indicators);
+                  return changed ? { ...ss, indicators: newIndicators } : ss;
+                });
+                return changed
+                  ? {
+                      ...s,
+                      subStrands: newSubStrands,
+                      indicators: strandIndicators,
+                    }
+                  : s;
               });
-              return changed ? { ...s, subStrands: newSubStrands } : s;
-            });
-            return changed ? { ...d, strands: newStrands } : d;
-          }),
-        };
-        if (changed) { next.set(docId, newH); break; }
-      }
-      return next;
-    });
-  }, []);
+              return changed
+                ? { ...d, strands: newStrands, indicators: domainIndicators }
+                : d;
+            }),
+          };
+          if (changed) {
+            next.set(docId, newH);
+            break;
+          }
+        }
+        return next;
+      });
+    },
+    [],
+  );
 
   /** Remove a record from the hierarchy map by id and type */
   const patchDelete = useCallback((id: number, type: string) => {
     setHierarchies((prev) => {
       const next = new Map(prev);
+      const filterIndicators = (indicators: Indicator[]) =>
+        indicators.filter((ind) => {
+          if (type === "indicator" && ind.id === id) {
+            return false;
+          }
+          return true;
+        });
       for (const [docId, h] of next) {
         let changed = false;
         const newH: HierarchyResponse = {
           ...h,
-          domains: type === "domain"
-            ? h.domains.filter((d) => { if (d.id === id) { changed = true; return false; } return true; })
-            : h.domains.map((d) => {
-                const newStrands = type === "strand"
-                  ? d.strands.filter((s) => { if (s.id === id) { changed = true; return false; } return true; })
-                  : d.strands.map((s) => {
-                      const newSubStrands = type === "sub_strand"
-                        ? s.subStrands.filter((ss) => { if (ss.id === id) { changed = true; return false; } return true; })
-                        : s.subStrands.map((ss) => {
-                            const newIndicators = ss.indicators.filter((ind) => {
-                              if (type === "indicator" && ind.id === id) { changed = true; return false; }
-                              return true;
-                            });
-                            return newIndicators.length !== ss.indicators.length ? { ...ss, indicators: newIndicators } : ss;
-                          });
-                      return changed || newSubStrands !== s.subStrands ? { ...s, subStrands: newSubStrands } : s;
-                    });
-                return changed || newStrands !== d.strands ? { ...d, strands: newStrands } : d;
-              }),
+          domains:
+            type === "domain"
+              ? h.domains.filter((d) => {
+                  if (d.id === id) {
+                    changed = true;
+                    return false;
+                  }
+                  return true;
+                })
+              : h.domains.map((d) => {
+                  const domainIndicators = filterIndicators(d.indicators);
+                  if (domainIndicators.length !== d.indicators.length)
+                    changed = true;
+                  const newStrands =
+                    type === "strand"
+                      ? d.strands.filter((s) => {
+                          if (s.id === id) {
+                            changed = true;
+                            return false;
+                          }
+                          return true;
+                        })
+                      : d.strands.map((s) => {
+                          const strandIndicators = filterIndicators(
+                            s.indicators,
+                          );
+                          if (strandIndicators.length !== s.indicators.length)
+                            changed = true;
+                          const newSubStrands =
+                            type === "sub_strand"
+                              ? s.subStrands.filter((ss) => {
+                                  if (ss.id === id) {
+                                    changed = true;
+                                    return false;
+                                  }
+                                  return true;
+                                })
+                              : s.subStrands.map((ss) => {
+                                  const newIndicators = filterIndicators(
+                                    ss.indicators,
+                                  );
+                                  if (
+                                    newIndicators.length !==
+                                    ss.indicators.length
+                                  )
+                                    changed = true;
+                                  return newIndicators.length !==
+                                    ss.indicators.length
+                                    ? { ...ss, indicators: newIndicators }
+                                    : ss;
+                                });
+                          return changed || newSubStrands !== s.subStrands
+                            ? {
+                                ...s,
+                                subStrands: newSubStrands,
+                                indicators: strandIndicators,
+                              }
+                            : s;
+                        });
+                  return changed || newStrands !== d.strands
+                    ? {
+                        ...d,
+                        strands: newStrands,
+                        indicators: domainIndicators,
+                      }
+                    : d;
+                }),
         };
-        if (changed) { next.set(docId, newH); break; }
+        if (changed) {
+          next.set(docId, newH);
+          break;
+        }
       }
       return next;
     });
@@ -442,25 +557,51 @@ export function HierarchyTable({
       const next = new Map(prev);
       for (const [docId, h] of next) {
         let changed = false;
+        const patchIndicators = (indicators: Indicator[]) =>
+          indicators.map((ind) =>
+            type === "indicator" && ind.id === record.id
+              ? ((changed = true), { ...ind, ...(record as Indicator) })
+              : ind,
+          );
         const newH: HierarchyResponse = {
           ...h,
           domains: h.domains.map((d) => {
-            if (type === "domain" && d.id === record.id) { changed = true; return { ...d, ...(record as Domain) }; }
+            if (type === "domain" && d.id === record.id) {
+              changed = true;
+              return { ...d, ...(record as Domain) };
+            }
+            const domainIndicators = patchIndicators(d.indicators);
             const newStrands = d.strands.map((s) => {
-              if (type === "strand" && s.id === record.id) { changed = true; return { ...s, ...(record as Strand) }; }
+              if (type === "strand" && s.id === record.id) {
+                changed = true;
+                return { ...s, ...(record as Strand) };
+              }
+              const strandIndicators = patchIndicators(s.indicators);
               const newSubStrands = s.subStrands.map((ss) => {
-                if (type === "sub_strand" && ss.id === record.id) { changed = true; return { ...ss, ...(record as SubStrand) }; }
-                const newIndicators = ss.indicators.map((ind) =>
-                  type === "indicator" && ind.id === record.id ? (changed = true, { ...ind, ...(record as Indicator) }) : ind
-                );
+                if (type === "sub_strand" && ss.id === record.id) {
+                  changed = true;
+                  return { ...ss, ...(record as SubStrand) };
+                }
+                const newIndicators = patchIndicators(ss.indicators);
                 return changed ? { ...ss, indicators: newIndicators } : ss;
               });
-              return changed ? { ...s, subStrands: newSubStrands } : s;
+              return changed
+                ? {
+                    ...s,
+                    subStrands: newSubStrands,
+                    indicators: strandIndicators,
+                  }
+                : s;
             });
-            return changed ? { ...d, strands: newStrands } : d;
+            return changed
+              ? { ...d, strands: newStrands, indicators: domainIndicators }
+              : d;
           }),
         };
-        if (changed) { next.set(docId, newH); break; }
+        if (changed) {
+          next.set(docId, newH);
+          break;
+        }
       }
       return next;
     });
@@ -597,7 +738,8 @@ export function HierarchyTable({
     setExpanded(new Set());
   }, []);
 
-  const isAllExpanded = allExpanded.length > 0 && allExpanded.every((k) => expanded.has(k));
+  const isAllExpanded =
+    allExpanded.length > 0 && allExpanded.every((k) => expanded.has(k));
 
   // ------ Sorting ------
 
@@ -648,7 +790,10 @@ export function HierarchyTable({
 
       // Document row
       result.push(
-        <TableRow key={docKey} className="bg-primary/5 hover:bg-primary/10 font-medium">
+        <TableRow
+          key={docKey}
+          className="bg-primary/5 hover:bg-primary/10 font-medium"
+        >
           <TableCell>
             <ExpandToggle
               expanded={docExpanded}
@@ -656,7 +801,9 @@ export function HierarchyTable({
               depth={0}
             />
           </TableCell>
-          <TableCell className="font-semibold text-foreground">{doc.title}</TableCell>
+          <TableCell className="font-semibold text-foreground">
+            {doc.title}
+          </TableCell>
           <TableCell className="text-muted-foreground">
             {doc.country} / {doc.state} - {doc.versionYear}
           </TableCell>
@@ -702,6 +849,15 @@ export function HierarchyTable({
       matchesVerification(domain.humanVerified, status)
     )
       return true;
+    // Check direct indicators on the domain
+    if (
+      domain.indicators.some(
+        (ind) =>
+          recordMatchesSearch(ind, query ?? "") &&
+          matchesVerification(ind.humanVerified, status),
+      )
+    )
+      return true;
     return domain.strands.some((s) => strandHasMatch(s, query, status));
   }
 
@@ -713,6 +869,15 @@ export function HierarchyTable({
     if (
       recordMatchesSearch(strand, query ?? "") &&
       matchesVerification(strand.humanVerified, status)
+    )
+      return true;
+    // Check direct indicators on the strand
+    if (
+      strand.indicators.some(
+        (ind) =>
+          recordMatchesSearch(ind, query ?? "") &&
+          matchesVerification(ind.humanVerified, status),
+      )
     )
       return true;
     return strand.subStrands.some((ss) => subStrandHasMatch(ss, query, status));
@@ -758,7 +923,9 @@ export function HierarchyTable({
         </TableCell>
         <TableCell>
           <span className="inline-flex items-center gap-2">
-            <span className="text-xs font-mono text-primary/70 bg-primary/5 px-1.5 py-0.5 rounded">{domain.code}</span>
+            <span className="text-xs font-mono text-primary/70 bg-primary/5 px-1.5 py-0.5 rounded">
+              {domain.code}
+            </span>
             <span className="font-medium">{domain.name}</span>
           </span>
         </TableCell>
@@ -768,14 +935,20 @@ export function HierarchyTable({
         <TableCell>
           <VerifiedBadge
             verified={domain.humanVerified}
-            onClick={onVerify ? () => handleVerify(domain.id, "domain", !domain.humanVerified) : undefined}
+            onClick={
+              onVerify
+                ? () => handleVerify(domain.id, "domain", !domain.humanVerified)
+                : undefined
+            }
           />
         </TableCell>
         {hasEditPermission && (
           <TableCell>
             <ActionButtons
               onEdit={onEdit ? () => onEdit(domain, "domain") : undefined}
-              onDelete={onDelete ? () => handleDelete(domain.id, "domain") : undefined}
+              onDelete={
+                onDelete ? () => handleDelete(domain.id, "domain") : undefined
+              }
             />
           </TableCell>
         )}
@@ -792,6 +965,29 @@ export function HierarchyTable({
 
     for (const strand of sortedStrands) {
       renderStrand(result, strand, searchQuery, verificationStatus);
+    }
+
+    // Render indicators directly under this domain (no strand)
+    const sortedDomainIndicators = [...domain.indicators].sort((a, b) => {
+      if (sortField === "code") return compareField(a.code, b.code, sortDir);
+      if (sortField === "ageBand")
+        return compareField(a.ageBand, b.ageBand, sortDir);
+      if (sortField === "name")
+        return compareField(
+          a.title ?? a.description,
+          b.title ?? b.description,
+          sortDir,
+        );
+      return compareField(a.humanVerified, b.humanVerified, sortDir);
+    });
+
+    for (const indicator of sortedDomainIndicators) {
+      if (
+        !recordMatchesSearch(indicator, searchQuery ?? "") ||
+        !matchesVerification(indicator.humanVerified, verificationStatus)
+      )
+        continue;
+      renderIndicator(result, indicator, 2);
     }
   }
 
@@ -817,7 +1013,9 @@ export function HierarchyTable({
         </TableCell>
         <TableCell>
           <span className="inline-flex items-center gap-2">
-            <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{strand.code}</span>
+            <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+              {strand.code}
+            </span>
             {strand.name}
           </span>
         </TableCell>
@@ -827,14 +1025,20 @@ export function HierarchyTable({
         <TableCell>
           <VerifiedBadge
             verified={strand.humanVerified}
-            onClick={onVerify ? () => handleVerify(strand.id, "strand", !strand.humanVerified) : undefined}
+            onClick={
+              onVerify
+                ? () => handleVerify(strand.id, "strand", !strand.humanVerified)
+                : undefined
+            }
           />
         </TableCell>
         {hasEditPermission && (
           <TableCell>
             <ActionButtons
               onEdit={onEdit ? () => onEdit(strand, "strand") : undefined}
-              onDelete={onDelete ? () => handleDelete(strand.id, "strand") : undefined}
+              onDelete={
+                onDelete ? () => handleDelete(strand.id, "strand") : undefined
+              }
             />
           </TableCell>
         )}
@@ -850,13 +1054,43 @@ export function HierarchyTable({
     });
 
     for (const subStrand of sortedSubStrands) {
-      renderSubStrand(result, subStrand, searchQuery, verificationStatus);
+      renderSubStrand(
+        result,
+        subStrand,
+        strand,
+        searchQuery,
+        verificationStatus,
+      );
+    }
+
+    // Render indicators directly under this strand (no sub-strand)
+    const sortedStrandIndicators = [...strand.indicators].sort((a, b) => {
+      if (sortField === "code") return compareField(a.code, b.code, sortDir);
+      if (sortField === "ageBand")
+        return compareField(a.ageBand, b.ageBand, sortDir);
+      if (sortField === "name")
+        return compareField(
+          a.title ?? a.description,
+          b.title ?? b.description,
+          sortDir,
+        );
+      return compareField(a.humanVerified, b.humanVerified, sortDir);
+    });
+
+    for (const indicator of sortedStrandIndicators) {
+      if (
+        !recordMatchesSearch(indicator, searchQuery ?? "") ||
+        !matchesVerification(indicator.humanVerified, verificationStatus)
+      )
+        continue;
+      renderIndicator(result, indicator, 3);
     }
   }
 
   function renderSubStrand(
     result: React.ReactNode[],
     subStrand: SubStrandWithChildren,
+    strand: Strand,
     searchQuery?: string,
     verificationStatus?: "all" | "verified" | "unverified",
   ) {
@@ -876,7 +1110,9 @@ export function HierarchyTable({
         </TableCell>
         <TableCell>
           <span className="inline-flex items-center gap-2">
-            <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{subStrand.code}</span>
+            <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+              {subStrand.code}
+            </span>
             {subStrand.name}
           </span>
         </TableCell>
@@ -886,15 +1122,28 @@ export function HierarchyTable({
         <TableCell>
           <VerifiedBadge
             verified={subStrand.humanVerified}
-            onClick={onVerify ? () => handleVerify(subStrand.id, "sub_strand", !subStrand.humanVerified) : undefined}
+            onClick={
+              onVerify
+                ? () =>
+                    handleVerify(
+                      subStrand.id,
+                      "sub_strand",
+                      !subStrand.humanVerified,
+                    )
+                : undefined
+            }
           />
         </TableCell>
         {hasEditPermission && (
           <TableCell>
             <ActionButtons
-              onEdit={onEdit ? () => onEdit(subStrand, "sub_strand") : undefined}
+              onEdit={
+                onEdit ? () => onEdit(subStrand, "sub_strand") : undefined
+              }
               onDelete={
-                onDelete ? () => handleDelete(subStrand.id, "sub_strand") : undefined
+                onDelete
+                  ? () => handleDelete(subStrand.id, "sub_strand")
+                  : undefined
               }
             />
           </TableCell>
@@ -906,9 +1155,14 @@ export function HierarchyTable({
 
     const sortedIndicators = [...subStrand.indicators].sort((a, b) => {
       if (sortField === "code") return compareField(a.code, b.code, sortDir);
-      if (sortField === "ageBand") return compareField(a.ageBand, b.ageBand, sortDir);
+      if (sortField === "ageBand")
+        return compareField(a.ageBand, b.ageBand, sortDir);
       if (sortField === "name")
-        return compareField(a.title ?? a.description, b.title ?? b.description, sortDir);
+        return compareField(
+          a.title ?? a.description,
+          b.title ?? b.description,
+          sortDir,
+        );
       return compareField(a.humanVerified, b.humanVerified, sortDir);
     });
 
@@ -919,29 +1173,46 @@ export function HierarchyTable({
       )
         continue;
 
-      renderIndicator(result, indicator);
+      renderIndicator(result, indicator, 4, subStrand, strand);
     }
   }
 
-  function renderIndicator(result: React.ReactNode[], indicator: Indicator) {
+  function renderIndicator(
+    result: React.ReactNode[],
+    indicator: Indicator,
+    depth: number,
+    subStrand?: SubStrand,
+    strand?: Strand,
+  ) {
     const key = `indicator-${indicator.id}`;
+
+    let displayName = indicator.title ?? indicator.description;
+    if (indicator.title && subStrand != null) {
+      if (indicator.title == subStrand.name && indicator.description != null) {
+        displayName = indicator.description;
+      }
+    } else if (
+      indicator.title &&
+      strand != null &&
+      indicator.title == strand.name &&
+      indicator.description != null
+    ) {
+      displayName = indicator.description;
+    }
 
     result.push(
       <TableRow key={key} className="hover:bg-muted/30">
         <TableCell>
-          <span style={{ paddingLeft: "6rem" }} />
+          <span style={{ paddingLeft: `${depth * 1.5}rem` }} />
         </TableCell>
-        <TableCell>
+        <TableCell colSpan={2}>
           <span className="inline-flex items-center gap-2">
             <span className="text-xs font-mono text-muted-foreground/70 bg-muted/50 px-1.5 py-0.5 rounded">
               {indicator.code}
             </span>
-            <span className="text-sm text-foreground/80">
-              {indicator.title ?? indicator.description}
-            </span>
+            <span className="text-sm text-foreground/80">{displayName}</span>
           </span>
         </TableCell>
-        <TableCell />
         <TableCell className="text-xs text-muted-foreground">
           {indicator.ageBand}
         </TableCell>
@@ -951,7 +1222,16 @@ export function HierarchyTable({
         <TableCell>
           <VerifiedBadge
             verified={indicator.humanVerified}
-            onClick={onVerify ? () => handleVerify(indicator.id, "indicator", !indicator.humanVerified) : undefined}
+            onClick={
+              onVerify
+                ? () =>
+                    handleVerify(
+                      indicator.id,
+                      "indicator",
+                      !indicator.humanVerified,
+                    )
+                : undefined
+            }
           />
         </TableCell>
         {hasEditPermission && (
@@ -959,7 +1239,9 @@ export function HierarchyTable({
             <ActionButtons
               onEdit={onEdit ? () => onEdit(indicator, "indicator") : undefined}
               onDelete={
-                onDelete ? () => handleDelete(indicator.id, "indicator") : undefined
+                onDelete
+                  ? () => handleDelete(indicator.id, "indicator")
+                  : undefined
               }
             />
           </TableCell>
