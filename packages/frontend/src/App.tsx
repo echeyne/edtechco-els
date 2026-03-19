@@ -15,9 +15,7 @@ function App() {
         <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-30 px-6 py-3">
           <div className="container flex items-center justify-between">
             <h1 className="text-xl font-semibold tracking-tight text-foreground">
-              <span className="text-primary">
-                Early Learning Standards Explorer
-              </span>{" "}
+              <span className="text-primary">Early Learning Standards</span>{" "}
               <span className="font-normal text-muted-foreground">
                 Explorer
               </span>
