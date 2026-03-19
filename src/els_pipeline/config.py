@@ -20,6 +20,10 @@ class Config:
     # Confidence Threshold
     CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.7"))
     
+    # Batch Configuration
+    MAX_CHUNKS_PER_BATCH = int(os.getenv("MAX_CHUNKS_PER_BATCH", "5"))
+    MAX_DOMAINS_PER_BATCH = int(os.getenv("MAX_DOMAINS_PER_BATCH", "3"))
+    
     # AWS Region
     AWS_REGION = os.getenv("AWS_REGION", "us-east-1")
     

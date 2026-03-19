@@ -23,6 +23,15 @@ open htmlcov/index.html
 
 # Specific component
 pytest tests/property/test_ingestion_props.py -v
+
+# Batching tests
+pytest tests/property/test_detection_batching_props.py -v
+pytest tests/property/test_parse_batching_props.py -v
+pytest tests/integration/test_detection_batching.py -v
+pytest tests/integration/test_detect_batch.py -v
+pytest tests/integration/test_merge_detection_results.py -v
+pytest tests/integration/test_parse_batching.py -v
+pytest tests/integration/test_merge_parse_results.py -v
 ```
 
 ### Manual AWS Tests (requires deployment)
@@ -39,15 +48,17 @@ python scripts/test_pipeline_manual.py
 
 ## Component Coverage
 
-| Component    | Property Tests                                                                    | Integration Tests | Manual Test      |
-| ------------ | --------------------------------------------------------------------------------- | ----------------- | ---------------- |
-| Ingester     | S3 path construction, metadata completeness, format validation                    | Mocked S3         | Real S3 upload   |
-| Extractor    | Block reading order, table cell structure, page numbers                           | Mocked Textract   | Real Textract    |
-| Detector     | Confidence threshold flagging                                                     | Mocked Bedrock    | Real Bedrock LLM |
-| Parser       | Level normalization, hierarchy mapping, Standard_ID determinism, orphan detection | Logic testing     | Sample data      |
-| Validator    | Schema validation, error reporting, uniqueness, serialization round-trip          | Mocked S3         | Real S3 storage  |
-| Database     | Vector similarity ordering, query filter correctness                              | Test DB           | Real Aurora      |
-| Orchestrator | Stage result completeness, run count invariants                                   | Mocked stages     | Step Functions   |
+| Component      | Property Tests                                                                                            | Integration Tests   | Manual Test        |
+| -------------- | --------------------------------------------------------------------------------------------------------- | ------------------- | ------------------ |
+| Ingester       | S3 path construction, metadata completeness, format validation                                            | Mocked S3           | Real S3 upload     |
+| Extractor      | Block reading order, table cell structure, page numbers                                                   | Mocked Textract     | Real Textract      |
+| Detector       | Confidence threshold flagging                                                                             | Mocked Bedrock      | Real Bedrock LLM   |
+| Det. Batching  | Batch no-data-loss, batch size constraint, dedup correctness, status determination, review count accuracy | Mocked S3 + Bedrock | Step Functions Map |
+| Parser         | Level normalization, hierarchy mapping, Standard_ID determinism, orphan detection                         | Logic testing       | Sample data        |
+| Parse Batching | Exact partitioning, batch size constraint, review element filtering, merge completeness                   | Mocked S3 + Bedrock | Step Functions Map |
+| Validator      | Schema validation, error reporting, uniqueness, serialization round-trip                                  | Mocked S3           | Real S3 storage    |
+| Database       | Vector similarity ordering, query filter correctness                                                      | Test DB             | Real Aurora        |
+| Orchestrator   | Stage result completeness, run count invariants                                                           | Mocked stages       | Step Functions     |
 
 ## Environment Setup
 
@@ -79,6 +90,10 @@ export BEDROCK_PARSER_LLM_MODEL_ID=us.anthropic.claude-sonnet-4-6
 export BEDROCK_EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
 
 export CONFIDENCE_THRESHOLD=0.7
+
+# Batch processing
+export MAX_CHUNKS_PER_BATCH=5
+export MAX_DOMAINS_PER_BATCH=3
 ```
 
 See `.env.example` for the full list.
@@ -87,7 +102,7 @@ See `.env.example` for the full list.
 
 - Overall: > 80%
 - Critical paths (ingestion, validation, embeddings, DB): > 90%
-- All 27 correctness properties covered by property tests
+- All 36 correctness properties covered by property tests
 - All AWS service interactions covered by integration tests
 
 ## Debugging

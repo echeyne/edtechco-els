@@ -17,6 +17,16 @@ from .ingester import ingest_document
 from .extractor import extract_text
 from .detector import detect_structure
 from .parser import parse_hierarchy
+from .detection_batching import (
+    prepare_detection_batches,
+    detect_batch,
+    merge_detection_results,
+)
+from .parse_batching import (
+    prepare_parse_batches,
+    parse_batch,
+    merge_parse_results,
+)
 from .validator import validate_record, serialize_record
 from .models import IngestionRequest
 from .config import Config
@@ -767,3 +777,206 @@ def persistence_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     except Exception as e:
         return _handle_error("data_persistence", e, event)
 
+
+def prepare_detection_batches_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+    """
+    Lambda handler for detection batch preparation stage.
+
+    Splits extracted text blocks into bounded batches for parallel processing.
+
+    Expected event structure:
+    {
+        "run_id": str,
+        "output_artifact": str (S3 key with extracted text),
+        "country": str,
+        "state": str,
+        "version_year": int
+    }
+
+    Returns:
+        {
+            "status": "success" | "error",
+            "batch_count": int,
+            "manifest_key": str,
+            "country": str,
+            "state": str,
+            "version_year": int,
+            "run_id": str,
+            "error": str (optional)
+        }
+    """
+    try:
+        logger.info(f"Starting detection batch preparation: run_id={event.get('run_id')}, country={event.get('country')}")
+        return prepare_detection_batches(event, context)
+    except Exception as e:
+        return _handle_error("prepare_detection_batches", e, event)
+
+
+def detect_batch_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+    """
+    Lambda handler for processing a single detection batch.
+
+    Processes one batch of text-block chunks through Bedrock for structure detection.
+
+    Expected event structure:
+    {
+        "run_id": str,
+        "batch_key": str (S3 key with batch text blocks),
+        "batch_index": int,
+        "country": str,
+        "state": str,
+        "version_year": int
+    }
+
+    Returns:
+        {
+            "batch_index": int,
+            "elements_count": int,
+            "result_key": str,
+            "status": "success" | "partial" | "error"
+        }
+    """
+    try:
+        logger.info(f"Starting detection batch processing: run_id={event.get('run_id')}, batch_index={event.get('batch_index')}")
+        return detect_batch(event, context)
+    except Exception as e:
+        return _handle_error("detect_batch", e, event)
+
+
+def merge_detection_results_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+    """
+    Lambda handler for merging detection batch results.
+
+    Combines all batch partial detection results into a single deduplicated output.
+
+    Expected event structure:
+    {
+        "run_id": str,
+        "manifest_key": str (S3 key with batch manifest),
+        "country": str,
+        "state": str,
+        "version_year": int
+    }
+
+    Returns:
+        {
+            "status": "success" | "partial" | "error",
+            "stage_name": "structure_detection",
+            "output_artifact": str,
+            "review_count": int,
+            "total_elements": int,
+            "country": str,
+            "state": str,
+            "version_year": int,
+            "run_id": str,
+            "error": str (optional)
+        }
+    """
+    try:
+        logger.info(f"Starting detection results merge: run_id={event.get('run_id')}, country={event.get('country')}")
+        return merge_detection_results(event, context)
+    except Exception as e:
+        return _handle_error("merge_detection_results", e, event)
+
+
+def prepare_parse_batches_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+    """
+    Lambda handler for parse batch preparation stage.
+
+    Splits detected elements into bounded batches of domain chunks for parallel processing.
+
+    Expected event structure:
+    {
+        "run_id": str,
+        "output_artifact": str (S3 key with detection output),
+        "country": str,
+        "state": str,
+        "version_year": int,
+        "age_band": str
+    }
+
+    Returns:
+        {
+            "status": "success" | "error",
+            "batch_count": int,
+            "manifest_key": str,
+            "country": str,
+            "state": str,
+            "version_year": int,
+            "age_band": str,
+            "run_id": str,
+            "error": str (optional)
+        }
+    """
+    try:
+        logger.info(f"Starting parse batch preparation: run_id={event.get('run_id')}, country={event.get('country')}")
+        return prepare_parse_batches(event, context)
+    except Exception as e:
+        return _handle_error("prepare_parse_batches", e, event)
+
+
+def parse_batch_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+    """
+    Lambda handler for processing a single parse batch.
+
+    Processes one batch of domain chunks through Bedrock for hierarchy parsing.
+
+    Expected event structure:
+    {
+        "run_id": str,
+        "batch_key": str (S3 key with batch elements),
+        "batch_index": int,
+        "country": str,
+        "state": str,
+        "version_year": int,
+        "age_band": str
+    }
+
+    Returns:
+        {
+            "batch_index": int,
+            "standards_count": int,
+            "result_key": str,
+            "status": "success" | "partial" | "error"
+        }
+    """
+    try:
+        logger.info(f"Starting parse batch processing: run_id={event.get('run_id')}, batch_index={event.get('batch_index')}")
+        return parse_batch(event, context)
+    except Exception as e:
+        return _handle_error("parse_batch", e, event)
+
+
+def merge_parse_results_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
+    """
+    Lambda handler for merging parse batch results.
+
+    Combines all batch partial parse results into a single unified output.
+
+    Expected event structure:
+    {
+        "run_id": str,
+        "manifest_key": str (S3 key with batch manifest),
+        "country": str,
+        "state": str,
+        "version_year": int
+    }
+
+    Returns:
+        {
+            "status": "success" | "partial" | "error",
+            "stage_name": "hierarchy_parsing",
+            "output_artifact": str,
+            "total_indicators": int,
+            "country": str,
+            "state": str,
+            "version_year": int,
+            "run_id": str,
+            "error": str (optional)
+        }
+    """
+    try:
+        logger.info(f"Starting parse results merge: run_id={event.get('run_id')}, country={event.get('country')}")
+        return merge_parse_results(event, context)
+    except Exception as e:
+        return _handle_error("merge_parse_results", e, event)

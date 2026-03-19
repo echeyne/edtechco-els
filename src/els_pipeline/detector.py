@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 # Constants
 CHARS_PER_TOKEN = 4
 DEFAULT_TARGET_TOKENS = 2000
-DEFAULT_OVERLAP_TOKENS = 200
+DEFAULT_OVERLAP_TOKENS = 500
 MAX_PARSE_RETRIES = 2
 MAX_BEDROCK_RETRIES = 2
 LLM_TEMPERATURE = 0.1
@@ -214,9 +214,22 @@ OUTPUT FORMAT — Return ONLY a JSON array. No text before or after it.
   }}
 ]
 
+CRITICAL — ELEMENTS THAT SPAN PAGE BOUNDARIES:
+Documents are chunked for processing, so you may see structural elements whose children appear in a DIFFERENT chunk. This is normal and expected. You MUST still extract these elements. Specifically:
+- If you see a strand or sub_strand header (e.g., "C. Relationships with Others") with a description paragraph but NO indicators beneath it in this text, extract it anyway. Its indicators will appear in a later chunk.
+- If you see indicators that appear to belong to a strand/sub_strand not shown in this text, extract the indicators. The parent element was in a previous chunk.
+- Do NOT skip an element just because it has no children visible in the current text. Every heading, section title, or structural marker must be extracted regardless of whether its children are present.
+
+CRITICAL — RECOGNIZING LESS OBVIOUS HIERARCHY MARKERS:
+Not all structural elements are formatted with bold headings or numbered lists. Watch for these patterns:
+- A lettered section (e.g., "A. Self-Concept", "B. Self-Regulation", "C. Relationships with Others") followed by a descriptive paragraph is a structural element, even if it appears at the very end of the text with nothing after it.
+- A numbered sub-section (e.g., "1. Behavior Control", "2. Emotional Control") under a lettered section is also a structural element.
+- Section headers may appear in different visual styles: bold, colored, larger font, or simply as a line starting with a letter/number prefix. The text extraction may not preserve formatting, so rely on the alphanumeric prefix pattern (A., B., C., 1., 2., 3.) and the presence of a descriptive paragraph to identify structural elements.
+- A standalone line that looks like a title (short, no period at the end, followed by a longer descriptive paragraph) is likely a structural element even without an explicit letter/number prefix.
+
 FINAL REMINDERS:
 - Return ONLY the JSON array. No markdown, no explanation, no commentary.
-- Extract EVERY structural element you find. Do not skip any.
+- Extract EVERY structural element you find. Do not skip any — even if it appears at the very end of the text with no children visible.
 - Use the page numbers from the [Page N] markers in the text.
 - Remember: classify by NESTING DEPTH in the document, NOT by what the document calls each level.
 

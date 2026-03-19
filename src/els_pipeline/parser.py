@@ -117,7 +117,14 @@ Rules:
 - For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 0-48, PK4 is 0-60, 3 to 4 ½ Years is 36-54) If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
 - For code: it should be hirarchical (e.g. "A", "A.1", "A.1a", "A.1a.1") not just the final part.
 - Return ONLY the JSON array, no other text.
-- Every indicator element must appear exactly once in the output."""
+- Every indicator element must appear exactly once in the output.
+
+CRITICAL — RESOLVING HIERARCHY USING CODES AND CONTEXT:
+The detected elements come from processing the document in overlapping chunks. This means:
+- A strand or sub_strand may have been detected in one chunk while its child indicators were detected in a different chunk. You MUST still link them correctly using code prefixes, naming patterns, and document order.
+- Use the hierarchical code structure to resolve parentage. For example, indicators with codes like "PK3.I.A.1" and "PK4.I.A.1" belong under the strand with code "A" (Self-Concept) in domain "I" (Social and Emotional Development).
+- If a strand or sub_strand appears in the elements list but has no indicators directly following it, look for indicators elsewhere in the list whose codes or source context indicate they belong under that strand/sub_strand.
+- Do NOT drop strands or sub_strands just because their indicators are not adjacent in the element list. Every strand and sub_strand should appear as the parent of at least one indicator in the output (unless it genuinely has no indicators in the document)."""
 
     return prompt
 

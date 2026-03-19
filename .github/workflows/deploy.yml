@@ -108,6 +108,9 @@ jobs:
 
       - name: Deploy CloudFormation stack
         run: |
+          AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          CFN_BUCKET="els-lambda-code-${{ secrets.ENVIRONMENT_NAME }}-${AWS_ACCOUNT_ID}"
+
           aws cloudformation deploy \
             --template-file infra/template.yaml \
             --stack-name els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
@@ -115,7 +118,9 @@ jobs:
               EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} \
               Region=${{ secrets.AWS_REGION }} \
             --capabilities CAPABILITY_NAMED_IAM \
-            --no-fail-on-empty-changeset
+            --no-fail-on-empty-changeset \
+            --s3-bucket "$CFN_BUCKET" \
+            --s3-prefix cfn-templates
 
       - name: Update Lambda function code
         run: |
@@ -271,6 +276,9 @@ jobs:
 
       - name: Deploy CloudFormation stack
         run: |
+          AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+          CFN_BUCKET="els-lambda-code-${{ secrets.ENVIRONMENT_NAME }}-${AWS_ACCOUNT_ID}"
+
           aws cloudformation deploy \
             --template-file infra/template.yaml \
             --stack-name els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
@@ -278,7 +286,9 @@ jobs:
               EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} \
               Region=${{ secrets.AWS_REGION }} \
             --capabilities CAPABILITY_NAMED_IAM \
-            --no-fail-on-empty-changeset
+            --no-fail-on-empty-changeset \
+            --s3-bucket "$CFN_BUCKET" \
+            --s3-prefix cfn-templates
 
       - name: Update Lambda function code
         run: |

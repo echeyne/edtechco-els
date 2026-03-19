@@ -232,6 +232,244 @@ Resources:
         - Key: Project
           Value: ELS-Pipeline
 
+  # IAM Role for Detection Batch Preparer Lambda
+  DetectionBatchPreparerLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "els-detection-batch-preparer-role-${EnvironmentName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3ExtractionReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/extraction/*"
+        - PolicyName: S3DetectionBatchWriteAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/detection/*"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # IAM Role for Detection Batch Processor Lambda
+  DetectionBatchProcessorLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "els-detection-batch-processor-role-${EnvironmentName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3DetectionBatchReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/detection/*"
+        - PolicyName: S3DetectionResultWriteAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/detection/*"
+        - PolicyName: BedrockInvokeAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                Resource: "*"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # IAM Role for Detection Results Merger Lambda
+  DetectionMergerLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "els-detection-merger-role-${EnvironmentName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3DetectionReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/detection/*"
+        - PolicyName: S3DetectionOutputWriteAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/detection/*"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # IAM Role for Parse Batch Preparer Lambda
+  ParseBatchPreparerLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "els-parse-batch-preparer-role-${EnvironmentName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3DetectionOutputReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/detection/*"
+        - PolicyName: S3ParsingBatchWriteAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/parsing/*"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # IAM Role for Parse Batch Processor Lambda
+  ParseBatchProcessorLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "els-parse-batch-processor-role-${EnvironmentName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3ParsingBatchReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/parsing/*"
+        - PolicyName: S3ParsingResultWriteAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/parsing/*"
+        - PolicyName: BedrockInvokeAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                Resource: "*"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # IAM Role for Parse Results Merger Lambda
+  ParseMergerLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub "els-parse-merger-role-${EnvironmentName}"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: S3ParsingReadAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/parsing/*"
+        - PolicyName: S3ParsingOutputWriteAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                Resource: !Sub "${ProcessedJsonBucket.Arn}/*/intermediate/parsing/*"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
   # S3 Processed JSON Bucket
   # Stores validated Canonical_JSON records with country-based path structure:
   # {country}/{state}/{year}/{standard_id}.json
@@ -439,6 +677,151 @@ Resources:
       Role: !GetAtt HierarchyParserLambdaRole.Arn
       Timeout: 900
       MemorySize: 1024
+      Environment:
+        Variables:
+          ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
+          ENVIRONMENT: !Ref EnvironmentName
+      Code:
+        S3Bucket: !Sub "els-lambda-code-${EnvironmentName}-${AWS::AccountId}"
+        S3Key: "els-lambda-package.zip"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # Detection Batch Preparer Lambda Function
+  PrepareDetectionBatchesLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "els-prepare-detection-batches-${EnvironmentName}"
+      Runtime: python3.11
+      Handler: els_pipeline.handlers.prepare_detection_batches_handler
+      Role: !GetAtt DetectionBatchPreparerLambdaRole.Arn
+      Timeout: 60
+      MemorySize: 512
+      Environment:
+        Variables:
+          ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
+          ENVIRONMENT: !Ref EnvironmentName
+          MAX_CHUNKS_PER_BATCH: "5"
+      Code:
+        S3Bucket: !Sub "els-lambda-code-${EnvironmentName}-${AWS::AccountId}"
+        S3Key: "els-lambda-package.zip"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # Detection Batch Processor Lambda Function
+  DetectBatchLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "els-detect-batch-${EnvironmentName}"
+      Runtime: python3.11
+      Handler: els_pipeline.handlers.detect_batch_handler
+      Role: !GetAtt DetectionBatchProcessorLambdaRole.Arn
+      Timeout: 600
+      MemorySize: 1024
+      Environment:
+        Variables:
+          ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
+          BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-6-v1"
+          CONFIDENCE_THRESHOLD: "0.7"
+          MAX_CHUNKS_PER_BATCH: "5"
+          ENVIRONMENT: !Ref EnvironmentName
+      Code:
+        S3Bucket: !Sub "els-lambda-code-${EnvironmentName}-${AWS::AccountId}"
+        S3Key: "els-lambda-package.zip"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # Detection Results Merger Lambda Function
+  MergeDetectionResultsLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "els-merge-detection-results-${EnvironmentName}"
+      Runtime: python3.11
+      Handler: els_pipeline.handlers.merge_detection_results_handler
+      Role: !GetAtt DetectionMergerLambdaRole.Arn
+      Timeout: 120
+      MemorySize: 512
+      Environment:
+        Variables:
+          ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
+          CONFIDENCE_THRESHOLD: "0.7"
+          ENVIRONMENT: !Ref EnvironmentName
+      Code:
+        S3Bucket: !Sub "els-lambda-code-${EnvironmentName}-${AWS::AccountId}"
+        S3Key: "els-lambda-package.zip"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # Parse Batch Preparer Lambda Function
+  PrepareParseBatchesLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "els-prepare-parse-batches-${EnvironmentName}"
+      Runtime: python3.11
+      Handler: els_pipeline.handlers.prepare_parse_batches_handler
+      Role: !GetAtt ParseBatchPreparerLambdaRole.Arn
+      Timeout: 60
+      MemorySize: 512
+      Environment:
+        Variables:
+          ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
+          ENVIRONMENT: !Ref EnvironmentName
+          MAX_DOMAINS_PER_BATCH: "3"
+      Code:
+        S3Bucket: !Sub "els-lambda-code-${EnvironmentName}-${AWS::AccountId}"
+        S3Key: "els-lambda-package.zip"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # Parse Batch Processor Lambda Function
+  ParseBatchLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "els-parse-batch-${EnvironmentName}"
+      Runtime: python3.11
+      Handler: els_pipeline.handlers.parse_batch_handler
+      Role: !GetAtt ParseBatchProcessorLambdaRole.Arn
+      Timeout: 600
+      MemorySize: 1024
+      Environment:
+        Variables:
+          ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
+          ENVIRONMENT: !Ref EnvironmentName
+          MAX_DOMAINS_PER_BATCH: "3"
+      Code:
+        S3Bucket: !Sub "els-lambda-code-${EnvironmentName}-${AWS::AccountId}"
+        S3Key: "els-lambda-package.zip"
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+        - Key: Project
+          Value: ELS-Pipeline
+
+  # Parse Results Merger Lambda Function
+  MergeParseResultsLambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: !Sub "els-merge-parse-results-${EnvironmentName}"
+      Runtime: python3.11
+      Handler: els_pipeline.handlers.merge_parse_results_handler
+      Role: !GetAtt ParseMergerLambdaRole.Arn
+      Timeout: 120
+      MemorySize: 512
       Environment:
         Variables:
           ELS_PROCESSED_BUCKET: !Ref ProcessedJsonBucket
@@ -942,7 +1325,7 @@ Resources:
                   "Next": "FormatExtractionError"
                 }
               ],
-              "Default": "StructureDetection"
+              "Default": "PrepareDetectionBatches"
             },
             "FormatExtractionError": {
               "Type": "Pass",
@@ -959,17 +1342,76 @@ Resources:
               },
               "Next": "NotifyFailure"
             },
-            "StructureDetection": {
+            "PrepareDetectionBatches": {
               "Type": "Task",
               "Resource": "arn:aws:states:::lambda:invoke",
               "Parameters": {
-                "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-structure-detector-${EnvironmentName}",
+                "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-prepare-detection-batches-${EnvironmentName}",
                 "Payload": {
                   "run_id.$": "$.run_id",
                   "output_artifact.$": "$.extraction_result.Payload.output_artifact",
                   "country.$": "$.country",
                   "state.$": "$.state",
                   "version_year.$": "$.version_year"
+                }
+              },
+              "ResultPath": "$.detection_batch_prep",
+              "Retry": [
+                {
+                  "ErrorEquals": ["States.TaskFailed"],
+                  "IntervalSeconds": 5,
+                  "MaxAttempts": 2,
+                  "BackoffRate": 2.0
+                }
+              ],
+              "Catch": [
+                {
+                  "ErrorEquals": ["States.ALL"],
+                  "ResultPath": "$.error_info",
+                  "Next": "NotifyFailure"
+                }
+              ],
+              "Next": "DetectBatchMap"
+            },
+            "DetectBatchMap": {
+              "Type": "Map",
+              "ItemsPath": "$.detection_batch_prep.Payload.batch_keys",
+              "MaxConcurrency": 3,
+              "Iterator": {
+                "StartAt": "DetectSingleBatch",
+                "States": {
+                  "DetectSingleBatch": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-detect-batch-${EnvironmentName}",
+                      "Payload.$": "$"
+                    },
+                    "End": true
+                  }
+                }
+              },
+              "ResultPath": "$.detection_batch_results",
+              "Catch": [
+                {
+                  "ErrorEquals": ["States.ALL"],
+                  "ResultPath": "$.detection_batch_errors",
+                  "Next": "MergeDetectionResults"
+                }
+              ],
+              "Next": "MergeDetectionResults"
+            },
+            "MergeDetectionResults": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-merge-detection-results-${EnvironmentName}",
+                "Payload": {
+                  "manifest_key.$": "$.detection_batch_prep.Payload.manifest_key",
+                  "country.$": "$.country",
+                  "state.$": "$.state",
+                  "version_year.$": "$.version_year",
+                  "run_id.$": "$.run_id"
                 }
               },
               "ResultPath": "$.detection_result",
@@ -999,7 +1441,7 @@ Resources:
                   "Next": "FormatDetectionError"
                 }
               ],
-              "Default": "HierarchyParsing"
+              "Default": "PrepareParseBatches"
             },
             "FormatDetectionError": {
               "Type": "Pass",
@@ -1010,17 +1452,16 @@ Resources:
                 "version_year.$": "$.version_year",
                 "error_info": {
                   "stage": "detection",
-                  "error.$": "$.detection_result.Payload.error",
-                  "error_type.$": "$.detection_result.Payload.error_type"
+                  "error.$": "$.detection_result.Payload.error"
                 }
               },
               "Next": "NotifyFailure"
             },
-            "HierarchyParsing": {
+            "PrepareParseBatches": {
               "Type": "Task",
               "Resource": "arn:aws:states:::lambda:invoke",
               "Parameters": {
-                "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-hierarchy-parser-${EnvironmentName}",
+                "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-prepare-parse-batches-${EnvironmentName}",
                 "Payload": {
                   "run_id.$": "$.run_id",
                   "output_artifact.$": "$.detection_result.Payload.output_artifact",
@@ -1030,11 +1471,70 @@ Resources:
                   "age_band.$": "$.age_band"
                 }
               },
+              "ResultPath": "$.parse_batch_prep",
+              "Retry": [
+                {
+                  "ErrorEquals": ["States.TaskFailed"],
+                  "IntervalSeconds": 5,
+                  "MaxAttempts": 2,
+                  "BackoffRate": 2.0
+                }
+              ],
+              "Catch": [
+                {
+                  "ErrorEquals": ["States.ALL"],
+                  "ResultPath": "$.error_info",
+                  "Next": "NotifyFailure"
+                }
+              ],
+              "Next": "ParseBatchMap"
+            },
+            "ParseBatchMap": {
+              "Type": "Map",
+              "ItemsPath": "$.parse_batch_prep.Payload.batch_keys",
+              "MaxConcurrency": 3,
+              "Iterator": {
+                "StartAt": "ParseSingleBatch",
+                "States": {
+                  "ParseSingleBatch": {
+                    "Type": "Task",
+                    "Resource": "arn:aws:states:::lambda:invoke",
+                    "Parameters": {
+                      "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-parse-batch-${EnvironmentName}",
+                      "Payload.$": "$"
+                    },
+                    "End": true
+                  }
+                }
+              },
+              "ResultPath": "$.parse_batch_results",
+              "Catch": [
+                {
+                  "ErrorEquals": ["States.ALL"],
+                  "ResultPath": "$.parse_batch_errors",
+                  "Next": "MergeParseResults"
+                }
+              ],
+              "Next": "MergeParseResults"
+            },
+            "MergeParseResults": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "FunctionName": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:els-merge-parse-results-${EnvironmentName}",
+                "Payload": {
+                  "manifest_key.$": "$.parse_batch_prep.Payload.manifest_key",
+                  "country.$": "$.country",
+                  "state.$": "$.state",
+                  "version_year.$": "$.version_year",
+                  "run_id.$": "$.run_id"
+                }
+              },
               "ResultPath": "$.parsing_result",
               "Retry": [
                 {
                   "ErrorEquals": ["States.TaskFailed"],
-                  "IntervalSeconds": 2,
+                  "IntervalSeconds": 5,
                   "MaxAttempts": 2,
                   "BackoffRate": 2.0
                 }
@@ -1068,8 +1568,7 @@ Resources:
                 "version_year.$": "$.version_year",
                 "error_info": {
                   "stage": "parsing",
-                  "error.$": "$.parsing_result.Payload.error",
-                  "error_type.$": "$.parsing_result.Payload.error_type"
+                  "error.$": "$.parsing_result.Payload.error"
                 }
               },
               "Next": "NotifyFailure"

@@ -96,10 +96,16 @@ Each pipeline stage writes intermediate output to S3 for debugging:
 
 ```
 {country}/{state}/{year}/intermediate/
-  ├── extraction/{run_id}.json    # Textract blocks
-  ├── detection/{run_id}.json     # Detected structure elements
-  ├── parsing/{run_id}.json       # Parsed indicators with hierarchy
-  └── validation/{run_id}.json    # Validation summary
+  ├── extraction/{run_id}.json          # Textract blocks
+  ├── detection/manifest/{run_id}.json  # Detection batch manifest
+  ├── detection/batch-N/{run_id}.json   # Per-batch text blocks
+  ├── detection/result-N/{run_id}.json  # Per-batch detection results
+  ├── detection/{run_id}.json           # Merged detection output
+  ├── parsing/manifest/{run_id}.json    # Parse batch manifest
+  ├── parsing/batch-N/{run_id}.json     # Per-batch elements
+  ├── parsing/result-N/{run_id}.json    # Per-batch parse results
+  ├── parsing/{run_id}.json             # Merged parsing output
+  └── validation/{run_id}.json          # Validation summary
 ```
 
 To inspect:
@@ -146,15 +152,16 @@ Key CloudWatch metrics to watch: Lambda invocations/errors/duration, Step Functi
 
 ## Troubleshooting
 
-| Issue                      | Diagnosis                                        | Fix                                                         |
-| -------------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
-| CloudFormation fails       | Check stack events                               | Ensure `CAPABILITY_NAMED_IAM`. Verify IAM permissions.      |
-| Lambda timeout             | Check CloudWatch logs                            | Increase timeout/memory in template.                        |
-| Bedrock access denied      | `aws bedrock list-foundation-models`             | Request model access in Bedrock console.                    |
-| Aurora connection failure  | Check VPC/security groups                        | Ensure Lambda is in same VPC. Check port 5432 rules.        |
-| S3 path issues             | `aws s3 ls s3://${BUCKET}/`                      | Verify country code is uppercase 2-letter ISO format.       |
-| Intermediate files missing | Check Lambda logs for S3 errors                  | Verify IAM role has `s3:PutObject` on the processed bucket. |
-| "No text blocks provided"  | Download extraction output, check `blocks` array | Review extraction Lambda logs.                              |
+| Issue                      | Diagnosis                                              | Fix                                                           |
+| -------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
+| CloudFormation fails       | Check stack events                                     | Ensure `CAPABILITY_NAMED_IAM`. Verify IAM permissions.        |
+| Lambda timeout             | Check CloudWatch logs                                  | Increase timeout/memory in template. Check batch size config. |
+| Batch processing slow      | Check `MAX_CHUNKS_PER_BATCH` / `MAX_DOMAINS_PER_BATCH` | Lower batch size to reduce per-Lambda work.                   |
+| Bedrock access denied      | `aws bedrock list-foundation-models`                   | Request model access in Bedrock console.                      |
+| Aurora connection failure  | Check VPC/security groups                              | Ensure Lambda is in same VPC. Check port 5432 rules.          |
+| S3 path issues             | `aws s3 ls s3://${BUCKET}/`                            | Verify country code is uppercase 2-letter ISO format.         |
+| Intermediate files missing | Check Lambda logs for S3 errors                        | Verify IAM role has `s3:PutObject` on the processed bucket.   |
+| "No text blocks provided"  | Download extraction output, check `blocks` array       | Review extraction Lambda logs.                                |
 
 ### Debugging Tips
 

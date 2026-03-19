@@ -116,6 +116,30 @@ Country codes are validated at multiple levels:
    - Permissions: S3 read/write to ProcessedJsonBucket
    - Purpose: Validate and store Canonical_JSON
 
+6. **DetectionBatchPreparerRole**
+   - Permissions: S3 read (extraction output), S3 write (detection batches)
+   - Purpose: Split text blocks into bounded detection batches
+
+7. **DetectionBatchProcessorRole**
+   - Permissions: S3 read (detection batches), S3 write (detection results), Bedrock invoke
+   - Purpose: Process a single detection batch through Bedrock
+
+8. **DetectionMergerRole**
+   - Permissions: S3 read (detection batches + results), S3 write (detection output)
+   - Purpose: Merge and deduplicate detection batch results
+
+9. **ParseBatchPreparerRole**
+   - Permissions: S3 read (detection output), S3 write (parsing batches)
+   - Purpose: Split detected elements into bounded parse batches by domain
+
+10. **ParseBatchProcessorRole**
+    - Permissions: S3 read (parsing batches), S3 write (parsing results), Bedrock invoke
+    - Purpose: Process a single parse batch through Bedrock
+
+11. **ParseMergerRole**
+    - Permissions: S3 read (parsing batches + results), S3 write (parsing output)
+    - Purpose: Merge parse batch results into final output
+
 ### Lambda Functions (to be added)
 
 Lambda functions will be added in subsequent tasks with the following environment variables:
@@ -132,18 +156,33 @@ Environment:
     S3_PATH_PATTERN: "{country}/{state}/{year}/{identifier}"
 ```
 
+#### Batching Lambda Functions
+
+| Function                              | Handler                                                   | Timeout | Memory | Purpose                                     |
+| ------------------------------------- | --------------------------------------------------------- | ------- | ------ | ------------------------------------------- |
+| `els-prepare-detection-batches-{env}` | `els_pipeline.handlers.prepare_detection_batches_handler` | 60s     | 512MB  | Split text blocks into detection batches    |
+| `els-detect-batch-{env}`              | `els_pipeline.handlers.detect_batch_handler`              | 600s    | 1024MB | Process one detection batch via Bedrock     |
+| `els-merge-detection-results-{env}`   | `els_pipeline.handlers.merge_detection_results_handler`   | 120s    | 512MB  | Merge and deduplicate detection results     |
+| `els-prepare-parse-batches-{env}`     | `els_pipeline.handlers.prepare_parse_batches_handler`     | 60s     | 512MB  | Split elements into parse batches by domain |
+| `els-parse-batch-{env}`               | `els_pipeline.handlers.parse_batch_handler`               | 600s    | 1024MB | Process one parse batch via Bedrock         |
+| `els-merge-parse-results-{env}`       | `els_pipeline.handlers.merge_parse_results_handler`       | 120s    | 512MB  | Merge parse results into final output       |
+
+Batch processor Lambdas include additional env vars: `MAX_CHUNKS_PER_BATCH`, `MAX_DOMAINS_PER_BATCH`, `BEDROCK_DETECTOR_LLM_MODEL_ID`, `CONFIDENCE_THRESHOLD`.
+
 ### Step Functions (to be added)
 
 AWS Step Functions state machine will orchestrate the pipeline stages:
 
 1. Ingestion
 2. Text Extraction
-3. Structure Detection
-4. Hierarchy Parsing
+3. Detection Batching (Prepare → Map: Detect Batch ×N, MaxConcurrency 3 → Merge)
+4. Parse Batching (Prepare → Map: Parse Batch ×N, MaxConcurrency 3 → Merge)
 5. Validation
 6. Embedding Generation
 7. Recommendation Generation
 8. Data Persistence
+
+The detection and parsing stages use an iterative batching pattern with Step Functions Map states for parallel execution. Batch sizes are controlled by `MAX_CHUNKS_PER_BATCH` (default 5) and `MAX_DOMAINS_PER_BATCH` (default 3) environment variables.
 
 ### Aurora PostgreSQL (to be added)
 

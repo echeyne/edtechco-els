@@ -312,5 +312,61 @@ class PipelineRunResult(BaseModel):
         return v
 
 
+# Detection Batching Models
+
+class DetectionBatchInfo(BaseModel):
+    """Metadata for a single detection batch."""
+    batch_index: int = Field(ge=0)
+    batch_s3_key: str
+    chunk_count: int
+    block_count: int
+
+
+class DetectionBatchManifest(BaseModel):
+    """Describes how text-block chunks are split into detection batches."""
+    run_id: str
+    total_blocks: int
+    total_chunks: int
+    batch_count: int
+    batches: List[DetectionBatchInfo]
+    created_at: str
+
+
+class DetectionBatchResult(BaseModel):
+    """Partial detection result from a single batch."""
+    batch_index: int = Field(ge=0)
+    elements: List[Dict[str, Any]]
+    errors: List[str]
+    status: StatusEnum
+
+
+# Parse Batching Models
+
+class ParseBatchInfo(BaseModel):
+    """Metadata for a single parse batch."""
+    batch_index: int = Field(ge=0)
+    batch_s3_key: str
+    domain_count: int
+    element_count: int
+
+
+class ParseBatchManifest(BaseModel):
+    """Describes how domain chunks are split into parse batches."""
+    run_id: str
+    total_elements: int
+    total_domains: int
+    batch_count: int
+    batches: List[ParseBatchInfo]
+    created_at: str
+
+
+class ParseBatchResult(BaseModel):
+    """Partial parsing result from a single batch."""
+    batch_index: int = Field(ge=0)
+    standards: List[Dict[str, Any]]
+    errors: List[str]
+    status: StatusEnum
+
+
 # Enable forward references for recursive models
 HierarchyNode.model_rebuild()

@@ -8,8 +8,8 @@ The pipeline takes PDF/HTML standards documents and runs them through a series o
 
 1. **Ingestion** — Uploads raw documents to S3 with country-based path structure
 2. **Text Extraction** — Extracts text blocks from PDFs using AWS Textract
-3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, indicators)
-4. **Hierarchy Parsing** — Normalizes detected elements into a consistent tree structure
+3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, indicators). Large documents are split into batches processed in parallel via Step Functions Map states.
+4. **Hierarchy Parsing** — Normalizes detected elements into a consistent tree structure. Domain chunks are batched and processed in parallel, then merged.
 5. **Validation** — Validates records against the canonical schema and enforces uniqueness
 6. **Embedding Generation** — Generates vector embeddings via Bedrock Titan for similarity search
 7. **Recommendation Generation** — Produces activity recommendations for parents and teachers
@@ -22,13 +22,21 @@ The whole thing is orchestrated by AWS Step Functions and deployed via CloudForm
 ```
 S3 (raw PDFs) → Lambda: Ingester
              → Lambda: Text Extractor (Textract)
-             → Lambda: Structure Detector (Bedrock Claude)
-             → Lambda: Hierarchy Parser
+             → Detection Batching:
+                 Lambda: Prepare Detection Batches
+                 → Step Functions Map: Detect Batch (parallel, max 3)
+                 → Lambda: Merge Detection Results
+             → Parse Batching:
+                 Lambda: Prepare Parse Batches
+                 → Step Functions Map: Parse Batch (parallel, max 3)
+                 → Lambda: Merge Parse Results
              → Lambda: Validator → S3 (canonical JSON)
              → Lambda: Embedding Generator (Bedrock Titan)
              → Lambda: Recommendation Generator (Bedrock Claude)
              → Lambda: Persister → Aurora PostgreSQL (pgvector)
 ```
+
+The detection and parsing stages use an iterative batching pattern to avoid Lambda timeout issues on large documents. Each stage is split into three steps (prepare → parallel process → merge) orchestrated by Step Functions Map states.
 
 **AWS Services used:** S3, Lambda, Step Functions, Textract, Bedrock, Aurora PostgreSQL Serverless v2, SNS, Secrets Manager, CloudWatch.
 
@@ -46,7 +54,8 @@ Example: `US/CA/2021/california_all_standards_2021.pdf` → `US/CA/2021/US-CA-20
 ## Project Layout
 
 ```
-src/els_pipeline/     Core pipeline modules (ingester, extractor, detector, parser, validator, etc.)
+src/els_pipeline/     Core pipeline modules (ingester, extractor, detector, parser, validator,
+                      detection_batching, parse_batching, etc.)
 infra/                CloudFormation template and database migrations
 scripts/              Deployment and manual testing scripts
 tests/
@@ -129,6 +138,8 @@ Key environment variables (see `.env.example` for the full list):
 | `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6`  |
 | `BEDROCK_EMBEDDING_MODEL_ID`    | Bedrock model for embeddings              | `amazon.titan-embed-text-v2:0`    |
 | `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.7`                             |
+| `MAX_CHUNKS_PER_BATCH`          | Max text-block chunks per detection batch | `5`                               |
+| `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                               |
 | `DB_HOST`                       | Aurora PostgreSQL endpoint                | `localhost`                       |
 | `DESCOPE_PROJECT_ID`            | Descope project ID for API authentication | —                                 |
 

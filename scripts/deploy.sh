@@ -83,10 +83,19 @@ package_lambdas() {
 # Validate CloudFormation template
 validate_template() {
     print_header "Validating CloudFormation Template"
-    
+
+    # Template exceeds 51,200 byte inline limit — upload to S3 for validation
+    AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+    CFN_BUCKET="els-lambda-code-${ENVIRONMENT}-${AWS_ACCOUNT_ID}"
+
+    aws s3 cp "$TEMPLATE_FILE" "s3://$CFN_BUCKET/cfn-templates/template.yaml" \
+        --region "$REGION" > /dev/null
+
+    TEMPLATE_URL="https://${CFN_BUCKET}.s3.${REGION}.amazonaws.com/cfn-templates/template.yaml"
+
     if aws cloudformation validate-template \
-        --template-body file://$TEMPLATE_FILE \
-        --region $REGION > /dev/null 2>&1; then
+        --template-url "$TEMPLATE_URL" \
+        --region "$REGION" > /dev/null 2>&1; then
         print_message "$GREEN" "✓ Template validation successful"
     else
         print_message "$RED" "❌ Template validation failed"
@@ -102,7 +111,10 @@ deploy_stack() {
     print_message "$YELLOW" "Environment: $ENVIRONMENT"
     print_message "$YELLOW" "Region: $REGION"
     echo ""
-    
+
+    AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+    CFN_BUCKET="els-lambda-code-${ENVIRONMENT}-${AWS_ACCOUNT_ID}"
+
     aws cloudformation deploy \
         --template-file $TEMPLATE_FILE \
         --stack-name $STACK_NAME \
@@ -111,6 +123,8 @@ deploy_stack() {
             Region=$REGION \
         --capabilities CAPABILITY_NAMED_IAM \
         --no-fail-on-empty-changeset \
+        --s3-bucket "$CFN_BUCKET" \
+        --s3-prefix cfn-templates \
         --region $REGION
     
     if [ $? -eq 0 ]; then
