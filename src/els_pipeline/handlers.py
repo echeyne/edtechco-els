@@ -457,6 +457,7 @@ def _indicator_to_canonical(indicator: Dict[str, Any], event: Dict[str, Any]) ->
             "title": indicator.get("document", {}).get("title", "") if isinstance(indicator.get("document"), dict) else event.get("document_title", f"{event.get('state', '')} Early Learning Standards"),
             "version_year": indicator.get("version_year", event.get("version_year", 0)),
             "source_url": indicator.get("document", {}).get("source_url", "") if isinstance(indicator.get("document"), dict) else event.get("source_url", ""),
+            "s3_key": indicator.get("document", {}).get("s3_key", "") if isinstance(indicator.get("document"), dict) else event.get("s3_key", ""),
             "age_band": age_band,
             "publishing_agency": indicator.get("document", {}).get("publishing_agency", "") if isinstance(indicator.get("document"), dict) else event.get("publishing_agency", ""),
         },

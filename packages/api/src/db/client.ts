@@ -151,6 +151,15 @@ export async function queryMany<
   return result.rows;
 }
 
+/**
+ * Returns true if the value should be inlined as a SQL expression rather than
+ * bound as a parameter. Strings ending with "()" are treated as SQL calls
+ * (e.g. "NOW()"), and the literal string "NULL" is treated as SQL NULL.
+ */
+function isSqlExpression(v: unknown): v is string {
+  return typeof v === "string" && (v === "NULL" || /\(\)$/.test(v));
+}
+
 export async function updateRow<
   T extends Record<string, unknown> = Record<string, unknown>,
 >(
@@ -165,8 +174,19 @@ export async function updateRow<
   if (entries.length === 0)
     return queryOne<T>(`SELECT * FROM ${table} WHERE id = $1`, [id]);
 
-  const setClauses = entries.map(([col], i) => `${col} = $${i + 2}`);
-  const values = entries.map(([, v]) => v);
+  // Separate SQL expressions (inlined) from regular values (parameterised)
+  let paramIndex = 2; // $1 is reserved for id
+  const setClauses: string[] = [];
+  const values: unknown[] = [];
+
+  for (const [col, v] of entries) {
+    if (isSqlExpression(v)) {
+      setClauses.push(`${col} = ${v}`);
+    } else {
+      setClauses.push(`${col} = $${paramIndex++}`);
+      values.push(v);
+    }
+  }
 
   const sql = `UPDATE ${table} SET ${setClauses.join(", ")} WHERE id = $1 RETURNING *`;
   return queryOne<T>(sql, [id, ...values]);

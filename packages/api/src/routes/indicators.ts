@@ -82,7 +82,7 @@ indicators.put("/:id", requireAuth, requireEditPermission, async (c) => {
 
   const row = await updateRow("indicators", id, fields, {
     edited_at: "NOW()",
-    edited_by: user.email,
+    edited_by: user.displayName,
   });
 
   if (!row) {
@@ -162,7 +162,7 @@ indicators.patch(
     if (humanVerified) {
       row = await queryOne(
         `UPDATE indicators SET human_verified = true, verified_at = NOW(), verified_by = $2 WHERE id = $1 RETURNING *`,
-        [id, user.email],
+        [id, user.displayName],
       );
     } else {
       row = await queryOne(

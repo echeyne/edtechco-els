@@ -93,14 +93,13 @@ export function EditModal({
 
   // UI state
   const [saving, setSaving] = useState(false);
-  const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Populate form when record changes
   useEffect(() => {
     if (!record) return;
     setCode(record.code ?? "");
-    setHumanVerified(record.humanVerified ?? false);
+    setHumanVerified(true);
     setError(null);
 
     if (recordType === "domain") {
@@ -169,31 +168,6 @@ export function EditModal({
     return result;
   }, [hierarchies]);
 
-  const handleVerifyChange = useCallback(
-    async (checked: boolean) => {
-      if (!token) return;
-      setVerifying(true);
-      setError(null);
-      try {
-        const verifyFn = {
-          domain: verifyDomain,
-          strand: verifyStrand,
-          sub_strand: verifySubStrand,
-          indicator: verifyIndicator,
-        }[recordType];
-        await verifyFn(record.id, { humanVerified: checked }, token);
-        setHumanVerified(checked);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "Failed to update verification",
-        );
-      } finally {
-        setVerifying(false);
-      }
-    },
-    [token, record.id, recordType],
-  );
-
   const handleSave = useCallback(async () => {
     if (!token) return;
     setSaving(true);
@@ -239,6 +213,18 @@ export function EditModal({
         updated = await updateSubStrand(record.id, data, token);
       }
 
+      // Persist verification status if it changed from the record's original value
+      if (humanVerified !== (record.humanVerified ?? false)) {
+        const verifyFn = {
+          domain: verifyDomain,
+          strand: verifyStrand,
+          sub_strand: verifySubStrand,
+          indicator: verifyIndicator,
+        }[recordType];
+        await verifyFn(record.id, { humanVerified }, token);
+        updated = { ...updated, humanVerified };
+      }
+
       onSave(updated);
       onOpenChange(false);
     } catch (err) {
@@ -249,6 +235,7 @@ export function EditModal({
   }, [
     token,
     record.id,
+    record.humanVerified,
     recordType,
     code,
     name,
@@ -261,6 +248,7 @@ export function EditModal({
     parentDomainId,
     parentStrandId,
     parentSubStrandId,
+    humanVerified,
     onSave,
     onOpenChange,
   ]);
@@ -446,9 +434,8 @@ export function EditModal({
             <Checkbox
               id="edit-human-verified"
               checked={humanVerified}
-              disabled={verifying}
               onCheckedChange={(checked) =>
-                handleVerifyChange(checked === true)
+                setHumanVerified(checked === true)
               }
             />
             <Label htmlFor="edit-human-verified" className="cursor-pointer">
@@ -472,7 +459,7 @@ export function EditModal({
           >
             Cancel
           </Button>
-          <Button onClick={handleSave} disabled={saving || verifying}>
+          <Button onClick={handleSave} disabled={saving}>
             {saving ? "Saving…" : "Save"}
           </Button>
         </DialogFooter>

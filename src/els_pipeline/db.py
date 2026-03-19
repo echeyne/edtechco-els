@@ -116,10 +116,11 @@ def persist_standard(standard: NormalizedStandard, document_meta: Dict[str, Any]
                 # Insert or get document — age_band comes from the parsed
                 # indicator (standard.age_band), not document_meta.
                 cur.execute("""
-                    INSERT INTO documents (country, state, title, version_year, source_url, age_band, publishing_agency)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    INSERT INTO documents (country, state, title, version_year, source_url, s3_key, age_band, publishing_agency)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
                     ON CONFLICT (country, state, version_year, title) DO UPDATE
                     SET source_url = EXCLUDED.source_url,
+                        s3_key = COALESCE(EXCLUDED.s3_key, documents.s3_key),
                         age_band = EXCLUDED.age_band,
                         publishing_agency = EXCLUDED.publishing_agency
                     RETURNING id
@@ -129,6 +130,7 @@ def persist_standard(standard: NormalizedStandard, document_meta: Dict[str, Any]
                     document_meta['title'],
                     standard.version_year,
                     document_meta.get('source_url'),
+                    document_meta.get('s3_key'),
                     standard.age_band or "PK",
                     document_meta['publishing_agency']
                 ))

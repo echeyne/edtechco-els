@@ -62,7 +62,7 @@ function createTestApp() {
     requireEditPermission,
     async (c) => {
       const user = c.get("authUser");
-      return c.json({ success: true, editedBy: user.email });
+      return c.json({ success: true, editedBy: user.displayName });
     },
   );
 

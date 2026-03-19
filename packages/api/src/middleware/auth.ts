@@ -7,7 +7,7 @@ import type { AuthenticationInfo } from "@descope/node-sdk";
 
 export interface AuthUser {
   userId: string;
-  email: string;
+  displayName: string;
   canEdit: boolean;
 }
 
@@ -62,8 +62,8 @@ function extractCanEdit(token: AuthenticationInfo["token"]): boolean {
   return false;
 }
 
-function extractEmail(token: AuthenticationInfo["token"]): string {
-  if (typeof token.email === "string") return token.email;
+function extractName(token: AuthenticationInfo["token"]): string {
+  if (typeof token.displayName === "string") return token.displayName;
   if (typeof token.sub === "string") return token.sub;
   return "unknown";
 }
@@ -107,7 +107,7 @@ export const requireAuth = createMiddleware<AuthEnv>(
 
     const user: AuthUser = {
       userId: authInfo.token.sub ?? "unknown",
-      email: extractEmail(authInfo.token),
+      displayName: extractName(authInfo.token),
       canEdit: extractCanEdit(authInfo.token),
     };
 

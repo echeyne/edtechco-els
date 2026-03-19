@@ -59,6 +59,7 @@ def _persist_single_record(record_key: str) -> None:
     document_meta = {
         "title": canonical_json["document"]["title"],
         "source_url": canonical_json["document"].get("source_url"),
+        "s3_key": canonical_json["document"].get("s3_key"),
         "publishing_agency": canonical_json["document"]["publishing_agency"],
     }
 

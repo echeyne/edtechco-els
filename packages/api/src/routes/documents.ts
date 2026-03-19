@@ -41,6 +41,7 @@ function mapDocument(row: Record<string, unknown>): Document {
     title: row.title as string,
     versionYear: row.version_year as number,
     sourceUrl: (row.source_url as string) ?? null,
+    s3Key: (row.s3_key as string) ?? null,
     ageBand: (row.age_band as string) ?? "",
     publishingAgency: (row.publishing_agency as string) ?? "",
     createdAt: new Date(row.created_at as string),
@@ -293,12 +294,18 @@ documents.get("/:id/pdf-url", async (c) => {
   }
 
   const doc = mapDocument(docRow as unknown as Record<string, unknown>);
-  if (!doc.sourceUrl) {
+
+  // s3Key must exist and must not be an external URL (e.g. source_url
+  // accidentally stored in the s3_key column).
+  const hasValidS3Key = doc.s3Key && !doc.s3Key.includes("://");
+
+  if (!hasValidS3Key) {
     return c.json(
       {
         error: {
           code: "NOT_FOUND",
-          message: "Document has no source PDF",
+          message: "Document has no source PDF in S3",
+          sourceUrl: doc.sourceUrl ?? undefined,
         },
       },
       404,
@@ -320,7 +327,7 @@ documents.get("/:id/pdf-url", async (c) => {
 
   const command = new GetObjectCommand({
     Bucket: bucket,
-    Key: doc.sourceUrl,
+    Key: doc.s3Key!,
   });
 
   const expiresIn = 3600; // 1 hour

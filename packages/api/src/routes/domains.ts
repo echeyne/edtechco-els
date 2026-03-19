@@ -67,7 +67,7 @@ domains.put("/:id", requireAuth, requireEditPermission, async (c) => {
 
   const row = await updateRow("domains", id, fields, {
     edited_at: "NOW()",
-    edited_by: user.email,
+    edited_by: user.displayName,
   });
 
   if (!row) {
@@ -146,7 +146,7 @@ domains.patch("/:id/verify", requireAuth, requireEditPermission, async (c) => {
   if (humanVerified) {
     row = await queryOne(
       `UPDATE domains SET human_verified = true, verified_at = NOW(), verified_by = $2 WHERE id = $1 RETURNING *`,
-      [id, user.email],
+      [id, user.displayName],
     );
   } else {
     row = await queryOne(

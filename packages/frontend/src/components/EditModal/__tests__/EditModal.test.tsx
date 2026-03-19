@@ -133,6 +133,7 @@ describe("EditModal", () => {
   it("save button calls the appropriate API update function for domain", async () => {
     const updatedDomain = { ...mockDomain, name: "Updated Name" };
     mockUpdateDomain.mockResolvedValue(updatedDomain);
+    mockVerifyDomain.mockResolvedValue(undefined);
     const onSave = vi.fn();
 
     renderModal({ record: mockDomain, recordType: "domain", onSave });
@@ -153,14 +154,24 @@ describe("EditModal", () => {
       );
     });
 
+    // humanVerified defaults to true, record has false, so verify API is called
     await waitFor(() => {
-      expect(onSave).toHaveBeenCalledWith(updatedDomain);
+      expect(mockVerifyDomain).toHaveBeenCalledWith(
+        10,
+        { humanVerified: true },
+        "test-token",
+      );
+    });
+
+    await waitFor(() => {
+      expect(onSave).toHaveBeenCalledWith({ ...updatedDomain, humanVerified: true });
     });
   });
 
   it("save button calls the appropriate API update function for indicator", async () => {
     const updatedIndicator = { ...mockIndicator, title: "Updated Title" };
     mockUpdateIndicator.mockResolvedValue(updatedIndicator);
+    mockVerifyIndicator.mockResolvedValue(undefined);
     const onSave = vi.fn();
 
     renderModal({ record: mockIndicator, recordType: "indicator", onSave });
@@ -183,8 +194,17 @@ describe("EditModal", () => {
       );
     });
 
+    // humanVerified defaults to true, record has false, so verify API is called
     await waitFor(() => {
-      expect(onSave).toHaveBeenCalledWith(updatedIndicator);
+      expect(mockVerifyIndicator).toHaveBeenCalledWith(
+        100,
+        { humanVerified: true },
+        "test-token",
+      );
+    });
+
+    await waitFor(() => {
+      expect(onSave).toHaveBeenCalledWith({ ...updatedIndicator, humanVerified: true });
     });
   });
 

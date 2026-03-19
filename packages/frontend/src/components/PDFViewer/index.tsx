@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Download,
+  ExternalLink,
   Loader2,
   RefreshCw,
 } from "lucide-react";
@@ -21,6 +22,7 @@ export default function PDFViewer({ documentId, initialPage }: PDFViewerProps) {
   const [expiresAt, setExpiresAt] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sourceUrl, setSourceUrl] = useState<string | null>(null);
   const [expired, setExpired] = useState(false);
   const [currentPage, setCurrentPage] = useState(initialPage ?? 1);
   const [pageInput, setPageInput] = useState(String(initialPage ?? 1));
@@ -28,14 +30,19 @@ export default function PDFViewer({ documentId, initialPage }: PDFViewerProps) {
   const fetchUrl = useCallback(async () => {
     setLoading(true);
     setError(null);
+    setSourceUrl(null);
     setExpired(false);
 
     try {
       const data = await getPdfUrl(documentId);
       setPdfUrl(data.url);
       setExpiresAt(data.expiresAt);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Failed to load PDF");
+    } catch (err: unknown) {
+      const apiErr = err as Error & { sourceUrl?: string };
+      setError(apiErr.message ?? "Failed to load PDF");
+      if (apiErr.sourceUrl) {
+        setSourceUrl(apiErr.sourceUrl);
+      }
     } finally {
       setLoading(false);
     }
@@ -105,9 +112,23 @@ export default function PDFViewer({ documentId, initialPage }: PDFViewerProps) {
     return (
       <div className="flex flex-col items-center gap-4 py-16">
         <p className="text-destructive">{error}</p>
-        <Button variant="outline" onClick={fetchUrl}>
-          Retry
-        </Button>
+        {sourceUrl ? (
+          <div className="flex flex-col items-center gap-2 text-center">
+            <p className="text-sm text-muted-foreground">
+              The original document is available at its source website:
+            </p>
+            <Button variant="outline" asChild>
+              <a href={sourceUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                View original source
+              </a>
+            </Button>
+          </div>
+        ) : (
+          <Button variant="outline" onClick={fetchUrl}>
+            Retry
+          </Button>
+        )}
       </div>
     );
   }

@@ -54,7 +54,7 @@ function toListItem(doc: Document): DocumentListItem {
     country: doc.country,
     state: doc.state,
     versionYear: doc.versionYear,
-    s3Key: doc.sourceUrl ?? "",
+    s3Key: doc.s3Key ?? "",
   };
 }
 

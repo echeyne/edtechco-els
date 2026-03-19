@@ -91,6 +91,7 @@ def start_pipeline(
         "country": country,
         "state": state,
         "version_year": version_year,
+        "s3_key": s3_key,
         "source_url": "",  # Optional: can be provided by caller in future
         "publishing_agency": "",  # Optional: can be provided by caller in future
         "filename": filename,

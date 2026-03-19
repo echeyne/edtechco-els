@@ -7,6 +7,7 @@ export interface Document {
   title: string;
   versionYear: number;
   sourceUrl: string | null;
+  s3Key: string | null;
   ageBand: string;
   publishingAgency: string;
   createdAt: Date;

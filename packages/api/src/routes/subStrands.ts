@@ -67,7 +67,7 @@ subStrands.put("/:id", requireAuth, requireEditPermission, async (c) => {
 
   const row = await updateRow("sub_strands", id, fields, {
     edited_at: "NOW()",
-    edited_by: user.email,
+    edited_by: user.displayName,
   });
 
   if (!row) {
@@ -149,7 +149,7 @@ subStrands.patch(
     if (humanVerified) {
       row = await queryOne(
         `UPDATE sub_strands SET human_verified = true, verified_at = NOW(), verified_by = $2 WHERE id = $1 RETURNING *`,
-        [id, user.email],
+        [id, user.displayName],
       );
     } else {
       row = await queryOne(

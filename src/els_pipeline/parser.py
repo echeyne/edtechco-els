@@ -115,6 +115,7 @@ Rules:
 - For indicator_name: use the actual title of the indicator (e.g. "Curiosity and Interest"), NOT age-band labels like "Early", "Later", "By 36 months", etc. Strip any age-band pre-text from the indicator title. The age-band information belongs in the age_band field.
 - For indicator_description: use the full descriptive text of the indicator. This may be null if no description exists beyond the title. Strip any age-band pre-text from the indicator description. The age-band information belongs in the age_band field.
 - For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 0-48, PK4 is 0-60, 3 to 4 ½ Years is 36-54) If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
+- For code: it should be hirarchical (e.g. "A", "A.1", "A.1a", "A.1a.1") not just the final part.
 - Return ONLY the JSON array, no other text.
 - Every indicator element must appear exactly once in the output."""
 

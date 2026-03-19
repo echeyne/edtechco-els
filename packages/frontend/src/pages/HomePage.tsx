@@ -55,8 +55,11 @@ export default function HomePage() {
   const docsRef = useRef<Document[]>([]);
   const hierarchiesRef = useRef<Map<number, HierarchyResponse>>(new Map());
 
-  // Refresh key – bump to force HierarchyTable to re-fetch
-  const [refreshKey, setRefreshKey] = useState(0);
+  // Local record patch – set to trigger an in-place update in HierarchyTable
+  const [pendingUpdate, setPendingUpdate] = useState<{
+    record: Domain | Strand | SubStrand | Indicator;
+    type: string;
+  } | null>(null);
 
   const handleDataLoaded = useCallback(
     (docs: Document[], hierarchies: Map<number, HierarchyResponse>) => {
@@ -87,7 +90,6 @@ export default function HomePage() {
       if (!fn) return;
 
       await fn(id, token);
-      setRefreshKey((k) => k + 1);
     },
     [token],
   );
@@ -98,28 +100,27 @@ export default function HomePage() {
       const fn = VERIFY_FN[type as RecordType];
       if (!fn) return;
       await fn(id, { humanVerified: verified }, token);
-      setRefreshKey((k) => k + 1);
     },
     [token],
   );
 
   const handleSave = useCallback(
-    (_updated: Domain | Strand | SubStrand | Indicator) => {
-      setRefreshKey((k) => k + 1);
+    (updated: Domain | Strand | SubStrand | Indicator) => {
+      setPendingUpdate({ record: updated, type: editType });
     },
-    [],
+    [editType],
   );
 
   return (
     <div>
       <HierarchyTable
-        key={refreshKey}
         filters={filters}
         onFilterChange={setFilters}
         onEdit={hasEditPermission ? handleEdit : undefined}
         onDelete={hasEditPermission ? handleDelete : undefined}
         onVerify={hasEditPermission ? handleVerify : undefined}
         onDataLoaded={handleDataLoaded}
+        updateRecord={pendingUpdate}
       />
 
       {editRecord && (
