@@ -37,6 +37,7 @@ const mockDocument: Document = {
   title: "California ELS",
   versionYear: 2024,
   sourceUrl: null,
+  s3Key: '',
   ageBand: "0-5",
   publishingAgency: "CA Dept of Ed",
   createdAt: new Date(),
@@ -62,6 +63,7 @@ const mockHierarchy: HierarchyResponse = {
           domainId: 10,
           code: "S1",
           name: "Listening",
+          deleted: false,
           description: null,
           humanVerified: false,
           verifiedAt: null,
@@ -69,8 +71,13 @@ const mockHierarchy: HierarchyResponse = {
           editedAt: null,
           editedBy: null,
           subStrands: [],
+          deletedAt: null,
+          deletedBy: null
         },
       ],
+      deleted: false,
+      deletedAt: null,
+      deletedBy: null
     },
   ],
 };

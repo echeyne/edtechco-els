@@ -45,6 +45,9 @@ const mockDomain: Domain = {
   verifiedBy: null,
   editedAt: null,
   editedBy: null,
+  deleted: false,
+  deletedAt: null,
+  deletedBy: null
 };
 
 const mockIndicator: Indicator = {
@@ -66,6 +69,9 @@ const mockIndicator: Indicator = {
   editedBy: null,
   lastVerified: null,
   createdAt: new Date(),
+  deleted: false,
+  deletedAt: null,
+  deletedBy: null
 };
 
 // ---- Helpers ----
