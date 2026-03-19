@@ -122,12 +122,12 @@ function VerifiedBadge({
   onClick?: () => void;
 }) {
   const badge = verified ? (
-    <Badge className="bg-green-100 text-green-800 border-green-200 hover:bg-green-100">
+    <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 shadow-none">
       <ShieldCheck className="mr-1 h-3 w-3" />
       Verified
     </Badge>
   ) : (
-    <Badge variant="secondary" className="text-muted-foreground">
+    <Badge variant="secondary" className="text-muted-foreground shadow-none">
       Unverified
     </Badge>
   );
@@ -221,93 +221,101 @@ function FilterBar({
   onFilterChange,
   countries,
   states,
+  expandButton,
 }: {
   filters: FilterState;
   onFilterChange: (f: FilterState) => void;
   countries: string[];
   states: string[];
+  expandButton?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap items-center gap-3 mb-4">
-      {/* Search */}
-      <div className="relative flex-1 min-w-[200px]">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search..."
-          value={filters.searchQuery ?? ""}
-          onChange={(e) =>
-            onFilterChange({ ...filters, searchQuery: e.target.value })
-          }
-          className="pl-9"
-        />
+    <div className="rounded-lg border bg-card p-4 shadow-sm">
+      <div className="flex flex-wrap items-center gap-3">
+        {/* Search */}
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search standards..."
+            value={filters.searchQuery ?? ""}
+            onChange={(e) =>
+              onFilterChange({ ...filters, searchQuery: e.target.value })
+            }
+            className="pl-9 h-9"
+          />
+        </div>
+
+        <div className="flex items-center gap-2">
+          {/* Country */}
+          <Select
+            value={filters.country ?? "__all__"}
+            onValueChange={(v) =>
+              onFilterChange({
+                ...filters,
+                country: v === "__all__" ? undefined : v,
+                state: undefined,
+              })
+            }
+          >
+            <SelectTrigger className="w-[150px] h-9">
+              <SelectValue placeholder="Country" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__all__">All Countries</SelectItem>
+              {countries.map((c) => (
+                <SelectItem key={c} value={c}>
+                  {c}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {/* State */}
+          <Select
+            value={filters.state ?? "__all__"}
+            onValueChange={(v) =>
+              onFilterChange({
+                ...filters,
+                state: v === "__all__" ? undefined : v,
+              })
+            }
+          >
+            <SelectTrigger className="w-[150px] h-9">
+              <SelectValue placeholder="State" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__all__">All States</SelectItem>
+              {states.map((s) => (
+                <SelectItem key={s} value={s}>
+                  {s}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {/* Verification Status */}
+          <Select
+            value={filters.verificationStatus ?? "all"}
+            onValueChange={(v) =>
+              onFilterChange({
+                ...filters,
+                verificationStatus: v as FilterState["verificationStatus"],
+              })
+            }
+          >
+            <SelectTrigger className="w-[150px] h-9">
+              <SelectValue placeholder="Status" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Status</SelectItem>
+              <SelectItem value="verified">Verified</SelectItem>
+              <SelectItem value="unverified">Unverified</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {expandButton}
+        </div>
       </div>
-
-      {/* Country */}
-      <Select
-        value={filters.country ?? "__all__"}
-        onValueChange={(v) =>
-          onFilterChange({
-            ...filters,
-            country: v === "__all__" ? undefined : v,
-            state: undefined,
-          })
-        }
-      >
-        <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="Country" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="__all__">All Countries</SelectItem>
-          {countries.map((c) => (
-            <SelectItem key={c} value={c}>
-              {c}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-
-      {/* State */}
-      <Select
-        value={filters.state ?? "__all__"}
-        onValueChange={(v) =>
-          onFilterChange({
-            ...filters,
-            state: v === "__all__" ? undefined : v,
-          })
-        }
-      >
-        <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="State" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="__all__">All States</SelectItem>
-          {states.map((s) => (
-            <SelectItem key={s} value={s}>
-              {s}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-
-      {/* Verification Status */}
-      <Select
-        value={filters.verificationStatus ?? "all"}
-        onValueChange={(v) =>
-          onFilterChange({
-            ...filters,
-            verificationStatus: v as FilterState["verificationStatus"],
-          })
-        }
-      >
-        <SelectTrigger className="w-[160px]">
-          <SelectValue placeholder="Status" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="all">All Status</SelectItem>
-          <SelectItem value="verified">Verified</SelectItem>
-          <SelectItem value="unverified">Unverified</SelectItem>
-        </SelectContent>
-      </Select>
     </div>
   );
 }
@@ -332,11 +340,11 @@ function SortableHeader({
   const active = sortField === field;
   return (
     <button
-      className="inline-flex items-center gap-1 hover:text-foreground"
+      className={`inline-flex items-center gap-1 transition-colors ${active ? "text-foreground" : "hover:text-foreground"}`}
       onClick={() => onSort(field)}
     >
       {label}
-      {active && <span className="text-xs">{sortDir === "asc" ? "↑" : "↓"}</span>}
+      {active && <span className="text-xs text-primary">{sortDir === "asc" ? "↑" : "↓"}</span>}
     </button>
   );
 }
@@ -640,7 +648,7 @@ export function HierarchyTable({
 
       // Document row
       result.push(
-        <TableRow key={docKey} className="bg-muted/30 font-medium">
+        <TableRow key={docKey} className="bg-primary/5 hover:bg-primary/10 font-medium">
           <TableCell>
             <ExpandToggle
               expanded={docExpanded}
@@ -648,8 +656,8 @@ export function HierarchyTable({
               depth={0}
             />
           </TableCell>
-          <TableCell className="font-semibold">{doc.title}</TableCell>
-          <TableCell>
+          <TableCell className="font-semibold text-foreground">{doc.title}</TableCell>
+          <TableCell className="text-muted-foreground">
             {doc.country} / {doc.state} - {doc.versionYear}
           </TableCell>
           <TableCell />
@@ -740,7 +748,7 @@ export function HierarchyTable({
     const isExpanded = expanded.has(key);
 
     result.push(
-      <TableRow key={key} className="bg-blue-50/50">
+      <TableRow key={key} className="bg-blue-50/60 hover:bg-blue-50">
         <TableCell>
           <ExpandToggle
             expanded={isExpanded}
@@ -749,8 +757,10 @@ export function HierarchyTable({
           />
         </TableCell>
         <TableCell>
-          <span className="text-xs text-muted-foreground mr-2">{domain.code}</span>
-          {domain.name}
+          <span className="inline-flex items-center gap-2">
+            <span className="text-xs font-mono text-primary/70 bg-primary/5 px-1.5 py-0.5 rounded">{domain.code}</span>
+            <span className="font-medium">{domain.name}</span>
+          </span>
         </TableCell>
         <TableCell />
         <TableCell />
@@ -797,7 +807,7 @@ export function HierarchyTable({
     const isExpanded = expanded.has(key);
 
     result.push(
-      <TableRow key={key}>
+      <TableRow key={key} className="hover:bg-muted/40">
         <TableCell>
           <ExpandToggle
             expanded={isExpanded}
@@ -806,8 +816,10 @@ export function HierarchyTable({
           />
         </TableCell>
         <TableCell>
-          <span className="text-xs text-muted-foreground mr-2">{strand.code}</span>
-          {strand.name}
+          <span className="inline-flex items-center gap-2">
+            <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{strand.code}</span>
+            {strand.name}
+          </span>
         </TableCell>
         <TableCell />
         <TableCell />
@@ -854,7 +866,7 @@ export function HierarchyTable({
     const isExpanded = expanded.has(key);
 
     result.push(
-      <TableRow key={key} className="bg-muted/20">
+      <TableRow key={key} className="bg-muted/20 hover:bg-muted/40">
         <TableCell>
           <ExpandToggle
             expanded={isExpanded}
@@ -863,8 +875,10 @@ export function HierarchyTable({
           />
         </TableCell>
         <TableCell>
-          <span className="text-xs text-muted-foreground mr-2">{subStrand.code}</span>
-          {subStrand.name}
+          <span className="inline-flex items-center gap-2">
+            <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">{subStrand.code}</span>
+            {subStrand.name}
+          </span>
         </TableCell>
         <TableCell />
         <TableCell />
@@ -913,16 +927,18 @@ export function HierarchyTable({
     const key = `indicator-${indicator.id}`;
 
     result.push(
-      <TableRow key={key}>
+      <TableRow key={key} className="hover:bg-muted/30">
         <TableCell>
           <span style={{ paddingLeft: "6rem" }} />
         </TableCell>
         <TableCell>
-          <span className="text-xs text-muted-foreground mr-2">
-            {indicator.code}
-          </span>
-          <span className="text-sm">
-            {indicator.title ?? indicator.description}
+          <span className="inline-flex items-center gap-2">
+            <span className="text-xs font-mono text-muted-foreground/70 bg-muted/50 px-1.5 py-0.5 rounded">
+              {indicator.code}
+            </span>
+            <span className="text-sm text-foreground/80">
+              {indicator.title ?? indicator.description}
+            </span>
           </span>
         </TableCell>
         <TableCell />
@@ -956,8 +972,11 @@ export function HierarchyTable({
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12 text-muted-foreground">
-        Loading hierarchy data…
+      <div className="flex items-center justify-center py-16 text-muted-foreground">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+          <span className="text-sm">Loading hierarchy data…</span>
+        </div>
       </div>
     );
   }
@@ -980,32 +999,32 @@ export function HierarchyTable({
         onFilterChange={onFilterChange}
         countries={countries}
         states={states}
+        expandButton={
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={isAllExpanded ? handleCollapseAll : handleExpandAll}
+            className="h-9"
+          >
+            {isAllExpanded ? (
+              <>
+                <ChevronsDownUp className="mr-2 h-4 w-4" />
+                Collapse All
+              </>
+            ) : (
+              <>
+                <ChevronsUpDown className="mr-2 h-4 w-4" />
+                Expand All
+              </>
+            )}
+          </Button>
+        }
       />
 
-      <div className="flex justify-end">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={isAllExpanded ? handleCollapseAll : handleExpandAll}
-        >
-          {isAllExpanded ? (
-            <>
-              <ChevronsDownUp className="mr-2 h-4 w-4" />
-              Collapse All
-            </>
-          ) : (
-            <>
-              <ChevronsUpDown className="mr-2 h-4 w-4" />
-              Expand All
-            </>
-          )}
-        </Button>
-      </div>
-
-      <div className="rounded-md border">
+      <div className="rounded-lg border bg-card shadow-sm overflow-hidden">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-muted/50 hover:bg-muted/50">
               <TableHead className="w-[50px]" />
               <TableHead>
                 <SortableHeader

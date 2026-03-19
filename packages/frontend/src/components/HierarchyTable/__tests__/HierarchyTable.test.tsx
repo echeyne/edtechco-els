@@ -186,7 +186,7 @@ describe("HierarchyTable", () => {
     renderTable();
 
     await waitFor(() => {
-      expect(screen.getByPlaceholderText("Search...")).toBeInTheDocument();
+      expect(screen.getByPlaceholderText("Search standards...")).toBeInTheDocument();
     });
 
     // The select triggers should be present
