@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { updateRow, deleteRow, queryOne } from "../db/client.js";
+import { updateRow, queryOne, softDeleteRow } from "../db/client.js";
 import { UpdateIndicatorSchema, VerifySchema } from "../schemas/index.js";
 import {
   requireAuth,
@@ -35,6 +35,9 @@ function mapIndicator(row: Record<string, unknown>): Indicator {
       ? new Date(row.last_verified as string)
       : null,
     createdAt: new Date(row.created_at as string),
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -106,10 +109,11 @@ indicators.delete("/:id", requireAuth, requireEditPermission, async (c) => {
     );
   }
 
-  // Check indicator exists
-  const existing = await queryOne("SELECT id FROM indicators WHERE id = $1", [
-    id,
-  ]);
+  // Check indicator exists and is not already deleted
+  const existing = await queryOne(
+    "SELECT id FROM indicators WHERE id = $1 AND deleted = false",
+    [id],
+  );
   if (!existing) {
     return c.json(
       { error: { code: "NOT_FOUND", message: "Indicator not found" } },
@@ -117,7 +121,8 @@ indicators.delete("/:id", requireAuth, requireEditPermission, async (c) => {
     );
   }
 
-  await deleteRow("indicators", id);
+  const user = c.get("authUser") as AuthUser;
+  await softDeleteRow("indicators", id, user.displayName);
 
   return c.json({ success: true });
 });

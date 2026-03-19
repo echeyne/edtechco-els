@@ -1,5 +1,11 @@
 import { Hono } from "hono";
-import { updateRow, deleteRow, queryOne, query } from "../db/client.js";
+import {
+  updateRow,
+  queryOne,
+  query,
+  softDeleteRow,
+  softDeleteWhere,
+} from "../db/client.js";
 import { UpdateDomainSchema, VerifySchema } from "../schemas/index.js";
 import {
   requireAuth,
@@ -25,6 +31,9 @@ function mapDomain(row: Record<string, unknown>): Domain {
     verifiedBy: (row.verified_by as string) ?? null,
     editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
     editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -91,8 +100,11 @@ domains.delete("/:id", requireAuth, requireEditPermission, async (c) => {
     );
   }
 
-  // Check domain exists
-  const existing = await queryOne("SELECT id FROM domains WHERE id = $1", [id]);
+  // Check domain exists and is not already deleted
+  const existing = await queryOne(
+    "SELECT id FROM domains WHERE id = $1 AND deleted = false",
+    [id],
+  );
   if (!existing) {
     return c.json(
       { error: { code: "NOT_FOUND", message: "Domain not found" } },
@@ -100,14 +112,18 @@ domains.delete("/:id", requireAuth, requireEditPermission, async (c) => {
     );
   }
 
-  // Cascade delete: indicators → sub_strands → strands → domain
-  await query(`DELETE FROM indicators WHERE domain_id = $1`, [id]);
+  const user = c.get("authUser") as AuthUser;
+  const deletedBy = user.displayName;
+
+  // Cascade soft-delete: indicators → sub_strands → strands → domain
+  await softDeleteWhere("indicators", "domain_id = $1", [id], deletedBy);
   await query(
-    `DELETE FROM sub_strands WHERE strand_id IN (SELECT id FROM strands WHERE domain_id = $1)`,
-    [id],
+    `UPDATE sub_strands SET deleted = true, deleted_at = NOW(), deleted_by = $2
+     WHERE strand_id IN (SELECT id FROM strands WHERE domain_id = $1) AND deleted = false`,
+    [id, deletedBy],
   );
-  await query(`DELETE FROM strands WHERE domain_id = $1`, [id]);
-  await deleteRow("domains", id);
+  await softDeleteWhere("strands", "domain_id = $1", [id], deletedBy);
+  await softDeleteRow("domains", id, deletedBy);
 
   return c.json({ success: true });
 });

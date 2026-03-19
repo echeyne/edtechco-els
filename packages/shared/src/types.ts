@@ -24,6 +24,9 @@ export interface Domain {
   verifiedBy: string | null;
   editedAt: Date | null;
   editedBy: string | null;
+  deleted: boolean;
+  deletedAt: Date | null;
+  deletedBy: string | null;
 }
 
 export interface Strand {
@@ -37,6 +40,9 @@ export interface Strand {
   verifiedBy: string | null;
   editedAt: Date | null;
   editedBy: string | null;
+  deleted: boolean;
+  deletedAt: Date | null;
+  deletedBy: string | null;
 }
 
 export interface SubStrand {
@@ -50,6 +56,9 @@ export interface SubStrand {
   verifiedBy: string | null;
   editedAt: Date | null;
   editedBy: string | null;
+  deleted: boolean;
+  deletedAt: Date | null;
+  deletedBy: string | null;
 }
 
 export interface Indicator {
@@ -71,6 +80,9 @@ export interface Indicator {
   editedBy: string | null;
   lastVerified: Date | null;
   createdAt: Date;
+  deleted: boolean;
+  deletedAt: Date | null;
+  deletedBy: string | null;
 }
 
 // API Response types — nested hierarchy

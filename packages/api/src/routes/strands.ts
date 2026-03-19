@@ -1,5 +1,10 @@
 import { Hono } from "hono";
-import { updateRow, deleteRow, queryOne, query } from "../db/client.js";
+import {
+  updateRow,
+  queryOne,
+  softDeleteRow,
+  softDeleteWhere,
+} from "../db/client.js";
 import { UpdateStrandSchema, VerifySchema } from "../schemas/index.js";
 import {
   requireAuth,
@@ -25,6 +30,9 @@ function mapStrand(row: Record<string, unknown>): Strand {
     verifiedBy: (row.verified_by as string) ?? null,
     editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
     editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -91,8 +99,11 @@ strands.delete("/:id", requireAuth, requireEditPermission, async (c) => {
     );
   }
 
-  // Check strand exists
-  const existing = await queryOne("SELECT id FROM strands WHERE id = $1", [id]);
+  // Check strand exists and is not already deleted
+  const existing = await queryOne(
+    "SELECT id FROM strands WHERE id = $1 AND deleted = false",
+    [id],
+  );
   if (!existing) {
     return c.json(
       { error: { code: "NOT_FOUND", message: "Strand not found" } },
@@ -100,10 +111,13 @@ strands.delete("/:id", requireAuth, requireEditPermission, async (c) => {
     );
   }
 
-  // Cascade delete: indicators → sub_strands → strand
-  await query(`DELETE FROM indicators WHERE strand_id = $1`, [id]);
-  await query(`DELETE FROM sub_strands WHERE strand_id = $1`, [id]);
-  await deleteRow("strands", id);
+  const user = c.get("authUser") as AuthUser;
+  const deletedBy = user.displayName;
+
+  // Cascade soft-delete: indicators → sub_strands → strand
+  await softDeleteWhere("indicators", "strand_id = $1", [id], deletedBy);
+  await softDeleteWhere("sub_strands", "strand_id = $1", [id], deletedBy);
+  await softDeleteRow("strands", id, deletedBy);
 
   return c.json({ success: true });
 });

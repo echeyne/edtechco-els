@@ -60,6 +60,9 @@ function mapDomain(row: Record<string, unknown>): Domain {
     verifiedBy: (row.verified_by as string) ?? null,
     editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
     editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -75,6 +78,9 @@ function mapStrand(row: Record<string, unknown>): Strand {
     verifiedBy: (row.verified_by as string) ?? null,
     editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
     editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -90,6 +96,9 @@ function mapSubStrand(row: Record<string, unknown>): SubStrand {
     verifiedBy: (row.verified_by as string) ?? null,
     editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
     editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -115,6 +124,9 @@ function mapIndicator(row: Record<string, unknown>): Indicator {
       ? new Date(row.last_verified as string)
       : null,
     createdAt: new Date(row.created_at as string),
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
   };
 }
 
@@ -180,16 +192,17 @@ documents.get("/:id/hierarchy", async (c) => {
   }
   const document = mapDocument(docRow as unknown as Record<string, unknown>);
 
-  // Fetch all children in parallel
+  // Fetch all children in parallel (exclude soft-deleted)
   const [domainRows, strandRows, subStrandRows, indicatorRows] =
     await Promise.all([
-      queryMany("SELECT * FROM domains WHERE document_id = $1 ORDER BY code", [
-        id,
-      ]),
+      queryMany(
+        "SELECT * FROM domains WHERE document_id = $1 AND deleted = false ORDER BY code",
+        [id],
+      ),
       queryMany(
         `SELECT s.* FROM strands s
          JOIN domains d ON s.domain_id = d.id
-         WHERE d.document_id = $1
+         WHERE d.document_id = $1 AND s.deleted = false AND d.deleted = false
          ORDER BY s.code`,
         [id],
       ),
@@ -197,14 +210,14 @@ documents.get("/:id/hierarchy", async (c) => {
         `SELECT ss.* FROM sub_strands ss
          JOIN strands s ON ss.strand_id = s.id
          JOIN domains d ON s.domain_id = d.id
-         WHERE d.document_id = $1
+         WHERE d.document_id = $1 AND ss.deleted = false AND s.deleted = false AND d.deleted = false
          ORDER BY ss.code`,
         [id],
       ),
       queryMany(
         `SELECT i.* FROM indicators i
          JOIN domains d ON i.domain_id = d.id
-         WHERE d.document_id = $1
+         WHERE d.document_id = $1 AND i.deleted = false AND d.deleted = false
          ORDER BY i.code`,
         [id],
       ),

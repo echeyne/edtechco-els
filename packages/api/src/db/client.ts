@@ -197,6 +197,38 @@ export async function deleteRow(table: string, id: number): Promise<boolean> {
   return (result.rowCount ?? 0) > 0;
 }
 
+/**
+ * Soft-delete a row by setting deleted = true, deleted_at = NOW(), deleted_by.
+ */
+export async function softDeleteRow(
+  table: string,
+  id: number,
+  deletedBy: string,
+): Promise<boolean> {
+  const result = await query(
+    `UPDATE ${table} SET deleted = true, deleted_at = NOW(), deleted_by = $2 WHERE id = $1 AND deleted = false`,
+    [id, deletedBy],
+  );
+  return (result.rowCount ?? 0) > 0;
+}
+
+/**
+ * Soft-delete multiple rows matching a WHERE clause.
+ */
+export async function softDeleteWhere(
+  table: string,
+  whereClause: string,
+  params: unknown[],
+  deletedBy: string,
+): Promise<number> {
+  const paramIdx = params.length + 1;
+  const result = await query(
+    `UPDATE ${table} SET deleted = true, deleted_at = NOW(), deleted_by = $${paramIdx} WHERE ${whereClause} AND deleted = false`,
+    [...params, deletedBy],
+  );
+  return result.rowCount ?? 0;
+}
+
 export async function closePool(): Promise<void> {
   if (_pool) await _pool.end();
 }
