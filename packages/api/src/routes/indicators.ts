@@ -7,7 +7,7 @@ import {
   type AuthEnv,
   type AuthUser,
 } from "../middleware/auth.js";
-import type { Indicator } from "@els/shared";
+import type { Indicator, SubStrand, Strand, Domain } from "@els/shared";
 
 const indicators = new Hono<AuthEnv>();
 
@@ -40,6 +40,131 @@ function mapIndicator(row: Record<string, unknown>): Indicator {
     deletedBy: (row.deleted_by as string) ?? null,
   };
 }
+
+function mapDomain(row: Record<string, unknown>): Domain {
+  return {
+    id: row.id as number,
+    documentId: row.document_id as number,
+    code: row.code as string,
+    name: row.name as string,
+    description: (row.description as string) ?? null,
+    humanVerified: (row.human_verified as boolean) ?? false,
+    verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
+    verifiedBy: (row.verified_by as string) ?? null,
+    editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
+    editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
+  };
+}
+
+function mapStrand(row: Record<string, unknown>): Strand {
+  return {
+    id: row.id as number,
+    domainId: row.domain_id as number,
+    code: row.code as string,
+    name: row.name as string,
+    description: (row.description as string) ?? null,
+    humanVerified: (row.human_verified as boolean) ?? false,
+    verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
+    verifiedBy: (row.verified_by as string) ?? null,
+    editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
+    editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
+  };
+}
+
+function mapSubStrand(row: Record<string, unknown>): SubStrand {
+  return {
+    id: row.id as number,
+    strandId: row.strand_id as number,
+    code: row.code as string,
+    name: row.name as string,
+    description: (row.description as string) ?? null,
+    humanVerified: (row.human_verified as boolean) ?? false,
+    verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
+    verifiedBy: (row.verified_by as string) ?? null,
+    editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
+    editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
+  };
+}
+
+// ---- GET /api/indicators/:id ----
+
+indicators.get("/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+  if (Number.isNaN(id)) {
+    return c.json(
+      { error: { code: "VALIDATION_ERROR", message: "Invalid indicator id" } },
+      400,
+    );
+  }
+
+  const row = await queryOne(
+    "SELECT * FROM indicators WHERE id = $1 AND deleted = false",
+    [id],
+  );
+  if (!row) {
+    return c.json(
+      { error: { code: "NOT_FOUND", message: "Indicator not found" } },
+      404,
+    );
+  }
+
+  const indicator = mapIndicator(row as unknown as Record<string, unknown>);
+
+  // Fetch parent sub-strand (if any)
+  let subStrand = null;
+  if (indicator.subStrandId) {
+    const ssRow = await queryOne(
+      "SELECT * FROM sub_strands WHERE id = $1 AND deleted = false",
+      [indicator.subStrandId],
+    );
+    subStrand = ssRow
+      ? mapSubStrand(ssRow as unknown as Record<string, unknown>)
+      : null;
+  }
+
+  // Fetch parent strand (if any)
+  let strand = null;
+  if (indicator.strandId) {
+    const sRow = await queryOne(
+      "SELECT * FROM strands WHERE id = $1 AND deleted = false",
+      [indicator.strandId],
+    );
+    strand = sRow
+      ? mapStrand(sRow as unknown as Record<string, unknown>)
+      : null;
+  } else if (subStrand) {
+    const sRow = await queryOne(
+      "SELECT * FROM strands WHERE id = $1 AND deleted = false",
+      [subStrand.strandId],
+    );
+    strand = sRow
+      ? mapStrand(sRow as unknown as Record<string, unknown>)
+      : null;
+  }
+
+  // Fetch parent domain
+  let domain = null;
+  if (indicator.domainId) {
+    const dRow = await queryOne(
+      "SELECT * FROM domains WHERE id = $1 AND deleted = false",
+      [indicator.domainId],
+    );
+    domain = dRow
+      ? mapDomain(dRow as unknown as Record<string, unknown>)
+      : null;
+  }
+
+  return c.json({ ...indicator, subStrand, strand, domain });
+});
 
 // ---- PUT /api/indicators/:id ----
 

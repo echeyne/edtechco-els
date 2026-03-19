@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { Link } from "react-router-dom";
 import type {
   Document,
   Domain,
@@ -626,10 +627,56 @@ export function HierarchyTable({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // UI state
-  const [expanded, setExpanded] = useState<Set<string>>(new Set());
-  const [sortField, setSortField] = useState<SortField>("code");
-  const [sortDir, setSortDir] = useState<SortDir>("asc");
+  // UI state — restore from sessionStorage so back-navigation preserves position
+  const [expanded, setExpanded] = useState<Set<string>>(() => {
+    try {
+      const saved = sessionStorage.getItem("hierarchy-expanded");
+      return saved ? new Set(JSON.parse(saved) as string[]) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+  const [sortField, setSortField] = useState<SortField>(() => {
+    return (
+      (sessionStorage.getItem("hierarchy-sortField") as SortField) || "code"
+    );
+  });
+  const [sortDir, setSortDir] = useState<SortDir>(() => {
+    return (sessionStorage.getItem("hierarchy-sortDir") as SortDir) || "asc";
+  });
+
+  // Persist UI state to sessionStorage so back-navigation restores position
+  useEffect(() => {
+    sessionStorage.setItem("hierarchy-expanded", JSON.stringify([...expanded]));
+  }, [expanded]);
+
+  useEffect(() => {
+    sessionStorage.setItem("hierarchy-sortField", sortField);
+  }, [sortField]);
+
+  useEffect(() => {
+    sessionStorage.setItem("hierarchy-sortDir", sortDir);
+  }, [sortDir]);
+
+  // Restore scroll position after data loads
+  useEffect(() => {
+    if (!loading) {
+      const savedScroll = sessionStorage.getItem("hierarchy-scrollY");
+      if (savedScroll) {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, Number(savedScroll));
+          sessionStorage.removeItem("hierarchy-scrollY");
+        });
+      }
+    }
+  }, [loading]);
+
+  // Save scroll position on unmount (navigating away)
+  useEffect(() => {
+    return () => {
+      sessionStorage.setItem("hierarchy-scrollY", String(window.scrollY));
+    };
+  }, []);
 
   // ------ Data fetching ------
 
@@ -926,7 +973,12 @@ export function HierarchyTable({
             <span className="text-xs font-mono text-primary/70 bg-primary/5 px-1.5 py-0.5 rounded">
               {domain.code}
             </span>
-            <span className="font-medium">{domain.name}</span>
+            <Link
+              to={`/domains/${domain.id}`}
+              className="font-medium hover:text-primary hover:underline transition-colors"
+            >
+              {domain.name}
+            </Link>
           </span>
         </TableCell>
         <TableCell />
@@ -1016,7 +1068,12 @@ export function HierarchyTable({
             <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
               {strand.code}
             </span>
-            {strand.name}
+            <Link
+              to={`/strands/${strand.id}`}
+              className="hover:text-primary hover:underline transition-colors"
+            >
+              {strand.name}
+            </Link>
           </span>
         </TableCell>
         <TableCell />
@@ -1113,7 +1170,12 @@ export function HierarchyTable({
             <span className="text-xs font-mono text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
               {subStrand.code}
             </span>
-            {subStrand.name}
+            <Link
+              to={`/sub-strands/${subStrand.id}`}
+              className="hover:text-primary hover:underline transition-colors"
+            >
+              {subStrand.name}
+            </Link>
           </span>
         </TableCell>
         <TableCell />
@@ -1210,7 +1272,12 @@ export function HierarchyTable({
             <span className="text-xs font-mono text-muted-foreground/70 bg-muted/50 px-1.5 py-0.5 rounded">
               {indicator.code}
             </span>
-            <span className="text-sm text-foreground/80">{displayName}</span>
+            <Link
+              to={`/indicators/${indicator.id}`}
+              className="text-sm text-foreground/80 hover:text-primary hover:underline transition-colors"
+            >
+              {displayName}
+            </Link>
           </span>
         </TableCell>
         <TableCell className="text-xs text-muted-foreground">

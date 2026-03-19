@@ -37,6 +37,31 @@ function mapDomain(row: Record<string, unknown>): Domain {
   };
 }
 
+// ---- GET /api/domains/:id ----
+
+domains.get("/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+  if (Number.isNaN(id)) {
+    return c.json(
+      { error: { code: "VALIDATION_ERROR", message: "Invalid domain id" } },
+      400,
+    );
+  }
+
+  const row = await queryOne(
+    "SELECT * FROM domains WHERE id = $1 AND deleted = false",
+    [id],
+  );
+  if (!row) {
+    return c.json(
+      { error: { code: "NOT_FOUND", message: "Domain not found" } },
+      404,
+    );
+  }
+
+  return c.json(mapDomain(row as unknown as Record<string, unknown>));
+});
+
 // ---- PUT /api/domains/:id ----
 
 domains.put("/:id", requireAuth, requireEditPermission, async (c) => {

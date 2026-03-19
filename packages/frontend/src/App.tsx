@@ -6,6 +6,7 @@ import DocumentsPage from "@/pages/DocumentsPage";
 import PDFViewerPage from "@/pages/PDFViewerPage";
 import InfoPage from "@/pages/InfoPage";
 import LoginPage from "@/pages/LoginPage";
+import DetailPage from "@/pages/DetailPage";
 
 function App() {
   return (
@@ -14,8 +15,12 @@ function App() {
         <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-30 px-6 py-3">
           <div className="container flex items-center justify-between">
             <h1 className="text-xl font-semibold tracking-tight text-foreground">
-              <span className="text-primary">Early Learning Standards Explorer</span>{" "}
-              <span className="font-normal text-muted-foreground">Explorer</span>
+              <span className="text-primary">
+                Early Learning Standards Explorer
+              </span>{" "}
+              <span className="font-normal text-muted-foreground">
+                Explorer
+              </span>
             </h1>
             <nav className="flex items-center gap-1">
               <NavLink
@@ -66,6 +71,22 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/documents" element={<DocumentsPage />} />
             <Route path="/documents/:id/view" element={<PDFViewerPage />} />
+            <Route
+              path="/domains/:id"
+              element={<DetailPage recordType="domain" />}
+            />
+            <Route
+              path="/strands/:id"
+              element={<DetailPage recordType="strand" />}
+            />
+            <Route
+              path="/sub-strands/:id"
+              element={<DetailPage recordType="sub_strand" />}
+            />
+            <Route
+              path="/indicators/:id"
+              element={<DetailPage recordType="indicator" />}
+            />
             <Route path="/info" element={<InfoPage />} />
             <Route path="/login" element={<LoginPage />} />
           </Routes>

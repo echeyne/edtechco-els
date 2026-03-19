@@ -1,9 +1,13 @@
-import { useState, useCallback, useRef } from "react";
-import type { Document, Domain, Strand, SubStrand, Indicator, HierarchyResponse } from "@els/shared";
-import {
-  HierarchyTable,
-  type FilterState,
-} from "@/components/HierarchyTable";
+import { useState, useCallback, useRef, useEffect } from "react";
+import type {
+  Document,
+  Domain,
+  Strand,
+  SubStrand,
+  Indicator,
+  HierarchyResponse,
+} from "@els/shared";
+import { HierarchyTable, type FilterState } from "@/components/HierarchyTable";
 import { EditModal } from "@/components/EditModal";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -31,7 +35,11 @@ const DELETE_FN: Record<
 
 const VERIFY_FN: Record<
   RecordType,
-  (id: number, data: { humanVerified: boolean }, token: string) => Promise<unknown>
+  (
+    id: number,
+    data: { humanVerified: boolean },
+    token: string,
+  ) => Promise<unknown>
 > = {
   domain: verifyDomain,
   strand: verifyStrand,
@@ -42,7 +50,19 @@ const VERIFY_FN: Record<
 export default function HomePage() {
   const { hasEditPermission, token } = useAuth();
 
-  const [filters, setFilters] = useState<FilterState>({});
+  const [filters, setFilters] = useState<FilterState>(() => {
+    try {
+      const saved = sessionStorage.getItem("hierarchy-filters");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  // Persist filters so back-navigation restores them
+  useEffect(() => {
+    sessionStorage.setItem("hierarchy-filters", JSON.stringify(filters));
+  }, [filters]);
 
   // Edit modal state
   const [editRecord, setEditRecord] = useState<

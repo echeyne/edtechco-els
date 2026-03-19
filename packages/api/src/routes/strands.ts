@@ -12,7 +12,7 @@ import {
   type AuthEnv,
   type AuthUser,
 } from "../middleware/auth.js";
-import type { Strand } from "@els/shared";
+import type { Strand, Domain } from "@els/shared";
 
 const strands = new Hono<AuthEnv>();
 
@@ -35,6 +35,62 @@ function mapStrand(row: Record<string, unknown>): Strand {
     deletedBy: (row.deleted_by as string) ?? null,
   };
 }
+
+function mapDomain(row: Record<string, unknown>): Domain {
+  return {
+    id: row.id as number,
+    documentId: row.document_id as number,
+    code: row.code as string,
+    name: row.name as string,
+    description: (row.description as string) ?? null,
+    humanVerified: (row.human_verified as boolean) ?? false,
+    verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
+    verifiedBy: (row.verified_by as string) ?? null,
+    editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
+    editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
+  };
+}
+
+// ---- GET /api/strands/:id ----
+
+strands.get("/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+  if (Number.isNaN(id)) {
+    return c.json(
+      { error: { code: "VALIDATION_ERROR", message: "Invalid strand id" } },
+      400,
+    );
+  }
+
+  const row = await queryOne(
+    "SELECT * FROM strands WHERE id = $1 AND deleted = false",
+    [id],
+  );
+  if (!row) {
+    return c.json(
+      { error: { code: "NOT_FOUND", message: "Strand not found" } },
+      404,
+    );
+  }
+
+  const strand = mapStrand(row as unknown as Record<string, unknown>);
+
+  // Fetch parent domain
+  const domainRow = await queryOne(
+    "SELECT * FROM domains WHERE id = $1 AND deleted = false",
+    [strand.domainId],
+  );
+
+  return c.json({
+    ...strand,
+    domain: domainRow
+      ? mapDomain(domainRow as unknown as Record<string, unknown>)
+      : null,
+  });
+});
 
 // ---- PUT /api/strands/:id ----
 

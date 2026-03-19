@@ -12,7 +12,7 @@ import {
   type AuthEnv,
   type AuthUser,
 } from "../middleware/auth.js";
-import type { SubStrand } from "@els/shared";
+import type { SubStrand, Strand, Domain } from "@els/shared";
 
 const subStrands = new Hono<AuthEnv>();
 
@@ -35,6 +35,90 @@ function mapSubStrand(row: Record<string, unknown>): SubStrand {
     deletedBy: (row.deleted_by as string) ?? null,
   };
 }
+
+function mapStrand(row: Record<string, unknown>): Strand {
+  return {
+    id: row.id as number,
+    domainId: row.domain_id as number,
+    code: row.code as string,
+    name: row.name as string,
+    description: (row.description as string) ?? null,
+    humanVerified: (row.human_verified as boolean) ?? false,
+    verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
+    verifiedBy: (row.verified_by as string) ?? null,
+    editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
+    editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
+  };
+}
+
+function mapDomain(row: Record<string, unknown>): Domain {
+  return {
+    id: row.id as number,
+    documentId: row.document_id as number,
+    code: row.code as string,
+    name: row.name as string,
+    description: (row.description as string) ?? null,
+    humanVerified: (row.human_verified as boolean) ?? false,
+    verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
+    verifiedBy: (row.verified_by as string) ?? null,
+    editedAt: row.edited_at ? new Date(row.edited_at as string) : null,
+    editedBy: (row.edited_by as string) ?? null,
+    deleted: (row.deleted as boolean) ?? false,
+    deletedAt: row.deleted_at ? new Date(row.deleted_at as string) : null,
+    deletedBy: (row.deleted_by as string) ?? null,
+  };
+}
+
+// ---- GET /api/sub-strands/:id ----
+
+subStrands.get("/:id", async (c) => {
+  const id = Number(c.req.param("id"));
+  if (Number.isNaN(id)) {
+    return c.json(
+      { error: { code: "VALIDATION_ERROR", message: "Invalid sub-strand id" } },
+      400,
+    );
+  }
+
+  const row = await queryOne(
+    "SELECT * FROM sub_strands WHERE id = $1 AND deleted = false",
+    [id],
+  );
+  if (!row) {
+    return c.json(
+      { error: { code: "NOT_FOUND", message: "Sub-strand not found" } },
+      404,
+    );
+  }
+
+  const subStrand = mapSubStrand(row as unknown as Record<string, unknown>);
+
+  // Fetch parent strand
+  const strandRow = await queryOne(
+    "SELECT * FROM strands WHERE id = $1 AND deleted = false",
+    [subStrand.strandId],
+  );
+  const strand = strandRow
+    ? mapStrand(strandRow as unknown as Record<string, unknown>)
+    : null;
+
+  // Fetch parent domain
+  let domain = null;
+  if (strand) {
+    const domainRow = await queryOne(
+      "SELECT * FROM domains WHERE id = $1 AND deleted = false",
+      [strand.domainId],
+    );
+    domain = domainRow
+      ? mapDomain(domainRow as unknown as Record<string, unknown>)
+      : null;
+  }
+
+  return c.json({ ...subStrand, strand, domain });
+});
 
 // ---- PUT /api/sub-strands/:id ----
 
