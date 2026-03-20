@@ -1,0 +1,30 @@
+{
+  "name": "@els/planning-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "test": "vitest --run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-agent-runtime": "^3.1011.0",
+    "@aws-sdk/client-rds-data": "^3.1011.0",
+    "@aws-sdk/client-secrets-manager": "^3.1008.0",
+    "@descope/node-sdk": "^1.10.0",
+    "@els/shared": "workspace:*",
+    "hono": "^4.7.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "fast-check": "^4.6.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

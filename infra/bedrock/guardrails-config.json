@@ -1,0 +1,203 @@
+{
+  "name": "ParentPlanningToolGuardrails",
+  "description": "Guardrails for the Parent Planning Tool Bedrock Agent. Enforces content safety, topic restrictions, PII filtering, and prompt attack prevention.",
+  "blockedInputMessaging": "I'm sorry, but I can only help with creating and refining learning plans for your child. Could you please ask me something related to your child's learning plan?",
+  "blockedOutputsMessaging": "I'm sorry, but I'm unable to provide that type of response. I'm here to help you create and refine learning plans for your child. Let's get back to planning!",
+  "contentPolicyConfig": {
+    "filtersConfig": [
+      {
+        "type": "SEXUAL",
+        "inputStrength": "HIGH",
+        "outputStrength": "HIGH"
+      },
+      {
+        "type": "VIOLENCE",
+        "inputStrength": "HIGH",
+        "outputStrength": "HIGH"
+      },
+      {
+        "type": "HATE",
+        "inputStrength": "HIGH",
+        "outputStrength": "HIGH"
+      },
+      {
+        "type": "INSULTS",
+        "inputStrength": "HIGH",
+        "outputStrength": "HIGH"
+      },
+      {
+        "type": "MISCONDUCT",
+        "inputStrength": "HIGH",
+        "outputStrength": "HIGH"
+      },
+      {
+        "type": "PROMPT_ATTACK",
+        "inputStrength": "HIGH",
+        "outputStrength": "NONE"
+      }
+    ]
+  },
+  "topicPolicyConfig": {
+    "topicsConfig": [
+      {
+        "name": "Medical Advice",
+        "definition": "Providing medical advice, medical diagnoses, treatment recommendations, medication suggestions, or any guidance that should come from a licensed healthcare professional.",
+        "examples": [
+          "What medication should I give my child for ADHD?",
+          "Is my child's development normal for their age?",
+          "Should I take my child to see a specialist?",
+          "What are the symptoms of autism in toddlers?"
+        ],
+        "type": "DENY"
+      },
+      {
+        "name": "Developmental Diagnoses",
+        "definition": "Diagnosing or suggesting developmental conditions, disabilities, learning disorders, behavioral disorders, or any clinical assessment of a child's developmental status.",
+        "examples": [
+          "Does my child have a learning disability?",
+          "My child might be on the autism spectrum, can you confirm?",
+          "Is my child developmentally delayed?",
+          "Can you assess if my child has dyslexia?"
+        ],
+        "type": "DENY"
+      },
+      {
+        "name": "Therapeutic Recommendations",
+        "definition": "Recommending specific therapies, therapeutic interventions, counseling approaches, or clinical treatment plans that should be prescribed by licensed therapists or clinicians.",
+        "examples": [
+          "What type of therapy does my child need?",
+          "Should my child get speech therapy?",
+          "Can you recommend an occupational therapist?",
+          "What behavioral interventions should I try?"
+        ],
+        "type": "DENY"
+      },
+      {
+        "name": "Politics",
+        "definition": "Discussing political topics, political parties, elections, government policies, political opinions, or politically divisive subjects.",
+        "examples": [
+          "What do you think about the current education policy?",
+          "Which political party supports early childhood education?",
+          "Should I vote for candidates who support preschool funding?",
+          "What are your thoughts on government-funded childcare?"
+        ],
+        "type": "DENY"
+      },
+      {
+        "name": "Religion",
+        "definition": "Discussing religious beliefs, religious practices, religious education, faith-based parenting, or promoting any particular religious viewpoint.",
+        "examples": [
+          "Should I include religious education in my child's plan?",
+          "What does the Bible say about raising children?",
+          "How do I teach my child about God?",
+          "Which religion is best for children?"
+        ],
+        "type": "DENY"
+      },
+      {
+        "name": "Personal Relationships",
+        "definition": "Providing advice on personal relationships, marital issues, family conflicts, co-parenting disputes, custody matters, or interpersonal relationship guidance.",
+        "examples": [
+          "My spouse and I disagree on parenting, what should I do?",
+          "How do I handle my ex's parenting style?",
+          "Can you help me with my custody arrangement?",
+          "My mother-in-law interferes with my parenting"
+        ],
+        "type": "DENY"
+      },
+      {
+        "name": "Financial Advice",
+        "definition": "Providing financial advice, investment recommendations, budgeting guidance, cost comparisons of educational programs, or any monetary planning guidance.",
+        "examples": [
+          "How much should I save for my child's education?",
+          "Is private preschool worth the cost?",
+          "What's the best 529 plan for my child?",
+          "How do I budget for childcare expenses?"
+        ],
+        "type": "DENY"
+      }
+    ]
+  },
+  "wordPolicyConfig": {
+    "managedWordListsConfig": [
+      {
+        "type": "PROFANITY"
+      }
+    ],
+    "wordsConfig": [
+      {
+        "text": "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\\b"
+      },
+      {
+        "text": "\\b\\d{3}[-.]?\\d{3}[-.]?\\d{4}\\b"
+      },
+      {
+        "text": "\\b\\d{3}[-]?\\d{2}[-]?\\d{4}\\b"
+      }
+    ]
+  },
+  "sensitiveInformationPolicyConfig": {
+    "piiEntitiesConfig": [
+      {
+        "type": "EMAIL",
+        "action": "BLOCK"
+      },
+      {
+        "type": "PHONE",
+        "action": "BLOCK"
+      },
+      {
+        "type": "US_SOCIAL_SECURITY_NUMBER",
+        "action": "BLOCK"
+      },
+      {
+        "type": "CREDIT_DEBIT_CARD_NUMBER",
+        "action": "BLOCK"
+      },
+      {
+        "type": "US_BANK_ACCOUNT_NUMBER",
+        "action": "BLOCK"
+      },
+      {
+        "type": "IP_ADDRESS",
+        "action": "BLOCK"
+      },
+      {
+        "type": "URL",
+        "action": "BLOCK"
+      },
+      {
+        "type": "DRIVER_ID",
+        "action": "BLOCK"
+      },
+      {
+        "type": "US_PASSPORT_NUMBER",
+        "action": "BLOCK"
+      },
+      {
+        "type": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+        "action": "BLOCK"
+      }
+    ],
+    "regexesConfig": [
+      {
+        "name": "EmailPattern",
+        "description": "Matches email addresses",
+        "pattern": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+        "action": "BLOCK"
+      },
+      {
+        "name": "PhonePattern",
+        "description": "Matches US phone numbers in various formats",
+        "pattern": "(\\+?1[-\\s.]?)?\\(?\\d{3}\\)?[-\\s.]?\\d{3}[-\\s.]?\\d{4}",
+        "action": "BLOCK"
+      },
+      {
+        "name": "SSNPattern",
+        "description": "Matches US Social Security Numbers",
+        "pattern": "\\b\\d{3}[-\\s]?\\d{2}[-\\s]?\\d{4}\\b",
+        "action": "BLOCK"
+      }
+    ]
+  }
+}
