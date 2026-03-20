@@ -5,7 +5,7 @@ How to deploy the ELS Pipeline to AWS using GitHub Actions or the deployment scr
 ## Prerequisites
 
 - AWS CLI v2 configured with appropriate credentials
-- Python 3.9+
+- Python 3.13+
 - GitHub repository with Actions enabled (for CI/CD)
 
 ## S3 Path Structure

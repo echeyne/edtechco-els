@@ -1,42 +1,38 @@
 import { Hono } from "hono";
-import { streamSSE } from "hono/streaming";
-import { z } from "zod";
-import {
-  BedrockAgentRuntimeClient,
-  InvokeAgentCommand,
-} from "@aws-sdk/client-bedrock-agent-runtime";
+import { defaultProvider } from "@aws-sdk/credential-provider-node";
+import type { AwsCredentialIdentity, Provider } from "@smithy/types";
 import type { AuthEnv } from "../middleware/auth.js";
 import { requireAuth } from "../middleware/auth.js";
+import { generatePresignedUrl } from "../lib/presign.js";
 
-// ---- Bedrock client (lazy singleton, injectable for tests) ----
+// ---- Credentials provider (lazy singleton, injectable for tests) ----
 
-let _bedrockClient: BedrockAgentRuntimeClient | null = null;
+let _credentials: Provider<AwsCredentialIdentity> | null = null;
 
-function getBedrockClient(): BedrockAgentRuntimeClient {
-  if (!_bedrockClient) {
-    _bedrockClient = new BedrockAgentRuntimeClient({});
+function getCredentials(): Provider<AwsCredentialIdentity> {
+  if (!_credentials) {
+    _credentials = defaultProvider();
   }
-  return _bedrockClient;
+  return _credentials;
 }
 
-/** Allow tests to inject a mock client */
-export function setBedrockClient(
-  client: BedrockAgentRuntimeClient | null,
+/** Allow tests to inject mock credentials */
+export function setCredentials(
+  creds: Provider<AwsCredentialIdentity> | null,
 ): void {
-  _bedrockClient = client;
+  _credentials = creds;
 }
 
-// ---- Request validation ----
+// ---- Presigned URL generator (injectable for tests) ----
 
-const chatRequestSchema = z.object({
-  message: z.string().min(1, "message is required"),
-  sessionId: z.string().optional(),
-  planId: z.string().optional(),
-});
+let _generatePresignedUrl = generatePresignedUrl;
 
-// ---- Timeout constant ----
-
-const AGENT_TIMEOUT_MS = 60_000;
+/** Allow tests to inject a mock presigned URL generator */
+export function setPresignedUrlGenerator(
+  fn: typeof generatePresignedUrl | null,
+): void {
+  _generatePresignedUrl = fn ?? generatePresignedUrl;
+}
 
 // ---- Route ----
 
@@ -44,35 +40,15 @@ const chat = new Hono<AuthEnv>();
 
 chat.use("/*", requireAuth);
 
-chat.post("/", async (c) => {
+chat.post("/session", async (c) => {
   const body = await c.req.json().catch(() => null);
-  if (!body) {
-    return c.json(
-      { error: { code: "BAD_REQUEST", message: "Invalid JSON body" } },
-      400,
-    );
-  }
+  const sessionId = body?.sessionId ?? crypto.randomUUID();
+  const planId = body?.planId;
 
-  const parsed = chatRequestSchema.safeParse(body);
-  if (!parsed.success) {
-    return c.json(
-      {
-        error: {
-          code: "BAD_REQUEST",
-          message: parsed.error.issues.map((i) => i.message).join(", "),
-        },
-      },
-      400,
-    );
-  }
+  const runtimeArn = process.env.AGENTCORE_RUNTIME_ARN;
+  const region = process.env.AWS_REGION ?? "us-east-1";
 
-  const { message, sessionId, planId } = parsed.data;
-  const userId = c.get("userId");
-
-  const agentId = process.env.BEDROCK_AGENT_ID;
-  const agentAliasId = process.env.BEDROCK_AGENT_ALIAS_ID;
-
-  if (!agentId || !agentAliasId) {
+  if (!runtimeArn) {
     return c.json(
       {
         error: {
@@ -84,176 +60,43 @@ chat.post("/", async (c) => {
     );
   }
 
-  // Use provided sessionId or generate a new one
-  const resolvedSessionId = sessionId ?? crypto.randomUUID();
+  const expires = 300;
 
-  const sessionAttributes: Record<string, string> = { userId };
+  // Pass userId and optional planId as custom query params so the agent
+  // can read them from the WebSocket connection context.
+  const customHeaders: Record<string, string> = {
+    "X-UserId": c.get("userId"),
+  };
   if (planId) {
-    sessionAttributes.planId = planId;
+    customHeaders["X-PlanId"] = planId;
   }
 
-  return streamSSE(c, async (stream) => {
-    const abortController = new AbortController();
-    const timeout = setTimeout(() => {
-      abortController.abort();
-    }, AGENT_TIMEOUT_MS);
-
-    try {
-      const command = new InvokeAgentCommand({
-        agentId,
-        agentAliasId,
-        sessionId: resolvedSessionId,
-        inputText: message,
-        enableTrace: true,
-        sessionState: {
-          sessionAttributes,
+  let url: string;
+  try {
+    url = await _generatePresignedUrl({
+      runtimeArn,
+      sessionId,
+      region,
+      credentials: getCredentials(),
+      customHeaders,
+      expires,
+    });
+  } catch {
+    return c.json(
+      {
+        error: {
+          code: "INTERNAL_ERROR",
+          message: "Failed to generate session URL",
         },
-      });
+      },
+      500,
+    );
+  }
 
-      const response = await getBedrockClient().send(command, {
-        abortSignal: abortController.signal,
-      });
-
-      if (!response.completion) {
-        await stream.writeSSE({
-          event: "error",
-          data: JSON.stringify({ message: "No response from agent" }),
-        });
-        return;
-      }
-
-      for await (const event of response.completion) {
-        // Text chunk from the agent
-        if (event.chunk?.bytes) {
-          const text = new TextDecoder().decode(event.chunk.bytes);
-          await stream.writeSSE({
-            event: "token",
-            data: JSON.stringify({
-              text,
-              sessionId: resolvedSessionId,
-            }),
-          });
-        }
-
-        // Trace events — detect plan creation/update actions
-        if (event.trace?.trace?.orchestrationTrace?.observation) {
-          const observation = event.trace.trace.orchestrationTrace.observation;
-          if (
-            observation.type === "ACTION_GROUP" &&
-            observation.actionGroupInvocationOutput?.text
-          ) {
-            try {
-              const outputText = observation.actionGroupInvocationOutput.text;
-              const parsed = JSON.parse(outputText);
-              if (parsed.planId && parsed.action) {
-                await stream.writeSSE({
-                  event: "plan",
-                  data: JSON.stringify({
-                    planId: parsed.planId,
-                    action: parsed.action,
-                  }),
-                });
-              }
-            } catch {
-              // Not a plan event — ignore parse errors
-            }
-          }
-        }
-
-        // Detect plan actions from invocation input traces
-        if (event.trace?.trace?.orchestrationTrace?.invocationInput) {
-          const invInput = event.trace.trace.orchestrationTrace.invocationInput;
-          if (
-            invInput.invocationType === "ACTION_GROUP" &&
-            invInput.actionGroupInvocationInput
-          ) {
-            const agInput = invInput.actionGroupInvocationInput;
-            const apiPath = agInput.apiPath ?? "";
-            const verb = agInput.verb ?? "";
-
-            // Detect createPlan or updatePlan calls
-            if (
-              agInput.actionGroupName === "PlanManagement" &&
-              ((verb === "POST" && apiPath.includes("plan")) ||
-                (verb === "PUT" && apiPath.includes("plan")))
-            ) {
-              // Plan action detected — the observation handler above
-              // will emit the plan SSE event with the actual planId
-            }
-          }
-        }
-
-        // Handle stream-level errors
-        if (event.internalServerException) {
-          await stream.writeSSE({
-            event: "error",
-            data: JSON.stringify({
-              message: "Agent encountered an internal error",
-            }),
-          });
-          return;
-        }
-
-        if (event.badGatewayException) {
-          await stream.writeSSE({
-            event: "error",
-            data: JSON.stringify({
-              message: "Agent service is temporarily unavailable",
-            }),
-          });
-          return;
-        }
-
-        if (event.throttlingException) {
-          await stream.writeSSE({
-            event: "error",
-            data: JSON.stringify({
-              message: "Too many requests, please try again later",
-            }),
-          });
-          return;
-        }
-      }
-
-      // Stream completed successfully
-      await stream.writeSSE({
-        event: "done",
-        data: JSON.stringify({}),
-      });
-    } catch (err: unknown) {
-      if (abortController.signal.aborted) {
-        await stream.writeSSE({
-          event: "error",
-          data: JSON.stringify({
-            message: "Agent response timed out",
-          }),
-        });
-        return;
-      }
-
-      const errorName = err instanceof Error ? err.constructor.name : "Unknown";
-
-      // Map specific AWS SDK errors to appropriate responses
-      if (
-        errorName === "BadGatewayException" ||
-        errorName === "DependencyFailedException"
-      ) {
-        await stream.writeSSE({
-          event: "error",
-          data: JSON.stringify({
-            message: "Agent service is temporarily unavailable",
-          }),
-        });
-        return;
-      }
-
-      await stream.writeSSE({
-        event: "error",
-        data: JSON.stringify({ message: "Something went wrong" }),
-      });
-    } finally {
-      clearTimeout(timeout);
-    }
+  return c.json({
+    url,
+    sessionId,
+    expiresAt: Math.floor(Date.now() / 1000) + expires,
   });
 });
 

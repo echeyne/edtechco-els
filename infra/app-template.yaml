@@ -192,7 +192,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-api-${EnvironmentName}"
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Handler: index.handler
       Role: !GetAtt ApiLambdaRole.Arn
       Timeout: 30

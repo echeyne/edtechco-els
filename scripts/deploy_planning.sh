@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ELS Planning App Deployment Script
-# Deploys the planning tool: CloudFormation infra, API Lambda, Action Group Lambda,
-# frontend (S3 + CloudFront), and Bedrock Agent resources.
+# Deploys the planning tool: CloudFormation infra, API Lambda,
+# frontend (S3 + CloudFront), and AgentCore agent.
 
 set -e
 
@@ -35,7 +35,7 @@ print_header() {
 SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
-SKIP_ACTION_GROUP=false
+SKIP_AGENTCORE=false
 CUSTOM_DOMAIN=""
 HOSTED_ZONE_ID=""
 BEDROCK_MODEL_ID=""
@@ -58,8 +58,8 @@ while [[ $# -gt 0 ]]; do
         --skip-api)
             SKIP_API=true
             shift ;;
-        --skip-action-group)
-            SKIP_ACTION_GROUP=true
+        --skip-agentcore)
+            SKIP_AGENTCORE=true
             shift ;;
         -d|--domain)
             CUSTOM_DOMAIN="$2"
@@ -79,7 +79,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --skip-infra                Skip CloudFormation deployment"
             echo "  --skip-frontend             Skip frontend build & deploy"
             echo "  --skip-api                  Skip Planning API Lambda deploy"
-            echo "  --skip-action-group         Skip Action Group Lambda deploy"
+            echo "  --skip-agentcore            Skip AgentCore agent deploy"
             echo "  -d, --domain DOMAIN         Custom domain (e.g. plan.example.com)"
             echo "  --hosted-zone-id ID         Route53 Hosted Zone ID for custom domain"
             echo "  --bedrock-model MODEL_ID    Bedrock model ID [default: template default]"
@@ -94,7 +94,7 @@ while [[ $# -gt 0 ]]; do
             echo "  $0                                          # Full deploy to dev"
             echo "  $0 -e prod -d plan.example.com --hosted-zone-id Z1234"
             echo "  $0 --skip-infra                             # Redeploy code only"
-            echo "  $0 --skip-infra --skip-action-group         # API + frontend only"
+            echo "  $0 --skip-infra --skip-agentcore            # API + frontend only"
             exit 0 ;;
         *)
             print_message "$RED" "Unknown option: $1"
@@ -219,48 +219,22 @@ deploy_api() {
     print_message "$GREEN" "✓ Planning API deployed"
 }
 
-# ─── Build & deploy Action Group Lambda ───
-deploy_action_group() {
-    print_header "Building & Deploying Action Group Lambda"
+# ─── Deploy AgentCore agent ───
+deploy_agentcore() {
+    print_header "Deploying AgentCore Agent"
 
-    LAMBDA_NAME=$(get_output ActionGroupLambdaFunctionName)
-    print_message "$YELLOW" "Lambda: $LAMBDA_NAME"
+    AGENTCORE_ROLE_ARN=$(get_output PlanningAgentCoreRoleArn)
+    print_message "$YELLOW" "AgentCore Role: $AGENTCORE_ROLE_ARN"
 
-    # Shared + planning-api should already be built from deploy_api,
-    # but build again if running standalone
-    pnpm --filter @els/shared run build
-    pnpm --filter @els/planning-api run build
+    print_message "$BLUE" "Deploying agent via AgentCore CLI..."
+    print_message "$YELLOW" "Run the following command from packages/agentcore-agent/:"
+    print_message "$YELLOW" "  bedrock-agentcore deploy --role-arn $AGENTCORE_ROLE_ARN --region $REGION"
+    print_message "$YELLOW" ""
+    print_message "$YELLOW" "After deployment, update the stack with the agent ID:"
+    print_message "$YELLOW" "  aws cloudformation update-stack --stack-name $STACK_NAME \\"
+    print_message "$YELLOW" "    --parameter-overrides AgentCoreAgentId=<AGENT_ID> ..."
 
-    # Bundle the action group handler
-    print_message "$BLUE" "Bundling for Lambda..."
-    mkdir -p build/action-group-lambda
-
-    npx esbuild packages/planning-api/dist/action-group/handler.js \
-        --bundle \
-        --platform=node \
-        --target=node20 \
-        --format=esm \
-        --outfile=build/action-group-lambda/index.mjs \
-        --external:@aws-sdk/* \
-        --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
-
-    # Package as zip
-    print_message "$BLUE" "Packaging zip..."
-    rm -f build/action-group-lambda.zip
-    (cd build/action-group-lambda && zip -r ../action-group-lambda.zip .)
-
-    # Deploy
-    print_message "$BLUE" "Updating Lambda function code..."
-    aws lambda update-function-code \
-        --function-name "$LAMBDA_NAME" \
-        --zip-file fileb://build/action-group-lambda.zip \
-        --region "$REGION" > /dev/null
-
-    aws lambda wait function-updated \
-        --function-name "$LAMBDA_NAME" \
-        --region "$REGION"
-
-    print_message "$GREEN" "✓ Action Group Lambda deployed"
+    print_message "$GREEN" "✓ AgentCore deployment instructions printed"
 }
 
 # ─── Build & deploy frontend ───
@@ -301,17 +275,17 @@ print_summary() {
 
     CLOUDFRONT_DOMAIN=$(get_output PlanningCloudFrontDomainName)
     API_URL=$(get_output PlanningApiGatewayUrl)
-    AGENT_ID=$(get_output PlanningBedrockAgentId)
+    AGENTCORE_ID=$(get_output PlanningAgentCoreRuntimeId)
 
     print_message "$GREEN" "✅ Planning App deployed successfully"
-    print_message "$GREEN" "   Frontend:  https://$CLOUDFRONT_DOMAIN"
-    print_message "$GREEN" "   API:       $API_URL"
-    print_message "$GREEN" "   Agent ID:  $AGENT_ID"
-    print_message "$GREEN" "   Stack:     $STACK_NAME"
-    print_message "$GREEN" "   Region:    $REGION"
+    print_message "$GREEN" "   Frontend:     https://$CLOUDFRONT_DOMAIN"
+    print_message "$GREEN" "   API:          $API_URL"
+    print_message "$GREEN" "   AgentCore ID: $AGENTCORE_ID"
+    print_message "$GREEN" "   Stack:        $STACK_NAME"
+    print_message "$GREEN" "   Region:       $REGION"
 
     if [ -n "$CUSTOM_DOMAIN" ]; then
-        print_message "$GREEN" "   Domain:    https://$CUSTOM_DOMAIN"
+        print_message "$GREEN" "   Domain:       https://$CUSTOM_DOMAIN"
     fi
 
     echo ""
@@ -336,10 +310,10 @@ main() {
         print_message "$YELLOW" "⏭ Skipping Planning API deployment"
     fi
 
-    if [ "$SKIP_ACTION_GROUP" = false ]; then
-        deploy_action_group
+    if [ "$SKIP_AGENTCORE" = false ]; then
+        deploy_agentcore
     else
-        print_message "$YELLOW" "⏭ Skipping Action Group deployment"
+        print_message "$YELLOW" "⏭ Skipping AgentCore agent deployment"
     fi
 
     if [ "$SKIP_FRONTEND" = false ]; then

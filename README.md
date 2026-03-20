@@ -70,7 +70,7 @@ documentation/        Detailed guides (deployment, testing, AWS operations)
 
 ### Prerequisites
 
-- Python 3.9+
+- Python 3.13+
 - AWS CLI v2 (configured with appropriate credentials)
 - Access to AWS Bedrock models (Claude and Titan Embed)
 

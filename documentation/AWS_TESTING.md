@@ -5,7 +5,7 @@ Step-by-step instructions for deploying, verifying, and operating the ELS Normal
 ## Pre-Deployment Checklist
 
 - AWS CLI v2 installed and configured
-- Python 3.11+
+- Python 3.13+
 - IAM permissions for: S3, Lambda, Step Functions, Aurora PostgreSQL, Textract, Bedrock, CloudWatch, SNS, Secrets Manager, IAM, VPC
 - Bedrock model access enabled for `us.anthropic.claude-sonnet-4-6` and `amazon.titan-embed-text-v2:0`
 

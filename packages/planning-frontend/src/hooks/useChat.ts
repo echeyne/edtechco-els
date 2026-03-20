@@ -1,4 +1,5 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
+import { getSessionUrl } from "@/lib/api";
 
 export interface ChatMessage {
   role: "user" | "assistant";
@@ -25,33 +26,6 @@ export interface UseChatReturn {
   planEvents: PlanEvent[];
 }
 
-/**
- * Parse SSE text into individual events.
- * SSE events are separated by double newlines. Each event has optional
- * `event:` and `data:` lines.
- */
-export function parseSSEEvents(raw: string): { event: string; data: string }[] {
-  const events: { event: string; data: string }[] = [];
-  const blocks = raw.split("\n\n");
-  for (const block of blocks) {
-    const trimmed = block.trim();
-    if (!trimmed) continue;
-    let eventType = "message";
-    let data = "";
-    for (const line of trimmed.split("\n")) {
-      if (line.startsWith("event:")) {
-        eventType = line.slice("event:".length).trim();
-      } else if (line.startsWith("data:")) {
-        data = line.slice("data:".length).trim();
-      }
-    }
-    if (data) {
-      events.push({ event: eventType, data });
-    }
-  }
-  return events;
-}
-
 export function useChat(options: UseChatOptions): UseChatReturn {
   const { token, sessionId: initialSessionId, planId } = options;
 
@@ -62,9 +36,44 @@ export function useChat(options: UseChatOptions): UseChatReturn {
 
   const lastMessageRef = useRef<string | null>(null);
   const sessionIdRef = useRef<string | undefined>(initialSessionId);
-  const abortControllerRef = useRef<AbortController | null>(null);
+  const sessionUrlRef = useRef<string | null>(null);
+  const sessionExpiresAtRef = useRef<number>(0);
+  const wsRef = useRef<WebSocket | null>(null);
 
-  const processStream = useCallback(
+  // Clean up WebSocket on unmount
+  useEffect(() => {
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.onclose = null;
+        wsRef.current.onerror = null;
+        wsRef.current.onmessage = null;
+        wsRef.current.close();
+        wsRef.current = null;
+      }
+    };
+  }, []);
+
+  const ensureSessionUrl = useCallback(async (): Promise<string> => {
+    const now = Math.floor(Date.now() / 1000);
+    if (sessionUrlRef.current && sessionExpiresAtRef.current > now) {
+      return sessionUrlRef.current;
+    }
+
+    const resp = await getSessionUrl(
+      {
+        sessionId: sessionIdRef.current,
+        planId,
+      },
+      token!,
+    );
+
+    sessionUrlRef.current = resp.url;
+    sessionIdRef.current = resp.sessionId;
+    sessionExpiresAtRef.current = resp.expiresAt;
+    return resp.url;
+  }, [token, planId]);
+
+  const openWebSocketAndSend = useCallback(
     async (message: string) => {
       if (!token) {
         setError("Not authenticated");
@@ -76,155 +85,149 @@ export function useChat(options: UseChatOptions): UseChatReturn {
 
       // Add user message
       setMessages((prev) => [...prev, { role: "user", content: message }]);
-
-      // Add empty assistant message that we'll stream into
+      // Add empty assistant message to stream into
       setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
 
-      const controller = new AbortController();
-      abortControllerRef.current = controller;
-
+      let url: string;
       try {
-        const response = await fetch("/api/chat", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            message,
-            sessionId: sessionIdRef.current,
-            planId,
-          }),
-          signal: controller.signal,
-        });
-
-        if (!response.ok) {
-          const errorText = await response.text().catch(() => "Request failed");
-          throw new Error(errorText || `HTTP ${response.status}`);
-        }
-
-        const reader = response.body?.getReader();
-        if (!reader) {
-          throw new Error("No response body");
-        }
-
-        const decoder = new TextDecoder();
-        let buffer = "";
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          buffer += decoder.decode(value, { stream: true });
-
-          // Process complete SSE events (separated by double newline)
-          const parts = buffer.split("\n\n");
-          // Keep the last part as it may be incomplete
-          buffer = parts.pop() ?? "";
-
-          for (const part of parts) {
-            const events = parseSSEEvents(part + "\n\n");
-            for (const sseEvent of events) {
-              handleSSEEvent(sseEvent);
-            }
-          }
-        }
-
-        // Process any remaining buffer
-        if (buffer.trim()) {
-          const events = parseSSEEvents(buffer + "\n\n");
-          for (const sseEvent of events) {
-            handleSSEEvent(sseEvent);
-          }
-        }
+        url = await ensureSessionUrl();
       } catch (err: unknown) {
-        if ((err as Error).name === "AbortError") return;
-        setError(err instanceof Error ? err.message : "Connection failed");
-      } finally {
+        setError(err instanceof Error ? err.message : "Failed to get session");
         setIsStreaming(false);
-        abortControllerRef.current = null;
+        return;
       }
-    },
-    [token, planId],
-  );
 
-  function handleSSEEvent(sseEvent: { event: string; data: string }) {
-    try {
-      const parsed = JSON.parse(sseEvent.data);
+      const ws = new WebSocket(url);
+      wsRef.current = ws;
 
-      switch (sseEvent.event) {
-        case "token": {
-          const text = parsed.text as string;
-          if (parsed.sessionId) {
-            sessionIdRef.current = parsed.sessionId as string;
-          }
-          // Append token to the last assistant message
-          setMessages((prev) => {
-            const updated = [...prev];
-            const last = updated[updated.length - 1];
-            if (last && last.role === "assistant") {
-              updated[updated.length - 1] = {
-                ...last,
-                content: last.content + text,
-              };
+      ws.onopen = () => {
+        ws.send(
+          JSON.stringify({
+            text: message,
+          }),
+        );
+      };
+
+      // Track whether we initiated the close (done/error frame) to avoid
+      // spurious "Connection lost" errors from the onclose handler.
+      let closedByProtocol = false;
+
+      ws.onmessage = (event: MessageEvent) => {
+        try {
+          const frame = JSON.parse(event.data as string) as {
+            type: string;
+            text?: string;
+            planId?: string;
+            action?: "created" | "updated";
+            message?: string;
+          };
+
+          switch (frame.type) {
+            case "text": {
+              setMessages((prev) => {
+                const updated = [...prev];
+                const last = updated[updated.length - 1];
+                if (last && last.role === "assistant") {
+                  updated[updated.length - 1] = {
+                    ...last,
+                    content: last.content + (frame.text ?? ""),
+                  };
+                }
+                return updated;
+              });
+              break;
             }
-            return updated;
-          });
-          break;
+            case "plan": {
+              if (frame.planId && frame.action) {
+                setPlanEvents((prev) => [
+                  ...prev,
+                  { planId: frame.planId!, action: frame.action! },
+                ]);
+              }
+              break;
+            }
+            case "error": {
+              closedByProtocol = true;
+              setError(frame.message ?? "Unknown error");
+              setIsStreaming(false);
+              ws.close();
+              break;
+            }
+            case "done": {
+              closedByProtocol = true;
+              setIsStreaming(false);
+              ws.close();
+              break;
+            }
+          }
+        } catch {
+          // Ignore malformed frames
         }
-        case "plan": {
-          setPlanEvents((prev) => [
-            ...prev,
-            {
-              planId: parsed.planId as string,
-              action: parsed.action as "created" | "updated",
-            },
-          ]);
-          break;
+      };
+
+      ws.onerror = () => {
+        closedByProtocol = true;
+        setError("Connection error");
+        setIsStreaming(false);
+      };
+
+      ws.onclose = () => {
+        if (!closedByProtocol) {
+          setError("Connection lost");
+          setIsStreaming(false);
         }
-        case "error": {
-          setError(parsed.message as string);
-          break;
-        }
-        case "done":
-          // Stream complete — nothing extra to do
-          break;
-      }
-    } catch {
-      // Ignore malformed SSE data
-    }
-  }
+        wsRef.current = null;
+      };
+    },
+    [token, planId, ensureSessionUrl],
+  );
 
   const sendMessage = useCallback(
     (message: string) => {
       if (isStreaming) return;
       lastMessageRef.current = message;
-      processStream(message);
+      openWebSocketAndSend(message);
     },
-    [isStreaming, processStream],
+    [isStreaming, openWebSocketAndSend],
   );
 
   const retry = useCallback(() => {
     if (isStreaming || !lastMessageRef.current) return;
-    // Remove the failed assistant message and the user message for the retry
+
+    // Close existing WebSocket if open
+    if (wsRef.current) {
+      wsRef.current.onclose = null;
+      wsRef.current.onerror = null;
+      wsRef.current.onmessage = null;
+      wsRef.current.close();
+      wsRef.current = null;
+    }
+
+    // Remove the failed assistant message and the user message
     setMessages((prev) => {
       const updated = [...prev];
-      // Remove trailing assistant message (empty or partial)
       if (
         updated.length > 0 &&
         updated[updated.length - 1].role === "assistant"
       ) {
         updated.pop();
       }
-      // Remove the user message that triggered the failed request
       if (updated.length > 0 && updated[updated.length - 1].role === "user") {
         updated.pop();
       }
       return updated;
     });
+
     setError(null);
-    processStream(lastMessageRef.current);
-  }, [isStreaming, processStream]);
+
+    // Invalidate session URL so a fresh one is fetched if expired
+    const now = Math.floor(Date.now() / 1000);
+    if (sessionExpiresAtRef.current <= now) {
+      sessionUrlRef.current = null;
+    }
+
+    openWebSocketAndSend(lastMessageRef.current);
+  }, [isStreaming, openWebSocketAndSend]);
 
   return { messages, isStreaming, error, sendMessage, retry, planEvents };
 }

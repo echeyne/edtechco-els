@@ -5,7 +5,15 @@ import chat from "./routes/chat.js";
 
 const app = new Hono();
 
-app.use("/*", cors());
+app.use(
+  "/*",
+  cors({
+    origin: (origin) => origin || "*",
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowHeaders: ["Content-Type", "Authorization"],
+    maxAge: 86400,
+  }),
+);
 
 app.get("/api/health", (c) => {
   return c.json({ status: "ok" });

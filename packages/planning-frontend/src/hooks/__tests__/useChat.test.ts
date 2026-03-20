@@ -1,108 +1,114 @@
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { useChat, parseSSEEvents } from "../useChat";
+import { useChat } from "../useChat";
+
+/* ------------------------------------------------------------------ */
+/*  Mock getSessionUrl                                                 */
+/* ------------------------------------------------------------------ */
+
+const mockGetSessionUrl = vi.fn();
+
+vi.mock("@/lib/api", () => ({
+  getSessionUrl: (...args: unknown[]) => mockGetSessionUrl(...args),
+}));
+
+/* ------------------------------------------------------------------ */
+/*  Mock WebSocket                                                     */
+/* ------------------------------------------------------------------ */
+
+type WSHandler = ((event: unknown) => void) | null;
+
+interface MockWebSocket {
+  onopen: WSHandler;
+  onmessage: WSHandler;
+  onerror: WSHandler;
+  onclose: WSHandler;
+  send: ReturnType<typeof vi.fn>;
+  close: ReturnType<typeof vi.fn>;
+  readyState: number;
+  url: string;
+}
+
+let lastWs: MockWebSocket | null = null;
+
+class FakeWebSocket implements MockWebSocket {
+  onopen: WSHandler = null;
+  onmessage: WSHandler = null;
+  onerror: WSHandler = null;
+  onclose: WSHandler = null;
+  send = vi.fn();
+  close = vi.fn();
+  readyState = 0;
+  url: string;
+
+  constructor(url: string) {
+    this.url = url;
+    lastWs = this;
+  }
+}
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-/** Build a ReadableStream that emits the given SSE chunks sequentially. */
-function makeSSEStream(chunks: string[]): ReadableStream<Uint8Array> {
-  const encoder = new TextEncoder();
-  let index = 0;
-  return new ReadableStream({
-    pull(controller) {
-      if (index < chunks.length) {
-        controller.enqueue(encoder.encode(chunks[index]));
-        index++;
-      } else {
-        controller.close();
-      }
-    },
-  });
+/** Simulate the WebSocket opening and delivering frames, then done. */
+function deliverFrames(ws: MockWebSocket, frames: object[]) {
+  // Fire onopen
+  ws.onopen?.({});
+
+  // Deliver each frame
+  for (const frame of frames) {
+    ws.onmessage?.({ data: JSON.stringify(frame) } as MessageEvent);
+  }
 }
 
-/** Create a mock fetch that returns an SSE stream from the given chunks. */
-function mockFetchSSE(chunks: string[], status = 200) {
-  return vi.fn().mockResolvedValue({
-    ok: status >= 200 && status < 300,
-    status,
-    body: makeSSEStream(chunks),
-    text: () => Promise.resolve("error"),
-  } as unknown as Response);
-}
+const DEFAULT_SESSION = {
+  url: "wss://example.com/ws",
+  sessionId: "sess-1",
+  expiresAt: Math.floor(Date.now() / 1000) + 300,
+};
 
 /* ------------------------------------------------------------------ */
-/*  parseSSEEvents unit tests                                          */
+/*  Tests                                                              */
 /* ------------------------------------------------------------------ */
 
-describe("parseSSEEvents", () => {
-  it("parses a single token event", () => {
-    const raw = 'event: token\ndata: {"text":"hello","sessionId":"s1"}\n\n';
-    const events = parseSSEEvents(raw);
-    expect(events).toEqual([
-      { event: "token", data: '{"text":"hello","sessionId":"s1"}' },
-    ]);
-  });
-
-  it("parses multiple events", () => {
-    const raw =
-      'event: token\ndata: {"text":"a","sessionId":"s1"}\n\n' +
-      'event: plan\ndata: {"planId":"p1","action":"created"}\n\n' +
-      "event: done\ndata: {}\n\n";
-    const events = parseSSEEvents(raw);
-    expect(events).toHaveLength(3);
-    expect(events[0].event).toBe("token");
-    expect(events[1].event).toBe("plan");
-    expect(events[2].event).toBe("done");
-  });
-
-  it("ignores empty blocks", () => {
-    const raw = "\n\n\n\n";
-    expect(parseSSEEvents(raw)).toEqual([]);
-  });
-});
-
-/* ------------------------------------------------------------------ */
-/*  useChat hook tests                                                 */
-/* ------------------------------------------------------------------ */
-
-describe("useChat", () => {
-  const originalFetch = globalThis.fetch;
-
+describe("useChat (WebSocket)", () => {
   beforeEach(() => {
     vi.useFakeTimers({ shouldAdvanceTime: true });
+    lastWs = null;
+    mockGetSessionUrl.mockResolvedValue({ ...DEFAULT_SESSION });
+    (globalThis as unknown as Record<string, unknown>).WebSocket =
+      FakeWebSocket;
   });
 
   afterEach(() => {
-    globalThis.fetch = originalFetch;
     vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
-  it("accumulates messages from token events", async () => {
-    const chunks = [
-      'event: token\ndata: {"text":"Hello ","sessionId":"s1"}\n\n',
-      'event: token\ndata: {"text":"world","sessionId":"s1"}\n\n',
-      "event: done\ndata: {}\n\n",
-    ];
-    globalThis.fetch = mockFetchSSE(chunks);
-
+  it("accumulates messages from text frames", async () => {
     const { result } = renderHook(() => useChat({ token: "test-token" }));
 
     act(() => {
       result.current.sendMessage("Hi");
     });
 
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "text", text: "Hello " },
+        { type: "text", text: "world" },
+        { type: "done" },
+      ]);
+    });
+
     await waitFor(() => {
       expect(result.current.isStreaming).toBe(false);
     });
 
-    // Should have user message + assistant message
     expect(result.current.messages).toHaveLength(2);
-    expect(result.current.messages[0]).toEqual({
-      role: "user",
-      content: "Hi",
-    });
+    expect(result.current.messages[0]).toEqual({ role: "user", content: "Hi" });
     expect(result.current.messages[1]).toEqual({
       role: "assistant",
       content: "Hello world",
@@ -110,17 +116,20 @@ describe("useChat", () => {
   });
 
   it("tracks plan events", async () => {
-    const chunks = [
-      'event: token\ndata: {"text":"Done","sessionId":"s1"}\n\n',
-      'event: plan\ndata: {"planId":"plan-1","action":"created"}\n\n',
-      "event: done\ndata: {}\n\n",
-    ];
-    globalThis.fetch = mockFetchSSE(chunks);
-
     const { result } = renderHook(() => useChat({ token: "test-token" }));
 
     act(() => {
       result.current.sendMessage("Create a plan");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "text", text: "Done" },
+        { type: "plan", planId: "plan-1", action: "created" },
+        { type: "done" },
+      ]);
     });
 
     await waitFor(() => {
@@ -132,25 +141,29 @@ describe("useChat", () => {
     ]);
   });
 
-  it("sets error on SSE error event", async () => {
-    const chunks = [
-      'event: error\ndata: {"message":"Something went wrong"}\n\n',
-    ];
-    globalThis.fetch = mockFetchSSE(chunks);
-
+  it("sets error on error frame", async () => {
     const { result } = renderHook(() => useChat({ token: "test-token" }));
 
     act(() => {
       result.current.sendMessage("Hi");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "error", message: "Something went wrong" },
+      ]);
     });
 
     await waitFor(() => {
       expect(result.current.error).toBe("Something went wrong");
+      expect(result.current.isStreaming).toBe(false);
     });
   });
 
-  it("sets error on HTTP failure", async () => {
-    globalThis.fetch = mockFetchSSE([], 500);
+  it("sets error on getSessionUrl failure", async () => {
+    mockGetSessionUrl.mockRejectedValueOnce(new Error("Network error"));
 
     const { result } = renderHook(() => useChat({ token: "test-token" }));
 
@@ -159,7 +172,7 @@ describe("useChat", () => {
     });
 
     await waitFor(() => {
-      expect(result.current.error).toBe("error");
+      expect(result.current.error).toBe("Network error");
       expect(result.current.isStreaming).toBe(false);
     });
   });
@@ -176,35 +189,78 @@ describe("useChat", () => {
     });
   });
 
-  it("retry resends the last message", async () => {
-    // First call fails
-    let callCount = 0;
-    globalThis.fetch = vi.fn().mockImplementation(() => {
-      callCount++;
-      if (callCount === 1) {
-        return Promise.resolve({
-          ok: false,
-          status: 500,
-          body: null,
-          text: () => Promise.resolve("Server error"),
-        });
-      }
-      // Second call succeeds
-      const chunks = [
-        'event: token\ndata: {"text":"Recovered","sessionId":"s1"}\n\n',
-        "event: done\ndata: {}\n\n",
-      ];
-      return Promise.resolve({
-        ok: true,
-        status: 200,
-        body: makeSSEStream(chunks),
-        text: () => Promise.resolve(""),
-      });
+  it("sets error on WebSocket onerror", async () => {
+    const { result } = renderHook(() => useChat({ token: "test-token" }));
+
+    act(() => {
+      result.current.sendMessage("Hi");
     });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      lastWs!.onerror?.({});
+    });
+
+    await waitFor(() => {
+      expect(result.current.error).toBe("Connection error");
+      expect(result.current.isStreaming).toBe(false);
+    });
+  });
+
+  it("sets error on WebSocket onclose with non-1000 code", async () => {
+    const { result } = renderHook(() => useChat({ token: "test-token" }));
+
+    act(() => {
+      result.current.sendMessage("Hi");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      lastWs!.onclose?.({ code: 1006 } as CloseEvent);
+    });
+
+    await waitFor(() => {
+      expect(result.current.error).toBe("Connection lost");
+      expect(result.current.isStreaming).toBe(false);
+    });
+  });
+
+  it("does not set error on normal close (code 1000)", async () => {
+    const { result } = renderHook(() => useChat({ token: "test-token" }));
+
+    act(() => {
+      result.current.sendMessage("Hi");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "text", text: "Hello" },
+        { type: "done" },
+      ]);
+    });
+
+    await waitFor(() => {
+      expect(result.current.isStreaming).toBe(false);
+    });
+
+    // Simulate normal close after done
+    act(() => {
+      lastWs!.onclose?.({ code: 1000 } as CloseEvent);
+    });
+
+    expect(result.current.error).toBeNull();
+  });
+
+  it("retry resends the last message", async () => {
+    mockGetSessionUrl.mockRejectedValueOnce(new Error("Server error"));
 
     const { result } = renderHook(() => useChat({ token: "test-token" }));
 
-    // Send initial message — will fail
+    // Send initial message — will fail at session URL fetch
     act(() => {
       result.current.sendMessage("Hello");
     });
@@ -214,9 +270,21 @@ describe("useChat", () => {
       expect(result.current.isStreaming).toBe(false);
     });
 
+    // Reset mock for retry
+    mockGetSessionUrl.mockResolvedValue({ ...DEFAULT_SESSION });
+
     // Retry
     act(() => {
       result.current.retry();
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "text", text: "Recovered" },
+        { type: "done" },
+      ]);
     });
 
     await waitFor(() => {
@@ -224,7 +292,6 @@ describe("useChat", () => {
       expect(result.current.error).toBeNull();
     });
 
-    // After retry, should have user + assistant messages
     expect(result.current.messages).toHaveLength(2);
     expect(result.current.messages[0]).toEqual({
       role: "user",
@@ -234,15 +301,9 @@ describe("useChat", () => {
       role: "assistant",
       content: "Recovered",
     });
-
-    // fetch was called twice
-    expect(globalThis.fetch).toHaveBeenCalledTimes(2);
   });
 
-  it("sends correct request body with sessionId and planId", async () => {
-    const chunks = ["event: done\ndata: {}\n\n"];
-    globalThis.fetch = mockFetchSSE(chunks);
-
+  it("sends correct JSON payload over WebSocket", async () => {
     const { result } = renderHook(() =>
       useChat({ token: "tok", sessionId: "sess-1", planId: "plan-1" }),
     );
@@ -251,58 +312,137 @@ describe("useChat", () => {
       result.current.sendMessage("Refine plan");
     });
 
-    await waitFor(() => {
-      expect(result.current.isStreaming).toBe(false);
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    // Trigger onopen to send the message
+    act(() => {
+      lastWs!.onopen?.({});
     });
 
-    expect(globalThis.fetch).toHaveBeenCalledWith(
-      "/api/chat",
-      expect.objectContaining({
-        method: "POST",
-        headers: expect.objectContaining({
-          Authorization: "Bearer tok",
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify({
-          message: "Refine plan",
-          sessionId: "sess-1",
-          planId: "plan-1",
-        }),
+    expect(lastWs!.send).toHaveBeenCalledWith(
+      JSON.stringify({
+        text: "Refine plan",
       }),
     );
   });
 
   it("does not send when already streaming", async () => {
-    // Create a stream that never completes
-    const neverEndingStream = new ReadableStream<Uint8Array>({
-      start() {
-        // intentionally never close
-      },
-    });
-    globalThis.fetch = vi.fn().mockResolvedValue({
-      ok: true,
-      status: 200,
-      body: neverEndingStream,
-      text: () => Promise.resolve(""),
-    });
-
     const { result } = renderHook(() => useChat({ token: "test-token" }));
 
     act(() => {
       result.current.sendMessage("First");
     });
 
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
     // Should be streaming now
-    await waitFor(() => {
-      expect(result.current.isStreaming).toBe(true);
-    });
+    expect(result.current.isStreaming).toBe(true);
 
     // Try to send another message — should be ignored
     act(() => {
       result.current.sendMessage("Second");
     });
 
-    // fetch should only have been called once
-    expect(globalThis.fetch).toHaveBeenCalledTimes(1);
+    // getSessionUrl should only have been called once
+    expect(mockGetSessionUrl).toHaveBeenCalledTimes(1);
+  });
+
+  it("reuses session URL if not expired", async () => {
+    const { result } = renderHook(() => useChat({ token: "test-token" }));
+
+    // First message
+    act(() => {
+      result.current.sendMessage("First");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "text", text: "Reply 1" },
+        { type: "done" },
+      ]);
+    });
+
+    await waitFor(() => {
+      expect(result.current.isStreaming).toBe(false);
+    });
+
+    // Second message — should reuse session URL
+    act(() => {
+      result.current.sendMessage("Second");
+    });
+
+    await waitFor(() => {
+      expect(result.current.messages).toHaveLength(4);
+    });
+
+    // getSessionUrl should only have been called once (reused)
+    expect(mockGetSessionUrl).toHaveBeenCalledTimes(1);
+  });
+
+  it("requests new session URL when expired", async () => {
+    // Return an already-expired session
+    mockGetSessionUrl.mockResolvedValueOnce({
+      url: "wss://example.com/ws-old",
+      sessionId: "sess-1",
+      expiresAt: Math.floor(Date.now() / 1000) - 10, // expired
+    });
+
+    const { result } = renderHook(() => useChat({ token: "test-token" }));
+
+    // First message
+    act(() => {
+      result.current.sendMessage("First");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    act(() => {
+      deliverFrames(lastWs!, [
+        { type: "text", text: "Reply 1" },
+        { type: "done" },
+      ]);
+    });
+
+    await waitFor(() => {
+      expect(result.current.isStreaming).toBe(false);
+    });
+
+    // Reset mock for second call with fresh URL
+    mockGetSessionUrl.mockResolvedValueOnce({
+      ...DEFAULT_SESSION,
+      url: "wss://example.com/ws-new",
+    });
+
+    // Second message — URL is expired, should request new one
+    act(() => {
+      result.current.sendMessage("Second");
+    });
+
+    await waitFor(() => {
+      expect(mockGetSessionUrl).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  it("calls getSessionUrl with sessionId and planId", async () => {
+    renderHook(() =>
+      useChat({ token: "tok", sessionId: "my-sess", planId: "my-plan" }),
+    );
+
+    const { result } = renderHook(() =>
+      useChat({ token: "tok", sessionId: "my-sess", planId: "my-plan" }),
+    );
+
+    act(() => {
+      result.current.sendMessage("Hello");
+    });
+
+    await waitFor(() => expect(lastWs).not.toBeNull());
+
+    expect(mockGetSessionUrl).toHaveBeenCalledWith(
+      { sessionId: "my-sess", planId: "my-plan" },
+      "tok",
+    );
   });
 });

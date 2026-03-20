@@ -1,106 +1,16 @@
-import { useState, useRef, useEffect, type FormEvent } from "react";
-import { useChat, type ChatMessage } from "@/hooks/useChat";
+import { useRef, useEffect } from "react";
+import Markdown from "react-markdown";
+import {
+  MainContainer,
+  ChatContainer,
+  MessageList,
+  Message,
+  MessageInput,
+  TypingIndicator,
+} from "@chatscope/chat-ui-kit-react";
+import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import { useChat } from "@/hooks/useChat";
 import { useAuth } from "@/contexts/AuthContext";
-
-/* ------------------------------------------------------------------ */
-/*  MessageBubble                                                      */
-/* ------------------------------------------------------------------ */
-
-function MessageBubble({ message }: { message: ChatMessage }) {
-  const isUser = message.role === "user";
-  return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-3`}>
-      <div
-        className={`max-w-[80%] rounded-lg px-4 py-2 text-sm whitespace-pre-wrap ${
-          isUser
-            ? "bg-primary text-primary-foreground"
-            : "bg-muted text-foreground"
-        }`}
-      >
-        {message.content}
-        {!isUser && message.content === "" && (
-          <span className="inline-block animate-pulse">▍</span>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  MessageList                                                        */
-/* ------------------------------------------------------------------ */
-
-function MessageList({ messages }: { messages: ChatMessage[] }) {
-  const bottomRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
-  if (messages.length === 0) {
-    return (
-      <div className="flex-1 flex items-center justify-center text-muted-foreground text-sm">
-        Start a conversation to create a learning plan.
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex-1 overflow-y-auto p-4">
-      {messages.map((msg, i) => (
-        <MessageBubble key={i} message={msg} />
-      ))}
-      <div ref={bottomRef} />
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  MessageInput                                                       */
-/* ------------------------------------------------------------------ */
-
-function MessageInput({
-  onSend,
-  disabled,
-}: {
-  onSend: (message: string) => void;
-  disabled: boolean;
-}) {
-  const [text, setText] = useState("");
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const trimmed = text.trim();
-    if (!trimmed || disabled) return;
-    onSend(trimmed);
-    setText("");
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="flex gap-2 border-t p-4">
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Type your message…"
-        disabled={disabled}
-        className="flex-1 rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
-        aria-label="Chat message"
-      />
-      <button
-        type="submit"
-        disabled={disabled || !text.trim()}
-        className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        Send
-      </button>
-    </form>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  ChatPanel                                                          */
-/* ------------------------------------------------------------------ */
 
 export interface ChatPanelProps {
   sessionId?: string;
@@ -127,26 +37,84 @@ export default function ChatPanel({
     lastNotifiedRef.current = planEvents.length;
   }, [planEvents, onPlanEvent]);
 
+  const handleSend = (_innerHTML: string, textContent: string) => {
+    const trimmed = textContent.trim();
+    if (trimmed) {
+      sendMessage(trimmed);
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full border rounded-lg bg-white">
-      <MessageList messages={messages} />
+    <div style={{ height: "100%", position: "relative" }}>
+      <MainContainer>
+        <ChatContainer>
+          <MessageList
+            typingIndicator={
+              isStreaming ? (
+                <TypingIndicator content="Assistant is typing" />
+              ) : undefined
+            }
+          >
+            {messages.map((msg, i) => (
+              <Message
+                key={i}
+                model={{
+                  message: msg.role === "user" ? msg.content : "",
+                  direction: msg.role === "user" ? "outgoing" : "incoming",
+                  position: "single",
+                }}
+              >
+                {msg.role === "assistant" && (
+                  <Message.CustomContent>
+                    <Markdown>{msg.content}</Markdown>
+                  </Message.CustomContent>
+                )}
+              </Message>
+            ))}
+          </MessageList>
+
+          <MessageInput
+            placeholder="Type your message…"
+            onSend={handleSend}
+            disabled={isStreaming}
+            attachButton={false}
+          />
+        </ChatContainer>
+      </MainContainer>
 
       {error && (
         <div
           role="alert"
-          className="mx-4 mb-2 flex items-center justify-between rounded-md bg-destructive/10 px-4 py-2 text-sm text-destructive"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "8px 16px",
+            backgroundColor: "#fef2f2",
+            color: "#dc2626",
+            fontSize: "0.875rem",
+            borderTop: "1px solid #fecaca",
+          }}
         >
           <span>{error}</span>
           <button
             onClick={retry}
-            className="ml-3 rounded-md bg-destructive px-3 py-1 text-xs font-medium text-destructive-foreground hover:bg-destructive/90"
+            style={{
+              marginLeft: "12px",
+              padding: "4px 12px",
+              backgroundColor: "#dc2626",
+              color: "#fff",
+              border: "none",
+              borderRadius: "4px",
+              fontSize: "0.75rem",
+              fontWeight: 500,
+              cursor: "pointer",
+            }}
           >
             Retry
           </button>
         </div>
       )}
-
-      <MessageInput onSend={sendMessage} disabled={isStreaming} />
     </div>
   );
 }

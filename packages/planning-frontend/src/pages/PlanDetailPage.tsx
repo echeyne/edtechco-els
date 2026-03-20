@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { getPlan, deletePlan, ApiError } from "@/lib/api";
 import PlanDisplay from "@/components/PlanDisplay";
 import ChatPanel from "@/components/ChatPanel";
 import type { PlanDetail } from "@/types";
@@ -21,17 +22,13 @@ export default function PlanDetailPage() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`/api/plans/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (res.status === 404) {
+      const data = await getPlan(id, token);
+      setPlan(data);
+    } catch (err) {
+      if (err instanceof ApiError && err.status === 404) {
         setError("Plan not found");
         return;
       }
-      if (!res.ok) throw new Error(`Failed to load plan (${res.status})`);
-      const data: PlanDetail = await res.json();
-      setPlan(data);
-    } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load plan");
     } finally {
       setLoading(false);
@@ -50,11 +47,7 @@ export default function PlanDetailPage() {
     if (!confirmed) return;
     setDeleting(true);
     try {
-      const res = await fetch(`/api/plans/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error(`Failed to delete plan (${res.status})`);
+      await deletePlan(id, token);
       navigate("/planning");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to delete plan");

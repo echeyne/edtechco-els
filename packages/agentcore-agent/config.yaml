@@ -1,0 +1,128 @@
+# AgentCore Planning Agent Configuration
+# Defines the model, instruction prompt, tool schemas, and guardrail for the
+# early learning planning assistant deployed to AgentCore Runtime.
+
+agent:
+  model: anthropic.claude-3-5-sonnet-20241022-v2:0
+  instruction_prompt_file: ../../infra/bedrock/agent-instruction-prompt.txt
+
+  guardrail:
+    identifier: ${GUARDRAIL_ID}
+    version: ${GUARDRAIL_VERSION}
+
+  tools:
+    # --- StandardsQuery action group ---
+    - name: getAvailableStates
+      description: >-
+        Return the list of distinct US states that have early learning
+        standards data in the database.
+      parameters: []
+
+    - name: getAgeBands
+      description: >-
+        Return the available age bands for a given state's early learning
+        standards.
+      parameters:
+        - name: state
+          type: string
+          required: true
+          description: The state code to retrieve age bands for.
+
+    - name: getIndicators
+      description: >-
+        Return learning indicators for a given state and age band, including
+        indicator code, description, domain, strand, and sub-strand.
+      parameters:
+        - name: state
+          type: string
+          required: true
+          description: The state code to filter indicators by.
+        - name: age_band
+          type: string
+          required: true
+          description: The age band to filter indicators by.
+
+    # --- PlanManagement action group ---
+    - name: createPlan
+      description: >-
+        Create a new learning plan for a child and persist it to the database.
+        Returns the created plan with its ID.
+      parameters:
+        - name: user_id
+          type: string
+          required: true
+          description: The authenticated user's ID (from session attributes).
+        - name: child_name
+          type: string
+          required: true
+          description: The child's first name.
+        - name: child_age
+          type: string
+          required: true
+          description: The child's age or age band.
+        - name: state
+          type: string
+          required: true
+          description: The state code for the learning standards.
+        - name: duration
+          type: string
+          required: true
+          description: The plan duration (e.g. "1 week", "4 weeks").
+        - name: content
+          type: object
+          required: true
+          description: >-
+            The structured plan content as a JSON object with sections,
+            activities, and indicator references.
+        - name: interests
+          type: string
+          required: false
+          description: The child's interests (optional).
+        - name: concerns
+          type: string
+          required: false
+          description: The parent's areas of concern (optional).
+
+    - name: updatePlan
+      description: >-
+        Update an existing plan's content. Only the plan owner can update it.
+        Returns the updated plan.
+      parameters:
+        - name: plan_id
+          type: string
+          required: true
+          description: The ID of the plan to update.
+        - name: user_id
+          type: string
+          required: true
+          description: The authenticated user's ID (from session attributes).
+        - name: content
+          type: object
+          required: true
+          description: The updated plan content as a JSON object.
+
+    - name: getPlan
+      description: >-
+        Retrieve a plan by ID. Only the plan owner can access it.
+      parameters:
+        - name: plan_id
+          type: string
+          required: true
+          description: The ID of the plan to retrieve.
+        - name: user_id
+          type: string
+          required: true
+          description: The authenticated user's ID (from session attributes).
+
+    - name: deletePlan
+      description: >-
+        Delete a plan by ID. Only the plan owner can delete it.
+      parameters:
+        - name: plan_id
+          type: string
+          required: true
+          description: The ID of the plan to delete.
+        - name: user_id
+          type: string
+          required: true
+          description: The authenticated user's ID (from session attributes).

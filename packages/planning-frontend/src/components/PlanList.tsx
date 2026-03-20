@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { getPlans } from "@/lib/api";
 import type { PlanSummary } from "@/types";
 
 /* ------------------------------------------------------------------ */
@@ -81,11 +82,7 @@ export default function PlanList({ onStartNew, refreshKey }: PlanListProps) {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/plans", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!res.ok) throw new Error(`Failed to load plans (${res.status})`);
-      const data: PlanSummary[] = await res.json();
+      const data = await getPlans(token);
       setPlans(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load plans");

@@ -55,12 +55,12 @@ install_dependencies() {
     if command -v docker &> /dev/null; then
         print_message "$YELLOW" "Using Docker to build Lambda-compatible packages..."
         
-        # Use Docker with Amazon Linux 2023 (matches Lambda Python 3.11 runtime)
+        # Use Docker with Amazon Linux 2023 (matches Lambda Python 3.13 runtime)
         # Override entrypoint to run pip directly
         docker run --rm \
             --entrypoint pip \
             -v "$(pwd)/$PACKAGE_DIR:/var/task" \
-            public.ecr.aws/lambda/python:3.11 \
+            public.ecr.aws/lambda/python:3.13 \
             install \
                 boto3 \
                 pydantic \
@@ -77,7 +77,7 @@ install_dependencies() {
         pip install --target "$PACKAGE_DIR" \
             --platform manylinux2014_x86_64 \
             --implementation cp \
-            --python-version 3.11 \
+            --python-version 3.13 \
             --only-binary=:all: \
             boto3 \
             pydantic \

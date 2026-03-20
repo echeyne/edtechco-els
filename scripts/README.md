@@ -35,7 +35,7 @@ Automated deployment script for the ELS Pipeline infrastructure with country cod
 **Requirements:**
 
 - AWS CLI installed and configured
-- Python 3.9+
+- Python 3.13+
 - jq (for JSON parsing)
 - Valid AWS credentials with deployment permissions
 

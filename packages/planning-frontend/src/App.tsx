@@ -5,6 +5,7 @@ import LandingPage from "@/pages/LandingPage";
 import AboutPage from "@/pages/AboutPage";
 import PlanningPage from "@/pages/PlanningPage";
 import PlanDetailPage from "@/pages/PlanDetailPage";
+import LoginPage from "@/pages/LoginPage";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
         <main className="container py-6">
           <Routes>
             <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route
               path="/planning"

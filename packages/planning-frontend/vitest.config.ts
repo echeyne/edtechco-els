@@ -7,6 +7,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      "@chatscope/chat-ui-kit-react/dist/styles/default/styles.min.css":
+        path.resolve(__dirname, "./src/__mocks__/empty.css"),
     },
   },
   test: {
@@ -14,5 +16,8 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: ["./src/test-setup.ts"],
     css: true,
+    env: {
+      VITE_API_BASE: "",
+    },
   },
 });

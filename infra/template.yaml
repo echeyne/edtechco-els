@@ -598,7 +598,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-ingester-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.ingestion_handler
       Role: !GetAtt IngesterLambdaRole.Arn
       Timeout: 60
@@ -623,7 +623,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-text-extractor-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.extraction_handler
       Role: !GetAtt TextExtractorLambdaRole.Arn
       Timeout: 300
@@ -647,7 +647,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-structure-detector-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.detection_handler
       Role: !GetAtt StructureDetectorLambdaRole.Arn
       Timeout: 900
@@ -672,7 +672,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-hierarchy-parser-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.parsing_handler
       Role: !GetAtt HierarchyParserLambdaRole.Arn
       Timeout: 900
@@ -695,7 +695,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-prepare-detection-batches-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.prepare_detection_batches_handler
       Role: !GetAtt DetectionBatchPreparerLambdaRole.Arn
       Timeout: 60
@@ -719,7 +719,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-detect-batch-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.detect_batch_handler
       Role: !GetAtt DetectionBatchProcessorLambdaRole.Arn
       Timeout: 600
@@ -745,7 +745,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-merge-detection-results-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.merge_detection_results_handler
       Role: !GetAtt DetectionMergerLambdaRole.Arn
       Timeout: 120
@@ -769,7 +769,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-prepare-parse-batches-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.prepare_parse_batches_handler
       Role: !GetAtt ParseBatchPreparerLambdaRole.Arn
       Timeout: 60
@@ -793,7 +793,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-parse-batch-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.parse_batch_handler
       Role: !GetAtt ParseBatchProcessorLambdaRole.Arn
       Timeout: 600
@@ -817,7 +817,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-merge-parse-results-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.merge_parse_results_handler
       Role: !GetAtt ParseMergerLambdaRole.Arn
       Timeout: 120
@@ -840,7 +840,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-validator-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.validation_handler
       Role: !GetAtt ValidatorLambdaRole.Arn
       Timeout: 180
@@ -863,7 +863,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-persistence-${EnvironmentName}"
-      Runtime: python3.11
+      Runtime: python3.13
       Handler: els_pipeline.handlers.persistence_handler
       Role: !GetAtt PersistenceLambdaRole.Arn
       Timeout: 180

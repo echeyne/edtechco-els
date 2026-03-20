@@ -12,11 +12,16 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@aws-sdk/client-bedrock-agent-runtime": "^3.1011.0",
+    "@aws-crypto/sha256-js": "^5.2.0",
+    "@aws-sdk/client-bedrock-agentcore": "^3.1011.0",
     "@aws-sdk/client-rds-data": "^3.1011.0",
     "@aws-sdk/client-secrets-manager": "^3.1008.0",
+    "@aws-sdk/credential-provider-node": "^3.972.0",
     "@descope/node-sdk": "^1.10.0",
     "@els/shared": "workspace:*",
+    "@smithy/protocol-http": "^5.0.0",
+    "@smithy/signature-v4": "^5.0.0",
+    "@smithy/types": "^4.0.0",
     "hono": "^4.7.0",
     "zod": "^3.24.0"
   },

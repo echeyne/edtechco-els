@@ -111,7 +111,9 @@ describe("PlanList", () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
       ok: false,
       status: 500,
-    } as Response);
+      statusText: "Internal Server Error",
+      text: () => Promise.resolve("Failed to load plans (500)"),
+    } as unknown as Response);
 
     renderPlanList();
 

@@ -3,9 +3,8 @@ Transform: AWS::Serverless-2016-10-31
 Description: |
   ELS Parent Planning Tool Infrastructure
   - Frontend: S3 + CloudFront (plan.<domain>.com)
-  - Planning API: Lambda + API Gateway (Hono, SSE streaming)
-  - Action Group Lambda: Bedrock Agent DB read/write
-  - Bedrock Agent with guardrails and action groups
+  - Planning API: Lambda + API Gateway (Hono)
+  - Bedrock Guardrails for content filtering
 
 Parameters:
   EnvironmentName:
@@ -32,9 +31,14 @@ Parameters:
     Type: String
     Default: us.anthropic.claude-sonnet-4-6-v1
     Description: Bedrock foundation model ID for the planning agent
+  AgentCoreRuntimeArn:
+    Type: String
+    Default: ""
+    Description: AgentCore Runtime ARN (set after CLI deployment, e.g. arn:aws:bedrock-agentcore:REGION:ACCOUNT:runtime/RUNTIME_ID)
 
 Conditions:
   HasCustomDomain: !Not [!Equals [!Ref CustomDomainName, ""]]
+  HasAgentCoreRuntimeArn: !Not [!Equals [!Ref AgentCoreRuntimeArn, ""]]
 
 Resources:
   # ─── Frontend: S3 bucket for static assets ───
@@ -154,16 +158,19 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Policies:
-        - PolicyName: BedrockAgentInvoke
+        - PolicyName: AgentCorePresignedUrl
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
               - Effect: Allow
                 Action:
-                  - bedrock:InvokeAgent
+                  - bedrock-agentcore:GeneratePresignedUrl
+                  - bedrock-agentcore:InvokeAgent
                 Resource:
-                  - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent/*"
-                  - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent-alias/*"
+                  - !If
+                    - HasAgentCoreRuntimeArn
+                    - !Ref AgentCoreRuntimeArn
+                    - !Sub "arn:aws:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:runtime/*"
         - PolicyName: RdsDataReadOnly
           PolicyDocument:
             Version: "2012-10-17"
@@ -191,7 +198,7 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       FunctionName: !Sub "els-planning-api-${EnvironmentName}"
-      Runtime: nodejs20.x
+      Runtime: nodejs22.x
       Handler: index.handler
       Role: !GetAtt PlanningApiLambdaRole.Arn
       Timeout: 120
@@ -205,8 +212,7 @@ Resources:
             Fn::Sub: "${PipelineStackName}-DatabaseSecretArn"
           DB_NAME: els_pipeline
           DESCOPE_PROJECT_ID: !Ref DescopeProjectId
-          BEDROCK_AGENT_ID: !Ref PlanningBedrockAgent
-          BEDROCK_AGENT_ALIAS_ID: !GetAtt PlanningBedrockAgentAlias.AgentAliasId
+          AGENTCORE_RUNTIME_ARN: !Ref AgentCoreRuntimeArn
       Code:
         ZipFile: |
           exports.handler = async () => ({ statusCode: 200, body: 'placeholder' });
@@ -216,7 +222,7 @@ Resources:
         - Key: Project
           Value: ELS-Planning
 
-  # ─── Planning API: API Gateway (HTTP API with streaming) ───
+  # ─── Planning API: API Gateway (HTTP API) ───
   PlanningApiGateway:
     Type: AWS::ApiGatewayV2::Api
     Properties:
@@ -253,22 +259,46 @@ Resources:
       Principal: apigateway.amazonaws.com
       SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${PlanningApiGateway}/*"
 
-  # ─── Action Group Lambda ───
-  ActionGroupLambdaRole:
+  # ─── AgentCore Runtime ───
+  # The AgentCore Runtime agent is deployed via the AgentCore CLI
+  # (`bedrock-agentcore deploy`) rather than CloudFormation, as there is no
+  # native CloudFormation resource type for AgentCore Runtime yet.
+  # The WaitConditionHandle below is a no-op placeholder so that the template
+  # can reference the agent's IAM role and output the agent ID (supplied via
+  # the AgentCoreAgentId parameter after CLI deployment).
+
+  PlanningAgentCoreRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub "els-planning-action-group-role-${EnvironmentName}"
+      RoleName: !Sub "els-planning-agentcore-role-${EnvironmentName}"
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
         Statement:
           - Effect: Allow
             Principal:
-              Service: lambda.amazonaws.com
+              Service: bedrock.amazonaws.com
             Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       Policies:
-        - PolicyName: RdsDataReadWrite
+        - PolicyName: BedrockModelInvocation
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:InvokeModelWithResponseStream
+                Resource:
+                  - !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/${BedrockAgentModelId}"
+        - PolicyName: BedrockGuardrailAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:ApplyGuardrail
+                Resource:
+                  - !GetAtt PlanningBedrockGuardrail.GuardrailArn
+        - PolicyName: RdsDataApiAccess
           PolicyDocument:
             Version: "2012-10-17"
             Statement:
@@ -276,9 +306,6 @@ Resources:
                 Action:
                   - rds-data:ExecuteStatement
                   - rds-data:BatchExecuteStatement
-                  - rds-data:BeginTransaction
-                  - rds-data:CommitTransaction
-                  - rds-data:RollbackTransaction
                 Resource:
                   - !ImportValue
                     Fn::Sub: "${PipelineStackName}-DatabaseClusterArn"
@@ -294,80 +321,14 @@ Resources:
         - Key: Project
           Value: ELS-Planning
 
-  ActionGroupLambdaFunction:
-    Type: AWS::Lambda::Function
-    Properties:
-      FunctionName: !Sub "els-planning-action-group-${EnvironmentName}"
-      Runtime: nodejs20.x
-      Handler: index.handler
-      Role: !GetAtt ActionGroupLambdaRole.Arn
-      Timeout: 30
-      MemorySize: 512
-      Environment:
-        Variables:
-          ENVIRONMENT: !Ref EnvironmentName
-          DB_CLUSTER_ARN: !ImportValue
-            Fn::Sub: "${PipelineStackName}-DatabaseClusterArn"
-          DB_SECRET_ARN: !ImportValue
-            Fn::Sub: "${PipelineStackName}-DatabaseSecretArn"
-          DB_NAME: els_pipeline
-      Code:
-        ZipFile: |
-          exports.handler = async () => ({ statusCode: 200, body: 'placeholder' });
-      Tags:
-        - Key: Environment
-          Value: !Ref EnvironmentName
-        - Key: Project
-          Value: ELS-Planning
+  PlanningAgentCoreRuntime:
+    # No-op placeholder — the actual AgentCore Runtime agent is deployed via
+    # the AgentCore CLI: `bedrock-agentcore deploy`
+    # After deployment, set the AgentCoreAgentId parameter to the agent ID
+    # returned by the CLI so that the Lambda and outputs reference it.
+    Type: AWS::CloudFormation::WaitConditionHandle
 
-  ActionGroupLambdaBedrockPermission:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !Ref ActionGroupLambdaFunction
-      Action: lambda:InvokeFunction
-      Principal: bedrock.amazonaws.com
-      SourceArn: !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:agent/*"
-
-  # ─── Bedrock Agent ───
-  PlanningBedrockAgentRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub "els-planning-agent-role-${EnvironmentName}"
-      AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: bedrock.amazonaws.com
-            Action: sts:AssumeRole
-            Condition:
-              StringEquals:
-                aws:SourceAccount: !Ref "AWS::AccountId"
-      Policies:
-        - PolicyName: BedrockModelInvoke
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - bedrock:InvokeModel
-                Resource:
-                  - !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/${BedrockAgentModelId}"
-        - PolicyName: BedrockGuardrailAccess
-          PolicyDocument:
-            Version: "2012-10-17"
-            Statement:
-              - Effect: Allow
-                Action:
-                  - bedrock:ApplyGuardrail
-                Resource:
-                  - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:guardrail/*"
-      Tags:
-        - Key: Environment
-          Value: !Ref EnvironmentName
-        - Key: Project
-          Value: ELS-Planning
-
+  # ─── Bedrock Guardrails ───
   PlanningBedrockGuardrail:
     Type: AWS::Bedrock::Guardrail
     Properties:
@@ -489,309 +450,6 @@ Resources:
       GuardrailIdentifier: !Ref PlanningBedrockGuardrail
       Description: !Sub "Planning guardrail version - ${EnvironmentName}"
 
-  PlanningBedrockAgent:
-    Type: AWS::Bedrock::Agent
-    Properties:
-      AgentName: !Sub "els-planning-agent-${EnvironmentName}"
-      Description: "Parent Planning Tool conversational agent for creating personalized early learning plans"
-      AgentResourceRoleArn: !GetAtt PlanningBedrockAgentRole.Arn
-      FoundationModel: !Ref BedrockAgentModelId
-      IdleSessionTTLInSeconds: 1800
-      Instruction: |
-        You are a friendly, supportive early learning planning assistant that helps parents create personalized learning plans for their children. You guide parents through a structured conversation to collect information, then generate evidence-based activity plans grounded in real state-specific early learning standards.
-
-        You have access to two action groups:
-        - StandardsQuery: Query the standards database for available states, age bands, and learning indicators.
-        - PlanManagement: Create, update, retrieve, and delete learning plans.
-
-        Follow the multi-step planning workflow: collect child profile (name, state, age), gather interests and concerns, ask for plan duration, confirm inputs, query standards via action group, generate plan, and persist plan via action group.
-
-        Use ONLY indicators returned by the StandardsQuery action group. NEVER fabricate indicator codes or descriptions. Reference specific indicator codes in each activity. If a state/age combination has no data, inform the parent and suggest alternatives.
-
-        Only use the child's first name. Do not ask for or store any other PII. Do not provide medical advice, developmental diagnoses, or therapeutic recommendations. Stay on topic — early learning plan creation only.
-      GuardrailConfiguration:
-        GuardrailIdentifier: !Ref PlanningBedrockGuardrail
-        GuardrailVersion: !GetAtt PlanningBedrockGuardrailVersion.Version
-      ActionGroups:
-        - ActionGroupName: StandardsQuery
-          Description: "Query the standards database for available states, age bands, and learning indicators"
-          ActionGroupExecutor:
-            Lambda: !GetAtt ActionGroupLambdaFunction.Arn
-          ApiSchema:
-            Payload: |
-              {
-                "openapi": "3.0.3",
-                "info": {
-                  "title": "StandardsQuery Action Group",
-                  "description": "Query the standards database for available states, age bands, and learning indicators",
-                  "version": "1.0.0"
-                },
-                "paths": {
-                  "/getAvailableStates": {
-                    "get": {
-                      "operationId": "getAvailableStates",
-                      "summary": "Get available states with standards data",
-                      "description": "Returns a list of all state codes that have early learning standards data available in the database.",
-                      "responses": {
-                        "200": {
-                          "description": "List of state codes",
-                          "content": {
-                            "application/json": {
-                              "schema": {
-                                "type": "object",
-                                "properties": {
-                                  "states": {
-                                    "type": "array",
-                                    "items": { "type": "string" },
-                                    "description": "Array of state abbreviation codes"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "/getAgeBands": {
-                    "get": {
-                      "operationId": "getAgeBands",
-                      "summary": "Get age bands for a state",
-                      "description": "Returns the available age bands for a given state's early learning standards.",
-                      "parameters": [
-                        {
-                          "name": "state",
-                          "in": "query",
-                          "required": true,
-                          "description": "Two-letter state abbreviation code (e.g. OH, CA)",
-                          "schema": { "type": "string" }
-                        }
-                      ],
-                      "responses": {
-                        "200": {
-                          "description": "List of age bands",
-                          "content": {
-                            "application/json": {
-                              "schema": {
-                                "type": "object",
-                                "properties": {
-                                  "ageBands": {
-                                    "type": "array",
-                                    "items": { "type": "string" },
-                                    "description": "Array of age band labels"
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  },
-                  "/getIndicators": {
-                    "get": {
-                      "operationId": "getIndicators",
-                      "summary": "Get indicators for a state and age band",
-                      "description": "Returns learning indicators for a specific state and age band combination.",
-                      "parameters": [
-                        {
-                          "name": "state",
-                          "in": "query",
-                          "required": true,
-                          "description": "Two-letter state abbreviation code (e.g. OH, CA)",
-                          "schema": { "type": "string" }
-                        },
-                        {
-                          "name": "ageBand",
-                          "in": "query",
-                          "required": true,
-                          "description": "Age band label to filter indicators by (e.g. Birth-12 Months)",
-                          "schema": { "type": "string" }
-                        }
-                      ],
-                      "responses": {
-                        "200": {
-                          "description": "List of indicators",
-                          "content": {
-                            "application/json": {
-                              "schema": {
-                                "type": "object",
-                                "properties": {
-                                  "indicators": {
-                                    "type": "array",
-                                    "description": "Array of learning indicator objects",
-                                    "items": {
-                                      "type": "object",
-                                      "properties": {
-                                        "code": { "type": "string", "description": "Unique indicator code" },
-                                        "description": { "type": "string", "description": "Indicator description text" },
-                                        "domain_name": { "type": "string", "description": "Learning domain name" },
-                                        "strand_name": { "type": "string", "description": "Strand within the domain" },
-                                        "sub_strand_name": { "type": "string", "description": "Sub-strand within the strand" },
-                                        "age_band": { "type": "string", "description": "Age band this indicator applies to" }
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-        - ActionGroupName: PlanManagement
-          Description: "Create, update, retrieve, and delete learning plans"
-          ActionGroupExecutor:
-            Lambda: !GetAtt ActionGroupLambdaFunction.Arn
-          ApiSchema:
-            Payload: |
-              {
-                "openapi": "3.0.3",
-                "info": {
-                  "title": "PlanManagement Action Group",
-                  "description": "Create, update, retrieve, and delete learning plans",
-                  "version": "1.0.0"
-                },
-                "paths": {
-                  "/createPlan": {
-                    "post": {
-                      "operationId": "createPlan",
-                      "summary": "Create a new learning plan",
-                      "description": "Creates a new personalized learning plan for a child and persists it to the database.",
-                      "requestBody": {
-                        "required": true,
-                        "content": {
-                          "application/json": {
-                            "schema": {
-                              "type": "object",
-                              "required": ["userId", "childName", "childAge", "state", "duration", "content"],
-                              "properties": {
-                                "userId": { "type": "string", "description": "Authenticated user ID of the parent" },
-                                "childName": { "type": "string", "description": "First name of the child" },
-                                "childAge": { "type": "string", "description": "Age of the child (e.g. 3 years)" },
-                                "state": { "type": "string", "description": "Two-letter state abbreviation code" },
-                                "interests": { "type": "string", "description": "Child interests noted by the parent" },
-                                "concerns": { "type": "string", "description": "Parent concerns about the child's development" },
-                                "duration": { "type": "string", "description": "Plan duration (e.g. 1 week, 2 weeks)" },
-                                "content": { "type": "string", "description": "Full generated plan content in markdown format" }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "responses": {
-                        "201": { "description": "Plan created successfully" }
-                      }
-                    }
-                  },
-                  "/updatePlan": {
-                    "put": {
-                      "operationId": "updatePlan",
-                      "summary": "Update an existing learning plan",
-                      "description": "Updates the content of an existing learning plan.",
-                      "parameters": [
-                        {
-                          "name": "planId",
-                          "in": "query",
-                          "required": true,
-                          "description": "Unique identifier of the plan to update",
-                          "schema": { "type": "string" }
-                        },
-                        {
-                          "name": "userId",
-                          "in": "query",
-                          "required": true,
-                          "description": "Authenticated user ID of the plan owner",
-                          "schema": { "type": "string" }
-                        }
-                      ],
-                      "requestBody": {
-                        "required": true,
-                        "content": {
-                          "application/json": {
-                            "schema": {
-                              "type": "object",
-                              "required": ["content"],
-                              "properties": {
-                                "content": { "type": "string", "description": "Updated plan content in markdown format" }
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "responses": {
-                        "200": { "description": "Plan updated successfully" }
-                      }
-                    }
-                  },
-                  "/getPlan": {
-                    "get": {
-                      "operationId": "getPlan",
-                      "summary": "Retrieve a learning plan",
-                      "description": "Retrieves a specific learning plan by its ID for the given user.",
-                      "parameters": [
-                        {
-                          "name": "planId",
-                          "in": "query",
-                          "required": true,
-                          "description": "Unique identifier of the plan to retrieve",
-                          "schema": { "type": "string" }
-                        },
-                        {
-                          "name": "userId",
-                          "in": "query",
-                          "required": true,
-                          "description": "Authenticated user ID of the plan owner",
-                          "schema": { "type": "string" }
-                        }
-                      ],
-                      "responses": {
-                        "200": { "description": "Plan details returned successfully" }
-                      }
-                    }
-                  },
-                  "/deletePlan": {
-                    "delete": {
-                      "operationId": "deletePlan",
-                      "summary": "Delete a learning plan",
-                      "description": "Permanently deletes a learning plan by its ID for the given user.",
-                      "parameters": [
-                        {
-                          "name": "planId",
-                          "in": "query",
-                          "required": true,
-                          "description": "Unique identifier of the plan to delete",
-                          "schema": { "type": "string" }
-                        },
-                        {
-                          "name": "userId",
-                          "in": "query",
-                          "required": true,
-                          "description": "Authenticated user ID of the plan owner",
-                          "schema": { "type": "string" }
-                        }
-                      ],
-                      "responses": {
-                        "200": { "description": "Plan deleted successfully" }
-                      }
-                    }
-                  }
-                }
-              }
-      Tags:
-        Environment: !Ref EnvironmentName
-        Project: ELS-Planning
-
-  PlanningBedrockAgentAlias:
-    Type: AWS::Bedrock::AgentAlias
-    Properties:
-      AgentId: !Ref PlanningBedrockAgent
-      AgentAliasName: !Sub "planning-${EnvironmentName}"
-      Description: !Sub "Planning agent alias for ${EnvironmentName}"
-
   # ─── Custom Domain (conditional) ───
   PlanningDomainCertificate:
     Type: AWS::CertificateManager::Certificate
@@ -841,21 +499,17 @@ Outputs:
     Value: !Ref PlanningApiLambdaFunction
     Description: Planning API Lambda function name
 
-  ActionGroupLambdaFunctionName:
-    Value: !Ref ActionGroupLambdaFunction
-    Description: Action Group Lambda function name
-
-  PlanningBedrockAgentId:
-    Value: !Ref PlanningBedrockAgent
-    Description: Bedrock Agent ID
-
-  PlanningBedrockAgentAliasId:
-    Value: !GetAtt PlanningBedrockAgentAlias.AgentAliasId
-    Description: Bedrock Agent Alias ID
-
   PlanningGuardrailId:
     Value: !Ref PlanningBedrockGuardrail
     Description: Bedrock Guardrail ID
+
+  PlanningAgentCoreRuntimeArn:
+    Value: !Ref AgentCoreRuntimeArn
+    Description: AgentCore Runtime ARN (set via AgentCoreRuntimeArn parameter after CLI deployment)
+
+  PlanningAgentCoreRoleArn:
+    Value: !GetAtt PlanningAgentCoreRole.Arn
+    Description: IAM role ARN for the AgentCore Runtime agent
 
   PlanningCustomDomainUrl:
     Condition: HasCustomDomain
