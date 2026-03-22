@@ -12,7 +12,10 @@ def _get_client():
     """Return the RDS Data API client, creating it lazily on first call."""
     global _rds_client
     if _rds_client is None:
-        _rds_client = boto3.client("rds-data")
+        region = os.environ.get("AWS_REGION") or os.environ.get("AWS_DEFAULT_REGION")
+        if not region:
+            raise RuntimeError("AWS_REGION or AWS_DEFAULT_REGION must be set")
+        _rds_client = boto3.client("rds-data", region_name=region)
     return _rds_client
 
 

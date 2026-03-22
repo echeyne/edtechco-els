@@ -306,8 +306,8 @@ Resources:
                   - bedrock:InvokeModel
                   - bedrock:InvokeModelWithResponseStream
                 Resource:
-                  - !Sub "arn:aws:bedrock:*::foundation-model/${BedrockAgentModelId}"
-                  - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/us.${BedrockAgentModelId}"
+                  - !Sub "arn:aws:bedrock:*::foundation-model/*"
+                  - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/*"
         - PolicyName: AllowAgentCoreInvole
           PolicyDocument:
             Version: "2012-10-17"
@@ -344,6 +344,17 @@ Resources:
                 Resource:
                   - !ImportValue
                     Fn::Sub: "${PipelineStackName}-DatabaseSecretArn"
+        - PolicyName: CloudWatchLogsAccess
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - logs:DescribeLogStreams
+                Resource: !Sub "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/bedrock-agentcore/*"
       Tags:
         - Key: Environment
           Value: !Ref EnvironmentName

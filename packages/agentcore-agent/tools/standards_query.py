@@ -9,24 +9,25 @@ from typing import Any
 from tools.db import execute
 
 
-def get_available_states() -> list[dict[str, str]]:
+def get_available_states() -> list[str]:
     """Return distinct states from the documents table.
 
     Returns:
-        List of dicts, each with a ``state`` key.
+        List of state code strings.
     """
     sql = "SELECT DISTINCT state FROM documents ORDER BY state"
-    return execute(sql)
+    rows = execute(sql)
+    return [row["state"] for row in rows]
 
 
-def get_age_bands(state: str) -> list[dict[str, str]]:
+def get_age_bands(state: str) -> list[str]:
     """Return distinct age bands for a given state.
 
     Args:
         state: The state code to filter by.
 
     Returns:
-        List of dicts, each with an ``age_band`` key.
+        List of age band strings.
     """
     sql = (
         "SELECT DISTINCT doc.age_band "
@@ -39,7 +40,8 @@ def get_age_bands(state: str) -> list[dict[str, str]]:
         "ORDER BY doc.age_band"
     )
     parameters = [{"name": "state", "value": {"stringValue": state}}]
-    return execute(sql, parameters)
+    rows = execute(sql, parameters)
+    return [row["age_band"] for row in rows]
 
 
 def get_indicators(state: str, age_band: str) -> list[dict[str, Any]]:

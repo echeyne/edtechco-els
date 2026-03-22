@@ -66,19 +66,16 @@ export function useChat(options: UseChatOptions) {
     ws.onmessage = (event) => {
       try {
         const frame = JSON.parse(event.data);
-        console.log(frame);
 
         switch (frame.type) {
           case "text":
             setMessages((prev) => {
-              const updated = [...prev];
-              const last = updated[updated.length - 1];
-
-              if (last?.role === "assistant") {
-                last.content += frame.text ?? "";
-              }
-
-              return updated;
+              const last = prev[prev.length - 1];
+              if (last?.role !== "assistant") return prev;
+              return [
+                ...prev.slice(0, -1),
+                { ...last, content: last.content + (frame.text ?? "") },
+              ];
             });
             break;
 
