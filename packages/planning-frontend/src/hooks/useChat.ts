@@ -140,7 +140,6 @@ export function useChat(options: UseChatOptions) {
         setError("Not authenticated");
         return;
       }
-      console.log("hi");
 
       if (isStreaming) return;
 
@@ -158,7 +157,6 @@ export function useChat(options: UseChatOptions) {
 
       try {
         const ws = await connect();
-        console.log("about to send");
         ws.send(
           JSON.stringify({
             inputText: message,
