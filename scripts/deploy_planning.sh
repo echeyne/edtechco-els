@@ -223,18 +223,104 @@ deploy_api() {
 deploy_agentcore() {
     print_header "Deploying AgentCore Agent"
 
+    if ! command -v agentcore &> /dev/null; then
+        print_message "$RED" "❌ agentcore CLI not found. Install with: pip install bedrock-agentcore-starter-toolkit"
+        exit 1
+    fi
+
     AGENTCORE_ROLE_ARN=$(get_output PlanningAgentCoreRoleArn)
     print_message "$YELLOW" "AgentCore Role: $AGENTCORE_ROLE_ARN"
 
-    print_message "$BLUE" "Deploying agent via AgentCore CLI..."
-    print_message "$YELLOW" "Run the following command from packages/agentcore-agent/:"
-    print_message "$YELLOW" "  bedrock-agentcore deploy --role-arn $AGENTCORE_ROLE_ARN --region $REGION"
-    print_message "$YELLOW" ""
-    print_message "$YELLOW" "After deployment, update the stack with the agent ID:"
-    print_message "$YELLOW" "  aws cloudformation update-stack --stack-name $STACK_NAME \\"
-    print_message "$YELLOW" "    --parameter-overrides AgentCoreAgentId=<AGENT_ID> ..."
+    # Remove any stale config so agentcore configure starts fresh
+    rm -f "$PROJECT_ROOT/packages/agentcore-agent/.bedrock_agentcore.yaml"
 
-    print_message "$GREEN" "✓ AgentCore deployment instructions printed"
+    # Configure the agent for direct code deploy (serverless, no container)
+    print_message "$BLUE" "Configuring AgentCore agent..."
+    (cd "$PROJECT_ROOT/packages/agentcore-agent" && \
+        agentcore configure \
+            --entrypoint app.py \
+            --name els_planning_agent \
+            --execution-role "$AGENTCORE_ROLE_ARN" \
+            --deployment-type direct_code_deploy \
+            --runtime PYTHON_3_13 \
+            --protocol HTTP \
+            --disable-memory \
+            --region "$REGION" \
+            --non-interactive)
+
+    # Retrieve DB connection info from the pipeline stack (same env vars the Lambda uses)
+    PIPELINE_STACK="els-pipeline-${ENVIRONMENT}"
+    DB_CLUSTER_ARN=$(aws cloudformation describe-stacks \
+        --stack-name "$PIPELINE_STACK" \
+        --region "$REGION" \
+        --query "Stacks[0].Outputs[?OutputKey==\`DatabaseClusterArn\`].OutputValue" \
+        --output text 2>/dev/null || echo "")
+    DB_SECRET_ARN=$(aws cloudformation describe-stacks \
+        --stack-name "$PIPELINE_STACK" \
+        --region "$REGION" \
+        --query "Stacks[0].Outputs[?OutputKey==\`DatabaseSecretArn\`].OutputValue" \
+        --output text 2>/dev/null || echo "")
+    DB_NAME="els_pipeline"
+
+    # Retrieve guardrail info from the planning stack
+    GUARDRAIL_ID=$(get_output PlanningGuardrailId)
+    GUARDRAIL_VERSION="DRAFT"
+
+    if [ -z "$DB_CLUSTER_ARN" ] || [ -z "$DB_SECRET_ARN" ]; then
+        print_message "$RED" "❌ Could not retrieve DB_CLUSTER_ARN or DB_SECRET_ARN from pipeline stack"
+        exit 1
+    fi
+
+    print_message "$YELLOW" "DB Cluster ARN: $DB_CLUSTER_ARN"
+    print_message "$YELLOW" "Guardrail ID: $GUARDRAIL_ID"
+
+    # Deploy to AWS (serverless — no Docker required)
+    print_message "$BLUE" "Deploying AgentCore agent..."
+    AGENTCORE_DEPLOY_OUTPUT=$(cd "$PROJECT_ROOT/packages/agentcore-agent" && \
+        agentcore deploy \
+            --agent els_planning_agent \
+            --auto-update-on-conflict \
+            --env "DB_CLUSTER_ARN=$DB_CLUSTER_ARN" \
+            --env "DB_SECRET_ARN=$DB_SECRET_ARN" \
+            --env "DB_NAME=$DB_NAME" \
+            --env "GUARDRAIL_ID=$GUARDRAIL_ID" \
+            --env "GUARDRAIL_VERSION=$GUARDRAIL_VERSION" 2>&1)
+
+    echo "$AGENTCORE_DEPLOY_OUTPUT"
+
+    # Extract the Runtime ARN from CLI output and update the stack parameter
+    AGENTCORE_RUNTIME_ARN=$(echo "$AGENTCORE_DEPLOY_OUTPUT" | grep -oE 'arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]+:runtime/[A-Za-z0-9_-]+' | head -1)
+
+    if [ -n "$AGENTCORE_RUNTIME_ARN" ]; then
+        print_message "$GREEN" "✓ AgentCore agent deployed: $AGENTCORE_RUNTIME_ARN"
+
+        # Update the CloudFormation stack with the runtime ARN so the Lambda
+        # env var AGENTCORE_RUNTIME_ARN is set correctly.
+        print_message "$BLUE" "Updating stack with AgentCore Runtime ARN..."
+        aws cloudformation update-stack \
+            --stack-name "$STACK_NAME" \
+            --use-previous-template \
+            --parameters \
+                ParameterKey=EnvironmentName,UsePreviousValue=true \
+                ParameterKey=PipelineStackName,UsePreviousValue=true \
+                ParameterKey=DescopeProjectId,UsePreviousValue=true \
+                ParameterKey=CustomDomainName,UsePreviousValue=true \
+                ParameterKey=HostedZoneId,UsePreviousValue=true \
+                ParameterKey=BedrockAgentModelId,UsePreviousValue=true \
+                ParameterKey=AgentCoreRuntimeArn,ParameterValue="$AGENTCORE_RUNTIME_ARN" \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --region "$REGION" || true
+
+        print_message "$BLUE" "Waiting for stack update to complete..."
+        aws cloudformation wait stack-update-complete \
+            --stack-name "$STACK_NAME" \
+            --region "$REGION" 2>/dev/null || true
+
+        print_message "$GREEN" "✓ Lambda AGENTCORE_RUNTIME_ARN updated"
+    else
+        print_message "$YELLOW" "⚠ Could not extract Runtime ARN from deploy output."
+        print_message "$YELLOW" "  Set it manually: aws cloudformation update-stack --stack-name $STACK_NAME --use-previous-template --parameters ParameterKey=AgentCoreRuntimeArn,ParameterValue=<ARN> --capabilities CAPABILITY_NAMED_IAM"
+    fi
 }
 
 # ─── Build & deploy frontend ───
@@ -275,7 +361,7 @@ print_summary() {
 
     CLOUDFRONT_DOMAIN=$(get_output PlanningCloudFrontDomainName)
     API_URL=$(get_output PlanningApiGatewayUrl)
-    AGENTCORE_ID=$(get_output PlanningAgentCoreRuntimeId)
+    AGENTCORE_ID=$(get_output PlanningAgentCoreRuntimeArn)
 
     print_message "$GREEN" "✅ Planning App deployed successfully"
     print_message "$GREEN" "   Frontend:     https://$CLOUDFRONT_DOMAIN"

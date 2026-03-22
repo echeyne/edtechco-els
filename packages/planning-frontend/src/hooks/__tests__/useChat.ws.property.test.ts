@@ -246,19 +246,21 @@ describe("useChat WebSocket property tests", () => {
             await waitFor(() => expect(lastWs).not.toBeNull());
 
             act(() => {
-              lastWs!.onopen?.({});
-
               if (scenario.kind === "onerror") {
+                // Must not call onopen first — connect() would already be resolved.
                 lastWs!.onerror?.({});
-              } else if (scenario.kind === "onclose") {
-                lastWs!.onclose?.({ code: scenario.code } as CloseEvent);
-              } else if (scenario.kind === "error_frame") {
-                lastWs!.onmessage?.({
-                  data: JSON.stringify({
-                    type: "error",
-                    message: scenario.message,
-                  }),
-                } as MessageEvent);
+              } else {
+                lastWs!.onopen?.({});
+                if (scenario.kind === "onclose") {
+                  lastWs!.onclose?.({ code: scenario.code } as CloseEvent);
+                } else if (scenario.kind === "error_frame") {
+                  lastWs!.onmessage?.({
+                    data: JSON.stringify({
+                      type: "error",
+                      message: scenario.message,
+                    }),
+                  } as MessageEvent);
+                }
               }
             });
 
@@ -332,9 +334,8 @@ describe("useChat WebSocket property tests", () => {
 
               await waitFor(() => expect(lastWs).not.toBeNull());
 
-              // Simulate error
+              // Handshake failure: only onerror (onopen would resolve connect() first)
               act(() => {
-                lastWs!.onopen?.({});
                 lastWs!.onerror?.({});
               });
 
@@ -509,12 +510,14 @@ describe("useChat WebSocket property tests", () => {
                 lastWs!.onopen?.({});
               });
 
-              // Verify the message was sent as JSON
-              expect(lastWs!.send).toHaveBeenCalledTimes(1);
+              // send runs in a microtask after connect()'s open promise resolves
+              await waitFor(() => {
+                expect(lastWs!.send).toHaveBeenCalledTimes(1);
+              });
               const sentPayload = JSON.parse(
                 lastWs!.send.mock.calls[0][0] as string,
               );
-              expect(sentPayload.text).toBe(message);
+              expect(sentPayload.inputText).toBe(message);
               // sessionAttributes are no longer sent over WebSocket;
               // they are embedded in the presigned URL query params.
 

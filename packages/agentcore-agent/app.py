@@ -2,6 +2,10 @@
 
 Handles WebSocket connections from the frontend, processes user messages
 with a Strands agent, and streams text/plan/done/error frames back.
+
+Key design: the Strands agent is lazily initialized on first request,
+NOT at module import time. This avoids cold-start failures when the
+BedrockModel or config files are unavailable during module loading.
 """
 
 import json
@@ -12,9 +16,6 @@ from bedrock_agentcore.runtime import BedrockAgentCoreApp
 from strands import Agent, tool
 from strands.models.bedrock import BedrockModel
 
-from tools.standards_query import get_available_states, get_age_bands, get_indicators
-from tools.plan_management import create_plan, update_plan, get_plan, delete_plan
-
 logger = logging.getLogger(__name__)
 
 app = BedrockAgentCoreApp()
@@ -22,50 +23,35 @@ app = BedrockAgentCoreApp()
 # Plan-mutating tools whose results should emit a plan event frame
 PLAN_MUTATION_TOOLS = {"createPlan", "updatePlan"}
 
+# Lazy-initialized agent singleton
+_agent: Agent | None = None
+
 
 # ---- Strands @tool wrappers ----
-# Each wrapper delegates to the existing tool implementation while providing
-# the typed signature and docstring that Strands uses to generate the tool
-# spec for the model.
+# Imports are deferred inside each tool body so module-level import
+# of app.py does NOT trigger boto3 client creation or DB connections.
 
 
 @tool
 def getAvailableStates() -> dict:
-    """Return the list of distinct US states that have early learning standards data.
-
-    Returns:
-        A dict with a ``states`` key containing the list of state records.
-    """
+    """Return the list of distinct US states that have early learning standards data."""
+    from tools.standards_query import get_available_states
     result = get_available_states()
     return {"status": "success", "content": [{"text": json.dumps(result)}]}
 
 
 @tool
 def getAgeBands(state: str) -> dict:
-    """Return the available age bands for a given state's early learning standards.
-
-    Args:
-        state: The state code to retrieve age bands for.
-
-    Returns:
-        A dict with an ``ageBands`` key containing the list of age band records.
-    """
+    """Return the available age bands for a given state's early learning standards."""
+    from tools.standards_query import get_age_bands
     result = get_age_bands(state)
     return {"status": "success", "content": [{"text": json.dumps(result)}]}
 
 
 @tool
 def getIndicators(state: str, age_band: str) -> dict:
-    """Return learning indicators for a given state and age band.
-
-    Args:
-        state: The state code to filter indicators by.
-        age_band: The age band to filter indicators by.
-
-    Returns:
-        A dict with an ``indicators`` key containing indicator records with
-        code, description, domain, strand, and sub-strand.
-    """
+    """Return learning indicators for a given state and age band."""
+    from tools.standards_query import get_indicators
     result = get_indicators(state, age_band)
     return {"status": "success", "content": [{"text": json.dumps(result)}]}
 
@@ -81,21 +67,8 @@ def createPlan(
     interests: str = "",
     concerns: str = "",
 ) -> dict:
-    """Create a new learning plan for a child and persist it to the database.
-
-    Args:
-        user_id: The authenticated user's ID (from session attributes).
-        child_name: The child's first name.
-        child_age: The child's age or age band.
-        state: The state code for the learning standards.
-        duration: The plan duration (e.g. "1 week", "4 weeks").
-        content: The structured plan content as a JSON object.
-        interests: The child's interests (optional).
-        concerns: The parent's areas of concern (optional).
-
-    Returns:
-        The created plan with its ID and action.
-    """
+    """Create a new learning plan for a child and persist it to the database."""
+    from tools.plan_management import create_plan
     result = create_plan(
         user_id=user_id,
         child_name=child_name,
@@ -111,51 +84,29 @@ def createPlan(
 
 @tool
 def updatePlan(plan_id: str, user_id: str, content: dict) -> dict:
-    """Update an existing plan's content. Only the plan owner can update it.
-
-    Args:
-        plan_id: The ID of the plan to update.
-        user_id: The authenticated user's ID (from session attributes).
-        content: The updated plan content as a JSON object.
-
-    Returns:
-        The updated plan with its ID and action.
-    """
+    """Update an existing plan's content. Only the plan owner can update it."""
+    from tools.plan_management import update_plan
     result = update_plan(plan_id=plan_id, user_id=user_id, content=content)
     return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
 
 
 @tool
 def getPlan(plan_id: str, user_id: str) -> dict:
-    """Retrieve a plan by ID. Only the plan owner can access it.
-
-    Args:
-        plan_id: The ID of the plan to retrieve.
-        user_id: The authenticated user's ID (from session attributes).
-
-    Returns:
-        The plan detail.
-    """
+    """Retrieve a plan by ID. Only the plan owner can access it."""
+    from tools.plan_management import get_plan
     result = get_plan(plan_id=plan_id, user_id=user_id)
     return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
 
 
 @tool
 def deletePlan(plan_id: str, user_id: str) -> dict:
-    """Delete a plan by ID. Only the plan owner can delete it.
-
-    Args:
-        plan_id: The ID of the plan to delete.
-        user_id: The authenticated user's ID (from session attributes).
-
-    Returns:
-        A success confirmation.
-    """
+    """Delete a plan by ID. Only the plan owner can delete it."""
+    from tools.plan_management import delete_plan
     result = delete_plan(plan_id=plan_id, user_id=user_id)
     return {"status": "success", "content": [{"text": json.dumps(result)}]}
 
 
-# ---- Load instruction prompt and build the Strands agent ----
+# ---- Lazy agent initialization ----
 
 TOOLS = [
     getAvailableStates,
@@ -168,39 +119,40 @@ TOOLS = [
 ]
 
 
-def _load_instruction_prompt() -> str:
-    """Load the agent instruction prompt from config or file."""
-    config_path = os.path.join(os.path.dirname(__file__), "config.yaml")
-    prompt_file = None
-    model_id = "anthropic.claude-3-5-sonnet-20241022-v2:0"
+def _get_agent() -> Agent:
+    """Return the Strands agent, creating it on first call."""
+    global _agent
+    if _agent is not None:
+        return _agent
+
+    system_prompt, model_id = _load_instruction_prompt()
+    _agent = _build_agent(system_prompt, model_id)
+    return _agent
+
+
+def _load_instruction_prompt() -> tuple[str, str]:
+    """Load the agent instruction prompt and model ID from config.yaml."""
+    model_id = "us.anthropic.claude-sonnet-4-6"
+    prompt = ""
 
     try:
         import yaml
-
+        config_path = os.path.join(os.path.dirname(__file__), "config.yaml")
         with open(config_path) as f:
             config = yaml.safe_load(f)
         agent_cfg = config.get("agent", {})
-        prompt_file = agent_cfg.get("instruction_prompt_file")
-        model_id_cfg = agent_cfg.get("model")
-        if model_id_cfg:
-            model_id = model_id_cfg
+        if agent_cfg.get("model"):
+            model_id = agent_cfg["model"]
+        if agent_cfg.get("instruction_prompt"):
+            prompt = agent_cfg["instruction_prompt"]
     except Exception:
-        logger.warning("Could not load config.yaml, using defaults")
-
-    prompt = ""
-    if prompt_file:
-        prompt_path = os.path.join(os.path.dirname(__file__), prompt_file)
-        try:
-            with open(prompt_path) as f:
-                prompt = f.read()
-        except FileNotFoundError:
-            logger.warning("Instruction prompt file not found: %s", prompt_path)
+        logger.warning("Could not load config.yaml, using defaults", exc_info=True)
 
     return prompt, model_id
 
 
 def _build_agent(system_prompt: str, model_id: str) -> Agent:
-    """Create a Strands Agent with Bedrock model and guardrails."""
+    """Create a Strands Agent with Bedrock model and optional guardrails."""
     guardrail_id = os.environ.get("GUARDRAIL_ID", "")
     guardrail_version = os.environ.get("GUARDRAIL_VERSION", "")
 
@@ -210,7 +162,6 @@ def _build_agent(system_prompt: str, model_id: str) -> Agent:
         model_kwargs["guardrail_version"] = guardrail_version
 
     model = BedrockModel(**model_kwargs)
-
     return Agent(
         model=model,
         system_prompt=system_prompt,
@@ -219,50 +170,51 @@ def _build_agent(system_prompt: str, model_id: str) -> Agent:
     )
 
 
-_system_prompt, _model_id = _load_instruction_prompt()
-agent = _build_agent(_system_prompt, _model_id)
-
-
 # ---- WebSocket handler ----
 
 @app.websocket
 async def handle_ws(websocket, context):
-    """Handle WebSocket connections from the frontend.
-
-    Accepts connections, iterates over incoming JSON messages,
-    processes them with the Strands agent, and streams response frames back.
-
-    Message protocol:
-      Client -> Agent: { "text": "..." }
-      Agent -> Client: { "type": "text", "text": "..." }
-                       { "type": "plan", "planId": "...", "action": "created"|"updated" }
-                       { "type": "done" }
-                       { "type": "error", "message": "..." }
-    """
+    """Handle WebSocket connections from the frontend."""
     await websocket.accept()
 
-    # Extract userId and planId from the WebSocket connection's query
-    # parameters or custom headers embedded in the presigned URL.
     query_params = dict(websocket.query_params) if hasattr(websocket, "query_params") else {}
     headers = context.request_headers or {}
+
+    def _hdr(name_lower: str) -> str | None:
+        for k, v in headers.items():
+            if k.lower() == name_lower:
+                return v
+        return None
+
     user_id = (
-        query_params.get("X-UserId")
-        or headers.get("X-UserId")
-        or headers.get("x-amzn-bedrock-agentcore-custom-x-userid")
+        query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-UserId")
+        or query_params.get("X-UserId")
+        or _hdr("x-amzn-bedrock-agentcore-runtime-custom-userid")
+        or _hdr("x-amzn-bedrock-agentcore-custom-x-userid")
+        or _hdr("x-userid")
         or ""
     )
     plan_id = (
-        query_params.get("X-PlanId")
-        or headers.get("X-PlanId")
-        or headers.get("x-amzn-bedrock-agentcore-custom-x-planid")
+        query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-PlanId")
+        or query_params.get("X-PlanId")
+        or _hdr("x-amzn-bedrock-agentcore-runtime-custom-planid")
+        or _hdr("x-amzn-bedrock-agentcore-custom-x-planid")
+        or _hdr("x-planid")
     )
+
+    # Lazy-init the agent on first connection
+    try:
+        agent = _get_agent()
+    except Exception as e:
+        logger.exception("Failed to initialize agent")
+        await websocket.send_json({"type": "error", "message": f"Agent init failed: {e}"})
+        await websocket.send_json({"type": "done"})
+        return
 
     async for message in websocket.iter_json():
         try:
-            user_text = message.get("text", "")
+            user_text = (message.get("inputText") or message.get("text") or "").strip()
 
-            # Inject session context into the user message so the agent
-            # (and its tools) can access userId and planId.
             context_prefix = f"[Session context: userId={user_id}"
             if plan_id:
                 context_prefix += f", planId={plan_id}"
@@ -271,11 +223,9 @@ async def handle_ws(websocket, context):
             enriched_prompt = context_prefix + user_text
 
             async for event in agent.stream_async(enriched_prompt):
-                # Stream text chunks to the client
                 if "data" in event:
                     await websocket.send_json({"type": "text", "text": event["data"]})
 
-                # Detect tool results for plan mutation events
                 if "current_tool_use" in event:
                     tool_use = event["current_tool_use"]
                     tool_name = tool_use.get("name", "")
@@ -283,7 +233,6 @@ async def handle_ws(websocket, context):
 
                     if tool_name in PLAN_MUTATION_TOOLS and tool_result:
                         try:
-                            # The tool result content is a list with a text entry
                             result_content = tool_result.get("content", [])
                             for item in result_content:
                                 if "text" in item:
@@ -295,10 +244,7 @@ async def handle_ws(websocket, context):
                                             "action": parsed["action"],
                                         })
                         except (json.JSONDecodeError, KeyError, TypeError, AttributeError):
-                            logger.warning(
-                                "Failed to parse plan event from tool result: %s",
-                                tool_name,
-                            )
+                            logger.warning("Failed to parse plan event from %s", tool_name)
 
             await websocket.send_json({"type": "done"})
         except Exception as e:
@@ -308,3 +254,7 @@ async def handle_ws(websocket, context):
                 await websocket.send_json({"type": "done"})
             except Exception:
                 break
+
+
+if __name__ == "__main__":
+    app.run()

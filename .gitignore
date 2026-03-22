@@ -59,5 +59,9 @@ extraction_sample.json
 *test_output.json
 test_parser_local.py
 
+# AgentCore - build artifacts & generated config
+.bedrock_agentcore/
+.bedrock_agentcore.yaml
+
 #Kiro
 .kiro/

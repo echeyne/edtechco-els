@@ -15,8 +15,8 @@ import type { PresignOptions } from "../../lib/presign.js";
  * (a) a non-empty url string starting with wss://,
  * (b) a sessionId matching the provided value or a valid UUID if none was provided,
  * (c) an expiresAt timestamp within 300 seconds of the current time, and
- * (d) the planId (if provided) SHALL have been forwarded as a custom header
- *     to the presigned URL generation call.
+ * (d) the planId (if provided) SHALL have been forwarded as a Runtime-Custom
+ *     query parameter to the presigned URL generation call.
  *
  * **Validates: Requirements 1.2, 1.3, 1.4, 1.5, 1.6**
  */
@@ -109,17 +109,21 @@ describe("Property 1: Session endpoint returns valid presigned URL with correct 
         expect(json.expiresAt).toBeGreaterThanOrEqual(nowBefore + 300);
         expect(json.expiresAt).toBeLessThanOrEqual(nowAfter + 300);
 
-        // (d) planId forwarded as custom header
+        // (d) planId forwarded as allowlisted Runtime-Custom query param
         const lastCall = capturedCalls[capturedCalls.length - 1];
         if (planId !== undefined) {
-          expect(lastCall.customHeaders).toHaveProperty("X-PlanId", planId);
+          expect(lastCall.queryParams).toHaveProperty(
+            "X-Amzn-Bedrock-AgentCore-Runtime-Custom-PlanId",
+            planId,
+          );
         } else {
-          expect(lastCall.customHeaders).not.toHaveProperty("X-PlanId");
+          expect(lastCall.queryParams).not.toHaveProperty(
+            "X-Amzn-Bedrock-AgentCore-Runtime-Custom-PlanId",
+          );
         }
 
-        // userId always forwarded
-        expect(lastCall.customHeaders).toHaveProperty(
-          "X-UserId",
+        expect(lastCall.queryParams).toHaveProperty(
+          "X-Amzn-Bedrock-AgentCore-Runtime-Custom-UserId",
           "test-user-id",
         );
       }),

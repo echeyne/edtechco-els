@@ -5,26 +5,44 @@ from typing import Any
 
 import boto3
 
-_rds_client = boto3.client("rds-data")
+_rds_client = None
 
-DB_CLUSTER_ARN = os.environ.get("DB_CLUSTER_ARN", "")
-DB_SECRET_ARN = os.environ.get("DB_SECRET_ARN", "")
-DB_NAME = os.environ.get("DB_NAME", "")
+
+def _get_client():
+    """Return the RDS Data API client, creating it lazily on first call."""
+    global _rds_client
+    if _rds_client is None:
+        _rds_client = boto3.client("rds-data")
+    return _rds_client
+
+
+def _get_db_params() -> dict[str, str]:
+    cluster_arn = os.environ.get("DB_CLUSTER_ARN", "")
+    secret_arn = os.environ.get("DB_SECRET_ARN", "")
+    database = os.environ.get("DB_NAME", "els_pipeline")
+
+    if not cluster_arn or not secret_arn:
+        raise RuntimeError("DB_CLUSTER_ARN and DB_SECRET_ARN must be set")
+
+    return {
+        "resourceArn": cluster_arn,
+        "secretArn": secret_arn,
+        "database": database,
+    }
 
 
 def execute(sql: str, parameters: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     """Execute a SQL statement via the RDS Data API and return rows as dicts."""
+    db = _get_db_params()
     params: dict[str, Any] = {
-        "resourceArn": DB_CLUSTER_ARN,
-        "secretArn": DB_SECRET_ARN,
-        "database": DB_NAME,
+        **db,
         "sql": sql,
         "includeResultMetadata": True,
     }
     if parameters:
         params["parameters"] = parameters
 
-    response = _rds_client.execute_statement(**params)
+    response = _get_client().execute_statement(**params)
 
     columns = [col["name"] for col in response.get("columnMetadata", [])]
     rows: list[dict[str, Any]] = []
@@ -48,17 +66,13 @@ def execute(sql: str, parameters: list[dict[str, Any]] | None = None) -> list[di
 
 
 def execute_raw(sql: str, parameters: list[dict[str, Any]] | None = None) -> dict[str, Any]:
-    """Execute a SQL statement and return the raw RDS Data API response.
-
-    Useful for DELETE/UPDATE statements where ``numberOfRecordsUpdated`` is needed.
-    """
+    """Execute a SQL statement and return the raw RDS Data API response."""
+    db = _get_db_params()
     params: dict[str, Any] = {
-        "resourceArn": DB_CLUSTER_ARN,
-        "secretArn": DB_SECRET_ARN,
-        "database": DB_NAME,
+        **db,
         "sql": sql,
     }
     if parameters:
         params["parameters"] = parameters
 
-    return _rds_client.execute_statement(**params)
+    return _get_client().execute_statement(**params)

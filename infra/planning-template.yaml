@@ -29,7 +29,7 @@ Parameters:
     NoEcho: true
   BedrockAgentModelId:
     Type: String
-    Default: us.anthropic.claude-sonnet-4-6-v1
+    Default: anthropic.claude-sonnet-4-6
     Description: Bedrock foundation model ID for the planning agent
   AgentCoreRuntimeArn:
     Type: String
@@ -164,8 +164,8 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
-                  - bedrock-agentcore:GeneratePresignedUrl
-                  - bedrock-agentcore:InvokeAgent
+                  - bedrock-agentcore:InvokeRuntime
+                  - bedrock-agentcore:InvokeAgentRuntimeWithWebSocketStream
                 Resource:
                   - !If
                     - HasAgentCoreRuntimeArn
@@ -228,6 +228,24 @@ Resources:
     Properties:
       Name: !Sub "els-planning-api-${EnvironmentName}"
       ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins:
+          - "http://localhost:5173"
+          - "http://localhost:4173"
+          - !If
+            - HasCustomDomain
+            - !Sub "https://${CustomDomainName}"
+            - !Ref "AWS::NoValue"
+        AllowMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+          - Authorization
+        MaxAge: 86400
 
   PlanningApiGatewayIntegration:
     Type: AWS::ApiGatewayV2::Integration
@@ -276,7 +294,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              Service: bedrock.amazonaws.com
+              Service: bedrock-agentcore.amazonaws.com
             Action: sts:AssumeRole
       Policies:
         - PolicyName: BedrockModelInvocation
@@ -288,7 +306,18 @@ Resources:
                   - bedrock:InvokeModel
                   - bedrock:InvokeModelWithResponseStream
                 Resource:
-                  - !Sub "arn:aws:bedrock:${AWS::Region}::foundation-model/${BedrockAgentModelId}"
+                  - !Sub "arn:aws:bedrock:*::foundation-model/${BedrockAgentModelId}"
+                  - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/us.${BedrockAgentModelId}"
+        - PolicyName: AllowAgentCoreInvole
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock-agentcore:InvokeAgentRuntimeWithWebSocketStream
+                  - bedrock-agentcore:InvokeAgentRuntime
+                Resource:
+                  - !Sub "arn:aws:bedrock-agentcore:${AWS::Region}:${AWS::AccountId}:agent-runtime/*"
         - PolicyName: BedrockGuardrailAccess
           PolicyDocument:
             Version: "2012-10-17"
@@ -322,9 +351,11 @@ Resources:
           Value: ELS-Planning
 
   PlanningAgentCoreRuntime:
-    # No-op placeholder — the actual AgentCore Runtime agent is deployed via
-    # the AgentCore CLI: `bedrock-agentcore deploy`
-    # After deployment, set the AgentCoreAgentId parameter to the agent ID
+    # The AgentCore Runtime agent is deployed via the AgentCore CLI using
+    # direct_code_deploy (serverless — no container to manage).
+    # Run: agentcore configure --deployment-type direct_code_deploy --runtime PYTHON_3_13
+    #      agentcore deploy
+    # After deployment, set the AgentCoreRuntimeArn parameter to the agent ARN
     # returned by the CLI so that the Lambda and outputs reference it.
     Type: AWS::CloudFormation::WaitConditionHandle
 

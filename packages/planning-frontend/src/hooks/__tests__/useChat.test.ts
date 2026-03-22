@@ -319,9 +319,12 @@ describe("useChat (WebSocket)", () => {
       lastWs!.onopen?.({});
     });
 
+    await waitFor(() => {
+      expect(lastWs!.send).toHaveBeenCalledTimes(1);
+    });
     expect(lastWs!.send).toHaveBeenCalledWith(
       JSON.stringify({
-        text: "Refine plan",
+        inputText: "Refine plan",
       }),
     );
   });

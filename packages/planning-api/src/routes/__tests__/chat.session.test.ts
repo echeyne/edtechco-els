@@ -109,7 +109,7 @@ describe("Session endpoint edge cases", () => {
     expect(json.expiresAt).toBeGreaterThan(0);
   });
 
-  it("does not include planId in customHeaders when no body is sent", async () => {
+  it("does not include planId in queryParams when no body is sent", async () => {
     const res = await app.request("/api/chat/session", {
       method: "POST",
       headers: {
@@ -120,10 +120,13 @@ describe("Session endpoint edge cases", () => {
     expect(res.status).toBe(200);
     expect(capturedCalls).toHaveLength(1);
     const opts = capturedCalls[0] as Record<string, unknown>;
-    const customHeaders = opts.customHeaders as
-      | Record<string, string>
-      | undefined;
-    expect(customHeaders).not.toHaveProperty("X-PlanId");
-    expect(customHeaders).toHaveProperty("X-UserId", "test-user-id");
+    const queryParams = opts.queryParams as Record<string, string> | undefined;
+    expect(queryParams).not.toHaveProperty(
+      "X-Amzn-Bedrock-AgentCore-Runtime-Custom-PlanId",
+    );
+    expect(queryParams).toHaveProperty(
+      "X-Amzn-Bedrock-AgentCore-Runtime-Custom-UserId",
+      "test-user-id",
+    );
   });
 });

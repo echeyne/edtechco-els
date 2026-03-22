@@ -2,5 +2,7 @@ bedrock-agentcore
 boto3
 pyyaml
 strands-agents
+strands-agents-tools
 hypothesis
 pytest
+bedrock-agentcore-starter-toolkit

@@ -7,7 +7,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch --env-file=.env.local src/server.ts",
     "test": "vitest --run",
     "typecheck": "tsc --noEmit"
   },
@@ -19,6 +19,7 @@
     "@aws-sdk/credential-provider-node": "^3.972.0",
     "@descope/node-sdk": "^1.10.0",
     "@els/shared": "workspace:*",
+    "@hono/node-server": "^1.19.11",
     "@smithy/protocol-http": "^5.0.0",
     "@smithy/signature-v4": "^5.0.0",
     "@smithy/types": "^4.0.0",
