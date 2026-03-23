@@ -64,6 +64,7 @@ function freshSession(overrides: Record<string, unknown> = {}) {
   return {
     url: "wss://example.com/ws",
     sessionId: "sess-1",
+    userId: "test-user-id",
     expiresAt: Math.floor(Date.now() / 1000) + 300,
     ...overrides,
   };

@@ -4,33 +4,28 @@ Uses the RDS Data API (boto3 execute_statement) to query the standards
 database. SQL queries are ported from packages/planning-api/src/action-group/handler.ts.
 """
 
+import logging
 from typing import Any
 
 from tools.db import execute
 
+logger = logging.getLogger(__name__)
+
 
 def get_available_states() -> list[str]:
-    """Return distinct states from the documents table.
-
-    Returns:
-        List of state code strings.
-    """
+    """Return distinct states from the documents table."""
+    logger.info("Fetching available states")
     sql = "SELECT DISTINCT state FROM documents ORDER BY state"
     rows = execute(sql)
+    logger.info("Found %d states", len(rows))
     return [row["state"] for row in rows]
 
 
-def get_age_bands(state: str) -> list[str]:
-    """Return distinct age bands for a given state.
-
-    Args:
-        state: The state code to filter by.
-
-    Returns:
-        List of age band strings.
-    """
+def get_age_ranges(state: str) -> list[str]:
+    """Return distinct age ranges for a given state."""
+    logger.info("Fetching age ranges for state=%s", state)
     sql = (
-        "SELECT DISTINCT doc.age_band "
+        "SELECT DISTINCT doc.age_band as age_range "
         "FROM indicators i "
         "JOIN sub_strands ss ON i.sub_strand_id = ss.id "
         "JOIN strands s ON ss.strand_id = s.id "
@@ -41,37 +36,30 @@ def get_age_bands(state: str) -> list[str]:
     )
     parameters = [{"name": "state", "value": {"stringValue": state}}]
     rows = execute(sql, parameters)
-    return [row["age_band"] for row in rows]
+    logger.info("Found %d age ranges for state=%s", len(rows), state)
+    return [row["age_range"] for row in rows]
 
 
-def get_indicators(state: str, age_band: str) -> list[dict[str, Any]]:
-    """Return indicators for a given state and age band.
-
-    Args:
-        state: The state code to filter by.
-        age_band: The age band to filter by.
-
-    Returns:
-        List of dicts with keys: ``code``, ``description``, ``domain_name``,
-        ``strand_name``, ``sub_strand_name``, ``age_band``.
-    """
+def get_indicators(state: str, age_range: str) -> list[dict[str, Any]]:
+    """Return indicators for a given state and age band."""
+    logger.info("Fetching indicators for state=%s, age_range=%s", state, age_range)
     sql = (
         "SELECT i.code, "
         "       i.description, "
         "       d.name AS domain_name, "
         "       s.name AS strand_name, "
         "       ss.name AS sub_strand_name, "
-        "       doc.age_band "
+        "       doc.age_band as age_range "
         "FROM indicators i "
         "JOIN sub_strands ss ON i.sub_strand_id = ss.id "
         "JOIN strands s ON ss.strand_id = s.id "
         "JOIN domains d ON s.domain_id = d.id "
         "JOIN documents doc ON d.document_id = doc.id "
-        "WHERE doc.state = :state AND doc.age_band = :age_band "
+        "WHERE doc.state = :state AND doc.age_band = :age_range "
         "ORDER BY d.name, s.name, i.code"
     )
     parameters = [
         {"name": "state", "value": {"stringValue": state}},
-        {"name": "age_band", "value": {"stringValue": age_band}},
+        {"name": "age_range", "value": {"stringValue": age_range}},
     ]
     return execute(sql, parameters)

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { getPlan, deletePlan, ApiError } from "@/lib/api";
 import PlanDisplay from "@/components/PlanDisplay";
+import PrintPlanButton from "@/components/PrintPlanButton";
 import ChatPanel from "@/components/ChatPanel";
 import type { PlanDetail } from "@/types";
 
@@ -106,6 +107,7 @@ export default function PlanDetailPage() {
           </p>
         </div>
         <div className="flex gap-2">
+          <PrintPlanButton plan={plan} />
           <button
             onClick={() => setShowChat((v) => !v)}
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"

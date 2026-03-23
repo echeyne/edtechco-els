@@ -104,7 +104,7 @@ Resources:
           - AcmCertificateArn: !Ref PlanningDomainCertificate
             SslSupportMethod: sni-only
             MinimumProtocolVersion: TLSv1.2_2021
-          - !Ref "AWS::NoValue"
+          - CloudFrontDefaultCertificate: true
         Origins:
           - Id: S3Origin
             DomainName: !GetAtt PlanningFrontendBucket.RegionalDomainName
@@ -407,16 +407,11 @@ Resources:
               - "Is my child's development normal for their age?"
             Type: DENY
           - Name: DevelopmentalDiagnoses
-            Definition: "Diagnosing or suggesting developmental conditions, disabilities, learning disorders, behavioral disorders, or any clinical assessment of a child's developmental status."
+            Definition: "Clinically diagnosing or assessing whether a child has a developmental condition, disability, or learning disorder."
             Examples:
               - "Does my child have a learning disability?"
               - "My child might be on the autism spectrum, can you confirm?"
-            Type: DENY
-          - Name: TherapeuticRecommendations
-            Definition: "Recommending specific therapies, therapeutic interventions, counseling approaches, or clinical treatment plans that should be prescribed by licensed therapists or clinicians."
-            Examples:
-              - "What type of therapy does my child need?"
-              - "Should my child get speech therapy?"
+              - "I think your child shows signs of ADHD."
             Type: DENY
           - Name: Politics
             Definition: "Discussing political topics, political parties, elections, government policies, political opinions, or politically divisive subjects."
@@ -457,7 +452,7 @@ Resources:
           - Type: IP_ADDRESS
             Action: BLOCK
           - Type: URL
-            Action: BLOCK
+            Action: ANONYMIZE
           - Type: DRIVER_ID
             Action: BLOCK
           - Type: US_PASSPORT_NUMBER

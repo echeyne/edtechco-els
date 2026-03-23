@@ -16,9 +16,18 @@ from bedrock_agentcore.runtime import BedrockAgentCoreApp
 from strands import Agent, tool
 from strands.models.bedrock import BedrockModel
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    force=True,
+)
 logger = logging.getLogger(__name__)
 
-app = BedrockAgentCoreApp()
+# Also ensure strands and boto loggers are at INFO so we see model/tool activity
+logging.getLogger("strands").setLevel(logging.INFO)
+logging.getLogger("bedrock_agentcore").setLevel(logging.INFO)
+
+app = BedrockAgentCoreApp(debug=True)
 
 # Plan-mutating tools whose results should emit a plan event frame
 PLAN_MUTATION_TOOLS = {"createPlan", "updatePlan"}
@@ -35,25 +44,43 @@ _agent: Agent | None = None
 @tool
 def getAvailableStates() -> dict:
     """Return the list of distinct US states that have early learning standards data."""
+    logger.info("Tool called: getAvailableStates")
     from tools.standards_query import get_available_states
-    result = get_available_states()
-    return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    try:
+        result = get_available_states()
+        logger.info("getAvailableStates returned %d states", len(result))
+        return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    except Exception:
+        logger.exception("getAvailableStates failed")
+        raise
 
 
 @tool
-def getAgeBands(state: str) -> dict:
-    """Return the available age bands for a given state's early learning standards."""
-    from tools.standards_query import get_age_bands
-    result = get_age_bands(state)
-    return {"status": "success", "content": [{"text": json.dumps(result)}]}
+def getAgeRanges(state: str) -> dict:
+    """Return the available age ranges for a given state's early learning standards."""
+    logger.info("Tool called: getAgeBands(state=%s)", state)
+    from tools.standards_query import get_age_ranges
+    try:
+        result = get_age_ranges(state)
+        logger.info("getAgeBands returned %d bands", len(result))
+        return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    except Exception:
+        logger.exception("getAgeBands failed for state=%s", state)
+        raise
 
 
 @tool
-def getIndicators(state: str, age_band: str) -> dict:
-    """Return learning indicators for a given state and age band."""
+def getIndicators(state: str, age_range: str) -> dict:
+    """Return learning indicators for a given state and age range."""
+    logger.info("Tool called: getIndicators(state=%s, age_range=%s)", state, age_range)
     from tools.standards_query import get_indicators
-    result = get_indicators(state, age_band)
-    return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    try:
+        result = get_indicators(state, age_range)
+        logger.info("getIndicators returned %d indicators", len(result))
+        return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    except Exception:
+        logger.exception("getIndicators failed for state=%s, age_range=%s", state, age_range)
+        raise
 
 
 @tool
@@ -68,49 +95,73 @@ def createPlan(
     concerns: str = "",
 ) -> dict:
     """Create a new learning plan for a child and persist it to the database."""
+    logger.info("Tool called: createPlan(user_id=%s, child=%s, state=%s)", user_id, child_name, state)
     from tools.plan_management import create_plan
-    result = create_plan(
-        user_id=user_id,
-        child_name=child_name,
-        child_age=child_age,
-        state=state,
-        duration=duration,
-        content=content,
-        interests=interests or None,
-        concerns=concerns or None,
-    )
-    return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
+    try:
+        result = create_plan(
+            user_id=user_id,
+            child_name=child_name,
+            child_age=child_age,
+            state=state,
+            duration=duration,
+            content=content,
+            interests=interests or None,
+            concerns=concerns or None,
+        )
+        logger.info("createPlan succeeded: planId=%s", result.get("planId"))
+        return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
+    except Exception:
+        logger.exception("createPlan failed")
+        raise
 
 
 @tool
 def updatePlan(plan_id: str, user_id: str, content: dict) -> dict:
     """Update an existing plan's content. Only the plan owner can update it."""
+    logger.info("Tool called: updatePlan(plan_id=%s, user_id=%s)", plan_id, user_id)
     from tools.plan_management import update_plan
-    result = update_plan(plan_id=plan_id, user_id=user_id, content=content)
-    return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
+    try:
+        result = update_plan(plan_id=plan_id, user_id=user_id, content=content)
+        logger.info("updatePlan succeeded: planId=%s", result.get("planId"))
+        return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
+    except Exception:
+        logger.exception("updatePlan failed for plan_id=%s", plan_id)
+        raise
 
 
 @tool
 def getPlan(plan_id: str, user_id: str) -> dict:
     """Retrieve a plan by ID. Only the plan owner can access it."""
+    logger.info("Tool called: getPlan(plan_id=%s, user_id=%s)", plan_id, user_id)
     from tools.plan_management import get_plan
-    result = get_plan(plan_id=plan_id, user_id=user_id)
-    return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
+    try:
+        result = get_plan(plan_id=plan_id, user_id=user_id)
+        logger.info("getPlan succeeded for plan_id=%s", plan_id)
+        return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
+    except Exception:
+        logger.exception("getPlan failed for plan_id=%s", plan_id)
+        raise
 
 
 @tool
 def deletePlan(plan_id: str, user_id: str) -> dict:
     """Delete a plan by ID. Only the plan owner can delete it."""
+    logger.info("Tool called: deletePlan(plan_id=%s, user_id=%s)", plan_id, user_id)
     from tools.plan_management import delete_plan
-    result = delete_plan(plan_id=plan_id, user_id=user_id)
-    return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    try:
+        result = delete_plan(plan_id=plan_id, user_id=user_id)
+        logger.info("deletePlan succeeded for plan_id=%s", plan_id)
+        return {"status": "success", "content": [{"text": json.dumps(result)}]}
+    except Exception:
+        logger.exception("deletePlan failed for plan_id=%s", plan_id)
+        raise
 
 
 # ---- Lazy agent initialization ----
 
 TOOLS = [
     getAvailableStates,
-    getAgeBands,
+    getAgeRanges,
     getIndicators,
     createPlan,
     updatePlan,
@@ -156,11 +207,13 @@ def _build_agent(system_prompt: str, model_id: str) -> Agent:
     guardrail_id = os.environ.get("GUARDRAIL_ID", "")
     guardrail_version = os.environ.get("GUARDRAIL_VERSION", "")
 
-    model_kwargs = {"model_id": model_id, "max_tokens": 4096}
+    model_kwargs = {"model_id": model_id, "max_tokens": 16384}
     if guardrail_id and guardrail_version:
         model_kwargs["guardrail_id"] = guardrail_id
         model_kwargs["guardrail_version"] = guardrail_version
+        logger.info("Guardrails enabled: id=%s version=%s", guardrail_id, guardrail_version)
 
+    logger.info("Building Strands agent with model=%s", model_id)
     model = BedrockModel(**model_kwargs)
     return Agent(
         model=model,
@@ -177,30 +230,33 @@ async def handle_ws(websocket, context):
     """Handle WebSocket connections from the frontend."""
     await websocket.accept()
 
+    # --- Debug: log everything available so we can find the user ID ---
     query_params = dict(websocket.query_params) if hasattr(websocket, "query_params") else {}
-    headers = context.request_headers or {}
+    ws_headers = dict(websocket.headers) if hasattr(websocket, "headers") else {}
+    ctx_headers = context.request_headers if context and hasattr(context, "request_headers") else {}
+    logger.info("WS query_params: %s", query_params)
+    logger.info("WS headers: %s", ws_headers)
+    logger.info("Context request_headers: %s", ctx_headers)
+    logger.info("Context fields: %s", {k: getattr(context, k, None) for k in dir(context) if not k.startswith("_")})
 
-    def _hdr(name_lower: str) -> str | None:
-        for k, v in headers.items():
-            if k.lower() == name_lower:
-                return v
-        return None
+    # Try every possible source for the custom user ID
+    user_id = ""
+    for source_name, source in [("ctx_headers", ctx_headers or {}), ("ws_headers", ws_headers), ("query_params", query_params)]:
+        for key, value in source.items():
+            if "userid" in key.lower() and "custom" in key.lower():
+                logger.info("Found user_id in %s[%s] = %s", source_name, key, value)
+                if not user_id:
+                    user_id = value
 
-    user_id = (
-        query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-UserId")
-        or query_params.get("X-UserId")
-        or _hdr("x-amzn-bedrock-agentcore-runtime-custom-userid")
-        or _hdr("x-amzn-bedrock-agentcore-custom-x-userid")
-        or _hdr("x-userid")
-        or ""
-    )
-    plan_id = (
-        query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-PlanId")
-        or query_params.get("X-PlanId")
-        or _hdr("x-amzn-bedrock-agentcore-runtime-custom-planid")
-        or _hdr("x-amzn-bedrock-agentcore-custom-x-planid")
-        or _hdr("x-planid")
-    )
+    if not user_id:
+        logger.info("No user_id from headers/query params; will check first message payload")
+
+    plan_id = ""
+    for source_name, source in [("ctx_headers", ctx_headers or {}), ("ws_headers", ws_headers), ("query_params", query_params)]:
+        for key, value in source.items():
+            if "planid" in key.lower() and "custom" in key.lower():
+                if not plan_id:
+                    plan_id = value
 
     # Lazy-init the agent on first connection
     try:
@@ -215,12 +271,31 @@ async def handle_ws(websocket, context):
         try:
             user_text = (message.get("inputText") or message.get("text") or "").strip()
 
+            # Accept user_id from the message payload (sent by the frontend)
+            # as the primary source, since the AgentCore Runtime proxy strips
+            # custom query params before they reach the handler.
+            if not user_id:
+                msg_uid = message.get("userId", "")
+                if msg_uid:
+                    user_id = msg_uid
+                    logger.info("Got user_id from message payload: %s", user_id)
+
+            if not user_id:
+                logger.warning("No user_id found in any source")
+                await websocket.send_json({
+                    "type": "error",
+                    "message": "Not authenticated. Please log in to continue.",
+                })
+                await websocket.send_json({"type": "done"})
+                return
+
             context_prefix = f"[Session context: userId={user_id}"
             if plan_id:
                 context_prefix += f", planId={plan_id}"
             context_prefix += "]\n\n"
 
             enriched_prompt = context_prefix + user_text
+            logger.info("Processing message from user_id=%s, text_length=%d", user_id, len(user_text))
 
             async for event in agent.stream_async(enriched_prompt):
                 if "data" in event:

@@ -1,9 +1,12 @@
 """Shared RDS Data API helper for AgentCore agent tools."""
 
+import logging
 import os
 from typing import Any
 
 import boto3
+
+logger = logging.getLogger(__name__)
 
 _rds_client = None
 
@@ -15,6 +18,7 @@ def _get_client():
         region = os.environ.get("AWS_REGION") or os.environ.get("AWS_DEFAULT_REGION")
         if not region:
             raise RuntimeError("AWS_REGION or AWS_DEFAULT_REGION must be set")
+        logger.info("Creating RDS Data API client in region=%s", region)
         _rds_client = boto3.client("rds-data", region_name=region)
     return _rds_client
 
@@ -36,6 +40,8 @@ def _get_db_params() -> dict[str, str]:
 
 def execute(sql: str, parameters: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     """Execute a SQL statement via the RDS Data API and return rows as dicts."""
+    logger.info("Executing SQL: %s", sql[:200])
+    logger.debug("SQL parameters: %s", parameters)
     db = _get_db_params()
     params: dict[str, Any] = {
         **db,
@@ -45,7 +51,11 @@ def execute(sql: str, parameters: list[dict[str, Any]] | None = None) -> list[di
     if parameters:
         params["parameters"] = parameters
 
-    response = _get_client().execute_statement(**params)
+    try:
+        response = _get_client().execute_statement(**params)
+    except Exception:
+        logger.exception("RDS execute_statement failed for SQL: %s", sql[:200])
+        raise
 
     columns = [col["name"] for col in response.get("columnMetadata", [])]
     rows: list[dict[str, Any]] = []
@@ -70,6 +80,8 @@ def execute(sql: str, parameters: list[dict[str, Any]] | None = None) -> list[di
 
 def execute_raw(sql: str, parameters: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Execute a SQL statement and return the raw RDS Data API response."""
+    logger.info("Executing raw SQL: %s", sql[:200])
+    logger.debug("SQL parameters: %s", parameters)
     db = _get_db_params()
     params: dict[str, Any] = {
         **db,
@@ -78,4 +90,8 @@ def execute_raw(sql: str, parameters: list[dict[str, Any]] | None = None) -> dic
     if parameters:
         params["parameters"] = parameters
 
-    return _get_client().execute_statement(**params)
+    try:
+        return _get_client().execute_statement(**params)
+    except Exception:
+        logger.exception("RDS execute_raw failed for SQL: %s", sql[:200])
+        raise

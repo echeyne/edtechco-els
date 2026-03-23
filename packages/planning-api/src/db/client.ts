@@ -2,6 +2,7 @@ import {
   RDSDataClient,
   ExecuteStatementCommand,
   type Field,
+  type TypeHint,
 } from "@aws-sdk/client-rds-data";
 
 // ---- RDS Data API client (lazy singleton) ----
@@ -20,18 +21,27 @@ export function setRdsClient(client: RDSDataClient | null): void {
 
 // ---- Helpers ----
 
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 /**
- * Convert a JS value to an RDS Data API Field.
+ * Convert a JS value to an RDS Data API Field + optional typeHint.
  */
-function toField(value: unknown): Field {
-  if (value === null || value === undefined) return { isNull: true };
-  if (typeof value === "boolean") return { booleanValue: value };
+function toField(value: unknown): { value: Field; typeHint?: TypeHint } {
+  if (value === null || value === undefined) return { value: { isNull: true } };
+  if (typeof value === "boolean") return { value: { booleanValue: value } };
   if (typeof value === "number") {
-    return Number.isInteger(value)
-      ? { longValue: value }
-      : { doubleValue: value };
+    return {
+      value: Number.isInteger(value)
+        ? { longValue: value }
+        : { doubleValue: value },
+    };
   }
-  return { stringValue: String(value) };
+  const str = String(value);
+  if (UUID_RE.test(str)) {
+    return { value: { stringValue: str }, typeHint: "UUID" };
+  }
+  return { value: { stringValue: str } };
 }
 
 /**
@@ -67,10 +77,14 @@ async function executeStatement(
   // Replace $1, $2, ... with :p1, :p2, ...
   const convertedSql = sql.replace(/\$(\d+)/g, ":p$1");
 
-  const parameters = params.map((v, i) => ({
-    name: `p${i + 1}`,
-    value: toField(v),
-  }));
+  const parameters = params.map((v, i) => {
+    const { value, typeHint } = toField(v);
+    return {
+      name: `p${i + 1}`,
+      value,
+      ...(typeHint && { typeHint }),
+    };
+  });
 
   const resp = await getRdsClient().send(
     new ExecuteStatementCommand({

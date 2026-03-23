@@ -323,7 +323,7 @@ class TestPlanMutationEvents:
 import os
 import re
 
-from tools.standards_query import get_available_states, get_age_bands, get_indicators
+from tools.standards_query import get_available_states, get_age_ranges, get_indicators
 
 
 class TestToolUnitTests:
@@ -362,7 +362,7 @@ class TestToolUnitTests:
         }
 
         with patch("tools.db._rds_client", mock_client):
-            result = get_age_bands("INVALID")
+            result = get_age_ranges("INVALID")
 
         assert result == []
 

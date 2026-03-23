@@ -6,9 +6,12 @@ and packages/planning-api/src/action-group/handler.ts.
 """
 
 import json
+import logging
 from typing import Any
 
 from tools.db import execute, execute_raw
+
+logger = logging.getLogger(__name__)
 
 
 def _parse_plan_row(row: dict[str, Any]) -> dict[str, Any]:
@@ -78,6 +81,7 @@ def create_plan(
     if not content:
         raise ValueError("content is required")
 
+    logger.info("Creating plan for user_id=%s, child=%s, state=%s", user_id, child_name, state)
     sql = (
         "INSERT INTO plans (user_id, child_name, child_age, state, interests, concerns, duration, content) "
         "VALUES (:user_id, :child_name, :child_age, :state, :interests, :concerns, :duration, :content) "
@@ -99,6 +103,7 @@ def create_plan(
         raise RuntimeError("Failed to create plan")
 
     plan = _parse_plan_row(rows[0])
+    logger.info("Plan created: planId=%s", plan["id"])
     return {"plan": plan, "planId": plan["id"], "action": "created"}
 
 
@@ -107,20 +112,8 @@ def update_plan(
     user_id: str,
     content: dict[str, Any],
 ) -> dict[str, Any]:
-    """Update a plan's content and return the updated record.
-
-    Args:
-        plan_id: The plan ID.
-        user_id: The owning user's ID.
-        content: The new plan content as a dict (stored as JSONB).
-
-    Returns:
-        Dict with ``plan`` (plan detail), ``planId``, and ``action`` ("updated")
-        for WebSocket plan event emission.
-
-    Raises:
-        ValueError: If the plan is not found or not owned by the user.
-    """
+    """Update a plan's content and return the updated record."""
+    logger.info("Updating plan=%s for user_id=%s", plan_id, user_id)
     sql = (
         "UPDATE plans SET content = :content, updated_at = NOW() "
         "WHERE id = :id AND user_id = :user_id "
@@ -137,22 +130,13 @@ def update_plan(
         raise ValueError("Plan not found or not owned by user")
 
     plan = _parse_plan_row(rows[0])
+    logger.info("Plan updated: planId=%s", plan["id"])
     return {"plan": plan, "planId": plan["id"], "action": "updated"}
 
 
 def get_plan(plan_id: str, user_id: str) -> dict[str, Any]:
-    """Fetch a single plan by ID, scoped to the owning user.
-
-    Args:
-        plan_id: The plan ID.
-        user_id: The owning user's ID.
-
-    Returns:
-        Dict with ``plan`` key containing the plan detail.
-
-    Raises:
-        ValueError: If the plan is not found or not owned by the user.
-    """
+    """Fetch a single plan by ID, scoped to the owning user."""
+    logger.info("Fetching plan=%s for user_id=%s", plan_id, user_id)
     sql = "SELECT * FROM plans WHERE id = :id AND user_id = :user_id"
     parameters = [
         {"name": "id", "value": {"stringValue": plan_id}},
@@ -167,18 +151,8 @@ def get_plan(plan_id: str, user_id: str) -> dict[str, Any]:
 
 
 def delete_plan(plan_id: str, user_id: str) -> dict[str, Any]:
-    """Delete a plan by ID, scoped to the owning user.
-
-    Args:
-        plan_id: The plan ID.
-        user_id: The owning user's ID.
-
-    Returns:
-        Dict with ``success`` key set to True.
-
-    Raises:
-        ValueError: If the plan is not found or not owned by the user.
-    """
+    """Delete a plan by ID, scoped to the owning user."""
+    logger.info("Deleting plan=%s for user_id=%s", plan_id, user_id)
     sql = "DELETE FROM plans WHERE id = :id AND user_id = :user_id"
     parameters = [
         {"name": "id", "value": {"stringValue": plan_id}},

@@ -21,8 +21,10 @@ export default function PlanningPage() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="flex items-center justify-between mb-6">
+    <div
+      className={`max-w-4xl mx-auto w-full flex-1 flex flex-col ${view === "chat" ? "min-h-0 overflow-hidden" : ""}`}
+    >
+      <div className="flex items-center justify-between mb-4 flex-shrink-0">
         <h2 className="text-xl font-semibold">My Plans</h2>
         {view === "list" ? (
           <button
@@ -44,7 +46,7 @@ export default function PlanningPage() {
       {view === "list" ? (
         <PlanList onStartNew={handleStartNew} refreshKey={refreshKey} />
       ) : (
-        <div className="h-[600px]">
+        <div className="flex-1 min-h-0 pb-6">
           <ChatPanel onPlanEvent={handlePlanEvent} />
         </div>
       )}

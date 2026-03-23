@@ -1,5 +1,6 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { AuthContextProvider } from "@/contexts/AuthContext";
+import { LoginButton } from "@/components/LoginButton";
 import AuthGuard from "@/components/AuthGuard";
 import LandingPage from "@/pages/LandingPage";
 import AboutPage from "@/pages/AboutPage";
@@ -10,8 +11,8 @@ import LoginPage from "@/pages/LoginPage";
 function App() {
   return (
     <AuthContextProvider>
-      <div className="min-h-screen bg-background">
-        <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-30 px-6 py-3">
+      <div className="h-full flex flex-col bg-background">
+        <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-30 py-3 flex-shrink-0">
           <div className="container flex items-center justify-between">
             <h1 className="text-xl font-semibold tracking-tight text-foreground">
               <span className="text-primary">Parent Planning</span>{" "}
@@ -55,10 +56,13 @@ function App() {
               >
                 Planning
               </NavLink>
+              <div className="ml-2 pl-2 border-l">
+                <LoginButton />
+              </div>
             </nav>
           </div>
         </header>
-        <main className="container py-6">
+        <main className="container py-6 flex-1 flex flex-col min-h-0 overflow-auto">
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<LoginPage />} />

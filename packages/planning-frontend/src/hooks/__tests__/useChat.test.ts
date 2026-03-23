@@ -65,6 +65,7 @@ function deliverFrames(ws: MockWebSocket, frames: object[]) {
 const DEFAULT_SESSION = {
   url: "wss://example.com/ws",
   sessionId: "sess-1",
+  userId: "test-user-id",
   expiresAt: Math.floor(Date.now() / 1000) + 300,
 };
 
@@ -389,6 +390,7 @@ describe("useChat (WebSocket)", () => {
     mockGetSessionUrl.mockResolvedValueOnce({
       url: "wss://example.com/ws-old",
       sessionId: "sess-1",
+      userId: "test-user-id",
       expiresAt: Math.floor(Date.now() / 1000) - 10, // expired
     });
 

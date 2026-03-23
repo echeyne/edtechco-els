@@ -1,8 +1,9 @@
 bedrock-agentcore
 boto3
 pyyaml
-strands-agents
+strands-agents[otel]
 strands-agents-tools
+aws-opentelemetry-distro
 hypothesis
 pytest
 bedrock-agentcore-starter-toolkit

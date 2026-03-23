@@ -28,6 +28,7 @@ export function useChat(options: UseChatOptions) {
   const sessionIdRef = useRef<string | undefined>(initialSessionId);
   const sessionUrlRef = useRef<string | null>(null);
   const sessionExpiresAtRef = useRef<number>(0);
+  const sessionUserIdRef = useRef<string | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
   const lastMessageRef = useRef<string | null>(null);
   /** Mirrors isStreaming for WebSocket handlers (connect closes over stale render state). */
@@ -53,6 +54,7 @@ export function useChat(options: UseChatOptions) {
     sessionUrlRef.current = resp.url;
     sessionIdRef.current = resp.sessionId;
     sessionExpiresAtRef.current = resp.expiresAt;
+    sessionUserIdRef.current = resp.userId;
 
     return resp.url;
   }, [token, planId]);
@@ -157,6 +159,7 @@ export function useChat(options: UseChatOptions) {
         ws.send(
           JSON.stringify({
             inputText: message,
+            userId: sessionUserIdRef.current,
           }),
         );
       } catch (err: any) {

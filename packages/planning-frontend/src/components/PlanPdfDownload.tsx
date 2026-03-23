@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 /*  PDF Document component                                             */
 /* ------------------------------------------------------------------ */
 
-function PlanPdfDocument({ data }: { data: PdfData }) {
+export function PlanPdfDocument({ data }: { data: PdfData }) {
   // Group activities by section label to preserve structure
   const sections: { label: string; activities: PdfActivityData[] }[] = [];
   for (const activity of data.activities) {

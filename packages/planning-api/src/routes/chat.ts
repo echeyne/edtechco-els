@@ -81,6 +81,7 @@ chat.post("/session", async (c) => {
     return c.json({
       url,
       sessionId,
+      userId: c.get("userId"),
       expiresAt: Math.floor(Date.now() / 1000) + expires,
     });
   } catch (err) {
