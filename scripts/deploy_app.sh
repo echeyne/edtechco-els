@@ -173,7 +173,7 @@ deploy_frontend() {
 
     # Sync to S3
     print_message "$BLUE" "Uploading to S3..."
-    aws s3 sync packages/frontend/dist/ "s3://$FRONTEND_BUCKET/" \
+    aws s3 sync packages/els-explorer-frontend/dist/ "s3://$FRONTEND_BUCKET/" \
         --delete \
         --region "$REGION"
 
@@ -201,7 +201,7 @@ deploy_api() {
 
     # Bundle for Lambda using esbuild
     print_message "$BLUE" "Bundling for Lambda..."
-    npx esbuild packages/api/dist/lambda.js \
+    npx esbuild packages/els-explorer-api/dist/lambda.js \
         --bundle \
         --platform=node \
         --target=node24 \

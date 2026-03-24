@@ -200,7 +200,7 @@ jobs:
             --query "Stacks[0].Outputs[?OutputKey=='ApiLambdaFunctionName'].OutputValue" \
             --output text)
 
-          npx esbuild packages/api/dist/lambda.js \
+          npx esbuild packages/els-explorer-api/dist/lambda.js \
             --bundle \
             --platform=node \
             --target=node20 \
@@ -230,7 +230,7 @@ jobs:
             --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
             --output text)
 
-          aws s3 sync packages/frontend/dist/ "s3://$FRONTEND_BUCKET/" --delete
+          aws s3 sync packages/els-explorer-frontend/dist/ "s3://$FRONTEND_BUCKET/" --delete
           aws cloudfront create-invalidation \
             --distribution-id "$DISTRIBUTION_ID" \
             --paths "/*" > /dev/null
@@ -370,7 +370,7 @@ jobs:
             --query "Stacks[0].Outputs[?OutputKey=='ApiLambdaFunctionName'].OutputValue" \
             --output text)
 
-          npx esbuild packages/api/dist/lambda.js \
+          npx esbuild packages/els-explorer-api/dist/lambda.js \
             --bundle \
             --platform=node \
             --target=node20 \
@@ -400,7 +400,7 @@ jobs:
             --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" \
             --output text)
 
-          aws s3 sync packages/frontend/dist/ "s3://$FRONTEND_BUCKET/" --delete
+          aws s3 sync packages/els-explorer-frontend/dist/ "s3://$FRONTEND_BUCKET/" --delete
           aws cloudfront create-invalidation \
             --distribution-id "$DISTRIBUTION_ID" \
             --paths "/*" > /dev/null
