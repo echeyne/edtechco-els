@@ -96,6 +96,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -106,21 +111,15 @@ jobs:
           chmod +x scripts/package_lambda.sh
           ENVIRONMENT=${{ secrets.ENVIRONMENT_NAME }} AWS_REGION=${{ secrets.AWS_REGION }} bash scripts/package_lambda.sh
 
-      - name: Deploy CloudFormation stack
-        run: |
-          AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-          CFN_BUCKET="els-lambda-code-${{ secrets.ENVIRONMENT_NAME }}-${AWS_ACCOUNT_ID}"
+      - name: Install CDK dependencies
+        run: cd infra/cdk && npm ci
 
-          aws cloudformation deploy \
-            --template-file infra/template.yaml \
-            --stack-name els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
-            --parameter-overrides \
-              EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} \
-              Region=${{ secrets.AWS_REGION }} \
-            --capabilities CAPABILITY_NAMED_IAM \
-            --no-fail-on-empty-changeset \
-            --s3-bucket "$CFN_BUCKET" \
-            --s3-prefix cfn-templates
+      - name: Deploy pipeline infrastructure
+        run: |
+          cd infra/cdk && npx cdk deploy els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
+            -c environment=${{ secrets.ENVIRONMENT_NAME }} \
+            -c region=${{ secrets.AWS_REGION }} \
+            --require-approval never
 
       - name: Update Lambda function code
         run: |
@@ -177,17 +176,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install CDK dependencies
+        run: cd infra/cdk && npm ci
+
       - name: Deploy app infrastructure
+        env:
+          DESCOPE_PROJECT_ID: ${{ secrets.DESCOPE_PROJECT_ID }}
         run: |
-          aws cloudformation deploy \
-            --template-file infra/app-template.yaml \
-            --stack-name els-app-${{ secrets.ENVIRONMENT_NAME }} \
-            --parameter-overrides \
-              EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} \
-              PipelineStackName=els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
-              DescopeProjectId=${{ secrets.DESCOPE_PROJECT_ID }} \
-            --capabilities CAPABILITY_NAMED_IAM \
-            --no-fail-on-empty-changeset
+          cd infra/cdk && npx cdk deploy els-app-${{ secrets.ENVIRONMENT_NAME }} \
+            -c environment=${{ secrets.ENVIRONMENT_NAME }} \
+            --require-approval never
 
       - name: Build packages
         run: pnpm run build
@@ -264,6 +262,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -274,21 +277,15 @@ jobs:
           chmod +x scripts/package_lambda.sh
           ENVIRONMENT=${{ secrets.ENVIRONMENT_NAME }} AWS_REGION=${{ secrets.AWS_REGION }} bash scripts/package_lambda.sh
 
-      - name: Deploy CloudFormation stack
-        run: |
-          AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-          CFN_BUCKET="els-lambda-code-${{ secrets.ENVIRONMENT_NAME }}-${AWS_ACCOUNT_ID}"
+      - name: Install CDK dependencies
+        run: cd infra/cdk && npm ci
 
-          aws cloudformation deploy \
-            --template-file infra/template.yaml \
-            --stack-name els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
-            --parameter-overrides \
-              EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} \
-              Region=${{ secrets.AWS_REGION }} \
-            --capabilities CAPABILITY_NAMED_IAM \
-            --no-fail-on-empty-changeset \
-            --s3-bucket "$CFN_BUCKET" \
-            --s3-prefix cfn-templates
+      - name: Deploy pipeline infrastructure
+        run: |
+          cd infra/cdk && npx cdk deploy els-pipeline-${{ secrets.ENVIRONMENT_NAME }} \
+            -c environment=${{ secrets.ENVIRONMENT_NAME }} \
+            -c region=${{ secrets.AWS_REGION }} \
+            --require-approval never
 
       - name: Update Lambda function code
         run: |
@@ -345,19 +342,21 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Install CDK dependencies
+        run: cd infra/cdk && npm ci
+
       - name: Deploy app infrastructure with custom domain
+        env:
+          DESCOPE_PROJECT_ID: ${{ secrets.DESCOPE_PROJECT_ID }}
         run: |
-          PARAMS="EnvironmentName=${{ secrets.ENVIRONMENT_NAME }} PipelineStackName=els-pipeline-${{ secrets.ENVIRONMENT_NAME }} DescopeProjectId=${{ secrets.DESCOPE_PROJECT_ID }}"
+          CDK_CONTEXT="-c environment=${{ secrets.ENVIRONMENT_NAME }}"
           if [ -n "${{ secrets.CUSTOM_DOMAIN }}" ]; then
-            PARAMS="$PARAMS CustomDomainName=${{ secrets.CUSTOM_DOMAIN }} HostedZoneId=${{ secrets.HOSTED_ZONE_ID }}"
+            CDK_CONTEXT="$CDK_CONTEXT -c customDomain=${{ secrets.CUSTOM_DOMAIN }} -c hostedZoneId=${{ secrets.HOSTED_ZONE_ID }}"
           fi
 
-          aws cloudformation deploy \
-            --template-file infra/app-template.yaml \
-            --stack-name els-app-${{ secrets.ENVIRONMENT_NAME }} \
-            --parameter-overrides $PARAMS \
-            --capabilities CAPABILITY_NAMED_IAM \
-            --no-fail-on-empty-changeset
+          cd infra/cdk && npx cdk deploy els-app-${{ secrets.ENVIRONMENT_NAME }} \
+            $CDK_CONTEXT \
+            --require-approval never
 
       - name: Build packages
         run: pnpm run build

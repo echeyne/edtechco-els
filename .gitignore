@@ -65,3 +65,6 @@ test_parser_local.py
 
 #Kiro
 .kiro/
+
+#cdk
+cdk.out*
