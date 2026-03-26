@@ -7,3 +7,4 @@ aws-opentelemetry-distro
 hypothesis
 pytest
 bedrock-agentcore-starter-toolkit
+descope

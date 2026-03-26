@@ -156,6 +156,14 @@ export class ElsAppStack extends cdk.Stack {
     const apiGateway = new apigatewayv2.CfnApi(this, "ApiGateway", {
       name: `els-api-${env}`,
       protocolType: "HTTP",
+      // CORS origins are patched below after the CloudFront distribution is
+      // created so we can include the CloudFront domain in the allow-list.
+      corsConfiguration: {
+        allowOrigins: ["http://localhost:5173", "http://localhost:4173"],
+        allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allowHeaders: ["Content-Type", "Authorization"],
+        maxAge: 86400,
+      },
     });
 
     const apiGatewayIntegration = new apigatewayv2.CfnIntegration(
@@ -239,6 +247,22 @@ export class ElsAppStack extends cdk.Stack {
         bucketPolicy: "FrontendBucketPolicy",
       },
     });
+
+    // Patch CORS allow-origins to include the CloudFront domain (and custom
+    // domain if provided). This must happen after the distribution is created
+    // so the CloudFront domain token is available.
+    const corsAllowOrigins: string[] = [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      cdk.Fn.join("", ["https://", frontend.distribution.attrDomainName]),
+    ];
+    if (props.customDomainName) {
+      corsAllowOrigins.push(`https://${props.customDomainName}`);
+    }
+    apiGateway.addPropertyOverride(
+      "CorsConfiguration.AllowOrigins",
+      corsAllowOrigins,
+    );
 
     // ========================================================================
     // Conditional Custom Domain: Route53 Alias Record

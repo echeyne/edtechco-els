@@ -155,20 +155,13 @@ export class ElsPlanningStack extends cdk.Stack {
     // HTTP API Gateway (L1 constructs matching CloudFormation)
     // ========================================================================
 
-    // Build CORS allow origins
-    const corsAllowOrigins: string[] = [
-      "http://localhost:5173",
-      "http://localhost:4173",
-    ];
-    if (props.customDomainName) {
-      corsAllowOrigins.push(`https://${props.customDomainName}`);
-    }
-
     const apiGateway = new apigatewayv2.CfnApi(this, "PlanningApiGateway", {
       name: `els-planning-api-${env}`,
       protocolType: "HTTP",
+      // CORS origins are patched below after the CloudFront distribution is
+      // created so we can include the CloudFront domain in the allow-list.
       corsConfiguration: {
-        allowOrigins: corsAllowOrigins,
+        allowOrigins: ["http://localhost:5173", "http://localhost:4173"],
         allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowHeaders: ["Content-Type", "Authorization"],
         maxAge: 86400,
@@ -256,6 +249,22 @@ export class ElsPlanningStack extends cdk.Stack {
         bucketPolicy: "PlanningFrontendBucketPolicy",
       },
     });
+
+    // Patch CORS allow-origins to include the CloudFront domain (and custom
+    // domain if provided). This must happen after the distribution is created
+    // so the CloudFront domain token is available.
+    const corsAllowOrigins: string[] = [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      cdk.Fn.join("", ["https://", frontend.distribution.attrDomainName]),
+    ];
+    if (props.customDomainName) {
+      corsAllowOrigins.push(`https://${props.customDomainName}`);
+    }
+    apiGateway.addPropertyOverride(
+      "CorsConfiguration.AllowOrigins",
+      corsAllowOrigins,
+    );
 
     // ========================================================================
     // Conditional Custom Domain: Route53 Alias Record
@@ -558,6 +567,12 @@ export class ElsPlanningStack extends cdk.Stack {
         DB_NAME: "els_pipeline",
         GUARDRAIL_ID: guardrail.ref,
         GUARDRAIL_VERSION: guardrailVersion.attrVersion,
+        DESCOPE_PROJECT_ID: props.descopeProjectId,
+      },
+      // Allow the Authorization header through so the agent can validate
+      // the user's Descope JWT directly — this is the tamper-proof identity source.
+      requestHeaderConfiguration: {
+        allowlistedHeaders: ["Authorization"],
       },
       tags: {
         Environment: env,

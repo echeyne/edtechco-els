@@ -36,6 +36,7 @@ htmlcov/
 .env
 .env.dev
 .env.local
+.env.production.local
 
 # IDE
 .vscode/
@@ -68,3 +69,5 @@ test_parser_local.py
 
 #cdk
 cdk.out*
+
+outputs/*

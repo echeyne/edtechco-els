@@ -139,8 +139,13 @@ deploy_frontend() {
     DISTRIBUTION_ID=$(get_output CloudFrontDistributionId)
     CLOUDFRONT_DOMAIN=$(get_output CloudFrontDomainName)
 
+    API_URL=$(get_output ApiGatewayUrl)
+    echo "VITE_API_BASE=$API_URL" > packages/els-explorer-frontend/.env.production.local
+
     pnpm --filter @els/shared run build
     pnpm --filter @els/frontend run build
+
+    rm -f packages/els-explorer-frontend/.env.production.local
 
     aws s3 sync packages/els-explorer-frontend/dist/ "s3://$FRONTEND_BUCKET/" \
         --delete --region "$REGION"

@@ -151,8 +151,19 @@ deploy_frontend() {
     DISTRIBUTION_ID=$(get_output PlanningCloudFrontDistributionId)
     CLOUDFRONT_DOMAIN=$(get_output PlanningCloudFrontDomainName)
 
+    API_URL=$(get_output PlanningApiGatewayUrl)
+    print_message "$YELLOW" "API URL: $API_URL"
+
+    # Write a production-only env file so VITE_API_BASE is set correctly
+    # even if .env.local exists with a dev value (Vite loads .env.production.local
+    # with higher priority than .env.local in production mode).
+    echo "VITE_API_BASE=$API_URL" > packages/planning-frontend/.env.production.local
+
     pnpm --filter @els/shared run build
     pnpm --filter @els/planning-frontend run build
+
+    # Clean up the temp env file
+    rm -f packages/planning-frontend/.env.production.local
 
     aws s3 sync packages/planning-frontend/dist/ "s3://$FRONTEND_BUCKET/" \
         --delete --region "$REGION"

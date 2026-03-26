@@ -76,6 +76,7 @@ deploy_cdk() {
         -c environment="$ENVIRONMENT" \
         -c region="$REGION" \
         --require-approval never \
+        --exclusively \
         --output "cdk.out.deploy-${ENVIRONMENT}"
 
     cd "$PROJECT_ROOT"
