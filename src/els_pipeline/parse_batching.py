@@ -12,6 +12,8 @@ from typing import Any, Dict, List
 
 import json
 
+from botocore.exceptions import ClientError, ReadTimeoutError
+
 from .config import Config
 from .models import (
     DetectedElement,
@@ -225,7 +227,7 @@ def parse_batch(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                 all_standards.extend(standards)
                 success = True
                 break
-            except (ValueError, json.JSONDecodeError) as e:
+            except (ValueError, json.JSONDecodeError, ClientError, ReadTimeoutError) as e:
                 if attempt == MAX_PARSE_RETRIES:
                     error_msg = (
                         f"Chunk {chunk_idx} failed after "

@@ -12,7 +12,7 @@ from typing import List, Dict, Any
 
 import boto3
 from botocore.config import Config as BotocoreConfig
-from botocore.exceptions import ClientError
+from botocore.exceptions import ClientError, ReadTimeoutError
 
 from .models import (
     DetectedElement,
@@ -165,7 +165,7 @@ def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str
         "bedrock-runtime",
         region_name=Config.AWS_REGION,
         config=BotocoreConfig(
-            read_timeout=180,
+            read_timeout=360,
             connect_timeout=10,
             retries={"max_attempts": 0},
         ),
@@ -195,7 +195,7 @@ def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str
             logger.info(f"Bedrock response received: {len(response_text)} characters")
             return response_text
 
-        except ClientError as e:
+        except (ClientError, ReadTimeoutError) as e:
             if attempt < max_retries:
                 logger.warning(
                     f"Bedrock API call failed (attempt {attempt + 1}/{max_retries + 1}): {e}"
