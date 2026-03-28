@@ -1,7 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as iam from "aws-cdk-lib/aws-iam";
-import * as s3 from "aws-cdk-lib/aws-s3";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
 import { Construct } from "constructs";
 
@@ -12,8 +11,13 @@ export interface PipelineLambdaProps {
   timeout: cdk.Duration;
   memorySize: number;
   environment: Record<string, string>;
-  codeBucket: string;
-  codeKey: string;
+  /**
+   * Absolute or relative path to the Python source directory.
+   * CDK will bundle this with Docker (pip install + copy source) and
+   * content-hash the result so CloudFormation updates the function
+   * whenever the code actually changes.
+   */
+  codePath: string;
   cfnLogicalId?: string;
   vpcConfig?: {
     vpc: ec2.IVpc;
@@ -28,12 +32,6 @@ export class PipelineLambda extends Construct {
   constructor(scope: Construct, id: string, props: PipelineLambdaProps) {
     super(scope, id);
 
-    const codeBucket = s3.Bucket.fromBucketName(
-      this,
-      "CodeBucket",
-      props.codeBucket,
-    );
-
     this.function = new lambda.Function(this, "Function", {
       functionName: props.functionName,
       runtime: lambda.Runtime.PYTHON_3_13,
@@ -42,7 +40,19 @@ export class PipelineLambda extends Construct {
       timeout: props.timeout,
       memorySize: props.memorySize,
       environment: props.environment,
-      code: lambda.Code.fromBucket(codeBucket, props.codeKey),
+      code: lambda.Code.fromAsset(props.codePath, {
+        bundling: {
+          image: lambda.Runtime.PYTHON_3_13.bundlingImage,
+          command: [
+            "bash",
+            "-c",
+            [
+              "pip install boto3 pydantic psycopg2-binary python-dotenv -t /asset-output --quiet",
+              "cp -au . /asset-output",
+            ].join(" && "),
+          ],
+        },
+      }),
       ...(props.vpcConfig && {
         vpc: props.vpcConfig.vpc,
         securityGroups: props.vpcConfig.securityGroups,

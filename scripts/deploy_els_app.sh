@@ -99,36 +99,9 @@ deploy_infra() {
 
 # ─── Build & deploy API ───
 deploy_api() {
-    print_header "Building & Deploying API"
-
-    LAMBDA_NAME=$(get_output ApiLambdaFunctionName)
-    print_message "$YELLOW" "Lambda: $LAMBDA_NAME"
-
-    pnpm --filter @els/shared run build
-    pnpm --filter @els/api run build
-
-    npx esbuild packages/els-explorer-api/dist/lambda.js \
-        --bundle \
-        --platform=node \
-        --target=node24 \
-        --format=esm \
-        --outfile=build/api-lambda/index.mjs \
-        --external:@aws-sdk/* \
-        --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
-
-    rm -f build/api-lambda.zip
-    (cd build/api-lambda && zip -r ../api-lambda.zip .)
-
-    aws lambda update-function-code \
-        --function-name "$LAMBDA_NAME" \
-        --zip-file fileb://build/api-lambda.zip \
-        --region "$REGION" > /dev/null
-
-    aws lambda wait function-updated \
-        --function-name "$LAMBDA_NAME" \
-        --region "$REGION"
-
-    print_message "$GREEN" "✓ API deployed"
+    print_header "API Code Deployed via CDK"
+    print_message "$GREEN" "✓ CDK bundles and deploys the API Lambda code automatically."
+    print_message "$GREEN" "  If you skipped infra, re-run without --skip-infra to deploy code changes."
 }
 
 # ─── Build & deploy frontend ───

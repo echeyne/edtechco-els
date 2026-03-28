@@ -1,3 +1,4 @@
+import * as path from "path";
 import * as cdk from "aws-cdk-lib";
 import * as s3 from "aws-cdk-lib/aws-s3";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
@@ -945,8 +946,10 @@ export class ElsPipelineStack extends cdk.Stack {
     // Lambda Functions
     // ========================================================================
 
-    const codeBucket = `els-lambda-code-${env}-${accountId}`;
-    const codeKey = "els-lambda-package.zip";
+    // Resolve the Python source directory relative to the CDK project root.
+    // CDK bundles this with Docker (pip install + copy) and content-hashes
+    // the result, so CloudFormation updates the function whenever code changes.
+    const pipelineCodePath = path.resolve(process.cwd(), "../../src");
 
     // Wrap CfnRoles as IRole for PipelineLambda construct
     const wrapRole = (cfnRole: iam.CfnRole): iam.IRole =>
@@ -986,8 +989,7 @@ export class ElsPipelineStack extends cdk.Stack {
         ENVIRONMENT: env,
         COUNTRY_CODE_VALIDATION: "enabled",
       },
-      codeBucket,
-      codeKey,
+      codePath: pipelineCodePath,
       cfnLogicalId: "IngesterLambdaFunction",
     });
 
@@ -1005,8 +1007,7 @@ export class ElsPipelineStack extends cdk.Stack {
           ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
           ENVIRONMENT: env,
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "TextExtractorLambdaFunction",
       },
     );
@@ -1026,8 +1027,7 @@ export class ElsPipelineStack extends cdk.Stack {
           CONFIDENCE_THRESHOLD: "0.7",
           ENVIRONMENT: env,
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "StructureDetectorLambdaFunction",
       },
     );
@@ -1045,8 +1045,7 @@ export class ElsPipelineStack extends cdk.Stack {
           ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
           ENVIRONMENT: env,
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "HierarchyParserLambdaFunction",
       },
     );
@@ -1065,8 +1064,7 @@ export class ElsPipelineStack extends cdk.Stack {
           ENVIRONMENT: env,
           MAX_CHUNKS_PER_BATCH: "5",
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "PrepareDetectionBatchesLambdaFunction",
       },
     );
@@ -1084,8 +1082,7 @@ export class ElsPipelineStack extends cdk.Stack {
         MAX_CHUNKS_PER_BATCH: "5",
         ENVIRONMENT: env,
       },
-      codeBucket,
-      codeKey,
+      codePath: pipelineCodePath,
       cfnLogicalId: "DetectBatchLambdaFunction",
     });
 
@@ -1103,8 +1100,7 @@ export class ElsPipelineStack extends cdk.Stack {
           CONFIDENCE_THRESHOLD: "0.7",
           ENVIRONMENT: env,
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "MergeDetectionResultsLambdaFunction",
       },
     );
@@ -1123,8 +1119,7 @@ export class ElsPipelineStack extends cdk.Stack {
           ENVIRONMENT: env,
           MAX_DOMAINS_PER_BATCH: "3",
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "PrepareParseBatchesLambdaFunction",
       },
     );
@@ -1140,8 +1135,7 @@ export class ElsPipelineStack extends cdk.Stack {
         ENVIRONMENT: env,
         MAX_DOMAINS_PER_BATCH: "3",
       },
-      codeBucket,
-      codeKey,
+      codePath: pipelineCodePath,
       cfnLogicalId: "ParseBatchLambdaFunction",
     });
 
@@ -1158,8 +1152,7 @@ export class ElsPipelineStack extends cdk.Stack {
           ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
           ENVIRONMENT: env,
         },
-        codeBucket,
-        codeKey,
+        codePath: pipelineCodePath,
         cfnLogicalId: "MergeParseResultsLambdaFunction",
       },
     );
@@ -1174,8 +1167,7 @@ export class ElsPipelineStack extends cdk.Stack {
         ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
         ENVIRONMENT: env,
       },
-      codeBucket,
-      codeKey,
+      codePath: pipelineCodePath,
       cfnLogicalId: "ValidatorLambdaFunction",
     });
 
@@ -1191,8 +1183,7 @@ export class ElsPipelineStack extends cdk.Stack {
         DB_CLUSTER_ARN: `arn:aws:rds:${region}:${accountId}:cluster:${this.databaseCluster.ref}`,
         ENVIRONMENT: env,
       },
-      codeBucket,
-      codeKey,
+      codePath: pipelineCodePath,
       cfnLogicalId: "PersistenceLambdaFunction",
       vpcConfig: {
         vpc: l2Vpc,
@@ -1603,11 +1594,19 @@ export class ElsPipelineStack extends cdk.Stack {
             },
           },
           ResultPath: "$.parse_batch_results",
+          Retry: [
+            {
+              ErrorEquals: ["States.TaskFailed", "States.Timeout"],
+              IntervalSeconds: 10,
+              MaxAttempts: 1,
+              BackoffRate: 2.0,
+            },
+          ],
           Catch: [
             {
               ErrorEquals: ["States.ALL"],
-              ResultPath: "$.parse_batch_errors",
-              Next: "MergeParseResults",
+              ResultPath: "$.error_info",
+              Next: "NotifyFailure",
             },
           ],
           Next: "MergeParseResults",

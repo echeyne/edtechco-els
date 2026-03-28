@@ -67,9 +67,7 @@ export default function PDFViewer({ documentId, initialPage }: PDFViewerProps) {
     return () => clearInterval(interval);
   }, [expiresAt]);
 
-  const iframeSrc = pdfUrl
-    ? `${pdfUrl}#page=${currentPage}`
-    : undefined;
+  const iframeSrc = pdfUrl ? `${pdfUrl}#page=${currentPage}` : undefined;
 
   const goToPage = (page: number) => {
     const p = Math.max(1, page);
@@ -137,9 +135,7 @@ export default function PDFViewer({ documentId, initialPage }: PDFViewerProps) {
   if (expired) {
     return (
       <div className="flex flex-col items-center gap-4 py-16">
-        <p className="text-muted-foreground">
-          The PDF link has expired.
-        </p>
+        <p className="text-muted-foreground">The PDF link has expired.</p>
         <Button variant="outline" onClick={fetchUrl}>
           <RefreshCw className="mr-2 h-4 w-4" />
           Refresh link
@@ -150,59 +146,6 @@ export default function PDFViewer({ documentId, initialPage }: PDFViewerProps) {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Toolbar */}
-      <div
-        className={cn(
-          "flex items-center gap-2 border-b bg-muted/50 px-4 py-2",
-        )}
-      >
-        {/* Page navigation */}
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => goToPage(currentPage - 1)}
-          disabled={currentPage <= 1}
-          aria-label="Previous page"
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-
-        <div className="flex items-center gap-1 text-sm">
-          <span>Page</span>
-          <Input
-            className="h-8 w-16 text-center"
-            value={pageInput}
-            onChange={(e) => setPageInput(e.target.value)}
-            onKeyDown={handlePageInputKeyDown}
-            onBlur={handlePageInputBlur}
-            aria-label="Page number"
-          />
-        </div>
-
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={() => goToPage(currentPage + 1)}
-          aria-label="Next page"
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-
-        <div className="flex-1" />
-
-        {/* Download */}
-        <Button
-          variant="outline"
-          size="sm"
-          asChild
-        >
-          <a href={pdfUrl ?? "#"} target="_blank" rel="noopener noreferrer">
-            <Download className="mr-2 h-4 w-4" />
-            Download
-          </a>
-        </Button>
-      </div>
-
       {/* PDF iframe */}
       <iframe
         key={iframeSrc}

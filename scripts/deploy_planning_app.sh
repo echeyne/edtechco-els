@@ -107,39 +107,9 @@ deploy_infra() {
 
 # ─── Build & deploy Planning API Lambda ───
 deploy_api() {
-    print_header "Building & Deploying Planning API"
-    cd "$PROJECT_ROOT"
-
-    LAMBDA_NAME=$(get_output PlanningApiLambdaFunctionName)
-    print_message "$YELLOW" "Lambda: $LAMBDA_NAME"
-
-    pnpm --filter @els/shared run build
-    pnpm --filter @els/planning-api run build
-
-    mkdir -p build/planning-api-lambda
-
-    npx esbuild packages/planning-api/dist/lambda.js \
-        --bundle \
-        --platform=node \
-        --target=node20 \
-        --format=esm \
-        --outfile=build/planning-api-lambda/index.mjs \
-        '--external:@aws-sdk/*' \
-        --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);"
-
-    rm -f build/planning-api-lambda.zip
-    (cd build/planning-api-lambda && zip -r ../planning-api-lambda.zip .)
-
-    aws lambda update-function-code \
-        --function-name "$LAMBDA_NAME" \
-        --zip-file fileb://build/planning-api-lambda.zip \
-        --region "$REGION" > /dev/null
-
-    aws lambda wait function-updated \
-        --function-name "$LAMBDA_NAME" \
-        --region "$REGION"
-
-    print_message "$GREEN" "✓ Planning API deployed"
+    print_header "API Code Deployed via CDK"
+    print_message "$GREEN" "✓ CDK bundles and deploys the Planning API Lambda code automatically."
+    print_message "$GREEN" "  If you skipped infra, re-run without --skip-infra to deploy code changes."
 }
 
 # ─── Build & deploy frontend ───

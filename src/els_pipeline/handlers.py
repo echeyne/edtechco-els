@@ -28,7 +28,7 @@ from .parse_batching import (
     merge_parse_results,
 )
 from .validator import validate_record, serialize_record
-from .models import IngestionRequest
+from .models import IngestionRequest, StatusEnum
 from .config import Config
 from .s3_helpers import save_json_to_s3, load_json_from_s3, construct_intermediate_key
 
@@ -387,8 +387,15 @@ def parsing_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             "indicators": result.indicators,  # Already serialized in ParseResult
             "total_indicators": len(result.indicators),
             "parsing_timestamp": datetime.now(timezone.utc).isoformat(),
-            "source_detection_key": detection_key
+            "source_detection_key": detection_key,
+            "status": result.status,
+            "error": result.error,
         }
+
+        if result.status == StatusEnum.PARTIAL.value:
+            logger.warning(
+                f"Parsing completed with partial results: {result.error}"
+            )
 
         # Save parsing output to S3
         output_key = construct_intermediate_key(

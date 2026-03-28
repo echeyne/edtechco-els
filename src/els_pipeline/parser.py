@@ -34,15 +34,28 @@ LLM_MAX_TOKENS = 64000
 
 
 def generate_standard_id(
-    country: str, state: str, version_year: int, domain_code: str, indicator_code: str
+    country: str,
+    state: str,
+    version_year: int,
+    domain_code: str,
+    indicator_code: str,
+    age_band: str = "",
 ) -> str:
     """
     Generate a deterministic Standard_ID.
 
+    The age_band is included so that PK3 and PK4 variants of the same
+    indicator (e.g. I.A.1 for 36-48 vs I.A.1 for 48-60) receive distinct
+    IDs instead of colliding.
+
     Returns:
-        Standard_ID in format: {COUNTRY}-{STATE}-{YEAR}-{DOMAIN_CODE}-{INDICATOR_CODE}
+        Standard_ID in format: {COUNTRY}-{STATE}-{YEAR}-{DOMAIN_CODE}-{INDICATOR_CODE}-{AGE_BAND}
+        (age_band is omitted from the suffix when empty/null)
     """
-    return f"{country}-{state}-{version_year}-{domain_code}-{indicator_code}"
+    base = f"{country}-{state}-{version_year}-{domain_code}-{indicator_code}"
+    if age_band:
+        return f"{base}-{age_band}"
+    return base
 
 
 def build_parsing_prompt(
@@ -114,10 +127,11 @@ Rules:
 - If a hierarchy level does not exist (e.g. no sub_strand), set its code, name, and description to null.
 - For indicator_name: use the actual title of the indicator (e.g. "Curiosity and Interest"), NOT age-band labels like "Early", "Later", "By 36 months", etc. Strip any age-band pre-text from the indicator title. The age-band information belongs in the age_band field.
 - For indicator_description: use the full descriptive text of the indicator. This may be null if no description exists beyond the title. Strip any age-band pre-text from the indicator description. The age-band information belongs in the age_band field.
-- For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 0-48, PK4 is 0-60, 3 to 4 ½ Years is 36-54) If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
+- For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 36-48, PK4 is 48-60, 3 to 4 ½ Years is 36-54) If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
 - For code: it should be hirarchical (e.g. "A", "A.1", "A.1a", "A.1a.1") not just the final part.
 - Return ONLY the JSON array, no other text.
 - Every indicator element must appear exactly once in the output.
+- There will be cases where you see "No PK3 outcomes for this domain of learning." or similar wording. This means that for the given indicator and age, there is no outcome. In this case, the indicator should be omitted. Do not try to attach it to another indicator.
 
 CRITICAL — RESOLVING HIERARCHY USING CODES AND CONTEXT:
 The detected elements come from processing the document in overlapping chunks. This means:
@@ -151,7 +165,7 @@ def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str
         "bedrock-runtime",
         region_name=Config.AWS_REGION,
         config=BotocoreConfig(
-            read_timeout=600,
+            read_timeout=180,
             connect_timeout=10,
             retries={"max_attempts": 0},
         ),
@@ -284,9 +298,11 @@ def parse_llm_response(
 
             age_band = obj.get("age_band") or fallback_age_band
 
+            print(f"DEBUG: age_band: '{age_band}'")
             standard_id = generate_standard_id(
-                country, state, version_year, obj["domain_code"], obj["indicator_code"]
+                country, state, version_year, obj["domain_code"], obj["indicator_code"], age_band
             )
+            print(f"DEBUG: standard_id: '{standard_id}'")
 
             source_page = obj.get("source_page", 1)
             source_text = obj.get("source_text", "")
@@ -311,6 +327,46 @@ def parse_llm_response(
             continue
 
     return standards
+def _infer_domain_code(
+    element: DetectedElement,
+    domain_codes: List[str],
+) -> str | None:
+    """
+    Infer which domain an element belongs to by matching its code against
+    known domain codes.
+
+    Strategy (tried in order):
+    1. Prefix match — the element's code (after stripping common age-band
+       prefixes like ``PK3.``, ``PK4.``) starts with a known domain code
+       followed by a separator (``.`` or ``-``).  Longer domain codes are
+       tried first so that ``III`` is matched before ``I``.
+    2. Returns None if no domain can be determined — the caller should
+       fall back to document-order assignment.
+
+    This approach is format-agnostic: it works with Roman numerals
+    (``I.A.1``), abbreviations (``LLD.A.1``), numeric codes (``1.2.3``),
+    and arbitrary strings as long as child codes are prefixed with their
+    parent domain code.
+    """
+    code = element.code
+    # Strip common age-band prefixes (e.g. PK3., PK4.)
+    stripped = re.sub(r'^PK\d+\.', '', code)
+
+    # Try longest domain codes first so "III" matches before "I"
+    for dc in sorted(domain_codes, key=len, reverse=True):
+        if stripped == dc:
+            # Exact match (element IS the domain, shouldn't happen for
+            # non-domain elements but handle gracefully)
+            return dc
+        if stripped.startswith(dc) and len(stripped) > len(dc):
+            # Check that the next character is a separator, not just a
+            # longer code that happens to share a prefix
+            next_char = stripped[len(dc)]
+            if next_char in ('.', '-', '_'):
+                return dc
+    return None
+
+
 def chunk_elements_by_domain(
     elements: List[DetectedElement],
 ) -> List[List[DetectedElement]]:
@@ -318,32 +374,87 @@ def chunk_elements_by_domain(
     Split elements into chunks grouped by domain for parallel LLM calls.
 
     Each chunk contains one domain element and all of its descendant strands,
-    sub_strands, and indicators (determined by document order: every element
-    after a domain up to the next domain belongs to that domain).
+    sub_strands, and indicators.  Non-domain elements are routed to the
+    correct domain chunk by matching their code prefix against known domain
+    codes, NOT by document order alone.  This is critical because overlapping
+    detector chunks can interleave elements from different domains.
+
+    Duplicate domain elements (same code) produced by overlapping detector
+    chunks are merged: the one with the richer description is kept.
+
+    Duplicate non-domain elements (same level + code) from overlapping
+    detector chunks are deduplicated within each domain group.
 
     If the input contains no domain-level elements the full list is returned
     as a single chunk so the LLM can still attempt resolution.
 
     Returns:
-        List of element groups, one per domain.
+        List of element groups, one per unique domain code.
     """
     if not elements:
         return []
 
-    chunks: List[List[DetectedElement]] = []
-    current_chunk: List[DetectedElement] = []
+    from collections import OrderedDict
 
+    domain_chunks: OrderedDict[str, List[DetectedElement]] = OrderedDict()
+
+    # First pass: collect all domain elements so we know the valid codes
     for el in elements:
-        if el.level == HierarchyLevelEnum.DOMAIN and current_chunk:
-            chunks.append(current_chunk)
-            current_chunk = []
-        current_chunk.append(el)
+        if el.level == HierarchyLevelEnum.DOMAIN:
+            code = el.code
+            if code not in domain_chunks:
+                domain_chunks[code] = [el]
+            else:
+                # Keep the richer description
+                existing_domain = next(
+                    (e for e in domain_chunks[code] if e.level == HierarchyLevelEnum.DOMAIN),
+                    None,
+                )
+                if existing_domain and len(el.description or "") > len(
+                    existing_domain.description or ""
+                ):
+                    idx = domain_chunks[code].index(existing_domain)
+                    domain_chunks[code][idx] = el
 
-    if current_chunk:
-        chunks.append(current_chunk)
+    domain_codes = list(domain_chunks.keys())
 
-    # If we ended up with zero domain-headed chunks (no domain elements at
-    # all), return the whole list as one chunk.
+    # Second pass: route non-domain elements to the correct domain chunk.
+    # We track document-order domain context as a fallback for elements
+    # whose codes don't contain a recognisable domain prefix (e.g. bare
+    # strand codes like "A", "B").
+    current_domain_code: str | None = (
+        next(iter(domain_chunks), None) if domain_chunks else None
+    )
+    for el in elements:
+        if el.level == HierarchyLevelEnum.DOMAIN:
+            current_domain_code = el.code
+            continue
+
+        # Try to infer the correct domain from the element's code
+        inferred = _infer_domain_code(el, domain_codes)
+        if inferred:
+            target = inferred
+        elif current_domain_code is not None:
+            # Fallback: use the most recently seen domain in document order
+            target = current_domain_code
+        else:
+            # No domain seen yet — park in a placeholder group
+            if "__pre__" not in domain_chunks:
+                domain_chunks["__pre__"] = []
+            domain_chunks["__pre__"].append(el)
+            continue
+
+        # Deduplicate elements (same level + code) from overlapping chunks
+        existing_codes = {
+            (e.level, e.code)
+            for e in domain_chunks[target]
+            if e.level != HierarchyLevelEnum.DOMAIN
+        }
+        if (el.level, el.code) not in existing_codes:
+            domain_chunks[target].append(el)
+
+    chunks = list(domain_chunks.values())
+
     if not chunks:
         return [elements]
 

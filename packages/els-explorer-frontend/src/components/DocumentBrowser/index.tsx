@@ -12,6 +12,8 @@ import {
   Globe,
   MapPin,
   Calendar,
+  ExternalLink,
+  Building2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -30,6 +32,8 @@ interface DocumentListItem {
   state: string;
   versionYear: number;
   s3Key: string;
+  sourceUrl: string | null;
+  publishingAgency: string;
 }
 
 /** Group key: country → state → documents */
@@ -55,6 +59,8 @@ function toListItem(doc: Document): DocumentListItem {
     state: doc.state,
     versionYear: doc.versionYear,
     s3Key: doc.s3Key ?? "",
+    sourceUrl: doc.sourceUrl,
+    publishingAgency: doc.publishingAgency,
   };
 }
 
@@ -116,7 +122,9 @@ export default function DocumentBrowser({
       })
       .catch((err) => {
         if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Failed to load documents");
+          setError(
+            err instanceof Error ? err.message : "Failed to load documents",
+          );
         }
       })
       .finally(() => {
@@ -173,7 +181,9 @@ export default function DocumentBrowser({
       {/* Empty state */}
       {groups.length === 0 && (
         <p className="py-8 text-center text-muted-foreground">
-          {searchQuery ? "No documents match your search." : "No documents available."}
+          {searchQuery
+            ? "No documents match your search."
+            : "No documents available."}
         </p>
       )}
 
@@ -194,7 +204,7 @@ export default function DocumentBrowser({
 
               <ul className="ml-4 space-y-1">
                 {stateGroup.documents.map((doc) => (
-                  <li key={doc.id}>
+                  <li key={doc.id} className="space-y-1">
                     <Link
                       to={`/documents/${doc.id}/view`}
                       onClick={() => onDocumentSelect?.(doc.id)}
@@ -205,12 +215,33 @@ export default function DocumentBrowser({
                     >
                       <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
                       <span className="flex-1 truncate">{doc.title}</span>
+                      {doc.publishingAgency && (
+                        <Badge variant="outline" className="shrink-0">
+                          <Building2 className="mr-1 h-3 w-3" />
+                          {doc.publishingAgency}
+                        </Badge>
+                      )}
                       <Badge variant="secondary" className="shrink-0">
                         <Calendar className="mr-1 h-3 w-3" />
                         {doc.versionYear}
                       </Badge>
                       <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                     </Link>
+                    {doc.sourceUrl && (
+                      <p className="ml-11 text-xs text-muted-foreground">
+                        For the full, unedited document and related resources,
+                        visit the{" "}
+                        <a
+                          href={doc.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 underline hover:text-foreground"
+                        >
+                          original source
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>

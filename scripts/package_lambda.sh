@@ -163,12 +163,18 @@ update_lambda_functions() {
     AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
     LAMBDA_BUCKET="els-lambda-code-${ENVIRONMENT}-${AWS_ACCOUNT_ID}"
     
-    # List of Lambda function names
+    # List of Lambda function names (must match CDK stack definitions)
     FUNCTIONS=(
         "els-ingester-${ENVIRONMENT}"
         "els-text-extractor-${ENVIRONMENT}"
         "els-structure-detector-${ENVIRONMENT}"
         "els-hierarchy-parser-${ENVIRONMENT}"
+        "els-prepare-detection-batches-${ENVIRONMENT}"
+        "els-detect-batch-${ENVIRONMENT}"
+        "els-merge-detection-results-${ENVIRONMENT}"
+        "els-prepare-parse-batches-${ENVIRONMENT}"
+        "els-parse-batch-${ENVIRONMENT}"
+        "els-merge-parse-results-${ENVIRONMENT}"
         "els-validator-${ENVIRONMENT}"
         "els-persistence-${ENVIRONMENT}"
     )

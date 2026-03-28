@@ -109,8 +109,7 @@ describe("PipelineLambda construct", () => {
         ENVIRONMENT: "dev",
         TEST_VAR: "value",
       },
-      codeBucket: "test-code-bucket",
-      codeKey: "test-code.zip",
+      codePath: __dirname, // Use test dir as a dummy code path
     });
 
     template = Template.fromStack(stack);

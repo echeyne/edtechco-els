@@ -342,6 +342,8 @@ documents.get("/:id/pdf-url", async (c) => {
   const command = new GetObjectCommand({
     Bucket: bucket,
     Key: doc.s3Key!,
+    ResponseContentType: "application/pdf",
+    ResponseContentDisposition: "inline",
   });
 
   const expiresIn = 3600; // 1 hour

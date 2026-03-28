@@ -1,3 +1,4 @@
+import * as path from "path";
 import * as cdk from "aws-cdk-lib";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as lambda from "aws-cdk-lib/aws-lambda";
@@ -118,36 +119,57 @@ export class ElsAppStack extends cdk.Stack {
     // API Lambda Function
     // ========================================================================
 
-    const apiLambdaFunction = new lambda.CfnFunction(
-      this,
-      "ApiLambdaFunction",
-      {
-        functionName: `els-api-${env}`,
-        runtime: "nodejs22.x",
-        handler: "index.handler",
-        role: apiLambdaRole.attrArn,
-        timeout: 30,
-        memorySize: 512,
-        environment: {
-          variables: {
-            ENVIRONMENT: env,
-            DB_CLUSTER_ARN: databaseClusterArn,
-            DB_SECRET_ARN: databaseSecretArn,
-            DB_NAME: "els_pipeline",
-            ELS_RAW_BUCKET: `els-raw-documents-${env}-${accountId}`,
-            ELS_PROCESSED_BUCKET: `els-processed-json-${env}-${accountId}`,
-            DESCOPE_PROJECT_ID: props.descopeProjectId,
+    // Resolve the API source directory relative to the CDK project root.
+    // CDK bundles this with esbuild and content-hashes the result, so
+    // CloudFormation updates the function whenever the code changes.
+    const apiCodePath = path.resolve(
+      process.cwd(),
+      "../../packages/els-explorer-api",
+    );
+
+    const apiLambdaFunction = new lambda.Function(this, "ApiLambdaFunction", {
+      functionName: `els-api-${env}`,
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: "index.handler",
+      role: iam.Role.fromRoleArn(
+        this,
+        "ApiLambdaRoleRef",
+        apiLambdaRole.attrArn,
+      ),
+      timeout: cdk.Duration.seconds(30),
+      memorySize: 512,
+      environment: {
+        ENVIRONMENT: env,
+        DB_CLUSTER_ARN: databaseClusterArn,
+        DB_SECRET_ARN: databaseSecretArn,
+        DB_NAME: "els_pipeline",
+        ELS_RAW_BUCKET: `els-raw-documents-${env}-${accountId}`,
+        ELS_PROCESSED_BUCKET: `els-processed-json-${env}-${accountId}`,
+        DESCOPE_PROJECT_ID: props.descopeProjectId,
+      },
+      code: lambda.Code.fromAsset(apiCodePath, {
+        bundling: {
+          image: lambda.Runtime.NODEJS_22_X.bundlingImage,
+          command: [
+            "bash",
+            "-c",
+            [
+              "npm install --prefix /tmp/build",
+              "npx --prefix /tmp/build esbuild src/lambda.ts --bundle --platform=node --target=node22 --format=esm --outfile=/asset-output/index.mjs --external:@aws-sdk/* '--banner:js=import { createRequire } from \"module\"; const require = createRequire(import.meta.url);'",
+            ].join(" && "),
+          ],
+          environment: {
+            // Ensure npm can write to tmp
+            HOME: "/tmp",
           },
         },
-        code: {
-          zipFile: `exports.handler = async () => ({ statusCode: 200, body: 'placeholder' });`,
-        },
-        tags: [
-          { key: "Environment", value: env },
-          { key: "Project", value: "ELS-App" },
-        ],
-      },
+      }),
+    });
+    (apiLambdaFunction.node.defaultChild as cdk.CfnResource).overrideLogicalId(
+      "ApiLambdaFunction",
     );
+    cdk.Tags.of(apiLambdaFunction).add("Environment", env);
+    cdk.Tags.of(apiLambdaFunction).add("Project", "ELS-App");
 
     // ========================================================================
     // HTTP API Gateway (L1 constructs matching CloudFormation)
@@ -172,7 +194,7 @@ export class ElsAppStack extends cdk.Stack {
       {
         apiId: apiGateway.ref,
         integrationType: "AWS_PROXY",
-        integrationUri: apiLambdaFunction.attrArn,
+        integrationUri: apiLambdaFunction.functionArn,
         payloadFormatVersion: "2.0",
       },
     );
@@ -191,7 +213,7 @@ export class ElsAppStack extends cdk.Stack {
 
     // Lambda permission for API Gateway invocation
     new lambda.CfnPermission(this, "ApiLambdaPermission", {
-      functionName: apiLambdaFunction.ref,
+      functionName: apiLambdaFunction.functionName,
       action: "lambda:InvokeFunction",
       principal: "apigateway.amazonaws.com",
       sourceArn: `arn:aws:execute-api:${region}:${accountId}:${apiGateway.ref}/*`,
@@ -306,8 +328,7 @@ export class ElsAppStack extends cdk.Stack {
     });
 
     new cdk.CfnOutput(this, "ApiLambdaFunctionName", {
-      value: apiLambdaFunction.ref,
-      description: "API Lambda function name",
+      value: apiLambdaFunction.functionName,
     });
 
     if (props.customDomainName) {

@@ -121,35 +121,59 @@ export class ElsPlanningStack extends cdk.Stack {
     // Planning API Lambda Function
     // ========================================================================
 
-    const planningApiLambdaFunction = new lambda.CfnFunction(
+    // Resolve the Planning API source directory relative to the CDK project root.
+    // CDK bundles this with esbuild and content-hashes the result, so
+    // CloudFormation updates the function whenever the code changes.
+    const planningApiCodePath = path.resolve(
+      process.cwd(),
+      "../../packages/planning-api",
+    );
+
+    const planningApiLambdaFunction = new lambda.Function(
       this,
       "PlanningApiLambdaFunction",
       {
         functionName: `els-planning-api-${env}`,
-        runtime: "nodejs22.x",
+        runtime: lambda.Runtime.NODEJS_22_X,
         handler: "index.handler",
-        role: planningApiLambdaRole.attrArn,
-        timeout: 120,
+        role: iam.Role.fromRoleArn(
+          this,
+          "PlanningApiLambdaRoleRef",
+          planningApiLambdaRole.attrArn,
+        ),
+        timeout: cdk.Duration.seconds(120),
         memorySize: 512,
         environment: {
-          variables: {
-            ENVIRONMENT: env,
-            DB_CLUSTER_ARN: databaseClusterArn,
-            DB_SECRET_ARN: databaseSecretArn,
-            DB_NAME: "els_pipeline",
-            DESCOPE_PROJECT_ID: props.descopeProjectId,
-            AGENTCORE_RUNTIME_ARN: "", // Updated after AgentCore Runtime is created below
+          ENVIRONMENT: env,
+          DB_CLUSTER_ARN: databaseClusterArn,
+          DB_SECRET_ARN: databaseSecretArn,
+          DB_NAME: "els_pipeline",
+          DESCOPE_PROJECT_ID: props.descopeProjectId,
+          AGENTCORE_RUNTIME_ARN: "", // Updated after AgentCore Runtime is created below
+        },
+        code: lambda.Code.fromAsset(planningApiCodePath, {
+          bundling: {
+            image: lambda.Runtime.NODEJS_22_X.bundlingImage,
+            command: [
+              "bash",
+              "-c",
+              [
+                "npm install --prefix /tmp/build",
+                "npx --prefix /tmp/build esbuild src/lambda.ts --bundle --platform=node --target=node22 --format=esm --outfile=/asset-output/index.mjs --external:@aws-sdk/* '--banner:js=import { createRequire } from \"module\"; const require = createRequire(import.meta.url);'",
+              ].join(" && "),
+            ],
+            environment: {
+              HOME: "/tmp",
+            },
           },
-        },
-        code: {
-          zipFile: `exports.handler = async () => ({ statusCode: 200, body: 'placeholder' });`,
-        },
-        tags: [
-          { key: "Environment", value: env },
-          { key: "Project", value: "ELS-Planning" },
-        ],
+        }),
       },
     );
+    (
+      planningApiLambdaFunction.node.defaultChild as cdk.CfnResource
+    ).overrideLogicalId("PlanningApiLambdaFunction");
+    cdk.Tags.of(planningApiLambdaFunction).add("Environment", env);
+    cdk.Tags.of(planningApiLambdaFunction).add("Project", "ELS-Planning");
 
     // ========================================================================
     // HTTP API Gateway (L1 constructs matching CloudFormation)
@@ -174,7 +198,7 @@ export class ElsPlanningStack extends cdk.Stack {
       {
         apiId: apiGateway.ref,
         integrationType: "AWS_PROXY",
-        integrationUri: planningApiLambdaFunction.attrArn,
+        integrationUri: planningApiLambdaFunction.functionArn,
         payloadFormatVersion: "2.0",
       },
     );
@@ -193,7 +217,7 @@ export class ElsPlanningStack extends cdk.Stack {
 
     // Lambda permission for API Gateway invocation
     new lambda.CfnPermission(this, "PlanningApiLambdaPermission", {
-      functionName: planningApiLambdaFunction.ref,
+      functionName: planningApiLambdaFunction.functionName,
       action: "lambda:InvokeFunction",
       principal: "apigateway.amazonaws.com",
       sourceArn: `arn:aws:execute-api:${region}:${accountId}:${apiGateway.ref}/*`,
@@ -647,17 +671,15 @@ export class ElsPlanningStack extends cdk.Stack {
     );
 
     // Wire the runtime ARN into the Lambda function's environment
-    // (CfnFunction doesn't support addEnvironment, so we use an override)
-    const cfnLambda = planningApiLambdaFunction;
-    cfnLambda.addPropertyOverride(
-      "Environment.Variables.AGENTCORE_RUNTIME_ARN",
+    planningApiLambdaFunction.addEnvironment(
+      "AGENTCORE_RUNTIME_ARN",
       agentRuntime.agentRuntimeArn,
     );
 
     // Grant the Lambda permission to invoke the AgentCore runtime
     const planningApiLambdaRoleL2 = iam.Role.fromRoleArn(
       this,
-      "PlanningApiLambdaRoleRef",
+      "PlanningApiLambdaRoleRefForAgentCore",
       planningApiLambdaRole.attrArn,
     );
     agentRuntime.grantInvokeRuntime(planningApiLambdaRoleL2);
@@ -687,8 +709,7 @@ export class ElsPlanningStack extends cdk.Stack {
     });
 
     new cdk.CfnOutput(this, "PlanningApiLambdaFunctionName", {
-      value: planningApiLambdaFunction.ref,
-      description: "Planning API Lambda function name",
+      value: planningApiLambdaFunction.functionName,
     });
 
     new cdk.CfnOutput(this, "PlanningGuardrailId", {

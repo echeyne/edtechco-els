@@ -281,7 +281,7 @@ class TestStandardIDGeneration:
             result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 1
-        assert result.standards[0].standard_id == "US-CA-2021-LLD-LLD.1"
+        assert result.standards[0].standard_id == "US-CA-2021-LLD-LLD.1-PK"
 
 
 class TestOrphanDetection:
