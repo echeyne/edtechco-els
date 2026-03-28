@@ -1073,7 +1073,7 @@ export class ElsPipelineStack extends cdk.Stack {
       functionName: `els-detect-batch-${env}`,
       handler: "els_pipeline.handlers.detect_batch_handler",
       role: wrapRole(detectionBatchProcessorLambdaRole),
-      timeout: cdk.Duration.seconds(600),
+      timeout: cdk.Duration.seconds(900),
       memorySize: 1024,
       environment: {
         ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
@@ -1128,7 +1128,7 @@ export class ElsPipelineStack extends cdk.Stack {
       functionName: `els-parse-batch-${env}`,
       handler: "els_pipeline.handlers.parse_batch_handler",
       role: wrapRole(parseBatchProcessorLambdaRole),
-      timeout: cdk.Duration.seconds(600),
+      timeout: cdk.Duration.seconds(900),
       memorySize: 1024,
       environment: {
         ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,

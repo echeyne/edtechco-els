@@ -4,6 +4,7 @@ import * as cdk from "aws-cdk-lib";
 import { ElsPipelineStack } from "../lib/pipeline-stack";
 import { ElsAppStack } from "../lib/app-stack";
 import { ElsPlanningStack } from "../lib/planning-stack";
+import { LandingSiteStack } from "../lib/landing-site-stack";
 
 const app = new cdk.App();
 
@@ -34,3 +35,10 @@ const planningStack = new ElsPlanningStack(app, `els-planning-${env}`, {
   env: { region },
 });
 planningStack.addDependency(pipelineStack);
+
+const landingSiteStack = new LandingSiteStack(app, `els-landing-${env}`, {
+  environmentName: env,
+  customDomainName: app.node.tryGetContext("landingDomain"),
+  hostedZoneId: app.node.tryGetContext("hostedZoneId"),
+  env: { region },
+});
