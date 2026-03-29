@@ -197,7 +197,7 @@ def persist_standard(standard: NormalizedStandard, document_meta: Dict[str, Any]
                     sub_strand_id,
                     standard.indicator.code,
                     standard.indicator.name or None,
-                    standard.indicator.description,
+                    standard.indicator.description or "",
                     standard.age_band,
                     standard.source_page,
                     standard.source_text

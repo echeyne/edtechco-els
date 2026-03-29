@@ -102,7 +102,6 @@ def canonical_json_strategy(draw, valid=True):
             "standard.domain.code",
             "standard.domain.name",
             "standard.indicator.code",
-            "standard.indicator.description",
         ]))
         
         # Remove the field

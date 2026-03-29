@@ -47,7 +47,7 @@ export class PipelineLambda extends Construct {
             "bash",
             "-c",
             [
-              "pip install boto3 pydantic psycopg2-binary python-dotenv -t /asset-output --quiet",
+              "pip install --no-cache-dir boto3 pydantic psycopg2-binary python-dotenv -t /asset-output --quiet",
               "cp -au . /asset-output",
             ].join(" && "),
           ],

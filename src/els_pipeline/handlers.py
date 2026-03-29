@@ -459,10 +459,12 @@ def _indicator_to_canonical(indicator: Dict[str, Any], event: Dict[str, Any]) ->
 
     # The indicator hierarchy level uses 'description' but the canonical schema
     # also requires 'code'.  Ensure both are present.
+    # Some age bands (e.g. PK3 / 36-48) have null descriptions — fall back to
+    # the indicator name so downstream stages always receive a usable string.
     ind = std_obj["indicator"]
     if isinstance(ind, dict):
-        if "description" not in ind:
-            ind["description"] = ind.get("name", "")
+        if not ind.get("description"):
+            ind["description"] = ind.get("name") or ""
 
     # age_band comes from the parsed indicator data, not document metadata
     age_band = indicator.get("age_band") or event.get("age_band", "PK")

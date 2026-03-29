@@ -71,11 +71,11 @@ CANONICAL_SCHEMA = {
                 },
                 "indicator": {
                     "type": "object",
-                    "required": ["code", "description"],
+                    "required": ["code"],
                     "properties": {
                         "code": {"type": "string", "minLength": 1},
                         "name": {"oneOf": [{"type": "null"}, {"type": "string"}]},
-                        "description": {"type": "string", "minLength": 1},
+                        "description": {"oneOf": [{"type": "null"}, {"type": "string"}]},
                     },
                 },
             },
@@ -303,20 +303,30 @@ def _validate_schema(record: Dict[str, Any]) -> list[ValidationError]:
                 )
             )
         elif isinstance(std["indicator"], dict):
-            for field in ["code", "description"]:
-                if field not in std["indicator"]:
-                    errors.append(
-                        ValidationError(
-                            field_path=f"standard.indicator.{field}",
-                            message=f"Missing required field: standard.indicator.{field}",
-                            error_type="missing_field",
-                        )
+            # code is always required
+            if "code" not in std["indicator"]:
+                errors.append(
+                    ValidationError(
+                        field_path="standard.indicator.code",
+                        message="Missing required field: standard.indicator.code",
+                        error_type="missing_field",
                     )
-                elif not isinstance(std["indicator"][field], str) or len(std["indicator"][field]) == 0:
+                )
+            elif not isinstance(std["indicator"]["code"], str) or len(std["indicator"]["code"]) == 0:
+                errors.append(
+                    ValidationError(
+                        field_path="standard.indicator.code",
+                        message="standard.indicator.code must be a non-empty string",
+                        error_type="invalid_type",
+                    )
+                )
+            # description is optional — may be null or empty for some age bands (e.g. PK3)
+            if "description" in std["indicator"] and std["indicator"]["description"] is not None:
+                if not isinstance(std["indicator"]["description"], str):
                     errors.append(
                         ValidationError(
-                            field_path=f"standard.indicator.{field}",
-                            message=f"standard.indicator.{field} must be a non-empty string",
+                            field_path="standard.indicator.description",
+                            message="standard.indicator.description must be a string or null",
                             error_type="invalid_type",
                         )
                     )
@@ -438,7 +448,7 @@ def serialize_record(
         "indicator": {
             "code": standard.indicator.code,
             "name": standard.indicator.name if standard.indicator.name else None,
-            "description": standard.indicator.description if standard.indicator.description is not None else "",
+            "description": standard.indicator.description,
         },
     }
 
@@ -526,7 +536,7 @@ def deserialize_record(json_data: Dict[str, Any]) -> NormalizedStandard:
     indicator = HierarchyLevel(
         code=std["indicator"]["code"],
         name=std["indicator"].get("name") or "",
-        description=std["indicator"]["description"] if std["indicator"]["description"] else None,
+        description=std["indicator"].get("description"),
     )
 
     # Build NormalizedStandard — age_band from document level
