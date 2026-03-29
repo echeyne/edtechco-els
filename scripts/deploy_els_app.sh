@@ -128,7 +128,11 @@ deploy_frontend() {
         --paths "/*" \
         --region "$REGION" > /dev/null
 
-    print_message "$GREEN" "✓ Frontend deployed to https://$CLOUDFRONT_DOMAIN"
+    if [ -n "$CUSTOM_DOMAIN" ]; then
+        print_message "$GREEN" "✓ Frontend deployed to https://$CUSTOM_DOMAIN"
+    else
+        print_message "$GREEN" "✓ Frontend deployed to https://$CLOUDFRONT_DOMAIN"
+    fi
 }
 
 # ─── Summary ───
@@ -136,8 +140,13 @@ print_summary() {
     print_header "Deployment Complete"
     CLOUDFRONT_DOMAIN=$(get_output CloudFrontDomainName)
     API_URL=$(get_output ApiGatewayUrl)
+    if [ -n "$CUSTOM_DOMAIN" ]; then
+        FRONTEND_URL="https://$CUSTOM_DOMAIN"
+    else
+        FRONTEND_URL="https://$CLOUDFRONT_DOMAIN"
+    fi
     print_message "$GREEN" "✅ ELS App deployed"
-    print_message "$GREEN" "   Frontend: https://$CLOUDFRONT_DOMAIN"
+    print_message "$GREEN" "   Frontend: $FRONTEND_URL"
     print_message "$GREEN" "   API:      $API_URL"
     print_message "$GREEN" "   Stack:    $STACK_NAME ($REGION)"
 }
