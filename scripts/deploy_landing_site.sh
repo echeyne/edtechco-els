@@ -30,8 +30,8 @@ print_header() {
 
 SKIP_INFRA=false
 SKIP_FRONTEND=false
-CUSTOM_DOMAIN=""
-HOSTED_ZONE_ID=""
+CUSTOM_DOMAIN="edtechco.org"
+HOSTED_ZONE_ID="Z0235101CN666KKXEN77"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -77,7 +77,7 @@ deploy_infra() {
     cd "$PROJECT_ROOT/infra/cdk"
     npm ci --silent
 
-    CDK_CONTEXT="-c environment=$ENVIRONMENT"
+    CDK_CONTEXT="-c environment=$ENVIRONMENT -c targetStack=$STACK_NAME"
     [ -n "$CUSTOM_DOMAIN" ] && CDK_CONTEXT="$CDK_CONTEXT -c landingDomain=$CUSTOM_DOMAIN"
     [ -n "$HOSTED_ZONE_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c hostedZoneId=$HOSTED_ZONE_ID"
 
@@ -97,6 +97,12 @@ deploy_frontend() {
     FRONTEND_BUCKET=$(get_output LandingSiteBucketName)
     DISTRIBUTION_ID=$(get_output LandingSiteCloudFrontDistributionId)
     CLOUDFRONT_DOMAIN=$(get_output LandingSiteCloudFrontDomainName)
+
+    if [ -z "$FRONTEND_BUCKET" ] || [ -z "$DISTRIBUTION_ID" ]; then
+        print_message "$RED" "✗ Failed to retrieve stack outputs from '$STACK_NAME'."
+        print_message "$RED" "  Ensure the CDK stack has been deployed (don't use --skip-infra on first deploy)."
+        exit 1
+    fi
 
     pnpm --filter @els/landing-site run build
 
@@ -125,8 +131,17 @@ print_summary() {
 main() {
     print_header "ELS Landing Site Deployment"
 
-    [ "$SKIP_INFRA" = false ] && deploy_infra || print_message "$YELLOW" "⏭ Skipping infrastructure"
-    [ "$SKIP_FRONTEND" = false ] && deploy_frontend || print_message "$YELLOW" "⏭ Skipping frontend"
+    if [ "$SKIP_INFRA" = false ]; then
+        deploy_infra
+    else
+        print_message "$YELLOW" "⏭ Skipping infrastructure"
+    fi
+
+    if [ "$SKIP_FRONTEND" = false ]; then
+        deploy_frontend
+    else
+        print_message "$YELLOW" "⏭ Skipping frontend"
+    fi
 
     print_summary
 }
