@@ -53,13 +53,15 @@ chat.post("/session", async (c) => {
 
   const expires = 300;
 
-  // Pass the user's Descope JWT via the Authorization header allowlist so the
-  // agent can validate it server-side. This is tamper-proof: the token is
-  // cryptographically signed by Descope and the agent re-validates it.
-  // We do NOT embed userId in a custom query param — those are not covered
-  // by the SigV4 signature in a way that prevents post-signing tampering.
+  // Pass the user's Descope JWT via a custom AgentCore query param.
+  // The Authorization header allowlist requires a custom JWT authorizer,
+  // so we use the X-Amzn-Bedrock-AgentCore-Runtime-Custom-* prefix instead.
+  // The token is still cryptographically signed by Descope and re-validated
+  // by the agent — it cannot be forged.
+  const rawToken =
+    c.req.header("Authorization")?.replace(/^Bearer\s+/i, "") ?? "";
   const queryParams: Record<string, string> = {
-    Authorization: `Bearer ${c.req.header("Authorization")?.replace(/^Bearer\s+/i, "") ?? ""}`,
+    "X-Amzn-Bedrock-AgentCore-Runtime-Custom-Token": rawToken,
   };
 
   if (planId) {

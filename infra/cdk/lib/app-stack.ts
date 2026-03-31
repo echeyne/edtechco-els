@@ -150,10 +150,38 @@ export class ElsAppStack extends cdk.Stack {
       code: lambda.Code.fromAsset(apiCodePath, {
         bundling: {
           image: lambda.Runtime.NODEJS_22_X.bundlingImage,
+          local: {
+            tryBundle(outputDir: string) {
+              try {
+                const { execSync } = require("child_process");
+                execSync(
+                  [
+                    "npx esbuild src/lambda.ts",
+                    "--bundle",
+                    "--platform=node",
+                    "--target=node22",
+                    "--format=esm",
+                    `--outfile=${outputDir}/index.mjs`,
+                    "--external:@aws-sdk/*",
+                    "'--banner:js=import { createRequire } from \"module\"; const require = createRequire(import.meta.url);'",
+                  ].join(" "),
+                  {
+                    cwd: apiCodePath,
+                    stdio: ["ignore", "pipe", "inherit"],
+                  },
+                );
+                return true;
+              } catch {
+                return false;
+              }
+            },
+          },
           command: [
             "bash",
             "-c",
             [
+              "mkdir -p /tmp/build",
+              "cp package.json /tmp/build/",
               "npm install --prefix /tmp/build",
               "npx --prefix /tmp/build esbuild src/lambda.ts --bundle --platform=node --target=node22 --format=esm --outfile=/asset-output/index.mjs --external:@aws-sdk/* '--banner:js=import { createRequire } from \"module\"; const require = createRequire(import.meta.url);'",
             ].join(" && "),

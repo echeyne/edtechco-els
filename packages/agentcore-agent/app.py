@@ -229,25 +229,30 @@ def _build_session_agent(user_id: str) -> Agent:
 # ---- WebSocket handler ----
 
 def _extract_user_id(websocket, context) -> str:
-    """Validate the Descope JWT from the Authorization header and return the user ID.
+    """Validate the Descope JWT and return the user ID.
 
     The Planning API forwards the user's original Descope token via the
-    Authorization header (allowlisted on the AgentCore Runtime). We validate
-    it here with the Descope SDK — this is cryptographically verified and
-    cannot be spoofed by modifying query parameters.
+    custom AgentCore query param X-Amzn-Bedrock-AgentCore-Runtime-Custom-Token.
+    We validate it here with the Descope SDK — the token is cryptographically
+    signed by Descope and cannot be forged.
     """
     import os
+    query_params = dict(websocket.query_params) if hasattr(websocket, "query_params") else {}
     ws_headers = dict(websocket.headers) if hasattr(websocket, "headers") else {}
     ctx_headers = context.request_headers if context and hasattr(context, "request_headers") else {}
 
-    # Authorization header may arrive via context or websocket headers
-    auth_header = (ctx_headers or {}).get("authorization") or ws_headers.get("authorization") or ""
+    # Primary: custom query param forwarded by the Planning API Lambda
+    token = query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-Token", "").strip()
 
-    if not auth_header.lower().startswith("bearer "):
-        logger.warning("No Bearer token found in Authorization header")
+    # Fallback: Authorization header (for local dev / direct invocation)
+    if not token:
+        auth_header = (ctx_headers or {}).get("authorization") or ws_headers.get("authorization") or ""
+        if auth_header.lower().startswith("bearer "):
+            token = auth_header[7:].strip()
+
+    if not token:
+        logger.warning("No token found in custom query param or Authorization header")
         return ""
-
-    token = auth_header[7:].strip()
 
     project_id = os.environ.get("DESCOPE_PROJECT_ID", "")
     if not project_id:

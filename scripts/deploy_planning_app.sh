@@ -31,8 +31,8 @@ print_header() {
 SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
-CUSTOM_DOMAIN=""
-HOSTED_ZONE_ID=""
+CUSTOM_DOMAIN="planning.edtechco.org"
+HOSTED_ZONE_ID="Z0235101CN666KKXEN77"
 BEDROCK_MODEL_ID=""
 
 while [[ $# -gt 0 ]]; do
@@ -92,7 +92,7 @@ deploy_infra() {
     cd "$PROJECT_ROOT/infra/cdk"
     npm ci --silent
 
-    CDK_CONTEXT="-c environment=$ENVIRONMENT"
+    CDK_CONTEXT="-c environment=$ENVIRONMENT -c targetStack=$STACK_NAME"
     [ -n "$CUSTOM_DOMAIN" ] && CDK_CONTEXT="$CDK_CONTEXT -c planningDomain=$CUSTOM_DOMAIN"
     [ -n "$HOSTED_ZONE_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c hostedZoneId=$HOSTED_ZONE_ID"
     [ -n "$BEDROCK_MODEL_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c bedrockModel=$BEDROCK_MODEL_ID"
@@ -124,10 +124,10 @@ deploy_frontend() {
     API_URL=$(get_output PlanningApiGatewayUrl)
     print_message "$YELLOW" "API URL: $API_URL"
 
-    # Write a production-only env file so VITE_API_BASE is set correctly
-    # even if .env.local exists with a dev value (Vite loads .env.production.local
-    # with higher priority than .env.local in production mode).
-    echo "VITE_API_BASE=$API_URL" > packages/planning-frontend/.env.production.local
+    # VITE_API_BASE must be empty in production so the frontend uses relative
+    # URLs (e.g. /api/plans). CloudFront proxies /api/* to the API Gateway,
+    # avoiding cross-origin requests entirely.
+    echo "VITE_API_BASE=" > packages/planning-frontend/.env.production.local
 
     pnpm --filter @els/shared run build
     pnpm --filter @els/planning-frontend run build

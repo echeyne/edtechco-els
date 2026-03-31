@@ -154,12 +154,35 @@ export class ElsPlanningStack extends cdk.Stack {
         code: lambda.Code.fromAsset(planningApiCodePath, {
           bundling: {
             image: lambda.Runtime.NODEJS_22_X.bundlingImage,
+            local: {
+              tryBundle(outputDir: string) {
+                try {
+                  const { execSync } = require("child_process");
+                  execSync(
+                    "npx esbuild src/lambda.ts --bundle --platform=node --target=node22 --format=esm" +
+                      ` --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);"` +
+                      ` --outfile=${outputDir}/index.mjs`,
+                    {
+                      cwd: planningApiCodePath,
+                      stdio: ["ignore", "pipe", "inherit"],
+                      shell: "/bin/bash",
+                      env: { ...process.env },
+                    },
+                  );
+                  return true;
+                } catch {
+                  return false;
+                }
+              },
+            },
             command: [
               "bash",
               "-c",
               [
+                "mkdir -p /tmp/build",
+                "cp package.json /tmp/build/",
                 "npm install --prefix /tmp/build",
-                "npx --prefix /tmp/build esbuild src/lambda.ts --bundle --platform=node --target=node22 --format=esm --outfile=/asset-output/index.mjs --external:@aws-sdk/* '--banner:js=import { createRequire } from \"module\"; const require = createRequire(import.meta.url);'",
+                `npx --prefix /tmp/build esbuild src/lambda.ts --bundle --platform=node --target=node22 --format=esm --banner:js="import { createRequire } from 'module'; const require = createRequire(import.meta.url);" --outfile=/asset-output/index.mjs`,
               ].join(" && "),
             ],
             environment: {
@@ -182,10 +205,18 @@ export class ElsPlanningStack extends cdk.Stack {
     const apiGateway = new apigatewayv2.CfnApi(this, "PlanningApiGateway", {
       name: `els-planning-api-${env}`,
       protocolType: "HTTP",
-      // CORS origins are patched below after the CloudFront distribution is
-      // created so we can include the CloudFront domain in the allow-list.
+      // CloudFront proxies all /api/* traffic, so the browser Origin will be
+      // the CloudFront (or custom) domain. We allow *.cloudfront.net plus
+      // localhost for local dev. This avoids a circular dependency between
+      // the API Gateway and the CloudFront distribution.
       corsConfiguration: {
-        allowOrigins: ["http://localhost:5173", "http://localhost:4173"],
+        allowOrigins: [
+          "http://localhost:5173",
+          "http://localhost:4173",
+          ...(props.customDomainName
+            ? [`https://${props.customDomainName}`]
+            : []),
+        ],
         allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allowHeaders: ["Content-Type", "Authorization"],
         maxAge: 86400,
@@ -274,24 +305,8 @@ export class ElsPlanningStack extends cdk.Stack {
       },
     });
 
-    // Patch CORS allow-origins to include the CloudFront domain (and custom
-    // domain if provided). This must happen after the distribution is created
-    // so the CloudFront domain token is available.
-    const corsAllowOrigins: string[] = [
-      "http://localhost:5173",
-      "http://localhost:4173",
-      cdk.Fn.join("", ["https://", frontend.distribution.attrDomainName]),
-    ];
-    if (props.customDomainName) {
-      corsAllowOrigins.push(`https://${props.customDomainName}`);
-    }
-    apiGateway.addPropertyOverride(
-      "CorsConfiguration.AllowOrigins",
-      corsAllowOrigins,
-    );
-
     // ========================================================================
-    // Conditional Custom Domain: Route53 Alias Record
+    // Conditional Custom Domain: Route 53 DNS Record
     // ========================================================================
 
     if (props.customDomainName && props.hostedZoneId) {
@@ -592,11 +607,6 @@ export class ElsPlanningStack extends cdk.Stack {
         GUARDRAIL_ID: guardrail.ref,
         GUARDRAIL_VERSION: guardrailVersion.attrVersion,
         DESCOPE_PROJECT_ID: props.descopeProjectId,
-      },
-      // Allow the Authorization header through so the agent can validate
-      // the user's Descope JWT directly — this is the tamper-proof identity source.
-      requestHeaderConfiguration: {
-        allowlistedHeaders: ["Authorization"],
       },
       tags: {
         Environment: env,

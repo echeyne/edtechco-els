@@ -30,8 +30,8 @@ print_header() {
 SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
-CUSTOM_DOMAIN=""
-HOSTED_ZONE_ID=""
+CUSTOM_DOMAIN="els-explorer.edtechco.org"
+HOSTED_ZONE_ID="Z09570222PJJLF3NZAXTU"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -85,7 +85,7 @@ deploy_infra() {
     cd "$PROJECT_ROOT/infra/cdk"
     npm ci --silent
 
-    CDK_CONTEXT="-c environment=$ENVIRONMENT"
+    CDK_CONTEXT="-c environment=$ENVIRONMENT -c targetStack=$STACK_NAME"
     [ -n "$CUSTOM_DOMAIN" ] && CDK_CONTEXT="$CDK_CONTEXT -c customDomain=$CUSTOM_DOMAIN"
     [ -n "$HOSTED_ZONE_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c hostedZoneId=$HOSTED_ZONE_ID"
 
