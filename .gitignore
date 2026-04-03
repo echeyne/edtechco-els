@@ -68,6 +68,9 @@ test_parser_local.py
 #Kiro
 .kiro/
 
+# Claude
+.claude/
+
 #cdk
 cdk.out*
 
