@@ -58,7 +58,12 @@ export function useChat(options: UseChatOptions) {
   }, [token, planId]);
 
   const connect = useCallback(async () => {
-    const url = decodeURIComponent(await ensureSessionUrl());
+    // Reuse existing open WebSocket to preserve backend agent conversation history
+    if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+      return wsRef.current;
+    }
+
+    const url = await ensureSessionUrl();
 
     const ws = new WebSocket(url);
     wsRef.current = ws;
@@ -105,12 +110,21 @@ export function useChat(options: UseChatOptions) {
       }
     };
 
-    ws.onclose = () => {
+    ws.onclose = (ev) => {
+      console.warn(
+        "WebSocket closed:",
+        ev.code,
+        ev.reason,
+        "wasClean:",
+        ev.wasClean,
+      );
       sessionUrlRef.current = null;
       wsRef.current = null;
 
       if (streamingRef.current) {
-        setError("Connection lost");
+        setError(
+          `Connection lost (code: ${ev.code}, reason: ${ev.reason || "none"})`,
+        );
         streamingRef.current = false;
         setIsStreaming(false);
       }
@@ -118,11 +132,14 @@ export function useChat(options: UseChatOptions) {
 
     await new Promise<void>((resolve, reject) => {
       ws.onopen = () => resolve();
-      // ws.onopen = () => ws.send(JSON.stringify({ inputText: "Hello!" }));
-      ws.onerror = () => reject(new Error("Connection error"));
+      ws.onerror = (ev) => {
+        console.error("WebSocket error event:", ev);
+        reject(new Error("Connection error"));
+      };
     });
 
-    ws.onerror = () => {
+    ws.onerror = (ev) => {
+      console.error("WebSocket error event (post-open):", ev);
       setError("Connection error");
       streamingRef.current = false;
       setIsStreaming(false);

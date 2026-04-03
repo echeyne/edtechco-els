@@ -399,12 +399,11 @@ export class ElsPlanningStack extends cdk.Stack {
             {
               name: "TherapyRecommendations",
               definition:
-                "Recommending clinical therapies like ABA, occupational therapy, speech therapy, or counseling. Excludes educational activities supporting motor skills or social emotional learning.",
+                "Recommending or directing a user to pursue specific clinical therapies or professional treatment for their child.",
               examples: [
-                "Should my child start ABA therapy?",
-                "Do you recommend occupational therapy for my toddler?",
-                "What type of speech therapy is best for a 4-year-old?",
-                "Can you refer us to a behavioral therapist?",
+                "You should start ABA therapy",
+                "I recommend occupational therapy",
+                "Speech therapy would be best for your child",
               ],
               type: "DENY",
             },
@@ -435,7 +434,7 @@ export class ElsPlanningStack extends cdk.Stack {
             {
               name: "PersonalRelationships",
               definition:
-                "Providing advice on marital issues, romantic relationships, family conflicts, co-parenting disputes, custody matters, or interpersonal relationship counseling.",
+                "Advice on marital issues, romantic relationships, family conflicts, co-parenting disputes, custody, or relationship counseling. Excludes collecting a child's name or age for learning plans.",
               examples: [
                 "My spouse and I disagree on parenting, what should I do?",
                 "How do I handle my ex's parenting style?",
@@ -444,18 +443,19 @@ export class ElsPlanningStack extends cdk.Stack {
               ],
               type: "DENY",
             },
-            {
-              name: "FinancialAdvice",
-              definition:
-                "Providing financial planning advice, investment recommendations, budgeting guidance, cost comparisons of educational programs, or monetary planning.",
-              examples: [
-                "How much should I save for my child's college?",
-                "Is private preschool worth the cost?",
-                "What's the best 529 plan for education savings?",
-                "How do I budget for childcare expenses?",
-              ],
-              type: "DENY",
-            },
+            // {
+            //   name: "FinancialAdvice",
+            //   definition:
+            //     "Providing personalized financial advice or recommendations about how a user should manage, invest, or save their money, including suggesting financial products or strategies tailored to an individual.",
+            //   examples: [
+            //     "You should invest in a 529 plan for your child",
+            //     "I recommend saving $500 per month for preschool",
+            //     "The best financial option for you is private school",
+            //     "Based on your income, you should allocate your budget like this",
+            //     "You should choose this savings account over others",
+            //   ],
+            //   type: "DENY",
+            // },
             {
               name: "LegalAdvice",
               definition:
@@ -486,7 +486,6 @@ export class ElsPlanningStack extends cdk.Stack {
           piiEntitiesConfig: [
             { type: "EMAIL", action: "BLOCK" },
             { type: "PHONE", action: "BLOCK" },
-            { type: "NAME", action: "ANONYMIZE" },
             { type: "US_SOCIAL_SECURITY_NUMBER", action: "BLOCK" },
             { type: "CREDIT_DEBIT_CARD_NUMBER", action: "BLOCK" },
             { type: "US_BANK_ACCOUNT_NUMBER", action: "BLOCK" },
@@ -565,7 +564,7 @@ export class ElsPlanningStack extends cdk.Stack {
       "PlanningBedrockGuardrailVersion",
       {
         guardrailIdentifier: guardrail.ref,
-        description: `Planning guardrail version - ${env}`,
+        description: `Planning guardrail version - ${env} - ${Date.now()}`,
       },
     );
 
@@ -581,25 +580,76 @@ export class ElsPlanningStack extends cdk.Stack {
       "../../packages/agentcore-agent",
     );
 
+    // Install runtime dependencies into a staging directory, then point
+    // fromCodeAsset at it.  This avoids CDK bundling entirely — the asset
+    // is a plain directory that gets zipped and uploaded to S3 as-is.
+    const stagingDir = path.resolve(agentCodePath, ".deploy_staging");
+    (() => {
+      const { execSync } = require("child_process");
+      const fs = require("fs");
+      // Clean previous staging
+      if (fs.existsSync(stagingDir)) {
+        fs.rmSync(stagingDir, { recursive: true });
+      }
+      fs.mkdirSync(stagingDir, { recursive: true });
+      // Install runtime deps (arm64 wheels for AgentCore's linux/arm64 runtime)
+      execSync(
+        [
+          "python3 -m pip install -r requirements-runtime.txt",
+          "--platform manylinux2014_aarch64",
+          "--implementation cp",
+          "--python-version 3.13",
+          "--only-binary=:all:",
+          `--target "${stagingDir}"`,
+        ].join(" "),
+        { cwd: agentCodePath, stdio: "inherit" },
+      );
+      // NOTE: We intentionally keep *.dist-info directories.  OpenTelemetry
+      // (and other packages) use importlib.metadata entry_points registered in
+      // dist-info to discover runtime implementations (e.g. the contextvars
+      // context provider).  Removing dist-info causes StopIteration crashes.
+      // Remove Python cache files from installed dependencies — these are
+      // compiled for the local platform and will cause CREATE_FAILED on the
+      // AgentCore linux/arm64 runtime.
+      execSync(
+        `find "${stagingDir}" -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null; find "${stagingDir}" -name '*.pyc' -delete 2>/dev/null; true`,
+        { stdio: "inherit" },
+      );
+      // Copy agent source files into staging
+      execSync(
+        [
+          "rsync -a",
+          "--exclude .venv",
+          "--exclude __pycache__",
+          "--exclude '*.pyc'",
+          "--exclude .hypothesis",
+          "--exclude .pytest_cache",
+          "--exclude .bedrock_agentcore",
+          "--exclude .deploy_staging",
+          "--exclude tests",
+          "--exclude requirements-runtime.txt",
+          `. "${stagingDir}"`,
+        ].join(" "),
+        { cwd: agentCodePath, stdio: "inherit" },
+      );
+    })();
+
     const agentRuntimeArtifact = agentcore.AgentRuntimeArtifact.fromCodeAsset({
-      path: agentCodePath,
+      path: stagingDir,
       runtime: agentcore.AgentCoreRuntime.PYTHON_3_13,
       entrypoint: ["app.py"],
-      exclude: [
-        ".venv",
-        "__pycache__",
-        "*.pyc",
-        ".hypothesis",
-        ".pytest_cache",
-        ".bedrock_agentcore",
-        "tests",
-      ],
     });
 
     const agentRuntime = new agentcore.Runtime(this, "PlanningAgentRuntime", {
       runtimeName: `els_planning_agent_${env}`,
       agentRuntimeArtifact: agentRuntimeArtifact,
       protocolConfiguration: agentcore.ProtocolType.HTTP,
+      requestHeaderConfiguration: {
+        allowlistedHeaders: [
+          "X-Amzn-Bedrock-AgentCore-Runtime-Custom-Token",
+          "X-Amzn-Bedrock-AgentCore-Runtime-Custom-PlanId",
+        ],
+      },
       environmentVariables: {
         DB_CLUSTER_ARN: databaseClusterArn,
         DB_SECRET_ARN: databaseSecretArn,

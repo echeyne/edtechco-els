@@ -64,14 +64,12 @@ export async function generatePresignedUrl(
 
   const host = getDataPlaneHost(opts.region);
 
-  // Use the raw (unencoded) ARN for the HttpRequest path.  The default
-  // uriEscapePath=true in SignatureV4 will encode colons (%3A) while
-  // leaving slashes as-is when computing the canonical path — exactly
-  // matching botocore's SigV4QueryAuth behaviour.
-  const rawPath = `/runtimes/${opts.runtimeArn}/ws`;
-
-  // For the final URL we need the ARN percent-encoded so the server
-  // can distinguish ARN-internal slashes from path separators.
+  // Match botocore's SigV4QueryAuth behaviour:
+  // 1. Percent-encode the ARN (quote(arn, safe="")) so colons → %3A, slash → %2F
+  // 2. Pass the encoded path to HttpRequest with uriEscapePath=true (default)
+  //    SignatureV4 will double-encode: %3A → %253A, %2F → %252F in the
+  //    canonical request — exactly matching botocore's canonical URI.
+  // 3. Use the same single-encoded path in the final URL.
   const encodedArn = encodeURIComponent(opts.runtimeArn);
   const wirePath = `/runtimes/${encodedArn}/ws`;
 
@@ -84,7 +82,7 @@ export async function generatePresignedUrl(
     method: "GET",
     protocol: "https:",
     hostname: host,
-    path: rawPath,
+    path: wirePath,
     query,
     headers: {
       host,

@@ -241,8 +241,14 @@ def _extract_user_id(websocket, context) -> str:
     ws_headers = dict(websocket.headers) if hasattr(websocket, "headers") else {}
     ctx_headers = context.request_headers if context and hasattr(context, "request_headers") else {}
 
-    # Primary: custom query param forwarded by the Planning API Lambda
-    token = query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-Token", "").strip()
+    # Primary: AgentCore delivers custom query params as lowercased headers.
+    # See https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-get-started-websocket.html
+    custom_header_key = "x-amzn-bedrock-agentcore-runtime-custom-token"
+    token = (
+        ws_headers.get(custom_header_key, "").strip()
+        or (ctx_headers or {}).get(custom_header_key, "").strip()
+        or query_params.get("X-Amzn-Bedrock-AgentCore-Runtime-Custom-Token", "").strip()
+    )
 
     # Fallback: Authorization header (for local dev / direct invocation)
     if not token:
@@ -331,9 +337,65 @@ async def handle_ws(websocket, context):
             enriched_prompt = context_prefix + user_text
             logger.info("Processing message from user_id=%s, text_length=%d", user_id, len(user_text))
 
+            streamed_text_chunks: list[str] = []
+            guardrail_intervened = False
+
             async for event in agent.stream_async(enriched_prompt):
+                logger.debug("Stream event keys=%s type=%s", list(event.keys()) if isinstance(event, dict) else type(event).__name__, type(event).__name__)
+
+                if isinstance(event, dict):
+                    # ---- Guardrail trace inspection ----
+                    trace = event.get("trace") or event.get("guardrail_trace") or event.get("guardrailTrace") or {}
+                    if trace:
+                        logger.warning("Guardrail trace for user_id=%s: %s", user_id, json.dumps(trace, default=str)[:2000])
+
+                        # Log each assessment (input or output) that resulted in a block
+                        for assessment_key in ("inputAssessment", "outputAssessments", "inputAssessments"):
+                            assessments = trace.get(assessment_key)
+                            if not assessments:
+                                continue
+                            if isinstance(assessments, dict):
+                                assessments = [assessments]
+                            for assessment in assessments:
+                                action = assessment.get("action") or ""
+                                if action == "BLOCKED":
+                                    logger.warning(
+                                        "GUARDRAIL %s BLOCKED for user_id=%s — policies: %s",
+                                        assessment_key, user_id,
+                                        json.dumps(assessment, default=str)[:2000],
+                                    )
+
+                    # ---- Stop reason detection ----
+                    stop = event.get("stop_reason") or event.get("stopReason") or ""
+                    if stop == "guardrail_intervened":
+                        guardrail_intervened = True
+                        accumulated = "".join(streamed_text_chunks)
+                        logger.warning(
+                            "GUARDRAIL INTERVENED on OUTPUT for user_id=%s. "
+                            "Streamed text before intervention (%d chars): %s",
+                            user_id, len(accumulated), accumulated[:3000],
+                        )
+
+                    # ---- Detect blocked-messaging replacement text ----
+                    data_text = event.get("data", "")
+                    if isinstance(data_text, str) and "I'm sorry, but I can only help with" in data_text:
+                        logger.warning("GUARDRAIL BLOCKED INPUT for user_id=%s, response=%s", user_id, data_text[:200])
+
+                    # ---- Amazon-specific guardrail action header ----
+                    gr_action = event.get("amazon-bedrock-guardrailAction") or ""
+                    if gr_action:
+                        logger.warning("Bedrock guardrailAction=%s for user_id=%s", gr_action, user_id)
+
                 if "data" in event:
+                    streamed_text_chunks.append(event["data"])
                     await websocket.send_json({"type": "text", "text": event["data"]})
+
+            if guardrail_intervened:
+                full_output = "".join(streamed_text_chunks)
+                logger.warning(
+                    "GUARDRAIL SESSION SUMMARY for user_id=%s — final output (%d chars): %s",
+                    user_id, len(full_output), full_output[:3000],
+                )
 
                 if "current_tool_use" in event:
                     tool_use = event["current_tool_use"]

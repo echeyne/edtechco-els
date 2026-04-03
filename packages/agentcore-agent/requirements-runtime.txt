@@ -1,0 +1,6 @@
+bedrock-agentcore
+boto3
+pyyaml
+strands-agents[otel]
+aws-opentelemetry-distro
+descope
