@@ -7,7 +7,7 @@ The ELS Normalization Pipeline is a serverless system built on AWS that transfor
 1. A Python-based data pipeline orchestrated by Step Functions
 2. A TypeScript REST API and React frontend for exploring the data (Standards Explorer)
 3. An AI-powered planning application using Bedrock AgentCore (Planning App)
-4. A marketing landing site
+4. A project landing site
 
 ## Pipeline Stages
 
@@ -181,7 +181,7 @@ Each pipeline run writes intermediate output for debugging:
 
 ### Landing Site
 
-- **Frontend** (`packages/landing-site/`): Static React marketing page deployed to S3 + CloudFront.
+- **Frontend** (`packages/landing-site/`): Static React landing page deployed to S3 + CloudFront.
 
 ## AWS Services
 

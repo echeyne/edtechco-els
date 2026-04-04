@@ -19,7 +19,7 @@ On top of the pipeline, there are three web applications:
 
 - **Standards Explorer** — Browse, search, edit, and verify the normalized standards hierarchy
 - **Planning App** — AI-powered chat interface for generating personalized learning plans using Bedrock AgentCore
-- **Landing Site** — Marketing landing page
+- **Landing Site** — Project landing page
 
 The whole thing is orchestrated by AWS Step Functions and deployed via AWS CDK.
 
@@ -56,7 +56,7 @@ packages/
   ├── planning-api/        Hono API proxying to Bedrock AgentCore for planning
   ├── planning-frontend/   React chat UI for AI-powered learning plans
   ├── agentcore-agent/     Python Strands agent deployed to Bedrock AgentCore
-  └── landing-site/        Marketing landing page (React)
+  └── landing-site/        Project landing page (React)
 infra/
   ├── cdk/                 AWS CDK stacks (pipeline, app, planning, landing)
   └── migrations/          PostgreSQL migration scripts
