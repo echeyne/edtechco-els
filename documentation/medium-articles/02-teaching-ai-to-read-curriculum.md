@@ -8,11 +8,9 @@ If you hand a curriculum specialist a state's early learning standards document 
 
 They do all of this because they have deep domain knowledge. They've read hundreds of these documents. They understand the conventions of the field.
 
-Teaching an AI system to replicate that judgment — reliably, across documents from fifty states with different formats and conventions — is the core engineering challenge of the ELS Pipeline.
+Teaching an AI system to replicate that judgment — reliably, across documents from fifty states with different formats and conventions — is the core engineering challenge of the [ELS Pipeline](https://github.com/echeyne/kinder-readiness/tree/main/src/els_pipeline). In the [first article in this series](link-to-article-1), I described why this problem matters. This article explains how I solved it.
 
 The approach I chose — detailed prompt engineering over model fine-tuning — is grounded in a fundamental insight from Brown et al.'s landmark GPT-3 paper: sufficiently capable language models can perform competitively with fine-tuned models on many tasks through carefully constructed prompts alone, without any gradient updates ([Brown et al., 2020, "Language Models are Few-Shot Learners," _NeurIPS_](https://proceedings.neurips.cc/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf)). Wei et al. extended this finding with chain-of-thought prompting, demonstrating that including intermediate reasoning steps in prompts significantly improves performance on complex tasks ([Wei et al., 2022, "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models," _NeurIPS_](https://arxiv.org/abs/2201.11903)). For a domain with limited labeled training data — there is no large annotated corpus of parsed early learning standards — prompt engineering is the pragmatic choice.
-
-This article explains how I approached it.
 
 ---
 
@@ -22,7 +20,7 @@ The naive approach to parsing a standards document is to write a rule-based extr
 
 Here's what you're actually dealing with:
 
-**Formatting is not reliable structure.** After AWS Textract processes a PDF, you have a list of text blocks with page numbers, bounding box coordinates, and confidence scores. The visual hierarchy — indentation, font size, bold formatting — mostly doesn't survive. You have raw text in reading order, and that's it.
+**Formatting is not reliable structure.** After AWS Textract [processes a PDF](https://github.com/echeyne/kinder-readiness/blob/main/src/els_pipeline/extractor.py), you have a list of text blocks with page numbers, bounding box coordinates, and confidence scores. The visual hierarchy — indentation, font size, bold formatting — mostly doesn't survive. You have raw text in reading order, and that's it.
 
 **Terminology is jurisdiction-specific.** Texas calls the top level "Domains" and the next level "Skills." California calls the top level "Foundations" and uses a different organizational logic entirely. New Jersey has "Preschool Teaching and Learning Standards" organized by "Standards" containing "Indicators." None of these terms mean the same thing relative to the others.
 
@@ -36,11 +34,11 @@ Here's what you're actually dealing with:
 
 The pipeline approaches this as a two-stage AI problem.
 
-**Stage 1: Structure Detection.** A language model reads chunks of text extracted from the document and identifies every structural element — every domain, strand, sub-strand, and indicator — along with its level in the hierarchy, its code, its title, its description, and a confidence score.
+**Stage 1: [Structure Detection](https://github.com/echeyne/kinder-readiness/blob/main/src/els_pipeline/detector.py).** A language model reads chunks of text extracted from the document and identifies every structural element — every domain, strand, sub-strand, and indicator — along with its level in the hierarchy, its code, its title, its description, and a confidence score.
 
-**Stage 2: Hierarchy Parsing.** A second language model takes the detected elements and resolves the parent-child relationships — building the actual tree structure. This is necessary because chunks may split a parent from its children, and the parser needs to reconstruct the complete hierarchy from partial views.
+**Stage 2: [Hierarchy Parsing](https://github.com/echeyne/kinder-readiness/blob/main/src/els_pipeline/parser.py).** A second language model takes the detected elements and resolves the parent-child relationships — building the actual tree structure. This is necessary because chunks may split a parent from its children, and the parser needs to reconstruct the complete hierarchy from partial views.
 
-Between stages, a batching and merging system handles the scale problem. Large documents get split into overlapping chunks, processed in parallel via AWS Step Functions, and their results merged with deduplication logic.
+Between stages, a [batching and merging system](https://github.com/echeyne/kinder-readiness/blob/main/src/els_pipeline/detection_batching.py) handles the scale problem. Large documents get split into overlapping chunks, processed in parallel via AWS Step Functions, and their results merged with deduplication logic.
 
 ---
 
@@ -60,7 +58,7 @@ This instruction prevents the model from silently dropping elements that appear 
 
 ## The Detection Prompt: Encoding Domain Expertise
 
-The detection stage prompt is the result of extensive iteration across documents from multiple states. It encodes, as explicit instructions, the same tacit knowledge that a curriculum specialist brings to the task.
+The [detection stage prompt](https://github.com/echeyne/kinder-readiness/blob/main/src/els_pipeline/detector.py) is the result of extensive iteration across documents from multiple states. It encodes, as explicit instructions, the same tacit knowledge that a curriculum specialist brings to the task.
 
 **The core principle: classify by nesting depth, not by document labels.**
 
@@ -157,9 +155,11 @@ A few things surprised me in building this system:
 
 ---
 
-In the next article, I'll cover the ELS Explorer — the human-in-the-loop interface that lets curriculum specialists review and verify AI-extracted standards, with an audit trail that tracks every edit and verification. The engineering challenge there is different: how do you build a data curation tool that makes human review fast enough to actually happen?
+In the [next article](link-to-article-3), I'll cover the planning assistant — a conversational agent that turns normalized standards data into personalized learning plans for families. In the [fourth article](link-to-article-4), I'll cover the ELS Explorer — the human-in-the-loop interface that lets curriculum specialists review and verify AI-extracted standards, with an audit trail that tracks every edit and verification. The engineering challenge there is different: how do you build a data curation tool that makes human review fast enough to actually happen?
 
-_EdTech Co. is a mission-driven engineering initiative focused on building open infrastructure for early childhood education._
+---
+
+_EdTech Co. is a mission-driven engineering initiative focused on building open infrastructure for early childhood education. The full source code is available on [GitHub](https://github.com/echeyne/kinder-readiness)._
 
 ---
 

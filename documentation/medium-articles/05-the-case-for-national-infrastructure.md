@@ -1,10 +1,10 @@
 # The Case for a National Early Learning Data Layer
 
-_What would it mean if every early learning standard in America were machine-readable, queryable, and interoperable — and why it's closer than you think_
+_What would it mean if every early learning standard in America were machine-readable, queryable, and interoperable — and why it's closer than you might think_
 
 ---
 
-This is the last article in a five-part series about building the ELS Platform — a system that uses AI to extract, normalize, and operationalize early learning standards from state education documents across the United States and internationally. The previous articles covered the engineering: the AI pipeline, the prompt design, the planning agent, the human verification layer.
+This is the last article in a five-part series about building the [ELS Platform](https://github.com/echeyne/kinder-readiness) — a system that uses AI to extract, normalize, and operationalize early learning standards from state education documents across the United States and internationally. The previous articles covered the engineering: [the fragmentation problem](link-to-article-1), [the AI pipeline](link-to-article-2), [the planning agent](link-to-article-3), and [the human verification layer](link-to-article-4).
 
 This article steps back from the code and asks the question the code was written to answer: what would change if every state's early learning standards existed in a single, normalized, machine-readable format?
 
@@ -14,7 +14,7 @@ This article steps back from the code and asks the question the code was written
 
 The United States Department of Education maintains the Common Core State Standards for K-12 mathematics and English language arts. They're published in a structured format. They have stable identifiers. Curricula, assessments, and digital learning tools can reference them unambiguously.
 
-For early childhood — birth through kindergarten entry — no equivalent exists. The federal government established the Head Start Early Learning Outcomes Framework (ELOF) in 2015, presenting five broad areas of early learning across infants, toddlers, and preschoolers — but it covers only Head Start programs ([Office of Head Start, 2015, *Head Start Early Learning Outcomes Framework: Ages Birth to Five*](https://headstart.gov/school-readiness/article/head-start-early-learning-outcomes-framework)). Meanwhile, all 56 states and territories have developed their own early learning guidelines, each published independently as standalone PDF documents and updated on their own schedules ([Office of Child Care, NCECQA](https://childcareta.acf.hhs.gov/sites/default/files/state_elgs_web_final_2.pdf)).
+For early childhood — birth through kindergarten entry — no equivalent exists. The federal government established the Head Start Early Learning Outcomes Framework (ELOF) in 2015, presenting five broad areas of early learning across infants, toddlers, and preschoolers — but it covers only Head Start programs ([Office of Head Start, 2015, _Head Start Early Learning Outcomes Framework: Ages Birth to Five_](https://headstart.gov/school-readiness/article/head-start-early-learning-outcomes-framework)). Meanwhile, all 56 states and territories have developed their own early learning guidelines, each published independently as standalone PDF documents and updated on their own schedules ([Office of Child Care, NCECQA](https://childcareta.acf.hhs.gov/sites/default/files/state_elgs_web_final_2.pdf)).
 
 The result is a fragmented landscape that creates real costs:
 
@@ -46,11 +46,11 @@ This isn't just an academic exercise. Quality Rating and Improvement Systems (QR
 
 Within a single state, standards typically span multiple age bands: infant/toddler, preschool (3–4 years), and pre-kindergarten (4–5 years). Some states also have kindergarten and early elementary standards. But the connections between age bands — how a preschool indicator progresses into a kindergarten expectation — are rarely made explicit in the documents themselves.
 
-A normalized database with age-band metadata enables vertical analysis: trace a skill (self-regulation, letter recognition, counting) from its earliest appearance in the infant/toddler standards through its most advanced form in the kindergarten expectations. This is exactly the P-3 continuity analysis that the Foundation for Child Development championed across a decade of research (2003–2013), which found that preschool gains fade "as children advance beyond Kindergarten" unless schools provide "aligned standards and curriculum in a coherent PK-3 education program" ([FCD PreK-3rd Policy Briefs](https://www.fcd-us.org/prek-3rd-policy-briefs/)). Stipek's research for SRCD identified a key barrier: continuity in instruction is less likely when "state and district standards and assessments for preschool are not well aligned" with those for early elementary grades ([Stipek, 2017, SRCD](https://www.srcd.org/research/what-does-pk-3-instructional-alignment-mean-policy-and-practice)). A normalized data layer directly addresses that barrier.
+A normalized database with age-band metadata enables vertical analysis: trace a skill (self-regulation, letter recognition, counting) from its earliest appearance in the infant/toddler standards through its most advanced form in the kindergarten expectations. This is exactly the P-3 continuity analysis that the Foundation for Child Development championed through its PreK-3rd initiative (2003–2013), which found that preschool gains fade "as children advance beyond Kindergarten" unless schools provide "aligned standards and curriculum in a coherent PK-3 education program" ([FCD PreK-3rd Policy Briefs](https://www.fcd-us.org/prek-3rd-policy-briefs/)). Stipek's research for SRCD identified a key barrier: continuity in instruction is less likely when "state and district standards and assessments for preschool are not well aligned" with those for early elementary grades ([Stipek, 2017, SRCD](https://www.srcd.org/research/what-does-pk-3-instructional-alignment-mean-policy-and-practice)). A normalized data layer directly addresses that barrier.
 
 ### Automated Plan Generation Grounded in Real Standards
 
-The planning assistant I described in the third article in this series depends entirely on normalized data. When a parent selects their state and their child's age range, the assistant queries the database for matching indicators and generates an activity plan grounded exclusively in those real, verified indicators.
+The planning assistant I described in the [third article in this series](link-to-article-3) depends entirely on normalized data. When a parent selects their state and their child's age range, the assistant queries the database for matching indicators and generates an activity plan grounded exclusively in those real, verified indicators.
 
 Without normalized data, this assistant doesn't exist. It would be forced to rely on general developmental knowledge embedded in the language model's training data — knowledge that is approximate, unattributed, and unverifiable. The value of the assistant is precisely that it cites real standards, and that requires real data.
 
@@ -62,9 +62,9 @@ Processing a single state's standards document through the pipeline takes minute
 
 **Document acquisition.** Standards documents need to be located, downloaded, and verified as current versions. Some states publish their standards prominently on their education department websites. Others require navigating through multiple subdepartments and archived pages. A few have standards that exist only as physical publications or as appendices to larger policy documents.
 
-**Version tracking.** States revise their standards on varying schedules — some every five years, some every ten, some ad hoc. The NIEER State of Preschool Yearbook, which has tracked state-funded preschool policies annually since the 2001–2002 school year, documents this evolving landscape and notes that "with the development of the Common Core State Standards, there appears to be a trend among States to revise their ELGs and work to align them across age groups" ([NIEER, 2024, *State of Preschool Yearbook*](https://nieer.org/state-preschool-yearbook)). The pipeline produces version-specific records (each indicator carries a `version_year`), but keeping the dataset current requires monitoring fifty states for updates.
+**Version tracking.** States revise their standards on varying schedules — some every five years, some every ten, some ad hoc. The NIEER State of Preschool Yearbook, which has tracked state-funded preschool policies annually since the 2001–2002 school year, documents this evolving landscape and notes that "with the development of the Common Core State Standards, there appears to be a trend among States to revise their ELGs and work to align them across age groups" ([NIEER, 2024, _State of Preschool Yearbook_](https://nieer.org/state-preschool-yearbook)). The pipeline produces version-specific records (each indicator carries a `version_year`), but keeping the dataset current requires monitoring fifty states for updates.
 
-**Human verification at scale.** The AI pipeline produces high-confidence extractions, but every state's document introduces edge cases specific to its formatting and terminology. The human verification layer — specialists reviewing the extracted hierarchy against the source document — needs to scale alongside the document count. This means recruiting curriculum specialists with expertise in early childhood education, not just general-purpose data annotators.
+**Human verification at scale.** The AI pipeline produces high-confidence extractions, but every state's document introduces edge cases specific to its formatting and terminology. The [human verification layer](link-to-article-4) — specialists reviewing the extracted hierarchy against the source document — needs to scale alongside the document count. This means recruiting curriculum specialists with expertise in early childhood education, not just general-purpose data annotators.
 
 **Community trust.** The most technically accurate dataset in the world is useless if the practitioners and agencies who would use it don't trust it. Trust comes from transparency: showing the source text alongside the extracted data, making the verification status visible, publishing the methodology openly, and inviting expert review.
 
@@ -76,9 +76,9 @@ The AI pipeline is what makes this project feasible as a small-team effort. With
 
 AI reduces the per-document cost from days of specialist time to minutes of compute time plus hours of specialist review. That's the enabling economics.
 
-But the AI is a tool, not a solution. The value of the system is in the *verified* data — the records that a curriculum specialist has reviewed, confirmed or corrected, and marked as human-verified. The AI provides the first draft. The human provides the quality seal. The system tracks which is which, permanently.
+But the AI is a tool, not a solution. The value of the system is in the _verified_ data — the records that a curriculum specialist has reviewed, confirmed or corrected, and marked as human-verified. The AI provides the first draft. The human provides the quality seal. The system tracks which is which, permanently.
 
-This is a general pattern I think matters for applied AI in education: the model accelerates the work, but the human's judgment is what makes the output trustworthy. Ji et al.'s survey of hallucination in natural language generation documents how deep learning-based text generation is systematically "prone to hallucinating unintended text" — generating content that is fluent but factually unfounded ([Ji et al., 2023, *ACM Computing Surveys*](https://dl.acm.org/doi/10.1145/3571730)). Systems that obscure that boundary — that present AI output as authoritative without a verification mechanism — will eventually lose the trust of the practitioners they're meant to serve.
+This is a general pattern I think matters for applied AI in education: the model accelerates the work, but the human's judgment is what makes the output trustworthy. Ji et al.'s survey of hallucination in natural language generation documents how deep learning-based text generation is systematically "prone to hallucinating unintended text" — generating content that is fluent but factually unfounded ([Ji et al., 2023, _ACM Computing Surveys_](https://dl.acm.org/doi/10.1145/3571730)). Systems that obscure that boundary — that present AI output as authoritative without a verification mechanism — will eventually lose the trust of the practitioners they're meant to serve.
 
 ---
 
@@ -96,9 +96,9 @@ What the project needs now is collaborators:
 
 **Researchers** studying early childhood developmental standards, curriculum alignment, or the application of AI to educational data systems. The pipeline, the dataset, and the methodology are all available for research use.
 
-**Engineers** interested in applied AI for public benefit. The codebase spans Python (AI pipeline), TypeScript (APIs and frontends), and AWS infrastructure (Step Functions, Lambda, Aurora, Bedrock). Contributions across the stack are welcome.
+**Engineers** interested in applied AI for public benefit. The [codebase](https://github.com/echeyne/kinder-readiness) spans Python ([AI pipeline](https://github.com/echeyne/kinder-readiness/tree/main/src/els_pipeline)), TypeScript ([APIs](https://github.com/echeyne/kinder-readiness/tree/main/packages/els-explorer-api) and [frontends](https://github.com/echeyne/kinder-readiness/tree/main/packages/els-explorer-frontend)), and AWS infrastructure (Step Functions, Lambda, Aurora, Bedrock). Contributions across the stack are welcome.
 
-Early childhood education is the highest-leverage intervention point in the entire educational system. The research is clear on this — from Heckman's finding of 13% annual returns on early childhood investment ([Heckman & Karapakula, 2019](https://heckmanequation.org/resource/13-roi-toolbox/)), to the Perry Preschool Study's 40-year evidence of lasting gains in education, employment, and reduced crime ([Schweinhart et al., 2005](https://highscope.org/wp-content/uploads/2024/07/perry-preschool-summary-40.pdf)), to the NIEER Yearbook's documentation that only five states currently meet all ten quality benchmarks for preschool programs ([NIEER, 2024](https://nieer.org/state-preschool-yearbook)). What's been missing is the data infrastructure to support that insight at scale. That's what EdTech Co. is building.
+Early childhood education is the highest-leverage intervention point in the entire educational system. The research is clear on this — from Heckman's finding of 13% annual returns on early childhood investment ([Garcia, Heckman, Leaf, & Prados, 2020](https://heckmanequation.org/resource/13-roi-toolbox/)), to the Perry Preschool Study's 40-year evidence of lasting gains in education, employment, and reduced crime ([Schweinhart et al., 2005](https://highscope.org/wp-content/uploads/2024/07/perry-preschool-summary-40.pdf)), to the NIEER Yearbook's documentation that only five states currently meet all ten quality benchmarks for preschool programs ([NIEER, 2024](https://nieer.org/state-preschool-yearbook)). What's been missing is the data infrastructure to support that insight at scale. That's what EdTech Co. is building.
 
 ---
 
@@ -106,14 +106,18 @@ Early childhood education is the highest-leverage intervention point in the enti
 
 If you've followed this series from the beginning, thank you. Here's the full arc:
 
-1. **Why Early Childhood Education Has a Data Problem Nobody Talks About** — The problem: fragmented standards, no common schema, no queryable data.
-2. **Teaching an AI to Read Like a Curriculum Specialist** — The pipeline: prompt engineering, chunking, parallel processing, and the hardest classification problems.
-3. **From Standards to Story Time** — The planning agent: grounded in real data, guided by a structured workflow, secured by authorization closures.
-4. **Why I Built a Human Verification Layer on Top of My AI Pipeline** — The quality system: audit trails, soft cascade deletes, property-based testing, and why human oversight makes AI useful.
+1. **[Early Childhood Education Has a Data Problem](link-to-article-1)** — The problem: fragmented standards, no common schema, no queryable data.
+2. **[Teaching an AI to Read Like a Curriculum Specialist](link-to-article-2)** — The pipeline: prompt engineering, chunking, parallel processing, and the hardest classification problems.
+3. **[From Standards to Story Time](link-to-article-3)** — The planning agent: grounded in real data, guided by a structured workflow, secured by authorization closures.
+4. **[Why I Built a Human Verification Layer on Top of My AI Pipeline](link-to-article-4)** — The quality system: audit trails, soft cascade deletes, and why human oversight makes AI useful.
 5. **The Case for a National Early Learning Data Layer** — The vision: what changes when every state's standards are machine-readable and interoperable.
 
 The engineering serves the mission. The mission is making sure every child, in every state, has access to learning experiences grounded in the best knowledge we have about how young children develop. That work starts with data.
 
 ---
 
-_EdTech Co. is a mission-driven engineering initiative focused on building open infrastructure for early childhood education. To learn more or get involved, follow EdTech Co. on Medium._
+_EdTech Co. is a mission-driven engineering initiative focused on building open infrastructure for early childhood education. The full source code is available on [GitHub](https://github.com/echeyne/kinder-readiness). Follow along on Medium for technical deep-dives and policy perspectives._
+
+---
+
+_I work for Bezos Academy, a national provider of early-childhood education, but this research is my own and is in no way supported by Bezos Academy nor reflects the vision or mission of the organization._
