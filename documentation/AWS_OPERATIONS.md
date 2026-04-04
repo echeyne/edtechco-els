@@ -1,54 +1,16 @@
 # AWS Operations Guide
 
-Step-by-step instructions for deploying, verifying, and operating the ELS Normalization Pipeline on AWS.
+Step-by-step instructions for operating the ELS Normalization Pipeline on AWS after deployment.
 
 ## Pre-Deployment Checklist
 
 - AWS CLI v2 installed and configured
-- Python 3.13+
+- Python 3.13+, Node.js 20+, pnpm 9+, Docker
 - IAM permissions for: S3, Lambda, Step Functions, Aurora PostgreSQL, Textract, Bedrock, CloudWatch, SNS, Secrets Manager, IAM, VPC
-- Bedrock model access enabled for `us.anthropic.claude-sonnet-4-6` and `amazon.titan-embed-text-v2:0`
+- Bedrock model access enabled for Claude and Titan Embed models
+- CDK bootstrapped: `npx cdk bootstrap aws://<account>/<region>` (run once per account/region)
 
 To request Bedrock model access: AWS Console → Bedrock → Model access → Request access.
-
-## Deployment
-
-```bash
-# 1. Install
-python3 -m venv venv && source venv/bin/activate
-pip install -e .
-
-# 2. Configure
-cp .env.example .env  # Edit with your values
-
-# 3. Deploy
-./scripts/deploy.sh                          # Dev (default)
-./scripts/deploy.sh -e staging -r us-west-2  # Staging
-./scripts/deploy.sh -e prod -r us-east-1     # Production
-```
-
-Deployment takes ~10-15 minutes (Aurora cluster creation). The script packages Lambdas, validates the template, deploys, and outputs resource names.
-
-## Post-Deployment Verification
-
-```bash
-# Stack outputs
-aws cloudformation describe-stacks --stack-name els-pipeline-dev \
-  --query 'Stacks[0].Outputs' --output table
-
-# S3 buckets
-aws s3 ls | grep els-
-
-# Aurora cluster status
-aws rds describe-db-clusters --db-cluster-identifier els-database-cluster-dev \
-  --query 'DBClusters[0].Status'
-
-# Lambda functions
-aws lambda list-functions --query 'Functions[?starts_with(FunctionName, `els-`)].FunctionName'
-
-# Step Functions state machine
-aws stepfunctions describe-state-machine --state-machine-arn <ARN>
-```
 
 ## Running the Pipeline
 
@@ -76,9 +38,14 @@ aws stepfunctions start-execution \
 ### Monitor Execution
 
 ```bash
+# Check status
 aws stepfunctions describe-execution --execution-arn <ARN> --query 'status'
+
+# Full execution history
 aws stepfunctions get-execution-history --execution-arn <ARN> --max-results 100
 ```
+
+You can also use the Step Functions console for a visual execution flow.
 
 ### Verify Outputs
 
@@ -138,36 +105,83 @@ aws s3api put-bucket-lifecycle-configuration \
   }'
 ```
 
+## Adding Documents from New States
+
+Upload documents using the country-based path structure. The pipeline handles the country code automatically in all stages.
+
+```bash
+# Texas document
+aws s3 cp texas_standards.pdf s3://${ELS_RAW_BUCKET}/US/TX/2022/texas_standards.pdf
+
+# Arizona document
+aws s3 cp arizona_standards.pdf s3://${ELS_RAW_BUCKET}/US/AZ/2018/arizona_standards.pdf
+```
+
+Then start a pipeline execution with the matching country/state/year in the input.
+
 ## Monitoring
 
 ```bash
-# Lambda logs
+# Lambda logs (follow mode)
 aws logs tail /aws/lambda/els-ingester-dev --follow
 
 # Step Functions logs
 aws logs tail /aws/vendedlogs/states/els-pipeline-dev --follow
 ```
 
-Key CloudWatch metrics to watch: Lambda invocations/errors/duration, Step Functions execution success/failure, Aurora connections/CPU, S3 bucket size.
+Key CloudWatch metrics to watch:
+
+- Lambda: invocations, errors, duration, concurrent executions
+- Step Functions: execution success/failure, execution time
+- Aurora: connections, CPU utilization, ACU usage
+- S3: bucket size, request count
+
+## Database Operations
+
+### Connecting to Aurora
+
+Database credentials are stored in Secrets Manager. Retrieve them:
+
+```bash
+aws secretsmanager get-secret-value \
+  --secret-id els-database-secret-dev \
+  --query 'SecretString' --output text | jq '.'
+```
+
+### Running Migrations
+
+See [infra/migrations/README.md](../infra/migrations/README.md) for the full migration guide. To run a new migration:
+
+```bash
+psql -h <aurora-endpoint> -U postgres -d els_corpus -f infra/migrations/009_alter_indicator_required_desc.sql
+```
 
 ## Troubleshooting
 
-| Issue                      | Diagnosis                                              | Fix                                                           |
-| -------------------------- | ------------------------------------------------------ | ------------------------------------------------------------- |
-| CloudFormation fails       | Check stack events                                     | Ensure `CAPABILITY_NAMED_IAM`. Verify IAM permissions.        |
-| Lambda timeout             | Check CloudWatch logs                                  | Increase timeout/memory in template. Check batch size config. |
-| Batch processing slow      | Check `MAX_CHUNKS_PER_BATCH` / `MAX_DOMAINS_PER_BATCH` | Lower batch size to reduce per-Lambda work.                   |
-| Bedrock access denied      | `aws bedrock list-foundation-models`                   | Request model access in Bedrock console.                      |
-| Aurora connection failure  | Check VPC/security groups                              | Ensure Lambda is in same VPC. Check port 5432 rules.          |
-| S3 path issues             | `aws s3 ls s3://${BUCKET}/`                            | Verify country code is uppercase 2-letter ISO format.         |
-| Intermediate files missing | Check Lambda logs for S3 errors                        | Verify IAM role has `s3:PutObject` on the processed bucket.   |
-| "No text blocks provided"  | Download extraction output, check `blocks` array       | Review extraction Lambda logs.                                |
+| Issue                      | Diagnosis                                              | Fix                                                         |
+| -------------------------- | ------------------------------------------------------ | ----------------------------------------------------------- |
+| CloudFormation/CDK fails   | Check stack events in console                          | Ensure CDK is bootstrapped. Check IAM permissions.          |
+| Lambda timeout             | Check CloudWatch logs                                  | Increase timeout/memory. Lower batch size config.           |
+| Batch processing slow      | Check `MAX_CHUNKS_PER_BATCH` / `MAX_DOMAINS_PER_BATCH` | Lower batch size to reduce per-Lambda work.                 |
+| Bedrock access denied      | `aws bedrock list-foundation-models`                   | Request model access in Bedrock console.                    |
+| Aurora connection failure  | Check VPC/security groups                              | Ensure Lambda is in same VPC. Check port 5432 rules.        |
+| S3 path issues             | `aws s3 ls s3://${BUCKET}/`                            | Verify country code is uppercase 2-letter ISO format.       |
+| Intermediate files missing | Check Lambda logs for S3 errors                        | Verify IAM role has `s3:PutObject` on the processed bucket. |
+| "No text blocks provided"  | Download extraction output, check `blocks` array       | Review extraction Lambda logs.                              |
+| AgentCore connection fails | Check Planning API logs                                | Verify AgentCore Runtime ARN and IAM permissions.           |
+| Frontend 403 errors        | Check CloudFront distribution                          | Verify S3 bucket policy allows CloudFront OAI access.       |
 
 ### Debugging Tips
 
 - Set `LOG_LEVEL=DEBUG` on Lambda environment variables for verbose logging
 - Use the Step Functions console for visual execution flow
-- Use CloudWatch Insights to query across multiple Lambda log groups
+- Use CloudWatch Insights to query across multiple Lambda log groups:
+  ```
+  fields @timestamp, @message
+  | filter @message like /ERROR/
+  | sort @timestamp desc
+  | limit 50
+  ```
 - Test individual stages by invoking Lambdas directly with test payloads
 
 ## Cost Estimates (Dev Environment)
@@ -180,13 +194,15 @@ Key CloudWatch metrics to watch: Lambda invocations/errors/duration, Step Functi
 | Step Functions       | $5-10                    |
 | Textract             | Variable (per page)      |
 | Bedrock              | Variable (per token)     |
+| CloudFront           | $5-10                    |
 | CloudWatch           | $5-10                    |
-| **Total**            | **~$60-100**             |
+| **Total**            | **~$70-120**             |
 
 ### Cost Optimization
 
-- Aurora Serverless v2: set min capacity to 0.5 ACU
+- Aurora Serverless v2: set min capacity to 0.5 ACU for dev
 - S3 Intelligent-Tiering for infrequently accessed objects
-- Reduce CloudWatch log retention for non-critical logs
+- Reduce CloudWatch log retention for non-critical logs (7-14 days for dev)
 - Implement S3 lifecycle policies for intermediate data
 - Optimize Bedrock prompts to reduce token usage
+- Use `--skip-infra` flags on deploy scripts to avoid unnecessary CDK deployments

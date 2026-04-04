@@ -1,21 +1,27 @@
 # ELS Normalization Pipeline
 
-A serverless pipeline that ingests early learning standards (ELS) documents from multiple countries and states, extracts their hierarchical structure using AI, and normalizes them into a consistent canonical format.
+A serverless pipeline that ingests early learning standards (ELS) documents from multiple US states, extracts their hierarchical structure using AI, and normalizes them into a consistent canonical format — plus web apps for exploring and building learning plans from the resulting data.
 
 ## What It Does
 
-The pipeline takes PDF/HTML standards documents and runs them through a series of stages:
+Early learning standards vary wildly across states — different formats, structures, and terminology. This pipeline takes raw PDF documents and produces a unified, queryable dataset:
 
 1. **Ingestion** — Uploads raw documents to S3 with country-based path structure
 2. **Text Extraction** — Extracts text blocks from PDFs using AWS Textract
-3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, indicators). Large documents are split into batches processed in parallel via Step Functions Map states.
-4. **Hierarchy Parsing** — Normalizes detected elements into a consistent tree structure. Domain chunks are batched and processed in parallel, then merged.
+3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, indicators), with large documents batched and processed in parallel via Step Functions Map states
+4. **Hierarchy Parsing** — Normalizes detected elements into a consistent tree structure, also batched in parallel
 5. **Validation** — Validates records against the canonical schema and enforces uniqueness
 6. **Embedding Generation** — Generates vector embeddings via Bedrock Titan for similarity search
 7. **Recommendation Generation** — Produces activity recommendations for parents and teachers
 8. **Persistence** — Stores everything in Aurora PostgreSQL with pgvector
 
-The whole thing is orchestrated by AWS Step Functions and deployed via CloudFormation.
+On top of the pipeline, there are three web applications:
+
+- **Standards Explorer** — Browse, search, edit, and verify the normalized standards hierarchy
+- **Planning App** — AI-powered chat interface for generating personalized learning plans using Bedrock AgentCore
+- **Landing Site** — Marketing landing page
+
+The whole thing is orchestrated by AWS Step Functions and deployed via AWS CDK.
 
 ## Architecture
 
@@ -36,34 +42,31 @@ S3 (raw PDFs) → Lambda: Ingester
              → Lambda: Persister → Aurora PostgreSQL (pgvector)
 ```
 
-The detection and parsing stages use an iterative batching pattern to avoid Lambda timeout issues on large documents. Each stage is split into three steps (prepare → parallel process → merge) orchestrated by Step Functions Map states.
-
-**AWS Services used:** S3, Lambda, Step Functions, Textract, Bedrock, Aurora PostgreSQL Serverless v2, SNS, Secrets Manager, CloudWatch.
-
-## S3 Path Structure
-
-All paths are organized by country (ISO 3166-1 alpha-2):
-
-```
-Raw:       {country}/{state}/{year}/{filename}
-Processed: {country}/{state}/{year}/{standard_id}.json
-```
-
-Example: `US/CA/2021/california_all_standards_2021.pdf` → `US/CA/2021/US-CA-2021-LLD-1.2.json`
+The detection and parsing stages use an iterative batching pattern to avoid Lambda timeout issues on large documents. Each stage splits into three steps (prepare → parallel process → merge) orchestrated by Step Functions Map states.
 
 ## Project Layout
 
 ```
-src/els_pipeline/     Core pipeline modules (ingester, extractor, detector, parser, validator,
-                      detection_batching, parse_batching, etc.)
-infra/                CloudFormation template and database migrations
-scripts/              Deployment and manual testing scripts
+src/els_pipeline/          Python pipeline modules (ingester, extractor, detector,
+                           parser, validator, batching, embeddings, etc.)
+packages/
+  ├── shared/              Shared TypeScript types used by all web packages
+  ├── els-explorer-api/    Hono REST API for the standards explorer
+  ├── els-explorer-frontend/ React frontend for browsing/editing standards
+  ├── planning-api/        Hono API proxying to Bedrock AgentCore for planning
+  ├── planning-frontend/   React chat UI for AI-powered learning plans
+  ├── agentcore-agent/     Python Strands agent deployed to Bedrock AgentCore
+  └── landing-site/        Marketing landing page (React)
+infra/
+  ├── cdk/                 AWS CDK stacks (pipeline, app, planning, landing)
+  └── migrations/          PostgreSQL migration scripts
+scripts/                   Deployment scripts and manual testing tools
 tests/
-  ├── property/       Property-based tests (Hypothesis)
-  ├── integration/    Integration tests (moto-mocked AWS)
-  └── unit/           Unit tests
-standards/            Sample standards PDFs for testing
-documentation/        Detailed guides (deployment, testing, AWS operations)
+  ├── property/            Property-based tests (Hypothesis)
+  ├── integration/         Integration tests (moto-mocked AWS)
+  └── unit/                Unit tests
+standards/                 Sample standards PDFs for testing
+documentation/             Detailed guides
 ```
 
 ## Getting Started
@@ -71,18 +74,23 @@ documentation/        Detailed guides (deployment, testing, AWS operations)
 ### Prerequisites
 
 - Python 3.13+
+- Node.js 20+ and pnpm 9+
 - AWS CLI v2 (configured with appropriate credentials)
+- Docker (required by CDK for Lambda bundling)
 - Access to AWS Bedrock models (Claude and Titan Embed)
 
 ### Local Setup
 
 ```bash
-# Clone and install
+# Clone and install Python dependencies
 git clone <repository-url>
 cd els-pipeline
 python3 -m venv venv
 source venv/bin/activate
 pip install -e ".[dev]"
+
+# Install Node.js dependencies
+pnpm install
 
 # Copy and configure environment
 cp .env.example .env
@@ -92,7 +100,7 @@ cp .env.example .env
 ### Running Tests
 
 ```bash
-# All tests
+# Python pipeline tests (all)
 pytest tests/ -v
 
 # By category
@@ -102,29 +110,30 @@ pytest tests/unit/ -v           # Unit
 
 # With coverage
 pytest tests/ --cov=els_pipeline --cov-report=html
+
+# Node.js package tests
+pnpm test
 ```
 
 ### Deploying
 
-```bash
-# Deploy to dev (default)
-./scripts/deploy.sh
+There are four independent CDK stacks, each with its own deploy script:
 
-# Deploy to a specific environment and region
-./scripts/deploy.sh -e staging -r us-west-2
+```bash
+# Pipeline infrastructure (S3, Lambda, Step Functions, Aurora, etc.)
+./scripts/deploy_els_pipeline.sh -e dev
+
+# Standards Explorer app (API + frontend)
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_els_app.sh -e dev
+
+# Planning app (API + AgentCore + frontend)
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh -e dev
+
+# Landing site
+./scripts/deploy_landing_site.sh -e dev
 ```
 
-The deploy script packages Lambda functions, validates the CloudFormation template, deploys the stack, and outputs the resource names. Deployment takes ~10-15 minutes (Aurora cluster creation).
-
 See [documentation/DEPLOYMENT.md](documentation/DEPLOYMENT.md) for full details.
-
-## CI/CD
-
-Pushes to `main` trigger the GitHub Actions workflow (`.github/workflows/deploy.yml`):
-
-1. Runs all tests (unit, property, integration)
-2. Deploys to dev
-3. Deploys to prod (after dev succeeds)
 
 ## Configuration
 
@@ -137,7 +146,7 @@ Key environment variables (see `.env.example` for the full list):
 | `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for structure detection     | `us.anthropic.claude-opus-4-6-v1` |
 | `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6`  |
 | `BEDROCK_EMBEDDING_MODEL_ID`    | Bedrock model for embeddings              | `amazon.titan-embed-text-v2:0`    |
-| `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.7`                             |
+| `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.8`                             |
 | `MAX_CHUNKS_PER_BATCH`          | Max text-block chunks per detection batch | `5`                               |
 | `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                               |
 | `DB_HOST`                       | Aurora PostgreSQL endpoint                | `localhost`                       |
@@ -145,12 +154,15 @@ Key environment variables (see `.env.example` for the full list):
 
 ## Documentation
 
-- [Deployment Guide](documentation/DEPLOYMENT.md) — Infrastructure setup, GitHub secrets, manual and automated deployment
-- [Testing Guide](documentation/COMPREHENSIVE_TESTING.md) — Testing strategy, running tests, coverage goals
-- [AWS Operations Guide](documentation/AWS_TESTING.md) — Post-deployment verification, monitoring, troubleshooting, cost optimization
-- [Infrastructure README](infra/README.md) — CloudFormation resources, S3 structure, IAM roles
+- [Deployment Guide](documentation/DEPLOYMENT.md) — All four stacks, prerequisites, scripts, and options
+- [Testing Guide](documentation/TESTING.md) — Testing strategy, running tests, coverage goals
+- [Architecture Guide](documentation/ARCHITECTURE.md) — Pipeline stages, data flow, batching pattern, data models
+- [API Reference](documentation/API.md) — Explorer and Planning API endpoints
+- [AWS Operations Guide](documentation/AWS_OPERATIONS.md) — Post-deployment verification, monitoring, troubleshooting, cost
+- [Infrastructure Guide](infra/README.md) — CDK stacks, S3 structure, IAM roles
 - [Database Migrations](infra/migrations/README.md) — Schema evolution and migration instructions
+- [Contributing Guide](documentation/CONTRIBUTING.md) — Development workflow, code style, PR process
 
 ## License
 
-Internal use only.
+Apache License 2.0 — see [LICENSE](LICENSE) for details.

@@ -1,202 +1,186 @@
 # Deployment Guide
 
-How to deploy the ELS Pipeline to AWS using GitHub Actions or the deployment script.
+How to deploy the ELS Pipeline and its web applications to AWS.
+
+The project consists of four independent CDK stacks:
+
+| Stack                | Script                   | What It Deploys                                                                             |
+| -------------------- | ------------------------ | ------------------------------------------------------------------------------------------- |
+| `els-pipeline-{env}` | `deploy_els_pipeline.sh` | S3 buckets, Lambda functions, Step Functions, Aurora PostgreSQL, Textract/Bedrock IAM roles |
+| `els-app-{env}`      | `deploy_els_app.sh`      | Standards Explorer API (Lambda + API Gateway), frontend (S3 + CloudFront)                   |
+| `els-planning-{env}` | `deploy_planning_app.sh` | Planning API (Lambda + API Gateway), Bedrock AgentCore Runtime, frontend (S3 + CloudFront)  |
+| `els-landing-{env}`  | `deploy_landing_site.sh` | Landing site frontend (S3 + CloudFront)                                                     |
+
+The app and planning stacks depend on the pipeline stack (they import its Aurora cluster and S3 bucket outputs).
 
 ## Prerequisites
 
 - AWS CLI v2 configured with appropriate credentials
 - Python 3.13+
-- GitHub repository with Actions enabled (for CI/CD)
+- Node.js 20+ and pnpm 9+
+- Docker (CDK uses Docker to bundle Python Lambda code)
+- IAM permissions for: CloudFormation, S3, Lambda, Step Functions, Aurora, Textract, Bedrock, CloudWatch, SNS, Secrets Manager, IAM, VPC, CloudFront, API Gateway, ACM, Route53
 
-## S3 Path Structure
+### Bedrock Model Access
 
-All buckets use a country-based path layout (ISO 3166-1 alpha-2 codes):
+Request access in the AWS Console under Bedrock → Model access for:
 
-| Bucket         | Pattern                                                  | Example                                         |
-| -------------- | -------------------------------------------------------- | ----------------------------------------------- |
-| Raw documents  | `{country}/{state}/{year}/{filename}`                    | `US/CA/2021/california_standards.pdf`           |
-| Processed JSON | `{country}/{state}/{year}/{standard_id}.json`            | `US/CA/2021/US-CA-2021-LLD-1.2.json`            |
-| Embeddings     | `{country}/{state}/{year}/embeddings/{standard_id}.json` | `US/CA/2021/embeddings/US-CA-2021-LLD-1.2.json` |
+- `us.anthropic.claude-opus-4-6-v1` (structure detection)
+- `us.anthropic.claude-sonnet-4-6` (parsing, recommendations, planning agent)
+- `amazon.titan-embed-text-v2:0` (embeddings)
 
-## GitHub Secrets
-
-Configure these in `Settings > Secrets and variables > Actions`:
-
-| Secret                  | Description                                              |
-| ----------------------- | -------------------------------------------------------- |
-| `AWS_ACCESS_KEY_ID`     | IAM access key with deployment permissions               |
-| `AWS_SECRET_ACCESS_KEY` | IAM secret key                                           |
-| `AWS_REGION`            | Target region (e.g. `us-east-1`)                         |
-| `ENVIRONMENT_NAME`      | Target environment: `dev`, `staging`, or `prod`          |
-| `CUSTOM_DOMAIN`         | (prod only) Custom domain name, e.g. `app.example.com`   |
-| `HOSTED_ZONE_ID`        | (prod only) Route53 Hosted Zone ID for the custom domain |
-
-The IAM user needs permissions for CloudFormation, S3, Lambda, IAM, SSM, CloudFront, API Gateway, ACM, and Route53.
-
-## Automated Deployment (CI/CD)
-
-Pushes to `main` trigger the GitHub Actions workflow:
-
-1. Runs all tests (unit, property, integration)
-2. Packages Lambda functions and uploads to S3
-3. Deploys CloudFormation stack to dev
-4. Deploys to prod after dev succeeds
-
-## Manual Deployment
-
-### Using the Deploy Script (Recommended)
+## Pipeline Deployment
 
 ```bash
 # Dev (default)
-./scripts/deploy.sh
+./scripts/deploy_els_pipeline.sh
 
-# Production
-./scripts/deploy.sh -e prod -r us-east-2
+# Production in a specific region
+./scripts/deploy_els_pipeline.sh -e prod -r us-west-2
 ```
 
-The script validates the template, deploys the stack, creates an environment `.env` file, and verifies success. Expect ~10-15 minutes for initial deployment (Aurora cluster creation).
+Options:
 
-### Using AWS CLI Directly
+| Flag                  | Description                 | Default     |
+| --------------------- | --------------------------- | ----------- |
+| `-e`, `--environment` | `dev`, `staging`, or `prod` | `dev`       |
+| `-r`, `--region`      | AWS region                  | `us-east-1` |
 
-```bash
-aws cloudformation deploy \
-  --template-file infra/template.yaml \
-  --stack-name els-pipeline-dev \
-  --parameter-overrides EnvironmentName=dev Region=us-east-1 \
-  --capabilities CAPABILITY_NAMED_IAM
-```
+CDK handles Lambda code bundling automatically via Docker. When your Python source changes, CDK detects it and deploys new code. Initial deployment takes ~10-15 minutes (Aurora cluster creation).
 
-## App Deployment (Frontend + API)
-
-The app deployment script (`scripts/deploy_app.sh`) handles the frontend (S3 + CloudFront) and API (Lambda + API Gateway) as a separate stack from the pipeline infrastructure.
-
-### Prerequisites
-
-In addition to the general prerequisites above, the app deployment requires:
-
-- Node.js
-- pnpm
-
-### Usage
+## Standards Explorer App Deployment
 
 ```bash
-# Full deploy to dev (default)
-./scripts/deploy_app.sh
+# Full deploy to dev
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_els_app.sh
 
-# Deploy to production
-./scripts/deploy_app.sh -e prod -r us-east-2
+# Deploy to production with custom domain
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_els_app.sh \
+  -e prod -d app.example.com --hosted-zone-id Z1234
 
-# Redeploy code only (skip CloudFormation)
-./scripts/deploy_app.sh --skip-infra
+# Redeploy code only (skip CDK)
+./scripts/deploy_els_app.sh --skip-infra
 
 # Frontend only
-./scripts/deploy_app.sh --skip-infra --skip-api
+./scripts/deploy_els_app.sh --skip-infra --skip-api
 
 # API only
-./scripts/deploy_app.sh --skip-infra --skip-frontend
+./scripts/deploy_els_app.sh --skip-infra --skip-frontend
 ```
 
-### Options
+Options:
 
-| Flag                  | Description                                      | Default     |
-| --------------------- | ------------------------------------------------ | ----------- |
-| `-e`, `--environment` | Target environment (`dev`, `staging`, `prod`)    | `dev`       |
-| `-r`, `--region`      | AWS region                                       | `us-east-1` |
-| `--skip-infra`        | Skip CloudFormation stack deployment             |             |
-| `--skip-frontend`     | Skip frontend build and S3/CloudFront deployment |             |
-| `--skip-api`          | Skip API build and Lambda deployment             |             |
+| Flag                  | Description                                  | Default     |
+| --------------------- | -------------------------------------------- | ----------- |
+| `-e`, `--environment` | `dev`, `staging`, or `prod`                  | `dev`       |
+| `-r`, `--region`      | AWS region                                   | `us-east-1` |
+| `--skip-infra`        | Skip CDK stack deployment                    | —           |
+| `--skip-frontend`     | Skip frontend build and S3/CloudFront deploy | —           |
+| `--skip-api`          | Skip API Lambda deploy                       | —           |
+| `-d`, `--domain`      | Custom domain name                           | —           |
+| `--hosted-zone-id`    | Route53 Hosted Zone ID for custom domain     | —           |
 
-### What It Does
+Requires `DESCOPE_PROJECT_ID` environment variable for authentication.
 
-The script runs three stages (each skippable):
+The script:
 
-1. **Infrastructure** — Deploys the `els-app-{env}` CloudFormation stack from `infra/app-template.yaml`
-2. **API** — Builds the API (`@els/shared` + `@els/api`), bundles with esbuild for Lambda, and updates the function code
-3. **Frontend** — Builds the frontend (`@els/shared` + `@els/frontend`), syncs to S3, and invalidates the CloudFront cache
+1. Deploys the CDK stack (API Gateway, Lambda, S3, CloudFront)
+2. CDK bundles and deploys the API Lambda automatically
+3. Builds `@els/shared` and `@els/frontend`, syncs to S3, invalidates CloudFront
 
-### App Stack Naming
+## Planning App Deployment
 
-| Environment | Stack Name        |
-| ----------- | ----------------- |
-| Development | `els-app-dev`     |
-| Staging     | `els-app-staging` |
-| Production  | `els-app-prod`    |
+```bash
+# Full deploy to dev
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh
 
-### App Stack Outputs
+# Production with custom domain
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh \
+  -e prod -d plan.example.com --hosted-zone-id Z1234
 
-After deployment, the script prints the frontend URL (CloudFront) and API URL (API Gateway). The API is also accessible at `https://{cloudfront-domain}/api/*`.
+# Redeploy code only
+./scripts/deploy_planning_app.sh --skip-infra
 
-## Post-Deployment
+# Frontend only
+./scripts/deploy_planning_app.sh --skip-infra --skip-api
+```
 
-1. Get stack outputs:
+Options are the same as the app deployment, plus:
 
-   ```bash
-   aws cloudformation describe-stacks \
-     --stack-name els-pipeline-dev \
-     --query 'Stacks[0].Outputs'
-   ```
+| Flag              | Description                                 | Default          |
+| ----------------- | ------------------------------------------- | ---------------- |
+| `--bedrock-model` | Override the Bedrock model ID for the agent | template default |
 
-2. Update `.env` with the deployed bucket names (the deploy script does this automatically).
+This stack also deploys a Bedrock AgentCore Runtime that hosts the Strands-based planning agent (`packages/agentcore-agent/`).
 
-3. Verify:
+## Landing Site Deployment
 
-   ```bash
-   # Check buckets exist
-   aws s3 ls | grep els-
+```bash
+# Full deploy
+./scripts/deploy_landing_site.sh
 
-   # Test upload with country path
-   aws s3 cp test.pdf s3://${ELS_RAW_BUCKET}/US/CA/2021/test.pdf
-   ```
+# Production with custom domain
+./scripts/deploy_landing_site.sh -e prod -d example.com --hosted-zone-id Z1234
+
+# Redeploy frontend only
+./scripts/deploy_landing_site.sh --skip-infra
+```
+
+## GitHub Secrets (CI/CD)
+
+If using GitHub Actions, configure these in `Settings > Secrets and variables > Actions`:
+
+| Secret                  | Description                                     |
+| ----------------------- | ----------------------------------------------- |
+| `AWS_ACCESS_KEY_ID`     | IAM access key with deployment permissions      |
+| `AWS_SECRET_ACCESS_KEY` | IAM secret key                                  |
+| `AWS_REGION`            | Target region (e.g. `us-east-1`)                |
+| `ENVIRONMENT_NAME`      | Target environment: `dev`, `staging`, or `prod` |
+| `DESCOPE_PROJECT_ID`    | Descope project ID for authentication           |
+| `CUSTOM_DOMAIN`         | (prod only) Custom domain name                  |
+| `HOSTED_ZONE_ID`        | (prod only) Route53 Hosted Zone ID              |
+
+## Post-Deployment Verification
+
+```bash
+# Pipeline stack outputs
+aws cloudformation describe-stacks --stack-name els-pipeline-dev \
+  --query 'Stacks[0].Outputs' --output table
+
+# Check S3 buckets
+aws s3 ls | grep els-
+
+# Check Aurora cluster
+aws rds describe-db-clusters --db-cluster-identifier els-database-cluster-dev \
+  --query 'DBClusters[0].Status'
+
+# Check Lambda functions
+aws lambda list-functions \
+  --query 'Functions[?starts_with(FunctionName, `els-`)].FunctionName'
+
+# Test upload
+aws s3 cp standards/california_all_standards_2021.pdf \
+  s3://${ELS_RAW_BUCKET}/US/CA/2021/california_all_standards_2021.pdf
+```
 
 ## Environment Configuration
 
-| Environment | Stack Name             | `ENVIRONMENT_NAME` |
-| ----------- | ---------------------- | ------------------ |
-| Development | `els-pipeline-dev`     | `dev`              |
-| Staging     | `els-pipeline-staging` | `staging`          |
-| Production  | `els-pipeline-prod`    | `prod`             |
-
-## Adding Documents from New Countries
-
-Upload documents using the country-based path structure. The pipeline handles the country code automatically in all stages.
-
-```bash
-# Canadian document
-aws s3 cp ontario_standards.pdf s3://${ELS_RAW_BUCKET}/CA/ON/2022/ontario_standards.pdf
-
-# Australian document
-aws s3 cp nsw_standards.pdf s3://${ELS_RAW_BUCKET}/AU/NSW/2023/nsw_early_years.pdf
-```
+| Environment | Pipeline Stack         | App Stack         | Planning Stack         | Landing Stack         |
+| ----------- | ---------------------- | ----------------- | ---------------------- | --------------------- |
+| Development | `els-pipeline-dev`     | `els-app-dev`     | `els-planning-dev`     | `els-landing-dev`     |
+| Staging     | `els-pipeline-staging` | `els-app-staging` | `els-planning-staging` | `els-landing-staging` |
+| Production  | `els-pipeline-prod`    | `els-app-prod`    | `els-planning-prod`    | `els-landing-prod`    |
 
 ## Rollback
 
-CloudFormation rolls back automatically on failure. To manually rollback or delete:
+CDK/CloudFormation rolls back automatically on failure. To manually delete a stack:
 
 ```bash
 aws cloudformation delete-stack --stack-name els-pipeline-dev
 aws cloudformation wait stack-delete-complete --stack-name els-pipeline-dev
 ```
 
-> Deleting the stack removes all S3 buckets and their contents. Back up data first.
-
-## Troubleshooting
-
-| Issue                                       | Solution                                                                                     |
-| ------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Stack creation fails with permission errors | Ensure `CAPABILITY_NAMED_IAM` is set. Check IAM permissions.                                 |
-| Stack already exists                        | The workflow uses `--no-fail-on-empty-changeset` for updates. Delete and recreate if needed. |
-| Tests fail in CI                            | Run `pytest tests/ -v` locally to reproduce.                                                 |
-
-## Cost Estimates
-
-Current infrastructure (approximate monthly):
-
-- S3: ~$0.023/GB
-- CloudFormation, IAM, SSM: Free
-- Lambda: ~$0.20/1M requests + compute
-- Textract: ~$1.50/1K pages
-- Bedrock: Model-specific token pricing
-- Aurora Serverless v2: ~$0.12/ACU-hour
+> Deleting the pipeline stack removes S3 buckets and their contents. Back up data first.
 
 ## Security
 
@@ -204,3 +188,17 @@ Current infrastructure (approximate monthly):
 - IAM roles follow least privilege (each Lambda has a dedicated role)
 - S3 versioning enabled for audit trail
 - Database credentials stored in Secrets Manager
+- API authentication via Descope JWTs
+- AgentCore agent validates Descope tokens and binds user_id per session
+
+## Troubleshooting
+
+| Issue                                       | Solution                                                             |
+| ------------------------------------------- | -------------------------------------------------------------------- |
+| Stack creation fails with permission errors | Ensure `CAPABILITY_NAMED_IAM` is set. Check IAM permissions.         |
+| CDK bootstrap required                      | Run `npx cdk bootstrap aws://<account>/<region>` in `infra/cdk/`     |
+| Docker not running                          | CDK needs Docker to bundle Python Lambda code. Start Docker Desktop. |
+| `DESCOPE_PROJECT_ID` not set                | Export it before running app/planning deploy scripts                 |
+| Aurora connection failure                   | Check VPC/security groups. Ensure Lambda is in same VPC.             |
+| Bedrock access denied                       | Request model access in Bedrock console.                             |
+| Frontend shows stale content                | CloudFront invalidation may take a few minutes to propagate.         |
