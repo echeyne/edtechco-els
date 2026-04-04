@@ -1,4 +1,4 @@
-# ELS Normalization Pipeline
+# Early Learning Standards (ELS) Platform
 
 A serverless pipeline that ingests early learning standards (ELS) documents from multiple US states, extracts their hierarchical structure using AI, and normalizes them into a consistent canonical format — plus web apps for exploring and building learning plans from the resulting data.
 
