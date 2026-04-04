@@ -31,7 +31,7 @@ print_header() {
 SKIP_INFRA=false
 SKIP_FRONTEND=false
 CUSTOM_DOMAIN="edtechco.org"
-HOSTED_ZONE_ID="Z0235101CN666KKXEN77"
+HOSTED_ZONE_ID=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in

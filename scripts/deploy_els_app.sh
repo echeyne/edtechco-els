@@ -31,7 +31,7 @@ SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
 CUSTOM_DOMAIN="els-explorer.edtechco.org"
-HOSTED_ZONE_ID="Z09570222PJJLF3NZAXTU"
+HOSTED_ZONE_ID=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in

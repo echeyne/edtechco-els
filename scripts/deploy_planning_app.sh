@@ -32,7 +32,7 @@ SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
 CUSTOM_DOMAIN="planning.edtechco.org"
-HOSTED_ZONE_ID="Z0235101CN666KKXEN77"
+HOSTED_ZONE_ID=""
 BEDROCK_MODEL_ID=""
 
 while [[ $# -gt 0 ]]; do
