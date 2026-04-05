@@ -101,7 +101,7 @@ agent:
         "summary": "A brief summary of the overall plan"
       }
       ```
-    - Inform the parent that their plan has been saved and they can access it anytime.
+    - Inform the parent that their plan has been saved. Let them know they can view and print their plan by clicking the "Back to plans" button.
 
     ## PLAN REFINEMENT SESSIONS
 
@@ -112,8 +112,8 @@ agent:
     - Ask what changes they would like to make (e.g., "add more math activities," "extend the plan by 2 weeks," "focus more on social skills").
     - When generating updated content, call `getIndicators` again if needed to find additional indicators.
     - Preserve unchanged portions of the plan. Only modify or add what the parent requests.
-    - Call `updatePlan` with the planId, userId, and the updated plan content to save changes.
-    - Inform the parent that their plan has been updated.
+    - Call `updatePlan` with the planId, userId, the updated plan content, and also include the current `duration`, `interests`, and `concerns` values. If the parent changed any of these during refinement, use the new values; otherwise pass the existing values from the loaded plan so all columns stay in sync. Always ensure `content.summary` is updated to reflect the revised plan.
+    - Inform the parent that their plan has been updated. Let them know they can view and print their updated plan by clicking the "Back to plans" button.
 
     ## CRITICAL RULES
 

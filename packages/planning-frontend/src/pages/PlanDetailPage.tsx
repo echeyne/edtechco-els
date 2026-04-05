@@ -4,7 +4,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getPlan, deletePlan, ApiError } from "@/lib/api";
 import PlanDisplay from "@/components/PlanDisplay";
 import PrintPlanButton from "@/components/PrintPlanButton";
-import ChatPanel from "@/components/ChatPanel";
 import type { PlanDetail } from "@/types";
 
 export default function PlanDetailPage() {
@@ -15,7 +14,6 @@ export default function PlanDetailPage() {
   const [plan, setPlan] = useState<PlanDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showChat, setShowChat] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
   const fetchPlan = useCallback(async () => {
@@ -56,10 +54,15 @@ export default function PlanDetailPage() {
     }
   }, [token, id, deleting, navigate]);
 
-  const handlePlanEvent = useCallback(() => {
-    // Re-fetch plan when it's updated via chat refinement
-    fetchPlan();
-  }, [fetchPlan]);
+  const handleRefine = useCallback(() => {
+    if (!plan) return;
+    navigate("/planning", {
+      state: {
+        refinePlanId: plan.id,
+        initialMessage: `I'd like to refine plan ${plan.id}`,
+      },
+    });
+  }, [navigate, plan]);
 
   if (loading) {
     return <p className="text-sm text-muted-foreground">Loading plan…</p>;
@@ -109,10 +112,10 @@ export default function PlanDetailPage() {
         <div className="flex gap-2">
           <PrintPlanButton plan={plan} />
           <button
-            onClick={() => setShowChat((v) => !v)}
+            onClick={handleRefine}
             className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >
-            {showChat ? "Hide Chat" : "Refine this plan"}
+            Refine this plan
           </button>
           <button
             onClick={handleDelete}
@@ -123,12 +126,6 @@ export default function PlanDetailPage() {
           </button>
         </div>
       </div>
-
-      {showChat && (
-        <div className="mb-6 h-[400px]">
-          <ChatPanel planId={plan.id} onPlanEvent={handlePlanEvent} />
-        </div>
-      )}
 
       <PlanDisplay content={plan.content} />
     </div>

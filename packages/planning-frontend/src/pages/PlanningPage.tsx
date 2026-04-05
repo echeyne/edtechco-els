@@ -1,21 +1,45 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ChatPanel from "@/components/ChatPanel";
 import PlanList from "@/components/PlanList";
 
+interface RefineState {
+  refinePlanId?: string;
+  initialMessage?: string;
+}
+
 export default function PlanningPage() {
+  const location = useLocation();
   const [view, setView] = useState<"list" | "chat">("list");
   const [refreshKey, setRefreshKey] = useState(0);
+  const [refinePlanId, setRefinePlanId] = useState<string | undefined>();
+  const [initialMessage, setInitialMessage] = useState<string | undefined>();
+
+  // If navigated here with refine state, open chat with that context
+  useEffect(() => {
+    const state = location.state as RefineState | null;
+    if (state?.refinePlanId) {
+      setRefinePlanId(state.refinePlanId);
+      setInitialMessage(state.initialMessage);
+      setView("chat");
+      // Clear the navigation state so refreshing doesn't re-trigger
+      window.history.replaceState({}, "");
+    }
+  }, [location.state]);
 
   const handleStartNew = useCallback(() => {
+    setRefinePlanId(undefined);
+    setInitialMessage(undefined);
     setView("chat");
   }, []);
 
   const handlePlanEvent = useCallback(() => {
-    // Bump refreshKey so PlanList re-fetches when a plan SSE event arrives
     setRefreshKey((k) => k + 1);
   }, []);
 
   const handleBackToList = useCallback(() => {
+    setRefinePlanId(undefined);
+    setInitialMessage(undefined);
     setView("list");
     setRefreshKey((k) => k + 1);
   }, []);
@@ -47,7 +71,11 @@ export default function PlanningPage() {
         <PlanList onStartNew={handleStartNew} refreshKey={refreshKey} />
       ) : (
         <div className="flex-1 min-h-0 pb-6">
-          <ChatPanel onPlanEvent={handlePlanEvent} />
+          <ChatPanel
+            planId={refinePlanId}
+            initialMessage={initialMessage}
+            onPlanEvent={handlePlanEvent}
+          />
         </div>
       )}
     </div>

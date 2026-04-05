@@ -32,6 +32,13 @@ logging.getLogger("bedrock_agentcore").setLevel(logging.INFO)
 
 app = BedrockAgentCoreApp(debug=True)
 
+# Suppress noisy periodic ping health-check messages from cluttering logs
+class _PingFilter(logging.Filter):
+    def filter(self, record):
+        return "Ping request" not in record.getMessage()
+
+logging.getLogger("bedrock_agentcore.app").addFilter(_PingFilter())
+
 # Plan-mutating tools whose results should emit a plan event frame
 PLAN_MUTATION_TOOLS = {"createPlan", "updatePlan"}
 
@@ -120,12 +127,29 @@ def build_session_tools(user_id: str) -> list:
             raise
 
     @tool
-    def updatePlan(plan_id: str, content: dict) -> dict:
-        """Update an existing plan's content. Only operates on plans owned by the current user."""
+    def updatePlan(
+        plan_id: str,
+        content: dict,
+        duration: str = "",
+        interests: str = "",
+        concerns: str = "",
+    ) -> dict:
+        """Update an existing plan's content and metadata. Only operates on plans owned by the current user.
+
+        Always include duration, interests, concerns, and an updated content.summary
+        when the plan changes so that all plan columns stay in sync.
+        """
         logger.info("Tool called: updatePlan(plan_id=%s, user_id=%s)", plan_id, user_id)
         from tools.plan_management import update_plan
         try:
-            result = update_plan(plan_id=plan_id, user_id=user_id, content=content)
+            result = update_plan(
+                plan_id=plan_id,
+                user_id=user_id,
+                content=content,
+                duration=duration or None,
+                interests=interests or None,
+                concerns=concerns or None,
+            )
             logger.info("updatePlan succeeded: planId=%s", result.get("planId"))
             return {"status": "success", "content": [{"text": json.dumps(result, default=str)}]}
         except Exception:

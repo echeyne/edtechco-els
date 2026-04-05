@@ -111,19 +111,44 @@ def update_plan(
     plan_id: str,
     user_id: str,
     content: dict[str, Any],
+    duration: str | None = None,
+    interests: str | None = None,
+    concerns: str | None = None,
 ) -> dict[str, Any]:
-    """Update a plan's content and return the updated record."""
+    """Update a plan's content and optional metadata, then return the updated record.
+
+    Args:
+        plan_id: The plan's UUID.
+        user_id: The owning user's ID.
+        content: The updated plan content dict (stored as JSONB).
+        duration: Optional updated plan duration.
+        interests: Optional updated child interests.
+        concerns: Optional updated parent concerns.
+    """
     logger.info("Updating plan=%s for user_id=%s", plan_id, user_id)
+
+    set_clauses = ["content = :content", "updated_at = NOW()"]
+    parameters = [
+        {"name": "content", "typeHint": "JSON", "value": {"stringValue": json.dumps(content)}},
+        {"name": "id", "typeHint": "UUID", "value": {"stringValue": plan_id}},
+        {"name": "user_id", "value": {"stringValue": user_id}},
+    ]
+
+    if duration is not None:
+        set_clauses.append("duration = :duration")
+        parameters.append({"name": "duration", "value": {"stringValue": duration}})
+    if interests is not None:
+        set_clauses.append("interests = :interests")
+        parameters.append({"name": "interests", "value": {"stringValue": interests}})
+    if concerns is not None:
+        set_clauses.append("concerns = :concerns")
+        parameters.append({"name": "concerns", "value": {"stringValue": concerns}})
+
     sql = (
-        "UPDATE plans SET content = :content, updated_at = NOW() "
+        f"UPDATE plans SET {', '.join(set_clauses)} "
         "WHERE id = :id AND user_id = :user_id "
         "RETURNING *"
     )
-    parameters = [
-        {"name": "content", "typeHint": "JSON", "value": {"stringValue": json.dumps(content)}},
-        {"name": "id", "value": {"stringValue": plan_id}},
-        {"name": "user_id", "value": {"stringValue": user_id}},
-    ]
 
     rows = execute(sql, parameters)
     if not rows:
@@ -139,7 +164,7 @@ def get_plan(plan_id: str, user_id: str) -> dict[str, Any]:
     logger.info("Fetching plan=%s for user_id=%s", plan_id, user_id)
     sql = "SELECT * FROM plans WHERE id = :id AND user_id = :user_id"
     parameters = [
-        {"name": "id", "value": {"stringValue": plan_id}},
+        {"name": "id", "typeHint": "UUID", "value": {"stringValue": plan_id}},
         {"name": "user_id", "value": {"stringValue": user_id}},
     ]
 
@@ -155,7 +180,7 @@ def delete_plan(plan_id: str, user_id: str) -> dict[str, Any]:
     logger.info("Deleting plan=%s for user_id=%s", plan_id, user_id)
     sql = "DELETE FROM plans WHERE id = :id AND user_id = :user_id"
     parameters = [
-        {"name": "id", "value": {"stringValue": plan_id}},
+        {"name": "id", "typeHint": "UUID", "value": {"stringValue": plan_id}},
         {"name": "user_id", "value": {"stringValue": user_id}},
     ]
 

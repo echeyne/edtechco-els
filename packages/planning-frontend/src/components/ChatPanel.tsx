@@ -8,6 +8,8 @@ import { useAuth } from "@/contexts/AuthContext";
 export interface ChatPanelProps {
   sessionId?: string;
   planId?: string;
+  /** If provided, this message is sent automatically when the panel mounts. */
+  initialMessage?: string;
   onPlanEvent?: (planId: string, action: "created" | "updated") => void;
 }
 
@@ -20,6 +22,7 @@ const SUGGESTIONS = [
 export default function ChatPanel({
   sessionId,
   planId,
+  initialMessage,
   onPlanEvent,
 }: ChatPanelProps) {
   const { token } = useAuth();
@@ -28,7 +31,17 @@ export default function ChatPanel({
 
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const initialSentRef = useRef(false);
+
+  // Auto-send the initial message once on mount
+  useEffect(() => {
+    if (initialMessage && token && !initialSentRef.current) {
+      initialSentRef.current = true;
+      sendMessage(initialMessage);
+    }
+  }, [initialMessage, token, sendMessage]);
 
   // Notify parent of plan events
   const lastNotifiedRef = useRef(0);
@@ -40,9 +53,12 @@ export default function ChatPanel({
     lastNotifiedRef.current = planEvents.length;
   }, [planEvents, onPlanEvent]);
 
-  // Scroll to bottom on new messages
+  // Scroll to bottom on new messages — stay within the chat container
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages]);
 
   const handleSend = (text: string) => {
@@ -73,12 +89,15 @@ export default function ChatPanel({
   const showSuggestions = messages.length === 0 && !isStreaming;
 
   /** Normalise agent markdown so it renders with proper spacing. */
-  const formatContent = (raw: string) => raw.replace(/\.([A-Z])/g, ". $1");
+  const formatContent = (raw: string) => raw.replace(/([.!])([A-Z])/g, "$1 $2");
 
   return (
     <div className="flex flex-col h-full min-h-0 rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
       {/* Message area */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 min-h-0 flex flex-col">
+      <div
+        ref={messagesContainerRef}
+        className="flex-1 overflow-y-auto px-4 py-4 space-y-3 min-h-0 flex flex-col"
+      >
         {showSuggestions && (
           <div className="flex flex-col items-center justify-center flex-1 gap-4 py-8">
             <p className="text-sm text-slate-400">How can I help you today?</p>
