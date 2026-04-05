@@ -221,12 +221,20 @@ describe("ElsPlanningStack", () => {
       template = Template.fromStack(stack);
     });
 
-    test("ACM Certificate exists", () => {
+    test("ACM Certificate exists with Retain policy", () => {
       template.resourceCountIs("AWS::CertificateManager::Certificate", 1);
+      template.hasResource("AWS::CertificateManager::Certificate", {
+        DeletionPolicy: "Retain",
+        UpdateReplacePolicy: "Retain",
+      });
     });
 
-    test("Route53 RecordSet exists", () => {
+    test("Route53 RecordSet exists with Retain policy", () => {
       template.resourceCountIs("AWS::Route53::RecordSet", 1);
+      template.hasResource("AWS::Route53::RecordSet", {
+        DeletionPolicy: "Retain",
+        UpdateReplacePolicy: "Retain",
+      });
     });
 
     test("outputs PlanningCustomDomainUrl", () => {

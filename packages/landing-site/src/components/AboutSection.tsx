@@ -1,6 +1,6 @@
 export default function AboutSection() {
   return (
-    <section id="about" className="px-4 pb-16 sm:py-24">
+    <section id="about" className="px-4 pb-16">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="mb-6 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Our Mission

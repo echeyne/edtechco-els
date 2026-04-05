@@ -9,7 +9,7 @@ export default function ProjectsSection({
   projects = defaultProjects,
 }: ProjectsSectionProps) {
   return (
-    <section id="projects" className="px-4 pb-16 sm:py-24">
+    <section id="projects" className="px-4 pb-16">
       <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         Our Projects
       </h2>

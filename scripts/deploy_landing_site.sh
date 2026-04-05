@@ -30,8 +30,6 @@ print_header() {
 
 SKIP_INFRA=false
 SKIP_FRONTEND=false
-CUSTOM_DOMAIN="edtechco.org"
-HOSTED_ZONE_ID=""
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -39,8 +37,6 @@ while [[ $# -gt 0 ]]; do
         -r|--region) REGION="$2"; shift 2 ;;
         --skip-infra) SKIP_INFRA=true; shift ;;
         --skip-frontend) SKIP_FRONTEND=true; shift ;;
-        -d|--domain) CUSTOM_DOMAIN="$2"; shift 2 ;;
-        --hosted-zone-id) HOSTED_ZONE_ID="$2"; shift 2 ;;
         -h|--help)
             echo "Usage: $0 [OPTIONS]"
             echo ""
@@ -49,13 +45,11 @@ while [[ $# -gt 0 ]]; do
             echo "  -r, --region REGION         AWS region [default: us-east-1]"
             echo "  --skip-infra                Skip CDK deployment"
             echo "  --skip-frontend             Skip frontend build & deploy"
-            echo "  -d, --domain DOMAIN         Custom domain (e.g. landing.example.com)"
-            echo "  --hosted-zone-id ID         Route53 Hosted Zone ID for custom domain"
             echo "  -h, --help                  Show this help"
             echo ""
             echo "Examples:"
             echo "  $0                                          # Full deploy to dev"
-            echo "  $0 -e prod -d landing.example.com --hosted-zone-id Z1234"
+            echo "  $0 -e prod                                  # Full deploy to prod"
             echo "  $0 --skip-infra                             # Redeploy frontend only"
             exit 0 ;;
         *) print_message "$RED" "Unknown option: $1"; exit 1 ;;
@@ -78,8 +72,6 @@ deploy_infra() {
     npm ci --silent
 
     CDK_CONTEXT="-c environment=$ENVIRONMENT -c targetStack=$STACK_NAME"
-    [ -n "$CUSTOM_DOMAIN" ] && CDK_CONTEXT="$CDK_CONTEXT -c landingDomain=$CUSTOM_DOMAIN"
-    [ -n "$HOSTED_ZONE_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c hostedZoneId=$HOSTED_ZONE_ID"
 
     npx cdk deploy "$STACK_NAME" \
         $CDK_CONTEXT \
@@ -123,7 +115,6 @@ print_summary() {
     CLOUDFRONT_DOMAIN=$(get_output LandingSiteCloudFrontDomainName)
     print_message "$GREEN" "✅ Landing Site deployed"
     print_message "$GREEN" "   Frontend:     https://$CLOUDFRONT_DOMAIN"
-    [ -n "$CUSTOM_DOMAIN" ] && print_message "$GREEN" "   Domain:       https://$CUSTOM_DOMAIN"
     print_message "$GREEN" "   Stack:        $STACK_NAME ($REGION)"
 }
 

@@ -255,7 +255,8 @@ export class ElsPlanningStack extends cdk.Stack {
     });
 
     // ========================================================================
-    // Conditional Custom Domain: ACM Certificate
+    // Domain resources — marked RETAIN so CloudFormation orphans them.
+    // After one successful deploy these can be removed from code entirely.
     // ========================================================================
 
     let certificate: acm.ICertificate | undefined;
@@ -280,6 +281,7 @@ export class ElsPlanningStack extends cdk.Stack {
           ),
         },
       );
+      acmCertificate.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
       cdk.Tags.of(acmCertificate).add("Environment", env);
       cdk.Tags.of(acmCertificate).add("Project", "ELS-Planning");
       certificate = acmCertificate;
@@ -295,7 +297,6 @@ export class ElsPlanningStack extends cdk.Stack {
       bucketPrefix: "els-planning-frontend",
       apiGateway: apiGateway,
       customDomainName: props.customDomainName,
-      hostedZoneId: props.hostedZoneId,
       certificate: certificate,
       cfnLogicalIds: {
         bucket: "PlanningFrontendBucket",
@@ -306,11 +307,11 @@ export class ElsPlanningStack extends cdk.Stack {
     });
 
     // ========================================================================
-    // Conditional Custom Domain: Route 53 DNS Record
+    // Conditional Custom Domain: Route 53 DNS Record (RETAIN)
     // ========================================================================
 
     if (props.customDomainName && props.hostedZoneId) {
-      new route53.CfnRecordSet(this, "PlanningDnsRecord", {
+      const dnsRecord = new route53.CfnRecordSet(this, "PlanningDnsRecord", {
         hostedZoneId: props.hostedZoneId,
         name: props.customDomainName,
         type: "A",
@@ -320,6 +321,7 @@ export class ElsPlanningStack extends cdk.Stack {
           evaluateTargetHealth: false,
         },
       });
+      dnsRecord.applyRemovalPolicy(cdk.RemovalPolicy.RETAIN);
     }
 
     // ========================================================================
@@ -383,6 +385,10 @@ export class ElsPlanningStack extends cdk.Stack {
                 "Can you prescribe something for my child's anxiety?",
               ],
               type: "DENY",
+              inputEnabled: true,
+              inputAction: "BLOCK",
+              outputEnabled: false,
+              outputAction: "NONE",
             },
             {
               name: "ClinicalDiagnosis",
@@ -395,6 +401,10 @@ export class ElsPlanningStack extends cdk.Stack {
                 "Is my child developmentally delayed?",
               ],
               type: "DENY",
+              inputEnabled: true,
+              inputAction: "BLOCK",
+              outputEnabled: false,
+              outputAction: "NONE",
             },
             {
               name: "TherapyRecommendations",
@@ -406,6 +416,10 @@ export class ElsPlanningStack extends cdk.Stack {
                 "Speech therapy would be best for your child",
               ],
               type: "DENY",
+              inputEnabled: true,
+              inputAction: "BLOCK",
+              outputEnabled: false,
+              outputAction: "NONE",
             },
             {
               name: "Politics",
@@ -434,7 +448,7 @@ export class ElsPlanningStack extends cdk.Stack {
             {
               name: "PersonalRelationships",
               definition:
-                "Advice on marital issues, romantic relationships, family conflicts, co-parenting disputes, custody, or relationship counseling. Excludes collecting a child's name or age for learning plans.",
+                "Advice on marital issues, romantic relationships, family conflicts, co-parenting disputes, custody, or relationship counseling",
               examples: [
                 "My spouse and I disagree on parenting, what should I do?",
                 "How do I handle my ex's parenting style?",

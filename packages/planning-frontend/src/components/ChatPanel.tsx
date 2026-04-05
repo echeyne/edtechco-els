@@ -114,6 +114,10 @@ export default function ChatPanel({
                     remarkPlugins={[remarkGfm]}
                     components={{
                       p: ({ children }) => <p className="py-2">{children}</p>,
+                      h3: ({ children }) => (
+                        <h3 className="py-2">{children}</h3>
+                      ),
+                      hr: ({ children }) => <hr className="mt-2 py-2" />,
                     }}
                   >
                     {formatContent(msg.content)}

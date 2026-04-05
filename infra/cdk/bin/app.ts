@@ -43,8 +43,6 @@ if (
       environmentName: env,
       pipelineStackName: `els-pipeline-${env}`,
       descopeProjectId: process.env.DESCOPE_PROJECT_ID!,
-      customDomainName: app.node.tryGetContext("planningDomain"),
-      hostedZoneId: app.node.tryGetContext("hostedZoneId"),
       env: { region },
     });
     planningStack.addDependency(pipelineStack);

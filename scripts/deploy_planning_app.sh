@@ -31,8 +31,6 @@ print_header() {
 SKIP_INFRA=false
 SKIP_FRONTEND=false
 SKIP_API=false
-CUSTOM_DOMAIN="planning.edtechco.org"
-HOSTED_ZONE_ID=""
 BEDROCK_MODEL_ID=""
 
 while [[ $# -gt 0 ]]; do
@@ -42,8 +40,6 @@ while [[ $# -gt 0 ]]; do
         --skip-infra) SKIP_INFRA=true; shift ;;
         --skip-frontend) SKIP_FRONTEND=true; shift ;;
         --skip-api) SKIP_API=true; shift ;;
-        -d|--domain) CUSTOM_DOMAIN="$2"; shift 2 ;;
-        --hosted-zone-id) HOSTED_ZONE_ID="$2"; shift 2 ;;
         --bedrock-model) BEDROCK_MODEL_ID="$2"; shift 2 ;;
         -h|--help)
             echo "Usage: $0 [OPTIONS]"
@@ -54,8 +50,6 @@ while [[ $# -gt 0 ]]; do
             echo "  --skip-infra                Skip CDK deployment (infra + AgentCore Runtime)"
             echo "  --skip-frontend             Skip frontend build & deploy"
             echo "  --skip-api                  Skip Planning API Lambda deploy"
-            echo "  -d, --domain DOMAIN         Custom domain (e.g. plan.example.com)"
-            echo "  --hosted-zone-id ID         Route53 Hosted Zone ID for custom domain"
             echo "  --bedrock-model MODEL_ID    Bedrock model ID [default: template default]"
             echo "  -h, --help                  Show this help"
             echo ""
@@ -64,7 +58,7 @@ while [[ $# -gt 0 ]]; do
             echo ""
             echo "Examples:"
             echo "  $0                                          # Full deploy to dev"
-            echo "  $0 -e prod -d plan.example.com --hosted-zone-id Z1234"
+            echo "  $0 -e prod"
             echo "  $0 --skip-infra                             # Redeploy code only"
             echo "  $0 --skip-infra --skip-frontend             # API only"
             exit 0 ;;
@@ -93,8 +87,6 @@ deploy_infra() {
     npm ci --silent
 
     CDK_CONTEXT="-c environment=$ENVIRONMENT -c targetStack=$STACK_NAME"
-    [ -n "$CUSTOM_DOMAIN" ] && CDK_CONTEXT="$CDK_CONTEXT -c planningDomain=$CUSTOM_DOMAIN"
-    [ -n "$HOSTED_ZONE_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c hostedZoneId=$HOSTED_ZONE_ID"
     [ -n "$BEDROCK_MODEL_ID" ] && CDK_CONTEXT="$CDK_CONTEXT -c bedrockModel=$BEDROCK_MODEL_ID"
 
     DESCOPE_PROJECT_ID="$DESCOPE_PROJECT_ID" npx cdk deploy "$STACK_NAME" \
