@@ -31,11 +31,17 @@ import { ArrowLeft, ShieldCheck, Edit, Save, X } from "lucide-react";
 type RecordType = "domain" | "strand" | "sub_strand" | "indicator";
 
 // ---------------------------------------------------------------------------
-// VerifiedBadge (read-only display)
+// VerifiedBadge (clickable when onClick is provided)
 // ---------------------------------------------------------------------------
 
-function VerifiedBadge({ verified }: { verified: boolean }) {
-  return verified ? (
+function VerifiedBadge({
+  verified,
+  onClick,
+}: {
+  verified: boolean;
+  onClick?: () => void;
+}) {
+  const badge = verified ? (
     <Badge className="bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100 shadow-none">
       <ShieldCheck className="mr-1 h-3 w-3" />
       Verified
@@ -45,6 +51,23 @@ function VerifiedBadge({ verified }: { verified: boolean }) {
       Unverified
     </Badge>
   );
+
+  if (onClick) {
+    return (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+        className="cursor-pointer hover:opacity-80"
+        aria-label={verified ? "Mark as unverified" : "Mark as verified"}
+      >
+        {badge}
+      </button>
+    );
+  }
+
+  return badge;
 }
 
 // ---------------------------------------------------------------------------
@@ -248,6 +271,32 @@ export default function DetailPage({ recordType }: { recordType: RecordType }) {
     }
   };
 
+  // Toggle verification with optimistic update (matches hierarchy page behaviour)
+  const handleVerify = useCallback(async () => {
+    if (!token || !data) return;
+    const newVerified = !data.humanVerified;
+
+    // Optimistic update
+    setData((prev) => (prev ? { ...prev, humanVerified: newVerified } : prev));
+
+    try {
+      const verifyFn = {
+        domain: verifyDomain,
+        strand: verifyStrand,
+        sub_strand: verifySubStrand,
+        indicator: verifyIndicator,
+      }[recordType];
+      await verifyFn(data.id, { humanVerified: newVerified }, token);
+      // Re-fetch to pick up verifiedAt / verifiedBy changes
+      await fetchData();
+    } catch {
+      // Revert on failure
+      setData((prev) =>
+        prev ? { ...prev, humanVerified: !newVerified } : prev,
+      );
+    }
+  }, [token, data, recordType, fetchData]);
+
   const typeLabel = {
     domain: "Domain",
     strand: "Strand",
@@ -308,7 +357,12 @@ export default function DetailPage({ recordType }: { recordType: RecordType }) {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {!editing && <VerifiedBadge verified={data.humanVerified} />}
+          {!editing && (
+            <VerifiedBadge
+              verified={data.humanVerified}
+              onClick={hasEditPermission ? handleVerify : undefined}
+            />
+          )}
           {hasEditPermission && !editing && (
             <Button variant="outline" size="sm" onClick={handleStartEdit}>
               <Edit className="mr-2 h-4 w-4" /> Edit
@@ -533,7 +587,10 @@ export default function DetailPage({ recordType }: { recordType: RecordType }) {
             )}
 
             <DetailRow label="Human Verified" value={null}>
-              <VerifiedBadge verified={data.humanVerified} />
+              <VerifiedBadge
+                verified={data.humanVerified}
+                onClick={hasEditPermission ? handleVerify : undefined}
+              />
             </DetailRow>
 
             {data.verifiedAt && (

@@ -26,11 +26,7 @@ def get_age_ranges(state: str) -> list[str]:
     logger.info("Fetching age ranges for state=%s", state)
     sql = (
         "SELECT DISTINCT doc.age_band as age_range "
-        "FROM indicators i "
-        "JOIN sub_strands ss ON i.sub_strand_id = ss.id "
-        "JOIN strands s ON ss.strand_id = s.id "
-        "JOIN domains d ON s.domain_id = d.id "
-        "JOIN documents doc ON d.document_id = doc.id "
+        "FROM documents doc "
         "WHERE doc.state = :state "
         "ORDER BY doc.age_band"
     )

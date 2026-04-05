@@ -160,6 +160,20 @@ function isSqlExpression(v: unknown): v is string {
   return typeof v === "string" && (v === "NULL" || /\(\)$/.test(v));
 }
 
+export async function insertRow<
+  T extends Record<string, unknown> = Record<string, unknown>,
+>(table: string, fields: Record<string, unknown>): Promise<T> {
+  const entries = Object.entries(fields).filter(([, v]) => v !== undefined);
+  const columns = entries.map(([col]) => col);
+  const values = entries.map(([, v]) => v);
+  const placeholders = values.map((_, i) => `$${i + 1}`);
+
+  const sql = `INSERT INTO ${table} (${columns.join(", ")}) VALUES (${placeholders.join(", ")}) RETURNING *`;
+  const row = await queryOne<T>(sql, values);
+  if (!row) throw new Error(`Failed to insert into ${table}`);
+  return row;
+}
+
 export async function updateRow<
   T extends Record<string, unknown> = Record<string, unknown>,
 >(

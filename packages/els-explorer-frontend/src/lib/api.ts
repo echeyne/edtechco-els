@@ -5,10 +5,15 @@ import type {
   SubStrand,
   Indicator,
   HierarchyResponse,
+  CreateDomainRequest,
+  CreateStrandRequest,
+  CreateSubStrandRequest,
+  CreateIndicatorRequest,
   UpdateDomainRequest,
   UpdateStrandRequest,
   UpdateSubStrandRequest,
   UpdateIndicatorRequest,
+  ReorderDomainsRequest,
   VerifyRequest,
   FilterQuery,
   ApiError,
@@ -81,6 +86,52 @@ export function getFilters(): Promise<{
   return request<{ countries: string[]; states: string[] }>("/api/filters");
 }
 
+// ---- Create endpoints (authenticated) ----
+
+export function createDomain(
+  data: CreateDomainRequest,
+  token: string,
+): Promise<Domain> {
+  return request<Domain>(
+    "/api/domains",
+    { method: "POST", body: JSON.stringify(data) },
+    token,
+  );
+}
+
+export function createStrand(
+  data: CreateStrandRequest,
+  token: string,
+): Promise<Strand> {
+  return request<Strand>(
+    "/api/strands",
+    { method: "POST", body: JSON.stringify(data) },
+    token,
+  );
+}
+
+export function createSubStrand(
+  data: CreateSubStrandRequest,
+  token: string,
+): Promise<SubStrand> {
+  return request<SubStrand>(
+    "/api/sub-strands",
+    { method: "POST", body: JSON.stringify(data) },
+    token,
+  );
+}
+
+export function createIndicator(
+  data: CreateIndicatorRequest,
+  token: string,
+): Promise<Indicator> {
+  return request<Indicator>(
+    "/api/indicators",
+    { method: "POST", body: JSON.stringify(data) },
+    token,
+  );
+}
+
 // ---- Write endpoints (authenticated) ----
 
 export function updateDomain(
@@ -114,6 +165,17 @@ export function verifyDomain(id: number, data: VerifyRequest, token: string) {
   }>(
     `/api/domains/${id}/verify`,
     { method: "PATCH", body: JSON.stringify(data) },
+    token,
+  );
+}
+
+export function reorderDomains(
+  data: ReorderDomainsRequest,
+  token: string,
+): Promise<{ success: boolean }> {
+  return request<{ success: boolean }>(
+    "/api/domains/reorder",
+    { method: "PUT", body: JSON.stringify(data) },
     token,
   );
 }

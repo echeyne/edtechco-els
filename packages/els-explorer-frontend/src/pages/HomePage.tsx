@@ -9,6 +9,7 @@ import type {
 } from "@els/shared";
 import { HierarchyTable, type FilterState } from "@/components/HierarchyTable";
 import { EditModal } from "@/components/EditModal";
+import { AddModal } from "@/components/AddModal";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   deleteDomain,
@@ -71,9 +72,13 @@ export default function HomePage() {
   const [editType, setEditType] = useState<RecordType>("domain");
   const [editOpen, setEditOpen] = useState(false);
 
+  // Add modal state
+  const [addOpen, setAddOpen] = useState(false);
+
   // Data from HierarchyTable for parent selectors in EditModal
   const docsRef = useRef<Document[]>([]);
   const hierarchiesRef = useRef<Map<number, HierarchyResponse>>(new Map());
+  const refreshRef = useRef<(() => void) | null>(null);
 
   // Local record patch – set to trigger an in-place update in HierarchyTable
   const [pendingUpdate, setPendingUpdate] = useState<{
@@ -131,6 +136,18 @@ export default function HomePage() {
     [editType],
   );
 
+  const handleAdd = useCallback(() => {
+    setAddOpen(true);
+  }, []);
+
+  const handleCreated = useCallback(
+    (_created: Domain | Strand | SubStrand | Indicator, _type: RecordType) => {
+      // Reload the full hierarchy to pick up the new record
+      refreshRef.current?.();
+    },
+    [],
+  );
+
   return (
     <div>
       <HierarchyTable
@@ -139,8 +156,10 @@ export default function HomePage() {
         onEdit={hasEditPermission ? handleEdit : undefined}
         onDelete={hasEditPermission ? handleDelete : undefined}
         onVerify={hasEditPermission ? handleVerify : undefined}
+        onAdd={hasEditPermission ? handleAdd : undefined}
         onDataLoaded={handleDataLoaded}
         updateRecord={pendingUpdate}
+        onRefreshRef={refreshRef}
       />
 
       {editRecord && (
@@ -154,6 +173,14 @@ export default function HomePage() {
           hierarchies={hierarchiesRef.current}
         />
       )}
+
+      <AddModal
+        open={addOpen}
+        onOpenChange={setAddOpen}
+        onCreated={handleCreated}
+        documents={docsRef.current}
+        hierarchies={hierarchiesRef.current}
+      />
     </div>
   );
 }

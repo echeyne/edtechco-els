@@ -19,6 +19,7 @@ export interface Domain {
   code: string;
   name: string;
   description: string | null;
+  order: number | null;
   humanVerified: boolean;
   verifiedAt: Date | null;
   verifiedBy: string | null;
@@ -106,13 +107,53 @@ export interface HierarchyResponse {
   domains: DomainWithChildren[];
 }
 
-// API Request types
+// API Create request types
+
+export interface CreateDomainRequest {
+  documentId: number;
+  code: string;
+  name: string;
+  description?: string | null;
+}
+
+export interface CreateStrandRequest {
+  domainId: number;
+  code: string;
+  name: string;
+  description?: string | null;
+}
+
+export interface CreateSubStrandRequest {
+  strandId: number;
+  code: string;
+  name: string;
+  description?: string | null;
+}
+
+export interface CreateIndicatorRequest {
+  domainId: number;
+  strandId?: number | null;
+  subStrandId?: number | null;
+  code: string;
+  title?: string | null;
+  description: string;
+  ageBand?: string | null;
+  sourcePage?: number | null;
+  sourceText?: string | null;
+}
+
+// API Update request types
 
 export interface UpdateDomainRequest {
   code?: string;
   name?: string;
   description?: string | null;
   documentId?: number;
+}
+
+export interface ReorderDomainsRequest {
+  /** Array of domain IDs in the desired display order */
+  domainIds: number[];
 }
 
 export interface UpdateStrandRequest {
@@ -137,6 +178,7 @@ export interface UpdateIndicatorRequest {
   sourcePage?: number | null;
   sourceText?: string | null;
   subStrandId?: number | null;
+  strandId?: number | null;
 }
 
 export interface VerifyRequest {

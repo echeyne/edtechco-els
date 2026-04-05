@@ -5,7 +5,12 @@ import {
   useMemo,
   type ReactNode,
 } from "react";
-import { AuthProvider, useDescope, useSession, useUser } from "@descope/react-sdk";
+import {
+  AuthProvider,
+  useDescope,
+  useSession,
+  useUser,
+} from "@descope/react-sdk";
 
 interface AuthContextValue {
   isAuthenticated: boolean;
@@ -48,7 +53,10 @@ function AuthInner({ children }: { children: ReactNode }) {
 
   const user = useMemo(() => {
     if (!isAuthenticated || !descopeUser) return null;
-    const attrs = (descopeUser.customAttributes ?? {}) as Record<string, unknown>;
+    const attrs = (descopeUser.customAttributes ?? {}) as Record<
+      string,
+      unknown
+    >;
     return {
       id: descopeUser.userId ?? "",
       email: descopeUser.email ?? "",

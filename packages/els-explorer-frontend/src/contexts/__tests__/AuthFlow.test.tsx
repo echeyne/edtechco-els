@@ -1,4 +1,12 @@
-import { describe, it, expect, vi, beforeAll, afterAll, afterEach } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  vi,
+  beforeAll,
+  afterAll,
+  afterEach,
+} from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { http, HttpResponse } from "msw";
@@ -56,6 +64,7 @@ const mockHierarchy = {
       code: "D1",
       name: "Language",
       description: null,
+      order: null,
       humanVerified: false,
       verifiedAt: null,
       verifiedBy: null,
@@ -124,7 +133,11 @@ async function renderAndExpand(authState: typeof mockAuthState) {
   );
 
   // Wait for the document title to appear (data loaded)
-  const docTitle = await screen.findByText("California ELS", {}, { timeout: 3000 });
+  const docTitle = await screen.findByText(
+    "California ELS",
+    {},
+    { timeout: 3000 },
+  );
   expect(docTitle).toBeInTheDocument();
 
   // Expand the document row to reveal domain rows with edit controls
@@ -193,9 +206,16 @@ describe("Auth flow integration", () => {
       http.put("*/api/domains/:id", ({ request }) => {
         capturedAuthHeader = request.headers.get("Authorization");
         return HttpResponse.json({
-          id: 10, documentId: 1, code: "D1", name: "Updated",
-          description: null, humanVerified: false, verifiedAt: null,
-          verifiedBy: null, editedAt: null, editedBy: null,
+          id: 10,
+          documentId: 1,
+          code: "D1",
+          name: "Updated",
+          description: null,
+          humanVerified: false,
+          verifiedAt: null,
+          verifiedBy: null,
+          editedAt: null,
+          editedBy: null,
         });
       }),
     );

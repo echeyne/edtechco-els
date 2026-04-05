@@ -206,14 +206,11 @@ export class ElsAppStack extends cdk.Stack {
     const apiGateway = new apigatewayv2.CfnApi(this, "ApiGateway", {
       name: `els-api-${env}`,
       protocolType: "HTTP",
-      // CORS origins are patched below after the CloudFront distribution is
-      // created so we can include the CloudFront domain in the allow-list.
-      corsConfiguration: {
-        allowOrigins: ["http://localhost:5173", "http://localhost:4173"],
-        allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        allowHeaders: ["Content-Type", "Authorization"],
-        maxAge: 86400,
-      },
+      // CORS is handled by the Lambda (Hono cors() middleware) rather than
+      // at the API Gateway level. This avoids a circular CloudFormation
+      // dependency: CloudFront references the API Gateway endpoint for its
+      // origin, so the API Gateway cannot also reference the CloudFront
+      // domain for CORS allow-origins.
     });
 
     const apiGatewayIntegration = new apigatewayv2.CfnIntegration(
@@ -298,21 +295,8 @@ export class ElsAppStack extends cdk.Stack {
       },
     });
 
-    // Patch CORS allow-origins to include the CloudFront domain (and custom
-    // domain if provided). This must happen after the distribution is created
-    // so the CloudFront domain token is available.
-    const corsAllowOrigins: string[] = [
-      "http://localhost:5173",
-      "http://localhost:4173",
-      cdk.Fn.join("", ["https://", frontend.distribution.attrDomainName]),
-    ];
-    if (props.customDomainName) {
-      corsAllowOrigins.push(`https://${props.customDomainName}`);
-    }
-    apiGateway.addPropertyOverride(
-      "CorsConfiguration.AllowOrigins",
-      corsAllowOrigins,
-    );
+    // Note: CORS allow-origins (including the CloudFront domain) are handled
+    // by the Lambda's Hono cors() middleware, not the API Gateway.
 
     // ========================================================================
     // Conditional Custom Domain: Route53 Alias Record

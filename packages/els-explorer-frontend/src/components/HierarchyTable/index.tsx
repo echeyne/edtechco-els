@@ -1,5 +1,20 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  useSortable,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import type {
   Document,
   Domain,
@@ -11,7 +26,12 @@ import type {
   Indicator,
   HierarchyResponse,
 } from "@els/shared";
-import { getDocuments, getHierarchy, getFilters } from "@/lib/api";
+import {
+  getDocuments,
+  getHierarchy,
+  getFilters,
+  reorderDomains,
+} from "@/lib/api";
 import { useAuth } from "@/contexts/AuthContext";
 import {
   Table,
@@ -40,7 +60,9 @@ import {
   Search,
   Edit,
   Trash2,
+  Plus,
   X,
+  GripVertical,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -63,6 +85,7 @@ export interface HierarchyTableProps {
   ) => void;
   onDelete?: (id: number, type: string) => Promise<void>;
   onVerify?: (id: number, type: string, verified: boolean) => Promise<void>;
+  onAdd?: () => void;
   onDataLoaded?: (
     documents: Document[],
     hierarchies: Map<number, HierarchyResponse>,
@@ -72,6 +95,8 @@ export interface HierarchyTableProps {
     record: Domain | Strand | SubStrand | Indicator;
     type: string;
   } | null;
+  /** Expose a refresh function so parent can trigger a data reload */
+  onRefreshRef?: React.MutableRefObject<(() => void) | null>;
 }
 
 type SortField = "code" | "name" | "status" | "ageBand";
@@ -225,6 +250,97 @@ function ActionButtons({
         </Button>
       )}
     </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// DraggableDomainRow — wraps a domain table row with dnd-kit sortable
+// ---------------------------------------------------------------------------
+
+function DraggableDomainRow({
+  domain,
+  isExpanded,
+  onToggle,
+  onEdit,
+  onDelete,
+  onVerify,
+  hasEditPermission,
+  colCount,
+}: {
+  domain: DomainWithChildren;
+  isExpanded: boolean;
+  onToggle: () => void;
+  onEdit?: () => void;
+  onDelete?: () => void;
+  onVerify?: () => void;
+  hasEditPermission: boolean;
+  colCount: number;
+}) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: domain.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined,
+  } as React.CSSProperties;
+
+  return (
+    <TableRow
+      ref={setNodeRef}
+      style={style}
+      className="bg-blue-50/60 hover:bg-blue-50"
+    >
+      <TableCell>
+        <div className="inline-flex items-center">
+          {hasEditPermission && (
+            <button
+              className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground mr-1 touch-none"
+              aria-label="Drag to reorder domain"
+              {...attributes}
+              {...listeners}
+            >
+              <GripVertical className="h-4 w-4" />
+            </button>
+          )}
+          <ExpandToggle
+            expanded={isExpanded}
+            onToggle={onToggle}
+            depth={hasEditPermission ? 0 : 1}
+          />
+        </div>
+      </TableCell>
+      <TableCell>
+        <span className="inline-flex items-center gap-2">
+          <span className="text-xs font-mono text-primary/70 bg-primary/5 px-1.5 py-0.5 rounded">
+            {domain.code}
+          </span>
+          <Link
+            to={`/domains/${domain.id}`}
+            className="font-medium hover:text-primary hover:underline transition-colors"
+          >
+            {domain.name}
+          </Link>
+        </span>
+      </TableCell>
+      <TableCell />
+      <TableCell />
+      <TableCell />
+      <TableCell>
+        <VerifiedBadge verified={domain.humanVerified} onClick={onVerify} />
+      </TableCell>
+      {hasEditPermission && (
+        <TableCell>
+          <ActionButtons onEdit={onEdit} onDelete={onDelete} />
+        </TableCell>
+      )}
+    </TableRow>
   );
 }
 
@@ -388,10 +504,12 @@ export function HierarchyTable({
   onEdit,
   onDelete,
   onVerify,
+  onAdd,
   onDataLoaded,
   updateRecord,
+  onRefreshRef,
 }: HierarchyTableProps) {
-  const { hasEditPermission } = useAuth();
+  const { hasEditPermission, token } = useAuth();
 
   // Data state
   const [documents, setDocuments] = useState<Document[]>([]);
@@ -733,6 +851,18 @@ export function HierarchyTable({
     fetchDocuments();
   }, [fetchDocuments]);
 
+  // Expose refresh function to parent
+  useEffect(() => {
+    if (onRefreshRef) {
+      onRefreshRef.current = fetchDocuments;
+    }
+    return () => {
+      if (onRefreshRef) {
+        onRefreshRef.current = null;
+      }
+    };
+  }, [onRefreshRef, fetchDocuments]);
+
   /** Wrap onDelete to do an optimistic local removal */
   const handleDelete = useCallback(
     async (id: number, type: string) => {
@@ -802,6 +932,66 @@ export function HierarchyTable({
     [sortField],
   );
 
+  // ------ Drag-and-drop reorder ------
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor),
+  );
+
+  const handleDragEnd = useCallback(
+    async (event: DragEndEvent) => {
+      const { active, over } = event;
+      if (!over || active.id === over.id) return;
+
+      // Find which document these domains belong to
+      for (const [docId, hierarchy] of hierarchies) {
+        const domainIds = hierarchy.domains.map((d) => d.id);
+        const activeIdx = domainIds.indexOf(active.id as number);
+        const overIdx = domainIds.indexOf(over.id as number);
+
+        if (activeIdx === -1 || overIdx === -1) continue;
+
+        // Reorder domains
+        const newDomains = [...hierarchy.domains];
+        const [moved] = newDomains.splice(activeIdx, 1);
+        newDomains.splice(overIdx, 0, moved);
+
+        // Assign order values based on new positions
+        const reorderedDomains = newDomains.map((d, i) => ({ ...d, order: i }));
+
+        // Optimistic update
+        setHierarchies((prev) => {
+          const next = new Map(prev);
+          next.set(docId, {
+            ...hierarchy,
+            domains: reorderedDomains,
+          });
+          return next;
+        });
+
+        // Persist to API
+        if (token) {
+          try {
+            await reorderDomains(
+              { domainIds: reorderedDomains.map((d) => d.id) },
+              token,
+            );
+          } catch {
+            // Revert on failure
+            setHierarchies((prev) => {
+              const next = new Map(prev);
+              next.set(docId, hierarchy);
+              return next;
+            });
+          }
+        }
+        break;
+      }
+    },
+    [hierarchies, token],
+  );
+
   // ------ Build visible rows ------
 
   const rows = useMemo(() => {
@@ -819,8 +1009,18 @@ export function HierarchyTable({
       const docMatchesSearch =
         !searchQuery || matchesSearch(doc.title, searchQuery);
 
-      // Sort domains
+      // Sort domains — respect custom order when present
+      const hasCustomOrder = hierarchy.domains.some((d) => d.order != null);
       const sortedDomains = [...hierarchy.domains].sort((a, b) => {
+        if (hasCustomOrder && sortField === "code") {
+          // When custom order exists and we're on the default sort,
+          // use order (nulls sort last), then fall back to code
+          const aOrder = a.order ?? Number.MAX_SAFE_INTEGER;
+          const bOrder = b.order ?? Number.MAX_SAFE_INTEGER;
+          const diff = aOrder - bOrder;
+          if (diff !== 0) return sortDir === "asc" ? diff : -diff;
+          return compareField(a.code, b.code, sortDir);
+        }
         if (sortField === "code") return compareField(a.code, b.code, sortDir);
         if (sortField === "name") return compareField(a.name, b.name, sortDir);
         return compareField(a.humanVerified, b.humanVerified, sortDir);
@@ -863,9 +1063,33 @@ export function HierarchyTable({
 
       if (!docExpanded) continue;
 
+      // Collect domain IDs for sortable context
+      const visibleDomainIds = sortedDomains
+        .filter((d) => domainHasMatch(d, searchQuery, verificationStatus))
+        .map((d) => d.id);
+
+      // Build domain rows (including their children) as a flat array
+      const domainRows: React.ReactNode[] = [];
       for (const domain of sortedDomains) {
-        renderDomain(result, domain, doc.id, searchQuery, verificationStatus);
+        renderDomain(
+          domainRows,
+          domain,
+          doc.id,
+          searchQuery,
+          verificationStatus,
+        );
       }
+
+      // Wrap domain rows in SortableContext for drag-and-drop reordering
+      result.push(
+        <SortableContext
+          key={`sortable-${doc.id}`}
+          items={visibleDomainIds}
+          strategy={verticalListSortingStrategy}
+        >
+          {domainRows}
+        </SortableContext>,
+      );
     }
 
     return result;
@@ -960,51 +1184,23 @@ export function HierarchyTable({
     const isExpanded = expanded.has(key);
 
     result.push(
-      <TableRow key={key} className="bg-blue-50/60 hover:bg-blue-50">
-        <TableCell>
-          <ExpandToggle
-            expanded={isExpanded}
-            onToggle={() => toggleExpand(key)}
-            depth={1}
-          />
-        </TableCell>
-        <TableCell>
-          <span className="inline-flex items-center gap-2">
-            <span className="text-xs font-mono text-primary/70 bg-primary/5 px-1.5 py-0.5 rounded">
-              {domain.code}
-            </span>
-            <Link
-              to={`/domains/${domain.id}`}
-              className="font-medium hover:text-primary hover:underline transition-colors"
-            >
-              {domain.name}
-            </Link>
-          </span>
-        </TableCell>
-        <TableCell />
-        <TableCell />
-        <TableCell />
-        <TableCell>
-          <VerifiedBadge
-            verified={domain.humanVerified}
-            onClick={
-              onVerify
-                ? () => handleVerify(domain.id, "domain", !domain.humanVerified)
-                : undefined
-            }
-          />
-        </TableCell>
-        {hasEditPermission && (
-          <TableCell>
-            <ActionButtons
-              onEdit={onEdit ? () => onEdit(domain, "domain") : undefined}
-              onDelete={
-                onDelete ? () => handleDelete(domain.id, "domain") : undefined
-              }
-            />
-          </TableCell>
-        )}
-      </TableRow>,
+      <DraggableDomainRow
+        key={key}
+        domain={domain}
+        isExpanded={isExpanded}
+        onToggle={() => toggleExpand(key)}
+        onEdit={onEdit ? () => onEdit(domain, "domain") : undefined}
+        onDelete={
+          onDelete ? () => handleDelete(domain.id, "domain") : undefined
+        }
+        onVerify={
+          onVerify
+            ? () => handleVerify(domain.id, "domain", !domain.humanVerified)
+            : undefined
+        }
+        hasEditPermission={hasEditPermission}
+        colCount={hasEditPermission ? 7 : 6}
+      />,
     );
 
     if (!isExpanded) return;
@@ -1349,82 +1545,101 @@ export function HierarchyTable({
         countries={countries}
         states={states}
         expandButton={
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={isAllExpanded ? handleCollapseAll : handleExpandAll}
-            className="h-9"
-          >
-            {isAllExpanded ? (
-              <>
-                <ChevronsDownUp className="mr-2 h-4 w-4" />
-                Collapse All
-              </>
-            ) : (
-              <>
-                <ChevronsUpDown className="mr-2 h-4 w-4" />
-                Expand All
-              </>
+          <div className="flex items-center gap-2">
+            {onAdd && (
+              <Button
+                variant="default"
+                size="sm"
+                onClick={onAdd}
+                className="h-9"
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Add Standard
+              </Button>
             )}
-          </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={isAllExpanded ? handleCollapseAll : handleExpandAll}
+              className="h-9"
+            >
+              {isAllExpanded ? (
+                <>
+                  <ChevronsDownUp className="mr-2 h-4 w-4" />
+                  Collapse All
+                </>
+              ) : (
+                <>
+                  <ChevronsUpDown className="mr-2 h-4 w-4" />
+                  Expand All
+                </>
+              )}
+            </Button>
+          </div>
         }
       />
 
-      <div className="rounded-lg border bg-card shadow-sm overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-muted/50 hover:bg-muted/50">
-              <TableHead className="w-[50px]" />
-              <TableHead>
-                <SortableHeader
-                  label="Name"
-                  field="name"
-                  sortField={sortField}
-                  sortDir={sortDir}
-                  onSort={handleSort}
-                />
-              </TableHead>
-              <TableHead className="w-[140px]">Details</TableHead>
-              <TableHead className="w-[160px]">
-                <SortableHeader
-                  label="Age range (months)"
-                  field="ageBand"
-                  sortField={sortField}
-                  sortDir={sortDir}
-                  onSort={handleSort}
-                />
-              </TableHead>
-              <TableHead className="w-[80px]">Page</TableHead>
-              <TableHead className="w-[120px]">
-                <SortableHeader
-                  label="Status"
-                  field="status"
-                  sortField={sortField}
-                  sortDir={sortDir}
-                  onSort={handleSort}
-                />
-              </TableHead>
-              {hasEditPermission && (
-                <TableHead className="w-[100px]">Actions</TableHead>
-              )}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {rows.length > 0 ? (
-              rows
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={hasEditPermission ? 7 : 6}
-                  className="text-center py-8 text-muted-foreground"
-                >
-                  No data found matching the current filters.
-                </TableCell>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="rounded-lg border bg-card shadow-sm overflow-hidden">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-muted/50 hover:bg-muted/50">
+                <TableHead className="w-[50px]" />
+                <TableHead>
+                  <SortableHeader
+                    label="Name"
+                    field="name"
+                    sortField={sortField}
+                    sortDir={sortDir}
+                    onSort={handleSort}
+                  />
+                </TableHead>
+                <TableHead className="w-[140px]">Details</TableHead>
+                <TableHead className="w-[160px]">
+                  <SortableHeader
+                    label="Age range (months)"
+                    field="ageBand"
+                    sortField={sortField}
+                    sortDir={sortDir}
+                    onSort={handleSort}
+                  />
+                </TableHead>
+                <TableHead className="w-[80px]">Page</TableHead>
+                <TableHead className="w-[120px]">
+                  <SortableHeader
+                    label="Status"
+                    field="status"
+                    sortField={sortField}
+                    sortDir={sortDir}
+                    onSort={handleSort}
+                  />
+                </TableHead>
+                {hasEditPermission && (
+                  <TableHead className="w-[100px]">Actions</TableHead>
+                )}
               </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+            </TableHeader>
+            <TableBody>
+              {rows.length > 0 ? (
+                rows
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={hasEditPermission ? 7 : 6}
+                    className="text-center py-8 text-muted-foreground"
+                  >
+                    No data found matching the current filters.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </DndContext>
     </div>
   );
 }

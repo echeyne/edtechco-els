@@ -2,10 +2,15 @@ import { Hono } from "hono";
 import {
   updateRow,
   queryOne,
+  insertRow,
   softDeleteRow,
   softDeleteWhere,
 } from "../db/client.js";
-import { UpdateSubStrandSchema, VerifySchema } from "../schemas/index.js";
+import {
+  UpdateSubStrandSchema,
+  CreateSubStrandSchema,
+  VerifySchema,
+} from "../schemas/index.js";
 import {
   requireAuth,
   requireEditPermission,
@@ -61,6 +66,7 @@ function mapDomain(row: Record<string, unknown>): Domain {
     code: row.code as string,
     name: row.name as string,
     description: (row.description as string) ?? null,
+    order: (row.order as number) ?? null,
     humanVerified: (row.human_verified as boolean) ?? false,
     verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
     verifiedBy: (row.verified_by as string) ?? null,
@@ -71,6 +77,38 @@ function mapDomain(row: Record<string, unknown>): Domain {
     deletedBy: (row.deleted_by as string) ?? null,
   };
 }
+
+// ---- POST /api/sub-strands ----
+
+subStrands.post("/", requireAuth, requireEditPermission, async (c) => {
+  const body = await c.req.json();
+  const parsed = CreateSubStrandSchema.safeParse(body);
+  if (!parsed.success) {
+    return c.json(
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Invalid request body",
+          details: parsed.error.flatten(),
+        },
+      },
+      400,
+    );
+  }
+
+  const user = c.get("authUser") as AuthUser;
+
+  const row = await insertRow("sub_strands", {
+    strand_id: parsed.data.strandId,
+    code: parsed.data.code,
+    name: parsed.data.name,
+    description: parsed.data.description ?? null,
+    human_verified: false,
+    edited_by: user.displayName,
+  });
+
+  return c.json(mapSubStrand(row as unknown as Record<string, unknown>), 201);
+});
 
 // ---- GET /api/sub-strands/:id ----
 

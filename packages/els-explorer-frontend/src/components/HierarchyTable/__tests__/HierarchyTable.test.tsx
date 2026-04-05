@@ -37,7 +37,7 @@ const mockDocument: Document = {
   title: "California ELS",
   versionYear: 2024,
   sourceUrl: null,
-  s3Key: '',
+  s3Key: "",
   ageBand: "0-5",
   publishingAgency: "CA Dept of Ed",
   createdAt: new Date(),
@@ -52,6 +52,7 @@ const mockHierarchy: HierarchyResponse = {
       code: "D1",
       name: "Language Development",
       description: "Language skills",
+      order: null,
       humanVerified: true,
       verifiedAt: null,
       verifiedBy: null,
@@ -73,13 +74,13 @@ const mockHierarchy: HierarchyResponse = {
           subStrands: [],
           indicators: [],
           deletedAt: null,
-          deletedBy: null
+          deletedBy: null,
         },
       ],
       indicators: [],
       deleted: false,
       deletedAt: null,
-      deletedBy: null
+      deletedBy: null,
     },
   ],
 };
@@ -111,7 +112,10 @@ describe("HierarchyTable", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockHasEditPermission = false;
-    mockGetFilters.mockResolvedValue({ countries: ["US"], states: ["CA", "NY"] });
+    mockGetFilters.mockResolvedValue({
+      countries: ["US"],
+      states: ["CA", "NY"],
+    });
   });
 
   it("renders loading state initially", () => {
@@ -179,7 +183,9 @@ describe("HierarchyTable", () => {
     fireEvent.click(collapseBtn);
 
     await waitFor(() => {
-      expect(screen.queryByText("Language Development")).not.toBeInTheDocument();
+      expect(
+        screen.queryByText("Language Development"),
+      ).not.toBeInTheDocument();
     });
   });
 
@@ -188,7 +194,9 @@ describe("HierarchyTable", () => {
     renderTable();
 
     await waitFor(() => {
-      expect(screen.getByPlaceholderText("Search standards...")).toBeInTheDocument();
+      expect(
+        screen.getByPlaceholderText("Search standards..."),
+      ).toBeInTheDocument();
     });
 
     // The select triggers should be present

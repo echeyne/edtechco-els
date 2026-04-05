@@ -55,6 +55,7 @@ function mapDomain(row: Record<string, unknown>): Domain {
     code: row.code as string,
     name: row.name as string,
     description: (row.description as string) ?? null,
+    order: (row.order as number) ?? null,
     humanVerified: (row.human_verified as boolean) ?? false,
     verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
     verifiedBy: (row.verified_by as string) ?? null,
@@ -196,7 +197,7 @@ documents.get("/:id/hierarchy", async (c) => {
   const [domainRows, strandRows, subStrandRows, indicatorRows] =
     await Promise.all([
       queryMany(
-        "SELECT * FROM domains WHERE document_id = $1 AND deleted = false ORDER BY code",
+        'SELECT * FROM domains WHERE document_id = $1 AND deleted = false ORDER BY COALESCE("order", 2147483647), code',
         [id],
       ),
       queryMany(

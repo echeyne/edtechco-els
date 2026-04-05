@@ -3,10 +3,16 @@ import {
   updateRow,
   queryOne,
   query,
+  insertRow,
   softDeleteRow,
   softDeleteWhere,
 } from "../db/client.js";
-import { UpdateDomainSchema, VerifySchema } from "../schemas/index.js";
+import {
+  UpdateDomainSchema,
+  CreateDomainSchema,
+  VerifySchema,
+  ReorderDomainsSchema,
+} from "../schemas/index.js";
 import {
   requireAuth,
   requireEditPermission,
@@ -26,6 +32,7 @@ function mapDomain(row: Record<string, unknown>): Domain {
     code: row.code as string,
     name: row.name as string,
     description: (row.description as string) ?? null,
+    order: (row.order as number) ?? null,
     humanVerified: (row.human_verified as boolean) ?? false,
     verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
     verifiedBy: (row.verified_by as string) ?? null,
@@ -36,6 +43,69 @@ function mapDomain(row: Record<string, unknown>): Domain {
     deletedBy: (row.deleted_by as string) ?? null,
   };
 }
+
+// ---- POST /api/domains ----
+
+domains.post("/", requireAuth, requireEditPermission, async (c) => {
+  const body = await c.req.json();
+  const parsed = CreateDomainSchema.safeParse(body);
+  if (!parsed.success) {
+    return c.json(
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Invalid request body",
+          details: parsed.error.flatten(),
+        },
+      },
+      400,
+    );
+  }
+
+  const user = c.get("authUser") as AuthUser;
+
+  const row = await insertRow("domains", {
+    document_id: parsed.data.documentId,
+    code: parsed.data.code,
+    name: parsed.data.name,
+    description: parsed.data.description ?? null,
+    human_verified: false,
+    edited_by: user.displayName,
+  });
+
+  return c.json(mapDomain(row as unknown as Record<string, unknown>), 201);
+});
+
+// ---- PUT /api/domains/reorder ----
+
+domains.put("/reorder", requireAuth, requireEditPermission, async (c) => {
+  const body = await c.req.json();
+  const parsed = ReorderDomainsSchema.safeParse(body);
+  if (!parsed.success) {
+    return c.json(
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Invalid request body",
+          details: parsed.error.flatten(),
+        },
+      },
+      400,
+    );
+  }
+
+  const { domainIds } = parsed.data;
+
+  // Update each domain's order based on its position in the array
+  for (let i = 0; i < domainIds.length; i++) {
+    await query(
+      `UPDATE domains SET "order" = $1 WHERE id = $2 AND deleted = false`,
+      [i, domainIds[i]],
+    );
+  }
+
+  return c.json({ success: true });
+});
 
 // ---- GET /api/domains/:id ----
 

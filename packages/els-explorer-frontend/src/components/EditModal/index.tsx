@@ -89,7 +89,9 @@ export function EditModal({
   const [parentDocumentId, setParentDocumentId] = useState<number | null>(null);
   const [parentDomainId, setParentDomainId] = useState<number | null>(null);
   const [parentStrandId, setParentStrandId] = useState<number | null>(null);
-  const [parentSubStrandId, setParentSubStrandId] = useState<number | null>(null);
+  const [parentSubStrandId, setParentSubStrandId] = useState<number | null>(
+    null,
+  );
 
   // UI state
   const [saving, setSaving] = useState(false);
@@ -125,6 +127,7 @@ export function EditModal({
       setSourcePage(ind.sourcePage != null ? String(ind.sourcePage) : "");
       setSourceText(ind.sourceText ?? "");
       setParentSubStrandId(ind.subStrandId ?? null);
+      setParentStrandId(ind.strandId ?? null);
     }
   }, [record, recordType]);
 
@@ -176,6 +179,8 @@ export function EditModal({
       let updated: Domain | Strand | SubStrand | Indicator;
 
       if (recordType === "indicator") {
+        const ind = record as Indicator;
+        const isDirectStrandChild = ind.subStrandId == null;
         const data: UpdateIndicatorRequest = {
           code,
           title: title || null,
@@ -183,7 +188,8 @@ export function EditModal({
           ageBand: ageBand || null,
           sourcePage: sourcePage ? Number(sourcePage) : null,
           sourceText: sourceText || null,
-          subStrandId: parentSubStrandId,
+          subStrandId: isDirectStrandChild ? null : parentSubStrandId,
+          strandId: isDirectStrandChild ? parentStrandId : undefined,
         };
         updated = await updateIndicator(record.id, data, token);
       } else if (recordType === "domain") {
@@ -331,26 +337,56 @@ export function EditModal({
           )}
 
           {/* Parent selector — indicator → sub_strand */}
-          {recordType === "indicator" && allSubStrands.length > 0 && (
-            <div className="grid gap-2">
-              <Label htmlFor="edit-parent-substrand">Parent Sub-Strand</Label>
-              <Select
-                value={parentSubStrandId != null ? String(parentSubStrandId) : ""}
-                onValueChange={(v) => setParentSubStrandId(Number(v))}
-              >
-                <SelectTrigger id="edit-parent-substrand">
-                  <SelectValue placeholder="Select sub-strand" />
-                </SelectTrigger>
-                <SelectContent>
-                  {allSubStrands.map((ss) => (
-                    <SelectItem key={ss.id} value={String(ss.id)}>
-                      {ss.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          )}
+          {recordType === "indicator" &&
+            (record as Indicator).subStrandId != null &&
+            allSubStrands.length > 0 && (
+              <div className="grid gap-2">
+                <Label htmlFor="edit-parent-substrand">Parent Sub-Strand</Label>
+                <Select
+                  value={
+                    parentSubStrandId != null ? String(parentSubStrandId) : ""
+                  }
+                  onValueChange={(v) => setParentSubStrandId(Number(v))}
+                >
+                  <SelectTrigger id="edit-parent-substrand">
+                    <SelectValue placeholder="Select sub-strand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {allSubStrands.map((ss) => (
+                      <SelectItem key={ss.id} value={String(ss.id)}>
+                        {ss.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+
+          {/* Parent selector — indicator → strand (direct child, no sub-strand) */}
+          {recordType === "indicator" &&
+            (record as Indicator).subStrandId == null &&
+            allStrands.length > 0 && (
+              <div className="grid gap-2">
+                <Label htmlFor="edit-parent-strand-indicator">
+                  Parent Strand
+                </Label>
+                <Select
+                  value={parentStrandId != null ? String(parentStrandId) : ""}
+                  onValueChange={(v) => setParentStrandId(Number(v))}
+                >
+                  <SelectTrigger id="edit-parent-strand-indicator">
+                    <SelectValue placeholder="Select strand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {allStrands.map((s) => (
+                      <SelectItem key={s.id} value={String(s.id)}>
+                        {s.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
 
           {/* Code field — all record types */}
           <div className="grid gap-2">
@@ -434,9 +470,7 @@ export function EditModal({
             <Checkbox
               id="edit-human-verified"
               checked={humanVerified}
-              onCheckedChange={(checked) =>
-                setHumanVerified(checked === true)
-              }
+              onCheckedChange={(checked) => setHumanVerified(checked === true)}
             />
             <Label htmlFor="edit-human-verified" className="cursor-pointer">
               Human Verified

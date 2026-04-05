@@ -1,6 +1,10 @@
 import { Hono } from "hono";
-import { updateRow, queryOne, softDeleteRow } from "../db/client.js";
-import { UpdateIndicatorSchema, VerifySchema } from "../schemas/index.js";
+import { updateRow, queryOne, insertRow, softDeleteRow } from "../db/client.js";
+import {
+  UpdateIndicatorSchema,
+  CreateIndicatorSchema,
+  VerifySchema,
+} from "../schemas/index.js";
 import {
   requireAuth,
   requireEditPermission,
@@ -48,6 +52,7 @@ function mapDomain(row: Record<string, unknown>): Domain {
     code: row.code as string,
     name: row.name as string,
     description: (row.description as string) ?? null,
+    order: (row.order as number) ?? null,
     humanVerified: (row.human_verified as boolean) ?? false,
     verifiedAt: row.verified_at ? new Date(row.verified_at as string) : null,
     verifiedBy: (row.verified_by as string) ?? null,
@@ -94,6 +99,72 @@ function mapSubStrand(row: Record<string, unknown>): SubStrand {
     deletedBy: (row.deleted_by as string) ?? null,
   };
 }
+
+// ---- POST /api/indicators ----
+
+indicators.post("/", requireAuth, requireEditPermission, async (c) => {
+  const body = await c.req.json();
+  const parsed = CreateIndicatorSchema.safeParse(body);
+  if (!parsed.success) {
+    return c.json(
+      {
+        error: {
+          code: "VALIDATION_ERROR",
+          message: "Invalid request body",
+          details: parsed.error.flatten(),
+        },
+      },
+      400,
+    );
+  }
+
+  const user = c.get("authUser") as AuthUser;
+
+  // Look up the domain and its parent document to generate standard_id
+  const domain = await queryOne(
+    `SELECT d.code AS domain_code, doc.country, doc.state, doc.version_year
+     FROM domains d
+     JOIN documents doc ON d.document_id = doc.id
+     WHERE d.id = $1`,
+    [parsed.data.domainId],
+  );
+
+  if (!domain) {
+    return c.json(
+      {
+        error: {
+          code: "NOT_FOUND",
+          message: `Domain with id ${parsed.data.domainId} not found`,
+        },
+      },
+      404,
+    );
+  }
+
+  // Generate deterministic standard_id matching the pipeline format:
+  // {COUNTRY}-{STATE}-{YEAR}-{DOMAIN_CODE}-{INDICATOR_CODE}[-{AGE_BAND}]
+  const base = `${domain.country}-${domain.state}-${domain.version_year}-${domain.domain_code}-${parsed.data.code}`;
+  const standardId = parsed.data.ageBand
+    ? `${base}-${parsed.data.ageBand}`
+    : base;
+
+  const row = await insertRow("indicators", {
+    standard_id: standardId,
+    domain_id: parsed.data.domainId,
+    strand_id: parsed.data.strandId ?? null,
+    sub_strand_id: parsed.data.subStrandId ?? null,
+    code: parsed.data.code,
+    title: parsed.data.title ?? null,
+    description: parsed.data.description,
+    age_band: parsed.data.ageBand ?? null,
+    source_page: parsed.data.sourcePage ?? null,
+    source_text: parsed.data.sourceText ?? null,
+    human_verified: false,
+    edited_by: user.displayName,
+  });
+
+  return c.json(mapIndicator(row as unknown as Record<string, unknown>), 201);
+});
 
 // ---- GET /api/indicators/:id ----
 
@@ -207,6 +278,8 @@ indicators.put("/:id", requireAuth, requireEditPermission, async (c) => {
     fields.source_text = parsed.data.sourceText;
   if (parsed.data.subStrandId !== undefined)
     fields.sub_strand_id = parsed.data.subStrandId;
+  if (parsed.data.strandId !== undefined)
+    fields.strand_id = parsed.data.strandId;
 
   const row = await updateRow("indicators", id, fields, {
     edited_at: "NOW()",

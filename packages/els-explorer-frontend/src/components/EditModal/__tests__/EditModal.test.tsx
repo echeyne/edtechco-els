@@ -40,6 +40,7 @@ const mockDomain: Domain = {
   code: "D1",
   name: "Language Development",
   description: "Language skills",
+  order: null,
   humanVerified: false,
   verifiedAt: null,
   verifiedBy: null,
@@ -47,7 +48,7 @@ const mockDomain: Domain = {
   editedBy: null,
   deleted: false,
   deletedAt: null,
-  deletedBy: null
+  deletedBy: null,
 };
 
 const mockIndicator: Indicator = {
@@ -71,7 +72,7 @@ const mockIndicator: Indicator = {
   createdAt: new Date(),
   deleted: false,
   deletedAt: null,
-  deletedBy: null
+  deletedBy: null,
 };
 
 // ---- Helpers ----
@@ -170,7 +171,10 @@ describe("EditModal", () => {
     });
 
     await waitFor(() => {
-      expect(onSave).toHaveBeenCalledWith({ ...updatedDomain, humanVerified: true });
+      expect(onSave).toHaveBeenCalledWith({
+        ...updatedDomain,
+        humanVerified: true,
+      });
     });
   });
 
@@ -210,7 +214,10 @@ describe("EditModal", () => {
     });
 
     await waitFor(() => {
-      expect(onSave).toHaveBeenCalledWith({ ...updatedIndicator, humanVerified: true });
+      expect(onSave).toHaveBeenCalledWith({
+        ...updatedIndicator,
+        humanVerified: true,
+      });
     });
   });
 
