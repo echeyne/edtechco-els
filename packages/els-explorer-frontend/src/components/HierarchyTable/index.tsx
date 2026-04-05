@@ -1217,7 +1217,10 @@ export function HierarchyTable({
 
     // Render indicators directly under this domain (no strand)
     const sortedDomainIndicators = [...domain.indicators].sort((a, b) => {
-      if (sortField === "code") return compareField(a.code, b.code, sortDir);
+      if (sortField === "code") {
+        const cmp = compareField(a.code, b.code, sortDir);
+        return cmp !== 0 ? cmp : compareField(a.ageBand, b.ageBand, sortDir);
+      }
       if (sortField === "ageBand")
         return compareField(a.ageBand, b.ageBand, sortDir);
       if (sortField === "name")
@@ -1318,7 +1321,10 @@ export function HierarchyTable({
 
     // Render indicators directly under this strand (no sub-strand)
     const sortedStrandIndicators = [...strand.indicators].sort((a, b) => {
-      if (sortField === "code") return compareField(a.code, b.code, sortDir);
+      if (sortField === "code") {
+        const cmp = compareField(a.code, b.code, sortDir);
+        return cmp !== 0 ? cmp : compareField(a.ageBand, b.ageBand, sortDir);
+      }
       if (sortField === "ageBand")
         return compareField(a.ageBand, b.ageBand, sortDir);
       if (sortField === "name")
@@ -1412,7 +1418,10 @@ export function HierarchyTable({
     if (!isExpanded) return;
 
     const sortedIndicators = [...subStrand.indicators].sort((a, b) => {
-      if (sortField === "code") return compareField(a.code, b.code, sortDir);
+      if (sortField === "code") {
+        const cmp = compareField(a.code, b.code, sortDir);
+        return cmp !== 0 ? cmp : compareField(a.ageBand, b.ageBand, sortDir);
+      }
       if (sortField === "ageBand")
         return compareField(a.ageBand, b.ageBand, sortDir);
       if (sortField === "name")
