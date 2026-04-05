@@ -26,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { FilterableSelect } from "@/components/ui/filterable-select";
 import {
   createDomain,
   createStrand,
@@ -370,21 +371,16 @@ export function AddModal({
           {recordType === "strand" && allDomains.length > 0 && (
             <div className="grid gap-2">
               <Label htmlFor="add-parent-domain">Parent Domain</Label>
-              <Select
+              <FilterableSelect
+                id="add-parent-domain"
+                options={allDomains.map((d) => ({
+                  value: String(d.id),
+                  label: d.label,
+                }))}
                 value={parentDomainId != null ? String(parentDomainId) : ""}
                 onValueChange={(v) => setParentDomainId(Number(v))}
-              >
-                <SelectTrigger id="add-parent-domain">
-                  <SelectValue placeholder="Select domain" />
-                </SelectTrigger>
-                <SelectContent>
-                  {allDomains.map((d) => (
-                    <SelectItem key={d.id} value={String(d.id)}>
-                      {d.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                placeholder="Select domain"
+              />
             </div>
           )}
 
@@ -392,21 +388,16 @@ export function AddModal({
           {recordType === "sub_strand" && allStrands.length > 0 && (
             <div className="grid gap-2">
               <Label htmlFor="add-parent-strand">Parent Strand</Label>
-              <Select
+              <FilterableSelect
+                id="add-parent-strand"
+                options={allStrands.map((s) => ({
+                  value: String(s.id),
+                  label: s.label,
+                }))}
                 value={parentStrandId != null ? String(parentStrandId) : ""}
                 onValueChange={(v) => setParentStrandId(Number(v))}
-              >
-                <SelectTrigger id="add-parent-strand">
-                  <SelectValue placeholder="Select strand" />
-                </SelectTrigger>
-                <SelectContent>
-                  {allStrands.map((s) => (
-                    <SelectItem key={s.id} value={String(s.id)}>
-                      {s.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                placeholder="Select strand"
+              />
             </div>
           )}
 
@@ -440,42 +431,32 @@ export function AddModal({
               {indicatorParentLevel === "domain" && allDomains.length > 0 && (
                 <div className="grid gap-2">
                   <Label htmlFor="add-ind-parent-domain">Parent Domain</Label>
-                  <Select
+                  <FilterableSelect
+                    id="add-ind-parent-domain"
+                    options={allDomains.map((d) => ({
+                      value: String(d.id),
+                      label: d.label,
+                    }))}
                     value={parentDomainId != null ? String(parentDomainId) : ""}
                     onValueChange={(v) => setParentDomainId(Number(v))}
-                  >
-                    <SelectTrigger id="add-ind-parent-domain">
-                      <SelectValue placeholder="Select domain" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {allDomains.map((d) => (
-                        <SelectItem key={d.id} value={String(d.id)}>
-                          {d.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    placeholder="Select domain"
+                  />
                 </div>
               )}
 
               {indicatorParentLevel === "strand" && allStrands.length > 0 && (
                 <div className="grid gap-2">
                   <Label htmlFor="add-ind-parent-strand">Parent Strand</Label>
-                  <Select
+                  <FilterableSelect
+                    id="add-ind-parent-strand"
+                    options={allStrands.map((s) => ({
+                      value: String(s.id),
+                      label: s.label,
+                    }))}
                     value={parentStrandId != null ? String(parentStrandId) : ""}
                     onValueChange={(v) => setParentStrandId(Number(v))}
-                  >
-                    <SelectTrigger id="add-ind-parent-strand">
-                      <SelectValue placeholder="Select strand" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {allStrands.map((s) => (
-                        <SelectItem key={s.id} value={String(s.id)}>
-                          {s.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    placeholder="Select strand"
+                  />
                 </div>
               )}
 
@@ -485,25 +466,20 @@ export function AddModal({
                     <Label htmlFor="add-ind-parent-substrand">
                       Parent Sub-Strand
                     </Label>
-                    <Select
+                    <FilterableSelect
+                      id="add-ind-parent-substrand"
+                      options={allSubStrands.map((ss) => ({
+                        value: String(ss.id),
+                        label: ss.label,
+                      }))}
                       value={
                         parentSubStrandId != null
                           ? String(parentSubStrandId)
                           : ""
                       }
                       onValueChange={(v) => setParentSubStrandId(Number(v))}
-                    >
-                      <SelectTrigger id="add-ind-parent-substrand">
-                        <SelectValue placeholder="Select sub-strand" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {allSubStrands.map((ss) => (
-                          <SelectItem key={ss.id} value={String(ss.id)}>
-                            {ss.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                      placeholder="Select sub-strand"
+                    />
                   </div>
                 )}
             </>
