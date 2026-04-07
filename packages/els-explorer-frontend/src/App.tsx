@@ -56,7 +56,7 @@ function App() {
                   }`
                 }
               >
-                Info
+                About
               </NavLink>
               <div className="ml-2 pl-2 border-l">
                 <LoginButton />

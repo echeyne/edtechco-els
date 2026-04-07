@@ -1,25 +1,47 @@
 import { Link } from "react-router-dom";
+import { BookOpen, Layers, Sparkles, ExternalLink } from "lucide-react";
+
+function Section({
+  icon: Icon,
+  title,
+  children,
+}: {
+  icon: React.ElementType;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-lg border bg-white p-5">
+      <div className="mb-3 flex items-center gap-2 text-primary">
+        <Icon className="h-5 w-5 shrink-0" aria-hidden="true" />
+        <h3 className="text-base font-semibold">{title}</h3>
+      </div>
+      <div className="text-sm leading-relaxed text-muted-foreground space-y-2">
+        {children}
+      </div>
+    </section>
+  );
+}
 
 export default function AboutPage() {
   return (
-    <div className="max-w-3xl mx-auto py-8 flex flex-col gap-10">
-      <section>
-        <h2 className="text-3xl font-bold tracking-tight text-foreground">
+    <div className="mx-auto max-w-3xl space-y-8 pb-12">
+      {/* Header */}
+      <div>
+        <h2 className="text-2xl font-semibold tracking-tight">
           About the Planning Tool
         </h2>
-        <p className="mt-4 text-muted-foreground leading-relaxed">
+        <p className="mt-2 text-muted-foreground">
           The Parent Planning Tool was created to help parents build
           personalized early learning plans grounded in state-specific
           standards. It is part of the Early Learning Standards Platform and
           uses a common standards database.
         </p>
-      </section>
+      </div>
 
-      <section>
-        <h3 className="text-xl font-semibold text-foreground mb-3">
-          The Early Learning Standards Platform
-        </h3>
-        <p className="text-muted-foreground leading-relaxed">
+      {/* The Early Learning Standards Platform */}
+      <Section icon={Layers} title="The Early Learning Standards Platform">
+        <p>
           Early learning standards define what children should know and be able
           to do at various ages. Each state publishes its own set of standards,
           but they are often locked in PDFs and difficult for families to use.
@@ -31,18 +53,18 @@ export default function AboutPage() {
           <a
             href="https://edtechco.org"
             target="_blank"
-            className="text-primary"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-primary hover:underline"
           >
             edtechco.org
+            <ExternalLink className="h-3 w-3" aria-hidden="true" />
           </a>
         </p>
-      </section>
+      </Section>
 
-      <section>
-        <h3 className="text-xl font-semibold text-foreground mb-3">
-          How the Planning Tool Fits In
-        </h3>
-        <p className="text-muted-foreground leading-relaxed">
+      {/* How the Planning Tool Fits In */}
+      <Section icon={Sparkles} title="How the Planning Tool Fits In">
+        <p>
           The Planning Tool sits on top of this standards database. When you
           create a plan, our AI assistant queries real indicators for your
           child's state and age, then generates activities that directly
@@ -50,8 +72,27 @@ export default function AboutPage() {
           backed by the same benchmarks used by educators — not made up on the
           spot.
         </p>
-      </section>
+      </Section>
 
+      {/* Contact / More Info */}
+      <div className="rounded-lg border border-primary/20 bg-primary/5 p-5 text-sm text-muted-foreground">
+        <p>
+          The Planning Tool is part of the Early Learning Standards Platform
+          built by EdTechCo. For general information about the project,
+          partnership inquiries, or to get in touch, visit{" "}
+          <a
+            href="https://edtechco.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+          >
+            edtechco.org
+            <ExternalLink className="h-3 w-3" aria-hidden="true" />
+          </a>
+        </p>
+      </div>
+
+      {/* Navigation */}
       <nav className="flex items-center gap-4 pt-2">
         <Link
           to="/"

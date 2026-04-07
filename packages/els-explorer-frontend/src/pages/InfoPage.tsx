@@ -2,11 +2,10 @@ import {
   Brain,
   FileSearch,
   Layers,
-  MessageSquare,
-  ShieldCheck,
+  CheckCircle,
   Database,
-  Workflow,
   Sparkles,
+  ExternalLink,
 } from "lucide-react";
 
 function Section({
@@ -62,48 +61,84 @@ export default function InfoPage() {
       {/* Header */}
       <div>
         <h2 className="text-2xl font-semibold tracking-tight">
-          About the ELS Project
+          About the ELS Explorer
         </h2>
         <p className="mt-2 text-muted-foreground">
-          The Early Learning Standards (ELS) platform uses AI at every layer
-          &mdash; from extracting structured data out of state PDF documents, to
-          powering a conversational planning assistant for parents. Here&rsquo;s
-          how it all fits together.
+          The ELS Explorer is the verification and browsing interface for the
+          Early Learning Standards Pipeline. It lets reviewers inspect, edit,
+          and approve the structured data that the pipeline extracts from state
+          PDF documents. For more about the broader Early Learning Standards
+          Platform, visit{" "}
+          <a
+            href="https://edtechco.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-primary hover:underline"
+          >
+            edtechco.org
+            <ExternalLink className="h-3 w-3" aria-hidden="true" />
+          </a>
         </p>
       </div>
 
+      {/* What the Explorer Does */}
+      <Section icon={CheckCircle} title="What the Explorer Does">
+        <p>
+          The Explorer is the human-in-the-loop layer of the pipeline. After AI
+          extraction produces structured records, reviewers use this app to:
+        </p>
+        <ul className="list-disc space-y-1 pl-5 pt-1">
+          <li>
+            Browse extracted domains, strands, sub-strands, and indicators for
+            any processed state document.
+          </li>
+          <li>
+            Compare the original source PDF with extracted data to verify
+            accuracy.
+          </li>
+          <li>
+            Edit or flag records that need correction before they enter the
+            shared standards database.
+          </li>
+          <li>
+            Review confidence scores assigned during extraction to prioritize
+            which records need attention.
+          </li>
+        </ul>
+      </Section>
+
       {/* AI Extraction Pipeline */}
-      <Section icon={FileSearch} title="AI-Powered Document Extraction">
+      <Section icon={FileSearch} title="The Extraction Pipeline">
         <p>
           State early learning standards are published as PDFs with widely
-          varying formats. We run a multi-stage pipeline that turns those
-          documents into structured, queryable data:
+          varying formats. The pipeline turns those documents into structured,
+          queryable data through several stages:
         </p>
         <ol className="space-y-2 pt-1" role="list">
           <PipelineStep
             number={1}
             label="Ingestion"
-            detail="Source PDFs are uploaded to S3 and versioned for traceability."
+            detail="Source PDFs are uploaded and versioned in S3 for traceability."
           />
           <PipelineStep
             number={2}
-            label="Text Extraction (AWS Textract)"
-            detail="Each page is processed by Amazon Textract to produce text blocks with page numbers and reading-order metadata."
+            label="Text Extraction"
+            detail="Amazon Textract processes each page to produce text blocks with page numbers and reading-order metadata."
           />
           <PipelineStep
             number={3}
-            label="Structure Detection (Claude on Bedrock)"
+            label="Structure Detection"
             detail="Text blocks are chunked and sent to Claude via Amazon Bedrock. A detailed prompt instructs the model to identify domains, strands, sub-strands, and indicators by nesting depth — not by the labels each state happens to use."
           />
           <PipelineStep
             number={4}
-            label="Hierarchy Parsing"
-            detail="Detected elements are assembled into a normalized four-level hierarchy (Domain → Strand → Sub-Strand → Indicator) and persisted to a relational database."
+            label="Hierarchy Assembly"
+            detail="A second Claude pass validates and assembles detected elements into a normalized four-level hierarchy, resolving ambiguous nesting and merging cross-chunk fragments before persisting to the database."
           />
           <PipelineStep
             number={5}
             label="Human Verification"
-            detail="Every extracted record carries a confidence score. Reviewers use this Explorer app to verify, edit, or flag items before they're used downstream."
+            detail="Every extracted record carries a confidence score. Reviewers use this Explorer app to verify, edit, or flag items before they are used downstream."
           />
         </ol>
       </Section>
@@ -112,14 +147,14 @@ export default function InfoPage() {
       <Section icon={Brain} title="LLM-Driven Structure Detection">
         <p>
           The hardest part of the pipeline is understanding each state&rsquo;s
-          unique document layout. Claude receives a carefully engineered prompt
+          unique document layout. The LLM receives a carefully engineered prompt
           that:
         </p>
         <ul className="list-disc space-y-1 pl-5 pt-1">
           <li>
-            Classifies elements by their nesting depth rather than
-            state-specific labels (e.g., a state&rsquo;s &ldquo;Goal&rdquo;
-            might map to our &ldquo;Strand&rdquo; level).
+            Classifies elements by nesting depth rather than state-specific
+            labels (e.g., a state&rsquo;s &ldquo;Goal&rdquo; might map to our
+            &ldquo;Strand&rdquo; level).
           </li>
           <li>
             Distinguishes true indicators from illustrative examples or
@@ -165,116 +200,25 @@ export default function InfoPage() {
         </div>
         <p className="pt-2">
           This normalization makes it possible to compare standards across
-          states and power the planning assistant with a uniform query
-          interface.
-        </p>
-      </Section>
-
-      {/* Planning Assistant */}
-      <Section icon={MessageSquare} title="Conversational Planning Assistant">
-        <p>
-          The parent-facing Planning Tool is powered by an AI agent built with
-          the Strands framework running on Amazon Bedrock AgentCore. It uses
-          Claude Sonnet as its foundation model and follows a guided multi-step
-          conversation:
-        </p>
-        <ul className="list-disc space-y-1 pl-5 pt-1">
-          <li>
-            Collects the child&rsquo;s name, state, and age range through
-            natural dialogue.
-          </li>
-          <li>
-            Queries the standards database in real time using tool-calling to
-            fetch available states, age ranges, and matching indicators.
-          </li>
-          <li>
-            Generates a personalized activity plan grounded in real indicators
-            &mdash; every suggested activity references a specific standard
-            code.
-          </li>
-          <li>
-            Persists plans to the database and supports follow-up refinement
-            sessions without re-entering profile information.
-          </li>
-          <li>
-            Streams responses over WebSocket for a real-time chat experience.
-          </li>
-        </ul>
-      </Section>
-
-      {/* Agent Tool Use */}
-      <Section icon={Workflow} title="Agent Tool Architecture">
-        <p>
-          The planning agent doesn&rsquo;t just generate text &mdash; it
-          orchestrates real database operations through a set of tools:
-        </p>
-        <ul className="list-disc space-y-1 pl-5 pt-1">
-          <li>
-            <span className="font-medium text-foreground">StandardsQuery</span>{" "}
-            &mdash; retrieves available states, age ranges, and learning
-            indicators from the RDS database via the Data API.
-          </li>
-          <li>
-            <span className="font-medium text-foreground">PlanManagement</span>{" "}
-            &mdash; creates, updates, retrieves, and deletes learning plans,
-            storing structured JSON content alongside child profile metadata.
-          </li>
-        </ul>
-        <p className="pt-1">
-          The agent decides when and how to call these tools based on the
-          conversation context, following a structured workflow defined in its
-          system prompt.
-        </p>
-      </Section>
-
-      {/* Safety & Guardrails */}
-      <Section icon={ShieldCheck} title="Safety &amp; Guardrails">
-        <p>
-          The planning assistant is wrapped in Amazon Bedrock Guardrails that
-          enforce content safety and privacy:
-        </p>
-        <ul className="list-disc space-y-1 pl-5 pt-1">
-          <li>
-            Content filters block harmful categories (violence, hate speech,
-            misconduct) and prompt-injection attempts.
-          </li>
-          <li>
-            Topic policies deny off-topic requests including medical advice,
-            developmental diagnoses, politics, religion, and financial guidance.
-          </li>
-          <li>
-            PII detection blocks emails, phone numbers, SSNs, credit card
-            numbers, and other sensitive data from entering or leaving the
-            model.
-          </li>
-          <li>Profanity filtering is enabled via managed word lists.</li>
-        </ul>
-        <p className="pt-1">
-          Only the child&rsquo;s first name is ever collected &mdash; no last
-          names, birthdates, or other identifying information.
+          states and powers downstream tools like the parent-facing Planning
+          Tool with a uniform query interface.
         </p>
       </Section>
 
       {/* Infrastructure */}
-      <Section icon={Database} title="Infrastructure">
-        <p>The platform runs on AWS with a serverless-first architecture:</p>
+      <Section icon={Database} title="Pipeline Infrastructure">
+        <p>The extraction pipeline and Explorer run on AWS:</p>
         <ul className="list-disc space-y-1 pl-5 pt-1">
           <li>
-            Amazon Bedrock for foundation model access (Claude) and guardrails.
-          </li>
-          <li>
-            Bedrock AgentCore Runtime for hosting the Strands-based planning
-            agent with WebSocket streaming.
+            Amazon Bedrock for foundation model access (Claude) used in
+            structure detection and hierarchy parsing.
           </li>
           <li>AWS Textract for OCR and document text extraction.</li>
           <li>
-            Amazon RDS (PostgreSQL) via the Data API for standards and plan
-            storage.
+            Amazon RDS (PostgreSQL) via the Data API for standards storage.
           </li>
           <li>S3 for raw PDF storage and intermediate pipeline artifacts.</li>
-          <li>
-            Lambda + API Gateway (Hono) for the Explorer and Planning APIs.
-          </li>
+          <li>Lambda + API Gateway for the Explorer API.</li>
           <li>CloudFront + S3 for frontend hosting.</li>
         </ul>
       </Section>
@@ -282,14 +226,29 @@ export default function InfoPage() {
       {/* Built with AI */}
       <Section icon={Sparkles} title="Built with AI, Verified by Humans">
         <p>
-          AI accelerates every step of this project &mdash; from extracting
-          thousands of standards out of dense PDF documents, to generating
-          personalized learning plans in real time. But every AI-produced record
-          passes through a human verification layer before it influences a
-          child&rsquo;s learning plan. The Explorer app you&rsquo;re using right
-          now is that verification interface.
+          AI accelerates extraction of thousands of standards from dense PDF
+          documents, but a human-in-the-loop verification is needed to ensure
+          data quality and trust. This Explorer is that verification interface.
         </p>
       </Section>
+
+      {/* Contact / More Info */}
+      <div className="rounded-lg border border-primary/20 bg-primary/5 p-5 text-sm text-muted-foreground">
+        <p>
+          The ELS Explorer is part of the Early Learning Standards Platform
+          built by EdTechCo. For general information about the project,
+          partnership inquiries, or to get in touch, visit{" "}
+          <a
+            href="https://edtechco.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+          >
+            edtechco.org
+            <ExternalLink className="h-3 w-3" aria-hidden="true" />
+          </a>
+        </p>
+      </div>
     </div>
   );
 }
