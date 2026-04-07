@@ -10,22 +10,31 @@ export default function AboutPage() {
         <p className="mt-4 text-muted-foreground leading-relaxed">
           The Parent Planning Tool was created to help parents build
           personalized early learning plans grounded in state-specific
-          standards. It is part of the Early Learning Standards project and
-          shares the same standards database and authentication infrastructure.
+          standards. It is part of the Early Learning Standards Platform and
+          uses a common standards database.
         </p>
       </section>
 
       <section>
         <h3 className="text-xl font-semibold text-foreground mb-3">
-          The Early Learning Standards Project
+          The Early Learning Standards Platform
         </h3>
         <p className="text-muted-foreground leading-relaxed">
           Early learning standards define what children should know and be able
           to do at various ages. Each state publishes its own set of standards,
           but they are often locked in PDFs and difficult for families to use.
-          The Early Learning Standards project extracts, organizes, and verifies
-          these standards into a searchable database — making them accessible to
-          parents, educators, and tool builders alike.
+          The Early Learning Standards Platform extracts, organizes, and
+          verifies these standards into a searchable database — making them
+          accessible to parents, educators, and tool builders alike. To learn
+          more about the Early Learning Standards Platform or to contact us
+          visit{" "}
+          <a
+            href="https://edtechco.org"
+            target="_blank"
+            className="text-primary"
+          >
+            edtechco.org
+          </a>
         </p>
       </section>
 

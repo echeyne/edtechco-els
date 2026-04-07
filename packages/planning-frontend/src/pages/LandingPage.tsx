@@ -70,30 +70,23 @@ export default function LandingPage() {
       {/* Organization Info */}
       <section className="max-w-3xl mx-auto text-center">
         <h3 className="text-2xl font-semibold text-foreground mb-4">
-          Early Learning Standards Project
+          Early Learning Standards Platform
         </h3>
         <p className="text-muted-foreground leading-relaxed">
           The Parent Planning Tool is part of the Early Learning Standards
-          project — an initiative to make state early learning standards
+          Platform — an initiative to make state early learning standards
           accessible and actionable for families. We maintain a comprehensive
           database of standards across multiple states so every plan is grounded
-          in real, evidence-based benchmarks.
+          in real, evidence-based benchmarks. To learn more about the Early
+          Learning Standards Platform or to contact us visit{" "}
+          <a
+            href="https://edtechco.org"
+            target="_blank"
+            className="text-primary"
+          >
+            edtechco.org
+          </a>
         </p>
-        <div className="mt-6 flex items-center justify-center gap-4">
-          <Link
-            to="/about"
-            className="text-sm font-medium text-primary hover:underline"
-          >
-            Learn more about us
-          </Link>
-          <span className="text-border">|</span>
-          <Link
-            to="/planning"
-            className="text-sm font-medium text-primary hover:underline"
-          >
-            Go to Planning
-          </Link>
-        </div>
       </section>
     </div>
   );
