@@ -135,7 +135,7 @@ def build_detection_prompt(blocks: List[TextBlock]) -> str:
 
     prompt = f"""You are extracting the hierarchical structure from an early learning standards document. Your job is to identify every structural element and classify it into the correct hierarchy level.
 
-STRICT RULE: You must use ONLY the exact titles, codes (as applicable), numbers, and names that appear in the document text. Do NOT invent any titles. If a code does not exist, assign an appropriate one.
+STRICT RULE: You must use ONLY the exact titles, codes (as applicable), numbers, and names that appear in the document text. Do NOT invent any titles. If a code does not exist in the document, generate a short uppercase abbreviation from the title (e.g. "Physical Development" → "PHD", "Social Emotional" → "SE"). Use at most 5 characters. Be consistent: if you assign a code to an element, use that EXACT same code every time that element appears.
 
 HIERARCHY LEVELS (from highest to lowest):
 Our normalized hierarchy has exactly four levels. Every document must be mapped into these four levels:
@@ -190,7 +190,7 @@ These are NOT the same indicator. They have different codes, different titles, a
 
 FIELD INSTRUCTIONS:
 - "level": One of "domain", "strand", "sub_strand", or "indicator".
-- "code": The code or number from the document (e.g., "1.0", "1.1", "ATL"). If the document does not assign a code, assign an appropriate one.
+- "code": The code or number from the document (e.g., "1.0", "1.1", "ATL"). If the document does not assign a code, generate a short uppercase abbreviation from the title (max 5 characters, e.g. "Physical Development" → "PHD"). Do NOT use the full title or a camelCase version of the title as the code.
 - "title": The exact title as written in the document. Only shorten it if it has redundent leading/trailing text like "STRAND" or "DOMAIN". IMPORTANT: Strip age-band pre-text labels from indicator titles. Remove prefixes like "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "By 36 months", "By 48 months", "Younger Toddler", "Older Toddler", "PK3", "PK4", etc. The title should be the actual name of the indicator, not the age-band label. For example, if the document shows "Early (3 to 4 ½ Years)" as a label above the indicator text "Curiosity and Interest", the title should be "Curiosity and Interest", NOT "Early (3 to 4 ½ Years)". The age-band information should go into the age_band field instead.
 - "description": The full descriptive text associated with this element, including any age-band details. Combine all age-specific text into one description. If there is no description beyond the title, use an empty string "".
 - "confidence": A float between 0.0 and 1.0 reflecting how certain you are about the classification:

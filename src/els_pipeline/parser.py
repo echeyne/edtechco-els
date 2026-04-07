@@ -327,6 +327,210 @@ def parse_llm_response(
             continue
 
     return standards
+
+
+def normalize_parsed_codes(
+    standards: List[NormalizedStandard],
+) -> List[NormalizedStandard]:
+    """
+    Normalize codes across parsed standards so that the same hierarchy entity
+    always uses the same code in the final output.
+
+    This handles the case where the parser LLM (called once per domain chunk)
+    produces slightly different codes for the same strand/sub_strand name
+    across chunks, or where the domain code itself drifts.
+
+    Works at every hierarchy level: domain, strand, sub_strand, indicator.
+    For each (level, name) pair, picks the best canonical code using the
+    same heuristics as normalize_element_codes.
+
+    Returns:
+        New list of NormalizedStandard objects with consistent codes.
+    """
+    from collections import Counter
+
+    if not standards:
+        return standards
+
+    # Collect codes per (level, name) across all standards
+    domain_codes: dict[str, Counter] = {}
+    strand_codes: dict[str, Counter] = {}
+    sub_strand_codes: dict[str, Counter] = {}
+
+    for s in standards:
+        dk = s.domain.name.strip().lower()
+        if dk not in domain_codes:
+            domain_codes[dk] = Counter()
+        domain_codes[dk][s.domain.code] += 1
+
+        if s.strand:
+            sk = s.strand.name.strip().lower()
+            if sk not in strand_codes:
+                strand_codes[sk] = Counter()
+            strand_codes[sk][s.strand.code] += 1
+
+        if s.sub_strand:
+            ssk = s.sub_strand.name.strip().lower()
+            if ssk not in sub_strand_codes:
+                sub_strand_codes[ssk] = Counter()
+            sub_strand_codes[ssk][s.sub_strand.code] += 1
+
+    def _pick_canonical(counter: Counter) -> str:
+        if len(counter) == 1:
+            return next(iter(counter))
+
+        def _sort_key(code_count):
+            code, count = code_count
+            is_slug = len(code) > 10 or bool(re.search(r'[a-z][A-Z]', code))
+            return (is_slug, -count, len(code), code)
+
+        return min(counter.items(), key=_sort_key)[0]
+
+    d_canonical = {name: _pick_canonical(c) for name, c in domain_codes.items()}
+    s_canonical = {name: _pick_canonical(c) for name, c in strand_codes.items()}
+    ss_canonical = {name: _pick_canonical(c) for name, c in sub_strand_codes.items()}
+
+    # Log normalizations
+    for name, counter in domain_codes.items():
+        if len(counter) > 1:
+            logger.info(
+                f"Parsed code normalization: domain '{name}' — "
+                f"canonical '{d_canonical[name]}', replaced: "
+                f"{[c for c in counter if c != d_canonical[name]]}"
+            )
+    for name, counter in strand_codes.items():
+        if len(counter) > 1:
+            logger.info(
+                f"Parsed code normalization: strand '{name}' — "
+                f"canonical '{s_canonical[name]}', replaced: "
+                f"{[c for c in counter if c != s_canonical[name]]}"
+            )
+    for name, counter in sub_strand_codes.items():
+        if len(counter) > 1:
+            logger.info(
+                f"Parsed code normalization: sub_strand '{name}' — "
+                f"canonical '{ss_canonical[name]}', replaced: "
+                f"{[c for c in counter if c != ss_canonical[name]]}"
+            )
+
+    # Rewrite standards with canonical codes
+    result = []
+    for s in standards:
+        updates = {}
+
+        new_domain_code = d_canonical.get(s.domain.name.strip().lower(), s.domain.code)
+        if new_domain_code != s.domain.code:
+            updates["domain"] = s.domain.model_copy(update={"code": new_domain_code})
+
+        if s.strand:
+            new_strand_code = s_canonical.get(s.strand.name.strip().lower(), s.strand.code)
+            if new_strand_code != s.strand.code:
+                updates["strand"] = s.strand.model_copy(update={"code": new_strand_code})
+
+        if s.sub_strand:
+            new_ss_code = ss_canonical.get(s.sub_strand.name.strip().lower(), s.sub_strand.code)
+            if new_ss_code != s.sub_strand.code:
+                updates["sub_strand"] = s.sub_strand.model_copy(update={"code": new_ss_code})
+
+        if updates:
+            # Regenerate standard_id if domain code changed
+            domain_code = updates.get("domain", s.domain).code
+            s = s.model_copy(update=updates)
+            new_id = generate_standard_id(
+                s.country, s.state, s.version_year,
+                domain_code, s.indicator.code, s.age_band
+            )
+            s = s.model_copy(update={"standard_id": new_id})
+
+        result.append(s)
+
+    return result
+
+
+def normalize_element_codes(
+    elements: List[DetectedElement],
+) -> List[DetectedElement]:
+    """
+    Normalize codes across detected elements so that the same entity
+    (identified by hierarchy level + name) always uses the same code.
+
+    When the detector processes a document in overlapping chunks, the LLM
+    may assign different codes to the same domain/strand/sub_strand across
+    chunks (e.g. "PHD" vs "PhysicalDevelopment" for "Physical Development").
+    This function picks a single canonical code per (level, name) pair and
+    rewrites every element to use it.
+
+    Canonical code selection prefers:
+    1. Codes that look like explicit document codes (short, alphanumeric,
+       possibly with dots/dashes) over codes that look like slugified names.
+    2. Among equally "good" codes, the most frequently occurring one.
+    3. Ties broken by shortest length, then lexicographic order.
+
+    Returns:
+        New list of DetectedElement objects with normalized codes.
+    """
+    from collections import Counter
+
+    if not elements:
+        return elements
+
+    # Group codes by (level, normalized_name)
+    code_groups: dict[tuple[str, str], Counter] = {}
+    for el in elements:
+        key = (el.level.value, el.title.strip().lower())
+        if key not in code_groups:
+            code_groups[key] = Counter()
+        code_groups[key][el.code] += 1
+
+    # For each group, pick the canonical code
+    canonical: dict[tuple[str, str], str] = {}
+    for key, counter in code_groups.items():
+        if len(counter) == 1:
+            canonical[key] = next(iter(counter))
+            continue
+
+        # Score each code: prefer short, alphanumeric codes (real document
+        # codes) over long slugified names.
+        def _code_sort_key(code_count):
+            code, count = code_count
+            # A "document code" is short and uses only alphanumerics, dots,
+            # dashes, underscores.  A "slugified name" is longer and often
+            # contains no separators or uses camelCase / full words.
+            is_slug = len(code) > 10 or bool(re.search(r'[a-z][A-Z]', code))
+            return (
+                is_slug,      # False (real code) sorts before True (slug)
+                -count,       # Higher frequency first
+                len(code),    # Shorter first
+                code,         # Lexicographic tiebreak
+            )
+
+        best = min(counter.items(), key=_code_sort_key)
+        canonical[key] = best[0]
+
+    # Build a mapping from old code to new code per (level, name)
+    # and rewrite elements
+    normalized = []
+    for el in elements:
+        key = (el.level.value, el.title.strip().lower())
+        new_code = canonical.get(key, el.code)
+        if new_code != el.code:
+            el = el.model_copy(update={"code": new_code})
+        normalized.append(el)
+
+    # Log any normalizations that happened
+    for key, counter in code_groups.items():
+        if len(counter) > 1:
+            level, name = key
+            winner = canonical[key]
+            others = [c for c in counter if c != winner]
+            logger.info(
+                f"Code normalization: {level} '{name}' — "
+                f"canonical code '{winner}', replaced: {others}"
+            )
+
+    return normalized
+
+
 def _infer_domain_code(
     element: DetectedElement,
     domain_codes: List[str],
@@ -498,6 +702,10 @@ def parse_hierarchy(
                 error="No valid elements to parse (all flagged for review or empty input)",
             )
 
+        # Normalize codes so the same entity always uses the same code
+        # across chunks (e.g. "PHD" and "PhysicalDevelopment" both become "PHD")
+        valid_elements = normalize_element_codes(valid_elements)
+
         # Split into per-domain chunks so each LLM call is small enough
         chunks = chunk_elements_by_domain(valid_elements)
         logger.info(
@@ -556,6 +764,10 @@ def parse_hierarchy(
         if chunk_errors:
             status = StatusEnum.PARTIAL.value
             error = "; ".join(chunk_errors)
+
+        # Normalize codes across all parsed standards so the same entity
+        # always uses the same code (handles cross-chunk LLM inconsistency)
+        all_standards = normalize_parsed_codes(all_standards)
 
         return ParseResult(
             standards=all_standards,
