@@ -6,21 +6,35 @@ export interface Article {
 
 export const articles: Article[] = [
   {
-    title: "Building an Early Learning Standards Explorer with AI",
+    title: "Early Childhood Education Has a Data Problem",
     description:
-      "How we used data engineering and AI to make early learning standards across states searchable and comparable for educators.",
-    url: "https://medium.com/@edtechco/building-an-early-learning-standards-explorer-with-ai",
+      "How fragmented early learning standards are quietly undermining the P-3 pipeline — and what software engineering can do about it",
+    url: "https://medium.com/@emilycheyne/early-childhood-education-has-a-data-problem-2e1a758764be",
   },
   {
-    title: "From Data Pipelines to Parent Tools",
+    title: "Teaching AI to Read Like a Curriculum Specialist",
     description:
-      "The journey of turning raw educational standards data into a practical planning tool for parents and caregivers.",
-    url: "https://medium.com/@edtechco/from-data-pipelines-to-parent-tools",
+      "Inside the prompt engineering and architecture behind an automated early learning standards parser",
+    url: "https://medium.com/@emilycheyne/teaching-ai-to-read-like-a-curriculum-specialist-2709bc6fa880",
   },
   {
-    title: "Lessons Learned: Open-Source EdTech Development",
+    title:
+      "From Standards to Story Time: Building an AI Planning Assistant Grounded in Real Early Learning Data",
     description:
-      "Reflections on building open-source tools for education, including challenges with data quality, accessibility, and community feedback.",
-    url: "https://medium.com/@edtechco/lessons-learned-open-source-edtech-development",
+      "How a conversational agent turns state-specific learning standards into personalized activity plans for families",
+    url: "https://medium.com/@emilycheyne/from-standards-to-story-time-building-an-ai-planning-assistant-grounded-in-real-early-learning-68af26d83591",
+  },
+  {
+    title:
+      "Why a Human Verification Layer is Necessary in Addition to the AI Pipeline",
+    description:
+      "AI can extract early learning standards at scale. But production data quality requires human oversight and engineering to make that oversight fast enough for realistic usage.",
+    url: "https://medium.com/@emilycheyne/why-a-human-verification-layer-is-necessary-in-addition-to-the-ai-pipeline-ef1509d0a668",
+  },
+  {
+    title: "The Case for a National Early Learning Data Layer",
+    description:
+      "Exploring the implications of every early learning standard in America being machine-readable, queryable, and interoperable, and why this scenario is closer than you might think.",
+    url: "https://emilycheyne.medium.com/the-case-for-a-national-early-learning-data-layer-8bcd48e139f0",
   },
 ];
