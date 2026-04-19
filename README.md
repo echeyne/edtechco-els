@@ -26,20 +26,18 @@ The whole thing is orchestrated by AWS Step Functions and deployed via AWS CDK.
 ## Architecture
 
 ```
-S3 (raw PDFs) → Lambda: Ingester
-             → Lambda: Text Extractor (Textract)
-             → Detection Batching:
-                 Lambda: Prepare Detection Batches
-                 → Step Functions Map: Detect Batch (parallel, max 3)
-                 → Lambda: Merge Detection Results
-             → Parse Batching:
-                 Lambda: Prepare Parse Batches
-                 → Step Functions Map: Parse Batch (parallel, max 3)
-                 → Lambda: Merge Parse Results
-             → Lambda: Validator → S3 (canonical JSON)
-             → Lambda: Embedding Generator (Bedrock Titan)
-             → Lambda: Recommendation Generator (Bedrock Claude)
-             → Lambda: Persister → Aurora PostgreSQL (pgvector)
+PDF → Lambda: Ingester
+    → Lambda: Text Extractor (Textract)
+    → Detection Batching:
+        Lambda: Prepare Detection Batches
+        → Step Functions Map: Detect Batch (parallel, max 3)
+        → Lambda: Merge Detection Results
+    → Parse Batching:
+        Lambda: Prepare Parse Batches
+        → Step Functions Map: Parse Batch (parallel, max 3)
+        → Lambda: Merge Parse Results
+    → Lambda: Validator → S3 (canonical JSON)
+    → Lambda: Persister → Aurora PostgreSQL
 ```
 
 The detection and parsing stages use an iterative batching pattern to avoid Lambda timeout issues on large documents. Each stage splits into three steps (prepare → parallel process → merge) orchestrated by Step Functions Map states.
