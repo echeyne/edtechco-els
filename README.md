@@ -11,9 +11,7 @@ Early learning standards vary wildly across states — different formats, struct
 3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, indicators), with large documents batched and processed in parallel via Step Functions Map states
 4. **Hierarchy Parsing** — Normalizes detected elements into a consistent tree structure, also batched in parallel
 5. **Validation** — Validates records against the canonical schema and enforces uniqueness
-6. **Embedding Generation** — Generates vector embeddings via Bedrock Titan for similarity search
-7. **Recommendation Generation** — Produces activity recommendations for parents and teachers
-8. **Persistence** — Stores everything in Aurora PostgreSQL with pgvector
+6. **Persistence** — Stores everything in Aurora PostgreSQL
 
 On top of the pipeline, there are three web applications:
 
