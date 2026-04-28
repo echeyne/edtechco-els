@@ -135,18 +135,18 @@ See [documentation/DEPLOYMENT.md](documentation/DEPLOYMENT.md) for full details.
 
 Key environment variables (see `.env.example` for the full list):
 
-| Variable                        | Description                               | Default                           |
-| ------------------------------- | ----------------------------------------- | --------------------------------- |
-| `ELS_RAW_BUCKET`                | S3 bucket for raw documents               | `els-raw-documents`               |
-| `ELS_PROCESSED_BUCKET`          | S3 bucket for canonical JSON              | `els-processed-json`              |
-| `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for structure detection     | `us.anthropic.claude-opus-4-6-v1` |
-| `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6`  |
-| `BEDROCK_EMBEDDING_MODEL_ID`    | Bedrock model for embeddings              | `amazon.titan-embed-text-v2:0`    |
-| `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.8`                             |
-| `MAX_CHUNKS_PER_BATCH`          | Max text-block chunks per detection batch | `5`                               |
-| `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                               |
-| `DB_HOST`                       | Aurora PostgreSQL endpoint                | `localhost`                       |
-| `DESCOPE_PROJECT_ID`            | Descope project ID for API authentication | —                                 |
+| Variable                        | Description                               | Default                          |
+| ------------------------------- | ----------------------------------------- | -------------------------------- |
+| `ELS_RAW_BUCKET`                | S3 bucket for raw documents               | `els-raw-documents`              |
+| `ELS_PROCESSED_BUCKET`          | S3 bucket for canonical JSON              | `els-processed-json`             |
+| `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for structure detection     | `us.anthropic.claude-opus-4-7`   |
+| `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6` |
+| `BEDROCK_EMBEDDING_MODEL_ID`    | Bedrock model for embeddings              | `amazon.titan-embed-text-v2:0`   |
+| `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.8`                            |
+| `MAX_CHUNKS_PER_BATCH`          | Max text-block chunks per detection batch | `5`                              |
+| `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                              |
+| `DB_HOST`                       | Aurora PostgreSQL endpoint                | `localhost`                      |
+| `DESCOPE_PROJECT_ID`            | Descope project ID for API authentication | —                                |
 
 ## Documentation
 

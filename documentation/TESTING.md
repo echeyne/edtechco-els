@@ -149,7 +149,7 @@ export DB_USER="postgres"
 export DB_PASSWORD="<from-secrets-manager>"
 
 # Bedrock models
-export BEDROCK_DETECTOR_LLM_MODEL_ID=us.anthropic.claude-opus-4-6-v1
+export BEDROCK_DETECTOR_LLM_MODEL_ID=us.anthropic.claude-opus-4-7
 export BEDROCK_PARSER_LLM_MODEL_ID=us.anthropic.claude-sonnet-4-6
 export BEDROCK_EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
 

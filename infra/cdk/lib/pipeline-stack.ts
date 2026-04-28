@@ -1023,7 +1023,7 @@ export class ElsPipelineStack extends cdk.Stack {
         memorySize: 1024,
         environment: {
           ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
-          BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-6-v1",
+          BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-7",
           CONFIDENCE_THRESHOLD: "0.7",
           ENVIRONMENT: env,
         },
@@ -1077,7 +1077,7 @@ export class ElsPipelineStack extends cdk.Stack {
       memorySize: 1024,
       environment: {
         ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
-        BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-6-v1",
+        BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-7",
         CONFIDENCE_THRESHOLD: "0.7",
         MAX_CHUNKS_PER_BATCH: "5",
         ENVIRONMENT: env,

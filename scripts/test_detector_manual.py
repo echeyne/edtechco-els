@@ -11,7 +11,7 @@ Prerequisites:
 
 Environment Variables:
 - AWS_REGION: AWS region (default: us-east-1)
-- BEDROCK_DETECTOR_LLM_MODEL_ID: Bedrock model ID (default: us.anthropic.claude-opus-4-6-v1)
+- BEDROCK_DETECTOR_LLM_MODEL_ID: Bedrock model ID (default: us.anthropic.claude-opus-4-7)
 - CONFIDENCE_THRESHOLD: Confidence threshold for review flagging (default: 0.8)
 
 Usage:
