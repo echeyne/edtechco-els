@@ -8,7 +8,7 @@ previous rule-based prefix-matching and document-order strategies.
 import json
 import logging
 import re
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 import boto3
 from botocore.config import Config as BotocoreConfig
@@ -23,6 +23,13 @@ from .models import (
     StatusEnum,
 )
 from .config import Config
+from .metrics import (
+    LLMCallMetrics,
+    MetricsTimer,
+    extract_usage_from_response,
+    emit_cloudwatch_metrics,
+    log_llm_call_metrics,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -143,16 +150,21 @@ The detected elements come from processing the document in overlapping chunks. T
     return prompt
 
 
-def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str:
+def call_bedrock_llm(
+    prompt: str,
+    max_retries: int = MAX_BEDROCK_RETRIES,
+    metrics_context: Optional[Dict[str, Any]] = None,
+) -> str:
     """
     Call Amazon Bedrock LLM with the given prompt.
 
-    Mirrors the implementation in detector.py: boto3 bedrock-runtime client,
-    Config.AWS_REGION, Config.BEDROCK_PARSER_LLM_MODEL_ID, retry on ClientError.
+    Captures and emits token usage and latency metrics.
 
     Args:
         prompt: The prompt to send to the LLM
         max_retries: Maximum number of retry attempts
+        metrics_context: Optional dict with run_id, country, state,
+                         batch_index, chunk_index for metric dimensions
 
     Returns:
         LLM response text
@@ -177,22 +189,48 @@ def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str
         "messages": [{"role": "user", "content": prompt}],
         "temperature": LLM_TEMPERATURE,
     }
+    ctx = metrics_context or {}
 
     logger.info(f"Calling Bedrock with model: {Config.BEDROCK_PARSER_LLM_MODEL_ID}")
 
     for attempt in range(max_retries + 1):
         try:
-            response = bedrock.invoke_model(
-                modelId=Config.BEDROCK_PARSER_LLM_MODEL_ID,
-                body=json.dumps(request_body),
-            )
-            response_body = json.loads(response["body"].read())
+            with MetricsTimer() as timer:
+                response = bedrock.invoke_model(
+                    modelId=Config.BEDROCK_PARSER_LLM_MODEL_ID,
+                    body=json.dumps(request_body),
+                )
+                response_body = json.loads(response["body"].read())
 
             if "content" not in response_body or len(response_body["content"]) == 0:
                 raise ValueError("Unexpected response format from Bedrock: missing content")
 
             response_text = response_body["content"][0]["text"]
-            logger.info(f"Bedrock response received: {len(response_text)} characters")
+            usage = extract_usage_from_response(response_body)
+
+            # Emit metrics
+            call_metrics = LLMCallMetrics(
+                stage="parsing",
+                model_id=Config.BEDROCK_PARSER_LLM_MODEL_ID,
+                input_tokens=usage["input_tokens"],
+                output_tokens=usage["output_tokens"],
+                latency_ms=timer.elapsed_ms,
+                retry_count=attempt,
+                run_id=ctx.get("run_id", ""),
+                country=ctx.get("country", ""),
+                state=ctx.get("state", ""),
+                batch_index=ctx.get("batch_index"),
+                chunk_index=ctx.get("chunk_index"),
+                success=True,
+            )
+            log_llm_call_metrics(call_metrics)
+            emit_cloudwatch_metrics(call_metrics)
+
+            logger.info(
+                f"Bedrock response received: {len(response_text)} chars, "
+                f"{usage['input_tokens']} in / {usage['output_tokens']} out tokens, "
+                f"{timer.elapsed_ms:.0f}ms"
+            )
             return response_text
 
         except (ClientError, ReadTimeoutError) as e:
@@ -202,6 +240,20 @@ def call_bedrock_llm(prompt: str, max_retries: int = MAX_BEDROCK_RETRIES) -> str
                 )
                 continue
             else:
+                # Emit error metrics
+                error_metrics = LLMCallMetrics(
+                    stage="parsing",
+                    model_id=Config.BEDROCK_PARSER_LLM_MODEL_ID,
+                    retry_count=attempt,
+                    run_id=ctx.get("run_id", ""),
+                    country=ctx.get("country", ""),
+                    state=ctx.get("state", ""),
+                    success=False,
+                    error=str(e),
+                )
+                log_llm_call_metrics(error_metrics)
+                emit_cloudwatch_metrics(error_metrics)
+
                 logger.error(
                     f"Bedrock API call failed after {max_retries + 1} attempts: {e}"
                 )

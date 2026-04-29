@@ -11,6 +11,7 @@ import * as sfn from "aws-cdk-lib/aws-stepfunctions";
 import * as ssm from "aws-cdk-lib/aws-ssm";
 import { Construct } from "constructs";
 import { PipelineLambda } from "./constructs/pipeline-lambda";
+import { PipelineDashboard } from "./constructs/pipeline-dashboard";
 
 export interface ElsPipelineStackProps extends cdk.StackProps {
   environmentName: string;
@@ -481,6 +482,24 @@ export class ElsPipelineStack extends cdk.Stack {
               ],
             },
           },
+          {
+            policyName: "CloudWatchMetricsAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["cloudwatch:PutMetricData"],
+                  Resource: "*",
+                  Condition: {
+                    StringEquals: {
+                      "cloudwatch:namespace": "ELS/Pipeline",
+                    },
+                  },
+                },
+              ],
+            },
+          },
         ],
         tags: [
           { key: "Environment", value: env },
@@ -534,6 +553,24 @@ export class ElsPipelineStack extends cdk.Stack {
                   Effect: "Allow",
                   Action: ["bedrock:InvokeModel"],
                   Resource: "*",
+                },
+              ],
+            },
+          },
+          {
+            policyName: "CloudWatchMetricsAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["cloudwatch:PutMetricData"],
+                  Resource: "*",
+                  Condition: {
+                    StringEquals: {
+                      "cloudwatch:namespace": "ELS/Pipeline",
+                    },
+                  },
                 },
               ],
             },
@@ -635,6 +672,24 @@ export class ElsPipelineStack extends cdk.Stack {
                   Effect: "Allow",
                   Action: ["bedrock:InvokeModel"],
                   Resource: "*",
+                },
+              ],
+            },
+          },
+          {
+            policyName: "CloudWatchMetricsAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["cloudwatch:PutMetricData"],
+                  Resource: "*",
+                  Condition: {
+                    StringEquals: {
+                      "cloudwatch:namespace": "ELS/Pipeline",
+                    },
+                  },
                 },
               ],
             },
@@ -780,6 +835,24 @@ export class ElsPipelineStack extends cdk.Stack {
                   Effect: "Allow",
                   Action: ["bedrock:InvokeModel"],
                   Resource: "*",
+                },
+              ],
+            },
+          },
+          {
+            policyName: "CloudWatchMetricsAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["cloudwatch:PutMetricData"],
+                  Resource: "*",
+                  Condition: {
+                    StringEquals: {
+                      "cloudwatch:namespace": "ELS/Pipeline",
+                    },
+                  },
                 },
               ],
             },
@@ -1854,6 +1927,15 @@ export class ElsPipelineStack extends cdk.Stack {
         { key: "Environment", value: env },
         { key: "Project", value: "ELS-Pipeline" },
       ],
+    });
+
+    // ========================================================================
+    // Pipeline Metrics Dashboard
+    // ========================================================================
+
+    new PipelineDashboard(this, "PipelineDashboard", {
+      environmentName: env,
+      stateMachineName: `els-core-pipeline-${env}`,
     });
 
     // ========================================================================

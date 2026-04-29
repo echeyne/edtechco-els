@@ -4,3 +4,4 @@ Arizona,https://www.azed.gov/ece/preschool,2018,https://www.azed.gov/sites/defau
 Texas,https://tea.texas.gov/academics/early-childhood-education/educator-resources/texas-prekindergarten-guidelines,2022,https://tea.texas.gov/academics/early-childhood-education/2022-texas-pkg-comprehensive-guide.pdf
 Flordia,https://flbt5.floridaearlylearning.com/standards.html#d=I,II,III,IV,V,VI,VII,VIII&a=three_year_olds,four_year_olds,2017,https://flbt5.floridaearlylearning.com/docs/OEL-SR15BtoK.pdf,false
 Flordia,https://flbt5.floridaearlylearning.com/standards.html#d=I,II,III,IV,V,VI,VII,VIII&a=three_year_olds,2017,https://flbt5.floridaearlylearning.com/docs/OEL-SR15BtoK.pdf,false
+Colorado,https://cdec.colorado.gov/for-families/colorado-learning-and-development-guidelines,2020,https://drive.google.com/file/d/1yAFfahu2aQrtjndfCrLnUD8ziGmYixhY/view,true
