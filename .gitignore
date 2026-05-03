@@ -74,7 +74,5 @@ test_parser_local.py
 #cdk
 cdk.out*
 
-outputs/*
-
 # Playwright
 .playwright-mcp

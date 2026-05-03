@@ -1,0 +1,2547 @@
+{
+  "elements": [
+    {
+      "level": "domain",
+      "code": "SE",
+      "title": "Social Emotional Development Standard",
+      "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large.",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "SE.1",
+      "title": "Self-Awareness and Emotional Skills",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "STRAND 1: SELF-AWARENESS AND EMOTIONAL SKILLS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.1.1",
+      "title": "Self-Awareness",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "Concept 1: Self-Awareness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.1.1.I",
+      "title": "The child demonstrates an awareness of self.",
+      "description": "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.1.2",
+      "title": "Recognizes and Expresses Feelings",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "Concept 2: Recognizes and Expresses Feelings",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.1.2.I",
+      "title": "The child recognizes and expresses feelings of self and others.",
+      "description": "Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.1.3",
+      "title": "Self-Regulation",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "Concept 3: Self-Regulation",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.1.3.I",
+      "title": "The child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "description": "Young children develop self-control as they acquire the ability to regulate their impulses with decreasing support from adults. This enables children to function successfully and independently in both personal and social contexts. Temperament displays itself through the way a child manages their behaviors in daily activity; temperament is driven by both nature and nurture.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "The child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "SE.2",
+      "title": "Relationships and Social Skills",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "STRAND 2: RELATIONSHIPS AND SOCIAL SKILLS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.2.1",
+      "title": "Attachment",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "Concept 1: Attachment",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.2.1.I",
+      "title": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "description": "Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SED",
+      "title": "SOCIAL EMOTIONAL DEVELOPMENT",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "SOCIAL EMOTIONAL DEVELOPMENT",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR2",
+      "title": "RELATIONSHIPS AND SOCIAL SKILLS",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "STRAND 2: RELATIONSHIPS AND SOCIAL SKILLS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Attachment",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 8,
+      "source_text": "Concept 1: Attachment",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SED.S2.C1",
+      "title": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "description": "Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning.",
+      "confidence": 0.92,
+      "source_page": 8,
+      "source_text": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Social Interactions",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 9,
+      "source_text": "Concept 2: Social Interactions",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SED.S2.C2",
+      "title": "The child displays positive social behavior.",
+      "description": "A child's relationship with peers and adults reflect their ability to initiate and sustain positive and appropriate interactions while increasing their capacity to acknowledge someone else's perspective.",
+      "confidence": 0.92,
+      "source_page": 9,
+      "source_text": "The child displays positive social behavior.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Respect",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 10,
+      "source_text": "Concept 3: Respect",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SED.S2.C3",
+      "title": "The child has an increasing capacity to understand social boundaries about behavior and the environment.",
+      "description": "When children interact with others, they become aware of the boundaries of acceptable behavior and possess a growing sense of the potential consequences of their actions. Children thrive in environments when they have a sense of ownership.",
+      "confidence": 0.92,
+      "source_page": 10,
+      "source_text": "The child has an increasing capacity to understand social boundaries about behavior and the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "APPROACHES TO LEARNING STANDARD",
+      "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards.",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "APPROACHES TO LEARNING STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR1",
+      "title": "Initiative and Curiosity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 1: Initiative and Curiosity",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Initiative",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Initiative",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Curiosity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 2: Curiosity",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR2",
+      "title": "Attentiveness and Persistence",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 2: Attentiveness and Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Attentiveness",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Attentiveness",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Persistence",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 2: Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR3",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 3: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.88,
+      "source_page": 11,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR4",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 4: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR5",
+      "title": "Reasoning and Problem-Solving",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 5: Reasoning and Problem-Solving",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "Approaches to Learning",
+      "description": "Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards.",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "APPROACHES TO LEARNING",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "Initiative and Curiosity",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 12,
+      "source_text": "STRAND 1: INITIATIVE AND CURIOSITY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.1",
+      "title": "Initiative",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 12,
+      "source_text": "Concept 1: Initiative",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1.1",
+      "title": "The child demonstrates motivation, independence, and responsibility while participating in a range of activities and routines.",
+      "description": "Initiative refers to a child's ability to exhibit a spirit of independence, resourcefulness, and motivation regarding making choices when interacting with others or independently.",
+      "confidence": 0.93,
+      "source_page": 12,
+      "source_text": "The child demonstrates motivation, independence, and responsibility while participating in a range of activities and routines.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.2",
+      "title": "Curiosity",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 13,
+      "source_text": "Concept 2: Curiosity",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.1",
+      "title": "The child demonstrates eagerness to learn about and discuss a range of topics, ideas, and activities.",
+      "description": "Curiosity relates to children's natural tendencies as active learners to explore all aspects of the environment, from objects and people, to ideas and customs. It is through discovering the answers to their own questions that children construct knowledge.",
+      "confidence": 0.93,
+      "source_page": 13,
+      "source_text": "The child demonstrates eagerness to learn about and discuss a range of topics, ideas, and activities.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "Attentiveness and Persistence",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "STRAND 2: ATTENTIVENESS AND PERSISTENCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.1",
+      "title": "Attentiveness",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "Concept 1: Attentiveness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.1",
+      "title": "The child demonstrates the ability to focus on an activity.",
+      "description": "Attentiveness refers to the child's ability to focus attention and concentrate. This enhances academic learning, including language acquisition and problem solving, as well as social skills and cooperation.",
+      "confidence": 0.93,
+      "source_page": 14,
+      "source_text": "The child demonstrates the ability to focus on an activity.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.2",
+      "title": "Persistence",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "Concept 2: Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.1",
+      "title": "The child demonstrates the ability to maintain and sustain a task.",
+      "description": "Children demonstrate persistence in their capacity to engage in what they are doing and to meet challenges",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "The child demonstrates the ability to maintain and sustain a task.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "3",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 3: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3.1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "4",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 4: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4.1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "5",
+      "title": "Reasoning and Problem-Solving",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 5: Reasoning and Problem-Solving",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "5.1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.75,
+      "source_page": 11,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S2",
+      "title": "ATTENTIVENESS AND PERSISTENCE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "STRAND 2: ATTENTIVENESS AND PERSISTENCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C1",
+      "title": "Attentiveness",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "Concept 1: Attentiveness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C1.1",
+      "title": "The child demonstrates the ability to focus on an activity.",
+      "description": "Attentiveness refers to the child's ability to focus attention and concentrate. This enhances academic learning, including language acquisition and problem solving, as well as social skills and cooperation.",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "The child demonstrates the ability to focus on an activity. Attentiveness refers to the child's ability to focus attention and concentrate.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C2",
+      "title": "Persistence",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "Concept 2: Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C2.1",
+      "title": "The child demonstrates the ability to maintain and sustain a task.",
+      "description": "Children demonstrate persistence in their capacity to engage in what they are doing and to meet challenges appropriate to their level of development. The ability to persist in a task is an essential element in learning.",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "The child demonstrates the ability to maintain and sustain a task.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "CONFIDENCE AND RESILIENCE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "STRAND 3: CONFIDENCE AND RESILIENCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S3C1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3C1.1",
+      "title": "The child demonstrates self-assurance, motivation, and stamina in a variety of circumstances.",
+      "description": "Confident children feel positive about themselves and their ability to do things or to adapt to changing situations. Confidence is supported by a mindset of resiliency. A confident child is willing to take a reasonable risk, to express or defend ideas, to try new experiences, or to engage in challenging tasks.",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "The child demonstrates self-assurance, motivation, and stamina in a variety of circumstances.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S4",
+      "title": "CREATIVITY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "STRAND 4: CREATIVITY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S4C1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1.1",
+      "title": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "description": "Creativity involves generating novel ideas while engaging curiosity, risk-taking, and imagination. Creativity can be expressed in many ways. We commonly think of this word in association with the expressive arts. However, creativity involves being able to cope with new situations and problems as well as to see things from a different perspective. A creative child extends and elaborates on ideas and appreciates humor.",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S5",
+      "title": "REASONING AND PROBLEM SOLVING",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "STRAND 5: REASONING AND PROBLEM SOLVING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S5C1",
+      "title": "Reasoning",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "Concept 1: Reasoning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S5C1.1",
+      "title": "The child demonstrates the ability to think in a logical way.",
+      "description": "Reasoning involves the child's ability to use prior knowledge and information to generate a decision or conclusion. Logic and reasoning skills are key to child development in early learning. These skills help children work cooperatively and solve problems independently.",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "The child demonstrates the ability to think in a logical way.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "APPROACHES TO LEARNING",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "APPROACHES TO LEARNING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4.C1",
+      "title": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "description": "Creativity involves generating novel ideas while engaging curiosity, risk-taking, and imagination. Creativity can be expressed in many ways. We commonly think of this word in association with the expressive arts. However, creativity involves being able to cope with new situations and problems as well as to see things from a different perspective. A creative child extends and elaborates on ideas and appreciates humor.",
+      "confidence": 0.92,
+      "source_page": 17,
+      "source_text": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Reasoning",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "Concept 1: Reasoning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S5.C1",
+      "title": "The child demonstrates the ability to think in a logical way.",
+      "description": "Reasoning involves the child's ability to use prior knowledge and information to generate a decision or conclusion. Logic and reasoning skills are key to child development in early learning. These skills help children work cooperatively and solve problems independently.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "The child demonstrates the ability to think in a logical way.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Problem-Solving",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 19,
+      "source_text": "Concept 2: Problem-Solving",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S5.C2",
+      "title": "The child demonstrates their ability to focus energies on suitable solutions.",
+      "description": "Problem solving involves the child's ability to look for or find multiple solutions to a question, task, or problem. This ability is crucial for constructing knowledge as the child builds conflict resolution skills.",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "The child demonstrates their ability to focus energies on suitable solutions.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY STANDARD",
+      "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs.",
+      "confidence": 0.95,
+      "source_page": 20,
+      "source_text": "LANGUAGE AND LITERACY STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "Language",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 21,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Receptive Language Understanding",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 21,
+      "source_text": "Concept 1: Receptive Language Understanding",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S1.C1",
+      "title": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues.",
+      "description": "Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. \"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\" Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "LANGUAGE AND LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "STRAND 1: LANGUAGE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Concept 1: Receptive Language and Communication Skills",
+      "description": "Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading.",
+      "confidence": 0.9,
+      "source_page": 21,
+      "source_text": "Receptive language is the ability to understand or comprehend language that is heard or read.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Concept 2: Expressive Language and Communication Skills",
+      "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\" Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs.",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "Concept 2: Expressive Language and Communication Skills",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "LANGUAGE AND LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "LANGUAGE",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Vocabulary",
+      "description": "The child understands and uses increasingly complex vocabulary. The early childhood years are a period of vocabulary expansion and exploration. Research indicates that there is a strong connection between vocabulary development and reading comprehension which correlates to academic success. Children gain language and vocabulary skills by having multiple and frequent opportunities to listen, talk, read, share ideas, relate experiences, and engage in meaningful conversations. They need to play with familiar language and experiment with language in different settings. Rhymes, songs, and read-alouds that use rare words allow children to talk about and develop an understanding of words they would not otherwise hear in everyday conversations.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "Concept 3: Vocabulary",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "LANGUAGE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.3",
+      "title": "Vocabulary",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "Concept 3: Vocabulary",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3.1",
+      "title": "The child understands and uses increasingly complex vocabulary.",
+      "description": "The early childhood years are a period of vocabulary expansion and exploration. Research indicates that there is a strong connection between vocabulary development and reading comprehension which correlates to academic success. Children gain language and vocabulary skills by having multiple and frequent opportunities to listen, talk, read, share ideas, relate experiences, and engage in meaningful conversations. They need to play with familiar language and experiment with language in different settings. Rhymes, songs, and read-alouds that use rare words allow children to talk about and develop an understanding of words they would not otherwise hear in everyday conversations.",
+      "confidence": 0.92,
+      "source_page": 24,
+      "source_text": "The child understands and uses increasingly complex vocabulary.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "EMERGENT LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 25,
+      "source_text": "STRAND 2: EMERGENT LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.1",
+      "title": "Concepts of Print",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "Concept 1: Concepts of Print",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.1",
+      "title": "The child knows that print carries messages.",
+      "description": "Through daily experiences with materials, in a print rich environment, young children delight in discovering the connections between spoken and written words. They learn what print is used for and that print conveys meaning such as in signs, letters, menus, storybooks, and magazines.",
+      "confidence": 0.92,
+      "source_page": 25,
+      "source_text": "The child knows that print carries messages.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.2",
+      "title": "Book Handling Skills",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "Concept 2: Book Handling Skills",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.1",
+      "title": "The child demonstrates how to handle books appropriately and with care.",
+      "description": "It is important to provide young children with many opportunities to interact with and care for books in all environments. Young children need to have access to a variety of fiction and nonfiction books throughout the day, including those that reflect diverse cultures. Through these experiences, children learn to hold books right side up and to turn the pages one at a time to view the illustrations and to gain a sense of the story or content.",
+      "confidence": 0.92,
+      "source_page": 26,
+      "source_text": "The child demonstrates how to handle books appropriately and with care.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.3",
+      "title": "Phonological Awareness",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 27,
+      "source_text": "Concept 3: Phonological Awareness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3.1",
+      "title": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).",
+      "description": "Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "confidence": 0.92,
+      "source_page": 27,
+      "source_text": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.4",
+      "title": "Alphabet Knowledge",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "Concept 4: Alphabet Knowledge",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.4.1",
+      "title": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters.",
+      "description": "Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. Young children begin to recognize some printed sounds, phonemes).",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "LANGUAGE AND LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S2",
+      "title": "EMERGENT LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "STRAND 2: EMERGENT LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C4",
+      "title": "Alphabet Knowledge",
+      "description": "Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "Concept 4: Alphabet Knowledge",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C4.1",
+      "title": "The child demonstrates knowledge of the alphabet.",
+      "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters.",
+      "confidence": 0.93,
+      "source_page": 28,
+      "source_text": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C5",
+      "title": "Comprehension and Text Structure",
+      "description": "Children gain understanding about language and reading through their interactions with verbal language, print, and daily routines. Through shared reading (or dialogic reading), children learn about reading concepts by experiencing a learning environment rich in signs, symbols, words, numbers, and art that reflect diverse cultures. When children are read to regularly and encouraged to intentionally interact with printed materials, they develop an interest in books and other printed materials. \"To comprehend what they read, children must continually draw on relevant background knowledge. This means that having a solid conceptual and informational base is a vital part of becoming a skilled reader.\"",
+      "confidence": 0.95,
+      "source_page": 30,
+      "source_text": "Concept 5: Comprehension and Text Structure",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C5.1",
+      "title": "The child demonstrates an understanding of narrative structure through storytelling, questioning, and recall.",
+      "description": "The child demonstrates an understanding of narrative structure through storytelling, questioning, and recall.",
+      "confidence": 0.93,
+      "source_page": 30,
+      "source_text": "The child demonstrates an understanding of narrative structure through storytelling, questioning, and recall.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR3",
+      "title": "STRAND 3: EMERGENT WRITING",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 32,
+      "source_text": "STRAND 3: EMERGENT WRITING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Concept 1: Writing Processes and Writing Applications",
+      "description": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas.",
+      "confidence": 0.9,
+      "source_page": 32,
+      "source_text": "Concept 1: Writing Processes and Writing Applications",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EWIND",
+      "title": "Emergent Writing Indicator",
+      "description": "Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner.",
+      "confidence": 0.7,
+      "source_page": 32,
+      "source_text": "Indicators and examples in the Context of Daily Routines, Activities, and Play",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "MATH",
+      "title": "Mathematics Standard",
+      "description": "Mathematics is a way of thinking, knowing, problem-solving, and reasoning that is accessible to all children regardless of their prior knowledge and experiences. Mathematical knowledge, interests, and skills are basic to children's success in school and later life. From a very early age, mathematics helps children to connect ideas, develop logical thinking, question, analyze, and understand the world around them. Through their senses, children embrace mathematics as an integral part of their world. Children thrive in environments that promote thinking and curiosity, are rich in mathematical language, and nurture their natural drive to explore and experiment with numbers, shapes, measurement, and patterns. Spontaneous and planned math experiences that are developmentally appropriate encourage children's positive attitudes towards mathematics.",
+      "confidence": 0.95,
+      "source_page": 34,
+      "source_text": "MATHEMATICS STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "Counting and Cardinality",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 34,
+      "source_text": "Strand 1: Counting and Cardinality",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.1",
+      "title": "Counts Out Loud",
+      "description": "The child counts out loud and uses number words in daily conversations. To build an understanding of counting, children need environments that are rich in mathematical language and provide varied opportunities to count in ways that are personally meaningful, challenging, and fun.",
+      "confidence": 0.95,
+      "source_page": 35,
+      "source_text": "Concept 1: Counts Out Loud",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1.a",
+      "title": "Shows interest in and awareness of counting",
+      "description": "Shows interest in and awareness of counting. Examples: Participates in counting activities. Experiments with and uses numbers and counting in play.",
+      "confidence": 0.9,
+      "source_page": 35,
+      "source_text": "a. Shows interest in and awareness of counting.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1.b",
+      "title": "Rote counts zero to ten and beyond with increasing accuracy",
+      "description": "Rote counts zero to ten and beyond with increasing accuracy. Examples: Sings counting songs. Says or signs to ten while playing hide and seek. Counts to twenty while lathering hands with soap during handwashing.",
+      "confidence": 0.9,
+      "source_page": 35,
+      "source_text": "b. Rote counts zero to ten and beyond with increasing accuracy.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.2",
+      "title": "Knows Number Names and Symbols",
+      "description": "The child identifies numerals and uses number words in daily activities. To build an understanding of number names and symbols, materials and opportunities for mathematical thinking should be embedded in a variety of learning experiences to allow children the opportunity to explore and play with numbers and numerals throughout the day, across the curriculum, and at home.",
+      "confidence": 0.95,
+      "source_page": 36,
+      "source_text": "Concept 2: Knows Number Names and Symbols",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.a",
+      "title": "Uses numerals and number symbols in the context of daily routines, activities, and play",
+      "description": "Uses numerals and number symbols in the context of daily routines, activities, and play. Examples: Draws a squiggly line and says, 'Here is my phone number.' Looks at the grocery advertisement and says, 'Oranges are on sale for three dollars.'",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "a. Uses numerals and number symbols in the context of daily routines, activities, and play.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.b",
+      "title": "Uses and creates symbols to represent numbers",
+      "description": "Uses and creates symbols to represent numbers. Examples: Holds up four fingers when asked, 'How old are you?' Uses buttons and other manipulatives to represent numbers. Uses a variety of materials (i.e. clay, sand, shaving cream) to write and form numerals and numeral-like symbols.",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "b. Uses and creates symbols to represent numbers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.c",
+      "title": "Writes numerals and numeral-like symbols",
+      "description": "Writes out a bill while playing restaurant and says, 'You owe ten dollars.' Scrapes lines in the sand table and says, 'I wrote the number one.'",
+      "confidence": 0.75,
+      "source_page": 36,
+      "source_text": "C. Writes out a bill while playing restaurant and says, \"You owe ten dollars.\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.d",
+      "title": "Identifies numerals zero to ten",
+      "description": "Identifies numerals zero to ten. Examples: Names some numerals while reading a book. Recognizes numerals in the environment; e.g., signs, grocery store, room numbers. Points to numerals on his shirt and says, 'I have a two and a five on my shirt.' (The numerals may or may not be a two and a five).",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "d. Identifies numerals zero to ten.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.e",
+      "title": "Differentiates some written numerals from written letters",
+      "description": "Differentiates some written numerals from written letters. Examples: Describes the numeral eight as a racetrack. Says, 'The four looks like the letter H missing a leg.'",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "e. Differentiates some written numerals from written letters.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "WRIT.A",
+      "title": "In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols",
+      "description": "In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols. Examples: Draws random lines/scribbles on a page. Scribbles a note to mom, prior to leaving school. Draws to produce letter-like forms - creating a mock word - the child says, 'This is Papa.' Listens to a book about where people live, and paints a picture of their home. Uses an interactive whiteboard to make an onscreen drawing of the snake from a story about snakes.",
+      "confidence": 0.8,
+      "source_page": 32,
+      "source_text": "a. In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "WRIT.B",
+      "title": "Writes own name using letter-like forms or conventional print",
+      "description": "Writes own name using letter-like forms or conventional print. Examples: Writes own name on drawing. Writes own name from left to right on the sidewalk when playing with chalk on sidewalk.",
+      "confidence": 0.8,
+      "source_page": 32,
+      "source_text": "b. Writes own name using letter-like forms or conventional print.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "WRIT.C",
+      "title": "Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story",
+      "description": "Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes. Examples: Asks, 'What would you like to eat?' while playing restaurant and scribbles the order on a pad. Writes WLC M and says, 'This says, Welcome.'",
+      "confidence": 0.8,
+      "source_page": 33,
+      "source_text": "C. Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story;",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "WRIT.D",
+      "title": "Forms letters starting with large motor progressing to fine motor",
+      "description": "Forms letters starting with large motor (sky writing, paint brush and water, sidewalk chalk) progressing to fine motor (paper and writing utensil). Examples: Writes letters from name on the sidewalk with chalk. Writes letter-like forms on a page and says, 'This is a note for my mommy.'",
+      "confidence": 0.8,
+      "source_page": 33,
+      "source_text": "d. Forms letters starting with large motor (sky writing, paint brush and water, sidewalk chalk) progressing to finemotor (paper and writing utensil).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "WRIT.E",
+      "title": "Organizes writing from left to right",
+      "description": "Organizes writing from left to right, indicating a print awareness that letters cluster as words and words cluster into phrases or sentences by use of spacing or marks. Examples: Plays at writing a message by placing spaces between the 'words' on the page. Writes a series of letters and asks, 'What word does this make?'",
+      "confidence": 0.8,
+      "source_page": 33,
+      "source_text": "e. Organizes writing from left to right, indicating a print awareness that letters cluster as words and wordscluster into phrases or sentences by use of spacing or marks.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "MATH",
+      "title": "MATHEMATICS",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 36,
+      "source_text": "MATHEMATICS",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "COUNTING AND CARDINALITY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 36,
+      "source_text": "STRAND 1: COUNTING AND CARDINALITY",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.a",
+      "title": "Uses numerals and number symbols in the context of daily routines, activities, and play.",
+      "description": "Draws a squiggly line and says, \"Here is my phone number.\" Looks at the grocery advertisement and says, \"Oranges are on sale for three dollars.\"",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "a. Uses numerals and number symbols in the context of daily routines, activities, and play.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.b",
+      "title": "Uses and creates symbols to represent numbers.",
+      "description": "Holds up four fingers when asked, \"How old are you?\" Uses buttons and other manipulatives to represent numbers. Uses a variety of materials (i.e. clay, sand, shaving cream) to write and form numerals and numeral-like symbols.",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "b. Uses and creates symbols to represent numbers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.c",
+      "title": "Writes numerals and numeral-like symbols in play.",
+      "description": "Writes out a bill while playing restaurant and says, \"You owe ten dollars.\" Scrapes lines in the sand table and says, \"I wrote the number one.\"",
+      "confidence": 0.6,
+      "source_page": 36,
+      "source_text": "C. Writes out a bill while playing restaurant and says, \"You owe ten dollars.\"",
+      "needs_review": true
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.d",
+      "title": "Identifies numerals zero to ten.",
+      "description": "Names some numerals while reading a book. Recognizes numerals in the environment; e.g., signs, grocery store, room numbers. Points to numerals on his shirt and says, \"I have a two and a five on my shirt.\" (The numerals may or may not be a two and a five).",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "d. Identifies numerals zero to ten.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.e",
+      "title": "Differentiates some written numerals from written letters.",
+      "description": "Describes the numeral eight as a racetrack. Says, \"The four looks like the letter H missing a leg.\"",
+      "confidence": 0.9,
+      "source_page": 36,
+      "source_text": "e. Differentiates some written numerals from written letters.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.3",
+      "title": "Compares Numbers and Quantities",
+      "description": "The child applies a range of strategies such as matching or counting to compare sets of objects. Children develop an understanding of numbers through hands-on experiences, using a variety of objects found in the home, the learning environment, and nature. To build an understanding of numbers and the quantities they represent, young children need daily experiences involving comparing groups of objects in ways that are personally meaningful, challenging, and fun.",
+      "confidence": 0.9,
+      "source_page": 37,
+      "source_text": "Concept 3: Compares Numbers and Quantities",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3.a",
+      "title": "Compares two sets of objects using terms such as greater than, less than, or equal to.",
+      "description": "Looks at friend's blocks and says, \"I have more blocks than you.\" Matches one car for each person to see if there are fewer cars or people.",
+      "confidence": 0.9,
+      "source_page": 37,
+      "source_text": "a. Compares two sets of objects using terms such as greater than, less than, or equal to.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.4",
+      "title": "Counts to Tell Number of Objects",
+      "description": "The child uses number words and counting to identify quantity. Developing an understanding of numbers begins with hands-on experiences using a variety of objects found in the home, the learning environment, and nature. To build an understanding of \"how much\" and to explore number relationships, children need daily experiences involving counting in ways that are personally meaningful, challenging, and fun.",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "Concept 4: Counts to Tell Number of Objects",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4.a",
+      "title": "Identifies quantities of three to five objects without counting using visual approximation (Subitize).",
+      "description": "Sees and labels collections of one to three with a number. Looks at a pile of blocks and says, \"There are four blocks.\"",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "a. Identifies quantities of three to five objects without counting using visual approximation (Subitize).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4.b",
+      "title": "Demonstrates the ability to match object to object in a group (One-to-one correspondence).",
+      "description": "Matches one cup to each plate at the table during snack time. Recognizes that there is one shoe for each foot.",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "b. Demonstrates the ability to match object to object in a group (One-to-one correspondence).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4.c",
+      "title": "Counts groups of objects using a number word for each object (Rational counting).",
+      "description": "Assigns a number name to cars on the rug, \"one, two, three, four, five.\" Counts out four straws for the four children at the table.",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "C. Counts groups of objects using a number word for each object (Rational counting).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4.d",
+      "title": "Counts a collection of up to ten items using the last counting word to tell, \"How many?\" (Cardinality)",
+      "description": "Counts out six eggs. When adult asks, \"How many?\" the child responds, \"six.\" Counts and responds, \"seven\" when the teacher asks, \"How many children are here today?\"",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "d. Counts a collection of up to ten items using the last counting word to tell, \"How many?\" (Cardinality)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4.e",
+      "title": "Matches numerals to quantities using manipulatives.",
+      "description": "Spins a spinner, lands on five and moves five steps. Matches three objects to the numeral three.",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "e. Matches numerals to quantities using manipulatives.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "OPERATIONS AND ALGEBRAIC THINKING",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "STRAND 2: OPERATIONS AND ALGEBRAIC THINKING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.1",
+      "title": "Explores Addition and Subtraction",
+      "description": "The child recognizes addition as adding to and subtraction as taking away from. Developing an understanding of a number begins with hands-on experiences using a variety of objects found in the home, the learning environment, and nature. To build an understanding of numbers and to discover number relationships, children need opportunities to describe the changes that result from putting sets of objects together or taking them apart (e.g., blocks, animals, toy people).",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "Concept 1: Explores Addition and Subtraction",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.a",
+      "title": "Recognizes that adding increases the number of objects in a group.",
+      "description": "Adds one block to the pile of blocks and says, \"Now I have more.\" Adds another slice of apple on the plate and says, \"Now I have two.\"",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "a. Recognizes that adding increases the number of objects in a group.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.b",
+      "title": "Describes changes in two or more sets of objects when they are combined.",
+      "description": "Recognizes that three cars and two trucks is a total of five vehicles. Puts the red, yellow, and blue crayons together and tells how many crayons.",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "b. Describes changes in two or more sets of objects when they are combined.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.c",
+      "title": "Recognizes that taking away (subtracting) decreases the number of objects in a group",
+      "description": "Eats an apple slice and says, \"I only have one left.\" Gives some marbles to a friend and then says, \"Now I have less.\"",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "C. Recognizes that taking away (subtracting) decreases the number of objects in a group",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.d",
+      "title": "Describes changes in a set of objects when they are separated into parts.",
+      "description": "Plays with a plastic ball and bowling pins and tells how many pins fell down and how many are left standing. Gives two grapes to a friend and says, \"Now I have two grapes, and you have two grapes.\"",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "d. Describes changes in a set of objects when they are separated into parts.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.e",
+      "title": "Counts on from the larger number for addition.",
+      "description": "Recognizes immediately a set of two and then counts on three, four, five as objects are added to the set.",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "e. Counts on from the larger number for addition.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.2",
+      "title": "Patterning",
+      "description": "The child recognizes, fixes, duplicates, extends, describes, and creates patterns. Recognition and investigation of patterns are important components of a child's development. A child's ability to work with patterns is the precursor to mathematical thinking, especially algebraic processes. Children need frequent opportunities to engage in pattern-related activities such as playing with repetitive sounds and movement or noticing patterns in textures and pictures.",
+      "confidence": 0.9,
+      "source_page": 40,
+      "source_text": "Concept 2: Patterning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.a",
+      "title": "Recognizes patterns in the real world.",
+      "description": "Follows and remembers movements in familiar songs and rhymes. Notices patterns on clothing. \"Look, the stripes on your shirt go red, blue, red, blue.\" Anticipates what comes next in the daily routine.",
+      "confidence": 0.9,
+      "source_page": 40,
+      "source_text": "a. Recognizes patterns in the real world.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.b",
+      "title": "Fixes simple patterns.",
+      "description": "Sees a row of blocks: red, blue, red, red the child says, \"Hey something is wrong, that block should be blue.\" Notices that their peers' insect manipulatives are lined up as butterfly, ladybug, butterfly, and cricket and says, \"the ladybug comes after the butterfly.\"",
+      "confidence": 0.9,
+      "source_page": 40,
+      "source_text": "b. Fixes simple patterns.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.c",
+      "title": "Duplicates simple patterns.",
+      "description": "Matches a pattern on a picture to make a necklace from shaped beads.",
+      "confidence": 0.9,
+      "source_page": 40,
+      "source_text": "C. Duplicates simple patterns.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "MATH",
+      "title": "MATHEMATICS",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "MATHEMATICS",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S2",
+      "title": "OPERATIONS AND ALGEBRAIC THINKING",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "STRAND 2: OPERATIONS AND ALGEBRAIC THINKING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Patterning",
+      "description": "The child recognizes, fixes, duplicates, extends, describes, and creates patterns. Recognition and investigation of patterns are important components of a child's development. A child's ability to work with patterns is the precursor to mathematical thinking, especially algebraic processes. Children need frequent opportunities to engage in pattern-related activities such as playing with repetitive sounds and movement or noticing patterns in textures and pictures.",
+      "confidence": 0.92,
+      "source_page": 40,
+      "source_text": "Concept 2: Patterning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAT",
+      "title": "The child recognizes, fixes, duplicates, extends, describes, and creates patterns.",
+      "description": "Recognition and investigation of patterns are important components of a child's development. A child's ability to work with patterns is the precursor to mathematical thinking, especially algebraic processes. Children need frequent opportunities to engage in pattern-related activities such as playing with repetitive sounds and movement or noticing patterns in textures and pictures.",
+      "confidence": 0.9,
+      "source_page": 40,
+      "source_text": "The child recognizes, fixes, duplicates, extends, describes, and creates patterns.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "MEASUREMENT AND DATA",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 41,
+      "source_text": "STRAND 3: MEASUREMENT AND DATA",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Sorts and Classifies",
+      "description": "The child sorts and groups objects by a variety of attributes. Recognizing relationships between objects, people, and events allows young children to make generalizations and predictions beyond information directly available to them. The ability to think logically and to reason (problem solve) extends far beyond mathematical boundaries.",
+      "confidence": 0.92,
+      "source_page": 41,
+      "source_text": "Concept 1: Sorts and Classifies",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SORT",
+      "title": "The child sorts and groups objects by a variety of attributes.",
+      "description": "Recognizing relationships between objects, people, and events allows young children to make generalizations and predictions beyond information directly available to them. The ability to think logically and to reason (problem solve) extends far beyond mathematical boundaries.",
+      "confidence": 0.9,
+      "source_page": 41,
+      "source_text": "The child sorts and groups objects by a variety of attributes.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2D",
+      "title": "Data Analysis",
+      "description": "With prompting and support the child collects, organizes, displays, and describes relevant data. Children are natural observers and questioners. To build upon this strength, adults should facilitate children's opportunities to ask questions, sort and classify objects, collect and display information, and talk about what is meaningful to them.",
+      "confidence": 0.92,
+      "source_page": 42,
+      "source_text": "Concept 2: Data Analysis",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "DATA",
+      "title": "With prompting and support the child collects, organizes, displays, and describes relevant data.",
+      "description": "Children are natural observers and questioners. To build upon this strength, adults should facilitate children's opportunities to ask questions, sort and classify objects, collect and display information, and talk about what is meaningful to them.",
+      "confidence": 0.9,
+      "source_page": 42,
+      "source_text": "With prompting and support the child collects, organizes, displays, and describes relevant data.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Measures",
+      "description": "The child uses measurement to describe and compare objects in the environment. Starting at a very young age, children compare based on observable attributes and characteristics. Immersing children in measurement activities provides them with opportunities to explore, compare, and discuss the use of measurement in their environment.",
+      "confidence": 0.92,
+      "source_page": 43,
+      "source_text": "Concept 3: Measures",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "MEAS",
+      "title": "The child uses measurement to describe and compare objects in the environment.",
+      "description": "Starting at a very young age, children compare based on observable attributes and characteristics. Immersing children in measurement activities provides them with opportunities to explore, compare, and discuss the use of measurement in their environment.",
+      "confidence": 0.9,
+      "source_page": 43,
+      "source_text": "The child uses measurement to describe and compare objects in the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "MATH",
+      "title": "MATHEMATICS",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 43,
+      "source_text": "MATHEMATICS",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "STRAND 3: MEASUREMENT AND DATA",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 43,
+      "source_text": "STRAND 3: MEASUREMENT AND DATA",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Concept 3: Measures",
+      "description": "Starting at a very young age, children compare based on observable attributes and characteristics. Immersing children in measurement activities provides them with opportunities to explore, compare, and discuss the use of measurement in their environment.",
+      "confidence": 0.92,
+      "source_page": 43,
+      "source_text": "Concept 3: Measures",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C3",
+      "title": "The child uses measurement to describe and compare objects in the environment.",
+      "description": "Starting at a very young age, children compare based on observable attributes and characteristics. Immersing children in measurement activities provides them with opportunities to explore, compare, and discuss the use of measurement in their environment.",
+      "confidence": 0.9,
+      "source_page": 43,
+      "source_text": "The child uses measurement to describe and compare objects in the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S4",
+      "title": "STRAND 4: GEOMETRY",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 44,
+      "source_text": "STRAND 4: GEOMETRY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Concept 1: Shapes",
+      "description": "Geometry for young children involves observing, playing with, and purposefully investigating shapes that are found in their environment. Beginning in infancy, children compare objects by form and shape. This familiarity is a foundation for more complex learning experiences involving shape, position, and orientation in space.",
+      "confidence": 0.92,
+      "source_page": 44,
+      "source_text": "Concept 1: Shapes",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C1",
+      "title": "The child recognizes names and describes common shapes and their properties.",
+      "description": "Geometry for young children involves observing, playing with, and purposefully investigating shapes that are found in their environment. Beginning in infancy, children compare objects by form and shape. This familiarity is a foundation for more complex learning experiences involving shape, position, and orientation in space.",
+      "confidence": 0.9,
+      "source_page": 44,
+      "source_text": "The child recognizes names and describes common shapes and their properties.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR4",
+      "title": "STRAND 4: GEOMETRY",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 44,
+      "source_text": "STRAND 4: GEOMETRY",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SHP",
+      "title": "The child recognizes names and describes common shapes and their properties.",
+      "description": "Geometry for young children involves observing, playing with, and purposefully investigating shapes that are found in their environment. Beginning in infancy, children compare objects by form and shape. This familiarity is a foundation for more complex learning experiences involving shape, position, and orientation in space.",
+      "confidence": 0.9,
+      "source_page": 44,
+      "source_text": "The child recognizes names and describes common shapes and their properties.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Concept 2: Spatial Reasoning",
+      "description": "Geometry for young children involves observing, playing with, and purposefully investigating shapes that are found in their environment. Children spontaneously make spatial comparisons using vocabulary such as: location/positional terms, movement, distance, and transformation. This familiarity is a foundation for more complex learning experiences involving shape, position, and orientation in space.",
+      "confidence": 0.9,
+      "source_page": 45,
+      "source_text": "Concept 2: Spatial Reasoning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SPR",
+      "title": "The child uses and demonstrates an understanding of positional terms.",
+      "description": "Geometry for young children involves observing, playing with, and purposefully investigating shapes that are found in their environment. Children spontaneously make spatial comparisons using vocabulary such as: location/positional terms, movement, distance, and transformation.",
+      "confidence": 0.9,
+      "source_page": 45,
+      "source_text": "The child uses and demonstrates an understanding of positional terms.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SCI",
+      "title": "SCIENCE STANDARD",
+      "description": "Children are capable of complex scientific thinking and approaches to investigating the world, developing new ideas, collaborating with others, solving problems, constructing theories, and exploring with abundant curiosity. Science, for young children and their caregivers, is an active and open-ended search to construct new knowledge. Children ask questions and seek answers to understand the world around them and learn by being actively engaged with experiences, real objects and natural, relevant phenomena. As children seek answers, they will plan, observe, predict, and form conclusions. Children's observations, predictions, explanations, and conclusions should be respected and valued by their caregivers and can lead to meaningful opportunities to develop skills, knowledge, and relationships. Children's experiences with scientific inquiry form the basis for further investigation and thought. Learning through inquiry requires both the child's curiosity and adult guidance: planning and preparing the environment for scientific exploration, supporting and scaffolding investigation, provoking deeper thought with reflective questions, and engaging in scientific inquiry with children.",
+      "confidence": 0.95,
+      "source_page": 46,
+      "source_text": "SCIENCE STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR1",
+      "title": "Strand 1: Scientific Inquiry and Application",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 46,
+      "source_text": "Strand 1: Scientific Inquiry and Application",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Concept 1: Exploration, Observations, and Hypotheses",
+      "description": "Curiosity about the natural world leads children to ask questions and make predictions, which are their theories about why, how, where, and what if. Materials and instructional strategies that are culturally and linguistically responsive and relevant to the child's context support their exploration, observations, and hypotheses about relationships between objects, people, and events in their world.",
+      "confidence": 0.9,
+      "source_page": 47,
+      "source_text": "Concept 1: Exploration, Observations, and Hypotheses",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EOH",
+      "title": "The child observes, explores, and interacts with materials, others, and the environment.",
+      "description": "Curiosity about the natural world leads children to ask questions and make predictions, which are their theories about why, how, where, and what if. Materials and instructional strategies that are culturally and linguistically responsive and relevant to the child's context support their exploration, observations, and hypotheses about relationships between objects, people, and events in their world.",
+      "confidence": 0.9,
+      "source_page": 47,
+      "source_text": "The child observes, explores, and interacts with materials, others, and the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SCI",
+      "title": "SCIENCE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 47,
+      "source_text": "SCIENCE",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "SCIENTIFIC INQUIRY AND APPLICATION",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 47,
+      "source_text": "STRAND 1: SCIENTIFIC INQUIRY AND APPLICATION",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Exploration, Observations, and Hypotheses",
+      "description": "Curiosity about the natural world leads children to ask questions and make predictions, which are their theories about why, how, where, and what if. Materials and instructional strategies that are culturally and linguistically responsive and relevant to the child's context support their exploration, observations, and hypotheses about relationships between objects, people, and events in their world.",
+      "confidence": 0.9,
+      "source_page": 47,
+      "source_text": "Concept 1: Exploration, Observations, and Hypotheses",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C1.1",
+      "title": "The child observes, explores, and interacts with materials, others, and the environment.",
+      "description": "Curiosity about the natural world leads children to ask questions and make predictions, which are their theories about why, how, where, and what if. Materials and instructional strategies that are culturally and linguistically responsive and relevant to the child's context support their exploration, observations, and hypotheses about relationships between objects, people, and events in their world.",
+      "confidence": 0.9,
+      "source_page": 47,
+      "source_text": "The child observes, explores, and interacts with materials, others, and the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Investigation",
+      "description": "Children use their skills and a variety of tools and materials to gather information while investigating. Active experimentation requires questioning, refining, and persistence. Children explore answers to questions and begin to form more complex conclusions. Information gathered in the process deepens a child's knowledge of the world and their environment.",
+      "confidence": 0.9,
+      "source_page": 48,
+      "source_text": "Concept 2: Investigation",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C2.1",
+      "title": "The child researches their own predictions and the ideas of others through active exploration and experimentation.",
+      "description": "Children use their skills and a variety of tools and materials to gather information while investigating. Active experimentation requires questioning, refining, and persistence. Children explore answers to questions and begin to form more complex conclusions. Information gathered in the process deepens a child's knowledge of the world and their environment.",
+      "confidence": 0.9,
+      "source_page": 48,
+      "source_text": "The child researches their own predictions and the ideas of others through active exploration and experimentation.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Analysis and Conclusion",
+      "description": "Children form conclusions about their observations and investigations by collecting, discussing and communicating, and reflecting upon the information gathered. Adults can help children organize their information using tools such as graphs, digital media, manipulatives, and other relevant methods.",
+      "confidence": 0.9,
+      "source_page": 49,
+      "source_text": "Concept 3: Analysis and Conclusion",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C3.1",
+      "title": "The child analyzes data (their observations and background knowledge) and forms conclusions about their investigation.",
+      "description": "Children form conclusions about their observations and investigations by collecting, discussing and communicating, and reflecting upon the information gathered. Adults can help children organize their information using tools such as graphs, digital media, manipulatives, and other relevant methods.",
+      "confidence": 0.9,
+      "source_page": 49,
+      "source_text": "The child analyzes data (their observations and background knowledge) and forms conclusions about their investigation.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C4",
+      "title": "Communication",
+      "description": "Based on their experiences, children express their deeper understanding of science concepts and their environment through words and other representations such as digital tools, painting, drawing, sculpting, or movement.",
+      "confidence": 0.9,
+      "source_page": 50,
+      "source_text": "Concept 4: Communication",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "C4.1",
+      "title": "The child discusses, communicates, and reflects upon the scientific investigation and its findings.",
+      "description": "Based on their experiences, children express their deeper understanding of science concepts and their environment through words and other representations such as digital tools, painting, drawing, sculpting, or movement. When caregivers engage children in dialogue with meaningful scientific vocabulary relevant to their experiences, they can promote language, literacy, and",
+      "confidence": 0.9,
+      "source_page": 50,
+      "source_text": "The child discusses, communicates, and reflects upon the scientific investigation and its findings.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SCI",
+      "title": "SCIENCE",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 49,
+      "source_text": "SCIENCE",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "INQUIRY AND APPLICATION",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 49,
+      "source_text": "STRAND 1: INQUIRY AND APPLICATION",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Analysis and Conclusion",
+      "description": "Children form conclusions about their observations and investigations by collecting, discussing and communicating, and reflecting upon the information gathered. Adults can help children organize their information using tools such as graphs, digital media, manipulatives, and other relevant methods.",
+      "confidence": 0.9,
+      "source_page": 49,
+      "source_text": "Concept 3: Analysis and Conclusion",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "",
+      "title": "The child analyzes data (their observations and background knowledge) and forms conclusions about their investigation.",
+      "description": "Children form conclusions about their observations and investigations by collecting, discussing and communicating, and reflecting upon the information gathered. Adults can help children organize their information using tools such as graphs, digital media, manipulatives, and other relevant methods.",
+      "confidence": 0.9,
+      "source_page": 49,
+      "source_text": "The child analyzes data (their observations and background knowledge) and forms conclusions about their investigation.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4",
+      "title": "Communication",
+      "description": "Based on their experiences, children express their deeper understanding of science concepts and their environment through words and other representations such as digital tools, painting, drawing, sculpting, or movement. When caregivers engage children in dialogue with meaningful scientific vocabulary relevant to their experiences, they can promote language, literacy, and cognitive skills which are essential foundations for later success in school and in life.",
+      "confidence": 0.9,
+      "source_page": 50,
+      "source_text": "Concept 4: Communication",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "",
+      "title": "The child discusses, communicates, and reflects upon the scientific investigation and its findings.",
+      "description": "Based on their experiences, children express their deeper understanding of science concepts and their environment through words and other representations such as digital tools, painting, drawing, sculpting, or movement. When caregivers engage children in dialogue with meaningful scientific vocabulary relevant to their experiences, they can promote language, literacy, and cognitive skills which are essential foundations for later success in school and in life.",
+      "confidence": 0.9,
+      "source_page": 50,
+      "source_text": "The child discusses, communicates, and reflects upon the scientific investigation and its findings.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SS",
+      "title": "SOCIAL STUDIES STANDARD",
+      "description": "Social Studies is the study of the complex and intertwined relationships between people, their environment, and their needs. The inclusion of Social Studies in early childhood environments is important to nurture children's understanding of themselves and others. Social Studies includes basic skills and competencies that set the foundation for learning about concepts of social science. Social Studies is about interdependence. At a young age, children begin to develop their social identity and think about their place in the social world. As children grow, they develop an increased awareness of their personal histories and heritage, and a sense of time and place. Through everyday interactions with children and adults, they develop an appreciation for rights and responsibility within a group, and how social rules help people in promoting safety and fairness.",
+      "confidence": 0.92,
+      "source_page": 51,
+      "source_text": "SOCIAL STUDIES STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "FAMILY",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 52,
+      "source_text": "STRAND 1: FAMILY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Understands Family",
+      "description": "Children are curious about their world. They thrive on learning experiences that are meaningful and that connect to what they have previously learned. A child's family is central to their understanding of themselves and provides a foundational reference for their roles and relationships at school and within the larger community. As their perception grows, children further expand this scope to understand how systems work together.",
+      "confidence": 0.9,
+      "source_page": 52,
+      "source_text": "Concept 1: Understands Family",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "",
+      "title": "The child demonstrates an understanding of families and the roles and responsibilities of being a family member.",
+      "description": "Children are curious about their world. They thrive on learning experiences that are meaningful and that connect to what they have previously learned. A child's family is central to their understanding of themselves and provides a foundational reference for their roles and relationships at school and within the larger community. As their perception grows, children further expand this scope to understand how systems work together.",
+      "confidence": 0.9,
+      "source_page": 52,
+      "source_text": "The child demonstrates an understanding of families and the roles and responsibilities of being a family member.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SS",
+      "title": "Social Studies",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 52,
+      "source_text": "SOCIAL STUDIES",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "Family",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 52,
+      "source_text": "STRAND 1: FAMILY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S1C1",
+      "title": "Understands Family",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 52,
+      "source_text": "Concept 1: Understands Family",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S1C1.1",
+      "title": "The child demonstrates an understanding of families and the roles and responsibilities of being a family member.",
+      "description": "Children are curious about their world. They thrive on learning experiences that are meaningful and that connect to what they have previously learned. A child's family is central to their understanding of themselves and provides a foundational reference for their roles and relationships at school and within the larger community. As their perception grows, children further expand this scope to understand how systems work together.",
+      "confidence": 0.92,
+      "source_page": 52,
+      "source_text": "The child demonstrates an understanding of families and the roles and responsibilities of being a family member.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S2",
+      "title": "Community",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 53,
+      "source_text": "STRAND 2: COMMUNITY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C1",
+      "title": "Understands Community",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 53,
+      "source_text": "Concept 1: Understands Community",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C1.1",
+      "title": "The child recognizes that they are part of a family and larger community with other people and that they can accept and appreciate diverse people and experiences.",
+      "description": "Children become aware of and begin to recognize and appreciate the diversity, similarities and differences, between people through their experiences of relevant cultural and traditional events. Diversity can take many forms: gender, ethnicity, age, religion, family structure, ability levels, body shape, culture, language, to name a few. Children gain awareness of people and their backgrounds through participation in their community and learning environments. Children begin to understand that events occur outside their own families and their own environment through conversation with peers and interaction with the cultures of others.",
+      "confidence": 0.92,
+      "source_page": 53,
+      "source_text": "The child recognizes that they are part of a family and larger community with other people and that they can acceptand appreciate diverse people and experiences.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C2",
+      "title": "Rights, Responsibilities, and Roles within Community",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 54,
+      "source_text": "Concept 2: Rights, Responsibilities, and Roles within Community",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C2.1",
+      "title": "The child demonstrates a sense of belonging to the community and contributes to its care.",
+      "description": "Children recognize themselves as part of their home and community. Children are given opportunities to experience choices and to make their own decisions to demonstrate their roles as individuals. As children learn to demonstrate respect for ideas and rules, they gain the skills necessary for being contributing members of their family and of a community.",
+      "confidence": 0.92,
+      "source_page": 54,
+      "source_text": "The child demonstrates a sense of belonging to the community and contributes to its care.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C3",
+      "title": "Environment",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 55,
+      "source_text": "Concept 3: Environment",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C3.1",
+      "title": "The child demonstrates awareness of locations within and around their community and of the environment.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 55,
+      "source_text": "The child demonstrates awareness of locations within and around their community and of the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "History and Events",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 51,
+      "source_text": "Strand 3: History and Events",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S3C1",
+      "title": "Understands Time - Past, Present, and Future",
+      "description": "",
+      "confidence": 0.88,
+      "source_page": 51,
+      "source_text": "Concept 1: Understands Time - Past, Present, and Future",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.2",
+      "title": "Rights, Responsibilities, and Roles within Community",
+      "description": "The child demonstrates a sense of belonging to the community and contributes to its care. Children recognize themselves as part of their home and community. Children are given opportunities to experience choices and to make their own decisions to demonstrate their roles as individuals. As children learn to demonstrate respect for ideas and rules, they gain the skills necessary for being contributing members of their family and of a community.",
+      "confidence": 0.9,
+      "source_page": 54,
+      "source_text": "Concept 2: Rights, Responsibilities, and Roles within Community",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.1",
+      "title": "The child demonstrates a sense of belonging to the community and contributes to its care.",
+      "description": "Children recognize themselves as part of their home and community. Children are given opportunities to experience choices and to make their own decisions to demonstrate their roles as individuals. As children learn to demonstrate respect for ideas and rules, they gain the skills necessary for being contributing members of their family and of a community.",
+      "confidence": 0.92,
+      "source_page": 54,
+      "source_text": "The child demonstrates a sense of belonging to the community and contributes to its care.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.3",
+      "title": "Environment",
+      "description": "The child demonstrates awareness of locations within and around their community and of the environment. As young children explore their community and visit a variety of places, they begin to develop a sense of direction and location. While going for rides on the bus or in a car, or while walking in their neighborhoods, children become aware of signs, symbols, and other landmarks. This helps to develop a stronger relationship with a sense of place which encourages children to take care of and advocate for their environment.",
+      "confidence": 0.9,
+      "source_page": 55,
+      "source_text": "Concept 3: Environment",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3.1",
+      "title": "The child demonstrates awareness of locations within and around their community and of the environment.",
+      "description": "As young children explore their community and visit a variety of places, they begin to develop a sense of direction and location. While going for rides on the bus or in a car, or while walking in their neighborhoods, children become aware of signs, symbols, and other landmarks. This helps to develop a stronger relationship with a sense of place which encourages children to take care of and advocate for their environment.",
+      "confidence": 0.92,
+      "source_page": 55,
+      "source_text": "The child demonstrates awareness of locations within and around their community and of the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "3",
+      "title": "History and Events",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 56,
+      "source_text": "STRAND 3: HISTORY AND EVENTS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3.1",
+      "title": "Understands Time - Past, Present, and Future",
+      "description": "The child demonstrates an awareness of time and sequence of events in their daily lives. As young children explore their family and community identity and roles, they begin to differentiate a sense of what is in the past, present, and future. While describing, experiencing, planning, and discussing past events, children become aware of time, what is now and what is later. Moreover, children begin to develop cognitive skills regarding how the past can affect the present and future, and how people live and what they do changes over time.",
+      "confidence": 0.9,
+      "source_page": 56,
+      "source_text": "Concept 1: Understands Time - Past, Present, and Future",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1.1",
+      "title": "The child demonstrates an awareness of time and sequence of events in their daily lives.",
+      "description": "As young children explore their family and community identity and roles, they begin to differentiate a sense of what is in the past, present, and future. While describing, experiencing, planning, and discussing past events, children become aware of time, what is now and what is later. Moreover, children begin to develop cognitive skills regarding how the past can affect the present and future, and how people live and what they do changes over time.",
+      "confidence": 0.92,
+      "source_page": 56,
+      "source_text": "The child demonstrates an awareness of time and sequence of events in their daily lives.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "PDHS",
+      "title": "Physical Development, Health and Safety Standard",
+      "description": "Children in our care deserve environments that are safe and encourage healthy living. It is important to recognize that children's physical development and their health and safety have as important a place in the curriculum as other areas of development. Children develop skills necessary for future social and academic success as they explore, combine, and refine their physical movements. Thoughtfully planned movement experiences with vigorous outdoor and indoor activities should be part of the daily schedule. Therefore, it is important to model healthy living practices and teach children the importance of safe behavior, good hygiene, a healthy diet, and the need for physical activity and rest.",
+      "confidence": 0.95,
+      "source_page": 57,
+      "source_text": "PHYSICAL DEVELOPMENT, HEALTH AND SAFETY STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "Physical Development",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 58,
+      "source_text": "STRAND 1: PHYSICAL DEVELOPMENT",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.1",
+      "title": "Gross Motor Development",
+      "description": "The child moves with maturing, fundamental movement skills. Children are frequently in motion. This movement develops young children's large muscles as they run, jump, and play in both structured and unstructured settings. Children increase their ability to control their bodies and learn that regular physical activity can enhance their overall physical, social health, mental health, cognitive academic performance, and learning.",
+      "confidence": 0.92,
+      "source_page": 58,
+      "source_text": "Concept 1: Gross Motor Development",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1.1",
+      "title": "The child moves with maturing, fundamental movement skills.",
+      "description": "Children are frequently in motion. This movement develops young children's large muscles as they run, jump, and play in both structured and unstructured settings. Children increase their ability to control their bodies and learn that regular physical activity can enhance their overall physical, social health, mental health, cognitive academic performance, and learning.",
+      "confidence": 0.92,
+      "source_page": 58,
+      "source_text": "The child moves with maturing, fundamental movement skills.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "PDHS",
+      "title": "Physical Development, Health and Safety",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 58,
+      "source_text": "PHYSICAL DEVELOPMENT, HEALTH AND SAFETY",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "Physical Development",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 58,
+      "source_text": "STRAND 1: PHYSICAL DEVELOPMENT",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S1.C1",
+      "title": "Gross Motor Development",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 58,
+      "source_text": "Concept 1: Gross Motor Development",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S1.C1.1",
+      "title": "The child moves with maturing, fundamental movement skills.",
+      "description": "Children are frequently in motion. This movement develops young children's large muscles as they run, jump, and play in both structured and unstructured settings. Children increase their ability to control their bodies and learn that regular physical activity can enhance their overall physical, social health, mental health, cognitive academic performance, and learning.",
+      "confidence": 0.92,
+      "source_page": 58,
+      "source_text": "The child moves with maturing, fundamental movement skills.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S1.C2",
+      "title": "Fine Motor Development",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 59,
+      "source_text": "Concept 2: Fine Motor Development",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S1.C2.1",
+      "title": "The child uses fingers, hands, and wrists to manipulate tools and materials.",
+      "description": "Developing fine motor skills is an important foundation for other developmental areas such as cognitive development, artistic expression, daily living skills, and handwriting. Children begin to demonstrate an increased amount of strength, dexterity, and stamina to perform fine motor tasks using a variety of manipulatives and tools. When children are engaged in appropriate activities and experiences, they develop the ability to gain fine motor control, which leads to independence.",
+      "confidence": 0.92,
+      "source_page": 59,
+      "source_text": "The child uses fingers, hands, and wrists to manipulate tools and materials.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S2",
+      "title": "Health",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 60,
+      "source_text": "STRAND 2: HEALTH",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2.C1",
+      "title": "Personal Health and Hygiene Practices",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 60,
+      "source_text": "Concept 1: Personal Health and Hygiene Practices",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2.C1.1",
+      "title": "Child demonstrates knowledge of personal health practices and routines and understands the functions of body parts.",
+      "description": "Children begin to learn self-help/adaptive skills that will assist them in making appropriate healthy choices. They learn that proper nutrition, physical activity, and rest are necessary for a healthy body.",
+      "confidence": 0.92,
+      "source_page": 60,
+      "source_text": "Child demonstrates knowledge of personal health practices and routines and understands the functions of body parts.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "Safety",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 61,
+      "source_text": "STRAND 3: SAFETY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S3.C1",
+      "title": "Safety and Injury Prevention",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 61,
+      "source_text": "Concept 1: Safety and Injury Prevention",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3.C1.1",
+      "title": "Child demonstrates knowledge of personal safety practices and routines.",
+      "description": "Safety awareness refers to development of the ability to identify potential risks and use safe practices to protect oneself and others. Children recognize and avoid potentially harmful persons, objects, substances, activities, and environments to keep themselves safe. These principles should be relevant to Arizona and to the community/region in which the child lives.",
+      "confidence": 0.92,
+      "source_page": 61,
+      "source_text": "Child demonstrates knowledge of personal safety practices and routines.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "PDHS",
+      "title": "Physical Development, Health and Safety",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 61,
+      "source_text": "PHYSICAL DEVELOPMENT, HEALTH AND SAFETY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Safety and Injury Prevention",
+      "description": "Safety awareness refers to development of the ability to identify potential risks and use safe practices to protect oneself and others. Children recognize and avoid potentially harmful persons, objects, substances, activities, and environments to keep themselves safe. These principles should be relevant to Arizona and to the community/region in which the child lives.",
+      "confidence": 0.9,
+      "source_page": 61,
+      "source_text": "Concept 1: Safety and Injury Prevention",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SIP",
+      "title": "Child demonstrates knowledge of personal safety practices and routines.",
+      "description": "Safety awareness refers to development of the ability to identify potential risks and use safe practices to protect oneself and others. Children recognize and avoid potentially harmful persons, objects, substances, activities, and environments to keep themselves safe. These principles should be relevant to Arizona and to the community/region in which the child lives.",
+      "confidence": 0.9,
+      "source_page": 61,
+      "source_text": "Child demonstrates knowledge of personal safety practices and routines.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "FA",
+      "title": "Fine Arts Standard",
+      "description": "The arts connect all areas of learning and are fundamental to children's development and education. The arts nurture the imagination and creative spirit of all children. Sensory awareness (sight, sound, touch, smell, taste) is the foundation for all imaginative activity and creative expression. For young children, the importance of the arts is in the process of creating and constructing rather than the result of the product. Arts connect all areas of learning and are fundamental to children's development and education. As children are involved in the arts process they develop independence, self-esteem, and self-expression. They discover ways through which to understand, design, and explain their ideas, thinking, and theories about the world. The arts enable all children to discover more about who they are and gain insight into their own culture and the cultures around them.",
+      "confidence": 0.95,
+      "source_page": 63,
+      "source_text": "FINE ARTS STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "Visual Arts",
+      "description": "Strand 1: Visual Arts",
+      "confidence": 0.95,
+      "source_page": 63,
+      "source_text": "Strand 1: Visual Arts",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.1",
+      "title": "Improvises and Connects with Visual Arts",
+      "description": "The child uses a wide variety of materials, media, tools and digital tools, techniques, and processes to explore, create, respond to, and connect with visual arts. Children approach art as open-ended play and communicate their ideas, experiences, and feelings by generating representations using a multitude of media such as crayons, markers, paints, paper, modeling, and construction. Children develop vocabulary to share their opinions about their artistic creations and experiences. Caregivers can support children to reflect upon and describe the characteristics, and qualities of their work and the work of others.",
+      "confidence": 0.95,
+      "source_page": 64,
+      "source_text": "Concept 1: Improvises and Connects with Visual Arts",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "The child uses a wide variety of materials, media, tools and digital tools, techniques, and processes to explore, create, respond to, and connect with visual arts.",
+      "description": "Examples include: Creates their own original works using a variety of materials/media, tools, and techniques; Represents creative choices, ideas, experiences, and feelings with details that connect to personal meaning; Engages in two- and three-dimensional artistic investigations; Describes and communicates an understanding of their work and the artwork of others.",
+      "confidence": 0.9,
+      "source_page": 64,
+      "source_text": "The child uses a wide variety of materials, media, tools and digital tools, techniques, and processes to explore, create, respond to, and connect with visual arts.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "Music",
+      "description": "Strand 2: Music",
+      "confidence": 0.95,
+      "source_page": 65,
+      "source_text": "Strand 2: Music",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.1",
+      "title": "Creates and Connects with Musical Concepts and Expressions",
+      "description": "The child uses a wide variety of instruments, media, and tools, techniques, and music to explore and connect. Singing, making, and listening to music are fundamental musical activities of young children. These activities help young children explore and demonstrate self-expression, creativity, and appreciation for the arts. Engagement with music encourages mathematical thinking concepts such as patterning and sequencing, physical movement and spatial awareness, and social interaction.",
+      "confidence": 0.95,
+      "source_page": 65,
+      "source_text": "Concept 1: Creates and Connects with Musical Concepts and Expressions",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "The child uses a wide variety of instruments, media, and tools, techniques, and music to explore and connect.",
+      "description": "Examples include: Experiments with a variety of instruments, vocalizations, sounds; Sings to familiar rhymes, songs, and chants; Uses familiar songs, rhymes, or chants to create their own musical improvisations; Responds to different styles of music and music representative of a variety of cultures; Describes and communicates an understanding of music in the contexts of daily experiences.",
+      "confidence": 0.9,
+      "source_page": 65,
+      "source_text": "The child uses a wide variety of instruments, media, and tools, techniques, and music to explore and connect.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "3",
+      "title": "Creative Movement and Dance",
+      "description": "Strand 3: Creative Movement and Dance",
+      "confidence": 0.95,
+      "source_page": 66,
+      "source_text": "Strand 3: Creative Movement and Dance",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3.1",
+      "title": "Creates and Connects with Creative Movement and Dance",
+      "description": "The child uses a wide variety of movement, expressions, media and tools, and techniques, to explore and connect with their own bodies within space. \"As children explore ways they can move their bodies and make objects move,\" they construct knowledge about their capabilities as learners. Movement and dance provides children with a \"vehicle and organizing framework to express ideas and feelings as well to develop and enhance locomotor skills\". These activities help young children explore and demonstrate self-expression, creativity, and appreciation for the arts. Intentional engagement with music between caregivers and children encourages mathematical thinking concepts such as patterning and sequencing, physical movement and spatial awareness, and social interaction.",
+      "confidence": 0.95,
+      "source_page": 66,
+      "source_text": "Concept 1: Creates and Connects with Creative Movement and Dance",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "The child uses a wide variety of movement, expressions, media and tools, and techniques, to explore and connect with their own bodies within space.",
+      "description": "Examples include: Experiments with a variety of movements (e.g., Stretches as high as they can during yoga to \"reach the sun\").",
+      "confidence": 0.88,
+      "source_page": 66,
+      "source_text": "The child uses a wide variety of movement, expressions, media and tools, and techniques, to explore and connect with their own bodies within space.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "4",
+      "title": "Dramatic Play",
+      "description": "Strand 4: Dramatic Play",
+      "confidence": 0.9,
+      "source_page": 63,
+      "source_text": "Strand 4: Dramatic Play",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4.1",
+      "title": "Creates and Connects with Dramatic Activities",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 63,
+      "source_text": "Concept 1: Creates and Connects with Dramatic Activities",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "FA",
+      "title": "FINE ARTS",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 66,
+      "source_text": "FINE ARTS",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "CREATIVE MOVEMENT AND DANCE",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 66,
+      "source_text": "STRAND 3: CREATIVE MOVEMENT AND DANCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S3C1",
+      "title": "Creates and Connects with Creative Movement and Dance",
+      "description": "The child uses a wide variety of movement, expressions, media and tools, and techniques, to explore and connect with their own bodies within space. \"As children explore ways they can move their bodies and make objects move,\" they construct knowledge about their capabilities as learners. Movement and dance provides children with a \"vehicle and organizing framework to express ideas and feelings as well to develop and enhance locomotor skills\". These activities help young children explore and demonstrate self-expression, creativity, and appreciation for the arts. Intentional engagement with music between caregivers and children encourages mathematical thinking concepts such as patterning and sequencing, physical movement and spatial awareness, and social interaction.",
+      "confidence": 0.9,
+      "source_page": 66,
+      "source_text": "Concept 1: Creates and Connects with Creative Movement and Dance",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3C1a",
+      "title": "Experiments with a variety of movements.",
+      "description": "Stretches as high as they can during yoga to \"reach the sun\". Moves to their interpretation of the animals in the story as the teacher reads it aloud.",
+      "confidence": 0.9,
+      "source_page": 66,
+      "source_text": "a. Experiments with a variety of movements.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3C1b",
+      "title": "Dances and moves to rhymes, songs, and chants.",
+      "description": "Choreographs a spontaneous movement to a favorite song in a small group. Teaches a familiar finger play to a friend that they learned at the library story time.",
+      "confidence": 0.9,
+      "source_page": 66,
+      "source_text": "b. Dances and moves to rhymes, songs, and chants.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3C1c",
+      "title": "Responds with movement to various sensory stimuli.",
+      "description": "Rolls their wheelchair in response to the beat of the drums in the song. Imitates the trees bending in the wind using scarves on the playground. Use of different tempos of music or sound, light and shadow, dramatic play acting.",
+      "confidence": 0.9,
+      "source_page": 66,
+      "source_text": "C. Responds with movement to various sensory stimuli.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3C1d",
+      "title": "Describes and communicates an understanding of movement and dance in the contexts of daily experiences.",
+      "description": "Drives like a train during the transition to the playground, imitating the trains that travel through the nearby railroad. Sways while hearing the \"the wipers on the bus, go swish, swish, swish\".",
+      "confidence": 0.9,
+      "source_page": 66,
+      "source_text": "d. Describes and communicates an understanding of movement and dance in the contexts of daily experiences.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S4",
+      "title": "DRAMATIC PLAY",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 67,
+      "source_text": "STRAND 4: DRAMATIC PLAY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S4C1",
+      "title": "Creates and Connects with Dramatic Activities",
+      "description": "The child uses the portrayal of events, characters, or stories through acting and using props and language to explore, create, and connect. Children use the richness of their daily activities to create pretend play, assuming different roles and characters. These experiences contribute to children's ability to self-regulate, communicate more effectively, and engage in cooperative activity with peers while practicing roles of others. When caregivers design environments for children to easily access relevant dramatic play tools and props, children can explore and understand the world around them creating a deeper comprehension of the relationships between objects, people, and events.",
+      "confidence": 0.9,
+      "source_page": 67,
+      "source_text": "Concept 1: Creates and Connects with Dramatic Activities",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1a",
+      "title": "Assumes roles from daily activities using a variety of props.",
+      "description": "Selects from a box of clothes a hat, jacket, and piece of rope and portrays a firefighter putting out a fire. Pretends to be a teacher and reads a book to the stuffed bear.",
+      "confidence": 0.9,
+      "source_page": 67,
+      "source_text": "a. Assumes roles from daily activities using a variety of props.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1b",
+      "title": "Takes on more than one dramatic play role at a time.",
+      "description": "Changes their voice while pretending to be a \"daddy\" and a \"baby.\" Says, \"I'll be the doctor and the nurse. You be the patient.\"",
+      "confidence": 0.9,
+      "source_page": 67,
+      "source_text": "b. Takes on more than one dramatic play role at a time.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1c",
+      "title": "Pretends an object exists without using a prop.",
+      "description": "Orders a \"cheese pizza\" and reaches into pocket for imaginary money to pay. Pretends to put on a hat and coat to go outside, during dramatic play.",
+      "confidence": 0.9,
+      "source_page": 67,
+      "source_text": "C. Pretends an object exists without using a prop.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1d",
+      "title": "Dramatizes familiar stories.",
+      "description": "Plays the wolf in The Three Little Pigs. Says, \"My grandfather told me a story about where the wind comes from. I'll be the wind.\"",
+      "confidence": 0.9,
+      "source_page": 67,
+      "source_text": "d. Dramatizes familiar stories.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1e",
+      "title": "Adds details and expresses original ideas in dramatic play situations.",
+      "description": "Adds their own ending to a story they read in the library center. Brings large blocks from the block center to the dramatic play center to construct the wings for the airplane for their \"trip to the Grand Canyon\".",
+      "confidence": 0.9,
+      "source_page": 67,
+      "source_text": "e. Adds details and expresses original ideas in dramatic play situations.",
+      "needs_review": false
+    }
+  ],
+  "review_count": 1,
+  "detection_timestamp": "2026-04-30T01:19:26.253272+00:00",
+  "source_extraction_key": ""
+}
