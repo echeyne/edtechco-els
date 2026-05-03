@@ -521,6 +521,7 @@ def call_bedrock_llm(
     max_retries: int = MAX_BEDROCK_RETRIES,
     metrics_context: Optional[Dict[str, Any]] = None,
     prefill: Optional[str] = None,
+    model_id: Optional[str] = None,
 ) -> str:
     """
     Call Amazon Bedrock LLM (Claude) with the given prompt.
@@ -552,15 +553,16 @@ def call_bedrock_llm(
     )
     request_body = _build_bedrock_request(prompt, prefill=prefill)
     ctx = metrics_context or {}
-    
-    logger.info(f"Calling Bedrock with model: {Config.BEDROCK_DETECTOR_LLM_MODEL_ID}")
+    effective_model_id = model_id or Config.BEDROCK_DETECTOR_LLM_MODEL_ID
+
+    logger.info(f"Calling Bedrock with model: {effective_model_id}")
     logger.debug(f"Prompt length: {len(prompt)} characters, ~{estimate_tokens(prompt)} tokens")
-    
+
     for attempt in range(max_retries + 1):
         try:
             with MetricsTimer() as timer:
                 response = bedrock.invoke_model(
-                    modelId=Config.BEDROCK_DETECTOR_LLM_MODEL_ID,
+                    modelId=effective_model_id,
                     body=json.dumps(request_body)
                 )
                 response_body = json.loads(response['body'].read())
@@ -575,7 +577,7 @@ def call_bedrock_llm(
             # Emit metrics
             call_metrics = LLMCallMetrics(
                 stage="detection",
-                model_id=Config.BEDROCK_DETECTOR_LLM_MODEL_ID,
+                model_id=effective_model_id,
                 input_tokens=usage["input_tokens"],
                 output_tokens=usage["output_tokens"],
                 latency_ms=timer.elapsed_ms,
@@ -608,7 +610,7 @@ def call_bedrock_llm(
                 # Emit error metrics
                 error_metrics = LLMCallMetrics(
                     stage="detection",
-                    model_id=Config.BEDROCK_DETECTOR_LLM_MODEL_ID,
+                    model_id=effective_model_id,
                     retry_count=attempt,
                     run_id=ctx.get("run_id", ""),
                     country=ctx.get("country", ""),
