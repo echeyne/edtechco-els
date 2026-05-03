@@ -1,0 +1,78 @@
+{
+  "$schema": "../golden_set.schema.json",
+  "state": "CO",
+  "country": "US",
+  "version_year": 2020,
+  "source_document": "Colorado Early Learning & Development Guidelines Ages 3-5.pdf",
+  "annotator": "TODO",
+  "annotation_date": "TODO",
+  "notes": "CO is a 3-level document: Domain → Strand → Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'.",
+
+  "expected_depth_map": {
+    "doc_depths": [
+      {"depth": 1, "canonical_level": "domain",    "label_in_doc": "Domain",    "prefix_pattern": "Title-Case Domain Name (in spread header)", "example": "Physical Development & Health"},
+      {"depth": 2, "canonical_level": "strand",    "label_in_doc": "Section",   "prefix_pattern": "N. <Title>: <description sentence>",         "example": "1. Relationships with Adults and Peers: The healthy relationships and interactions with adults and peers."},
+      {"depth": 3, "canonical_level": "indicator", "label_in_doc": "Indicator", "prefix_pattern": "N. <indicator sentence>",                    "example": "1. Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases."}
+    ]
+  },
+
+  "elements": [
+    {
+      "test_case_id": "CO-DOM-01",
+      "level": "domain",
+      "code": "PDH",
+      "title": "Physical Development & Health",
+      "description": "TODO — copy from page 3",
+      "source_page": 3,
+      "parent_code": null
+    },
+    {
+      "test_case_id": "CO-STR-01",
+      "level": "strand",
+      "code": "1",
+      "title": "Health, Safety and Nutrition",
+      "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+      "source_page": 4,
+      "parent_code": "PDH"
+    },
+    {
+      "test_case_id": "CO-IND-01",
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+      "description": "TODO",
+      "source_page": 4,
+      "parent_code": "1",
+      "domain_code": "PDH",
+      "strand_code": "1",
+      "sub_strand_code": null
+    },
+    {
+      "test_case_id": "CO-STR-SED",
+      "level": "strand",
+      "code": "RAP",
+      "title": "Relationships with Adults and Peers",
+      "description": "The healthy relationships and interactions with adults and peers.",
+      "source_page": 7,
+      "parent_code": "TODO"
+    }
+  ],
+
+  "regression_cases": [
+    {
+      "id": "CO-NO-SUB-STRAND",
+      "description": "CO has zero sub_strands. Every numbered section header (e.g. '1. Relationships ...') is a strand.",
+      "assertion": "the detected element list contains zero elements with level == 'sub_strand'."
+    },
+    {
+      "id": "CO-NUMERIC-STRANDS",
+      "description": "Numeric-prefixed section headers under a domain are strands, not sub_strands or indicators.",
+      "assertion": "every detected element whose source_text matches r'^\\d+\\.\\s+[A-Z].*:' has level == 'strand'."
+    },
+    {
+      "id": "CO-INDICATOR-PARENT-IS-STRAND",
+      "description": "Every indicator's parent in the parser output must be a strand (sub_strand_code is null).",
+      "assertion": "for every indicator in the parser output, sub_strand_code is null and strand_code is non-null."
+    }
+  ]
+}

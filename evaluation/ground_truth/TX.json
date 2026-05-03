@@ -1,0 +1,105 @@
+{
+  "$schema": "../golden_set.schema.json",
+  "state": "TX",
+  "country": "US",
+  "version_year": 2022,
+  "source_document": "Texas 2022 Prekindergarten Guidelines.pdf",
+  "annotator": "TODO",
+  "annotation_date": "TODO",
+  "notes": "TX uses a 4-level hierarchy: Domain (Roman numeral) → Strand (letter) → Sub-Strand (numeric) → Indicator. Indicators come in side-by-side PK3/PK4 columns — each column is a SEPARATE indicator with its own code (e.g. PK3.I.A.2 vs PK4.I.A.2).",
+  "expected_depth_map": {
+    "doc_depths": [
+      {
+        "depth": 1,
+        "canonical_level": "domain",
+        "label_in_doc": "Domain",
+        "prefix_pattern": "Roman.<Title>",
+        "example": "I. Social and Emotional Development"
+      },
+      {
+        "depth": 2,
+        "canonical_level": "strand",
+        "label_in_doc": "Skill area",
+        "prefix_pattern": "I.A. <Title>",
+        "example": "I.A. Self-Concept"
+      },
+      {
+        "depth": 3,
+        "canonical_level": "sub_strand",
+        "label_in_doc": "Skill",
+        "prefix_pattern": "I.A.<n> <Title>",
+        "example": "TODO"
+      },
+      {
+        "depth": 4,
+        "canonical_level": "indicator",
+        "label_in_doc": "Outcome",
+        "prefix_pattern": "PK[34].I.A.<n> <Outcome text>",
+        "example": "PK3.I.A.2 Child can identify own physical attributes ..."
+      }
+    ]
+  },
+  "elements": [
+    {
+      "test_case_id": "TX-DOM-01",
+      "level": "domain",
+      "code": "I",
+      "title": "Social and Emotional Development",
+      "description": "TODO",
+      "source_page": 9,
+      "parent_code": null
+    },
+    {
+      "test_case_id": "TX-STR-01",
+      "level": "strand",
+      "code": "I.A",
+      "title": "Self-Concept",
+      "description": "TODO",
+      "source_page": "TODO",
+      "parent_code": "I"
+    },
+    {
+      "test_case_id": "TX-IND-01-PK3",
+      "level": "indicator",
+      "code": "PK3.I.A.2",
+      "title": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+      "age_band": "PK3",
+      "description": "TODO",
+      "source_page": "TODO",
+      "parent_code": "TODO",
+      "domain_code": "I",
+      "strand_code": "I.A",
+      "sub_strand_code": "TODO"
+    },
+    {
+      "test_case_id": "TX-IND-01-PK4",
+      "level": "indicator",
+      "code": "PK4.I.A.2",
+      "title": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+      "age_band": "PK4",
+      "description": "TODO",
+      "source_page": "TODO",
+      "parent_code": "TODO",
+      "domain_code": "I",
+      "strand_code": "I.A",
+      "sub_strand_code": "TODO"
+    }
+  ],
+  "regression_cases": [
+    {
+      "id": "TX-PK3-PK4-DISTINCT",
+      "description": "PK3 and PK4 outcomes for the same skill row must each emit their own indicator.",
+      "assertion": "for every skill row, the detected output contains at least one indicator with code starting 'PK3.' AND at least one with code starting 'PK4.'."
+    },
+    {
+      "id": "TX-AGE-BAND-SET",
+      "description": "Age band must be populated for every indicator.",
+      "assertion": "every indicator has age_band in {'PK3', 'PK4'}."
+    },
+    {
+      "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+      "description": "The literal text 'PK3 Outcome' / 'PK4 Outcome' column headers must not be extracted as indicators.",
+      "assertion": "no indicator has title in {'PK3 Outcome', 'PK4 Outcome', 'PK3', 'PK4'}."
+    }
+  ]
+}
