@@ -1,0 +1,119 @@
+{
+  "$schema": "../golden_set.schema.json",
+  "state": "CA",
+  "country": "US",
+  "version_year": 2008,
+  "source_document": "CA Preschool Learning Foundations Vol 1.pdf",
+  "annotator": "TODO",
+  "annotation_date": "TODO",
+  "notes": "CA uses an explicit 4-level hierarchy: Domain → Strand → Sub-Strand → Foundation. Side-by-side age columns ('Early (3 to 4 ½ Years)' vs. 'Later (4 to 5 ½ Years)') MUST each become a separate indicator.",
+  "expected_depth_map": {
+    "doc_depths": [
+      {
+        "depth": 1,
+        "canonical_level": "domain",
+        "label_in_doc": "Domain",
+        "prefix_pattern": "ALL-CAPS DOMAIN NAME",
+        "example": "TODO"
+      },
+      {
+        "depth": 2,
+        "canonical_level": "strand",
+        "label_in_doc": "Strand",
+        "prefix_pattern": "Strand - <Title>",
+        "example": "TODO"
+      },
+      {
+        "depth": 3,
+        "canonical_level": "sub_strand",
+        "label_in_doc": "Sub-Strand",
+        "prefix_pattern": "Sub-Strand - <Title>",
+        "example": "TODO"
+      },
+      {
+        "depth": 4,
+        "canonical_level": "indicator",
+        "label_in_doc": "Foundation",
+        "prefix_pattern": "Foundation N.N <Title>",
+        "example": "Foundation 1.2 Initiative"
+      }
+    ]
+  },
+  "elements": [
+    {
+      "test_case_id": "CA-DOM-01",
+      "level": "domain",
+      "code": "TODO",
+      "title": "Social-Emotional Development",
+      "description": "TODO",
+      "source_page": "TODO",
+      "parent_code": null
+    },
+    {
+      "test_case_id": "CA-STR-01",
+      "level": "strand",
+      "code": "TODO",
+      "title": "Self",
+      "description": "TODO",
+      "source_page": "TODO",
+      "parent_code": "TODO"
+    },
+    {
+      "test_case_id": "CA-SUB-01",
+      "level": "sub_strand",
+      "code": "TODO",
+      "title": "Initiative",
+      "description": "TODO",
+      "source_page": 4,
+      "parent_code": "TODO"
+    },
+    {
+      "test_case_id": "CA-IND-01-EARLY",
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Initiative",
+      "age_band": "Early (3 to 4 ½ Years)",
+      "description": "TODO — copy verbatim Early-column prose for Foundation 1.2",
+      "source_page": 4,
+      "parent_code": "TODO",
+      "domain_code": "TODO",
+      "strand_code": "TODO",
+      "sub_strand_code": "TODO"
+    },
+    {
+      "test_case_id": "CA-IND-01-LATER",
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Initiative",
+      "age_band": "Later (4 to 5 ½ Years)",
+      "description": "TODO — copy verbatim Later-column prose for Foundation 1.2",
+      "source_page": 4,
+      "parent_code": "TODO",
+      "domain_code": "TODO",
+      "strand_code": "TODO",
+      "sub_strand_code": "TODO"
+    }
+  ],
+  "regression_cases": [
+    {
+      "id": "CA-AGE-COLUMNS-EMITTED",
+      "description": "Side-by-side Early/Later columns under any Foundation must each emit their own indicator. Same code, same title, different age_band, different description.",
+      "assertion": "for every Foundation N.N in the document, the detector output contains >= 2 indicators with that code, and the set of age_band values across them includes both 'Early (3 to 4 ½ Years)' and 'Later (4 to 5 ½ Years)'."
+    },
+    {
+      "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+      "description": "Age-band labels must never appear in the title field; they go to age_band.",
+      "assertion": "no detected indicator has a title containing 'Early (' or 'Later ('."
+    },
+    {
+      "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+      "description": "The 'a.', 'b.', 'c.' lettered examples beneath a Foundation are not indicators.",
+      "assertion": "no detected indicator's source_text starts with a lone single-letter prefix like 'a.', 'b.', 'c.' followed by an example fragment."
+    },
+    {
+      "id": "CA-FOUR-LEVEL-HIERARCHY",
+      "description": "Every indicator must trace back through sub_strand → strand → domain.",
+      "assertion": "for every indicator, sub_strand_code, strand_code, and domain_code in the parser output are non-null and resolve to existing elements."
+    }
+  ]
+}

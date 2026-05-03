@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "golden_set.schema.json",
+  "title": "ELS Detector Golden Set",
+  "description": "Per-state golden set used by evaluation/eval_suite.py to grade the detector. Each file is a hand-annotated picture of what the detector SHOULD produce for one source document.",
+  "type": "object",
+  "required": [
+    "state",
+    "country",
+    "version_year",
+    "elements",
+    "regression_cases"
+  ],
+  "properties": {
+    "state": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "country": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "version_year": {
+      "type": "integer"
+    },
+    "source_document": {
+      "type": "string"
+    },
+    "annotator": {
+      "type": "string"
+    },
+    "annotation_date": {
+      "type": "string",
+      "description": "YYYY-MM-DD"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-form context for annotators / future readers."
+    },
+    "expected_depth_map": {
+      "type": "object",
+      "description": "What infer_depth_map SHOULD return for this document. Used to grade Pass-1.",
+      "required": [
+        "doc_depths"
+      ],
+      "properties": {
+        "doc_depths": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "depth",
+              "canonical_level"
+            ],
+            "properties": {
+              "depth": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "canonical_level": {
+                "enum": [
+                  "domain",
+                  "strand",
+                  "sub_strand",
+                  "indicator"
+                ]
+              },
+              "label_in_doc": {
+                "type": "string"
+              },
+              "prefix_pattern": {
+                "type": "string"
+              },
+              "example": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "elements": {
+      "type": "array",
+      "description": "Hand-annotated structural elements. Use as many as needed to cover the document; even a few-dozen-per-state is enough to detect regressions.",
+      "items": {
+        "type": "object",
+        "required": [
+          "test_case_id",
+          "level",
+          "title"
+        ],
+        "properties": {
+          "test_case_id": {
+            "type": "string",
+            "description": "Stable identifier, e.g. CA-IND-01-EARLY. Used so failure messages reference a specific row."
+          },
+          "level": {
+            "enum": [
+              "domain",
+              "strand",
+              "sub_strand",
+              "indicator"
+            ]
+          },
+          "code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "age_band": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Required for indicators that come from age-band columns; null otherwise."
+          },
+          "source_page": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "description": "Page number, or 'TODO' while annotating."
+          },
+          "parent_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "domain_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "strand_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sub_strand_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "regression_cases": {
+      "type": "array",
+      "description": "Behavioural assertions targeted at known failure modes. Each case is checked by eval_suite.py against the live detector output and reported pass/fail. Keep them assertion-style: a sentence the eval can mechanically verify.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "description",
+          "assertion"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "e.g. CA-AGE-COLUMNS-EMITTED"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable reason for this case (links to a real bug if applicable)."
+          },
+          "assertion": {
+            "type": "string",
+            "description": "Plain-English assertion. The matching check function lives in evaluation/regression_checks.py keyed by id."
+          }
+        }
+      }
+    }
+  }
+}

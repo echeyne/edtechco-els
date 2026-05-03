@@ -119,131 +119,196 @@ def chunk_text_blocks(
 
 
 
-def build_detection_prompt(blocks: List[TextBlock]) -> str:
+DEPTH_MAP_SAMPLE_TOKENS = 6000
+
+
+def build_depth_map_prompt(blocks: List[TextBlock]) -> str:
     """
-    Build a structured prompt for the LLM to detect hierarchy elements.
+    Build the Pass-1 prompt that asks the LLM to infer the document's
+    structural hierarchy *before* we ask it to classify individual elements.
 
-    The prompt is designed to extract educational standards hierarchy from
-    early learning standards documents, identifying domains, strands,
-    sub_strands, and indicators with their associated metadata.
-
-    Args:
-        blocks: List of text blocks to analyze
-
-    Returns:
-        Formatted prompt string optimized for Claude Sonnet 4.5
+    The output is a depth_map: a list of nesting depths (1..N) with the
+    label/prefix pattern used at that depth and one concrete example. This
+    map is then injected into the per-chunk extraction prompt so the model
+    classifies by document-specific position rather than by guessing from
+    surface cues like "1." vs "A.".
     """
-    # Combine text blocks with page numbers for context
-    text_content = "\n".join([
-        f"[Page {block.page_number}] {block.text}"
-        for block in blocks
-    ])
+    text_content = "\n".join(
+        f"[Page {b.page_number}] {b.text}" for b in blocks
+    )
 
-    prompt = f"""You are extracting the hierarchical structure from an early learning standards document. Your job is to identify every structural element and classify it into the correct hierarchy level.
+    return f"""You are analyzing the structural skeleton of an early learning standards document. You will NOT extract individual elements — only the document's nesting hierarchy.
 
-STRICT RULE: You must use ONLY the exact titles, codes (as applicable), numbers, and names that appear in the document text. Do NOT invent any titles. If a code does not exist in the document, generate a short uppercase abbreviation from the title (e.g. "Physical Development" → "PHD", "Social Emotional" → "SE"). Use at most 5 characters. Be consistent: if you assign a code to an element, use that EXACT same code every time that element appears.
+Read the sample below and identify how many distinct nesting depths the document uses, what each depth looks like (its prefix/label pattern), and one concrete example. The DEEPEST depth is always the leaf (individual learning goals/foundations/benchmarks).
 
-HIERARCHY LEVELS (from highest to lowest):
-Our normalized hierarchy has exactly four levels. Every document must be mapped into these four levels:
-1. "domain" — The broadest category (nesting depth 1). The top-level developmental areas that contain everything else.
-2. "strand" — The second level of grouping (nesting depth 2). A grouping that sits directly under a domain and contains sub_strands or indicators beneath it.
-3. "sub_strand" — The third level (nesting depth 3). A grouping that sits under a strand (or directly under a domain if no strand exists) and contains indicators beneath it.
-4. "indicator" — The leaf level (nesting depth 4, or the deepest level present). Individual learning goals, foundations, benchmarks, or skill statements. These describe what a child should know or be able to do. They do NOT contain other structural elements beneath them. IMPORTANT: An indicator is the learning goal statement itself (e.g., "The child demonstrates an awareness of self."), NOT the lettered/bulleted examples or observable behaviors listed beneath it. Those examples illustrate the indicator but are not separate indicators.
+This document's depths must then be mapped to a canonical 4-level hierarchy:
+- depth 1 → "domain"
+- depth 2 → "strand" (skip if the document has no level between domain and the groups that hold indicators)
+- depth 3 → "sub_strand" (skip if absent)
+- deepest depth → "indicator"
 
-CRITICAL — CLASSIFY BY NESTING DEPTH, NOT BY DOCUMENT LABELS:
-Different states use different terminology. A document may call something a "Sub-Strand" but if it sits at the second nesting level (directly under a domain, with further groupings beneath it), it is a STRAND in our hierarchy. Similarly, a document may call something a "Topic" but if it is the third nesting level, it is a SUB_STRAND.
+Rules:
+- A 3-level document (domain > group > leaf) maps to: domain, sub_strand, indicator. There is NO strand.
+- A 2-level document (domain > leaf) maps to: domain, indicator.
+- Use depth POSITION, not the document's labels. If a document uses "Sub-Strand" as the label for the second level (directly under domain), it is still a STRAND in our canonical hierarchy.
 
-Follow this process:
-1. FIRST, read the entire text and identify the document's own structural hierarchy. Map out how many nesting levels exist and what sits under what.
-2. THEN, map each nesting level to our four-level hierarchy based on POSITION, not labels:
-   - The topmost grouping (the broadest category that contains everything else) → "domain"
-   - The next level down (groups that sit directly inside a domain and contain further sub-groups or indicators) → "strand"
-   - The next level down (groups that contain indicators) → "sub_strand"
-   - The leaf-level items (specific learning statements, foundations, benchmarks, skills) → "indicator"
-3. If the document only has 3 nesting levels (no intermediate grouping between domain and the groups that hold indicators), then there are no strands — map the groups directly under the domain as "sub_strand" and their children as "indicator".
-4. If the document has 4+ nesting levels, collapse the deeper levels as needed so everything fits into our four-level model.
+Be deterministic and conservative. Do not speculate. If you cannot tell whether two depths are distinct, assume they are the same depth.
 
-CRITICAL — INDICATORS vs. EXAMPLES/EVIDENCE:
-Many early learning standards documents list "Indicators and Examples" or "Examples in the Context of Daily Routines, Activities, and Play" beneath a learning goal statement. These lettered or bulleted items (e.g., "a. Demonstrates self-confidence", "b. Makes personal preferences known to others") are NOT separate indicators. They are illustrative examples or observable behaviors that help teachers recognize the indicator in practice.
+Output ONLY a JSON object with this exact shape:
+{{
+  "doc_depths": [
+    {{"depth": 1, "canonical_level": "domain",     "label_in_doc": "<what the doc calls this>", "prefix_pattern": "<regex-ish pattern e.g. 'ALL-CAPS HEADING' or 'N. <Title>: <desc>'>", "example": "<exact text from doc>"}},
+    {{"depth": 2, "canonical_level": "strand|sub_strand|indicator", ...}}
+  ],
+  "notes": "<one short sentence about anything unusual, e.g. age-band columns, sidebars to ignore>"
+}}
 
-The actual INDICATOR is the overarching learning goal statement that appears ABOVE these examples, such as "The child demonstrates an awareness of self." The description paragraph that follows it (e.g., "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.") is the indicator's description.
-
-When you encounter this pattern:
-- The learning goal statement (e.g., "The child demonstrates an awareness of self.") → this is the INDICATOR title
-- The explanatory paragraph below it → this is the INDICATOR description
-- The lettered/bulleted examples beneath (a, b, c, d, e...) with their sub-bullets → these are NOT separate indicators. Do NOT extract them as indicators. They are supporting examples and should be IGNORED as structural elements. You may optionally include them as part of the indicator's description text, but they must NOT be emitted as their own elements.
-
-Similarly, sections labeled "Indicators and Examples in the Context of Daily Routines, Activities, and Play" are section headers for the examples area — they are NOT indicators themselves.
-
-EXAMPLES OF LABEL-TO-LEVEL MAPPING (these are illustrative, not exhaustive):
-- A document labels top sections as "Domains" and has "Strands" under them, with "Sub-Strands" under those, and "Foundations" at the bottom:
-  → Domain = domain, Strand = strand, Sub-Strand = sub_strand, Foundation = indicator
-- A document labels top sections as "Areas" with "Goals" under them and "Objectives" under those:
-  → Area = domain, Goal = strand, Objective = indicator (no sub_strand)
-- A document labels top sections as "Domains" with "Standards" directly containing "Indicators":
-  → Domain = domain, Standard = sub_strand (no strand), Indicator = indicator
-- A document has a developmental area (e.g., "Social Emotional Development"), then "Strands" (e.g., "Self-Awareness and Emotional Skills"), then "Concepts" (e.g., "Self-Awareness"), then a learning goal statement (e.g., "The child demonstrates an awareness of self.") followed by lettered examples (a, b, c...):
-  → Developmental area = domain, Strand = strand, Concept = sub_strand, Learning goal statement = indicator. The lettered examples are NOT indicators — they are illustrative examples and should be excluded or folded into the indicator description.
-
-CRITICAL — SIDE-BY-SIDE AGE-GROUP OUTCOMES ARE SEPARATE INDICATORS:
-Some documents present outcomes for different age groups (e.g., PK3 and PK4, "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "By 36 months", "By 48 months") in side-by-side table columns. Each column represents a DISTINCT indicator and MUST be extracted as its own separate element. Do NOT merge them into a single indicator.
-
-For example, if you see a table with a "PK3 Outcome" column and a "PK4 Outcome" column:
-- "PK3.I.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted." → one indicator with code "PK3.I.A.2"
-- "PK4.I.A.2 Child shows self-awareness of physical attributes, personal preferences, and own abilities." → a SEPARATE indicator with code "PK4.I.A.2"
-
-These are NOT the same indicator. They have different codes, different titles, and different descriptions. The fact that they appear on the same row or page does not make them one element. Always emit one JSON object per age-group outcome.
-
-FIELD INSTRUCTIONS:
-- "level": One of "domain", "strand", "sub_strand", or "indicator".
-- "code": The code or number from the document (e.g., "1.0", "1.1", "ATL"). If the document does not assign a code, generate a short uppercase abbreviation from the title (max 5 characters, e.g. "Physical Development" → "PHD"). Do NOT use the full title or a camelCase version of the title as the code.
-- "title": The exact title as written in the document. Only shorten it if it has redundent leading/trailing text like "STRAND" or "DOMAIN". IMPORTANT: Strip age-band pre-text labels from indicator titles. Remove prefixes like "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "By 36 months", "By 48 months", "Younger Toddler", "Older Toddler", "PK3", "PK4", etc. The title should be the actual name of the indicator, not the age-band label. For example, if the document shows "Early (3 to 4 ½ Years)" as a label above the indicator text "Curiosity and Interest", the title should be "Curiosity and Interest", NOT "Early (3 to 4 ½ Years)". The age-band information should go into the age_band field instead.
-- "description": The full descriptive text associated with this element, including any age-band details. Combine all age-specific text into one description. If there is no description beyond the title, use an empty string "".
-- "confidence": A float between 0.0 and 1.0 reflecting how certain you are about the classification:
-  - 0.95+ : Nesting position is unambiguous and the element clearly maps to this level.
-  - 0.85-0.94 : Nesting position is clear but the document's labeling is somewhat ambiguous.
-  - 0.70-0.84 : The nesting structure has some ambiguity (e.g., unclear if a level should be strand or sub_strand).
-  - Below 0.70 : Uncertain classification.
-- "source_page": The page number from the [Page N] marker where this element appears.
-- "source_text": The exact text from the document that you used to identify this element. Copy it verbatim.
-
-OUTPUT FORMAT — Return ONLY a JSON array. No text before or after it.
-[
-  {{
-    "level": "domain|strand|sub_strand|indicator",
-    "code": "exact code from document or empty string",
-    "title": "exact title from document",
-    "description": "full description from document including age-specific details",
-    "confidence": 0.95,
-    "source_page": 1,
-    "source_text": "exact text copied from document"
-  }}
-]
-
-CRITICAL — ELEMENTS THAT SPAN PAGE BOUNDARIES:
-Documents are chunked for processing, so you may see structural elements whose children appear in a DIFFERENT chunk. This is normal and expected. You MUST still extract these elements. Specifically:
-- If you see a strand or sub_strand header (e.g., "C. Relationships with Others") with a description paragraph but NO indicators beneath it in this text, extract it anyway. Its indicators will appear in a later chunk.
-- If you see indicators that appear to belong to a strand/sub_strand not shown in this text, extract the indicators. The parent element was in a previous chunk.
-- Do NOT skip an element just because it has no children visible in the current text. Every heading, section title, or structural marker must be extracted regardless of whether its children are present.
-
-CRITICAL — RECOGNIZING LESS OBVIOUS HIERARCHY MARKERS:
-Not all structural elements are formatted with bold headings or numbered lists. Watch for these patterns:
-- A lettered section (e.g., "A. Self-Concept", "B. Self-Regulation", "C. Relationships with Others") followed by a descriptive paragraph is a structural element, even if it appears at the very end of the text with nothing after it.
-- A numbered sub-section (e.g., "1. Behavior Control", "2. Emotional Control") under a lettered section is also a structural element.
-- Section headers may appear in different visual styles: bold, colored, larger font, or simply as a line starting with a letter/number prefix. The text extraction may not preserve formatting, so rely on the alphanumeric prefix pattern (A., B., C., 1., 2., 3.) and the presence of a descriptive paragraph to identify structural elements.
-- A standalone line that looks like a title (short, no period at the end, followed by a longer descriptive paragraph) is likely a structural element even without an explicit letter/number prefix.
-
-FINAL REMINDERS:
-- Return ONLY the JSON array. No markdown, no explanation, no commentary.
-- Extract EVERY structural element you find. Do not skip any — even if it appears at the very end of the text with no children visible.
-- Use the page numbers from the [Page N] markers in the text.
-- Remember: classify by NESTING DEPTH in the document, NOT by what the document calls each level.
-
-TEXT TO ANALYZE:
+DOCUMENT SAMPLE:
 
 {text_content}"""
 
-    return prompt
+
+def build_detection_prompt(
+    blocks: List[TextBlock],
+    depth_map: Optional[Dict[str, Any]] = None,
+) -> str:
+    """
+    Build the Pass-2 per-chunk extraction prompt.
+
+    If `depth_map` is provided (from build_depth_map_prompt + LLM), it is
+    injected into the prompt so the model classifies by document-specific
+    nesting depth rather than by re-inferring the hierarchy on every chunk.
+    Pass `None` only for backwards compatibility / tests.
+    """
+    text_content = "\n".join(
+        f"[Page {b.page_number}] {b.text}" for b in blocks
+    )
+
+    depth_map_block = (
+        f"DEPTH MAP (authoritative — use this to assign `level`):\n"
+        f"{json.dumps(depth_map, indent=2)}\n"
+        if depth_map else
+        "DEPTH MAP: not provided — infer the canonical level from nesting position, "
+        "not from prefixes or labels.\n"
+    )
+
+    return f"""You extract structural elements from an early learning standards document chunk.
+
+Be deterministic. Be conservative. Do not be creative. Two runs over the same text MUST produce the same JSON. Do not invent titles, codes, or descriptions — only use text that literally appears in the chunk.
+
+CANONICAL HIERARCHY: domain (1) > strand (2) > sub_strand (3) > indicator (leaf). A document may skip strand or sub_strand; the depth map says which levels exist.
+
+CLASSIFICATION RULE:
+- If a depth map is provided, look up each element's depth in the document and use the `canonical_level` from that depth. Do NOT reclassify based on prefix style.
+- If no depth map is provided, classify by nesting POSITION, never by what the document calls a level.
+
+EXTRACTION RULES:
+1. Emit every structural element you see, even if its children are not in this chunk.
+2. Lettered/bulleted examples under an indicator (a., b., c., …) are NOT separate indicators — fold into the indicator's description or ignore.
+3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`.
+4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title (e.g. "Physical Development" → "PHD"). Use the SAME code every time the same element appears.
+5. `confidence`: 0.95+ if the depth map clearly applies; 0.80–0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
+6. `source_page`: page number from the [Page N] marker on that line.
+7. `source_text`: the exact line(s) from the chunk you used. Copy verbatim.
+
+NEGATIVE EXAMPLES (do NOT do these):
+- Do not emit "Indicators and Examples in the Context of Daily Routines" as a structural element. It is a section header for examples.
+- Do not merge "Early" and "Later" age columns into one indicator.
+- Do not classify a numeric prefix ("1.", "2.") as `sub_strand` just because numeric-under-letter is sub_strand in some other doc — use the depth map.
+
+OUTPUT — return ONLY a JSON array, starting with `[` and ending with `]`. No prose, no markdown, no commentary. Schema per element:
+{{"level": "domain|strand|sub_strand|indicator", "code": "...", "title": "...", "description": "...", "age_band": "..." or null, "confidence": 0.0-1.0, "source_page": N, "source_text": "..."}}
+
+{depth_map_block}
+DOCUMENT CHUNK:
+
+{text_content}"""
+
+
+def _sample_blocks_for_depth_map(
+    blocks: List[TextBlock],
+    target_tokens: int = DEPTH_MAP_SAMPLE_TOKENS,
+) -> List[TextBlock]:
+    """Sample evenly across the document so depth_map sees structure from
+    beginning, middle, and end (TOC pages, body, appendix all differ)."""
+    if not blocks:
+        return []
+    total_tokens = sum(estimate_tokens(b.text) for b in blocks)
+    if total_tokens <= target_tokens:
+        return blocks
+    # Take a contiguous middle slice — mid-document is usually the cleanest
+    # repeat of the structural pattern (TOC and appendices are noisy).
+    stride = max(1, total_tokens // target_tokens)
+    sampled, tokens = [], 0
+    for i, b in enumerate(blocks):
+        if i % stride == 0:
+            sampled.append(b)
+            tokens += estimate_tokens(b.text)
+            if tokens >= target_tokens:
+                break
+    return sampled
+
+
+def infer_depth_map(
+    blocks: List[TextBlock],
+    metrics_context: Optional[Dict[str, Any]] = None,
+) -> Optional[Dict[str, Any]]:
+    """
+    Pass 1: ask the LLM to describe the document's nesting hierarchy.
+
+    Returns the parsed depth_map dict, or None on failure (caller should
+    fall back to no-depth-map mode rather than aborting detection).
+    """
+    sample = _sample_blocks_for_depth_map(blocks)
+    if not sample:
+        return None
+
+    prompt = build_depth_map_prompt(sample)
+    logger.info(
+        f"Inferring depth map from {len(sample)} sampled blocks "
+        f"(~{sum(estimate_tokens(b.text) for b in sample)} tokens)"
+    )
+
+    try:
+        # Pass 1 is structural-summary work — run it on the lighter model
+        # (Haiku by default) so we don't burn the Opus token-rate budget
+        # before the per-chunk extraction pass even starts.
+        response_text = call_bedrock_llm(
+            prompt,
+            metrics_context=metrics_context,
+            model_id=Config.BEDROCK_DEPTH_MAP_LLM_MODEL_ID,
+        )
+    except Exception as e:
+        logger.warning(f"Depth-map inference failed at Bedrock call: {e}")
+        return None
+
+    # The response is a single JSON OBJECT, not an array.
+    text = response_text.strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        text = "\n".join(l for l in lines[1:] if not l.strip().startswith("```")).strip()
+    start = text.find("{")
+    end = text.rfind("}")
+    if start == -1 or end == -1 or start >= end:
+        logger.warning(f"Depth-map response was not a JSON object: {text[:300]}")
+        return None
+    try:
+        depth_map = json.loads(text[start : end + 1])
+    except json.JSONDecodeError as e:
+        logger.warning(f"Depth-map JSON parse failed: {e}")
+        return None
+
+    if not isinstance(depth_map, dict) or "doc_depths" not in depth_map:
+        logger.warning(f"Depth-map missing required key 'doc_depths': {depth_map}")
+        return None
+
+    logger.info(f"Depth map inferred: {len(depth_map['doc_depths'])} levels")
+    for d in depth_map["doc_depths"]:
+        logger.info(
+            f"  depth={d.get('depth')} → {d.get('canonical_level')} "
+            f"(pattern: {d.get('prefix_pattern')!r})"
+        )
+    return depth_map
 
 
 
@@ -334,6 +399,10 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
     # Determine needs_review based on confidence threshold
     needs_review = confidence < Config.CONFIDENCE_THRESHOLD
     
+    age_band = elem_data.get('age_band')
+    if isinstance(age_band, str) and not age_band.strip():
+        age_band = None
+
     return DetectedElement(
         level=level,
         code=elem_data['code'],
@@ -342,7 +411,8 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
         confidence=confidence,
         source_page=elem_data.get('source_page', default_page),
         source_text=elem_data['source_text'],
-        needs_review=needs_review
+        needs_review=needs_review,
+        age_band=age_band,
     )
 
 
@@ -405,25 +475,25 @@ def parse_llm_response(response_text: str, blocks: List[TextBlock]) -> List[Dete
     return detected_elements
 
 
-def _build_bedrock_request(prompt: str) -> Dict[str, Any]:
+def _build_bedrock_request(
+    prompt: str,
+    prefill: Optional[str] = None,
+) -> Dict[str, Any]:
     """
     Build request body for Bedrock Claude API.
-    
-    Args:
-        prompt: The prompt to send to the LLM
-        
-    Returns:
-        Request body dictionary
+
+    `prefill` is appended as an assistant message — Claude continues from it
+    verbatim, which is the most reliable way to force a structured-output
+    format (e.g. `[` to force a JSON array) on Opus 4.7 where we cannot
+    set `temperature`.
     """
+    messages: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
+    if prefill:
+        messages.append({"role": "assistant", "content": prefill})
     return {
         "anthropic_version": "bedrock-2023-05-31",
         "max_tokens": LLM_MAX_TOKENS,
-        "messages": [
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
+        "messages": messages,
     }
 
 
@@ -450,6 +520,7 @@ def call_bedrock_llm(
     prompt: str,
     max_retries: int = MAX_BEDROCK_RETRIES,
     metrics_context: Optional[Dict[str, Any]] = None,
+    prefill: Optional[str] = None,
 ) -> str:
     """
     Call Amazon Bedrock LLM (Claude) with the given prompt.
@@ -479,7 +550,7 @@ def call_bedrock_llm(
             retries={"max_attempts": 0}  # We handle retries ourselves
         )
     )
-    request_body = _build_bedrock_request(prompt)
+    request_body = _build_bedrock_request(prompt, prefill=prefill)
     ctx = metrics_context or {}
     
     logger.info(f"Calling Bedrock with model: {Config.BEDROCK_DETECTOR_LLM_MODEL_ID}")
@@ -495,6 +566,10 @@ def call_bedrock_llm(
                 response_body = json.loads(response['body'].read())
             
             response_text = _extract_text_from_bedrock_response(response_body)
+            # Bedrock returns only Claude's continuation; if we prefilled,
+            # re-prepend it so downstream parsing sees a complete document.
+            if prefill:
+                response_text = prefill + response_text
             usage = extract_usage_from_response(response_body)
             
             # Emit metrics
@@ -556,9 +631,10 @@ def call_bedrock_llm(
 
 
 def _process_chunk(
-    chunk: List[TextBlock], 
-    chunk_idx: int, 
-    total_chunks: int
+    chunk: List[TextBlock],
+    chunk_idx: int,
+    total_chunks: int,
+    depth_map: Optional[Dict[str, Any]] = None,
 ) -> List[DetectedElement]:
     """
     Process a single chunk of text blocks through the LLM.
@@ -579,13 +655,14 @@ def _process_chunk(
     )
     
     # Build prompt for this chunk
-    prompt = build_detection_prompt(chunk)
-    
+    prompt = build_detection_prompt(chunk, depth_map=depth_map)
+
     # Try to parse LLM response with retries
     for parse_attempt in range(MAX_PARSE_RETRIES + 1):
         try:
-            # Call Bedrock
-            response_text = call_bedrock_llm(prompt)
+            # Call Bedrock; prefill `[` to force a JSON-array response since
+            # Opus 4.7 doesn't support temperature.
+            response_text = call_bedrock_llm(prompt, prefill="[")
             
             # Parse response
             elements = parse_llm_response(response_text, chunk)
@@ -653,18 +730,28 @@ def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> Dete
         )
     
     try:
-        # Chunk the text blocks
+        # Pass 1: infer the document's nesting hierarchy. We pass it into
+        # every per-chunk extraction so the model classifies by document
+        # depth rather than re-guessing on each chunk.
+        depth_map = infer_depth_map(blocks)
+        if depth_map is None:
+            logger.warning(
+                "Depth-map inference failed; falling back to no-depth-map mode"
+            )
+
+        # Pass 2: chunk and extract.
         chunks = chunk_text_blocks(blocks)
         logger.info(
             f"Created {len(chunks)} chunks from {len(blocks)} text blocks "
             f"(target: {DEFAULT_TARGET_TOKENS} tokens, overlap: {DEFAULT_OVERLAP_TOKENS} tokens)"
         )
-        
+
         all_elements = []
-        
-        # Process each chunk
+
         for chunk_idx, chunk in enumerate(chunks):
-            chunk_elements = _process_chunk(chunk, chunk_idx, len(chunks))
+            chunk_elements = _process_chunk(
+                chunk, chunk_idx, len(chunks), depth_map=depth_map
+            )
             all_elements.extend(chunk_elements)
             
             logger.info(

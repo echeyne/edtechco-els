@@ -16,6 +16,11 @@ class Config:
     BEDROCK_DETECTOR_LLM_MODEL_ID = os.getenv("BEDROCK_DETECTOR_LLM_MODEL_ID", "us.anthropic.claude-opus-4-7")
     BEDROCK_PARSER_LLM_MODEL_ID = os.getenv("BEDROCK_PARSER_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
     BEDROCK_EMBEDDING_MODEL_ID = os.getenv("BEDROCK_EMBEDDING_MODEL_ID", "amazon.titan-embed-text-v1")
+    # Pass-1 (depth-map inference) is structural-summary work — Haiku is plenty
+    # and avoids the Opus token-rate ceiling that throttles back-to-back calls.
+    BEDROCK_DEPTH_MAP_LLM_MODEL_ID = os.getenv(
+        "BEDROCK_DEPTH_MAP_LLM_MODEL_ID", "us.anthropic.claude-haiku-4-5"
+    )
     
     # Confidence Threshold
     CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.5"))

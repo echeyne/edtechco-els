@@ -72,6 +72,10 @@ class DetectedElement(BaseModel):
     source_page: int = Field(gt=0)
     source_text: str
     needs_review: bool
+    # Populated for indicators that come from age-banded columns (e.g.
+    # "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). None for
+    # non-age-banded elements.
+    age_band: Optional[str] = None
     
     @field_validator('needs_review')
     @classmethod
