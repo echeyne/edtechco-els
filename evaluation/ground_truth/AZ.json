@@ -1,0 +1,100 @@
+{
+  "$schema": "../golden_set.schema.json",
+  "state": "AZ",
+  "country": "US",
+  "version_year": 2018,
+  "source_document": "Arizona Early Learning Standards",
+  "annotator": "Emily Cheyne",
+  "annotation_date": "05/03/2026",
+  "notes": "AZ uses 'Standard → Strand → Concept → Indicator'. Map Standard → domain, Strand → strand, Concept → sub_strand, Indicator (the learning-goal sentence, NOT the lettered 'a./b./c.' examples beneath it) → indicator. No age-band columns.",
+  "expected_depth_map": {
+    "doc_depths": [
+      {
+        "depth": 1,
+        "canonical_level": "domain",
+        "label_in_doc": "Standard",
+        "prefix_pattern": "ALL-CAPS STANDARD NAME",
+        "example": "SOCIAL EMOTIONAL STANDARD"
+      },
+      {
+        "depth": 2,
+        "canonical_level": "strand",
+        "label_in_doc": "Strand",
+        "prefix_pattern": "Strand N: <Title>",
+        "example": "Strand 1: Self-Awareness and Emotional Skills"
+      },
+      {
+        "depth": 3,
+        "canonical_level": "sub_strand",
+        "label_in_doc": "Concept",
+        "prefix_pattern": "Concept N: <Title>",
+        "example": "Concept 1: Self-Awareness"
+      },
+      {
+        "depth": 4,
+        "canonical_level": "indicator",
+        "label_in_doc": "Indicator",
+        "prefix_pattern": "<Learning-goal sentence ending in .>",
+        "example": "The child demonstrates an awareness of self."
+      }
+    ]
+  },
+  "elements": [
+    {
+      "test_case_id": "AZ-DOM-SE",
+      "level": "domain",
+      "code": "SE",
+      "title": "Social Emotional Standard",
+      "description": "Established social-emotional skills have a significant, positive impact on a child’s learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "source_page": 4,
+      "parent_code": null
+    },
+    {
+      "test_case_id": "AZ-STR-SE-1",
+      "level": "strand",
+      "code": "1",
+      "title": "Self-Awareness and Emotional Skills",
+      "description": null,
+      "source_page": 6,
+      "parent_code": "SE"
+    },
+    {
+      "test_case_id": "AZ-SUB-SE-1-1",
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Self-Awareness",
+      "description": null,
+      "source_page": "TODO",
+      "parent_code": "1"
+    },
+    {
+      "test_case_id": "AZ-IND-SE-1-1-1",
+      "level": "indicator",
+      "code": "SE.1.1.1",
+      "title": "The child demonstrates an awareness of self.",
+      "description": "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "source_page": 6,
+      "parent_code": "1",
+      "domain_code": "SE",
+      "strand_code": "1",
+      "sub_strand_code": "1"
+    }
+  ],
+  "regression_cases": [
+    {
+      "id": "AZ-NO-LETTERED-EXAMPLES",
+      "description": "Lettered ('a.', 'b.', 'c.') items beneath an indicator are examples, NOT separate indicators.",
+      "assertion": "no detected indicator's source_text matches r'^\\s*[a-z]\\.\\s' (single lowercase letter followed by '. ')."
+    },
+    {
+      "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+      "description": "Section headers like 'Indicators and Examples in the Context of Daily Routines, Activities, and Play' must not be emitted as structural elements.",
+      "assertion": "no detected element has title containing 'Indicators and Examples in the Context'."
+    },
+    {
+      "id": "AZ-FOUR-LEVEL-HIERARCHY",
+      "description": "AZ uses all four levels.",
+      "assertion": "the set of distinct levels in the detected output equals {'domain','strand','sub_strand','indicator'}."
+    }
+  ]
+}

@@ -15,6 +15,7 @@ from .detector import (
     build_detection_prompt,
     call_bedrock_llm,
     parse_llm_response,
+    infer_depth_map,
     MAX_PARSE_RETRIES,
 )
 from .models import (
@@ -74,6 +75,19 @@ def prepare_detection_batches(event: Dict[str, Any], context: Any) -> Dict[str, 
     # Convert to TextBlock instances
     blocks = [TextBlock(**b) for b in blocks_data]
 
+    # Pass 1: infer depth map ONCE for the whole document and persist it,
+    # so every batch sees the same canonical hierarchy.
+    metrics_ctx = {
+        "run_id": run_id, "country": country, "state": state,
+    }
+    depth_map = infer_depth_map(blocks, metrics_context=metrics_ctx)
+    depth_map_key = construct_intermediate_key(
+        country, state, version_year, "detection/depth_map", run_id,
+    )
+    save_json_to_s3(depth_map or {}, Config.S3_PROCESSED_BUCKET, depth_map_key)
+    if depth_map is None:
+        logger.warning("Depth-map inference failed; batches will run without it")
+
     # Chunk text blocks using existing function
     chunks = chunk_text_blocks(blocks)
     max_per_batch = Config.MAX_CHUNKS_PER_BATCH
@@ -102,6 +116,7 @@ def prepare_detection_batches(event: Dict[str, Any], context: Any) -> Dict[str, 
             "state": state,
             "version_year": version_year,
             "run_id": run_id,
+            "depth_map_key": depth_map_key,
         })
     else:
         for i in range(0, len(chunks), max_per_batch):
@@ -132,6 +147,7 @@ def prepare_detection_batches(event: Dict[str, Any], context: Any) -> Dict[str, 
                 "state": state,
                 "version_year": version_year,
                 "run_id": run_id,
+                "depth_map_key": depth_map_key,
             })
 
     # Build and save manifest
@@ -188,6 +204,17 @@ def detect_batch(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     batch_data = load_json_from_s3(Config.S3_PROCESSED_BUCKET, event["batch_key"])
     blocks = [TextBlock(**b) for b in batch_data.get("blocks", [])]
 
+    # Load the depth map produced once at preparation time. Empty dict means
+    # the Pass-1 inference failed; we fall back to no-depth-map mode.
+    depth_map: Any = None
+    depth_map_key = event.get("depth_map_key")
+    if depth_map_key:
+        try:
+            loaded = load_json_from_s3(Config.S3_PROCESSED_BUCKET, depth_map_key)
+            depth_map = loaded if loaded else None
+        except Exception as e:
+            logger.warning(f"Failed to load depth_map from {depth_map_key}: {e}")
+
     # Re-chunk the batch blocks
     chunks = chunk_text_blocks(blocks)
 
@@ -195,11 +222,11 @@ def detect_batch(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     errors = []
 
     for chunk_idx, chunk in enumerate(chunks):
-        prompt = build_detection_prompt(chunk)
+        prompt = build_detection_prompt(chunk, depth_map=depth_map)
         success = False
         for attempt in range(MAX_PARSE_RETRIES + 1):
             try:
-                response_text = call_bedrock_llm(prompt)
+                response_text = call_bedrock_llm(prompt, prefill="[")
                 elements = parse_llm_response(response_text, chunk)
                 all_elements.extend(elements)
                 success = True

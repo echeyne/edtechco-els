@@ -1,69 +1,65 @@
-# Ground Truth Annotations
+# Ground Truth Annotations (Golden Sets)
 
-Place human-annotated ground truth files here, one per state document.
+One JSON file per state. Each file is the hand-annotated ground truth for a
+single source PDF. The eval suite (`evaluation/eval_suite.py`) loads these,
+runs the detector against the matching extraction, and grades the output.
 
-## File Format
+Files in this directory:
 
-Each file should be named `{state}.json` (e.g., `TX.json`, `CA.json`) and contain:
+| File      | Purpose                                                                |
+| --------- | ---------------------------------------------------------------------- |
+| `AZ.json` | Arizona Early Learning Standards 4th Ed. — 4-level, lettered examples  |
+| `CA.json` | California Preschool Learning Foundations — 4-level, age-band columns  |
+| `CO.json` | Colorado ELDG Ages 3-5 — 3-level (no sub_strand), numeric strands      |
+| `TX.json` | Texas 2022 PreK Guidelines — 4-level, side-by-side PK3/PK4 columns     |
 
-```json
-{
-  "state": "TX",
-  "country": "US",
-  "version_year": 2024,
-  "source_document": "texas_prek_guidelines_2024.pdf",
-  "annotator": "your_name",
-  "annotation_date": "2026-04-27",
-  "elements": [
-    {
-      "level": "domain",
-      "code": "I",
-      "title": "Social and Emotional Development",
-      "description": "...",
-      "source_page": 5
-    },
-    {
-      "level": "strand",
-      "code": "A",
-      "title": "Self-Concept",
-      "description": "...",
-      "parent_code": "I",
-      "source_page": 5
-    },
-    {
-      "level": "indicator",
-      "code": "I.A.1",
-      "title": "Child is aware of where own body is in space...",
-      "description": "...",
-      "parent_code": "A",
-      "domain_code": "I",
-      "strand_code": "A",
-      "sub_strand_code": null,
-      "age_band": "48-60",
-      "source_page": 6
-    }
-  ]
-}
+The schema is in `../golden_set.schema.json`. Each file has three things to
+fill in:
+
+1. **`expected_depth_map`** — what `infer_depth_map` should return for this
+   document. This is graded standalone so we know whether Pass-1 is correct
+   independently of the per-chunk extraction.
+2. **`elements`** — a list of structural elements with `test_case_id`s. You
+   do NOT need to annotate the entire document. Aim for full coverage of
+   1–2 representative domains plus a handful of edge cases. ~50 elements
+   per state is enough to catch the regressions we care about.
+3. **`regression_cases`** — bug-targeted behavioural assertions. Each
+   `id` corresponds to a check function in `evaluation/regression_checks.py`.
+   When you add a new regression case here, also add a check function with
+   the same `id` (the suite logs `SKIP` if the function is missing).
+
+## How to populate `elements`
+
+For every element you annotate, fill in the fields marked `TODO` in the
+template. The required minimum is `test_case_id`, `level`, `title`. Adding
+`code`, `source_page`, and parent codes makes the eval much sharper.
+
+Annotation tips:
+
+- **Test case IDs** follow `<STATE>-<KIND>-<N>` (e.g. `CA-IND-01-EARLY`).
+  For age-banded indicators, suffix with the band (`-EARLY`, `-LATER`,
+  `-PK3`, `-PK4`). This lets the eval report `CA-IND-01-LATER MISSING`
+  when the detector drops the Later column.
+- **Use copy-verbatim text** for `title` and `description`. Don't paraphrase
+  — the matcher does fuzzy comparison but works much better when the
+  source is literal.
+- **`age_band`** is null for non-age-banded elements. For CA, use the exact
+  document phrasing: `"Early (3 to 4 ½ Years)"` / `"Later (4 to 5 ½ Years)"`.
+  For TX, use `"PK3"` / `"PK4"`.
+
+## Running the eval
+
+```sh
+# All states, single run
+python -m evaluation.eval_suite
+
+# One state
+python -m evaluation.eval_suite --state CA
+
+# Stability check: run the detector N times against the same chunk and
+# report level-classification disagreement rate.
+python -m evaluation.eval_suite --state CA --stability-runs 3
 ```
 
-## Annotation Guidelines
-
-1. Read the full PDF and identify every structural element
-2. Classify by nesting depth (same rules as the pipeline):
-   - Depth 1 = domain, Depth 2 = strand, Depth 3 = sub_strand, Depth 4 = indicator
-3. Record the exact code, title, and description from the document
-4. For indicators, record the full parent chain (domain_code, strand_code, sub_strand_code)
-5. Record age_band in months format (e.g., "36-48", "48-60")
-6. Include source_page for traceability
-
-## Recommended States to Annotate
-
-Pick 3-5 states that represent different document structures:
-
-| State | Why                                         | Structure                    |
-| ----- | ------------------------------------------- | ---------------------------- |
-| TX    | Side-by-side PK3/PK4 age columns            | 4-level with age variants    |
-| CA    | Clean hierarchy, well-structured            | 4-level standard             |
-| OH    | 3-level (no sub_strand)                     | 3-level                      |
-| SC    | Unusual terminology ("Domains of Learning") | 4-level, non-standard labels |
-| NY    | Dense, many indicators                      | 4-level, high volume         |
+See the docstring at the top of `evaluation/eval_suite.py` for the full
+metric set and configuration knobs.
