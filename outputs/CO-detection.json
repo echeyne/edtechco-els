@@ -1,0 +1,3317 @@
+{
+  "elements": [
+    {
+      "level": "domain",
+      "code": "PDH",
+      "title": "Physical Development & Health",
+      "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "Physical Development & Health - The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Health, Safety and Nutrition",
+      "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "1. Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+      "description": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "1. Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+      "description": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "2. Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+      "description": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "3. Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Get sufficient rest and exercise to support healthy development.*",
+      "description": "Get sufficient rest and exercise to support healthy development.* (Aligned to the Colorado Academic Standards)",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "4. Get sufficient rest and exercise to support healthy development.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*",
+      "description": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "5. Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.6",
+      "title": "Communicate an understanding of the importance of health and safety routines and rules.*",
+      "description": "Communicate an understanding of the importance of health and safety routines and rules.*",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "6. Communicate an understanding of the importance of health and safety routines and rules.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.7",
+      "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*",
+      "description": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "7. Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.8",
+      "title": "Distinguish food on a continuum from most healthy to less healthy.",
+      "description": "Distinguish food on a continuum from most healthy to less healthy.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "8. Distinguish food on a continuum from most healthy to less healthy.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.9",
+      "title": "Eat a variety of nutritious foods.",
+      "description": "Eat a variety of nutritious foods.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "9. Eat a variety of nutritious foods.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.10",
+      "title": "Participate in structured and unstructured physical activities.*",
+      "description": "Participate in structured and unstructured physical activities.*",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "10. Participate in structured and unstructured physical activities.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.11",
+      "title": "Recognize the importance of doctor and dentist visits.",
+      "description": "Recognize the importance of doctor and dentist visits.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "11. Recognize the importance of doctor and dentist visits.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.12",
+      "title": "Cooperate during doctor and dentist visits and health and developmental screening.",
+      "description": "Cooperate during doctor and dentist visits and health and developmental screening.",
+      "confidence": 0.9,
+      "source_page": 4,
+      "source_text": "12. Cooperate during doctor and dentist visits and health and developmental screening.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Gross Motor Skills",
+      "description": "The control of large muscles for movement, navigation, and balance.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "2. Gross Motor Skills: The control of large muscles for movement, navigation, and balance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
+      "description": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "1. Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+      "description": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "2. Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
+      "description": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "3. Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Fine Motor Skills",
+      "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "3. Fine Motor Skills: The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Develop hand strength and dexterity.",
+      "description": "Develop hand strength and dexterity.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "1. Develop hand strength and dexterity.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "description": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "2. Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Manipulate a range of objects, such as blocks or books.",
+      "description": "Manipulate a range of objects, such as blocks or books.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "3. Manipulate a range of objects, such as blocks or books.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "GMS",
+      "title": "Gross Motor Skills",
+      "description": "",
+      "confidence": 0.7,
+      "source_page": 5,
+      "source_text": "1. Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "GMS.1",
+      "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
+      "description": "Children may: Balance on one leg; Pretend to be various jumping or crawling creatures (e.g., rabbit, frog, kangaroo, grasshopper, snake, lizard). Adults may: Provide adequate space and age-appropriate equipment and materials, with adaptations as needed. Supervise and participate in daily outdoor play. Plan daily physical activities that are vigorous as well as developmentally and individually appropriate. Provide appropriate modifications for children with special needs.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "1. Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "GMS.2",
+      "title": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+      "description": "Children may: Combine large muscle movements with equipment (e.g., riding a tricycle, using a slide or swings, bouncing a ball).",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "2. Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "GMS.3",
+      "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.",
+      "description": "Children may: Engage in activities that involve climbing, rocking, swinging, rolling, spinning, jumping, or being turned upside-down.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "3. Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "FMS",
+      "title": "Fine Motor Skills",
+      "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "3. Fine Motor Skills: The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "FMS.1",
+      "title": "Develop hand strength and dexterity.",
+      "description": "Children may: Engage in activities that enhance hand-eye coordination, such as using eating utensils, dressing themselves, building with blocks, creating with clay or play dough, putting puzzles together, and stringing beads. Adults may: Provide adequate time for drawing, cutting, and handwriting development. Provide modeling materials (e.g., play dough, clay) and activities (e.g., beads, Legos, small blocks) to strengthen hand and develop fine motor coordination.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "1. Develop hand strength and dexterity.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "FMS.2",
+      "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "2. Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "FMS.3",
+      "title": "Manipulate a range of objects, such as blocks or books.",
+      "description": "Link paper clips to make necklaces.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "3. Manipulate a range of objects, such as blocks or books.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "FMS.4",
+      "title": "Manipulate writing, drawing, and art tools.",
+      "description": "Children may: Create puppet shows with finger puppets. Adults may: Provide handheld tools, such as spoons, paintbrushes, crayons, markers, tweezers, eyedroppers, garlic press, clothespins, and safety scissors, with adaptations as needed. Provide adaptive writing utensils for children with fine motor delays. Show child how you use drawing and writing tools in your daily activities.",
+      "confidence": 0.9,
+      "source_page": 5,
+      "source_text": "4. Manipulate writing, drawing, and art tools.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SED",
+      "title": "Social & Emotional Development",
+      "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "Social & Emotional Development",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "RAP",
+      "title": "Relationships with Adults and Peers",
+      "description": "The healthy relationships and interactions with adults and peers.",
+      "confidence": 0.85,
+      "source_page": 7,
+      "source_text": "1. Relationships with Adults and Peers: The healthy relationships and interactions with adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "RAP.1",
+      "title": "Engage in and maintains positive relationships and interactions with adults.",
+      "description": "Children may: Interact readily with trusted adults. Engage in some positive interactions with less familiar adults, such as parent volunteers. Show affection and preference for adults who interact with them on a regular basis. Seek help from adults when needed.",
+      "confidence": 0.9,
+      "source_page": 7,
+      "source_text": "1. Engage in and maintains positive relationships and interactions with adults.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "RAP.2",
+      "title": "Engage in prosocial and cooperative behavior with adults.",
+      "description": "Children may: Engage in prosocial behaviors with adults, such as using respectful language or greetings. Attend to an adult when asked. Follow adult guidelines and expectations for appropriate behavior. Ask or waits for adult permission before doing something when they are unsure.",
+      "confidence": 0.9,
+      "source_page": 7,
+      "source_text": "2. Engage in prosocial and cooperative behavior with adults.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "RAP.3",
+      "title": "Engage in and maintains positive interactions and relationships with other children.",
+      "description": "Children may: Engage in and maintain positive interactions with other children. Use a variety of skills for entering social situations with other children, such as suggesting something to do together, joining an existing activity, or sharing a toy. Take turns in conversations and interactions with other children. Develop friendships with one or two preferred other children.",
+      "confidence": 0.9,
+      "source_page": 7,
+      "source_text": "3. Engage in and maintains positive interactions and relationships with other children.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "RAP.4",
+      "title": "Engage in cooperative play with other children.",
+      "description": "Children may: Engage in joint play, such as using coordinated goals, planning, roles, and games with rules, with at least one other child at a time.",
+      "confidence": 0.9,
+      "source_page": 7,
+      "source_text": "4. Engage in cooperative play with other children.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "RAP.5",
+      "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 7,
+      "source_text": "5. Use basic problem-solving skills to resolve conflicts with other children.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SED",
+      "title": "Social & Emotional Development",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "Social & Emotional Development",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SIB",
+      "title": "Sense of Identity and Belonging",
+      "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals.",
+      "confidence": 0.85,
+      "source_page": 8,
+      "source_text": "2. Sense of Identity and Belonging: The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SIB.1",
+      "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
+      "description": "Children may describe self using several different characteristics. Demonstrate knowledge of uniqueness of self, such as talents, interests, preferences, or culture.",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "1. Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SIB.2",
+      "title": "Express confidence in own skills and positive feelings about self.",
+      "description": "Children may show satisfaction or seek acknowledgment when completing a task or solving a problem. Express own ideas or beliefs in group contexts or in interactions with others. Use positive words to describe self, such as kind or hard-worker.",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "2. Express confidence in own skills and positive feelings about self.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SIB.3",
+      "title": "Have a sense of belonging to family, community, and other groups.",
+      "description": "Children may identify self as being a part of different groups, such as family, community, culture, faith, or preschool. Relate personal stories about being a part of different groups. Identify similarities and differences about self across familiar environments and settings.",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "3. Have a sense of belonging to family, community, and other groups.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "EF",
+      "title": "Emotional Functioning",
+      "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors.",
+      "confidence": 0.85,
+      "source_page": 8,
+      "source_text": "3. Emotional Functioning: A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EF.1",
+      "title": "Express a broad range of emotions and recognize these emotions in self and others.",
+      "description": "Children may recognize and label basic emotions in books or photographs. Use words or signs to describe own feelings. Use words or signs to describe the feelings of adults or other children. Reflect on personal experiences that evoked strong emotions.",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "1. Express a broad range of emotions and recognize these emotions in self and others.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EF.2",
+      "title": "Express care and concern toward others.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "2. Express care and concern toward others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EF.3",
+      "title": "Manage emotions with",
+      "description": "Experiment with new materials and activities without fear of making",
+      "confidence": 0.7,
+      "source_page": 8,
+      "source_text": "3. Manage emotions with",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "REL2",
+      "title": "Engage in prosocial and cooperative behavior with adults.",
+      "description": "Children may show affection and preference for adults who interact with them on a regular basis. Seek help from adults when needed. Engage in prosocial behaviors with adults, such as using respectful language or greetings. Attend to an adult when asked. Follow adult guidelines and expectations for appropriate behavior. Ask or wait for adult permission before doing something when they are unsure.",
+      "confidence": 0.88,
+      "source_page": 7,
+      "source_text": "2. Engage in prosocial and cooperative behavior with adults.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "REL3",
+      "title": "Engage in and maintains positive interactions and relationships with other children.",
+      "description": "Children may engage in and maintain positive interactions with other children. Use a variety of skills for entering social situations with other children, such as suggesting something to do together, joining an existing activity, or sharing a toy. Take turns in conversations and interactions with other children. Develop friendships with one or two preferred other children.",
+      "confidence": 0.88,
+      "source_page": 7,
+      "source_text": "3. Engage in and maintains positive interactions and relationships with other children.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "REL4",
+      "title": "Engage in cooperative play with other children.",
+      "description": "Children may engage in joint play, such as using coordinated goals, planning, roles, and games with rules, with at least one other child at a time. Demonstrate willingness to include others' ideas during interactions and play. Show enjoyment of play with other children, such as through verbal exchanges, smiles, and laughter. Engage in reflection and conversation about past play experiences.",
+      "confidence": 0.88,
+      "source_page": 7,
+      "source_text": "4. Engage in cooperative play with other children.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "REL5",
+      "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+      "description": "Children may recognize and describe basic social problems in books or pictures, such as both children wanting the same toy, and during interactions with other children, such as 'Why do you think your friend might be sad?'. Use basic strategies for dealing with common conflicts, such as sharing, taking turns, and compromising. Express feelings, needs, and opinions in conflict situations. Seek adult help when needed to resolve conflicts.",
+      "confidence": 0.88,
+      "source_page": 7,
+      "source_text": "5. Use basic problem-solving skills to resolve conflicts with other children.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SED",
+      "title": "Social & Emotional Development",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "Social & Emotional Development",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EF.3",
+      "title": "Manage emotions with increasing independence.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 8,
+      "source_text": "3. Manage emotions with increasing independence.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "EBSR",
+      "title": "Emotional and Behavioral Self-Regulation",
+      "description": "The ability to recognize and regulate emotions and behavior.",
+      "confidence": 0.88,
+      "source_page": 9,
+      "source_text": "4. Emotional and Behavioral Self-Regulation: The ability to recognize and regulate emotions and behavior.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EBSR.1",
+      "title": "Follow classroom rules and routines with increasing independence.",
+      "description": "Children may: Express emotions in ways that are appropriate to the situation. Look for adult assistance when emotions are most intense. Use a range of coping strategies to manage emotions with the support of an adult, such as using words or taking deep breaths. Demonstrate awareness of classroom rules when asked and is able to follow these rules most of the time. Follow most classroom routines, such as putting away their backpack when entering the room or sitting on the rug after outside time. Respond to signals when transitioning from one activity to another.",
+      "confidence": 0.9,
+      "source_page": 9,
+      "source_text": "1. Follow classroom rules and routines with increasing independence.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EBSR.2",
+      "title": "Appropriately handle and take care of classroom materials.",
+      "description": "Children may: Appropriately handle materials during activities. Clean up and put materials away appropriately, such as placing blocks back on correct shelf or placing markers in the correct bin.",
+      "confidence": 0.9,
+      "source_page": 9,
+      "source_text": "2. Appropriately handle and take care of classroom materials.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "EBSR.3",
+      "title": "Manage actions, words, and behavior with increasing independence.",
+      "description": "Children may: Demonstrate control over actions and words in response to a challenging situation, such as wanting to use the same materials as another child, or frustration over not being able to climb to the top of a structure. May need support from adults. Manage behavior according to expectations, such as using quiet feet when asked or sitting on the rug during circle time. Wait for their turn, such as wait in line to wash hands or wait for turn on swings. Refrain from aggressive behavior towards others. Begin to understand the consequences of behavior, such as hitting leads to quiet time. Children can describe the effects their behavior may have on others, such as noticing that another child feels sad when you hit him.",
+      "confidence": 0.9,
+      "source_page": 9,
+      "source_text": "3. Manage actions, words, and behavior with increasing independence.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SED",
+      "title": "Social & Emotional Development",
+      "description": "",
+      "confidence": 0.92,
+      "source_page": 10,
+      "source_text": "Social & Emotional Development",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "5",
+      "title": "Cognitive Self-Regulation (Executive Functioning)",
+      "description": "The ability to regulate attention and impulses.",
+      "confidence": 0.88,
+      "source_page": 10,
+      "source_text": "5. Cognitive Self-Regulation (Executive Functioning): The ability to regulate attention and impulses.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "5.1",
+      "title": "Demonstrate an increasing ability to control impulses.",
+      "description": "Children may stop an engaging activity to transition to another less desirable activity with adult guidance and support; delay having desires met, such as agreeing to wait their turn to start an activity; without adult reminders, wait to communicate information to a group; refrain from responding impulsively, such as waiting to be called on during group discussion or requesting materials rather than grabbing them.",
+      "confidence": 0.9,
+      "source_page": 10,
+      "source_text": "1. Demonstrate an increasing ability to control impulses.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "5.2",
+      "title": "Maintain focus and sustain attention with minimal adult support.",
+      "description": "Children may maintain focus on activities for extended periods of time, such as 15 minutes or more; engage in purposeful play for extended periods of time; attend to adult during large and small group activities with minimal support.",
+      "confidence": 0.9,
+      "source_page": 10,
+      "source_text": "2. Maintain focus and sustain attention with minimal adult support.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "5.3",
+      "title": "Persist in tasks.",
+      "description": "Children may complete tasks that are challenging or less preferred despite frustration, either by persisting or seeking help from an adult or other child; return with focus to an activity or project after having been away from it.",
+      "confidence": 0.9,
+      "source_page": 10,
+      "source_text": "3. Persist in tasks.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "5.4",
+      "title": "Hold information in mind and manipulate it to perform tasks.",
+      "description": "Children may accurately recount recent experiences in the correct order and include relevant details; successfully follow detailed, multi-step directions, sometimes with reminders; remember actions to go with stories or songs shortly after being taught.",
+      "confidence": 0.9,
+      "source_page": 10,
+      "source_text": "4. Hold information in mind and manipulate it to perform tasks.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "5.5",
+      "title": "Demonstrate flexibility in thinking and behavior.",
+      "description": "Children may try different strategies to complete work or solve problems, including with other children; apply different rules in contexts that require different behaviors, such as using indoor voices or feet instead of outdoor voices or feet; transition between activities without getting upset.",
+      "confidence": 0.9,
+      "source_page": 10,
+      "source_text": "5. Demonstrate flexibility in thinking and behavior.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ELD",
+      "title": "English Language Development",
+      "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English.",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "English Language Development",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Receptive English Language Skills",
+      "description": "The ability to comprehend or understand the English language.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "1. Receptive English Language Skills: The ability to comprehend or understand the English language.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Participate with movement and gestures while other children and the teachers dance and sing in English.",
+      "description": "Children may participate with movement and gestures while other children and the teachers dance and sing in English.",
+      "confidence": 0.88,
+      "source_page": 12,
+      "source_text": "1. Participate with movement and gestures while other children and the teachers dance and sing in English.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Acknowledge or respond nonverbally to common words or phrases when accompanied by adult gestures.",
+      "description": "Children may acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
+      "confidence": 0.88,
+      "source_page": 12,
+      "source_text": "2. Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Point to body parts when asked.",
+      "description": "Children may point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+      "confidence": 0.88,
+      "source_page": 12,
+      "source_text": "3. Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Comprehend and respond to increasingly complex and varied English vocabulary.",
+      "description": "Children may comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
+      "confidence": 0.88,
+      "source_page": 12,
+      "source_text": "4. Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Follow multi-step directions in English with minimal cues or assistance.",
+      "description": "Children may follow multi-step directions in English with minimal cues or assistance.",
+      "confidence": 0.88,
+      "source_page": 12,
+      "source_text": "5. Follow multi-step directions in English with minimal cues or assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Expressive English Language Skills",
+      "description": "The ability to speak or use English.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "2. Expressive English Language Skills: The ability to speak or use English.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Repeat word or phrase to self.",
+      "description": "Children may repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+      "confidence": 0.85,
+      "source_page": 12,
+      "source_text": "1. Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ELD",
+      "title": "English Language Development",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "English Language Development",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Participate with movement and gestures",
+      "description": "Participate with movement and gestures while other children and the teachers dance and sing in English.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "1. Participate with movement and gestures while other children and the teachers dance and sing in English.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Acknowledge or respond nonverbally to common words or phrases",
+      "description": "Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "2. Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Point to body parts when asked",
+      "description": "Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "3. Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Comprehend and respond to increasingly complex and varied English vocabulary",
+      "description": "Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "4. Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Follow multi-step directions in English",
+      "description": "Follow multi-step directions in English with minimal cues or assistance.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "5. Follow multi-step directions in English with minimal cues or assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Repeat word or phrase to self",
+      "description": "Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "1. Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Request items in English",
+      "description": "Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "2. Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Use one or two English words to represent a bigger idea",
+      "description": "Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "3. Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.4",
+      "title": "Use increasingly complex and varied English vocabulary",
+      "description": "Use increasingly complex and varied English vocabulary.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "4. Use increasingly complex and varied English vocabulary.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.5",
+      "title": "Construct sentences",
+      "description": "Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "5. Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Engagement in English Literacy Activities",
+      "description": "Understanding and responding to books, storytelling, and songs presented in English.",
+      "confidence": 0.88,
+      "source_page": 12,
+      "source_text": "3. Engagement in English Literacy Activities: Understanding and responding to books, storytelling, and songs presented in English.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Demonstrate eagerness to participate in songs, rhymes, and stories in English",
+      "description": "Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "1. Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Point to pictures and says the word in English",
+      "description": "Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "2. Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Learn part of a song or poem in English and repeat it",
+      "description": "Learn part of a song or poem in English and repeat it.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "3. Learn part of a song or poem in English and repeat it.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.4",
+      "title": "Talk with peers or adults about a story read in English",
+      "description": "Talk with peers or adults about a story read in English.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "4. Talk with peers or adults about a story read in English.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.5",
+      "title": "Tell a story in English with a beginning, middle, and end",
+      "description": "Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
+      "confidence": 0.9,
+      "source_page": 12,
+      "source_text": "5. Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LD",
+      "title": "Language Development",
+      "description": "The Language Development domain describes children's developing ability to effectively communicate (expressive language) and understand (receptive language) oral language in different environments and for a variety of purposes. Such skills are key to children's learning and social competence. The understanding and use of language is also closely related to students' developing literacy and their later success in learning to read and write.",
+      "confidence": 0.95,
+      "source_page": 13,
+      "source_text": "Language Development",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Attending and Understanding",
+      "description": "The ability to comprehend or understand language.",
+      "confidence": 0.88,
+      "source_page": 13,
+      "source_text": "1. Attending and Understanding: The ability to comprehend or understand language.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LD1.1",
+      "title": "Attend to language during conversations, songs, stories, or other learning experiences",
+      "description": "Attend to language during conversations, songs, stories, or other learning experiences.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "1. Attend to language during conversations, songs, stories, or other learning experiences.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LD1.2",
+      "title": "Comprehend increasingly complex and varied vocabulary",
+      "description": "Comprehend increasingly complex and varied vocabulary.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "2. Comprehend increasingly complex and varied vocabulary.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LD1.3",
+      "title": "Comprehend different forms of language",
+      "description": "Comprehend different forms of language, such as questions or exclamations.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "3. Comprehend different forms of language, such as questions or exclamations.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LD1.4",
+      "title": "Follow two- to three-step directions",
+      "description": "Follow two- to three-step directions.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "4. Follow two- to three-step directions.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LD1.5",
+      "title": "Comprehend different grammatical structures or rules for using language",
+      "description": "Comprehend different grammatical structures or rules for using language.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "5. Comprehend different grammatical structures or rules for using language.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Communicating and Speaking",
+      "description": "The ability to use language.",
+      "confidence": 0.88,
+      "source_page": 13,
+      "source_text": "2. Communicating and Speaking: The ability to use language.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LD2.1",
+      "title": "Vary the amount of information provided to meet the demands of the situation",
+      "description": "Vary the amount of information provided to meet the demands of the situation.",
+      "confidence": 0.85,
+      "source_page": 13,
+      "source_text": "1. Vary the amount of information provided to meet the demands of the situation.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Attend to language during conversations, songs, stories, or other learning experiences.",
+      "description": "Attend to language during conversations, songs, stories, or other learning experiences.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "1. Attend to language during conversations, songs, stories, or other learning experiences.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Comprehend increasingly complex and varied vocabulary.",
+      "description": "Comprehend increasingly complex and varied vocabulary.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "2. Comprehend increasingly complex and varied vocabulary.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Comprehend different forms of language, such as questions or exclamations.",
+      "description": "Comprehend different forms of language, such as questions or exclamations.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "3. Comprehend different forms of language, such as questions or exclamations.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Follow two- to three-step directions.",
+      "description": "Follow two- to three-step directions.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "4. Follow two- to three-step directions.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Comprehend different grammatical structures or rules for using language.",
+      "description": "Comprehend different grammatical structures or rules for using language.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "5. Comprehend different grammatical structures or rules for using language.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Vary the amount of information provided to meet the demands of the situation.",
+      "description": "Vary the amount of information provided to meet the demands of the situation.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "1. Vary the amount of information provided to meet the demands of the situation.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Understand, follow, and use appropriate social and conversational rules.",
+      "description": "Understand, follow, and use appropriate social and conversational rules.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "2. Understand, follow, and use appropriate social and conversational rules.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Express self in increasingly long, detailed, and sophisticated ways.",
+      "description": "Express self in increasingly long, detailed, and sophisticated ways.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "3. Express self in increasingly long, detailed, and sophisticated ways.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.4",
+      "title": "Participate in conversations of more than three exchanges with peers and adults.",
+      "description": "Participate in conversations of more than three exchanges with peers and adults.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "4. Participate in conversations of more than three exchanges with peers and adults.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.5",
+      "title": "Use language to express ideas and needs.",
+      "description": "Use language to express ideas and needs.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "5. Use language to express ideas and needs.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.6",
+      "title": "Understand the difference between a question and a statement.",
+      "description": "Understand the difference between a question and a statement.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "6. Understand the difference between a question and a statement.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.7",
+      "title": "Practice asking questions and making statements.",
+      "description": "Practice asking questions and making statements.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "7. Practice asking questions and making statements.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.8",
+      "title": "Speak in sentences of five or six words.",
+      "description": "Speak in sentences of five or six words.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "8. Speak in sentences of five or six words.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Vocabulary",
+      "description": "The ability to use a variety of words.",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "3. Vocabulary: The ability to use a variety of words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Understand and use a wide variety of words for a variety of purposes.",
+      "description": "Understand and use a wide variety of words for a variety of purposes.",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "1. Understand and use a wide variety of words for a variety of purposes.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Show understanding of word categories and relationships among words",
+      "description": "Show understanding of word categories and relationships among words",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "2. Show understanding of word categories and relationships among words",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "VOCAB",
+      "title": "Vocabulary",
+      "description": "The ability to use a variety of words.",
+      "confidence": 0.88,
+      "source_page": 14,
+      "source_text": "3. Vocabulary: The ability to use a variety of words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "VOCAB.1",
+      "title": "Understand and use a wide variety of words for a variety of purposes.",
+      "description": "Children may demonstrate the use of multiple (two or three) new words or signs a day during play and other activities; show recognition of and/or familiarity with key domain-specific words heard during reading or discussions; use new domain-specific vocabulary during activities with multiple exposures, such as using the word \"cocoon\" when learning about the life-cycle of caterpillars, or \"cylinder\" when learning about 3-D shapes.",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "1. Understand and use a wide variety of words for a variety of purposes.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "VOCAB.2",
+      "title": "Show understanding of word categories and relationships among words",
+      "description": "Children may categorize words or objects, such as sorting a hard hat, machines, and tools into the construction group, or giving many examples of farm animals; discuss new words in relation to known words and word categories; identify shared characteristics among people, places, things, or actions.",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "2. Show understanding of word categories and relationships among words",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "VOCAB.3",
+      "title": "Use increasingly complex and varied vocabulary.",
+      "description": "Children may show an ability to distinguish similar words, such as \"I don't like it, I love it!\" or \"It's more than tall, it's gigantic,\" or \"It's so cold, it's frosty.\"",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "3. Use increasingly complex and varied vocabulary.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LKS",
+      "title": "Literacy Knowledge & Skills",
+      "description": "The Literacy Knowledge & Skills domain describes skills that provide the basis for children's emerging ability to read and write. Preschool age children are developing attitudes about reading that will affect their approach to learning as they age. They are also developing basic understandings about how books and other print materials convey meaning. This domain also addresses early reading skills, such as the ability to hear and differentiate sounds in words and some basic letter knowledge. Children's ability to physically write is closely tied to their development of fine motor skills at this age, which often vary significantly. Children may practice communicating their ideas on paper in whatever way they can, including scribbling, dictation, drawing pictures, or tracing letters and words.",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "Literacy Knowledge & Skills",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "PAK",
+      "title": "Print and Alphabet Knowledge",
+      "description": "The interest in books and their characteristics, and knowledge of the alphabet.",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "1. Print and Alphabet Knowledge: The interest in books and their characteristics, and knowledge of the alphabet.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.1",
+      "title": "Demonstrate an understanding of how print is used (functions of print) and the rules that govern how print works (conventions of print).",
+      "description": "Children may handle books respectfully and appropriately.",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "1. Demonstrate an understanding of how print is used (functions of print) and the rules that govern how print works (conventions of print).*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.2",
+      "title": "Identify letters of the alphabet and produce correct sounds associated with letters.",
+      "description": "Children may distinguish between upper and lower case letter shapes; select alphabet letters that match with their sounds; recognize the letters in their own name; know the name for many letters of the alphabet.",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "2. Identify letters of the alphabet and produce correct sounds associated with letters.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.3",
+      "title": "Show interest in both shared reading experiences and looking at books independently.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "3. Show interest in both shared reading experiences and looking at books independently.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.4",
+      "title": "Recognize how books are read, such as front-to-back and one page at a time, and recognize basic characteristics, such as title, author, and illustrator.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "4. Recognize how books are read, such as front-to-back and one page at a time, and recognize basic characteristics, such as title, author, and illustrator.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.5",
+      "title": "Recognize words as a unit of print and understand that letters are grouped to form words.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "5. Recognize words as a unit of print and understand that letters are grouped to form words.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.6",
+      "title": "Recognize that the letters of the alphabet are a special category of visual graphics that can be individually named.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "6. Recognize that the letters of the alphabet are a special category of visual graphics that can be individually named.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.7",
+      "title": "Attend to the beginning letters and sounds in familiar words.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "7. Attend to the beginning letters and sounds in familiar words.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.8",
+      "title": "Recognize print in everyday life, such as numbers, letters, one's name, words, and familiar logos and signs.",
+      "description": "Children may recognize how printed material connects to their world and daily life; associate pictorial symbols with objects or actions (e.g., picture recipes, rebus stories); recognize that print can tell people what to do.",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "8. Recognize print in everyday life, such as numbers, letters, one's name, words, and familiar logos and signs.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.9",
+      "title": "Understand that print conveys meaning.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "9. Understand that print conveys meaning.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.10",
+      "title": "Understand conventions, such as print moves from left to right and top to bottom of a page.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "10. Understand conventions, such as print moves from left to right and top to bottom of a page.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PAK.11",
+      "title": "Recognize the association between spoken or signed and written words.",
+      "description": "Children may understand that letters function to represent sounds in spoken words; identify their name on labels or tags.",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "11. Recognize the association between spoken or signed and written words.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "PHONA",
+      "title": "Phonological Awareness",
+      "description": "An awareness that language can be broken into words, syllables, and smaller pieces of sound.",
+      "confidence": 0.88,
+      "source_page": 16,
+      "source_text": "2. Phonological Awareness: An awareness that language can be broken into words, syllables, and smaller pieces of sound.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LKS",
+      "title": "Literacy Knowledge & Skills",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "Literacy Knowledge & Skills",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Phonological Awareness",
+      "description": "An awareness that language can be broken into words, syllables, and smaller pieces of sound.",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "2. Phonological Awareness: An awareness that language can be broken into words, syllables, and smaller pieces of sound.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Identify and discriminate between words in language.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "1. Identify and discriminate between words in language.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Identify and discriminate between separate syllables in words.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "2. Identify and discriminate between separate syllables in words.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Identify and discriminate between sounds and phonemes in language, such as attention to beginning and ending sounds of words and recognition that different words begin or end with the same sound.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "3. Identify and discriminate between sounds and phonemes in language, such as attention to beginning and ending sounds of words and recognition that different words begin or end with the same sound.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.4",
+      "title": "Recognize patterns of sounds in songs, storytelling, and poetry.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "4. Recognize patterns of sounds in songs, storytelling, and poetry.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Comprehension and Text Structure",
+      "description": "The ability to understand and get meaning from stories and information from books and other texts.",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "3. Comprehension and Text Structure: The ability to understand and get meaning from stories and information from books and other texts.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Ask and answer questions and make comments about print materials.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "1. Ask and answer questions and make comments about print materials.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Retell stories or information from books through conversation, artistic works, creative movement, or drama.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "2. Retell stories or information from books through conversation, artistic works, creative movement, or drama.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Make predictions based on illustrations.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "3. Make predictions based on illustrations.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.4",
+      "title": "Begin to identify key features of reality versus fantasy in stories, pictures, and events.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "4. Begin to identify key features of reality versus fantasy in stories, pictures, and events.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.5",
+      "title": "Demonstrate interest in different kinds of literature, such as fiction and nonfiction books and poetry, on a range of topics.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "5. Demonstrate interest in different kinds of literature, such as fiction and nonfiction books and poetry, on a range of topics.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4",
+      "title": "Writing",
+      "description": "The familiarity with writing implements, conventions, and emerging skills to communicate through written representations, symbols, and letters.",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "4. Writing: The familiarity with writing implements, conventions, and emerging skills to communicate through written representations, symbols, and letters.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.1",
+      "title": "Experiment with writing tools and materials.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "1. Experiment with writing tools and materials.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.2",
+      "title": "Recognize that writing is a way of communicating for a variety of purposes, such as giving information, sharing stories, or giving an opinion.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "2. Recognize that writing is a way of communicating for a variety of purposes, such as giving information, sharing stories, or giving an opinion.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.3",
+      "title": "Use scribbles, shapes, pictures, and letters to represent objects, stories, experiences, or ideas.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "3. Use scribbles, shapes, pictures, and letters to represent objects, stories, experiences, or ideas.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.4",
+      "title": "Copy, trace, or independently write letters or words.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 16,
+      "source_text": "4. Copy, trace, or independently write letters or words.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LR",
+      "title": "Logic & Reasoning",
+      "description": "The Logic & Reasoning domain describes children's ability to think through problems and apply strategies for solving them. Such strategies require the ability to make connections among events or ideas, such as cause and effect relationships and comparisons. Likewise, the ability to think abstractly, or symbolically, about their world allows children to better understand the world around them. Such critical thinking skills are essential to children's early learning and also to their ability to understand and adapt to a wide range of situations at home and in the community.",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "Logic & Reasoning",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Reasoning and Problem-Solving",
+      "description": "The ability to recognize, understand, and analyze a problem and draw on knowledge or experience to seek solutions to a problem.",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "1. Reasoning and Problem-Solving: The ability to recognize, understand, and analyze a problem and draw on knowledge or experience to seek solutions to a problem.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Seek multiple solutions to a question, task, or problem.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "1. Seek multiple solutions to a question, task, or problem.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Recognize cause and effect relationships.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "2. Recognize cause and effect relationships.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Classify, compare, and contrast objects, events, and experiences.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "3. Classify, compare, and contrast objects, events, and experiences.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Use past knowledge to build new knowledge.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "4. Use past knowledge to build new knowledge.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Identify problems and search for solutions by asking questions during collaborative explorations of the topic; begin to state facts about the topic.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "5. Identify problems and search for solutions by asking questions during collaborative explorations of the topic; begin to state facts about the topic.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Symbolic Representation",
+      "description": "The use of symbols or objects to represent something else.",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "2. Symbolic Representation: The use of symbols or objects to represent something else.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Represent people, places, or things through drawings, movement, and three-dimensional objects.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "1. Represent people, places, or things through drawings, movement, and three-dimensional objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Engage in pretend play and act out roles.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "2. Engage in pretend play and act out roles.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Begin to identify key features of reality versus fantasy in stories, pictures, and events.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "3. Begin to identify key features of reality versus fantasy in stories, pictures, and events.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "MKS",
+      "title": "Mathematics Knowledge & Skills",
+      "description": "The Mathematics Knowledge & Skills domain describes children's abilities to understand numbers, quantity, and the relationships between them. Also important to this domain is a basic understanding of shapes, the position of shapes in space, patterns, and measurement. Many indicators described in this domain require children to make generalizations and think abstractly, which build cognitive skills that support early learning and are associated with positive outcomes. Some of the indicators and examples may not be appropriate until late in the 3-5 year age range.",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "Mathematics Knowledge & Skills - The Mathematics Knowledge & Skills domain describes children's abilities to understand numbers, quantity, and the relationships between them.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Number Concepts and Quantities",
+      "description": "The understanding that numbers represent quantities and have ordinal properties (number words represent a rank order, particular size, or position in a list).",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "1. Number Concepts and Quantities: The understanding that numbers represent quantities and have ordinal properties (number words represent a rank order, particular size, or position in a list).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Count verbally or sign to at least 20.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "1. Count verbally or sign to at least 20.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Instantly recognize, without counting, small quantities of up to five objects and say or sign the number.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "2. Instantly recognize, without counting, small quantities of up to five objects and say or sign the number.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Say or sign the number names in order when counting, pairing one number word that corresponds with one object, up to at least 10.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "3. Say or sign the number names in order when counting, pairing one number word that corresponds with one object, up to at least 10.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Use the number name of the last object counted to answer \"How many?\" questions for up to approximately 10 objects.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "4. Use the number name of the last object counted to answer \"How many?\" questions for up to approximately 10 objects.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Accurately count as many as five objects in a scattered configuration.",
+      "description": "",
+      "confidence": 0.75,
+      "source_page": 18,
+      "source_text": "5. Accurately count as many as five objects in a",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LLKS",
+      "title": "Literacy Knowledge & Skills",
+      "description": "Literacy domain context includes writing-related indicators such as developing pencil grip, recognizing writing as communication, using scribbles/shapes/letters to represent ideas, and copying/tracing/writing letters or words.",
+      "confidence": 0.7,
+      "source_page": 16,
+      "source_text": "Encourage children's interest and attempts to copy or write letters and their own name. 2. Recognize that writing is a way of communicating for a variety of purposes...",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "W1",
+      "title": "Begin to develop proper pencil grip.",
+      "description": "",
+      "confidence": 0.7,
+      "source_page": 16,
+      "source_text": "Begin to develop proper pencil grip.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "W2",
+      "title": "Recognize that writing is a way of communicating for a variety of purposes, such as giving information, sharing stories, or giving an opinion.",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 16,
+      "source_text": "2. Recognize that writing is a way of communicating for a variety of purposes, such as giving information, sharing stories, or giving an opinion.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "W3",
+      "title": "Use scribbles, shapes, pictures, and letters to represent objects, stories, experiences, or ideas.",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 16,
+      "source_text": "3. Use scribbles, shapes, pictures, and letters to represent objects, stories, experiences, or ideas.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "W4",
+      "title": "Copy, trace, or independently write letters or words.",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 16,
+      "source_text": "4. Copy, trace, or independently write letters or words.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Accurately count as many as five objects in a scattered configuration or out of a collection of more than five objects.",
+      "description": "Accurately count as many as five objects in a scattered configuration or out of a collection of more than five objects.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "5. Accurately count as many as five objects in a scattered configuration or out of a collection of more than five objects.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.6",
+      "title": "Understand that each successive number name refers to a quantity that is one larger.",
+      "description": "Understand that each successive number name refers to a quantity that is one larger.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "6. Understand that each successive number name refers to a quantity that is one larger.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.7",
+      "title": "Identify whether the number of objects in one group is more than, less than, or the same as objects in another group for up to at least five objects.",
+      "description": "Identify whether the number of objects in one group is more than, less than, or the same as objects in another group for up to at least five objects.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "7. Identify whether the number of objects in one group is more than, less than, or the same as objects in another group for up to at least five objects.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.8",
+      "title": "Identify and use numbers related to order or position from first to fifth.",
+      "description": "Identify and use numbers related to order or position from first to fifth.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "8. Identify and use numbers related to order or position from first to fifth.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.9",
+      "title": "Associate a number of objects with a written numeral 0-5.",
+      "description": "Associate a number of objects with a written numeral 0-5.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "9. Associate a number of objects with a written numeral 0-5.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.10",
+      "title": "Recognize and, with support, write some numerals up to 10.",
+      "description": "Recognize and, with support, write some numerals up to 10.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "10. Recognize and, with support, write some numerals up to 10.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Operations and Algebraic Thinking",
+      "description": "The use of numbers to describe relationships and solve problems.",
+      "confidence": 0.9,
+      "source_page": 19,
+      "source_text": "2. Operations and Algebraic Thinking: The use of numbers to describe relationships and solve problems.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Represent addition and subtraction in different ways, such as with fingers, objects, and drawings.",
+      "description": "Represent addition and subtraction in different ways, such as with fingers, objects, and drawings.",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "1. Represent addition and subtraction in different ways, such as with fingers, objects, and drawings.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Solve addition and subtraction problems set in simple contexts. Add and subtract up to at least five to or from a given number to find a sum or difference up to 1.",
+      "description": "Solve addition and subtraction problems set in simple contexts. Add and subtract up to at least five to or from a given number to find a sum or difference up to 1.",
+      "confidence": 0.9,
+      "source_page": 19,
+      "source_text": "2. Solve addition and subtraction problems set in simple contexts. Add and subtract up to at least five to or from a given number to find a sum or difference up to 1.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "With adult assistance, begin to use counting on (adding 1 or 2, for example) from the larger number for addition.",
+      "description": "With adult assistance, begin to use counting on (adding 1 or 2, for example) from the larger number for addition.",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "3. With adult assistance, begin to use counting on (adding 1 or 2, for example) from the larger number for addition.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.4",
+      "title": "Fill in missing elements of simple patterns.",
+      "description": "Fill in missing elements of simple patterns.",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "4. Fill in missing elements of simple patterns.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.5",
+      "title": "Duplicate simple patterns in a different location than demonstrated, such as making the same alternating color pattern with blocks at a table that was demonstrated on the rug. Extend patterns, such as making an eight-block tower of the same pattern that was demonstrated with four blocks.",
+      "description": "Duplicate simple patterns in a different location than demonstrated, such as making the same alternating color pattern with blocks at a table that was demonstrated on the rug. Extend patterns, such as making an eight-block tower of the same pattern that was demonstrated with four blocks.",
+      "confidence": 0.9,
+      "source_page": 19,
+      "source_text": "5. Duplicate simple patterns in a different location than demonstrated, such as making the same alternating color pattern with blocks at a table that was demonstrated on the rug. Extend patterns, such as making an eight-block tower of the same pattern that was demonstrated with four blocks.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.6",
+      "title": "Identify the core unit of sequentially repeating patterns, such as color in a sequence of alternating red and blue blocks.",
+      "description": "Identify the core unit of sequentially repeating patterns, such as color in a sequence of alternating red and blue blocks.",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "6. Identify the core unit of sequentially repeating patterns, such as color in a sequence of alternating red and blue blocks.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "MKS",
+      "title": "Mathematics Knowledge & Skills",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 20,
+      "source_text": "Mathematics Knowledge & Skills",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Measurement and Data",
+      "description": "The understanding of attributes and relative properties of objects as related to size, capacity, and area.",
+      "confidence": 0.9,
+      "source_page": 20,
+      "source_text": "3. Measurement and Data: The understanding of attributes and relative properties of objects as related to size, capacity, and area.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Use comparative language",
+      "description": "Use comparative language, such as shortest, heavier, biggest, or later.",
+      "confidence": 0.92,
+      "source_page": 20,
+      "source_text": "1. Use comparative language, such as shortest, heavier, biggest, or later.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Compare or order up to five objects based on measurable attributes",
+      "description": "Compare or order up to five objects based on their measurable attributes, such as height or weight.",
+      "confidence": 0.92,
+      "source_page": 20,
+      "source_text": "2. Compare or order up to five objects based on their measurable attributes, such as height or weight.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Measure using the same unit",
+      "description": "Measure using the same unit, such as putting together snap cubes to see how tall a book is.",
+      "confidence": 0.92,
+      "source_page": 20,
+      "source_text": "3. Measure using the same unit, such as putting together snap cubes to see how tall a book is.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4",
+      "title": "Geometry and Spatial Sense",
+      "description": "The understanding of shapes, their properties, and how objects are related to one another.",
+      "confidence": 0.9,
+      "source_page": 21,
+      "source_text": "4. Geometry and Spatial Sense: The understanding of shapes, their properties, and how objects are related to one another.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.1",
+      "title": "Name and describe shapes",
+      "description": "Name and describe shapes in terms of length of sides, number of sides, and number of angles/corners.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "1. Name and describe shapes in terms of length of sides, number of sides, and number of angles/corners.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.2",
+      "title": "Correctly name basic shapes",
+      "description": "Correctly name basic shapes (circle, square, rectangle, triangle) regardless of size and orientation.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "2. Correctly name basic shapes (circle, square, rectangle, triangle) regardless of size and orientation.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.3",
+      "title": "Analyze, compare, and sort shapes",
+      "description": "Analyze, compare, and sort two- and three-dimensional shapes and objects in different sizes. Describe their similarities, differences, and other attributes, such as size and shape.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "3. Analyze, compare, and sort two-and three-dimensional shapes and objects in different sizes. Describe their similarities, differences, and other attributes, such as size and shape.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.4",
+      "title": "Compose simple shapes to form larger shapes",
+      "description": "Compose simple shapes to form larger shapes.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "4. Compose simple shapes to form larger shapes.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.5",
+      "title": "Understand and use language related to directionality, order, and position",
+      "description": "Understand and use language related to directionality, order, and the position of objects, including up/down and in front/behind.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "5. Understand and use language related to directionality, order, and the position of objects, including up/down and in front/behind.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.6",
+      "title": "Correctly follow directions involving their own position in space",
+      "description": "Correctly follow directions involving their own position in space, such as \"Stand up\" and \"Move forward.\"",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "6. Correctly follow directions involving their own position in space, such as \"Stand up\" and \"Move forward.\"*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SKS",
+      "title": "Science Knowledge & Skills",
+      "description": "The Science Knowledge & Skills domain describes children's abilities to observe and gather information about the natural and physical world around them. Children use their natural curiosity to explore and ask questions about their environment, through which they learn about living things and natural processes. The indicators in science also describe ways in which children process information by making connections, predictions, and generalizations based on their observations.",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "Science Knowledge & Skills",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Scientific Inquiry",
+      "description": "The skills to observe and collect information and use it to ask questions, predict, explain, and draw conclusions.",
+      "confidence": 0.9,
+      "source_page": 22,
+      "source_text": "1. Scientific Inquiry: The skills to observe and collect information and use it to ask questions, predict, explain, and draw conclusions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Observe and describe observable phenomena",
+      "description": "Observe and describes observable phenomena (objects, materials, organisms, and events).",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "1. Observe and describes observable phenomena (objects, materials, organisms, and events).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Engage in scientific talk",
+      "description": "Engage in scientific talk.",
+      "confidence": 0.9,
+      "source_page": 22,
+      "source_text": "2. Engage in scientific talk.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SCI",
+      "title": "Science Knowledge & Skills",
+      "description": "The Science Knowledge & Skills domain describes children's abilities to observe and gather information about the natural and physical world around them. Children use their natural curiosity to explore and ask questions about their environment, through which they learn about living things and natural processes. The indicators in science also describe ways in which children process information by making connections, predictions, and generalizations based on their observations.",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "Science Knowledge & Skills - The Science Knowledge & Skills domain describes children's abilities to observe and gather information about the natural and physical world around them.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Observe and describes observable phenomena (objects, materials, organisms, and events).",
+      "description": "Observe and describes observable phenomena (objects, materials, organisms, and events).",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "1. Observe and describes observable phenomena (objects, materials, organisms, and events).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Engage in scientific talk.",
+      "description": "Engage in scientific talk.",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "2. Engage in scientific talk.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Compare and categorize observable phenomena.",
+      "description": "Compare and categorize observable phenomena.",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "3. Compare and categorize observable phenomena.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.4",
+      "title": "Use senses to explore the properties of objects and materials (e.g., solids, liquids).",
+      "description": "Use senses to explore the properties of objects and materials (e.g., solids, liquids).",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "4. Use senses to explore the properties of objects and materials (e.g., solids, liquids).*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.5",
+      "title": "Make simple observations, predictions, explanations, and generalizations based on real-life experiences.",
+      "description": "Make simple observations, predictions, explanations, and generalizations based on real-life experiences.",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "5. Make simple observations, predictions, explanations, and generalizations based on real-life experiences.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.6",
+      "title": "Notice change in matter.",
+      "description": "Notice change in matter.",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "6. Notice change in matter.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.7",
+      "title": "Observe, describe and discuss properties of materials and transformation of substances.",
+      "description": "Observe, describe and discuss properties of materials and transformation of substances.",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "7. Observe, describe and discuss properties of materials and transformation of substances.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.8",
+      "title": "Observe and discuss common properties, differences and comparisons among objects.",
+      "description": "Observe and discuss common properties, differences and comparisons among objects.",
+      "confidence": 0.92,
+      "source_page": 22,
+      "source_text": "8. Observe and discuss common properties, differences and comparisons among objects.*",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Reasoning and Problem Solving",
+      "description": "Gathering information to make predictions, conduct investigations and experiments, draw conclusions, and analyze and communicate results.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "2. Reasoning and Problem Solving: Gathering information to make predictions, conduct investigations and experiments, draw conclusions, and analyze and communicate results.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Ask a question, gather information, and make predictions.",
+      "description": "Ask a question, gather information, and make predictions.",
+      "confidence": 0.92,
+      "source_page": 23,
+      "source_text": "1. Ask a question, gather information, and make predictions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Plan and conduct investigations and experiments.",
+      "description": "Plan and conduct investigations and experiments.",
+      "confidence": 0.92,
+      "source_page": 23,
+      "source_text": "2. Plan and conduct investigations and experiments.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Analyze results, draw conclusions, and communicate results.",
+      "description": "Analyze results, draw conclusions, and communicate results.",
+      "confidence": 0.92,
+      "source_page": 23,
+      "source_text": "3. Analyze results, draw conclusions, and communicate results.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Life Science",
+      "description": "Make sense of natural phenomena and solve problems that require understanding how individual organisms are configured and how these structures function to support life, growth, behavior and reproduction.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "3. Life Science: Make sense of natural phenomena and solve problems that require understanding how individual organisms are configured and how these structures function to support life, growth, behavior and reproduction.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Observe, describe and discuss living things and natural processes.",
+      "description": "Observe, describe and discuss living things and natural processes.",
+      "confidence": 0.92,
+      "source_page": 23,
+      "source_text": "1. Observe, describe and discuss living things and natural processes.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Observe similarities and differences in the needs of living things.",
+      "description": "Observe similarities and differences in the needs of living things.",
+      "confidence": 0.92,
+      "source_page": 23,
+      "source_text": "2. Observe similarities and differences in the needs of living things.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Observe and describe how natural habitats provide for the basic needs of plants and animals with respect to shelter, food, water, air and light.",
+      "description": "Observe and describe how natural habitats provide for the basic needs of plants and animals with respect to shelter, food, water, air and light.",
+      "confidence": 0.92,
+      "source_page": 23,
+      "source_text": "3. Observe and describe how natural habitats provide for the basic needs of plants and animals with respect to shelter, food, water, air and light.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.4",
+      "title": "Ask and pursue questions through simple investigations",
+      "description": "Ask and pursue questions through simple investigations",
+      "confidence": 0.88,
+      "source_page": 23,
+      "source_text": "4. Ask and pursue questions through simple",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "LS",
+      "title": "Life Science",
+      "description": "Make sense of natural phenomena and solve problems that require understanding how individual organisms are configured and how these structures function to support life, growth, behavior and reproduction.",
+      "confidence": 0.85,
+      "source_page": 23,
+      "source_text": "3. Life Science: Make sense of natural phenomena and solve problems that require understanding how individual organisms are configured and how these structures function to support life, growth, behavior and reproduction.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.1",
+      "title": "Observe, describe and discuss living things and natural processes.",
+      "description": "Match photographs of different habitats to the things that occupy them (i.e., worms live in the ground; fish live in water).",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "1. Observe, describe and discuss living things and natural processes.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.2",
+      "title": "Observe similarities and differences in the needs of living things.",
+      "description": "Read books about living and nonliving things, inquire about how we know if something is living or not.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "2. Observe similarities and differences in the needs of living things.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.3",
+      "title": "Observe and describe how natural habitats provide for the basic needs of plants and animals with respect to shelter, food, water, air and light.",
+      "description": "Sequence a series of photographs/pictures of a plant's growth. Sequence a series of photographs/pictures of the life cycle of a butterfly from caterpillar to chrysalis/cocoon to butterfly.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "3. Observe and describe how natural habitats provide for the basic needs of plants and animals with respect to shelter, food, water, air and light.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.4",
+      "title": "Ask and pursue questions through simple investigations and observations of living things.",
+      "description": "Watch the fish, observe and discuss the movement of the gills, explaining that this is how fish breathe under water.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "4. Ask and pursue questions through simple investigations and observations of living things.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.5",
+      "title": "Collect, describe, and record information about living things through discussion, drawings, graphs, technology and charts.",
+      "description": "Document the life cycle of living things. Recognize that living things require water, air, and food.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "5. Collect, describe, and record information about living things through discussion, drawings, graphs, technology and charts.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.6",
+      "title": "Identify differences between living and nonliving things.",
+      "description": "Identify and describe through a variety of modalities the changes in living things overtime (e.g., bears hibernate when it is cold outside).",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "6. Identify differences between living and nonliving things.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.7",
+      "title": "Identify the common needs such as food, air and water of familiar living things.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "7. Identify the common needs such as food, air and water of familiar living things.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.8",
+      "title": "Predict, explain and infer patterns based on observations and representations of living things, their needs and life cycles.",
+      "description": "Investigate living things by caring for animals and plants in the classroom.",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "8. Predict, explain and infer patterns based on observations and representations of living things, their needs and life cycles.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.9",
+      "title": "Observe and document changes in living things over time using different modalities such as drawing, dramatization, describing or using technology.",
+      "description": "Document the human life cycle (i.e., babies grow into children, children grow to be adults, adults get older).",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "9. Observe and document changes in living things over time using different modalities such as drawing, dramatization, describing or using technology.*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "LS.10",
+      "title": "Recognize that plants and animals grow and change.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 23,
+      "source_text": "10. Recognize that plants and animals grow and change.*",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "Approaches to Learning",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 24,
+      "source_text": "Approaches to Learning",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Initiative and Curiosity",
+      "description": "An interest in varied topics and activities, a desire to learn and independence in learning.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "1. Initiative and Curiosity: An interest in varied topics and activities, a desire to learn and independence in learning.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.1",
+      "title": "Engage in independent activities",
+      "description": "Engage in independent activities.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "1. Engage in independent activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.2",
+      "title": "Make choices and communicate these to adults and other children",
+      "description": "Make choices and communicate these to adults and other children.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "2. Make choices and communicate these to adults and other children.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.3",
+      "title": "Independently identify and seek things to complete activities or tasks",
+      "description": "Independently identify and seek things to complete activities or tasks, such as gathering art supplies to make a mask or gathering cards to play a matching activity.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "3. Independently identify and seek things to complete activities or tasks, such as gathering art supplies to make a mask or gathering cards to play a matching activity.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.4",
+      "title": "Plan play scenarios",
+      "description": "Plan play scenarios, such as dramatic play or construction, by establishing roles for play, using appropriate materials, and generating appropriate scenarios to be enacted.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "4. Plan play scenarios, such as dramatic play or construction, by establishing roles for play, using appropriate materials, and generating appropriate scenarios to be enacted.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.5",
+      "title": "Ask questions and seek new information",
+      "description": "Ask questions and seek new information.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "5. Ask questions and seek new information.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.6",
+      "title": "Be willing to participate in new activities or experiences",
+      "description": "Be willing to participate in new activities or experiences even if they are perceived as challenging.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "6. Be willing to participate in new activities or experiences even if they are perceived as challenging.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.1.7",
+      "title": "Demonstrate eagerness to learn about and discuss a range of topics, ideas, and activities",
+      "description": "Demonstrate eagerness to learn about and discuss a range of topics, ideas, and activities.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "7. Demonstrate eagerness to learn about and discuss a range of topics, ideas, and activities.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Creativity",
+      "description": "Creatively engaging in learning and interactions with others.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "2. Creativity: Creatively engaging in learning and interactions with others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.2.1",
+      "title": "Ask questions related to tasks or activities that indicate thinking about new ways to accomplish the task or activity",
+      "description": "Ask questions related to tasks or activities that indicate thinking about new ways to accomplish the task or activity.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "1. Ask questions related to tasks or activities that indicate thinking about new ways to accomplish the task or activity.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.2.2",
+      "title": "Approach tasks, activities, and play in ways that show creative problem solving",
+      "description": "Approach tasks, activities, and play in ways that show creative problem solving.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "2. Approach tasks, activities, and play in ways that show creative problem solving.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.2.3",
+      "title": "Use multiple means of communication to creatively express thoughts, feelings, or ideas",
+      "description": "Use multiple means of communication to creatively express thoughts, feelings, or ideas.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "3. Use multiple means of communication to creatively express thoughts, feelings, or ideas.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.2.4",
+      "title": "Engage in social and pretend play",
+      "description": "Engage in social and pretend play.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "4. Engage in social and pretend play.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.2.5",
+      "title": "Use imagination with materials to create stories or works of art",
+      "description": "Use imagination with materials to create stories or works of art.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "5. Use imagination with materials to create stories or works of art.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "ATL.2.6",
+      "title": "Use objects or materials to represent something else during play",
+      "description": "Use objects or materials to represent something else during play, such as using a paper plate or Frisbee as a steering wheel.",
+      "confidence": 0.9,
+      "source_page": 25,
+      "source_text": "6. Use objects or materials to represent something else during play, such as using a paper plate or Frisbee as a steering wheel.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SSKS",
+      "title": "Social Studies Knowledge & Skills",
+      "description": "The Social Studies Knowledge & Skills domain describes children's learning about people, places, events, and society, and how these things relate to their lives. By learning about themselves, their family, and their community, children develop self-identity and expand their understanding of places and people outside their direct experience.",
+      "confidence": 0.95,
+      "source_page": 26,
+      "source_text": "Social Studies Knowledge & Skills - The Social Studies Knowledge & Skills domain describes children's learning about people, places, events, and society, and how these things relate to their lives.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "History and Events",
+      "description": "The understanding that events happened in the past and how these events relate to one's self, family, and community.",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "1. History and Events: The understanding that events happened in the past and how these events relate to one's self, family, and community.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SSKS.1.1",
+      "title": "Differentiate between past, present, and future",
+      "description": "Differentiate between past, present, and future.",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "1. Differentiate between past, present, and future.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SSKS.1.2",
+      "title": "Recognize family or personal events that happened in the past",
+      "description": "Recognize family or personal events that happened in the past.",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "2. Recognize family or personal events that happened in the past.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SSKS.1.3",
+      "title": "Understand that how people live and what they do changes over time",
+      "description": "Understand that how people live and what they do changes over time.",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "3. Understand that how people live and what they do changes over time.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Geography",
+      "description": "Apply geographic representations and perspectives to analyze human movement, spatial patterns, systems, and the connections and relationships among them.",
+      "confidence": 0.9,
+      "source_page": 27,
+      "source_text": "2. Geography: Apply geographic representations and perspectives to analyze human movement, spatial patterns, systems, and the connections and relationships among them.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SSKS.2.1",
+      "title": "Identify aspects of the environment",
+      "description": "Identify aspects of the environment, such as firsthand experiences in their environment.",
+      "confidence": 0.85,
+      "source_page": 27,
+      "source_text": "1. Identify aspects of the environment, such",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Differentiate between past, present, and future.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "1. Differentiate between past, present, and future.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2",
+      "title": "Recognize family or personal events that happened in the past.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "2. Recognize family or personal events that happened in the past.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.3",
+      "title": "Understand that how people live and what they do changes over time.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 26,
+      "source_text": "3. Understand that how people live and what they do changes over time.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Identify aspects of the environment, such as roads, buildings, trees, gardens, bodies of water, and land formations.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 27,
+      "source_text": "1. Identify aspects of the environment, such as roads, buildings, trees, gardens, bodies of water, and land formations.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Develop an awareness of the school, neighborhood, and community.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 27,
+      "source_text": "2. Develop an awareness of the school, neighborhood, and community.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Economics",
+      "description": "Understand the allocation of scarce resources in societies through analysis of individual choice, market interaction, and public policy.",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "3. Economics: Understand the allocation of scarce resources in societies through analysis of individual choice, market interaction, and public policy.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Identify choices that individuals can make.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "1. Identify choices that individuals can make.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.2",
+      "title": "Explain how individuals earn money and use it to make choices among their various wants.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "2. Explain how individuals earn money and use it to make choices among their various wants.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Recognize coins and currency as money.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "3. Recognize coins and currency as money.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.4",
+      "title": "Identify how money is used.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "4. Identify how money is used.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.5",
+      "title": "Discuss why we need money.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "5. Discuss why we need money.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.6",
+      "title": "Sort coins by physical attributes such as color or size.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "6. Sort coins by physical attributes such as color or size.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4",
+      "title": "Civics",
+      "description": "Analyze the origins, structures, and functions of governments to evaluate the impact on citizens and the global society.",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "4. Civics: Analyze the origins, structures, and functions of governments to evaluate the impact on citizens and the global society.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.1",
+      "title": "Understand the reasons for rules in the home and classroom and for laws in the community.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "1. Understand the reasons for rules in the home and classroom and for laws in the community.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.2",
+      "title": "Show interest in interacting with and developing relationships with others.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "2. Show interest in interacting with and developing relationships with others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.3",
+      "title": "Recognize that everyone has rights and responsibilities within a group.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "3. Recognize that everyone has rights and responsibilities within a group.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.4",
+      "title": "Demonstrate self-regulated behaviors and fairness in resolving conflicts.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "4. Demonstrate self-regulated behaviors and fairness in resolving conflicts.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4",
+      "title": "Civics: Analyze the origins, structures, and functions of governments to evaluate the impact on citizens and the global society.",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 28,
+      "source_text": "4. Civics: Analyze the origins, structures, and functions of governments to evaluate the impact on citizens and the global society.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Understand the reasons for rules in the home and classroom and for laws in the community.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "1. Understand the reasons for rules in the home and classroom and for laws in the community.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Show interest in interacting with and developing relationships with others.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "2. Show interest in interacting with and developing relationships with others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Recognize that everyone has rights and responsibilities within a group.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "3. Recognize that everyone has rights and responsibilities within a group.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Demonstrate self-regulated behaviors and fairness in resolving conflicts.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 28,
+      "source_text": "4. Demonstrate self-regulated behaviors and fairness in resolving conflicts.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "CAE",
+      "title": "Creative Arts Expression",
+      "description": "The Creative Arts domain describes the variety of artistic activities that allow children to use their imaginations, creativity, and express ideas in a variety of mediums. Included in this domain are indicators for dance, drama and theatre arts, music, and visual arts. The creative arts provide a means for children to display their understanding of a wide variety of knowledge and ideas that are part of other domains.",
+      "confidence": 0.95,
+      "source_page": 29,
+      "source_text": "Creative Arts Expression1 The Creative Arts domain describes the variety of artistic activities that allow children to use their imaginations, creativity, and express ideas in a variety of mediums.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "CAED",
+      "title": "Creative Arts Expression (Dance)",
+      "description": "",
+      "confidence": 0.88,
+      "source_page": 29,
+      "source_text": "Creative Arts Expression (Dance)",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Movement: The use of the body to move to music and express oneself.",
+      "description": "",
+      "confidence": 0.88,
+      "source_page": 29,
+      "source_text": "1. Movement: The use of the body to move to music and express oneself.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Safely practice simple locomotor and non-locomotor movements.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 29,
+      "source_text": "1. Safely practice simple locomotor and non-locomotor movements.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Explore movement in time and space using shape, size, level, direction, stillness and transference of weight (stepping).",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 29,
+      "source_text": "2. Explore movement in time and space using shape, size, level, direction, stillness and transference of weight (stepping).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Explore movement to encourage (kinesthetic) body awareness.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 29,
+      "source_text": "3. Explore movement to encourage (kinesthetic) body awareness.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Explore simple phrases of movement to experience rhythm, clapping and moving to music in relationship to others.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 29,
+      "source_text": "4. Explore simple phrases of movement to experience rhythm, clapping and moving to music in relationship to others.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Create, Compose, and Choreograph: Using the dance elements of space, time, and energy to explore, improvise, and develop movement phrases, sequences and dances.",
+      "description": "",
+      "confidence": 0.88,
+      "source_page": 30,
+      "source_text": "2. Create, Compose, and Choreograph: Using the dance elements of space, time, and energy to explore, improvise, and develop movement phrases, sequences and dances.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Create movements in response to sensory ideas (e.g., textures, colors, smells) and images from nature.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "1. Create movements in response to sensory ideas (e.g., textures, colors, smells) and images from nature.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Move to express different feelings in personal and general space.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "2. Move to express different feelings in personal and general space.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Explore movement while moving with objects (e.g., scarves, feathers, balls).",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "3. Explore movement while moving with objects (e.g., scarves, feathers, balls).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Transfer same movements to different body parts and use repetition.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "4. Transfer same movements to different body parts and use repetition.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "DANCE",
+      "title": "Creative Arts Expression (Dance)",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 30,
+      "source_text": "Creative Arts Expression (Dance)",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2",
+      "title": "Create, Compose, and Choreograph",
+      "description": "Using the dance elements of space, time, and energy to explore, improvise, and develop movement phrases, sequences and dances.",
+      "confidence": 0.88,
+      "source_page": 30,
+      "source_text": "2. Create, Compose, and Choreograph: Using the dance elements of space, time, and energy to explore, improvise, and develop movement phrases, sequences and dances.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1",
+      "title": "Create movements in response to sensory ideas and images from nature",
+      "description": "Create movements in response to sensory ideas (e.g., textures, colors, smells) and images from nature.",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "1. Create movements in response to sensory ideas (e.g., textures, colors, smells) and images from nature.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2",
+      "title": "Move to express different feelings in personal and general space",
+      "description": "Move to express different feelings in personal and general space.",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "2. Move to express different feelings in personal and general space.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.3",
+      "title": "Explore movement while moving with objects",
+      "description": "Explore movement while moving with objects (e.g., scarves, feathers, balls).",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "3. Explore movement while moving with objects (e.g., scarves, feathers, balls).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.4",
+      "title": "Transfer same movements to different body parts and use repetition",
+      "description": "Transfer same movements to different body parts and use repetition.",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "4. Transfer same movements to different body parts and use repetition.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3",
+      "title": "Historical and Cultural Context",
+      "description": "Understanding the global and cultural relevance of dance.",
+      "confidence": 0.88,
+      "source_page": 30,
+      "source_text": "3. Historical and Cultural Context: Understanding the global and cultural relevance of dance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.1",
+      "title": "Explore how dance expresses ideas and emotions",
+      "description": "Explore how dance expresses ideas and emotions.",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "1. Explore how dance expresses ideas and emotions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.3",
+      "title": "Explore occasions for dance across different cultures",
+      "description": "Explore occasions for dance across different cultures.",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "3. Explore occasions for dance across different cultures.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3.4",
+      "title": "Explore shapes, levels and patterns in a dance, and describe the actions",
+      "description": "Explore shapes, levels and patterns in a dance, and describe the actions.",
+      "confidence": 0.9,
+      "source_page": 30,
+      "source_text": "4. Explore shapes, levels and patterns in a dance, and describe the actions.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4",
+      "title": "Reflect, Connect, and Respond",
+      "description": "Reflecting upon dance, connecting it with other disciplines, responding to it to discuss and analyze dance as art.",
+      "confidence": 0.88,
+      "source_page": 31,
+      "source_text": "4. Reflect, Connect, and Respond: Reflecting upon dance, connecting it with other disciplines, responding to it to discuss and analyze dance as art.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.1",
+      "title": "Experience the joy of seeing and responding to dance",
+      "description": "Experience the joy of seeing and responding to dance.",
+      "confidence": 0.9,
+      "source_page": 31,
+      "source_text": "1. Experience the joy of seeing and responding to dance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.2",
+      "title": "Demonstrate movement to express emotion",
+      "description": "Demonstrate movement to express emotion.",
+      "confidence": 0.9,
+      "source_page": 31,
+      "source_text": "2. Demonstrate movement to express emotion.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.3",
+      "title": "Express what is seen and felt in a creative movement or dance",
+      "description": "Express what is seen and felt in a creative movement or dance with different tempos, rhythms and genres.",
+      "confidence": 0.9,
+      "source_page": 31,
+      "source_text": "3. Express what is seen and felt in a creative movement or dance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.4",
+      "title": "View a performance with attention",
+      "description": "View a performance with attention.",
+      "confidence": 0.9,
+      "source_page": 31,
+      "source_text": "4. View a performance with attention.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.5",
+      "title": "Describe a dance in their own words",
+      "description": "Describe a dance in their own words.",
+      "confidence": 0.9,
+      "source_page": 31,
+      "source_text": "5. Describe a dance in their own words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4.6",
+      "title": "Show their favorite dance move to the performers or each other",
+      "description": "Show their favorite dance move to the performers or each other.",
+      "confidence": 0.9,
+      "source_page": 31,
+      "source_text": "6. Show their favorite dance move to the performers or each other.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "DRAMA",
+      "title": "Creative Arts Expression (Drama and Theater Arts)",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 32,
+      "source_text": "Creative Arts Expression (Drama and Theater Arts)",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1",
+      "title": "Create",
+      "description": "Creating and forming theatrical works, interpreting theatrical works for performance and design, and developing characters and analyzing roles.",
+      "confidence": 0.88,
+      "source_page": 32,
+      "source_text": "1. Create: Creating and forming theatrical works, interpreting theatrical works for performance and design, and developing characters and analyzing roles.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1",
+      "title": "Create characters and environments using imagination and background knowledge through dramatic play or guided drama experience",
+      "description": "Create characters and environments using imagination and background knowledge through dramatic play or guided drama experience (e.g., story drama, creative drama, movement stories).",
+      "confidence": 0.88,
+      "source_page": 32,
+      "source_text": "1. Create characters and environments using imagination and background knowledge through dramatic play or guided drama experience (e.g., story drama, creative drama, movement stories,",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "CAE-DT",
+      "title": "Creative Arts Expression (Drama and Theater Arts)",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 32,
+      "source_text": "Creative Arts Expression (Drama and Theater Arts)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "DT.1",
+      "title": "Create: Creating and forming theatrical works, interpreting theatrical works for performance and design, and developing characters and analyzing roles.",
+      "description": "Children may: 1. Create characters and environments using imagination and background knowledge through dramatic play or guided drama experience (e.g., story drama, creative drama, movement stories, pantomimes, puppetry, etc.). 2. Generate multiple representations of a single object in a variety of dramatic experiences (e.g., story drama, creative drama, movement stories, pantomime, puppetry, etc.). 3. Communicate ideas through actions and words using imagination and background knowledge in dramatic play or a guided drama experience. 4. Investigate story in dramatic play or a guided drama experience. 5. Apply personal experiences to a story in dramatic play or a guided drama experience.",
+      "confidence": 0.9,
+      "source_page": 32,
+      "source_text": "1. Create: Creating and forming theatrical works, interpreting theatrical works for performance and design, and developing characters and analyzing roles.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "DT.2",
+      "title": "Perform: Expressing the human experience in story, movement, speech, and staging for an intended audience.",
+      "description": "Children may: 1. Make appropriate character reactions that connect the environment or cultures of the story using imagination or background knowledge in a dramatic play or a guided drama experience. 2. Create characters using body and voice in dramatic play or a guided drama experience. 3. Explore and experiment with various design or technical elements in dramatic play or a guided drama experience. 4. Interpret character choices and emotions using voice and body in dramatic play or a guided drama experience.",
+      "confidence": 0.9,
+      "source_page": 33,
+      "source_text": "2. Perform: Expressing the human experience in story, movement, speech, and staging for an intended audience.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "DT.3",
+      "title": "Respond: Responding to the artistic and scientific knowledge of conventions, cultures, styles, genres, theories, and technologies needed to know better choices and best practices.",
+      "description": "Children may: 1. Recall an emotional response in dramatic play or a guided drama experience. 2. Reflect on choices in a dramatic play and guided drama experiences. 3. Name and describe characters in a dramatic play or a guided drama. 4. Recognize artistic choices. 5. Identify and connect stories and cultural experiences that are similar to one another in dramatic play or a guided drama experience.",
+      "confidence": 0.9,
+      "source_page": 33,
+      "source_text": "3. Respond: Responding to the artistic and scientific knowledge of conventions, cultures, styles, genres, theories, and technologies needed to know better choices and best practices.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "CAE-M",
+      "title": "Creative Arts Expression (Music)",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 34,
+      "source_text": "Creative Arts Expression (Music)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "M.1",
+      "title": "Music Expression: The use of voice and instruments to create sounds.",
+      "description": "Children may: 1. Use voices expressively when speaking, chanting, and...",
+      "confidence": 0.85,
+      "source_page": 34,
+      "source_text": "1. Music Expression: The use of voice and instruments to create sounds.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "MUSIC",
+      "title": "Creative Arts Expression (Music)",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 34,
+      "source_text": "Creative Arts Expression (Music)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Music Expression: The use of voice and instruments to create sounds.",
+      "description": "Children may: Enjoy making and listening to music. Act out actions in songs. Play with instruments to create different sounds. 1. Clap hands in response to music with various beats. 2. Make vocal sounds. 3. Use words such as loud or soft, fast or slow to describe music. 4. Move arms up to high notes and down to low notes. Sing along with recordings of learned songs. Choose when to appropriately sing, speak, and chant the words of a learned song. Practice using high and low vocal sounds. Indicators: 1. Use voices expressively when speaking, chanting, and singing. 2. Perform through multiple modalities a variety of simple songs and singing games alone and with others. 3. Use voice and/or instruments to enhance familiar songs or chants. 4. Respond to rhythmic patterns and elements of music using expressive movement. 5. Apply teacher feedback for progress of musical practice and experience.",
+      "confidence": 0.9,
+      "source_page": 34,
+      "source_text": "1. Music Expression: The use of voice and instruments to create sounds.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Creation of Music: Compose, improvise, and arrange sounds and musical ideas to communicate purposeful intent.",
+      "description": "Children may: Move or play in response to music. Improvise sound effects during play. Indicators: 1. Improvise sound effects to accompany play activities. 2. Use improvised movement to demonstrate musical awareness.",
+      "confidence": 0.9,
+      "source_page": 35,
+      "source_text": "2. Creation of Music: Compose, improvise, and arrange sounds and musical ideas to communicate purposeful intent.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Theory of Music. Read, write, and analyze the elements of music through a variety of means to demonstrate musical literacy.",
+      "description": "Children may: Use words or other expressions to say why they like music. Use words or other expressions to describe differences in music. Share why they like some music better than others. Communicate a song's meaning and intent through drawing or painting (e.g., drawing farm animals while listening to 'Old MacDonald'). Indicators: 1. Use individual means to respond to rhythm. 2. Use individual means to respond to pitch. 3. Use individual means to respond to dynamics. 4. Use individual means to respond to form. 5. Use invented symbols to represent musical sounds.",
+      "confidence": 0.9,
+      "source_page": 35,
+      "source_text": "3. Theory of Music. Read, write, and analyze the elements of music through a variety of means to demonstrate musical literacy.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "CAEM",
+      "title": "Creative Arts Expression (Music)",
+      "description": "",
+      "confidence": 0.7,
+      "source_page": 35,
+      "source_text": "Creative Arts Expression (Music)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Creation of Music",
+      "description": "Compose, improvise, and arrange sounds and musical ideas to communicate purposeful intent.",
+      "confidence": 0.85,
+      "source_page": 35,
+      "source_text": "2. Creation of Music: Compose, improvise, and arrange sounds and musical ideas to communicate purposeful intent.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Theory of Music",
+      "description": "Read, write, and analyze the elements of music through a variety of means to demonstrate musical literacy.",
+      "confidence": 0.85,
+      "source_page": 35,
+      "source_text": "3. Theory of Music. Read, write, and analyze the elements of music through a variety of means to demonstrate musical literacy.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Aesthetic Valuation of Music",
+      "description": "Evaluate and respond to music using criteria to make informed musical decisions.",
+      "confidence": 0.85,
+      "source_page": 36,
+      "source_text": "4. Aesthetic Valuation of Music: Evaluate and respond to music using criteria to make informed musical decisions.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "CAE-M",
+      "title": "Creative Arts Expression (Music)",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 36,
+      "source_text": "Creative Arts Expression (Music)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Aesthetic Valuation of Music: Evaluate and respond to music using criteria to make informed musical decisions.",
+      "description": "Children may: 1. Move, sing, or describe to show preference for styles of music. 2. Discuss feelings in response to music. 3. Use individual communication to describe music. 4. Explore music from media, community, and home events. 5. Listen and respond to various musical styles, such as marches and lullabies. 6. Communicate feelings in music. 7. Express personal interests regarding why some music selections are preferred over others.",
+      "confidence": 0.85,
+      "source_page": 36,
+      "source_text": "4. Aesthetic Valuation of Music: Evaluate and respond to music using criteria to make informed musical decisions.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "CAE-V",
+      "title": "Creative Arts Expression (Visual Arts)",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 37,
+      "source_text": "Creative Arts Expression (Visual Arts)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Observe and Learn to Comprehend: Identify art in daily surroundings.",
+      "description": "Children may: 1. Select images in materials such as but not limited to books, cartoons, computer games, and environmental print. 2. Use age-appropriate communication to describe works of art. 3. Recognize basic language of art and design in relation to daily surroundings.",
+      "confidence": 0.9,
+      "source_page": 37,
+      "source_text": "1. Observe and Learn to Comprehend: Identify art in daily surroundings.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Envision and Critique to Reflect: Evaluate the effectiveness of what is made during the creative process.",
+      "description": "Children may: Explain that works of art communicate ideas and tell stories. Communicate a story about a work of art. Discuss one's own artistic creations and those of others.",
+      "confidence": 0.9,
+      "source_page": 38,
+      "source_text": "2. Envision and Critique to Reflect: Evaluate the effectiveness of what is made during the creative process.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Invent and Discover to Create: Use different skills to generate works of art for functional, expressive, conceptual, and social/cultural purposes.",
+      "description": "Children may: 1. Explore the process of creating works of art at one's own pace. 2. Use art materials freely, safely, and with respect to specific environments. 3. Engage in the process of creating visual narratives from familiar stories and subject matter.",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "3. Invent and Discover to Create: Use different skills to generate works of art for functional, expressive, conceptual, and social/cultural purposes.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "CAE-VA",
+      "title": "Creative Arts Expression (Visual Arts)",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 39,
+      "source_text": "Creative Arts Expression (Visual Arts)",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Invent and Discover to Create",
+      "description": "Use different skills to generate works of art for functional, expressive, conceptual, and social/cultural purposes. Children may: 1. Explore the process of creating works of art at one's own pace. 2. Use art materials freely, safely, and with respect to specific environments. 3. Engage in the process of creating visual narratives from familiar stories and subject matter.",
+      "confidence": 0.88,
+      "source_page": 39,
+      "source_text": "3. Invent and Discover to Create: Use different skills to generate works of art for functional, expressive, conceptual, and social/cultural purposes.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Relate and Connect to Transfer",
+      "description": "Make new connections to their own environments, cultures, and stories through the process of making art. Children may: 1. Explain what an artist does and who an artist can be. 2. Identify some of the activities in which artists participate. 3. Identify arts materials used by artists.",
+      "confidence": 0.88,
+      "source_page": 39,
+      "source_text": "4. Relate and Connect to Transfer: Make new connections to their own environments, cultures, and stories through the process of making art.",
+      "needs_review": false
+    }
+  ],
+  "review_count": 0,
+  "detection_timestamp": "2026-04-29T00:51:22.496263+00:00",
+  "source_extraction_key": ""
+}

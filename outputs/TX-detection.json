@@ -1,0 +1,2947 @@
+{
+  "elements": [
+    {
+      "level": "domain",
+      "code": "I",
+      "title": "Social and Emotional Development",
+      "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness.",
+      "confidence": 0.97,
+      "source_page": 3,
+      "source_text": "I. Social and Emotional Development Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "I.A",
+      "title": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community.",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "A. Self-Concept\nCentral to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.A.1",
+      "title": "Child is building competence in controlling own body movements.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "\u0420\u041a\u0417.I.\u0410.1 Child is building competence in controlling own body movements.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.A.1",
+      "title": "Child is aware of where own body is in space and respects personal boundaries.",
+      "description": "The child may: stay in designated personal spaces without intruding upon others (e.g., stays in own seat at lunch table without kicking feet or leaning against neighboring children or stays seated on assigned space during whole group instruction without distracting others); move around the classroom without stepping on materials or disrupting others' activities; maintain appropriate personal space when speaking with others.",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "PK4.I.A.1 Child is aware of where own body is in space and respects personal boundaries.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.A.2",
+      "title": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "PK3.1.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.A.2",
+      "title": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+      "description": "The child may: use basic physical characteristics to describe self (e.g., hair color, eye color, or height); identify with a group or groups to which they belong (e.g., race/ethnicity, speaker of another language, family member, classroom group); use personal inclinations to describe self (e.g., favorite color, food, or game); use specific competencies to describe self (e.g., \"I can tie my shoes.\" or \"I am good at drawing.\").",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "PK4.I.A.2 Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.A.3",
+      "title": "Child begins to show awareness of own abilities.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "PK3.I.A.3 Child begins to show awareness of own abilities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.A.3",
+      "title": "Child shows reasonable opinion of his own abilities and limitations.",
+      "description": "The child may: choose to use the stairs instead of the climbing rope on the playground; request help from adults when appropriate; decline help politely when not needed (e.g., \"No thanks, I can do it myself.\").",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "PK4.I.A.3 Child shows reasonable opinion of his own abilities and limitations.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.A.4",
+      "title": "Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "PK3.1.A.4 Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.A.4",
+      "title": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
+      "description": "The child may: independently select a new book or game in a learning center; work on a puzzle until it is complete; try several strategies to solve a problem before seeking adult assistance (e.g., when a crayon breaks, the child replaces the broken crayon with a new crayon instead of raising their hand to tell the teacher).",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "PK4.I.A.4 Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "I.B",
+      "title": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation.",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "B. Self-Regulation\nPrekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "I.B.1",
+      "title": "Behavior Control",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "1. Behavior Control",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.1.a",
+      "title": "Child follows simple rules and routines when assisted by adults.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "PK3.I.B.1.a Child follows simple rules and routines when assisted by adults.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.1.a",
+      "title": "Child follows classroom rules and routines with occasional reminders from adults.",
+      "description": "The child may: demonstrate understanding of classroom rules; respond appropriately to classroom behavior expectations; identify and follow the sequence of the day's events, (e.g., \"After centers, it's time to go outside.\"); participate in daily transitions when changing centers, moving from whole group to small group instruction, getting in line, etc.",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "PK4.I.B.1.a Child follows classroom rules and routines with occasional reminders from adults.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.1.b",
+      "title": "Child takes care of and manages classroom materials with adult assistance.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "PK3.I.B.1.b Child takes care of and manages classroom materials with adult assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.1.b",
+      "title": "Child takes care of and manages classroom materials.",
+      "description": "The child may: appropriately handle materials during activities; clean up and place classroom materials in appropriately labeled spaces; put away personal belongings in their designated space.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "PK4.I.B.1.b Child takes care of and manages classroom materials.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.1.c",
+      "title": "Child manages own behavior with adult guidance and assistance.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "PK3.I.B.1.c Child manages own behavior with adult guidance and assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.1.c",
+      "title": "Child regulates own behavior with occasional reminders or assistance from adults.",
+      "description": "The child may: communicate appropriately to make needs known; wait for a turn (e.g., waits patiently at the water fountain for a classmate to finish drinking or selects another learning center when the learning center of choice is full); refrain from impulsive responses (e.g., waits for turn to be called on during group discussion or requests materials rather than grabbing them).",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "PK4.I.B.1.c Child regulates own behavior with occasional reminders or assistance from adults.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "I.B.2",
+      "title": "Emotional Control",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "2. Emotional Control",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.2.a",
+      "title": "Child recognizes and expresses a range of emotions.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "PK3.I.B.2.a Child recognizes and expresses a range of emotions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.2.a",
+      "title": "Child begins to understand the connection between emotions and behaviors.",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 6,
+      "source_text": "PK4.I.B.2.a Child begins to understand the connection between emotions and behaviors.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "I",
+      "title": "Social and Emotional Development",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "I. Social and Emotional Development Domain",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.2.b",
+      "title": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
+      "description": "Child Behaviors: demonstrate familiarity with a variety of feeling words (e.g., happy, sad, mad, scared, proud, worried, excited); label own feelings when prompted; identify feelings of characters in stories or movies.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "PK3.I.B.2.b Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.2.b",
+      "title": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
+      "description": "Child Behaviors: demonstrate familiarity with a variety of feeling words (e.g., happy, sad, mad, scared, proud, worried, excited); label own feelings when prompted; identify feelings of characters in stories or movies.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "PK4.I.B.2.b Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.2.c",
+      "title": "Child manages intensity of emotions with adult assistance.",
+      "description": "Child Behaviors: use appropriate strategies to decrease level of distress (e.g., requests help when feeling frustrated with a task or seeks comfort from teacher when feeling sad); respond positively to adult guidance in using calming strategies (e.g., suggestions to separate self from frustrating situations or take a deep breath); show enjoyment while participating in activities that stimulate different types of emotions (e.g., playground games or music activities that require alternation of loud/quiet, fast/slow).",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "PK3.I.B.2.c Child manages intensity of emotions with adult assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.2.c",
+      "title": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
+      "description": "Child Behaviors: use appropriate strategies to decrease level of distress (e.g., requests help when feeling frustrated with a task or seeks comfort from teacher when feeling sad); respond positively to adult guidance in using calming strategies (e.g., suggestions to separate self from frustrating situations or take a deep breath); show enjoyment while participating in activities that stimulate different types of emotions (e.g., playground games or music activities that require alternation of loud/quiet, fast/slow).",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "PK4.I.B.2.c Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "I.B.3",
+      "title": "Control of Attention",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "3. Control of Attention",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.3.a",
+      "title": "Child focuses attention on one task at a time but may not stay with it to completion.",
+      "description": "Child Behaviors: select and complete an activity before moving on to a new one; create and carry out a sequence of dramatic play plans with a peer; follow a familiar daily routine until the task is finished.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "PK3.I.B.3.a Child focuses attention on one task at a time but may not stay with it to completion.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.3.a",
+      "title": "Child sustains attention to personally chosen or routine (teacher-directed) tasks until completed.",
+      "description": "Child Behaviors: select and complete an activity before moving on to a new one; create and carry out a sequence of dramatic play plans with a peer; follow a familiar daily routine until the task is finished.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "PK4.I.B.3.a Child sustains attention to personally chosen or routine (teacher-directed) tasks until completed.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.B.3.b",
+      "title": "Child remains focused on engaging, teacher-led group activities for up to 10-15 minutes at a time.",
+      "description": "Child Behaviors: increase stamina on ability to pay attention during story time; actively participate by sitting attentively (e.g., eye contact, raising hand, contributing to discussion) during circle time; engage in a teacher-led small group activity despite what may be occurring in other small groups around her.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "PK3.I.B.3.b Child remains focused on engaging, teacher-led group activities for up to 10-15 minutes at a time.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.B.3.b",
+      "title": "Child remains focused on engaging, teacher-led group activities for up to 20 minutes.",
+      "description": "Child Behaviors: increase stamina on ability to pay attention during story time; actively participate by sitting attentively (e.g., eye contact, raising hand, contributing to discussion) during circle time; engage in a teacher-led small group activity despite what may be occurring in other small groups around her.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "PK4.I.B.3.b Child remains focused on engaging, teacher-led group activities for up to 20 minutes.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "I.C",
+      "title": "Relationships with Others",
+      "description": "As prekindergarten children enter school, they start forming relationships with the adults and other children in their school environment. Effective teachers offer support and assist children as they develop meaningful and rewarding relationships. During this developmental period, children often begin to develop special friendships with peers that increase their feelings of comfort, joy, and confidence in their social world. These experiences also help build a sense of empathy and caring for others.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "C. Relationships with Others\nAs prekindergarten children enter school, they start forming relationships with the adults and other children in their school environment. Effective teachers offer support and assist children as they develop meaningful and rewarding relationships. During this developmental period, children often begin to develop special friendships with peers that increase their feelings of comfort, joy, and confidence in their social world. These experiences also help build a sense of empathy and caring for others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.1",
+      "title": "Child forms positive relationships with adults and peers.",
+      "description": "Child Behaviors: greet teachers and/or peers in the morning and say goodbye when leaving; demonstrate they are listening to adults and/or peers when communicating (e.g., looks at speaker, responds to verbal or nonverbal exchanges); engage in conversations with adults and/or peers about what they are doing (e.g., shares stories and experiences from outside of the school).",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "PK3.I.C.1 Child forms positive relationships with adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.1",
+      "title": "Child uses effective verbal and nonverbal communication skills to build relationships with adults and peers.",
+      "description": "Child Behaviors: greet teachers and/or peers in the morning and say goodbye when leaving; demonstrate they are listening to adults and/or peers when communicating (e.g., looks at speaker, responds to verbal or nonverbal exchanges); engage in conversations with adults and/or peers about what they are doing (e.g., shares stories and experiences from outside of the school).",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "PK4.I.C.1 Child uses effective verbal and nonverbal communication skills to build relationships with adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.2",
+      "title": "Child assumes roles and responsibilities as part of the classroom community with adult assistance.",
+      "description": "Child Behaviors: readily accept and carry out \"classroom helper\" assignments with adult assistance; remind his teacher that it is his turn to shut off the lights; respect other's workspace and time with shared materials; take responsibility for cleaning up classroom materials after use.",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "PK3.I.C.2 Child assumes roles and responsibilities as part of the classroom community with adult assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.2",
+      "title": "Child assumes various roles and responsibilities as part of the classroom community.",
+      "description": "Child Behaviors: readily accept and carry out \"classroom helper\" assignments with adult assistance; remind his teacher that it is his turn to shut off the lights; respect other's workspace and time with shared materials; take responsibility for cleaning up classroom materials after use.",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "PK4.I.C.2 Child assumes various roles and responsibilities as part of the classroom community.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "I",
+      "title": "Social and Emotional Development",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "I. Social and Emotional Development Domain",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.3",
+      "title": "Child shows interest in peer play but may be less skilled in initiating and joining a group.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "PK3.I.C.3 Child shows interest in peer play but may be less skilled in initiating and joining a group.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.3",
+      "title": "Child shows competence in initiating social interactions.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 9,
+      "source_text": "PK4.I.C.3 Child shows competence in initiating social interactions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.4",
+      "title": "Child enjoys parallel and associative play with peers.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 10,
+      "source_text": "PK3.I.C.4 Child enjoys parallel and associative play with peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.4",
+      "title": "Child increasingly interacts with peers during cooperative play scenarios that share a common plan and goal.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 10,
+      "source_text": "PK4.I.C.4 Child increasingly interacts with peers during cooperative play scenarios that share a common plan and goal.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.5",
+      "title": "Child seeks adult help when experiencing conflicts with another child.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 10,
+      "source_text": "PK3.I.C.5 Child seeks adult help when experiencing conflicts with another child.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.5",
+      "title": "Child initiates problem-solving strategies when experiencing conflicts with others and seeks adult support when necessary.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 10,
+      "source_text": "PK4.I.C.5 Child initiates problem-solving strategies when experiencing conflicts with others and seeks adult support when necessary.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.6",
+      "title": "Child responds with concern when a child or adult is distressed.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 10,
+      "source_text": "PK3.I.C.6 Child responds with concern when a child or adult is distressed.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.6",
+      "title": "Child demonstrates empathy and caring for others.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 10,
+      "source_text": "PK4.I.C.6 Child demonstrates empathy and caring for others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.C.7",
+      "title": "Child interacts with peers and may have preferred friends.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "PK3.I.C.7 Child interacts with peers and may have preferred friends.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.C.7",
+      "title": "Child interacts with peers and has preferred friends.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "PK4.I.C.7 Child interacts with peers and has preferred friends.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "I.D",
+      "title": "Social Awareness",
+      "description": "Prekindergarten children need adult support and guidance in learning how to socially interact with others. It can be a challenge for a young child to sense other people's emotions or to imagine what someone else might be thinking or feeling. Teachers can reinforce children's social awareness skills by facilitating peer-to-peer and adult-to-child interactions and asking thought-provoking questions with the support of rich, socially relevant educational materials.",
+      "confidence": 0.92,
+      "source_page": 11,
+      "source_text": "D. Social Awareness\nPrekindergarten children need adult support and guidance in learning how to socially interact with others. It can be a challenge for a young child to sense other people's emotions or to imagine what someone else might be thinking or feeling. Teachers can reinforce children's social awareness skills by facilitating peer-to-peer and adult-to-child interactions and asking thought-provoking questions with the support of rich, socially relevant educational materials.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.I.D.1",
+      "title": "Child shows interest in other people and their feelings.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "PK3.I.D.1 Child shows interest in other people and their feelings.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.I.D.1",
+      "title": "Child demonstrates an understanding that others have perspectives and feelings that are similar and/or different from her own.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "PK4.I.D.1 Child demonstrates an understanding that others have perspectives and feelings that are similar and/or different from her own.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "II",
+      "title": "Emergent Literacy: Language and Communication",
+      "description": "During the prekindergarten years, children's expanding language skills have a tremendous impact upon their ability to read and write as they progress successfully through school.",
+      "confidence": 0.9,
+      "source_page": 13,
+      "source_text": "II. Emergent Literacy: Language and Communication Domain\nDuring the prekindergarten years, children's expanding language skills have a tremendous impact upon their ability to read and write as they progress successfully through school.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "I.C",
+      "title": "Relationships with Others",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 11,
+      "source_text": "PK3.I.C.7 Child interacts with peers and may have preferred friends.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "II.A",
+      "title": "Listening Comprehension",
+      "description": "From birth, children begin learning by listening to the world around them. As their exposure to language(s) increases, so does their understanding. Multilingual learners understand that they are hearing two language systems from a very early age. Prekindergarten-age children are able to comprehend (with increasing accuracy) what they hear in conversations and in stories read aloud. Children demonstrate understanding through their questions, comments, and actions.",
+      "confidence": 0.95,
+      "source_page": 13,
+      "source_text": "A. Listening Comprehension\nFrom birth, children begin learning by listening to the world around them. As their exposure to language(s) increases, so does their understanding. Multilingual learners understand that they are hearing two language systems from a very early age. Prekindergarten-age children are able to comprehend (with increasing accuracy) what they hear in conversations and in stories read aloud. Children demonstrate understanding through their questions, comments, and actions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.A.1",
+      "title": "Child responds to situations in ways that demonstrate an understanding of what has been communicated.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 14,
+      "source_text": "PK3.II.A.1 Child responds to situations in ways that demonstrate an understanding of what has been communicated.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.A.1",
+      "title": "Child shows understanding by responding appropriately to what has been communicated by adults and peers.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 14,
+      "source_text": "PK4.II.A.1 Child shows understanding by responding appropriately to what has been communicated by adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.A.2",
+      "title": "Child shows understanding by following two-step verbal directions.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 14,
+      "source_text": "PK3.II.A.2 Child shows understanding by following two-step verbal directions.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.A.2",
+      "title": "Child shows understanding by following three-step verbal directions.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 14,
+      "source_text": "PK4.II.A.2 Child shows understanding by following three-step verbal directions.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "II.B",
+      "title": "Speaking (Conversation)",
+      "description": "Prekindergarten children become increasingly able to describe their wants and needs, carry on conversations with others, and share information with both peers and adults. The ability to engage others in conversations involves asking questions, listening, and responding, as well as using verbal and nonverbal communication. Additionally, multilingual learners become increasingly aware of language context. For example, a staff member with knowledge of Spanish and English learns that he can have a conversation in Spanish with a bilingual librarian but will use English to express a preference to the non-bilingual art teacher. Children who are multilingual learners may require more time to respond because they are learning and processing two languages at once. Multilingual learners may also respond in one language and use the other language to fill in a word or phrase within a sentence. Both are normal parts of bilingual development. Multilingual learners should be encouraged and expected to demonstrate their speaking/communication skills in their home language as well as in English.",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "B. Speaking (Conversation)\nPrekindergarten children become increasingly able to describe their wants and needs, carry on conversations with others, and share information with both peers and adults.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.B.1",
+      "title": "Child uses language to communicate basic needs and wants.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "PK3.II.B.1 Child uses language to communicate basic needs and wants.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.B.1",
+      "title": "Child uses language for multiple purposes.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "PK4.II.B.1 Child uses language for multiple purposes.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.B.2",
+      "title": "Child begins to use appropriate language, style, and nonverbal cues during communication with familiar adults and peers.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "PK3.II.B.2 Child begins to use appropriate language, style, and nonverbal cues during communication with familiar adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.B.2",
+      "title": "Child engages in conversations in appropriate ways, demonstrating knowledge of verbal and nonverbal conversational rules.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "PK4.II.B.2 Child engages in conversations in appropriate ways, demonstrating knowledge of verbal and nonverbal conversational rules.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.B.3",
+      "title": "Child is able to communicate basic information in familiar social settings.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "\u0420\u041a\u0417.\u041f\u0406.\u0412.\u0417 Child is able to communicate basic information in familiar social settings.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.B.3",
+      "title": "Child provides appropriate information in various settings.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "PK4.II.B.3 Child provides appropriate information in various settings.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.B.4",
+      "title": "Child begins to use appropriate language for different situations.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "PK3.II.B.4 Child begins to use appropriate language for different situations.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.B.4",
+      "title": "Child matches language to social contexts.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "PK4.II.B.4 Child matches language to social contexts.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "II.C",
+      "title": "Articulation",
+      "description": "Prekindergarten children must learn to vocalize, pronounce, and discriminate sounds and words within languages. Learning to accurately perceive the difference between similar-sounding words will support children's development of early literacy skills and help set them up for future reading and writing success. Young children will continue to acquire the ability to recognize new sounds but may mispronounce some words in their own speech. Difficulty with producing some speech sounds (e.g., /l/, /r/, or /th/) is common for prekindergarten children but may improve with practice and age. Similarly, multilingual learners may need repeated, meaningful opportunities to more closely approximate the sounds of the language with which they are less familiar.",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "C. Articulation\nPrekindergarten children must learn to vocalize, pronounce, and discriminate sounds and words within languages.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.C.1",
+      "title": "Child's speech is understood by familiar adults and peers.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "PK3.II.C.1 Child's speech is understood by familiar adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.C.1",
+      "title": "Child's speech is understood by both familiar and unfamiliar adults and peers.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "PK4.II.C.1 Child's speech is understood by both familiar and unfamiliar adults and peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.C.2",
+      "title": "Child begins to mimic intonation of language through songs and fingerplay.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "PK3.II.C.2 Child begins to mimic intonation of language through songs and fingerplay.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.C.2",
+      "title": "Child demonstrates growing understanding of the intonation of language.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "PK4.II.C.2 Child demonstrates growing understanding of the intonation of language.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "II.D",
+      "title": "Vocabulary",
+      "description": "Vocabulary development is one of the most important predictors of later reading achievement.",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "D. Vocabulary\nVocabulary development is one of the most important predictors of later reading achievement.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "II",
+      "title": "Emergent Literacy: Language and Communication",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "II. Emergent Literacy:\nLanguage and Communication Domain",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.D.1",
+      "title": "Child understands (receptive) and uses (expressive) expected words to label and describe common objects, people, places, actions, and events.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 18,
+      "source_text": "PK3.II.D.1 Child understands (receptive) and uses (expressive) expected words to label and describe common objects, people, places, actions, and events.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.D.1",
+      "title": "Child understands (receptive) and uses (expressive) a wide variety of words to label, describe and make connections among objects, people, places, actions, and events.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 18,
+      "source_text": "PK4.II.D.1 Child understands (receptive) and uses (expressive) a wide variety of words to label, describe and make connections among objects, people, places, actions, and events.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.D.2",
+      "title": "Child understands (receptive) the instructional language of the classroom.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 18,
+      "source_text": "PK3.II.D.2 Child understands (receptive) the instructional language of the classroom.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.D.2",
+      "title": "Child understands (receptive) and uses (expressive) the instructional language of the classroom.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 18,
+      "source_text": "PK4.II.D.2 Child understands (receptive) and uses (expressive) the instructional language of the classroom.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.D.3",
+      "title": "Child shows a steady increase in listening and speaking vocabulary.",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 19,
+      "source_text": "PK3.II.D.3 Child shows a steady increase in",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.D.3",
+      "title": "Child consistently understands and uses an expanding vocabulary.",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 19,
+      "source_text": "PK4.II.D.3 Child consistently understands",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.D.3",
+      "title": "Child shows a steady increase in understanding (receptive) and using (expressive) language learned from books, conversations, and play.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 19,
+      "source_text": "PK3.II.D.3 Child shows a steady increase in understanding (receptive) and using (expressive) language learned from books, conversations, and play.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.D.3",
+      "title": "Child consistently understands (receptive) and uses (expressive) new vocabulary acquired through books, conversations, and play.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 19,
+      "source_text": "PK4.II.D.3 Child consistently understands (receptive) and uses (expressive) new vocabulary acquired through books, conversations, and play.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "II.E",
+      "title": "Sentences and Structure",
+      "description": "Prekindergarten children become increasingly adept at using language to express their needs and interests, share ideas, and participate in conversations with their peers. The grammatical complexity of a spoken sentence expands when they have plenty of opportunities for rich conversations with other children and adults. Children's overgeneralization of language rules, which results in the use of invented words (e.g., saying \"foots\" instead of \"feet\"), is a normal part of language acquisition. Multilingual learners may also overgeneralize across languages (e.g., saying \"the dog big\" instead of \"the big dog\" is an example of applying the Spanish language structure \"el perro grande\" in an English sentence). This flexibility of usage is not a sign of confusion but evidence of a developing bilingual brain. Another sign of developing bilingualism is the use of words from two languages in one sentence. For example, a sequential bilingual student learning Spanish in a dual language immersion program may say at the class party \"Quiero el cookie.\" This child is",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "E. Sentences and Structure\nPrekindergarten children become increasingly adept at using language to express their needs and interests, share ideas, and participate in conversations with their peers.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.E.1",
+      "title": "Child typically uses simple sentences of three to four words, usually in correct word order.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 20,
+      "source_text": "PK3.II.E.1 Child typically uses simple sentences of three to four words, usually in correct word order.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.E.1",
+      "title": "Child typically uses complete sentences of four or more words with age-appropriate grammatical complexity, usually in standard word order.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 20,
+      "source_text": "PK4.II.E.1 Child typically uses complete sentences of four or more words with age-appropriate grammatical complexity, usually in standard word order.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.E.2",
+      "title": "Child begins to use regular plurals and regular past tense correctly.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 20,
+      "source_text": "PK3.II.E.2 Child begins to use regular plurals and regular past tense correctly.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.E.2",
+      "title": "Child correctly uses regular and irregular plurals, regular past tense, personal and possessive pronouns, and subject-verb agreement.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 20,
+      "source_text": "PK4.II.E.2 Child correctly uses regular and irregular plurals, regular past tense, personal and possessive pronouns, and subject-verb agreement.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.E.3",
+      "title": "Child uses simple sentence structures with at least one idea.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 21,
+      "source_text": "PK3.II.E.3 Child uses simple sentence structures with at least one idea.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.E.3",
+      "title": "Child uses sentences that combine multiple phrases or ideas.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 21,
+      "source_text": "PK4.II.E.3 Child uses sentences that combine multiple phrases or ideas.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.II.E.4",
+      "title": "Child understands increasingly longer sentences that combine two ideas.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 21,
+      "source_text": "PK3.II.E.4 Child understands increasingly longer sentences that combine two ideas.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.II.E.4",
+      "title": "Child uses sentences that provide many details, remains on topic, and clearly communicates intended meaning.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 21,
+      "source_text": "PK4.II.E.4 Child uses sentences that provide many details, remains on topic, and clearly communicates intended meaning.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "III",
+      "title": "Emergent Literacy: Reading",
+      "description": "Learning to read and write are among the most important milestones and achievements in a young child's life. Early language and literacy instruction is critical because research has proven that emergent literacy skills serve as predictors for children's school readiness, and their later capacity to learn academic knowledge. Children acquire emergent literacy skills when they are actively engaged in meaningful and purposeful interactions and learning experiences. They develop an understanding of the everyday functions of print and gain the motivation to learn to read through daily exposure and engagement with various forms of verbal and written language, including nonfiction and fiction books, poems, songs, and nursery rhymes. Being read to and interacting with culturally relevant stories and print also helps children build their social and cultural identities. Even before children start school, they can become aware of systematic patterns of sounds in spoken languages, manipulate sounds in words, recognize words or environmental print, learn the relationship between sounds and letters, and establish a basic understanding of storytelling and story structure. The goal of emergent literacy instruction in prekindergarten is not to teach children to read connected text or even whole words, but rather to teach the building blocks that will, in later grades, provide children the foundation needed to become proficient readers and writers. When given ample opportunities to interact with books and other forms of print, as well as some explicit and systematic instruction in emergent literacy skills, children can learn much more about the purposes and concepts of written language and about the letters that can be combined to form print and their corresponding sounds. Young children learn best through experiences that are meaningful and interesting to them and benefit from guided practice and repetition. Multilingual learners learning to read only in English will use what they already know and understand about literacy in their primary language to make connections to emergent literacy experiences in English. Families of these learners must be empowered to understand that continuing to expose children to literacy experiences in their native language is not just important, but a critical form of literacy support that they are uniquely qualified to provide.",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "III. Emergent Literacy: Reading Domain\nLearning to read and write are among the most important milestones and achievements in a young child's life.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.A",
+      "title": "Motivation to Read",
+      "description": "The prekindergarten years are an important time for increased motivation to read and write and can be especially important for children who have not previously and do not currently have access to books. All children benefit immensely from the targeted opportunity to develop an understanding of and appreciation of written languages through early school experiences. Prekindergarten children benefit from classroom activities and environments that build on their own family backgrounds and personal experiences to create positive connections to reading and writing. These early experiences will come to define their expectations and influence their motivation to work toward learning to read and write independently. These same experiences also give families a first impression of how their home culture will be acknowledged and valued within the school system. It is therefore critical that students of all cultural and linguistic backgrounds see themselves and their families reflected in books, activities, and the classroom culture in general. Children who are motivated to read and write find pleasure in looking at the covers and illustrations in books, listening and making personal connections to stories being read aloud, and mimicking reading behaviors through independent exploration of books and other forms of text. They also have an intrinsic motivation to ask about surrounding print and a desire to understand how writing works. Learning to read is a gradual, ongoing process; however, building young children's enthusiasm for books and written text at an early age can impact their willingness to overcome potential future challenges with reading and writing.",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "A. Motivation to Read",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.A.1",
+      "title": "Child demonstrates an interest in pictures, text, and stories read aloud.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 23,
+      "source_text": "PK3.III.A.1 Child demonstrates an interest in pictures, text, and stories read aloud.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.A.1",
+      "title": "Child engages in story-related pre-reading activities.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 23,
+      "source_text": "PK4.III.A.1 Child engages in story-related pre-reading activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.A.2",
+      "title": "Child tells a story by looking at pictures or from memory.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 23,
+      "source_text": "PK3.III.A.2 Child tells a story by looking at pictures or from memory.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.A.2",
+      "title": "Child self-selects books and other written materials to engage in pre-reading behaviors.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 23,
+      "source_text": "PK4.III.A.2 Child self-selects books and other written materials to engage in pre-reading behaviors.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.A.3",
+      "title": "Child notices and connects meaning to environmental print.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "PK3.III.A.3 Child notices and connects meaning to environmental print.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.A.3",
+      "title": "Child recognizes that all print carries meaning and serves as a means for communication.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "PK4.III.A.3 Child recognizes that all print carries meaning and serves as a means for communication.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.B",
+      "title": "Phonological Awareness",
+      "description": "Phonological awareness is an auditory skill that involves the understanding of the sounds of spoken",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "B. Phonological Awareness\nPhonological awareness is an auditory skill that involves the understanding of the sounds of spoken",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "III",
+      "title": "Emergent Literacy: Reading",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "III. Emergent Literacy: Reading Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.A",
+      "title": "Emergent Literacy: Reading",
+      "description": "Children who develop a love of reading and interacting with text at an early age can impact their willingness to overcome potential future challenges with reading and writing.",
+      "confidence": 0.8,
+      "source_page": 23,
+      "source_text": "Emergent Literacy: Reading",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.1",
+      "title": "Child recognizes when a word in a spoken sentence is changed.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 25,
+      "source_text": "PK3.III.B.1 Child recognizes when a word in a spoken sentence is changed.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.1",
+      "title": "Child identifies the individual words in a spoken sentence.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 25,
+      "source_text": "PK4.III.B.1 Child identifies the individual words in a spoken sentence.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "III",
+      "title": "Emergent Literacy: Reading",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 26,
+      "source_text": "III. Emergent Literacy: Reading Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.B",
+      "title": "Phonological Awareness",
+      "description": "Oral language proficiency in children's native language supports the development of phonological awareness in English for first- and second-language learners. English learners draw upon their phonological awareness skills in their first language when developing phonological awareness in a second language. English learners benefit from explicit and systematic phonemic awareness instruction, specifically segmentation, blending, and manipulation. For multilingual learners who are exposed to phonological awareness instruction only in English, it is important to accept oral approximations of English sounds due to English proficiency level or articulation difficulties rather than correcting them in the moment. Non-standard pronunciation does not indicate a lack of understanding, and multilingual learners benefit more from targeted instruction rather than a quick correction.",
+      "confidence": 0.88,
+      "source_page": 25,
+      "source_text": "Oral language proficiency in children's native language supports the development of phonological awareness in English for first- and second-language learners.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.2",
+      "title": "Child begins to distinguish differences between similar-sounding words.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 26,
+      "source_text": "PK3.III.B.2 Child begins to distinguish differences between similar-sounding words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.2",
+      "title": "Child distinguishes differences between similar-sounding words.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 26,
+      "source_text": "PK4.III.B.2 Child distinguishes differences between similar-sounding words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.3",
+      "title": "Child recognizes the individual words in a compound word.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 26,
+      "source_text": "PK3.III.B.3 Child recognizes the individual words in a compound word.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.3",
+      "title": "Child uses two familiar base words to form a compound word with pictorial or gestural supports.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 26,
+      "source_text": "PK4.III.B.3 Child uses two familiar base words to form a compound word with pictorial or gestural supports.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.4",
+      "title": "Three-year olds do not typically develop word manipulation skills, so no outcome is included",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 27,
+      "source_text": "PK3.III.B.4 *Three-year olds do not typically develop word manipulation skills, so no outcome is included*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.4",
+      "title": "Child manipulates compound words with pictorial or gestural support.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 27,
+      "source_text": "PK4.III.B.4 Child manipulates compound words with pictorial or gestural support.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.5",
+      "title": "Child participates in oral syllabication activities.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 27,
+      "source_text": "PK3.III.B.5 Child participates in oral syllabication activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.5",
+      "title": "Child begins to blend and segment syllables in multisyllabic words.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 27,
+      "source_text": "PK4.III.B.5 Child begins to blend and segment syllables in multisyllabic words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.6",
+      "title": "Child uses rhyming words through playful activities such as songs, nursery rhymes, and fingerplay.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "PK3.III.B.6 Child uses rhyming words through playful activities such as songs, nursery rhymes, and fingerplay.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.6",
+      "title": "Child identifies rhyming words.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "PK4.III.B.6 Child identifies rhyming words.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "III",
+      "title": "Emergent Literacy: Reading",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "III. Emergent Literacy: Reading Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.B",
+      "title": "Phonological Awareness",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 27,
+      "source_text": "PK3.III.B.5",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.7",
+      "title": "Child uses alliteration through playful activities such as songs and read alouds.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "PK3.III.B.7 Child uses alliteration through playful activities such as songs and read alouds.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.7",
+      "title": "Child identifies alliterative words with pictorial support.",
+      "description": "Child Behaviors: The child may: pair pictures or sort objects into groups by beginning sound; identify words in rhyming songs that begin with the same sounds; make silly phrases by changing the beginning sounds of all words to have the same sound (e.g., \"Mappy Mirthday Moo Moo\"); play name games (e.g., producing a word that begins with same beginning sound as their name - Jumping Jasmine, Dancing David, Silly Sofia, Funny Fernando); listen to two sentences within a story and identify which sentence has alliteration in it.",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "PK4.III.B.7 Child identifies alliterative words with pictorial support.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.8",
+      "title": "Child participates in onset-rime blending activities (in English only).",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "PK3.III.B.8 Child participates in onset-rime blending activities (in English only).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.8",
+      "title": "Child identifies a familiar one-syllable word that is segmented by onset and rime (in English only).",
+      "description": "Child Behaviors: The child may: identify a word that is segmented by onset-rime (e.g., if the teacher says /b/+/ark/ then child will say \"bark\"); select the appropriate picture from several pictures when the teacher says a word segmented between the onset and rime (e.g., when shown several pictures, and adult says /r/+/ug/, child selects the picture of the rug); look at a picture of an animal and when the teacher says the onset, the child finishes the word by saying the rime (e.g., if the teacher says /t/ the child says /oad/).",
+      "confidence": 0.95,
+      "source_page": 28,
+      "source_text": "PK4.III.B.8 Child identifies a familiar one-syllable word that is segmented by onset and rime (in English only).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.B.9",
+      "title": "Three-year olds do not typically develop phonemic awareness, so no outcome is included.",
+      "description": "*Three-year olds do not typically develop phonemic awareness, so no outcome is included*",
+      "confidence": 0.85,
+      "source_page": 29,
+      "source_text": "PK3.III.B.9 *Three-year olds do not typically develop phonemic awareness, so no outcome is included*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.B.9",
+      "title": "Child blends and segments one-syllable words by phonemes with visual or gestural support.",
+      "description": "Child Behaviors: The child may: watch an adult say a word segmented by phonemes, tapping a dot for each phoneme, and correctly identifies the word by naming it or pointing to a picture/object that matches (e.g., teacher says, /b/- \u03c3/-/x/ and child points to a box or says \"box\"); pull down a chip for each phoneme they hear, when the teacher says a word segmented by phonemes; select a picture or an object and uses sound boxes or gestures to accurately segment the word by phoneme (e.g., child points to a hat and says /h/-/\u0103/-/t/).",
+      "confidence": 0.95,
+      "source_page": 29,
+      "source_text": "PK4.III.B.9 Child blends and segments one-syllable words by phonemes with visual or gestural support.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.C",
+      "title": "Alphabet Knowledge",
+      "description": "Alphabet knowledge is an essential component of emergent literacy and is a strong predictor of success in learning to read and write. Alphabet knowledge includes letter recognition, letter naming, letter-sound correspondence, and alphabetization. The distinction between each component of alphabet knowledge is identified below: letter recognition (a receptive skill): the ability to identify letters when asked to touch or point to a letter; letter naming (expressive skill): the ability to name letters with automaticity; letter-sound correspondence: knowledge of the common sounds - the sounds that a letter represents most frequently; alphabetization: the ability to say and place letters of the alphabet in sequential order. Letter formation is also an important aspect of alphabet knowledge because learning how to write each letter draws children's attention to the similarities and differences among letter shapes. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting. These experiences must integrate all components of alphabet knowledge and should include many opportunities for children to see letters within the context of written text. Relying solely on rote practice can result in frustration and negative attitudes toward learning. Knowing how letters function in writing and how these letters connect to the sounds children hear in words is crucial to children's success in reading. Combined with phonological awareness, letter knowledge is the key to children understanding the alphabetic principle. Children will use this sound/letter connection to begin to identify printed words, such as their names and other familiar words. In English, students generally identify letter names before letter sounds. However, in Spanish, children tend to learn letter sounds before letter names. During Spanish alphabet knowledge activities, students may know letter sounds before letter names. Children generally recognize capital letters before lowercase letters because uppercase letters are more distinguishable than lowercase letters.",
+      "confidence": 0.95,
+      "source_page": 29,
+      "source_text": "C. Alphabet Knowledge\nAlphabet knowledge is an essential component of emergent literacy and is a strong predictor of success in learning to read and write.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.C.1",
+      "title": "Child shows awareness of letters by singing alphabet songs and recognizing some frequently encountered letters (e.g., first letter of name or letters in environmental print).",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 30,
+      "source_text": "PK3.III.C.1 Child shows awareness of letters by singing alphabet songs and recognizing some frequently encountered letters (e.g., first letter of name or letters in environmental print).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.C.1",
+      "title": "Child recognizes and names at least 20 letters (upper- or lower-case letters).",
+      "description": "Child Behaviors: The child may: name letters on name cards, posters, books, and signs around the room; identify specific letters in shared reading or writing experiences (e.g., points to a letter in a book, circles a letter on a poster, etc.); recognize the letters in their own name; match upper and lowercase letters, while recalling the name of the letters; participate in letter recognition games or activities (e.g., alphabet bingo, alphabet arcs, letter hunts, I Spy the letter etc.).",
+      "confidence": 0.95,
+      "source_page": 30,
+      "source_text": "PK4.III.C.1 Child recognizes and names at least 20 letters (upper- or lower-case letters).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.C.2",
+      "title": "Child identifies the letter associated with the sound of the first letter of his name.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 31,
+      "source_text": "PK3.III.C.2 Child identifies the letter associated with the sound of the first letter of his name.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.C.2",
+      "title": "Child recognizes at least 20 distinct letter-sound correspondences.",
+      "description": "Child Behaviors: The child may: match a letter to the picture that begins with the corresponding letter sound; identify the letter that corresponds with a specific letter sound.",
+      "confidence": 0.95,
+      "source_page": 31,
+      "source_text": "PK4.III.C.2 Child recognizes at least 20 distinct letter-sound correspondences.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "III",
+      "title": "Emergent Literacy: Reading",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 31,
+      "source_text": "III. Emergent Literacy: Reading Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.C",
+      "title": "Alphabet Knowledge",
+      "description": "Along with phonological awareness, letter knowledge is the key to children understanding the alphabetic principle. Children will use this sound/letter connection to begin to identify printed words, such as their names and other familiar words. *Important things to note: In English, students generally identify letter names before letter sounds. However, in Spanish, children tend to learn letter sounds before letter names. During Spanish alphabet knowledge activities, students may know letter sounds before letter names. Children generally recognize capital letters before lowercase letters because uppercase letters are more distinguishable than lowercase letters.",
+      "confidence": 0.85,
+      "source_page": 30,
+      "source_text": "awareness, letter knowledge is the key to children understanding the alphabetic principle. Children will use this sound/letter connection to begin to identify printed words, such as their names and other familiar words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.C.3",
+      "title": "Child produces the correct sound for the first letter of his name.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 31,
+      "source_text": "PK3.III.C.3 Child produces the correct sound for the first letter of his name.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.C.3",
+      "title": "Child produces at least 20 distinct letter-sound correspondences.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 31,
+      "source_text": "PK4.III.C.3 Child produces at least 20 distinct letter-sound correspondences.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "III.D",
+      "title": "Comprehension of Text",
+      "description": "Exposure to many kinds of books, both fiction and nonfiction, helps prekindergarten children build vocabulary, make connections to text, build schema, and background knowledge, and become familiar with how stories and other types of texts work. Children develop concepts of story structures, character actions, and knowledge about informational text structure which influences how they understand, interpret, and link what they already know to new information. Multilingual learners must have read aloud experiences in their home language regardless of bilingual education or ESL program participation. These experiences are opportunities to learn everything mentioned above without a language barrier. Teachers of multilingual students must communicate the importance of home language read aloud experiences to families and support them as they provide these experiences at home. Multilingual learners who have experiences with stories read aloud in the home language can be prompted to make connections between texts in different languages.",
+      "confidence": 0.95,
+      "source_page": 31,
+      "source_text": "D. Comprehension of Text\nExposure to many kinds of books, both fiction and nonfiction, helps prekindergarten children build vocabulary, make connections to text, build schema, and background knowledge, and become familiar with how stories and other types of texts work.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.D.1",
+      "title": "Child re-enacts a story after it has been read aloud.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 32,
+      "source_text": "PK3.III.D.1 Child re-enacts a story after it has been read aloud.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.D.1",
+      "title": "Child retells or re-enacts a story with a clear beginning, middle, and end.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 32,
+      "source_text": "PK4.III.D.1 Child retells or re-enacts a story with a clear beginning, middle, and end.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.D.2",
+      "title": "Child makes personal connections to books read aloud.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 32,
+      "source_text": "PK3.III.D.2 Child makes personal connections to books read aloud.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.D.2",
+      "title": "Child uses information learned from books by describing, relating, categorizing, or comparing and contrasting.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 32,
+      "source_text": "PK4.III.D.2 Child uses information learned from books by describing, relating, categorizing, or comparing and contrasting.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.D.3",
+      "title": "Child asks and answers age-appropriate questions about a book.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 33,
+      "source_text": "PK3.III.D.3 Child asks and answers age-appropriate questions about a book.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.D.3",
+      "title": "Child asks and responds to questions relevant to the text read aloud.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 33,
+      "source_text": "PK4.III.D.3 Child asks and responds to questions relevant to the text read aloud.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.D.4",
+      "title": "Child attempts to make predictions by looking at the cover of a book or the pictures within a story.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 33,
+      "source_text": "PK3.III.D.4 Child attempts to make predictions by looking at the cover of a book or the pictures within a story.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.D.4",
+      "title": "Child makes inferences and predictions about a text.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 33,
+      "source_text": "PK4.III.D.4 Child makes inferences and predictions about a text.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "III.E",
+      "title": "Concepts of Print",
+      "description": "Through daily experiences with a variety of print materials, young children delight in discovering the connections between spoken and written words. Frequent exposure to print allows prekindergarten children to understand that print carries meaning and encourages them to explore what print is used for and how it works. Children will begin to recognize the distinction between letters, words, sentences, punctuation marks, and images. They will also deepen their understanding of how books work, including print directionality and appropriate handling of books, and learn how to hold and care for books. These print concepts and skills can be taught explicitly, modeled through shared reading experiences, and reinforced through print-rich learning environments. Print-rich learning environments incorporate labels, signs, letters, menus, magazines, digital media, and storybooks into every aspect of the day. Multilingual learners should be exposed to print in both the home language and English. Targeted instruction should be provided for students whose home language differs from English to explicitly compare characteristics of the two print systems, rather than elevate print concepts in one language over another. This will reinforce the transferability of many print concepts across both languages and help children understand key distinctions.",
+      "confidence": 0.95,
+      "source_page": 33,
+      "source_text": "E. Concepts of Print\nThrough daily experiences with a variety of print materials, young children delight in discovering the connections between spoken and written words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.E.1",
+      "title": "Child can distinguish between pictures and print.",
+      "description": "PK3 Outcome. Child can distinguish between pictures and print.",
+      "confidence": 0.95,
+      "source_page": 34,
+      "source_text": "PK3.III.E.1 Child can distinguish between pictures and print.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.E.1",
+      "title": "Child can distinguish between elements of print including letters, words, and pictures.",
+      "description": "PK4 Outcome. Child can distinguish between elements of print including letters, words, and pictures.",
+      "confidence": 0.95,
+      "source_page": 34,
+      "source_text": "PK4.III.E.1 Child can distinguish between elements of print including letters, words, and pictures.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.E.2",
+      "title": "Child handles books with increasing skill and imitates reading with awareness of directionality (e.g., imitates reading text across a page).",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 34,
+      "source_text": "PK3.III.E.2 Child handles books with increasing skill and imitates reading with awareness of directionality (e.g., imitates reading text across a page).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.E.2",
+      "title": "Child holds books right side up and demonstrates understanding of print directionality (e.g., knows where a book starts and ends, turns pages, points to words left to right, top to bottom, with correct sweeping).",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 34,
+      "source_text": "PK4.III.E.2 Child holds books right side up and demonstrates understanding of print directionality (e.g., knows where a book starts and ends, turns pages, points to words left to right, top to bottom, with correct sweeping).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.III.E.3",
+      "title": "Child begins to notice the basic features of print (e.g., repeating words, space between words, punctuation vs. letters).",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 35,
+      "source_text": "PK3.III.E.3 Child begins to notice the basic features of print (e.g., repeating words, space between words, punctuation vs. letters).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.III.E.3",
+      "title": "Child can identify some conventional features of print that communicate meaning including end punctuation and case.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 35,
+      "source_text": "PK4.III.E.3 Child can identify some conventional features of print that communicate meaning including end punctuation and case.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "IV",
+      "title": "Emergent Literacy: Writing",
+      "description": "Prekindergarten children begin to notice, imitate, and explore the many ways adults use writing to communicate. Early writing experiences may include asking adults to write their names, signs, and letters for them and progresses to independently imitating adults, using marks to represent their own thoughts and ideas. Through these early writing experiences, young children develop initial understandings about the forms, features, and functions of written language. Over time, children's writing attempts more closely approximate conventional writing. In prekindergarten classrooms, teachers serve as models and guides, writing for different purposes for and with children. Fine motor skills may impact children's ability to write legibly; however, this should not limit their opportunities to write for meaning. The child's level of fine motor development should determine the tools and the size of the surfaces that are provided for writing experiences. Fine motor skills can be developed alongside writing and through writing as children progress through the developmental stages. The Emergent Literacy: Writing Domain of the Texas Prekindergarten Guidelines is divided into the following skills: motivation to write, writing as a process, and conventions in writing. See Appendix.",
+      "confidence": 0.96,
+      "source_page": 36,
+      "source_text": "IV. Emergent Literacy: Writing Domain\nPrekindergarten children begin to notice, imitate, and explore the many ways adults use writing to communicate.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "IV.A",
+      "title": "Motivation to Write",
+      "description": "As young children watch adults write for many purposes, they develop the understanding that print conveys meaning and become motivated to write by engaging in drawing or scribbling to communicate. They will sketch lines and scribble \"notes\" in an attempt to imitate adults' writing behaviors and begin to make connections between print and spoken words. Eventually their writing abilities will progress, and they may begin to use letters or letter strings to communicate. It is important to remember that all efforts to convey meaning in the form of scribbles, letter-like forms, or strings of letters should be celebrated. Teachers play an important role in the development of prekindergarten children's emergent writing by encouraging them to communicate their thoughts and record their ideas.",
+      "confidence": 0.95,
+      "source_page": 36,
+      "source_text": "A. Motivation to Write\nAs young children watch adults write for many purposes, they develop the understanding that print conveys meaning and become motivated to write by engaging in drawing or scribbling to communicate.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.A.1",
+      "title": "Child engages in free-choice drawing and writing activities.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 36,
+      "source_text": "PK3.IV.A.1 Child engages in free-choice drawing and writing activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.A.1",
+      "title": "Child intentionally uses marks, letters, or symbols to record language and verbally shares meaning.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 36,
+      "source_text": "PK4.IV.A.1 Child intentionally uses marks, letters, or symbols to record language and verbally shares meaning.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.A.2",
+      "title": "Child attempts to draw and write for many purposes and begins to explore different writing tools.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 37,
+      "source_text": "PK3.IV.A.2 Child attempts to draw and write for many purposes and begins to explore different writing tools.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.A.2",
+      "title": "Child independently draws and writes for many purposes to communicate ideas, using a variety of writing tools.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 37,
+      "source_text": "PK4.IV.A.2 Child independently draws and writes for many purposes to communicate ideas, using a variety of writing tools.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "IV.B",
+      "title": "Writing as a Process",
+      "description": "As young children begin to understand that marks convey meaning (what they think, they can say; and what they say, they can read and write), it is important to model that writing is not simply about a product. Writing is a thought process that moves from thinking of an idea to a well-developed idea or piece of writing (one the young author is proud to share). Teachers who interact with children to compose a piece of writing over a series of days, using modeled, shared, and/or interactive writing expose children to the process of prewriting/brainstorming writing/drafting, revising (what the writing sounds like), editing (what the writing looks like), and publishing/sharing in a way that is",
+      "confidence": 0.95,
+      "source_page": 37,
+      "source_text": "B. Writing as a Process\nAs young children begin to understand that marks convey meaning (what they think, they can say; and what they say, they can read and write), it is important to model that writing is not simply about a product.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "IV",
+      "title": "Emergent Literacy: Writing",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 37,
+      "source_text": "IV. Emergent Literacy: Writing Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "A",
+      "title": "Writing as a Product",
+      "description": "",
+      "confidence": 0.8,
+      "source_page": 36,
+      "source_text": "PK3.IV.A.1 Child engages in free-choice drawing and writing activities.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "B",
+      "title": "Writing as a Process",
+      "description": "As young children begin to understand that marks convey meaning (what they think, they can say; and what they say, they can read and write), it is important to model that writing is not simply about a product. Writing is a thought process that moves from thinking of an idea to a well-developed idea or piece of writing (one the young author is proud to share). Teachers who interact with children to compose a piece of writing over a series of days, using modeled, shared, and/or interactive writing expose children to the process of prewriting/brainstorming writing/drafting, revising (what the writing sounds like), editing (what the writing looks like), and publishing/sharing in a way that is understandable. Children's ability to engage in each of the stages of the writing process develops over time. Guiding children through the process of taking a piece of writing from the \"thought stage\" to the \"sharing stage\" motivates children to write and helps them see and understand the power of using print to convey meaning. Multilingual students who begin writing in two languages will also learn which language is more appropriate to use based on context and audience.",
+      "confidence": 0.95,
+      "source_page": 37,
+      "source_text": "B. Writing as a Process\nAs young children begin to understand that marks convey meaning (what they think, they can say; and what they say, they can read and write), it is important to model that writing is not simply about a product.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.B.1",
+      "title": "Child discusses and contributes ideas for drafts composed in whole/small group writing activities with adult prompting.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 38,
+      "source_text": "PK3.IV.B.1 Child discusses and contributes ideas for drafts composed in whole/small group writing activities with adult prompting.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.B.1",
+      "title": "Child discusses and contributes ideas for drafts composed in whole/small group writing activities.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 38,
+      "source_text": "PK4.IV.B.1 Child discusses and contributes ideas for drafts composed in whole/small group writing activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.B.2",
+      "title": "Child observes and discusses ideas for revising (add, take out, change) drawings and/or written words in whole/small group writing activities.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 38,
+      "source_text": "PK3.IV.B.2 Child observes and discusses ideas for revising (add, take out, change) drawings and/or written words in whole/small group writing activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.B.2",
+      "title": "Child interacts and provides suggestions for revisions (add, take out, change order) and edits (conventions) in whole/small group writing activities.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 38,
+      "source_text": "PK4.IV.B.2 Child interacts and provides suggestions for revisions (add, take out, change order) and edits (conventions) in whole/small group writing activities.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.B.3",
+      "title": "Child shares written products with others.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "\u0420\u041a\u0417.IV.\u0412.\u0417 Child shares written products with others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.B.3",
+      "title": "Child shares and celebrates class-made and individual written products.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "PK4.IV.B.3 Child shares and celebrates class-made and individual written products.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "C",
+      "title": "Conventions in Writing",
+      "description": "Foundational writing skills (also known as conventional writing skills) are important predictors of children's future reading and writing skills. Just as children learn to talk by talking, children learn concepts of print through interacting with print. To children, it may appear that writing is simply talk that has been written down. However, there are rules that apply to writing that do not apply to speaking. These specific rules that govern how to record thoughts in writing must be learned so children can become more proficient at conveying their thoughts and actions. Shared and/or interactive writing experiences can help children better understand these conventions of writing.",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "C. Conventions in Writing\nFoundational writing skills (also known as conventional writing skills) are important predictors of children's future reading and writing skills.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.C.1",
+      "title": "Child attempts to write some letters of own name (usually beginning with the first letter).",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "PK3.IV.C.1 Child attempts to write some letters of own name (usually beginning with the first letter).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.C.1",
+      "title": "Child writes first name (or nickname) using legible letters in the proper sequence.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "PK4.IV.C.1 Child writes first name (or nickname) using legible letters in the proper sequence.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "IV",
+      "title": "Emergent Literacy: Writing",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 39,
+      "source_text": "IV. Emergent Literacy: Writing Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "IV.B",
+      "title": "Writing as a Process",
+      "description": "",
+      "confidence": 0.75,
+      "source_page": 39,
+      "source_text": "PK3.IV.B.3 Child shares written products with others.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "IV.C",
+      "title": "Conventions in Writing",
+      "description": "Foundational writing skills (also known as conventional writing skills) are important predictors of children's future reading and writing skills. Just as children learn to talk by talking, children learn concepts of print through interacting with print. To children, it may appear that writing is simply talk that has been written down. However, there are rules that apply to writing that do not apply to speaking. These specific rules that govern how to record thoughts in writing must be learned so children can become more proficient at conveying their thoughts and actions. Shared and/or interactive writing experiences can help children better understand these conventions of writing.",
+      "confidence": 0.95,
+      "source_page": 39,
+      "source_text": "C. Conventions in Writing\nFoundational writing skills (also known as conventional writing skills) are important predictors of children's future reading and writing skills. Just as children learn to talk by talking, children learn concepts of print through interacting with print. To children, it may appear that writing is simply talk that has been written down. However, there are rules that apply to writing that do not apply to speaking. These specific rules that govern how to record thoughts in writing must be learned so children can become more proficient at conveying their thoughts and actions. Shared and/or interactive writing experiences can help children better understand these conventions of writing.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.C.2",
+      "title": "Child uses drawings, scribbles, and mock letters to communicate ideas.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "PK3.IV.C.2 Child uses drawings, scribbles, and mock letters to communicate ideas.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.C.2",
+      "title": "Child progresses from using scribbles and mock letters to forming letters and letter strings as a way to communicate.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "PK4.IV.C.2 Child progresses from using scribbles and mock letters to forming letters and letter strings as a way to communicate.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.C.3",
+      "title": "Child begins to write using letter-like forms.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "PK3.IV.C.3 Child begins to write using letter-like forms.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.C.3",
+      "title": "Child begins to write familiar words using letter-sound correspondences, often using letters associated with beginning and/or ending sounds to write words.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "PK4.IV.C.3 Child begins to write familiar words using letter-sound correspondences, often using letters associated with beginning and/or ending sounds to write words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.C.4",
+      "title": "Child begins to show understanding of directionality (e.g., attempts to write top to bottom, left to right), but may still start at random places on a page.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "PK3.IV.C.4 Child begins to show understanding of directionality (e.g., attempts to write top to bottom, left to right), but may still start at random places on a page.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.C.4",
+      "title": "Child uses appropriate directionality when writing (e.g., top to bottom, left to right).",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 40,
+      "source_text": "PK4.IV.C.4 Child uses appropriate directionality when writing (e.g., top to bottom, left to right).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IV.C.5",
+      "title": "*There is not enough research to support the inclusion of a PK3 outcome*",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 41,
+      "source_text": "PK3.IV.C.5 *There is not enough research to support the inclusion of a PK3 outcome*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IV.C.5",
+      "title": "Child begins to experiment with punctuation when writing.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 41,
+      "source_text": "PK4.IV.C.5 Child begins to experiment with punctuation when writing.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "V",
+      "title": "Mathematics",
+      "description": "Prekindergarten children's mathematical understandings are built on informal experiences acquired at a very early age. For example, young children know immediately if someone gets more cookies than they do simply by looking at the amount of cookies given. Teachers can build upon these informal foundational mathematical experiences by: 1.) planning a rich environment where math concepts can be practiced, 2.) offering sequential learning experiences that give children the opportunity to learn math concepts and skills, and 3.) taking advantage of the opportunities in the classroom where mathematical reasoning is meaningful for the child. The classroom environment can effectively support mathematical competencies. Those competencies require the use of informal representation of math concepts. Abstract symbols, no matter how carefully designed or simplified, cannot involve the child's senses the way real materials can. Real materials can be maneuvered to demonstrate the math concept concretely and can be experienced visually by the child. Concrete representation such as counters, tally marks, fingers, or other objects help children create connection to math concepts. In addition, concrete objects allow multilingual learners the opportunity to demonstrate their mathematical knowledge even if they do not have the language to express it yet. As children gain comfort with concrete representation, they will begin to use pictorial representations which prepare them for abstract representations.",
+      "confidence": 0.95,
+      "source_page": 42,
+      "source_text": "V. Mathematics Domain\nPrekindergarten children's mathematical understandings are built on informal experiences acquired at a very early age.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "V",
+      "title": "Mathematics Domain",
+      "description": "Prekindergarten children's mathematical understandings are built on informal experiences acquired at a very early age. For example, young children know immediately if someone gets more cookies than they do simply by looking at the amount of cookies given. Teachers can build upon these informal foundational mathematical experiences by: 1.) planning a rich environment where math concepts can be practiced, 2.) offering sequential learning experiences that give children the opportunity to learn math concepts and skills, and 3.) taking advantage of the opportunities in the classroom where mathematical reasoning is meaningful for the child. The classroom environment can effectively support mathematical competencies. Those competencies require the use of informal representation of math concepts. Abstract symbols, no matter how carefully designed or simplified, cannot involve the child's senses the way real materials can. Real materials can be maneuvered to demonstrate the math concept concretely and can be experienced visually by the child. Concrete representation such as counters, tally marks, fingers, or other objects help children create connection to math concepts. In addition, concrete objects allow multilingual learners the opportunity to demonstrate their mathematical knowledge even if they do not have the language to express it yet. As children gain comfort with concrete representation, they will begin to use pictorial representations which prepare them for abstract representations. Although math concepts and skills can be learned through one's experiences, teacher-directed instruction that focuses on the progression of skills/concepts is an effective way to introduce and/or expand each child's mathematical sense. All math concepts should be taught from the progression of easy-to-understand to the more difficult. Teachers should be especially sensitive to what is known about each individual learner's developmental skills to meet their needs most effectively. Early math instruction is not limited to a specific period or time of the day in the prekindergarten classroom. Instead, it is a natural part of any quality prekindergarten learning environment and can be incorporated throughout the day. The Math domain of the Texas Prekindergarten Guidelines is divided into the following skills: number sense, joining and separating, geometry and spatial sense, measurement, and classification and patterns.",
+      "confidence": 0.97,
+      "source_page": 42,
+      "source_text": "V. Mathematics Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "V.A",
+      "title": "Number Sense",
+      "description": "Number sense is a broad term that refers to a set of prerequisite skills that are needed to perform basic math operations; it is the deep understanding of how numbers work. Number sense includes counting, number recognition, understanding quantities, composing, and decomposing numbers, and making number comparisons. It is one of the strongest indicators of overall mathematics achievement. Prekindergarten children learn number sense through play and continuous exploration in their natural environment. Prekindergarten teachers can organize experiences for children by intentionally setting up the environment to promote these experiences. The prekindergarten child has innately learned much about counting and numbers from the environment they live in. They sing songs and listen to rhymes that contain numbers and can hold up the right number of fingers to show how old they are. To strengthen their ability to count with an understanding of quantity, the classroom should be filled with opportunities to practice the counting sequence. Counting is foundational to later math concept development. To develop a strong understanding of quantity and, eventually, how to manipulate quantities (like adding and subtracting), children need an abundance of counting experiences. Prekindergarten children also begin to learn about quantities. They will understand that quantities, whether tangible or theoretical, are countable. They will also learn that numerals are used to represent the quantities. In addition to developing an initial understanding of a quantity of small groups of objects, children can compare small groups to tell if the groups are the same, if one is smaller (has less or fewer), or which group has more. An understanding of these comparisons provides an important foundation which helps the child fully grasp the relationship and correlation between one number and another at the concrete level. A strong foundation in number sense teaches children to be flexible in their problem solving. Children learn that numbers are meaningful and despite manipulation, their outcomes are constant and sensible.",
+      "confidence": 0.96,
+      "source_page": 43,
+      "source_text": "A. Number Sense",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.1",
+      "title": "Child rote counts from 1 to 10.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 43,
+      "source_text": "PK3.V.A.1 Child rote counts from 1 to 10.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.1",
+      "title": "Child rote counts from 1 to 30.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 43,
+      "source_text": "PK4.V.A.1 Child rote counts from 1 to 30.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.2",
+      "title": "Child counts up to 5 objects with one-to-one correspondence.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 43,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0410.2 Child counts up to 5 objects with one-to-one correspondence.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.2",
+      "title": "Child counts up to 10 objects with one-to-one correspondence.",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 43,
+      "source_text": "PK4.V.A.2 Child counts up to 10 objects with one-to-one correspondence.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "V",
+      "title": "Mathematics",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 44,
+      "source_text": "V. Mathematics Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "A",
+      "title": "Number Sense",
+      "description": "Children come to school with a natural curiosity about counting and numbers from the environment they live in. They sing songs and listen to rhymes that contain numbers and can hold up the right number of fingers to show how old they are. To strengthen their ability to count with an understanding of quantity, the classroom should be filled with opportunities to practice the counting sequence. Counting is foundational to later math concept development. To develop a strong understanding of quantity and, eventually, how to manipulate quantities (like adding and subtracting), children need an abundance of counting experiences. Prekindergarten children also begin to learn about quantities. They will understand that quantities, whether tangible or theoretical, are countable. They will also learn that numerals are used to represent the quantities. In addition to developing an initial understanding of a quantity of small groups of objects, children can compare small groups to tell if the groups are the same, if one is smaller (has less or fewer), or which group has more. An understanding of these comparisons provides an important foundation which helps the child fully grasp the relationship and correlation between one number and another at the concrete level. A strong foundation in number sense teaches children to be flexible in their problem solving. Children learn that numbers are meaningful and despite manipulation, their outcomes are constant and sensible.",
+      "confidence": 0.9,
+      "source_page": 43,
+      "source_text": "Children come to school with a natural curiosity about counting and numbers from the environment they live in.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.3",
+      "title": "Child counts up to 5 items and demonstrates cardinality by communicating that the last number indicates how many items are in the set.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 44,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0410.\u0417 Child counts up to 5 items and demonstrates cardinality by communicating that the last number indicates how many items are in the set.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.3",
+      "title": "Child counts up to 10 items and demonstrates cardinality by communicating that the last number indicates how many items are in the set.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 44,
+      "source_text": "PK4.V.A.3 Child counts up to 10 items and demonstrates cardinality by communicating that the last number indicates how many items are in the set.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.4",
+      "title": "Child instantly recognizes the quantity of up to 3 objects without counting (subitizes).",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 44,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0410.4 Child instantly recognizes the quantity of up to 3 objects without counting (subitizes).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.4",
+      "title": "Child instantly recognizes the quantity of up to 6 objects without counting (subitizes).",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 44,
+      "source_text": "PK4.V.A.4 Child instantly recognizes the quantity of up to 6 objects without counting (subitizes).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.5",
+      "title": "Child recognizes numerals 0-5.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 45,
+      "source_text": "PK3.V.A.5 Child recognizes numerals 0-5.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.5",
+      "title": "Child recognizes numerals 0-10.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 45,
+      "source_text": "PK4.V.A.5 Child recognizes numerals 0-10.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.6",
+      "title": "Child represents quantities up to 5.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 45,
+      "source_text": "PK3.V.A.6 Child represents quantities up to 5.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.6",
+      "title": "Child represents quantities up to 10.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 45,
+      "source_text": "PK4.V.A.6 Child represents quantities up to 10.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.7",
+      "title": "There is not enough research to support the inclusion of a PK3 outcome",
+      "description": "*There is not enough research to support the inclusion of a PK3 outcome*",
+      "confidence": 0.9,
+      "source_page": 45,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0410.7 *There is not enough research to support the inclusion of a PK3 outcome*",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.7",
+      "title": "Child begins to understand that numbers 0-10 can be composed and decomposed in various ways to represent a quantity.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 45,
+      "source_text": "PK4.V.A.7 Child begins to understand that numbers 0-10 can be composed and decomposed in various ways to represent a quantity.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.A.8",
+      "title": "Child compares sets of objects up to 5 using comparative language (e.g., greater/more than, less/fewer than, equal to/same number of).",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 46,
+      "source_text": "PK3.V.A.8 Child compares sets of objects up to 5 using comparative language (e.g., greater/more than, less/fewer than, equal to/same number of).",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.A.8",
+      "title": "Child compares sets of objects up to 10 using comparative language (e.g., more than, less than, same number of).",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 46,
+      "source_text": "PK4.V.A.8 Child compares sets of objects up to 10 using comparative language (e.g., more than, less than, same number of).",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "B",
+      "title": "Joining and Separating",
+      "description": "This math skill develops the concept of more, less, and the same. Children make comparisons - an understanding of these comparisons provides an important foundation which helps the child fully grasp the relationship and correlation between one number and another at the concrete level. It is especially important that young children be given numerous opportunities during the school day to manipulate objects to internalize this mathematical concept.",
+      "confidence": 0.92,
+      "source_page": 46,
+      "source_text": "B. Joining and Separating\nThis math skill develops the concept of more, less, and the same.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.B.1",
+      "title": "Child uses objects to demonstrate that adding one or more objects to a set will increase the number of objects in the set.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 46,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0412.1 Child uses objects to demonstrate that adding one or more objects to a set will increase the number of objects in the set.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.B.1",
+      "title": "Child uses objects, pictorial models, and/or a verbal word problem to represent adding up to 5 objects.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 46,
+      "source_text": "PK4.V.B.1 Child uses objects, pictorial models, and/or a verbal word problem to represent adding up to 5 objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.B.2",
+      "title": "Child uses objects to demonstrate that taking away one or more objects from a set will decrease the number of objects in the set.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 47,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0412.2 Child uses objects to demonstrate that taking away one or more objects from a set will decrease the number of objects in the set.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.B.2",
+      "title": "Child uses objects, pictorial models, and/or a verbal word problem to represent subtracting objects from a set of 5.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 47,
+      "source_text": "PK4.V.B.2 Child uses objects, pictorial models, and/or a verbal word problem to represent subtracting objects from a set of 5.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "C",
+      "title": "Geometry and Spatial Sense",
+      "description": "The basis of geometry and spatial sense skills begins with a child who explores, describes, and organizes objects according to their attributes and position/location. Through intentional classroom activities guided by teachers, children notice and describe small details in the materials they see in the environment, using terms that categorize their shape and describe their relative position in space. They then progress to investigating what happens when two shapes are put together, and they can apply their ideas about location to the object's direction and distance.",
+      "confidence": 0.92,
+      "source_page": 47,
+      "source_text": "C. Geometry and Spatial Sense\nThe basis of geometry and spatial sense skills begins with a child who explores, describes, and organizes objects according to their attributes and position/location.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.C.1",
+      "title": "Child names and describes common 2D shapes.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 47,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0421.1 Child names and describes common 2D shapes.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.C.1",
+      "title": "Child names and describes common 2D shapes and names at least 1 solid 3D shape.",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 47,
+      "source_text": "PK4.V.C.1 Child names and describes common 2D shapes and names at least 1 solid 3D shape.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "V",
+      "title": "Mathematics",
+      "description": "",
+      "confidence": 0.97,
+      "source_page": 47,
+      "source_text": "V. Mathematics Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "B",
+      "title": "Operations and Algebraic Thinking",
+      "description": "",
+      "confidence": 0.75,
+      "source_page": 47,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0412.2",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.C.2",
+      "title": "Child attempts to create shapes using materials and/or manipulatives.",
+      "description": "Child Behaviors: put shapes together to make real-world objects (e.g., uses a square and a triangle to make a house); place pattern block shapes together to make new shapes (e.g., uses 2 triangles to make a square); make and name a shape created when playing with playdough (e.g., says \"I'm making a circle\")",
+      "confidence": 0.95,
+      "source_page": 48,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0421.2 Child attempts to create shapes using materials and/or manipulatives.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.C.2",
+      "title": "Child creates shapes using materials and/or manipulatives.",
+      "description": "Child Behaviors: put shapes together to make real-world objects (e.g., uses a square and a triangle to make a house); place pattern block shapes together to make new shapes (e.g., uses 2 triangles to make a square); make and name a shape created when playing with playdough (e.g., says \"I'm making a circle\")",
+      "confidence": 0.95,
+      "source_page": 48,
+      "source_text": "PK4.V.C.2 Child creates shapes using materials and/or manipulatives.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.C.3",
+      "title": "Child begins to use language to describe position of objects.",
+      "description": "Child Behaviors: use the words \"near\" and \"far\" to describe distance of objects on the playground and in the classroom; follow directions that use location words (e.g., places a stuffed animal \"on\" or \"under\" a chair, sits \"beside\" or \"between\" friends on the carpet, gets \"in front of\" or \"behind\" a peer in line, etc.); tell a friend, using location words, where to find an object (e.g., says \"The paper is in front of the markers in the writing center.\")",
+      "confidence": 0.95,
+      "source_page": 48,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0421.\u0417 Child begins to use language to describe position of objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.C.3",
+      "title": "Child demonstrates use of position words.",
+      "description": "Child Behaviors: use the words \"near\" and \"far\" to describe distance of objects on the playground and in the classroom; follow directions that use location words (e.g., places a stuffed animal \"on\" or \"under\" a chair, sits \"beside\" or \"between\" friends on the carpet, gets \"in front of\" or \"behind\" a peer in line, etc.); tell a friend, using location words, where to find an object (e.g., says \"The paper is in front of the markers in the writing center.\")",
+      "confidence": 0.95,
+      "source_page": 48,
+      "source_text": "PK4.V.C.3 Child demonstrates use of position words.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.C.4",
+      "title": "Child recognizes common shapes, regardless of size.",
+      "description": "Child Behaviors: demonstrate understanding that a shape stays the same across various orientations (e.g., identifies shape correctly while playing with blocks no matter how they are oriented on the floor or table); sort a small pile of pattern block shapes into similar shapes, regardless of size; match shapes that are oriented differently from others (e.g., identifies and matches the two triangles from a group of shapes even though one is oriented sideways, and one is oriented with the tip pointing downwards); hold a pattern block and finds others of the same shape around the room, regardless of orientation and size",
+      "confidence": 0.95,
+      "source_page": 48,
+      "source_text": "PK3.V.C.4 Child recognizes common shapes, regardless of size.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.C.4",
+      "title": "Child recognizes common shapes, regardless of orientation and size.",
+      "description": "Child Behaviors: demonstrate understanding that a shape stays the same across various orientations (e.g., identifies shape correctly while playing with blocks no matter how they are oriented on the floor or table); sort a small pile of pattern block shapes into similar shapes, regardless of size; match shapes that are oriented differently from others (e.g., identifies and matches the two triangles from a group of shapes even though one is oriented sideways, and one is oriented with the tip pointing downwards); hold a pattern block and finds others of the same shape around the room, regardless of orientation and size",
+      "confidence": 0.95,
+      "source_page": 48,
+      "source_text": "PK4.V.C.4 Child recognizes common shapes, regardless of orientation and size.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "D",
+      "title": "Measurement",
+      "description": "Young children can recognize differences in the measurable aspects of objects by saying things like \"Her cup is less full than mine\" or \"My dog is heavier than your dog because he is bigger\". Classroom activities that include explorations of weight, length, and capacity should involve children in hands-on learning using measurement tools. Teachers can introduce and reinforce terms associated with measurement such as longer, shorter, heavier, and lighter. Early measurement skills begin with comparisons before progressing to using a unit to measure.",
+      "confidence": 0.97,
+      "source_page": 49,
+      "source_text": "D. Measurement\nYoung children can recognize differences in the measurable aspects of objects by saying things like \"Her cup is less full than mine\" or \"My dog is heavier than your dog because he is bigger\".",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.D.1",
+      "title": "Child understands that lengths of objects can vary and be compared.",
+      "description": "Child Behaviors: identify who is taller when comparing the height of 2 or more friends; place 2-10 objects from shortest to tallest or tallest to shortest on the table; use measurement words that can describe height (e.g., uses words like \"taller,\" \"shorter,\" \"longer,\" or \"smaller\")",
+      "confidence": 0.95,
+      "source_page": 49,
+      "source_text": "PK3.V.D.1 Child understands that lengths of objects can vary and be compared.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.D.1",
+      "title": "Child recognizes and compares heights or lengths of people or objects.",
+      "description": "Child Behaviors: identify who is taller when comparing the height of 2 or more friends; place 2-10 objects from shortest to tallest or tallest to shortest on the table; use measurement words that can describe height (e.g., uses words like \"taller,\" \"shorter,\" \"longer,\" or \"smaller\")",
+      "confidence": 0.95,
+      "source_page": 49,
+      "source_text": "PK4.V.D.1 Child recognizes and compares heights or lengths of people or objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.D.2",
+      "title": "Child begins to recognize capacity based on how much space exists within an object.",
+      "description": "Child Behaviors: compare the amount of space occupied by objects (e.g., says \"I want the big bowl of cereal; it has more.\"); demonstrate understanding of capacity while filling containers using measuring cups (e.g., says \"I think this one will take two cups to fill it up to the top.\"); compare capacity of containers accurately (e.g., can compare and identify which object will hold more water when filled)",
+      "confidence": 0.95,
+      "source_page": 49,
+      "source_text": "PK3.V.D.2 Child begins to recognize capacity based on how much space exists within an object.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.D.2",
+      "title": "Child recognizes and compares capacity based on how much space exists within an object.",
+      "description": "Child Behaviors: compare the amount of space occupied by objects (e.g., says \"I want the big bowl of cereal; it has more.\"); demonstrate understanding of capacity while filling containers using measuring cups (e.g., says \"I think this one will take two cups to fill it up to the top.\"); compare capacity of containers accurately (e.g., can compare and identify which object will hold more water when filled)",
+      "confidence": 0.95,
+      "source_page": 49,
+      "source_text": "PK4.V.D.2 Child recognizes and compares capacity based on how much space exists within an object.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.D.3",
+      "title": "Child understands that weights of objects can vary and be compared.",
+      "description": "Child Behaviors: use hands to compare weight of objects (e.g., holds pumpkins of various sizes and says which is heavier or lighter)",
+      "confidence": 0.95,
+      "source_page": 50,
+      "source_text": "PK3.V.D.3 Child understands that weights of objects can vary and be compared.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.D.3",
+      "title": "Child recognizes and compares weights of objects.",
+      "description": "Child Behaviors: use hands to compare weight of objects (e.g., holds pumpkins of various sizes and says which is heavier or lighter)",
+      "confidence": 0.95,
+      "source_page": 50,
+      "source_text": "PK4.V.D.3 Child recognizes and compares weights of objects.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "V.D",
+      "title": "Measurement",
+      "description": "Young children can recognize differences in the measurable aspects of objects by saying things like \"Her cup is less full than mine\" or \"My dog is heavier than your dog because he is bigger\". Classroom activities that include explorations of weight, length, and capacity should involve children in hands-on learning using measurement tools. Teachers can introduce and reinforce terms associated with measurement such as longer, shorter, heavier, and lighter. Early measurement skills begin with comparisons before progressing to using a unit to measure.",
+      "confidence": 0.95,
+      "source_page": 49,
+      "source_text": "D. Measurement\nYoung children can recognize differences in the measurable aspects of objects by saying things like \"Her cup is less full than mine\" or \"My dog is heavier than your dog because he is bigger\". Classroom activities that include explorations of weight, length, and capacity should involve children in hands-on learning using measurement tools. Teachers can introduce and reinforce terms associated with measurement such as longer, shorter, heavier, and lighter. Early measurement skills begin with comparisons before progressing to using a unit to measure.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.D.4",
+      "title": "Child shows awareness of the passage of time within a day.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 50,
+      "source_text": "PK3.V.D.4 Child shows awareness of the passage of time within a day.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.D.4",
+      "title": "Child uses language to describe concepts associated with the passing of time within a day.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 50,
+      "source_text": "PK4.V.D.4 Child uses language to describe concepts associated with the passing of time within a day.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "V.E",
+      "title": "Classification and Patterns",
+      "description": "Children can sort and classify objects according to one or more of their characteristics. With guidance, they learn how to arrange a pattern so that an attribute repeats itself over and over in a predictable manner. In their interaction with adults and peers, children use foundational math vocabulary, picking up words used for comparison, position, and sequencing. As children progress, they extend their comparing skills by creating visual representations of objects in the form of graphs.",
+      "confidence": 0.95,
+      "source_page": 51,
+      "source_text": "E. Classification and Patterns\nChildren can sort and classify objects according to one or more of their characteristics. With guidance, they learn how to arrange a pattern so that an attribute repeats itself over and over in a predictable manner. In their interaction with adults and peers, children use foundational math vocabulary, picking up words used for comparison, position, and sequencing. As children progress, they extend their comparing skills by creating visual representations of objects in the form of graphs.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.E.1",
+      "title": "Child sorts objects that are the same and different.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 51,
+      "source_text": "PK3.V.E.1 Child sorts objects that are the same and different.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.E.1",
+      "title": "Child sorts objects that are the same and different into groups and uses language to describe how the groups are similar and different.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 51,
+      "source_text": "PK4.V.E.1 Child sorts objects that are the same and different into groups and uses language to describe how the groups are similar and different.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.E.2",
+      "title": "Child participates in group activities of",
+      "description": "",
+      "confidence": 0.7,
+      "source_page": 51,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0415.2 Child participates in group activities of",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.E.2",
+      "title": "Child participates in group activities of collecting data and organizing it into graphic representations.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 51,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0415.2 Child participates in group activities of\ncollecting data and organizing it into graphic\nrepresentations.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.E.2",
+      "title": "Child collects data and organizes it in a graphic representation.",
+      "description": "Child Behaviors\nThe child may:\nplace concrete objects or picture representations on a floor graph (e.g., uses an apple or orange to show their favorite fruit)\nanswer the question of the week (e.g., \"Do you have a cat?\") and places a check on the yes or no graph\ncompare data on graphs or charts (e.g., talks about the class-made graph showing how children get to school-walk, car, bus, vans-says, \"Look Juan walks to school. See his name is here.\")",
+      "confidence": 0.95,
+      "source_page": 51,
+      "source_text": "PK4.V.E.2 Child collects data and organizes it in a\ngraphic representation.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.V.E.3",
+      "title": "Child recognizes and duplicates patterns.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 52,
+      "source_text": "\u0420\u041a\u0417.\u0474.\u0415.\u0417 Child recognizes and duplicates\npatterns.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.V.E.3",
+      "title": "Child recognizes, duplicates, extends, and creates patterns.",
+      "description": "Child Behaviors\nThe child may:\nidentify repeating patterns in their environment\nuse different materials (e.g., buttons, beads, color cubes) to create pattern necklaces (e.g., 2 buttons, 2 beads, 2 buttons, 2 beads, etc.)\nanticipate repeating patterns in a predictable book and says the next line before turning the page\ncreate a repeated pattern using different colored blocks\naccurately continue to add to an already established pattern",
+      "confidence": 0.95,
+      "source_page": 52,
+      "source_text": "PK4.V.E.3 Child recognizes, duplicates, extends,\nand creates patterns.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "VI",
+      "title": "Science",
+      "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them.\n\nScience concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts.\n\nThe Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science.",
+      "confidence": 0.97,
+      "source_page": 53,
+      "source_text": "VI. Science Domain\nYoung children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science...",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VI.A",
+      "title": "Physical Science",
+      "description": "Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences.",
+      "confidence": 0.95,
+      "source_page": 53,
+      "source_text": "A. Physical Science\nPrekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.A.1",
+      "title": "Child observes, investigates, describes, and discusses characteristics of common objects.",
+      "description": "No PK3 outcomes for this domain of learning.\n\nChild Behaviors\nThe child may:\nexplore using his senses and uses sensory language to describe characteristics of natural and human-made objects and materials (e.g., wood, cotton, fur, stone, leather, plastic, paper, foil, ingredients for cooking, feathers, sponges)\nsort, group, or classify objects in meaningful ways based on one or more characteristics (e.g., hard/soft or heavy/light; materials that are made of wood, plastic, rock)\ninvestigate and predict what common objects will do in response to an action (e.g., whether materials will sink/float or melt/freeze)",
+      "confidence": 0.96,
+      "source_page": 53,
+      "source_text": "PK4.VI.A.1 Child observes, investigates, describes,\nand discusses characteristics of common objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.A.2",
+      "title": "Child observes, investigates, describes, and discusses position and motion of objects.",
+      "description": "No PK3 outcomes for this domain of learning.\n\nChild Behaviors\nThe child may:\nobserve, measure, describe, and demonstrate the numerous ways objects can move (e.g., straight, zigzag, round and round, fast, slow)\nuse positional language to inform others of the location, arrangement and/or stance of an object (e.g., the books are under the table, my folder is inside my bag, you are in front of me on the carpet, the car is beside the track, the ball is near the court etc.)\ninvestigate, predict, and state conclusions regarding how an object moves under a variety of conditions (e.g., \"The car won't roll on the carpet,\" \"These wheels are bigger; it will go faster.\")",
+      "confidence": 0.96,
+      "source_page": 54,
+      "source_text": "PK4.VI.A.2 Child observes, investigates, describes,\nand discusses position and motion of objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.A.3",
+      "title": "Child uses simple scientific tools to learn about objects.",
+      "description": "No PK3 outcomes for this domain of learning.\n\nChild Behaviors\nThe child may:\nknow the function of specific tools (e.g., a thermometer measures temperature)\nexplore objects by appropriately using magnets, balances, eyedroppers, beakers/jars, etc.\nuse a magnifying glass to observe, describe, and discuss the features of a common object (e.g., texture, color, shape, etc.)",
+      "confidence": 0.96,
+      "source_page": 54,
+      "source_text": "PK4.VI.A.3 Child uses simple scientific tools to\nlearn about objects.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.A.4",
+      "title": "Child observes, investigates, describes, and discusses sources of energy including light, heat, and electricity.",
+      "description": "No PK3 outcomes for this domain of learning.\n\nChild Behaviors\nThe child may:\ndescribe common sources of energy (e.g., sun, wind, water)\ndemonstrate understanding that some items/equipment must have a source of energy to operate",
+      "confidence": 0.96,
+      "source_page": 55,
+      "source_text": "PK4.VI.A.4 Child observes, investigates, describes,\nand discusses sources of energy including light,\nheat, and electricity.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "VI",
+      "title": "Science Domain",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 55,
+      "source_text": "VI. Science Domain",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VI.A",
+      "title": "Physical Science",
+      "description": "",
+      "confidence": 0.85,
+      "source_page": 54,
+      "source_text": "Science",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VI.B",
+      "title": "Life Science",
+      "description": "Young children have a keen interest in studying living things, including the unique features of plants and animals, the environments in which they live, and what each living thing needs to thrive. Effective teachers provide opportunities for children to explore, observe, and investigate various organisms through hands-on experiences. Through these experiences, children are encouraged to use newly acquired vocabulary to describe and discuss their observations.",
+      "confidence": 0.95,
+      "source_page": 55,
+      "source_text": "B. Life Science\nYoung children have a keen interest in studying living things, including the unique features of plants and animals, the environments in which they live, and what each living thing needs to thrive.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.B.1",
+      "title": "Child observes, investigates, describes, and discusses the characteristics of organisms.",
+      "description": "Child Behaviors - The child may: describe the color, size, and shape of organisms; describe an organism's need for food, water, air, light, and shelter; compare differences and similarities of animals and plants (e.g., fish live in water, all birds have feathers, we can eat some plants)",
+      "confidence": 0.95,
+      "source_page": 55,
+      "source_text": "PK4.VI.B.1 Child observes, investigates, describes, and discusses the characteristics of organisms.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.B.2",
+      "title": "Child observes, describes, and discusses the life cycles of organisms.",
+      "description": "Child Behaviors - The child may: plant seeds, then observe, discuss, and record the plant's growth; observe, record, and discuss the stages of the life cycle of an organism (e.g., a baby, dog, frog, or butterfly); observe and discuss human growth (e.g., measures growth using wall chart at the beginning and end of the year); describe the differences in baby and adult organisms",
+      "confidence": 0.95,
+      "source_page": 56,
+      "source_text": "PK4.VI.B.2 Child observes, describes, and discusses the life cycles of organisms.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.B.3",
+      "title": "Child observes, investigates, describes, and discusses the relationship of organisms in their environments.",
+      "description": "Child Behaviors - The child may: describe characteristics and differences between living and non-living organisms; discuss how all organisms are dependent on other organisms (e.g., birds eat seeds, cows eat grass, humans eat vegetables and meat); observe living organisms (e.g., spiders, insects, worms, snails, birds) in their natural environment and discuss and record their behaviors/routines; observe, discuss, and record seasonal changes in the environment (e.g., tree leaves turn assorted colors, birds collect nesting materials, weather is warmer)",
+      "confidence": 0.95,
+      "source_page": 56,
+      "source_text": "PK4.VI.B.3 Child observes, investigates, describes, and discusses the relationship of organisms in their environments.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VI.C",
+      "title": "Earth and Space Science",
+      "description": "Young children are innately curious about nature and the outdoors. When given the opportunity, they love to play with earth's materials - sand, dirt, water, and rocks. They are aware of weather conditions and wonder why the weather changes from day to day. They notice the clouds in the sky, and they observe that the sun moves across the sky each day and the moon changes shape. These concepts are all a part of earth and space science. Studying earth and space science expands young children's vocabulary and guides them to discover their place in the world by understanding how they can impact their environment with positive actions.",
+      "confidence": 0.95,
+      "source_page": 56,
+      "source_text": "C. Earth and Space Science\nYoung children are innately curious about nature and the outdoors.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.C.1",
+      "title": "Child observes, investigates, describes, and discusses earth materials, and their properties and uses.",
+      "description": "Child Behaviors - The child may: observe, discuss, and compare earth materials (e.g., rocks, soil, sand) using magnifying glasses, filters, water, and measurement tools; identify the importance of soil, sunlight, air, temperature, and water to plant growth; discuss and explain ways earth materials (e.g., soil, rocks) are used (e.g., building houses, road construction, decorative purposes)",
+      "confidence": 0.95,
+      "source_page": 57,
+      "source_text": "PK4.VI.C.1 Child observes, investigates, describes, and discusses earth materials, and their properties and uses.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.C.2",
+      "title": "Child identifies, observes, describes, and discusses objects in the sky.",
+      "description": "Child Behaviors - The child may: observe and discuss characteristics of clouds (e.g., makes representation, such as finger painting the clouds in the sky, and talks about their shape, size or color when sharing their work); ask questions and/or makes comments about the sun, stars, and moon; identify and/or makes comments about objects that are commonly seen in the sky (e.g., sun, clouds, moon, stars, etc.)",
+      "confidence": 0.95,
+      "source_page": 57,
+      "source_text": "PK4.VI.C.2 Child identifies, observes, describes, and discusses objects in the sky.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "VI",
+      "title": "Science Domain",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 57,
+      "source_text": "VI. Science Domain",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.C.3",
+      "title": "Child observes and describes what happens during changes in the earth and sky.",
+      "description": "Child Behaviors: The child may: observe and describe how different items (e.g., rocks, metal, water) respond to the warmth of the sun outside on a sunny day or a cold/cloudy day; explain what happens after a weather event (e.g., erosion after a rainstorm, movements of leaves after a windstorm); observe, record, and predict daily weather changes (e.g., weather charts); observe shadows and describe the relationship between the shadow, object, and the sun; observe and describe seasonal changes",
+      "confidence": 0.95,
+      "source_page": 57,
+      "source_text": "PK4.VI.C.3 Child observes and describes what happens during changes in the earth and sky.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VI.C.4",
+      "title": "Child demonstrates an understanding of the importance of caring for our environment and our planet.",
+      "description": "Child Behaviors: The child may: discuss \"green\" practices (e.g., water conservation, clean air, recycling); engage in conservation or recycling projects (e.g., not using as many paper towels, using both sides of the paper); go on a \"trash hunt\" to clean the school yard",
+      "confidence": 0.95,
+      "source_page": 58,
+      "source_text": "PK4.VI.C.4 Child demonstrates an understanding of the importance of caring for our environment and our planet.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "VII",
+      "title": "Social Studies Domain",
+      "description": "It is important for prekindergarten children to learn about people, places, and events in society, beginning with themselves, their family, and their community. This helps develop children's self-identity and expand their understanding of the world outside their direct experience. The prekindergarten classroom may be one of the first places children experience a variety of cultures and languages and where diversity is elevated and honored. Skills such as beginning economics, geography awareness, problem-solving, decision-making, and working independently as well as in teams in a classroom prepare children to become active participants in their local and larger society. Children come from a variety of cultural and linguistic settings; therefore, their background knowledge and understanding of the world can be unique and diverse. It is important to incorporate and honor children's home community and culture in the prekindergarten classroom. This will help children make connections to some of the concepts in the social studies domain. The Social Studies domain of the Texas Prekindergarten Guidelines is divided into these skill areas: people past and present, economics, geography, and citizenship.",
+      "confidence": 0.97,
+      "source_page": 59,
+      "source_text": "VII. Social Studies Domain\nIt is important for prekindergarten children to learn about people, places, and events in society, beginning with themselves, their family, and their community.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VII.A",
+      "title": "People Past and Present",
+      "description": "Prekindergarten children are aware of time and begin to organize their lives around it. Young children learn to depend on events and routines that occur in a regular and predictable order. They begin to understand past events and how these events relate to each of their cultural backgrounds as well as present and future activities, demonstrating evidence of their growing understanding of time, change, culture, and continuity.",
+      "confidence": 0.95,
+      "source_page": 59,
+      "source_text": "A. People Past and Present\nPrekindergarten children are aware of time and begin to organize their lives around it. Young children learn to depend on events and routines that occur in a regular and predictable order. They begin to understand past events and how these events relate to each of their cultural backgrounds as well as present and future activities, demonstrating evidence of their growing understanding of time, change, culture, and continuity.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VII.A.1",
+      "title": "Child identifies similarities and differences between himself, classmates, and other people through specific characteristics and cultural influences.",
+      "description": "Child Behaviors: The child may: describe self and classmates in a drawing by identifying distinguishing characteristics (e.g., color of eyes, length of hair, color or texture of hair, etc.); understand that people speak different languages",
+      "confidence": 0.95,
+      "source_page": 59,
+      "source_text": "PK4.VII.A.1 Child identifies similarities and differences between himself, classmates, and other people through specific characteristics and cultural influences.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VII.D",
+      "title": "Citizenship",
+      "description": "Prekindergarten children begin to understand important symbols, routines, and celebrations that represent American culture. They begin to understand what it means to be a citizen of the United States of America and a resident of the state of Texas.",
+      "confidence": 0.95,
+      "source_page": 60,
+      "source_text": "D. Citizenship\nPrekindergarten children begin to understand important symbols, routines, and celebrations that represent American culture. They begin to understand what it means to be a citizen of the United States of America and a resident of the state of Texas.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VII.D.1",
+      "title": "Child identifies the United States and Texas flag.",
+      "description": "Child Behaviors: The child may: point to identify the United States or Texas flag when asked; face the correct flag when saying the Pledge of Allegiance; compare the United States flag and the Texas flag by discussing their similarities and differences",
+      "confidence": 0.95,
+      "source_page": 60,
+      "source_text": "PK4.VII.D.1 Child identifies the United States and Texas flag.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "VII",
+      "title": "Social Studies",
+      "description": "The Social Studies domain of the Texas Prekindergarten Guidelines is divided into these skill areas: people past and present, economics, geography, and citizenship.",
+      "confidence": 0.95,
+      "source_page": 59,
+      "source_text": "The Social Studies domain of the Texas Prekindergarten Guidelines is divided into these skill areas: people past and present, economics, geography, and citizenship.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VII.D.2",
+      "title": "Child recites the Pledge of Allegiance to the United States flag and the Texas flag and observes a moment of silence.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.96,
+      "source_page": 60,
+      "source_text": "PK4.VII.D.2 Child recites the Pledge of Allegiance to the United States flag and the Texas flag and observes a moment of silence.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VII.D.3",
+      "title": "The child engages in voting as a method for group decision-making.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.96,
+      "source_page": 61,
+      "source_text": "PK4.VII.D.3 The child engages in voting as a method for group decision-making.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "VIII",
+      "title": "Fine Arts",
+      "description": "Art can help prekindergarten children learn to observe, organize, and interpret experiences through multiple mediums. They can benefit from many opportunities to creatively express themselves through music, movement and dance, dramatic play, and the visual arts (e.g., drawing, painting, building sculptures, etc.). The outcomes in this domain reflect children's need to experiment, manipulate and transform materials. Teachers can encourage this by providing opportunities for children to engage in the \"process\" of creating rather than focusing on the \"product\" that is created. Art should be integrated across all learning domains and can be used to support many aspects of development (e.g., self-expression, fine and gross motor skills, and vocabulary). The Fine Arts Domain of the Texas Prekindergarten Guidelines is divided into the following skills: art, music, and dramatic expression.",
+      "confidence": 0.95,
+      "source_page": 62,
+      "source_text": "VIII. Fine Arts Domain\nArt can help prekindergarten children learn to observe, organize, and interpret experiences through multiple mediums. They can benefit from many opportunities to creatively express themselves through music, movement and dance, dramatic play, and the visual arts (e.g., drawing, painting, building sculptures, etc.). The outcomes in this domain reflect children's need to experiment, manipulate and transform materials. Teachers can encourage this by providing opportunities for children to engage in the \"process\" of creating rather than focusing on the \"product\" that is created. Art should be integrated across all learning domains and can be used to support many aspects of development (e.g., self-expression, fine and gross motor skills, and vocabulary). The Fine Arts Domain of the Texas Prekindergarten Guidelines is divided into the following skills: art, music, and dramatic expression.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VIII.A",
+      "title": "Art",
+      "description": "Prekindergarten children explore a wide variety of materials and make discoveries about color, shape, and texture through art experiences. They learn to express what they know and begin to recognize how others express themselves through art. They begin to gain control of fine-motor muscles and practice hand-eye coordination. The majority of art experiences should be model/sample free with the focus being on the process of creating.",
+      "confidence": 0.95,
+      "source_page": 62,
+      "source_text": "A. Art\nPrekindergarten children explore a wide variety of materials and make discoveries about color, shape, and texture through art experiences. They learn to express what they know and begin to recognize how others express themselves through art. They begin to gain control of fine-motor muscles and practice hand-eye coordination. The majority of art experiences should be model/sample free with the focus being on the process of creating.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VIII.A.1",
+      "title": "Child uses a variety of art materials for sensory experiences and exploration.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.96,
+      "source_page": 62,
+      "source_text": "PK4.VIII.A.1 Child uses a variety of art materials for sensory experiences and exploration.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VIII.A.2",
+      "title": "Child uses art as a form of creative self-expression and representation.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.96,
+      "source_page": 63,
+      "source_text": "PK4.VIII.A.2 Child uses art as a form of creative self-expression and representation.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VIII.A.3",
+      "title": "Child demonstrates interest in and shows appreciation for the creative work of others.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.96,
+      "source_page": 63,
+      "source_text": "PK4.VIII.A.3 Child demonstrates interest in and shows appreciation for the creative work of others.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VIII.B",
+      "title": "Music",
+      "description": "Prekindergarten children express themselves through singing and movement and by playing simple instruments. Like art, music is a form of experiencing, learning, and communicating with others.",
+      "confidence": 0.95,
+      "source_page": 63,
+      "source_text": "B. Music\nPrekindergarten children express themselves through singing and movement and by playing simple instruments. Like art, music is a form of experiencing, learning, and communicating with others. Children",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VIII.B.1",
+      "title": "Child participates in classroom music activities including singing, playing musical instruments, and moving to rhythms.",
+      "description": "No PK3 outcomes for this domain of learning. Child Behaviors: The child may: sing along with popular songs during circle time (e.g., \"Old McDonald Had a Farm\"); join in fingerplay by chanting and following the movements in songs (e.g., \"Itsy, Bitsy, Spider\"); make up and sing songs during the day; move in rhythm to simple tunes and musical patterns; explores or plays with musical instruments (e.g., maracas, cymbals, rhythm sticks, tambourine)",
+      "confidence": 0.95,
+      "source_page": 63,
+      "source_text": "PK4.VIII.B.1 Child participates in classroom music\nactivities including singing, playing musical\ninstruments, and moving to rhythms.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VIII.B.2",
+      "title": "Child responds to different musical styles through movement and play.",
+      "description": "No PK3 outcomes for this domain of learning. Child Behaviors: The child may: use props (e.g., scarves, streamers) to respond to music through movement; follow the beat using body and musical instruments (e.g., walks or jumps to the beat); describe moods and feelings (e.g., happy/sad) associated with different types of music (e.g., loud/soft, fast/slow, etc.); talk about different styles of music including music from different parts of the world (e.g., classical, country, dance, jazz, hip-hop, Latin, rock)",
+      "confidence": 0.95,
+      "source_page": 64,
+      "source_text": "PK4.VIII.B.2 Child responds to different musical\nstyles through movement and play.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "VIII.C",
+      "title": "Dramatic Expression",
+      "description": "Prekindergarten children participate in expressive and spontaneous productions through creative dramatic play. Children demonstrate their unique interpretation of music, songs, and stories through movement and dramatic experiences. These experiences contribute to children's ability to communicate more effectively and engage in cooperative play with others.",
+      "confidence": 0.95,
+      "source_page": 64,
+      "source_text": "C. Dramatic Expression\nPrekindergarten children participate in expressive and spontaneous productions through creative\ndramatic play. Children demonstrate their unique interpretation of music, songs, and stories through\nmovement and dramatic experiences. These experiences contribute to children's ability to communicate\nmore effectively and engage in cooperative play with others.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.VIII.C.1",
+      "title": "Child creates or recreates stories, moods, or experiences through dramatic representations.",
+      "description": "No PK3 outcomes for this domain of learning. Child Behaviors: The child may: act out a story read aloud; engage in dramatic play with classmates to create a story; make or use props to dramatize a story read aloud; re-enact real life events in the dramatic play center",
+      "confidence": 0.95,
+      "source_page": 64,
+      "source_text": "PK4.VIII.C.1 Child creates or recreates stories,\nmoods, or experiences through dramatic\nrepresentations.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "IX",
+      "title": "Physical Development",
+      "description": "Prekindergarten children's learning is directly influenced by their development of gross and fine motor skills as well as their knowledge of personal safety and health. The motor development outcomes included in this domain describe opportunities for children to develop rhythmic, stability, loco-motor, and manipulative skills that ultimately influence many aspects of children's success in cognitive, perceptual, and social emotional development. Children's knowledge of personal safety and health impacts their development of healthy habits early, which are key to life-long health and overall well-being. The Physical Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: gross motor development, fine motor development, and personal safety and health.",
+      "confidence": 0.95,
+      "source_page": 66,
+      "source_text": "IX. Physical Development Domain\nPrekindergarten children's learning is directly influenced by their development of gross and fine motor\nskills as well as their knowledge of personal safety and health.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "IX.A",
+      "title": "Gross Motor Development",
+      "description": "Prekindergarten children explore their physical space and understand how their bodies function in space through active movement experiences. Large-motor skills are developed first, followed by stability (e.g., turning, twisting, balancing, dodging) and manipulative (e.g., throwing, catching, kicking, striking) motor skills. Gross motor development requires thought and deliberate movement. Four-year-old children develop greater control of gross motor manipulative movements that involve giving force to objects and receiving force from objects.",
+      "confidence": 0.95,
+      "source_page": 66,
+      "source_text": "A. Gross Motor Development\nPrekindergarten children explore their physical space and understand how their bodies function in space\nthrough active movement experiences.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IX.A.1",
+      "title": "Child masters basic skills of running, jumping, climbing, and pedaling.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 66,
+      "source_text": "PK3.IX.A.1 Child masters basic skills of running,\njumping, climbing, and pedaling.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.A.1",
+      "title": "Child demonstrates coordination and balance in isolation.",
+      "description": "Child Behaviors: The child may: maintain balance while walking on a balance beam or standing on one foot; hop on one foot, walk, jog, jump, and gallop in place or from one place to another; carry a bowl or plate of objects from one spot to another; coordinate large muscle movement and equipment (e.g., swing on a swing, ride a tricycle, slide on a slide, dribble a ball, jump over a rope)",
+      "confidence": 0.95,
+      "source_page": 66,
+      "source_text": "PK4.IX.A.1 Child demonstrates coordination and\nbalance in isolation.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IX.A.2",
+      "title": "Child engages in movement sequences with adult support.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 67,
+      "source_text": "PK3.IX.A.2 Child engages in movement sequences\nwith adult support.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.A.2",
+      "title": "Child coordinates sequence of movements to perform tasks.",
+      "description": "Child Behaviors: The child may: move within a space of defined boundaries, changing body configuration to accommodate the space (e.g., moving through an obstacle course); use non-locomotor (axial) movements such as reaching, twisting, turning, and bending; participate in group games involving movement (e.g., \"Hokey Pokey\")",
+      "confidence": 0.95,
+      "source_page": 67,
+      "source_text": "PK4.IX.A.2 Child coordinates sequence of\nmovements to perform tasks.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "IX.B",
+      "title": "Fine Motor Development",
+      "description": "Prekindergarten children participate in fine-motor manipulative movements through object-handling activities that emphasize motor control, precision, and accuracy of movement. Cutting with scissors, manipulating modeling dough, and drawing are the foundational skills needed for the demands of handwriting and other small-motor skills in later school years. Fine motor activities that help to strengthen the small muscles of the hands in preparation for writing are integrated into learning centers.",
+      "confidence": 0.95,
+      "source_page": 67,
+      "source_text": "B. Fine Motor Development\nPrekindergarten children participate in fine-motor manipulative movements through object-handling\nactivities that emphasize motor control, precision, and accuracy of movement.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IX.B.1",
+      "title": "Child experiments with a variety of fine motor tasks but may lack strength and control.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 67,
+      "source_text": "PK3.IX.B.1 Child experiments with a variety of fine\nmotor tasks but may lack strength and control.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.B.1",
+      "title": "Child shows control of tasks that require small-muscle strength and control.",
+      "description": "Child Behaviors: The child may: use pincer control (grasps small objects between thumb and index finger) to manipulate tools (e.g., tweezers, eyedroppers) and manipulatives (e.g., linking cubes); use hands and fingers to manipulate various classroom materials (e.g., molding modeling clay, placing caps on and off markers, painting at the easel, tearing paper); hold drawing and writing utensils in a more conventional grasp (with fingers instead of fist)",
+      "confidence": 0.95,
+      "source_page": 67,
+      "source_text": "PK4.IX.B.1 Child shows control of tasks that require\nsmall-muscle strength and control.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IX.B.2",
+      "title": "Child shows emerging proficiency in eye-hand coordination.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 68,
+      "source_text": "PK3.IX.B.2 Child shows emerging proficiency in",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.B.2",
+      "title": "Child shows increasing control of tasks that require eye-hand coordination.",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 68,
+      "source_text": "PK4.IX.B.2 Child shows increasing control of tasks\nthat require eye-hand coordination.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "IX",
+      "title": "Physical Development",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 67,
+      "source_text": "IX. Physical Development Domain",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK3.IX.B.2",
+      "title": "Child shows emerging proficiency in tasks requiring eye-hand coordination.",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 68,
+      "source_text": "PK3.IX.B.2 Child shows emerging proficiency in\ntasks requiring eye-hand coordination.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "IX.C",
+      "title": "Personal Safety and Health",
+      "description": "Prekindergarten children develop an understanding of health and safety issues related to their daily routines and activities. Children learn to make healthy choices in nutrition and understand the importance of well-being through exercise and rest.",
+      "confidence": 0.95,
+      "source_page": 68,
+      "source_text": "C. Personal Safety and Health\nPrekindergarten children develop an understanding of health and safety issues related to their daily routines and activities. Children learn to make healthy choices in nutrition and understand the importance of well-being through exercise and rest.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.C.1",
+      "title": "Child practices good habits of personal safety.",
+      "description": "No PK3 outcomes for this skill.",
+      "confidence": 0.95,
+      "source_page": 68,
+      "source_text": "PK4.IX.C.1 Child practices good habits of personal\nsafety.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.C.2",
+      "title": "Child practices good habits of personal health and hygiene.",
+      "description": "No PK3 outcomes for this skill.",
+      "confidence": 0.95,
+      "source_page": 68,
+      "source_text": "PK4.IX.C.2 Child practices good habits of personal\nhealth and hygiene.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.IX.C.3",
+      "title": "Child identifies good habits of nutrition and exercise.",
+      "description": "No PK3 outcomes for this skill.",
+      "confidence": 0.95,
+      "source_page": 69,
+      "source_text": "PK4.IX.C.3 Child identifies good habits of nutrition\nand exercise.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "X",
+      "title": "Technology Applications",
+      "description": "Technology can greatly enhance learning experiences for prekindergarten children, but it is critical that young children learn about the appropriate use of technology and interactive media. It can enhance active, hands-on, creative, and authentic engagement with others and with the world, but it must be used with intentionality. Technology should not replace face-to-face instruction. Regular access and exposure to computers and related technology including challenging learning applications, programs, and websites, can provide opportunities for children to expand their ability to acquire information, solve problems, and communicate. These technologies serve as important learning tools and are integrated throughout the instructional program to enrich learning of curriculum content and concepts. Providing access to a variety of technologies is critical in the development of skills that young children need to learn and grow in the 21st century. The Technology Applications Domain of the Texas Prekindergarten Guidelines includes only one skill: technology and devices.",
+      "confidence": 0.95,
+      "source_page": 70,
+      "source_text": "X. Technology Applications Domain\nTechnology can greatly enhance learning experiences for prekindergarten children, but it is critical that young children learn about the appropriate use of technology and interactive media.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "X.A",
+      "title": "Technology and Devices",
+      "description": "Prekindergarten children learn how technology can enhance our lives. Surrounded by technology, children can benefit from becoming aware of and interacting with digital media and a variety of other available technology. They develop techniques for handling and controlling various devices, becoming increasingly confident and independent users of developmentally appropriate interactive media.",
+      "confidence": 0.95,
+      "source_page": 70,
+      "source_text": "A. Technology and Devices\nPrekindergarten children learn how technology can enhance our lives. Surrounded by technology, children can benefit from becoming aware of and interacting with digital media and a variety of other available technology. They develop techniques for handling and controlling various devices, becoming increasingly confident and independent users of developmentally appropriate interactive media.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.X.A.1",
+      "title": "Child opens and navigates through digital learning applications and programs, when appropriate.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.95,
+      "source_page": 70,
+      "source_text": "PK4.X.A.1 Child opens and navigates through\ndigital learning applications and programs, when\nappropriate.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.X.A.2",
+      "title": "Child uses and names a variety of digital tools that support and enhance learning.",
+      "description": "No PK3 outcomes for this domain of learning.",
+      "confidence": 0.95,
+      "source_page": 71,
+      "source_text": "PK4.X.A.2 Child uses and names a variety of digital\ntools that support and enhance learning.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "X",
+      "title": "Technology Applications Domain",
+      "description": "The Technology Applications Domain of the Texas Prekindergarten Guidelines includes only one skill: technology and devices. Young children learn about the appropriate use of technology and interactive media. It can enhance active, hands-on, creative, and authentic engagement with others and with the world, but it must be used with intentionality. Technology should not replace face-to-face instruction. Regular access and exposure to computers and related technology including challenging learning applications, programs, and websites, can provide opportunities for children to expand their ability to acquire information, solve problems, and communicate. These technologies serve as important learning tools and are integrated throughout the instructional program to enrich learning of curriculum content and concepts. Providing access to a variety of technologies is critical in the development of skills that young children need to learn and grow in the 21st century.",
+      "confidence": 0.97,
+      "source_page": 70,
+      "source_text": "X. Technology Applications Domain",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.X.A.3",
+      "title": "Child uses digital learning applications to contribute to class-made digital products that express own ideas, as appropriate.",
+      "description": "Child Behaviors: The child may: use digital tools or apps to draw and write; use a variety of digital tools with audio, video, and graphics to capture original creations and add it to a digital portfolio (e.g., photos of block buildings or artwork, recording of dramatic play, etc.); explore digital storytelling by co-creating digital books with adult support (e.g., child chooses photos or takes pictures of drawings to add to a story and records voice narrating the story).",
+      "confidence": 0.97,
+      "source_page": 71,
+      "source_text": "PK4.X.A.3 Child uses digital learning applications to contribute to class-made digital products that express own ideas, as appropriate.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.X.A.4",
+      "title": "Child uses technology to access appropriate information, with adult assistance.",
+      "description": "Child Behaviors: The child may: use technology to learn new information (e.g., listens to a book or watches a video to learn about animals, participates in a virtual field trip, uses voice-activated features to get a question answered); interact with technology to practice recently learned skills (e.g., used in a learning app or game).",
+      "confidence": 0.97,
+      "source_page": 71,
+      "source_text": "PK4.X.A.4 Child uses technology to access appropriate information, with adult assistance.",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "PK4.X.A.5",
+      "title": "Child practices safe behavior while using digital tools and resources.",
+      "description": "Child Behaviors: The child may: follow procedures set by the teacher when using technology; carry devices safely across the room (e.g., using two hands); log out when finished to maintain privacy; access only the approved apps or websites on a device (likely from an adult-created menu).",
+      "confidence": 0.97,
+      "source_page": 72,
+      "source_text": "PK4.X.A.5 Child practices safe behavior while using digital tools and resources.",
+      "needs_review": false
+    }
+  ],
+  "review_count": 0,
+  "detection_timestamp": "2026-03-29T19:05:40.771736+00:00",
+  "source_extraction_key": ""
+}
