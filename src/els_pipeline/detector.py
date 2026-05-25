@@ -270,14 +270,7 @@ def infer_depth_map(
     )
 
     try:
-        # Pass 1 is structural-summary work — run it on the lighter model
-        # (Haiku by default) so we don't burn the Opus token-rate budget
-        # before the per-chunk extraction pass even starts.
-        response_text = call_bedrock_llm(
-            prompt,
-            metrics_context=metrics_context,
-            model_id=Config.BEDROCK_DEPTH_MAP_LLM_MODEL_ID,
-        )
+        response_text = call_bedrock_llm(prompt, metrics_context=metrics_context)
     except Exception as e:
         logger.warning(f"Depth-map inference failed at Bedrock call: {e}")
         return None
@@ -521,7 +514,6 @@ def call_bedrock_llm(
     max_retries: int = MAX_BEDROCK_RETRIES,
     metrics_context: Optional[Dict[str, Any]] = None,
     prefill: Optional[str] = None,
-    model_id: Optional[str] = None,
 ) -> str:
     """
     Call Amazon Bedrock LLM (Claude) with the given prompt.

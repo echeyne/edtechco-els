@@ -6,12 +6,12 @@ runs the detector against the matching extraction, and grades the output.
 
 Files in this directory:
 
-| File      | Purpose                                                               |
-| --------- | --------------------------------------------------------------------- |
-| `AZ.json` | Arizona Early Learning Standards 4th Ed. — 4-level, lettered examples |
-| `CA.json` | California Preschool Learning Foundations — 4-level, age-band columns |
-| `CO.json` | Colorado ELDG Ages 3-5 — 3-level (no sub_strand), numeric strands     |
-| `TX.json` | Texas 2022 PreK Guidelines — 4-level, side-by-side PK3/PK4 columns    |
+| File      | Purpose                                                                |
+| --------- | ---------------------------------------------------------------------- |
+| `AZ.json` | Arizona Early Learning Standards 4th Ed. — 4-level, lettered examples  |
+| `CA.json` | California Preschool Learning Foundations — 4-level, age-band columns  |
+| `CO.json` | Colorado ELDG Ages 3-5 — 3-level (no sub_strand), numeric strands      |
+| `TX.json` | Texas 2022 PreK Guidelines — 4-level, side-by-side PK3/PK4 columns     |
 
 The schema is in `../golden_set.schema.json`. Each file has three things to
 fill in:
@@ -55,8 +55,6 @@ python -m evaluation.eval_suite
 
 # One state
 python -m evaluation.eval_suite --state CA
-
-python -m evaluation.eval_suite --state AZ --extraction-dir outputs/05-03-26
 
 # Stability check: run the detector N times against the same chunk and
 # report level-classification disagreement rate.
