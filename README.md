@@ -139,7 +139,8 @@ Key environment variables (see `.env.example` for the full list):
 | ------------------------------- | ----------------------------------------- | -------------------------------- |
 | `ELS_RAW_BUCKET`                | S3 bucket for raw documents               | `els-raw-documents`              |
 | `ELS_PROCESSED_BUCKET`          | S3 bucket for canonical JSON              | `els-processed-json`             |
-| `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for structure detection     | `us.anthropic.claude-opus-4-7`   |
+| `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for Pass-2 per-chunk extraction | `us.anthropic.claude-sonnet-4-6` |
+| `BEDROCK_DEPTH_MAP_LLM_MODEL_ID`| Bedrock model for Pass-1 depth-map inference  | `us.anthropic.claude-haiku-4-5-20251001-v1:0` |
 | `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6` |
 | `BEDROCK_EMBEDDING_MODEL_ID`    | Bedrock model for embeddings              | `amazon.titan-embed-text-v2:0`   |
 | `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.8`                            |
@@ -147,6 +148,32 @@ Key environment variables (see `.env.example` for the full list):
 | `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                              |
 | `DB_HOST`                       | Aurora PostgreSQL endpoint                | `localhost`                      |
 | `DESCOPE_PROJECT_ID`            | Descope project ID for API authentication | —                                |
+
+## Detector evaluation
+
+The detector is graded against per-state hand-annotated golden sets in
+`evaluation/ground_truth/`. Each invocation persists a snapshot under
+`evaluation/runs/<timestamp>-<git-sha>[-label]/` so prompt iterations are
+comparable later.
+
+```sh
+# Run the full suite (all states with golden sets)
+python -m evaluation.eval_suite
+
+# Tag a run while tuning a prompt
+python -m evaluation.eval_suite --label fewshot-v2 --notes "added indicator example"
+
+# Browse and diff
+python -m evaluation.eval_suite --list-runs
+python -m evaluation.eval_suite --compare latest <older-run-id-or-prefix>
+```
+
+See [evaluation/ground_truth/README.md](evaluation/ground_truth/README.md)
+for the golden-set schema and annotation workflow, and
+[evaluation/runs/README.md](evaluation/runs/README.md) for the snapshot
+layout and the meaning of `manifest.json` fields (especially
+`prompt_hashes`, which is what tells you whether a score change is
+attributable to a prompt edit vs. model non-determinism).
 
 ## Documentation
 
@@ -158,6 +185,7 @@ Key environment variables (see `.env.example` for the full list):
 - [Infrastructure Guide](infra/README.md) — CDK stacks, S3 structure, IAM roles
 - [Database Migrations](infra/migrations/README.md) — Schema evolution and migration instructions
 - [Contributing Guide](documentation/CONTRIBUTING.md) — Development workflow, code style, PR process
+- [Detector Evaluation Suite](evaluation/ground_truth/README.md) — Golden sets and how to grade detector changes
 
 ## License
 

@@ -35,11 +35,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import inspect
 import json
 import logging
+import subprocess
 import sys
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -49,6 +52,8 @@ SRC = ROOT / "src"
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
+from els_pipeline import detector as _detector_mod  # noqa: E402
+from els_pipeline.config import Config  # noqa: E402
 from els_pipeline.detector import (  # noqa: E402
     detect_structure,
     infer_depth_map,
@@ -60,6 +65,55 @@ logger = logging.getLogger("eval_suite")
 
 CACHE_DIR = ROOT / "evaluation" / ".cache"
 CACHE_DIR.mkdir(exist_ok=True)
+RUNS_DIR = ROOT / "evaluation" / "runs"
+RUNS_DIR.mkdir(exist_ok=True)
+
+
+# ---------- run-context capture ----------
+
+def _git_sha() -> str:
+    try:
+        return subprocess.check_output(
+            ["git", "rev-parse", "--short", "HEAD"],
+            stderr=subprocess.DEVNULL,
+            cwd=str(ROOT),
+        ).decode().strip()
+    except Exception:
+        return "nogit"
+
+
+def _git_dirty() -> bool:
+    try:
+        out = subprocess.check_output(
+            ["git", "status", "--porcelain"],
+            stderr=subprocess.DEVNULL,
+            cwd=str(ROOT),
+        ).decode().strip()
+        return bool(out)
+    except Exception:
+        return False
+
+
+def _prompt_hashes() -> Dict[str, str]:
+    """Hash the prompt skeletons in force at run time. When you tweak a
+    prompt and re-run, the hashes change — so a diff between two runs'
+    manifests tells you whether the score change is from a prompt edit."""
+    rules_src = getattr(_detector_mod, "_DETECTION_RULES_TEMPLATE", "")
+    depth_src = inspect.getsource(_detector_mod.build_depth_map_prompt)
+    return {
+        "detection_rules_sha8": hashlib.sha256(rules_src.encode()).hexdigest()[:8],
+        "depth_map_prompt_sha8": hashlib.sha256(depth_src.encode()).hexdigest()[:8],
+    }
+
+
+def _new_run_dir(label: Optional[str]) -> Path:
+    ts = datetime.now().strftime("%Y%m%d-%H%M%S")
+    sha = _git_sha()
+    dirty = "-dirty" if _git_dirty() else ""
+    suffix = f"-{label}" if label else ""
+    p = RUNS_DIR / f"{ts}-{sha}{dirty}{suffix}"
+    p.mkdir(parents=True, exist_ok=False)
+    return p
 
 
 # ---------- helpers ----------
@@ -111,7 +165,15 @@ def run_detector_cached(
     logger.info(f"  [detector] running on {len(blocks)} blocks…")
     result = detect_structure(blocks, document_s3_key=str(extraction_path))
     elements = [e.model_dump() for e in result.elements]
-    cache_path.write_text(json.dumps(elements, indent=2, default=str))
+    # Don't cache empty / error results — otherwise a throttled run poisons
+    # every subsequent eval until the user remembers to nuke .cache/.
+    if elements and getattr(result, "status", "success") != "error":
+        cache_path.write_text(json.dumps(elements, indent=2, default=str))
+    else:
+        logger.warning(
+            f"  [no-cache] detector returned {len(elements)} elements "
+            f"(status={getattr(result, 'status', '?')}, error={getattr(result, 'error', '?')}) — not caching"
+        )
     return elements
 
 
@@ -303,7 +365,10 @@ def evaluate_state(
     golden_path: Path,
     use_cache: bool,
     stability_runs: int,
-) -> StateReport:
+) -> Tuple[StateReport, List[dict], Optional[dict]]:
+    """Return ``(report, detected_elements, depth_map)`` so the run
+    persistence layer can snapshot the raw detector output alongside the
+    grades."""
     logger.info(f"== {state} ==")
     golden = json.loads(golden_path.read_text())
 
@@ -328,7 +393,177 @@ def evaluate_state(
             state, extraction_path, stability_runs
         )
 
-    return rep
+    return rep, detected, actual_dm
+
+
+def report_to_dict(r: StateReport) -> dict:
+    return {
+        "state": r.state,
+        "precision": r.precision, "recall": r.recall, "f1": r.f1,
+        "matched": r.matched, "n_golden": r.n_golden, "n_detected": r.n_detected,
+        "per_level": {k: dict(v) for k, v in r.per_level.items()},
+        "confusion": {k: dict(v) for k, v in r.confusion.items()},
+        "missing_test_cases": r.missing_test_cases,
+        "extra_elements": [list(t) for t in r.extra_elements],
+        "age_band_drops": r.age_band_drops,
+        "depth_map_passed": r.depth_map_passed,
+        "depth_map_detail": r.depth_map_detail,
+        "regressions": [{"id": c, "status": s, "detail": d} for c, s, d in r.regressions],
+        "stability_runs": r.stability_runs,
+        "stability_disagreement_rate": r.stability_disagreement_rate,
+        "stability_size_stdev": r.stability_size_stdev,
+    }
+
+
+# ---------- run persistence ----------
+
+def write_run_artifacts(
+    run_dir: Path,
+    args: argparse.Namespace,
+    reports: List[StateReport],
+    detected_by_state: Dict[str, List[dict]],
+    depth_map_by_state: Dict[str, Optional[dict]],
+) -> None:
+    """Snapshot everything you'd want for prompt-tuning forensics later:
+    the full reports, the raw detector output per state, the depth maps,
+    and a manifest with model ids + prompt hashes + invocation args."""
+    manifest = {
+        "run_id": run_dir.name,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "git_sha": _git_sha(),
+        "git_dirty": _git_dirty(),
+        "label": getattr(args, "label", None),
+        "notes": getattr(args, "notes", None),
+        "args": {k: v for k, v in vars(args).items() if not k.startswith("_")},
+        "models": {
+            "detector": Config.BEDROCK_DETECTOR_LLM_MODEL_ID,
+            "depth_map": Config.BEDROCK_DEPTH_MAP_LLM_MODEL_ID,
+        },
+        "prompt_hashes": _prompt_hashes(),
+        "summary": {
+            r.state: {
+                "precision": round(r.precision, 4),
+                "recall": round(r.recall, 4),
+                "f1": round(r.f1, 4),
+                "matched": r.matched,
+                "n_golden": r.n_golden,
+                "n_detected": r.n_detected,
+                "depth_map_passed": r.depth_map_passed,
+                "regressions": {
+                    "pass": sum(1 for _, s, _ in r.regressions if s == "PASS"),
+                    "fail": sum(1 for _, s, _ in r.regressions if s == "FAIL"),
+                    "skip": sum(1 for _, s, _ in r.regressions if s == "SKIP"),
+                    "error": sum(1 for _, s, _ in r.regressions if s == "ERROR"),
+                },
+            }
+            for r in reports
+        },
+    }
+
+    (run_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, default=str))
+    (run_dir / "report.json").write_text(
+        json.dumps([report_to_dict(r) for r in reports], indent=2, default=str)
+    )
+    (run_dir / "console.txt").write_text(
+        "\n\n".join(render_report(r) for r in reports)
+    )
+    states_dir = run_dir / "states"
+    states_dir.mkdir(exist_ok=True)
+    for state, det in detected_by_state.items():
+        (states_dir / f"{state}.detected.json").write_text(
+            json.dumps(det, indent=2, default=str)
+        )
+        if depth_map_by_state.get(state) is not None:
+            (states_dir / f"{state}.depth_map.json").write_text(
+                json.dumps(depth_map_by_state[state], indent=2, default=str)
+            )
+
+
+def list_runs() -> int:
+    runs = sorted(p for p in RUNS_DIR.iterdir() if p.is_dir())
+    if not runs:
+        print(f"No runs in {RUNS_DIR}")
+        return 0
+    print(f"{'run_id':<48}  {'states':<20}  {'mean f1':<8}  {'reg fail':<8}  notes")
+    print("-" * 110)
+    for r in runs:
+        try:
+            m = json.loads((r / "manifest.json").read_text())
+        except FileNotFoundError:
+            continue
+        states = ",".join(sorted(m.get("summary", {}).keys()))
+        f1s = [v["f1"] for v in m.get("summary", {}).values()]
+        mean_f1 = f"{sum(f1s) / len(f1s):.3f}" if f1s else "—"
+        fails = sum(v["regressions"]["fail"] + v["regressions"]["error"]
+                    for v in m.get("summary", {}).values())
+        notes = m.get("notes") or m.get("label") or ""
+        print(f"{r.name:<48}  {states:<20}  {mean_f1:<8}  {fails:<8}  {notes}")
+    return 0
+
+
+def _resolve_run(run_id: str) -> Optional[Path]:
+    """Allow `latest`, partial-prefix match, or exact dir name."""
+    if run_id == "latest":
+        runs = sorted(p for p in RUNS_DIR.iterdir() if p.is_dir())
+        return runs[-1] if runs else None
+    direct = RUNS_DIR / run_id
+    if direct.is_dir():
+        return direct
+    matches = [p for p in RUNS_DIR.iterdir() if p.is_dir() and p.name.startswith(run_id)]
+    if len(matches) == 1:
+        return matches[0]
+    if len(matches) > 1:
+        print(f"Ambiguous run id {run_id!r} matches: {[m.name for m in matches]}")
+    return None
+
+
+def compare_runs(a_id: str, b_id: str) -> int:
+    a = _resolve_run(a_id)
+    b = _resolve_run(b_id)
+    if not a or not b:
+        print(f"Run not found: {a_id if not a else b_id}")
+        return 2
+
+    a_man = json.loads((a / "manifest.json").read_text())
+    b_man = json.loads((b / "manifest.json").read_text())
+    a_rep = {r["state"]: r for r in json.loads((a / "report.json").read_text())}
+    b_rep = {r["state"]: r for r in json.loads((b / "report.json").read_text())}
+
+    print(f"A: {a.name}")
+    print(f"   models={a_man.get('models')}")
+    print(f"   prompts={a_man.get('prompt_hashes')}")
+    print(f"   notes={a_man.get('notes') or a_man.get('label') or '—'}")
+    print(f"B: {b.name}")
+    print(f"   models={b_man.get('models')}")
+    print(f"   prompts={b_man.get('prompt_hashes')}")
+    print(f"   notes={b_man.get('notes') or b_man.get('label') or '—'}")
+    print()
+
+    states = sorted(set(a_rep) | set(b_rep))
+    print(f"{'state':<6}  {'metric':<22}  {'A':>8}  {'B':>8}  {'Δ':>8}")
+    print("-" * 60)
+    for st in states:
+        ra, rb = a_rep.get(st), b_rep.get(st)
+        if not ra or not rb:
+            print(f"{st:<6}  (only in {'A' if ra else 'B'})")
+            continue
+        for metric in ("precision", "recall", "f1"):
+            av = float(ra.get(metric, 0)); bv = float(rb.get(metric, 0))
+            delta = bv - av
+            mark = "  ✓" if delta > 0.005 else ("  ✗" if delta < -0.005 else "")
+            print(f"{st:<6}  {metric:<22}  {av:>8.3f}  {bv:>8.3f}  {delta:>+8.3f}{mark}")
+        # Regression-case delta
+        a_cases = {c["id"]: c["status"] for c in ra.get("regressions", [])}
+        b_cases = {c["id"]: c["status"] for c in rb.get("regressions", [])}
+        flips = []
+        for cid in sorted(set(a_cases) | set(b_cases)):
+            sa, sb = a_cases.get(cid, "—"), b_cases.get(cid, "—")
+            if sa != sb:
+                flips.append(f"{cid}: {sa}→{sb}")
+        if flips:
+            print(f"{st:<6}  regression flips        " + "; ".join(flips))
+        print()
+    return 0
 
 
 def render_report(rep: StateReport) -> str:
@@ -386,10 +621,21 @@ def main() -> int:
     parser.add_argument("--golden-dir", default="evaluation/ground_truth", help="Directory holding {STATE}.json golden sets")
     parser.add_argument("--no-cache", action="store_true", help="Disable detector-output cache")
     parser.add_argument("--stability-runs", type=int, default=1, help="Re-run the detector this many times to measure stability (>=2 enables it)")
-    parser.add_argument("--report-json", help="Optional path to write the full report as JSON")
+    parser.add_argument("--report-json", help="Optional path to also write the full report to a custom path (run dir is always written)")
+    parser.add_argument("--label", help="Short slug appended to the run dir name, e.g. 'fewshot-v2' (no spaces)")
+    parser.add_argument("--notes", help="Free-text note recorded in manifest.json — surfaced by --list-runs")
+    parser.add_argument("--no-persist", action="store_true", help="Skip writing a run dir under evaluation/runs/ (use for ad-hoc debugging)")
+    parser.add_argument("--list-runs", action="store_true", help="Print all stored runs and exit")
+    parser.add_argument("--compare", nargs=2, metavar=("RUN_A", "RUN_B"),
+                        help="Diff two runs and exit. Each id may be 'latest', a full dir name, or a unique prefix.")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(message)s")
+
+    if args.list_runs:
+        return list_runs()
+    if args.compare:
+        return compare_runs(*args.compare)
 
     extraction_dir = Path(args.extraction_dir)
     golden_dir = Path(args.golden_dir)
@@ -400,6 +646,8 @@ def main() -> int:
         states = sorted(p.stem for p in golden_dir.glob("*.json"))
 
     reports: List[StateReport] = []
+    detected_by_state: Dict[str, List[dict]] = {}
+    depth_map_by_state: Dict[str, Optional[dict]] = {}
     for st in states:
         ext_path = extraction_dir / f"{st}-extraction.json"
         gold_path = golden_dir / f"{st}.json"
@@ -407,39 +655,34 @@ def main() -> int:
             logger.warning(f"-- {st}: skipped (missing {ext_path if not ext_path.exists() else gold_path})")
             continue
         try:
-            rep = evaluate_state(
+            rep, detected, dm = evaluate_state(
                 st, ext_path, gold_path,
                 use_cache=not args.no_cache,
                 stability_runs=args.stability_runs,
             )
             reports.append(rep)
+            detected_by_state[st] = detected
+            depth_map_by_state[st] = dm
         except Exception as e:
             logger.exception(f"-- {st}: ERROR — {e}")
 
     for rep in reports:
         print(render_report(rep))
 
+    # Persist a snapshot of this run for later prompt-tuning forensics.
+    # Skip only if the user explicitly opted out or nothing ran.
+    if reports and not args.no_persist:
+        run_dir = _new_run_dir(args.label)
+        write_run_artifacts(run_dir, args, reports, detected_by_state, depth_map_by_state)
+        print(f"\nRun saved → {run_dir}")
+        print(f"  Compare to a previous run: python -m evaluation.eval_suite --compare {run_dir.name} <other-run-id>")
+        print(f"  List all runs:             python -m evaluation.eval_suite --list-runs")
+
     if args.report_json:
-        out = []
-        for r in reports:
-            out.append({
-                "state": r.state,
-                "precision": r.precision, "recall": r.recall, "f1": r.f1,
-                "matched": r.matched, "n_golden": r.n_golden, "n_detected": r.n_detected,
-                "per_level": {k: dict(v) for k, v in r.per_level.items()},
-                "confusion": {k: dict(v) for k, v in r.confusion.items()},
-                "missing_test_cases": r.missing_test_cases,
-                "extra_elements": [list(t) for t in r.extra_elements],
-                "age_band_drops": r.age_band_drops,
-                "depth_map_passed": r.depth_map_passed,
-                "depth_map_detail": r.depth_map_detail,
-                "regressions": [{"id": c, "status": s, "detail": d} for c, s, d in r.regressions],
-                "stability_runs": r.stability_runs,
-                "stability_disagreement_rate": r.stability_disagreement_rate,
-                "stability_size_stdev": r.stability_size_stdev,
-            })
-        Path(args.report_json).write_text(json.dumps(out, indent=2, default=str))
-        print(f"\nFull report written to {args.report_json}")
+        Path(args.report_json).write_text(
+            json.dumps([report_to_dict(r) for r in reports], indent=2, default=str)
+        )
+        print(f"\nFull report also written to {args.report_json}")
 
     failures = sum(
         1 for r in reports

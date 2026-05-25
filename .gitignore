@@ -76,3 +76,6 @@ cdk.out*
 
 # Playwright
 .playwright-mcp
+
+# Evaluation
+evaluation/.cache/

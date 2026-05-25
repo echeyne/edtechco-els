@@ -2,9 +2,9 @@
   "$schema": "../golden_set.schema.json",
   "state": "CA",
   "country": "US",
-  "version_year": 2008,
-  "source_document": "CA Preschool Learning Foundations Vol 1.pdf",
-  "annotator": "TODO",
+  "version_year": 2021,
+  "source_document": "California Preschool/Transitional Kindergarten Learning Foundations At-a-Glance",
+  "annotator": "Emily Cheyne",
   "annotation_date": "TODO",
   "notes": "CA uses an explicit 4-level hierarchy: Domain → Strand → Sub-Strand → Foundation. Side-by-side age columns ('Early (3 to 4 ½ Years)' vs. 'Later (4 to 5 ½ Years)') MUST each become a separate indicator.",
   "expected_depth_map": {
@@ -13,29 +13,29 @@
         "depth": 1,
         "canonical_level": "domain",
         "label_in_doc": "Domain",
-        "prefix_pattern": "ALL-CAPS DOMAIN NAME",
-        "example": "TODO"
+        "prefix_pattern": "Domain Name",
+        "example": "Approaches to Learning"
       },
       {
         "depth": 2,
         "canonical_level": "strand",
         "label_in_doc": "Strand",
-        "prefix_pattern": "Strand - <Title>",
-        "example": "TODO"
+        "prefix_pattern": "Strand N - <Title>",
+        "example": "Strand 1.0 - Motivation to Learn"
       },
       {
         "depth": 3,
         "canonical_level": "sub_strand",
         "label_in_doc": "Sub-Strand",
         "prefix_pattern": "Sub-Strand - <Title>",
-        "example": "TODO"
+        "example": "Sub-Strand - Curiosity abd Interest"
       },
       {
         "depth": 4,
         "canonical_level": "indicator",
         "label_in_doc": "Foundation",
         "prefix_pattern": "Foundation N.N <Title>",
-        "example": "Foundation 1.2 Initiative"
+        "example": "Foundation 1.2 Self-Identity"
       }
     ]
   },
@@ -43,62 +43,62 @@
     {
       "test_case_id": "CA-DOM-01",
       "level": "domain",
-      "code": "TODO",
-      "title": "Social-Emotional Development",
-      "description": "TODO",
-      "source_page": "TODO",
+      "code": "ATL",
+      "title": "Approaches to Learning",
+      "description": null,
+      "source_page": 4,
       "parent_code": null
     },
     {
       "test_case_id": "CA-STR-01",
       "level": "strand",
-      "code": "TODO",
-      "title": "Self",
-      "description": "TODO",
-      "source_page": "TODO",
-      "parent_code": "TODO"
+      "code": "ATL.1",
+      "title": " Motivation to Learn",
+      "description": null,
+      "source_page": 4,
+      "parent_code": "ATL"
     },
     {
       "test_case_id": "CA-SUB-01",
       "level": "sub_strand",
-      "code": "TODO",
-      "title": "Initiative",
-      "description": "TODO",
+      "code": "ATL.1.1",
+      "title": "Curiositya and Interest",
+      "description": null,
       "source_page": 4,
-      "parent_code": "TODO"
+      "parent_code": "ATL.1"
     },
     {
       "test_case_id": "CA-IND-01-EARLY",
       "level": "indicator",
-      "code": "1.2",
-      "title": "Initiative",
-      "age_band": "Early (3 to 4 ½ Years)",
-      "description": "TODO — copy verbatim Early-column prose for Foundation 1.2",
+      "code": "ATL.1.1.1.EARLY",
+      "title": "Curiosity and Interest",
+      "age_band": "36-54",
+      "description": "Express interest in some familiar and new objects, people, and activities in their immediate environment. Seek information by exploring with their senses, describing their observations, and asking simple questions.",
       "source_page": 4,
-      "parent_code": "TODO",
-      "domain_code": "TODO",
-      "strand_code": "TODO",
-      "sub_strand_code": "TODO"
+      "parent_code": "ATL.1.1",
+      "domain_code": "ATL",
+      "strand_code": "ATL.1",
+      "sub_strand_code": "ATL.1.1"
     },
     {
       "test_case_id": "CA-IND-01-LATER",
       "level": "indicator",
-      "code": "1.2",
-      "title": "Initiative",
-      "age_band": "Later (4 to 5 ½ Years)",
-      "description": "TODO — copy verbatim Later-column prose for Foundation 1.2",
+      "code": "ATL.1.1.1.LATER",
+      "title": "Curiosity and Interest",
+      "age_band": "54-60",
+      "description": "Express interest in a broader range of familiar and new objects, people, and activities by exploring more extensively with their senses, describing their observations in greater detail, and asking more detailed questions.",
       "source_page": 4,
-      "parent_code": "TODO",
-      "domain_code": "TODO",
-      "strand_code": "TODO",
-      "sub_strand_code": "TODO"
+      "parent_code": "ATL.1.1",
+      "domain_code": "ATL",
+      "strand_code": "ATL.1",
+      "sub_strand_code": "ATL.1.1"
     }
   ],
   "regression_cases": [
     {
       "id": "CA-AGE-COLUMNS-EMITTED",
-      "description": "Side-by-side Early/Later columns under any Foundation must each emit their own indicator. Same code, same title, different age_band, different description.",
-      "assertion": "for every Foundation N.N in the document, the detector output contains >= 2 indicators with that code, and the set of age_band values across them includes both 'Early (3 to 4 ½ Years)' and 'Later (4 to 5 ½ Years)'."
+      "description": "Side-by-side Early/Later columns under any Foundation must each emit their own indicator. Different code, same title, different age_band, different description.",
+      "assertion": "for every Foundation N.N in the document, the detector output contains exactly 2 indicators: one with a code ending in '.EARLY' (age_band '36-54') and one ending in '.LATER' (age_band '54-60'), sharing the same base code and title but having distinct codes and distinct descriptions."
     },
     {
       "id": "CA-AGE-LABEL-NOT-IN-TITLE",

@@ -50,16 +50,54 @@ Annotation tips:
 ## Running the eval
 
 ```sh
-# All states, single run
+# All states with golden sets
 python -m evaluation.eval_suite
 
 # One state
 python -m evaluation.eval_suite --state CA
 
-# Stability check: run the detector N times against the same chunk and
-# report level-classification disagreement rate.
+# Stability check: re-run the detector N times against the same chunks
+# and report the level-classification disagreement rate + size stdev.
 python -m evaluation.eval_suite --state CA --stability-runs 3
+
+# Skip the run-snapshot write for ad-hoc debugging
+python -m evaluation.eval_suite --no-persist
 ```
 
-See the docstring at the top of `evaluation/eval_suite.py` for the full
-metric set and configuration knobs.
+### Run snapshots and prompt-tuning workflow
+
+Every invocation (unless `--no-persist`) writes a self-contained snapshot
+to `evaluation/runs/<timestamp>-<git-sha>[-dirty][-<label>]/`:
+
+- `manifest.json` — timestamp, git sha + dirty flag, model ids,
+  `prompt_hashes` (sha8 of the rules template + depth-map prompt source),
+  invocation args, per-state summary (precision/recall/f1, regression
+  pass/fail counts).
+- `report.json` — the full per-state grading.
+- `console.txt` — what was printed to your terminal.
+- `states/<STATE>.detected.json` — raw detector output.
+- `states/<STATE>.depth_map.json` — depth map Pass-1 returned.
+
+Tag runs as you tune a prompt:
+
+```sh
+python -m evaluation.eval_suite --label fewshot-v2 \
+    --notes "tightened indicator schema; added worked example"
+```
+
+Browse history and diff two runs:
+
+```sh
+python -m evaluation.eval_suite --list-runs
+python -m evaluation.eval_suite --compare latest 20260503-153012
+# (run id may be 'latest', a full dir name, or a unique prefix)
+```
+
+The `prompt_hashes` field in the manifest is what tells you whether a
+score change came from a prompt edit. When the hashes differ between two
+runs, the score delta is attributable to that edit; when they're
+identical and scores still differ, you're seeing model non-determinism
+(use `--stability-runs N` to quantify).
+
+See `evaluation/runs/README.md` for the full snapshot layout and the
+docstring at the top of `evaluation/eval_suite.py` for the metric set.

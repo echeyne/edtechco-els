@@ -148,6 +148,11 @@ def extract_usage_from_response(response_body: Dict[str, Any]) -> Dict[str, int]
     return {
         "input_tokens": usage.get("input_tokens", 0),
         "output_tokens": usage.get("output_tokens", 0),
+        # Anthropic prompt-cache fields (present when cache_control is set):
+        # `cache_creation_input_tokens` is the first call that wrote the
+        # cache; `cache_read_input_tokens` is the discount on subsequent hits.
+        "cache_creation_input_tokens": usage.get("cache_creation_input_tokens", 0),
+        "cache_read_input_tokens": usage.get("cache_read_input_tokens", 0),
     }
 
 

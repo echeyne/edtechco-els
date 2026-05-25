@@ -1,0 +1,4 @@
+# Per-run snapshots are local artifacts, not source.
+*
+!.gitignore
+!README.md

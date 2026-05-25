@@ -13,18 +13,24 @@ class Config:
     
     # Bedrock Model IDs
     # Use cross-region inference profile for Anthropic models
-    BEDROCK_DETECTOR_LLM_MODEL_ID = os.getenv("BEDROCK_DETECTOR_LLM_MODEL_ID", "us.anthropic.claude-opus-4-7")
-    # Pass-1 (depth-map inference) is structural-summary work — Haiku is plenty
-    # and avoids the Opus token-rate ceiling that throttles back-to-back calls.
-    BEDROCK_DEPTH_MAP_LLM_MODEL_ID = os.getenv(
-        "BEDROCK_DEPTH_MAP_LLM_MODEL_ID", "us.anthropic.claude-haiku-4-5-20251001-v1:0"
-    )
+    # Per-chunk extraction default. Sonnet 4.6 was chosen over Opus 4.7
+    # because (a) the depth-map two-pass shifts the hard reasoning into
+    # Pass 1, leaving Pass 2 as structured extraction Sonnet handles fine,
+    # and (b) Opus's account-level TPM ceiling throttles back-to-back
+    # 17-chunk runs even with backoff. Override via env var if you want
+    # to A/B against Opus on a small doc.
+    BEDROCK_DETECTOR_LLM_MODEL_ID = os.getenv("BEDROCK_DETECTOR_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
     BEDROCK_PARSER_LLM_MODEL_ID = os.getenv("BEDROCK_PARSER_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
     BEDROCK_EMBEDDING_MODEL_ID = os.getenv("BEDROCK_EMBEDDING_MODEL_ID", "amazon.titan-embed-text-v1")
     # Pass-1 (depth-map inference) is structural-summary work — Haiku is plenty
     # and avoids the Opus token-rate ceiling that throttles back-to-back calls.
+    # NOTE: Opus 4.7 and Sonnet 4.6 have bare-name inference profiles, but
+    # Haiku 4.5 only registers the fully-versioned form on Bedrock. Don't
+    # collapse this to "us.anthropic.claude-haiku-4-5" — Bedrock returns
+    # ValidationException ("invalid model identifier") on the bare name.
     BEDROCK_DEPTH_MAP_LLM_MODEL_ID = os.getenv(
-        "BEDROCK_DEPTH_MAP_LLM_MODEL_ID", "us.anthropic.claude-haiku-4-5"
+        "BEDROCK_DEPTH_MAP_LLM_MODEL_ID",
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0",
     )
     
     # Confidence Threshold

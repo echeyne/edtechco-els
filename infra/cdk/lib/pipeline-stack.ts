@@ -619,6 +619,40 @@ export class ElsPipelineStack extends cdk.Stack {
               ],
             },
           },
+          {
+            // The preparer now runs the Pass-1 depth-map inference on
+            // Bedrock before splitting blocks into batches, so it needs
+            // InvokeModel just like the processor.
+            policyName: "BedrockInvokeAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["bedrock:InvokeModel"],
+                  Resource: "*",
+                },
+              ],
+            },
+          },
+          {
+            policyName: "CloudWatchMetricsAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["cloudwatch:PutMetricData"],
+                  Resource: "*",
+                  Condition: {
+                    StringEquals: {
+                      "cloudwatch:namespace": "ELS/Pipeline",
+                    },
+                  },
+                },
+              ],
+            },
+          },
         ],
         tags: [
           { key: "Environment", value: env },
@@ -1096,7 +1130,13 @@ export class ElsPipelineStack extends cdk.Stack {
         memorySize: 1024,
         environment: {
           ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
-          BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-7",
+          // Sonnet 4.6 chosen over Opus 4.7 because the depth-map two-pass
+          // means Pass 2 is structured extraction (Sonnet handles fine) and
+          // Opus's account-level TPM ceiling throttles back-to-back chunk
+          // calls. Override per-env if needed.
+          BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-sonnet-4-6",
+          BEDROCK_DEPTH_MAP_LLM_MODEL_ID:
+            "us.anthropic.claude-haiku-4-5-20251001-v1:0",
           CONFIDENCE_THRESHOLD: "0.7",
           ENVIRONMENT: env,
         },
@@ -1130,12 +1170,17 @@ export class ElsPipelineStack extends cdk.Stack {
         functionName: `els-prepare-detection-batches-${env}`,
         handler: "els_pipeline.handlers.prepare_detection_batches_handler",
         role: wrapRole(detectionBatchPreparerLambdaRole),
-        timeout: cdk.Duration.seconds(60),
+        // Bumped from 60s to 300s after adding the Pass-1 depth-map
+        // Bedrock call. Bedrock latency dominates this Lambda's runtime;
+        // S3 + chunking are <5s combined.
+        timeout: cdk.Duration.seconds(300),
         memorySize: 512,
         environment: {
           ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
           ENVIRONMENT: env,
           MAX_CHUNKS_PER_BATCH: "5",
+          BEDROCK_DEPTH_MAP_LLM_MODEL_ID:
+            "us.anthropic.claude-haiku-4-5-20251001-v1:0",
         },
         codePath: pipelineCodePath,
         cfnLogicalId: "PrepareDetectionBatchesLambdaFunction",
@@ -1150,7 +1195,10 @@ export class ElsPipelineStack extends cdk.Stack {
       memorySize: 1024,
       environment: {
         ELS_PROCESSED_BUCKET: this.processedJsonBucket.bucketName,
-        BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-opus-4-7",
+        // See StructureDetectorLambda above for the rationale on Sonnet
+        // over Opus. Per-chunk extraction is bounded by Bedrock TPM, not
+        // model capability, after the depth-map Pass 1 lands.
+        BEDROCK_DETECTOR_LLM_MODEL_ID: "us.anthropic.claude-sonnet-4-6",
         CONFIDENCE_THRESHOLD: "0.7",
         MAX_CHUNKS_PER_BATCH: "5",
         ENVIRONMENT: env,

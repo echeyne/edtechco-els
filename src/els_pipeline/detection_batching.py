@@ -13,6 +13,7 @@ from .config import Config
 from .detector import (
     chunk_text_blocks,
     build_detection_prompt,
+    build_detection_prompt_parts,
     call_bedrock_llm,
     parse_llm_response,
     infer_depth_map,
@@ -222,11 +223,15 @@ def detect_batch(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     errors = []
 
     for chunk_idx, chunk in enumerate(chunks):
-        prompt = build_detection_prompt(chunk, depth_map=depth_map)
+        cached_prefix, variable_suffix = build_detection_prompt_parts(
+            chunk, depth_map=depth_map
+        )
         success = False
         for attempt in range(MAX_PARSE_RETRIES + 1):
             try:
-                response_text = call_bedrock_llm(prompt, prefill="[")
+                response_text = call_bedrock_llm(
+                    variable_suffix, prefill="[", cached_prefix=cached_prefix
+                )
                 elements = parse_llm_response(response_text, chunk)
                 all_elements.extend(elements)
                 success = True

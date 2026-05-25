@@ -2,6 +2,8 @@
 
 import json
 import logging
+import random
+import time
 from typing import List, Dict, Any, Optional
 import boto3
 from botocore.config import Config as BotocoreConfig
@@ -24,8 +26,20 @@ CHARS_PER_TOKEN = 4
 DEFAULT_TARGET_TOKENS = 2000
 DEFAULT_OVERLAP_TOKENS = 500
 MAX_PARSE_RETRIES = 2
-MAX_BEDROCK_RETRIES = 2
+MAX_BEDROCK_RETRIES = 5
 LLM_MAX_TOKENS = 16000
+# Exponential-backoff parameters for Bedrock ThrottlingException handling.
+# AWS-side throttles need real wall-clock pauses; instant retries just
+# burn the next token bucket the same way.
+BEDROCK_BACKOFF_BASE_S = 4.0
+BEDROCK_BACKOFF_MAX_S = 60.0
+# Only some Anthropic models on Bedrock allow the assistant-prefill trick
+# (forcing the response to start with `[`). Sonnet 4.6 returns
+# ValidationException("This model does not support assistant message prefill")
+# so we drop the prefill silently for unsupported models and rely on the
+# prompt's "return ONLY a JSON array" instruction instead. Substring match
+# is intentional — covers `us.` and `global.` profile prefixes.
+MODELS_SUPPORTING_PREFILL = ("opus-4-7",)
 
 
 def estimate_tokens(text: str) -> int:
@@ -168,31 +182,7 @@ DOCUMENT SAMPLE:
 {text_content}"""
 
 
-def build_detection_prompt(
-    blocks: List[TextBlock],
-    depth_map: Optional[Dict[str, Any]] = None,
-) -> str:
-    """
-    Build the Pass-2 per-chunk extraction prompt.
-
-    If `depth_map` is provided (from build_depth_map_prompt + LLM), it is
-    injected into the prompt so the model classifies by document-specific
-    nesting depth rather than by re-inferring the hierarchy on every chunk.
-    Pass `None` only for backwards compatibility / tests.
-    """
-    text_content = "\n".join(
-        f"[Page {b.page_number}] {b.text}" for b in blocks
-    )
-
-    depth_map_block = (
-        f"DEPTH MAP (authoritative — use this to assign `level`):\n"
-        f"{json.dumps(depth_map, indent=2)}\n"
-        if depth_map else
-        "DEPTH MAP: not provided — infer the canonical level from nesting position, "
-        "not from prefixes or labels.\n"
-    )
-
-    return f"""You extract structural elements from an early learning standards document chunk.
+_DETECTION_RULES_TEMPLATE = """You extract structural elements from an early learning standards document chunk.
 
 Be deterministic. Be conservative. Do not be creative. Two runs over the same text MUST produce the same JSON. Do not invent titles, codes, or descriptions — only use text that literally appears in the chunk.
 
@@ -219,10 +209,77 @@ NEGATIVE EXAMPLES (do NOT do these):
 OUTPUT — return ONLY a JSON array, starting with `[` and ending with `]`. No prose, no markdown, no commentary. Schema per element:
 {{"level": "domain|strand|sub_strand|indicator", "code": "...", "title": "...", "description": "...", "age_band": "..." or null, "confidence": 0.0-1.0, "source_page": N, "source_text": "..."}}
 
-{depth_map_block}
-DOCUMENT CHUNK:
+STRICT SCHEMA RULES:
+- `code`, `title`, `description`, `source_text` are STRINGS. Never `null`. Use `""` (empty string) if the value is unknown or absent. Returning `null` for these fields is a hard error.
+- `age_band` is either a string (the verbatim column label) or `null` for elements that are not age-banded. Default to `null`.
+- `confidence` is a number between 0.0 and 1.0 inclusive.
+- `source_page` is a positive integer matching a [Page N] marker in the chunk.
+- `level` is one of the four canonical strings exactly: `"domain"`, `"strand"`, `"sub_strand"`, `"indicator"`. Never abbreviate, never capitalize differently, never invent new levels.
+- Every key listed in the schema MUST appear in every element object — even if its value is `""` or `null`.
 
-{text_content}"""
+WORKED EXAMPLE (an excerpt from a hypothetical 4-level document; mimic this exact shape):
+INPUT (chunk):
+[Page 12] SOCIAL EMOTIONAL STANDARD
+[Page 12] Strand 1: Self-Awareness and Emotional Skills
+[Page 13] Concept 1: Self-Awareness
+[Page 13] The child demonstrates an awareness of self.
+[Page 13] Children develop a sense of personal identity as they begin to recognize what makes them unique.
+[Page 13] a. Identifies own physical attributes.
+[Page 13] b. Names own preferences.
+OUTPUT:
+[
+  {{"level":"domain","code":"SE","title":"Social Emotional Standard","description":"","age_band":null,"confidence":0.95,"source_page":12,"source_text":"SOCIAL EMOTIONAL STANDARD"}},
+  {{"level":"strand","code":"1","title":"Self-Awareness and Emotional Skills","description":"","age_band":null,"confidence":0.95,"source_page":12,"source_text":"Strand 1: Self-Awareness and Emotional Skills"}},
+  {{"level":"sub_strand","code":"1","title":"Self-Awareness","description":"","age_band":null,"confidence":0.95,"source_page":13,"source_text":"Concept 1: Self-Awareness"}},
+  {{"level":"indicator","code":"SE.1.1.1","title":"The child demonstrates an awareness of self.","description":"Children develop a sense of personal identity as they begin to recognize what makes them unique.","age_band":null,"confidence":0.95,"source_page":13,"source_text":"The child demonstrates an awareness of self."}}
+]
+Notice: the lettered "a." and "b." items beneath the indicator are NOT separate indicators. They are examples and are excluded from the output entirely.
+
+{depth_map_block}"""
+
+
+def build_detection_prompt_parts(
+    blocks: List[TextBlock],
+    depth_map: Optional[Dict[str, Any]] = None,
+) -> tuple[str, str]:
+    """
+    Return ``(static_prefix, variable_suffix)`` for the per-chunk detection
+    prompt.
+
+    The split exists for prompt caching: the static prefix (rules + depth
+    map) is identical across every chunk in a run, so we mark it cacheable
+    on the Bedrock request and the suffix (the chunk text) is the only
+    part Bedrock charges full price for after the first call.
+    """
+    depth_map_block = (
+        f"DEPTH MAP (authoritative — use this to assign `level`):\n"
+        f"{json.dumps(depth_map, indent=2)}\n"
+        if depth_map else
+        "DEPTH MAP: not provided — infer the canonical level from nesting position, "
+        "not from prefixes or labels.\n"
+    )
+    static_prefix = _DETECTION_RULES_TEMPLATE.format(depth_map_block=depth_map_block)
+
+    text_content = "\n".join(
+        f"[Page {b.page_number}] {b.text}" for b in blocks
+    )
+    variable_suffix = f"DOCUMENT CHUNK:\n\n{text_content}"
+    return static_prefix, variable_suffix
+
+
+def build_detection_prompt(
+    blocks: List[TextBlock],
+    depth_map: Optional[Dict[str, Any]] = None,
+) -> str:
+    """Backwards-compatible single-string form of the detection prompt.
+
+    Prefer ``build_detection_prompt_parts`` + ``call_bedrock_llm(..., cached_prefix=...)``
+    for live calls — that path enables Bedrock prompt caching and saves
+    the input-token cost of the static rules block on every chunk after
+    the first.
+    """
+    static_prefix, variable_suffix = build_detection_prompt_parts(blocks, depth_map)
+    return f"{static_prefix}\n{variable_suffix}"
 
 
 def _sample_blocks_for_depth_map(
@@ -357,20 +414,23 @@ def _extract_json_from_response(response_text: str) -> str:
 
 def _validate_element_data(elem_data: Dict[str, Any]) -> Optional[str]:
     """
-    Validate element data has all required fields.
-    
-    Args:
-        elem_data: Dictionary containing element data
-        
-    Returns:
-        Error message if validation fails, None if valid
+    Validate element data has all required fields, coercing common
+    Sonnet quirks in place (e.g. ``"description": null`` → ``""``).
     """
     required_fields = ['level', 'code', 'title', 'description', 'confidence', 'source_page', 'source_text']
     missing_fields = [field for field in required_fields if field not in elem_data]
-    
+
     if missing_fields:
         return f"Missing required fields: {missing_fields}"
-    
+
+    # Sonnet often emits `null` instead of `""` for empty string fields even
+    # when the prompt asks for an empty string. Pydantic rejects `None` for
+    # non-Optional `str` fields — coerce here so we don't burn three retries
+    # on the same deterministic failure.
+    for k in ("code", "title", "description", "source_text"):
+        if elem_data.get(k) is None:
+            elem_data[k] = ""
+
     return None
 
 
@@ -478,6 +538,7 @@ def parse_llm_response(response_text: str, blocks: List[TextBlock]) -> List[Dete
 def _build_bedrock_request(
     prompt: str,
     prefill: Optional[str] = None,
+    cached_prefix: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Build request body for Bedrock Claude API.
@@ -486,8 +547,23 @@ def _build_bedrock_request(
     verbatim, which is the most reliable way to force a structured-output
     format (e.g. `[` to force a JSON array) on Opus 4.7 where we cannot
     set `temperature`.
+
+    `cached_prefix` opts the call into Anthropic prompt caching: the prefix
+    is sent as its own content block with ``cache_control: ephemeral``, so
+    Bedrock charges full input-token cost only on the first call in a 5-min
+    window and ~10% thereafter. The cached prefix must be at least 1024
+    tokens for Sonnet (~2048 for Opus); shorter prefixes are silently not
+    cached by the API but the request still succeeds.
     """
-    messages: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
+    if cached_prefix:
+        user_content: Any = [
+            {"type": "text", "text": cached_prefix, "cache_control": {"type": "ephemeral"}},
+            {"type": "text", "text": prompt},
+        ]
+    else:
+        user_content = prompt
+
+    messages: List[Dict[str, Any]] = [{"role": "user", "content": user_content}]
     if prefill:
         messages.append({"role": "assistant", "content": prefill})
     return {
@@ -522,6 +598,7 @@ def call_bedrock_llm(
     metrics_context: Optional[Dict[str, Any]] = None,
     prefill: Optional[str] = None,
     model_id: Optional[str] = None,
+    cached_prefix: Optional[str] = None,
 ) -> str:
     """
     Call Amazon Bedrock LLM (Claude) with the given prompt.
@@ -551,9 +628,18 @@ def call_bedrock_llm(
             retries={"max_attempts": 0}  # We handle retries ourselves
         )
     )
-    request_body = _build_bedrock_request(prompt, prefill=prefill)
     ctx = metrics_context or {}
     effective_model_id = model_id or Config.BEDROCK_DETECTOR_LLM_MODEL_ID
+
+    # Drop prefill for models that don't accept it — otherwise Bedrock
+    # returns a non-retriable ValidationException.
+    effective_prefill = prefill
+    if prefill and not any(tag in effective_model_id for tag in MODELS_SUPPORTING_PREFILL):
+        effective_prefill = None
+
+    request_body = _build_bedrock_request(
+        prompt, prefill=effective_prefill, cached_prefix=cached_prefix
+    )
 
     logger.info(f"Calling Bedrock with model: {effective_model_id}")
     logger.debug(f"Prompt length: {len(prompt)} characters, ~{estimate_tokens(prompt)} tokens")
@@ -570,8 +656,8 @@ def call_bedrock_llm(
             response_text = _extract_text_from_bedrock_response(response_body)
             # Bedrock returns only Claude's continuation; if we prefilled,
             # re-prepend it so downstream parsing sees a complete document.
-            if prefill:
-                response_text = prefill + response_text
+            if effective_prefill:
+                response_text = effective_prefill + response_text
             usage = extract_usage_from_response(response_body)
             
             # Emit metrics
@@ -592,19 +678,41 @@ def call_bedrock_llm(
             log_llm_call_metrics(call_metrics)
             emit_cloudwatch_metrics(call_metrics)
             
+            cache_read = usage.get("cache_read_input_tokens", 0)
+            cache_write = usage.get("cache_creation_input_tokens", 0)
+            cache_note = (
+                f" (cache: {cache_read} read, {cache_write} written)"
+                if cache_read or cache_write else ""
+            )
             logger.info(
                 f"Bedrock response received: {len(response_text)} chars, "
                 f"{usage['input_tokens']} in / {usage['output_tokens']} out tokens, "
-                f"{timer.elapsed_ms:.0f}ms"
+                f"{timer.elapsed_ms:.0f}ms{cache_note}"
             )
             
             return response_text
                 
         except ClientError as e:
+            # ValidationException = our request is malformed (model id wrong,
+            # unsupported feature, schema bad). Retrying won't help and just
+            # burns the backoff budget.
+            if e.response.get("Error", {}).get("Code") == "ValidationException":
+                logger.error(f"Bedrock ValidationException (not retrying): {e}")
+                raise
             if attempt < max_retries:
+                # Exponential backoff with full jitter: sleep ∈ [0, base*2^attempt],
+                # capped at BEDROCK_BACKOFF_MAX_S. ThrottlingException is the
+                # main case here and needs real seconds, not instant retry.
+                delay = min(
+                    BEDROCK_BACKOFF_MAX_S,
+                    BEDROCK_BACKOFF_BASE_S * (2 ** attempt),
+                )
+                sleep_s = random.uniform(0, delay)
                 logger.warning(
                     f"Bedrock API call failed (attempt {attempt + 1}/{max_retries + 1}): {e}"
+                    f" — sleeping {sleep_s:.1f}s before retry"
                 )
+                time.sleep(sleep_s)
                 continue
             else:
                 # Emit error metrics
@@ -656,15 +764,22 @@ def _process_chunk(
         f"({len(chunk)} blocks, ~{sum(estimate_tokens(b.text) for b in chunk)} tokens)"
     )
     
-    # Build prompt for this chunk
-    prompt = build_detection_prompt(chunk, depth_map=depth_map)
+    # Build prompt as (cached prefix, variable suffix). The prefix is the
+    # static rules + depth map and is identical across every chunk in the
+    # run, so Bedrock prompt caching makes only the suffix incur full
+    # input-token cost after the first chunk.
+    cached_prefix, variable_suffix = build_detection_prompt_parts(
+        chunk, depth_map=depth_map
+    )
 
     # Try to parse LLM response with retries
     for parse_attempt in range(MAX_PARSE_RETRIES + 1):
         try:
-            # Call Bedrock; prefill `[` to force a JSON-array response since
-            # Opus 4.7 doesn't support temperature.
-            response_text = call_bedrock_llm(prompt, prefill="[")
+            # Prefill `[` to force a JSON-array response (no temperature
+            # control on Opus/Sonnet via Bedrock invoke_model).
+            response_text = call_bedrock_llm(
+                variable_suffix, prefill="[", cached_prefix=cached_prefix
+            )
             
             # Parse response
             elements = parse_llm_response(response_text, chunk)

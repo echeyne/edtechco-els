@@ -41,43 +41,97 @@
   },
   "elements": [
     {
-      "test_case_id": "AZ-DOM-SE",
+      "test_case_id": "AZ-DOM-SED",
       "level": "domain",
-      "code": "SE",
-      "title": "Social Emotional Standard",
+      "code": "SED",
+      "title": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
       "description": "Established social-emotional skills have a significant, positive impact on a child’s learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
       "source_page": 4,
       "parent_code": null
     },
     {
-      "test_case_id": "AZ-STR-SE-1",
+      "test_case_id": "AZ-STR-SED-1",
       "level": "strand",
-      "code": "1",
+      "code": "SED.1",
       "title": "Self-Awareness and Emotional Skills",
       "description": null,
       "source_page": 6,
-      "parent_code": "SE"
+      "parent_code": "SED"
     },
     {
-      "test_case_id": "AZ-SUB-SE-1-1",
+      "test_case_id": "AZ-SUB-SED-1-1",
       "level": "sub_strand",
-      "code": "1",
+      "code": "SED.1.1",
       "title": "Self-Awareness",
-      "description": null,
-      "source_page": "TODO",
-      "parent_code": "1"
+      "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "source_page": 6,
+      "parent_code": "SED.1"
     },
     {
-      "test_case_id": "AZ-IND-SE-1-1-1",
+      "test_case_id": "AZ-IND-SED-1-1-a",
       "level": "indicator",
-      "code": "SE.1.1.1",
-      "title": "The child demonstrates an awareness of self.",
-      "description": "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "code": "SED.1.1.a",
+      "title": "Demonstrates self-confidence.",
+      "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\"",
       "source_page": 6,
-      "parent_code": "1",
-      "domain_code": "SE",
-      "strand_code": "1",
-      "sub_strand_code": "1"
+      "parent_code": "SED.1.1",
+      "domain_code": "SED",
+      "strand_code": "SED.1",
+      "sub_strand_code": "SED.1.1"
+    },
+    {
+      "test_case_id": "AZ-IND-SED-1-1-e",
+      "level": "indicator",
+      "code": "SED.1.1.e",
+      "title": "DDemonstrates developmentally appropriate cultural curiosity and responsiveness.",
+      "description": "Wonders about a friend's seaweed snack and asks for a taste. The group widens the story time circle to make room for the child and their wheelchair. A guest speaker (parent) shares a storybook and song in their home language to the class.",
+      "source_page": 6,
+      "parent_code": "SED.1.1",
+      "domain_code": "SED",
+      "strand_code": "SED.1",
+      "sub_strand_code": "SED.1.1"
+    },
+    {
+      "test_case_id": "AZ-STR-SED-2",
+      "level": "strand",
+      "code": "SED.2",
+      "title": "Relationships and Social Skills",
+      "description": null,
+      "source_page": 10,
+      "parent_code": "SED"
+    },
+    {
+      "test_case_id": "AZ-SUB-SED-2-2",
+      "level": "sub_strand",
+      "code": "SED.2.2",
+      "title": "Social Interactions",
+      "description": "The child displays positive social behavior. A child’s relationship with peers and adults reflect their ability to initiate and sustain positive and appropriate interactions while increasing their capacity to acknowledge someone else’s perspective.",
+      "source_page": 10,
+      "parent_code": "SED.2"
+    },
+    {
+      "test_case_id": "AZ-IND-SED-2-2-a",
+      "level": "indicator",
+      "code": "SED.2.2.a",
+      "title": "Responds when adults or other children initiate interactions.",
+      "description": "Selects from the choice board when asked, \"What do you want to do now?\" Decides whether to join a group when invited to play.",
+      "source_page": 10,
+      "parent_code": "SED.2.2",
+      "domain_code": "SED",
+      "strand_code": "SED.2",
+      "sub_strand_code": "SED.2.2"
+    },
+    {
+      "test_case_id": "AZ-IND-SED-1-1-e",
+      "level": "indicator",
+      "code": "SED.1.1.e",
+      "title": "DDemonstrates developmentally appropriate cultural curiosity and responsiveness.",
+      "description": "Wonders about a friend's seaweed snack and asks for a taste. The group widens the story time circle to make room for the child and their wheelchair. A guest speaker (parent) shares a storybook and song in their home language to the class.",
+      "source_page": 6,
+      "parent_code": "SED.1.1",
+      "domain_code": "SED",
+      "strand_code": "SED.1",
+      "sub_strand_code": "SED.1.1"
     }
   ],
   "regression_cases": [
