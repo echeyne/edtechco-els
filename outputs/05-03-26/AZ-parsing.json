@@ -1,0 +1,471 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-AZ-2018-SE-SE.1.1.I-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SE",
+        "name": "Social Emotional Development Standard",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large."
+      },
+      "strand": {
+        "code": "SE.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SE.1.1",
+        "name": "Self-Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "SE.1.1.I",
+        "name": "The child demonstrates an awareness of self.",
+        "description": "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+    },
+    {
+      "standard_id": "US-AZ-2018-SE-SE.1.2.I-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SE",
+        "name": "Social Emotional Development Standard",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large."
+      },
+      "strand": {
+        "code": "SE.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SE.1.2",
+        "name": "Recognizes and Expresses Feelings",
+        "description": null
+      },
+      "indicator": {
+        "code": "SE.1.2.I",
+        "name": "The child recognizes and expresses feelings of self and others.",
+        "description": "Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions."
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions."
+    },
+    {
+      "standard_id": "US-AZ-2018-SE-SE.1.3.I-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SE",
+        "name": "Social Emotional Development Standard",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large."
+      },
+      "strand": {
+        "code": "SE.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SE.1.3",
+        "name": "Self-Regulation",
+        "description": null
+      },
+      "indicator": {
+        "code": "SE.1.3.I",
+        "name": "The child manages the expression of feelings, thoughts, impulses, and behaviors.",
+        "description": "Young children develop self-control as they acquire the ability to regulate their impulses with decreasing support from adults. This enables children to function successfully and independently in both personal and social contexts. Temperament displays itself through the way a child manages their behaviors in daily activity; temperament is driven by both nature and nurture."
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "The child manages the expression of feelings, thoughts, impulses, and behaviors."
+    },
+    {
+      "standard_id": "US-AZ-2018-SE-SE.2.1.I-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SE",
+        "name": "Social Emotional Development Standard",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large."
+      },
+      "strand": {
+        "code": "SE.2",
+        "name": "Relationships and Social Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SE.2.1",
+        "name": "Attachment",
+        "description": null
+      },
+      "indicator": {
+        "code": "SE.2.1.I",
+        "name": "The child demonstrates the ability to engage in and maintain secure relationships.",
+        "description": "Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning."
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "The child demonstrates the ability to engage in and maintain secure relationships."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED-SED.S2.C1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "SOCIAL EMOTIONAL DEVELOPMENT",
+        "description": null
+      },
+      "strand": {
+        "code": "SED.STR2",
+        "name": "RELATIONSHIPS AND SOCIAL SKILLS",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.STR2.C1",
+        "name": "Attachment",
+        "description": null
+      },
+      "indicator": {
+        "code": "SED.S2.C1",
+        "name": "The child demonstrates the ability to engage in and maintain secure relationships.",
+        "description": "Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning."
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "The child demonstrates the ability to engage in and maintain secure relationships."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED-SED.S2.C2-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "SOCIAL EMOTIONAL DEVELOPMENT",
+        "description": null
+      },
+      "strand": {
+        "code": "SED.STR2",
+        "name": "RELATIONSHIPS AND SOCIAL SKILLS",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.STR2.C2",
+        "name": "Social Interactions",
+        "description": null
+      },
+      "indicator": {
+        "code": "SED.S2.C2",
+        "name": "The child displays positive social behavior.",
+        "description": "A child's relationship with peers and adults reflect their ability to initiate and sustain positive and appropriate interactions while increasing their capacity to acknowledge someone else's perspective."
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "The child displays positive social behavior."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED-SED.S2.C3-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "SOCIAL EMOTIONAL DEVELOPMENT",
+        "description": null
+      },
+      "strand": {
+        "code": "SED.STR2",
+        "name": "RELATIONSHIPS AND SOCIAL SKILLS",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.STR2.C3",
+        "name": "Respect",
+        "description": null
+      },
+      "indicator": {
+        "code": "SED.S2.C3",
+        "name": "The child has an increasing capacity to understand social boundaries about behavior and the environment.",
+        "description": "When children interact with others, they become aware of the boundaries of acceptable behavior and possess a growing sense of the potential consequences of their actions. Children thrive in environments when they have a sense of ownership."
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "The child has an increasing capacity to understand social boundaries about behavior and the environment."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.1.1.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.1",
+        "name": "Initiative and Curiosity",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.1.1",
+        "name": "Initiative",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.1.1.1",
+        "name": "The child demonstrates motivation, independence, and responsibility while participating in a range of activities and routines.",
+        "description": "Initiative refers to a child's ability to exhibit a spirit of independence, resourcefulness, and motivation regarding making choices when interacting with others or independently."
+      },
+      "age_band": "36-60",
+      "source_page": 12,
+      "source_text": "The child demonstrates motivation, independence, and responsibility while participating in a range of activities and routines."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.1.2.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.1",
+        "name": "Initiative and Curiosity",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.1.2",
+        "name": "Curiosity",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.1.2.1",
+        "name": "The child demonstrates eagerness to learn about and discuss a range of topics, ideas, and activities.",
+        "description": "Curiosity relates to children's natural tendencies as active learners to explore all aspects of the environment, from objects and people, to ideas and customs. It is through discovering the answers to their own questions that children construct knowledge."
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "The child demonstrates eagerness to learn about and discuss a range of topics, ideas, and activities."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.2.1.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.2",
+        "name": "Attentiveness and Persistence",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.2.1",
+        "name": "Attentiveness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.2.1.1",
+        "name": "The child demonstrates the ability to focus on an activity.",
+        "description": "Attentiveness refers to the child's ability to focus attention and concentrate. This enhances academic learning, including language acquisition and problem solving, as well as social skills and cooperation."
+      },
+      "age_band": "36-60",
+      "source_page": 14,
+      "source_text": "The child demonstrates the ability to focus on an activity. Attentiveness refers to the child's ability to focus attention and concentrate."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.2.2.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.2",
+        "name": "Attentiveness and Persistence",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.2.2",
+        "name": "Persistence",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.2.2.1",
+        "name": "The child demonstrates the ability to maintain and sustain a task.",
+        "description": "Children demonstrate persistence in their capacity to engage in what they are doing and to meet challenges appropriate to their level of development. The ability to persist in a task is an essential element in learning."
+      },
+      "age_band": "36-60",
+      "source_page": 15,
+      "source_text": "The child demonstrates the ability to maintain and sustain a task."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.3.1.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.3",
+        "name": "Confidence and Resilience",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.3.1",
+        "name": "Confidence and Resilience",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.3.1.1",
+        "name": "The child demonstrates self-assurance, motivation, and stamina in a variety of circumstances.",
+        "description": "Confident children feel positive about themselves and their ability to do things or to adapt to changing situations. Confidence is supported by a mindset of resiliency. A confident child is willing to take a reasonable risk, to express or defend ideas, to try new experiences, or to engage in challenging tasks."
+      },
+      "age_band": "36-60",
+      "source_page": 16,
+      "source_text": "The child demonstrates self-assurance, motivation, and stamina in a variety of circumstances."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.4.1.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.4",
+        "name": "Creativity",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.4.1",
+        "name": "Creativity",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.4.1.1",
+        "name": "The child demonstrates the ability to express their own unique way of seeing the world.",
+        "description": "Creativity involves generating novel ideas while engaging curiosity, risk-taking, and imagination. Creativity can be expressed in many ways. We commonly think of this word in association with the expressive arts. However, creativity involves being able to cope with new situations and problems as well as to see things from a different perspective. A creative child extends and elaborates on ideas and appreciates humor."
+      },
+      "age_band": "36-60",
+      "source_page": 17,
+      "source_text": "The child demonstrates the ability to express their own unique way of seeing the world."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.5.1.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.5",
+        "name": "Reasoning and Problem-Solving",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.5.1",
+        "name": "Reasoning",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.5.1.1",
+        "name": "The child demonstrates the ability to think in a logical way.",
+        "description": "Reasoning involves the child's ability to use prior knowledge and information to generate a decision or conclusion. Logic and reasoning skills are key to child development in early learning. These skills help children work cooperatively and solve problems independently."
+      },
+      "age_band": "36-60",
+      "source_page": 18,
+      "source_text": "The child demonstrates the ability to think in a logical way."
+    },
+    {
+      "standard_id": "US-AZ-2018-ATL-ATL.5.2.1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "ATL",
+        "name": "APPROACHES TO LEARNING STANDARD",
+        "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards."
+      },
+      "strand": {
+        "code": "ATL.5",
+        "name": "Reasoning and Problem-Solving",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ATL.5.2",
+        "name": "Problem-Solving",
+        "description": null
+      },
+      "indicator": {
+        "code": "ATL.5.2.1",
+        "name": "The child demonstrates their ability to focus energies on suitable solutions.",
+        "description": "Problem solving involves the child's ability to look for or find multiple solutions to a question, task, or problem. This ability is crucial for constructing knowledge as the child builds conflict resolution skills."
+      },
+      "age_band": "36-60",
+      "source_page": 19,
+      "source_text": "The child demonstrates their ability to focus energies on suitable solutions."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL-LL.S1.C1-36-60",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "LANGUAGE AND LITERACY STANDARD",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.S1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.S1.C1",
+        "name": "Receptive Language Understanding",
+        "description": null
+      },
+      "indicator": {
+        "code": "LL.S1.C1",
+        "name": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues.",
+        "description": "Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. \"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\" Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "age_band": "36-60",
+      "source_page": 21,
+      "source_text": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues."
+    }
+  ],
+  "total_indicators": 16,
+  "parsing_timestamp": "2026-05-03T21:26:30.086120+00:00",
+  "source_detection_key": ""
+}

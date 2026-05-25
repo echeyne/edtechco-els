@@ -1,0 +1,807 @@
+{
+  "elements": [
+    {
+      "level": "domain",
+      "code": "SE",
+      "title": "Social Emotional Development Standard",
+      "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large.",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "SE.1",
+      "title": "Self-Awareness and Emotional Skills",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "STRAND 1: SELF-AWARENESS AND EMOTIONAL SKILLS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.1.1",
+      "title": "Self-Awareness",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "Concept 1: Self-Awareness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.1.1.I",
+      "title": "The child demonstrates an awareness of self.",
+      "description": "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "confidence": 0.95,
+      "source_page": 5,
+      "source_text": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.1.2",
+      "title": "Recognizes and Expresses Feelings",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "Concept 2: Recognizes and Expresses Feelings",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.1.2.I",
+      "title": "The child recognizes and expresses feelings of self and others.",
+      "description": "Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.1.3",
+      "title": "Self-Regulation",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "Concept 3: Self-Regulation",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.1.3.I",
+      "title": "The child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "description": "Young children develop self-control as they acquire the ability to regulate their impulses with decreasing support from adults. This enables children to function successfully and independently in both personal and social contexts. Temperament displays itself through the way a child manages their behaviors in daily activity; temperament is driven by both nature and nurture.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "The child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "SE.2",
+      "title": "Relationships and Social Skills",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "STRAND 2: RELATIONSHIPS AND SOCIAL SKILLS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "SE.2.1",
+      "title": "Attachment",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "Concept 1: Attachment",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SE.2.1.I",
+      "title": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "description": "Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "SED",
+      "title": "SOCIAL EMOTIONAL DEVELOPMENT",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "SOCIAL EMOTIONAL DEVELOPMENT",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR2",
+      "title": "RELATIONSHIPS AND SOCIAL SKILLS",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "STRAND 2: RELATIONSHIPS AND SOCIAL SKILLS",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Attachment",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 8,
+      "source_text": "Concept 1: Attachment",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SED.S2.C1",
+      "title": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "description": "Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning.",
+      "confidence": 0.92,
+      "source_page": 8,
+      "source_text": "The child demonstrates the ability to engage in and maintain secure relationships.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Social Interactions",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 9,
+      "source_text": "Concept 2: Social Interactions",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SED.S2.C2",
+      "title": "The child displays positive social behavior.",
+      "description": "A child's relationship with peers and adults reflect their ability to initiate and sustain positive and appropriate interactions while increasing their capacity to acknowledge someone else's perspective.",
+      "confidence": 0.92,
+      "source_page": 9,
+      "source_text": "The child displays positive social behavior.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Respect",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 10,
+      "source_text": "Concept 3: Respect",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "SED.S2.C3",
+      "title": "The child has an increasing capacity to understand social boundaries about behavior and the environment.",
+      "description": "When children interact with others, they become aware of the boundaries of acceptable behavior and possess a growing sense of the potential consequences of their actions. Children thrive in environments when they have a sense of ownership.",
+      "confidence": 0.92,
+      "source_page": 10,
+      "source_text": "The child has an increasing capacity to understand social boundaries about behavior and the environment.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "APPROACHES TO LEARNING STANDARD",
+      "description": "Approaches to learning refers to behaviors that indicate ways children become engaged in social interactions and learning experiences. Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards.",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "APPROACHES TO LEARNING STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR1",
+      "title": "Initiative and Curiosity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 1: Initiative and Curiosity",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Initiative",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Initiative",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Curiosity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 2: Curiosity",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR2",
+      "title": "Attentiveness and Persistence",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 2: Attentiveness and Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Attentiveness",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Attentiveness",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Persistence",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 2: Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR3",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 3: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.88,
+      "source_page": 11,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR4",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 4: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "STR5",
+      "title": "Reasoning and Problem-Solving",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 5: Reasoning and Problem-Solving",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "Approaches to Learning",
+      "description": "Approaches to learning contribute to their success in school and influence their development and learning in other domains. For example, curiosity is a prerequisite of exploration, and reasoning and problem solving are as necessary for social relationships as they are for mathematics. A child's ability to stay focused, interested, and engaged in activities supports a range of positive outcomes, including cognitive, language, and social and emotional development. Many early learning experts view approaches to learning as one of the most important domains of early childhood development. When children have a positive experience in learning, they are likely to want to learn more. A child's brain development is the architecture that supports and shapes approaches to learning. Approaches to learning leads to executive functions, an umbrella term for a set of neurologically-based processes that involve managing one's self and one's resources to achieve a goal. These include the ability to remember and follow multi-step instructions, avoid distractions, control [abrupt] responses, adjust when rules change, and persist at problem-solving. When adults provide a solid foundation in approaches to learning, children will be better equipped for kindergarten and to take advantage of Arizona's K-12 Standards.",
+      "confidence": 0.95,
+      "source_page": 11,
+      "source_text": "APPROACHES TO LEARNING",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "Initiative and Curiosity",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 12,
+      "source_text": "STRAND 1: INITIATIVE AND CURIOSITY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.1",
+      "title": "Initiative",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 12,
+      "source_text": "Concept 1: Initiative",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.1.1",
+      "title": "The child demonstrates motivation, independence, and responsibility while participating in a range of activities and routines.",
+      "description": "Initiative refers to a child's ability to exhibit a spirit of independence, resourcefulness, and motivation regarding making choices when interacting with others or independently.",
+      "confidence": 0.93,
+      "source_page": 12,
+      "source_text": "The child demonstrates motivation, independence, and responsibility while participating in a range of activities and routines.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "1.2",
+      "title": "Curiosity",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 13,
+      "source_text": "Concept 2: Curiosity",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "1.2.1",
+      "title": "The child demonstrates eagerness to learn about and discuss a range of topics, ideas, and activities.",
+      "description": "Curiosity relates to children's natural tendencies as active learners to explore all aspects of the environment, from objects and people, to ideas and customs. It is through discovering the answers to their own questions that children construct knowledge.",
+      "confidence": 0.93,
+      "source_page": 13,
+      "source_text": "The child demonstrates eagerness to learn about and discuss a range of topics, ideas, and activities.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "Attentiveness and Persistence",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "STRAND 2: ATTENTIVENESS AND PERSISTENCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.1",
+      "title": "Attentiveness",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "Concept 1: Attentiveness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.1.1",
+      "title": "The child demonstrates the ability to focus on an activity.",
+      "description": "Attentiveness refers to the child's ability to focus attention and concentrate. This enhances academic learning, including language acquisition and problem solving, as well as social skills and cooperation.",
+      "confidence": 0.93,
+      "source_page": 14,
+      "source_text": "The child demonstrates the ability to focus on an activity.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "2.2",
+      "title": "Persistence",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "Concept 2: Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "2.2.1",
+      "title": "The child demonstrates the ability to maintain and sustain a task.",
+      "description": "Children demonstrate persistence in their capacity to engage in what they are doing and to meet challenges",
+      "confidence": 0.9,
+      "source_page": 15,
+      "source_text": "The child demonstrates the ability to maintain and sustain a task.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "3",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 3: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "3.1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "4",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 4: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "4.1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "5",
+      "title": "Reasoning and Problem-Solving",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 11,
+      "source_text": "Strand 5: Reasoning and Problem-Solving",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "5.1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.75,
+      "source_page": 11,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S2",
+      "title": "ATTENTIVENESS AND PERSISTENCE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "STRAND 2: ATTENTIVENESS AND PERSISTENCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C1",
+      "title": "Attentiveness",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "Concept 1: Attentiveness",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C1.1",
+      "title": "The child demonstrates the ability to focus on an activity.",
+      "description": "Attentiveness refers to the child's ability to focus attention and concentrate. This enhances academic learning, including language acquisition and problem solving, as well as social skills and cooperation.",
+      "confidence": 0.95,
+      "source_page": 14,
+      "source_text": "The child demonstrates the ability to focus on an activity. Attentiveness refers to the child's ability to focus attention and concentrate.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S2C2",
+      "title": "Persistence",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "Concept 2: Persistence",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S2C2.1",
+      "title": "The child demonstrates the ability to maintain and sustain a task.",
+      "description": "Children demonstrate persistence in their capacity to engage in what they are doing and to meet challenges appropriate to their level of development. The ability to persist in a task is an essential element in learning.",
+      "confidence": 0.95,
+      "source_page": 15,
+      "source_text": "The child demonstrates the ability to maintain and sustain a task.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S3",
+      "title": "CONFIDENCE AND RESILIENCE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "STRAND 3: CONFIDENCE AND RESILIENCE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S3C1",
+      "title": "Confidence and Resilience",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "Concept 1: Confidence and Resilience",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S3C1.1",
+      "title": "The child demonstrates self-assurance, motivation, and stamina in a variety of circumstances.",
+      "description": "Confident children feel positive about themselves and their ability to do things or to adapt to changing situations. Confidence is supported by a mindset of resiliency. A confident child is willing to take a reasonable risk, to express or defend ideas, to try new experiences, or to engage in challenging tasks.",
+      "confidence": 0.95,
+      "source_page": 16,
+      "source_text": "The child demonstrates self-assurance, motivation, and stamina in a variety of circumstances.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S4",
+      "title": "CREATIVITY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "STRAND 4: CREATIVITY",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S4C1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4C1.1",
+      "title": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "description": "Creativity involves generating novel ideas while engaging curiosity, risk-taking, and imagination. Creativity can be expressed in many ways. We commonly think of this word in association with the expressive arts. However, creativity involves being able to cope with new situations and problems as well as to see things from a different perspective. A creative child extends and elaborates on ideas and appreciates humor.",
+      "confidence": 0.95,
+      "source_page": 17,
+      "source_text": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S5",
+      "title": "REASONING AND PROBLEM SOLVING",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "STRAND 5: REASONING AND PROBLEM SOLVING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "S5C1",
+      "title": "Reasoning",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "Concept 1: Reasoning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S5C1.1",
+      "title": "The child demonstrates the ability to think in a logical way.",
+      "description": "Reasoning involves the child's ability to use prior knowledge and information to generate a decision or conclusion. Logic and reasoning skills are key to child development in early learning. These skills help children work cooperatively and solve problems independently.",
+      "confidence": 0.95,
+      "source_page": 18,
+      "source_text": "The child demonstrates the ability to think in a logical way.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "ATL",
+      "title": "APPROACHES TO LEARNING",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 14,
+      "source_text": "APPROACHES TO LEARNING",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Creativity",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 17,
+      "source_text": "Concept 1: Creativity",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S4.C1",
+      "title": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "description": "Creativity involves generating novel ideas while engaging curiosity, risk-taking, and imagination. Creativity can be expressed in many ways. We commonly think of this word in association with the expressive arts. However, creativity involves being able to cope with new situations and problems as well as to see things from a different perspective. A creative child extends and elaborates on ideas and appreciates humor.",
+      "confidence": 0.92,
+      "source_page": 17,
+      "source_text": "The child demonstrates the ability to express their own unique way of seeing the world.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Reasoning",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 18,
+      "source_text": "Concept 1: Reasoning",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S5.C1",
+      "title": "The child demonstrates the ability to think in a logical way.",
+      "description": "Reasoning involves the child's ability to use prior knowledge and information to generate a decision or conclusion. Logic and reasoning skills are key to child development in early learning. These skills help children work cooperatively and solve problems independently.",
+      "confidence": 0.92,
+      "source_page": 18,
+      "source_text": "The child demonstrates the ability to think in a logical way.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Problem-Solving",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 19,
+      "source_text": "Concept 2: Problem-Solving",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S5.C2",
+      "title": "The child demonstrates their ability to focus energies on suitable solutions.",
+      "description": "Problem solving involves the child's ability to look for or find multiple solutions to a question, task, or problem. This ability is crucial for constructing knowledge as the child builds conflict resolution skills.",
+      "confidence": 0.92,
+      "source_page": 19,
+      "source_text": "The child demonstrates their ability to focus energies on suitable solutions.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY STANDARD",
+      "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs.",
+      "confidence": 0.95,
+      "source_page": 20,
+      "source_text": "LANGUAGE AND LITERACY STANDARD",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "Language",
+      "description": "",
+      "confidence": 0.93,
+      "source_page": 21,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Receptive Language Understanding",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 21,
+      "source_text": "Concept 1: Receptive Language Understanding",
+      "needs_review": false
+    },
+    {
+      "level": "indicator",
+      "code": "S1.C1",
+      "title": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues.",
+      "description": "Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. \"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\" Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading.",
+      "confidence": 0.92,
+      "source_page": 21,
+      "source_text": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues.",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "LANGUAGE AND LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "STRAND 1: LANGUAGE",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C1",
+      "title": "Concept 1: Receptive Language and Communication Skills",
+      "description": "Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading.",
+      "confidence": 0.9,
+      "source_page": 21,
+      "source_text": "Receptive language is the ability to understand or comprehend language that is heard or read.",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C2",
+      "title": "Concept 2: Expressive Language and Communication Skills",
+      "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\" Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs.",
+      "confidence": 0.95,
+      "source_page": 22,
+      "source_text": "Concept 2: Expressive Language and Communication Skills",
+      "needs_review": false
+    },
+    {
+      "level": "domain",
+      "code": "LL",
+      "title": "LANGUAGE AND LITERACY",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 24,
+      "source_text": "LANGUAGE AND LITERACY",
+      "needs_review": false
+    },
+    {
+      "level": "strand",
+      "code": "S1",
+      "title": "LANGUAGE",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "STRAND 1: LANGUAGE",
+      "needs_review": false
+    },
+    {
+      "level": "sub_strand",
+      "code": "C3",
+      "title": "Vocabulary",
+      "description": "The child understands and uses increasingly complex vocabulary. The early childhood years are a period of vocabulary expansion and exploration. Research indicates that there is a strong connection between vocabulary development and reading comprehension which correlates to academic success. Children gain language and vocabulary skills by having multiple and frequent opportunities to listen, talk, read, share ideas, relate experiences, and engage in meaningful conversations. They need to play with familiar language and experiment with language in different settings. Rhymes, songs, and read-alouds that use rare words allow children to talk about and develop an understanding of words they would not otherwise hear in everyday conversations.",
+      "confidence": 0.9,
+      "source_page": 24,
+      "source_text": "Concept 3: Vocabulary",
+      "needs_review": false
+    }
+  ],
+  "review_count": 0,
+  "detection_timestamp": "2026-05-03T21:25:24.648730+00:00",
+  "source_extraction_key": ""
+}
