@@ -5,7 +5,7 @@
   "version_year": 2018,
   "source_document": "Arizona Early Learning Standards",
   "annotator": "Emily Cheyne",
-  "annotation_date": "05/03/2026",
+  "annotation_date": "05-25-2026",
   "notes": "AZ uses 'Standard → Strand → Concept → Indicator'. Map Standard → domain, Strand → strand, Concept → sub_strand, Indicator (the learning-goal sentence, NOT the lettered 'a./b./c.' examples beneath it) → indicator. No age-band columns.",
   "expected_depth_map": {
     "doc_depths": [
@@ -14,7 +14,7 @@
         "canonical_level": "domain",
         "label_in_doc": "Standard",
         "prefix_pattern": "ALL-CAPS STANDARD NAME",
-        "example": "SOCIAL EMOTIONAL STANDARD"
+        "example": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD"
       },
       {
         "depth": 2,
@@ -41,11 +41,11 @@
   },
   "elements": [
     {
-      "test_case_id": "AZ-DOM-SE",
+      "test_case_id": "AZ-DOM-SED",
       "level": "domain",
-      "code": "SE",
-      "title": "Social Emotional Standard",
-      "description": "Established social-emotional skills have a significant, positive impact on a child’s learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "code": "SED",
+      "title": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
+      "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children’s emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child’s ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child’s confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child’s learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
       "source_page": 4,
       "parent_code": null
     },
@@ -55,37 +55,47 @@
       "code": "1",
       "title": "Self-Awareness and Emotional Skills",
       "description": null,
-      "source_page": 6,
-      "parent_code": "SE"
+      "source_page": 5,
+      "parent_code": "SED",
+      "domain_code": "SED"
     },
     {
       "test_case_id": "AZ-SUB-SE-1-1",
       "level": "sub_strand",
-      "code": "1",
-      "title": "Self-Awareness",
-      "description": null,
-      "source_page": "TODO",
-      "parent_code": "1"
+      "code": "2",
+      "title": "Recognizes and Expresses Feelings",
+      "description": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+      "source_page": 5,
+      "parent_code": "1",
+      "domain_code": "SED",
+      "strand_code": "1"
     },
     {
-      "test_case_id": "AZ-IND-SE-1-1-1",
+      "test_case_id": "AZ-IND-SE-1-1-a",
       "level": "indicator",
-      "code": "SE.1.1.1",
-      "title": "The child demonstrates an awareness of self.",
-      "description": "Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
-      "source_page": 6,
-      "parent_code": "1",
-      "domain_code": "SE",
+      "code": "SE.1.2.a",
+      "title": "Associates emotions with words, facial expressions, and body language.",
+      "description": "Describes the emotions of a character in a book. Signs, “I am mad” when asked how they feel.",
+      "source_page": 5,
+      "parent_code": "2",
+      "domain_code": "SED",
       "strand_code": "1",
-      "sub_strand_code": "1"
+      "sub_strand_code": "2"
+    },
+    {
+      "test_case_id": "AZ-IND-SE-1-1-b",
+      "level": "indicator",
+      "code": "SE.1.2.b",
+      "title": "Identifies, describes, and expresses their own feelings.",
+      "description": "Covers their eyes and says, \"This is scary!\" while listening to a story. Says, \"I am happy today because it's my birthday!\"",
+      "source_page": 5,
+      "parent_code": "2",
+      "domain_code": "SED",
+      "strand_code": "1",
+      "sub_strand_code": "2"
     }
   ],
   "regression_cases": [
-    {
-      "id": "AZ-NO-LETTERED-EXAMPLES",
-      "description": "Lettered ('a.', 'b.', 'c.') items beneath an indicator are examples, NOT separate indicators.",
-      "assertion": "no detected indicator's source_text matches r'^\\s*[a-z]\\.\\s' (single lowercase letter followed by '. ')."
-    },
     {
       "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
       "description": "Section headers like 'Indicators and Examples in the Context of Daily Routines, Activities, and Play' must not be emitted as structural elements.",

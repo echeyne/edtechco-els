@@ -54,6 +54,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Evaluation
+evaluation/.cache/
+
 # Project Specific
 scratches.txt
 extraction_sample.json

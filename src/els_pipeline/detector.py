@@ -270,7 +270,7 @@ def infer_depth_map(
     )
 
     try:
-        response_text = call_bedrock_llm(prompt, metrics_context=metrics_context)
+        response_text = call_bedrock_llm(prompt, metrics_context=metrics_context, model_id=Config.BEDROCK_DEPTH_MAP_LLM_MODEL_ID)
     except Exception as e:
         logger.warning(f"Depth-map inference failed at Bedrock call: {e}")
         return None
@@ -400,7 +400,7 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
         level=level,
         code=elem_data['code'],
         title=elem_data['title'],
-        description=elem_data['description'],
+        description=elem_data.get('description') or "",
         confidence=confidence,
         source_page=elem_data.get('source_page', default_page),
         source_text=elem_data['source_text'],
@@ -514,6 +514,7 @@ def call_bedrock_llm(
     max_retries: int = MAX_BEDROCK_RETRIES,
     metrics_context: Optional[Dict[str, Any]] = None,
     prefill: Optional[str] = None,
+    model_id: Optional[str] = None,
 ) -> str:
     """
     Call Amazon Bedrock LLM (Claude) with the given prompt.
@@ -543,9 +544,13 @@ def call_bedrock_llm(
             retries={"max_attempts": 0}  # We handle retries ourselves
         )
     )
-    request_body = _build_bedrock_request(prompt, prefill=prefill)
     ctx = metrics_context or {}
     effective_model_id = model_id or Config.BEDROCK_DETECTOR_LLM_MODEL_ID
+    # Opus 4.6 (and cross-region variants) does not support assistant prefill.
+    if prefill and "opus-4-6" in effective_model_id:
+        logger.debug(f"Dropping prefill — model {effective_model_id} does not support it")
+        prefill = None
+    request_body = _build_bedrock_request(prompt, prefill=prefill)
 
     logger.info(f"Calling Bedrock with model: {effective_model_id}")
     logger.debug(f"Prompt length: {len(prompt)} characters, ~{estimate_tokens(prompt)} tokens")
@@ -654,9 +659,7 @@ def _process_chunk(
     # Try to parse LLM response with retries
     for parse_attempt in range(MAX_PARSE_RETRIES + 1):
         try:
-            # Call Bedrock; prefill `[` to force a JSON-array response since
-            # Opus 4.7 doesn't support temperature.
-            response_text = call_bedrock_llm(prompt, prefill="[")
+            response_text = call_bedrock_llm(prompt)
             
             # Parse response
             elements = parse_llm_response(response_text, chunk)

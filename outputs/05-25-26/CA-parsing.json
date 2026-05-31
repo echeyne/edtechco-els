@@ -1,0 +1,452 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-CA-2021-ATL-ATL.1.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ATL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "ATL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ATL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 1.0 - Motivation to Learn"
+    },
+    {
+      "standard_id": "US-CA-2021-ATL-ATL.2.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ATL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "ATL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ATL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 2.0 - Executive Functioning"
+    },
+    {
+      "standard_id": "US-CA-2021-ATL-ATL.3.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ATL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "ATL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ATL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 3.0 - Goal-Directed Learning"
+    },
+    {
+      "standard_id": "US-CA-2021-SED-SED.1.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SED",
+        "name": "Social and Emotional Development",
+        "description": null
+      },
+      "strand": {
+        "code": "1.0",
+        "name": "Self",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.0",
+        "name": "Self",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 1.0 - Self"
+    },
+    {
+      "standard_id": "US-CA-2021-SED-SED.2.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SED",
+        "name": "Social and Emotional Development",
+        "description": null
+      },
+      "strand": {
+        "code": "2.0",
+        "name": "Interactions and Relationships with Adults",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.0",
+        "name": "Interactions and Relationships with Adults",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 2.0 - Interactions and Relationships with Adults"
+    },
+    {
+      "standard_id": "US-CA-2021-SED-SED.3.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SED",
+        "name": "Social and Emotional Development",
+        "description": null
+      },
+      "strand": {
+        "code": "3.0",
+        "name": "Interactions and Relationships with Peers",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.0",
+        "name": "Interactions and Relationships with Peers",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 3.0 - Interactions and Relationships with Peers"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD-ELD-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": null
+      },
+      "strand": null,
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "English Language Development"
+    },
+    {
+      "standard_id": "US-CA-2021-MATH-MATH.1.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "MATH",
+        "name": "Mathematics",
+        "description": null
+      },
+      "strand": {
+        "code": "1.0",
+        "name": "Counting and Cardinality",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "MATH.1.0",
+        "name": "Counting and Cardinality",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 1.0 - Counting and Cardinality"
+    },
+    {
+      "standard_id": "US-CA-2021-MATH-MATH.2.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "MATH",
+        "name": "Mathematics",
+        "description": null
+      },
+      "strand": {
+        "code": "2.0",
+        "name": "Operations and Algebraic Thinking",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "MATH.2.0",
+        "name": "Operations and Algebraic Thinking",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 2.0 - Operations and Algebraic Thinking"
+    },
+    {
+      "standard_id": "US-CA-2021-MATH-MATH.3.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "MATH",
+        "name": "Mathematics",
+        "description": null
+      },
+      "strand": {
+        "code": "3.0",
+        "name": "Measurement and Data",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "MATH.3.0",
+        "name": "Measurement and Data",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 3.0 - Measurement and Data"
+    },
+    {
+      "standard_id": "US-CA-2021-MATH-MATH.4.0-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "MATH",
+        "name": "Mathematics",
+        "description": null
+      },
+      "strand": {
+        "code": "4.0",
+        "name": "Geometry and Spatial Thinking",
+        "description": null
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "MATH.4.0",
+        "name": "Geometry and Spatial Thinking",
+        "description": null
+      },
+      "age_band": "36-66",
+      "source_page": 1,
+      "source_text": "Strand: 4.0 - Geometry and Spatial Thinking"
+    },
+    {
+      "standard_id": "US-CA-2021-SCI-SCI.1.0.1.1SS.1.1-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SCI",
+        "name": "Science",
+        "description": null
+      },
+      "strand": {
+        "code": "SCI.1.0",
+        "name": "Science and Engineering Practices",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SCI.1.0.1.1SS",
+        "name": "Curiosity and Interest",
+        "description": null
+      },
+      "indicator": {
+        "code": "SCI.1.0.1.1SS.1.1",
+        "name": "Curiosity and Interest",
+        "description": "Express interest in some familiar and new objects, people, and activities in their immediate environment. Seek information by exploring with their senses, describing their observations, and asking simple questions."
+      },
+      "age_band": "36-66",
+      "source_page": 2,
+      "source_text": "Foundation 1.1 Curiosity and Interest\nExpress interest in some familiar and new objects, people, and activities in their immediate environment. Seek information by exploring with their senses, describing their observations, and asking simple questions."
+    },
+    {
+      "standard_id": "US-CA-2021-SCI-SCI.1.0.1.2SS.1.2-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SCI",
+        "name": "Science",
+        "description": null
+      },
+      "strand": {
+        "code": "SCI.1.0",
+        "name": "Science and Engineering Practices",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SCI.1.0.1.2SS",
+        "name": "Initiative",
+        "description": null
+      },
+      "indicator": {
+        "code": "SCI.1.0.1.2SS.1.2",
+        "name": "Initiative",
+        "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems."
+      },
+      "age_band": "36-66",
+      "source_page": 2,
+      "source_text": "Foundation 1.2 Initiative\nDemonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems."
+    },
+    {
+      "standard_id": "US-CA-2021-SCI-SCI.1.0.1.3SS.1.3-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SCI",
+        "name": "Science",
+        "description": null
+      },
+      "strand": {
+        "code": "SCI.1.0",
+        "name": "Science and Engineering Practices",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SCI.1.0.1.3SS",
+        "name": "Engagement",
+        "description": null
+      },
+      "indicator": {
+        "code": "SCI.1.0.1.3SS.1.3",
+        "name": "Engagement",
+        "description": "Actively engage by focusing and concentrating on activities for brief periods of time with adult support."
+      },
+      "age_band": "36-66",
+      "source_page": 2,
+      "source_text": "Foundation 1.3 Engagement\nActively engage by focusing and concentrating on activities for brief periods of time with adult support."
+    },
+    {
+      "standard_id": "US-CA-2021-SCI-SCI.1.0.1.4SS.1.4-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SCI",
+        "name": "Science",
+        "description": null
+      },
+      "strand": {
+        "code": "SCI.1.0",
+        "name": "Science and Engineering Practices",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SCI.1.0.1.4SS",
+        "name": "Perseverance",
+        "description": null
+      },
+      "indicator": {
+        "code": "SCI.1.0.1.4SS.1.4",
+        "name": "Persisting Despite Difficulties",
+        "description": "Demonstrate persistence, with adult support, when engaging in an activity despite encountering setbacks or boredom. Make an effort, with adult support, to cope with emotions that arise (for instance, frustration, anger, sadness, excitement), although may shift to another activity after a short while."
+      },
+      "age_band": "36-66",
+      "source_page": 3,
+      "source_text": "Foundation 1.4 Persisting Despite Difficulties\nDemonstrate persistence, with adult support, when engaging in an activity despite encountering setbacks or boredom. Make an effort, with adult support, to cope with emotions that arise (for instance, frustration, anger, sadness, excitement), although may shift to another activity after a short while."
+    },
+    {
+      "standard_id": "US-CA-2021-SCI-SCI.2.0.2.1SS.2.1-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SCI",
+        "name": "Science",
+        "description": null
+      },
+      "strand": {
+        "code": "SCI.2.0",
+        "name": "Physical Science",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SCI.2.0.2.1SS",
+        "name": "Working Memory",
+        "description": null
+      },
+      "indicator": {
+        "code": "SCI.2.0.2.1SS.2.1",
+        "name": "Working Memory",
+        "description": "Hold approximately one to two pieces of information in their mind for a short time and use the knowledge to guide behavior when performing tasks and engaging in play, with adult support."
+      },
+      "age_band": "36-66",
+      "source_page": 3,
+      "source_text": "Foundation 2.1 Working Memory\nHold approximately one to two pieces of information in their mind for a short time and use the knowledge to guide behavior when performing tasks and engaging in play, with adult support."
+    },
+    {
+      "standard_id": "US-CA-2021-SCI-SCI.2.0.2.2SS.2.2-36-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "SCI",
+        "name": "Science",
+        "description": null
+      },
+      "strand": {
+        "code": "SCI.2.0",
+        "name": "Physical Science",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SCI.2.0.2.2SS",
+        "name": "Inhibitory Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "SCI.2.0.2.2SS.2.2",
+        "name": "Managing Impulsive Behaviors",
+        "description": "Demonstrate emerging ability to manage habitual reactions (habits that are not useful in a particular context), impulsive behaviors (acting on a whim), and delaying gratification (resisting temptation for an instant reward) with adult support."
+      },
+      "age_band": "36-66",
+      "source_page": 3,
+      "source_text": "Foundation 2.2 Managing Impulsive Behaviors\nDemonstrate emerging ability to manage habitual reactions (habits that are not useful in a particular context), impulsive behaviors (acting on a whim), and delaying gratification (resisting temptation for an instant reward) with adult support."
+    }
+  ],
+  "total_indicators": 17,
+  "parsing_timestamp": "2026-05-25T22:11:02.916002+00:00",
+  "source_detection_key": ""
+}

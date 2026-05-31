@@ -20,8 +20,7 @@ logger = logging.getLogger(__name__)
 # Bedrock pricing per 1K tokens (us-east-1, as of April 2026)
 # Update these when prices change or models change
 BEDROCK_PRICING = {
-    "us.anthropic.claude-opus-4-7": {"input_per_1k": 0.005, "output_per_1k": 0.025},
-    "anthropic.claude-opus-4-7": {"input_per_1k": 0.005, "output_per_1k": 0.025},
+    "us.anthropic.claude-opus-4-6-v1": {"input_per_1k": 0.005, "output_per_1k": 0.025},
     "us.anthropic.claude-sonnet-4-6": {"input_per_1k": 0.003, "output_per_1k": 0.015},
     "anthropic.claude-sonnet-4-6": {"input_per_1k": 0.003, "output_per_1k": 0.015},
 }

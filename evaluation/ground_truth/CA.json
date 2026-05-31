@@ -3,9 +3,9 @@
   "state": "CA",
   "country": "US",
   "version_year": 2008,
-  "source_document": "CA Preschool Learning Foundations Vol 1.pdf",
-  "annotator": "TODO",
-  "annotation_date": "TODO",
+  "source_document": "california_all_standards_2021_only_subset.pdf",
+  "annotator": "Emily Cheyne",
+  "annotation_date": "05-31-26",
   "notes": "CA uses an explicit 4-level hierarchy: Domain → Strand → Sub-Strand → Foundation. Side-by-side age columns ('Early (3 to 4 ½ Years)' vs. 'Later (4 to 5 ½ Years)') MUST each become a separate indicator.",
   "expected_depth_map": {
     "doc_depths": [
@@ -13,29 +13,29 @@
         "depth": 1,
         "canonical_level": "domain",
         "label_in_doc": "Domain",
-        "prefix_pattern": "ALL-CAPS DOMAIN NAME",
-        "example": "TODO"
+        "prefix_pattern": "None",
+        "example": "Approaches to Learning"
       },
       {
         "depth": 2,
         "canonical_level": "strand",
         "label_in_doc": "Strand",
-        "prefix_pattern": "Strand - <Title>",
-        "example": "TODO"
+        "prefix_pattern": "Strand N: <Title>",
+        "example": "Strand: 1.0 - Motivation to Learn"
       },
       {
         "depth": 3,
         "canonical_level": "sub_strand",
         "label_in_doc": "Sub-Strand",
         "prefix_pattern": "Sub-Strand - <Title>",
-        "example": "TODO"
+        "example": "Sub-Strand: Curiosity and Interest"
       },
       {
         "depth": 4,
         "canonical_level": "indicator",
         "label_in_doc": "Foundation",
-        "prefix_pattern": "Foundation N.N <Title>",
-        "example": "Foundation 1.2 Initiative"
+        "prefix_pattern": "Foundation N.N - <Title>",
+        "example": "Foundation 1.1 - Curiosity and Interest"
       }
     ]
   },
@@ -43,55 +43,233 @@
     {
       "test_case_id": "CA-DOM-01",
       "level": "domain",
-      "code": "TODO",
-      "title": "Social-Emotional Development",
-      "description": "TODO",
-      "source_page": "TODO",
+      "code": "ATL",
+      "title": "Approaches to Learning",
+      "description": null,
+      "source_page": 1,
       "parent_code": null
     },
     {
       "test_case_id": "CA-STR-01",
       "level": "strand",
-      "code": "TODO",
-      "title": "Self",
-      "description": "TODO",
-      "source_page": "TODO",
-      "parent_code": "TODO"
+      "code": "ATL.2.0",
+      "title": "Executive Functioning",
+      "description": null,
+      "source_page": 1,
+      "parent_code": "ATL",
+      "domain_code": "ATL"
     },
     {
       "test_case_id": "CA-SUB-01",
       "level": "sub_strand",
-      "code": "TODO",
-      "title": "Initiative",
-      "description": "TODO",
+      "code": "ATL.2.0.IC",
+      "title": "Inhibitory Control",
+      "description": null,
       "source_page": 4,
-      "parent_code": "TODO"
+      "parent_code": "ATL.2.0",
+      "domain_code": "ATL",
+      "strand_code": "ATL.2.0"
     },
     {
       "test_case_id": "CA-IND-01-EARLY",
       "level": "indicator",
-      "code": "1.2",
+      "code": "ATL.2.0.IC.2.1.early",
       "title": "Initiative",
       "age_band": "Early (3 to 4 ½ Years)",
-      "description": "TODO — copy verbatim Early-column prose for Foundation 1.2",
-      "source_page": 4,
-      "parent_code": "TODO",
-      "domain_code": "TODO",
-      "strand_code": "TODO",
-      "sub_strand_code": "TODO"
+      "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems",
+      "source_page": 3,
+      "parent_code": "ATL.2.0.IC",
+      "sub_strand_code": "ATL.2.0.IC",
+      "domain_code": "ATL",
+      "strand_code": "ATL.2.0"
     },
     {
       "test_case_id": "CA-IND-01-LATER",
       "level": "indicator",
-      "code": "1.2",
+      "code": "ATL.2.0.IC.2.1.later",
       "title": "Initiative",
       "age_band": "Later (4 to 5 ½ Years)",
-      "description": "TODO — copy verbatim Later-column prose for Foundation 1.2",
-      "source_page": 4,
-      "parent_code": "TODO",
-      "domain_code": "TODO",
-      "strand_code": "TODO",
-      "sub_strand_code": "TODO"
+      "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently.",
+      "source_page": 3,
+      "parent_code": "ATL.2.0.2",
+      "sub_strand_code": "ATL.2.0.2",
+      "domain_code": "ATL",
+      "strand_code": "ATL.2.0"
+    },
+    {
+      "test_case_id": "CA-DOM-02",
+      "level": "domain",
+      "code": "FLD",
+      "title": "Foundational Language Development",
+      "description": null,
+      "source_page": 1,
+      "parent_code": null
+    },
+    {
+      "test_case_id": "CA-STR-02",
+      "level": "strand",
+      "code": "FLD.1.0",
+      "title": "Listening and Speaking",
+      "description": null,
+      "source_page": 1,
+      "parent_code": "FLD",
+      "domain_code": "FLD"
+    },
+    {
+      "test_case_id": "CA-SUB-02",
+      "level": "sub_strand",
+      "code": "FLD.1.0.VOC",
+      "title": "Vocabulary",
+      "description": null,
+      "source_page": 8,
+      "parent_code": "FLD.1.0",
+      "domain_code": "FLD",
+      "strand_code": "FLD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-02-EARLY",
+      "level": "indicator",
+      "code": "FLD.1.0.VOC.1.1.early",
+      "title": "Understanding and Using Vocabulary",
+      "age_band": "Early (3 to 4 ½ Years)",
+      "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories.",
+      "source_page": 8,
+      "parent_code": "FLD.1.0.VOC",
+      "sub_strand_code": "FLD.1.0.VOC",
+      "domain_code": "FLD",
+      "strand_code": "FLD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-02-LATER",
+      "level": "indicator",
+      "code": "FLD.1.0.VOC.1.1.later",
+      "title": "Understanding and Using Vocabulary",
+      "age_band": "Later (4 to 5 ½ Years)",
+      "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories.",
+      "source_page": 8,
+      "parent_code": "FLD.1.0.VOC",
+      "sub_strand_code": "FLD.1.0.VOC",
+      "domain_code": "FLD",
+      "strand_code": "FLD.1.0"
+    },
+    {
+      "test_case_id": "CA-DOM-03",
+      "level": "domain",
+      "code": "ELD",
+      "title": "English Language Development",
+      "description": null,
+      "source_page": 1,
+      "parent_code": null
+    },
+    {
+      "test_case_id": "CA-STR-03",
+      "level": "strand",
+      "code": "ELD.1.0",
+      "title": "Listening and Speaking",
+      "description": null,
+      "source_page": 1,
+      "parent_code": "FLD",
+      "domain_code": "FLD"
+    },
+    {
+      "test_case_id": "CA-SUB-03",
+      "level": "sub_strand",
+      "code": "ELD.1.0.VOC",
+      "title": "Vocabulary",
+      "description": null,
+      "source_page": 1,
+      "parent_code": "ELD.1.0",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-03-DISCOVERING",
+      "level": "indicator",
+      "code": "ELD.1.0.VOC.1.1.discovering",
+      "title": "Understanding Words",
+      "age_band": null,
+      "description": "Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers.",
+      "source_page": 11,
+      "parent_code": "ELD.1.0.VOC",
+      "sub_strand_code": "ELD.1.0.VOC",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-03-DEVELOPING",
+      "level": "indicator",
+      "code": "ELD.1.0.VOC.1.1.developing",
+      "title": "Understanding Words",
+      "age_band": null,
+      "description": "Demonstrate understanding of words in English for objects and actions as well as phrases encountered frequently in interactions with adults and peers.",
+      "source_page": 11,
+      "parent_code": "ELD.1.0.VOC",
+      "sub_strand_code": "ELD.1.0.VOC",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-03-BROADENING",
+      "level": "indicator",
+      "code": "ELD.1.0.VOC.1.1.broadening",
+      "title": "Understanding Words",
+      "age_band": null,
+      "description": "Demonstrate understanding of a larger set of words in English (for example, objects and actions, personal pronouns, possessives, and descriptive terms) in interactions with adults and peers.",
+      "source_page": 11,
+      "parent_code": "ELD.1.0.VOC",
+      "sub_strand_code": "ELD.1.0.VOC",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-SUB-04",
+      "level": "sub_strand",
+      "code": "ELD.1.0.GRM",
+      "title": "Grammar",
+      "description": null,
+      "source_page": 11,
+      "parent_code": "ELD.1.0",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-04-DISCOVERING",
+      "level": "indicator",
+      "code": "ELD.1.0.GRM.1.4.discovering",
+      "title": "Using Complex Sentence Structures",
+      "age_band": null,
+      "description": "Use words or phrases repeatedly experienced in English to communicate.",
+      "source_page": 12,
+      "parent_code": "ELD.1.0.GRM",
+      "sub_strand_code": "ELD.1.0.GRM",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-04-DEVELOPING",
+      "level": "indicator",
+      "code": "ELD.1.0.GRM.1.1.developing",
+      "title": "Using Complex Sentence Structures",
+      "age_band": null,
+      "description": "Use a few formulaic English sentence structures to communicate on a range of topics by switching out key words in a phrase.",
+      "source_page": 12,
+      "parent_code": "ELD.1.0.GRM",
+      "sub_strand_code": "ELD.1.0.GRM",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
+    },
+    {
+      "test_case_id": "CA-IND-04-BROADENING",
+      "level": "indicator",
+      "code": "ELD.1.0.GRM.1.1.broadening",
+      "title": "Using Complex Sentence Structures",
+      "age_band": null,
+      "description": "Use a variety of English grammatical forms, with some inaccuracies, to produce many different types of sentence structures. Grammatical forms can include adding appropriate possessive pronouns (for example, your, my); conjunctions (for example, and, or); and other elements (for example, adjectives, adverbs).",
+      "source_page": 12,
+      "parent_code": "ELD.1.0.GRM",
+      "sub_strand_code": "ELD.1.0.GRM",
+      "domain_code": "ELD",
+      "strand_code": "ELD.1.0"
     }
   ],
   "regression_cases": [

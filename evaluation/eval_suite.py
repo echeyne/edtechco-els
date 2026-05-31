@@ -29,6 +29,7 @@ Usage:
     python -m evaluation.eval_suite --state CA --stability-runs 3
     python -m evaluation.eval_suite --no-cache             # force re-run
     python -m evaluation.eval_suite --extraction-dir outputs --golden-dir evaluation/ground_truth
+    python -m evaluation.eval_suite --output-dir evaluation/review
 """
 
 from __future__ import annotations
@@ -145,6 +146,11 @@ class StateReport:
     # Regression cases
     regressions: List[Tuple[str, str, str]] = field(default_factory=list)  # (id, status, detail)
 
+    # Full element detail for review output
+    extra_elements_full: List[dict] = field(default_factory=list)
+    missing_golden_full: List[dict] = field(default_factory=list)
+    matched_pairs: List[Tuple[dict, dict]] = field(default_factory=list)  # (golden, detected)
+
     # Stability (optional)
     stability_runs: int = 0
     stability_disagreement_rate: Optional[float] = None
@@ -201,12 +207,14 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
 
         if d is None:
             rep.missing_test_cases.append(gid)
+            rep.missing_golden_full.append(g)
             rep.per_level[glevel]["fn"] += 1
             if g.get("age_band"):
                 rep.age_band_drops.append(gid)
             continue
 
         rep.matched += 1
+        rep.matched_pairs.append((g, d))
         matched_det_ids.add(id(d))
 
         dlevel = d.get("level")
@@ -221,6 +229,7 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
         if id(d) in matched_det_ids:
             continue
         rep.extra_elements.append((d.get("level", "?"), d.get("code", "?")))
+        rep.extra_elements_full.append(d)
         rep.per_level[d.get("level", "?")]["fp"] += 1
 
     return rep
@@ -303,7 +312,7 @@ def evaluate_state(
     golden_path: Path,
     use_cache: bool,
     stability_runs: int,
-) -> StateReport:
+) -> Tuple[StateReport, List[dict]]:
     logger.info(f"== {state} ==")
     golden = json.loads(golden_path.read_text())
 
@@ -328,7 +337,7 @@ def evaluate_state(
             state, extraction_path, stability_runs
         )
 
-    return rep
+    return rep, detected
 
 
 def render_report(rep: StateReport) -> str:
@@ -379,6 +388,46 @@ def render_report(rep: StateReport) -> str:
     return "\n".join(out)
 
 
+def write_review_dir(rep: StateReport, detected: List[dict], output_dir: Path) -> None:
+    """Write per-state review files into output_dir for offline inspection."""
+    output_dir.mkdir(parents=True, exist_ok=True)
+    state = rep.state
+
+    # Full untruncated text report
+    (output_dir / f"{state}-report.txt").write_text(render_report(rep))
+
+    # All detected elements (full JSON)
+    (output_dir / f"{state}-detected.json").write_text(
+        json.dumps(detected, indent=2, default=str)
+    )
+
+    # Side-by-side review: matched pairs, missing golden, extra detected
+    review = {
+        "state": state,
+        "summary": {
+            "golden": rep.n_golden,
+            "detected": rep.n_detected,
+            "matched": rep.matched,
+            "precision": round(rep.precision, 4),
+            "recall": round(rep.recall, 4),
+            "f1": round(rep.f1, 4),
+        },
+        "matched": [
+            {"golden": g, "detected": d}
+            for g, d in rep.matched_pairs
+        ],
+        "missing_from_detected": rep.missing_golden_full,
+        "extra_in_detected": rep.extra_elements_full,
+        "regressions": [
+            {"id": cid, "status": status, "detail": detail}
+            for cid, status, detail in rep.regressions
+        ],
+    }
+    (output_dir / f"{state}-review.json").write_text(
+        json.dumps(review, indent=2, default=str)
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--state", action="append", help="Limit to specific state(s); repeatable")
@@ -387,6 +436,7 @@ def main() -> int:
     parser.add_argument("--no-cache", action="store_true", help="Disable detector-output cache")
     parser.add_argument("--stability-runs", type=int, default=1, help="Re-run the detector this many times to measure stability (>=2 enables it)")
     parser.add_argument("--report-json", help="Optional path to write the full report as JSON")
+    parser.add_argument("--output-dir", help="Directory to write per-state review files ({STATE}-report.txt, {STATE}-detected.json, {STATE}-review.json)")
     args = parser.parse_args()
 
     logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -399,6 +449,8 @@ def main() -> int:
     else:
         states = sorted(p.stem for p in golden_dir.glob("*.json"))
 
+    output_dir = Path(args.output_dir) if args.output_dir else None
+
     reports: List[StateReport] = []
     for st in states:
         ext_path = extraction_dir / f"{st}-extraction.json"
@@ -407,17 +459,22 @@ def main() -> int:
             logger.warning(f"-- {st}: skipped (missing {ext_path if not ext_path.exists() else gold_path})")
             continue
         try:
-            rep = evaluate_state(
+            rep, detected = evaluate_state(
                 st, ext_path, gold_path,
                 use_cache=not args.no_cache,
                 stability_runs=args.stability_runs,
             )
             reports.append(rep)
+            if output_dir:
+                write_review_dir(rep, detected, output_dir / st)
         except Exception as e:
             logger.exception(f"-- {st}: ERROR — {e}")
 
     for rep in reports:
         print(render_report(rep))
+
+    if output_dir:
+        print(f"\nReview files written to {output_dir}/")
 
     if args.report_json:
         out = []

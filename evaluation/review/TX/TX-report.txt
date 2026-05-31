@@ -1,0 +1,23 @@
+
+=== TX ===
+  golden:   8
+  detected: 75
+  matched:  8
+  precision: 0.107  recall: 1.000  f1: 0.193
+  per-level:
+    domain      tp=1   fp=10  fn=0   p=0.09 r=1.00
+    indicator   tp=4   fp=50  fn=0   p=0.07 r=1.00
+    strand      tp=2   fp=4   fn=0   p=0.33 r=1.00
+    sub_strand  tp=1   fp=3   fn=0   p=0.25 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+    strand     → strand     : 2
+    sub_strand → sub_strand : 1
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (67): [('domain', 'I'), ('domain', 'II'), ('domain', 'III'), ('domain', 'IV'), ('domain', 'V'), ('domain', 'VI'), ('domain', 'VII'), ('domain', 'VIII'), ('domain', 'IX'), ('domain', 'X')]…
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=27, PK4 count=27
+    [PASS] TX-AGE-BAND-SET — all 54 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators

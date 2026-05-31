@@ -1,0 +1,642 @@
+{
+  "state": "AZ",
+  "summary": {
+    "golden": 5,
+    "detected": 50,
+    "matched": 5,
+    "precision": 0.1,
+    "recall": 1.0,
+    "f1": 0.1818
+  },
+  "matched": [
+    {
+      "golden": {
+        "test_case_id": "AZ-DOM-SED",
+        "level": "domain",
+        "code": "SED",
+        "title": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children\u2019s emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child\u2019s ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child\u2019s confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child\u2019s learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "source_page": 4,
+        "parent_code": null
+      },
+      "detected": {
+        "level": "domain",
+        "code": "SED",
+        "title": "SOCIAL EMOTIONAL DEVELOPMENT",
+        "description": "",
+        "confidence": 0.95,
+        "source_page": 8,
+        "source_text": "SOCIAL EMOTIONAL DEVELOPMENT",
+        "needs_review": false,
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-STR-SE-1",
+        "level": "strand",
+        "code": "1",
+        "title": "Self-Awareness and Emotional Skills",
+        "description": null,
+        "source_page": 5,
+        "parent_code": "SED",
+        "domain_code": "SED"
+      },
+      "detected": {
+        "level": "strand",
+        "code": "Strand 1",
+        "title": "Self-Awareness and Emotional Skills",
+        "description": "",
+        "confidence": 0.95,
+        "source_page": 8,
+        "source_text": "STRAND 1: SELF-AWARENESS AND EMOTIONAL SKILLS",
+        "needs_review": false,
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-SUB-SE-1-1",
+        "level": "sub_strand",
+        "code": "2",
+        "title": "Recognizes and Expresses Feelings",
+        "description": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+        "source_page": 5,
+        "parent_code": "1",
+        "domain_code": "SED",
+        "strand_code": "1"
+      },
+      "detected": {
+        "level": "sub_strand",
+        "code": "Concept 2",
+        "title": "Recognizes and Expresses Feelings",
+        "description": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+        "confidence": 0.95,
+        "source_page": 7,
+        "source_text": "Concept 2: Recognizes and Expresses Feelings\nThe child recognizes and expresses feelings of self and others.",
+        "needs_review": false,
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-SE-1-1-a",
+        "level": "indicator",
+        "code": "SE.1.2.a",
+        "title": "Associates emotions with words, facial expressions, and body language.",
+        "description": "Describes the emotions of a character in a book. Signs, \u201cI am mad\u201d when asked how they feel.",
+        "source_page": 5,
+        "parent_code": "2",
+        "domain_code": "SED",
+        "strand_code": "1",
+        "sub_strand_code": "2"
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "a",
+        "title": "Associates emotions with words, facial expressions, and body language.",
+        "description": "Describes the emotions of a character in a book. Signs, \"I am mad\" when asked how they feel.",
+        "confidence": 0.92,
+        "source_page": 7,
+        "source_text": "a. Associates emotions with words, facial expressions, and body language.",
+        "needs_review": false,
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-SE-1-1-b",
+        "level": "indicator",
+        "code": "SE.1.2.b",
+        "title": "Identifies, describes, and expresses their own feelings.",
+        "description": "Covers their eyes and says, \"This is scary!\" while listening to a story. Says, \"I am happy today because it's my birthday!\"",
+        "source_page": 5,
+        "parent_code": "2",
+        "domain_code": "SED",
+        "strand_code": "1",
+        "sub_strand_code": "2"
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "b",
+        "title": "Identifies, describes, and expresses their own feelings.",
+        "description": "Covers their eyes and says, \"This is scary!\" while listening to a story. Says, \"I am happy today because it's my birthday!\"",
+        "confidence": 0.92,
+        "source_page": 7,
+        "source_text": "b. Identifies, describes, and expresses their own feelings.",
+        "needs_review": false,
+        "age_band": null
+      }
+    }
+  ],
+  "missing_from_detected": [],
+  "extra_in_detected": [
+    {
+      "level": "domain",
+      "code": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
+      "title": "Social Emotional Development Standard",
+      "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place.",
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "APPROACHES TO LEARNING STANDARD",
+      "title": "Approaches to Learning Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 2,
+      "source_text": "APPROACHES TO LEARNING STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "LANGUAGE AND LITERACY STANDARD",
+      "title": "Language and Literacy Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 2,
+      "source_text": "LANGUAGE AND LITERACY STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "MATHEMATICS STANDARD",
+      "title": "Mathematics Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 3,
+      "source_text": "MATHEMATICS STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "SCIENCE STANDARD",
+      "title": "Science Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 3,
+      "source_text": "SCIENCE STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "SOCIAL STUDIES STANDARD",
+      "title": "Social Studies Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 3,
+      "source_text": "SOCIAL STUDIES STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "PHYSICAL DEVELOPMENT, HEALTH & SAFETY STANDARD",
+      "title": "Physical Development, Health & Safety Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 3,
+      "source_text": "PHYSICAL DEVELOPMENT, HEALTH & SAFETY STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "domain",
+      "code": "FINE ARTS STANDARD",
+      "title": "Fine Arts Standard",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 3,
+      "source_text": "FINE ARTS STANDARD",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "Strand 1",
+      "title": "Self-Awareness and Emotional Skills",
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "STRAND 1: SELF-AWARENESS AND EMOTIONAL SKILLS",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "Strand 2",
+      "title": "Relationships and Social Skills",
+      "description": "",
+      "confidence": 0.9,
+      "source_page": 2,
+      "source_text": "Strand 2: Relationships and Social Skills",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 1",
+      "title": "Self-Awareness",
+      "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "Concept 1: Self-Awareness\nThe child demonstrates an awareness of self.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Demonstrates self-confidence.",
+      "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\"",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "a.\nDemonstrates self-confidence.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Makes personal preferences known to others.",
+      "description": "Chooses carrots over celery during mealtime. Tells friends, \"I don't like that.\"",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "b. Makes personal preferences known to others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Demonstrates knowledge of self-identity/autonomy.",
+      "description": "Declares, \"I'm the big brother,\" while looking at a family picture. Tells the teacher, \"I'm at school while mommy is at work.\" Holds up three fingers and says, \"I am this many.\"",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "C.\nDemonstrates knowledge of self-identity/autonomy.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "d",
+      "title": "Displays an awareness of similarities and differences between self and others.",
+      "description": "Says, \"My hair is curly and yours is straight.\" Points to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "d. Displays an awareness of similarities and differences between self and others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "e",
+      "title": "Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
+      "description": "Wonders about a friend's seaweed snack and asks for a taste. The group widens the story time circle to make room for the child and their wheelchair. A guest speaker (parent) shares a storybook and song in their home language to the class.",
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "e. Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Associates emotions with words, facial expressions, and body language.",
+      "description": "Describes the emotions of a character in a book. Signs, \"I am mad\" when asked how they feel.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "a. Associates emotions with words, facial expressions, and body language.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Identifies, describes, and expresses their own feelings.",
+      "description": "Covers their eyes and says, \"This is scary!\" while listening to a story. Says, \"I am happy today because it's my birthday!\"",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "b. Identifies, describes, and expresses their own feelings.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Identifies and describes feelings of others.",
+      "description": "Approaches an adult and says, \"That child is sad. They are crying.\" Says, \"My mommy will be so excited to see my picture!\"",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "C. Identifies and describes feelings of others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "d",
+      "title": "Expresses feelings of satisfaction in independent activities",
+      "description": "Independently peddles the tricycle with a smile on their face. Displays their clay structure and says, \"Look what I did!\"",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "d. Expresses feelings of satisfaction in independent activities",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "e",
+      "title": "Expresses empathy for others.",
+      "description": "Sees a friend crying and then gives the friend a hug. Asks, \"Are you ok?\" after seeing a friend fall down.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "e. Expresses empathy for others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 3",
+      "title": "Self-Regulation",
+      "description": "The child manages the expression of feelings, thoughts, impulses, and behaviors. Young children develop self-control as they acquire the ability to regulate their impulses with decreasing support from adults. This enables children to function successfully and independently in both personal and social contexts. Temperament displays itself through the way a child manages their behaviors in daily activity; temperament is driven by both nature and nurture.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "Concept 3: Self-Regulation\nThe child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Understands and follows expectations in the learning environment.",
+      "description": "Uses walking feet when transitioning to the library. Puts the puzzle away, where it belongs, when finished.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "a. Understands and follows expectations in the learning environment.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Adjusts behavior and adapts to transitions, daily routines, and unexpected events.",
+      "description": "Moves through activities independently. Stays with the group and follows the teacher during a fire drill.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "b. Adjusts behavior and adapts to transitions, daily routines, and unexpected events.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 3",
+      "title": "Self-Regulation",
+      "description": "The child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "confidence": 0.95,
+      "source_page": 8,
+      "source_text": "Concept 3: Self-Regulation\nThe child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Identifies and describes feelings of others.",
+      "description": "Approaches an adult and says, \"That child is sad. They are crying.\" Says, \"My mommy will be so excited to see my picture!\"",
+      "confidence": 0.92,
+      "source_page": 7,
+      "source_text": "C. Identifies and describes feelings of others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "d",
+      "title": "Expresses feelings of satisfaction in independent activities",
+      "description": "Independently peddles the tricycle with a smile on their face. Displays their clay structure and says, \"Look what I did!\"",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "d. Expresses feelings of satisfaction in independent activities",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "e",
+      "title": "Expresses empathy for others.",
+      "description": "Sees a friend crying and then gives the friend a hug. Asks, \"Are you ok?\" after seeing a friend fall down.",
+      "confidence": 0.95,
+      "source_page": 7,
+      "source_text": "e. Expresses empathy for others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 3",
+      "title": "Self-Regulation",
+      "description": "The child manages the expression of feelings, thoughts, impulses, and behaviors. Young children develop self-control as they acquire the ability to regulate their impulses with decreasing support from adults. This enables children to function successfully and independently in both personal and social contexts. Temperament displays itself through the way a child manages their behaviors in daily activity; temperament is driven by both nature and nurture.",
+      "confidence": 0.96,
+      "source_page": 8,
+      "source_text": "Concept 3: Self-Regulation\nThe child manages the expression of feelings, thoughts, impulses, and behaviors.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Understands and follows expectations in the learning environment.",
+      "description": "Uses walking feet when transitioning to the library. Puts the puzzle away, where it belongs, when finished.",
+      "confidence": 0.96,
+      "source_page": 8,
+      "source_text": "a. Understands and follows expectations in the learning environment.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Adjusts behavior and adapts to transitions, daily routines, and unexpected events.",
+      "description": "Moves through activities independently. Stays with the group and follows the teacher during a fire drill. Chooses a cozy corner away from the group when needed.",
+      "confidence": 0.96,
+      "source_page": 8,
+      "source_text": "b. Adjusts behavior and adapts to transitions, daily routines, and unexpected events.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Chooses appropriate words and actions.",
+      "description": "Says and/or signs, \"Stop, I don't like it when you hit me.\" Waits their turn during a shared game or toy time.",
+      "confidence": 0.96,
+      "source_page": 8,
+      "source_text": "C. Chooses appropriate words and actions.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "Strand 2",
+      "title": "Relationships and Social Skills",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 9,
+      "source_text": "STRAND 2: RELATIONSHIPS AND SOCIAL SKILLS",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 1",
+      "title": "Attachment",
+      "description": "The child demonstrates the ability to engage in and maintain secure relationships. Positive social relationships between adults and children develop in an environment where children feel safe and secure. When caregivers provide a secure base of physical and emotional support, children construct secure attachments with their caregivers which supports them in moving into deeper and more complex learning.",
+      "confidence": 0.96,
+      "source_page": 9,
+      "source_text": "Concept 1: Attachment\nThe child demonstrates the ability to engage in and maintain secure relationships.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Expresses interest, curiosity, and trust with familiar adults.",
+      "description": "Child welcomes a new guest to the classroom. When teacher smiles, child responds with a smile back.",
+      "confidence": 0.96,
+      "source_page": 9,
+      "source_text": "a. Expresses interest, curiosity, and trust with familiar adults.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Seeks support from familiar adults.",
+      "description": "Asks for comfort/reassurance after a playground fall. Seeks out the caregiver when they need help doing a task.",
+      "confidence": 0.96,
+      "source_page": 9,
+      "source_text": "b. Seeks support from familiar adults.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Separates from familiar adult with minimal distress.",
+      "description": "Continues to paint after acknowledging a family member's departure. Transitions quickly into classroom activity after family drop off.",
+      "confidence": 0.96,
+      "source_page": 9,
+      "source_text": "C. Separates from familiar adult with minimal distress.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 2",
+      "title": "Social Interactions",
+      "description": "The child displays positive social behavior. A child's relationship with peers and adults reflect their ability to initiate and sustain positive and appropriate interactions while increasing their capacity to acknowledge someone else's perspective.",
+      "confidence": 0.96,
+      "source_page": 10,
+      "source_text": "Concept 2: Social Interactions\nThe child displays positive social behavior.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Responds when adults or other children initiate interactions.",
+      "description": "Selects from the choice board when asked, \"What do you want to do now?\" Decides whether to join a group when invited to play.",
+      "confidence": 0.96,
+      "source_page": 10,
+      "source_text": "a. Responds when adults or other children initiate interactions.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Initiates and sustains positive interactions with adults and other children.",
+      "description": "Shares about a new food at dinner. Suggests, \"Let's build a road for our cars.\" Then the children work together to build a road.",
+      "confidence": 0.96,
+      "source_page": 10,
+      "source_text": "b. Initiates and sustains positive interactions with adults and other children.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Acknowledges someone's perspective by demonstrating positive ways to resolve conflict.",
+      "description": "Child asks, \"When you're done, can I play with it?\" Seeks assistance from a teacher when a disagreement starts to escalate.",
+      "confidence": 0.96,
+      "source_page": 10,
+      "source_text": "C. Acknowledges someone's perspective by demonstrating positive ways to resolve conflict.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 3",
+      "title": "Respect",
+      "description": "The child has an increasing capacity to understand social boundaries about behavior and the environment. When children interact with others, they become aware of the boundaries of acceptable behavior and possess a growing sense of the potential consequences of their actions. Children thrive in environments when they have a sense of ownership.",
+      "confidence": 0.96,
+      "source_page": 11,
+      "source_text": "Concept 3: Respect\nThe child has an increasing capacity to understand social boundaries about behavior and the environment.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "a",
+      "title": "Respects the rights and property of others.",
+      "description": "Walks around a block structure built by another child. Waits behind friend for their turn to go down the slide.",
+      "confidence": 0.96,
+      "source_page": 11,
+      "source_text": "a. Respects the rights and property of others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Defends own rights and the rights of others.",
+      "description": "Tells his friend not to knock down his block structure. Tells teacher, \"I can't have anything with peanuts.\"",
+      "confidence": 0.96,
+      "source_page": 11,
+      "source_text": "b. Defends own rights and the rights of others.",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Shows respect for learning materials in the learning environment.",
+      "description": "Stacks up books after reading time. Puts caps on markers after using them.",
+      "confidence": 0.96,
+      "source_page": 11,
+      "source_text": "C. Shows respect for learning materials in the learning environment.",
+      "needs_review": false,
+      "age_band": null
+    }
+  ],
+  "regressions": [
+    {
+      "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+      "status": "PASS",
+      "detail": "no examples-section headers emitted"
+    },
+    {
+      "id": "AZ-FOUR-LEVEL-HIERARCHY",
+      "status": "PASS",
+      "detail": "all four levels present"
+    }
+  ]
+}
