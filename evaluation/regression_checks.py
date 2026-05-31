@@ -21,6 +21,11 @@ CheckFn = Callable[[List[dict]], Tuple[bool, str]]
 # ------- CA -------
 
 def check_ca_age_columns_emitted(elements: List[dict]) -> Tuple[bool, str]:
+    # Only the Early/Later age-band scheme is in scope here. CA's ELD domain
+    # uses a different 3-way column scheme (Discovering/Developing/Broadening),
+    # so foundations carrying only those bands are not Early/Later foundations
+    # and must not be flagged. The bug this guards is collapsing a foundation's
+    # Early and Later columns into one indicator.
     by_code: Dict[str, set] = {}
     for e in elements:
         if e.get("level") != "indicator":
@@ -31,11 +36,19 @@ def check_ca_age_columns_emitted(elements: List[dict]) -> Tuple[bool, str]:
             continue
         by_code.setdefault(code, set()).add(ab)
 
-    bad = [c for c, bands in by_code.items()
-           if not (any("Early" in b for b in bands) and any("Later" in b for b in bands))]
+    in_scope = 0
+    bad = []
+    for c, bands in by_code.items():
+        has_early = any("Early" in b for b in bands)
+        has_later = any("Later" in b for b in bands)
+        if not (has_early or has_later):
+            continue  # different column scheme — not this check's concern
+        in_scope += 1
+        if not (has_early and has_later):
+            bad.append(c)
     if bad:
-        return False, f"{len(bad)} indicator codes missing Early or Later: {bad[:5]}{'…' if len(bad) > 5 else ''}"
-    return True, f"all {len(by_code)} indicator codes have both Early and Later"
+        return False, f"{len(bad)} Early/Later foundations missing a column: {bad[:5]}{'…' if len(bad) > 5 else ''}"
+    return True, f"all {in_scope} Early/Later foundations emit both columns"
 
 
 def check_ca_age_label_not_in_title(elements: List[dict]) -> Tuple[bool, str]:

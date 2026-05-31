@@ -6,7 +6,7 @@
   "source_document": "colorado_3_5_trimmed_2020_subset.pdf",
   "annotator": "05-31-26",
   "annotation_date": "Emily Cheyne",
-  "notes": "CO is a 3-level document: Domain → Strand → Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'.",
+  "notes": "CO is a 3-level document: Domain → Strand → Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'. Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected. Removed former CO-IND-04 (SED.5.4 'Hold information in mind…'): that content is not present in this trimmed subset extraction (page 10 is English Language Development, not SED Executive Function), so it was a golden annotation error, not a detector miss.",
   "expected_depth_map": {
     "doc_depths": [
       {
@@ -36,44 +36,53 @@
     {
       "test_case_id": "CO-DOM-01",
       "level": "domain",
-      "code": "PDH",
+      "code": "PHD",
       "title": "Physical Development & Health",
       "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
       "source_page": 2,
-      "parent_code": null
+      "parser_expected": {
+        "full_code": "PDH"
+      }
     },
     {
       "test_case_id": "CO-STR-01",
       "level": "strand",
-      "code": "PDH.1",
+      "code": "1",
       "title": "Health, Safety and Nutrition",
       "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
       "source_page": 3,
-      "parent_code": "PDH"
+      "parser_expected": {
+        "full_code": "PDH.1",
+        "parent_code": "PDH"
+      }
     },
     {
       "test_case_id": "CO-IND-01",
       "level": "indicator",
-      "code": "PDH.1.1",
+      "code": "1.1",
       "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
       "description": null,
       "source_page": 3,
-      "parent_code": "PDH.1",
-      "domain_code": "PDH",
-      "strand_code": "PDH.1",
-      "sub_strand_code": null
+      "parser_expected": {
+        "full_code": "PDH.1.1",
+        "parent_code": "PDH.1",
+        "domain_code": "PDH",
+        "strand_code": "PDH.1"
+      }
     },
     {
       "test_case_id": "CO-IND-02",
       "level": "indicator",
-      "code": "PDH.1.6",
+      "code": "1.6",
       "title": "Communicate an understanding of the importance of health and safety routines and rules.",
       "description": null,
       "source_page": 3,
-      "parent_code": "PDH.1",
-      "domain_code": "PDH",
-      "strand_code": "PDH.1",
-      "sub_strand_code": null
+      "parser_expected": {
+        "full_code": "PDH.1.6",
+        "parent_code": "PDH.1",
+        "domain_code": "PDH",
+        "strand_code": "PDH.1"
+      }
     },
     {
       "test_case_id": "CO-DOM-02",
@@ -81,41 +90,33 @@
       "code": "SED",
       "title": "Social & Emotional Development",
       "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
-      "source_page": 7,
-      "parent_code": null
+      "source_page": 7
     },
     {
       "test_case_id": "CO-STR-02",
       "level": "strand",
-      "code": "SED.4",
+      "code": "4",
       "title": "Emotional and Behavioral Self-Regulation",
       "description": "The ability to recognize and regulate emotions and behavior.",
       "source_page": 8,
-      "parent_code": "SED"
+      "parser_expected": {
+        "full_code": "SED.4",
+        "parent_code": "SED"
+      }
     },
     {
       "test_case_id": "CO-IND-03",
       "level": "indicator",
-      "code": "SED.4.3",
+      "code": "4.3",
       "title": "Manage actions, words, and behavior with increasing independence.",
       "description": null,
       "source_page": 8,
-      "parent_code": "SED.4",
-      "domain_code": "SED",
-      "strand_code": "SED.4",
-      "sub_strand_code": null
-    },
-    {
-      "test_case_id": "CO-IND-04",
-      "level": "indicator",
-      "code": "SED.5.4",
-      "title": "Hold information in mind and manipulate it to perform tasks.",
-      "description": null,
-      "source_page": 10,
-      "parent_code": "SED.5",
-      "domain_code": "SED",
-      "strand_code": "SED.5",
-      "sub_strand_code": null
+      "parser_expected": {
+        "full_code": "SED.4.3",
+        "parent_code": "SED.4",
+        "domain_code": "SED",
+        "strand_code": "SED.4"
+      }
     }
   ],
   "regression_cases": [

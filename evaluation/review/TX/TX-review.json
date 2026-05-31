@@ -2,11 +2,12 @@
   "state": "TX",
   "summary": {
     "golden": 8,
-    "detected": 75,
+    "detected": 61,
     "matched": 8,
-    "precision": 0.1067,
+    "ignored_out_of_scope": 15,
+    "precision": 0.1739,
     "recall": 1.0,
-    "f1": 0.1928
+    "f1": 0.2963
   },
   "matched": [
     {
@@ -16,8 +17,7 @@
         "code": "I",
         "title": "Social and Emotional Development Domain",
         "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness.",
-        "source_page": 4,
-        "parent_code": null
+        "source_page": 4
       },
       "detected": {
         "level": "domain",
@@ -25,7 +25,7 @@
         "title": "Social and Emotional Development Domain",
         "description": "",
         "confidence": 0.97,
-        "source_page": 5,
+        "source_page": 4,
         "source_text": "I. Social and Emotional Development Domain",
         "needs_review": false,
         "age_band": null
@@ -35,20 +35,23 @@
       "golden": {
         "test_case_id": "TX-STR-01",
         "level": "strand",
-        "code": "I.A",
+        "code": "A",
         "title": "Self-Concept",
         "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community.",
         "source_page": 4,
-        "parent_code": "I"
+        "parser_expected": {
+          "full_code": "I.A",
+          "parent_code": "I"
+        }
       },
       "detected": {
         "level": "strand",
         "code": "A",
         "title": "Self-Concept",
-        "description": "",
-        "confidence": 0.92,
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space.",
+        "confidence": 0.97,
         "source_page": 4,
-        "source_text": "\u0420\u041a\u0417.I.\u0410.1 Child is building competence in",
+        "source_text": "A. Self-Concept",
         "needs_review": false,
         "age_band": null
       }
@@ -62,17 +65,18 @@
         "age_band": "PK3",
         "description": null,
         "source_page": 4,
-        "parent_code": "I.A",
-        "domain_code": "I",
-        "strand_code": "I.A",
-        "sub_strand_code": null
+        "parser_expected": {
+          "parent_code": "I.A",
+          "domain_code": "I",
+          "strand_code": "I.A"
+        }
       },
       "detected": {
         "level": "indicator",
         "code": "PK3.I.A.2",
         "title": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
         "description": "",
-        "confidence": 0.95,
+        "confidence": 0.97,
         "source_page": 5,
         "source_text": "PK3.1.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
         "needs_review": false,
@@ -88,10 +92,11 @@
         "age_band": "PK4",
         "description": null,
         "source_page": 4,
-        "parent_code": "I.A",
-        "domain_code": "I",
-        "strand_code": "I.A",
-        "sub_strand_code": null
+        "parser_expected": {
+          "parent_code": "I.A",
+          "domain_code": "I",
+          "strand_code": "I.A"
+        }
       },
       "detected": {
         "level": "indicator",
@@ -109,18 +114,21 @@
       "golden": {
         "test_case_id": "TX-STR-02",
         "level": "strand",
-        "code": "I.B",
+        "code": "B",
         "title": "Self-Regulation",
         "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation.",
         "source_page": 6,
-        "parent_code": "I"
+        "parser_expected": {
+          "full_code": "I.B",
+          "parent_code": "I"
+        }
       },
       "detected": {
         "level": "strand",
         "code": "B",
         "title": "Self-Regulation",
         "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement.",
-        "confidence": 0.97,
+        "confidence": 0.95,
         "source_page": 6,
         "source_text": "B. Self-Regulation",
         "needs_review": false,
@@ -131,18 +139,21 @@
       "golden": {
         "test_case_id": "TX-SUB-01",
         "level": "sub_strand",
-        "code": "I.B.2",
+        "code": "2",
         "title": "Emotional Control",
         "description": null,
         "source_page": 7,
-        "parent_code": "I.B"
+        "parser_expected": {
+          "full_code": "I.B.2",
+          "parent_code": "I.B"
+        }
       },
       "detected": {
         "level": "sub_strand",
         "code": "2",
         "title": "Emotional Control",
         "description": "",
-        "confidence": 0.97,
+        "confidence": 0.95,
         "source_page": 7,
         "source_text": "2. Emotional Control",
         "needs_review": false,
@@ -158,17 +169,19 @@
         "age_band": "PK3",
         "description": null,
         "source_page": 7,
-        "parent_code": "I.B.2",
-        "domain_code": "I",
-        "strand_code": "I.B",
-        "sub_strand_code": "I.B.2"
+        "parser_expected": {
+          "parent_code": "I.B.2",
+          "domain_code": "I",
+          "strand_code": "I.B",
+          "sub_strand_code": "I.B.2"
+        }
       },
       "detected": {
         "level": "indicator",
         "code": "PK3.I.B.2.b",
         "title": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
         "description": "",
-        "confidence": 0.97,
+        "confidence": 0.95,
         "source_page": 8,
         "source_text": "PK3.I.B.2.b Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
         "needs_review": false,
@@ -184,17 +197,19 @@
         "age_band": "PK4",
         "description": null,
         "source_page": 7,
-        "parent_code": "I.B.2",
-        "domain_code": "I",
-        "strand_code": "I.B",
-        "sub_strand_code": "I.B.2"
+        "parser_expected": {
+          "parent_code": "I.B.2",
+          "domain_code": "I",
+          "strand_code": "I.B",
+          "sub_strand_code": "I.B.2"
+        }
       },
       "detected": {
         "level": "indicator",
         "code": "PK4.I.B.2.b",
         "title": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
         "description": "",
-        "confidence": 0.97,
+        "confidence": 0.95,
         "source_page": 8,
         "source_text": "PK4.I.B.2.b Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
         "needs_review": false,
@@ -208,254 +223,12 @@
       "level": "domain",
       "code": "I",
       "title": "Social and Emotional Development Domain",
-      "description": "The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness.",
-      "confidence": 0.97,
-      "source_page": 4,
+      "description": "",
+      "confidence": 0.95,
+      "source_page": 5,
       "source_text": "I. Social and Emotional Development Domain",
       "needs_review": false,
       "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "II",
-      "title": "Emergent Literacy: Language and Communication",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Emergent Literacy: Language and Communication I",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "III",
-      "title": "Emergent Literacy: Reading",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Emergent Literacy: Reading I 28",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "IV",
-      "title": "Emergent Literacy: Writing",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Emergent Literacy: Writing I 42",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "V",
-      "title": "Mathematics",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Mathematics I 48",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "VI",
-      "title": "Science",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Science I 59",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "VII",
-      "title": "Social Studies",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Social Studies I 65",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "VIII",
-      "title": "Fine Arts",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Fine Arts I 71",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "IX",
-      "title": "Physical Development",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Physical Development I 75",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "X",
-      "title": "Technology",
-      "description": "",
-      "confidence": 0.9,
-      "source_page": 1,
-      "source_text": "Technology I 79",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "strand",
-      "code": "A",
-      "title": "Self-Concept",
-      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space.",
-      "confidence": 0.97,
-      "source_page": 4,
-      "source_text": "A. Self-Concept",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.A.1",
-      "title": "Child is building competence in controlling own body movements.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 4,
-      "source_text": "\u0420\u041a\u0417.I.\u0410.1 Child is building competence in controlling own body movements.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.A.1",
-      "title": "Child is aware of where own body is in space and respects personal boundaries.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 4,
-      "source_text": "PK4.I.A.1 Child is aware of where own body is in space and respects personal boundaries.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.A.2",
-      "title": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 5,
-      "source_text": "PK3.1.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.A.2",
-      "title": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 5,
-      "source_text": "PK4.I.A.2 Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.A.3",
-      "title": "Child begins to show awareness of own abilities.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 5,
-      "source_text": "PK3.I.A.3 Child begins to show awareness of own",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.A.3",
-      "title": "Child shows reasonable opinion of his own abilities and limitations.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 5,
-      "source_text": "PK4.I.A.3 Child shows reasonable opinion of his",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.A.4",
-      "title": "Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 2,
-      "source_text": "PK3.I.A.4 Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.A.4",
-      "title": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 2,
-      "source_text": "PK4.I.A.4 Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.A.1",
-      "title": "Child is building competence in controlling own body movements.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 4,
-      "source_text": "\u0420\u041a\u0417.I.\u0410.1 Child is building competence in controlling own body movements.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.A.1",
-      "title": "Child is aware of where own body is in space and respects personal boundaries.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 4,
-      "source_text": "PK4.I.A.1 Child is aware of where own body is in space and respects personal boundaries.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.A.3",
-      "title": "Child begins to show awareness of own abilities.",
-      "description": "",
-      "confidence": 0.96,
-      "source_page": 5,
-      "source_text": "PK3.I.A.3 Child begins to show awareness of own abilities.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.A.3",
-      "title": "Child shows reasonable opinion of his own abilities and limitations.",
-      "description": "",
-      "confidence": 0.97,
-      "source_page": 5,
-      "source_text": "PK4.I.A.3 Child shows reasonable opinion of his own abilities and limitations.",
-      "needs_review": false,
-      "age_band": "PK4"
     },
     {
       "level": "indicator",
@@ -473,7 +246,7 @@
       "code": "PK4.I.A.4",
       "title": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 6,
       "source_text": "PK4.I.A.4 Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
       "needs_review": false,
@@ -484,7 +257,7 @@
       "code": "1",
       "title": "Behavior Control",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 6,
       "source_text": "1. Behavior Control",
       "needs_review": false,
@@ -495,7 +268,7 @@
       "code": "PK3.I.B.1.a",
       "title": "Child follows simple rules and routines when assisted by adults.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 6,
       "source_text": "PK3.I.B.1.a Child follows simple rules and routines when assisted by adults.",
       "needs_review": false,
@@ -506,7 +279,7 @@
       "code": "PK4.I.B.1.a",
       "title": "Child follows classroom rules and routines with occasional reminders from adults.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 6,
       "source_text": "PK4.I.B.1.a Child follows classroom rules and routines with occasional reminders from adults.",
       "needs_review": false,
@@ -517,7 +290,7 @@
       "code": "PK3.I.B.1.b",
       "title": "Child takes care of and manages classroom materials with adult assistance.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 7,
       "source_text": "PK3.I.B.1.b Child takes care of and manages classroom materials with adult assistance.",
       "needs_review": false,
@@ -528,7 +301,7 @@
       "code": "PK4.I.B.1.b",
       "title": "Child takes care of and manages classroom materials.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 7,
       "source_text": "PK4.I.B.1.b Child takes care of and manages classroom materials.",
       "needs_review": false,
@@ -539,7 +312,7 @@
       "code": "PK3.I.B.1.c",
       "title": "Child manages own behavior with adult guidance and assistance.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 7,
       "source_text": "PK3.I.B.1.c Child manages own behavior with adult guidance and assistance.",
       "needs_review": false,
@@ -550,7 +323,7 @@
       "code": "PK4.I.B.1.c",
       "title": "Child regulates own behavior with occasional reminders or assistance from adults.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 7,
       "source_text": "PK4.I.B.1.c Child regulates own behavior with occasional reminders or assistance from adults.",
       "needs_review": false,
@@ -561,7 +334,7 @@
       "code": "PK3.I.B.2.a",
       "title": "Child recognizes and expresses a range of emotions.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 7,
       "source_text": "PK3.I.B.2.a Child recognizes and expresses a range of emotions.",
       "needs_review": false,
@@ -572,7 +345,7 @@
       "code": "PK4.I.B.2.a",
       "title": "Child begins to understand the connection between emotions and behaviors.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 7,
       "source_text": "PK4.I.B.2.a Child begins to understand the connection between emotions and behaviors.",
       "needs_review": false,
@@ -583,7 +356,7 @@
       "code": "PK3.I.B.2.c",
       "title": "Child manages intensity of emotions with adult assistance.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 8,
       "source_text": "PK3.I.B.2.c Child manages intensity of emotions with adult assistance.",
       "needs_review": false,
@@ -594,7 +367,7 @@
       "code": "PK4.I.B.2.c",
       "title": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 8,
       "source_text": "PK4.I.B.2.c Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
       "needs_review": false,
@@ -605,7 +378,7 @@
       "code": "3",
       "title": "Control of Attention",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 9,
       "source_text": "3. Control of Attention",
       "needs_review": false,
@@ -616,7 +389,7 @@
       "code": "PK3.I.B.3.a",
       "title": "Child focuses attention on one task at a time but may not stay with it to completion.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 9,
       "source_text": "PK3.I.B.3.a Child focuses attention on one task at a time but may not stay with it to completion.",
       "needs_review": false,
@@ -627,7 +400,7 @@
       "code": "PK4.I.B.3.a",
       "title": "Child sustains attention to personally chosen or routine (teacher-directed) tasks until completed.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 9,
       "source_text": "PK4.I.B.3.a Child sustains attention to personally chosen or routine (teacher-directed) tasks until completed.",
       "needs_review": false,
@@ -638,7 +411,7 @@
       "code": "PK3.I.B.3.b",
       "title": "Child remains focused on engaging, teacher-led group activities for up to 10-15 minutes at a time.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 9,
       "source_text": "PK3.I.B.3.b Child remains focused on engaging, teacher-led group activities for up to 10-15 minutes at a time.",
       "needs_review": false,
@@ -649,7 +422,7 @@
       "code": "PK4.I.B.3.b",
       "title": "Child remains focused on engaging, teacher-led group activities for up to 20 minutes.",
       "description": "",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 9,
       "source_text": "PK4.I.B.3.b Child remains focused on engaging, teacher-led group activities for up to 20 minutes.",
       "needs_review": false,
@@ -668,89 +441,12 @@
     },
     {
       "level": "sub_strand",
-      "code": "3",
-      "title": "Control of Attention",
+      "code": "2",
+      "title": "Emotional Control",
       "description": "",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "3. Control of Attention",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.B.2.c",
-      "title": "Child manages intensity of emotions with adult assistance.",
-      "description": "Child manages intensity of emotions with adult assistance.",
-      "confidence": 0.95,
+      "confidence": 0.85,
       "source_page": 8,
-      "source_text": "PK3.I.B.2.c Child manages intensity of emotions\nwith adult assistance.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.B.2.c",
-      "title": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
-      "description": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
-      "confidence": 0.95,
-      "source_page": 8,
-      "source_text": "PK4.I.B.2.c Child is able to manage intensity of\nemotions more consistently, although adult\nguidance is sometimes necessary.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.B.3.a",
-      "title": "Child focuses attention on one task at a time but may not stay with it to completion.",
-      "description": "Child focuses attention on one task at a time but may not stay with it to completion.",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "PK3.I.B.3.a Child focuses attention on one task at\na time but may not stay with it to completion.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.B.3.a",
-      "title": "Child sustains attention to personally chosen or routine (teacher-directed) tasks until completed.",
-      "description": "Child sustains attention to personally chosen or routine (teacher-directed) tasks until completed.",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "PK4.I.B.3.a Child sustains attention to personally\nchosen or routine (teacher-directed) tasks until\ncompleted.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "indicator",
-      "code": "PK3.I.B.3.b",
-      "title": "Child remains focused on engaging, teacher-led group activities for up to 10-15 minutes at a time.",
-      "description": "Child remains focused on engaging, teacher-led group activities for up to 10-15 minutes at a time.",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "PK3.I.B.3.b Child remains focused on engaging,\nteacher-led group activities for up to 10-15\nminutes at a time.",
-      "needs_review": false,
-      "age_band": "PK3"
-    },
-    {
-      "level": "indicator",
-      "code": "PK4.I.B.3.b",
-      "title": "Child remains focused on engaging, teacher-led group activities for up to 20 minutes.",
-      "description": "Child remains focused on engaging, teacher-led group activities for up to 20 minutes.",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "PK4.I.B.3.b Child remains focused on engaging,\nteacher-led group activities for up to 20 minutes.",
-      "needs_review": false,
-      "age_band": "PK4"
-    },
-    {
-      "level": "strand",
-      "code": "C",
-      "title": "Relationships with Others",
-      "description": "As prekindergarten children enter school, they start forming relationships with the adults and other children in their school environment. Effective teachers offer support and assist children as they develop meaningful and rewarding relationships. During this developmental period, children often begin to develop special friendships with peers that increase their feelings of comfort, joy, and confidence in their social world. These experiences also help build a sense of empathy and caring for others.",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "C. Relationships with Others",
+      "source_text": "PK3.I.B.2.c Child manages intensity of emotions with adult assistance.",
       "needs_review": false,
       "age_band": null
     },
@@ -761,7 +457,7 @@
       "description": "Child forms positive relationships with adults and peers.",
       "confidence": 0.95,
       "source_page": 10,
-      "source_text": "PK3.I.C.1 Child forms positive relationships\nwith adults and peers.",
+      "source_text": "PK3.I.C.1 Child forms positive relationships with adults and peers.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -772,7 +468,7 @@
       "description": "Child uses effective verbal and nonverbal communication skills to build relationships with adults and peers.",
       "confidence": 0.95,
       "source_page": 10,
-      "source_text": "PK4.I.C.1 Child uses effective verbal and nonverbal\ncommunication skills to build relationships with\nadults and peers.",
+      "source_text": "PK4.I.C.1 Child uses effective verbal and nonverbal communication skills to build relationships with adults and peers.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -783,7 +479,7 @@
       "description": "Child assumes roles and responsibilities as part of the classroom community with adult assistance.",
       "confidence": 0.95,
       "source_page": 10,
-      "source_text": "PK3.I.C.2 Child assumes roles and responsibilities\nas part of the classroom community with adult\nassistance.",
+      "source_text": "PK3.I.C.2 Child assumes roles and responsibilities as part of the classroom community with adult assistance.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -794,7 +490,7 @@
       "description": "Child assumes various roles and responsibilities as part of the classroom community.",
       "confidence": 0.95,
       "source_page": 10,
-      "source_text": "PK4.I.C.2 Child assumes various roles and\nresponsibilities as part of the classroom\ncommunity.",
+      "source_text": "PK4.I.C.2 Child assumes various roles and responsibilities as part of the classroom community.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -805,7 +501,7 @@
       "description": "Child shows interest in peer play but may be less skilled in initiating and joining a group.",
       "confidence": 0.95,
       "source_page": 10,
-      "source_text": "PK3.I.C.3 Child shows interest in peer play but may\nbe less skilled in initiating and joining a group.",
+      "source_text": "PK3.I.C.3 Child shows interest in peer play but may be less skilled in initiating and joining a group.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -816,7 +512,7 @@
       "description": "Child shows competence in initiating social interactions.",
       "confidence": 0.95,
       "source_page": 10,
-      "source_text": "PK4.I.C.3 Child shows competence in initiating\nsocial interactions.",
+      "source_text": "PK4.I.C.3 Child shows competence in initiating social interactions.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -827,7 +523,7 @@
       "description": "Child enjoys parallel and associative play with peers.",
       "confidence": 0.95,
       "source_page": 11,
-      "source_text": "PK3.I.C.4 Child enjoys parallel and associative play\nwith peers.",
+      "source_text": "PK3.I.C.4 Child enjoys parallel and associative play with peers.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -838,7 +534,7 @@
       "description": "Child increasingly interacts with peers during cooperative play scenarios that share a common plan and goal.",
       "confidence": 0.95,
       "source_page": 11,
-      "source_text": "PK4.I.C.4 Child increasingly interacts with\npeers during cooperative play scenarios that share\na common plan and goal.",
+      "source_text": "PK4.I.C.4 Child increasingly interacts with peers during cooperative play scenarios that share a common plan and goal.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -849,7 +545,7 @@
       "description": "Child seeks adult help when experiencing conflicts with another child.",
       "confidence": 0.95,
       "source_page": 11,
-      "source_text": "PK3.I.C.5 Child seeks adult help when experiencing\nconflicts with another child.",
+      "source_text": "PK3.I.C.5 Child seeks adult help when experiencing conflicts with another child.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -860,7 +556,7 @@
       "description": "Child initiates problem-solving strategies when experiencing conflicts with others and seeks adult support when necessary.",
       "confidence": 0.95,
       "source_page": 11,
-      "source_text": "PK4.I.C.5 Child initiates problem-solving\nstrategies when experiencing conflicts with\nothers and seeks adult support when necessary.",
+      "source_text": "PK4.I.C.5 Child initiates problem-solving strategies when experiencing conflicts with others and seeks adult support when necessary.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -871,7 +567,7 @@
       "description": "Child responds with concern when a child or adult is distressed.",
       "confidence": 0.95,
       "source_page": 11,
-      "source_text": "PK3.I.C.6 Child responds with concern when a child\nor adult is distressed.",
+      "source_text": "PK3.I.C.6 Child responds with concern when a child or adult is distressed.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -882,7 +578,7 @@
       "description": "Child demonstrates empathy and caring for others.",
       "confidence": 0.95,
       "source_page": 11,
-      "source_text": "PK4.I.C.6 Child demonstrates empathy and caring\nfor others.",
+      "source_text": "PK4.I.C.6 Child demonstrates empathy and caring for others.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -893,7 +589,7 @@
       "description": "Child interacts with peers and may have preferred friends.",
       "confidence": 0.95,
       "source_page": 12,
-      "source_text": "PK3.I.C.7 Child interacts with peers and may have\npreferred friends.",
+      "source_text": "PK3.I.C.7 Child interacts with peers and may have preferred friends.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -904,7 +600,7 @@
       "description": "Child interacts with peers and has preferred friends.",
       "confidence": 0.95,
       "source_page": 12,
-      "source_text": "PK4.I.C.7 Child interacts with peers and has\npreferred friends.",
+      "source_text": "PK4.I.C.7 Child interacts with peers and has preferred friends.",
       "needs_review": false,
       "age_band": "PK4"
     },
@@ -926,7 +622,7 @@
       "description": "Child shows interest in other people and their feelings.",
       "confidence": 0.95,
       "source_page": 12,
-      "source_text": "PK3.I.D.1 Child shows interest in other people and\ntheir feelings.",
+      "source_text": "PK3.I.D.1 Child shows interest in other people and their feelings.",
       "needs_review": false,
       "age_band": "PK3"
     },
@@ -937,7 +633,7 @@
       "description": "Child demonstrates an understanding that others have perspectives and feelings that are similar and/or different from her own.",
       "confidence": 0.95,
       "source_page": 12,
-      "source_text": "PK4.I.D.1 Child demonstrates an understanding\nthat others have perspectives and feelings that are\nsimilar and/or different from her own.",
+      "source_text": "PK4.I.D.1 Child demonstrates an understanding that others have perspectives and feelings that are similar and/or different from her own.",
       "needs_review": false,
       "age_band": "PK4"
     }
@@ -946,12 +642,12 @@
     {
       "id": "TX-PK3-PK4-DISTINCT",
       "status": "PASS",
-      "detail": "PK3 count=27, PK4 count=27"
+      "detail": "PK3 count=21, PK4 count=21"
     },
     {
       "id": "TX-AGE-BAND-SET",
       "status": "PASS",
-      "detail": "all 54 indicators have a valid age_band"
+      "detail": "all 42 indicators have a valid age_band"
     },
     {
       "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",

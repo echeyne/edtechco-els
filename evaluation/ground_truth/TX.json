@@ -46,17 +46,19 @@
       "code": "I",
       "title": "Social and Emotional Development Domain",
       "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness.",
-      "source_page": 4,
-      "parent_code": null
+      "source_page": 4
     },
     {
       "test_case_id": "TX-STR-01",
       "level": "strand",
-      "code": "I.A",
+      "code": "A",
       "title": "Self-Concept",
       "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community.",
       "source_page": 4,
-      "parent_code": "I"
+      "parser_expected": {
+        "full_code": "I.A",
+        "parent_code": "I"
+      }
     },
     {
       "test_case_id": "TX-IND-01-PK3",
@@ -66,10 +68,11 @@
       "age_band": "PK3",
       "description": null,
       "source_page": 4,
-      "parent_code": "I.A",
-      "domain_code": "I",
-      "strand_code": "I.A",
-      "sub_strand_code": null
+      "parser_expected": {
+        "parent_code": "I.A",
+        "domain_code": "I",
+        "strand_code": "I.A"
+      }
     },
     {
       "test_case_id": "TX-IND-01-PK4",
@@ -79,28 +82,35 @@
       "age_band": "PK4",
       "description": null,
       "source_page": 4,
-      "parent_code": "I.A",
-      "domain_code": "I",
-      "strand_code": "I.A",
-      "sub_strand_code": null
+      "parser_expected": {
+        "parent_code": "I.A",
+        "domain_code": "I",
+        "strand_code": "I.A"
+      }
     },
     {
       "test_case_id": "TX-STR-02",
       "level": "strand",
-      "code": "I.B",
+      "code": "B",
       "title": "Self-Regulation",
       "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation.",
       "source_page": 6,
-      "parent_code": "I"
+      "parser_expected": {
+        "full_code": "I.B",
+        "parent_code": "I"
+      }
     },
     {
       "test_case_id": "TX-SUB-01",
       "level": "sub_strand",
-      "code": "I.B.2",
+      "code": "2",
       "title": "Emotional Control",
       "description": null,
       "source_page": 7,
-      "parent_code": "I.B"
+      "parser_expected": {
+        "full_code": "I.B.2",
+        "parent_code": "I.B"
+      }
     },
     {
       "test_case_id": "TX-IND-02-PK3",
@@ -110,10 +120,12 @@
       "age_band": "PK3",
       "description": null,
       "source_page": 7,
-      "parent_code": "I.B.2",
-      "domain_code": "I",
-      "strand_code": "I.B",
-      "sub_strand_code": "I.B.2"
+      "parser_expected": {
+        "parent_code": "I.B.2",
+        "domain_code": "I",
+        "strand_code": "I.B",
+        "sub_strand_code": "I.B.2"
+      }
     },
     {
       "test_case_id": "TX-IND-02-PK4",
@@ -123,10 +135,12 @@
       "age_band": "PK4",
       "description": null,
       "source_page": 7,
-      "parent_code": "I.B.2",
-      "domain_code": "I",
-      "strand_code": "I.B",
-      "sub_strand_code": "I.B.2"
+      "parser_expected": {
+        "parent_code": "I.B.2",
+        "domain_code": "I",
+        "strand_code": "I.B",
+        "sub_strand_code": "I.B.2"
+      }
     }
   ],
   "regression_cases": [

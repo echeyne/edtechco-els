@@ -108,7 +108,8 @@
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "The DOCUMENT-LOCAL code the detector emits (e.g. domain 'ATL', strand '1.0', indicator '1.1'). NOT the full dotted parser code. Detector matching is code-agnostic (title + age_band + domain), so this is informational; null is fine where the document has no code."
           },
           "title": {
             "type": "string"
@@ -133,29 +134,27 @@
             ],
             "description": "Page number, or 'TODO' while annotating."
           },
-          "parent_code": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "domain_code": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "strand_code": {
-            "type": [
-              "string",
-              "null"
-            ]
-          },
-          "sub_strand_code": {
-            "type": [
-              "string",
-              "null"
-            ]
+          "parser_expected": {
+            "type": "object",
+            "description": "Parser-stage expectations: parentage and the full dotted hierarchical code. The DETECTOR never produces these (it emits a flat list of elements with document-local codes); parentage and full-code assembly are parser.py's job. The detector grader ignores this block — it exists for the future parser-golden eval.",
+            "properties": {
+              "full_code": {
+                "type": ["string", "null"],
+                "description": "Full dotted code the parser assembles, e.g. 'ATL.2.0.IC.2.1.early'."
+              },
+              "parent_code": {
+                "type": ["string", "null"]
+              },
+              "domain_code": {
+                "type": ["string", "null"]
+              },
+              "strand_code": {
+                "type": ["string", "null"]
+              },
+              "sub_strand_code": {
+                "type": ["string", "null"]
+              }
+            }
           }
         }
       }

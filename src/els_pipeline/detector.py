@@ -205,7 +205,8 @@ CLASSIFICATION RULE:
 EXTRACTION RULES:
 1. Emit every structural element you see, even if its children are not in this chunk.
 2. Lettered/bulleted examples under an indicator (a., b., c., …) are NOT separate indicators — fold into the indicator's description or ignore.
-3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`.
+3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
+   - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
 4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title (e.g. "Physical Development" → "PHD"). Use the SAME code every time the same element appears.
 5. `confidence`: 0.95+ if the depth map clearly applies; 0.80–0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
 6. `source_page`: page number from the [Page N] marker on that line.
@@ -367,6 +368,21 @@ def _validate_element_data(elem_data: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+def _normalize_age_band(age_band: Any) -> Optional[str]:
+    """
+    Canonicalize an age-band label so the same band is spelled identically
+    every time. The LLM transcribes the half-year glyph inconsistently —
+    unicode '½' vs ASCII '1/2' — which otherwise produces two distinct
+    age_band strings for the same column (e.g. "Early (3 to 4 ½ Years)" and
+    "Early (3 to 4 1/2 Years)"). We fold ASCII to the unicode glyph (matching
+    the source PDFs) and collapse whitespace.
+    """
+    if not isinstance(age_band, str):
+        return None
+    normalized = " ".join(age_band.split()).replace("1/2", "½")
+    return normalized or None
+
+
 def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Optional[DetectedElement]:
     """
     Create a DetectedElement from validated element data.
@@ -392,9 +408,7 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
     # Determine needs_review based on confidence threshold
     needs_review = confidence < Config.CONFIDENCE_THRESHOLD
     
-    age_band = elem_data.get('age_band')
-    if isinstance(age_band, str) and not age_band.strip():
-        age_band = None
+    age_band = _normalize_age_band(elem_data.get('age_band'))
 
     return DetectedElement(
         level=level,
@@ -690,6 +704,38 @@ def _process_chunk(
     return []
 
 
+def _dedup_elements(elements: List[DetectedElement]) -> List[DetectedElement]:
+    """
+    Drop duplicate elements produced by chunk overlap.
+
+    Adjacent chunks intentionally overlap (DEFAULT_OVERLAP_TOKENS) so elements
+    at a chunk boundary can be re-emitted by both chunks. Collapse those on a
+    content key of (level, normalized title, age_band, source_page), keeping
+    the highest-confidence instance. Order is preserved by first appearance so
+    the document-ordered structure (and downstream domain context) is intact.
+    """
+    best: Dict[tuple, DetectedElement] = {}
+    order: List[tuple] = []
+    for el in elements:
+        key = (
+            el.level.value,
+            " ".join((el.title or "").lower().split()),
+            el.age_band or None,
+            el.source_page,
+        )
+        if key not in best:
+            best[key] = el
+            order.append(key)
+        elif el.confidence > best[key].confidence:
+            best[key] = el
+    deduped = [best[k] for k in order]
+    dropped = len(elements) - len(deduped)
+    if dropped:
+        logger.info(f"De-duplicated {dropped} overlap-repeated elements "
+                    f"({len(elements)} → {len(deduped)})")
+    return deduped
+
+
 def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> DetectionResult:
     """
     Detect hierarchical structure in extracted text blocks using Claude Sonnet 4.5.
@@ -755,7 +801,10 @@ def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> Dete
                 f"Progress: {chunk_idx + 1}/{len(chunks)} chunks processed, "
                 f"{len(all_elements)} total elements detected so far"
             )
-        
+
+        # Collapse elements re-emitted at overlapping chunk boundaries.
+        all_elements = _dedup_elements(all_elements)
+
         # Count elements needing review
         review_count = sum(1 for elem in all_elements if elem.needs_review)
         

@@ -69,18 +69,52 @@ def _norm(s: str) -> str:
     return " ".join((s or "").lower().split())
 
 
-def _elem_key(e: dict) -> Tuple[str, str, Optional[str]]:
-    """Stable matching key. age_band is included so age-banded variants
-    don't collapse onto each other."""
-    return (
-        (e.get("level") or "").strip(),
-        (e.get("code") or "").strip(),
-        (e.get("age_band") or None),
-    )
+def _norm_age_band(ab: Optional[str]) -> Optional[str]:
+    """Canonicalize an age-band string for comparison. The detector (and the
+    source PDFs) spell the half-year glyph inconsistently — unicode '½' vs
+    ASCII '1/2' — so fold both to a single form and collapse whitespace/case.
+    Returns None for empty/missing bands."""
+    if not ab:
+        return None
+    s = ab.replace("½", "1/2")
+    s = " ".join(s.lower().split())
+    return s or None
 
 
 def _title_key(e: dict) -> str:
     return _norm(e.get("title", ""))
+
+
+def _tag_domains(elements: List[dict]) -> List[dict]:
+    """Walk a flat, document-ordered element list and tag each element with
+    its enclosing domain (the normalized title of the most-recent domain).
+
+    The detector emits a flat list with no parent links; golden sets are
+    authored in document order. This single pass gives us a domain context
+    that disambiguates same-titled strands under different domains (e.g. CA's
+    'Listening and Speaking' under both FLD and ELD) and lets precision be
+    scoped to the domains the golden set actually annotates.
+
+    Mutates and returns the list (adds the private '_domain' key)."""
+    current: Optional[str] = None
+    for e in elements:
+        if (e.get("level") or "").strip() == "domain":
+            current = _title_key(e)
+        e["_domain"] = current
+    return elements
+
+
+def _match_key(e: dict) -> Tuple[Optional[str], str, str, Optional[str]]:
+    """Domain-scoped, code-agnostic matching key: (enclosing domain, level,
+    normalized title, normalized age_band). Codes are deliberately excluded —
+    the detector emits document-local codes (e.g. '1.2') and invents
+    sub_strand codes ('CI', 'WM'), neither of which the golden can mirror."""
+    return (
+        e.get("_domain"),
+        (e.get("level") or "").strip(),
+        _title_key(e),
+        _norm_age_band(e.get("age_band")),
+    )
 
 
 def _hash_blocks(blocks: List[dict]) -> str:
@@ -126,6 +160,8 @@ class StateReport:
     matched: int = 0
     missing_test_cases: List[str] = field(default_factory=list)
     extra_elements: List[Tuple[str, str]] = field(default_factory=list)  # (level, code)
+    # Detected elements outside any golden-annotated domain — neither TP nor FP.
+    ignored_out_of_scope: int = 0
 
     # Level confusion: golden_level -> detected_level -> count
     confusion: Dict[str, Dict[str, int]] = field(
@@ -177,33 +213,51 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
     rep.n_golden = len(golden)
     rep.n_detected = len(detected)
 
-    # Build detected lookup by (level, code, age_band) and by title
-    det_by_key: Dict[Tuple[str, str, Optional[str]], dict] = {}
-    det_by_title: Dict[str, dict] = {}
+    # Tag both lists with their enclosing domain (in document order) so we can
+    # match domain-scoped and scope false positives to annotated domains.
+    _tag_domains(golden)
+    _tag_domains(detected)
+
+    # Domains the golden set actually annotates. A detected element only counts
+    # toward precision if it falls inside one of these.
+    annotated_domains = {
+        _title_key(g) for g in golden
+        if (g.get("level") or "").strip() == "domain"
+    }
+
+    # Index detected two ways. Use lists so age-banded duplicates (and
+    # chunk-overlap repeats) don't overwrite each other.
+    #   - domain-scoped: (domain, level, title, age_band) — disambiguates
+    #     same-titled elements under different domains (CA's FLD/ELD).
+    #   - domain-agnostic: (level, title, age_band) — fallback for documents
+    #     that front-load all domain headers (AZ), where the last-seen-domain
+    #     heuristic mis-assigns body content.
+    det_index: Dict[Tuple, List[dict]] = defaultdict(list)
+    det_index_no_dom: Dict[Tuple, List[dict]] = defaultdict(list)
     for d in detected:
-        det_by_key[_elem_key(d)] = d
-        det_by_title[_title_key(d)] = d
+        det_index[_match_key(d)].append(d)
+        det_index_no_dom[_match_key(d)[1:]].append(d)
 
     matched_det_ids: set = set()
+
+    def _first_unmatched(candidates: List[dict]) -> Optional[dict]:
+        for cand in candidates:
+            if id(cand) not in matched_det_ids:
+                return cand
+        return None
 
     for g in golden:
         # Skip incomplete annotations.
         if not g.get("level") or not g.get("title"):
             continue
 
-        # Try (level, code, age_band) first, then (level, title fuzzy).
-        key = _elem_key(g)
-        d = det_by_key.get(key)
-        if d is None:
-            # Try title-based fallback constrained to same level.
-            cand = det_by_title.get(_title_key(g))
-            if cand and cand.get("level") == g.get("level"):
-                # Don't accept a title match across age_bands — that hides Bug 1.
-                if (cand.get("age_band") or None) == (g.get("age_band") or None):
-                    d = cand
-
         gid = g.get("test_case_id", "?")
         glevel = g.get("level")
+
+        # Prefer a domain-scoped match; fall back to domain-agnostic.
+        d = _first_unmatched(det_index.get(_match_key(g), []))
+        if d is None:
+            d = _first_unmatched(det_index_no_dom.get(_match_key(g)[1:], []))
 
         if d is None:
             rep.missing_test_cases.append(gid)
@@ -228,9 +282,21 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
     for d in detected:
         if id(d) in matched_det_ids:
             continue
+        # Domain-scoped precision: only an unmatched detection inside an
+        # annotated domain is a false positive. Everything else is real output
+        # the golden subset simply doesn't cover — ignore it.
+        if d.get("_domain") not in annotated_domains:
+            rep.ignored_out_of_scope += 1
+            continue
         rep.extra_elements.append((d.get("level", "?"), d.get("code", "?")))
         rep.extra_elements_full.append(d)
         rep.per_level[d.get("level", "?")]["fp"] += 1
+
+    # Drop the private domain tag so it doesn't leak into serialized output.
+    for e in detected:
+        e.pop("_domain", None)
+    for e in golden:
+        e.pop("_domain", None)
 
     return rep
 
@@ -374,7 +440,8 @@ def render_report(rep: StateReport) -> str:
         out.append(f"  missing test cases ({len(rep.missing_test_cases)}): {rep.missing_test_cases[:10]}{'…' if len(rep.missing_test_cases) > 10 else ''}")
     if rep.extra_elements:
         head = rep.extra_elements[:10]
-        out.append(f"  extra detected ({len(rep.extra_elements)}): {head}{'…' if len(rep.extra_elements) > 10 else ''}")
+        out.append(f"  extra detected (in-scope FPs) ({len(rep.extra_elements)}): {head}{'…' if len(rep.extra_elements) > 10 else ''}")
+    out.append(f"  ignored (out-of-scope domains): {rep.ignored_out_of_scope}")
 
     out.append("  regression cases:")
     for cid, status, detail in rep.regressions:
@@ -408,6 +475,7 @@ def write_review_dir(rep: StateReport, detected: List[dict], output_dir: Path) -
             "golden": rep.n_golden,
             "detected": rep.n_detected,
             "matched": rep.matched,
+            "ignored_out_of_scope": rep.ignored_out_of_scope,
             "precision": round(rep.precision, 4),
             "recall": round(rep.recall, 4),
             "f1": round(rep.f1, 4),
@@ -487,6 +555,7 @@ def main() -> int:
                 "confusion": {k: dict(v) for k, v in r.confusion.items()},
                 "missing_test_cases": r.missing_test_cases,
                 "extra_elements": [list(t) for t in r.extra_elements],
+                "ignored_out_of_scope": r.ignored_out_of_scope,
                 "age_band_drops": r.age_band_drops,
                 "depth_map_passed": r.depth_map_passed,
                 "depth_map_detail": r.depth_map_detail,

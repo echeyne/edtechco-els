@@ -1,23 +1,26 @@
 {
   "state": "CO",
   "summary": {
-    "golden": 8,
-    "detected": 68,
-    "matched": 7,
-    "precision": 0.1029,
-    "recall": 0.875,
-    "f1": 0.1842
+    "golden": 7,
+    "detected": 65,
+    "matched": 6,
+    "ignored_out_of_scope": 19,
+    "precision": 0.1304,
+    "recall": 0.8571,
+    "f1": 0.2264
   },
   "matched": [
     {
       "golden": {
         "test_case_id": "CO-DOM-01",
         "level": "domain",
-        "code": "PDH",
+        "code": "PHD",
         "title": "Physical Development & Health",
         "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
         "source_page": 2,
-        "parent_code": null
+        "parser_expected": {
+          "full_code": "PDH"
+        }
       },
       "detected": {
         "level": "domain",
@@ -26,7 +29,7 @@
         "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
         "confidence": 0.96,
         "source_page": 2,
-        "source_text": "Physical Development & Health\nThe Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills.",
+        "source_text": "Physical Development & Health",
         "needs_review": false,
         "age_band": null
       }
@@ -35,11 +38,14 @@
       "golden": {
         "test_case_id": "CO-STR-01",
         "level": "strand",
-        "code": "PDH.1",
+        "code": "1",
         "title": "Health, Safety and Nutrition",
         "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
         "source_page": 3,
-        "parent_code": "PDH"
+        "parser_expected": {
+          "full_code": "PDH.1",
+          "parent_code": "PDH"
+        }
       },
       "detected": {
         "level": "strand",
@@ -57,14 +63,16 @@
       "golden": {
         "test_case_id": "CO-IND-01",
         "level": "indicator",
-        "code": "PDH.1.1",
+        "code": "1.1",
         "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
         "description": null,
         "source_page": 3,
-        "parent_code": "PDH.1",
-        "domain_code": "PDH",
-        "strand_code": "PDH.1",
-        "sub_strand_code": null
+        "parser_expected": {
+          "full_code": "PDH.1.1",
+          "parent_code": "PDH.1",
+          "domain_code": "PDH",
+          "strand_code": "PDH.1"
+        }
       },
       "detected": {
         "level": "indicator",
@@ -80,47 +88,21 @@
     },
     {
       "golden": {
-        "test_case_id": "CO-IND-02",
-        "level": "indicator",
-        "code": "PDH.1.6",
-        "title": "Communicate an understanding of the importance of health and safety routines and rules.",
-        "description": null,
-        "source_page": 3,
-        "parent_code": "PDH.1",
-        "domain_code": "PDH",
-        "strand_code": "PDH.1",
-        "sub_strand_code": null
-      },
-      "detected": {
-        "level": "indicator",
-        "code": "1.6",
-        "title": "Communicate an understanding of the importance of health and safety routines and rules.",
-        "description": "Aligned to Colorado Academic Standards.",
-        "confidence": 0.96,
-        "source_page": 3,
-        "source_text": "6. Communicate an understanding of the importance of health and safety routines and rules.*",
-        "needs_review": false,
-        "age_band": null
-      }
-    },
-    {
-      "golden": {
         "test_case_id": "CO-DOM-02",
         "level": "domain",
         "code": "SED",
         "title": "Social & Emotional Development",
         "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
-        "source_page": 7,
-        "parent_code": null
+        "source_page": 7
       },
       "detected": {
         "level": "domain",
         "code": "SED",
         "title": "Social & Emotional Development",
-        "description": "",
-        "confidence": 0.95,
-        "source_page": 7,
-        "source_text": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
+        "confidence": 0.97,
+        "source_page": 5,
+        "source_text": "Social & Emotional Development\nThe Social & Emotional domain describes children's ability to develop positive relationships and\nideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and\nexpress emotions.",
         "needs_review": false,
         "age_band": null
       }
@@ -129,11 +111,14 @@
       "golden": {
         "test_case_id": "CO-STR-02",
         "level": "strand",
-        "code": "SED.4",
+        "code": "4",
         "title": "Emotional and Behavioral Self-Regulation",
         "description": "The ability to recognize and regulate emotions and behavior.",
         "source_page": 8,
-        "parent_code": "SED"
+        "parser_expected": {
+          "full_code": "SED.4",
+          "parent_code": "SED"
+        }
       },
       "detected": {
         "level": "strand",
@@ -151,20 +136,22 @@
       "golden": {
         "test_case_id": "CO-IND-03",
         "level": "indicator",
-        "code": "SED.4.3",
+        "code": "4.3",
         "title": "Manage actions, words, and behavior with increasing independence.",
         "description": null,
         "source_page": 8,
-        "parent_code": "SED.4",
-        "domain_code": "SED",
-        "strand_code": "SED.4",
-        "sub_strand_code": null
+        "parser_expected": {
+          "full_code": "SED.4.3",
+          "parent_code": "SED.4",
+          "domain_code": "SED",
+          "strand_code": "SED.4"
+        }
       },
       "detected": {
         "level": "indicator",
         "code": "4.3",
         "title": "Manage actions, words, and behavior with increasing independence.",
-        "description": "",
+        "description": "Manage actions, words, and behavior with increasing independence.",
         "confidence": 0.95,
         "source_page": 8,
         "source_text": "3. Manage actions, words, and behavior with increasing independence.*",
@@ -175,16 +162,18 @@
   ],
   "missing_from_detected": [
     {
-      "test_case_id": "CO-IND-04",
+      "test_case_id": "CO-IND-02",
       "level": "indicator",
-      "code": "SED.5.4",
-      "title": "Hold information in mind and manipulate it to perform tasks.",
+      "code": "1.6",
+      "title": "Communicate an understanding of the importance of health and safety routines and rules.",
       "description": null,
-      "source_page": 10,
-      "parent_code": "SED.5",
-      "domain_code": "SED",
-      "strand_code": "SED.5",
-      "sub_strand_code": null
+      "source_page": 3,
+      "parser_expected": {
+        "full_code": "PDH.1.6",
+        "parent_code": "PDH.1",
+        "domain_code": "PDH",
+        "strand_code": "PDH.1"
+      }
     }
   ],
   "extra_in_detected": [
@@ -213,8 +202,8 @@
     {
       "level": "indicator",
       "code": "1.4",
-      "title": "Get sufficient rest and exercise to support healthy development.",
-      "description": "Aligned to Colorado Academic Standards.",
+      "title": "Get sufficient rest and exercise to support healthy development.*",
+      "description": "",
       "confidence": 0.96,
       "source_page": 3,
       "source_text": "4. Get sufficient rest and exercise to support healthy development.*",
@@ -224,8 +213,8 @@
     {
       "level": "indicator",
       "code": "1.5",
-      "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.",
-      "description": "Aligned to Colorado Academic Standards.",
+      "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*",
+      "description": "",
       "confidence": 0.96,
       "source_page": 3,
       "source_text": "5. Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*",
@@ -234,9 +223,20 @@
     },
     {
       "level": "indicator",
+      "code": "1.6",
+      "title": "Communicate an understanding of the importance of health and safety routines and rules.*",
+      "description": "",
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "6. Communicate an understanding of the importance of health and safety routines and rules.*",
+      "needs_review": false,
+      "age_band": null
+    },
+    {
+      "level": "indicator",
       "code": "1.7",
-      "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.",
-      "description": "Aligned to Colorado Academic Standards.",
+      "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*",
+      "description": "",
       "confidence": 0.96,
       "source_page": 3,
       "source_text": "7. Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*",
@@ -268,8 +268,8 @@
     {
       "level": "indicator",
       "code": "1.10",
-      "title": "Participate in structured and unstructured physical activities.",
-      "description": "Aligned to Colorado Academic Standards.",
+      "title": "Participate in structured and unstructured physical activities.*",
+      "description": "",
       "confidence": 0.96,
       "source_page": 3,
       "source_text": "10. Participate in structured and unstructured physical activities.*",
@@ -312,8 +312,8 @@
     {
       "level": "indicator",
       "code": "2.1",
-      "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
-      "description": "Aligned to Colorado Academic Standards.",
+      "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
+      "description": "",
       "confidence": 0.96,
       "source_page": 4,
       "source_text": "1. Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
@@ -334,8 +334,8 @@
     {
       "level": "indicator",
       "code": "2.3",
-      "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.",
-      "description": "Aligned to Colorado Academic Standards.",
+      "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
+      "description": "",
       "confidence": 0.96,
       "source_page": 4,
       "source_text": "3. Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
@@ -387,46 +387,24 @@
       "age_band": null
     },
     {
-      "level": "strand",
-      "code": "3",
-      "title": "Fine Motor Skills",
-      "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
-      "confidence": 0.95,
-      "source_page": 4,
-      "source_text": "3. Fine Motor Skills: The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
       "level": "indicator",
       "code": "1",
-      "title": "Develop hand strength and dexterity.",
+      "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
       "description": "",
-      "confidence": 0.95,
+      "confidence": 0.92,
       "source_page": 4,
-      "source_text": "1. Develop hand strength and dexterity.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "2",
-      "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 4,
-      "source_text": "2. Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "source_text": "1. Develop motor control and balance\nfor a range of physical activities, such\nas walking, propelling a wheelchair\nor mobility device, skipping, running,\nclimbing, and hopping.*",
       "needs_review": false,
       "age_band": null
     },
     {
       "level": "indicator",
       "code": "3",
-      "title": "Manipulate a range of objects, such as blocks or books.",
+      "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.",
       "description": "",
-      "confidence": 0.95,
+      "confidence": 0.92,
       "source_page": 4,
-      "source_text": "3. Manipulate a range of objects, such as blocks or books.",
+      "source_text": "3. Understand movement concepts,\nsuch as control of the body, how the\nbody moves (such as an awareness of\nspace and directionality), and that the\nbody can move independently or in\ncoordination with other objects.*",
       "needs_review": false,
       "age_band": null
     },
@@ -437,18 +415,7 @@
       "description": "",
       "confidence": 0.95,
       "source_page": 4,
-      "source_text": "4. Manipulate writing, drawing, and art tools.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "SED",
-      "title": "Social & Emotional Development",
-      "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
-      "confidence": 0.97,
-      "source_page": 5,
-      "source_text": "Social & Emotional Development\nThe Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions.",
+      "source_text": "4. Manipulate writing, drawing, and art\ntools.",
       "needs_review": false,
       "age_band": null
     },
@@ -457,7 +424,7 @@
       "code": "1",
       "title": "Relationships with Adults and Peers",
       "description": "The healthy relationships and interactions with adults and peers.",
-      "confidence": 0.97,
+      "confidence": 0.95,
       "source_page": 6,
       "source_text": "1. Relationships with Adults and Peers: The healthy relationships and interactions with adults and peers.",
       "needs_review": false,
@@ -470,7 +437,7 @@
       "description": "",
       "confidence": 0.95,
       "source_page": 6,
-      "source_text": "1. Engage in and maintains positive relationships and interactions with adults.*",
+      "source_text": "1. Engage in and maintains\npositive relationships and\ninteractions with adults.*",
       "needs_review": false,
       "age_band": null
     },
@@ -481,7 +448,7 @@
       "description": "",
       "confidence": 0.95,
       "source_page": 6,
-      "source_text": "2. Engage in prosocial and cooperative behavior with adults.*",
+      "source_text": "2. Engage in prosocial and\ncooperative behavior with\nadults.*",
       "needs_review": false,
       "age_band": null
     },
@@ -492,7 +459,7 @@
       "description": "",
       "confidence": 0.95,
       "source_page": 6,
-      "source_text": "3. Engage in and maintains positive interactions and relationships with other children.*",
+      "source_text": "3. Engage in and maintains\npositive interactions and\nrelationships with other\nchildren.*",
       "needs_review": false,
       "age_band": null
     },
@@ -503,7 +470,7 @@
       "description": "",
       "confidence": 0.95,
       "source_page": 6,
-      "source_text": "4. Engage in cooperative play with other children.",
+      "source_text": "4. Engage in cooperative play\nwith other children.",
       "needs_review": false,
       "age_band": null
     },
@@ -514,7 +481,7 @@
       "description": "",
       "confidence": 0.95,
       "source_page": 6,
-      "source_text": "5. Use basic problem-solving skills to resolve conflicts with other children.",
+      "source_text": "5. Use basic problem-solving\nskills to resolve conflicts\nwith other children.",
       "needs_review": false,
       "age_band": null
     },
@@ -534,20 +501,20 @@
       "code": "1",
       "title": "Recognize self as a unique individual having own abilities, characteristics,",
       "description": "",
-      "confidence": 0.85,
+      "confidence": 0.88,
       "source_page": 7,
-      "source_text": "1. Recognize self as a unique individual having own abilities, characteristics,",
+      "source_text": "1. Recognize self as a unique\nindividual having own\nabilities, characteristics,",
       "needs_review": false,
       "age_band": null
     },
     {
-      "level": "strand",
-      "code": "2",
-      "title": "Sense of Identity and Belonging",
-      "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals.",
-      "confidence": 0.97,
+      "level": "domain",
+      "code": "SED",
+      "title": "Social & Emotional Development",
+      "description": "",
+      "confidence": 0.95,
       "source_page": 7,
-      "source_text": "2. Sense of Identity and Belonging: The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals.",
+      "source_text": "Social & Emotional Development",
       "needs_review": false,
       "age_band": null
     },
@@ -555,7 +522,7 @@
       "level": "indicator",
       "code": "2.1",
       "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
-      "description": "",
+      "description": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
       "confidence": 0.95,
       "source_page": 7,
       "source_text": "1. Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.*",
@@ -566,7 +533,7 @@
       "level": "indicator",
       "code": "2.2",
       "title": "Express confidence in own skills and positive feelings about self.",
-      "description": "",
+      "description": "Express confidence in own skills and positive feelings about self.",
       "confidence": 0.95,
       "source_page": 7,
       "source_text": "2. Express confidence in own skills and positive feelings about self.*",
@@ -577,7 +544,7 @@
       "level": "indicator",
       "code": "2.3",
       "title": "Have a sense of belonging to family, community, and other groups.",
-      "description": "",
+      "description": "Have a sense of belonging to family, community, and other groups.",
       "confidence": 0.95,
       "source_page": 7,
       "source_text": "3. Have a sense of belonging to family, community, and other groups.",
@@ -599,7 +566,7 @@
       "level": "indicator",
       "code": "3.1",
       "title": "Express a broad range of emotions and recognize these emotions in self and others.",
-      "description": "",
+      "description": "Express a broad range of emotions and recognize these emotions in self and others.",
       "confidence": 0.95,
       "source_page": 7,
       "source_text": "1. Express a broad range of emotions and recognize these emotions in self and others.*",
@@ -610,7 +577,7 @@
       "level": "indicator",
       "code": "3.2",
       "title": "Express care and concern toward others.",
-      "description": "",
+      "description": "Express care and concern toward others.",
       "confidence": 0.95,
       "source_page": 7,
       "source_text": "2. Express care and concern toward others.",
@@ -621,7 +588,7 @@
       "level": "indicator",
       "code": "3.3",
       "title": "Manage emotions with increasing independence.",
-      "description": "",
+      "description": "Manage emotions with increasing independence.",
       "confidence": 0.95,
       "source_page": 7,
       "source_text": "3. Manage emotions with increasing independence.*",
@@ -632,7 +599,7 @@
       "level": "indicator",
       "code": "4.1",
       "title": "Follow classroom rules and routines with increasing independence.",
-      "description": "",
+      "description": "Follow classroom rules and routines with increasing independence.",
       "confidence": 0.95,
       "source_page": 8,
       "source_text": "1. Follow classroom rules and routines with increasing independence.*",
@@ -643,219 +610,10 @@
       "level": "indicator",
       "code": "4.2",
       "title": "Appropriately handle and take care of classroom materials.",
-      "description": "",
+      "description": "Appropriately handle and take care of classroom materials.",
       "confidence": 0.95,
       "source_page": 8,
       "source_text": "2. Appropriately handle and take care of classroom materials.*",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "domain",
-      "code": "ELD",
-      "title": "English Language Development",
-      "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English.",
-      "confidence": 0.95,
-      "source_page": 9,
-      "source_text": "English Language Development\nThe English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "strand",
-      "code": "1",
-      "title": "Receptive English Language Skills",
-      "description": "The ability to comprehend or understand the English language.",
-      "confidence": 0.96,
-      "source_page": 10,
-      "source_text": "1. Receptive English Language Skills: The ability to comprehend or understand the English language.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "1.1",
-      "title": "Participate with movement and gestures while other children and the teachers dance and sing in English.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "1. Participate with movement and gestures while other children and the teachers dance and sing in English.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "1.2",
-      "title": "Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "2. Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "1.3",
-      "title": "Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "3. Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "1.4",
-      "title": "Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "4. Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "1.5",
-      "title": "Follow multi-step directions in English with minimal cues or assistance.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "5. Follow multi-step directions in English with minimal cues or assistance.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "strand",
-      "code": "2",
-      "title": "Expressive English Language Skills",
-      "description": "The ability to speak or use English.",
-      "confidence": 0.96,
-      "source_page": 10,
-      "source_text": "2. Expressive English Language Skills: The ability to speak or use English.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "2.1",
-      "title": "Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "1. Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "2.2",
-      "title": "Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "2. Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "2.3",
-      "title": "Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "3. Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "2.4",
-      "title": "Use increasingly complex and varied English vocabulary.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "4. Use increasingly complex and varied English vocabulary.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "2.5",
-      "title": "Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "5. Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "strand",
-      "code": "3",
-      "title": "Engagement in English Literacy Activities",
-      "description": "Understanding and responding to books, storytelling, and songs presented in English.",
-      "confidence": 0.96,
-      "source_page": 10,
-      "source_text": "3. Engagement in English Literacy Activities: Understanding and responding to books, storytelling, and songs presented in English.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "3.1",
-      "title": "Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "1. Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "3.2",
-      "title": "Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "2. Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "3.3",
-      "title": "Learn part of a song or poem in English and repeat it.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "3. Learn part of a song or poem in English and repeat it.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "3.4",
-      "title": "Talk with peers or adults about a story read in English.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "4. Talk with peers or adults about a story read in English.",
-      "needs_review": false,
-      "age_band": null
-    },
-    {
-      "level": "indicator",
-      "code": "3.5",
-      "title": "Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
-      "description": "",
-      "confidence": 0.95,
-      "source_page": 10,
-      "source_text": "5. Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
       "needs_review": false,
       "age_band": null
     }
