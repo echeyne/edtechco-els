@@ -101,9 +101,10 @@ def check_co_numeric_strands(elements: List[dict]) -> Tuple[bool, str]:
 
 
 def check_co_indicator_parent_is_strand(elements: List[dict]) -> Tuple[bool, str]:
-    # This check needs parser output; here we approximate using detected elements only.
-    # The eval suite will pass parser output via a different code path when available.
-    return True, "deferred to parser-output check (see eval_suite.py)"
+    # This check needs parser output; the detector eval has no parentage info.
+    # The real check is check_parser_co_indicator_parent_is_strand, run by
+    # eval_parser.py. Here (detector context) it is a no-op.
+    return True, "deferred to parser-output check (see eval_parser.py)"
 
 
 # ------- TX -------
@@ -158,6 +159,92 @@ def check_az_four_level_hierarchy(elements: List[dict]) -> Tuple[bool, str]:
     return check_ca_four_level_hierarchy(elements)
 
 
+# ======================================================================
+# PARSER checks
+#
+# These take the parser output (list of serialized NormalizedStandard dicts,
+# i.e. ParseResult.indicators) rather than detector elements. Each is keyed by
+# `check_parser_<lower_snake_id>` and looked up via `lookup_parser` so a case id
+# can mean different things in detector vs parser context (e.g.
+# CO-INDICATOR-PARENT-IS-STRAND is a no-op for the detector but a real check
+# here).
+#
+# Shape of each item: {standard_id, domain:{code,name}, strand:{...}|None,
+#                      sub_strand:{...}|None, indicator:{code,name}, age_band, ...}
+# ======================================================================
+
+def _code(level: Optional[dict]) -> Optional[str]:
+    return (level or {}).get("code") if isinstance(level, dict) else None
+
+
+def _distinct_within_code_groups(indicators: List[dict]) -> Tuple[bool, str]:
+    """For every group of standards sharing the same (domain_code, indicator
+    code), assert their standard_ids and age_bands are all distinct — i.e.
+    age-band variants of one indicator survived parsing as separate standards
+    instead of collapsing onto one id."""
+    groups: Dict[Tuple[Optional[str], Optional[str]], List[dict]] = {}
+    for ind in indicators:
+        key = (_code(ind.get("domain")), _code(ind.get("indicator")))
+        groups.setdefault(key, []).append(ind)
+
+    bad = []
+    multi = 0
+    for key, members in groups.items():
+        if len(members) < 2:
+            continue
+        multi += 1
+        ids = [m.get("standard_id") for m in members]
+        bands = [m.get("age_band") for m in members]
+        if len(set(ids)) != len(ids) or len(set(bands)) != len(bands):
+            bad.append((key, ids))
+    if bad:
+        return False, f"{len(bad)} multi-variant indicator code(s) collapsed/duplicated, e.g. {bad[0]}"
+    return True, f"{multi} multi-variant indicator code(s) all kept distinct ids+bands"
+
+
+def check_parser_co_indicator_parent_is_strand(indicators: List[dict]) -> Tuple[bool, str]:
+    """Every CO indicator's parent is a strand: sub_strand is null and strand
+    is non-null (CO is a 3-level document with no sub_strands)."""
+    bad = [
+        i for i in indicators
+        if i.get("sub_strand") is not None or i.get("strand") is None
+    ]
+    if bad:
+        ex = bad[0]
+        return False, (
+            f"{len(bad)}/{len(indicators)} indicators have wrong parent "
+            f"(e.g. {_code(ex.get('indicator'))!r}: strand={_code(ex.get('strand'))!r}, "
+            f"sub_strand={_code(ex.get('sub_strand'))!r})"
+        )
+    return True, f"all {len(indicators)} indicators have a strand parent and null sub_strand"
+
+
+def check_parser_ca_early_later_distinct_ids(indicators: List[dict]) -> Tuple[bool, str]:
+    """CA Foundations with Early/Later columns must survive as separate
+    standards with distinct standard_ids (and distinct age_bands)."""
+    return _distinct_within_code_groups(indicators)
+
+
+def check_parser_tx_pk3_pk4_distinct_ids(indicators: List[dict]) -> Tuple[bool, str]:
+    """TX PK3/PK4 variants of an outcome must survive as separate standards
+    with distinct standard_ids (and distinct age_bands)."""
+    return _distinct_within_code_groups(indicators)
+
+
+def check_parser_no_id_collision(indicators: List[dict]) -> Tuple[bool, str]:
+    """Every standard_id is unique across the whole parser output."""
+    ids = [i.get("standard_id") for i in indicators]
+    seen, dupes = set(), []
+    for sid in ids:
+        if sid in seen:
+            dupes.append(sid)
+        seen.add(sid)
+    if dupes:
+        uniq = sorted(set(dupes))
+        return False, f"{len(dupes)} colliding standard_id(s): {uniq[:5]}{'…' if len(uniq) > 5 else ''}"
+    return True, f"all {len(ids)} standard_ids unique"
+
+
 # ------- registry -------
 
 def _id_to_fn_name(case_id: str) -> str:
@@ -165,4 +252,10 @@ def _id_to_fn_name(case_id: str) -> str:
 
 
 def lookup(case_id: str) -> CheckFn | None:
+    """Detector-stage check for a case id (check_<id>)."""
     return globals().get(_id_to_fn_name(case_id))
+
+
+def lookup_parser(case_id: str) -> CheckFn | None:
+    """Parser-stage check for a case id (check_parser_<id>)."""
+    return globals().get("check_parser_" + case_id.lower().replace("-", "_"))

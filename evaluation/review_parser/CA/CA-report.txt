@@ -1,0 +1,26 @@
+
+=== CA ===
+  golden indicators: 10
+  parsed:            42
+  matched:           4  (coverage 0.400)
+  field accuracy:    1.000
+  per-field (ok/total):
+    domain_code          4/4   (1.00)
+    domain_name          4/4   (1.00)
+    strand_code          4/4   (1.00)
+    strand_name          4/4   (1.00)
+    sub_strand_code      4/4   (1.00)
+    sub_strand_name      4/4   (1.00)
+    indicator_code       4/4   (1.00)
+    indicator_name       4/4   (1.00)
+    age_band_months      4/4   (1.00)
+    standard_id          4/4   (1.00)
+  dropped (6): ['CA-IND-01-LATER', 'CA-IND-02-LATER', 'CA-IND-03-DEVELOPING', 'CA-IND-03-BROADENING', 'CA-IND-04-DEVELOPING', 'CA-IND-04-BROADENING']
+  standard_id collisions: 0
+  regression cases:
+    [SKIP] CA-AGE-COLUMNS-EMITTED — no check function for this stage
+    [SKIP] CA-AGE-LABEL-NOT-IN-TITLE — no check function for this stage
+    [SKIP] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no check function for this stage
+    [SKIP] CA-FOUR-LEVEL-HIERARCHY — no check function for this stage
+    [PASS] CA-EARLY-LATER-DISTINCT-IDS — 0 multi-variant indicator code(s) all kept distinct ids+bands
+    [PASS] NO-ID-COLLISION — all 42 standard_ids unique

@@ -1,0 +1,1018 @@
+[
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.A.1-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.A.1",
+      "name": "Child is building competence in controlling own body movements.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 4,
+    "source_text": "РКЗ.I.А.1 Child is building competence in controlling own body movements."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.A.1-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.A.1",
+      "name": "Child is aware of where own body is in space and respects personal boundaries.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 4,
+    "source_text": "PK4.I.A.1 Child is aware of where own body is in space and respects personal boundaries."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.A.2-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.A.2",
+      "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 5,
+    "source_text": "PK3.1.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.A.2-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.A.2",
+      "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 5,
+    "source_text": "PK4.I.A.2 Child shows self-awareness of physical attributes, personal preferences, and own abilities."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.A.3-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.A.3",
+      "name": "Child begins to show awareness of own abilities.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 5,
+    "source_text": "PK3.I.A.3 Child begins to show awareness of own"
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.A.3-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.A.3",
+      "name": "Child shows reasonable opinion of his own abilities and limitations.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 5,
+    "source_text": "PK4.I.A.3 Child shows reasonable opinion of his"
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.A.4-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.A.4",
+      "name": "Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 2,
+    "source_text": "PK3.I.A.4 Child shows initiative in trying new activities but may not persist when obstacles or challenges arise."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.A.4-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.A",
+      "name": "Self-Concept",
+      "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.A.4",
+      "name": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 2,
+    "source_text": "PK4.I.A.4 Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.B.1.a-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.1",
+      "name": "Behavior Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK3.I.B.1.a",
+      "name": "Child follows simple rules and routines when assisted by adults.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 6,
+    "source_text": "PK3.I.B.1.a Child follows simple rules and routines when assisted by adults."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.B.1.a-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.1",
+      "name": "Behavior Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK4.I.B.1.a",
+      "name": "Child follows classroom rules and routines with occasional reminders from adults.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 6,
+    "source_text": "PK4.I.B.1.a Child follows classroom rules and routines with occasional reminders from adults."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.B.1.b-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.1",
+      "name": "Behavior Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK3.I.B.1.b",
+      "name": "Child takes care of and manages classroom materials with adult assistance.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 7,
+    "source_text": "PK3.I.B.1.b Child takes care of and manages classroom materials with adult assistance."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.B.1.b-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.1",
+      "name": "Behavior Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK4.I.B.1.b",
+      "name": "Child takes care of and manages classroom materials.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 7,
+    "source_text": "PK4.I.B.1.b Child takes care of and manages classroom materials."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.B.1.c-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.1",
+      "name": "Behavior Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK3.I.B.1.c",
+      "name": "Child manages own behavior with adult guidance and assistance.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 7,
+    "source_text": "PK3.I.B.1.c Child manages own behavior with adult guidance and assistance."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.B.1.c-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.1",
+      "name": "Behavior Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK4.I.B.1.c",
+      "name": "Child regulates own behavior with occasional reminders or assistance from adults.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 7,
+    "source_text": "PK4.I.B.1.c Child regulates own behavior with occasional reminders or assistance from adults."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.B.2.a-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.2",
+      "name": "Emotional Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK3.I.B.2.a",
+      "name": "Child recognizes and expresses a range of emotions.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 7,
+    "source_text": "PK3.I.B.2.a Child recognizes and expresses a range of emotions."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.B.2.a-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.2",
+      "name": "Emotional Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK4.I.B.2.a",
+      "name": "Child begins to understand the connection between emotions and behaviors.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 7,
+    "source_text": "PK4.I.B.2.a Child begins to understand the connection between emotions and behaviors."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.B.2.b-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.2",
+      "name": "Emotional Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK3.I.B.2.b",
+      "name": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 8,
+    "source_text": "PK3.I.B.2.b Child is familiar with basic feeling words (e.g., happy, sad, mad, scared)."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.B.2.b-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.B",
+      "name": "Self-Regulation",
+      "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+    },
+    "sub_strand": {
+      "code": "I.B.2",
+      "name": "Emotional Control",
+      "description": null
+    },
+    "indicator": {
+      "code": "PK4.I.B.2.b",
+      "name": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
+      "description": null
+    },
+    "age_band": "48-60",
+    "source_page": 8,
+    "source_text": "PK4.I.B.2.b Child uses verbal and nonverbal communication to communicate basic emotions and feelings."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.1-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.1",
+      "name": "Child forms positive relationships with adults and peers.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 10,
+    "source_text": "PK3.I.C.1 Child forms positive relationships\nwith adults and peers."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.1-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.1",
+      "name": "Child uses effective verbal and nonverbal communication skills to build relationships with adults and peers.",
+      "description": "Child Behaviors: greet teachers and/or peers in the morning and say goodbye when leaving; demonstrate they are listening to adults and/or peers when communicating (e.g., looks at speaker, responds to verbal or nonverbal exchanges); engage in conversations with adults and/or peers about what they are doing (e.g., shares stories and experiences from outside of the school)"
+    },
+    "age_band": "48-60",
+    "source_page": 10,
+    "source_text": "PK4.I.C.1 Child uses effective verbal and nonverbal\ncommunication skills to build relationships with\nadults and peers."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.2-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.2",
+      "name": "Child assumes roles and responsibilities as part of the classroom community with adult assistance.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 10,
+    "source_text": "PK3.I.C.2 Child assumes roles and responsibilities\nas part of the classroom community with adult\nassistance."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.2-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.2",
+      "name": "Child assumes various roles and responsibilities as part of the classroom community.",
+      "description": "Child Behaviors: readily accept and carry out \"classroom helper\" assignments with adult assistance; remind his teacher that it is his turn to shut off the lights; respect other's workspace and time with shared materials; take responsibility for cleaning up classroom materials after use"
+    },
+    "age_band": "48-60",
+    "source_page": 10,
+    "source_text": "PK4.I.C.2 Child assumes various roles and\nresponsibilities as part of the classroom\ncommunity."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.3-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.3",
+      "name": "Child shows interest in peer play but may be less skilled in initiating and joining a group.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 10,
+    "source_text": "PK3.I.C.3 Child shows interest in peer play but may\nbe less skilled in initiating and joining a group."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.3-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.3",
+      "name": "Child shows competence in initiating social interactions.",
+      "description": "Child Behaviors: participate spontaneously in a variety of group activities, tasks, and play; actively seek out partners and appropriately invite them to play (e.g., starts a game with classmates on the playground); seek out the teacher to ask questions, when appropriate"
+    },
+    "age_band": "48-60",
+    "source_page": 10,
+    "source_text": "PK4.I.C.3 Child shows competence in initiating\nsocial interactions."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.4-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.4",
+      "name": "Child enjoys parallel and associative play with peers.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 11,
+    "source_text": "PK3.I.C.4 Child enjoys parallel and associative play\nwith peers."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.4-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.4",
+      "name": "Child increasingly interacts with peers during cooperative play scenarios that share a common plan and goal.",
+      "description": "Child Behaviors: demonstrate the ability to negotiate and compromise with peers to achieve a cooperative goal; follow the lead of others (e.g., enters a center and adapts to the ongoing play of others); generate joint play goals and carry them out with at least one other peer"
+    },
+    "age_band": "48-60",
+    "source_page": 11,
+    "source_text": "PK4.I.C.4 Child increasingly interacts with\npeers during cooperative play scenarios that share\na common plan and goal."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.5-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.5",
+      "name": "Child seeks adult help when experiencing conflicts with another child.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 11,
+    "source_text": "PK3.I.C.5 Child seeks adult help when experiencing\nconflicts with another child."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.5-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.5",
+      "name": "Child initiates problem-solving strategies when experiencing conflicts with others and seeks adult support when necessary.",
+      "description": "Child Behaviors: follow conflict resolution steps, with teacher's guidance, to solve a dispute with a classmate; ask an adult or peer for help when needed; attempt to work out problems with a peer independently before seeking adult help"
+    },
+    "age_band": "48-60",
+    "source_page": 11,
+    "source_text": "PK4.I.C.5 Child initiates problem-solving\nstrategies when experiencing conflicts with\nothers and seeks adult support when necessary."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.6-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.6",
+      "name": "Child responds with concern when a child or adult is distressed.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 11,
+    "source_text": "PK3.I.C.6 Child responds with concern when a child\nor adult is distressed."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.6-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.6",
+      "name": "Child demonstrates empathy and caring for others.",
+      "description": "Child Behaviors: show emotions related to another's experience (e.g., expresses sadness for a character in a book or shows excitement when a classmate crosses the finish line in a race); demonstrate a desire to be helpful (e.g., volunteers to help a classmate clean up a spill); demonstrate consideration for a classmate (e.g., comforts a classmate who is crying, slows down to walk with a classmate who has an injury, befriends a classmate who is shy)"
+    },
+    "age_band": "48-60",
+    "source_page": 11,
+    "source_text": "PK4.I.C.6 Child demonstrates empathy and caring\nfor others."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.C.7-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.C.7",
+      "name": "Child interacts with peers and may have preferred friends.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 12,
+    "source_text": "PK3.I.C.7 Child interacts with peers and may have\npreferred friends."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.C.7-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.C",
+      "name": "Social and Emotional Development - C",
+      "description": null
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.C.7",
+      "name": "Child interacts with peers and has preferred friends.",
+      "description": "Child Behaviors: talk with friends to plan their play (e.g., planning to play 'house' in the dramatic play/pretend and learn center); express interest in playing with a preferred playmate outside of school; independently choose a work or play partner"
+    },
+    "age_band": "48-60",
+    "source_page": 12,
+    "source_text": "PK4.I.C.7 Child interacts with peers and has\npreferred friends."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK3.I.D.1-36-48",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.D",
+      "name": "Social Awareness",
+      "description": "Prekindergarten children need adult support and guidance in learning how to socially interact with others. It can be a challenge for a young child to sense other people's emotions or to imagine what someone else might be thinking or feeling. Teachers can reinforce children's social awareness skills by facilitating peer-to-peer and adult-to-child interactions and asking thought-provoking questions with the support of rich, socially relevant educational materials."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK3.I.D.1",
+      "name": "Child shows interest in other people and their feelings.",
+      "description": null
+    },
+    "age_band": "36-48",
+    "source_page": 12,
+    "source_text": "PK3.I.D.1 Child shows interest in other people and\ntheir feelings."
+  },
+  {
+    "standard_id": "US-TX-2022-I-PK4.I.D.1-48-60",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "I",
+      "name": "Social and Emotional Development",
+      "description": null
+    },
+    "strand": {
+      "code": "I.D",
+      "name": "Social Awareness",
+      "description": "Prekindergarten children need adult support and guidance in learning how to socially interact with others. It can be a challenge for a young child to sense other people's emotions or to imagine what someone else might be thinking or feeling. Teachers can reinforce children's social awareness skills by facilitating peer-to-peer and adult-to-child interactions and asking thought-provoking questions with the support of rich, socially relevant educational materials."
+    },
+    "sub_strand": null,
+    "indicator": {
+      "code": "PK4.I.D.1",
+      "name": "Child demonstrates an understanding that others have perspectives and feelings that are similar and/or different from her own.",
+      "description": "Child Behaviors: use words to express own and other's preferences (e.g., \"I like to paint with red and Mary likes to paint with blue.\"); use words to express own and other's feelings (e.g., \"Michael thinks that's funny, but I don't!\"); ask questions that indicate understanding that others may have a different perspective (e.g., \"Do you like cats or dogs?\" or \"Were you scared of the thunder?\")"
+    },
+    "age_band": "48-60",
+    "source_page": 12,
+    "source_text": "PK4.I.D.1 Child demonstrates an understanding\nthat others have perspectives and feelings that are\nsimilar and/or different from her own."
+  },
+  {
+    "standard_id": "US-TX-2022-IV-IV",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "IV",
+      "name": "Emergent Literacy: Writing",
+      "description": null
+    },
+    "strand": null,
+    "sub_strand": null,
+    "indicator": {
+      "code": "IV",
+      "name": "Emergent Literacy: Writing",
+      "description": null
+    },
+    "age_band": "",
+    "source_page": 1,
+    "source_text": "Emergent Literacy: Writing I 42"
+  },
+  {
+    "standard_id": "US-TX-2022-VI-VI",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "VI",
+      "name": "Science",
+      "description": null
+    },
+    "strand": null,
+    "sub_strand": null,
+    "indicator": {
+      "code": "VI",
+      "name": "Science",
+      "description": null
+    },
+    "age_band": "",
+    "source_page": 1,
+    "source_text": "Science I 59"
+  },
+  {
+    "standard_id": "US-TX-2022-VII-VII",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "VII",
+      "name": "Social Studies",
+      "description": null
+    },
+    "strand": null,
+    "sub_strand": null,
+    "indicator": {
+      "code": "VII",
+      "name": "Social Studies",
+      "description": null
+    },
+    "age_band": "",
+    "source_page": 1,
+    "source_text": "Social Studies I 65"
+  },
+  {
+    "standard_id": "US-TX-2022-VIII-VIII",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "VIII",
+      "name": "Fine Arts",
+      "description": null
+    },
+    "strand": null,
+    "sub_strand": null,
+    "indicator": {
+      "code": "VIII",
+      "name": "Fine Arts",
+      "description": null
+    },
+    "age_band": "",
+    "source_page": 1,
+    "source_text": "Fine Arts I 71"
+  },
+  {
+    "standard_id": "US-TX-2022-IX-IX",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "IX",
+      "name": "Physical Development",
+      "description": null
+    },
+    "strand": null,
+    "sub_strand": null,
+    "indicator": {
+      "code": "IX",
+      "name": "Physical Development",
+      "description": null
+    },
+    "age_band": "",
+    "source_page": 1,
+    "source_text": "Physical Development I 75"
+  },
+  {
+    "standard_id": "US-TX-2022-X-X",
+    "country": "US",
+    "state": "TX",
+    "version_year": 2022,
+    "domain": {
+      "code": "X",
+      "name": "Technology",
+      "description": null
+    },
+    "strand": null,
+    "sub_strand": null,
+    "indicator": {
+      "code": "X",
+      "name": "Technology",
+      "description": null
+    },
+    "age_band": "",
+    "source_page": 1,
+    "source_text": "Technology I 79"
+  }
+]

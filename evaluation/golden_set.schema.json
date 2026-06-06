@@ -136,23 +136,23 @@
           },
           "parser_expected": {
             "type": "object",
-            "description": "Parser-stage expectations: parentage and the full dotted hierarchical code. The DETECTOR never produces these (it emits a flat list of elements with document-local codes); parentage and full-code assembly are parser.py's job. The detector grader ignores this block — it exists for the future parser-golden eval.",
+            "description": "Authoritative expected PARSER output for this element (only meaningful on indicators). The detector never produces these; parentage, full hierarchical codes, month-normalized age bands, and standard_id assembly are parser.py's job. Populated from a human-verified parser run (see evaluation/_bootstrap_parser_expected.py) and graded for exact equality by eval_parser.py. The detector grader ignores this block.",
             "properties": {
-              "full_code": {
+              "domain_code": { "type": ["string", "null"] },
+              "domain_name": { "type": ["string", "null"] },
+              "strand_code": { "type": ["string", "null"] },
+              "strand_name": { "type": ["string", "null"] },
+              "sub_strand_code": { "type": ["string", "null"] },
+              "sub_strand_name": { "type": ["string", "null"] },
+              "indicator_code": { "type": ["string", "null"] },
+              "indicator_name": { "type": ["string", "null"] },
+              "age_band_months": {
                 "type": ["string", "null"],
-                "description": "Full dotted code the parser assembles, e.g. 'ATL.2.0.IC.2.1.early'."
+                "description": "Parser's month-normalized age band, e.g. '36-54' (Early), '36-66' (Later), '36-48' (PK3), '48-60' (PK4). Null when the indicator carries no age band."
               },
-              "parent_code": {
-                "type": ["string", "null"]
-              },
-              "domain_code": {
-                "type": ["string", "null"]
-              },
-              "strand_code": {
-                "type": ["string", "null"]
-              },
-              "sub_strand_code": {
-                "type": ["string", "null"]
+              "standard_id": {
+                "type": ["string", "null"],
+                "description": "Expected deterministic id: COUNTRY-STATE-YEAR-DOMAINCODE-INDICATORCODE[-AGEBANDMONTHS]."
               }
             }
           }
@@ -161,7 +161,7 @@
     },
     "regression_cases": {
       "type": "array",
-      "description": "Behavioural assertions targeted at known failure modes. Each case is checked by eval_suite.py against the live detector output and reported pass/fail. Keep them assertion-style: a sentence the eval can mechanically verify.",
+      "description": "Behavioural assertions targeted at known failure modes. Each case is checked against live pipeline output and reported pass/fail: eval_detector.py runs cases via regression_checks.lookup (check_<id>), eval_parser.py via regression_checks.lookup_parser (check_parser_<id>); a case with no function for a stage is SKIPped. Keep them assertion-style.",
       "items": {
         "type": "object",
         "required": [

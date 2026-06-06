@@ -1,8 +1,10 @@
 # Ground Truth Annotations (Golden Sets)
 
 One JSON file per state. Each file is the hand-annotated ground truth for a
-single source PDF. The eval suite (`evaluation/eval_suite.py`) loads these,
-runs the detector against the matching extraction, and grades the output.
+single source PDF. The eval suites load these and grade pipeline output:
+`evaluation/eval_detector.py` runs the detector against the matching extraction;
+`evaluation/eval_parser.py` runs the parser against the matching detection
+output and grades the `parser_expected` blocks.
 
 Files in this directory:
 
@@ -50,16 +52,20 @@ Annotation tips:
 ## Running the eval
 
 ```sh
-# All states, single run
-python -m evaluation.eval_suite
+# Detector eval — all states, single run
+python -m evaluation.eval_detector
 
 # One state
-python -m evaluation.eval_suite --state CA
+python -m evaluation.eval_detector --state CA
 
 # Stability check: run the detector N times against the same chunk and
 # report level-classification disagreement rate.
-python -m evaluation.eval_suite --state CA --stability-runs 3
+python -m evaluation.eval_detector --state CA --stability-runs 3
+
+# Parser eval — grade parse_hierarchy output against parser_expected
+python -m evaluation.eval_parser --detection-dir outputs/05-31-26
+python -m evaluation.eval_parser --state CA --stability-runs 3
 ```
 
-See the docstring at the top of `evaluation/eval_suite.py` for the full
-metric set and configuration knobs.
+See the docstring at the top of `evaluation/eval_detector.py` and
+`evaluation/eval_parser.py` for the full metric set and configuration knobs.

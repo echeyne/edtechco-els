@@ -350,11 +350,9 @@ def parse_llm_response(
 
             age_band = obj.get("age_band") or fallback_age_band
 
-            print(f"DEBUG: age_band: '{age_band}'")
             standard_id = generate_standard_id(
                 country, state, version_year, obj["domain_code"], obj["indicator_code"], age_band
             )
-            print(f"DEBUG: standard_id: '{standard_id}'")
 
             source_page = obj.get("source_page", 1)
             source_text = obj.get("source_text", "")

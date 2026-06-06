@@ -39,10 +39,7 @@
       "code": "PHD",
       "title": "Physical Development & Health",
       "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
-      "source_page": 2,
-      "parser_expected": {
-        "full_code": "PDH"
-      }
+      "source_page": 2
     },
     {
       "test_case_id": "CO-STR-01",
@@ -50,11 +47,7 @@
       "code": "1",
       "title": "Health, Safety and Nutrition",
       "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
-      "source_page": 3,
-      "parser_expected": {
-        "full_code": "PDH.1",
-        "parent_code": "PDH"
-      }
+      "source_page": 3
     },
     {
       "test_case_id": "CO-IND-01",
@@ -64,10 +57,16 @@
       "description": null,
       "source_page": 3,
       "parser_expected": {
-        "full_code": "PDH.1.1",
-        "parent_code": "PDH.1",
-        "domain_code": "PDH",
-        "strand_code": "PDH.1"
+        "domain_code": "PHD",
+        "domain_name": "Physical Development & Health",
+        "strand_code": "PHD.1",
+        "strand_name": "Health, Safety and Nutrition",
+        "sub_strand_code": null,
+        "sub_strand_name": null,
+        "indicator_code": "PHD.1.1",
+        "indicator_name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+        "age_band_months": "",
+        "standard_id": "US-CO-2020-PHD-PHD.1.1"
       }
     },
     {
@@ -78,10 +77,16 @@
       "description": null,
       "source_page": 3,
       "parser_expected": {
-        "full_code": "PDH.1.6",
-        "parent_code": "PDH.1",
-        "domain_code": "PDH",
-        "strand_code": "PDH.1"
+        "domain_code": "PHD",
+        "domain_name": "Physical Development & Health",
+        "strand_code": "PHD.1",
+        "strand_name": "Health, Safety and Nutrition",
+        "sub_strand_code": null,
+        "sub_strand_name": null,
+        "indicator_code": "PHD.1.6",
+        "indicator_name": "Communicate an understanding of the importance of health and safety routines and rules.",
+        "age_band_months": "",
+        "standard_id": "US-CO-2020-PHD-PHD.1.6"
       }
     },
     {
@@ -98,11 +103,7 @@
       "code": "4",
       "title": "Emotional and Behavioral Self-Regulation",
       "description": "The ability to recognize and regulate emotions and behavior.",
-      "source_page": 8,
-      "parser_expected": {
-        "full_code": "SED.4",
-        "parent_code": "SED"
-      }
+      "source_page": 8
     },
     {
       "test_case_id": "CO-IND-03",
@@ -112,10 +113,16 @@
       "description": null,
       "source_page": 8,
       "parser_expected": {
-        "full_code": "SED.4.3",
-        "parent_code": "SED.4",
         "domain_code": "SED",
-        "strand_code": "SED.4"
+        "domain_name": "Social & Emotional Development",
+        "strand_code": "SED.4",
+        "strand_name": "Emotional and Behavioral Self-Regulation",
+        "sub_strand_code": "SED.4.3",
+        "sub_strand_name": "Manage actions, words, and behavior with increasing independence",
+        "indicator_code": "SED.4.3",
+        "indicator_name": "Manage actions, words, and behavior with increasing independence.",
+        "age_band_months": "",
+        "standard_id": "US-CO-2020-SED-SED.4.3"
       }
     }
   ],
@@ -134,6 +141,11 @@
       "id": "CO-INDICATOR-PARENT-IS-STRAND",
       "description": "Every indicator's parent in the parser output must be a strand (sub_strand_code is null).",
       "assertion": "for every indicator in the parser output, sub_strand_code is null and strand_code is non-null."
+    },
+    {
+      "id": "NO-ID-COLLISION",
+      "description": "PARSER: every standard_id in the parser output is unique.",
+      "assertion": "no two parser standards share a standard_id."
     }
   ]
 }

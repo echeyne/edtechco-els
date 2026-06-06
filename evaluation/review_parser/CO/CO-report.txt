@@ -1,0 +1,24 @@
+
+=== CO ===
+  golden indicators: 3
+  parsed:            45
+  matched:           3  (coverage 1.000)
+  field accuracy:    1.000
+  per-field (ok/total):
+    domain_code          3/3   (1.00)
+    domain_name          3/3   (1.00)
+    strand_code          3/3   (1.00)
+    strand_name          3/3   (1.00)
+    sub_strand_code      3/3   (1.00)
+    sub_strand_name      3/3   (1.00)
+    indicator_code       3/3   (1.00)
+    indicator_name       3/3   (1.00)
+    age_band_months      3/3   (1.00)
+    standard_id          3/3   (1.00)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [SKIP] CO-NO-SUB-STRAND — no check function for this stage
+    [SKIP] CO-NUMERIC-STRANDS — no check function for this stage
+    [FAIL] CO-INDICATOR-PARENT-IS-STRAND — 6/45 indicators have wrong parent (e.g. 'SED.3.1': strand='SED.3', sub_strand='SED.3.1')
+    [PASS] NO-ID-COLLISION — all 45 standard_ids unique

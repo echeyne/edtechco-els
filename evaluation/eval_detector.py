@@ -19,37 +19,39 @@ iterating on prompts:
     case in the golden set runs as PASS / FAIL / SKIP with a short detail
     line.
 
-The detector LLM call is cached per (state, extraction-hash, prompt-hash)
-in ``evaluation/.cache/`` so repeated runs are free unless you change
-the prompt.
+The detector LLM call is cached per (state, extraction-hash, suffix)
+in ``evaluation/.cache/`` so repeated runs are free unless the input changes.
+
+Shared helpers live in ``evaluation/eval_common.py``; the parser counterpart is
+``evaluation/eval_parser.py``.
 
 Usage:
-    python -m evaluation.eval_suite                        # all states
-    python -m evaluation.eval_suite --state CA             # one state
-    python -m evaluation.eval_suite --state CA --stability-runs 3
-    python -m evaluation.eval_suite --no-cache             # force re-run
-    python -m evaluation.eval_suite --extraction-dir outputs --golden-dir evaluation/ground_truth
-    python -m evaluation.eval_suite --output-dir evaluation/review
+    python -m evaluation.eval_detector                        # all states
+    python -m evaluation.eval_detector --state CA             # one state
+    python -m evaluation.eval_detector --state CA --stability-runs 3
+    python -m evaluation.eval_detector --no-cache             # force re-run
+    python -m evaluation.eval_detector --extraction-dir outputs --golden-dir evaluation/ground_truth
+    python -m evaluation.eval_detector --output-dir evaluation/review
 """
 
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import logging
 import sys
-from collections import Counter, defaultdict
+from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
-# Make `src` imports work when run as a module from the repo root.
-ROOT = Path(__file__).resolve().parent.parent
-SRC = ROOT / "src"
-if str(SRC) not in sys.path:
-    sys.path.insert(0, str(SRC))
-
+from evaluation.eval_common import (
+    CACHE_DIR,
+    _hash_blocks,
+    _norm,
+    _norm_age_band,
+    run_regressions,
+)
 from els_pipeline.detector import (  # noqa: E402
     detect_structure,
     infer_depth_map,
@@ -57,29 +59,10 @@ from els_pipeline.detector import (  # noqa: E402
 from els_pipeline.models import TextBlock  # noqa: E402
 from evaluation import regression_checks  # noqa: E402
 
-logger = logging.getLogger("eval_suite")
-
-CACHE_DIR = ROOT / "evaluation" / ".cache"
-CACHE_DIR.mkdir(exist_ok=True)
+logger = logging.getLogger("eval_detector")
 
 
 # ---------- helpers ----------
-
-def _norm(s: str) -> str:
-    return " ".join((s or "").lower().split())
-
-
-def _norm_age_band(ab: Optional[str]) -> Optional[str]:
-    """Canonicalize an age-band string for comparison. The detector (and the
-    source PDFs) spell the half-year glyph inconsistently — unicode '½' vs
-    ASCII '1/2' — so fold both to a single form and collapse whitespace/case.
-    Returns None for empty/missing bands."""
-    if not ab:
-        return None
-    s = ab.replace("½", "1/2")
-    s = " ".join(s.lower().split())
-    return s or None
-
 
 def _title_key(e: dict) -> str:
     return _norm(e.get("title", ""))
@@ -117,13 +100,6 @@ def _match_key(e: dict) -> Tuple[Optional[str], str, str, Optional[str]]:
     )
 
 
-def _hash_blocks(blocks: List[dict]) -> str:
-    h = hashlib.sha256()
-    for b in blocks:
-        h.update((b.get("text") or "").encode("utf-8"))
-    return h.hexdigest()[:16]
-
-
 # ---------- detector runner with cache ----------
 
 def run_detector_cached(
@@ -135,7 +111,7 @@ def run_detector_cached(
     """Run the detector once. Cache by (state, extraction-hash, suffix)."""
     extraction = json.loads(extraction_path.read_text())
     blocks_data = extraction.get("blocks", [])
-    cache_key = f"{state}-{_hash_blocks(blocks_data)}-{cache_suffix}.json"
+    cache_key = f"detection-{state}-{_hash_blocks(blocks_data)}-{cache_suffix}.json"
     cache_path = CACHE_DIR / cache_key
 
     if use_cache and cache_path.exists():
@@ -313,23 +289,6 @@ def grade_depth_map(expected: dict, actual: Optional[dict]) -> Tuple[bool, str]:
     return False, f"expected {exp_levels} got {act_levels}"
 
 
-def run_regressions(golden: dict, detected: List[dict]) -> List[Tuple[str, str, str]]:
-    out = []
-    for case in golden.get("regression_cases", []):
-        cid = case.get("id", "?")
-        fn = regression_checks.lookup(cid)
-        if fn is None:
-            out.append((cid, "SKIP", "no check function defined"))
-            continue
-        try:
-            passed, detail = fn(detected)
-        except Exception as e:
-            out.append((cid, "ERROR", f"{type(e).__name__}: {e}"))
-            continue
-        out.append((cid, "PASS" if passed else "FAIL", detail))
-    return out
-
-
 # ---------- stability ----------
 
 def measure_stability(
@@ -395,7 +354,7 @@ def evaluate_state(
     rep.depth_map_passed = passed
     rep.depth_map_detail = detail
 
-    rep.regressions = run_regressions(golden, detected)
+    rep.regressions = run_regressions(golden, detected, regression_checks.lookup)
 
     if stability_runs > 1:
         rep.stability_runs = stability_runs

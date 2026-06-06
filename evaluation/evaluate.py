@@ -217,6 +217,12 @@ def evaluate_hierarchy(
     """
     Evaluate hierarchy assignment accuracy from parsing output.
 
+    NOTE: Superseded by ``evaluation/eval_parser.py``, the maintained parser
+    golden-test harness (it grades the nested NormalizedStandard shape against
+    each golden element's ``parser_expected`` block, with stability and
+    regression checks). This function expects a *flat* ``domain_code`` shape and
+    is kept only for the legacy detector-vs-baseline comparison scripts.
+
     For each indicator in the parsing output, check if the assigned
     domain_code, strand_code, and sub_strand_code match ground truth.
 
