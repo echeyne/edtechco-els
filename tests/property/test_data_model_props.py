@@ -10,9 +10,6 @@ from datetime import datetime, timezone
 from els_pipeline.models import (
     DetectedElement,
     HierarchyLevelEnum,
-    EmbeddingRecord,
-    Recommendation,
-    AudienceEnum,
 )
 
 
@@ -42,56 +39,6 @@ def detected_element_strategy(draw):
     )
 
 
-@st.composite
-def embedding_record_strategy(draw):
-    """Generate an EmbeddingRecord with all required fields."""
-    indicator_id = draw(st.text(min_size=1, max_size=50))
-    country = draw(st.text(min_size=2, max_size=2, alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
-    state = draw(st.text(min_size=2, max_size=2, alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
-    vector = draw(st.lists(st.floats(min_value=-1.0, max_value=1.0), min_size=1, max_size=1536))
-    embedding_model = draw(st.text(min_size=1, max_size=100))
-    embedding_version = draw(st.text(min_size=1, max_size=10))
-    input_text = draw(st.text(min_size=1, max_size=1000))
-    created_at = datetime.now(timezone.utc).isoformat()
-    
-    return EmbeddingRecord(
-        indicator_id=indicator_id,
-        country=country,
-        state=state,
-        vector=vector,
-        embedding_model=embedding_model,
-        embedding_version=embedding_version,
-        input_text=input_text,
-        created_at=created_at,
-    )
-
-
-@st.composite
-def recommendation_strategy(draw):
-    """Generate a Recommendation with all required fields."""
-    recommendation_id = draw(st.text(min_size=1, max_size=100))
-    indicator_id = draw(st.text(min_size=1, max_size=50))
-    country = draw(st.text(min_size=2, max_size=2, alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
-    state = draw(st.text(min_size=2, max_size=2, alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'))
-    audience = draw(st.sampled_from(list(AudienceEnum)))
-    activity_description = draw(st.text(min_size=1, max_size=1000))
-    age_band = draw(st.text(min_size=1, max_size=10))
-    generation_model = draw(st.text(min_size=1, max_size=100))
-    created_at = datetime.now(timezone.utc).isoformat()
-    
-    return Recommendation(
-        recommendation_id=recommendation_id,
-        indicator_id=indicator_id,
-        country=country,
-        state=state,
-        audience=audience,
-        activity_description=activity_description,
-        age_band=age_band,
-        generation_model=generation_model,
-        created_at=created_at,
-    )
-
-
 # Property 7: Detected Element Field Validity
 # **Validates: Requirements 3.2, 3.3**
 
@@ -111,60 +58,3 @@ def test_property_7_detected_element_field_validity(element):
     valid_levels = {level.value for level in HierarchyLevelEnum}
     assert element.level.value in valid_levels, \
         f"Level {element.level} not in valid set {valid_levels}"
-
-
-# Property 18: Embedding Record Completeness
-# **Validates: Requirements 6.3**
-
-@given(embedding_record_strategy())
-def test_property_18_embedding_record_completeness(record):
-    """Property 18: Embedding Record Completeness.
-    
-    For any embedding record, all required fields present.
-    
-    **Validates: Requirements 6.3**
-    """
-    # All required fields must be present and non-empty
-    assert record.indicator_id, "indicator_id must be present and non-empty"
-    assert record.country, "country must be present and non-empty"
-    assert record.state, "state must be present and non-empty"
-    assert record.vector, "vector must be present and non-empty"
-    assert len(record.vector) > 0, "vector must contain at least one element"
-    assert record.embedding_model, "embedding_model must be present and non-empty"
-    assert record.embedding_version, "embedding_version must be present and non-empty"
-    assert record.created_at, "created_at must be present and non-empty"
-    assert record.input_text, "input_text must be present and non-empty"
-
-
-# Property 23: Recommendation Record Completeness
-# **Validates: Requirements 8.3, 8.6**
-
-@given(recommendation_strategy())
-def test_property_23_recommendation_record_completeness(recommendation):
-    """Property 23: Recommendation Record Completeness.
-    
-    For any recommendation, all required fields present and valid.
-    
-    **Validates: Requirements 8.3, 8.6**
-    """
-    # All required fields must be present and non-empty
-    assert recommendation.recommendation_id, \
-        "recommendation_id must be present and non-empty"
-    assert recommendation.indicator_id, \
-        "indicator_id must be present and non-empty"
-    assert recommendation.country, \
-        "country must be present and non-empty"
-    assert recommendation.state, \
-        "state must be present and non-empty"
-    assert recommendation.audience in [AudienceEnum.PARENT, AudienceEnum.TEACHER], \
-        f"audience must be 'parent' or 'teacher', got {recommendation.audience}"
-    assert recommendation.activity_description, \
-        "activity_description must be present and non-empty"
-    assert len(recommendation.activity_description) > 0, \
-        "activity_description must not be empty"
-    assert recommendation.age_band, \
-        "age_band must be present and non-empty"
-    assert recommendation.generation_model, \
-        "generation_model must be present and non-empty"
-    assert recommendation.created_at, \
-        "created_at must be present and non-empty"

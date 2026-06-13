@@ -9,8 +9,7 @@ class Config:
     # S3 Bucket Names
     S3_RAW_BUCKET = os.getenv("ELS_RAW_BUCKET", "els-raw-documents")
     S3_PROCESSED_BUCKET = os.getenv("ELS_PROCESSED_BUCKET", "els-processed-json")
-    S3_EMBEDDINGS_BUCKET = os.getenv("ELS_EMBEDDINGS_BUCKET", "els-embeddings")
-    
+
     # Bedrock Model IDs
     # Use cross-region inference profile for Anthropic models
     BEDROCK_DETECTOR_LLM_MODEL_ID = os.getenv("BEDROCK_DETECTOR_LLM_MODEL_ID", "us.anthropic.claude-opus-4-6-v1")
@@ -20,8 +19,7 @@ class Config:
         "BEDROCK_DEPTH_MAP_LLM_MODEL_ID", "us.anthropic.claude-haiku-4-5-20251001-v1:0"
     )
     BEDROCK_PARSER_LLM_MODEL_ID = os.getenv("BEDROCK_PARSER_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
-    BEDROCK_EMBEDDING_MODEL_ID = os.getenv("BEDROCK_EMBEDDING_MODEL_ID", "amazon.titan-embed-text-v1")
-    
+
     # Confidence Threshold
     CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.5"))
     

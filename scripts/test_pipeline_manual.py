@@ -2,9 +2,9 @@
 """
 Manual AWS test script for the ELS core pipeline.
 
-This script tests the complete pipeline execution with Step Functions
-(without embeddings/recommendations), monitors execution status and stage
-transitions, and verifies SNS notifications.
+This script tests the complete pipeline execution with Step Functions,
+monitors execution status and stage transitions, and verifies SNS
+notifications.
 
 Prerequisites:
 1. AWS credentials configured (via ~/.aws/credentials or environment variables)

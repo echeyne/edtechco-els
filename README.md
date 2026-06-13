@@ -44,7 +44,7 @@ The detection and parsing stages use an iterative batching pattern to avoid Lamb
 
 ```
 src/els_pipeline/          Python pipeline modules (ingester, extractor, detector,
-                           parser, validator, batching, embeddings, etc.)
+                           parser, validator, batching, persister, etc.)
 packages/
   ├── shared/              Shared TypeScript types used by all web packages
   ├── els-explorer-api/    Hono REST API for the standards explorer
@@ -73,7 +73,7 @@ documentation/             Detailed guides
 - Node.js 20+ and pnpm 9+
 - AWS CLI v2 (configured with appropriate credentials)
 - Docker (required by CDK for Lambda bundling)
-- Access to AWS Bedrock models (Claude and Titan Embed)
+- Access to AWS Bedrock models (Claude)
 
 ### Local Setup
 
@@ -141,7 +141,6 @@ Key environment variables (see `.env.example` for the full list):
 | `ELS_PROCESSED_BUCKET`          | S3 bucket for canonical JSON              | `els-processed-json`                 |
 | `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for structure detection     | `us.us.anthropic.claude-opus-4-6-v1` |
 | `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6`     |
-| `BEDROCK_EMBEDDING_MODEL_ID`    | Bedrock model for embeddings              | `amazon.titan-embed-text-v2:0`       |
 | `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.8`                                |
 | `MAX_CHUNKS_PER_BATCH`          | Max text-block chunks per detection batch | `5`                                  |
 | `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                                  |

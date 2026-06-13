@@ -1377,8 +1377,7 @@ export class ElsPipelineStack extends cdk.Stack {
     // ========================================================================
 
     const aslDefinition = {
-      Comment:
-        "ELS Normalization Pipeline - Core Stages (without embeddings/recommendations)",
+      Comment: "ELS Normalization Pipeline - Core Stages",
       StartAt: "Ingestion",
       States: {
         Ingestion: {

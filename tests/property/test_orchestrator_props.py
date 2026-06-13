@@ -13,8 +13,7 @@ from els_pipeline.models import PipelineStageResult, PipelineRunResult
 # Strategy for generating valid stage names
 stage_names = st.sampled_from([
     "ingestion", "text_extraction", "structure_detection",
-    "hierarchy_parsing", "validation", "embedding_generation",
-    "recommendation_generation", "data_persistence"
+    "hierarchy_parsing", "validation", "data_persistence"
 ])
 
 # Strategy for generating stage statuses
@@ -45,8 +44,7 @@ def pipeline_run_result(draw):
     """Generate a valid PipelineRunResult."""
     total_indicators = draw(st.integers(min_value=0, max_value=10000))
     total_validated = draw(st.integers(min_value=0, max_value=total_indicators))
-    total_embedded = draw(st.integers(min_value=0, max_value=total_validated))
-    
+
     return PipelineRunResult(
         run_id=draw(st.text(min_size=10, max_size=100)),
         document_s3_key=draw(st.text(min_size=10, max_size=200)),
@@ -56,8 +54,6 @@ def pipeline_run_result(draw):
         stages=draw(st.lists(pipeline_stage_result(), min_size=0, max_size=10)),
         total_indicators=total_indicators,
         total_validated=total_validated,
-        total_embedded=total_embedded,
-        total_recommendations=draw(st.integers(min_value=0, max_value=total_validated * 2)),
         status=draw(st.sampled_from(["running", "completed", "failed", "partial"]))
     )
 
@@ -81,8 +77,7 @@ def test_property_26_pipeline_stage_result_completeness(stage_result):
     # stage_name should be a valid stage
     valid_stages = {
         "ingestion", "text_extraction", "structure_detection",
-        "hierarchy_parsing", "validation", "embedding_generation",
-        "recommendation_generation", "data_persistence"
+        "hierarchy_parsing", "validation", "data_persistence"
     }
     assert stage_result.stage_name in valid_stages, f"stage_name must be one of {valid_stages}"
     
@@ -101,25 +96,18 @@ def test_property_26_pipeline_stage_result_completeness(stage_result):
 def test_property_27_pipeline_run_counts_invariant(run_result):
     """
     Property 27: Pipeline Run Counts Invariant
-    
-    For any successfully completed pipeline run, total_validated <= total_indicators
-    and total_embedded <= total_validated.
-    
+
+    For any successfully completed pipeline run, total_validated <= total_indicators.
+
     Validates: Requirements 9.4
     """
     # total_validated should not exceed total_indicators
     assert run_result.total_validated <= run_result.total_indicators, \
         f"total_validated ({run_result.total_validated}) must be <= total_indicators ({run_result.total_indicators})"
-    
-    # total_embedded should not exceed total_validated
-    assert run_result.total_embedded <= run_result.total_validated, \
-        f"total_embedded ({run_result.total_embedded}) must be <= total_validated ({run_result.total_validated})"
-    
+
     # All counts should be non-negative
     assert run_result.total_indicators >= 0, "total_indicators must be non-negative"
     assert run_result.total_validated >= 0, "total_validated must be non-negative"
-    assert run_result.total_embedded >= 0, "total_embedded must be non-negative"
-    assert run_result.total_recommendations >= 0, "total_recommendations must be non-negative"
 
 
 @given(
@@ -135,10 +123,7 @@ def test_property_27_pipeline_counts_with_stages(stages, total_indicators, total
     """
     # Ensure total_validated <= total_indicators
     assume(total_validated <= total_indicators)
-    
-    # Generate total_embedded that respects the invariant
-    total_embedded = min(total_validated, total_validated)
-    
+
     run_result = PipelineRunResult(
         run_id="test-run-id",
         document_s3_key="US/CA/2021/test.pdf",
@@ -148,14 +133,11 @@ def test_property_27_pipeline_counts_with_stages(stages, total_indicators, total
         stages=stages,
         total_indicators=total_indicators,
         total_validated=total_validated,
-        total_embedded=total_embedded,
-        total_recommendations=0,
         status="completed"
     )
-    
+
     # Verify the invariant holds
     assert run_result.total_validated <= run_result.total_indicators
-    assert run_result.total_embedded <= run_result.total_validated
 
 
 @given(country_codes)
@@ -196,11 +178,9 @@ def test_property_stage_ordering_preserved(stages):
         stages=stages,
         total_indicators=100,
         total_validated=90,
-        total_embedded=80,
-        total_recommendations=0,
         status="completed"
     )
-    
+
     # Verify stages are in the same order
     assert len(run_result.stages) == len(stages)
     for i, stage in enumerate(stages):

@@ -7,17 +7,11 @@ from datetime import datetime
 from els_pipeline.db import (
     DatabaseConnection,
     persist_standard,
-    persist_embedding,
-    persist_recommendation,
-    query_similar_indicators,
     get_indicators_by_country_state
 )
 from els_pipeline.models import (
     NormalizedStandard,
-    HierarchyLevel,
-    EmbeddingRecord,
-    Recommendation,
-    AudienceEnum
+    HierarchyLevel
 )
 
 
@@ -49,37 +43,6 @@ def sample_standard():
         ),
         source_page=43,
         source_text="Sample source text"
-    )
-
-
-@pytest.fixture
-def sample_embedding():
-    """Create a sample embedding record."""
-    return EmbeddingRecord(
-        indicator_id="US-CA-2021-LLD-1.2",
-        country="US",
-        state="CA",
-        vector=[0.1] * 1536,
-        embedding_model="amazon.titan-embed-text-v1",
-        embedding_version="v1",
-        input_text="Language and Literacy Development – Listening and Speaking – Child demonstrates understanding",
-        created_at=datetime.now().isoformat()
-    )
-
-
-@pytest.fixture
-def sample_recommendation():
-    """Create a sample recommendation."""
-    return Recommendation(
-        recommendation_id="rec-001",
-        indicator_id="US-CA-2021-LLD-1.2",
-        country="US",
-        state="CA",
-        audience=AudienceEnum.PARENT,
-        activity_description="Read picture books together and ask open-ended questions",
-        age_band="3-5",
-        generation_model="anthropic.claude-v2",
-        created_at=datetime.now().isoformat()
     )
 
 
@@ -182,104 +145,6 @@ class TestPersistStandard:
             
             # Should only insert document, domain, and indicator (no strand/sub_strand)
             conn.commit.assert_called_once()
-
-
-class TestPersistEmbedding:
-    """Tests for persist_embedding function."""
-    
-    def test_persist_embedding(self, mock_connection, sample_embedding):
-        """Test persisting an embedding record."""
-        conn, cursor = mock_connection
-        
-        with patch.object(DatabaseConnection, 'get_connection') as mock_get_conn:
-            mock_get_conn.return_value.__enter__.return_value = conn
-            
-            persist_embedding(sample_embedding)
-            
-            # Verify embedding insert
-            cursor.execute.assert_called_once()
-            call_args = cursor.execute.call_args[0]
-            assert 'INSERT INTO embeddings' in call_args[0]
-            assert sample_embedding.indicator_id in call_args[1]
-            assert sample_embedding.country in call_args[1]
-            assert sample_embedding.state in call_args[1]
-            
-            conn.commit.assert_called_once()
-
-
-class TestPersistRecommendation:
-    """Tests for persist_recommendation function."""
-    
-    def test_persist_recommendation(self, mock_connection, sample_recommendation):
-        """Test persisting a recommendation."""
-        conn, cursor = mock_connection
-        
-        with patch.object(DatabaseConnection, 'get_connection') as mock_get_conn:
-            mock_get_conn.return_value.__enter__.return_value = conn
-            
-            persist_recommendation(sample_recommendation)
-            
-            # Verify recommendation insert
-            cursor.execute.assert_called_once()
-            call_args = cursor.execute.call_args[0]
-            assert 'INSERT INTO recommendations' in call_args[0]
-            assert sample_recommendation.recommendation_id in call_args[1]
-            assert sample_recommendation.country in call_args[1]
-            assert sample_recommendation.state in call_args[1]
-            
-            conn.commit.assert_called_once()
-
-
-class TestQuerySimilarIndicators:
-    """Tests for query_similar_indicators function."""
-    
-    def test_query_without_filters(self, mock_connection):
-        """Test querying similar indicators without filters."""
-        conn, cursor = mock_connection
-        cursor.fetchall.return_value = [
-            {
-                'standard_id': 'US-CA-2021-LLD-1.2',
-                'code': 'LLD.A.1.a',
-                'description': 'Test description',
-                'domain_code': 'LLD',
-                'domain_name': 'Language',
-                'country': 'US',
-                'state': 'CA',
-                'age_band': '3-5',
-                'version_year': 2021,
-                'similarity': 0.95
-            }
-        ]
-        
-        with patch.object(DatabaseConnection, 'get_connection') as mock_get_conn:
-            mock_get_conn.return_value.__enter__.return_value = conn
-            
-            vector = [0.1] * 1536
-            results = query_similar_indicators(vector, top_k=10)
-            
-            assert len(results) == 1
-            assert results[0]['standard_id'] == 'US-CA-2021-LLD-1.2'
-            assert results[0]['country'] == 'US'
-            cursor.execute.assert_called_once()
-    
-    def test_query_with_country_state_filters(self, mock_connection):
-        """Test querying with country and state filters."""
-        conn, cursor = mock_connection
-        cursor.fetchall.return_value = []
-        
-        with patch.object(DatabaseConnection, 'get_connection') as mock_get_conn:
-            mock_get_conn.return_value.__enter__.return_value = conn
-            
-            vector = [0.1] * 1536
-            filters = {'country': 'US', 'state': 'CA', 'age_band': '3-5'}
-            results = query_similar_indicators(vector, top_k=5, filters=filters)
-            
-            # Verify filters were applied in query
-            call_args = cursor.execute.call_args[0]
-            assert 'e.country = %s' in call_args[0]
-            assert 'e.state = %s' in call_args[0]
-            assert 'US' in call_args[1]
-            assert 'CA' in call_args[1]
 
 
 class TestGetIndicatorsByCountryState:

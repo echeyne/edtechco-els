@@ -14,12 +14,6 @@ class HierarchyLevelEnum(str, Enum):
     INDICATOR = "indicator"
 
 
-class AudienceEnum(str, Enum):
-    """Valid recommendation audiences."""
-    PARENT = "parent"
-    TEACHER = "teacher"
-
-
 class StatusEnum(str, Enum):
     """Valid status values."""
     SUCCESS = "success"
@@ -195,83 +189,6 @@ class IngestionResult(BaseModel):
     error: Optional[str] = None
 
 
-# Embedding Models
-
-class EmbeddingRecord(BaseModel):
-    """Represents an embedding record."""
-    indicator_id: str
-    country: str
-    state: str
-    vector: List[float] = Field(min_length=1)
-    embedding_model: str
-    embedding_version: str
-    input_text: str
-    created_at: str
-    
-    @field_validator('country')
-    @classmethod
-    def validate_country_code(cls, v):
-        """Validate that country is a two-letter ISO 3166-1 alpha-2 code."""
-        if not re.match(r'^[A-Z]{2}$', v):
-            raise ValueError(f"country must be a two-letter uppercase ISO 3166-1 alpha-2 code, got: {v}")
-        return v
-
-
-class EmbeddingResult(BaseModel):
-    """Result of embedding generation."""
-    records: List[EmbeddingRecord]
-    status: str
-    error: Optional[str] = None
-
-
-# Recommendation Models
-
-class Recommendation(BaseModel):
-    """Represents a recommendation."""
-    recommendation_id: str
-    indicator_id: str
-    country: str
-    state: str
-    audience: AudienceEnum
-    activity_description: str = Field(min_length=1)
-    age_band: str
-    generation_model: str
-    created_at: str
-    
-    @field_validator('country')
-    @classmethod
-    def validate_country_code(cls, v):
-        """Validate that country is a two-letter ISO 3166-1 alpha-2 code."""
-        if not re.match(r'^[A-Z]{2}$', v):
-            raise ValueError(f"country must be a two-letter uppercase ISO 3166-1 alpha-2 code, got: {v}")
-        return v
-
-
-class RecommendationRequest(BaseModel):
-    """Request for recommendation generation."""
-    country: str
-    state: str
-    indicator_ids: Optional[List[str]] = None
-    domain_code: Optional[str] = None
-    strand_code: Optional[str] = None
-    age_band: str
-    
-    @field_validator('country')
-    @classmethod
-    def validate_country_code(cls, v):
-        """Validate that country is a two-letter ISO 3166-1 alpha-2 code."""
-        if not re.match(r'^[A-Z]{2}$', v):
-            raise ValueError(f"country must be a two-letter uppercase ISO 3166-1 alpha-2 code, got: {v}")
-        return v
-
-
-class RecommendationResult(BaseModel):
-    """Result of recommendation generation."""
-    recommendations: List[Recommendation]
-    status: str
-    error: Optional[str] = None
-
-
 # Pipeline Orchestration Models
 
 class PipelineStageResult(BaseModel):
@@ -293,10 +210,8 @@ class PipelineRunResult(BaseModel):
     stages: List[PipelineStageResult]
     total_indicators: int = Field(ge=0)
     total_validated: int = Field(ge=0)
-    total_embedded: int = Field(ge=0)
-    total_recommendations: int = Field(ge=0)
     status: str
-    
+
     @field_validator('total_validated')
     @classmethod
     def validate_total_validated(cls, v, info):
@@ -304,15 +219,6 @@ class PipelineRunResult(BaseModel):
         total_indicators = info.data.get('total_indicators', 0)
         if v > total_indicators:
             raise ValueError(f"total_validated ({v}) cannot exceed total_indicators ({total_indicators})")
-        return v
-    
-    @field_validator('total_embedded')
-    @classmethod
-    def validate_total_embedded(cls, v, info):
-        """Validate that total_embedded <= total_validated."""
-        total_validated = info.data.get('total_validated', 0)
-        if v > total_validated:
-            raise ValueError(f"total_embedded ({v}) cannot exceed total_validated ({total_validated})")
         return v
 
 

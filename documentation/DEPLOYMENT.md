@@ -26,8 +26,8 @@ The app and planning stacks depend on the pipeline stack (they import its Aurora
 Request access in the AWS Console under Bedrock → Model access for:
 
 - `us.anthropic.claude-opus-4-6-v1` (structure detection)
-- `us.anthropic.claude-sonnet-4-6` (parsing, recommendations, planning agent)
-- `amazon.titan-embed-text-v2:0` (embeddings)
+- `us.anthropic.claude-haiku-4-5-20251001-v1:0` (detection depth-map inference)
+- `us.anthropic.claude-sonnet-4-6` (parsing, planning agent)
 
 ## Pipeline Deployment
 

@@ -553,8 +553,6 @@ def test_pipeline_status_tracking():
     assert isinstance(result.stages, list)
     assert result.total_indicators >= 0
     assert result.total_validated >= 0
-    assert result.total_embedded >= 0
-    assert result.total_recommendations >= 0
     assert result.status in ["running", "completed", "failed", "partial"]
 
 

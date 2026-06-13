@@ -69,8 +69,6 @@ Each Lambda function has a dedicated IAM role following least privilege:
 | Parse Batch Processor     | S3 read (parsing batches), S3 write (parsing results), Bedrock invoke     |
 | Parse Merger              | S3 read (batches + results), S3 write (parsing output)                    |
 | Validator                 | S3 read/write to processed bucket                                         |
-| Embedding Generator       | Bedrock invoke (Titan Embed)                                              |
-| Recommendation Generator  | Bedrock invoke (Claude)                                                   |
 | Persister                 | Aurora Data API, Secrets Manager                                          |
 
 ## Database

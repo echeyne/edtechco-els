@@ -294,8 +294,6 @@ def test_complete_core_pipeline_with_mocked_services():
             "output_artifact": validation_result["output_artifact"],
             "total_indicators": validation_result["total_indicators"],
             "total_validated": validation_result["total_validated"],
-            "total_embedded": 0,
-            "total_recommendations": 0,
             "country": validation_result["country"],
             "state": validation_result["state"],
             "version_year": validation_result["version_year"]
@@ -493,8 +491,6 @@ def test_final_outputs_in_all_storage_locations():
         "output_artifact": "db://pipeline_runs/pipeline-US-CA-2021-test",
         "total_indicators": 10,
         "total_validated": 10,
-        "total_embedded": 0,
-        "total_recommendations": 0,
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -519,23 +515,11 @@ def test_pipeline_invariants():
     # Test invariant: total_validated <= total_indicators
     persistence_result = {
         "total_indicators": 10,
-        "total_validated": 8,
-        "total_embedded": 0,
-        "total_recommendations": 0
+        "total_validated": 8
     }
-    
+
     assert persistence_result["total_validated"] <= persistence_result["total_indicators"]
-    
-    # Test invariant: total_embedded <= total_validated (for full pipeline)
-    full_pipeline_result = {
-        "total_indicators": 10,
-        "total_validated": 8,
-        "total_embedded": 8,
-        "total_recommendations": 16
-    }
-    
-    assert full_pipeline_result["total_embedded"] <= full_pipeline_result["total_validated"]
-    
+
     # Test invariant: country code format
     assert len(persistence_result.get("country", "US")) == 2
     assert persistence_result.get("country", "US").isupper()

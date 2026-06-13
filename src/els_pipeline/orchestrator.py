@@ -2,8 +2,8 @@
 Pipeline orchestrator for the ELS normalization pipeline.
 
 This module provides functions to start, monitor, and re-run pipeline stages.
-The pipeline executes stages in order: ingestion → extraction → detection → 
-parsing → validation → embedding → recommendation → persistence.
+The pipeline executes stages in order: ingestion → extraction → detection →
+parsing → validation → persistence.
 """
 
 import json
@@ -136,7 +136,7 @@ def rerun_stage(
     
     Args:
         run_id: Unique identifier of the pipeline run
-        stage_name: Name of the stage to re-run (e.g., "validation", "embedding")
+        stage_name: Name of the stage to re-run (e.g., "validation", "structure_detection")
         state_machine_arn: ARN of the Step Functions state machine (optional)
     
     Returns:
@@ -154,8 +154,7 @@ def rerun_stage(
     
     valid_stages = {
         "ingestion", "text_extraction", "structure_detection",
-        "hierarchy_parsing", "validation", "embedding_generation",
-        "recommendation_generation", "data_persistence"
+        "hierarchy_parsing", "validation", "data_persistence"
     }
     
     if stage_name not in valid_stages:
@@ -278,7 +277,7 @@ def get_pipeline_status(run_id: str) -> PipelineRunResult:
         # In a real implementation, we would:
         # 1. Query Step Functions for execution status
         # 2. Parse the execution history to extract stage results
-        # 3. Query the database for totals (indicators, validated, embedded, recommendations)
+        # 3. Query the database for totals (indicators, validated)
         
         # For now, return a placeholder result
         # This would be replaced with actual Step Functions API calls
@@ -294,8 +293,6 @@ def get_pipeline_status(run_id: str) -> PipelineRunResult:
             stages=[],
             total_indicators=0,
             total_validated=0,
-            total_embedded=0,
-            total_recommendations=0,
             status="running"
         )
         
@@ -358,9 +355,7 @@ def _parse_execution_history(execution_arn: str) -> Dict[str, Any]:
         stages = []
         totals = {
             'total_indicators': 0,
-            'total_validated': 0,
-            'total_embedded': 0,
-            'total_recommendations': 0
+            'total_validated': 0
         }
         
         # Parse events to extract stage results
@@ -389,10 +384,6 @@ def _parse_execution_history(execution_arn: str) -> Dict[str, Any]:
                     totals['total_indicators'] = output['total_indicators']
                 if 'total_validated' in output:
                     totals['total_validated'] = output['total_validated']
-                if 'total_embedded' in output:
-                    totals['total_embedded'] = output['total_embedded']
-                if 'total_recommendations' in output:
-                    totals['total_recommendations'] = output['total_recommendations']
         
         return {
             'stages': stages,
@@ -404,7 +395,5 @@ def _parse_execution_history(execution_arn: str) -> Dict[str, Any]:
         return {
             'stages': [],
             'total_indicators': 0,
-            'total_validated': 0,
-            'total_embedded': 0,
-            'total_recommendations': 0
+            'total_validated': 0
         }

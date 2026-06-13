@@ -32,7 +32,7 @@ Output: List of `TextBlock` objects with text, page number, block type, confiden
 ### 3. Detection Batching
 
 **Module:** `src/els_pipeline/detection_batching.py`
-**Lambda handlers:** `detection_batch_preparer_handler`, `detection_batch_processor_handler`, `detection_merger_handler`
+**Lambda handlers:** `prepare_detection_batches_handler`, `detect_batch_handler`, `merge_detection_results_handler`
 
 Large documents can have hundreds of text blocks. To avoid Lambda timeouts, detection is split into three steps:
 
@@ -45,14 +45,19 @@ Large documents can have hundreds of text blocks. To avoid Lambda timeouts, dete
 **Module:** `src/els_pipeline/detector.py`
 **Lambda handler:** `detection_handler`
 
-Uses Bedrock Claude to identify hierarchical elements in text blocks. Each element is classified as a domain, strand, sub-strand, or indicator with a confidence score. Elements below the `CONFIDENCE_THRESHOLD` (default: 0.8) are flagged for human review.
+Uses Bedrock Claude to identify hierarchical elements in text blocks. Detection runs as **two passes** (`detect_structure`):
 
-The detection prompt instructs the LLM to extract structured JSON with fields: level, code, title, description, confidence, source_page, source_text.
+1. **Pass 1 — depth-map inference** (`infer_depth_map`): a sample of blocks taken evenly across the document is sent to a lightweight model (`BEDROCK_DEPTH_MAP_LLM_MODEL_ID`, default Claude Haiku) to infer the document's nesting hierarchy (`doc_depths`). This runs once per document. If it fails, detection falls back to a no-depth-map mode.
+2. **Pass 2 — per-chunk extraction**: blocks are chunked with token overlap (`chunk_text_blocks`) and each chunk is sent to the detector model (`BEDROCK_DETECTOR_LLM_MODEL_ID`, default Claude Opus) along with the depth map, so the model classifies elements by document depth rather than re-guessing per chunk. Elements re-emitted at overlapping chunk boundaries are collapsed by `_dedup_elements`.
+
+Each element is classified as a domain, strand, sub-strand, or indicator with a confidence score. Elements with a confidence below 0.7 get `needs_review=True` (set on `DetectedElement`) and are flagged for human review.
+
+The detection prompt instructs the LLM to extract structured JSON with fields: level, code, title, description, confidence, source_page, source_text, and age_band (populated for indicators that come from age-banded columns, e.g. "Early (3 to 4 ½ Years)", "PK3").
 
 ### 5. Parse Batching
 
 **Module:** `src/els_pipeline/parse_batching.py`
-**Lambda handlers:** `parse_batch_preparer_handler`, `parse_batch_processor_handler`, `parse_merger_handler`
+**Lambda handlers:** `prepare_parse_batches_handler`, `parse_batch_handler`, `merge_parse_results_handler`
 
 Same pattern as detection batching, but partitions by domain. Each batch contains up to `MAX_DOMAINS_PER_BATCH` (default: 3) domain groups. This ensures related elements stay together during parsing.
 
@@ -87,27 +92,13 @@ Validates each normalized record against the canonical schema using Pydantic mod
 
 Valid records are serialized to canonical JSON and stored in the processed S3 bucket.
 
-### 8. Embedding Generation
-
-**Lambda handler:** `embedding_handler`
-
-Generates vector embeddings for each indicator using Bedrock Titan Embed (`amazon.titan-embed-text-v2:0`). Embeddings enable similarity search across standards from different states.
-
-### 9. Recommendation Generation
-
-**Lambda handler:** `recommendation_handler`
-
-Uses Bedrock Claude to generate activity recommendations for each indicator, targeted at two audiences: parents and teachers.
-
-### 10. Persistence
+### 8. Persistence
 
 **Module:** `src/els_pipeline/persister.py`
 
-Stores all data in Aurora PostgreSQL Serverless v2 with the pgvector extension:
+Stores all data in Aurora PostgreSQL Serverless v2:
 
 - Documents, domains, strands, sub-strands, indicators
-- Vector embeddings (1024-dimensional)
-- Recommendations
 - Pipeline run metadata
 
 ## Data Models
@@ -127,7 +118,6 @@ Document (country, state, year, title, source_url, age_band)
 ### Key Enums
 
 - **HierarchyLevel:** `domain`, `strand`, `sub_strand`, `indicator`
-- **Audience:** `parent`, `teacher`
 - **Status:** `success`, `error`, `completed`, `failed`, `partial`, `running`
 
 ### Standard ID Format
@@ -146,7 +136,6 @@ All paths are organized by country (ISO 3166-1 alpha-2):
 | -------------- | -------------------------------------------------------- | ----------------------------------------------- |
 | Raw documents  | `{country}/{state}/{year}/{filename}`                    | `US/CA/2021/california_standards.pdf`           |
 | Processed JSON | `{country}/{state}/{year}/{standard_id}.json`            | `US/CA/2021/US-CA-2021-LLD-1.2.json`            |
-| Embeddings     | `{country}/{state}/{year}/embeddings/{standard_id}.json` | `US/CA/2021/embeddings/US-CA-2021-LLD-1.2.json` |
 
 ### Intermediate Data
 
@@ -175,7 +164,7 @@ Each pipeline run writes intermediate output for debugging:
 
 ### Planning App
 
-- **API** (`packages/planning-api/`): Hono API that proxies WebSocket connections to Bedrock AgentCore. Handles Descope authentication and forwards user tokens.
+- **API** (`packages/planning-api/`): Hono API that authenticates the user via Descope, then returns a short-lived presigned `wss://` URL for the Bedrock AgentCore runtime (`/chat` route). The browser connects to AgentCore directly over that WebSocket — the API does not proxy the stream. The user's Descope JWT (and optional plan ID) are embedded as `X-Amzn-Bedrock-AgentCore-Runtime-Custom-*` query params so identity is bound server-side. A `/plans` route provides plan CRUD.
 - **Agent** (`packages/agentcore-agent/`): Python Strands agent deployed to Bedrock AgentCore Runtime. Has tools for querying standards data and managing learning plans (CRUD). User identity is bound from the authenticated session — the LLM never controls which user's data is accessed.
 - **Frontend** (`packages/planning-frontend/`): React chat UI using `@chatscope/chat-ui-kit-react`. Supports real-time streaming, plan creation/editing, and PDF export.
 
@@ -187,12 +176,12 @@ Each pipeline run writes intermediate output for debugging:
 
 | Service                         | Purpose                                                     |
 | ------------------------------- | ----------------------------------------------------------- |
-| S3                              | Document storage (raw, processed, embeddings, intermediate) |
+| S3                              | Document storage (raw, processed, intermediate)             |
 | Lambda                          | Pipeline stage execution, API handlers                      |
 | Step Functions                  | Pipeline orchestration, parallel batch processing           |
 | Textract                        | PDF text extraction                                         |
-| Bedrock                         | LLM inference (Claude) and embeddings (Titan)               |
-| Aurora PostgreSQL Serverless v2 | Persistent storage with pgvector                            |
+| Bedrock                         | LLM inference (Claude)                                      |
+| Aurora PostgreSQL Serverless v2 | Persistent storage                                          |
 | API Gateway                     | REST API endpoints                                          |
 | CloudFront                      | Frontend CDN                                                |
 | Secrets Manager                 | Database credentials                                        |
@@ -213,15 +202,15 @@ All infrastructure is defined in AWS CDK (TypeScript) under `infra/cdk/`:
 | Planning | `lib/planning-stack.ts`     | Planning API, AgentCore, frontend hosting |
 | Landing  | `lib/landing-site-stack.ts` | Landing site hosting                      |
 
-The CDK app entry point (`bin/app.ts`) supports selective stack deployment via the `targetStack` context variable.
+The CDK app entry point (`bin/app.ts`) supports selective stack deployment via the `targetStack` context variable. Reusable constructs shared across stacks live in `lib/constructs/` (`pipeline-lambda.ts`, `pipeline-dashboard.ts`, `frontend-distribution.ts`).
 
 ## Database Schema
 
-PostgreSQL with pgvector. Migrations are in `infra/migrations/`:
+PostgreSQL. Migrations are in `infra/migrations/`:
 
 | Migration | Description                                                                                                      |
 | --------- | ---------------------------------------------------------------------------------------------------------------- |
-| 001       | Initial schema: documents, domains, strands, sub_strands, indicators, embeddings, recommendations, pipeline_runs |
+| 001       | Initial schema: documents, domains, strands, sub_strands, indicators, embeddings, recommendations, pipeline_runs (embeddings/recommendations later dropped in 011) |
 | 002       | Add description columns to domains/strands/sub_strands, age_band to indicators                                   |
 | 003       | Add title column to indicators                                                                                   |
 | 004       | Alter age_band column type                                                                                       |
@@ -230,6 +219,8 @@ PostgreSQL with pgvector. Migrations are in `infra/migrations/`:
 | 007       | Add soft delete columns (deleted, deleted_at, deleted_by)                                                        |
 | 008       | Add planning tables (plans)                                                                                      |
 | 009       | Alter indicator description to required                                                                          |
+| 010       | Add nullable `order` column to domains for user-defined ordering (falls back to `ORDER BY code`)                |
+| 011       | Drop unused embeddings/recommendations tables and pipeline_runs.total_embedded/total_recommendations columns     |
 
 ## Monorepo Structure
 
