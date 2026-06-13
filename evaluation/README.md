@@ -1,19 +1,28 @@
 # Ground Truth Annotations (Golden Sets)
 
-One JSON file per state. Each file is the hand-annotated ground truth for a
-single source PDF. The eval suites load these and grade pipeline output:
-`evaluation/eval_detector.py` runs the detector against the matching extraction;
-`evaluation/eval_parser.py` runs the parser against the matching detection
-output and grades the `parser_expected` blocks.
+There are **two** golden sets, graded by two independent suites:
 
-Files in this directory:
+- **`ground_truth_detector/1** — detector goldens, one JSON per state.
+  Graded by `evaluation/eval_detector.py`, which runs the detector against the
+  matching `{STATE}-extraction.json` and compares the flat element list.
+  Schema: `../golden_set.schema.json`.
+- **`/ground_truth_parser/`** — parser goldens, one JSON per state. Graded by
+  `evaluation/eval_parser.py`, which runs the parser against the matching
+  `{STATE}-detection.json` and compares the full nested `NormalizedStandard`
+  objects field-by-field. Schema: `../parser_golden.schema.json`.
 
-| File      | Purpose                                                                |
-| --------- | ---------------------------------------------------------------------- |
-| `AZ.json` | Arizona Early Learning Standards 4th Ed. — 4-level, lettered examples  |
-| `CA.json` | California Preschool Learning Foundations — 4-level, age-band columns  |
-| `CO.json` | Colorado ELDG Ages 3-5 — 3-level (no sub_strand), numeric strands      |
-| `TX.json` | Texas 2022 PreK Guidelines — 4-level, side-by-side PK3/PK4 columns     |
+The two are deliberately decoupled: the detector and parser produce different
+shapes (flat elements vs. nested resolved standards), run against different
+inputs (extraction vs. detection), and can be annotated/iterated separately.
+
+Files in each directory:
+
+| File      | Purpose                                                               |
+| --------- | --------------------------------------------------------------------- |
+| `AZ.json` | Arizona Early Learning Standards 4th Ed. — 4-level, lettered examples |
+| `CA.json` | California Preschool Learning Foundations — 4-level, age-band columns |
+| `CO.json` | Colorado ELDG Ages 3-5 — 3-level (no sub_strand), numeric strands     |
+| `TX.json` | Texas 2022 PreK Guidelines — 4-level, side-by-side PK3/PK4 columns    |
 
 The schema is in `../golden_set.schema.json`. Each file has three things to
 fill in:
@@ -62,7 +71,7 @@ python -m evaluation.eval_detector --state CA
 # report level-classification disagreement rate.
 python -m evaluation.eval_detector --state CA --stability-runs 3
 
-# Parser eval — grade parse_hierarchy output against parser_expected
+# Parser eval — grade parse_hierarchy output against ground_truth_parser/
 python -m evaluation.eval_parser --detection-dir outputs/05-31-26
 python -m evaluation.eval_parser --state CA --stability-runs 3
 ```

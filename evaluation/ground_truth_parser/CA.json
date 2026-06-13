@@ -1,0 +1,333 @@
+{
+  "$schema": "../parser_golden.schema.json",
+  "state": "CA",
+  "country": "US",
+  "version_year": 2021,
+  "annotator": "Emily Cheyne",
+  "annotation_date": "06-06-2026",
+  "notes": "CA uses an explicit 4-level hierarchy: Domain → Strand → Sub-Strand → Foundation. Side-by-side age columns ('Early (3 to 4 ½ Years)' vs. 'Later (4 to 5 ½ Years)') MUST each become a separate indicator.",
+  "standards": [
+    {
+      "test_case_id": "CA-IND-01-EARLY",
+      "expected": {
+        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2-36-54",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "ATL",
+          "name": "Approaches to Learning",
+          "description": ""
+        },
+        "strand": {
+          "code": "ATL.1.0",
+          "name": "Motivation to Learn",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "ATL.1.0.INIT",
+          "name": "Initiative",
+          "description": ""
+        },
+        "indicator": {
+          "code": "ATL.1.0.INIT.1.2.36-54",
+          "name": "Initiative",
+          "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems."
+        },
+        "age_band": "36-54",
+        "source_page": 4
+      }
+    },
+    {
+      "test_case_id": "CA-IND-01-LATER",
+      "expected": {
+        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2-48-66",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "ATL",
+          "name": "Approaches to Learning",
+          "description": ""
+        },
+        "strand": {
+          "code": "ATL.1.0",
+          "name": "Motivation to Learn",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "ATL.1.0.INIT",
+          "name": "Initiative",
+          "description": ""
+        },
+        "indicator": {
+          "code": "ATL.1.0.INIT.1.2.48-66",
+          "name": "Initiative",
+          "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently."
+        },
+        "age_band": "48-66",
+        "source_page": 4
+      }
+    },
+    {
+      "test_case_id": "CA-IND-02-EARLY",
+      "expected": {
+        "standard_id": "US-CA-2021-FLD.1.0.VOC.1.1.36-54",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "FLD",
+          "name": "Foundational Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "FLD.1.0",
+          "name": "Listening and Speaking",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "FLD.1.0.VOC",
+          "name": "Vocabulary",
+          "description": null
+        },
+        "indicator": {
+          "code": "FLD.1.0.VOC.1.1.36-54",
+          "name": "Understanding and Using Vocabulary",
+          "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories."
+        },
+        "age_band": "36-54",
+        "source_page": 8
+      }
+    },
+    {
+      "test_case_id": "CA-IND-02-LATER",
+      "expected": {
+        "standard_id": "US-CA-2021-FLD.1.0.VOC.1.1.48-66",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "FLD",
+          "name": "Foundational Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "FLD.1.0",
+          "name": "Listening and Speaking",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "FLD.1.0.VOC",
+          "name": "Vocabulary",
+          "description": null
+        },
+        "indicator": {
+          "code": "VPA.1.0.VOC.1.1.48-66",
+          "name": "Understanding and Using Vocabulary",
+          "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories."
+        },
+        "age_band": "36-54",
+        "source_page": 8
+      }
+    },
+    {
+      "test_case_id": "CA-IND-03-DISCOVERING",
+      "expected": {
+        "standard_id": "US-CA-2021-ELD.1.0.VOC.1.1.DISC",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "ELD",
+          "name": "English Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "ELD.1.0",
+          "name": "Listening and Speaking",
+          "description": null
+        },
+        "sub_strand": {
+          "code": "VOC",
+          "name": "Vocabulary",
+          "description": null
+        },
+        "indicator": {
+          "code": "ELD.1.0.VOC.1.1.DISC",
+          "name": "Understanding Words",
+          "description": "Discovering: Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers."
+        },
+        "age_band": "36-66",
+        "source_page": 11
+      }
+    },
+    {
+      "test_case_id": "CA-IND-03-DEVELOPING",
+      "expected": {
+        "standard_id": "US-CA-2021-ELD.1.0.VOC.1.1.DEV",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "ELD",
+          "name": "English Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "ELD.1.0",
+          "name": "Listening and Speaking",
+          "description": null
+        },
+        "sub_strand": {
+          "code": "VOC",
+          "name": "Vocabulary",
+          "description": null
+        },
+        "indicator": {
+          "code": "ELD.1.0.VOC.1.1.DEV",
+          "name": "Understanding Words",
+          "description": "Developing: Demonstrate understanding of words in English for objects and actions as well as phrases encountered frequently in interactions with adults and peers."
+        },
+        "age_band": "36-66",
+        "source_page": 11
+      }
+    },
+    {
+      "test_case_id": "CA-IND-03-BROADENING",
+      "expected": {
+        "standard_id": "US-CA-2021-ELD.1.0.VOC.1.1.BRD",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "ELD",
+          "name": "English Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "ELD.1.0",
+          "name": "Listening and Speaking",
+          "description": null
+        },
+        "sub_strand": {
+          "code": "VOC",
+          "name": "Vocabulary",
+          "description": null
+        },
+        "indicator": {
+          "code": "ELD.1.0.VOC.1.1.BRD",
+          "name": "Understanding Words",
+          "description": "Broadening: Demonstrate understanding of a larger set of words in English (for example, objects and actions, personal pronouns, possessives, and descriptive terms) in interactions with adults and peers."
+        },
+        "age_band": "36-66",
+        "source_page": 11
+      }
+    },
+    {
+      "test_case_id": "CA-IND-04-DISCOVERING",
+      "expected": {
+        "standard_id": "US-CA-2021-FLD.2.0.CAP.2.6.DISC",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "FLD",
+          "name": "Foundational Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "FLD.2.0",
+          "name": "Foundational Literacy Skills",
+          "description": null
+        },
+        "sub_strand": {
+          "code": "CAP",
+          "name": "Concepts About Print",
+          "description": null
+        },
+        "indicator": {
+          "code": "FLD.2.0.CAP.2.6.DISC",
+          "name": "Understanding the Concept of Print",
+          "description": "Discovering: Interact with materials representing the letters of the English alphabet."
+        },
+        "age_band": "36-66",
+        "source_page": 15
+      }
+    },
+    {
+      "test_case_id": "CA-IND-04-DEVELOPING",
+      "expected": {
+        "standard_id": "US-CA-2021-FLD.2.0.CAP.2.6.DEV",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "FLD",
+          "name": "Foundational Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "FLD.2.0",
+          "name": "Foundational Literacy Skills",
+          "description": null
+        },
+        "sub_strand": {
+          "code": "CAP",
+          "name": "Concepts About Print",
+          "description": null
+        },
+        "indicator": {
+          "code": "FLD.2.0.CAP.2.6.DEV",
+          "name": "Understanding the Concept of Print",
+          "description": "Developing: Demonstrate awareness that they are interacting with English print."
+        },
+        "age_band": "36-66",
+        "source_page": 15
+      }
+    },
+    {
+      "test_case_id": "CA-IND-04-BROADENING",
+      "expected": {
+        "standard_id": "US-CA-2021-FLD.2.0.CAP.2.6.BRD",
+        "country": "US",
+        "state": "CA",
+        "version_year": 2021,
+        "domain": {
+          "code": "FLD",
+          "name": "Foundational Language Development",
+          "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+        },
+        "strand": {
+          "code": "FLD.2.0",
+          "name": "Foundational Literacy Skills",
+          "description": null
+        },
+        "sub_strand": {
+          "code": "CAP",
+          "name": "Concepts About Print",
+          "description": null
+        },
+        "indicator": {
+          "code": "FLD.2.0.CAP.2.6.BRD",
+          "name": "Understanding the Concept of Print",
+          "description": "Broadening: Demonstrate awareness of English print as something that can be read and has specific meaning."
+        },
+        "age_band": "36-66",
+        "source_page": 15
+      }
+    }
+  ],
+  "regression_cases": [
+    {
+      "id": "CA-EARLY-LATER-DISTINCT-IDS",
+      "description": "PARSER: each Foundation's Early/Later age-band variants must survive parsing as separate standards with distinct standard_ids and age_bands, not collapse onto one.",
+      "assertion": "for every (domain_code, indicator_code) group with >1 parser standard, the standard_ids and age_bands within the group are all distinct."
+    },
+    {
+      "id": "NO-ID-COLLISION",
+      "description": "PARSER: every standard_id in the parser output is unique.",
+      "assertion": "no two parser standards share a standard_id."
+    }
+  ]
+}

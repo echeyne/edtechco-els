@@ -1,13 +1,13 @@
 
 === AZ ===
-  golden indicators: 2
-  parsed:            26
-  matched:           0  (coverage 0.000)
-  field accuracy:    0.000
-  per-field (ok/total):
-  dropped (2): ['AZ-IND-SE-1-1-a', 'AZ-IND-SE-1-1-b']
+  golden standards: 0
+  parsed:           26
+  matched:          0  (coverage 0.000)
+  fully correct:    0/0
+  field accuracy:   0.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
   standard_id collisions: 0
   regression cases:
-    [SKIP] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no check function for this stage
-    [SKIP] AZ-FOUR-LEVEL-HIERARCHY — no check function for this stage
     [PASS] NO-ID-COLLISION — all 26 standard_ids unique

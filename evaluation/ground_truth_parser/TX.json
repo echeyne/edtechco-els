@@ -1,0 +1,140 @@
+{
+  "$schema": "../parser_golden.schema.json",
+  "state": "TX",
+  "country": "US",
+  "version_year": 2022,
+  "source_detection": "outputs/05-31-26/TX-detection.json",
+  "annotator": "Emily Cheyne",
+  "annotation_date": "05-25-26",
+  "notes": "TX uses a 4-level hierarchy: Domain (Roman numeral) → Strand (letter) → Sub-Strand (numeric) → Indicator. Indicators come in side-by-side PK3/PK4 columns — each column is a SEPARATE indicator with its own code (e.g. PK3.I.A.2 vs PK4.I.A.2).",
+  "standards": [
+    {
+      "test_case_id": "TX-IND-01-PK3",
+      "expected": {
+        "standard_id": "US-TX-2022-I-PK3.I.A.2-36-48",
+        "country": "US",
+        "state": "TX",
+        "version_year": 2022,
+        "domain": {
+          "code": "I",
+          "name": "Social and Emotional Development",
+          "description": null
+        },
+        "strand": {
+          "code": "I.A",
+          "name": "Self-Concept",
+          "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+        },
+        "sub_strand": null,
+        "indicator": {
+          "code": "PK3.I.A.2",
+          "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+          "description": null
+        },
+        "age_band": "36-48",
+        "source_page": 5
+      }
+    },
+    {
+      "test_case_id": "TX-IND-01-PK4",
+      "expected": {
+        "standard_id": "US-TX-2022-I-PK4.I.A.2-48-60",
+        "country": "US",
+        "state": "TX",
+        "version_year": 2022,
+        "domain": {
+          "code": "I",
+          "name": "Social and Emotional Development",
+          "description": null
+        },
+        "strand": {
+          "code": "I.A",
+          "name": "Self-Concept",
+          "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space."
+        },
+        "sub_strand": null,
+        "indicator": {
+          "code": "PK4.I.A.2",
+          "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+          "description": null
+        },
+        "age_band": "48-60",
+        "source_page": 5
+      }
+    },
+    {
+      "test_case_id": "TX-IND-02-PK3",
+      "expected": {
+        "standard_id": "US-TX-2022-I-PK3.I.B.2.b-36-48",
+        "country": "US",
+        "state": "TX",
+        "version_year": 2022,
+        "domain": {
+          "code": "I",
+          "name": "Social and Emotional Development",
+          "description": null
+        },
+        "strand": {
+          "code": "I.B",
+          "name": "Self-Regulation",
+          "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+        },
+        "sub_strand": {
+          "code": "I.B.2",
+          "name": "Emotional Control",
+          "description": null
+        },
+        "indicator": {
+          "code": "PK3.I.B.2.b",
+          "name": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
+          "description": null
+        },
+        "age_band": "36-48",
+        "source_page": 8
+      }
+    },
+    {
+      "test_case_id": "TX-IND-02-PK4",
+      "expected": {
+        "standard_id": "US-TX-2022-I-PK4.I.B.2.b-48-60",
+        "country": "US",
+        "state": "TX",
+        "version_year": 2022,
+        "domain": {
+          "code": "I",
+          "name": "Social and Emotional Development",
+          "description": null
+        },
+        "strand": {
+          "code": "I.B",
+          "name": "Self-Regulation",
+          "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement."
+        },
+        "sub_strand": {
+          "code": "I.B.2",
+          "name": "Emotional Control",
+          "description": null
+        },
+        "indicator": {
+          "code": "PK4.I.B.2.b",
+          "name": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
+          "description": null
+        },
+        "age_band": "48-60",
+        "source_page": 8
+      }
+    }
+  ],
+  "regression_cases": [
+    {
+      "id": "TX-PK3-PK4-DISTINCT-IDS",
+      "description": "PARSER: PK3/PK4 variants of an outcome must survive parsing as separate standards with distinct standard_ids and age_bands, not collapse onto one.",
+      "assertion": "for every (domain_code, indicator_code) group with >1 parser standard, the standard_ids and age_bands within the group are all distinct."
+    },
+    {
+      "id": "NO-ID-COLLISION",
+      "description": "PARSER: every standard_id in the parser output is unique.",
+      "assertion": "no two parser standards share a standard_id."
+    }
+  ]
+}

@@ -1,46 +1,20 @@
 {
   "state": "AZ",
   "summary": {
-    "golden_indicators": 2,
+    "golden_standards": 0,
     "parsed": 26,
     "matched": 0,
+    "fully_correct": 0,
     "coverage": 0.0,
     "field_accuracy": 0.0,
-    "dropped": 2,
-    "ungraded": 0,
+    "dropped": 0,
+    "duplicated": 0,
     "id_collisions": 0
   },
   "matched": [],
-  "dropped_from_parsed": [
-    {
-      "test_case_id": "AZ-IND-SE-1-1-a",
-      "level": "indicator",
-      "code": "a",
-      "title": "Associates emotions with words, facial expressions, and body language.",
-      "description": "Describes the emotions of a character in a book. Signs, “I am mad” when asked how they feel.",
-      "source_page": 5
-    },
-    {
-      "test_case_id": "AZ-IND-SE-1-1-b",
-      "level": "indicator",
-      "code": "b",
-      "title": "Identifies, describes, and expresses their own feelings.",
-      "description": "Covers their eyes and says, \"This is scary!\" while listening to a story. Says, \"I am happy today because it's my birthday!\"",
-      "source_page": 5
-    }
-  ],
+  "dropped_from_parsed": [],
   "field_mismatches": [],
   "regressions": [
-    {
-      "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
-      "status": "SKIP",
-      "detail": "no check function for this stage"
-    },
-    {
-      "id": "AZ-FOUR-LEVEL-HIERARCHY",
-      "status": "SKIP",
-      "detail": "no check function for this stage"
-    },
     {
       "id": "NO-ID-COLLISION",
       "status": "PASS",

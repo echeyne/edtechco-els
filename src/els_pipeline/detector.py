@@ -208,7 +208,7 @@ EXTRACTION RULES:
 3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
    - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
 4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title (e.g. "Physical Development" → "PHD"). Use the SAME code every time the same element appears.
-5. `confidence`: 0.95+ if the depth map clearly applies; 0.80–0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
+5. `confidence`: 0.95+ if the depth map clearly applies; 0.80-0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
 6. `source_page`: page number from the [Page N] marker on that line.
 7. `source_text`: the exact line(s) from the chunk you used. Copy verbatim.
 

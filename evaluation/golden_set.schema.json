@@ -133,28 +133,6 @@
               "string"
             ],
             "description": "Page number, or 'TODO' while annotating."
-          },
-          "parser_expected": {
-            "type": "object",
-            "description": "Authoritative expected PARSER output for this element (only meaningful on indicators). The detector never produces these; parentage, full hierarchical codes, month-normalized age bands, and standard_id assembly are parser.py's job. Populated from a human-verified parser run (see evaluation/_bootstrap_parser_expected.py) and graded for exact equality by eval_parser.py. The detector grader ignores this block.",
-            "properties": {
-              "domain_code": { "type": ["string", "null"] },
-              "domain_name": { "type": ["string", "null"] },
-              "strand_code": { "type": ["string", "null"] },
-              "strand_name": { "type": ["string", "null"] },
-              "sub_strand_code": { "type": ["string", "null"] },
-              "sub_strand_name": { "type": ["string", "null"] },
-              "indicator_code": { "type": ["string", "null"] },
-              "indicator_name": { "type": ["string", "null"] },
-              "age_band_months": {
-                "type": ["string", "null"],
-                "description": "Parser's month-normalized age band, e.g. '36-54' (Early), '36-66' (Later), '36-48' (PK3), '48-60' (PK4). Null when the indicator carries no age band."
-              },
-              "standard_id": {
-                "type": ["string", "null"],
-                "description": "Expected deterministic id: COUNTRY-STATE-YEAR-DOMAINCODE-INDICATORCODE[-AGEBANDMONTHS]."
-              }
-            }
           }
         }
       }

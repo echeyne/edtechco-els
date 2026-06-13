@@ -384,7 +384,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "VPA.VOC",
+      "code": "VOC",
       "name": "Vocabulary",
       "description": null
     },
@@ -413,7 +413,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "VPA.VOC",
+      "code": "VOC",
       "name": "Vocabulary",
       "description": null
     },
@@ -442,7 +442,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
@@ -471,7 +471,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
@@ -616,7 +616,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "FLD.2.0.PA",
+      "code": "PA",
       "name": "Phonological Awareness",
       "description": null
     },
@@ -645,7 +645,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "FLD.2.0.PA",
+      "code": "PA",
       "name": "Phonological Awareness",
       "description": null
     },
@@ -674,7 +674,7 @@
       "description": null
     },
     "sub_strand": {
-      "code": "FLD.2.0.PA",
+      "code": "PA",
       "name": "Phonological Awareness",
       "description": null
     },
@@ -817,27 +817,6 @@
     "source_text": "Science"
   },
   {
-    "standard_id": "US-CA-2008-PHD-PHD",
-    "country": "US",
-    "state": "CA",
-    "version_year": 2008,
-    "domain": {
-      "code": "PHD",
-      "name": "Physical Development",
-      "description": null
-    },
-    "strand": null,
-    "sub_strand": null,
-    "indicator": {
-      "code": "PHD",
-      "name": "Physical Development",
-      "description": null
-    },
-    "age_band": "",
-    "source_page": 3,
-    "source_text": "Physical Development"
-  },
-  {
     "standard_id": "US-CA-2008-HLT-HLT",
     "country": "US",
     "state": "CA",
@@ -859,7 +838,7 @@
     "source_text": "Health"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.VOC.1.1",
+    "standard_id": "US-CA-2008-VPA-VPA.1.1",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -870,12 +849,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.VOC",
+      "code": "VOC",
       "name": "Vocabulary",
       "description": null
     },
     "indicator": {
-      "code": "VPA.VOC.1.1",
+      "code": "VPA.1.1",
       "name": "Understanding and Using Vocabulary",
       "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories."
     },
@@ -884,7 +863,7 @@
     "source_text": "Foundation 1.1 Understanding and Using Vocabulary"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.VOC.1.2",
+    "standard_id": "US-CA-2008-VPA-VPA.1.2",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -895,12 +874,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.VOC",
+      "code": "VOC",
       "name": "Vocabulary",
       "description": null
     },
     "indicator": {
-      "code": "VPA.VOC.1.2",
+      "code": "VPA.1.2",
       "name": "Understanding and Using Words for Categories",
       "description": "Understand and use commonly experienced vocabulary to describe categories and the relationships within them."
     },
@@ -909,7 +888,7 @@
     "source_text": "Foundation 1.2 Understanding and Using Words for Categories"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.VOC.1.3",
+    "standard_id": "US-CA-2008-VPA-VPA.1.3",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -920,12 +899,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.VOC",
+      "code": "VOC",
       "name": "Vocabulary",
       "description": null
     },
     "indicator": {
-      "code": "VPA.VOC.1.3",
+      "code": "VPA.1.3",
       "name": "Understanding and Using Size and Location Words",
       "description": "Understand and use words to describe the size and location of objects (such as \"tiny\" and \"on\"), including simple comparisons (such as \"bigger\")."
     },
@@ -934,7 +913,7 @@
     "source_text": "Foundation 1.3 Understanding and Using Size and Location Words"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.GRM.1.4",
+    "standard_id": "US-CA-2008-VPA-VPA.1.4",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -945,12 +924,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
     "indicator": {
-      "code": "VPA.GRM.1.4",
+      "code": "VPA.1.4",
       "name": "Using Grammatical Features and Sentence Structure",
       "description": "Use common word forms and sentence forms to express thoughts and ideas."
     },
@@ -959,7 +938,7 @@
     "source_text": "Foundation 1.4 Using Grammatical Features and Sentence Structure*"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.GRM.1.5",
+    "standard_id": "US-CA-2008-VPA-VPA.1.5",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -970,12 +949,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
     "indicator": {
-      "code": "VPA.GRM.1.5",
+      "code": "VPA.1.5",
       "name": "Asking Questions",
       "description": "Use questions to seek information and to clarify and confirm understanding."
     },
@@ -984,7 +963,7 @@
     "source_text": "Foundation 1.5 Asking Questions"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.GRM.1.6",
+    "standard_id": "US-CA-2008-VPA-VPA.1.6",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -995,12 +974,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
     "indicator": {
-      "code": "VPA.GRM.1.6",
+      "code": "VPA.1.6",
       "name": "Constructing Narratives",
       "description": "Use language to construct real or fictional short narratives."
     },
@@ -1009,7 +988,7 @@
     "source_text": "Foundation 1.6 Constructing Narratives"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.GRM.1.7",
+    "standard_id": "US-CA-2008-VPA-VPA.1.7",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -1020,12 +999,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
     "indicator": {
-      "code": "VPA.GRM.1.7",
+      "code": "VPA.1.7",
       "name": "Sharing Explanations and Opinions",
       "description": "Share descriptions, opinions, and explanations."
     },
@@ -1034,7 +1013,7 @@
     "source_text": "Foundation 1.7 Sharing Explanations and Opinions"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.GRM.1.8",
+    "standard_id": "US-CA-2008-VPA-VPA.1.8",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -1045,12 +1024,12 @@
     },
     "strand": null,
     "sub_strand": {
-      "code": "VPA.GRM",
+      "code": "GRM",
       "name": "Grammar",
       "description": null
     },
     "indicator": {
-      "code": "VPA.GRM.1.8",
+      "code": "VPA.1.8",
       "name": "Participating in Conversations",
       "description": "Participate in back-and-forth conversations with adults and peers. Respond on topic for at least one turn in a conversation."
     },
@@ -1059,7 +1038,7 @@
     "source_text": "Foundation 1.8 Participating in Conversations"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.2.0.PA.2.1",
+    "standard_id": "US-CA-2008-VPA-VPA.2.1",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -1074,12 +1053,12 @@
       "description": null
     },
     "sub_strand": {
-      "code": "FLD.2.0.PA",
+      "code": "PA",
       "name": "Phonological Awareness",
       "description": null
     },
     "indicator": {
-      "code": "VPA.2.0.PA.2.1",
+      "code": "VPA.2.1",
       "name": "Isolating Initial Sounds",
       "description": "Match words that have the same first sound in speech, with adult support or the support of pictures or objects."
     },
@@ -1088,7 +1067,7 @@
     "source_text": "Foundation 2.1 Isolating Initial Sounds"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.2.0.PA.2.2",
+    "standard_id": "US-CA-2008-VPA-VPA.2.2",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -1103,12 +1082,12 @@
       "description": null
     },
     "sub_strand": {
-      "code": "FLD.2.0.PA",
+      "code": "PA",
       "name": "Phonological Awareness",
       "description": null
     },
     "indicator": {
-      "code": "VPA.2.0.PA.2.2",
+      "code": "VPA.2.2",
       "name": "Recognizing and Blending Sounds",
       "description": "When presented with two single-syllable words (such as \"sand\" and \"box\"), blend them into a compound word in speech with adult support or the support of pictures or objects."
     },
@@ -1117,7 +1096,7 @@
     "source_text": "Foundation 2.2 Recognizing and Blending Sounds*"
   },
   {
-    "standard_id": "US-CA-2008-VPA-VPA.2.0.PA.2.3",
+    "standard_id": "US-CA-2008-VPA-VPA.2.3",
     "country": "US",
     "state": "CA",
     "version_year": 2008,
@@ -1132,12 +1111,12 @@
       "description": null
     },
     "sub_strand": {
-      "code": "FLD.2.0.PA",
+      "code": "PA",
       "name": "Phonological Awareness",
       "description": null
     },
     "indicator": {
-      "code": "VPA.2.0.PA.2.3",
+      "code": "VPA.2.3",
       "name": "Participating in Rhyming and Wordplay",
       "description": "Recognize or participate in familiar rhymes or songs."
     },

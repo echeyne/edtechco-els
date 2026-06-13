@@ -2,20 +2,26 @@
 
 Runs the parser (`parse_hierarchy`) against one or more frozen detector outputs
 (`{STATE}-detection.json`) and grades the resulting `NormalizedStandard`s
-against each golden element's `parser_expected` block. The headline goal is
-**consistency + correctness of codes and names across runs** — i.e. the parser
-isn't emitting random hierarchy codes/names each time.
+against a hand-verified parser golden set (`evaluation/ground_truth_parser/`).
+
+Unlike the detector golden (a flat element list), the parser produces fully
+resolved, NESTED `NormalizedStandard` objects, so each golden entry mirrors that
+whole object and we grade EVERY field of it: standard_id, country/state/
+version_year, the nested domain/strand/sub_strand/indicator (code + name +
+description each), age_band, source_page. (source_text is excluded — it's
+verbatim multi-line prose that's impractical to hand-author.)
+
+The headline goal is consistency + correctness across runs — the parser isn't
+emitting random hierarchy codes/names each time.
 
 Metrics per state:
-  - Coverage: how many annotated golden indicators the parser produced
-    (recall); which were dropped; which matched more than one standard.
-  - Field accuracy: per-field exact-match vs `parser_expected` for
-    domain/strand/sub_strand/indicator code+name, age_band_months, standard_id.
+  - Coverage: how many golden standards the parser produced (recall) / dropped.
+  - Field accuracy: per-field exact-match across the entire NormalizedStandard,
+    aggregated and broken out per dotted field path (e.g. sub_strand.code).
   - standard_id uniqueness across the whole output (collision detector).
-  - Targeted regression cases via `regression_checks.lookup_parser`
-    (check_parser_<id>); a case with no parser check is SKIPped.
+  - Parser regression cases via `regression_checks.lookup_parser`.
   - Optional N-run stability: rerun the parser N times on the same frozen
-    detection input and report the per-indicator field-disagreement rate.
+    detection input and report the per-standard field-disagreement rate.
 
 Parser input is a FROZEN detection.json fixture, so runs are deterministic
 except for the parser LLM itself; the parser output is cached in
@@ -40,7 +46,7 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Callable, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from evaluation.eval_common import (
     CACHE_DIR,
@@ -54,29 +60,52 @@ from evaluation import regression_checks
 
 logger = logging.getLogger("eval_parser")
 
-
-# Fields graded against parser_expected, paired with how to read them from a
-# parser output indicator (serialized NormalizedStandard).
-def _code(level: Optional[dict]) -> Optional[str]:
-    return (level or {}).get("code") if isinstance(level, dict) else None
-
-
-def _name(level: Optional[dict]) -> Optional[str]:
-    return (level or {}).get("name") if isinstance(level, dict) else None
-
-
-GRADED_FIELDS: List[Tuple[str, Callable[[dict], Optional[str]]]] = [
-    ("domain_code", lambda i: _code(i.get("domain"))),
-    ("domain_name", lambda i: _name(i.get("domain"))),
-    ("strand_code", lambda i: _code(i.get("strand"))),
-    ("strand_name", lambda i: _name(i.get("strand"))),
-    ("sub_strand_code", lambda i: _code(i.get("sub_strand"))),
-    ("sub_strand_name", lambda i: _name(i.get("sub_strand"))),
-    ("indicator_code", lambda i: _code(i.get("indicator"))),
-    ("indicator_name", lambda i: _name(i.get("indicator"))),
-    ("age_band_months", lambda i: i.get("age_band")),
-    ("standard_id", lambda i: i.get("standard_id")),
+# Every field of NormalizedStandard we grade, expressed as dotted paths. Nested
+# HierarchyLevel objects expand to <level>.<code|name|description>. This is the
+# whole object the parser returns (minus nothing) — change here if the model
+# gains/loses a field.
+# NOTE: source_text is deliberately NOT graded — it's verbatim multi-line prose
+# that's impractical to hand-author in the golden, so it's neither expected nor
+# compared.
+SCALAR_FIELDS = [
+    "standard_id", "country", "state", "version_year",
+    "age_band", "source_page",
 ]
+LEVELS = ["domain", "strand", "sub_strand", "indicator"]
+LEVEL_SUBFIELDS = ["code", "name", "description"]
+
+
+def _all_field_paths() -> List[str]:
+    paths = list(SCALAR_FIELDS)
+    for lvl in LEVELS:
+        for sub in LEVEL_SUBFIELDS:
+            paths.append(f"{lvl}.{sub}")
+    return paths
+
+
+FIELD_PATHS = _all_field_paths()
+
+
+def _get_path(obj: dict, path: str) -> Any:
+    """Read a dotted path from a standard dict. A null nested level (e.g. no
+    sub_strand) yields None for all its subfields."""
+    if "." not in path:
+        return obj.get(path)
+    head, sub = path.split(".", 1)
+    level = obj.get(head)
+    if not isinstance(level, dict):
+        return None
+    return level.get(sub)
+
+
+def _norm_val(v: Any) -> Any:
+    """Normalize a field value for comparison: treat ''/None alike, and compare
+    strings whitespace-insensitively so newline/spacing quirks don't dominate."""
+    if v is None:
+        return None
+    if isinstance(v, str):
+        return " ".join(v.split()) or None
+    return v
 
 
 # ---------- parser runner with cache ----------
@@ -84,13 +113,15 @@ GRADED_FIELDS: List[Tuple[str, Callable[[dict], Optional[str]]]] = [
 def run_parser_cached(
     state: str,
     detection_path: Path,
-    golden: dict,
+    country: str,
+    version_year: int,
     default_age_band: str,
     use_cache: bool = True,
     cache_suffix: str = "",
 ) -> List[dict]:
     """Run the parser once on a frozen detection.json. Cache by
-    (state, detection-hash, suffix). Returns ParseResult.indicators."""
+    (state, detection-hash, suffix). Returns ParseResult.indicators (the
+    serialized NormalizedStandard list)."""
     detection = json.loads(detection_path.read_text())
     elements_data = detection.get("elements", detection if isinstance(detection, list) else [])
 
@@ -104,9 +135,9 @@ def run_parser_cached(
     logger.info(f"  [parser] running on {len(elements)} detected elements…")
     result = parse_hierarchy(
         elements=elements,
-        country=golden.get("country", "US"),
-        state=golden.get("state", state),
-        version_year=golden.get("version_year", 0),
+        country=country,
+        state=state,
+        version_year=version_year,
         age_band=default_age_band,
     )
     indicators = result.indicators
@@ -116,31 +147,21 @@ def run_parser_cached(
 
 # ---------- matching ----------
 
-def _desc_overlap(a: Optional[str], b: Optional[str]) -> float:
-    sa, sb = set(_norm(a).split()), set(_norm(b).split())
-    if not sa or not sb:
-        return 0.0
-    return len(sa & sb) / len(sa | sb)
+def _indicator_name(std: dict) -> str:
+    ind = std.get("indicator")
+    return _norm((ind or {}).get("name") if isinstance(ind, dict) else None)
 
 
-def _index_by_name(indicators: List[dict]) -> Dict[str, List[dict]]:
-    idx: Dict[str, List[dict]] = defaultdict(list)
-    for ind in indicators:
-        idx[_norm(_name(ind.get("indicator")))].append(ind)
+def _match_key(std: dict) -> Tuple[str, Optional[str]]:
+    """Identity of a standard for matching: (normalized indicator name, age_band)."""
+    return (_indicator_name(std), std.get("age_band"))
+
+
+def _index_standards(standards: List[dict]) -> Dict[Tuple[str, Optional[str]], List[dict]]:
+    idx: Dict[Tuple[str, Optional[str]], List[dict]] = defaultdict(list)
+    for s in standards:
+        idx[_match_key(s)].append(s)
     return idx
-
-
-def _match_one(golden_ind: dict, by_name: Dict[str, List[dict]], matched_ids: set) -> Optional[dict]:
-    """Match a golden indicator to a parser output indicator by normalized name,
-    disambiguating same-named age-band variants by description overlap."""
-    title = _norm(golden_ind.get("title"))
-    cands = [c for c in by_name.get(title, []) if id(c) not in matched_ids]
-    if not cands:
-        return None
-    if len(cands) == 1:
-        return cands[0]
-    gdesc = golden_ind.get("description") or ""
-    return max(cands, key=lambda c: _desc_overlap(gdesc, (c.get("indicator") or {}).get("description")))
 
 
 # ---------- metrics ----------
@@ -148,23 +169,23 @@ def _match_one(golden_ind: dict, by_name: Dict[str, List[dict]], matched_ids: se
 @dataclass
 class ParserStateReport:
     state: str
-    n_golden_indicators: int = 0
+    n_golden: int = 0
     n_parsed: int = 0
     matched: int = 0
 
-    dropped: List[str] = field(default_factory=list)            # golden test_case_ids
-    ungraded: List[str] = field(default_factory=list)           # matched but no parser_expected
-    id_collisions: List[str] = field(default_factory=list)      # duplicate standard_ids
+    dropped: List[str] = field(default_factory=list)        # golden test_case_ids
+    duplicated: List[str] = field(default_factory=list)     # golden id matching >1 standard
+    id_collisions: List[str] = field(default_factory=list)  # duplicate standard_ids in output
 
-    # field -> {"ok": n, "total": n}
+    # dotted field path -> {"ok": n, "total": n}
     field_stats: Dict[str, Dict[str, int]] = field(
         default_factory=lambda: defaultdict(lambda: {"ok": 0, "total": 0})
     )
-    mismatches: List[dict] = field(default_factory=list)        # {test_case_id, field, expected, got}
+    mismatches: List[dict] = field(default_factory=list)    # {test_case_id, field, expected, got}
 
     regressions: List[Tuple[str, str, str]] = field(default_factory=list)
 
-    matched_pairs: List[Tuple[dict, dict]] = field(default_factory=list)  # (golden, parsed)
+    matched_pairs: List[Tuple[dict, dict]] = field(default_factory=list)  # (golden_entry, parsed)
     dropped_full: List[dict] = field(default_factory=list)
 
     stability_runs: int = 0
@@ -173,7 +194,7 @@ class ParserStateReport:
 
     @property
     def coverage(self) -> float:
-        return self.matched / self.n_golden_indicators if self.n_golden_indicators else 0.0
+        return self.matched / self.n_golden if self.n_golden else 0.0
 
     @property
     def field_accuracy(self) -> float:
@@ -181,50 +202,55 @@ class ParserStateReport:
         total = sum(s["total"] for s in self.field_stats.values())
         return ok / total if total else 0.0
 
+    @property
+    def standards_all_fields_ok(self) -> int:
+        """Matched standards with zero field mismatches."""
+        bad = {m["test_case_id"] for m in self.mismatches}
+        return sum(1 for g, _ in self.matched_pairs if g.get("test_case_id") not in bad)
 
-def grade_parser(golden: dict, indicators: List[dict]) -> ParserStateReport:
+
+def grade_parser(golden: dict, standards: List[dict]) -> ParserStateReport:
     rep = ParserStateReport(state=golden.get("state", ""))
-    golden_inds = [g for g in golden.get("elements", []) if g.get("level") == "indicator"]
-    rep.n_golden_indicators = len(golden_inds)
-    rep.n_parsed = len(indicators)
+    golden_stds = golden.get("standards", [])
+    rep.n_golden = len(golden_stds)
+    rep.n_parsed = len(standards)
 
-    by_name = _index_by_name(indicators)
+    index = _index_standards(standards)
     matched_ids: set = set()
 
-    for g in golden_inds:
+    for g in golden_stds:
         gid = g.get("test_case_id", "?")
-        d = _match_one(g, by_name, matched_ids)
-        if d is None:
+        expected = g.get("expected") or {}
+        key = (_norm((expected.get("indicator") or {}).get("name")), expected.get("age_band"))
+        cands = [c for c in index.get(key, []) if id(c) not in matched_ids]
+
+        if not cands:
             rep.dropped.append(gid)
             rep.dropped_full.append(g)
             continue
-
+        if len(cands) > 1:
+            rep.duplicated.append(gid)
+        d = cands[0]
         matched_ids.add(id(d))
         rep.matched += 1
         rep.matched_pairs.append((g, d))
 
-        expected = g.get("parser_expected")
-        if not expected:
-            rep.ungraded.append(gid)
-            continue
-
-        for fname, getter in GRADED_FIELDS:
-            if fname not in expected:
-                continue
-            exp = expected.get(fname)
-            got = getter(d)
-            rep.field_stats[fname]["total"] += 1
-            if (exp or None) == (got or None):
-                rep.field_stats[fname]["ok"] += 1
+        # Grade every field of the NormalizedStandard.
+        for path in FIELD_PATHS:
+            exp = _norm_val(_get_path(expected, path))
+            got = _norm_val(_get_path(d, path))
+            rep.field_stats[path]["total"] += 1
+            if exp == got:
+                rep.field_stats[path]["ok"] += 1
             else:
                 rep.mismatches.append(
-                    {"test_case_id": gid, "field": fname, "expected": exp, "got": got}
+                    {"test_case_id": gid, "field": path, "expected": exp, "got": got}
                 )
 
     # Global standard_id uniqueness across the whole parser output.
     seen: set = set()
-    for ind in indicators:
-        sid = ind.get("standard_id")
+    for s in standards:
+        sid = s.get("standard_id")
         if sid in seen:
             rep.id_collisions.append(sid)
         seen.add(sid)
@@ -237,33 +263,25 @@ def grade_parser(golden: dict, indicators: List[dict]) -> ParserStateReport:
 def measure_stability(
     state: str,
     detection_path: Path,
-    golden: dict,
+    country: str,
+    version_year: int,
     default_age_band: str,
     runs: int,
 ) -> Tuple[float, float]:
     """Rerun the parser `runs` times on the same frozen detection input; report
-    the per-indicator field-disagreement rate and output-size stdev. An indicator
-    identity is (normalized name, age_band); the compared signature is the tuple
-    of hierarchy codes + names + standard_id."""
+    the per-standard field-disagreement rate and output-size stdev. A standard's
+    identity is (indicator name, age_band); the compared signature is every
+    graded field."""
     import statistics
 
-    def _sig(ind: dict) -> Tuple:
-        return (
-            _code(ind.get("domain")), _name(ind.get("domain")),
-            _code(ind.get("strand")), _name(ind.get("strand")),
-            _code(ind.get("sub_strand")), _name(ind.get("sub_strand")),
-            _code(ind.get("indicator")), _name(ind.get("indicator")),
-            ind.get("standard_id"),
-        )
-
-    def _key(ind: dict) -> Tuple:
-        return (_norm(_name(ind.get("indicator"))), ind.get("age_band"))
+    def _sig(s: dict) -> Tuple:
+        return tuple(_norm_val(_get_path(s, p)) for p in FIELD_PATHS)
 
     outputs: List[List[dict]] = []
     for i in range(runs):
         outputs.append(
             run_parser_cached(
-                state, detection_path, golden, default_age_band,
+                state, detection_path, country, version_year, default_age_band,
                 use_cache=False, cache_suffix=f"stab-{i}",
             )
         )
@@ -271,10 +289,10 @@ def measure_stability(
     sizes = [len(o) for o in outputs]
     size_stdev = statistics.pstdev(sizes) if len(sizes) > 1 else 0.0
 
-    base = {_key(e): _sig(e) for e in outputs[0]}
+    base = {_match_key(s): _sig(s) for s in outputs[0]}
     disagreements = compared = 0
     for other in outputs[1:]:
-        omap = {_key(e): _sig(e) for e in other}
+        omap = {_match_key(s): _sig(s) for s in other}
         for k, sig in base.items():
             if k in omap:
                 compared += 1
@@ -296,46 +314,54 @@ def evaluate_state(
 ) -> Tuple[ParserStateReport, List[dict]]:
     logger.info(f"== {state} ==")
     golden = json.loads(golden_path.read_text())
+    country = golden.get("country", "US")
+    version_year = golden.get("version_year", 0)
 
-    indicators = run_parser_cached(
-        state, detection_path, golden, default_age_band, use_cache=use_cache
+    standards = run_parser_cached(
+        state, detection_path, country, version_year, default_age_band, use_cache=use_cache
     )
-    rep = grade_parser(golden, indicators)
+    rep = grade_parser(golden, standards)
     rep.state = state
-    rep.regressions = run_regressions(golden, indicators, regression_checks.lookup_parser)
+    rep.regressions = run_regressions(golden, standards, regression_checks.lookup_parser)
 
     if stability_runs > 1:
         rep.stability_runs = stability_runs
         rep.stability_disagreement_rate, rep.stability_size_stdev = measure_stability(
-            state, detection_path, golden, default_age_band, stability_runs
+            state, detection_path, country, version_year, default_age_band, stability_runs
         )
 
-    return rep, indicators
+    return rep, standards
 
 
 def render_report(rep: ParserStateReport) -> str:
     out = []
     out.append(f"\n=== {rep.state} ===")
-    out.append(f"  golden indicators: {rep.n_golden_indicators}")
-    out.append(f"  parsed:            {rep.n_parsed}")
-    out.append(f"  matched:           {rep.matched}  (coverage {rep.coverage:.3f})")
-    out.append(f"  field accuracy:    {rep.field_accuracy:.3f}")
+    out.append(f"  golden standards: {rep.n_golden}")
+    out.append(f"  parsed:           {rep.n_parsed}")
+    out.append(f"  matched:          {rep.matched}  (coverage {rep.coverage:.3f})")
+    out.append(f"  fully correct:    {rep.standards_all_fields_ok}/{rep.matched}")
+    out.append(f"  field accuracy:   {rep.field_accuracy:.3f}")
 
-    out.append("  per-field (ok/total):")
-    for fname, _ in GRADED_FIELDS:
-        s = rep.field_stats.get(fname)
+    out.append("  per-field (ok/total) — only fields with a mismatch shown:")
+    any_mismatch = False
+    for path in FIELD_PATHS:
+        s = rep.field_stats.get(path)
         if not s or s["total"] == 0:
             continue
+        if s["ok"] == s["total"]:
+            continue
+        any_mismatch = True
         acc = s["ok"] / s["total"]
-        flag = "" if s["ok"] == s["total"] else "  ← MISMATCH"
-        out.append(f"    {fname:<18} {s['ok']:>3}/{s['total']:<3} ({acc:.2f}){flag}")
+        out.append(f"    {path:<22} {s['ok']:>3}/{s['total']:<3} ({acc:.2f})  ← MISMATCH")
+    if not any_mismatch:
+        out.append("    (all graded fields matched)")
 
     if rep.dropped:
         out.append(f"  dropped ({len(rep.dropped)}): {rep.dropped[:10]}{'…' if len(rep.dropped) > 10 else ''}")
     else:
         out.append("  dropped: 0")
-    if rep.ungraded:
-        out.append(f"  ungraded — no parser_expected ({len(rep.ungraded)}): {rep.ungraded[:10]}{'…' if len(rep.ungraded) > 10 else ''}")
+    if rep.duplicated:
+        out.append(f"  duplicated ({len(rep.duplicated)}): {rep.duplicated[:10]}")
     if rep.id_collisions:
         uniq = sorted(set(rep.id_collisions))
         out.append(f"  standard_id collisions ({len(rep.id_collisions)}): {uniq[:5]}{'…' if len(uniq) > 5 else ''}")
@@ -344,10 +370,10 @@ def render_report(rep: ParserStateReport) -> str:
 
     if rep.mismatches:
         out.append(f"  field mismatches ({len(rep.mismatches)}):")
-        for m in rep.mismatches[:12]:
+        for m in rep.mismatches[:15]:
             out.append(f"    {m['test_case_id']} {m['field']}: expected {m['expected']!r} got {m['got']!r}")
-        if len(rep.mismatches) > 12:
-            out.append(f"    … and {len(rep.mismatches) - 12} more")
+        if len(rep.mismatches) > 15:
+            out.append(f"    … and {len(rep.mismatches) - 15} more")
 
     out.append("  regression cases:")
     for cid, status, detail in rep.regressions:
@@ -361,25 +387,26 @@ def render_report(rep: ParserStateReport) -> str:
     return "\n".join(out)
 
 
-def write_review_dir(rep: ParserStateReport, indicators: List[dict], output_dir: Path) -> None:
+def write_review_dir(rep: ParserStateReport, standards: List[dict], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     state = rep.state
 
     (output_dir / f"{state}-report.txt").write_text(render_report(rep))
     (output_dir / f"{state}-parsed.json").write_text(
-        json.dumps(indicators, indent=2, default=str, ensure_ascii=False)
+        json.dumps(standards, indent=2, default=str, ensure_ascii=False)
     )
 
     review = {
         "state": state,
         "summary": {
-            "golden_indicators": rep.n_golden_indicators,
+            "golden_standards": rep.n_golden,
             "parsed": rep.n_parsed,
             "matched": rep.matched,
+            "fully_correct": rep.standards_all_fields_ok,
             "coverage": round(rep.coverage, 4),
             "field_accuracy": round(rep.field_accuracy, 4),
             "dropped": len(rep.dropped),
-            "ungraded": len(rep.ungraded),
+            "duplicated": len(rep.duplicated),
             "id_collisions": len(rep.id_collisions),
         },
         "matched": [{"golden": g, "parsed": d} for g, d in rep.matched_pairs],
@@ -399,7 +426,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--state", action="append", help="Limit to specific state(s); repeatable")
     parser.add_argument("--detection-dir", default="outputs", help="Directory holding {STATE}-detection.json files (parser input)")
-    parser.add_argument("--golden-dir", default="evaluation/ground_truth", help="Directory holding {STATE}.json golden sets")
+    parser.add_argument("--golden-dir", default="evaluation/ground_truth_parser", help="Directory holding {STATE}.json parser golden sets")
     parser.add_argument("--default-age-band", default="", help="Fallback age_band passed to parse_hierarchy when the LLM returns null")
     parser.add_argument("--no-cache", action="store_true", help="Disable parser-output cache")
     parser.add_argument("--stability-runs", type=int, default=1, help="Re-run the parser this many times to measure stability (>=2 enables it)")
@@ -422,7 +449,7 @@ def main() -> int:
             logger.warning(f"-- {st}: skipped (missing {det_path if not det_path.exists() else gold_path})")
             continue
         try:
-            rep, indicators = evaluate_state(
+            rep, standards = evaluate_state(
                 st, det_path, gold_path,
                 default_age_band=args.default_age_band,
                 use_cache=not args.no_cache,
@@ -430,7 +457,7 @@ def main() -> int:
             )
             reports.append(rep)
             if output_dir:
-                write_review_dir(rep, indicators, output_dir / st)
+                write_review_dir(rep, standards, output_dir / st)
         except Exception as e:
             logger.exception(f"-- {st}: ERROR — {e}")
 
@@ -448,10 +475,11 @@ def main() -> int:
                 "coverage": r.coverage,
                 "field_accuracy": r.field_accuracy,
                 "matched": r.matched,
-                "n_golden_indicators": r.n_golden_indicators,
+                "fully_correct": r.standards_all_fields_ok,
+                "n_golden": r.n_golden,
                 "n_parsed": r.n_parsed,
                 "dropped": r.dropped,
-                "ungraded": r.ungraded,
+                "duplicated": r.duplicated,
                 "id_collisions": sorted(set(r.id_collisions)),
                 "field_stats": {k: dict(v) for k, v in r.field_stats.items()},
                 "mismatches": r.mismatches,

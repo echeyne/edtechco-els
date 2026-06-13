@@ -5,7 +5,7 @@ a side-by-side comparison table for the paper.
 
 Usage:
     python evaluation/compare_approaches.py \
-        --ground-truth evaluation/ground_truth/TX.json \
+        --ground-truth evaluation/ground_truth_detector/TX.json \
         --llm-output path/to/llm_detection.json \
         --baseline-output path/to/baseline_detection.json
 """

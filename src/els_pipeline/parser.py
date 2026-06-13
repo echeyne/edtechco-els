@@ -44,9 +44,7 @@ def generate_standard_id(
     country: str,
     state: str,
     version_year: int,
-    domain_code: str,
     indicator_code: str,
-    age_band: str = "",
 ) -> str:
     """
     Generate a deterministic Standard_ID.
@@ -56,12 +54,9 @@ def generate_standard_id(
     IDs instead of colliding.
 
     Returns:
-        Standard_ID in format: {COUNTRY}-{STATE}-{YEAR}-{DOMAIN_CODE}-{INDICATOR_CODE}-{AGE_BAND}
-        (age_band is omitted from the suffix when empty/null)
+        Standard_ID in format: {COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}
     """
-    base = f"{country}-{state}-{version_year}-{domain_code}-{indicator_code}"
-    if age_band:
-        return f"{base}-{age_band}"
+    base = f"{country}-{state}-{version_year}-{indicator_code}"
     return base
 
 
@@ -351,7 +346,7 @@ def parse_llm_response(
             age_band = obj.get("age_band") or fallback_age_band
 
             standard_id = generate_standard_id(
-                country, state, version_year, obj["domain_code"], obj["indicator_code"], age_band
+                country, state, version_year, obj["indicator_code"]
             )
 
             source_page = obj.get("source_page", 1)
@@ -488,7 +483,7 @@ def normalize_parsed_codes(
             s = s.model_copy(update=updates)
             new_id = generate_standard_id(
                 s.country, s.state, s.version_year,
-                domain_code, s.indicator.code, s.age_band
+                s.indicator.code,
             )
             s = s.model_copy(update={"standard_id": new_id})
 

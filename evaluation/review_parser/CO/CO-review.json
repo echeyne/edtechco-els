@@ -1,35 +1,44 @@
 {
   "state": "CO",
   "summary": {
-    "golden_indicators": 3,
+    "golden_standards": 3,
     "parsed": 45,
     "matched": 3,
+    "fully_correct": 3,
     "coverage": 1.0,
     "field_accuracy": 1.0,
     "dropped": 0,
-    "ungraded": 0,
+    "duplicated": 0,
     "id_collisions": 0
   },
   "matched": [
     {
       "golden": {
         "test_case_id": "CO-IND-01",
-        "level": "indicator",
-        "code": "1.1",
-        "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
-        "description": null,
-        "source_page": 3,
-        "parser_expected": {
-          "domain_code": "PHD",
-          "domain_name": "Physical Development & Health",
-          "strand_code": "PHD.1",
-          "strand_name": "Health, Safety and Nutrition",
-          "sub_strand_code": null,
-          "sub_strand_name": null,
-          "indicator_code": "PHD.1.1",
-          "indicator_name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
-          "age_band_months": "",
-          "standard_id": "US-CO-2020-PHD-PHD.1.1"
+        "expected": {
+          "standard_id": "US-CO-2020-PHD-PHD.1.1",
+          "country": "US",
+          "state": "CO",
+          "version_year": 2020,
+          "domain": {
+            "code": "PHD",
+            "name": "Physical Development & Health",
+            "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills."
+          },
+          "strand": {
+            "code": "PHD.1",
+            "name": "Health, Safety and Nutrition",
+            "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+          },
+          "sub_strand": null,
+          "indicator": {
+            "code": "PHD.1.1",
+            "name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+            "description": null
+          },
+          "age_band": "",
+          "source_page": 3,
+          "source_text": "1. Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases."
         }
       },
       "parsed": {
@@ -61,22 +70,30 @@
     {
       "golden": {
         "test_case_id": "CO-IND-02",
-        "level": "indicator",
-        "code": "1.6",
-        "title": "Communicate an understanding of the importance of health and safety routines and rules.",
-        "description": null,
-        "source_page": 3,
-        "parser_expected": {
-          "domain_code": "PHD",
-          "domain_name": "Physical Development & Health",
-          "strand_code": "PHD.1",
-          "strand_name": "Health, Safety and Nutrition",
-          "sub_strand_code": null,
-          "sub_strand_name": null,
-          "indicator_code": "PHD.1.6",
-          "indicator_name": "Communicate an understanding of the importance of health and safety routines and rules.",
-          "age_band_months": "",
-          "standard_id": "US-CO-2020-PHD-PHD.1.6"
+        "expected": {
+          "standard_id": "US-CO-2020-PHD-PHD.1.6",
+          "country": "US",
+          "state": "CO",
+          "version_year": 2020,
+          "domain": {
+            "code": "PHD",
+            "name": "Physical Development & Health",
+            "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills."
+          },
+          "strand": {
+            "code": "PHD.1",
+            "name": "Health, Safety and Nutrition",
+            "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+          },
+          "sub_strand": null,
+          "indicator": {
+            "code": "PHD.1.6",
+            "name": "Communicate an understanding of the importance of health and safety routines and rules.",
+            "description": null
+          },
+          "age_band": "",
+          "source_page": 3,
+          "source_text": "6. Communicate an understanding of the importance of health and safety routines and rules.*"
         }
       },
       "parsed": {
@@ -108,22 +125,34 @@
     {
       "golden": {
         "test_case_id": "CO-IND-03",
-        "level": "indicator",
-        "code": "4.3",
-        "title": "Manage actions, words, and behavior with increasing independence.",
-        "description": null,
-        "source_page": 8,
-        "parser_expected": {
-          "domain_code": "SED",
-          "domain_name": "Social & Emotional Development",
-          "strand_code": "SED.4",
-          "strand_name": "Emotional and Behavioral Self-Regulation",
-          "sub_strand_code": "SED.4.3",
-          "sub_strand_name": "Manage actions, words, and behavior with increasing independence",
-          "indicator_code": "SED.4.3",
-          "indicator_name": "Manage actions, words, and behavior with increasing independence.",
-          "age_band_months": "",
-          "standard_id": "US-CO-2020-SED-SED.4.3"
+        "expected": {
+          "standard_id": "US-CO-2020-SED-SED.4.3",
+          "country": "US",
+          "state": "CO",
+          "version_year": 2020,
+          "domain": {
+            "code": "SED",
+            "name": "Social & Emotional Development",
+            "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+          },
+          "strand": {
+            "code": "SED.4",
+            "name": "Emotional and Behavioral Self-Regulation",
+            "description": "The ability to recognize and regulate emotions and behavior."
+          },
+          "sub_strand": {
+            "code": "SED.4.3",
+            "name": "Manage actions, words, and behavior with increasing independence",
+            "description": null
+          },
+          "indicator": {
+            "code": "SED.4.3",
+            "name": "Manage actions, words, and behavior with increasing independence.",
+            "description": null
+          },
+          "age_band": "",
+          "source_page": 8,
+          "source_text": "3. Manage actions, words, and\nbehavior with increasing\nindependence.*"
         }
       },
       "parsed": {
@@ -160,16 +189,6 @@
   "dropped_from_parsed": [],
   "field_mismatches": [],
   "regressions": [
-    {
-      "id": "CO-NO-SUB-STRAND",
-      "status": "SKIP",
-      "detail": "no check function for this stage"
-    },
-    {
-      "id": "CO-NUMERIC-STRANDS",
-      "status": "SKIP",
-      "detail": "no check function for this stage"
-    },
     {
       "id": "CO-INDICATOR-PARENT-IS-STRAND",
       "status": "FAIL",

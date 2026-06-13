@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "parser_golden.schema.json",
+  "title": "ELS Parser Golden Set",
+  "description": "Per-state golden set used by evaluation/eval_parser.py to grade the parser. Each file is the hand-verified expected output of parse_hierarchy for one frozen detection.json input. Distinct from golden_set.schema.json (which grades the detector): the parser produces fully resolved, NESTED NormalizedStandard objects, so each expected entry mirrors that whole object.",
+  "type": "object",
+  "required": ["state", "country", "version_year", "standards", "regression_cases"],
+  "properties": {
+    "state": { "type": "string", "minLength": 2, "maxLength": 2 },
+    "country": { "type": "string", "minLength": 2, "maxLength": 2 },
+    "version_year": { "type": "integer" },
+    "source_detection": {
+      "type": "string",
+      "description": "Which detection.json this golden was verified against, e.g. 'outputs/05-31-26/CA-detection.json'."
+    },
+    "annotator": { "type": "string" },
+    "annotation_date": { "type": "string", "description": "YYYY-MM-DD" },
+    "notes": { "type": "string" },
+    "standards": {
+      "type": "array",
+      "description": "Hand-verified expected parser standards. You do NOT need to annotate every standard the parser emits; cover representative indicators plus the edge cases the regression_cases target. Each entry is matched to a parser-output standard by (indicator.name, age_band) and then graded field-by-field.",
+      "items": {
+        "type": "object",
+        "required": ["test_case_id", "expected"],
+        "properties": {
+          "test_case_id": {
+            "type": "string",
+            "description": "Stable id, e.g. CA-STD-01-EARLY. Used in failure messages."
+          },
+          "notes": { "type": "string" },
+          "expected": {
+            "type": "object",
+            "description": "The expected NormalizedStandard for this indicator, graded for exact equality field-by-field. source_text is intentionally omitted — it's verbatim multi-line prose that's impractical to hand-author, so it is neither expected nor compared.",
+            "required": ["standard_id", "country", "state", "version_year", "domain", "indicator", "source_page"],
+            "properties": {
+              "standard_id": { "type": "string" },
+              "country": { "type": "string" },
+              "state": { "type": "string" },
+              "version_year": { "type": "integer" },
+              "domain": { "$ref": "#/$defs/hierarchy_level" },
+              "strand": { "oneOf": [ { "$ref": "#/$defs/hierarchy_level" }, { "type": "null" } ] },
+              "sub_strand": { "oneOf": [ { "$ref": "#/$defs/hierarchy_level" }, { "type": "null" } ] },
+              "indicator": { "$ref": "#/$defs/hierarchy_level" },
+              "age_band": { "type": ["string", "null"] },
+              "source_page": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "regression_cases": {
+      "type": "array",
+      "description": "Parser-stage behavioural assertions. Checked by eval_parser.py via regression_checks.lookup_parser (check_parser_<id>); a case with no parser check is SKIPped.",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "assertion"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "assertion": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "hierarchy_level": {
+      "type": "object",
+      "description": "Mirrors src/els_pipeline/models.py HierarchyLevel.",
+      "required": ["code", "name"],
+      "properties": {
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

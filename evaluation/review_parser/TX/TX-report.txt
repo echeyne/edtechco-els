@@ -1,25 +1,14 @@
 
 === TX ===
-  golden indicators: 4
-  parsed:            40
-  matched:           4  (coverage 1.000)
-  field accuracy:    1.000
-  per-field (ok/total):
-    domain_code          4/4   (1.00)
-    domain_name          4/4   (1.00)
-    strand_code          4/4   (1.00)
-    strand_name          4/4   (1.00)
-    sub_strand_code      4/4   (1.00)
-    sub_strand_name      4/4   (1.00)
-    indicator_code       4/4   (1.00)
-    indicator_name       4/4   (1.00)
-    age_band_months      4/4   (1.00)
-    standard_id          4/4   (1.00)
+  golden standards: 4
+  parsed:           40
+  matched:          4  (coverage 1.000)
+  fully correct:    4/4
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
   dropped: 0
   standard_id collisions: 0
   regression cases:
-    [SKIP] TX-PK3-PK4-DISTINCT — no check function for this stage
-    [SKIP] TX-AGE-BAND-SET — no check function for this stage
-    [SKIP] TX-NO-COLUMN-HEADER-AS-INDICATOR — no check function for this stage
     [PASS] TX-PK3-PK4-DISTINCT-IDS — 0 multi-variant indicator code(s) all kept distinct ids+bands
     [PASS] NO-ID-COLLISION — all 40 standard_ids unique

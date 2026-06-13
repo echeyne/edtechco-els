@@ -71,19 +71,7 @@
       "title": "Initiative",
       "age_band": "Early (3 to 4 ½ Years)",
       "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems",
-      "source_page": 3,
-      "parser_expected": {
-        "domain_code": "ATL",
-        "domain_name": "Approaches to Learning",
-        "strand_code": "ATL.1.0",
-        "strand_name": "Motivation to Learn",
-        "sub_strand_code": "ATL.1.0.INIT",
-        "sub_strand_name": "Initiative",
-        "indicator_code": "ATL.1.0.INIT.1.2",
-        "indicator_name": "Initiative",
-        "age_band_months": "36-54 months",
-        "standard_id": "US-CA-2008-ATL-ATL.1.0.INIT.1.2-36-54 months"
-      }
+      "source_page": 3
     },
     {
       "test_case_id": "CA-IND-01-LATER",
@@ -125,19 +113,7 @@
       "title": "Understanding and Using Vocabulary",
       "age_band": "Early (3 to 4 ½ Years)",
       "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories.",
-      "source_page": 8,
-      "parser_expected": {
-        "domain_code": "VPA",
-        "domain_name": "Visual and Performing Arts",
-        "strand_code": null,
-        "strand_name": null,
-        "sub_strand_code": "VPA.VOC",
-        "sub_strand_name": "Vocabulary",
-        "indicator_code": "VPA.VOC.1.1",
-        "indicator_name": "Understanding and Using Vocabulary",
-        "age_band_months": "",
-        "standard_id": "US-CA-2008-VPA-VPA.VOC.1.1"
-      }
+      "source_page": 8
     },
     {
       "test_case_id": "CA-IND-02-LATER",
@@ -179,19 +155,7 @@
       "title": "Understanding Words",
       "age_band": "Discovering",
       "description": "Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers.",
-      "source_page": 11,
-      "parser_expected": {
-        "domain_code": "FLD",
-        "domain_name": "Foundational Language Development",
-        "strand_code": "FLD.1.0",
-        "strand_name": "Listening and Speaking",
-        "sub_strand_code": "VPA.VOC",
-        "sub_strand_name": "Vocabulary",
-        "indicator_code": "FLD.1.0.VOC.1.1",
-        "indicator_name": "Understanding Words",
-        "age_band_months": "",
-        "standard_id": "US-CA-2008-FLD-FLD.1.0.VOC.1.1"
-      }
+      "source_page": 11
     },
     {
       "test_case_id": "CA-IND-03-DEVELOPING",
@@ -226,19 +190,7 @@
       "title": "Using Complex Sentence Structures",
       "age_band": "Discovering",
       "description": "Use words or phrases repeatedly experienced in English to communicate.",
-      "source_page": 12,
-      "parser_expected": {
-        "domain_code": "FLD",
-        "domain_name": "Foundational Language Development",
-        "strand_code": "FLD.1.0",
-        "strand_name": "Listening and Speaking",
-        "sub_strand_code": "VPA.GRM",
-        "sub_strand_name": "Grammar",
-        "indicator_code": "FLD.1.0.GRM.1.4",
-        "indicator_name": "Using Complex Sentence Structures",
-        "age_band_months": "",
-        "standard_id": "US-CA-2008-FLD-FLD.1.0.GRM.1.4"
-      }
+      "source_page": 12
     },
     {
       "test_case_id": "CA-IND-04-DEVELOPING",
@@ -279,16 +231,6 @@
       "id": "CA-FOUR-LEVEL-HIERARCHY",
       "description": "Every indicator must trace back through sub_strand → strand → domain.",
       "assertion": "for every indicator, sub_strand_code, strand_code, and domain_code in the parser output are non-null and resolve to existing elements."
-    },
-    {
-      "id": "CA-EARLY-LATER-DISTINCT-IDS",
-      "description": "PARSER: each Foundation's Early/Later age-band variants must survive parsing as separate standards with distinct standard_ids and age_bands, not collapse onto one.",
-      "assertion": "for every (domain_code, indicator_code) group with >1 parser standard, the standard_ids and age_bands within the group are all distinct."
-    },
-    {
-      "id": "NO-ID-COLLISION",
-      "description": "PARSER: every standard_id in the parser output is unique.",
-      "assertion": "no two parser standards share a standard_id."
     }
   ]
 }

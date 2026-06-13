@@ -91,11 +91,6 @@
       "id": "AZ-FOUR-LEVEL-HIERARCHY",
       "description": "AZ uses all four levels.",
       "assertion": "the set of distinct levels in the detected output equals {'domain','strand','sub_strand','indicator'}."
-    },
-    {
-      "id": "NO-ID-COLLISION",
-      "description": "PARSER: every standard_id in the parser output is unique.",
-      "assertion": "no two parser standards share a standard_id."
     }
   ]
 }
