@@ -28,7 +28,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "PK3.I.A.2",
-          "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+          "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted",
           "description": null
         },
         "age_band": "36-48",
@@ -55,7 +55,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "PK4.I.A.2",
-          "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+          "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities",
           "description": null
         },
         "age_band": "48-60",
@@ -86,7 +86,7 @@
         },
         "indicator": {
           "code": "PK3.I.B.2.b",
-          "name": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
+          "name": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared)",
           "description": null
         },
         "age_band": "36-48",
@@ -117,7 +117,7 @@
         },
         "indicator": {
           "code": "PK4.I.B.2.b",
-          "name": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
+          "name": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings",
           "description": null
         },
         "age_band": "48-60",

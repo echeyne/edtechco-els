@@ -459,7 +459,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--state", action="append", help="Limit to specific state(s); repeatable")
     parser.add_argument("--extraction-dir", default="outputs", help="Directory holding {STATE}-extraction.json files")
-    parser.add_argument("--golden-dir", default="evaluation/ground_truth", help="Directory holding {STATE}.json golden sets")
+    parser.add_argument("--golden-dir", default="evaluation/ground_truth_detector", help="Directory holding {STATE}.json golden sets")
     parser.add_argument("--no-cache", action="store_true", help="Disable detector-output cache")
     parser.add_argument("--stability-runs", type=int, default=1, help="Re-run the detector this many times to measure stability (>=2 enables it)")
     parser.add_argument("--report-json", help="Optional path to write the full report as JSON")

@@ -60,7 +60,7 @@
       "test_case_id": "TX-IND-01-PK3",
       "level": "indicator",
       "code": "PK3.I.A.2",
-      "title": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
+      "title": "Child can identify own physical attributes and indicate some likes and dislikes when prompted",
       "age_band": "PK3",
       "description": null,
       "source_page": 4
@@ -69,7 +69,7 @@
       "test_case_id": "TX-IND-01-PK4",
       "level": "indicator",
       "code": "PK4.I.A.2",
-      "title": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
+      "title": "Child shows self-awareness of physical attributes, personal preferences, and own abilities",
       "age_band": "PK4",
       "description": null,
       "source_page": 4
@@ -94,7 +94,7 @@
       "test_case_id": "TX-IND-02-PK3",
       "level": "indicator",
       "code": "PK3.I.B.2.b",
-      "title": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared).",
+      "title": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared)",
       "age_band": "PK3",
       "description": null,
       "source_page": 7
@@ -103,7 +103,7 @@
       "test_case_id": "TX-IND-02-PK4",
       "level": "indicator",
       "code": "PK4.I.B.2.b",
-      "title": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings.",
+      "title": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings",
       "age_band": "PK4",
       "description": null,
       "source_page": 7

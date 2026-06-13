@@ -2,6 +2,7 @@
 
 import json
 import logging
+import re
 from typing import List, Dict, Any, Optional
 import boto3
 from botocore.config import Config as BotocoreConfig
@@ -22,10 +23,42 @@ logger = logging.getLogger(__name__)
 # Constants
 CHARS_PER_TOKEN = 4
 DEFAULT_TARGET_TOKENS = 2000
+
+# Leading structural labels like "Strand 1:" / "Concept 2:" name a node's
+# position in the hierarchy but are NOT part of its title — the canonical title
+# is the text after the label, and the label survives as the element's `code`.
+# Documents that label every node ("Strand N: <Title>", "Concept N: <Title>")
+# otherwise leave the label embedded in the title, which then fails to match
+# the canonical label-free title (e.g. AZ's
+# "Strand 1: Self-Awareness and Emotional Skills" vs.
+# "Self-Awareness and Emotional Skills"). We require a label keyword + an
+# identifier token + a colon so this only fires on genuine structural labels,
+# never on prose titles that merely begin with one of these words.
+_LABEL_PREFIX_RE = re.compile(
+    r"^\s*(?:Strand|Concept|Sub-?Strand|Standard|Section|Domain|Goal|Benchmark)"
+    r"\s+[A-Za-z0-9][\w.\-]*\s*:\s*",
+    re.IGNORECASE,
+)
+
+# Trailing footnote/reference markers ("…rules.*", "…health †") are typography,
+# not part of the title — the LLM transcribes them inconsistently across runs,
+# so a title matches the golden on one run and misses on the next. Strip a
+# trailing run of whitespace + footnote glyphs while preserving terminal
+# sentence punctuation ("…rules.*" → "…rules.").
+_TRAILING_MARKER_RE = re.compile(r"[\s*†‡§¶]+$")
 DEFAULT_OVERLAP_TOKENS = 500
 MAX_PARSE_RETRIES = 2
 MAX_BEDROCK_RETRIES = 2
 LLM_MAX_TOKENS = 16000
+
+# Extraction must be as repeatable as the model allows — two runs over the same
+# text should yield the same JSON. We pin temperature to 0, but only for models
+# that still accept sampling params. Opus 4.7/4.8 and Fable removed
+# temperature/top_p/top_k (a 400 if sent); Opus 4.6 and Haiku 4.5 still accept
+# them. Match on the substrings in the model id (which carry a region prefix,
+# e.g. "us.anthropic.claude-opus-4-6-v1").
+LLM_TEMPERATURE = 0.0
+_TEMPERATURE_UNSUPPORTED = ("opus-4-7", "opus-4-8", "fable")
 
 
 def estimate_tokens(text: str) -> int:
@@ -208,6 +241,7 @@ EXTRACTION RULES:
 3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
    - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
 4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title (e.g. "Physical Development" → "PHD"). Use the SAME code every time the same element appears.
+   - When a heading is written as "<Label> <N>: <Title>" (e.g. "Strand 1: Self-Awareness and Emotional Skills", "Concept 2: Recognizes and Expresses Feelings"), the label+number ("Strand 1", "Concept 2") is the `code` and the `title` is ONLY the text after the colon ("Self-Awareness and Emotional Skills", "Recognizes and Expresses Feelings"). Never leave the "Strand N:"/"Concept N:" label inside `title`.
 5. `confidence`: 0.95+ if the depth map clearly applies; 0.80-0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
 6. `source_page`: page number from the [Page N] marker on that line.
 7. `source_text`: the exact line(s) from the chunk you used. Copy verbatim.
@@ -215,6 +249,7 @@ EXTRACTION RULES:
 NEGATIVE EXAMPLES (do NOT do these):
 - Do not emit "Indicators and Examples in the Context of Daily Routines" as a structural element. It is a section header for examples.
 - Do not merge "Early" and "Later" age columns into one indicator.
+- Do not keep a structural label inside the title: "Strand 1: Self-Awareness" → title is "Self-Awareness", NOT "Strand 1: Self-Awareness".
 - Do not classify a numeric prefix ("1.", "2.") as `sub_strand` just because numeric-under-letter is sub_strand in some other doc — use the depth map.
 
 OUTPUT — return ONLY a JSON array, starting with `[` and ending with `]`. No prose, no markdown, no commentary. Schema per element:
@@ -383,6 +418,25 @@ def _normalize_age_band(age_band: Any) -> Optional[str]:
     return normalized or None
 
 
+def _strip_label_prefix(title: Any) -> Any:
+    """Canonicalize an element title for stable matching:
+
+    1. Strip a leading structural label ("Strand 1:", "Concept 2:") — the label
+       is the element's `code`, not part of its name.
+    2. Strip trailing footnote/reference markers ("…rules.*").
+
+    Both are surface noise the LLM transcribes inconsistently; removing them
+    keeps a title byte-stable across runs so it matches the golden's label-free,
+    marker-free title. No-op for titles that already lack a prefix/marker (the
+    common case — CA/CO/TX). Never strips the title down to empty: if cleaning
+    would leave nothing, the original is kept."""
+    if not isinstance(title, str):
+        return title
+    cleaned = _LABEL_PREFIX_RE.sub("", title)
+    cleaned = _TRAILING_MARKER_RE.sub("", cleaned).strip()
+    return cleaned or title
+
+
 def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Optional[DetectedElement]:
     """
     Create a DetectedElement from validated element data.
@@ -410,10 +464,19 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
     
     age_band = _normalize_age_band(elem_data.get('age_band'))
 
+    title = _strip_label_prefix(elem_data['title'])
+    # Indicator titles are full sentences transcribed from the source, so the LLM
+    # keeps the terminal period ("…diseases."). The canonical form drops it — the
+    # golden indicator titles are authored period-free. Scope this to indicators:
+    # domain/strand/sub_strand titles are short noun-phrase labels with no
+    # terminal punctuation, so they're left untouched.
+    if level == HierarchyLevelEnum.INDICATOR and isinstance(title, str):
+        title = title.rstrip().rstrip('.').rstrip() or title
+
     return DetectedElement(
         level=level,
         code=elem_data['code'],
-        title=elem_data['title'],
+        title=title,
         description=elem_data.get('description') or "",
         confidence=confidence,
         source_page=elem_data.get('source_page', default_page),
@@ -485,6 +548,7 @@ def parse_llm_response(response_text: str, blocks: List[TextBlock]) -> List[Dete
 def _build_bedrock_request(
     prompt: str,
     prefill: Optional[str] = None,
+    temperature: Optional[float] = None,
 ) -> Dict[str, Any]:
     """
     Build request body for Bedrock Claude API.
@@ -493,15 +557,23 @@ def _build_bedrock_request(
     verbatim, which is the most reliable way to force a structured-output
     format (e.g. `[` to force a JSON array) on Opus 4.7 where we cannot
     set `temperature`.
+
+    `temperature` (when not None) pins sampling — we pass 0 on models that
+    still accept it (Opus 4.6, Haiku 4.5) so detection is as deterministic as
+    the model allows; the caller drops it for models that reject sampling
+    params (Opus 4.7/4.8, Fable).
     """
     messages: List[Dict[str, Any]] = [{"role": "user", "content": prompt}]
     if prefill:
         messages.append({"role": "assistant", "content": prefill})
-    return {
+    body: Dict[str, Any] = {
         "anthropic_version": "bedrock-2023-05-31",
         "max_tokens": LLM_MAX_TOKENS,
         "messages": messages,
     }
+    if temperature is not None:
+        body["temperature"] = temperature
+    return body
 
 
 def _extract_text_from_bedrock_response(response_body: Dict[str, Any]) -> str:
@@ -564,7 +636,12 @@ def call_bedrock_llm(
     if prefill and "opus-4-6" in effective_model_id:
         logger.debug(f"Dropping prefill — model {effective_model_id} does not support it")
         prefill = None
-    request_body = _build_bedrock_request(prompt, prefill=prefill)
+    # Pin temperature for determinism, but only on models that accept it.
+    temperature: Optional[float] = LLM_TEMPERATURE
+    if any(m in effective_model_id for m in _TEMPERATURE_UNSUPPORTED):
+        logger.debug(f"Dropping temperature — model {effective_model_id} rejects sampling params")
+        temperature = None
+    request_body = _build_bedrock_request(prompt, prefill=prefill, temperature=temperature)
 
     logger.info(f"Calling Bedrock with model: {effective_model_id}")
     logger.debug(f"Prompt length: {len(prompt)} characters, ~{estimate_tokens(prompt)} tokens")

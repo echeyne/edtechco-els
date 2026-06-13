@@ -14,7 +14,7 @@
         "canonical_level": "domain",
         "label_in_doc": "Standard",
         "prefix_pattern": "ALL-CAPS STANDARD NAME",
-        "example": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD"
+        "example": "Social Emotional Development"
       },
       {
         "depth": 2,
@@ -44,8 +44,8 @@
       "test_case_id": "AZ-DOM-SED",
       "level": "domain",
       "code": null,
-      "title": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD",
-      "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children’s emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child’s ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child’s confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child’s learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "title": "Social Emotional Development",
+      "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
       "source_page": 4
     },
     {
@@ -59,25 +59,25 @@
     {
       "test_case_id": "AZ-SUB-SE-1-1",
       "level": "sub_strand",
-      "code": "Concept 2",
-      "title": "Recognizes and Expresses Feelings",
-      "description": "The child recognizes and expresses feelings of self and others. Children develop emotional literacy through the ability to identify and acknowledge their feelings and feelings of others through daily interactions.",
+      "code": "Concept 1",
+      "title": "Self-Awareness",
+      "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
       "source_page": 5
     },
     {
       "test_case_id": "AZ-IND-SE-1-1-a",
       "level": "indicator",
       "code": "a",
-      "title": "Associates emotions with words, facial expressions, and body language.",
-      "description": "Describes the emotions of a character in a book. Signs, “I am mad” when asked how they feel.",
+      "title": "Demonstrates self-confidence",
+      "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\"",
       "source_page": 5
     },
     {
-      "test_case_id": "AZ-IND-SE-1-1-b",
+      "test_case_id": "AZ-IND-LL-1-2-b",
       "level": "indicator",
       "code": "b",
-      "title": "Identifies, describes, and expresses their own feelings.",
-      "description": "Covers their eyes and says, \"This is scary!\" while listening to a story. Says, \"I am happy today because it's my birthday!\"",
+      "title": "Speaks clearly and understandably to express ideas, feelings, and needs",
+      "description": "Combines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\" Says, \"I want to go play at the water table.\"",
       "source_page": 5
     }
   ],
