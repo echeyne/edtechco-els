@@ -3,9 +3,10 @@
   "state": "CA",
   "country": "US",
   "version_year": 2021,
+  "default_age_band": "36-66",
   "annotator": "Emily Cheyne",
   "annotation_date": "06-06-2026",
-  "notes": "CA uses an explicit 4-level hierarchy: Domain → Strand → Sub-Strand → Foundation. Side-by-side age columns ('Early (3 to 4 ½ Years)' vs. 'Later (4 to 5 ½ Years)') MUST each become a separate indicator.",
+  "notes": "CA uses an explicit 4-level hierarchy: Domain -> Strand -> Sub-Strand -> Foundation. Side-by-side age columns ('Early (3 to 4 ½ Years)' vs. 'Later (4 to 5 ½ Years)') MUST each become a separate indicator.",
   "standards": [
     {
       "test_case_id": "CA-IND-01-EARLY",

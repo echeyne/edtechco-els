@@ -49,15 +49,44 @@ def generate_standard_id(
     """
     Generate a deterministic Standard_ID.
 
-    The age_band is included so that PK3 and PK4 variants of the same
-    indicator (e.g. I.A.1 for 36-48 vs I.A.1 for 48-60) receive distinct
-    IDs instead of colliding.
+    The canonical form is ``{COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}``. The
+    indicator_code is expected to already be fully qualified and to carry
+    whatever disambiguator is needed so that side-by-side age/column variants
+    of the same outcome get distinct IDs — e.g. TX ``PK3.I.A.2`` vs
+    ``PK4.I.A.2`` (age prefix), or CA ``ELD.1.0.VOC.1.1.DISC`` vs ``...BRD``
+    (column suffix). Keeping the disambiguator inside the indicator_code keeps
+    the ID derivation a single clean rule rather than appending age bands here.
 
     Returns:
         Standard_ID in format: {COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}
     """
     base = f"{country}-{state}-{version_year}-{indicator_code}"
     return base
+
+
+def canonicalize_age_band(raw: Optional[str]) -> Optional[str]:
+    """
+    Normalize an age-band string to a bare month range like ``"36-48"``.
+
+    The LLM is asked to convert age bands to months but is inconsistent about
+    the surface form — it may emit ``"36-54 months"``, ``"36 - 54"``, or use the
+    unicode ``½`` glyph in an un-converted label. This folds all of those to the
+    canonical ``"{start}-{end}"`` form the golden uses. Inputs that aren't a
+    recognizable numeric month range (None, empty, or a label the LLM failed to
+    convert) are returned stripped/unchanged so the caller's fallback and the
+    eval's field grading can still surface them.
+    """
+    if not raw:
+        return None
+    s = " ".join(str(raw).split())
+    m = re.match(
+        r"^(\d+)\s*(?:[-–—]|to)\s*(\d+)\s*(?:months?|mos?|mo)?$",
+        s,
+        re.IGNORECASE,
+    )
+    if m:
+        return f"{m.group(1)}-{m.group(2)}"
+    return s or None
 
 
 def build_parsing_prompt(
@@ -129,8 +158,9 @@ Rules:
 - If a hierarchy level does not exist (e.g. no sub_strand), set its code, name, and description to null.
 - For indicator_name: use the actual title of the indicator (e.g. "Curiosity and Interest"), NOT age-band labels like "Early", "Later", "By 36 months", etc. Strip any age-band pre-text from the indicator title. The age-band information belongs in the age_band field.
 - For indicator_description: use the full descriptive text of the indicator. This may be null if no description exists beyond the title. Strip any age-band pre-text from the indicator description. The age-band information belongs in the age_band field.
-- For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 36-48, PK4 is 48-60, 3 to 4 ½ Years is 36-54) If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
-- For code: it should be hirarchical (e.g. "A", "A.1", "A.1a", "A.1a.1") not just the final part.
+- For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 36-48, PK4 is 48-60, 3 to 4 ½ Years is 36-54). Output it as a BARE month range like "36-48" — no "months" suffix, no column labels. If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
+- For code: output the FULL CUMULATIVE hierarchical code for every level — each child's code is its parent's code followed by the child's own segment, NOT just the final segment. So a foundation with local code "1.2" under domain "ATL" / strand "1.0" / sub_strand "INIT" must have indicator_code "ATL.1.0.INIT.1.2", sub_strand_code "ATL.1.0.INIT", and strand_code "ATL.1.0" — never emit a bare "1.2" or "1.0". When an element's own code is already fully qualified (e.g. an indicator detected as "SED.1.1.a"), use it as-is and derive the parents from it (strand_code "SED.1", sub_strand_code "SED.1.1").
+- PRESERVE age/column prefixes in codes: if an indicator's detected code carries a leading token such as "PK3." or "PK4." (e.g. "PK3.I.A.2"), KEEP that token at the FRONT of the full code so the PK3 and PK4 variants stay two DISTINCT indicators with distinct codes. NEVER strip the prefix and NEVER collapse "PK3.I.A.2" and "PK4.I.A.2" onto "I.A.2".
 - Return ONLY the JSON array, no other text.
 - Every indicator element must appear exactly once in the output.
 - There will be cases where you see "No PK3 outcomes for this domain of learning." or similar wording. This means that for the given indicator and age, there is no outcome. In this case, the indicator should be omitted. Do not try to attach it to another indicator.
@@ -343,7 +373,7 @@ def parse_llm_response(
                 description=obj.get("indicator_description"),
             )
 
-            age_band = obj.get("age_band") or fallback_age_band
+            age_band = canonicalize_age_band(obj.get("age_band")) or fallback_age_band
 
             standard_id = generate_standard_id(
                 country, state, version_year, obj["indicator_code"]

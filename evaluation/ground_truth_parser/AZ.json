@@ -3,10 +3,10 @@
   "state": "AZ",
   "country": "US",
   "version_year": 2018,
-  "source_detection": "outputs/05-31-26/AZ-detection.json",
+  "default_age_band": "36-60",
   "annotator": "Emily Cheyne",
   "annotation_date": "06-10-2026",
-  "notes": "AZ uses 'Standard → Strand → Concept → Indicator'. Map Standard → domain, Strand → strand, Concept → sub_strand (including the learning goal sentence and description), Indicator (the lettered 'a./b./c.' examples beneath the learning goal sentence) → indicator.",
+  "notes": "AZ uses 'Standard -> Strand -> Concept -> Indicator'. Map Standard -> domain, Strand -> strand, Concept -> sub_strand (including the learning goal sentence and description), Indicator (the lettered 'a./b./c.' examples beneath the learning goal sentence) -> indicator.",
   "standards": [
     {
       "test_case_id": "AZ-IND-01",
@@ -14,7 +14,7 @@
         "standard_id": "US-AZ-2018-SED.1.1.a",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "SED",
           "name": "Social Emotional Development",
@@ -45,7 +45,7 @@
         "standard_id": "US-AZ-2018-SED.1.1.b",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "SED",
           "name": "Social Emotional Development",
@@ -76,7 +76,7 @@
         "standard_id": "US-AZ-2018-SED.1.1.c",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "SED",
           "name": "Social Emotional Development",
@@ -107,7 +107,7 @@
         "standard_id": "US-AZ-2018-SED.1.1.d",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "SED",
           "name": "Social Emotional Development",
@@ -138,7 +138,7 @@
         "standard_id": "US-AZ-2018-SED.1.1.e",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "SED",
           "name": "Social Emotional Development",
@@ -169,7 +169,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.a",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -200,7 +200,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.b",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -231,7 +231,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.c",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -262,7 +262,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.d",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -293,7 +293,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.e",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -324,7 +324,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.f",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -355,7 +355,7 @@
         "standard_id": "US-AZ-2018-LL.2.3.g",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -386,7 +386,7 @@
         "standard_id": "US-AZ-2018-LL.2.4.a",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -417,7 +417,7 @@
         "standard_id": "US-AZ-2018-LL.2.4.b",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -448,7 +448,7 @@
         "standard_id": "US-AZ-2018-LL.2.4.c",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -479,7 +479,7 @@
         "standard_id": "US-AZ-2018-LL.2.4.d",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -510,7 +510,7 @@
         "standard_id": "US-AZ-2018-LL.2.4.e",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",
@@ -541,7 +541,7 @@
         "standard_id": "US-AZ-2018-LL.3.1.c",
         "country": "US",
         "state": "AZ",
-        "version_year": 2021,
+        "version_year": 2018,
         "domain": {
           "code": "LL",
           "name": "Language and Literacy",

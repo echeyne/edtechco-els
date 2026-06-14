@@ -52,6 +52,7 @@ from evaluation.eval_common import (
     CACHE_DIR,
     _hash_blocks,
     _norm,
+    _norm_age_band,
     run_regressions,
 )
 from els_pipeline.parser import parse_hierarchy
@@ -141,6 +142,10 @@ def run_parser_cached(
         age_band=default_age_band,
     )
     indicators = result.indicators
+    logger.info(
+        f"  [parser] produced {len(indicators)} standards (status={result.status}"
+        + (f", error={result.error}" if result.error else "") + ")"
+    )
     cache_path.write_text(json.dumps(indicators, indent=2, default=str, ensure_ascii=False))
     return indicators
 
@@ -153,8 +158,15 @@ def _indicator_name(std: dict) -> str:
 
 
 def _match_key(std: dict) -> Tuple[str, Optional[str]]:
-    """Identity of a standard for matching: (normalized indicator name, age_band)."""
-    return (_indicator_name(std), std.get("age_band"))
+    """Identity of a standard for matching: (normalized indicator name,
+    canonicalized age_band).
+
+    The age band is folded via `_norm_age_band` so the unicode-'½' vs ASCII-'1/2'
+    glyph split documented in eval_common can't turn a produced standard into a
+    spurious "dropped" — which would otherwise hide EVERY other field comparison
+    for that standard. This is identity/pairing only; the age_band FIELD is still
+    graded strictly via `_norm_val` below."""
+    return (_indicator_name(std), _norm_age_band(std.get("age_band")))
 
 
 def _index_standards(standards: List[dict]) -> Dict[Tuple[str, Optional[str]], List[dict]]:
@@ -221,7 +233,8 @@ def grade_parser(golden: dict, standards: List[dict]) -> ParserStateReport:
     for g in golden_stds:
         gid = g.get("test_case_id", "?")
         expected = g.get("expected") or {}
-        key = (_norm((expected.get("indicator") or {}).get("name")), expected.get("age_band"))
+        # Reuse _match_key so the golden side and the parsed side can never drift.
+        key = _match_key(expected)
         cands = [c for c in index.get(key, []) if id(c) not in matched_ids]
 
         if not cands:
@@ -316,6 +329,12 @@ def evaluate_state(
     golden = json.loads(golden_path.read_text())
     country = golden.get("country", "US")
     version_year = golden.get("version_year", 0)
+    # The document-wide age band is production metadata supplied to the parser
+    # (handlers.py passes event["age_band"]). For docs whose indicators carry no
+    # per-indicator age band (e.g. AZ/CO preschool, 36-60), the golden records it
+    # as `default_age_band` so the eval feeds the parser the same value production
+    # would. A CLI --default-age-band still acts as the cross-state fallback.
+    default_age_band = golden.get("default_age_band", default_age_band)
 
     standards = run_parser_cached(
         state, detection_path, country, version_year, default_age_band, use_cache=use_cache

@@ -3,10 +3,10 @@
   "state": "CO",
   "country": "US",
   "version_year": 2020,
-  "source_detection": "outputs/05-31-26/CO-detection.json",
+  "default_age_band": "36-60",
   "annotator": "06-13-2026",
   "annotation_date": "Emily Cheyne",
-  "notes": "CO is a 3-level document: Domain → Strand → Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'. Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected. Removed former CO-IND-04 (SED.5.4 'Hold information in mind…'): that content is not present in this trimmed subset extraction (page 10 is English Language Development, not SED Executive Function), so it was a golden annotation error, not a detector miss.",
+  "notes": "CO is a 3-level document: Domain -> Strand -> Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'. Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected. Removed former CO-IND-04 (SED.5.4 'Hold information in mind\u2026'): that content is not present in this trimmed subset extraction (page 10 is English Language Development, not SED Executive Function), so it was a golden annotation error, not a detector miss.",
   "standards": [
     {
       "test_case_id": "CO-IND-01",
@@ -38,7 +38,7 @@
     {
       "test_case_id": "CO-IND-02",
       "expected": {
-        "standard_id": "US-CO-2020-PHD-PHD.1.6",
+        "standard_id": "US-CO-2020-PHD.1.6",
         "country": "US",
         "state": "CO",
         "version_year": 2020,
@@ -77,7 +77,7 @@
         "strand": {
           "code": "SED.2",
           "name": "Sense of Identity and Belonging",
-          "description": "TThe perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+          "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
         },
         "sub_strand": null,
         "indicator": {
