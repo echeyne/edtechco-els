@@ -11,7 +11,7 @@
     {
       "test_case_id": "CA-IND-01-EARLY",
       "expected": {
-        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2-36-54",
+        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2.36-54",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -42,7 +42,7 @@
     {
       "test_case_id": "CA-IND-01-LATER",
       "expected": {
-        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2-48-66",
+        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2.48-66",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -124,7 +124,7 @@
           "description": null
         },
         "indicator": {
-          "code": "VPA.1.0.VOC.1.1.48-66",
+          "code": "FLD.1.0.VOC.1.1.48-66",
           "name": "Understanding and Using Vocabulary",
           "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories."
         },
@@ -150,7 +150,7 @@
           "description": null
         },
         "sub_strand": {
-          "code": "VOC",
+          "code": "ELD.1.0.VOC",
           "name": "Vocabulary",
           "description": null
         },
@@ -181,7 +181,7 @@
           "description": null
         },
         "sub_strand": {
-          "code": "VOC",
+          "code": "ELD.1.0.VOC",
           "name": "Vocabulary",
           "description": null
         },
@@ -212,7 +212,7 @@
           "description": null
         },
         "sub_strand": {
-          "code": "VOC",
+          "code": "ELD.1.0.VOC",
           "name": "Vocabulary",
           "description": null
         },
@@ -228,27 +228,27 @@
     {
       "test_case_id": "CA-IND-04-DISCOVERING",
       "expected": {
-        "standard_id": "US-CA-2021-FLD.2.0.CAP.2.6.DISC",
+        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.DISC",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
         "domain": {
-          "code": "FLD",
-          "name": "Foundational Language Development",
+          "code": "ELD",
+          "name": "English Language Development",
           "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
         },
         "strand": {
-          "code": "FLD.2.0",
+          "code": "ELD.2.0",
           "name": "Foundational Literacy Skills",
           "description": null
         },
         "sub_strand": {
-          "code": "CAP",
+          "code": "ELD.2.0.CAP",
           "name": "Concepts About Print",
           "description": null
         },
         "indicator": {
-          "code": "FLD.2.0.CAP.2.6.DISC",
+          "code": "ELD.2.0.CAP.2.6.DISC",
           "name": "Understanding the Concept of Print",
           "description": "Discovering: Interact with materials representing the letters of the English alphabet."
         },
@@ -259,27 +259,27 @@
     {
       "test_case_id": "CA-IND-04-DEVELOPING",
       "expected": {
-        "standard_id": "US-CA-2021-FLD.2.0.CAP.2.6.DEV",
+        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.DEV",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
         "domain": {
-          "code": "FLD",
-          "name": "Foundational Language Development",
+          "code": "ELD",
+          "name": "English Language Development",
           "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
         },
         "strand": {
-          "code": "FLD.2.0",
+          "code": "ELD.2.0",
           "name": "Foundational Literacy Skills",
           "description": null
         },
         "sub_strand": {
-          "code": "CAP",
+          "code": "ELD.2.0.CAP",
           "name": "Concepts About Print",
           "description": null
         },
         "indicator": {
-          "code": "FLD.2.0.CAP.2.6.DEV",
+          "code": "ELD.2.0.CAP.2.6.DEV",
           "name": "Understanding the Concept of Print",
           "description": "Developing: Demonstrate awareness that they are interacting with English print."
         },
@@ -290,27 +290,27 @@
     {
       "test_case_id": "CA-IND-04-BROADENING",
       "expected": {
-        "standard_id": "US-CA-2021-FLD.2.0.CAP.2.6.BRD",
+        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.BRD",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
         "domain": {
-          "code": "FLD",
-          "name": "Foundational Language Development",
+          "code": "ELD",
+          "name": "English Language Development",
           "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
         },
         "strand": {
-          "code": "FLD.2.0",
+          "code": "ELD.2.0",
           "name": "Foundational Literacy Skills",
           "description": null
         },
         "sub_strand": {
-          "code": "CAP",
+          "code": "ELD.2.0.CAP",
           "name": "Concepts About Print",
           "description": null
         },
         "indicator": {
-          "code": "FLD.2.0.CAP.2.6.BRD",
+          "code": "ELD.2.0.CAP.2.6.BRD",
           "name": "Understanding the Concept of Print",
           "description": "Broadening: Demonstrate awareness of English print as something that can be read and has specific meaning."
         },

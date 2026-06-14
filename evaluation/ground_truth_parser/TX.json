@@ -157,7 +157,7 @@
     {
       "test_case_id": "TX-IND-03-PK4",
       "expected": {
-        "standard_id": "US-TX-2022-I.B.1.a.48-60",
+        "standard_id": "US-TX-2022-I.B.2.c.48-60",
         "country": "US",
         "state": "TX",
         "version_year": 2022,
