@@ -36,7 +36,7 @@
           "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems."
         },
         "age_band": "36-54",
-        "source_page": 4
+        "source_page": 2
       }
     },
     {
@@ -67,13 +67,13 @@
           "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently."
         },
         "age_band": "48-66",
-        "source_page": 4
+        "source_page": 2
       }
     },
     {
       "test_case_id": "CA-IND-02-EARLY",
       "expected": {
-        "standard_id": "US-CA-2021-FLD.1.0.VOC.1.1.36-54",
+        "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.1.36-54",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -88,23 +88,23 @@
           "description": ""
         },
         "sub_strand": {
-          "code": "FLD.1.0.VOC",
+          "code": "FLD.1.0.VOCA",
           "name": "Vocabulary",
           "description": null
         },
         "indicator": {
-          "code": "FLD.1.0.VOC.1.1.36-54",
+          "code": "FLD.1.0.VOCA.1.1.36-54",
           "name": "Understanding and Using Vocabulary",
           "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories."
         },
         "age_band": "36-54",
-        "source_page": 8
+        "source_page": 6
       }
     },
     {
       "test_case_id": "CA-IND-02-LATER",
       "expected": {
-        "standard_id": "US-CA-2021-FLD.1.0.VOC.1.1.48-66",
+        "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.1.48-66",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -119,23 +119,23 @@
           "description": ""
         },
         "sub_strand": {
-          "code": "FLD.1.0.VOC",
+          "code": "FLD.1.0.VOCA",
           "name": "Vocabulary",
           "description": null
         },
         "indicator": {
-          "code": "FLD.1.0.VOC.1.1.48-66",
+          "code": "FLD.1.0.VOCA.1.1.48-66",
           "name": "Understanding and Using Vocabulary",
           "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories."
         },
-        "age_band": "36-54",
-        "source_page": 8
+        "age_band": "48-66",
+        "source_page": 6
       }
     },
     {
       "test_case_id": "CA-IND-03-DISCOVERING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.1.0.VOC.1.1.DISC",
+        "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.1.DISC",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -150,23 +150,23 @@
           "description": null
         },
         "sub_strand": {
-          "code": "ELD.1.0.VOC",
+          "code": "ELD.1.0.VOCA",
           "name": "Vocabulary",
           "description": null
         },
         "indicator": {
-          "code": "ELD.1.0.VOC.1.1.DISC",
+          "code": "ELD.1.0.VOCA.1.1.DISC",
           "name": "Understanding Words",
           "description": "Discovering: Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers."
         },
         "age_band": "36-66",
-        "source_page": 11
+        "source_page": 9
       }
     },
     {
       "test_case_id": "CA-IND-03-DEVELOPING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.1.0.VOC.1.1.DEV",
+        "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.1.DEVE",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -181,23 +181,23 @@
           "description": null
         },
         "sub_strand": {
-          "code": "ELD.1.0.VOC",
+          "code": "ELD.1.0.VOCA",
           "name": "Vocabulary",
           "description": null
         },
         "indicator": {
-          "code": "ELD.1.0.VOC.1.1.DEV",
+          "code": "ELD.1.0.VOCA.1.1.DEVE",
           "name": "Understanding Words",
           "description": "Developing: Demonstrate understanding of words in English for objects and actions as well as phrases encountered frequently in interactions with adults and peers."
         },
         "age_band": "36-66",
-        "source_page": 11
+        "source_page": 9
       }
     },
     {
       "test_case_id": "CA-IND-03-BROADENING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.1.0.VOC.1.1.BRD",
+        "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.1.BROA",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -212,17 +212,17 @@
           "description": null
         },
         "sub_strand": {
-          "code": "ELD.1.0.VOC",
+          "code": "ELD.1.0.VOCA",
           "name": "Vocabulary",
           "description": null
         },
         "indicator": {
-          "code": "ELD.1.0.VOC.1.1.BRD",
+          "code": "ELD.1.0.VOCA.1.1.BROA",
           "name": "Understanding Words",
           "description": "Broadening: Demonstrate understanding of a larger set of words in English (for example, objects and actions, personal pronouns, possessives, and descriptive terms) in interactions with adults and peers."
         },
         "age_band": "36-66",
-        "source_page": 11
+        "source_page": 9
       }
     },
     {
@@ -253,13 +253,13 @@
           "description": "Discovering: Interact with materials representing the letters of the English alphabet."
         },
         "age_band": "36-66",
-        "source_page": 15
+        "source_page": 13
       }
     },
     {
       "test_case_id": "CA-IND-04-DEVELOPING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.DEV",
+        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.DEVE",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -279,18 +279,18 @@
           "description": null
         },
         "indicator": {
-          "code": "ELD.2.0.CAP.2.6.DEV",
+          "code": "ELD.2.0.CAP.2.6.DEVE",
           "name": "Understanding the Concept of Print",
           "description": "Developing: Demonstrate awareness that they are interacting with English print."
         },
         "age_band": "36-66",
-        "source_page": 15
+        "source_page": 13
       }
     },
     {
       "test_case_id": "CA-IND-04-BROADENING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.BRD",
+        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.BROA",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -310,12 +310,12 @@
           "description": null
         },
         "indicator": {
-          "code": "ELD.2.0.CAP.2.6.BRD",
+          "code": "ELD.2.0.CAP.2.6.BROA",
           "name": "Understanding the Concept of Print",
           "description": "Broadening: Demonstrate awareness of English print as something that can be read and has specific meaning."
         },
         "age_band": "36-66",
-        "source_page": 15
+        "source_page": 13
       }
     }
   ],

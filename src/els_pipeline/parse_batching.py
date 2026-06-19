@@ -17,15 +17,19 @@ from botocore.exceptions import ClientError, ReadTimeoutError
 from .config import Config
 from .models import (
     DetectedElement,
+    NormalizedStandard,
     ParseBatchInfo,
     ParseBatchManifest,
     ParseBatchResult,
 )
 from .parser import (
     MAX_PARSE_RETRIES,
+    abbreviate_element_codes,
     build_parsing_prompt,
     call_bedrock_llm,
     chunk_elements_by_domain,
+    normalize_element_codes,
+    normalize_parsed_codes,
     parse_llm_response,
 )
 from .s3_helpers import construct_intermediate_key, load_json_from_s3, save_json_to_s3
@@ -85,6 +89,13 @@ def prepare_parse_batches(event: Dict[str, Any], context: Any) -> Dict[str, Any]
     logger.info(
         f"Filtered elements: {len(valid_elements)} valid out of {len(elements)} total"
     )
+
+    # Canonicalize codes across elements BEFORE chunking — same steps the direct
+    # parse_hierarchy path runs. Without these the batched path routes/serializes
+    # un-normalized codes (e.g. "LANGLIT"/"LANG"/"LL" drift, "Strand 1" labels),
+    # diverging from the eval.
+    valid_elements = normalize_element_codes(valid_elements)
+    valid_elements = abbreviate_element_codes(valid_elements)
 
     # Group by domain using existing function
     domain_chunks = chunk_elements_by_domain(valid_elements)
@@ -351,6 +362,18 @@ def merge_parse_results(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             "run_id": run_id,
             "error": error_msg,
         }
+
+    # Canonicalize codes across ALL merged standards — same final step the direct
+    # parse_hierarchy path runs — so the same hierarchy entity uses one code even
+    # when its indicators were split across batches. Reconstruct the models,
+    # normalize, then re-serialize to the dict shape the output expects.
+    try:
+        normalized = normalize_parsed_codes(
+            [NormalizedStandard(**s) for s in all_standards]
+        )
+        all_standards = [s.model_dump() for s in normalized]
+    except Exception as e:
+        logger.warning(f"normalize_parsed_codes skipped on merge ({e}); using raw standards")
 
     # Determine overall status
     if all_errors and all_standards:

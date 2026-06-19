@@ -38,6 +38,12 @@ MAX_PARSE_RETRIES = 2
 MAX_BEDROCK_RETRIES = 2
 LLM_TEMPERATURE = 0.1
 LLM_MAX_TOKENS = 64000
+# A single domain chunk asked to resolve too many indicators at once makes the
+# LLM silently drop some (observed: AZ "Language and Literacy" with ~22
+# indicators in one call lost ~17). Split oversized domain chunks so each LLM
+# call stays well within reliable range; cross-chunk strand/sub_strand links are
+# re-resolved by the prompt and reconciled by normalize_parsed_codes.
+MAX_INDICATORS_PER_CHUNK = 12
 
 
 def generate_standard_id(
@@ -89,6 +95,117 @@ def canonicalize_age_band(raw: Optional[str]) -> Optional[str]:
     return s or None
 
 
+# Number of leading letters used to abbreviate a proficiency-style column label
+# (Discovering → DISC, Developing → DEVE, Broadening → BROA). Age-distinguished
+# columns use their month range instead, so this only fires for non-age labels.
+_COLUMN_ABBREV_LEN = 4
+# Leading age/column token to drop from a fully-qualified code, e.g. the "PK3."
+# in "PK3.I.A.2" — the disambiguator is re-applied as a suffix instead.
+_COLUMN_PREFIX_RE = re.compile(r"^PK\d+\.", re.IGNORECASE)
+
+
+def _strip_column_prefix(code: Optional[str]) -> Optional[str]:
+    """Drop a leading age/column token (e.g. ``PK3.``/``PK4.``) from a code so the
+    base hierarchical path is shared across side-by-side variants. No-op for codes
+    without such a prefix."""
+    if not code:
+        return code
+    return _COLUMN_PREFIX_RE.sub("", code)
+
+
+def _derive_label_abbrev(label: Optional[str]) -> Optional[str]:
+    """Derive a stable disambiguator from a proficiency-style column label: the
+    first ``_COLUMN_ABBREV_LEN`` alphabetic characters, uppercased
+    (``Discovering`` → ``DISC``, ``Developing`` → ``DEVE``, ``Broadening`` →
+    ``BROA``). Returns None if the label has no usable letters."""
+    if not label:
+        return None
+    letters = re.sub(r"[^A-Za-z]", "", label)
+    return letters[:_COLUMN_ABBREV_LEN].upper() or None
+
+
+def _disambiguator_suffix(
+    canonical_age: Optional[str],
+    column_label: Optional[str],
+) -> Optional[str]:
+    """The suffix appended to an indicator code so side-by-side column variants
+    keep distinct codes/IDs. Age-distinguished columns (Early/Later, PK3/PK4) use
+    the canonical month range (e.g. ``36-48``); proficiency columns that share one
+    age band (Discovering/Developing/Broadening) use a derived label abbreviation."""
+    if canonical_age:
+        return canonical_age
+    if column_label:
+        return _derive_label_abbrev(column_label)
+    return None
+
+
+# A structural-label code ("Strand 1", "Concept B", "Section 3") — the trailing
+# identifier IS the real code segment, so "Strand 1" → "1". Mirrors the
+# detector's _LABEL_PREFIX_RE but captures the identifier instead of stripping it.
+_LABEL_CODE_RE = re.compile(
+    r"^\s*(?:strand|concept|sub-?strand|section|standard|domain|goal|benchmark|unit|part)"
+    r"\s+([A-Za-z0-9][\w.\-]*)\s*$",
+    re.IGNORECASE,
+)
+# Length of a deterministic abbreviation for a single-word title (Vocabulary →
+# VOCA). Multi-word titles use an acronym of every word instead.
+_CODE_ABBREV_LEN = 4
+
+
+def _abbreviate_title(title: str) -> str:
+    """Deterministic short code from a title: acronym of every word for
+    multi-word titles ("Concepts About Print" → "CAP", "Social Emotional
+    Development" → "SED"), else the first _CODE_ABBREV_LEN letters of a
+    single word ("Vocabulary" → "VOCA"). Uppercased."""
+    words = re.findall(r"[A-Za-z0-9]+", title or "")
+    if not words:
+        return ""
+    if len(words) >= 2:
+        return "".join(w[0] for w in words).upper()
+    return words[0][:_CODE_ABBREV_LEN].upper()
+
+
+def normalize_code_to_canonical(code: Optional[str], title: Optional[str]) -> Optional[str]:
+    """Map a detected element's code to a clean, deterministic code SEGMENT for
+    cumulative-code building:
+
+    1. ``"Strand 1"`` / ``"Concept 2"`` (structural label + identifier) → the
+       identifier (``"1"`` / ``"2"``).
+    2. A code that is itself a title/phrase — it contains a space, or equals the
+       element's title — → a deterministic abbreviation of the title
+       (``"Concepts About Print"`` → ``"CAP"``, ``"Vocabulary"`` → ``"VOCA"``).
+    3. Otherwise the code already looks like a real short code (``"SED"``,
+       ``"1.0"``, ``"VOC"``, ``"a"``) → keep it unchanged.
+    """
+    if not code:
+        return code
+    c = code.strip()
+    m = _LABEL_CODE_RE.match(c)
+    if m:
+        return m.group(1)
+    t = (title or "").strip()
+    if (" " in c) or (t and c.lower() == t.lower()):
+        return _abbreviate_title(t or c) or c
+    return c
+
+
+def abbreviate_element_codes(
+    elements: List[DetectedElement],
+) -> List[DetectedElement]:
+    """Rewrite each element's code to its canonical short form (see
+    normalize_code_to_canonical) so the LLM builds cumulative codes from clean,
+    consistent segments (e.g. AZ "Strand 1"/"Concept 1" → "1"/"1", giving
+    "SED.1.1.a" instead of "SED.Strand 1.Concept 1.a"). Runs after
+    normalize_element_codes in both the direct and batched parse paths."""
+    out: List[DetectedElement] = []
+    for el in elements:
+        new_code = normalize_code_to_canonical(el.code, el.title)
+        if new_code and new_code != el.code:
+            el = el.model_copy(update={"code": new_code})
+        out.append(el)
+    return out
+
+
 def build_parsing_prompt(
     elements: List[DetectedElement],
     country: str,
@@ -119,6 +236,7 @@ def build_parsing_prompt(
             "code": el.code,
             "title": el.title,
             "description": el.description,
+            "age_band": el.age_band,
             "source_page": el.source_page,
             "source_text": el.source_text,
         })
@@ -149,6 +267,7 @@ Return a JSON array where each object represents one indicator with its full hie
   "indicator_name": "string",
   "indicator_description": "string or null",
   "age_band": "string or null",
+  "column_label": "string or null",
   "source_page": integer,
   "source_text": "string"
 }}
@@ -156,11 +275,12 @@ Return a JSON array where each object represents one indicator with its full hie
 Rules:
 - Populate domain_description, strand_description, and sub_strand_description from the document text (the description field of the corresponding element). Use null if no description exists for that level.
 - If a hierarchy level does not exist (e.g. no sub_strand), set its code, name, and description to null.
-- For indicator_name: use the actual title of the indicator (e.g. "Curiosity and Interest"), NOT age-band labels like "Early", "Later", "By 36 months", etc. Strip any age-band pre-text from the indicator title. The age-band information belongs in the age_band field.
-- For indicator_description: use the full descriptive text of the indicator. This may be null if no description exists beyond the title. Strip any age-band pre-text from the indicator description. The age-band information belongs in the age_band field.
-- For age_band: examine each indicator's code, title, description, and source_text for age-related information (e.g. "PK3", "PK4", "36 months", "48 months", "3-4 1/2 years). If you detect a specific age band, use that value. You should normalize the age band to be in months (i.e. PK3 is 36-48, PK4 is 48-60, 3 to 4 ½ Years is 36-54). Output it as a BARE month range like "36-48" — no "months" suffix, no column labels. If no age band is detectable, set age_band to null. The caller will apply the default age band "{age_band}" for any null values.
-- For code: output the FULL CUMULATIVE hierarchical code for every level — each child's code is its parent's code followed by the child's own segment, NOT just the final segment. So a foundation with local code "1.2" under domain "ATL" / strand "1.0" / sub_strand "INIT" must have indicator_code "ATL.1.0.INIT.1.2", sub_strand_code "ATL.1.0.INIT", and strand_code "ATL.1.0" — never emit a bare "1.2" or "1.0". When an element's own code is already fully qualified (e.g. an indicator detected as "SED.1.1.a"), use it as-is and derive the parents from it (strand_code "SED.1", sub_strand_code "SED.1.1").
-- PRESERVE age/column prefixes in codes: if an indicator's detected code carries a leading token such as "PK3." or "PK4." (e.g. "PK3.I.A.2"), KEEP that token at the FRONT of the full code so the PK3 and PK4 variants stay two DISTINCT indicators with distinct codes. NEVER strip the prefix and NEVER collapse "PK3.I.A.2" and "PK4.I.A.2" onto "I.A.2".
+- For indicator_name: use the actual title of the indicator (e.g. "Curiosity and Interest"), NOT age-band/column labels like "Early", "Later", "Discovering", "PK3", "By 36 months", etc. Strip any such pre-text from the title.
+- For indicator_description: use the full descriptive text of the indicator EXACTLY as it appears in the source, INCLUDING any leading proficiency label such as "Discovering:"/"Developing:"/"Broadening:" — that label carries the column's distinguishing content and MUST be kept in the description. (Age-column rows like Early/Later have no such inline label, so nothing is added.) This may be null if no description exists beyond the title.
+- For age_band: examine each indicator's code, title, description, source_text, and its detected age_band field for age information. Normalize a real age RANGE to BARE months like "36-48" (PK3 → 36-48, PK4 → 48-60, "3 to 4 ½ Years" → 36-54, "4 to 5 ½ Years" → 48-66). If the column is NOT an age range — e.g. a proficiency level such as "Discovering"/"Developing"/"Broadening" — set age_band to null. The caller applies the default age band "{age_band}" for nulls.
+- For column_label: if the indicator came from a side-by-side column, copy that column's label VERBATIM from the element's detected age_band field (e.g. "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "PK3", "Discovering"); otherwise null.
+- For code: output the BASE FULL CUMULATIVE hierarchical code for every level — each child's code is its parent's code followed by the child's own segment, NOT just the final segment. A foundation with local code "1.2" under domain "ATL" / strand "1.0" / sub_strand "INIT" → indicator_code "ATL.1.0.INIT.1.2", sub_strand_code "ATL.1.0.INIT", strand_code "ATL.1.0" — never a bare "1.2" or "1.0". When a code is already fully qualified (e.g. an indicator detected as "SED.1.1.a"), use it as-is and derive the parents (strand_code "SED.1", sub_strand_code "SED.1.1").
+- STRIP any leading age/column token from every code: a detected indicator code like "PK3.I.A.2" or "PK4.I.A.2" must become the BASE code "I.A.2" (drop the "PK3."/"PK4." prefix). Do NOT append the age band or column label to any code yourself — the caller appends a disambiguator suffix so side-by-side variants stay distinct.
 - Return ONLY the JSON array, no other text.
 - Every indicator element must appear exactly once in the output.
 - There will be cases where you see "No PK3 outcomes for this domain of learning." or similar wording. This means that for the given indicator and age, there is no outcome. In this case, the indicator should be omitted. Do not try to attach it to another indicator.
@@ -345,8 +465,11 @@ def parse_llm_response(
             continue
 
         try:
+            # Drop any leading age/column token (PK3./PK4.) so the base path is
+            # shared across side-by-side variants; the disambiguator is re-applied
+            # as a suffix on the indicator code below.
             domain = HierarchyLevel(
-                code=obj["domain_code"],
+                code=_strip_column_prefix(obj["domain_code"]),
                 name=obj["domain_name"],
                 description=obj.get("domain_description"),
             )
@@ -354,7 +477,7 @@ def parse_llm_response(
             strand = None
             if obj.get("strand_code") and obj.get("strand_name"):
                 strand = HierarchyLevel(
-                    code=obj["strand_code"],
+                    code=_strip_column_prefix(obj["strand_code"]),
                     name=obj["strand_name"],
                     description=obj.get("strand_description"),
                 )
@@ -362,21 +485,47 @@ def parse_llm_response(
             sub_strand = None
             if obj.get("sub_strand_code") and obj.get("sub_strand_name"):
                 sub_strand = HierarchyLevel(
-                    code=obj["sub_strand_code"],
+                    code=_strip_column_prefix(obj["sub_strand_code"]),
                     name=obj["sub_strand_name"],
                     description=obj.get("sub_strand_description"),
                 )
 
+            # Resolve the indicator code: base cumulative path (PK prefix stripped)
+            # + a disambiguator suffix for side-by-side column variants so Early vs
+            # Later (age) and Discovering vs Developing (proficiency) stay distinct.
+            column_label = obj.get("column_label")
+            canonical_age = canonicalize_age_band(obj.get("age_band"))
+            suffix = _disambiguator_suffix(canonical_age, column_label)
+            indicator_code = _strip_column_prefix(obj["indicator_code"])
+            if suffix and not indicator_code.endswith(suffix):
+                indicator_code = f"{indicator_code}.{suffix}"
+
+            # Proficiency columns (a column label that is NOT an age range, e.g.
+            # CA ELD "Discovering"/"Developing"/"Broadening") read in the source as
+            # an inline description prefix ("Discovering: <text>"). The detector
+            # lifts that label into age_band, so re-prepend it here — it's how the
+            # columns' descriptions stay distinguishable and matches the source.
+            indicator_description = obj.get("indicator_description")
+            if (
+                column_label
+                and not canonical_age
+                and indicator_description
+                and not indicator_description.lstrip().lower().startswith(
+                    column_label.strip().lower()
+                )
+            ):
+                indicator_description = f"{column_label.strip()}: {indicator_description.strip()}"
+
             indicator = HierarchyLevel(
-                code=obj["indicator_code"],
+                code=indicator_code,
                 name=obj["indicator_name"],
-                description=obj.get("indicator_description"),
+                description=indicator_description,
             )
 
-            age_band = canonicalize_age_band(obj.get("age_band")) or fallback_age_band
+            age_band = canonical_age or fallback_age_band
 
             standard_id = generate_standard_id(
-                country, state, version_year, obj["indicator_code"]
+                country, state, version_year, indicator_code
             )
 
             source_page = obj.get("source_page", 1)
@@ -723,13 +872,28 @@ def chunk_elements_by_domain(
             domain_chunks["__pre__"].append(el)
             continue
 
-        # Deduplicate elements (same level + code) from overlapping chunks
-        existing_codes = {
-            (e.level, e.code)
+        # Deduplicate overlap-repeated elements (same element re-emitted by
+        # adjacent detector chunks). The key includes the normalized title and
+        # age_band, NOT just (level, code): documents with per-group lettered
+        # indicators reuse the SAME bare code across groups (e.g. AZ Concept
+        # 2.3 'a' and Concept 2.4 'a' both have code "a"), and side-by-side
+        # column variants share a code with different age bands (CA "1.2" Early
+        # vs Later). Keying on title+age_band keeps those distinct; only a true
+        # repeat (same code, same title, same age_band) is dropped.
+        def _dedup_key(e: DetectedElement) -> tuple:
+            return (
+                e.level,
+                e.code,
+                " ".join((e.title or "").lower().split()),
+                e.age_band,
+            )
+
+        existing_keys = {
+            _dedup_key(e)
             for e in domain_chunks[target]
             if e.level != HierarchyLevelEnum.DOMAIN
         }
-        if (el.level, el.code) not in existing_codes:
+        if _dedup_key(el) not in existing_keys:
             domain_chunks[target].append(el)
 
     chunks = list(domain_chunks.values())
@@ -737,7 +901,45 @@ def chunk_elements_by_domain(
     if not chunks:
         return [elements]
 
+    # Split any domain chunk carrying too many indicators so the LLM isn't asked
+    # to resolve more than it reliably can in one call (it otherwise drops some).
+    chunks = [sub for chunk in chunks for sub in _split_oversized_chunk(chunk)]
+
     return chunks
+
+
+def _split_oversized_chunk(
+    chunk: List[DetectedElement],
+    max_indicators: int = MAX_INDICATORS_PER_CHUNK,
+) -> List[List[DetectedElement]]:
+    """Split one domain chunk into sub-chunks of at most ``max_indicators``
+    indicators each. Domain element(s) are repeated at the head of every
+    sub-chunk so the LLM still knows the domain; splits prefer strand/sub_strand
+    boundaries, with a hard cap so a single huge strand still gets divided."""
+    domain_els = [e for e in chunk if e.level == HierarchyLevelEnum.DOMAIN]
+    rest = [e for e in chunk if e.level != HierarchyLevelEnum.DOMAIN]
+    n_ind = sum(1 for e in rest if e.level == HierarchyLevelEnum.INDICATOR)
+    if n_ind <= max_indicators:
+        return [chunk]
+
+    sub_chunks: List[List[DetectedElement]] = []
+    cur: List[DetectedElement] = []
+    cur_ind = 0
+    for el in rest:
+        is_group = el.level in (HierarchyLevelEnum.STRAND, HierarchyLevelEnum.SUB_STRAND)
+        # Start a new sub-chunk once the current one is full. Prefer to break at a
+        # strand/sub_strand boundary, but hard-cap at max_indicators so a long run
+        # of indicators under one strand still gets divided.
+        if cur and (cur_ind >= max_indicators or (cur_ind >= max_indicators - 2 and is_group)):
+            sub_chunks.append(domain_els + cur)
+            cur, cur_ind = [], 0
+        cur.append(el)
+        if el.level == HierarchyLevelEnum.INDICATOR:
+            cur_ind += 1
+    if cur:
+        sub_chunks.append(domain_els + cur)
+
+    return sub_chunks or [chunk]
 
 
 def parse_hierarchy(
@@ -780,6 +982,9 @@ def parse_hierarchy(
         # Normalize codes so the same entity always uses the same code
         # across chunks (e.g. "PHD" and "PhysicalDevelopment" both become "PHD")
         valid_elements = normalize_element_codes(valid_elements)
+        # Canonicalize code segments ("Strand 1"→"1", "Concepts About Print"→"CAP")
+        # so cumulative codes come out clean and deterministic.
+        valid_elements = abbreviate_element_codes(valid_elements)
 
         # Split into per-domain chunks so each LLM call is small enough
         chunks = chunk_elements_by_domain(valid_elements)

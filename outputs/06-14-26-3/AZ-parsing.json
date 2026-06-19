@@ -1,0 +1,733 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-AZ-2018-SED.Strand 1.Concept 1.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place."
+      },
+      "strand": {
+        "code": "SED.Strand 1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.Strand 1.Concept 1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.Strand 1.Concept 1.a",
+        "name": "Demonstrates self-confidence",
+        "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\""
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "Demonstrates self-confidence.\na.\nAcknowledges her own accomplishments and says, \"I can hit the ball.\""
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.Strand 1.Concept 1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place."
+      },
+      "strand": {
+        "code": "SED.Strand 1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.Strand 1.Concept 1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.Strand 1.Concept 1.b",
+        "name": "Makes personal preferences known to others",
+        "description": "Chooses carrots over celery during mealtime. Tells friends, \"I don't like that.\""
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "b. Makes personal preferences known to others."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.Strand 1.Concept 1.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place."
+      },
+      "strand": {
+        "code": "SED.Strand 1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.Strand 1.Concept 1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.Strand 1.Concept 1.c",
+        "name": "Demonstrates knowledge of self-identity/autonomy",
+        "description": "Declares, \"I'm the big brother,\" while looking at a family picture. Tells the teacher, \"I'm at school while mommy is at work.\" Holds up three fingers and says, \"I am this many.\""
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "Demonstrates knowledge of self-identity/autonomy.\nC."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.Strand 1.Concept 1.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place."
+      },
+      "strand": {
+        "code": "SED.Strand 1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.Strand 1.Concept 1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.Strand 1.Concept 1.d",
+        "name": "Displays an awareness of similarities and differences between self and others",
+        "description": "Says, \"My hair is curly and yours is straight.\" Points to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt."
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "d. Displays an awareness of similarities and differences between self and others."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.Strand 1.Concept 1.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place."
+      },
+      "strand": {
+        "code": "SED.Strand 1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SED.Strand 1.Concept 1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.Strand 1.Concept 1.e",
+        "name": "Demonstrates developmentally appropriate cultural curiosity and responsiveness",
+        "description": "Wonders about a friend's seaweed snack and asks for a taste. The group widens the story time circle to make room for the child and their wheelchair. A guest speaker (parent) shares a storybook and song in their home language to the class."
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "e. Demonstrates developmentally appropriate cultural curiosity and responsiveness."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept1.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept1",
+        "name": "Receptive Language Understanding",
+        "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues."
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept1.a",
+        "name": "Demonstrates understanding of a variety of finger-plays, rhymes, chants and songs, poems, conversations, and stories",
+        "description": "Follows gestures and actions. Teacher asks, \"Where would you like to play? It's time to work.\" Child points to blocks or answers, \"Blocks.\" Teacher extends the interaction and builds on child's response by saying, \"Oh, you want to play in the block area.\""
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "a. Demonstrates understanding of a variety of finger-plays, rhymes, chants and songs, poems, conversations,\nandstories."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept1",
+        "name": "Receptive Language Understanding",
+        "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues."
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept1.b",
+        "name": "Engages actively in finger-plays, rhymes, chants and songs, poems, conversations, and stories",
+        "description": "Claps when prompted with, \"If you're happy and you know it, clap your hands.\" Participates in story, Going on a Bear Hunt."
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "b. Engages actively in finger-plays, rhymes, chants and songs, poems, conversations, and stories."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept1.C1c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept1",
+        "name": "Receptive Language Understanding",
+        "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues."
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept1.C1c",
+        "name": "Demonstrates understanding and follows directions that involve one step, two steps, or multiple steps",
+        "description": "Places toy truck on shelf when adult says, \"Please put the truck on the shelf.\" Responds to the directions, \"Put the block on the table, put your paper in the cubby, and line up to go outside.\""
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "C. Demonstrates understanding and follows directions that involve one step, two steps, or multiple steps."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2a",
+        "name": "Communicates needs, wants, ideas, and feelings through three to five-word sentences",
+        "description": "Engages intentionally in simple or multi-turn conversations with peers and adults at snack time. Talks with a peer about a trip to a park, another child utilizes sign language which includes social rules; pragmatics; age appropriate tone, and volume."
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "a. Communicates needs, wants, ideas, and feelings through three to five-word sentences."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2b",
+        "name": "Speaks clearly and understandably to express ideas, feelings, and needs",
+        "description": "Combines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\" Says, \"I want to go play at the water table.\""
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "b. Speaks clearly and understandably to express ideas, feelings, and needs."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2c",
+        "name": "Makes culturally relevant responses (both verbal and nonverbal) to questions and comments from others",
+        "description": "Exclaims, \"I did it!\" after teacher asks, \"Did you get your jacket on?\" Says, \"I have a cat, too,\" after teacher shows a picture of a cat. Responds, \"\u00a1S\u00cd, mam\u00e1! I have my peanut butter sandwich,\" during drop off, after a parent asks, \u00a1Adi\u00f3s! \u00bf Tienes tu s\u00e1ndwich?"
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "C. Makes culturally relevant responses (both verbal and nonverbal) to questions and comments from others."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2d",
+        "name": "Initiates, sustains, and expands conversations with peers and adults using open-ended responses",
+        "description": "Approaches peers and asks, \"What are you making?\" Says, \"I went to the zoo.\" Teacher expands by asking, \"What was your favorite animal?\" Child replies, \"The lion.\" Teacher responds, \"The lion is your favorite. Why?\" Child answers, \"I like the way he roars.\""
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "d. Initiates, sustains, and expands conversations with peers and adults using open-ended responses."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2e",
+        "name": "With modeling and support, child uses language that includes social rules; e.g., pragmatics, appropriate tone, volume, and inflection to express ideas, feelings, and needs",
+        "description": "Responds excitedly, \"That's my favorite!\" when an adult begins to read a book. Tells a classmate emphatically, \"Stop, I don't like that!\" or whispers in a classmate's ear during circle time."
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "e. With modeling and support, child uses language that includes social rules; e.g., pragmatics,\nappropriatetone, volume, and inflection to express ideas, feelings, and needs."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2f",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2f",
+        "name": "Uses culturally relevant responses such as eye contact, turn taking, and intonation while having conversations with adults and peers",
+        "description": "Uses turn-taking during conversations with peers and adults. Looks towards her friend, while speaking."
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "f. Uses culturally relevant responses such as eye contact, turn taking, and intonation while having conversations\nwithadults and peers."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2g",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2g",
+        "name": "Recognizes when the listener does not understand and varies the amount of information to clarify the message",
+        "description": "Uses a different word to clarify the intended message when child realizes he has been misunderstood. Points to a picture to clarify his intent."
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "g. Recognizes when the listener does not understand and varies the amount of information\u00b9\u00b2 to clarify the message."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept2.C2h",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept2",
+        "name": "Expressive Language and Communication Skills",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept2.C2h",
+        "name": "With modeling and support, uses increasingly complex phrases and sentences",
+        "description": "Says, \"Let's put the cars up higher on the ramp so they will go really fast.\""
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "h. With modeling and support, uses increasingly complex phrases and sentences."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept3.C",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept3",
+        "name": "Vocabulary",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept3.C",
+        "name": "Uses category labels and names objects within a category; e.g., fruit, vegetable, animal, transportation",
+        "description": "Replies, \"I want a carrot,\" when asked, \"Which vegetable do you want?\" Gathers a variety of animals and says, \"I found a dog, two pigs, and a duck.\""
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "C. Uses category labels and names objects within a category; e.g., fruit, vegetable, animal, transportation."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept3.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept3",
+        "name": "Vocabulary",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept3.d",
+        "name": "Demonstrates understanding of and uses words that indicate position and direction; e.g., in, on, out, under, over, off, besides, behind",
+        "description": "Responds to the teacher's requests to return his car to the shelf, put blocks in the container, or stand beside a peer. Says, \"I am standing between Billy and Rita.\""
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "d. Demonstrates understanding of and uses words that indicate position and direction; e.g., in, on, out,\nunder, over, off, besides, behind."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand1.Concept3.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand1",
+        "name": "Language",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.Strand1.Concept3",
+        "name": "Vocabulary",
+        "description": ""
+      },
+      "indicator": {
+        "code": "LL.Strand1.Concept3.e",
+        "name": "Seeks information in printed materials",
+        "description": "Says, \"We caught a cricket in our bug jar. Let's find a book about crickets.\" Looks at grocery advertisements while creating a shopping list."
+      },
+      "age_band": "36-60",
+      "source_page": 11,
+      "source_text": "e. Seeks information in printed materials."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3a",
+        "name": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes)",
+        "description": "Plays the game, Sound Bingo, and can differentiate between sounds - \"That's a telephone.\" \"That's a dog barking.\" Says, \"Hey, the beginning of my name sounds like that /t/.\""
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "a. Differentiates between sounds that are the same and different (e.g., environmental sounds, animal\nsounds, phonemes)."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3b",
+        "name": "Identifies rhyming words",
+        "description": "Shows thumbs up when two words rhyme in a poem, cat/hat. Points to pictures of words that rhyme."
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "b. Identifies rhyming words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3c",
+        "name": "Produces rhyming words",
+        "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the_.\""
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "C. Produces rhyming words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3d",
+        "name": "Recognizes spoken words that begin with the same sound",
+        "description": "Exclaims Millie, \"My name starts like Mel's name!\" Selects man and mop as beginning with the same sound when presented with pictures of man, hat, and mop."
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "d. Recognizes spoken words that begin with the same sound."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3e",
+        "name": "Hears and shows awareness of separate words within spoken phrases or sentences",
+        "description": "Jumps when hearing a specified word in a story/poem. Claps each word spoken in a sentence \"I like blocks.\""
+      },
+      "age_band": "36-60",
+      "source_page": 14,
+      "source_text": "e. Hears and shows awareness of separate words within spoken phrases or sentences."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3f",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3f",
+        "name": "Identifies and discriminates syllables in words",
+        "description": "Claps each syllable of a name during a name game or name song. (Ben-ja-min = clap, clap, clap) Takes a step for each syllable heard in a word. (hi-ber-na-tion = step, step, step, step)"
+      },
+      "age_band": "36-60",
+      "source_page": 14,
+      "source_text": "f. Identifies and discriminates syllables in words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.Strand2.C3g",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print."
+      },
+      "strand": {
+        "code": "LL.Strand2",
+        "name": "Emergent Literacy",
+        "description": ""
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "LL.Strand2.C3g",
+        "name": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support",
+        "description": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rime components. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/."
+      },
+      "age_band": "36-60",
+      "source_page": 14,
+      "source_text": "g. Combines onset and rime to form a familiar one-syllable word with and without pictorial support."
+    }
+  ],
+  "total_indicators": 26,
+  "parsing_timestamp": "2026-06-14T20:43:15.583865+00:00",
+  "source_detection_key": ""
+}

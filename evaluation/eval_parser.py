@@ -42,6 +42,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -124,7 +125,9 @@ def run_parser_cached(
     (state, detection-hash, suffix). Returns ParseResult.indicators (the
     serialized NormalizedStandard list)."""
     detection = json.loads(detection_path.read_text())
-    elements_data = detection.get("elements", detection if isinstance(detection, list) else [])
+    # A detection file is either {"elements": [...]} (pipeline output) or a bare
+    # element list (e.g. the detector eval's *-detected.json). Handle both.
+    elements_data = detection if isinstance(detection, list) else detection.get("elements", [])
 
     cache_key = f"parser-{state}-{_hash_blocks(elements_data, text_key='source_text')}-{cache_suffix}.json"
     cache_path = CACHE_DIR / cache_key
@@ -157,16 +160,44 @@ def _indicator_name(std: dict) -> str:
     return _norm((ind or {}).get("name") if isinstance(ind, dict) else None)
 
 
-def _match_key(std: dict) -> Tuple[str, Optional[str]]:
+# A proficiency-column disambiguator is an ALL-CAPS trailing code segment
+# (e.g. DISC/DEVE/BROA from Discovering/Developing/Broadening). Scoped to
+# uppercase ≥2-letter tokens so it does NOT fire on lettered indicators
+# ("…1.1.a") or junk codes ("C3a") — those stay distinguished by name.
+_VARIANT_SUFFIX_RE = re.compile(r"^[A-Z]{2,}$")
+
+
+def _variant_suffix(std: dict) -> Optional[str]:
+    """Trailing code segment that separates side-by-side column variants which
+    share a name AND age_band — i.e. proficiency levels like
+    ELD.1.0.VOC.1.1.DISC vs .DEVE vs .BROA (all "Understanding Words", all
+    36-66). Returns the suffix only when it's an all-caps label; age-distinguished
+    variants (Early/Later) are already separated by age_band, so their numeric
+    "…36-54" suffix is intentionally ignored here."""
+    ind = std.get("indicator")
+    code = (ind or {}).get("code") if isinstance(ind, dict) else None
+    if not code or "." not in code:
+        return None
+    last = code.rsplit(".", 1)[-1]
+    return last if _VARIANT_SUFFIX_RE.match(last) else None
+
+
+def _match_key(std: dict) -> Tuple[str, Optional[str], Optional[str]]:
     """Identity of a standard for matching: (normalized indicator name,
-    canonicalized age_band).
+    canonicalized age_band, proficiency-variant suffix).
 
     The age band is folded via `_norm_age_band` so the unicode-'½' vs ASCII-'1/2'
     glyph split documented in eval_common can't turn a produced standard into a
     spurious "dropped" — which would otherwise hide EVERY other field comparison
-    for that standard. This is identity/pairing only; the age_band FIELD is still
-    graded strictly via `_norm_val` below."""
-    return (_indicator_name(std), _norm_age_band(std.get("age_band")))
+    for that standard. The variant suffix disambiguates proficiency columns that
+    share a name AND age_band (DISC/DEVE/BROA) so they don't collide and mis-pair.
+    This is identity/pairing only; the graded fields are still compared strictly
+    via `_norm_val` below."""
+    return (
+        _indicator_name(std),
+        _norm_age_band(std.get("age_band")),
+        _variant_suffix(std),
+    )
 
 
 def _index_standards(standards: List[dict]) -> Dict[Tuple[str, Optional[str]], List[dict]]:

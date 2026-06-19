@@ -1,0 +1,761 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-CO-2020-PHD.1.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.1",
+        "name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "1. Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.2",
+        "name": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "2. Participate in prevention and management of chronic health conditions and avoid toxins, such as lead."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.3",
+        "name": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "3. Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.4",
+        "name": "Get sufficient rest and exercise to support healthy development",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "4. Get sufficient rest and exercise to support healthy development.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.5",
+        "name": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "5. Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.6",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.6",
+        "name": "Communicate an understanding of the importance of health and safety routines and rules",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "6. Communicate an understanding of the importance of health and safety routines and rules.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.7",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.7",
+        "name": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "7. Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.8",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.8",
+        "name": "Distinguish food on a continuum from most healthy to less healthy",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "8. Distinguish food on a continuum from most healthy to less healthy."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.9",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.9",
+        "name": "Eat a variety of nutritious foods",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "9. Eat a variety of nutritious foods."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.10",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.10",
+        "name": "Participate in structured and unstructured physical activities",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "10. Participate in structured and unstructured physical activities.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.11",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.11",
+        "name": "Recognize the importance of doctor and dentist visits",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "11. Recognize the importance of doctor and dentist visits."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.1.12",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.1.12",
+        "name": "Cooperate during doctor and dentist visits and health and developmental screening",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "12. Cooperate during doctor and dentist visits and health and developmental screening."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.2.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.2",
+        "name": "Gross Motor Skills",
+        "description": "The control of large muscles for movement, navigation, and balance."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.2.1",
+        "name": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "1. Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.2.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.2",
+        "name": "Gross Motor Skills",
+        "description": "The control of large muscles for movement, navigation, and balance."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.2.2",
+        "name": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "2. Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle."
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.2.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.2",
+        "name": "Gross Motor Skills",
+        "description": "The control of large muscles for movement, navigation, and balance."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PHD.2.3",
+        "name": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "3. Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PHD.3.3.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PHD",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PHD.3",
+        "name": "Fine Motor Skills",
+        "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring."
+      },
+      "sub_strand": {
+        "code": "PHD.3.3",
+        "name": "Fine Motor Skills",
+        "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring."
+      },
+      "indicator": {
+        "code": "PHD.3.3.4",
+        "name": "Manipulate writing, drawing, and art tools",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "4. Manipulate writing, drawing, and art\ntools."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.1",
+        "name": "Engage in and maintains positive relationships and interactions with adults",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "1. Engage in and maintains\npositive relationships and\ninteractions with adults.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.2",
+        "name": "Engage in prosocial and cooperative behavior with adults",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "2. Engage in prosocial and\ncooperative behavior with\nadults.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.3",
+        "name": "Engage in and maintains positive interactions and relationships with other children",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "3. Engage in and maintains\npositive interactions and\nrelationships with other\nchildren.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.4",
+        "name": "Engage in cooperative play with other children",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "4. Engage in cooperative play\nwith other children."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.5",
+        "name": "Use basic problem-solving skills to resolve conflicts with other children",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "5. Use basic problem-solving\nskills to resolve conflicts\nwith other children."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.2.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.2",
+        "name": "Sense of Identity and Belonging",
+        "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.1",
+        "name": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "1. Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.2.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.2",
+        "name": "Sense of Identity and Belonging",
+        "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.2",
+        "name": "Express confidence in own skills and positive feelings about self",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "2. Express confidence in own skills and positive feelings about self.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.2.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.2",
+        "name": "Sense of Identity and Belonging",
+        "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.3",
+        "name": "Have a sense of belonging to family, community, and other groups",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "3. Have a sense of belonging to family, community, and other groups."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.3.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.3",
+        "name": "Emotional Functioning",
+        "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.1",
+        "name": "Express a broad range of emotions and recognize these emotions in self and others",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "1. Express a broad range of emotions and recognize these emotions in self and others.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.3.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.3",
+        "name": "Emotional Functioning",
+        "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.2",
+        "name": "Express care and concern toward others",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "2. Express care and concern toward others."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.3.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.3",
+        "name": "Emotional Functioning",
+        "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.3",
+        "name": "Manage emotions with increasing independence",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "3. Manage emotions with increasing independence.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.4.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.4",
+        "name": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.4.1",
+        "name": "Follow classroom rules and routines with increasing independence",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "1. Follow classroom rules and routines with increasing independence.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.4.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.4",
+        "name": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.4.2",
+        "name": "Appropriately handle and take care of classroom materials",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "2. Appropriately handle and take care of classroom materials.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.4.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.4",
+        "name": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.4.3",
+        "name": "Manage actions, words, and behavior with increasing independence",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "3. Manage actions, words, and behavior with increasing independence.*"
+    }
+  ],
+  "total_indicators": 30,
+  "parsing_timestamp": "2026-06-19T17:36:42.022053+00:00",
+  "source_detection_key": ""
+}

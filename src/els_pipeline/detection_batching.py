@@ -121,14 +121,19 @@ def prepare_detection_batches(event: Dict[str, Any], context: Any) -> Dict[str, 
     else:
         for i in range(0, len(chunks), max_per_batch):
             batch_chunks = chunks[i : i + max_per_batch]
-            batch_blocks = [block for chunk in batch_chunks for block in chunk]
             idx = len(batches)
             batch_key = construct_intermediate_key(
                 country, state, version_year,
                 f"detection/batch-{idx}", run_id,
             )
+            # Persist the ORIGINAL chunks (each with its overlap), NOT a flattened
+            # block list. process_detection_batch then runs the exact same
+            # per-chunk LLM calls as the non-batched detect_structure. The old
+            # flatten-then-re-chunk path shifted chunk boundaries, which made the
+            # deployed pipeline drop tail indicators and misclassify levels —
+            # diverging from the direct path the eval grades.
             save_json_to_s3(
-                {"blocks": [b.model_dump() for b in batch_blocks]},
+                {"chunks": [[b.model_dump() for b in chunk] for chunk in batch_chunks]},
                 Config.S3_PROCESSED_BUCKET,
                 batch_key,
             )
@@ -137,7 +142,7 @@ def prepare_detection_batches(event: Dict[str, Any], context: Any) -> Dict[str, 
                     batch_index=idx,
                     batch_s3_key=batch_key,
                     chunk_count=len(batch_chunks),
-                    block_count=len(batch_blocks),
+                    block_count=sum(len(c) for c in batch_chunks),
                 )
             )
             batch_keys.append({
@@ -200,9 +205,19 @@ def detect_batch(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
 
     logger.info(f"Processing detection batch {batch_index}: run_id={run_id}")
 
-    # Load batch text blocks from S3
+    # Load this batch's chunks from S3. Prefer the preserved chunk structure so
+    # we run the SAME per-chunk LLM calls as detect_structure; fall back to
+    # re-chunking a flat block list for backward compatibility with older
+    # (pre-fix) batch payloads.
     batch_data = load_json_from_s3(Config.S3_PROCESSED_BUCKET, event["batch_key"])
-    blocks = [TextBlock(**b) for b in batch_data.get("blocks", [])]
+    if "chunks" in batch_data:
+        chunks = [
+            [TextBlock(**b) for b in chunk]
+            for chunk in batch_data["chunks"]
+        ]
+    else:
+        blocks = [TextBlock(**b) for b in batch_data.get("blocks", [])]
+        chunks = chunk_text_blocks(blocks)
 
     # Load the depth map produced once at preparation time. Empty dict means
     # the Pass-1 inference failed; we fall back to no-depth-map mode.
@@ -214,9 +229,6 @@ def detect_batch(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             depth_map = loaded if loaded else None
         except Exception as e:
             logger.warning(f"Failed to load depth_map from {depth_map_key}: {e}")
-
-    # Re-chunk the batch blocks
-    chunks = chunk_text_blocks(blocks)
 
     all_elements = []
     errors = []
@@ -277,7 +289,9 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
     Merge all partial detection batch results into a single output.
 
     Loads the batch manifest and all partial result files from S3,
-    merges and deduplicates elements using (code, title, source_page),
+    merges and deduplicates elements using
+    (level, code, title, age_band, source_page) — age_band is in the key so
+    side-by-side age/proficiency column variants are not collapsed,
     counts elements needing review, determines overall status, and
     saves the final detection output in the same format as the
     existing detection_handler.
@@ -356,11 +370,22 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
             "error": error_msg,
         }
 
-    # Deduplicate elements using (code, title, source_page) tuple
+    # Deduplicate overlap-repeated elements. The key includes age_band so
+    # side-by-side column variants that legitimately SHARE a code/title/page —
+    # e.g. CA Foundation "1.2" Early vs Later, or PK3 vs PK4 — are NOT collapsed
+    # into one; only true repeats (identical on all keys) are dropped. This
+    # mirrors detector._dedup_elements, which the non-batched path uses; omitting
+    # age_band here was silently dropping every second age/proficiency column.
     seen: set = set()
     unique_elements: List[Dict[str, Any]] = []
     for elem in all_elements:
-        key = (elem["code"], elem["title"], elem.get("source_page", 0))
+        key = (
+            elem.get("level"),
+            elem["code"],
+            elem["title"],
+            elem.get("age_band"),
+            elem.get("source_page", 0),
+        )
         if key not in seen:
             seen.add(key)
             unique_elements.append(elem)

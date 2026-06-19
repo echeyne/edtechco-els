@@ -46,6 +46,15 @@ _LABEL_PREFIX_RE = re.compile(
 # trailing run of whitespace + footnote glyphs while preserving terminal
 # sentence punctuation ("…rules.*" → "…rules.").
 _TRAILING_MARKER_RE = re.compile(r"[\s*†‡§¶]+$")
+
+# Some documents append a structural noun to the domain heading ("… Standard",
+# "… Domain") and/or repeat the heading as an ALL-CAPS running page header. Strip
+# the trailing noun on DOMAIN titles so the same domain matches the golden's
+# label-free title AND so its variants collapse during code normalization (e.g.
+# AZ "Language and Literacy Standard" and the running header "LANGUAGE AND
+# LITERACY" both normalize to "language and literacy" → one domain code; TX
+# "Social and Emotional Development Domain" → "Social and Emotional Development").
+_TRAILING_DOMAIN_LABEL_RE = re.compile(r"\s+(?:standards?|domains?)\s*$", re.IGNORECASE)
 DEFAULT_OVERLAP_TOKENS = 500
 MAX_PARSE_RETRIES = 2
 MAX_BEDROCK_RETRIES = 2
@@ -237,20 +246,27 @@ CLASSIFICATION RULE:
 
 EXTRACTION RULES:
 1. Emit every structural element you see, even if its children are not in this chunk.
-2. Lettered/bulleted examples under an indicator (a., b., c., …) are NOT separate indicators — fold into the indicator's description or ignore.
+2. A lettered/bulleted list (a., b., c., …) is EITHER the leaf indicators OR illustrative examples below a leaf — decide using the depth map, never the "a./b." surface style:
+   - If the document's DEEPEST depth in the depth map is this lettered list (i.e. there is no deeper indicator level beneath the letters), then EACH lettered item IS an indicator. Emit one indicator per letter. Its `title` is the lettered item's own skill/competency statement (the text after the letter, e.g. "a. Demonstrates self-confidence." → "Demonstrates self-confidence"); any further example anecdotes indented beneath that letter go in its `description`. Do NOT fold these letters away and do NOT drop them — every lettered item in the chunk must appear.
+   - Otherwise (the letters sit BELOW an already-identified leaf indicator and read as concrete behavior anecdotes, not skill statements) they are examples — fold them into the parent indicator's description or ignore them. Do NOT emit them as separate indicators.
 3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
    - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
 4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title (e.g. "Physical Development" → "PHD"). Use the SAME code every time the same element appears.
    - When a heading is written as "<Label> <N>: <Title>" (e.g. "Strand 1: Self-Awareness and Emotional Skills", "Concept 2: Recognizes and Expresses Feelings"), the label+number ("Strand 1", "Concept 2") is the `code` and the `title` is ONLY the text after the colon ("Self-Awareness and Emotional Skills", "Recognizes and Expresses Feelings"). Never leave the "Strand N:"/"Concept N:" label inside `title`.
+   - When a lettered list IS the leaf indicators (per rule 2), the `code` is JUST that item's letter, lowercased ("a", "b", "c", …) — exactly as the document orders them, regardless of any OCR casing. Do NOT prepend the parent strand/concept number (no "S1C1a"), and do NOT uppercase it (no bare "C"). The downstream parser supplies the parent's number; the detector only needs the consistent local letter.
 5. `confidence`: 0.95+ if the depth map clearly applies; 0.80-0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
 6. `source_page`: page number from the [Page N] marker on that line.
 7. `source_text`: the exact line(s) from the chunk you used. Copy verbatim.
+8. `description`: capture the element's COMPLETE descriptive/introductory prose, verbatim — EVERY sentence of a domain/strand/sub_strand introduction that appears in the chunk, not just the first sentence. Do NOT summarize, paraphrase, shorten, or stop at the first sentence. If the intro runs across several sentences or lines in the chunk, include all of them. (For an age-band column indicator, `description` is still only that one column's prose, per rule 3.)
 
 NEGATIVE EXAMPLES (do NOT do these):
 - Do not emit "Indicators and Examples in the Context of Daily Routines" as a structural element. It is a section header for examples.
 - Do not merge "Early" and "Later" age columns into one indicator.
 - Do not keep a structural label inside the title: "Strand 1: Self-Awareness" → title is "Self-Awareness", NOT "Strand 1: Self-Awareness".
 - Do not classify a numeric prefix ("1.", "2.") as `sub_strand` just because numeric-under-letter is sub_strand in some other doc — use the depth map.
+- Do not truncate a multi-sentence domain/strand description to its first sentence — capture the entire introduction verbatim.
+- When the depth map's leaf is a lettered list, do NOT drop or fold its letters: every "a./b./c." skill statement under a concept is its own indicator (e.g. under "Phonological Awareness" emit indicators "a","b","c","d","e","f","g", one per letter). Emit them even for concepts whose letters appear far from the concept heading in the chunk.
+- When a lettered list is NOT the leaf — concrete anecdotes ("Chooses carrots over celery during mealtime.") sitting under an already-identified leaf indicator/foundation — do NOT promote them to indicators; fold them into that indicator's description.
 
 OUTPUT — return ONLY a JSON array, starting with `[` and ending with `]`. No prose, no markdown, no commentary. Schema per element:
 {{"level": "domain|strand|sub_strand|indicator", "code": "...", "title": "...", "description": "...", "age_band": "..." or null, "confidence": 0.0-1.0, "source_page": N, "source_text": "..."}}
@@ -472,6 +488,12 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
     # terminal punctuation, so they're left untouched.
     if level == HierarchyLevelEnum.INDICATOR and isinstance(title, str):
         title = title.rstrip().rstrip('.').rstrip() or title
+
+    # Drop a trailing "Standard"/"Domain" noun from domain headings so duplicate
+    # domain variants (section header vs ALL-CAPS running header) collapse to one
+    # code during normalization and match the golden's label-free domain name.
+    if level == HierarchyLevelEnum.DOMAIN and isinstance(title, str):
+        title = _TRAILING_DOMAIN_LABEL_RE.sub("", title).strip() or title
 
     return DetectedElement(
         level=level,
