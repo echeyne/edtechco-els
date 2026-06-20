@@ -1,0 +1,680 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-TX-2022-I.A.1.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.1.36-48",
+        "name": "Child is building competence in controlling own body movements",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 2,
+      "source_text": "\u0420\u041a\u0417.I.\u0410.1 Child is building competence in controlling own body movements."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.1.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.1.48-60",
+        "name": "Child is aware of where own body is in space and respects personal boundaries",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 2,
+      "source_text": "PK4.I.A.1 Child is aware of where own body is in space and respects personal boundaries."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.2.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.2.36-48",
+        "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 3,
+      "source_text": "PK3.1.A.2 Child can identify own physical attributes and indicate some likes and dislikes when prompted."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.2.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.2.48-60",
+        "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 3,
+      "source_text": "PK4.I.A.2 Child shows self-awareness of physical attributes, personal preferences, and own abilities."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.3.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.3.36-48",
+        "name": "Child begins to show awareness of own abilities",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 3,
+      "source_text": "PK3.I.A.3 Child begins to show awareness of own abilities."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.3.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.3.48-60",
+        "name": "Child shows reasonable opinion of his own abilities and limitations",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 3,
+      "source_text": "PK4.I.A.3 Child shows reasonable opinion of his own abilities and limitations."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.4.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.4.36-48",
+        "name": "Child shows initiative in trying new activities but may not persist when obstacles or challenges arise",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 4,
+      "source_text": "PK3.1.A.4 Child shows initiative in trying new activities but may not persist when obstacles or challenges arise."
+    },
+    {
+      "standard_id": "US-TX-2022-I.A.4.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.A",
+        "name": "Self-Concept",
+        "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "I.A.4.48-60",
+        "name": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 4,
+      "source_text": "PK4.I.A.4 Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.1.a.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.1",
+        "name": "Behavior Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "I.B.1.a.36-48",
+        "name": "Child follows simple rules and routines when assisted by adults",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 4,
+      "source_text": "PK3.I.B.1.a Child follows simple rules and routines when assisted by adults."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.1.a.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.1",
+        "name": "Behavior Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "I.B.1.a.48-60",
+        "name": "Child follows classroom rules and routines with occasional reminders from adults",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 4,
+      "source_text": "PK4.I.B.1.a Child follows classroom rules and routines with occasional reminders from adults."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.1.b.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.1",
+        "name": "Behavior Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "I.B.1.b.36-48",
+        "name": "Child takes care of and manages classroom materials with adult assistance",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 5,
+      "source_text": "PK3.I.B.1.b Child takes care of and manages classroom materials with adult assistance."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.1.b.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.1",
+        "name": "Behavior Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "I.B.1.b.48-60",
+        "name": "Child takes care of and manages classroom materials",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 5,
+      "source_text": "PK4.I.B.1.b Child takes care of and manages classroom materials."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.1.c.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.1",
+        "name": "Behavior Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "I.B.1.c.36-48",
+        "name": "Child manages own behavior with adult guidance and assistance",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 5,
+      "source_text": "PK3.I.B.1.c Child manages own behavior with adult guidance and assistance."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.1.c.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.1",
+        "name": "Behavior Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "I.B.1.c.48-60",
+        "name": "Child regulates own behavior with occasional reminders or assistance from adults",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 5,
+      "source_text": "PK4.I.B.1.c Child regulates own behavior with occasional reminders or assistance from adults."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.2.a.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.2",
+        "name": "Emotional Control",
+        "description": ""
+      },
+      "indicator": {
+        "code": "I.B.2.a.36-48",
+        "name": "Child recognizes and expresses a range of emotions",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 5,
+      "source_text": "PK3.I.B.2.a Child recognizes and expresses a range of emotions."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.2.a.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.2",
+        "name": "Emotional Control",
+        "description": ""
+      },
+      "indicator": {
+        "code": "I.B.2.a.48-60",
+        "name": "Child begins to understand the connection between emotions and behaviors",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 5,
+      "source_text": "PK4.I.B.2.a Child begins to understand the connection between emotions and behaviors."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.2.b.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.2",
+        "name": "Emotional Control",
+        "description": ""
+      },
+      "indicator": {
+        "code": "I.B.2.b.36-48",
+        "name": "Child is familiar with basic feeling words (e.g., happy, sad, mad, scared)",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 6,
+      "source_text": "PK3.I.B.2.b Child is familiar with basic feeling\nwords (e.g., happy, sad, mad, scared)."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.2.b.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.2",
+        "name": "Emotional Control",
+        "description": ""
+      },
+      "indicator": {
+        "code": "I.B.2.b.48-60",
+        "name": "Child uses verbal and nonverbal communication to communicate basic emotions and feelings",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 6,
+      "source_text": "PK4.I.B.2.b Child uses verbal and nonverbal\ncommunication to communicate basic\nemotions and feelings."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.2.c.36-48",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.2",
+        "name": "Emotional Control",
+        "description": ""
+      },
+      "indicator": {
+        "code": "I.B.2.c.36-48",
+        "name": "Child manages intensity of emotions with adult assistance",
+        "description": null
+      },
+      "age_band": "36-48",
+      "source_page": 6,
+      "source_text": "PK3.I.B.2.c Child manages intensity of emotions\nwith adult assistance."
+    },
+    {
+      "standard_id": "US-TX-2022-I.B.2.c.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "I",
+        "name": "Social and Emotional Development",
+        "description": "While a prekindergarten education should include activities that strengthen cognitive skills, it must also provide for the development of the social and emotional competencies required for school readiness and success in life. The development of these personal and social skills enables children to build a sense of who they are and what they can do. Supportive, positive relationships between teachers and children are essential to implementing effective practices that support a child's social and emotional development. Children must establish positive relationships with adults and peers to participate effectively in the classroom community, assert independence in appropriate ways, and accomplish tasks that are meaningful to them without infringing on the rights of others. Children who can follow directions, communicate their wants, and needs effectively, and get along with other children are better prepared for kindergarten and beyond. Early experiences influence brain development by establishing the neural connections that provide the foundation for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, children benefit from direct instruction and repeated opportunities to practice these skills. The Social and Emotional Development Domain of the Texas Prekindergarten Guidelines is divided into the following skills: self-concept, self-regulation, relationships with others, and social awareness."
+      },
+      "strand": {
+        "code": "I.B",
+        "name": "Self-Regulation",
+        "description": "Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibility. As they encounter and overcome new and various social obstacles when interacting with peers, guidance from teachers will enable them to learn acceptable ways of dealing with social and emotional stress and/or excitement. Self-regulation skills include three subskills: behavior control, emotional control, and control of attention. Subskills only appear in this section of the Texas Prekindergarten Guidelines and are represented by a lowercase letter at the end of the citation."
+      },
+      "sub_strand": {
+        "code": "I.B.2",
+        "name": "Emotional Control",
+        "description": ""
+      },
+      "indicator": {
+        "code": "I.B.2.c.48-60",
+        "name": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 6,
+      "source_text": "PK4.I.B.2.c Child is able to manage intensity of\nemotions more consistently, although adult\nguidance is sometimes necessary."
+    },
+    {
+      "standard_id": "US-TX-2022-VI.A.1.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "VI",
+        "name": "Science",
+        "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them. Science concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts. The Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science."
+      },
+      "strand": {
+        "code": "VI.A",
+        "name": "Physical Science",
+        "description": "Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "VI.A.1.48-60",
+        "name": "Child observes, investigates, describes, and discusses characteristics of common objects",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 7,
+      "source_text": "PK4.VI.A.1 Child observes, investigates, describes,\nand discusses characteristics of common objects."
+    },
+    {
+      "standard_id": "US-TX-2022-VI.A.2.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "VI",
+        "name": "Science",
+        "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them. Science concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts. The Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science."
+      },
+      "strand": {
+        "code": "VI.A",
+        "name": "Physical Science",
+        "description": "Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "VI.A.2.48-60",
+        "name": "Child observes, investigates, describes, and discusses position and motion of objects",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 8,
+      "source_text": "PK4.VI.A.2 Child observes, investigates, describes,\nand discusses position and motion of objects."
+    },
+    {
+      "standard_id": "US-TX-2022-VI.A.3.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "VI",
+        "name": "Science",
+        "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them. Science concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts. The Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science."
+      },
+      "strand": {
+        "code": "VI.A",
+        "name": "Physical Science",
+        "description": "Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "VI.A.3.48-60",
+        "name": "Child uses simple scientific tools to learn about objects",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 8,
+      "source_text": "PK4.VI.A.3 Child uses simple scientific tools to\nlearn about objects."
+    },
+    {
+      "standard_id": "US-TX-2022-VI.A.4.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "VI",
+        "name": "Science",
+        "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them. Science concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts. The Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science."
+      },
+      "strand": {
+        "code": "VI.A",
+        "name": "Physical Science",
+        "description": "Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "VI.A.4.48-60",
+        "name": "Child observes, investigates, describes, and discusses sources of energy including light, heat, and electricity",
+        "description": null
+      },
+      "age_band": "48-60",
+      "source_page": 9,
+      "source_text": "PK4.VI.A.4 Child observes, investigates, describes,\nand discusses sources of energy including light,\nheat, and electricity."
+    },
+    {
+      "standard_id": "US-TX-2022-VI.B.1.48-60",
+      "country": "US",
+      "state": "TX",
+      "version_year": 2022,
+      "domain": {
+        "code": "VI",
+        "name": "Science",
+        "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them. Science concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts. The Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science."
+      },
+      "strand": {
+        "code": "VI.B",
+        "name": "Life Science",
+        "description": "Young children have a keen interest in studying living things, including the unique features of plants and animals, the environments in which they live, and what each living thing needs to thrive. Effective teachers provide opportunities for children to explore, observe, and investigate various organisms through hands-on experiences. Through these experiences, children are encouraged to use newly acquired vocabulary to describe and discuss their observations."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "VI.B.1.48-60",
+        "name": "Child observes, investigates, describes, and discusses the characteristics of organisms",
+        "description": "The child may:\ndescribe the color, size, and shape of organisms\ndescribe an organism's need for food, water, air, light, and shelter\ncompare differences and similarities of animals and plants (e.g., fish live in water, all birds have feathers, we can eat some plants)"
+      },
+      "age_band": "48-60",
+      "source_page": 9,
+      "source_text": "PK4.VI.B.1 Child observes, investigates, describes,\nand discusses the characteristics of organisms."
+    }
+  ],
+  "total_indicators": 25,
+  "parsing_timestamp": "2026-06-20T17:15:06.272140+00:00",
+  "source_detection_key": ""
+}

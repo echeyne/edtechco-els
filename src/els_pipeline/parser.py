@@ -189,6 +189,9 @@ def normalize_code_to_canonical(code: Optional[str], title: Optional[str]) -> Op
     return c
 
 
+_PURE_NUMERIC_RE = re.compile(r"^\d[\d.]*$")
+
+
 def abbreviate_element_codes(
     elements: List[DetectedElement],
 ) -> List[DetectedElement]:
@@ -197,9 +200,38 @@ def abbreviate_element_codes(
     consistent segments (e.g. AZ "Strand 1"/"Concept 1" → "1"/"1", giving
     "SED.1.1.a" instead of "SED.Strand 1.Concept 1.a"). Runs after
     normalize_element_codes in both the direct and batched parse paths."""
+    # Pre-compute normalised indicator codes so we can detect the CA pattern
+    # where a sub_strand element inherits the same Foundation number as its
+    # child indicators (e.g. sub_strand code="1.2" title="Initiative" sits above
+    # indicator code="1.2" title="Initiative [Early]"). In that case the numeric
+    # code belongs to the indicator; the sub_strand's identity is its title.
+    indicator_codes: set[str] = set()
+    for el in elements:
+        if el.level == HierarchyLevelEnum.INDICATOR:
+            nc = normalize_code_to_canonical(el.code, el.title)
+            if nc:
+                indicator_codes.add(nc)
+
     out: List[DetectedElement] = []
     for el in elements:
         new_code = normalize_code_to_canonical(el.code, el.title)
+        if (
+            el.level == HierarchyLevelEnum.SUB_STRAND
+            and new_code
+            and _PURE_NUMERIC_RE.match(new_code)
+            and new_code in indicator_codes
+            and el.title
+        ):
+            title_abbrev = _abbreviate_title(el.title)
+            if title_abbrev:
+                logger.info(
+                    "Code normalization: sub_strand '%s' (numeric code '%s' "
+                    "collides with indicator) → title abbreviation '%s'",
+                    el.title,
+                    new_code,
+                    title_abbrev,
+                )
+                new_code = title_abbrev
         if new_code and new_code != el.code:
             el = el.model_copy(update={"code": new_code})
         out.append(el)
@@ -873,19 +905,23 @@ def chunk_elements_by_domain(
             continue
 
         # Deduplicate overlap-repeated elements (same element re-emitted by
-        # adjacent detector chunks). The key includes the normalized title and
-        # age_band, NOT just (level, code): documents with per-group lettered
-        # indicators reuse the SAME bare code across groups (e.g. AZ Concept
-        # 2.3 'a' and Concept 2.4 'a' both have code "a"), and side-by-side
-        # column variants share a code with different age bands (CA "1.2" Early
-        # vs Later). Keying on title+age_band keeps those distinct; only a true
-        # repeat (same code, same title, same age_band) is dropped.
+        # adjacent detector chunks). The key includes the normalized title,
+        # age_band, AND source_page. source_page distinguishes section-separator
+        # strand headers that re-appear on a later page (e.g. AZ "Strand 2:
+        # Emergent Literacy" listed as overview on page 4 AND as section header
+        # on page 9) from true duplicates produced by overlapping detector chunks
+        # (same page, same content). Per-group lettered indicators reuse the same
+        # bare code across groups (e.g. AZ 'a' under Concept 2.3 and 'a' under
+        # Concept 2.4); column variants share a code with different age bands
+        # (CA "1.2" Early vs Later). All five fields together keep intentional
+        # repeats distinct while still dropping true same-page duplicates.
         def _dedup_key(e: DetectedElement) -> tuple:
             return (
                 e.level,
                 e.code,
                 " ".join((e.title or "").lower().split()),
                 e.age_band,
+                e.source_page,
             )
 
         existing_keys = {
@@ -914,7 +950,9 @@ def _split_oversized_chunk(
 ) -> List[List[DetectedElement]]:
     """Split one domain chunk into sub-chunks of at most ``max_indicators``
     indicators each. Domain element(s) are repeated at the head of every
-    sub-chunk so the LLM still knows the domain; splits prefer strand/sub_strand
+    sub-chunk so the LLM still knows the domain; the most recently seen strand
+    element is also carried forward so sub-chunks that start mid-strand still
+    have parent context for code construction. Splits prefer strand/sub_strand
     boundaries, with a hard cap so a single huge strand still gets divided."""
     domain_els = [e for e in chunk if e.level == HierarchyLevelEnum.DOMAIN]
     rest = [e for e in chunk if e.level != HierarchyLevelEnum.DOMAIN]
@@ -925,14 +963,23 @@ def _split_oversized_chunk(
     sub_chunks: List[List[DetectedElement]] = []
     cur: List[DetectedElement] = []
     cur_ind = 0
+    current_strand: DetectedElement | None = None
     for el in rest:
         is_group = el.level in (HierarchyLevelEnum.STRAND, HierarchyLevelEnum.SUB_STRAND)
+        if el.level == HierarchyLevelEnum.STRAND:
+            current_strand = el
         # Start a new sub-chunk once the current one is full. Prefer to break at a
         # strand/sub_strand boundary, but hard-cap at max_indicators so a long run
         # of indicators under one strand still gets divided.
         if cur and (cur_ind >= max_indicators or (cur_ind >= max_indicators - 2 and is_group)):
             sub_chunks.append(domain_els + cur)
             cur, cur_ind = [], 0
+            # Carry the current strand into the new sub-chunk so the LLM can
+            # correctly build hierarchical codes for sub_strands/indicators that
+            # appear without an explicit strand header (e.g. AZ Concept 3 under
+            # Strand 2 split across a chunk boundary).
+            if current_strand is not None and el.level != HierarchyLevelEnum.STRAND:
+                cur.append(current_strand)
         cur.append(el)
         if el.level == HierarchyLevelEnum.INDICATOR:
             cur_ind += 1

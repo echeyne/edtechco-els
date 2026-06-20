@@ -6,6 +6,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The Early Learning Standards (ELS) Platform: a serverless AWS pipeline that ingests US state early-learning-standards PDFs, uses Bedrock (Claude) + Textract to detect and normalize their hierarchy into a canonical schema, and stores the result in Aurora PostgreSQL. On top of it sit three web apps (Standards Explorer, Planning App, Landing Site). See [README.md](README.md) and [documentation/ARCHITECTURE.md](documentation/ARCHITECTURE.md) for the full picture — this file covers only what isn't obvious from those.
 
+## Design direction for the detector & parser (READ BEFORE EDITING `detector.py` / `parser.py`)
+
+**Goal: `detector.py` and `parser.py` should be LLM-driven, not rule-driven.** The intended architecture is "let the model reason about the document; keep the Python thin." Detection/parsing decisions — how to classify a level, how to build a code, how to handle age-band columns, how to strip a structural label — belong in the **prompt**, expressed as general document-structure principles, not in Python regexes and special-case branches.
+
+**The problem we are actively fighting: overfitting to the golden set.** The current golden states (CA, AZ, CO, TX) were each made to pass by adding targeted Python logic — e.g. `_COLUMN_PREFIX_RE` (`PK\d+.` stripping), `_LABEL_PREFIX_RE` / `_strip_label_prefix` (`Strand N:` / `Concept N:` handling), `_derive_label_abbrev` / `_abbreviate_title` column abbreviations, the CA sub_strand/indicator code-collision branch in `abbreviate_element_codes`, `_TRAILING_DOMAIN_LABEL_RE`, and the `½`/`1/2` glyph folding. Each of these encodes a quirk of one document. They make the goldens score well but **do not generalize** — running a new state (e.g. Nevada, 2026-06-20) through the pipeline produces poor results because the new document's quirks aren't covered by these hardcoded rules.
+
+**When working in these two files, prefer in this order:**
+1. **Improve the prompt** so the LLM handles the case as a general principle. A rule that helps every document (e.g. "a structural label like `Strand 1:` is the code, not the title") belongs as a prompt instruction, stated generally — not as a Python regex keyed to specific label words.
+2. **Only fall back to Python** for things that are genuinely deterministic post-processing and document-agnostic (JSON extraction, schema validation, ID derivation from already-clean fields, true cross-chunk reconciliation). New per-state regexes/branches are a smell — flag them rather than adding them.
+3. **Never loosen the eval matchers or edit goldens to paper over a generalization gap.** Fix the golden DATA and canonicalize the model output instead (see the golden-consistency note below).
+
+**Test for generalization, not just the goldens.** A change that raises a golden score but relies on a document-specific rule is a regression in disguise. Validate against a held-out state (Nevada is the current canary; PDFs in `standards/nevada_ses_standards_2025*.pdf`) before considering a detector/parser change done. The `evaluation-runner` skill auto-runs additional states for exactly this reason — use it.
+
 ## Two-language monorepo
 
 The repo mixes two independently-managed toolchains. **Know which half you're in before running anything.**
