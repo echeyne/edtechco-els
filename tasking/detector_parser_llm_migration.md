@@ -53,7 +53,7 @@ python -m evaluation.eval_parser --detection-dir outputs/06-20-26
 
 Priority = lowest risk + highest generalization value first. Tasks 2–4 are *redundant* rules (the prompt already states them; the Python is a keyword-limited duplicate that no-ops on non-golden states), so deleting them can only help. Tasks 5–7 are real behavior the Python owns exclusively. Task 6 flips a prompt contract and is the riskiest.
 
-### Task 1 — Establish the before-baseline (PREREQUISITE)
+### COMPLETED - Task 1 — Establish the before-baseline (PREREQUISITE)
 
 **Risk:** none. **Do this first; everything else gates against it.**
 
