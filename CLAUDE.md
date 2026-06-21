@@ -89,3 +89,10 @@ DB schema evolves via numbered files in `infra/migrations/` (Aurora PostgreSQL).
 ## Config
 
 Bedrock model IDs, bucket names, and batch sizes are all env vars — see [.env.example](.env.example). Defaults of note: detector uses Claude Opus, the detection depth-map pass uses Claude Haiku, and the parser uses Claude Sonnet.
+
+## Claude Code skills
+
+Two project skills live at `~/.claude/skills/` and are invoked automatically by Claude Code:
+
+- **`download-pipeline-outputs`** (`~/.claude/skills/download-pipeline-outputs/SKILL.md`) — downloads detection, extraction, and parsing JSON from S3 for all four golden states (AZ, CA, CO, TX) into a date-stamped `outputs/MM-DD-YY/` folder. Invoke with e.g. "download pipeline outputs for run 15". Uses AWS profile `kinder-readiness-dev-cli`; run IDs are zero-padded to 3 digits. Output files are named `<STATE>-<type>.json` (e.g. `AZ-detection.json`).
+- **`evaluation-runner`** (`~/.claude/skills/evaluation-runner/SKILL.md`) — runs the detector and parser eval suites against a local outputs folder and suggests fixes for low-scoring components.

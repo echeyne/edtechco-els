@@ -64,7 +64,7 @@ Priority = lowest risk + highest generalization value first. Tasks 2–4 are *re
 
 ---
 
-### Task 2 — Migrate structural-label handling (`Strand N:` / `Concept N:`)
+### COMPLETED Task 2 — Migrate structural-label handling (`Strand N:` / `Concept N:`)
 
 **Risk:** low (redundant rule). **Files:** `detector.py`, `parser.py`.
 
@@ -78,7 +78,7 @@ Confirm the detector emits clean code/title on AZ (the main label-heavy state) b
 
 ---
 
-### Task 3 — Move code-abbreviation generation into the detector prompt
+### COMPLETED Task 3 — Move code-abbreviation generation into the detector prompt
 
 **Risk:** low (redundant rule). **Files:** `detector.py`, `parser.py`.
 

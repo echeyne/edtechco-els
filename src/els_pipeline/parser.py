@@ -139,54 +139,22 @@ def _disambiguator_suffix(
     return None
 
 
-# A structural-label code ("Strand 1", "Concept B", "Section 3") — the trailing
-# identifier IS the real code segment, so "Strand 1" → "1". Mirrors the
-# detector's _LABEL_PREFIX_RE but captures the identifier instead of stripping it.
-_LABEL_CODE_RE = re.compile(
-    r"^\s*(?:strand|concept|sub-?strand|section|standard|domain|goal|benchmark|unit|part)"
-    r"\s+([A-Za-z0-9][\w.\-]*)\s*$",
-    re.IGNORECASE,
-)
-# Length of a deterministic abbreviation for a single-word title (Vocabulary →
-# VOCA). Multi-word titles use an acronym of every word instead.
-_CODE_ABBREV_LEN = 4
-
-
-def _abbreviate_title(title: str) -> str:
-    """Deterministic short code from a title: acronym of every word for
-    multi-word titles ("Concepts About Print" → "CAP", "Social Emotional
-    Development" → "SED"), else the first _CODE_ABBREV_LEN letters of a
-    single word ("Vocabulary" → "VOCA"). Uppercased."""
-    words = re.findall(r"[A-Za-z0-9]+", title or "")
-    if not words:
-        return ""
-    if len(words) >= 2:
-        return "".join(w[0] for w in words).upper()
-    return words[0][:_CODE_ABBREV_LEN].upper()
-
-
 def normalize_code_to_canonical(code: Optional[str], title: Optional[str]) -> Optional[str]:
-    """Map a detected element's code to a clean, deterministic code SEGMENT for
-    cumulative-code building:
+    """Pass the LLM's code through unchanged after a whitespace strip — real
+    short codes (``"SED"``, ``"1.0"``, ``"a"``) keep their form; structural-label
+    codes (``"Strand 1"``, ``"Concept 1"``) reach the parser as-is and the
+    parsing prompt instructs the LLM to use the bare identifier for the
+    cumulative chain.
 
-    1. ``"Strand 1"`` / ``"Concept 2"`` (structural label + identifier) → the
-       identifier (``"1"`` / ``"2"``).
-    2. A code that is itself a title/phrase — it contains a space, or equals the
-       element's title — → a deterministic abbreviation of the title
-       (``"Concepts About Print"`` → ``"CAP"``, ``"Vocabulary"`` → ``"VOCA"``).
-    3. Otherwise the code already looks like a real short code (``"SED"``,
-       ``"1.0"``, ``"VOC"``, ``"a"``) → keep it unchanged.
+    The title-as-code → abbreviation rewrite that used to live here was
+    migrated into the detector prompt (rule 4) in Task 3 of the LLM-first
+    migration; the LLM now emits the abbreviation directly. ``title`` is kept
+    on the signature for the CA collision branch in
+    ``abbreviate_element_codes``.
     """
     if not code:
         return code
-    c = code.strip()
-    m = _LABEL_CODE_RE.match(c)
-    if m:
-        return m.group(1)
-    t = (title or "").strip()
-    if (" " in c) or (t and c.lower() == t.lower()):
-        return _abbreviate_title(t or c) or c
-    return c
+    return code.strip()
 
 
 _PURE_NUMERIC_RE = re.compile(r"^\d[\d.]*$")
@@ -222,7 +190,15 @@ def abbreviate_element_codes(
             and new_code in indicator_codes
             and el.title
         ):
-            title_abbrev = _abbreviate_title(el.title)
+            # Inline title→abbrev: acronym for multi-word, first 4 letters for
+            # single-word. This whole CA collision branch is scheduled to be
+            # removed in Task 7 of the LLM-first migration.
+            words = re.findall(r"[A-Za-z0-9]+", el.title)
+            title_abbrev = (
+                "".join(w[0] for w in words).upper() if len(words) >= 2
+                else words[0][:4].upper() if words
+                else ""
+            )
             if title_abbrev:
                 logger.info(
                     "Code normalization: sub_strand '%s' (numeric code '%s' "
@@ -312,6 +288,7 @@ Rules:
 - For age_band: examine each indicator's code, title, description, source_text, and its detected age_band field for age information. Normalize a real age RANGE to BARE months like "36-48" (PK3 → 36-48, PK4 → 48-60, "3 to 4 ½ Years" → 36-54, "4 to 5 ½ Years" → 48-66). If the column is NOT an age range — e.g. a proficiency level such as "Discovering"/"Developing"/"Broadening" — set age_band to null. The caller applies the default age band "{age_band}" for nulls.
 - For column_label: if the indicator came from a side-by-side column, copy that column's label VERBATIM from the element's detected age_band field (e.g. "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "PK3", "Discovering"); otherwise null.
 - For code: output the BASE FULL CUMULATIVE hierarchical code for every level — each child's code is its parent's code followed by the child's own segment, NOT just the final segment. A foundation with local code "1.2" under domain "ATL" / strand "1.0" / sub_strand "INIT" → indicator_code "ATL.1.0.INIT.1.2", sub_strand_code "ATL.1.0.INIT", strand_code "ATL.1.0" — never a bare "1.2" or "1.0". When a code is already fully qualified (e.g. an indicator detected as "SED.1.1.a"), use it as-is and derive the parents (strand_code "SED.1", sub_strand_code "SED.1.1").
+- When an element's `code` is itself a structural label + identifier (e.g. "Strand 1", "Concept 1", "Goal 2", "Pillar A", "Unit 3" — any structural word the document uses, followed by a number or letter), use ONLY the bare identifier as that element's segment in the cumulative chain: "Strand 1" → segment "1", "Concept 1" → segment "1", "Pillar A" → segment "A". The label word merely names the level and is already captured by the element's `level`; it must NOT appear inside the cumulative `code`. Example: a strand with code "Strand 1" under domain "SED" → strand_code "SED.1" (not "SED.Strand 1"); a sub_strand with code "Concept 1" under that strand → sub_strand_code "SED.1.1" (not "SED.Strand 1.Concept 1"). Apply this to ANY label word, not just the examples.
 - STRIP any leading age/column token from every code: a detected indicator code like "PK3.I.A.2" or "PK4.I.A.2" must become the BASE code "I.A.2" (drop the "PK3."/"PK4." prefix). Do NOT append the age band or column label to any code yourself — the caller appends a disambiguator suffix so side-by-side variants stay distinct.
 - Return ONLY the JSON array, no other text.
 - Every indicator element must appear exactly once in the output.

@@ -24,22 +24,6 @@ logger = logging.getLogger(__name__)
 CHARS_PER_TOKEN = 4
 DEFAULT_TARGET_TOKENS = 2000
 
-# Leading structural labels like "Strand 1:" / "Concept 2:" name a node's
-# position in the hierarchy but are NOT part of its title — the canonical title
-# is the text after the label, and the label survives as the element's `code`.
-# Documents that label every node ("Strand N: <Title>", "Concept N: <Title>")
-# otherwise leave the label embedded in the title, which then fails to match
-# the canonical label-free title (e.g. AZ's
-# "Strand 1: Self-Awareness and Emotional Skills" vs.
-# "Self-Awareness and Emotional Skills"). We require a label keyword + an
-# identifier token + a colon so this only fires on genuine structural labels,
-# never on prose titles that merely begin with one of these words.
-_LABEL_PREFIX_RE = re.compile(
-    r"^\s*(?:Strand|Concept|Sub-?Strand|Standard|Section|Domain|Goal|Benchmark)"
-    r"\s+[A-Za-z0-9][\w.\-]*\s*:\s*",
-    re.IGNORECASE,
-)
-
 # Trailing footnote/reference markers ("…rules.*", "…health †") are typography,
 # not part of the title — the LLM transcribes them inconsistently across runs,
 # so a title matches the golden on one run and misses on the next. Strip a
@@ -251,8 +235,8 @@ EXTRACTION RULES:
    - Otherwise (the letters sit BELOW an already-identified leaf indicator and read as concrete behavior anecdotes, not skill statements) they are examples — fold them into the parent indicator's description or ignore them. Do NOT emit them as separate indicators.
 3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
    - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
-4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title (e.g. "Physical Development" → "PHD"). Use the SAME code every time the same element appears.
-   - When a heading is written as "<Label> <N>: <Title>" (e.g. "Strand 1: Self-Awareness and Emotional Skills", "Concept 2: Recognizes and Expresses Feelings"), the label+number ("Strand 1", "Concept 2") is the `code` and the `title` is ONLY the text after the colon ("Self-Awareness and Emotional Skills", "Recognizes and Expresses Feelings"). Never leave the "Strand N:"/"Concept N:" label inside `title`.
+4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title — multi-word titles use the first letter of each word ("Physical Development" → "PHD", "Concepts About Print" → "CAP"), single-word titles use the first 4 letters ("Vocabulary" → "VOCA"). Use the SAME code every time the same element appears.
+   - When a heading is written as `<Label> <id>: <Title>` — where `<Label>` is ANY structural word the document uses to name a level (e.g. Strand, Concept, Sub-Strand, Goal, Pillar, Unit, Theme, Section, Element, Standard, Domain, Benchmark, Component, Cluster, Foundation, Outcome, or whatever else this particular document uses) and `<id>` is the position identifier at that level (a number "1", a letter "A", a token "1.2") — the label-plus-id together is the element's `code` (e.g. "Strand 1", "Concept 2", "Goal A", "Pillar 1.2"). The `title` is ONLY the text after the colon (e.g. "Strand 1: Self-Awareness and Emotional Skills" → title "Self-Awareness and Emotional Skills"). This rule applies to EVERY structural-label heading word, not just the examples — never leave the `<Label> <id>:` prefix inside `title`, regardless of which word the document chose for `<Label>`.
    - When a lettered list IS the leaf indicators (per rule 2), the `code` is JUST that item's letter, lowercased ("a", "b", "c", …) — exactly as the document orders them, regardless of any OCR casing. Do NOT prepend the parent strand/concept number (no "S1C1a"), and do NOT uppercase it (no bare "C"). The downstream parser supplies the parent's number; the detector only needs the consistent local letter.
 5. `confidence`: 0.95+ if the depth map clearly applies; 0.80-0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
 6. `source_page`: page number from the [Page N] marker on that line.
@@ -435,21 +419,14 @@ def _normalize_age_band(age_band: Any) -> Optional[str]:
 
 
 def _strip_label_prefix(title: Any) -> Any:
-    """Canonicalize an element title for stable matching:
-
-    1. Strip a leading structural label ("Strand 1:", "Concept 2:") — the label
-       is the element's `code`, not part of its name.
-    2. Strip trailing footnote/reference markers ("…rules.*").
-
-    Both are surface noise the LLM transcribes inconsistently; removing them
-    keeps a title byte-stable across runs so it matches the golden's label-free,
-    marker-free title. No-op for titles that already lack a prefix/marker (the
-    common case — CA/CO/TX). Never strips the title down to empty: if cleaning
-    would leave nothing, the original is kept."""
+    """Strip trailing footnote/reference markers ("…rules.*", "…health †") —
+    typography the LLM transcribes inconsistently across runs. Removing them
+    keeps a title byte-stable so it matches the golden's marker-free title.
+    No-op for titles that already lack a marker. Never strips the title down to
+    empty: if cleaning would leave nothing, the original is kept."""
     if not isinstance(title, str):
         return title
-    cleaned = _LABEL_PREFIX_RE.sub("", title)
-    cleaned = _TRAILING_MARKER_RE.sub("", cleaned).strip()
+    cleaned = _TRAILING_MARKER_RE.sub("", title).strip()
     return cleaned or title
 
 
