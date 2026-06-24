@@ -90,7 +90,7 @@ Detector prompt rule 4 already asks the model to generate a ≤5-char uppercase 
 
 ---
 
-### Task 4 — Migrate domain trailing-noun stripping
+### Completed Task 4 — Migrate domain trailing-noun stripping
 
 **Risk:** low. **File:** `detector.py`.
 
