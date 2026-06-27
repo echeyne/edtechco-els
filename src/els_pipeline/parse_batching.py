@@ -24,7 +24,6 @@ from .models import (
 )
 from .parser import (
     MAX_PARSE_RETRIES,
-    abbreviate_element_codes,
     build_parsing_prompt,
     call_bedrock_llm,
     chunk_elements_by_domain,
@@ -90,12 +89,11 @@ def prepare_parse_batches(event: Dict[str, Any], context: Any) -> Dict[str, Any]
         f"Filtered elements: {len(valid_elements)} valid out of {len(elements)} total"
     )
 
-    # Canonicalize codes across elements BEFORE chunking — same steps the direct
-    # parse_hierarchy path runs. Without these the batched path routes/serializes
-    # un-normalized codes (e.g. "LANGLIT"/"LANG"/"LL" drift, "Strand 1" labels),
-    # diverging from the eval.
+    # Canonicalize codes across elements BEFORE chunking — same step the direct
+    # parse_hierarchy path runs. Without it the batched path routes/serializes
+    # drifted codes (e.g. "LANGLIT"/"LANG"/"LL" for the same domain), diverging
+    # from the eval.
     valid_elements = normalize_element_codes(valid_elements)
-    valid_elements = abbreviate_element_codes(valid_elements)
 
     # Group by domain using existing function
     domain_chunks = chunk_elements_by_domain(valid_elements)

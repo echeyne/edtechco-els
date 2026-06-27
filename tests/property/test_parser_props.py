@@ -436,19 +436,18 @@ def test_property_10_depth_based_hierarchy_mapping_4_levels(elements, country, s
     country=country_code(),
     state=state_code(),
     year=version_year(),
-    domain_code=st.text(alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ", min_size=1, max_size=5),
     indicator_code=st.text(alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", min_size=1, max_size=10),
 )
-def test_property_11_standard_id_determinism(country, state, year, domain_code, indicator_code):
+def test_property_11_standard_id_determinism(country, state, year, indicator_code):
     """
     Property 11: Standard_ID Determinism
 
     Validates: Requirements 4.5
     """
-    id1 = generate_standard_id(country, state, year, domain_code, indicator_code)
-    id2 = generate_standard_id(country, state, year, domain_code, indicator_code)
+    id1 = generate_standard_id(country, state, year, indicator_code)
+    id2 = generate_standard_id(country, state, year, indicator_code)
     assert id1 == id2
-    expected_format = f"{country}-{state}-{year}-{domain_code}-{indicator_code}"
+    expected_format = f"{country}-{state}-{year}-{indicator_code}"
     assert id1 == expected_format
 
 
@@ -530,27 +529,23 @@ def test_property_12_orphaned_indicators_without_domain(country, state, year):
     country=country_code(),
     state=state_code(),
     year=version_year(),
-    domain_code=st.text(
-        alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.",
-        min_size=1, max_size=10,
-    ),
     indicator_code=st.text(
         alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.",
         min_size=1, max_size=15,
     ),
 )
 def test_property_4_generate_standard_id_determinism_and_format(
-    country, state, year, domain_code, indicator_code
+    country, state, year, indicator_code
 ):
     """
     Feature: ai-powered-parser, Property 4: generate_standard_id determinism and format
 
     **Validates: Requirements 4.2, 4.3**
     """
-    id1 = generate_standard_id(country, state, year, domain_code, indicator_code)
-    id2 = generate_standard_id(country, state, year, domain_code, indicator_code)
+    id1 = generate_standard_id(country, state, year, indicator_code)
+    id2 = generate_standard_id(country, state, year, indicator_code)
     assert id1 == id2
-    expected = f"{country}-{state}-{year}-{domain_code}-{indicator_code}"
+    expected = f"{country}-{state}-{year}-{indicator_code}"
     assert id1 == expected
 
 

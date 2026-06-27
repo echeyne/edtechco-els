@@ -102,7 +102,7 @@ Detector prompt rule 4 already asks the model to generate a ≤5-char uppercase 
 
 ---
 
-### Task 5 — Migrate age/column code-prefix stripping (drop the `PK` regex)
+### Completed Task 5 — Migrate age/column code-prefix stripping (drop the `PK` regex)
 
 **Risk:** medium (Python owns this exclusively, TX). **File:** `parser.py`.
 
@@ -116,9 +116,11 @@ Detector prompt rule 4 already asks the model to generate a ≤5-char uppercase 
 
 ---
 
-### Task 6 — Migrate side-by-side column disambiguation to the LLM (flip the prompt contract)
+### Completed Task 6 — Migrate side-by-side column disambiguation to the LLM (flip the prompt contract)
 
 **Risk:** HIGH — flips an existing prompt contract. Do after the safer migrations. **File:** `parser.py`.
+
+> **Done (2026-06-25).** Flipped the prompt: removed the "Do NOT append… the caller appends a disambiguator suffix" contract and added a general DISAMBIGUATE rule (age-range column → `{start}-{end}` month range, e.g. `.36-48`; non-age proficiency column → first-4-letters-uppercased, e.g. `.DISC`/`.DEVE`/`.BROA`) appended to the indicator code only. Removed `_disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN`, and the suffix re-application block. Kept a thin numeric-counter uniqueness guard in `parse_llm_response`. Verified the LLM emits the disambiguators on its own (Python monkeypatched off: CA 0 dup codes / 23×36-54 / 23×48-66 / 48× DISC|DEVE|BROA; TX 0 dup codes / correct 36-48/48-60). Proven equivalent to Task 5 on the same 06-25-26 fixture (identical disambiguator distribution, 0 collisions). All `*-DISTINCT-IDS` + `NO-ID-COLLISION` regression cases PASS. Results: [task6-parser.json](task6-parser.json). Note: gate run against `outputs/06-25-26` (current detector), since the Task-1 `06-20-26` fixture predates Task 3's detector abbreviation and is no longer parser-compatible.
 
 Today the parsing prompt FORBIDS the LLM from disambiguating ("Do NOT append the age band or column label to any code") and Python owns it via `_disambiguator_suffix` + `_derive_label_abbrev` (`Discovering`→`DISC`) + `canonicalize_age_band`, re-applied as a suffix in `parse_llm_response`.
 
@@ -129,9 +131,11 @@ Today the parsing prompt FORBIDS the LLM from disambiguating ("Do NOT append the
 
 ---
 
-### Task 7 — Remove the CA collision branch and collapse emptied helpers
+### Completed Task 7 — Remove the CA collision branch and collapse emptied helpers
 
 **Risk:** medium (dependent cleanup). Do after Tasks 2, 3, 6. **File:** `parser.py`.
+
+> **Done (2026-06-25).** Generalized the CA collision-avoidance into `build_parsing_prompt` as one principle: "a sub_strand and its child indicator must NEVER share the same code" → derive the sub_strand segment from its TITLE using the same ≤5-char abbrev scheme the detector prompt already uses (multi-word→initials `CAP`, single-word→first-4 `INIT`/`VOCA`). Removed the hardcoded CA branch + `_PURE_NUMERIC_RE`; deleted `abbreviate_element_codes` (post-branch it was only a non-load-bearing `.strip()`) and `normalize_code_to_canonical`; removed the call from BOTH parse paths (`parse_hierarchy` + `prepare_parse_batches`) and the `parse_batching.py` import. `normalize_element_codes` (cross-chunk drift, out of scope) still runs first in both. Verified the LLM emits the disambiguated codes ON ITS OWN (Python branch gone): CA's 10 collision-prone ATL sub_strands → CURI/INIT/ENGA/PERS/WORK/IC/MAD/FLEX/PS/CE (0 collisions); CA-IND-01 Initiative → `ATL.1.0.INIT.1.2.36-54` EXACT golden match (better than the old branch, which got the strand prefix `ATL.1` wrong). Gate on `outputs/06-25-26-2` (no-cache, before vs after on the same fixture): CA 0.933→**0.978**, TX 0.896→**0.938**, AZ 0.926 flat, CO 0.833 flat; 0 ID collisions; all `*-DISTINCT-IDS` + `NO-ID-COLLISION` PASS. (CO's `CO-INDICATOR-PARENT-IS-STRAND` FAILs in both before and after — a pre-existing detection regression in the `06-25-26-2` CO detection, not this parser change.) Tests: 43 passed, 6 failed — all 6 confirmed pre-existing via git-stash (stale `generate_standard_id` format tests + retry/partitioning), zero introduced. Results: [task7-parser.json](task7-parser.json), baseline [task7-baseline-0625-2.json](task7-baseline-0625-2.json).
 
 `abbreviate_element_codes` contains a hardcoded CA pattern (sub_strand numeric code colliding with a child indicator → swap to title abbrev) using `_PURE_NUMERIC_RE`.
 

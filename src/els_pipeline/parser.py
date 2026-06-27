@@ -95,125 +95,6 @@ def canonicalize_age_band(raw: Optional[str]) -> Optional[str]:
     return s or None
 
 
-# Number of leading letters used to abbreviate a proficiency-style column label
-# (Discovering → DISC, Developing → DEVE, Broadening → BROA). Age-distinguished
-# columns use their month range instead, so this only fires for non-age labels.
-_COLUMN_ABBREV_LEN = 4
-# Leading age/column token to drop from a fully-qualified code, e.g. the "PK3."
-# in "PK3.I.A.2" — the disambiguator is re-applied as a suffix instead.
-_COLUMN_PREFIX_RE = re.compile(r"^PK\d+\.", re.IGNORECASE)
-
-
-def _strip_column_prefix(code: Optional[str]) -> Optional[str]:
-    """Drop a leading age/column token (e.g. ``PK3.``/``PK4.``) from a code so the
-    base hierarchical path is shared across side-by-side variants. No-op for codes
-    without such a prefix."""
-    if not code:
-        return code
-    return _COLUMN_PREFIX_RE.sub("", code)
-
-
-def _derive_label_abbrev(label: Optional[str]) -> Optional[str]:
-    """Derive a stable disambiguator from a proficiency-style column label: the
-    first ``_COLUMN_ABBREV_LEN`` alphabetic characters, uppercased
-    (``Discovering`` → ``DISC``, ``Developing`` → ``DEVE``, ``Broadening`` →
-    ``BROA``). Returns None if the label has no usable letters."""
-    if not label:
-        return None
-    letters = re.sub(r"[^A-Za-z]", "", label)
-    return letters[:_COLUMN_ABBREV_LEN].upper() or None
-
-
-def _disambiguator_suffix(
-    canonical_age: Optional[str],
-    column_label: Optional[str],
-) -> Optional[str]:
-    """The suffix appended to an indicator code so side-by-side column variants
-    keep distinct codes/IDs. Age-distinguished columns (Early/Later, PK3/PK4) use
-    the canonical month range (e.g. ``36-48``); proficiency columns that share one
-    age band (Discovering/Developing/Broadening) use a derived label abbreviation."""
-    if canonical_age:
-        return canonical_age
-    if column_label:
-        return _derive_label_abbrev(column_label)
-    return None
-
-
-def normalize_code_to_canonical(code: Optional[str], title: Optional[str]) -> Optional[str]:
-    """Pass the LLM's code through unchanged after a whitespace strip — real
-    short codes (``"SED"``, ``"1.0"``, ``"a"``) keep their form; structural-label
-    codes (``"Strand 1"``, ``"Concept 1"``) reach the parser as-is and the
-    parsing prompt instructs the LLM to use the bare identifier for the
-    cumulative chain.
-
-    The title-as-code → abbreviation rewrite that used to live here was
-    migrated into the detector prompt (rule 4) in Task 3 of the LLM-first
-    migration; the LLM now emits the abbreviation directly. ``title`` is kept
-    on the signature for the CA collision branch in
-    ``abbreviate_element_codes``.
-    """
-    if not code:
-        return code
-    return code.strip()
-
-
-_PURE_NUMERIC_RE = re.compile(r"^\d[\d.]*$")
-
-
-def abbreviate_element_codes(
-    elements: List[DetectedElement],
-) -> List[DetectedElement]:
-    """Rewrite each element's code to its canonical short form (see
-    normalize_code_to_canonical) so the LLM builds cumulative codes from clean,
-    consistent segments (e.g. AZ "Strand 1"/"Concept 1" → "1"/"1", giving
-    "SED.1.1.a" instead of "SED.Strand 1.Concept 1.a"). Runs after
-    normalize_element_codes in both the direct and batched parse paths."""
-    # Pre-compute normalised indicator codes so we can detect the CA pattern
-    # where a sub_strand element inherits the same Foundation number as its
-    # child indicators (e.g. sub_strand code="1.2" title="Initiative" sits above
-    # indicator code="1.2" title="Initiative [Early]"). In that case the numeric
-    # code belongs to the indicator; the sub_strand's identity is its title.
-    indicator_codes: set[str] = set()
-    for el in elements:
-        if el.level == HierarchyLevelEnum.INDICATOR:
-            nc = normalize_code_to_canonical(el.code, el.title)
-            if nc:
-                indicator_codes.add(nc)
-
-    out: List[DetectedElement] = []
-    for el in elements:
-        new_code = normalize_code_to_canonical(el.code, el.title)
-        if (
-            el.level == HierarchyLevelEnum.SUB_STRAND
-            and new_code
-            and _PURE_NUMERIC_RE.match(new_code)
-            and new_code in indicator_codes
-            and el.title
-        ):
-            # Inline title→abbrev: acronym for multi-word, first 4 letters for
-            # single-word. This whole CA collision branch is scheduled to be
-            # removed in Task 7 of the LLM-first migration.
-            words = re.findall(r"[A-Za-z0-9]+", el.title)
-            title_abbrev = (
-                "".join(w[0] for w in words).upper() if len(words) >= 2
-                else words[0][:4].upper() if words
-                else ""
-            )
-            if title_abbrev:
-                logger.info(
-                    "Code normalization: sub_strand '%s' (numeric code '%s' "
-                    "collides with indicator) → title abbreviation '%s'",
-                    el.title,
-                    new_code,
-                    title_abbrev,
-                )
-                new_code = title_abbrev
-        if new_code and new_code != el.code:
-            el = el.model_copy(update={"code": new_code})
-        out.append(el)
-    return out
-
-
 def build_parsing_prompt(
     elements: List[DetectedElement],
     country: str,
@@ -289,7 +170,12 @@ Rules:
 - For column_label: if the indicator came from a side-by-side column, copy that column's label VERBATIM from the element's detected age_band field (e.g. "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "PK3", "Discovering"); otherwise null.
 - For code: output the BASE FULL CUMULATIVE hierarchical code for every level — each child's code is its parent's code followed by the child's own segment, NOT just the final segment. A foundation with local code "1.2" under domain "ATL" / strand "1.0" / sub_strand "INIT" → indicator_code "ATL.1.0.INIT.1.2", sub_strand_code "ATL.1.0.INIT", strand_code "ATL.1.0" — never a bare "1.2" or "1.0". When a code is already fully qualified (e.g. an indicator detected as "SED.1.1.a"), use it as-is and derive the parents (strand_code "SED.1", sub_strand_code "SED.1.1").
 - When an element's `code` is itself a structural label + identifier (e.g. "Strand 1", "Concept 1", "Goal 2", "Pillar A", "Unit 3" — any structural word the document uses, followed by a number or letter), use ONLY the bare identifier as that element's segment in the cumulative chain: "Strand 1" → segment "1", "Concept 1" → segment "1", "Pillar A" → segment "A". The label word merely names the level and is already captured by the element's `level`; it must NOT appear inside the cumulative `code`. Example: a strand with code "Strand 1" under domain "SED" → strand_code "SED.1" (not "SED.Strand 1"); a sub_strand with code "Concept 1" under that strand → sub_strand_code "SED.1.1" (not "SED.Strand 1.Concept 1"). Apply this to ANY label word, not just the examples.
-- STRIP any leading age/column token from every code: a detected indicator code like "PK3.I.A.2" or "PK4.I.A.2" must become the BASE code "I.A.2" (drop the "PK3."/"PK4." prefix). Do NOT append the age band or column label to any code yourself — the caller appends a disambiguator suffix so side-by-side variants stay distinct.
+- A sub_strand and its child indicator must NEVER share the same code. Some documents number a named sub_strand (e.g. a "Foundation") with the SAME local number that its single child indicator also carries — e.g. a sub_strand titled "Initiative" with local code "1.2" sitting directly above an indicator also coded "1.2". When a sub_strand's local code would otherwise be identical to one of its child indicators' local codes, that shared number belongs to the INDICATOR; derive the sub_strand's OWN segment from its TITLE instead, as a ≤5-char uppercase abbreviation — multi-word titles use the first letter of each word ("Concepts About Print" → "CAP"), single-word titles use the first 4 letters ("Initiative" → "INIT", "Vocabulary" → "VOCA"). Build the cumulative chain with that title-derived segment: sub_strand "Initiative" under domain "ATL" / strand "1.0" → sub_strand_code "ATL.1.0.INIT", and its child indicator (local code "1.2") → indicator_code "ATL.1.0.INIT.1.2". A sub_strand whose code is already distinct from its indicators' (a letter, or an already-abbreviated token like "VOCA") keeps that code unchanged.
+- STRIP any leading age/column token from every indicator code: when an indicator appears in multiple side-by-side columns, each variant's detected code may begin with a token identifying its column (e.g. a grade-band prefix like `PK3.` or `PK4.`, an age-group label, or any other column-identifying token prepended to the hierarchical sequence). Strip that leading token and output only the base code shared across all column variants. Then use that stripped indicator code to derive ALL parent codes in the cumulative chain (domain, strand, sub_strand) — the stripped indicator prefix is the ground truth for the parent hierarchy, even if a detected parent element carries a different label. Example: `PK3.I.A.2` and `PK4.I.A.2` → base code `I.A.2`; domain_code=`I`, strand_code=`I.A`.
+- DISAMBIGUATE side-by-side columns by APPENDING a token to the END of the indicator code, so two variants of the same outcome (which share an identical base code) get DISTINCT indicator codes — and therefore distinct standard_ids. Append the token to the INDICATOR code ONLY; NEVER add it to the domain, strand, or sub_strand code. Choose the token by the column's type:
+  - AGE-RANGE column (the cell carries an age range — e.g. "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "PK3", "PK4"): append the SAME normalized month range you put in this indicator's `age_band`, written exactly as "{{start}}-{{end}}" (no spaces, no "months"). Examples: a PK3 outcome with base `I.A.2` → `I.A.2.36-48`, its PK4 variant → `I.A.2.48-60`; an "Early" outcome with base `ATL.1.0.INIT.1.2` → `ATL.1.0.INIT.1.2.36-54`, its "Later" variant → `ATL.1.0.INIT.1.2.48-66`. Apply this even when only one age column is present for the outcome (a lone PK4 outcome `VI.A.1` still becomes `VI.A.1.48-60`).
+  - NON-AGE column (a proficiency or similar label where the columns share one age range, so `age_band` is null — e.g. "Discovering"/"Developing"/"Broadening"): append the FIRST FOUR LETTERS of the column label, UPPERCASED. Examples: base `ELD.1.0.VOCA.1.1` → `ELD.1.0.VOCA.1.1.DISC` (Discovering), `ELD.1.0.VOCA.1.1.DEVE` (Developing), `ELD.1.0.VOCA.1.1.BROA` (Broadening).
+  - If the indicator does NOT come from an age/column cell (no per-column `age_band` and no `column_label`), append NOTHING — leave the base code as-is.
 - Return ONLY the JSON array, no other text.
 - Every indicator element must appear exactly once in the output.
 - There will be cases where you see "No PK3 outcomes for this domain of learning." or similar wording. This means that for the given indicator and age, there is no outcome. In this case, the indicator should be omitted. Do not try to attach it to another indicator.
@@ -462,6 +348,7 @@ def parse_llm_response(
 
     required_fields = {"domain_code", "domain_name", "indicator_code", "indicator_name"}
     standards: List[NormalizedStandard] = []
+    used_codes: set[str] = set()
 
     for obj in data:
         if not isinstance(obj, dict):
@@ -474,11 +361,8 @@ def parse_llm_response(
             continue
 
         try:
-            # Drop any leading age/column token (PK3./PK4.) so the base path is
-            # shared across side-by-side variants; the disambiguator is re-applied
-            # as a suffix on the indicator code below.
             domain = HierarchyLevel(
-                code=_strip_column_prefix(obj["domain_code"]),
+                code=obj["domain_code"],
                 name=obj["domain_name"],
                 description=obj.get("domain_description"),
             )
@@ -486,7 +370,7 @@ def parse_llm_response(
             strand = None
             if obj.get("strand_code") and obj.get("strand_name"):
                 strand = HierarchyLevel(
-                    code=_strip_column_prefix(obj["strand_code"]),
+                    code=obj["strand_code"],
                     name=obj["strand_name"],
                     description=obj.get("strand_description"),
                 )
@@ -494,20 +378,33 @@ def parse_llm_response(
             sub_strand = None
             if obj.get("sub_strand_code") and obj.get("sub_strand_name"):
                 sub_strand = HierarchyLevel(
-                    code=_strip_column_prefix(obj["sub_strand_code"]),
+                    code=obj["sub_strand_code"],
                     name=obj["sub_strand_name"],
                     description=obj.get("sub_strand_description"),
                 )
 
-            # Resolve the indicator code: base cumulative path (PK prefix stripped)
-            # + a disambiguator suffix for side-by-side column variants so Early vs
-            # Later (age) and Discovering vs Developing (proficiency) stay distinct.
+            # The indicator code — including any side-by-side column disambiguator
+            # token (age-range "36-48" or proficiency "DISC") — now comes straight
+            # from the LLM per the parsing prompt. column_label / canonical_age are
+            # still read for the age_band field and the proficiency-description prefix.
             column_label = obj.get("column_label")
             canonical_age = canonicalize_age_band(obj.get("age_band"))
-            suffix = _disambiguator_suffix(canonical_age, column_label)
-            indicator_code = _strip_column_prefix(obj["indicator_code"])
-            if suffix and not indicator_code.endswith(suffix):
-                indicator_code = f"{indicator_code}.{suffix}"
+            indicator_code = obj["indicator_code"]
+            # Thin uniqueness guard: side-by-side variants must keep distinct codes
+            # (and standard_ids). The prompt asks the LLM to append the per-column
+            # token itself; this only fires if two rows still collide, appending a
+            # numeric counter so neither variant is silently dropped downstream.
+            if indicator_code in used_codes:
+                base = indicator_code
+                counter = 2
+                while indicator_code in used_codes:
+                    indicator_code = f"{base}.{counter}"
+                    counter += 1
+                logger.warning(
+                    "Indicator code collision: '%s' reused; disambiguated to '%s'",
+                    base, indicator_code,
+                )
+            used_codes.add(indicator_code)
 
             # Proficiency columns (a column label that is NOT an age range, e.g.
             # CA ELD "Discovering"/"Developing"/"Broadening") read in the source as
@@ -773,8 +670,7 @@ def _infer_domain_code(
     known domain codes.
 
     Strategy (tried in order):
-    1. Prefix match — the element's code (after stripping common age-band
-       prefixes like ``PK3.``, ``PK4.``) starts with a known domain code
+    1. Prefix match — the element's code starts with a known domain code
        followed by a separator (``.`` or ``-``).  Longer domain codes are
        tried first so that ``III`` is matched before ``I``.
     2. Returns None if no domain can be determined — the caller should
@@ -786,19 +682,17 @@ def _infer_domain_code(
     parent domain code.
     """
     code = element.code
-    # Strip common age-band prefixes (e.g. PK3., PK4.)
-    stripped = re.sub(r'^PK\d+\.', '', code)
 
     # Try longest domain codes first so "III" matches before "I"
     for dc in sorted(domain_codes, key=len, reverse=True):
-        if stripped == dc:
+        if code == dc:
             # Exact match (element IS the domain, shouldn't happen for
             # non-domain elements but handle gracefully)
             return dc
-        if stripped.startswith(dc) and len(stripped) > len(dc):
+        if code.startswith(dc) and len(code) > len(dc):
             # Check that the next character is a separator, not just a
             # longer code that happens to share a prefix
-            next_char = stripped[len(dc)]
+            next_char = code[len(dc)]
             if next_char in ('.', '-', '_'):
                 return dc
     return None
@@ -1006,9 +900,6 @@ def parse_hierarchy(
         # Normalize codes so the same entity always uses the same code
         # across chunks (e.g. "PHD" and "PhysicalDevelopment" both become "PHD")
         valid_elements = normalize_element_codes(valid_elements)
-        # Canonicalize code segments ("Strand 1"→"1", "Concepts About Print"→"CAP")
-        # so cumulative codes come out clean and deterministic.
-        valid_elements = abbreviate_element_codes(valid_elements)
 
         # Split into per-domain chunks so each LLM call is small enough
         chunks = chunk_elements_by_domain(valid_elements)
