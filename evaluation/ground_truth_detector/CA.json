@@ -209,6 +209,50 @@
       "age_band": "Broadening",
       "description": "Use a variety of English grammatical forms, with some inaccuracies, to produce many different types of sentence structures. Grammatical forms can include adding appropriate possessive pronouns (for example, your, my); conjunctions (for example, and, or); and other elements (for example, adjectives, adverbs).",
       "source_page": 12
+    },
+    {
+      "test_case_id": "CA-SUB-05",
+      "level": "sub_strand",
+      "code": "GRAM",
+      "title": "Grammar",
+      "description": null,
+      "source_page": 7
+    },
+    {
+      "test_case_id": "CA-IND-05-EARLY",
+      "level": "indicator",
+      "code": "1.7",
+      "title": "Sharing Explanations and Opinions",
+      "description": "Share descriptions, opinions, and explanations.",
+      "source_page": 7,
+      "age_band": "Early (3 to 4 ½ Years)"
+    },
+    {
+      "test_case_id": "CA-IND-05-LATER",
+      "level": "indicator",
+      "code": "1.7",
+      "title": "Sharing Explanations and Opinions",
+      "description": "Share detailed descriptions, opinions, and explanations.",
+      "source_page": 7,
+      "age_band": "Later (4 to 5 ½ Years)"
+    },
+    {
+      "test_case_id": "CA-IND-06-EARLY",
+      "level": "indicator",
+      "code": "1.8",
+      "title": "Participating in Conversations",
+      "description": "Participate in back-and-forth conversations with adults and peers. Respond on topic for at least one turn in a conversation.",
+      "source_page": 8,
+      "age_band": "Early (3 to 4 ½ Years)"
+    },
+    {
+      "test_case_id": "CA-IND-06-LATER",
+      "level": "indicator",
+      "code": "1.8",
+      "title": "Participating in Conversations",
+      "description": "Participate in increasingly long and complex back-and-forth conversations with adults and peers. Respond on topic across several turns in the conversation.",
+      "source_page": 8,
+      "age_band": "Later (4 to 5 ½ Years)"
     }
   ],
   "regression_cases": [

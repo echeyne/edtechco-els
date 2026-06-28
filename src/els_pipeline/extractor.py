@@ -46,7 +46,7 @@ def extract_text(s3_key: str, s3_version_id: str) -> ExtractionResult:
         
         # Parse Textract response into TextBlock objects
         blocks = _parse_textract_response(textract_response)
-        
+
         if not blocks:
             logger.warning(f"Empty extraction output for {s3_key}")
             return ExtractionResult(
@@ -56,7 +56,15 @@ def extract_text(s3_key: str, s3_version_id: str) -> ExtractionResult:
                 status="error",
                 error="Empty extraction output"
             )
-        
+
+        # Repair OCR word-fusion (e.g. "firmfoundation") using the PDF's own
+        # embedded text layer, which carries the correct spacing. Textract
+        # occasionally recognizes two adjacent words as one token; the text
+        # layer of a digital-born PDF does not. This is best-effort: any
+        # failure leaves the Textract text untouched.
+        if is_pdf:
+            blocks = _repair_block_spacing(blocks, s3_key, s3_version_id)
+
         # Sort blocks by reading order
         sorted_blocks = _sort_blocks_by_reading_order(blocks)
         
@@ -251,6 +259,147 @@ def _parse_textract_response(response: Dict[str, Any]) -> List[TextBlock]:
         blocks.append(text_block)
     
     return blocks
+
+
+# Minimum de-spaced length a LINE must have before we attempt a text-layer
+# repair. Short lines collide with substrings of longer prose and would match
+# ambiguously, so we only repair lines long enough to locate unambiguously.
+_MIN_REPAIR_KEY_LEN = 12
+
+
+def _build_despaced_index(page_text: str) -> tuple[str, List[int]]:
+    """
+    Build a whitespace-stripped view of ``page_text`` plus a map from each
+    de-spaced character back to its index in the original text.
+
+    Returns ``(despaced, idx_map)`` where ``despaced[k]`` is the k-th
+    non-whitespace char and ``idx_map[k]`` is its position in ``page_text``.
+    Matching on the de-spaced form lets us locate a Textract line regardless of
+    how its spaces were (mis)recognized, then recover the original spacing.
+    """
+    despaced_chars: List[str] = []
+    idx_map: List[int] = []
+    for pos, ch in enumerate(page_text):
+        if not ch.isspace():
+            despaced_chars.append(ch)
+            idx_map.append(pos)
+    return "".join(despaced_chars), idx_map
+
+
+def _repair_line_text(block: TextBlock, page_text: str, despaced: str, idx_map: List[int]) -> str | None:
+    """
+    Return the spacing-corrected text for a LINE block, or None to leave it.
+
+    Locates the block's de-spaced text in the page's de-spaced text layer; when
+    it matches exactly once, adopts the text layer's spacing for that span.
+    The de-spaced forms are identical by construction, so ONLY whitespace
+    changes — never a character. Returns None when the block is ineligible
+    (not a LINE, too short, not found, or a non-unique match).
+    """
+    if block.block_type != "LINE":
+        return None
+
+    key = "".join(block.text.split())
+    if len(key) < _MIN_REPAIR_KEY_LEN:
+        return None
+
+    first = despaced.find(key)
+    if first == -1:
+        return None
+    # Require a unique match so we never adopt the wrong occurrence's spacing.
+    if despaced.find(key, first + 1) != -1:
+        return None
+
+    start = idx_map[first]
+    end = idx_map[first + len(key) - 1] + 1
+    # Collapse the text-layer span (which may contain line-wrap newlines) into a
+    # single spaced line, matching Textract's one-line-per-LINE convention.
+    return " ".join(page_text[start:end].split())
+
+
+def _repair_block_spacing(
+    blocks: List[TextBlock],
+    s3_key: str,
+    s3_version_id: str,
+) -> List[TextBlock]:
+    """
+    Fix Textract word-fusion in LINE blocks using the PDF's embedded text layer.
+
+    For each LINE block we strip its whitespace and locate that exact character
+    sequence in the corresponding page's text layer. When it appears exactly
+    once, we adopt the text layer's spacing for that span. The de-spaced forms
+    are identical by construction, so ONLY whitespace ever changes — never a
+    character. Anything that can't be matched unambiguously is left as-is.
+
+    Best-effort: if PyMuPDF is unavailable, the PDF can't be fetched/opened, or
+    a page has no usable text layer (e.g. a scanned page), the original
+    Textract blocks are returned unchanged.
+    """
+    try:
+        import fitz  # PyMuPDF
+    except ImportError:
+        logger.warning("PyMuPDF not installed; skipping text-layer spacing repair")
+        return blocks
+
+    pdf_bytes = _download_pdf_bytes(s3_key, s3_version_id)
+    if not pdf_bytes:
+        return blocks
+
+    try:
+        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    except Exception as e:
+        logger.warning(f"Could not open PDF text layer for {s3_key}: {e}")
+        return blocks
+
+    # Build each page's de-spaced index lazily and once. Cache holds
+    # (page_text, despaced, idx_map) or None for pages with no usable text layer.
+    page_cache: Dict[int, tuple] = {}
+
+    def _page_data(page_number: int):
+        if page_number not in page_cache:
+            page_idx = page_number - 1  # Textract Page is 1-based
+            data = None
+            if 0 <= page_idx < doc.page_count:
+                page_text = doc[page_idx].get_text()
+                if page_text and not page_text.isspace():
+                    despaced, idx_map = _build_despaced_index(page_text)
+                    data = (page_text, despaced, idx_map)
+            page_cache[page_number] = data
+        return page_cache[page_number]
+
+    repaired_count = 0
+    repaired_blocks: List[TextBlock] = []
+    try:
+        for block in blocks:
+            page_data = _page_data(block.page_number) if block.block_type == "LINE" else None
+            if page_data is not None:
+                new_text = _repair_line_text(block, *page_data)
+                if new_text is not None and new_text != block.text:
+                    block = block.model_copy(update={"text": new_text})
+                    repaired_count += 1
+            repaired_blocks.append(block)
+    finally:
+        doc.close()
+
+    if repaired_count:
+        logger.info(
+            f"Text-layer spacing repair: fixed {repaired_count} block(s) for {s3_key}"
+        )
+    return repaired_blocks
+
+
+def _download_pdf_bytes(s3_key: str, s3_version_id: str):
+    """Fetch the raw PDF bytes from S3, or None on any failure."""
+    try:
+        s3_client = boto3.client('s3', region_name=Config.AWS_REGION)
+        kwargs = {'Bucket': Config.S3_RAW_BUCKET, 'Key': s3_key}
+        if s3_version_id:
+            kwargs['VersionId'] = s3_version_id
+        response = s3_client.get_object(**kwargs)
+        return response['Body'].read()
+    except Exception as e:
+        logger.warning(f"Could not download PDF bytes for {s3_key}: {e}")
+        return None
 
 
 def _sort_blocks_by_reading_order(blocks: List[TextBlock]) -> List[TextBlock]:
