@@ -170,6 +170,7 @@ Rules:
 - For column_label: if the indicator came from a side-by-side column, copy that column's label VERBATIM from the element's detected age_band field (e.g. "Early (3 to 4 ½ Years)", "Later (4 to 5 ½ Years)", "PK3", "Discovering"); otherwise null.
 - For code: output the BASE FULL CUMULATIVE hierarchical code for every level — each child's code is its parent's code followed by the child's own segment, NOT just the final segment. A foundation with local code "1.2" under domain "ATL" / strand "1.0" / sub_strand "INIT" → indicator_code "ATL.1.0.INIT.1.2", sub_strand_code "ATL.1.0.INIT", strand_code "ATL.1.0" — never a bare "1.2" or "1.0". When a code is already fully qualified (e.g. an indicator detected as "SED.1.1.a"), use it as-is and derive the parents (strand_code "SED.1", sub_strand_code "SED.1.1").
 - When an element's `code` is itself a structural label + identifier (e.g. "Strand 1", "Concept 1", "Goal 2", "Pillar A", "Unit 3" — any structural word the document uses, followed by a number or letter), use ONLY the bare identifier as that element's segment in the cumulative chain: "Strand 1" → segment "1", "Concept 1" → segment "1", "Pillar A" → segment "A". The label word merely names the level and is already captured by the element's `level`; it must NOT appear inside the cumulative `code`. Example: a strand with code "Strand 1" under domain "SED" → strand_code "SED.1" (not "SED.Strand 1"); a sub_strand with code "Concept 1" under that strand → sub_strand_code "SED.1.1" (not "SED.Strand 1.Concept 1"). Apply this to ANY label word, not just the examples.
+- PRESERVE the bare identifier VERBATIM — do NOT renumber, pad, or drop any part of it. In particular, keep a decimal/dotted identifier exactly as written, INCLUDING a trailing ".0": "Strand: 1.0" → segment "1.0" (NEVER "1"), "Strand 2.0" → segment "2.0". So a strand labeled "1.0" under domain "ATL" → strand_code "ATL.1.0" (never "ATL.1"). A trailing ".0" is part of the document's id, not a droppable minor version. (This differs from a strand whose id genuinely IS a bare integer — e.g. detected "Strand 1" or derived from an indicator code like "SED.1.1.a" → strand segment "1"; preserve whatever the id actually is.)
 - A sub_strand and its child indicator must NEVER share the same code. Some documents number a named sub_strand (e.g. a "Foundation") with the SAME local number that its single child indicator also carries — e.g. a sub_strand titled "Initiative" with local code "1.2" sitting directly above an indicator also coded "1.2". When a sub_strand's local code would otherwise be identical to one of its child indicators' local codes, that shared number belongs to the INDICATOR; derive the sub_strand's OWN segment from its TITLE instead, as a ≤5-char uppercase abbreviation — multi-word titles use the first letter of each word ("Concepts About Print" → "CAP"), single-word titles use the first 4 letters ("Initiative" → "INIT", "Vocabulary" → "VOCA"). Build the cumulative chain with that title-derived segment: sub_strand "Initiative" under domain "ATL" / strand "1.0" → sub_strand_code "ATL.1.0.INIT", and its child indicator (local code "1.2") → indicator_code "ATL.1.0.INIT.1.2". A sub_strand whose code is already distinct from its indicators' (a letter, or an already-abbreviated token like "VOCA") keeps that code unchanged.
 - STRIP any leading age/column token from every indicator code: when an indicator appears in multiple side-by-side columns, each variant's detected code may begin with a token identifying its column (e.g. a grade-band prefix like `PK3.` or `PK4.`, an age-group label, or any other column-identifying token prepended to the hierarchical sequence). Strip that leading token and output only the base code shared across all column variants. Then use that stripped indicator code to derive ALL parent codes in the cumulative chain (domain, strand, sub_strand) — the stripped indicator prefix is the ground truth for the parent hierarchy, even if a detected parent element carries a different label. Example: `PK3.I.A.2` and `PK4.I.A.2` → base code `I.A.2`; domain_code=`I`, strand_code=`I.A`.
 - DISAMBIGUATE side-by-side columns by APPENDING a token to the END of the indicator code, so two variants of the same outcome (which share an identical base code) get DISTINCT indicator codes — and therefore distinct standard_ids. Append the token to the INDICATOR code ONLY; NEVER add it to the domain, strand, or sub_strand code. Choose the token by the column's type:
@@ -482,10 +483,16 @@ def normalize_parsed_codes(
     if not standards:
         return standards
 
-    # Collect codes per (level, name) across all standards
+    # Collect codes per entity across all standards. The key is scoped by the
+    # entity's position in the hierarchy, NOT by its title alone: two different
+    # domains can legitimately share a strand title ("Listening and Speaking")
+    # and even a sub_strand title ("Vocabulary"). Keying by title only would
+    # merge them into one entity and rewrite one domain's codes to the other's.
+    # Strands are keyed by (domain, strand_name); sub_strands by
+    # (domain, strand_name, sub_strand_name).
     domain_codes: dict[str, Counter] = {}
-    strand_codes: dict[str, Counter] = {}
-    sub_strand_codes: dict[str, Counter] = {}
+    strand_codes: dict[tuple[str, str], Counter] = {}
+    sub_strand_codes: dict[tuple[str, str, str], Counter] = {}
 
     for s in standards:
         dk = s.domain.name.strip().lower()
@@ -493,17 +500,18 @@ def normalize_parsed_codes(
             domain_codes[dk] = Counter()
         domain_codes[dk][s.domain.code] += 1
 
+        sk = s.strand.name.strip().lower() if s.strand else ""
         if s.strand:
-            sk = s.strand.name.strip().lower()
-            if sk not in strand_codes:
-                strand_codes[sk] = Counter()
-            strand_codes[sk][s.strand.code] += 1
+            strand_key = (dk, sk)
+            if strand_key not in strand_codes:
+                strand_codes[strand_key] = Counter()
+            strand_codes[strand_key][s.strand.code] += 1
 
         if s.sub_strand:
-            ssk = s.sub_strand.name.strip().lower()
-            if ssk not in sub_strand_codes:
-                sub_strand_codes[ssk] = Counter()
-            sub_strand_codes[ssk][s.sub_strand.code] += 1
+            ss_key = (dk, sk, s.sub_strand.name.strip().lower())
+            if ss_key not in sub_strand_codes:
+                sub_strand_codes[ss_key] = Counter()
+            sub_strand_codes[ss_key][s.sub_strand.code] += 1
 
     def _pick_canonical(counter: Counter) -> str:
         if len(counter) == 1:
@@ -528,19 +536,19 @@ def normalize_parsed_codes(
                 f"canonical '{d_canonical[name]}', replaced: "
                 f"{[c for c in counter if c != d_canonical[name]]}"
             )
-    for name, counter in strand_codes.items():
+    for key, counter in strand_codes.items():
         if len(counter) > 1:
             logger.info(
-                f"Parsed code normalization: strand '{name}' — "
-                f"canonical '{s_canonical[name]}', replaced: "
-                f"{[c for c in counter if c != s_canonical[name]]}"
+                f"Parsed code normalization: strand '{key[0]}/{key[1]}' — "
+                f"canonical '{s_canonical[key]}', replaced: "
+                f"{[c for c in counter if c != s_canonical[key]]}"
             )
-    for name, counter in sub_strand_codes.items():
+    for key, counter in sub_strand_codes.items():
         if len(counter) > 1:
             logger.info(
-                f"Parsed code normalization: sub_strand '{name}' — "
-                f"canonical '{ss_canonical[name]}', replaced: "
-                f"{[c for c in counter if c != ss_canonical[name]]}"
+                f"Parsed code normalization: sub_strand '{key[0]}/{key[1]}/{key[2]}' — "
+                f"canonical '{ss_canonical[key]}', replaced: "
+                f"{[c for c in counter if c != ss_canonical[key]]}"
             )
 
     # Rewrite standards with canonical codes
@@ -548,17 +556,21 @@ def normalize_parsed_codes(
     for s in standards:
         updates = {}
 
-        new_domain_code = d_canonical.get(s.domain.name.strip().lower(), s.domain.code)
+        dk = s.domain.name.strip().lower()
+        sk = s.strand.name.strip().lower() if s.strand else ""
+
+        new_domain_code = d_canonical.get(dk, s.domain.code)
         if new_domain_code != s.domain.code:
             updates["domain"] = s.domain.model_copy(update={"code": new_domain_code})
 
         if s.strand:
-            new_strand_code = s_canonical.get(s.strand.name.strip().lower(), s.strand.code)
+            new_strand_code = s_canonical.get((dk, sk), s.strand.code)
             if new_strand_code != s.strand.code:
                 updates["strand"] = s.strand.model_copy(update={"code": new_strand_code})
 
         if s.sub_strand:
-            new_ss_code = ss_canonical.get(s.sub_strand.name.strip().lower(), s.sub_strand.code)
+            ss_key = (dk, sk, s.sub_strand.name.strip().lower())
+            new_ss_code = ss_canonical.get(ss_key, s.sub_strand.code)
             if new_ss_code != s.sub_strand.code:
                 updates["sub_strand"] = s.sub_strand.model_copy(update={"code": new_ss_code})
 
