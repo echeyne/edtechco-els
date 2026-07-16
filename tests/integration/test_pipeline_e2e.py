@@ -163,7 +163,6 @@ def test_complete_core_pipeline_with_mocked_services():
                         confidence=0.95,
                         source_page=1,
                         source_text="Language and Literacy Development",
-                        needs_review=False
                     ),
                     DetectedElement(
                         level="indicator",
@@ -173,10 +172,8 @@ def test_complete_core_pipeline_with_mocked_services():
                         confidence=0.92,
                         source_page=1,
                         source_text="Child demonstrates understanding of language",
-                        needs_review=False
                     )
                 ],
-                review_count=0,
                 status="success",
                 error=None
             )
@@ -184,7 +181,6 @@ def test_complete_core_pipeline_with_mocked_services():
             detection_result = detection_handler(detection_event, None)
 
         assert detection_result["status"] == "success"
-        assert detection_result["review_count"] == 0
 
         # Stage 4: Hierarchy Parsing
         parsing_event = {

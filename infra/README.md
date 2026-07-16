@@ -19,7 +19,13 @@ The app and planning stacks depend on the pipeline stack (they import Aurora clu
 
 ### Shared Constructs
 
-`cdk/lib/constructs/` — Reusable CDK constructs shared across stacks.
+`cdk/lib/constructs/` — Reusable CDK constructs shared across stacks:
+
+| Construct                  | Purpose                                                                    |
+| -------------------------- | -------------------------------------------------------------------------- |
+| `pipeline-lambda.ts`       | Standard pipeline Lambda (Docker bundling, IAM role, env vars, log group)  |
+| `pipeline-dashboard.ts`    | CloudWatch dashboard for pipeline stage metrics                            |
+| `frontend-distribution.ts` | S3 + CloudFront distribution used by all three frontends                   |
 
 ## S3 Bucket Structure
 
@@ -42,9 +48,11 @@ Examples:
 {country}/{state}/{year}/{standard_id}.json
 ```
 
+Where `standard_id` is `{COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}` — the indicator code is fully qualified, and there is no separate domain-code component.
+
 Examples:
 
-- `US/CA/2021/US-CA-2021-LLD-1.2.json`
+- `US/CA/2021/US-CA-2021-LLD.1.2.json`
 
 ### Intermediate Data
 
@@ -73,7 +81,7 @@ Each Lambda function has a dedicated IAM role following least privilege:
 
 ## Database
 
-Aurora PostgreSQL Serverless v2 with pgvector extension. See [migrations/README.md](migrations/README.md) for schema details.
+Aurora PostgreSQL Serverless v2. The `vector` extension is still enabled by migration 001, but nothing uses it any more — the `embeddings` and `recommendations` tables were dropped in migration 011, since those pipeline stages were never wired into the deployed Step Functions definition. See [migrations/README.md](migrations/README.md) for schema details.
 
 ## Deployment
 

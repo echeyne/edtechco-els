@@ -27,6 +27,8 @@ Supported formats: `.pdf`, `.html`
 
 Extracts text blocks from PDFs using AWS Textract. Handles both synchronous (small documents) and asynchronous (large documents) Textract APIs. Sorts blocks by reading order and preserves table cell structure with row/column indices.
 
+Extraction is **hybrid**: Textract provides the layout (block types, geometry, table structure), but its OCR can fuse adjacent words together ("thechild" instead of "the child"). To repair this, the extractor also opens the PDF with PyMuPDF (`fitz`) and uses the PDF's own embedded text layer as a spacing oracle — `_repair_block_spacing` matches each Textract line against the de-spaced page text and restores the correct word boundaries. If the PDF has no usable text layer (a pure scan), the Textract text is used as-is.
+
 Output: List of `TextBlock` objects with text, page number, block type, confidence, and geometry.
 
 ### 3. Detection Batching
@@ -50,9 +52,15 @@ Uses Bedrock Claude to identify hierarchical elements in text blocks. Detection 
 1. **Pass 1 — depth-map inference** (`infer_depth_map`): a sample of blocks taken evenly across the document is sent to a lightweight model (`BEDROCK_DEPTH_MAP_LLM_MODEL_ID`, default Claude Haiku) to infer the document's nesting hierarchy (`doc_depths`). This runs once per document. If it fails, detection falls back to a no-depth-map mode.
 2. **Pass 2 — per-chunk extraction**: blocks are chunked with token overlap (`chunk_text_blocks`) and each chunk is sent to the detector model (`BEDROCK_DETECTOR_LLM_MODEL_ID`, default Claude Opus) along with the depth map, so the model classifies elements by document depth rather than re-guessing per chunk. Elements re-emitted at overlapping chunk boundaries are collapsed by `_dedup_elements`.
 
-Each element is classified as a domain, strand, sub-strand, or indicator with a confidence score. Elements with a confidence below 0.7 get `needs_review=True` (set on `DetectedElement`) and are flagged for human review.
+Each element is classified as a domain, strand, sub-strand, or indicator with a confidence score. The score is kept on `DetectedElement` as metadata only — there is no confidence gate; every element flows through to parsing and persistence, since every element gets reviewed by a human downstream regardless of confidence.
 
 The detection prompt instructs the LLM to extract structured JSON with fields: level, code, title, description, confidence, source_page, source_text, and age_band (populated for indicators that come from age-banded columns, e.g. "Early (3 to 4 ½ Years)", "PK3").
+
+#### Design constraint: the detector and parser are LLM-driven, not rule-driven
+
+Detection and parsing decisions — how to classify a level, how to build a code, how to handle age-band columns, how to strip a structural label — live in the **prompt** as general document-structure principles, not in Python regexes or per-state branches. The June 2026 LLM-first migration removed the per-state helpers that had accumulated to make the golden states pass; a new state-specific regex in `detector.py` or `parser.py` is treated as a regression even if it raises a golden score. The Python that remains is document-agnostic only: JSON extraction, schema validation, ID derivation, cross-chunk reconciliation, and chunking.
+
+See the design-direction section of [CLAUDE.md](../CLAUDE.md) for the full rules and the list of helpers that were deliberately removed.
 
 ### 5. Parse Batching
 
@@ -76,7 +84,7 @@ Document
                  └── Indicator (e.g., "Recognizes rhyming words")
 ```
 
-Generates deterministic Standard IDs in the format: `{country}-{state}-{year}-{domain_code}-{indicator_code}` (e.g., `US-CA-2021-LLD-1.2`).
+Generates deterministic Standard IDs in the format `{country}-{state}-{year}-{indicator_code}` (e.g., `US-CA-2021-LLD.1.2`) — see [Standard ID Format](#standard-id-format) below.
 
 ### 7. Validation
 
@@ -123,19 +131,28 @@ Document (country, state, year, title, source_url, age_band)
 ### Standard ID Format
 
 ```
-{country}-{state}-{year}-{domain_code}-{indicator_code}
+{COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}
 ```
 
-Example: `US-CA-2021-LLD-1.2` = United States, California, 2021, Language and Literacy Development, Indicator 1.2
+Example: `US-CA-2021-LLD.1.2` = United States, California, 2021, indicator `LLD.1.2`.
+
+There is **no separate `domain_code` component**. The `indicator_code` is already fully qualified — it carries the domain segment and any disambiguator it needs, so `generate_standard_id` (in `parser.py`) is a single clean rule rather than a stack of special cases. Disambiguators come in two shapes:
+
+| Shape           | Where it goes | Example                                                  |
+| --------------- | ------------- | -------------------------------------------------------- |
+| Age prefix      | Leading       | TX `PK3.I.A.2` vs `PK4.I.A.2`                            |
+| Column suffix   | Trailing      | CA `ELD.1.0.VOC.1.1.DISC` vs `ELD.1.0.VOC.1.1.BRD`       |
+
+This is what keeps side-by-side age/proficiency columns from collapsing into a single ID.
 
 ## S3 Path Structure
 
 All paths are organized by country (ISO 3166-1 alpha-2):
 
-| Bucket         | Pattern                                                  | Example                                         |
-| -------------- | -------------------------------------------------------- | ----------------------------------------------- |
-| Raw documents  | `{country}/{state}/{year}/{filename}`                    | `US/CA/2021/california_standards.pdf`           |
-| Processed JSON | `{country}/{state}/{year}/{standard_id}.json`            | `US/CA/2021/US-CA-2021-LLD-1.2.json`            |
+| Bucket         | Pattern                                       | Example                               |
+| -------------- | --------------------------------------------- | ------------------------------------- |
+| Raw documents  | `{country}/{state}/{year}/{filename}`         | `US/CA/2021/california_standards.pdf` |
+| Processed JSON | `{country}/{state}/{year}/{standard_id}.json` | `US/CA/2021/US-CA-2021-LLD.1.2.json`  |
 
 ### Intermediate Data
 
@@ -155,6 +172,21 @@ Each pipeline run writes intermediate output for debugging:
   └── validation/{run_id}.json
 ```
 
+## Quality Measurement (Evaluation Harness)
+
+`evaluation/` is a standing quality layer for the detector and parser, separate from `tests/`. Where `tests/` asserts that the code is correct, `evaluation/` measures how well the LLM stages actually read real documents — it is the thing you iterate against when changing a prompt.
+
+Two **decoupled** golden sets, graded by two suites:
+
+| Suite                        | Golden set                | Input                     | Compares                                        |
+| ---------------------------- | ------------------------- | ------------------------- | ----------------------------------------------- |
+| `evaluation/eval_detector.py` | `ground_truth_detector/`  | `{STATE}-extraction.json` | Flat list of detected elements                  |
+| `evaluation/eval_parser.py`   | `ground_truth_parser/`    | `{STATE}-detection.json`  | Nested `NormalizedStandard` objects, field-wise |
+
+They produce different shapes from different inputs and are annotated independently — a change to one does not imply a change to the other. Golden states are AZ, CA, CO, and TX; **Nevada is the held-out canary** used to check that a change generalizes rather than overfitting the goldens.
+
+See [evaluation/README.md](../evaluation/README.md) for annotation conventions and how to run each suite.
+
 ## Web Applications
 
 ### Standards Explorer
@@ -164,7 +196,7 @@ Each pipeline run writes intermediate output for debugging:
 
 ### Planning App
 
-- **API** (`packages/planning-api/`): Hono API that authenticates the user via Descope, then returns a short-lived presigned `wss://` URL for the Bedrock AgentCore runtime (`/chat` route). The browser connects to AgentCore directly over that WebSocket — the API does not proxy the stream. The user's Descope JWT (and optional plan ID) are embedded as `X-Amzn-Bedrock-AgentCore-Runtime-Custom-*` query params so identity is bound server-side. A `/plans` route provides plan CRUD.
+- **API** (`packages/planning-api/`): Hono API that authenticates the user via Descope, then returns a short-lived presigned `wss://` URL for the Bedrock AgentCore runtime (`/chat` route). The browser connects to AgentCore directly over that WebSocket — the API does not proxy the stream. The user's Descope JWT (and optional plan ID) are embedded as `X-Amzn-Bedrock-AgentCore-Runtime-Custom-*` query params so identity is bound server-side. A `/plans` route provides plan **reads and deletes only** — plans are created and updated by the agent's tools during a chat session, not by the frontend posting a plan body.
 - **Agent** (`packages/agentcore-agent/`): Python Strands agent deployed to Bedrock AgentCore Runtime. Has tools for querying standards data and managing learning plans (CRUD). User identity is bound from the authenticated session — the LLM never controls which user's data is accessed.
 - **Frontend** (`packages/planning-frontend/`): React chat UI using `@chatscope/chat-ui-kit-react`. Supports real-time streaming, plan creation/editing, and PDF export.
 

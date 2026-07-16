@@ -62,11 +62,15 @@ The project is a hybrid monorepo:
 ### Package Dependency Graph
 
 ```
-@els/shared ──→ @els/api ──→ @els/frontend
+@els/shared ──→ @els/api ──────────→ @els/frontend
             └──→ @els/planning-api ──→ @els/planning-frontend
+
+@els/landing-site   (standalone — does not depend on @els/shared)
 ```
 
-`@els/shared` must be built before any dependent package. Turborepo handles this automatically via `pnpm build`.
+`@els/shared` must be built before any dependent package. Turborepo handles this automatically via `pnpm build`. Note that `pnpm test` depends on `build` (see `turbo.json`), so a broken build blocks the tests.
+
+`@els/shared`'s `types.ts` is the TypeScript mirror of the Pydantic models in `src/els_pipeline/models.py`. **Changing the data model means changing both** — they are not generated from a single source.
 
 ## Code Style
 
@@ -124,6 +128,26 @@ pnpm typecheck
 2. Update or add tests in `tests/`
 3. Run `pytest tests/ -v` to verify
 4. If the change affects Lambda handlers, test deployment in dev
+
+### Detector / Parser Changes — read this first
+
+`detector.py` and `parser.py` are held to a stricter rule than the rest of the pipeline: **they are LLM-driven, not rule-driven.** Document-structure decisions (how to classify a level, build a code, handle age-band columns, strip a structural label) belong in the **prompt**, stated as general principles — not in Python regexes or per-state branches.
+
+The history here matters: the golden states (CA, AZ, CO, TX) had each been made to pass by adding targeted per-state Python logic that scored well on the goldens and **did not generalize**. The June 2026 LLM-first migration deleted that logic and moved each rule into the prompt. So:
+
+1. **Prefer fixing the prompt.** A rule that helps every document belongs there.
+2. **Fall back to Python only for genuinely document-agnostic post-processing** — JSON extraction, schema validation, ID derivation from already-clean fields, cross-chunk reconciliation.
+3. **Never loosen the eval matchers or edit goldens** to paper over a generalization gap. Fix the golden data and canonicalize the model output instead.
+4. **A new per-state regex or branch is a regression in disguise, even if it raises a golden score.** Flag it rather than adding it.
+
+Grade the change with the eval suites, not just `pytest` — and check it against a held-out state (Nevada is the current canary) to prove it generalizes:
+
+```bash
+python -m evaluation.eval_detector --state CA
+python -m evaluation.eval_parser --detection-dir outputs/MM-DD-YY
+```
+
+Full rules, and the list of helpers that were deliberately removed, are in [CLAUDE.md](../CLAUDE.md).
 
 ### API Changes
 

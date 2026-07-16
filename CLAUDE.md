@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The Early Learning Standards (ELS) Platform: a serverless AWS pipeline that ingests US state early-learning-standards PDFs, uses Bedrock (Claude) + Textract to detect and normalize their hierarchy into a canonical schema, and stores the result in Aurora PostgreSQL. On top of it sit three web apps (Standards Explorer, Planning App, Landing Site). See [README.md](README.md) and [documentation/ARCHITECTURE.md](documentation/ARCHITECTURE.md) for the full picture — this file covers only what isn't obvious from those.
 
+## Keep documentation in sync with substantial changes
+
+When a change alters behavior, config, schema, or architecture (not a small bug fix), grep the docs (`README.md`, `CLAUDE.md`, `documentation/*.md`, and any other `.md` that describes the touched area) for stale references and update them in the same pass — don't leave the code change and the docs update as separate follow-up work. A doc describing removed/changed behavior is worse than no doc at all, since it reads as authoritative.
+
 ## Design direction for the detector & parser (READ BEFORE EDITING `detector.py` / `parser.py`)
 
 **Goal: `detector.py` and `parser.py` should be LLM-driven, not rule-driven.** The intended architecture is "let the model reason about the document; keep the Python thin." Detection/parsing decisions — how to classify a level, how to build a code, how to handle age-band columns, how to strip a structural label — belong in the **prompt**, expressed as general document-structure principles, not in Python regexes and special-case branches.
@@ -80,7 +84,7 @@ python -m evaluation.eval_parser --detection-dir outputs/05-31-26
 - **Detection and parsing are batched** via a three-step prepare → Step-Functions-Map (max 3 concurrent) → merge pattern (`detection_batching.py`, `parse_batching.py`) to dodge Lambda timeouts on large docs. Detection batches by text-block chunks (`MAX_CHUNKS_PER_BATCH=5`); parsing batches by domain (`MAX_DOMAINS_PER_BATCH=3`) to keep related elements together.
 - **Stages communicate through S3, not direct payloads.** Each run writes intermediate JSON under `{country}/{state}/{year}/intermediate/...` keyed by `run_id` — read these when debugging a stage in isolation.
 - **Standard IDs are deterministic:** `{country}-{state}-{year}-{indicator_code}` (e.g. `US-CA-2021-LLD.1.2`). The `indicator_code` is fully qualified and carries any disambiguator (age prefix / column suffix) itself — there is no separate `domain_code` component (see `generate_standard_id` in `parser.py`). Pydantic `models.py` is the Python source of truth for the schema; `packages/shared/src/types.ts` mirrors it for TS — **keep these two in sync** when changing the data model.
-- Elements below `CONFIDENCE_THRESHOLD` (0.8) are flagged for human review rather than dropped.
+- Every detected element carries a `confidence` score but is never gated or dropped by it — all elements flow through to parsing and persistence, since every element is reviewed by a human downstream regardless of confidence.
 
 ## Infrastructure & deploy
 
@@ -105,3 +109,30 @@ Two project skills live at `~/.claude/skills/` and are invoked automatically by 
 
 - **`download-pipeline-outputs`** (`~/.claude/skills/download-pipeline-outputs/SKILL.md`) — downloads detection, extraction, and parsing JSON from S3 for all four golden states (AZ, CA, CO, TX) into a date-stamped `outputs/MM-DD-YY/` folder. Invoke with e.g. "download pipeline outputs for run 15". Uses AWS profile `kinder-readiness-dev-cli`; run IDs are zero-padded to 3 digits. Output files are named `<STATE>-<type>.json` (e.g. `AZ-detection.json`).
 - **`evaluation-runner`** (`~/.claude/skills/evaluation-runner/SKILL.md`) — runs the detector and parser eval suites against a local outputs folder and suggests fixes for low-scoring components.
+
+# AWS Guidance
+
+- Prefer the AWS MCP Server for AWS interactions — it provides sandboxed
+  execution, observability, and audit logging. If unavailable, use the
+  AWS CLI directly.
+- Before starting a task, check whether a relevant AWS skill is available.
+  Load the skill with `retrieve_skill` and prefer its guidance over
+  general knowledge.
+- When uncertain about specific AWS details (API parameters, permissions,
+  limits, error codes), verify against documentation rather than guessing.
+  State uncertainty explicitly if you cannot confirm.
+- When creating infrastructure, prefer infrastructure-as-code (AWS CDK or
+  CloudFormation) over direct CLI commands.
+- When working with infrastructure, follow AWS Well-Architected Framework
+  principles.
+- Do not use em dashes in AWS resource names or descriptions. Use
+  hyphens instead.
+
+## Secret Safety
+
+- MUST load the `aws-secrets-manager` skill first for any secret,
+  credential, API key, token, or password task. MUST NOT call
+  `secretsmanager get-secret-value` or `batch-get-secret-value`, and MUST
+  NOT hit the Secrets Manager Agent daemon directly. MUST use
+  `{{resolve:secretsmanager:secret-id:SecretString:json-key}}` with
+  `asm-exec` so the secret resolves at runtime without entering context.

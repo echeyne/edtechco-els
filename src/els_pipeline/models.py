@@ -65,30 +65,16 @@ class DetectedElement(BaseModel):
     confidence: float = Field(ge=0.0, le=1.0)
     source_page: int = Field(gt=0)
     source_text: str
-    needs_review: bool
     # Populated for indicators that come from age-banded columns (e.g.
     # "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). None for
     # non-age-banded elements.
     age_band: Optional[str] = None
-    
-    @field_validator('needs_review')
-    @classmethod
-    def validate_needs_review(cls, v, info):
-        """Validate needs_review flag based on confidence."""
-        confidence = info.data.get('confidence')
-        if confidence is not None:
-            expected = confidence < 0.7
-            if v != expected:
-                # Auto-correct based on confidence
-                return expected
-        return v
 
 
 class DetectionResult(BaseModel):
     """Result of structure detection."""
     document_s3_key: str
     elements: List[DetectedElement]
-    review_count: int = Field(ge=0)
     status: str
     error: Optional[str] = None
 

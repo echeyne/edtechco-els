@@ -28,7 +28,6 @@ def _el(level, code, title, page=1, age_band=None):
         confidence=0.95,
         source_page=page,
         source_text=title,
-        needs_review=False,
         age_band=age_band,
     )
 

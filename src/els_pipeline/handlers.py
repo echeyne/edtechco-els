@@ -236,7 +236,6 @@ def detection_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             "status": "success" | "error",
             "stage_name": "structure_detection",
             "output_artifact": str (S3 key with detected elements),
-            "review_count": int,
             "country": str,
             "state": str,
             "version_year": int,
@@ -276,7 +275,6 @@ def detection_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         # Prepare detection output JSON
         detection_output = {
             "elements": [elem.model_dump() for elem in result.elements],  # Serialize Pydantic models to dicts
-            "review_count": result.review_count,
             "detection_timestamp": datetime.now(timezone.utc).isoformat(),
             "source_extraction_key": extraction_key
         }
@@ -297,13 +295,12 @@ def detection_handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             logger.error(f"Failed to save detection output to S3: {output_key} - {str(e)}")
             return _handle_error("structure_detection", e, event)
 
-        logger.info(f"Structure detection completed: review_count={result.review_count}")
+        logger.info(f"Structure detection completed: {len(result.elements)} elements")
 
         return {
             "status": "success",
             "stage_name": "structure_detection",
             "output_artifact": output_key,
-            "review_count": result.review_count,
             "country": event["country"],
             "state": event["state"],
             "version_year": event["version_year"],
@@ -763,7 +760,6 @@ def merge_detection_results_handler(event: Dict[str, Any], context: Any) -> Dict
             "status": "success" | "partial" | "error",
             "stage_name": "structure_detection",
             "output_artifact": str,
-            "review_count": int,
             "total_elements": int,
             "country": str,
             "state": str,

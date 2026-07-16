@@ -7,11 +7,13 @@ A serverless pipeline that ingests early learning standards (ELS) documents from
 Early learning standards vary wildly across states — different formats, structures, and terminology. This pipeline takes raw PDF documents and produces a unified, queryable dataset:
 
 1. **Ingestion** — Uploads raw documents to S3 with country-based path structure
-2. **Text Extraction** — Extracts text blocks from PDFs using AWS Textract
-3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, indicators), with large documents batched and processed in parallel via Step Functions Map states
+2. **Text Extraction** — Extracts text blocks from PDFs with AWS Textract, repairing Textract's fused-word OCR errors against the PDF's own text layer (PyMuPDF)
+3. **Structure Detection** — Uses Bedrock (Claude) to identify hierarchy elements (domains, strands, sub-strands, indicators), with large documents batched and processed in parallel via Step Functions Map states
 4. **Hierarchy Parsing** — Normalizes detected elements into a consistent tree structure, also batched in parallel
 5. **Validation** — Validates records against the canonical schema and enforces uniqueness
 6. **Persistence** — Stores everything in Aurora PostgreSQL
+
+The detection and parsing stages are deliberately **LLM-driven rather than rule-driven** — document-structure logic lives in the prompts, not in per-state Python branches. See [CLAUDE.md](CLAUDE.md) before editing `detector.py` or `parser.py`.
 
 On top of the pipeline, there are three web applications:
 
@@ -49,7 +51,7 @@ packages/
   ├── shared/              Shared TypeScript types used by all web packages
   ├── els-explorer-api/    Hono REST API for the standards explorer
   ├── els-explorer-frontend/ React frontend for browsing/editing standards
-  ├── planning-api/        Hono API proxying to Bedrock AgentCore for planning
+  ├── planning-api/        Hono API: mints presigned AgentCore WebSocket URLs, plan reads
   ├── planning-frontend/   React chat UI for AI-powered learning plans
   ├── agentcore-agent/     Python Strands agent deployed to Bedrock AgentCore
   └── landing-site/        Project landing page (React)
@@ -61,6 +63,8 @@ tests/
   ├── property/            Property-based tests (Hypothesis)
   ├── integration/         Integration tests (moto-mocked AWS)
   └── unit/                Unit tests
+evaluation/                Quality harness for the detector & parser: golden
+                           sets per state + the two eval suites that grade them
 standards/                 Sample standards PDFs for testing
 documentation/             Detailed guides
 ```
@@ -135,17 +139,19 @@ See [documentation/DEPLOYMENT.md](documentation/DEPLOYMENT.md) for full details.
 
 Key environment variables (see `.env.example` for the full list):
 
-| Variable                        | Description                               | Default                              |
-| ------------------------------- | ----------------------------------------- | ------------------------------------ |
-| `ELS_RAW_BUCKET`                | S3 bucket for raw documents               | `els-raw-documents`                  |
-| `ELS_PROCESSED_BUCKET`          | S3 bucket for canonical JSON              | `els-processed-json`                 |
-| `BEDROCK_DETECTOR_LLM_MODEL_ID` | Bedrock model for structure detection     | `us.us.anthropic.claude-opus-4-6-v1` |
-| `BEDROCK_PARSER_LLM_MODEL_ID`   | Bedrock model for parsing                 | `us.anthropic.claude-sonnet-4-6`     |
-| `CONFIDENCE_THRESHOLD`          | Min confidence before flagging for review | `0.8`                                |
-| `MAX_CHUNKS_PER_BATCH`          | Max text-block chunks per detection batch | `5`                                  |
-| `MAX_DOMAINS_PER_BATCH`         | Max domain chunks per parse batch         | `3`                                  |
-| `DB_HOST`                       | Aurora PostgreSQL endpoint                | `localhost`                          |
-| `DESCOPE_PROJECT_ID`            | Descope project ID for API authentication | —                                    |
+| Variable                         | Description                                          | Default (`config.py`)                        |
+| -------------------------------- | ---------------------------------------------------- | -------------------------------------------- |
+| `ELS_RAW_BUCKET`                 | S3 bucket for raw documents                          | `els-raw-documents`                          |
+| `ELS_PROCESSED_BUCKET`           | S3 bucket for canonical JSON                         | `els-processed-json`                         |
+| `BEDROCK_DETECTOR_LLM_MODEL_ID`  | Bedrock model for structure detection                | `us.anthropic.claude-opus-4-6-v1`            |
+| `BEDROCK_DEPTH_MAP_LLM_MODEL_ID` | Bedrock model for the detection depth-map pass       | `us.anthropic.claude-haiku-4-5-20251001-v1:0` |
+| `BEDROCK_PARSER_LLM_MODEL_ID`    | Bedrock model for parsing                            | `us.anthropic.claude-sonnet-4-6`             |
+| `MAX_CHUNKS_PER_BATCH`           | Max text-block chunks per detection batch            | `5`                                          |
+| `MAX_DOMAINS_PER_BATCH`          | Max domain chunks per parse batch                    | `3`                                          |
+| `DB_HOST`                        | Aurora PostgreSQL endpoint                           | `localhost`                                  |
+| `DESCOPE_PROJECT_ID`             | Descope project ID for API authentication            | —                                            |
+
+Detected elements carry a `confidence` score, but nothing in the pipeline gates or drops elements on it — every element is reviewed by a human downstream regardless of confidence, so there's no threshold to configure.
 
 ## Documentation
 
@@ -154,9 +160,11 @@ Key environment variables (see `.env.example` for the full list):
 - [Architecture Guide](documentation/ARCHITECTURE.md) — Pipeline stages, data flow, batching pattern, data models
 - [API Reference](documentation/API.md) — Explorer and Planning API endpoints
 - [AWS Operations Guide](documentation/AWS_OPERATIONS.md) — Post-deployment verification, monitoring, troubleshooting, cost
+- [Evaluation Harness](evaluation/README.md) — Golden sets and the detector/parser eval suites
 - [Infrastructure Guide](infra/README.md) — CDK stacks, S3 structure, IAM roles
 - [Database Migrations](infra/migrations/README.md) — Schema evolution and migration instructions
 - [Contributing Guide](documentation/CONTRIBUTING.md) — Development workflow, code style, PR process
+- [CLAUDE.md](CLAUDE.md) — Design direction for the detector/parser; read before editing either
 
 ## License
 

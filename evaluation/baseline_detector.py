@@ -191,8 +191,6 @@ def _classify_block(block: TextBlock) -> Optional[DetectedElement]:
             if code:
                 confidence = min(1.0, confidence + 0.05)
 
-            needs_review = confidence < Config.CONFIDENCE_THRESHOLD
-
             return DetectedElement(
                 level=level,
                 code=code or title[:5].upper().replace(" ", ""),
@@ -201,7 +199,6 @@ def _classify_block(block: TextBlock) -> Optional[DetectedElement]:
                 confidence=confidence,
                 source_page=block.page_number,
                 source_text=text[:500],
-                needs_review=needs_review,
             )
 
     return None
@@ -221,7 +218,7 @@ def detect_structure_baseline(
         document_s3_key: S3 key of the source document
 
     Returns:
-        DetectionResult with detected elements, review count, and status
+        DetectionResult with detected elements and status
     """
     logger.info(f"Starting baseline detection for: {document_s3_key}")
     logger.info(f"Input: {len(blocks)} text blocks")
@@ -230,7 +227,6 @@ def detect_structure_baseline(
         return DetectionResult(
             document_s3_key=document_s3_key,
             elements=[],
-            review_count=0,
             status="error",
             error="No text blocks provided",
         )
@@ -242,20 +238,16 @@ def detect_structure_baseline(
         if element:
             elements.append(element)
 
-    review_count = sum(1 for e in elements if e.needs_review)
-
     level_counts = {}
     for elem in elements:
         level_counts[elem.level.value] = level_counts.get(elem.level.value, 0) + 1
 
     logger.info(f"Baseline detection complete: {len(elements)} elements")
     logger.info(f"Elements by level: {level_counts}")
-    logger.info(f"Review needed: {review_count}")
 
     return DetectionResult(
         document_s3_key=document_s3_key,
         elements=elements,
-        review_count=review_count,
         status="success",
         error=None,
     )

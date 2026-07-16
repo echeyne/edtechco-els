@@ -25,8 +25,7 @@ def detected_element_strategy(draw):
     confidence = draw(st.floats(min_value=0.0, max_value=1.0))
     source_page = draw(st.integers(min_value=1, max_value=1000))
     source_text = draw(st.text(min_size=1, max_size=1000))
-    needs_review = confidence < 0.7
-    
+
     return DetectedElement(
         level=level,
         code=code,
@@ -35,7 +34,6 @@ def detected_element_strategy(draw):
         confidence=confidence,
         source_page=source_page,
         source_text=source_text,
-        needs_review=needs_review,
     )
 
 

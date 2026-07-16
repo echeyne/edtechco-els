@@ -12,7 +12,6 @@ Prerequisites:
 Environment Variables:
 - AWS_REGION: AWS region (default: us-east-1)
 - BEDROCK_DETECTOR_LLM_MODEL_ID: Bedrock model ID (default: us.anthropic.claude-opus-4-6-v1)
-- CONFIDENCE_THRESHOLD: Confidence threshold for review flagging (default: 0.8)
 
 Usage:
     # Test with sample blocks:
@@ -388,7 +387,6 @@ def print_element(element, index):
     print(f"    Description: {element.description[:100]}..." if len(element.description) > 100 else f"    Description: {element.description}")
     print(f"    Confidence:  {element.confidence:.2f}")
     print(f"    Page:        {element.source_page}")
-    print(f"    Needs Review: {element.needs_review}")
 
 
 def main():
@@ -399,7 +397,6 @@ def main():
     print("\nEnvironment Configuration:")
     print(f"  AWS_REGION:            {os.getenv('AWS_REGION', 'us-east-1')}")
     print(f"  BEDROCK_DETECTOR_LLM_MODEL_ID:  {os.getenv('BEDROCK_DETECTOR_LLM_MODEL_ID', 'us.anthropic.claude-sonnet-4-6')}")
-    print(f"  CONFIDENCE_THRESHOLD:  {os.getenv('CONFIDENCE_THRESHOLD', '0.7')}")
     
     # Determine if we're loading from file or using sample blocks
     if len(sys.argv) > 1:
@@ -437,8 +434,7 @@ def main():
         print(f"\n  Status:        {result.status}")
         print(f"  Document:      {result.document_s3_key}")
         print(f"  Elements:      {len(result.elements)}")
-        print(f"  Review Count:  {result.review_count}")
-        
+
         if result.error:
             print(f"  Error:         {result.error}")
         
@@ -469,15 +465,7 @@ def main():
             for level in ['domain', 'strand', 'sub_strand', 'indicator']:
                 count = level_counts.get(level, 0)
                 print(f"  {level.capitalize():12} {count:3d}")
-            
-            # Elements needing review
-            if result.review_count > 0:
-                print_section("Elements Needing Review")
-                
-                review_elements = [e for e in result.elements if e.needs_review]
-                for idx, element in enumerate(review_elements):
-                    print_element(element, idx)
-        
+
         # Save results to file
         output_file = Path(__file__).parent.parent / "detector_test_output.json"
         with open(output_file, 'w') as f:
@@ -485,7 +473,6 @@ def main():
                 'status': result.status,
                 'document_s3_key': result.document_s3_key,
                 'total_elements': len(result.elements),
-                'review_count': result.review_count,
                 'error': result.error,
                 'elements': [
                     {
@@ -495,7 +482,6 @@ def main():
                         'description': e.description,
                         'confidence': e.confidence,
                         'source_page': e.source_page,
-                        'needs_review': e.needs_review
                     }
                     for e in result.elements
                 ]

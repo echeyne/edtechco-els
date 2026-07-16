@@ -251,41 +251,6 @@ def test_parse_llm_response_confidence_clamping(sample_text_blocks):
     assert elements[0].confidence == 1.0  # Clamped to max
 
 
-def test_confidence_threshold_flagging(sample_text_blocks):
-    """Test confidence threshold flagging."""
-    # High confidence element
-    high_conf_response = json.dumps([
-        {
-            "level": "indicator",
-            "code": "TEST.1",
-            "title": "Test",
-            "description": "Test",
-            "confidence": 0.85,
-            "source_page": 1,
-            "source_text": "Test"
-        }
-    ])
-    
-    elements = parse_llm_response(high_conf_response, sample_text_blocks)
-    assert elements[0].needs_review is False
-    
-    # Low confidence element
-    low_conf_response = json.dumps([
-        {
-            "level": "indicator",
-            "code": "TEST.2",
-            "title": "Test",
-            "description": "Test",
-            "confidence": 0.65,
-            "source_page": 1,
-            "source_text": "Test"
-        }
-    ])
-    
-    elements = parse_llm_response(low_conf_response, sample_text_blocks)
-    assert elements[0].needs_review is True
-
-
 @patch('els_pipeline.detector.boto3.client')
 def test_call_bedrock_llm_success(mock_boto_client, mock_bedrock_response):
     """Test successful Bedrock LLM call."""
@@ -354,17 +319,16 @@ def test_detect_structure_success(mock_call_bedrock, sample_text_blocks):
             "code": "LLD.1",
             "title": "Test Indicator",
             "description": "Test description",
-            "confidence": 0.65,  # Below threshold
+            "confidence": 0.65,
             "source_page": 1,
             "source_text": "Test"
         }
     ])
-    
+
     result = detect_structure(sample_text_blocks, "test-doc.pdf")
-    
+
     assert result.status == "success"
     assert len(result.elements) == 2
-    assert result.review_count == 1  # One element below threshold
     assert result.document_s3_key == "test-doc.pdf"
 
 

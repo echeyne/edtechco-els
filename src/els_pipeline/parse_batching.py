@@ -82,12 +82,11 @@ def prepare_parse_batches(event: Dict[str, Any], context: Any) -> Dict[str, Any]
             "run_id": run_id,
         }
 
-    # Convert to DetectedElement instances and filter out needs_review
+    # Convert to DetectedElement instances. All elements are passed through to
+    # parsing regardless of confidence — human review happens downstream.
     elements = [DetectedElement(**e) for e in elements_data]
-    valid_elements = [e for e in elements if not e.needs_review]
-    logger.info(
-        f"Filtered elements: {len(valid_elements)} valid out of {len(elements)} total"
-    )
+    valid_elements = elements
+    logger.info(f"Loaded {len(valid_elements)} elements for parsing")
 
     # Canonicalize codes across elements BEFORE chunking — same step the direct
     # parse_hierarchy path runs. Without it the batched path routes/serializes

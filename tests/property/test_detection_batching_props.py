@@ -95,7 +95,6 @@ detected_element_strategy = st.fixed_dictionaries({
     "confidence": st.floats(min_value=0.0, max_value=1.0),
     "source_page": st.integers(min_value=1, max_value=100),
     "source_text": st.text(min_size=1, max_size=200),
-    "needs_review": st.booleans(),
 })
 
 batch_status_strategy = st.sampled_from(["success", "partial", "error"])
@@ -182,36 +181,3 @@ def test_property_6_status_determination_correctness(statuses):
         assert result == "partial", (
             f"Expected 'partial' for mixed statuses {statuses}, got '{result}'"
         )
-
-
-# ---------------------------------------------------------------------------
-# Property 7: Review count accuracy
-# ---------------------------------------------------------------------------
-
-@given(st.lists(detected_element_strategy, min_size=0, max_size=50))
-@settings(max_examples=50, deadline=5000)
-def test_property_7_review_count_accuracy(elements):
-    """
-    Property 7: Review count accuracy
-
-    The review_count equals the count of deduplicated elements whose
-    confidence is below CONFIDENCE_THRESHOLD.
-
-    **Validates: Requirements 3.3**
-    """
-    unique = _deduplicate(elements)
-
-    review_count = sum(
-        1 for e in unique
-        if e.get("confidence", 1.0) < Config.CONFIDENCE_THRESHOLD
-    )
-
-    expected = sum(
-        1 for e in unique
-        if e.get("confidence", 1.0) < Config.CONFIDENCE_THRESHOLD
-    )
-
-    assert review_count == expected, (
-        f"Review count {review_count} != expected {expected} "
-        f"(threshold={Config.CONFIDENCE_THRESHOLD})"
-    )

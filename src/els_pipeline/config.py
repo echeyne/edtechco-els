@@ -20,9 +20,6 @@ class Config:
     )
     BEDROCK_PARSER_LLM_MODEL_ID = os.getenv("BEDROCK_PARSER_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
 
-    # Confidence Threshold
-    CONFIDENCE_THRESHOLD = float(os.getenv("CONFIDENCE_THRESHOLD", "0.5"))
-    
     # Batch Configuration
     MAX_CHUNKS_PER_BATCH = int(os.getenv("MAX_CHUNKS_PER_BATCH", "5"))
     MAX_DOMAINS_PER_BATCH = int(os.getenv("MAX_DOMAINS_PER_BATCH", "3"))

@@ -14,7 +14,7 @@ from els_pipeline.config import Config
 
 def _make_element(
     level="indicator", code="IND.1", title="Test Indicator",
-    confidence=0.95, page=1, needs_review=False,
+    confidence=0.95, page=1,
 ):
     """Helper to create a minimal DetectedElement dict."""
     return {
@@ -25,7 +25,6 @@ def _make_element(
         "confidence": confidence,
         "source_page": page,
         "source_text": "sample source text",
-        "needs_review": needs_review,
     }
 
 
@@ -53,7 +52,7 @@ def test_prepare_zero_elements(s3_setup):
     """Empty detection output produces at least one batch."""
     s3 = s3_setup
     event = _base_event()
-    detection = {"elements": [], "review_count": 0}
+    detection = {"elements": []}
     s3.put_object(
         Bucket=Config.S3_PROCESSED_BUCKET,
         Key=event["output_artifact"],
@@ -76,7 +75,7 @@ def test_prepare_single_domain(s3_setup):
         _make_element(level="strand", code="S1", title="Strand 1"),
         _make_element(level="indicator", code="I1", title="Indicator 1"),
     ]
-    detection = {"elements": elements, "review_count": 0}
+    detection = {"elements": elements}
     s3.put_object(
         Bucket=Config.S3_PROCESSED_BUCKET,
         Key=event["output_artifact"],
@@ -109,7 +108,7 @@ def test_prepare_multiple_domains_within_limit(s3_setup):
         elements.append(
             _make_element(level="indicator", code=f"I{i}", title=f"Ind {i}")
         )
-    detection = {"elements": elements, "review_count": 0}
+    detection = {"elements": elements}
     s3.put_object(
         Bucket=Config.S3_PROCESSED_BUCKET,
         Key=event["output_artifact"],
@@ -135,7 +134,7 @@ def test_prepare_exceeding_max_domains(s3_setup):
         elements.append(
             _make_element(level="indicator", code=f"I{i}", title=f"Ind {i}")
         )
-    detection = {"elements": elements, "review_count": 0}
+    detection = {"elements": elements}
     s3.put_object(
         Bucket=Config.S3_PROCESSED_BUCKET,
         Key=event["output_artifact"],
@@ -147,37 +146,6 @@ def test_prepare_exceeding_max_domains(s3_setup):
     assert result["status"] == "success"
     assert result["batch_count"] >= 2
     assert len(result["batch_keys"]) == result["batch_count"]
-
-
-def test_prepare_filters_needs_review(s3_setup):
-    """Elements with needs_review=True are filtered out."""
-    s3 = s3_setup
-    event = _base_event()
-    elements = [
-        _make_element(level="domain", code="D1", title="Domain 1", confidence=0.95),
-        _make_element(
-            level="indicator", code="I1", title="Review Me",
-            confidence=0.3, needs_review=True,
-        ),
-        _make_element(level="indicator", code="I2", title="Good One", confidence=0.9),
-    ]
-    detection = {"elements": elements, "review_count": 1}
-    s3.put_object(
-        Bucket=Config.S3_PROCESSED_BUCKET,
-        Key=event["output_artifact"],
-        Body=json.dumps(detection),
-    )
-
-    result = prepare_parse_batches(event, None)
-
-    assert result["status"] == "success"
-    manifest = json.loads(
-        s3.get_object(
-            Bucket=Config.S3_PROCESSED_BUCKET, Key=result["manifest_key"]
-        )["Body"].read()
-    )
-    # The review element should be filtered out
-    assert manifest["total_elements"] == 2
 
 
 def test_prepare_s3_load_failure(s3_setup):
@@ -195,7 +163,7 @@ def test_prepare_passthrough_fields(s3_setup):
     """Country, state, version_year, age_band, run_id are passed through."""
     s3 = s3_setup
     event = _base_event()
-    detection = {"elements": [], "review_count": 0}
+    detection = {"elements": []}
     s3.put_object(
         Bucket=Config.S3_PROCESSED_BUCKET,
         Key=event["output_artifact"],

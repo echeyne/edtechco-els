@@ -48,7 +48,6 @@ def _mock_detected_element():
         confidence=0.9,
         source_page=1,
         source_text="Sample text for detection",
-        needs_review=False,
     )
 
 

@@ -23,7 +23,6 @@ def _make_element(code="ELA.1.1", title="Reading", source_page=1, confidence=0.9
         "confidence": confidence,
         "source_page": source_page,
         "source_text": "sample",
-        "needs_review": confidence < Config.CONFIDENCE_THRESHOLD,
     }
 
 
@@ -210,31 +209,6 @@ def test_merge_missing_batch_result(s3_setup):
     assert "1" in result["error"]
 
 
-def test_merge_review_count(s3_setup):
-    """Review count reflects elements below confidence threshold."""
-    s3 = s3_setup
-    event = _base_event()
-
-    batch0_key = "US/CA/2021/intermediate/detection/batch-0/run-1.json"
-    result0_key = batch0_key.replace("/batch-", "/result-")
-
-    manifest = _make_manifest([(0, batch0_key)])
-    _put_json(s3, event["manifest_key"], manifest)
-
-    elements = [
-        _make_element(code="A", title="High", source_page=1, confidence=0.9),
-        _make_element(code="B", title="Low", source_page=2, confidence=0.3),
-        _make_element(code="C", title="Border", source_page=3, confidence=0.5),
-    ]
-    _put_json(s3, result0_key, _make_batch_result(0, elements))
-
-    result = merge_detection_results(event, None)
-
-    assert result["status"] == "success"
-    # Elements with confidence < 0.7: 0.3 and 0.5
-    assert result["review_count"] == 2
-
-
 def test_merge_output_format_matches_detection_handler(s3_setup):
     """Output saved to S3 matches the detection_handler format (Req 8.1)."""
     s3 = s3_setup
@@ -257,8 +231,6 @@ def test_merge_output_format_matches_detection_handler(s3_setup):
 
     # Must have same keys as detection_handler output
     assert "elements" in saved
-    assert "review_count" in saved
     assert "detection_timestamp" in saved
     assert "source_extraction_key" in saved
     assert isinstance(saved["elements"], list)
-    assert isinstance(saved["review_count"], int)

@@ -35,21 +35,20 @@ class TestDepthNormalization:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
                 title="Listening Skills",
                 description="Child demonstrates listening skills",
                 confidence=0.90, source_page=2,
-                source_text="LLD.1 indicator text", needs_review=False,
+                source_text="LLD.1 indicator text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.2",
                 title="Speaking Skills",
                 description="Child demonstrates speaking skills",
                 confidence=0.92, source_page=3,
-                source_text="LLD.2 indicator text", needs_review=False,
+                source_text="LLD.2 indicator text",
             ),
         ]
 
@@ -90,28 +89,27 @@ class TestDepthNormalization:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.STRAND, code="LLD.A",
                 title="Listening and Speaking",
                 description="Listening and speaking strand",
                 confidence=0.93, source_page=2,
-                source_text="LLD.A strand text", needs_review=False,
+                source_text="LLD.A strand text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.A.1",
                 title="Comprehension",
                 description="Child demonstrates understanding",
                 confidence=0.90, source_page=3,
-                source_text="LLD.A.1 indicator text", needs_review=False,
+                source_text="LLD.A.1 indicator text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.A.2",
                 title="Expression",
                 description="Child expresses ideas clearly",
                 confidence=0.91, source_page=4,
-                source_text="LLD.A.2 indicator text", needs_review=False,
+                source_text="LLD.A.2 indicator text",
             ),
         ]
 
@@ -155,35 +153,34 @@ class TestDepthNormalization:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.STRAND, code="LLD.A",
                 title="Listening and Speaking",
                 description="Listening and speaking strand",
                 confidence=0.93, source_page=2,
-                source_text="LLD.A strand text", needs_review=False,
+                source_text="LLD.A strand text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.SUB_STRAND, code="LLD.A.1",
                 title="Comprehension",
                 description="Comprehension sub-strand",
                 confidence=0.92, source_page=3,
-                source_text="LLD.A.1 sub-strand text", needs_review=False,
+                source_text="LLD.A.1 sub-strand text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.A.1.a",
                 title="Understanding Complex Language",
                 description="Child demonstrates understanding of complex language",
                 confidence=0.90, source_page=4,
-                source_text="LLD.A.1.a indicator text", needs_review=False,
+                source_text="LLD.A.1.a indicator text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.A.1.b",
                 title="Following Directions",
                 description="Child follows multi-step directions",
                 confidence=0.91, source_page=5,
-                source_text="LLD.A.1.b indicator text", needs_review=False,
+                source_text="LLD.A.1.b indicator text",
             ),
         ]
 
@@ -256,14 +253,13 @@ class TestStandardIDGeneration:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
                 title="Listening Skills",
                 description="Child demonstrates listening skills",
                 confidence=0.90, source_page=2,
-                source_text="LLD.1 indicator text", needs_review=False,
+                source_text="LLD.1 indicator text",
             ),
         ]
 
@@ -300,7 +296,7 @@ class TestOrphanDetection:
                 title="Orphaned Indicator",
                 description="This indicator has no parent domain",
                 confidence=0.90, source_page=1,
-                source_text="orphan text", needs_review=False,
+                source_text="orphan text",
             ),
         ]
 
@@ -320,14 +316,13 @@ class TestOrphanDetection:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
                 title="Valid Indicator",
                 description="This indicator has a parent domain",
                 confidence=0.90, source_page=2,
-                source_text="valid text", needs_review=False,
+                source_text="valid text",
             ),
         ]
 
@@ -360,28 +355,26 @@ class TestTreeAssembly:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
                 title="Listening Skills",
                 description="Child demonstrates listening skills",
                 confidence=0.90, source_page=2,
-                source_text="LLD.1 indicator text", needs_review=False,
+                source_text="LLD.1 indicator text",
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.DOMAIN, code="CD",
                 title="Cognitive Development",
                 description="Cognitive domain", confidence=0.95,
                 source_page=3, source_text="CD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="CD.1",
                 title="Problem Solving",
                 description="Child demonstrates problem solving",
                 confidence=0.90, source_page=4,
-                source_text="CD.1 indicator text", needs_review=False,
+                source_text="CD.1 indicator text",
             ),
         ]
 
@@ -414,49 +407,6 @@ class TestTreeAssembly:
         domains = {std.domain.code for std in result.standards}
         assert domains == {"LLD", "CD"}
 
-    def test_elements_flagged_for_review(self):
-        """Test that elements flagged for review are excluded."""
-        elements = [
-            DetectedElement(
-                level=HierarchyLevelEnum.DOMAIN, code="LLD",
-                title="Language and Literacy Development",
-                description="Language domain", confidence=0.95,
-                source_page=1, source_text="LLD domain text",
-                needs_review=False,
-            ),
-            DetectedElement(
-                level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
-                title="Valid Indicator",
-                description="This indicator is valid",
-                confidence=0.90, source_page=2,
-                source_text="valid text", needs_review=False,
-            ),
-            DetectedElement(
-                level=HierarchyLevelEnum.INDICATOR, code="LLD.2",
-                title="Low Confidence Indicator",
-                description="This indicator needs review",
-                confidence=0.60, source_page=3,
-                source_text="low confidence text", needs_review=True,
-            ),
-        ]
-
-        # LLD.2 is filtered out before the LLM call, so only LLD.1 comes back
-        fake = _bedrock_response([
-            {"domain_code": "LLD", "domain_name": "Language and Literacy Development",
-             "domain_description": "Language domain",
-             "strand_code": None, "strand_name": None, "strand_description": None,
-             "sub_strand_code": None, "sub_strand_name": None, "sub_strand_description": None,
-             "indicator_code": "LLD.1", "indicator_name": "Valid Indicator",
-             "indicator_description": "This indicator is valid",
-             "age_band": None, "source_page": 2, "source_text": "valid text"},
-        ])
-
-        with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake):
-            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
-
-        assert len(result.standards) == 1
-        assert result.standards[0].indicator.code == "LLD.1"
-
     def test_empty_elements_list(self):
         """Test parsing with an empty elements list."""
         result = parse_hierarchy([], "US", "CA", 2021, "PK")
@@ -467,8 +417,8 @@ class TestTreeAssembly:
     def test_no_indicators(self):
         """Test parsing with only domains (no indicators).
 
-        The AI parser sends all non-review elements to Bedrock. When the LLM
-        finds no indicators it returns an empty array, yielding 0 standards.
+        The AI parser sends all elements to Bedrock. When the LLM finds no
+        indicators it returns an empty array, yielding 0 standards.
         """
         elements = [
             DetectedElement(
@@ -476,7 +426,6 @@ class TestTreeAssembly:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
         ]
 
@@ -486,37 +435,6 @@ class TestTreeAssembly:
             result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 0
-
-
-class TestAllReviewInput:
-    """Test that all-review input returns error without calling Bedrock."""
-
-    def test_all_review_elements_returns_error(self):
-        """When every element has needs_review=True, return error immediately."""
-        elements = [
-            DetectedElement(
-                level=HierarchyLevelEnum.DOMAIN, code="LLD",
-                title="Language and Literacy Development",
-                description="Language domain", confidence=0.50,
-                source_page=1, source_text="LLD domain text",
-                needs_review=True,
-            ),
-            DetectedElement(
-                level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
-                title="Listening Skills",
-                description="Child demonstrates listening skills",
-                confidence=0.50, source_page=2,
-                source_text="LLD.1 indicator text", needs_review=True,
-            ),
-        ]
-
-        with patch("els_pipeline.parser.call_bedrock_llm") as mock_bedrock:
-            result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
-
-        assert result.status == "error"
-        assert len(result.standards) == 0
-        assert result.error is not None
-        mock_bedrock.assert_not_called()
 
 
 class TestJsonParseRetry:
@@ -530,14 +448,13 @@ class TestJsonParseRetry:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
                 title="Listening Skills",
                 description="Child demonstrates listening skills",
                 confidence=0.90, source_page=2,
-                source_text="LLD.1 indicator text", needs_review=False,
+                source_text="LLD.1 indicator text",
             ),
         ]
 
@@ -562,14 +479,13 @@ class TestClientErrorRetry:
                 title="Language and Literacy Development",
                 description="Language domain", confidence=0.95,
                 source_page=1, source_text="LLD domain text",
-                needs_review=False,
             ),
             DetectedElement(
                 level=HierarchyLevelEnum.INDICATOR, code="LLD.1",
                 title="Listening Skills",
                 description="Child demonstrates listening skills",
                 confidence=0.90, source_page=2,
-                source_text="LLD.1 indicator text", needs_review=False,
+                source_text="LLD.1 indicator text",
             ),
         ]
 

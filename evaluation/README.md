@@ -2,14 +2,14 @@
 
 There are **two** golden sets, graded by two independent suites:
 
-- **`ground_truth_detector/1** — detector goldens, one JSON per state.
+- **`ground_truth_detector/`** — detector goldens, one JSON per state.
   Graded by `evaluation/eval_detector.py`, which runs the detector against the
   matching `{STATE}-extraction.json` and compares the flat element list.
-  Schema: `../golden_set.schema.json`.
-- **`/ground_truth_parser/`** — parser goldens, one JSON per state. Graded by
+  Schema: `golden_set.schema.json`.
+- **`ground_truth_parser/`** — parser goldens, one JSON per state. Graded by
   `evaluation/eval_parser.py`, which runs the parser against the matching
   `{STATE}-detection.json` and compares the full nested `NormalizedStandard`
-  objects field-by-field. Schema: `../parser_golden.schema.json`.
+  objects field-by-field. Schema: `parser_golden.schema.json`.
 
 The two are deliberately decoupled: the detector and parser produce different
 shapes (flat elements vs. nested resolved standards), run against different
@@ -24,8 +24,8 @@ Files in each directory:
 | `CO.json` | Colorado ELDG Ages 3-5 — 3-level (no sub_strand), numeric strands     |
 | `TX.json` | Texas 2022 PreK Guidelines — 4-level, side-by-side PK3/PK4 columns    |
 
-The schema is in `../golden_set.schema.json`. Each file has three things to
-fill in:
+The detector schema is in `golden_set.schema.json`. Each file has three things
+to fill in:
 
 1. **`expected_depth_map`** — what `infer_depth_map` should return for this
    document. This is graded standalone so we know whether Pass-1 is correct
@@ -58,17 +58,31 @@ Annotation tips:
   document phrasing: `"Early (3 to 4 ½ Years)"` / `"Later (4 to 5 ½ Years)"`.
   For TX, use `"PK3"` / `"PK4"`.
 
+## Getting the inputs
+
+Neither suite runs the pipeline end-to-end — each one starts from a JSON file
+produced by an earlier stage, so you need a local outputs folder first:
+
+| Suite           | Reads                                       | Default dir |
+| --------------- | ------------------------------------------- | ----------- |
+| `eval_detector` | `{STATE}-extraction.json` (extractor output) | `outputs`   |
+| `eval_parser`   | `{STATE}-detection.json` (detector output)   | `outputs`   |
+
+The `download-pipeline-outputs` Claude Code skill pulls these from S3 for all
+four golden states into a date-stamped `outputs/MM-DD-YY/` folder — e.g.
+"download pipeline outputs for run 15".
+
 ## Running the eval
 
 ```sh
 # Detector eval — all states, single run
 python -m evaluation.eval_detector
 
-# One state
+# One state (repeatable: --state CA --state AZ)
 python -m evaluation.eval_detector --state CA
 
-# Stability check: run the detector N times against the same chunk and
-# report level-classification disagreement rate.
+# Stability check: re-run N times and report the level-classification
+# disagreement rate. This is an LLM-determinism check, not a quality check.
 python -m evaluation.eval_detector --state CA --stability-runs 3
 
 # Parser eval — grade parse_hierarchy output against ground_truth_parser/
@@ -76,5 +90,27 @@ python -m evaluation.eval_parser --detection-dir outputs/05-31-26
 python -m evaluation.eval_parser --state CA --stability-runs 3
 ```
 
+Shared flags: `--state` (repeatable), `--golden-dir`, `--no-cache` (bypass the
+cached LLM output — do this after a prompt change, or you will grade the old
+one), `--stability-runs`, `--report-json`, `--output-dir` (per-state review
+files). `eval_detector` takes `--extraction-dir`; `eval_parser` takes
+`--detection-dir` and `--default-age-band`.
+
 See the docstring at the top of `evaluation/eval_detector.py` and
 `evaluation/eval_parser.py` for the full metric set and configuration knobs.
+
+## What a good result looks like
+
+A score is only meaningful if it generalizes. The failure mode this harness
+exists to catch is **overfitting to the goldens** — a detector/parser change
+that lifts AZ/CA/CO/TX by encoding a rule specific to those documents.
+
+- Validate every detector/parser change against a **held-out state** before
+  calling it done. Nevada is the current canary
+  (`standards/nevada_ses_standards_2025*.pdf`); the `evaluation-runner` skill
+  auto-runs extra states for exactly this reason.
+- **Never loosen a matcher or edit a golden to make a score go up.** If the
+  model output and the golden disagree, fix the golden *data* and canonicalize
+  the output — don't weaken the test.
+
+See the design-direction section of [CLAUDE.md](../CLAUDE.md).

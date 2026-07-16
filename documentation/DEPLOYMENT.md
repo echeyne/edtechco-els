@@ -94,9 +94,8 @@ The script:
 # Full deploy to dev
 DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh
 
-# Production with custom domain
-DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh \
-  -e prod -d plan.example.com --hosted-zone-id Z1234
+# Production
+DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh -e prod
 
 # Redeploy code only
 ./scripts/deploy_planning_app.sh --skip-infra
@@ -105,11 +104,18 @@ DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh \
 ./scripts/deploy_planning_app.sh --skip-infra --skip-api
 ```
 
-Options are the same as the app deployment, plus:
+Options:
 
-| Flag              | Description                                 | Default          |
-| ----------------- | ------------------------------------------- | ---------------- |
-| `--bedrock-model` | Override the Bedrock model ID for the agent | template default |
+| Flag                  | Description                                 | Default          |
+| --------------------- | ------------------------------------------- | ---------------- |
+| `-e`, `--environment` | `dev`, `staging`, or `prod`                 | `dev`            |
+| `-r`, `--region`      | AWS region                                  | `us-east-1`      |
+| `--skip-infra`        | Skip CDK deployment (infra + AgentCore)     | —                |
+| `--skip-frontend`     | Skip frontend build and deploy              | —                |
+| `--skip-api`          | Skip Planning API Lambda deploy             | —                |
+| `--bedrock-model`     | Override the Bedrock model ID for the agent | template default |
+
+> Unlike the Explorer app script, this one takes **no** `-d`/`--hosted-zone-id` flags — there is no custom-domain option here yet.
 
 This stack also deploys a Bedrock AgentCore Runtime that hosts the Strands-based planning agent (`packages/agentcore-agent/`).
 
@@ -119,16 +125,18 @@ This stack also deploys a Bedrock AgentCore Runtime that hosts the Strands-based
 # Full deploy
 ./scripts/deploy_landing_site.sh
 
-# Production with custom domain
-./scripts/deploy_landing_site.sh -e prod -d example.com --hosted-zone-id Z1234
+# Production
+./scripts/deploy_landing_site.sh -e prod
 
 # Redeploy frontend only
 ./scripts/deploy_landing_site.sh --skip-infra
 ```
 
+Supports `-e`, `-r`, `--skip-infra`, and `--skip-frontend` only — no custom-domain or API flags.
+
 ## GitHub Secrets (CI/CD)
 
-If using GitHub Actions, configure these in `Settings > Secrets and variables > Actions`:
+There is **no CI workflow committed to this repo** — deploys are run from a developer machine via the scripts above. If you add GitHub Actions, these are the secrets it would need (`Settings > Secrets and variables > Actions`):
 
 | Secret                  | Description                                     |
 | ----------------------- | ----------------------------------------------- |

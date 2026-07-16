@@ -292,9 +292,8 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
     merges and deduplicates elements using
     (level, code, title, age_band, source_page) — age_band is in the key so
     side-by-side age/proficiency column variants are not collapsed,
-    counts elements needing review, determines overall status, and
-    saves the final detection output in the same format as the
-    existing detection_handler.
+    determines overall status, and saves the final detection output in
+    the same format as the existing detection_handler.
 
     Args:
         event: Lambda event containing manifest_key, country, state,
@@ -302,7 +301,7 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
         context: Lambda context (unused).
 
     Returns:
-        Dict with status, stage_name, output_artifact, review_count,
+        Dict with status, stage_name, output_artifact,
         total_elements, country, state, version_year, run_id, error.
     """
     run_id = event.get("run_id", "unknown")
@@ -324,7 +323,6 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
             "status": "error",
             "stage_name": "structure_detection",
             "output_artifact": None,
-            "review_count": 0,
             "total_elements": 0,
             "country": country,
             "state": state,
@@ -361,7 +359,6 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
             "status": "error",
             "stage_name": "structure_detection",
             "output_artifact": None,
-            "review_count": 0,
             "total_elements": 0,
             "country": country,
             "state": state,
@@ -390,12 +387,6 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
             seen.add(key)
             unique_elements.append(elem)
 
-    # Count elements needing review
-    review_count = sum(
-        1 for e in unique_elements
-        if e.get("confidence", 1.0) < Config.CONFIDENCE_THRESHOLD
-    )
-
     # Determine overall status
     if all_errors and unique_elements:
         status = "partial"
@@ -407,7 +398,6 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
     # Save final detection output in same format as detection_handler
     output = {
         "elements": unique_elements,
-        "review_count": review_count,
         "detection_timestamp": datetime.now(timezone.utc).isoformat(),
         "source_extraction_key": event.get("extraction_key", ""),
     }
@@ -418,14 +408,13 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
 
     logger.info(
         f"Detection merge complete: total_elements={len(unique_elements)}, "
-        f"review_count={review_count}, status={status}"
+        f"status={status}"
     )
 
     return {
         "status": status,
         "stage_name": "structure_detection",
         "output_artifact": output_key,
-        "review_count": review_count,
         "total_elements": len(unique_elements),
         "country": country,
         "state": state,

@@ -15,13 +15,16 @@ The project uses a multi-tier testing approach:
 
 ### Node.js Package Tests
 
-| Package                  | Framework                | Purpose                                   |
-| ------------------------ | ------------------------ | ----------------------------------------- |
-| `@els/api`               | vitest                   | API route handlers, database queries      |
-| `@els/frontend`          | vitest + Testing Library | React component rendering and interaction |
-| `@els/planning-api`      | vitest                   | Planning API routes, auth middleware      |
-| `@els/planning-frontend` | vitest + Testing Library | Chat UI components                        |
-| `@els/landing-site`      | vitest + Testing Library | Landing page components                   |
+| Package                  | Framework                | Purpose                                            |
+| ------------------------ | ------------------------ | -------------------------------------------------- |
+| `@els/api`               | vitest                   | API route handlers, database queries               |
+| `@els/frontend`          | vitest + Testing Library | React component rendering and interaction          |
+| `@els/planning-api`      | vitest                   | Planning API routes, auth middleware, plan queries |
+| `@els/planning-frontend` | vitest + Testing Library | Chat UI components                                 |
+| `@els/landing-site`      | vitest (configured)      | **No test files yet** — `pnpm test` is a no-op     |
+| `@els/shared`            | —                        | Types only; no test script                         |
+
+Property-based testing is not Python-only: both API packages use `fast-check` for invariants that unit tests miss — `verifyRoundTrip`, `editAudit`, `cascadeDelete`, and `filters` in `@els/api`, and `plans.property` / `plans.referential-integrity` in `@els/planning-api`.
 
 ## Running Tests
 
@@ -97,8 +100,10 @@ Requires environment variables set (see [Environment Setup](#environment-setup-f
 | Parser         | Level normalization, hierarchy mapping, Standard_ID determinism, orphan detection                         | Logic testing       | Sample data        |
 | Parse Batching | Exact partitioning, batch size constraint, review element filtering, merge completeness                   | Mocked S3 + Bedrock | Step Functions Map |
 | Validator      | Schema validation, error reporting, uniqueness, serialization round-trip                                  | Mocked S3           | Real S3 storage    |
-| Database       | Vector similarity ordering, query filter correctness                                                      | Test DB             | Real Aurora        |
+| Database       | Query filter correctness                                                                                  | Test DB             | Real Aurora        |
 | Orchestrator   | Stage result completeness, run count invariants                                                           | Mocked stages       | Step Functions     |
+
+Unit tests (`tests/unit/`) cover the narrower deterministic helpers that the tiers above don't reach: `test_extractor_repair.py` (the PyMuPDF spacing repair), `test_parser_chunking.py`, `test_parser_domain_anchor.py`, `test_s3_helpers.py`, and `test_db.py`.
 
 ## Property-Based Testing
 
@@ -126,6 +131,25 @@ To run with more examples for thorough testing:
 pytest tests/property/ -v --hypothesis-max-examples=100
 ```
 
+## Evaluation vs. Tests
+
+`tests/` and `evaluation/` answer different questions, and a green test suite does **not** mean the pipeline reads documents well.
+
+- **`tests/`** — is the code correct? Deterministic, no real LLM calls, runs in CI-time.
+- **`evaluation/`** — how well does the LLM actually read real state documents? Calls Bedrock, graded against hand-annotated golden sets, scores drift as prompts change.
+
+Any change to `detector.py` or `parser.py` (or their prompts) should be graded by the eval suites, not just by `pytest`:
+
+```bash
+python -m evaluation.eval_detector --state CA
+python -m evaluation.eval_parser --detection-dir outputs/MM-DD-YY
+
+# LLM-determinism check: re-run N times, report disagreement rate
+python -m evaluation.eval_detector --state CA --stability-runs 3
+```
+
+Because the LLM stages are prompt-driven, the failure mode to watch for is **overfitting to the goldens** — a change that lifts AZ/CA/CO/TX by encoding a document-specific rule. Validate against a held-out state (Nevada is the current canary) before calling a detector/parser change done. See [evaluation/README.md](../evaluation/README.md) and the design-direction section of [CLAUDE.md](../CLAUDE.md).
+
 ## Coverage Goals
 
 - Overall: > 80%
@@ -150,10 +174,10 @@ export DB_PASSWORD="<from-secrets-manager>"
 
 # Bedrock models
 export BEDROCK_DETECTOR_LLM_MODEL_ID=us.anthropic.claude-opus-4-6-v1
+export BEDROCK_DEPTH_MAP_LLM_MODEL_ID=us.anthropic.claude-haiku-4-5-20251001-v1:0
 export BEDROCK_PARSER_LLM_MODEL_ID=us.anthropic.claude-sonnet-4-6
 
 # Pipeline config
-export CONFIDENCE_THRESHOLD=0.8
 export MAX_CHUNKS_PER_BATCH=5
 export MAX_DOMAINS_PER_BATCH=3
 ```

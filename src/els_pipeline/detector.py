@@ -446,9 +446,6 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
     confidence = float(elem_data['confidence'])
     confidence = max(0.0, min(1.0, confidence))
     
-    # Determine needs_review based on confidence threshold
-    needs_review = confidence < Config.CONFIDENCE_THRESHOLD
-    
     age_band = _normalize_age_band(elem_data.get('age_band'))
 
     title = _strip_label_prefix(elem_data['title'])
@@ -468,7 +465,6 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
         confidence=confidence,
         source_page=elem_data.get('source_page', default_page),
         source_text=elem_data['source_text'],
-        needs_review=needs_review,
         age_band=age_band,
     )
 
@@ -821,17 +817,16 @@ def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> Dete
         document_s3_key: S3 key of the source document (for tracking)
         
     Returns:
-        DetectionResult with detected elements, review count, and status
+        DetectionResult with detected elements and status
     """
     logger.info(f"Starting structure detection for document: {document_s3_key}")
     logger.info(f"Input: {len(blocks)} text blocks")
-    
+
     if not blocks:
         logger.error("No text blocks provided")
         return DetectionResult(
             document_s3_key=document_s3_key,
             elements=[],
-            review_count=0,
             status="error",
             error="No text blocks provided"
         )
@@ -869,37 +864,28 @@ def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> Dete
         # Collapse elements re-emitted at overlapping chunk boundaries.
         all_elements = _dedup_elements(all_elements)
 
-        # Count elements needing review
-        review_count = sum(1 for elem in all_elements if elem.needs_review)
-        
         # Log summary by level
         level_counts = {}
         for elem in all_elements:
             level_counts[elem.level.value] = level_counts.get(elem.level.value, 0) + 1
-        
+
         logger.info(
             f"Detection complete: {len(all_elements)} total elements detected"
         )
         logger.info(f"Elements by level: {level_counts}")
-        logger.info(
-            f"Review needed: {review_count} elements "
-            f"(confidence < {Config.CONFIDENCE_THRESHOLD})"
-        )
-        
+
         return DetectionResult(
             document_s3_key=document_s3_key,
             elements=all_elements,
-            review_count=review_count,
             status="success",
             error=None
         )
-        
+
     except Exception as e:
         logger.error(f"Structure detection failed: {e}", exc_info=True)
         return DetectionResult(
             document_s3_key=document_s3_key,
             elements=[],
-            review_count=0,
             status="error",
             error=str(e)
         )

@@ -65,7 +65,6 @@ def test_california_standards():
             confidence=elem['confidence'],
             source_page=elem['source_page'],
             source_text=elem['description'],  # Use description as source_text
-            needs_review=elem['needs_review'],
         ))
     
     print(f"\n  Loaded {len(elements)} elements from detector_test_output.json")
@@ -118,7 +117,6 @@ def test_texas_standards():
             confidence=0.95,
             source_page=10,
             source_text="Domain I text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.STRAND,
@@ -128,7 +126,6 @@ def test_texas_standards():
             confidence=0.93,
             source_page=11,
             source_text="I.A strand text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR,
@@ -138,7 +135,6 @@ def test_texas_standards():
             confidence=0.90,
             source_page=12,
             source_text="I.A.1 indicator text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR,
@@ -148,7 +144,6 @@ def test_texas_standards():
             confidence=0.91,
             source_page=13,
             source_text="I.A.2 indicator text",
-            needs_review=False,
         ),
     ]
     
@@ -186,7 +181,6 @@ def test_florida_standards():
             confidence=0.95,
             source_page=20,
             source_text="PM domain text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR,
@@ -196,7 +190,6 @@ def test_florida_standards():
             confidence=0.90,
             source_page=21,
             source_text="PM.1 indicator text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR,
@@ -206,7 +199,6 @@ def test_florida_standards():
             confidence=0.91,
             source_page=22,
             source_text="PM.2 indicator text",
-            needs_review=False,
         ),
     ]
     
@@ -244,7 +236,6 @@ def test_orphan_detection():
             confidence=0.95,
             source_page=30,
             source_text="CD domain text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR,
@@ -254,7 +245,6 @@ def test_orphan_detection():
             confidence=0.90,
             source_page=31,
             source_text="CD.1 indicator text",
-            needs_review=False,
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR,
@@ -264,7 +254,6 @@ def test_orphan_detection():
             confidence=0.90,
             source_page=32,
             source_text="ORPHAN.1 indicator text",
-            needs_review=False,
         ),
     ]
     

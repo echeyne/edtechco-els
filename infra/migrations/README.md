@@ -1,6 +1,8 @@
 # Database Migrations
 
-SQL migration scripts for the ELS Normalization Pipeline database (Aurora PostgreSQL with pgvector).
+SQL migration scripts for the ELS Normalization Pipeline database (Aurora PostgreSQL).
+
+Migration 001 enables the `vector` (pgvector) extension, but as of migration 011 nothing depends on it — the `embeddings` and `recommendations` tables it existed for have been dropped. It is retained only so the migration chain replays cleanly from scratch.
 
 ## Migration Files
 
@@ -95,5 +97,5 @@ Database connection can be configured via environment variables:
 - Migrations are numbered sequentially: `NNN_description.sql`
 - Use `IF NOT EXISTS` and `ON CONFLICT` for idempotency where possible
 - Country codes follow ISO 3166-1 alpha-2 format (two uppercase letters)
-- Standard_ID format: `{COUNTRY}-{STATE}-{YEAR}-{DOMAIN_CODE}-{INDICATOR_CODE}`
-- The pgvector extension must be installed before running the initial migration
+- Standard_ID format: `{COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}` — e.g. `US-CA-2021-LLD.1.2`. The indicator code is fully qualified and carries its own disambiguator (age prefix like `PK3.`, or column suffix like `.DISC`); there is **no** separate domain-code component. See `generate_standard_id` in `src/els_pipeline/parser.py`.
+- The pgvector extension must be available before running the initial migration (001 declares it), even though no current table uses it

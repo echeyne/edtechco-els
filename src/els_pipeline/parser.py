@@ -109,7 +109,7 @@ def build_parsing_prompt(
     hierarchy context including descriptions for each level.
 
     Args:
-        elements: Filtered list of DetectedElement objects (needs_review=False)
+        elements: List of DetectedElement objects
         country: Two-letter country code
         state: State abbreviation
         version_year: Version year of the standards document
@@ -998,9 +998,9 @@ def parse_hierarchy(
     """
     Parse detected elements into normalized standards using an LLM.
 
-    Filters out needs_review elements, splits the remainder into per-domain
-    chunks, and calls the LLM once per chunk to stay within Bedrock timeout
-    limits.  Results from all chunks are merged into a single ParseResult.
+    Splits the elements into per-domain chunks and calls the LLM once per
+    chunk to stay within Bedrock timeout limits.  Results from all chunks
+    are merged into a single ParseResult.
 
     Args:
         elements: List of DetectedElement objects from the detector
@@ -1013,8 +1013,7 @@ def parse_hierarchy(
         ParseResult with standards, indicators, orphaned elements, and status
     """
     try:
-        # Filter out elements flagged for review
-        valid_elements = [e for e in elements if not e.needs_review]
+        valid_elements = elements
 
         if not valid_elements:
             return ParseResult(
@@ -1022,7 +1021,7 @@ def parse_hierarchy(
                 indicators=[],
                 orphaned_elements=elements,
                 status=StatusEnum.ERROR.value,
-                error="No valid elements to parse (all flagged for review or empty input)",
+                error="No valid elements to parse (empty input)",
             )
 
         # Normalize codes so the same entity always uses the same code

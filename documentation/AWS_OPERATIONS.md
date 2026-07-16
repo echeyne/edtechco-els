@@ -7,7 +7,7 @@ Step-by-step instructions for operating the ELS Normalization Pipeline on AWS af
 - AWS CLI v2 installed and configured
 - Python 3.13+, Node.js 20+, pnpm 9+, Docker
 - IAM permissions for: S3, Lambda, Step Functions, Aurora PostgreSQL, Textract, Bedrock, CloudWatch, SNS, Secrets Manager, IAM, VPC
-- Bedrock model access enabled for Claude and Titan Embed models
+- Bedrock model access enabled for the three Claude models the pipeline uses (Opus for detection, Haiku for the depth-map pass, Sonnet for parsing and the planning agent) — see [DEPLOYMENT.md](DEPLOYMENT.md#bedrock-model-access) for exact model IDs
 - CDK bootstrapped: `npx cdk bootstrap aws://<account>/<region>` (run once per account/region)
 
 To request Bedrock model access: AWS Console → Bedrock → Model access → Request access.
@@ -90,19 +90,36 @@ aws s3 cp s3://${BUCKET}/US/CA/2021/intermediate/extraction/${RUN_ID}.json - | j
 
 ### Lifecycle Management
 
-To auto-delete intermediate files after 7 days:
+> **Gotcha:** `intermediate/` is **not** a key prefix — it sits in the middle of the key (`US/CA/2021/intermediate/...`). S3 lifecycle filters match literal prefixes and do not support wildcards, so a rule filtered on `"Prefix": "intermediate/"` silently matches **zero objects**. It looks like cleanup is configured when nothing is being deleted.
+
+Two options that actually work:
+
+**1. One rule per document prefix** (no code change, but a rule per country/state/year):
 
 ```bash
 aws s3api put-bucket-lifecycle-configuration \
   --bucket ${ELS_PROCESSED_BUCKET} \
   --lifecycle-configuration '{
     "Rules": [{
-      "Id": "DeleteIntermediateAfter7Days",
+      "Id": "DeleteCA2021IntermediateAfter7Days",
       "Status": "Enabled",
-      "Filter": {"Prefix": "intermediate/"},
+      "Filter": {"Prefix": "US/CA/2021/intermediate/"},
       "Expiration": {"Days": 7}
     }]
   }'
+```
+
+**2. Tag intermediate objects and filter by tag** (the general fix — one rule covers every state, but requires tagging on write in `s3_helpers.py`, which does not happen today):
+
+```bash
+--lifecycle-configuration '{
+  "Rules": [{
+    "Id": "DeleteIntermediateAfter7Days",
+    "Status": "Enabled",
+    "Filter": {"Tag": {"Key": "lifecycle", "Value": "intermediate"}},
+    "Expiration": {"Days": 7}
+  }]
+}'
 ```
 
 ## Adding Documents from New States
@@ -150,10 +167,10 @@ aws secretsmanager get-secret-value \
 
 ### Running Migrations
 
-See [infra/migrations/README.md](../infra/migrations/README.md) for the full migration guide. To run a new migration:
+See [infra/migrations/README.md](../infra/migrations/README.md) for the full migration guide. To run a migration (011 is the latest):
 
 ```bash
-psql -h <aurora-endpoint> -U postgres -d els_corpus -f infra/migrations/009_alter_indicator_required_desc.sql
+psql -h <aurora-endpoint> -U postgres -d els_corpus -f infra/migrations/011_drop_embeddings_recommendations.sql
 ```
 
 ## Troubleshooting

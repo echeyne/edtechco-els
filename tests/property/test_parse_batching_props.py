@@ -28,23 +28,6 @@ detected_element_strategy = st.builds(
     confidence=st.floats(min_value=0.0, max_value=1.0),
     source_page=st.integers(min_value=1, max_value=100),
     source_text=st.text(min_size=1, max_size=50),
-    needs_review=st.just(False),  # will be auto-corrected by validator
-)
-
-# Strategy that may include review elements
-detected_element_with_review_strategy = st.builds(
-    DetectedElement,
-    level=_levels,
-    code=st.text(
-        min_size=1, max_size=10,
-        alphabet=st.characters(whitelist_categories=("L", "N")),
-    ),
-    title=st.text(min_size=1, max_size=50),
-    description=st.text(min_size=0, max_size=50),
-    confidence=st.floats(min_value=0.0, max_value=1.0),
-    source_page=st.integers(min_value=1, max_value=100),
-    source_text=st.text(min_size=1, max_size=50),
-    needs_review=st.booleans(),
 )
 
 
@@ -58,14 +41,14 @@ def test_property_2_parse_batch_exact_partitioning(elements):
     """
     Property 2: Parse batch exact partitioning
 
-    For any list of valid DetectedElement objects, the union of all batch
-    elements equals the original filtered set exactly — no loss, no
+    For any list of DetectedElement objects, the union of all batch
+    elements equals the original set exactly — no loss, no
     duplication.
 
     Validates: Requirements 4.4
     """
-    # Filter out needs_review (same as prepare_parse_batches)
-    valid_elements = [e for e in elements if not e.needs_review]
+    # All elements pass through to batching (no needs_review filtering).
+    valid_elements = elements
 
     # Chunk by domain
     domain_chunks = chunk_elements_by_domain(valid_elements)
@@ -116,8 +99,7 @@ def test_property_5_parse_batch_size_constraint(elements, max_domains_per_batch)
 
     Validates: Requirements 4.2, 9.4
     """
-    valid_elements = [e for e in elements if not e.needs_review]
-    domain_chunks = chunk_elements_by_domain(valid_elements)
+    domain_chunks = chunk_elements_by_domain(elements)
 
     # Group domain chunks into batches using the given max
     for i in range(0, len(domain_chunks), max_domains_per_batch):
@@ -127,38 +109,6 @@ def test_property_5_parse_batch_size_constraint(elements, max_domains_per_batch)
             f"exceeding limit of {max_domains_per_batch}"
         )
 
-
-
-# ---------------------------------------------------------------------------
-# Property 9: Parse preparer filters review elements
-# ---------------------------------------------------------------------------
-
-@given(st.lists(detected_element_with_review_strategy, min_size=0, max_size=30))
-@settings(max_examples=50, deadline=5000)
-def test_property_9_parse_preparer_filters_review_elements(elements):
-    """
-    Property 9: Parse preparer filters review elements
-
-    Batches produced by prepare_parse_batches contain only elements
-    where needs_review is false.
-
-    Validates: Requirements 4.1
-    """
-    # Filter (same logic as prepare_parse_batches)
-    valid_elements = [e for e in elements if not e.needs_review]
-
-    # Chunk and batch
-    domain_chunks = chunk_elements_by_domain(valid_elements)
-    max_per_batch = Config.MAX_DOMAINS_PER_BATCH
-
-    for i in range(0, max(len(domain_chunks), 1), max_per_batch):
-        batch_chunks = domain_chunks[i : i + max_per_batch]
-        for chunk in batch_chunks:
-            for el in chunk:
-                assert not el.needs_review, (
-                    f"Element with needs_review=True found in batch: "
-                    f"code={el.code}, confidence={el.confidence}"
-                )
 
 
 # ---------------------------------------------------------------------------

@@ -77,7 +77,6 @@ def detected_element(draw, level, code_prefix="", page_range=(1, 100)):
         confidence=confidence,
         source_page=source_page,
         source_text=source_text,
-        needs_review=False,
     )
 
 
@@ -152,7 +151,7 @@ def four_level_hierarchy(draw):
 
 @st.composite
 def arbitrary_element(draw):
-    """Generate a DetectedElement with arbitrary level and review flag."""
+    """Generate a DetectedElement with arbitrary level."""
     level = draw(st.sampled_from(list(HierarchyLevelEnum)))
     code = draw(st.text(
         alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.",
@@ -166,7 +165,7 @@ def arbitrary_element(draw):
     return DetectedElement(
         level=level, code=code, title=title, description=description,
         confidence=confidence, source_page=source_page,
-        source_text=source_text, needs_review=(confidence < 0.7),
+        source_text=source_text,
     )
 
 
@@ -306,7 +305,7 @@ def _mock_bedrock_four_level(elements):
 
 def _mock_bedrock_generic(elements):
     """Build a mock Bedrock response for arbitrary elements."""
-    indicators = [e for e in elements if e.level == HierarchyLevelEnum.INDICATOR and not e.needs_review]
+    indicators = [e for e in elements if e.level == HierarchyLevelEnum.INDICATOR]
     items = []
     for ind in indicators:
         items.append({
@@ -510,7 +509,6 @@ def test_property_12_orphaned_indicators_without_domain(country, state, year):
         confidence=0.9,
         source_page=1,
         source_text="orphan text",
-        needs_review=False,
     )
 
     fake = json.dumps([])
@@ -568,12 +566,12 @@ def test_property_2_3_age_band_fallback_and_passthrough(
     indicator = DetectedElement(
         level=HierarchyLevelEnum.INDICATOR, code="IND.1",
         title="Test Indicator", description="desc", confidence=0.9,
-        source_page=1, source_text="source", needs_review=False,
+        source_page=1, source_text="source",
     )
     domain = DetectedElement(
         level=HierarchyLevelEnum.DOMAIN, code="D1",
         title="Domain", description="domain desc", confidence=0.9,
-        source_page=1, source_text="domain source", needs_review=False,
+        source_page=1, source_text="domain source",
     )
 
     fake_response = json.dumps([{
@@ -612,8 +610,7 @@ def test_property_1_parse_hierarchy_always_returns_parse_result(
 
     **Validates: Requirements 3.4, 5.3**
     """
-    valid_elements = [e for e in elements if not e.needs_review]
-    indicators = [e for e in valid_elements if e.level == HierarchyLevelEnum.INDICATOR]
+    indicators = [e for e in elements if e.level == HierarchyLevelEnum.INDICATOR]
     fake_response = _mock_bedrock_generic(elements) if indicators else "[]"
 
     with patch("els_pipeline.parser.call_bedrock_llm", return_value=fake_response):
@@ -655,12 +652,12 @@ def test_property_5_json_parse_retry_exhaustion_returns_error(
         DetectedElement(
             level=HierarchyLevelEnum.DOMAIN, code="D1",
             title="Domain", description="domain desc", confidence=0.9,
-            source_page=1, source_text="domain source", needs_review=False,
+            source_page=1, source_text="domain source",
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR, code="D1.1",
             title="Indicator", description="indicator desc", confidence=0.9,
-            source_page=2, source_text="indicator source", needs_review=False,
+            source_page=2, source_text="indicator source",
         ),
     ]
 
@@ -698,12 +695,12 @@ def test_property_6_client_error_retry_exhaustion_returns_error(
         DetectedElement(
             level=HierarchyLevelEnum.DOMAIN, code="D1",
             title="Domain", description="domain desc", confidence=0.9,
-            source_page=1, source_text="domain source", needs_review=False,
+            source_page=1, source_text="domain source",
         ),
         DetectedElement(
             level=HierarchyLevelEnum.INDICATOR, code="D1.1",
             title="Indicator", description="indicator desc", confidence=0.9,
-            source_page=2, source_text="indicator source", needs_review=False,
+            source_page=2, source_text="indicator source",
         ),
     ]
 

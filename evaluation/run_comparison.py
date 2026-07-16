@@ -94,7 +94,6 @@ def run_detector(name: str, detect_fn, blocks: list[TextBlock]) -> dict:
 
     output = {
         "elements": [e.model_dump() for e in result.elements],
-        "review_count": result.review_count,
         "status": result.status,
         "detector": name,
         "elapsed_seconds": round(elapsed, 2),

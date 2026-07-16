@@ -13,7 +13,18 @@ Deployment scripts and manual testing tools for the ELS pipeline.
 | `package_lambda.sh`      | Package Python Lambda code (used internally by older workflows)             |
 | `migrate_cfn_to_cdk.sh`  | One-time migration helper from CloudFormation to CDK                        |
 
-All deploy scripts support `-e` (environment), `-r` (region), `--skip-infra`, `--skip-frontend`, `--skip-api`, and `-h` (help). See [Deployment Guide](../documentation/DEPLOYMENT.md) for full usage.
+All four support `-e` (environment), `-r` (region), and `-h` (help). The `--skip-*` flags vary — the pipeline script has none, since it has no frontend or app code to deploy separately:
+
+| Script                   | `--skip-infra` | `--skip-frontend` | `--skip-api` | Other                               |
+| ------------------------ | -------------- | ----------------- | ------------ | ----------------------------------- |
+| `deploy_els_pipeline.sh` | —              | —                 | —            | —                                   |
+| `deploy_els_app.sh`      | ✅             | ✅                | ✅           | `-d`/`--domain`, `--hosted-zone-id` |
+| `deploy_planning_app.sh` | ✅             | ✅                | ✅           | `--bedrock-model`                   |
+| `deploy_landing_site.sh` | ✅             | ✅                | —            | —                                   |
+
+Only `deploy_els_app.sh` takes custom-domain flags (`-d`, `--hosted-zone-id`). The planning and landing scripts do not.
+
+The Explorer and Planning deploys additionally require `DESCOPE_PROJECT_ID` to be set. See [Deployment Guide](../documentation/DEPLOYMENT.md) for full usage.
 
 ## Manual Testing Scripts
 
