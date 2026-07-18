@@ -27,7 +27,11 @@ Supported formats: `.pdf`, `.html`
 
 Extracts text blocks from PDFs using AWS Textract. Handles both synchronous (small documents) and asynchronous (large documents) Textract APIs. Sorts blocks by reading order and preserves table cell structure with row/column indices.
 
-Extraction is **hybrid**: Textract provides the layout (block types, geometry, table structure), but its OCR can fuse adjacent words together ("thechild" instead of "the child"). To repair this, the extractor also opens the PDF with PyMuPDF (`fitz`) and uses the PDF's own embedded text layer as a spacing oracle — `_repair_block_spacing` matches each Textract line against the de-spaced page text and restores the correct word boundaries. If the PDF has no usable text layer (a pure scan), the Textract text is used as-is.
+Extraction is **hybrid**: Textract provides the layout (block types, geometry, table structure), but its OCR can fuse adjacent words together ("thechild" instead of "the child"). To repair this, the extractor also opens the PDF with PyMuPDF (`fitz`) and uses the PDF's own embedded text layer as a spacing oracle — `_repair_block_spacing` matches each Textract line against the de-spaced page text and restores the correct word boundaries.
+
+Matching details that matter: the comparison runs over a **folded** view of both sides, because a PDF text layer renders punctuation typographically (`Children’s`) where Textract OCRs ASCII (`Children's`) — without folding, most lines fail to match at all. The fold is strictly 1-to-1 (curly quotes, dashes) so offsets stay aligned; length-changing normalization such as NFKC is deliberately avoided. Zero-width and soft-hyphen characters are dropped from the index rather than treated as whitespace, so a hyphenated line wrap rejoins into one word. The repaired string is rebuilt from the **block's own characters**, with the text layer contributing only the gap positions, so only whitespace ever changes — never a character. Any whitespace run, including a line-wrap newline, becomes exactly one space. A line whose folded form appears more than once on the page is left untouched rather than guessed at.
+
+If the PDF has no usable text layer (a pure scan), the Textract text is used as-is. PyMuPDF must be present in the Lambda bundle (see `infra/cdk/lib/constructs/pipeline-lambda.ts`) — if it is missing the repair no-ops silently in the output, so its absence is logged at ERROR.
 
 Output: List of `TextBlock` objects with text, page number, block type, confidence, and geometry.
 
@@ -40,7 +44,7 @@ Large documents can have hundreds of text blocks. To avoid Lambda timeouts, dete
 
 1. **Prepare** — Splits text blocks into batches of `MAX_CHUNKS_PER_BATCH` (default: 5) and writes each batch to S3 with a manifest file
 2. **Process** — Step Functions Map state invokes up to 3 concurrent Lambdas, each processing one batch through Bedrock Claude
-3. **Merge** — Collects all batch results, deduplicates detected elements by code, and produces a single merged output
+3. **Merge** — Collects all batch results and de-duplicates them by delegating to `detector._dedup_elements`, the same function the non-batched path uses, so the two paths cannot drift (they have before). If a batch element fails model validation the merge falls back to a conservative key-based de-dup.
 
 ### 4. Structure Detection
 
@@ -55,6 +59,20 @@ Uses Bedrock Claude to identify hierarchical elements in text blocks. Detection 
 Each element is classified as a domain, strand, sub-strand, or indicator with a confidence score. The score is kept on `DetectedElement` as metadata only — there is no confidence gate; every element flows through to parsing and persistence, since every element gets reviewed by a human downstream regardless of confidence.
 
 The detection prompt instructs the LLM to extract structured JSON with fields: level, code, title, description, confidence, source_page, source_text, and age_band (populated for indicators that come from age-banded columns, e.g. "Early (3 to 4 ½ Years)", "PK3").
+
+#### Column tagging in the prompt
+
+Textract records a normalized bounding box for every block, but a page-only serialization (`[Page 12] …`) throws that away — and on a multi-column page the blocks arrive interleaved line by line, so the model has no way to tell which column a line came from and crosses their contents. `_serialize_blocks_for_prompt` therefore tags each prompt line with the column it was laid out in: `[Page 12 | col 2] …`.
+
+`_assign_column_indices` derives the columns from each page's own distribution of left edges — no absolute coordinates. It collapses jitter-identical left edges into candidate edges, keeps only the populous ones (a real column runs the height of the page; a spanning header or an indented sub-list does not, so it cannot bridge two columns), merges edges closer together than the page's median block width, and assigns every block to its nearest surviving edge. Pages that resolve to a single column, or whose geometry is missing or degenerate, emit the plain `[Page N]` tag.
+
+Blocks stay in **document order** rather than being re-sorted into column order: `chunk_text_blocks` slices this same sequence into overlapping chunks, so re-ordering would separate a column's head from its tail, and row adjacency is what ties the columns of one age-band row together. The tag carries the signal without moving anything.
+
+#### Overlap de-duplication
+
+`_dedup_elements` handles the two shapes a chunk boundary produces. An element may be emitted **whole twice** under drifting codes (one domain arriving as both `SED` and `I`), or **once truncated and once complete** — chunk N ran out of text mid-sentence while chunk N+1 saw the element whole. Codes are reconciled first, by the same `parser.normalize_element_codes` machinery the parser uses, which collapses the first shape; the second is collapsed by prefix dominance, keeping the longer title and the richer description.
+
+Both passes are scoped by the element's owning domain (`parser.assign_domain_scopes`), because two domains can legitimately hold same-titled children — CA's ELD and FLD domains each own a "Listening and Speaking" strand and a "Vocabulary" sub-strand. Prefix dominance additionally requires a matching level, age band and code, and a substantial word-boundary prefix, so that genuinely distinct siblings ("Physical Development" vs "Physical Development and Health") are never merged.
 
 #### Design constraint: the detector and parser are LLM-driven, not rule-driven
 
