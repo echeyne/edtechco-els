@@ -1,0 +1,476 @@
+{
+  "detector": {
+    "AZ": {
+      "precision_raw": 0.5,
+      "recall": 1.0,
+      "f1_raw": 0.6667,
+      "matched": 5,
+      "annotation_coverage": {
+        "n_golden": 5,
+        "n_detected_total": 66,
+        "n_detected_in_annotated_domains": 9,
+        "precision_ceiling_from_annotation_coverage": 0.5556
+      },
+      "per_level": {
+        "domain": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 2,
+          "fp": 4,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 1
+          },
+          "indicator": {
+            "indicator": 2
+          },
+          "strand": {
+            "strand": 1
+          },
+          "sub_strand": {
+            "sub_strand": 1
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+          "status": "PASS",
+          "detail": "no examples-section headers emitted"
+        },
+        {
+          "id": "AZ-FOUR-LEVEL-HIERARCHY",
+          "status": "PASS",
+          "detail": "all four levels present"
+        }
+      ]
+    },
+    "CA": {
+      "precision_raw": 0.2049,
+      "recall": 1.0,
+      "f1_raw": 0.3401,
+      "matched": 25,
+      "annotation_coverage": {
+        "n_golden": 25,
+        "n_detected_total": 122,
+        "n_detected_in_annotated_domains": 122,
+        "precision_ceiling_from_annotation_coverage": 0.2049
+      },
+      "per_level": {
+        "domain": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 3,
+          "fp": 4,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 5,
+          "fp": 13,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 14,
+          "fp": 80,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 3
+          },
+          "indicator": {
+            "indicator": 14
+          },
+          "strand": {
+            "strand": 3
+          },
+          "sub_strand": {
+            "sub_strand": 5
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "CA-AGE-COLUMNS-EMITTED",
+          "status": "PASS",
+          "detail": "all 16 Early/Later foundations emit both columns"
+        },
+        {
+          "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+          "status": "PASS",
+          "detail": "no age-band labels in titles"
+        },
+        {
+          "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+          "status": "PASS",
+          "detail": "no lettered examples emitted as indicators"
+        },
+        {
+          "id": "CA-FOUR-LEVEL-HIERARCHY",
+          "status": "PASS",
+          "detail": "all four levels present"
+        }
+      ]
+    },
+    "CO": {
+      "precision_raw": 0.1304,
+      "recall": 0.8571,
+      "f1_raw": 0.2264,
+      "matched": 6,
+      "annotation_coverage": {
+        "n_golden": 7,
+        "n_detected_total": 65,
+        "n_detected_in_annotated_domains": 46,
+        "precision_ceiling_from_annotation_coverage": 0.1522
+      },
+      "per_level": {
+        "domain": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 1,
+          "fp": 8,
+          "fn": 1
+        },
+        "indicator": {
+          "tp": 3,
+          "fp": 31,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 2
+          },
+          "indicator": {
+            "indicator": 3
+          },
+          "strand": {
+            "strand": 1
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": [
+          "CO-STR-01"
+        ]
+      },
+      "age_band_drops": [],
+      "missing_test_cases": [
+        "CO-STR-01"
+      ],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "CO-NO-SUB-STRAND",
+          "status": "PASS",
+          "detail": "no sub_strands (correct for CO)"
+        },
+        {
+          "id": "CO-NUMERIC-STRANDS",
+          "status": "PASS",
+          "detail": "all numeric-prefixed sections correctly classified as strand"
+        }
+      ]
+    },
+    "TX": {
+      "precision_raw": 0.2143,
+      "recall": 0.75,
+      "f1_raw": 0.3333,
+      "matched": 6,
+      "annotation_coverage": {
+        "n_golden": 8,
+        "n_detected_total": 28,
+        "n_detected_in_annotated_domains": 28,
+        "precision_ceiling_from_annotation_coverage": 0.2857
+      },
+      "per_level": {
+        "domain": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 2,
+          "fp": 1,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 2,
+          "fp": 20,
+          "fn": 2
+        },
+        "sub_strand": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 1
+          },
+          "indicator": {
+            "indicator": 2
+          },
+          "strand": {
+            "strand": 2
+          },
+          "sub_strand": {
+            "sub_strand": 1
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": [
+          "TX-IND-02-PK3",
+          "TX-IND-02-PK4"
+        ]
+      },
+      "age_band_drops": [
+        "TX-IND-02-PK3",
+        "TX-IND-02-PK4"
+      ],
+      "missing_test_cases": [
+        "TX-IND-02-PK3",
+        "TX-IND-02-PK4"
+      ],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "TX-PK3-PK4-DISTINCT",
+          "status": "PASS",
+          "detail": "PK3 count=9, PK4 count=13"
+        },
+        {
+          "id": "TX-AGE-BAND-SET",
+          "status": "PASS",
+          "detail": "all 22 indicators have a valid age_band"
+        },
+        {
+          "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+          "status": "PASS",
+          "detail": "no column headers emitted as indicators"
+        }
+      ]
+    }
+  },
+  "parser": {
+    "AZ": {
+      "coverage": 1.0,
+      "field_accuracy": 0.9259,
+      "matched": 18,
+      "n_golden": 18,
+      "n_parsed": 45,
+      "fully_correct": 0,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 0.7222,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 0.2778,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 0.6667
+      },
+      "n_field_mismatches": 24,
+      "regressions": [
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 45 standard_ids unique"
+        }
+      ]
+    },
+    "CA": {
+      "coverage": 1.0,
+      "field_accuracy": 0.9947,
+      "matched": 21,
+      "n_golden": 21,
+      "n_parsed": 94,
+      "fully_correct": 19,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 0.9048
+      },
+      "n_field_mismatches": 2,
+      "regressions": [
+        {
+          "id": "CA-EARLY-LATER-DISTINCT-IDS",
+          "status": "PASS",
+          "detail": "0 multi-variant indicator code(s) all kept distinct ids+bands"
+        },
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 94 standard_ids unique"
+        }
+      ]
+    },
+    "CO": {
+      "coverage": 0.3333,
+      "field_accuracy": 0.9815,
+      "matched": 3,
+      "n_golden": 9,
+      "n_parsed": 66,
+      "fully_correct": 2,
+      "dropped": [
+        "CO-IND-03",
+        "CO-IND-04",
+        "CO-IND-05",
+        "CO-IND-06",
+        "CO-IND-07",
+        "CO-IND-08"
+      ],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 0.6667,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 1.0
+      },
+      "n_field_mismatches": 1,
+      "regressions": [
+        {
+          "id": "CO-INDICATOR-PARENT-IS-STRAND",
+          "status": "FAIL",
+          "detail": "27/66 indicators have wrong parent (e.g. 'SED.2.1a': strand='SED.2', sub_strand='SED.2.1')"
+        },
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 66 standard_ids unique"
+        }
+      ]
+    },
+    "TX": {
+      "coverage": 1.0,
+      "field_accuracy": 0.9583,
+      "matched": 8,
+      "n_golden": 8,
+      "n_parsed": 25,
+      "fully_correct": 2,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 0.75,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 0.5
+      },
+      "n_field_mismatches": 6,
+      "regressions": [
+        {
+          "id": "TX-PK3-PK4-DISTINCT-IDS",
+          "status": "PASS",
+          "detail": "0 multi-variant indicator code(s) all kept distinct ids+bands"
+        },
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 25 standard_ids unique"
+        }
+      ]
+    }
+  }
+}

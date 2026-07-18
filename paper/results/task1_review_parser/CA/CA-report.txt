@@ -1,0 +1,17 @@
+
+=== CA ===
+  golden standards: 21
+  parsed:           94
+  matched:          21  (coverage 1.000)
+  fully correct:    19/21
+  field accuracy:   0.995
+  per-field (ok/total) — only fields with a mismatch shown:
+    indicator.description   19/21  (0.90)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (2):
+    CA-IND-07-DISC indicator.description: expected 'Discovering: Attend to and participate in frequently experienced simple songs, poems, and fingerplays in English, with gestures and some key words.' got 'Discovering: Repeat or recite parts of simple songs, poems, and fingerplays in English, with gestures and some key words.'
+    CA-IND-07-DEVE indicator.description: expected 'Developing: Repeat or recite parts of simple songs, poems, and fingerplays that emphasize rhyme in English.' got 'Developing: Attend to and participate in frequently experienced simple songs, poems, and fingerplays that emphasize rhyme in English.'
+  regression cases:
+    [PASS] CA-EARLY-LATER-DISTINCT-IDS — 0 multi-variant indicator code(s) all kept distinct ids+bands
+    [PASS] NO-ID-COLLISION — all 94 standard_ids unique

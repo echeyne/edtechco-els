@@ -1,0 +1,365 @@
+[
+  {
+    "state": "CO",
+    "precision": 0.1590909090909091,
+    "recall": 1.0,
+    "f1": 0.2745098039215686,
+    "matched": 7,
+    "n_golden": 7,
+    "n_detected": 63,
+    "per_level": {
+      "domain": {
+        "tp": 2,
+        "fp": 1,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 5,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 3,
+        "fp": 31,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 2
+      },
+      "strand": {
+        "strand": 2
+      },
+      "indicator": {
+        "indicator": 3
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "2."
+      ],
+      [
+        "indicator",
+        "3."
+      ],
+      [
+        "indicator",
+        "4."
+      ],
+      [
+        "indicator",
+        "5."
+      ],
+      [
+        "indicator",
+        "7."
+      ],
+      [
+        "indicator",
+        "8."
+      ],
+      [
+        "indicator",
+        "9."
+      ],
+      [
+        "indicator",
+        "10."
+      ],
+      [
+        "indicator",
+        "11."
+      ],
+      [
+        "indicator",
+        "12."
+      ],
+      [
+        "strand",
+        "2."
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "indicator",
+        "2."
+      ],
+      [
+        "indicator",
+        "3."
+      ],
+      [
+        "strand",
+        "3."
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "indicator",
+        "2."
+      ],
+      [
+        "indicator",
+        "3."
+      ],
+      [
+        "indicator",
+        "4."
+      ],
+      [
+        "strand",
+        "1."
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "indicator",
+        "2."
+      ],
+      [
+        "indicator",
+        "3."
+      ],
+      [
+        "indicator",
+        "4."
+      ],
+      [
+        "indicator",
+        "5."
+      ],
+      [
+        "strand",
+        "2."
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "indicator",
+        "2."
+      ],
+      [
+        "indicator",
+        "3."
+      ],
+      [
+        "strand",
+        "3."
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "indicator",
+        "2."
+      ],
+      [
+        "indicator",
+        "3."
+      ],
+      [
+        "indicator",
+        "1."
+      ],
+      [
+        "indicator",
+        "2."
+      ]
+    ],
+    "ignored_out_of_scope": 19,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "CO-NO-SUB-STRAND",
+        "status": "PASS",
+        "detail": "no sub_strands (correct for CO)"
+      },
+      {
+        "id": "CO-NUMERIC-STRANDS",
+        "status": "PASS",
+        "detail": "all numeric-prefixed sections correctly classified as strand"
+      }
+    ],
+    "stability_runs": 3,
+    "stability_disagreement_rate": 0.0,
+    "stability_size_stdev": 0.0
+  },
+  {
+    "state": "TX",
+    "precision": 0.27586206896551724,
+    "recall": 1.0,
+    "f1": 0.4324324324324324,
+    "matched": 8,
+    "n_golden": 8,
+    "n_detected": 37,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 4,
+        "fp": 18,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 2
+      },
+      "indicator": {
+        "indicator": 4
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "PK3.I.A.1"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.1"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.4"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.4"
+      ],
+      [
+        "sub_strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.b"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.b"
+      ],
+      [
+        "domain",
+        "I"
+      ],
+      [
+        "sub_strand",
+        "1.b"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.c"
+      ]
+    ],
+    "ignored_out_of_scope": 8,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT",
+        "status": "PASS",
+        "detail": "PK3 count=11, PK4 count=16"
+      },
+      {
+        "id": "TX-AGE-BAND-SET",
+        "status": "PASS",
+        "detail": "all 27 indicators have a valid age_band"
+      },
+      {
+        "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+        "status": "PASS",
+        "detail": "no column headers emitted as indicators"
+      }
+    ],
+    "stability_runs": 3,
+    "stability_disagreement_rate": 0.0,
+    "stability_size_stdev": 0.0
+  }
+]

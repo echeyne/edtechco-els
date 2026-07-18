@@ -1,0 +1,25 @@
+
+=== TX ===
+  golden:   8
+  detected: 28
+  matched:  6
+  precision: 0.214  recall: 0.750  f1: 0.333
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=20  fn=2   p=0.09 r=0.50
+    strand      tp=2   fp=1   fn=0   p=0.67 r=1.00
+    sub_strand  tp=1   fp=1   fn=0   p=0.50 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 2
+    sub_strand → sub_strand : 1
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops (2): ['TX-IND-02-PK3', 'TX-IND-02-PK4']
+  missing test cases (2): ['TX-IND-02-PK3', 'TX-IND-02-PK4']
+  extra detected (in-scope FPs) (22): [('indicator', 'PK3.I.A.1'), ('indicator', 'PK4.I.A.1'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('indicator', 'PK3.I.A.4'), ('indicator', 'PK4.I.A.4'), ('sub_strand', '1'), ('indicator', 'PK3.I.B.1.a'), ('indicator', 'PK4.I.B.1.a'), ('indicator', 'PK3.I.B.1.b')]…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=9, PK4 count=13
+    [PASS] TX-AGE-BAND-SET — all 22 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators

@@ -1,0 +1,135 @@
+[
+  {
+    "state": "CO",
+    "coverage": 1.0,
+    "field_accuracy": 0.9691358024691358,
+    "matched": 9,
+    "fully_correct": 7,
+    "n_golden": 9,
+    "n_parsed": 48,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 9,
+        "total": 9
+      },
+      "country": {
+        "ok": 9,
+        "total": 9
+      },
+      "state": {
+        "ok": 9,
+        "total": 9
+      },
+      "version_year": {
+        "ok": 9,
+        "total": 9
+      },
+      "age_band": {
+        "ok": 9,
+        "total": 9
+      },
+      "source_page": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.description": {
+        "ok": 8,
+        "total": 9
+      },
+      "strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.name": {
+        "ok": 7,
+        "total": 9
+      },
+      "strand.description": {
+        "ok": 7,
+        "total": 9
+      },
+      "sub_strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.description": {
+        "ok": 9,
+        "total": 9
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "strand.name",
+        "expected": "Health, Safety and Nutrition",
+        "got": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "strand.description",
+        "expected": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "got": null
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "domain.description",
+        "expected": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills.",
+        "got": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "strand.name",
+        "expected": "Health, Safety and Nutrition",
+        "got": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "strand.description",
+        "expected": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "got": null
+      }
+    ],
+    "regressions": [
+      {
+        "id": "CO-INDICATOR-PARENT-IS-STRAND",
+        "status": "PASS",
+        "detail": "all 48 indicators have a strand parent and null sub_strand"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 48 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

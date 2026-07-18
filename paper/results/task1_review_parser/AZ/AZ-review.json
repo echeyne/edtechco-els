@@ -1,0 +1,1286 @@
+{
+  "state": "AZ",
+  "summary": {
+    "golden_standards": 18,
+    "parsed": 45,
+    "matched": 18,
+    "fully_correct": 0,
+    "coverage": 1.0,
+    "field_accuracy": 0.9259,
+    "dropped": 0,
+    "duplicated": 0,
+    "id_collisions": 0
+  },
+  "matched": [
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-01",
+        "expected": {
+          "standard_id": "US-AZ-2018-SED.1.1.a",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "SED",
+            "name": "Social Emotional Development",
+            "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+          },
+          "strand": {
+            "code": "SED.1",
+            "name": "Self-Awareness and Emotional Skills",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "SED.1.1",
+            "name": "Self-Awareness",
+            "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+          },
+          "indicator": {
+            "code": "SED.1.1.a",
+            "name": "Demonstrates self-confidence",
+            "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\""
+          },
+          "age_band": "36-60",
+          "source_page": 3
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-SED.1.1.a",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "SED",
+          "name": "Social Emotional Development",
+          "description": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place.\n\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive.\n\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\n\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+        },
+        "strand": {
+          "code": "SED.1",
+          "name": "Self-Awareness and Emotional Skills",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "SED.1.1",
+          "name": "Self-Awareness",
+          "description": "The child demonstrates an awareness of self.\n\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+        },
+        "indicator": {
+          "code": "SED.1.1.a",
+          "name": "Demonstrates self-confidence",
+          "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\"\nExplains, \"I'm learning how to take care of myself and my friends.\"\nSigns, \"I can do it myself.\""
+        },
+        "age_band": "36-60",
+        "source_page": 3,
+        "source_text": "Demonstrates self-confidence.\na.\nAcknowledges her own accomplishments and says, \"I can hit the ball.\"\nExplains, \"I'm learning how to take care of myself and my friends.\"\nSigns, \"I can do it myself.\""
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-02",
+        "expected": {
+          "standard_id": "US-AZ-2018-SED.1.1.b",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "SED",
+            "name": "Social Emotional Development",
+            "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+          },
+          "strand": {
+            "code": "SED.1",
+            "name": "Self-Awareness and Emotional Skills",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "SED.1.1",
+            "name": "Self-Awareness",
+            "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+          },
+          "indicator": {
+            "code": "SED.1.1.b",
+            "name": "Makes personal preferences known to others",
+            "description": "Chooses carrots over celery during mealtime. Tells friends, \"I don't like that.\""
+          },
+          "age_band": "36-60",
+          "source_page": 3
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-SED.1.1.b",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "SED",
+          "name": "Social Emotional Development",
+          "description": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place.\n\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive.\n\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\n\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+        },
+        "strand": {
+          "code": "SED.1",
+          "name": "Self-Awareness and Emotional Skills",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "SED.1.1",
+          "name": "Self-Awareness",
+          "description": "The child demonstrates an awareness of self.\n\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+        },
+        "indicator": {
+          "code": "SED.1.1.b",
+          "name": "Makes personal preferences known to others",
+          "description": "Chooses carrots over celery during mealtime.\nTells friends, \"I don't like that.\""
+        },
+        "age_band": "36-60",
+        "source_page": 3,
+        "source_text": "b. Makes personal preferences known to others.\nChooses carrots over celery during mealtime.\nTells friends, \"I don't like that.\""
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-03",
+        "expected": {
+          "standard_id": "US-AZ-2018-SED.1.1.c",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "SED",
+            "name": "Social Emotional Development",
+            "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+          },
+          "strand": {
+            "code": "SED.1",
+            "name": "Self-Awareness and Emotional Skills",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "SED.1.1",
+            "name": "Self-Awareness",
+            "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+          },
+          "indicator": {
+            "code": "SED.1.1.c",
+            "name": "Demonstrates knowledge of self-identity/autonomy",
+            "description": "Declares, \"I'm the big brother,\" while looking at a family picture. Tells the teacher, \"I'm at school while mommy is at work.\" Holds up three fingers and says, \"I am this many.\""
+          },
+          "age_band": "36-60",
+          "source_page": 3
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-SED.1.1.c",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "SED",
+          "name": "Social Emotional Development",
+          "description": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place.\n\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive.\n\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\n\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+        },
+        "strand": {
+          "code": "SED.1",
+          "name": "Self-Awareness and Emotional Skills",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "SED.1.1",
+          "name": "Self-Awareness",
+          "description": "The child demonstrates an awareness of self.\n\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+        },
+        "indicator": {
+          "code": "SED.1.1.c",
+          "name": "Demonstrates knowledge of self-identity/autonomy",
+          "description": "Declares, \"I'm the big brother,\" while looking at a family picture.\nTells the teacher, \"I'm at school while mommy is at work.\"\nHolds up three fingers and says, \"I am this many.\""
+        },
+        "age_band": "36-60",
+        "source_page": 3,
+        "source_text": "Demonstrates knowledge of self-identity/autonomy.\nC.\nDeclares, \"I'm the big brother,\" while looking at a family picture.\nTells the teacher, \"I'm at school while mommy is at work.\"\nHolds up three fingers and says, \"I am this many.\""
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-04",
+        "expected": {
+          "standard_id": "US-AZ-2018-SED.1.1.d",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "SED",
+            "name": "Social Emotional Development",
+            "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+          },
+          "strand": {
+            "code": "SED.1",
+            "name": "Self-Awareness and Emotional Skills",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "SED.1.1",
+            "name": "Self-Awareness",
+            "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+          },
+          "indicator": {
+            "code": "SED.1.1.d",
+            "name": "Displays an awareness of similarities and differences between self and others",
+            "description": "Says, \"My hair is curly and yours is straight.\" Points to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt."
+          },
+          "age_band": "36-60",
+          "source_page": 3
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-SED.1.1.d",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "SED",
+          "name": "Social Emotional Development",
+          "description": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place.\n\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive.\n\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\n\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+        },
+        "strand": {
+          "code": "SED.1",
+          "name": "Self-Awareness and Emotional Skills",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "SED.1.1",
+          "name": "Self-Awareness",
+          "description": "The child demonstrates an awareness of self.\n\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+        },
+        "indicator": {
+          "code": "SED.1.1.d",
+          "name": "Displays an awareness of similarities and differences between self and others",
+          "description": "Says, \"My hair is curly and yours is straight.\"\nPoints to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt."
+        },
+        "age_band": "36-60",
+        "source_page": 3,
+        "source_text": "d. Displays an awareness of similarities and differences between self and others.\nSays, \"My hair is curly and yours is straight.\"\nPoints to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-05",
+        "expected": {
+          "standard_id": "US-AZ-2018-SED.1.1.e",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "SED",
+            "name": "Social Emotional Development",
+            "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+          },
+          "strand": {
+            "code": "SED.1",
+            "name": "Self-Awareness and Emotional Skills",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "SED.1.1",
+            "name": "Self-Awareness",
+            "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+          },
+          "indicator": {
+            "code": "SED.1.1.e",
+            "name": "Demonstrates developmentally appropriate cultural curiosity and responsiveness",
+            "description": "Wonders about a friend's seaweed snack and asks for a taste. The group widens the story time circle to make room for the child and their wheelchair. A guest speaker (parent) shares a storybook and song in their home language to the class."
+          },
+          "age_band": "36-60",
+          "source_page": 3
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-SED.1.1.e",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "SED",
+          "name": "Social Emotional Development",
+          "description": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place.\n\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive.\n\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\n\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+        },
+        "strand": {
+          "code": "SED.1",
+          "name": "Self-Awareness and Emotional Skills",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "SED.1.1",
+          "name": "Self-Awareness",
+          "description": "The child demonstrates an awareness of self.\n\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+        },
+        "indicator": {
+          "code": "SED.1.1.e",
+          "name": "Demonstrates developmentally appropriate cultural curiosity and responsiveness",
+          "description": "Wonders about a friend's seaweed snack and asks for a taste.\nThe group widens the story time circle to make room for the child and their wheelchair.\nA guest speaker (parent) shares a storybook and song in their home language to the class."
+        },
+        "age_band": "36-60",
+        "source_page": 3,
+        "source_text": "e. Demonstrates developmentally appropriate cultural curiosity and responsiveness.\nWonders about a friend's seaweed snack and asks for a taste.\nThe group widens the story time circle to make room for the child and their wheelchair.\nA guest speaker (parent) shares a storybook and song in their home language to the class."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-06",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.a",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.a",
+            "name": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes)",
+            "description": "Plays the game, Sound Bingo, and can differentiate between sounds - \"That's a telephone.\" \"That's a dog barking.\" Says, \"Hey, the beginning of my name sounds like that /t/.\""
+          },
+          "age_band": "36-60",
+          "source_page": 11
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.a",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.a",
+          "name": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes)",
+          "description": "Plays the game, Sound Bingo, and can differentiate between sounds - \"That's a telephone.\" \"That's a dog barking.\"\nSays, \"Hey, the beginning of my name sounds like that /t/.\""
+        },
+        "age_band": "36-60",
+        "source_page": 11,
+        "source_text": "a. Differentiates between sounds that are the same and different (e.g., environmental sounds, animal\nsounds, phonemes)."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-07",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.b",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.b",
+            "name": "Identifies rhyming words",
+            "description": "Shows thumbs up when two words rhyme in a poem, cat/hat. Points to pictures of words that rhyme."
+          },
+          "age_band": "36-60",
+          "source_page": 11
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.b",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.b",
+          "name": "Identifies rhyming words",
+          "description": "Shows thumbs up when two words rhyme in a poem, cat/hat.\nPoints to pictures of words that rhyme."
+        },
+        "age_band": "36-60",
+        "source_page": 11,
+        "source_text": "b. Identifies rhyming words."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-08",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.c",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.c",
+            "name": "Produces rhyming words",
+            "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the .\""
+          },
+          "age_band": "36-60",
+          "source_page": 11
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.c",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.c",
+          "name": "Produces rhyming words",
+          "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing.\nFinishes the rhyme \"The fat cat sat on the_.\""
+        },
+        "age_band": "36-60",
+        "source_page": 11,
+        "source_text": "C. Produces rhyming words."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-09",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.d",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.d",
+            "name": "Recognizes spoken words that begin with the same sound",
+            "description": "Exclaims Millie, \"My name starts like Mel's name!\" Selects man and mop as beginning with the same sound when presented with pictures of man, hat, and mop."
+          },
+          "age_band": "36-60",
+          "source_page": 11
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.d",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.d",
+          "name": "Recognizes spoken words that begin with the same sound",
+          "description": "Exclaims Millie, \"My name starts like Mel's name!\"\nSelects man and mop as beginning with the same sound when presented with pictures of man, hat, and mop."
+        },
+        "age_band": "36-60",
+        "source_page": 11,
+        "source_text": "d. Recognizes spoken words that begin with the same sound."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-10",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.e",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.e",
+            "name": "Hears and shows awareness of separate words within spoken phrases or sentences",
+            "description": "Jumps when hearing a specified word in a story/poem. Claps each word spoken in a sentence \"I like blocks.\""
+          },
+          "age_band": "36-60",
+          "source_page": 12
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.e",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.e",
+          "name": "Hears and shows awareness of separate words within spoken phrases or sentences",
+          "description": "Jumps when hearing a specified word in a story/poem.\nClaps each word spoken in a sentence \"I like blocks.\""
+        },
+        "age_band": "36-60",
+        "source_page": 12,
+        "source_text": "e. Hears and shows awareness of separate words within spoken phrases or sentences."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-11",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.f",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.f",
+            "name": "Identifies and discriminates syllables in words",
+            "description": "Claps each syllable of a name during a name game or name song. (Ben-ja-min = clap, clap, clap) Takes a step for each syllable heard in a word. (hi-ber-na-tion = step, step, step, step)"
+          },
+          "age_band": "36-60",
+          "source_page": 12
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.f",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.f",
+          "name": "Identifies and discriminates syllables in words",
+          "description": "Claps each syllable of a name during a name game or name song. (Ben-ja-min = clap, clap, clap)\nTakes a step for each syllable heard in a word. (hi-ber-na-tion = step, step, step, step)"
+        },
+        "age_band": "36-60",
+        "source_page": 12,
+        "source_text": "f. Identifies and discriminates syllables in words."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-12",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.3.g",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.3",
+            "name": "Phonological Awareness",
+            "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+          },
+          "indicator": {
+            "code": "LL.2.3.g",
+            "name": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support",
+            "description": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rime components. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/."
+          },
+          "age_band": "36-60",
+          "source_page": 12
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.3.g",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.3",
+          "name": "Phonological Awareness",
+          "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+        },
+        "indicator": {
+          "code": "LL.2.3.g",
+          "name": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support",
+          "description": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rimecomponents. (/c/ + /at/)\nGuesses, \"Dog.\" when teacher says the onset and rime /d/+/og/."
+        },
+        "age_band": "36-60",
+        "source_page": 12,
+        "source_text": "g. Combines onset and rime to form a familiar one-syllable word with and without pictorial support."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-13",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.4.a",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.4",
+            "name": "Alphabet Knowledge",
+            "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+          },
+          "indicator": {
+            "code": "LL.2.4.a",
+            "name": "Discriminates letters from other shapes and symbols",
+            "description": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' falling off coconut tree.\" Looks at an advertisement (environmental print) and the child points to the \"W\" for Walmart."
+          },
+          "age_band": "36-60",
+          "source_page": 13
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.4.a",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.4",
+          "name": "Alphabet Knowledge",
+          "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+        },
+        "indicator": {
+          "code": "LL.2.4.a",
+          "name": "Discriminates letters from other shapes and symbols",
+          "description": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' fallingoff coconut tree.\"\nLooks at an advertisement (environmental print) and the child points to the \"W\" for Walmart."
+        },
+        "age_band": "36-60",
+        "source_page": 13,
+        "source_text": "a. Discriminates letters from other shapes and symbols."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-14",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.4.b",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.4",
+            "name": "Alphabet Knowledge",
+            "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+          },
+          "indicator": {
+            "code": "LL.2.4.b",
+            "name": "Matches and recognizes similarities and differences in letters, with modeling and support",
+            "description": "Traces the letter S and says, \"The letter has curves.\" Says, \"My name starts with a big A.\" The teacher says, \"Let's make a letter A like the letter in your name.\" Then using playdough, the child and teacher create the letter A."
+          },
+          "age_band": "36-60",
+          "source_page": 13
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.4.b",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.4",
+          "name": "Alphabet Knowledge",
+          "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+        },
+        "indicator": {
+          "code": "LL.2.4.b",
+          "name": "Matches and recognizes similarities and differences in letters, with modeling and support",
+          "description": "Traces the letter S and says, \"The letter has curves.\""
+        },
+        "age_band": "36-60",
+        "source_page": 13,
+        "source_text": "b. Matches and recognizes similarities and differences in letters, with modeling and support."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-15",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.4.c",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.4",
+            "name": "Alphabet Knowledge",
+            "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+          },
+          "indicator": {
+            "code": "LL.2.4.c",
+            "name": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends",
+            "description": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel."
+          },
+          "age_band": "36-60",
+          "source_page": 13
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.4.c",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.4",
+          "name": "Alphabet Knowledge",
+          "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+        },
+        "indicator": {
+          "code": "LL.2.4.c",
+          "name": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends",
+          "description": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles.\nSays, \"My name starts with an [1].\"\nPaints the letter L like in her friend's name, while at the easel."
+        },
+        "age_band": "36-60",
+        "source_page": 13,
+        "source_text": "C. Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-16",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.4.d",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.4",
+            "name": "Alphabet Knowledge",
+            "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+          },
+          "indicator": {
+            "code": "LL.2.4.d",
+            "name": "Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g., playdough, blocks, marker, and paper",
+            "description": "Rolls out the first letter of their name, \"K\" in playdough. Writes letter \"M\" for \"mom\" on an envelope, while at the writing center."
+          },
+          "age_band": "36-60",
+          "source_page": 13
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.4.d",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.4",
+          "name": "Alphabet Knowledge",
+          "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+        },
+        "indicator": {
+          "code": "LL.2.4.d",
+          "name": "Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g., playdough, blocks, marker, and paper",
+          "description": "Rolls out the first letter of their name, \"K\" in playdough.\nWrites letter \"M\" for \"mom\" on an envelope, while at the writing center."
+        },
+        "age_band": "36-60",
+        "source_page": 13,
+        "source_text": "d. Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g.,\nplaydough, blocks, marker, and paper."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-17",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.2.4.e",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.2",
+            "name": "Emergent Literacy",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.2.4",
+            "name": "Alphabet Knowledge",
+            "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+          },
+          "indicator": {
+            "code": "LL.2.4.e",
+            "name": "Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an increasing number of letters",
+            "description": "Writes name (Taylor) by making the \"t\" sound and then prints the letter. Says, \"/S/, /s/, /s/, snake.\" when looking at a letter [S]. Replicates the letter sound when a teacher shows and says a letter."
+          },
+          "age_band": "36-60",
+          "source_page": 13
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.2.4.e",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.2",
+          "name": "Emergent Literacy",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.2.4",
+          "name": "Alphabet Knowledge",
+          "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+        },
+        "indicator": {
+          "code": "LL.2.4.e",
+          "name": "Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an increasing number of letters",
+          "description": "Writes name (Taylor) by making the \"t\" sound and then prints the letter.\nSays, \"/S/, /s/, /s/, snake.\" when looking at a letter [S].\nReplicates the letter sound when a teacher shows and says a letter."
+        },
+        "age_band": "36-60",
+        "source_page": 13,
+        "source_text": "e. Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an\nincreasing number of letters."
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-18",
+        "expected": {
+          "standard_id": "US-AZ-2018-LL.3.1.c",
+          "country": "US",
+          "state": "AZ",
+          "version_year": 2018,
+          "domain": {
+            "code": "LL",
+            "name": "Language and Literacy",
+            "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+          },
+          "strand": {
+            "code": "LL.3",
+            "name": "Emergent Writing",
+            "description": ""
+          },
+          "sub_strand": {
+            "code": "LL.3.1",
+            "name": "Writing Processes and Writing Applications",
+            "description": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. "
+          },
+          "indicator": {
+            "code": "LL.3.1.c",
+            "name": " Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes",
+            "description": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad. Writes W L C M and says, \"This says, 'Welcome'.\""
+          },
+          "age_band": "36-60",
+          "source_page": 15
+        }
+      },
+      "parsed": {
+        "standard_id": "US-AZ-2018-LL.3.1.c",
+        "country": "US",
+        "state": "AZ",
+        "version_year": 2018,
+        "domain": {
+          "code": "LL",
+          "name": "Language and Literacy",
+          "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\n\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\n\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+        },
+        "strand": {
+          "code": "LL.3",
+          "name": "Emergent Writing",
+          "description": ""
+        },
+        "sub_strand": {
+          "code": "LL.3.1",
+          "name": "Writing Processes and Writing Applications",
+          "description": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas.\nChildren begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewardsby observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment thathas readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. 15"
+        },
+        "indicator": {
+          "code": "LL.3.1.c",
+          "name": "Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes",
+          "description": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad.\nWrites WLC M and says, \"This says, 'Welcome'.\""
+        },
+        "age_band": "36-60",
+        "source_page": 15,
+        "source_text": "C. Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story;\ne.g., signing artwork, captioning, labeling, creating lists, making notes."
+      }
+    }
+  ],
+  "dropped_from_parsed": [],
+  "field_mismatches": [
+    {
+      "test_case_id": "AZ-IND-01",
+      "field": "domain.description",
+      "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+    },
+    {
+      "test_case_id": "AZ-IND-02",
+      "field": "domain.description",
+      "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+    },
+    {
+      "test_case_id": "AZ-IND-03",
+      "field": "domain.description",
+      "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+    },
+    {
+      "test_case_id": "AZ-IND-04",
+      "field": "domain.description",
+      "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+    },
+    {
+      "test_case_id": "AZ-IND-05",
+      "field": "domain.description",
+      "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+      "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+    },
+    {
+      "test_case_id": "AZ-IND-06",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-07",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-08",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-08",
+      "field": "indicator.description",
+      "expected": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the .\"",
+      "got": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the_.\""
+    },
+    {
+      "test_case_id": "AZ-IND-09",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-10",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-11",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-12",
+      "field": "sub_strand.description",
+      "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+      "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+    },
+    {
+      "test_case_id": "AZ-IND-12",
+      "field": "indicator.description",
+      "expected": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rime components. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/.",
+      "got": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rimecomponents. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/."
+    },
+    {
+      "test_case_id": "AZ-IND-13",
+      "field": "sub_strand.description",
+      "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+      "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+    },
+    {
+      "test_case_id": "AZ-IND-13",
+      "field": "indicator.description",
+      "expected": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' falling off coconut tree.\" Looks at an advertisement (environmental print) and the child points to the \"W\" for Walmart.",
+      "got": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' fallingoff coconut tree.\" Looks at an advertisement (environmental print) and the child points to the \"W\" for Walmart."
+    },
+    {
+      "test_case_id": "AZ-IND-14",
+      "field": "sub_strand.description",
+      "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+      "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+    },
+    {
+      "test_case_id": "AZ-IND-14",
+      "field": "indicator.description",
+      "expected": "Traces the letter S and says, \"The letter has curves.\" Says, \"My name starts with a big A.\" The teacher says, \"Let's make a letter A like the letter in your name.\" Then using playdough, the child and teacher create the letter A.",
+      "got": "Traces the letter S and says, \"The letter has curves.\""
+    },
+    {
+      "test_case_id": "AZ-IND-15",
+      "field": "sub_strand.description",
+      "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+      "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+    },
+    {
+      "test_case_id": "AZ-IND-15",
+      "field": "indicator.description",
+      "expected": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel.",
+      "got": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [1].\" Paints the letter L like in her friend's name, while at the easel."
+    },
+    {
+      "test_case_id": "AZ-IND-16",
+      "field": "sub_strand.description",
+      "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+      "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+    },
+    {
+      "test_case_id": "AZ-IND-17",
+      "field": "sub_strand.description",
+      "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+      "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+    },
+    {
+      "test_case_id": "AZ-IND-18",
+      "field": "sub_strand.description",
+      "expected": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner.",
+      "got": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewardsby observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment thathas readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. 15"
+    },
+    {
+      "test_case_id": "AZ-IND-18",
+      "field": "indicator.description",
+      "expected": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad. Writes W L C M and says, \"This says, 'Welcome'.\"",
+      "got": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad. Writes WLC M and says, \"This says, 'Welcome'.\""
+    }
+  ],
+  "regressions": [
+    {
+      "id": "NO-ID-COLLISION",
+      "status": "PASS",
+      "detail": "all 45 standard_ids unique"
+    }
+  ]
+}

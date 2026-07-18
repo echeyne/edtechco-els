@@ -1,0 +1,16 @@
+
+=== CO ===
+  golden standards: 9
+  parsed:           66
+  matched:          3  (coverage 0.333)
+  fully correct:    2/3
+  field accuracy:   0.981
+  per-field (ok/total) — only fields with a mismatch shown:
+    domain.description       2/3   (0.67)  ← MISMATCH
+  dropped (6): ['CO-IND-03', 'CO-IND-04', 'CO-IND-05', 'CO-IND-06', 'CO-IND-07', 'CO-IND-08']
+  standard_id collisions: 0
+  field mismatches (1):
+    CO-IND-02 domain.description: expected "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills." got "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+  regression cases:
+    [FAIL] CO-INDICATOR-PARENT-IS-STRAND — 27/66 indicators have wrong parent (e.g. 'SED.2.1a': strand='SED.2', sub_strand='SED.2.1')
+    [PASS] NO-ID-COLLISION — all 66 standard_ids unique

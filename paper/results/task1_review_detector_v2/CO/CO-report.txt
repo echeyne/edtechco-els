@@ -1,0 +1,21 @@
+
+=== CO ===
+  golden:   7
+  detected: 63
+  matched:  7
+  precision: 0.159  recall: 1.000  f1: 0.275
+  per-level:
+    domain      tp=2   fp=1   fn=0   p=0.67 r=1.00
+    indicator   tp=3   fp=31  fn=0   p=0.09 r=1.00
+    strand      tp=2   fp=5   fn=0   p=0.29 r=1.00
+  level confusion (golden → detected):
+    domain     → HierarchyLevelEnum.DOMAIN : 2
+    indicator  → HierarchyLevelEnum.INDICATOR : 3
+    strand     → HierarchyLevelEnum.STRAND : 2
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (37): [(<HierarchyLevelEnum.INDICATOR: 'indicator'>, '2.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '3.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '4.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '5.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '7.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '8.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '9.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '10.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '11.'), (<HierarchyLevelEnum.INDICATOR: 'indicator'>, '12.')]…
+  ignored (out-of-scope domains): 19
+  regression cases:
+    [PASS] CO-NO-SUB-STRAND — no sub_strands (correct for CO)
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand

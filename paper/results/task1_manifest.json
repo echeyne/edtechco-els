@@ -1,0 +1,53 @@
+{
+  "task": "Task 1 — headline evals on the 4 golden states (AZ, CA, CO, TX)",
+  "date": "2026-07-18",
+  "supersedes": {
+    "date": "2026-07-16",
+    "outputs_dir": "outputs/07-16-26-2",
+    "reason": "Deployed detections were corrupted: els-detection-batch-preparer-role-dev lacked bedrock:InvokeModel, so Pass-1 depth-map inference failed with AccessDeniedException, an empty {} depth map was persisted, and every detection batch ran in no-depth-map mode. Fixed in infra/cdk/lib/pipeline-stack.ts (BedrockInvokeAccess + CloudWatchMetricsAccess on DetectionBatchPreparerLambdaRole), deployed 2026-07-17. The 07-16 reports are retained as depth-map-off ablation evidence for Task 3."
+  },
+  "git_commit": "0d2f88745f58bb872a8fe15d2b62386a820fd74f",
+  "git_note": "detector.py / prompts.py / config.py unchanged since this commit; src/ working tree clean for both the 07-16 and 07-18 eval sessions, so the two runs exercised identical detector code.",
+  "corpus_tier": "_only_subset (9-15pp manually trimmed subset PDFs; NOT full documents)",
+  "inputs": {
+    "outputs_dir": "outputs/07-17-26",
+    "pipeline_run_detection_timestamp": "2026-07-17T18:56:04Z",
+    "extraction_equivalence_note": "outputs/07-17-26 extraction files are byte-identical in text payload to outputs/07-16-26-2 (they differ only in source_version_id and extraction_timestamp; SHA-256 of the payload with those two keys removed matches for all four states). The detector eval therefore consumed the same input in both sessions.",
+    "detector_golden_dir": "evaluation/ground_truth_detector",
+    "parser_golden_dir": "evaluation/ground_truth_parser",
+    "golden_sizes": {
+      "detector_elements": {"AZ": 5, "CA": 25, "CO": 7, "TX": 8},
+      "parser_standards": {"AZ": 18, "CA": 21, "CO": 9, "TX": 8}
+    }
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "note": "config.py defaults; .env matches but is not loaded by the eval harness (no dotenv anywhere in src/ or evaluation/)"
+  },
+  "commands_in_order": [
+    "# 0. gate check: confirm the run post-dates the deploy and the depth map worked (CO ~65 elements / 0 sub_strands = fixed; 93 with sub_strands = pre-fix)",
+    "# 1. fresh no-cache runs against the post-fix outputs folder",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_detector --extraction-dir outputs/07-17-26 --no-cache --report-json paper/results/task1_detector_golden4_v2.json --output-dir paper/results/task1_review_detector_v2",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_parser --detection-dir outputs/07-17-26 --no-cache --report-json paper/results/task1_parser_golden4_v2.json --output-dir paper/results/task1_review_parser_v2",
+    "# 2. variance probe on the two states whose recall moved (3 fresh same-session runs each)",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_detector --extraction-dir outputs/07-17-26 --state CO --state TX --no-cache --stability-runs 3 --report-json paper/results/task1_detector_stability_CO_TX.json",
+    "# 3. consolidation (consolidate_task1.py is now path-parameterized; defaults reproduce the base-name files)",
+    "python paper/analysis/consolidate_task1.py --detector-report paper/results/task1_detector_golden4_v2.json --parser-report paper/results/task1_parser_golden4_v2.json --detector-review-dir paper/results/task1_review_detector_v2 --out paper/results/task1_summary_v2.json"
+  ],
+  "caveats": [
+    "DETECTOR OUTPUT IS NOT REPRODUCIBLE ACROSS SESSIONS (headline methodological caveat, finding 1): the 07-16 and 07-18 detector evals ran on byte-identical extraction text with identical detector code and produced materially different detections - AZ 66 vs 64 elements, CA 122 vs 122 (identical sequence), CO 65 vs 63, TX 28 vs 37. Recall consequently moved CO 0.857->1.000 and TX 0.750->1.000 with no code or input change. A single-run recall figure is not a reportable point estimate in either direction; report a range or mean+/-spread over N>=3 time-separated sessions. The 07-16 run's three 'genuine detector defects' (CO strand title-fusion, TX-IND-02-PK3 truncation, TX-IND-02-PK4 drop) did not recur and were samples, not defects.",
+    "THE SUITE'S --stability-runs IS AN INADEQUATE VARIANCE INSTRUMENT AND MUST NOT BE CITED AS EVIDENCE OF DETERMINISM: it reported level-disagreement 0.000 / size-stdev 0.00 for CO and TX (3 genuine no-cache runs) in the same session in which a 24h-separated run differed by up to 9 elements. Two defects: (a) it samples only within one session; (b) measure_stability keys elements on (code, title) and counts a disagreement only when a matched pair differs in level, so title truncation/fusion - the failure mode actually observed - drops out of the comparison rather than counting against stability.",
+    "PRECISION IS ANNOTATION-COVERAGE-BOUNDED, NOT A HALLUCINATION RATE: the detector goldens are partial spot-checks (AZ 5, CA 25, CO 7, TX 8 elements) while the detector emits 9-122 elements inside annotated domains. Every unmatched in-annotated-domain detection counts as a false positive even when it is correct document content (verified by inspection: all 5 AZ 'false positives' are real unannotated document elements). Ceiling precision from coverage alone this run: AZ 5/9, CA 25/122, CO 7/44, TX 8/29. Do not report raw precision as detector quality in the paper.",
+    "THE SUITE'S LEVEL-CONFUSION MATRIX IS STRUCTURALLY DIAGONAL: level is part of the match key (both domain-scoped and fallback), so a level-misclassified element can never pair with its golden; misclassifications surface as one FN plus one FP instead. paper/analysis/consolidate_task1.py computes a level-agnostic confusion analysis for the paper: 0 off-diagonal in all four states in both the 07-16 and 07-18 runs. The eval_detector module docstring ('precision/recall on (level, code) tuples') is also stale: matching is code-agnostic on (domain, level, title, age_band).",
+    "MATCHING IS TITLE-EXACT AFTER WHITESPACE/CASE NORMALIZATION: this is why title-fidelity variance (fused definitions, truncation) shows up as recall misses. Fairly counted as misses, but see the reproducibility caveat - whether a given title defect appears is run-dependent.",
+    "PARSER FIELD ACCURACY INCLUDES UPSTREAM EXTRACTION NOISE: AZ's field mismatches are all single-space word fusions from Textract extraction (e.g. 'firmfoundation', 'andphysical') surviving into descriptions, not hierarchy errors. AZ fully_correct=0 is entirely attributable to this (sub_strand.description 0.278, indicator.description 0.667, domain.description 0.722).",
+    "PARSER INPUT PATH RESOLVED: batched (deployed) and direct-path detections now converge for CO - both give 9/9 coverage and n_parsed=48 (batched field-acc 0.994 / 8 fully-correct vs direct 0.969 / 7, a gap within run-to-run variance). The paper may take parser numbers from the deployed batched path. task1_parser_CO_on_direct_detection.json is retained as the direct half of this comparison.",
+    "DOMAIN-AGNOSTIC FALLBACK MATCHING: eval_detector falls back to (level, title, age_band) matching when domain-scoped lookup misses. Before the CA golden reorder fix this silently cross-matched 5 CA elements across FLD/ELD domains; after the fix, 0. AZ's out-of-domain golden indicator (AZ-IND-LL-1-2-b, annotated without its Language and Literacy domain header) still relies on this fallback, and its domain is excluded from precision scoping while the indicator itself counts toward recall.",
+    "GOLDEN DATA FIXES APPLIED DURING TASK 1 (both verified score-neutral or transcription-error corrections, never matcher loosening): (1) CA detector golden: FLD Grammar/Sharing/Participating block (doc pages 7-8) was listed after the ELD entries, breaking document-order domain tagging - reordered to true document order; (2) TX parser golden: duplicated test_case_id TX-IND-04-PK4 - first entry (indicator VI.A.1, doc page 7) had source_page 9, fixed to 7; second entry (indicator VI.A.4) had strand.code IV.A, a transposition typo for VI.A (TX Science is domain VI), fixed, and re-id'd as TX-IND-05-PK4.",
+    "OPEN GOLDEN-CONVENTION QUESTION (not fixed, needs Emily's call): TX parser golden expects indicator.description=None for TX-IND-03/04/05 but the parser emits the child-behavior outcome text as the description (indicator.description accuracy 0.500 for TX). Whether TX indicator descriptions should be empty is an annotation-convention decision; graded as genuine mismatches for now.",
+    "DEPTH-MAP GRADING is a per-state exact-match on the canonical-level sequence (a boolean, not a percentage), computed standalone by calling infer_depth_map on the full extraction blocks - same call shape as production detect_structure. All four states PASS in both runs.",
+    "CORPUS TIER: every number in task1_* files is from the _only_subset tier (9-15pp manually trimmed subset PDFs), never full documents."
+  ]
+}

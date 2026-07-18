@@ -1,0 +1,614 @@
+[
+  {
+    "state": "AZ",
+    "coverage": 1.0,
+    "field_accuracy": 0.9259259259259259,
+    "matched": 18,
+    "fully_correct": 0,
+    "n_golden": 18,
+    "n_parsed": 45,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 18,
+        "total": 18
+      },
+      "country": {
+        "ok": 18,
+        "total": 18
+      },
+      "state": {
+        "ok": 18,
+        "total": 18
+      },
+      "version_year": {
+        "ok": 18,
+        "total": 18
+      },
+      "age_band": {
+        "ok": 18,
+        "total": 18
+      },
+      "source_page": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.description": {
+        "ok": 13,
+        "total": 18
+      },
+      "strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.description": {
+        "ok": 5,
+        "total": 18
+      },
+      "indicator.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.description": {
+        "ok": 12,
+        "total": 18
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "AZ-IND-01",
+        "field": "domain.description",
+        "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      {
+        "test_case_id": "AZ-IND-02",
+        "field": "domain.description",
+        "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      {
+        "test_case_id": "AZ-IND-03",
+        "field": "domain.description",
+        "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      {
+        "test_case_id": "AZ-IND-04",
+        "field": "domain.description",
+        "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      {
+        "test_case_id": "AZ-IND-05",
+        "field": "domain.description",
+        "expected": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "got": "Social emotional development is the core of early care and education because it sets a firmfoundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, andphysical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-controlover their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. Thesehardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      {
+        "test_case_id": "AZ-IND-06",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-07",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-08",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-08",
+        "field": "indicator.description",
+        "expected": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the .\"",
+        "got": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the_.\""
+      },
+      {
+        "test_case_id": "AZ-IND-09",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-10",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-11",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-12",
+        "field": "sub_strand.description",
+        "expected": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+        "got": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes). Young children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Researchindicates how quickly and how easily children learn to read often depends on how much phonological awareness they have. Children's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics)."
+      },
+      {
+        "test_case_id": "AZ-IND-12",
+        "field": "indicator.description",
+        "expected": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rime components. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/.",
+        "got": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rimecomponents. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/."
+      },
+      {
+        "test_case_id": "AZ-IND-13",
+        "field": "sub_strand.description",
+        "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+        "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+      },
+      {
+        "test_case_id": "AZ-IND-13",
+        "field": "indicator.description",
+        "expected": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' falling off coconut tree.\" Looks at an advertisement (environmental print) and the child points to the \"W\" for Walmart.",
+        "got": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' fallingoff coconut tree.\" Looks at an advertisement (environmental print) and the child points to the \"W\" for Walmart."
+      },
+      {
+        "test_case_id": "AZ-IND-14",
+        "field": "sub_strand.description",
+        "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+        "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+      },
+      {
+        "test_case_id": "AZ-IND-14",
+        "field": "indicator.description",
+        "expected": "Traces the letter S and says, \"The letter has curves.\" Says, \"My name starts with a big A.\" The teacher says, \"Let's make a letter A like the letter in your name.\" Then using playdough, the child and teacher create the letter A.",
+        "got": "Traces the letter S and says, \"The letter has curves.\""
+      },
+      {
+        "test_case_id": "AZ-IND-15",
+        "field": "sub_strand.description",
+        "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+        "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+      },
+      {
+        "test_case_id": "AZ-IND-15",
+        "field": "indicator.description",
+        "expected": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel.",
+        "got": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [1].\" Paints the letter L like in her friend's name, while at the easel."
+      },
+      {
+        "test_case_id": "AZ-IND-16",
+        "field": "sub_strand.description",
+        "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+        "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+      },
+      {
+        "test_case_id": "AZ-IND-17",
+        "field": "sub_strand.description",
+        "expected": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+        "got": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correctsounds associated with several letters. Learning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language. 13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting."
+      },
+      {
+        "test_case_id": "AZ-IND-18",
+        "field": "sub_strand.description",
+        "expected": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner.",
+        "got": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewardsby observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment thathas readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. 15"
+      },
+      {
+        "test_case_id": "AZ-IND-18",
+        "field": "indicator.description",
+        "expected": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad. Writes W L C M and says, \"This says, 'Welcome'.\"",
+        "got": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad. Writes WLC M and says, \"This says, 'Welcome'.\""
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 45 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "coverage": 1.0,
+    "field_accuracy": 0.9947089947089947,
+    "matched": 21,
+    "fully_correct": 19,
+    "n_golden": 21,
+    "n_parsed": 94,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 21,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 19,
+        "total": 21
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "CA-IND-07-DISC",
+        "field": "indicator.description",
+        "expected": "Discovering: Attend to and participate in frequently experienced simple songs, poems, and fingerplays in English, with gestures and some key words.",
+        "got": "Discovering: Repeat or recite parts of simple songs, poems, and fingerplays in English, with gestures and some key words."
+      },
+      {
+        "test_case_id": "CA-IND-07-DEVE",
+        "field": "indicator.description",
+        "expected": "Developing: Repeat or recite parts of simple songs, poems, and fingerplays that emphasize rhyme in English.",
+        "got": "Developing: Attend to and participate in frequently experienced simple songs, poems, and fingerplays that emphasize rhyme in English."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "CA-EARLY-LATER-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "0 multi-variant indicator code(s) all kept distinct ids+bands"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 94 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "coverage": 0.3333333333333333,
+    "field_accuracy": 0.9814814814814815,
+    "matched": 3,
+    "fully_correct": 2,
+    "n_golden": 9,
+    "n_parsed": 66,
+    "dropped": [
+      "CO-IND-03",
+      "CO-IND-04",
+      "CO-IND-05",
+      "CO-IND-06",
+      "CO-IND-07",
+      "CO-IND-08"
+    ],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 3,
+        "total": 3
+      },
+      "country": {
+        "ok": 3,
+        "total": 3
+      },
+      "state": {
+        "ok": 3,
+        "total": 3
+      },
+      "version_year": {
+        "ok": 3,
+        "total": 3
+      },
+      "age_band": {
+        "ok": 3,
+        "total": 3
+      },
+      "source_page": {
+        "ok": 3,
+        "total": 3
+      },
+      "domain.code": {
+        "ok": 3,
+        "total": 3
+      },
+      "domain.name": {
+        "ok": 3,
+        "total": 3
+      },
+      "domain.description": {
+        "ok": 2,
+        "total": 3
+      },
+      "strand.code": {
+        "ok": 3,
+        "total": 3
+      },
+      "strand.name": {
+        "ok": 3,
+        "total": 3
+      },
+      "strand.description": {
+        "ok": 3,
+        "total": 3
+      },
+      "sub_strand.code": {
+        "ok": 3,
+        "total": 3
+      },
+      "sub_strand.name": {
+        "ok": 3,
+        "total": 3
+      },
+      "sub_strand.description": {
+        "ok": 3,
+        "total": 3
+      },
+      "indicator.code": {
+        "ok": 3,
+        "total": 3
+      },
+      "indicator.name": {
+        "ok": 3,
+        "total": 3
+      },
+      "indicator.description": {
+        "ok": 3,
+        "total": 3
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "domain.description",
+        "expected": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills.",
+        "got": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "CO-INDICATOR-PARENT-IS-STRAND",
+        "status": "FAIL",
+        "detail": "27/66 indicators have wrong parent (e.g. 'SED.2.1a': strand='SED.2', sub_strand='SED.2.1')"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 66 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "coverage": 1.0,
+    "field_accuracy": 0.9583333333333334,
+    "matched": 8,
+    "fully_correct": 2,
+    "n_golden": 8,
+    "n_parsed": 25,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 8,
+        "total": 8
+      },
+      "country": {
+        "ok": 8,
+        "total": 8
+      },
+      "state": {
+        "ok": 8,
+        "total": 8
+      },
+      "version_year": {
+        "ok": 8,
+        "total": 8
+      },
+      "age_band": {
+        "ok": 8,
+        "total": 8
+      },
+      "source_page": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.description": {
+        "ok": 6,
+        "total": 8
+      },
+      "sub_strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.description": {
+        "ok": 4,
+        "total": 8
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "TX-IND-01-PK3",
+        "field": "strand.description",
+        "expected": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question “Who am I?” which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community.",
+        "got": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      {
+        "test_case_id": "TX-IND-01-PK4",
+        "field": "strand.description",
+        "expected": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question “Who am I?” which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community.",
+        "got": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+      },
+      {
+        "test_case_id": "TX-IND-03-PK3",
+        "field": "indicator.description",
+        "expected": null,
+        "got": "Child Behaviors The child may: use appropriate strategies to decrease level of distress (e.g., requests help when feeling frustrated with a task or seeks comfort from teacher when feeling sad) respond positively to adult guidance in using calming strategies (e.g., suggestions to separate self from frustrating situations or take a deep breath) show enjoyment while participating in activities that stimulate different types of emotions (e.g., playground games or music activities that require alternation of loud/quiet, fast/slow)"
+      },
+      {
+        "test_case_id": "TX-IND-03-PK4",
+        "field": "indicator.description",
+        "expected": null,
+        "got": "Child Behaviors The child may: use appropriate strategies to decrease level of distress (e.g., requests help when feeling frustrated with a task or seeks comfort from teacher when feeling sad) respond positively to adult guidance in using calming strategies (e.g., suggestions to separate self from frustrating situations or take a deep breath) show enjoyment while participating in activities that stimulate different types of emotions (e.g., playground games or music activities that require alternation of loud/quiet, fast/slow)"
+      },
+      {
+        "test_case_id": "TX-IND-04-PK4",
+        "field": "indicator.description",
+        "expected": null,
+        "got": "Child Behaviors The child may: explore using his senses and uses sensory language to describe characteristics of natural and human-made objects and materials (e.g., wood, cotton, fur, stone, leather, plastic, paper, foil, ingredients for cooking, feathers, sponges) sort, group, or classify objects in meaningful ways based on one or more characteristics (e.g., hard/soft or heavy/light; materials that are made of wood, plastic, rock) investigate and predict what common objects will do in response to an action (e.g., whether materials will sink/float or melt/freeze)"
+      },
+      {
+        "test_case_id": "TX-IND-05-PK4",
+        "field": "indicator.description",
+        "expected": null,
+        "got": "Child Behaviors The child may: describe common sources of energy (e.g., sun, wind, water) demonstrate understanding that some items/equipment must have a source of energy to function (e.g., \"Teacher, we need a new battery for this toy.\" or \"It's not working; it is not plugged in.\") identify common objects in the classroom or their home that need a source of energy to"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "0 multi-variant indicator code(s) all kept distinct ids+bands"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 25 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]
