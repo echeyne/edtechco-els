@@ -22,7 +22,7 @@
         "strand": {
           "code": "I.A",
           "name": "Self-Concept",
-          "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question “Who am I?” which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+          "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
         },
         "sub_strand": null,
         "indicator": {
@@ -49,7 +49,7 @@
         "strand": {
           "code": "I.A",
           "name": "Self-Concept",
-          "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question “Who am I?” which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
+          "description": "Central to understanding emotional development is the idea of self-concept: an ever-increasing level of conscious awareness of one's feelings, thoughts, abilities, likes, and dislikes, as well as awareness of one's body in space. Prekindergarten children's emerging ability to perceive these aspects of themselves at a conscious level distinguishes them from toddlers, who lack such awareness. Children begin to generate multiple answers to the question \"Who am I?\" which is an essential aspect of becoming competent in related areas, such as self-control and social/friendship skills. A child's identity includes cultural and linguistic factors, and the prekindergarten environment is one of the first public opportunities for children to recognize the uniqueness of their own home culture and language as well as accept and value cultures and languages different from their own. Early childhood educators must model the mindset of diversity as an asset in the classroom, school, and community."
         },
         "sub_strand": null,
         "indicator": {
@@ -209,11 +209,11 @@
           "description": null
         },
         "age_band": "48-60",
-        "source_page": 9
+        "source_page": 7
       }
     },
     {
-      "test_case_id": "TX-IND-04-PK4",
+      "test_case_id": "TX-IND-05-PK4",
       "expected": {
         "standard_id": "US-TX-2022-VI.A.4.48-60",
         "country": "US",
@@ -225,7 +225,7 @@
           "description": "Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult guidance. This allows children to be curious about the environment in which they live, ask a lot of questions, make observations, describe what they experience using their five senses, and make tentative explanations that can be shared with others. Children's curiosity creates a natural desire to watch, explore, question, and understand the world around them. Science concepts for prekindergarten children should be developmentally appropriate, interesting, and engaging, and able to be studied from multiple perspectives, in depth, and over time. When children have many and varied opportunities to explore a concept, they come to the final stage of scientific inquiry with a rich set of experiences to which they base their reflections and their developing theories. Although children can easily learn science as they observe and interact daily, it is the teacher's role to provide a learning environment that offers discovery and exploration through hands-on opportunities. These opportunities are particularly helpful for multilingual learners who may not be able to explain what they know or have learned in a second language. Children should be encouraged to be curious, ask questions, work collaboratively, plan investigations, record their observations, and discuss their findings. In addition, science provides a unique context for developing vocabulary, literacy, and math skills and concepts. The Science domain of the Texas Prekindergarten Guidelines is divided into the following skills: physical science, life science, and earth and space science."
         },
         "strand": {
-          "code": "IV.A",
+          "code": "VI.A",
           "name": "Physical Science",
           "description": "Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, question, and compare. Children learn about sources of energy by investigating and discussing light, heat, electricity, and magnetism. This builds an early understanding of life science, physical science, earth science and chemistry. Processes such as observing and recording data, posing questions, predicting, investigating, and drawing conclusions can provide experiences to support literacy, math, and the sciences."
         },
