@@ -47,7 +47,12 @@ export class PipelineLambda extends Construct {
             "bash",
             "-c",
             [
-              "pip install --no-cache-dir boto3 pydantic psycopg2-binary python-dotenv -t /asset-output --quiet",
+              // Keep this list in sync with [project].dependencies in the
+              // repo-root pyproject.toml. pymupdf in particular is required by
+              // extractor.py's text-layer spacing repair; when it is missing
+              // the repair silently no-ops and Textract word-fusion
+              // ("firmfoundation") survives into detection.
+              "pip install --no-cache-dir boto3 pydantic psycopg2-binary python-dotenv pymupdf -t /asset-output --quiet",
               "cp -au . /asset-output",
             ].join(" && "),
           ],

@@ -619,6 +619,42 @@ export class ElsPipelineStack extends cdk.Stack {
               ],
             },
           },
+          // The prepare step runs Pass-1 depth-map inference (Haiku) once and
+          // shares the result across batches, so this role needs Bedrock and
+          // metrics access just like the batch processor. Without it the
+          // depth-map call fails with AccessDenied and every batch degrades to
+          // no-depth-map mode.
+          {
+            policyName: "BedrockInvokeAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["bedrock:InvokeModel"],
+                  Resource: "*",
+                },
+              ],
+            },
+          },
+          {
+            policyName: "CloudWatchMetricsAccess",
+            policyDocument: {
+              Version: "2012-10-17",
+              Statement: [
+                {
+                  Effect: "Allow",
+                  Action: ["cloudwatch:PutMetricData"],
+                  Resource: "*",
+                  Condition: {
+                    StringEquals: {
+                      "cloudwatch:namespace": "ELS/Pipeline",
+                    },
+                  },
+                },
+              ],
+            },
+          },
         ],
         tags: [
           { key: "Environment", value: env },
