@@ -250,7 +250,7 @@
         "indicator": {
           "code": "LL.2.3.c",
           "name": "Produces rhyming words",
-          "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the .\""
+          "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. \nFinishes the rhyme \"The fat cat sat on the _.\""
         },
         "age_band": "36-60",
         "source_page": 11
@@ -467,7 +467,7 @@
         "indicator": {
           "code": "LL.2.4.c",
           "name": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends",
-          "description": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel."
+          "description": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. \nSays, \"My name starts with an [I].\"\nPaints the letter L like in her friend's name, while at the easel."
         },
         "age_band": "36-60",
         "source_page": 13
@@ -555,7 +555,7 @@
         "sub_strand": {
           "code": "LL.3.1",
           "name": "Writing Processes and Writing Applications",
-          "description": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. Children begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. "
+          "description": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas. \nChildren begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. "
         },
         "indicator": {
           "code": "LL.3.1.c",

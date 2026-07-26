@@ -1,0 +1,1312 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-AZ-2018-SED.1.1.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "SED.1.1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.1.1.a",
+        "name": "Demonstrates self-confidence",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "Demonstrates self-confidence."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.1.1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "SED.1.1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.1.1.b",
+        "name": "Makes personal preferences known to others",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "b. Makes personal preferences known to others."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.1.1.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "SED.1.1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.1.1.c",
+        "name": "Demonstrates knowledge of self-identity/autonomy",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "Demonstrates knowledge of self-identity/autonomy."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.1.1.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "SED.1.1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.1.1.d",
+        "name": "Displays an awareness of similarities and differences between self and others",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "d. Displays an awareness of similarities and differences between self and others."
+    },
+    {
+      "standard_id": "US-AZ-2018-SED.1.1.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "SED",
+        "name": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Self-Awareness and Emotional Skills",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "SED.1.1",
+        "name": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem."
+      },
+      "indicator": {
+        "code": "SED.1.1.e",
+        "name": "Demonstrates developmentally appropriate cultural curiosity and responsiveness",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "e. Demonstrates developmentally appropriate cultural curiosity and responsiveness."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.1.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.1",
+        "name": "Receptive Language Understanding",
+        "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues. Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. \"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\"\u00b9\u2070 Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.1.1.a",
+        "name": "Demonstrates understanding of a variety of finger-plays, rhymes, chants and songs, poems, conversations, and stories",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "a. Demonstrates understanding of a variety of finger-plays, rhymes, chants and songs, poems, conversations, andstories."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.1",
+        "name": "Receptive Language Understanding",
+        "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues. Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. \"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\"\u00b9\u2070 Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.1.1.b",
+        "name": "Engages actively in finger-plays, rhymes, chants and songs, poems, conversations, and stories",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "b. Engages actively in finger-plays, rhymes, chants and songs, poems, conversations, and stories."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.1.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.1",
+        "name": "Receptive Language Understanding",
+        "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues. Receptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations. \"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\"\u00b9\u2070 Associating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend. Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.1.1.c",
+        "name": "Demonstrates understanding and follows directions that involve one step, two steps, or multiple steps",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "C. Demonstrates understanding and follows directions that involve one step, two steps, or multiple steps."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.a",
+        "name": "Communicates needs, wants, ideas, and feelings through three to five-word sentences",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "a. Communicates needs, wants, ideas, and feelings through three to five-word sentences."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.b",
+        "name": "Speaks clearly and understandably to express ideas, feelings, and needs",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "b. Speaks clearly and understandably to express ideas, feelings, and needs."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.c",
+        "name": "Makes culturally relevant responses (both verbal and nonverbal) to questions and comments from others",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "C. Makes culturally relevant responses (both verbal and nonverbal) to questions and comments from others."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.d",
+        "name": "Initiates, sustains, and expands conversations with peers and adults using open-ended responses",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "d. Initiates, sustains, and expands conversations with peers and adults using open-ended responses."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.e",
+        "name": "With modeling and support, child uses language that includes social rules; e.g., pragmatics, appropriate tone, volume, and inflection to express ideas, feelings, and needs",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "e. With modeling and support, child uses language that includes social rules; e.g., pragmatics, appropriate tone, volume, and inflection to express ideas, feelings, and needs."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.f",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.f",
+        "name": "Uses culturally relevant responses such as eye contact, turn taking, and intonation while having conversations with adults and peers",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "f. Uses culturally relevant responses such as eye contact, turn taking, and intonation while having conversations with adults and peers."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.g",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.g",
+        "name": "Recognizes when the listener does not understand and varies the amount of information to clarify the message",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "g. Recognizes when the listener does not understand and varies the amount of information\u00b9\u00b2 to clarify the message."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.2.h",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.2",
+        "name": "Expressive Language and Communication Skills",
+        "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections. Children develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs."
+      },
+      "indicator": {
+        "code": "LL.1.2.h",
+        "name": "With modeling and support, uses increasingly complex phrases and sentences",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "h. With modeling and support, uses increasingly complex phrases and sentences."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.1.3.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.1",
+        "name": "Language",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.1.3",
+        "name": "Vocabulary",
+        "description": "The child understands and uses increasingly complex vocabulary. The early childhood years are a period of vocabulary expansion and exploration. Research indicates that there is a strong connection between vocabulary development and reading comprehension which correlates to academic success. Children gain language and vocabulary skills by having multiple and frequent opportunities to listen, talk, read, share ideas, relate experiences, and engage in meaningful conversations. They need to play with familiar language and experiment with language in different settings. Rhymes, songs, and read-alouds that use rare words allow children to talk about and develop an understanding of words they would not otherwise hear in everyday conversations."
+      },
+      "indicator": {
+        "code": "LL.1.3.a",
+        "name": "Uses rich vocabulary across many topic areas",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "a. Uses rich vocabulary across many topic areas."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.b",
+        "name": "Figures out the meanings of unfamiliar words and concepts using the context of conversations, pictures that accompany text, or concrete objects",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "b. Figures out the meanings of unfamiliar words and concepts using the context of conversations, pictures that accompany text, or concrete objects."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.c",
+        "name": "Uses category labels and names objects within a category; e.g., fruit, vegetable, animal, transportation",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "C. Uses category labels and names objects within a category; e.g., fruit, vegetable, animal, transportation."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.d",
+        "name": "Demonstrates understanding of and uses words that indicate position and direction; e.g., in, on, out, under, over, off, besides, behind",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "d. Demonstrates understanding of and uses words that indicate position and direction; e.g., in, on, out, under, over, off, besides, behind."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.a",
+        "name": "Identifies signs, symbols, and labels in a variety of environments (environmental print)",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "a. Identifies signs, symbols, and labels in a variety of environments (environmental print)."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.b.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.b.2",
+        "name": "Demonstrates and understands that print conveys meaning and that each spoken word can be written and read",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "b. Demonstrates and understands that print conveys meaning and that each spoken word can be written and read."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.c.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.c.2",
+        "name": "Recognizes that letters are grouped to form words",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "C. Recognizes that letters are grouped to form words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.d.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.d.2",
+        "name": "Recognizes own written name and the written names of friends and family",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "d. Recognizes own written name and the written names of friends and family."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.e",
+        "name": "Seeks information in printed materials",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "e. Seeks information in printed materials."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.a.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.a.2",
+        "name": "Holds a book right side up with the front cover facing the reader and understands left to right and top to bottom directionality",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "a. Holds a book right side up with the front cover facing the reader and understands left to right and top to bottom directionality."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.b.3",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.b.3",
+        "name": "Identifies where in the book to begin reading",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "b. Identifies where in the book to begin reading."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.c.3",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.c.3",
+        "name": "Understands a book has a title, author, and/or illustrator",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "C. Understands a book has a title, author, and/or illustrator."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.a.3",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": ""
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.a.3",
+        "name": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes)",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 11,
+      "source_text": "a. Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes)."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.b",
+        "name": "Identifies rhyming words",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 11,
+      "source_text": "b. Identifies rhyming words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.c",
+        "name": "Produces rhyming words",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 11,
+      "source_text": "C. Produces rhyming words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.d",
+        "name": "Recognizes spoken words that begin with the same sound",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 11,
+      "source_text": "d. Recognizes spoken words that begin with the same sound."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.e",
+        "name": "Hears and shows awareness of separate words within spoken phrases or sentences",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 12,
+      "source_text": "e. Hears and shows awareness of separate words within spoken phrases or sentences."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.f",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.f",
+        "name": "Identifies and discriminates syllables in words",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 12,
+      "source_text": "f. Identifies and discriminates syllables in words."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.g",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.g",
+        "name": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 12,
+      "source_text": "g. Combines onset and rime to form a familiar one-syllable word with and without pictorial support."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.a",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.a",
+        "name": "Discriminates letters from other shapes and symbols",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "a. Discriminates letters from other shapes and symbols."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.b.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.b.2",
+        "name": "Matches and recognizes similarities and differences in letters, with modeling and support",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "b. Matches and recognizes similarities and differences in letters, with modeling and support."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.c.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.c.2",
+        "name": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "C. Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.d.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.d.2",
+        "name": "Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g., playdough, blocks, marker, and paper",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "d. Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g.,\nplaydough, blocks, marker, and paper."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.e.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.e.2",
+        "name": "Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an increasing number of letters",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "e. Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an\nincreasing number of letters."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.a.2",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.a.2",
+        "name": "In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 14,
+      "source_text": "a. In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.b",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.b",
+        "name": "Writes own name using letter-like forms or conventional print",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 14,
+      "source_text": "b. Writes own name using letter-like forms or conventional print."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.c",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.c",
+        "name": "Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 15,
+      "source_text": "C. Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story;\ne.g., signing artwork, captioning, labeling, creating lists, making notes."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.d",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.d",
+        "name": "Forms letters starting with large motor (sky writing, paint brush and water, sidewalk chalk) progressing to fine motor (paper and writing utensil)",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 15,
+      "source_text": "d. Forms letters starting with large motor (sky writing, paint brush and water, sidewalk chalk) progressing to\nfine motor (paper and writing utensil)."
+    },
+    {
+      "standard_id": "US-AZ-2018-LL.3.1.e",
+      "country": "US",
+      "state": "AZ",
+      "version_year": 2018,
+      "domain": {
+        "code": "LL",
+        "name": "Language and Literacy",
+        "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print. Children learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print. The preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs."
+      },
+      "strand": {
+        "code": "LL.3",
+        "name": "Emergent Writing",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "LL.3.1",
+        "name": "Listening and Understanding",
+        "description": "Listening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading."
+      },
+      "indicator": {
+        "code": "LL.3.1.e",
+        "name": "Organizes writing from left to right, indicating a print awareness that letters cluster as words and words cluster into phrases or sentences by use of spacing or marks",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 15,
+      "source_text": "e. Organizes writing from left to right, indicating a print awareness that letters cluster as words and\nwords cluster into phrases or sentences by use of spacing or marks."
+    }
+  ],
+  "total_indicators": 45,
+  "parsing_timestamp": "2026-07-18T21:10:00.804934+00:00",
+  "source_detection_key": ""
+}

@@ -45,7 +45,7 @@
         "domain": {
           "code": "PDH",
           "name": "Physical Development & Health",
-          "description": "The Physical Development & Health domain describes children’s physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children’s knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+          "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children’s knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
         },
         "strand": {
           "code": "PDH.1",
