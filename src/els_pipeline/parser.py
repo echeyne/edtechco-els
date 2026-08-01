@@ -628,6 +628,119 @@ def normalize_parsed_codes(
     return result
 
 
+def _pick_code(counter, avoid: frozenset = frozenset()) -> str:
+    """Pick the canonical code for one entity: avoid codes that collide with a
+    sibling's code (``avoid``), then prefer short alphanumeric document codes
+    over long slugified names; then higher frequency, shorter length,
+    lexicographic order."""
+    if len(counter) == 1:
+        return next(iter(counter))
+
+    def _code_sort_key(code_count):
+        code, count = code_count
+        is_slug = len(code) > 10 or bool(re.search(r'[a-z][A-Z]', code))
+        return (code in avoid, is_slug, -count, len(code), code)
+
+    return min(counter.items(), key=_code_sort_key)[0]
+
+
+def canonical_domain_codes(
+    elements: List[DetectedElement],
+) -> tuple[dict, dict]:
+    """
+    Reconcile the codes of domain-level elements by domain TITLE.
+
+    Domains are the one level that can safely reconcile on title alone — a
+    document does not repeat a domain name for two different domains, but it
+    may emit the same domain under different codes in different chunks
+    (e.g. "SED" in one chunk, "I" in the next).
+
+    Returns:
+        (canonical_by_title, raw_code_to_canonical)
+    """
+    from collections import Counter
+
+    domain_title_codes: dict[str, Counter] = {}
+    for el in elements:
+        if el.level == HierarchyLevelEnum.DOMAIN:
+            t = el.title.strip().lower()
+            domain_title_codes.setdefault(t, Counter())[el.code] += 1
+    canonical_by_title = {t: _pick_code(c) for t, c in domain_title_codes.items()}
+    raw_to_canonical = {
+        el.code: canonical_by_title[el.title.strip().lower()]
+        for el in elements
+        if el.level == HierarchyLevelEnum.DOMAIN
+    }
+    return canonical_by_title, raw_to_canonical
+
+
+def assign_domain_scopes(elements: List[DetectedElement]) -> List[Optional[str]]:
+    """
+    Assign every element the canonical code of the domain it belongs to.
+
+    Scope is resolved by document order (the most recent domain heading seen),
+    refined by code-prefix inference when the element's own code carries a
+    recognizable domain prefix (``LLD.1.2`` under domain ``LLD``). Domain
+    elements themselves get scope ``None`` — they reconcile by title.
+
+    This is the shared notion of "which parent does this element sit under"
+    used both by :func:`normalize_element_codes` (so two domains that share a
+    strand title are not merged) and by the detector's overlap de-duplication
+    (so two same-titled elements under DIFFERENT domains are not collapsed).
+    """
+    _, raw_to_canonical = canonical_domain_codes(elements)
+    raw_domain_codes = list(raw_to_canonical.keys())
+
+    scopes: List[Optional[str]] = []
+    current_scope: Optional[str] = None
+    for el in elements:
+        if el.level == HierarchyLevelEnum.DOMAIN:
+            current_scope = raw_to_canonical.get(el.code)
+            scopes.append(None)
+        else:
+            inferred = _infer_domain_code(el, raw_domain_codes)
+            if inferred is not None:
+                scopes.append(raw_to_canonical.get(inferred, current_scope))
+            else:
+                scopes.append(current_scope)
+    return scopes
+
+
+def code_domain_scopes(elements: List[DetectedElement]) -> List[Optional[str]]:
+    """
+    Assign every element the domain implied by its OWN code, or None.
+
+    Identical to :func:`assign_domain_scopes` minus the document-order
+    fallback — and that omission is the whole point.
+
+    Use this to answer IDENTITY questions ("are these two rows the same
+    occurrence of one element?"). Document order is a property of the element
+    LIST, and chunk overlap is exactly what perturbs that list: a re-emitted
+    element can land past a later domain heading and inherit that domain even
+    though it is the same occurrence as its twin a few positions earlier. Keying
+    identity on an order-derived scope is therefore circular — it is most wrong
+    precisely for the duplicates it is meant to tell apart. A code-derived scope
+    is a property of the element itself, so both twins always agree on it.
+
+    Use :func:`assign_domain_scopes` for CONTEXT questions ("which domain does
+    this element sit under?"), where the order fallback is what you want.
+
+    Returns None for domain elements (they reconcile by title) and for any
+    element whose code carries no recognizable domain prefix.
+    """
+    _, raw_to_canonical = canonical_domain_codes(elements)
+    raw_domain_codes = list(raw_to_canonical.keys())
+
+    scopes: List[Optional[str]] = []
+    for el in elements:
+        if el.level == HierarchyLevelEnum.DOMAIN:
+            scopes.append(None)
+            continue
+        inferred = _infer_domain_code(el, raw_domain_codes)
+        scopes.append(raw_to_canonical.get(inferred) if inferred is not None else None)
+    return scopes
+
+
 def normalize_element_codes(
     elements: List[DetectedElement],
 ) -> List[DetectedElement]:
@@ -655,21 +768,6 @@ def normalize_element_codes(
     if not elements:
         return elements
 
-    def _pick(counter: Counter, avoid: frozenset = frozenset()) -> str:
-        """Pick the canonical code for one entity: avoid codes that collide with a
-        sibling's code (``avoid``), then prefer short alphanumeric document codes
-        over long slugified names; then higher frequency, shorter length,
-        lexicographic order."""
-        if len(counter) == 1:
-            return next(iter(counter))
-
-        def _code_sort_key(code_count):
-            code, count = code_count
-            is_slug = len(code) > 10 or bool(re.search(r'[a-z][A-Z]', code))
-            return (code in avoid, is_slug, -count, len(code), code)
-
-        return min(counter.items(), key=_code_sort_key)[0]
-
     # The same entity can be detected with different codes across overlapping
     # detector chunks (e.g. "PHD" vs "PhysicalDevelopment" for one domain). We
     # pick one canonical code per entity and rewrite every occurrence to it.
@@ -688,29 +786,12 @@ def normalize_element_codes(
         if el.level == HierarchyLevelEnum.DOMAIN:
             t = el.title.strip().lower()
             domain_title_codes.setdefault(t, Counter())[el.code] += 1
-    domain_canonical_by_title = {t: _pick(c) for t, c in domain_title_codes.items()}
-    raw_domain_to_canonical = {
-        el.code: domain_canonical_by_title[el.title.strip().lower()]
-        for el in elements
-        if el.level == HierarchyLevelEnum.DOMAIN
-    }
-    raw_domain_codes = list(raw_domain_to_canonical.keys())
+    domain_canonical_by_title, _ = canonical_domain_codes(elements)
 
     # Assign each element the canonical code of its owning domain: document order,
     # refined by code-prefix inference when the element's own code carries a
     # recognizable domain prefix.
-    elem_scope: list[str | None] = []
-    current_scope: str | None = None
-    for el in elements:
-        if el.level == HierarchyLevelEnum.DOMAIN:
-            current_scope = raw_domain_to_canonical.get(el.code)
-            elem_scope.append(None)  # domains reconcile by title only (phase 1)
-        else:
-            inferred = _infer_domain_code(el, raw_domain_codes)
-            if inferred is not None:
-                elem_scope.append(raw_domain_to_canonical.get(inferred, current_scope))
-            else:
-                elem_scope.append(current_scope)
+    elem_scope = assign_domain_scopes(elements)
 
     # Indicator codes per domain scope — used to keep a reconciled sub_strand
     # code from colliding with a foundation/indicator number in the same strand.
@@ -741,7 +822,7 @@ def normalize_element_codes(
             if level == HierarchyLevelEnum.SUB_STRAND.value
             else frozenset()
         )
-        nondomain_canonical[key] = _pick(counter, avoid)
+        nondomain_canonical[key] = _pick_code(counter, avoid)
 
     # Rewrite every element to its canonical code.
     normalized = []

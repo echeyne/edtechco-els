@@ -234,3 +234,107 @@ def test_merge_output_format_matches_detection_handler(s3_setup):
     assert "detection_timestamp" in saved
     assert "source_extraction_key" in saved
     assert isinstance(saved["elements"], list)
+
+
+def _make_typed_element(level, code, title, source_page):
+    """A detected element at an arbitrary hierarchy level."""
+    return {
+        "level": level,
+        "code": code,
+        "title": title,
+        "description": "desc",
+        "confidence": 0.9,
+        "source_page": source_page,
+        "source_text": f"[Page {source_page}] {title}",
+    }
+
+
+def test_merge_collapses_overlap_twins_displaced_past_a_later_domain(s3_setup):
+    """Overlap twins re-emitted AFTER a later domain heading still collapse.
+
+    This is the batched-path counterpart of the CO duplicate-indicator bug, and
+    it is deliberately tested HERE rather than through the detector eval: the
+    eval exercises the direct path (``detect_structure``), which chunks and
+    samples differently from the batched path production runs
+    (``detection_batching`` calls the LLM with ``prefill='['``, the direct path
+    does not). CO's three duplicate Gross Motor indicators appear only in the
+    batched artifact, so a green CO detector eval is a FALSE NEGATIVE for them.
+
+    Shape reproduced from ``outputs/07-24-26/CO-detection.json``: batch 0 ends
+    with the page-4 Gross Motor indicators; batch 1's overlap re-emits those
+    same three rows, but only after it has already emitted the page-5 SED
+    domain heading. A position-derived domain scope therefore disagrees between
+    the two copies (PDH vs SED) and keeps both. Identity must come from the
+    element's OWN code instead (``parser.code_domain_scopes``), which both
+    copies agree on, so the twins collapse.
+    """
+    s3 = s3_setup
+    event = _base_event()
+
+    batch0_key = "US/CA/2021/intermediate/detection/batch-0/run-1.json"
+    batch1_key = "US/CA/2021/intermediate/detection/batch-1/run-1.json"
+    result0_key = batch0_key.replace("/batch-", "/result-")
+    result1_key = batch1_key.replace("/batch-", "/result-")
+
+    manifest = _make_manifest([(0, batch0_key), (1, batch1_key)])
+    _put_json(s3, event["manifest_key"], manifest)
+
+    # The three page-4 indicators that the chunk overlap re-emits.
+    twins = [
+        _make_typed_element(
+            "indicator", "1", "Develop motor control and balance", 4
+        ),
+        _make_typed_element(
+            "indicator", "2", "Develop motor coordination and skill", 4
+        ),
+        _make_typed_element("indicator", "3", "Understand movement concepts", 4),
+    ]
+
+    batch0 = [
+        _make_typed_element("domain", "PDH", "Physical Development & Health", 2),
+        _make_typed_element("strand", "2", "Gross Motor Skills", 4),
+        *twins,
+    ]
+    # Batch 1 opens past the overlap boundary: the later domain heading is
+    # emitted BEFORE the re-emitted twins, so document order puts them under
+    # the wrong domain.
+    batch1 = [
+        _make_typed_element("domain", "SED", "Social & Emotional Development", 5),
+        _make_typed_element("strand", "1", "Relationships with Adults and Peers", 6),
+        *twins,
+        _make_typed_element("indicator", "1", "Recognize self as a unique individual", 7),
+    ]
+
+    _put_json(s3, result0_key, _make_batch_result(0, batch0))
+    _put_json(s3, result1_key, _make_batch_result(1, batch1))
+
+    result = merge_detection_results(event, None)
+    assert result["status"] == "success"
+
+    saved = json.loads(
+        s3.get_object(
+            Bucket=Config.S3_PROCESSED_BUCKET, Key=result["output_artifact"]
+        )["Body"].read()
+    )
+    elements = saved["elements"]
+
+    # The three twins must survive exactly once each.
+    for title in (
+        "Develop motor control and balance",
+        "Develop motor coordination and skill",
+        "Understand movement concepts",
+    ):
+        matches = [e for e in elements if e["title"] == title]
+        assert len(matches) == 1, (
+            f"{title!r} survived {len(matches)}x; overlap twins displaced past "
+            f"a later domain heading were not collapsed"
+        )
+
+    # 2 domains + 2 strands + 3 collapsed twins + 1 unique = 8
+    assert result["total_elements"] == 8
+    assert len(elements) == 8
+
+    # And the surviving copy must keep its FIRST position — before the later
+    # domain heading — or the parser reparents it by document order.
+    idx = {e["title"]: i for i, e in enumerate(elements)}
+    assert idx["Develop motor control and balance"] < idx["Social & Emotional Development"]

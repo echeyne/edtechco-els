@@ -224,23 +224,28 @@ class TestStandardIDGeneration:
     """Test Standard_ID generation and determinism."""
 
     def test_standard_id_format(self):
-        """Test that Standard_ID follows the correct format."""
-        standard_id = generate_standard_id("US", "CA", 2021, "LLD", "LLD.A.1.a")
-        assert standard_id == "US-CA-2021-LLD-LLD.A.1.a"
+        """Test that Standard_ID follows the correct format.
+
+        There is no separate domain_code component — the indicator_code is
+        expected to already be fully qualified (see generate_standard_id's
+        docstring and CLAUDE.md's "Standard IDs are deterministic" note).
+        """
+        standard_id = generate_standard_id("US", "CA", 2021, "LLD.A.1.a")
+        assert standard_id == "US-CA-2021-LLD.A.1.a"
         assert standard_id.startswith("US-")
         assert "2021" in standard_id
 
     def test_standard_id_determinism(self):
         """Test that Standard_ID generation is deterministic."""
-        id1 = generate_standard_id("US", "CA", 2021, "LLD", "LLD.A.1.a")
-        id2 = generate_standard_id("US", "CA", 2021, "LLD", "LLD.A.1.a")
+        id1 = generate_standard_id("US", "CA", 2021, "LLD.A.1.a")
+        id2 = generate_standard_id("US", "CA", 2021, "LLD.A.1.a")
         assert id1 == id2
 
     def test_standard_id_uniqueness(self):
         """Test that different inputs produce different Standard_IDs."""
-        id1 = generate_standard_id("US", "CA", 2021, "LLD", "LLD.A.1.a")
-        id2 = generate_standard_id("US", "CA", 2021, "LLD", "LLD.A.1.b")
-        id3 = generate_standard_id("US", "TX", 2021, "LLD", "LLD.A.1.a")
+        id1 = generate_standard_id("US", "CA", 2021, "LLD.A.1.a")
+        id2 = generate_standard_id("US", "CA", 2021, "LLD.A.1.b")
+        id3 = generate_standard_id("US", "TX", 2021, "LLD.A.1.a")
         assert id1 != id2
         assert id1 != id3
         assert id2 != id3
@@ -277,7 +282,9 @@ class TestStandardIDGeneration:
             result = parse_hierarchy(elements, "US", "CA", 2021, "PK")
 
         assert len(result.standards) == 1
-        assert result.standards[0].standard_id == "US-CA-2021-LLD-LLD.1-PK"
+        # indicator_code "LLD.1" is already fully qualified; the "PK" fallback
+        # age_band is stored as a separate field, not appended to the ID.
+        assert result.standards[0].standard_id == "US-CA-2021-LLD.1"
 
 
 class TestOrphanDetection:

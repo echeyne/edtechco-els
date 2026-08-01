@@ -16,9 +16,11 @@ from .detector import (
     call_bedrock_llm,
     parse_llm_response,
     infer_depth_map,
+    _dedup_elements,
     MAX_PARSE_RETRIES,
 )
 from .models import (
+    DetectedElement,
     TextBlock,
     DetectionBatchInfo,
     DetectionBatchManifest,
@@ -367,25 +369,41 @@ def merge_detection_results(event: Dict[str, Any], context: Any) -> Dict[str, An
             "error": error_msg,
         }
 
-    # Deduplicate overlap-repeated elements. The key includes age_band so
-    # side-by-side column variants that legitimately SHARE a code/title/page —
-    # e.g. CA Foundation "1.2" Early vs Later, or PK3 vs PK4 — are NOT collapsed
-    # into one; only true repeats (identical on all keys) are dropped. This
-    # mirrors detector._dedup_elements, which the non-batched path uses; omitting
-    # age_band here was silently dropping every second age/proficiency column.
-    seen: set = set()
+    # Deduplicate overlap-repeated elements by DELEGATING to
+    # detector._dedup_elements — the same function the non-batched path uses.
+    # These two paths must not drift: they have before, and the batched one is
+    # what production runs, so a fix applied only to the direct path is
+    # invisible where it matters. _dedup_elements handles both duplicate shapes
+    # (exact repeats under drifting codes, and titles truncated at a chunk
+    # boundary) and is domain-scoped so side-by-side column variants and
+    # same-titled children of different domains survive.
+    #
+    # Batch results are raw dicts; anything that fails to round-trip through
+    # the model falls back to the conservative key-based de-dup below so a
+    # single malformed element cannot lose the whole merge.
     unique_elements: List[Dict[str, Any]] = []
-    for elem in all_elements:
-        key = (
-            elem.get("level"),
-            elem["code"],
-            elem["title"],
-            elem.get("age_band"),
-            elem.get("source_page", 0),
+    try:
+        detected = [DetectedElement(**elem) for elem in all_elements]
+        unique_elements = [
+            el.model_dump(mode="json") for el in _dedup_elements(detected)
+        ]
+    except Exception as e:
+        logger.warning(
+            f"Falling back to key-based de-duplication on merge "
+            f"(could not validate batch elements: {e})"
         )
-        if key not in seen:
-            seen.add(key)
-            unique_elements.append(elem)
+        seen: set = set()
+        for elem in all_elements:
+            key = (
+                elem.get("level"),
+                elem["code"],
+                elem["title"],
+                elem.get("age_band"),
+                elem.get("source_page", 0),
+            )
+            if key not in seen:
+                seen.add(key)
+                unique_elements.append(elem)
 
     # Determine overall status
     if all_errors and unique_elements:

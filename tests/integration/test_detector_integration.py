@@ -135,7 +135,10 @@ def test_build_detection_prompt(sample_text_blocks):
     prompt = build_detection_prompt(sample_text_blocks)
     
     assert "Language and Literacy Development" in prompt
-    assert "[Page 1]" in prompt
+    # Blocks carrying usable geometry are tagged "[Page N | x=0.10]" so the
+    # model can work out the page's column structure itself; blocks without it
+    # fall back to a bare "[Page N]".
+    assert "[Page 1 | x=" in prompt
     assert "JSON array" in prompt
     assert "domain" in prompt
     assert "indicator" in prompt

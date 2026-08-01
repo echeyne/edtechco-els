@@ -266,24 +266,49 @@ def _parse_textract_response(response: Dict[str, Any]) -> List[TextBlock]:
 # ambiguously, so we only repair lines long enough to locate unambiguously.
 _MIN_REPAIR_KEY_LEN = 12
 
+# Characters a PDF text layer renders typographically but OCR reports as their
+# plain-ASCII equivalent (or vice versa). Matching is done on a folded view so
+# these purely-cosmetic differences don't defeat the search. The mapping is
+# strictly 1-to-1 (one char in, one char out) so folded offsets stay aligned
+# with the unfolded string — this is why NFKC-style normalization, which can
+# change length (e.g. "ﬁ" -> "fi", "…" -> "..."), is deliberately not used.
+_MATCH_FOLD = str.maketrans(
+    {
+        **{c: "'" for c in "‘’‚‛′´`"},
+        **{c: '"' for c in "“”„‟″"},
+        **{c: "-" for c in "‐‑‒–—−"},
+    }
+)
+
+# Zero-width / invisible characters a PDF text layer may carry that OCR never
+# emits. They are dropped from the index entirely (not treated as whitespace),
+# so a soft-hyphenated line wrap rejoins into the single word it represents.
+_INVISIBLE_CHARS = frozenset("­​‌‍⁠﻿")
+
+
+def _fold_for_match(text: str) -> str:
+    """Fold cosmetic character variants for matching. Length-preserving."""
+    return text.translate(_MATCH_FOLD)
+
 
 def _build_despaced_index(page_text: str) -> tuple[str, List[int]]:
     """
-    Build a whitespace-stripped view of ``page_text`` plus a map from each
-    de-spaced character back to its index in the original text.
+    Build a whitespace-stripped, match-folded view of ``page_text`` plus a map
+    from each de-spaced character back to its index in the original text.
 
-    Returns ``(despaced, idx_map)`` where ``despaced[k]`` is the k-th
-    non-whitespace char and ``idx_map[k]`` is its position in ``page_text``.
-    Matching on the de-spaced form lets us locate a Textract line regardless of
-    how its spaces were (mis)recognized, then recover the original spacing.
+    Returns ``(despaced, idx_map)`` where ``despaced[k]`` is the folded form of
+    the k-th visible char and ``idx_map[k]`` is its position in ``page_text``.
+    Matching on this form lets us locate a Textract line regardless of how its
+    spaces were (mis)recognized or how its quotes/dashes were rendered.
     """
     despaced_chars: List[str] = []
     idx_map: List[int] = []
     for pos, ch in enumerate(page_text):
-        if not ch.isspace():
-            despaced_chars.append(ch)
-            idx_map.append(pos)
-    return "".join(despaced_chars), idx_map
+        if ch.isspace() or ch in _INVISIBLE_CHARS:
+            continue
+        despaced_chars.append(ch)
+        idx_map.append(pos)
+    return _fold_for_match("".join(despaced_chars)), idx_map
 
 
 def _repair_line_text(block: TextBlock, page_text: str, despaced: str, idx_map: List[int]) -> str | None:
@@ -291,10 +316,21 @@ def _repair_line_text(block: TextBlock, page_text: str, despaced: str, idx_map: 
     Return the spacing-corrected text for a LINE block, or None to leave it.
 
     Locates the block's de-spaced text in the page's de-spaced text layer; when
-    it matches exactly once, adopts the text layer's spacing for that span.
-    The de-spaced forms are identical by construction, so ONLY whitespace
-    changes — never a character. Returns None when the block is ineligible
-    (not a LINE, too short, not found, or a non-unique match).
+    it matches exactly once, re-spaces the block using the word boundaries the
+    text layer shows for that span.
+
+    The returned string is built from the BLOCK's own characters — the text
+    layer contributes only the positions of the gaps — so ONLY whitespace ever
+    changes, never a character. (Rebuilding from the block rather than slicing
+    the page is what makes the cosmetic character folding above safe: a folded
+    match may pair "don't" with "don’t", and we keep the block's version.)
+
+    Any run of text-layer whitespace between two adjacent characters, including
+    a line-wrap newline, becomes exactly one space, matching Textract's
+    one-line-per-LINE convention.
+
+    Returns None when the block is ineligible (not a LINE, too short, not
+    found, or a non-unique match).
     """
     if block.block_type != "LINE":
         return None
@@ -303,18 +339,24 @@ def _repair_line_text(block: TextBlock, page_text: str, despaced: str, idx_map: 
     if len(key) < _MIN_REPAIR_KEY_LEN:
         return None
 
-    first = despaced.find(key)
+    folded_key = _fold_for_match(key)
+    first = despaced.find(folded_key)
     if first == -1:
         return None
     # Require a unique match so we never adopt the wrong occurrence's spacing.
-    if despaced.find(key, first + 1) != -1:
+    if despaced.find(folded_key, first + 1) != -1:
         return None
 
-    start = idx_map[first]
-    end = idx_map[first + len(key) - 1] + 1
-    # Collapse the text-layer span (which may contain line-wrap newlines) into a
-    # single spaced line, matching Textract's one-line-per-LINE convention.
-    return " ".join(page_text[start:end].split())
+    pieces: List[str] = [key[0]]
+    for offset in range(1, len(key)):
+        prev_pos = idx_map[first + offset - 1]
+        cur_pos = idx_map[first + offset]
+        # A gap in the text layer means a word boundary. Invisible characters
+        # (soft hyphen, zero-width joiners) alone do not constitute one.
+        if any(ch.isspace() for ch in page_text[prev_pos + 1 : cur_pos]):
+            pieces.append(" ")
+        pieces.append(key[offset])
+    return "".join(pieces)
 
 
 def _repair_block_spacing(
@@ -338,7 +380,13 @@ def _repair_block_spacing(
     try:
         import fitz  # PyMuPDF
     except ImportError:
-        logger.warning("PyMuPDF not installed; skipping text-layer spacing repair")
+        # Logged at ERROR, not WARNING: this is a deployment defect (the Lambda
+        # bundle is missing a declared dependency), not an expected condition.
+        # It degrades silently in the output, so it must be loud in the logs.
+        logger.error(
+            "PyMuPDF not installed; text-layer spacing repair DISABLED — "
+            "Textract word-fusion will survive into detection"
+        )
         return blocks
 
     pdf_bytes = _download_pdf_bytes(s3_key, s3_version_id)

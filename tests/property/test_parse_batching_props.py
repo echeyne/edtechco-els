@@ -3,7 +3,9 @@
 Feature: long-running-pipeline-support
 """
 
-from hypothesis import given, strategies as st, settings
+from collections import Counter
+
+from hypothesis import assume, given, strategies as st, settings
 
 from els_pipeline.models import DetectedElement, HierarchyLevelEnum
 from els_pipeline.parser import chunk_elements_by_domain
@@ -41,14 +43,39 @@ def test_property_2_parse_batch_exact_partitioning(elements):
     """
     Property 2: Parse batch exact partitioning
 
-    For any list of DetectedElement objects, the union of all batch
-    elements equals the original set exactly — no loss, no
-    duplication.
+    ``chunk_elements_by_domain`` intentionally collapses overlap-repeated
+    elements — same-code domain headers and same (level, code, normalized
+    title, age_band, source_page) non-domain elements re-emitted by adjacent
+    detector chunks (see its docstring). So "no loss, no duplication" only
+    holds when the input has nothing to dedup: this test constrains the input
+    to be dedup-key-unique, then asserts every element survives exactly once,
+    with none fabricated or dropped.
 
     Validates: Requirements 4.4
     """
     # All elements pass through to batching (no needs_review filtering).
     valid_elements = elements
+
+    # Require dedup-key uniqueness: no two domain elements share a code, and
+    # no two non-domain elements share (level, code, normalized title,
+    # age_band, source_page). Global uniqueness implies uniqueness within
+    # whatever domain group routing lands them in, so nothing collapses.
+    domain_codes = [el.code for el in valid_elements if el.level == HierarchyLevelEnum.DOMAIN]
+    assume(len(domain_codes) == len(set(domain_codes)))
+
+    def _dedup_key(e):
+        return (
+            e.level,
+            e.code,
+            " ".join((e.title or "").lower().split()),
+            e.age_band,
+            e.source_page,
+        )
+
+    non_domain_keys = [
+        _dedup_key(el) for el in valid_elements if el.level != HierarchyLevelEnum.DOMAIN
+    ]
+    assume(len(non_domain_keys) == len(set(non_domain_keys)))
 
     # Chunk by domain
     domain_chunks = chunk_elements_by_domain(valid_elements)
@@ -61,22 +88,21 @@ def test_property_2_parse_batch_exact_partitioning(elements):
         batch_elements = [el for chunk in batch_chunks for el in chunk]
         all_batch_elements.extend(batch_elements)
 
-    # The union of all batch elements must equal the original filtered set
-    # exactly — same count, same elements, same order preserved per domain.
+    # With a dedup-key-unique input, the union of all batch elements must
+    # equal the original set exactly — same count, same (level, code, title)
+    # multiset. Domain-grouping can reorder elements relative to the input, so
+    # compare by multiset rather than position.
     assert len(all_batch_elements) == len(valid_elements), (
         f"Element count mismatch: batches have {len(all_batch_elements)}, "
         f"original filtered set has {len(valid_elements)}"
     )
 
-    # Verify element-by-element identity (order preserved within domains)
-    for idx, (batch_el, orig_el) in enumerate(
-        zip(all_batch_elements, valid_elements)
-    ):
-        assert batch_el.code == orig_el.code and batch_el.title == orig_el.title, (
-            f"Element mismatch at index {idx}: "
-            f"batch=({batch_el.code}, {batch_el.title}), "
-            f"original=({orig_el.code}, {orig_el.title})"
-        )
+    batch_counter = Counter((el.level, el.code, el.title) for el in all_batch_elements)
+    orig_counter = Counter((el.level, el.code, el.title) for el in valid_elements)
+    assert batch_counter == orig_counter, (
+        f"Element set mismatch: batches have {batch_counter}, "
+        f"original filtered set has {orig_counter}"
+    )
 
 
 

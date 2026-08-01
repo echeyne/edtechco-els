@@ -678,7 +678,12 @@ def test_property_5_json_parse_retry_exhaustion_returns_error(
     year=version_year(),
     age_band=st.text(min_size=1, max_size=20),
 )
-@settings(max_examples=100)
+# No retry backoff sleep is involved (the retry loop just `continue`s), but
+# MAX_BEDROCK_RETRIES + 1 real attempts each emit LLM-call metrics, so a
+# loaded machine can push a single example past Hypothesis's 200ms default
+# deadline. That's test-harness timing, not application behavior worth
+# bounding, so the deadline is disabled here.
+@settings(max_examples=100, deadline=None)
 def test_property_6_client_error_retry_exhaustion_returns_error(
     country, state, year, age_band
 ):

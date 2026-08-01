@@ -10,6 +10,10 @@ from botocore.exceptions import ClientError
 
 from .models import TextBlock, DetectedElement, DetectionResult, HierarchyLevelEnum
 from .config import Config
+# Cross-chunk code reconciliation and domain scoping are shared with the parser
+# — the detector's overlap de-duplication reuses them rather than re-deriving
+# "which entity is this, and whose child is it".
+from .parser import assign_domain_scopes, code_domain_scopes, normalize_element_codes
 from .metrics import (
     LLMCallMetrics,
     MetricsTimer,
@@ -31,7 +35,37 @@ DEFAULT_TARGET_TOKENS = 2000
 # sentence punctuation ("…rules.*" → "…rules.").
 _TRAILING_MARKER_RE = re.compile(r"[\s*†‡§¶]+$")
 
+# Grounding check: everything except letters and digits is dropped before
+# comparing a title to its own source_text, so the comparison survives the
+# differences that legitimately arise between the two — line breaks inside a
+# wrapped heading, OCR punctuation and quote-glyph drift, and the ALL-CAPS
+# running-header normalization prompt rule 4 asks for ("SOCIAL EMOTIONAL
+# DEVELOPMENT STANDARD" → "Social Emotional Development").
+_GROUNDING_STRIP_RE = re.compile(r"[^a-z0-9]+")
+
+# A `<Label>: <id>` code keeps the colon the HEADING used to separate the two
+# ("Strand: 1.0" from "Strand: 1.0 — Listening and Speaking"), and the LLM
+# applies it inconsistently — CA emits "Strand: 1.0" six times and "Strand 2.0"
+# once, so one construct ends up with two spellings and the same strand fails
+# to reconcile across chunks. The canonical form is label, one space, id; the
+# separator is layout.
+#
+# Document-agnostic by construction: it keys on the SHAPE (a leading alphabetic
+# label, a colon, a remainder), never on which word the label is, so it holds
+# for Strand/Concept/Goal/Pillar or whatever a given document uses. Scoped to
+# the colon deliberately — a hyphen or dot inside a code is usually meaningful
+# ("1.0-V", "PK3.I.A.2", "A-1"), whereas a colon in a code is essentially
+# always the heading's label separator leaking through.
+_CODE_LABEL_SEPARATOR_RE = re.compile(r"^([A-Za-z][A-Za-z-]*)\s*:\s*(\S.*)$")
+
 DEFAULT_OVERLAP_TOKENS = 500
+
+# Overlap de-duplication: a title must be longer than this (normalized chars)
+# before it may be treated as the truncated prefix of a longer title. Short
+# label-like titles ("Vocabulary", "Grammar") are legitimately shared or
+# extended by sibling elements, so prefix dominance must not reach them.
+MIN_PREFIX_TITLE_CHARS = 12
+
 MAX_PARSE_RETRIES = 2
 MAX_BEDROCK_RETRIES = 2
 LLM_MAX_TOKENS = 16000
@@ -140,6 +174,70 @@ def chunk_text_blocks(
 DEPTH_MAP_SAMPLE_TOKENS = 6000
 
 
+# --------------------------------------------------------------------------
+# Layout geometry (EXPERIMENTAL — self-contained; remove `_block_left`, drop
+# the x= term from `_serialize_blocks_for_prompt`, and delete the LAYOUT
+# COORDINATES prompt paragraph to revert to plain "[Page N] text".)
+#
+# Textract gives every block a normalized BoundingBox, but the prompt used to
+# discard it. On a multi-column page (side-by-side age bands or proficiency
+# levels) the blocks arrive interleaved line-by-line, so a serialization that
+# keeps only the page number leaves the LLM no way to tell which column a line
+# came from — and it crosses the columns' contents.
+#
+# We pass the raw left edge through and let the MODEL group lines into
+# columns. Clustering the edges here in Python would mean deciding the
+# document's layout on the model's behalf — and a mis-clustered line reaches
+# the model as wrong evidence it has no way to recover from. Emitting the
+# coordinate keeps this function to "read a float off the block and print it"
+# and leaves the judgment where the rest of the detector's judgment lives.
+# --------------------------------------------------------------------------
+
+
+def _block_left(block: TextBlock) -> Optional[float]:
+    """Return a block's normalized left edge (0.0–1.0), or None if unusable."""
+    geometry = block.geometry if isinstance(block.geometry, dict) else None
+    bbox = geometry.get("BoundingBox") if geometry else None
+    if not isinstance(bbox, dict):
+        return None
+    try:
+        left = float(bbox["Left"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    if not 0.0 <= left <= 1.0:
+        return None
+    return left
+
+
+def _serialize_blocks_for_prompt(blocks: List[TextBlock]) -> str:
+    """
+    Render text blocks as prompt lines, tagging each with its page and its
+    normalized left edge on that page:
+    ``[Page 12 | x=0.09] Attend to and participate``.
+
+    Blocks whose geometry is missing or degenerate fall back to ``[Page N]``,
+    so a scanned page with no usable BoundingBox still serializes cleanly.
+
+    Blocks stay in DOCUMENT order rather than being re-sorted by coordinate.
+    Re-sorting would break two things the rest of the pipeline depends on:
+    ``chunk_text_blocks`` slices this same block sequence into overlapping
+    chunks, so a reordered stream would put a column's tail in a different
+    chunk from its head; and row adjacency is what ties the columns of one
+    age-band row together. The tag carries the layout signal without moving
+    anything.
+    """
+    lines = []
+    for block in blocks:
+        left = _block_left(block)
+        tag = (
+            f"[Page {block.page_number} | x={left:.2f}]"
+            if left is not None
+            else f"[Page {block.page_number}]"
+        )
+        lines.append(f"{tag} {block.text}")
+    return "\n".join(lines)
+
+
 def build_depth_map_prompt(blocks: List[TextBlock]) -> str:
     """
     Build the Pass-1 prompt that asks the LLM to infer the document's
@@ -151,9 +249,7 @@ def build_depth_map_prompt(blocks: List[TextBlock]) -> str:
     classifies by document-specific position rather than by guessing from
     surface cues like "1." vs "A.".
     """
-    text_content = "\n".join(
-        f"[Page {b.page_number}] {b.text}" for b in blocks
-    )
+    text_content = _serialize_blocks_for_prompt(blocks)
 
     return f"""You are analyzing the structural skeleton of an early learning standards document. You will NOT extract individual elements — only the document's nesting hierarchy.
 
@@ -161,14 +257,18 @@ Read the sample below and identify how many distinct nesting depths the document
 
 This document's depths must then be mapped to a canonical 4-level hierarchy:
 - depth 1 → "domain"
-- depth 2 → "strand" (skip if the document has no level between domain and the groups that hold indicators)
-- depth 3 → "sub_strand" (skip if absent)
+- depth 2 → "strand"
+- depth 3 → "sub_strand"
 - deepest depth → "indicator"
 
 Rules:
-- A 3-level document (domain > group > leaf) maps to: domain, sub_strand, indicator. There is NO strand.
-- A 2-level document (domain > leaf) maps to: domain, indicator.
-- Use depth POSITION, not the document's labels. If a document uses "Sub-Strand" as the label for the second level (directly under domain), it is still a STRAND in our canonical hierarchy.
+- Fill the canonical levels FROM THE TOP DOWN. The first depth is always "domain", the deepest depth is always "indicator", and any depth in between takes the next canonical level in order: the depth directly under domain is "strand", the one below that is "sub_strand". A document with fewer depths therefore drops the levels at the BOTTOM of that middle range — never "strand".
+- A 4-level document (domain > group > sub-group > leaf) maps to: domain, strand, sub_strand, indicator.
+- A 3-level document (domain > group > leaf) maps to: domain, strand, indicator. There is NO sub_strand — the single middle level is a STRAND, never a sub_strand.
+- A 2-level document (domain > leaf) maps to: domain, indicator. There is no strand and no sub_strand.
+- Use depth POSITION, not the document's labels. If a document uses "Sub-Strand" as the label for the second level (directly under domain), it is still a STRAND in our canonical hierarchy — and likewise a document that calls its single middle level "Section", "Concept", "Goal", or anything else still maps that level to "strand".
+
+Every line is prefixed with its page and the horizontal position it was laid out at: `[Page N | x=0.09]`, where x is the line's left edge as a fraction of the page width. Use x to work out whether a page uses a side-by-side layout: lines of one column share nearly the same x, and a jump to a clearly different x means a different column. Lines you judge to be in the same column read as one continuous cell, even when lines from other columns are interleaved between them. Treat parallel columns as repetitions of ONE depth, not as separate depths.
 
 Be deterministic and conservative. Do not speculate. If you cannot tell whether two depths are distinct, assume they are the same depth.
 
@@ -176,9 +276,9 @@ Output ONLY a JSON object with this exact shape:
 {{
   "doc_depths": [
     {{"depth": 1, "canonical_level": "domain",     "label_in_doc": "<what the doc calls this>", "prefix_pattern": "<regex-ish pattern e.g. 'ALL-CAPS HEADING' or 'N. <Title>: <desc>'>", "example": "<exact text from doc>"}},
-    {{"depth": 2, "canonical_level": "strand|sub_strand|indicator", ...}}
+    {{"depth": 2, "canonical_level": "strand|indicator", ...}}
   ],
-  "notes": "<one short sentence about anything unusual, e.g. age-band columns, sidebars to ignore>"
+  "notes": "<one short sentence about the LEVEL LAYOUT only, e.g. 'age-band columns repeat one depth'. A later stage reads this as an instruction, so: never describe text below the deepest depth as examples/illustrations/anecdotes, and never say to ignore or skip anything. Empty string if nothing unusual.>"
 }}
 
 DOCUMENT SAMPLE:
@@ -198,12 +298,17 @@ def build_detection_prompt(
     nesting depth rather than by re-inferring the hierarchy on every chunk.
     Pass `None` only for backwards compatibility / tests.
     """
-    text_content = "\n".join(
-        f"[Page {b.page_number}] {b.text}" for b in blocks
-    )
+    text_content = _serialize_blocks_for_prompt(blocks)
 
     depth_map_block = (
-        f"DEPTH MAP (authoritative — use this to assign `level`):\n"
+        f"DEPTH MAP — authoritative for ONE thing only: which depth maps to which `level`.\n"
+        f"It has no authority over what you extract. In particular `notes` is a machine-written\n"
+        f"observation about how the pages look, not an instruction: it can neither add nor remove\n"
+        f"an element, and it can never decide whether a run of text belongs to an element. If\n"
+        f"`notes` describes some text as examples, illustrations, anecdotes, or samples, that is a\n"
+        f"remark about how the text READS — it is not a finding that the text is owned elsewhere,\n"
+        f"and it never licenses dropping the text or emptying a `description`. Ownership is decided\n"
+        f"ONLY by rule 2a's anchor test, on the layout of the chunk below.\n"
         f"{json.dumps(depth_map, indent=2)}\n"
         if depth_map else
         "DEPTH MAP: not provided — infer the canonical level from nesting position, "
@@ -214,37 +319,54 @@ def build_detection_prompt(
 
 Be deterministic. Be conservative. Do not be creative. Two runs over the same text MUST produce the same JSON. Do not invent titles, codes, or descriptions — only use text that literally appears in the chunk.
 
-CANONICAL HIERARCHY: domain (1) > strand (2) > sub_strand (3) > indicator (leaf). A document may skip strand or sub_strand; the depth map says which levels exist.
+CANONICAL HIERARCHY: domain (1) > strand (2) > sub_strand (3) > indicator (leaf). A document with fewer levels drops them from the BOTTOM of the middle: the level directly under domain is always `strand`, and `sub_strand` exists only when there are two levels between domain and the leaf. So a 3-level document is domain > strand > indicator, never domain > sub_strand > indicator. The depth map says which levels exist.
+
+LAYOUT COORDINATES: every line is prefixed with its page and the horizontal position it was laid out at — `[Page N | x=0.09]`, where x is the line's left edge as a fraction of the page width (0.00 is the left margin, 1.00 the right). Use x to work out the page's column structure yourself: on a side-by-side layout the lines of one column share nearly the same x, and a jump to a clearly different x means a different column. Lines you judge to be in the same column must be read together as one continuous cell, in the order given, even when lines from other columns are interleaved between them. Never join text across what you judge to be two different columns into a single element, and never attribute one column's prose to another column's element. Expect a header that spans the whole layout to sit at the leftmost x while belonging to every column beneath it. A line tagged only `[Page N]` has no usable coordinate; use the text's own layout cues there.
 
 CLASSIFICATION RULE:
 - If a depth map is provided, look up each element's depth in the document and use the `canonical_level` from that depth. Do NOT reclassify based on prefix style.
 - If no depth map is provided, classify by nesting POSITION, never by what the document calls a level.
 
 EXTRACTION RULES:
-1. Emit every structural element you see, even if its children are not in this chunk.
+1. Emit every structural element you see, even if its children are not in this chunk. Emit ONLY what you see: every element must be backed by a heading line that literally appears in this chunk, and its `title` must be text copied from that line. A position identifier you read inside a CHILD's code is NOT evidence that the parent's heading is present. A child code names its ancestors — an indicator coded `A.B.2.c` says it sits under the `2` at the level above — but that tells you only where the child belongs; it does not put the parent's heading on the page. When a chunk opens part-way through a section and an ancestor's heading was left behind in the previous chunk, emit the children alone and leave the ancestor out. A later chunk that contains the heading will supply it, and the parent is reconstructed downstream from the children's codes. Never reconstruct it here by reading the code apart. Emit ONLY what you see: every element must be backed by a heading line that literally appears in this chunk. (This says only that the heading must BE there — how you split that line into `title`, `code`, and `description` is decided by rules 4 and 8 as usual, and this rule never tells you to copy the whole line into `title`.) A position identifier you read inside a CHILD's code is NOT evidence that the parent's heading is present. A child code names its ancestors — an indicator coded `A.B.2.c` says it sits under the `2` at the level above — but that tells you only where the child belongs; it does not put the parent's heading on the page. When a chunk opens part-way through a section and an ancestor's heading was left behind in the previous chunk, emit the children alone and leave the ancestor out. A later chunk that contains the heading will supply it, and the parent is reconstructed downstream from the children's codes. Never reconstruct it here by reading the code apart.
 2. A lettered/bulleted list (a., b., c., …) is EITHER the leaf indicators OR illustrative examples below a leaf — decide using the depth map, never the "a./b." surface style:
    - If the document's DEEPEST depth in the depth map is this lettered list (i.e. there is no deeper indicator level beneath the letters), then EACH lettered item IS an indicator. Emit one indicator per letter. Its `title` is the lettered item's own skill/competency statement (the text after the letter, e.g. "a. Demonstrates self-confidence." → "Demonstrates self-confidence"); any further example anecdotes indented beneath that letter go in its `description`. Do NOT fold these letters away and do NOT drop them — every lettered item in the chunk must appear.
-   - Otherwise (the letters sit BELOW an already-identified leaf indicator and read as concrete behavior anecdotes, not skill statements) they are examples — fold them into the parent indicator's description or ignore them. Do NOT emit them as separate indicators.
+   - Otherwise (the letters sit BELOW an already-identified leaf indicator and read as concrete behavior anecdotes, not skill statements) they are an EXAMPLE LIST — see rule 2a. Do NOT emit them as separate indicators.
+2a. EXAMPLE LISTS — decide by OWNERSHIP, not by how illustrative the text sounds. This applies only to text the depth map does NOT place at a structural depth; anything at a depth is an element (rule 2) and is emitted regardless of how example-like it reads. For the remaining, non-structural text, find the run's owner with this exact two-step test, in this order:
+   STEP 1 — Find the ANCHOR. Scan UPWARD from the run's first line and stop at the very first line that the depth map places at a structural depth. That element is the ANCHOR. Its depth is irrelevant: the anchor is the NEAREST element above the run, never the section's top-level heading. A leaf indicator is an anchor exactly like a domain or strand is — including a lettered item that rule 2 made an indicator.
+   STEP 2 — Look ONLY at the lines lying strictly BETWEEN the anchor and the run. Nothing above the anchor is part of this test.
+   - A heading or lead-in line lies in that gap — a non-structural line that names the run as a category rather than asserting a requirement ("Child Behaviors", "Examples", "The child may:", "For example:"). That line owns the run, and it is a section label rather than a structural element, so NOTHING from the run is extracted: do not emit the lead-in, do not emit the entries, and do NOT copy the entries into the anchor. The anchor's `description` keeps only its own prose, which is often empty. The same holds for a run laid out full-width BENEATH side-by-side columns: it is owned by no single column, so it enters no column's `description`.
+   - The gap is empty — the run simply continues directly underneath the anchor. Then it IS the anchor's own text, however anecdotal or example-like it reads. Put it in the anchor's `description`, verbatim. Never discard text merely because it illustrates: discard it only when the document has given it somewhere else to belong. Being CALLED an example is not being given somewhere else to belong — not by the depth map's `notes`, not by a section header higher up the page, not by your own reading of the tone. Only a lead-in sitting in the gap does that.
+   A heading's claim is SPENT the moment a structural element appears beneath it. A section header followed by structural elements is a label for that GROUP and hands ownership DOWN to them; it never reaches past them to claim text nested under one of them. This holds even when the header's own wording announces examples — a header that names both the indicators and their examples still owns nothing itself, and each indicator beneath it owns the example lines nested under that indicator.
+   Either way, such a run is never promoted to elements of its own.
 3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
    - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
 4. `code`: use the document's code if present (e.g. "1.0", "I.A.2", "PK3.I.A.2"). Otherwise generate a stable ≤5-char uppercase abbreviation from the title — multi-word titles use the first letter of each word ("Physical Development" → "PHD", "Concepts About Print" → "CAP"), single-word titles use the first 4 letters ("Vocabulary" → "VOCA"). Use the SAME code every time the same element appears.
-   - When a heading is written as `<Label> <id>: <Title>` — where `<Label>` is ANY structural word the document uses to name a level (e.g. Strand, Concept, Sub-Strand, Goal, Pillar, Unit, Theme, Section, Element, Standard, Domain, Benchmark, Component, Cluster, Foundation, Outcome, or whatever else this particular document uses) and `<id>` is the position identifier at that level (a number "1", a letter "A", a token "1.2") — the label-plus-id together is the element's `code` (e.g. "Strand 1", "Concept 2", "Goal A", "Pillar 1.2"). The `title` is ONLY the text after the colon (e.g. "Strand 1: Self-Awareness and Emotional Skills" → title "Self-Awareness and Emotional Skills"). This rule applies to EVERY structural-label heading word, not just the examples — never leave the `<Label> <id>:` prefix inside `title`, regardless of which word the document chose for `<Label>`.
+   - When a heading is written as `<Label> <id>: <Title>` — where `<Label>` is ANY structural word the document uses to name a level (e.g. Strand, Concept, Sub-Strand, Goal, Pillar, Unit, Theme, Section, Element, Standard, Domain, Benchmark, Component, Cluster, Foundation, Outcome, or whatever else this particular document uses) and `<id>` is the position identifier at that level (a number "1", a letter "A", a token "1.2") — the label-plus-id together is the element's `code`, written as the label, ONE space, then the id (e.g. "Strand 1", "Concept 2", "Goal A", "Pillar 1.2"). Whatever punctuation the heading used to separate the label from the id — a colon, hyphen, en/em dash — is layout and does NOT enter the code: "Strand: 1.0 — Listening and Speaking" gives code "Strand 1.0", never "Strand: 1.0". The `title` is ONLY the text after the colon (e.g. "Strand 1: Self-Awareness and Emotional Skills" → title "Self-Awareness and Emotional Skills"). This rule applies to EVERY structural-label heading word, not just the examples — never leave the `<Label> <id>:` prefix inside `title`, regardless of which word the document chose for `<Label>`.
+   - A structural label word contributes NOTHING to the code on its own. It earns a place in the code only through the position identifier attached to it: "Strand 1" works as a code because "1" says WHICH strand. So when a heading names the level but supplies no position identifier — `<Label><separator><Title>` with nothing between the label and the title, whatever the separator (colon, hyphen, en/em dash, or just a space): e.g. "Sub-Strand — Vocabulary", "Concept - Curiosity and Interest", "Domain: Number Sense", "Goal — Working Memory" — the label is pure level-naming, exactly like the trailing structural noun below. Drop it and derive the code from the TITLE ALONE using the ≤5-char abbreviation rule ("Vocabulary" → "VOCA", "Curiosity and Interest" → "CI", "Number Sense" → "NS", "Working Memory" → "WM"). Never abbreviate the label into the code and never prefix the code with it ("Sub-Strand — Vocabulary" → "VOCA", NOT "SS-V"; "Concept - Curiosity and Interest" → "CI", NOT "C-CI"), and never use the raw heading line as the code.
    - The same principle holds when the structural label appears as a TRAILING noun on the heading instead of a prefix: a heading like `<Title> <Label>` (e.g. "Social and Emotional Development Domain", "Language and Literacy Standard", "Physical Development Area", "Number Sense Strand") names a `<Title>` of a level the document calls `<Label>`. The structural noun is the level word, NOT part of the name — emit only the bare `<Title>` ("Social and Emotional Development", "Language and Literacy", "Physical Development", "Number Sense"). This applies regardless of which structural noun the document uses (Domain, Standard, Area, Strand, Section, Component, Cluster, Foundation, etc.). The same-named element may also appear elsewhere on the page as a running page header in ALL CAPS (e.g. "SOCIAL EMOTIONAL DEVELOPMENT STANDARD" repeated at the top of every page) — that running header is page typography, not a separate element and not a code; if you emit anything for it, normalize it back to the same bare title-cased `<Title>` so the two variants share the SAME `code` and the SAME `title`. The abbreviation rule above ("≤5-char uppercase abbreviation from the title") still applies: derive the code from the BARE title (e.g. "Social Emotional Development" → "SED"), NEVER use the heading text itself or the structural noun as the code.
    - When a lettered list IS the leaf indicators (per rule 2), the `code` is JUST that item's letter, lowercased ("a", "b", "c", …) — exactly as the document orders them, regardless of any OCR casing. Do NOT prepend the parent strand/concept number (no "S1C1a"), and do NOT uppercase it (no bare "C"). The downstream parser supplies the parent's number; the detector only needs the consistent local letter.
 5. `confidence`: 0.95+ if the depth map clearly applies; 0.80-0.94 if the chunk is ambiguous but the answer is likely; <0.70 if you are guessing.
-6. `source_page`: page number from the [Page N] marker on that line.
-7. `source_text`: the exact line(s) from the chunk you used. Copy verbatim.
-8. `description`: capture the element's COMPLETE descriptive/introductory prose, verbatim — EVERY sentence of a domain/strand/sub_strand introduction that appears in the chunk, not just the first sentence. Do NOT summarize, paraphrase, shorten, or stop at the first sentence. If the intro runs across several sentences or lines in the chunk, include all of them. (For an age-band column indicator, `description` is still only that one column's prose, per rule 3.)
+6. `source_page`: page number from the `[Page N]` / `[Page N | x=…]` marker on that line.
+7. `source_text`: the exact line(s) from the chunk you used. Copy verbatim, WITHOUT the leading `[Page N]` / `[Page N | x=…]` marker.
+8. `description`: capture the element's COMPLETE descriptive/introductory prose, verbatim — EVERY sentence of a domain/strand/sub_strand introduction that appears in the chunk, not just the first sentence. Do NOT summarize, paraphrase, shorten, or stop at the first sentence. If the intro runs across several sentences or lines in the chunk, include all of them. (For an age-band column indicator, `description` is still only that one column's prose, per rule 3.) `description` holds only the text the element OWNS (rule 2a) — never a run that a heading or lead-in of its own has claimed; an element that owns no prose gets an empty `description`, and that is the correct answer, not a gap to fill. Conversely, do not empty a `description` just because the text it owns reads like examples — unclaimed text under an element is that element's own.
 
 NEGATIVE EXAMPLES (do NOT do these):
-- Do not emit "Indicators and Examples in the Context of Daily Routines" as a structural element. It is a section header for examples.
+- Do not emit "Indicators and Examples in the Context of Daily Routines" as a structural element. It is a section header. It is not an owner either: structural indicators follow it, so its claim is spent on them (rule 2a) — the example lines nested under each of those indicators belong to that indicator, not to this header.
 - Do not merge "Early" and "Later" age columns into one indicator.
 - Do not keep a structural label inside the title: "Strand 1: Self-Awareness" → title is "Self-Awareness", NOT "Strand 1: Self-Awareness".
 - Do not keep a trailing structural noun inside the title: "Social and Emotional Development Domain" → title is "Social and Emotional Development", NOT "Social and Emotional Development Domain". "Language and Literacy Standard" → title is "Language and Literacy".
 - Do not classify a numeric prefix ("1.", "2.") as `sub_strand` just because numeric-under-letter is sub_strand in some other doc — use the depth map.
 - Do not truncate a multi-sentence domain/strand description to its first sentence — capture the entire introduction verbatim.
 - When the depth map's leaf is a lettered list, do NOT drop or fold its letters: every "a./b./c." skill statement under a concept is its own indicator (e.g. under "Phonological Awareness" emit indicators "a","b","c","d","e","f","g", one per letter). Emit them even for concepts whose letters appear far from the concept heading in the chunk.
-- When a lettered list is NOT the leaf — concrete anecdotes ("Chooses carrots over celery during mealtime.") sitting under an already-identified leaf indicator/foundation — do NOT promote them to indicators; fold them into that indicator's description.
+- When a lettered list is NOT the leaf — concrete anecdotes ("Chooses carrots over celery during mealtime.") sitting under an already-identified leaf indicator/foundation — do NOT promote them to indicators. Whether they land in that indicator's `description` is decided by rule 2a's ownership test, not by how anecdotal they sound.
+- Do not drop text that no heading claimed. Anecdote lines running on directly beneath a leaf ("Acknowledges her own accomplishments and says, \"I can hit the ball.\"") — with no "Examples:"-style lead-in between them and the leaf — are that leaf's own `description`. A section header further UP the page does not change this: the leaf is the nearest element above the anecdotes, the gap between them is empty, so they are the leaf's. Emitting an empty `description` there loses real content. Apply this identically to every such leaf on every page — two pages with the same layout must get the same answer.
+- Do not paste a claimed run into the element above it. Under a "Child Behaviors" heading and a "The child may:" lead-in, the behaviors belong to that section — they go nowhere, and the indicator's `description` stays empty.
+- Do not treat a phrase that merely announces an upcoming example list as an element or as a description. When the list follows that phrase directly, the phrase introduces illustrations and goes wherever the list goes: nowhere. When a structural element intervenes between the phrase and the list, the phrase's claim is already spent — the list is that element's own text (rule 2a).
+- Do not fold a structural label into the code: "Sub-Strand — Vocabulary" → code "VOCA", never "SS-V", "SS-VOCA", or the whole heading line "Sub-Strand — Vocabulary". A label with no position identifier after it is not part of the code. Give the SAME element the SAME code on every chunk it appears in — never "VOCA" in one chunk and "SS-V" in another.
+- Do not carry the heading's separator punctuation into the code: "Strand: 1.0 — Listening and Speaking" → code "Strand 1.0", NOT "Strand: 1.0". Spell it the same way on every chunk — "Strand: 1.0" here and "Strand 2.0" there is the same construct written two ways, and the two no longer reconcile as one element.
+- Do not back-form a parent heading out of a child's code. If the chunk begins mid-section with a leaf line like "A.B.1.b Child takes care of and manages classroom materials." and the "1. Behavior Control" heading it belongs under is not in this chunk, emit the leaf ALONE — do NOT also emit a sub_strand "1 / Behavior Control" whose only evidence is the "1" inside the leaf's code. Check yourself with `source_text`: if the only line you can cite for a heading is one of its children's lines, you did not see that heading and must not emit it. Note that you also cannot know its title — a title you supply from memory of an earlier chunk, or by guessing, is invented text (rule: never invent titles).
+- Do not back-form a parent heading out of a child's code. If the chunk begins mid-section with a leaf line like "A.B.1.b Child takes care of and manages classroom materials." and the "1. Behavior Control" heading it belongs under is not in this chunk, emit the leaf ALONE — do NOT also emit a sub_strand "1 / Behavior Control" whose only evidence is the "1" inside the leaf's code. Check yourself with `source_text`: if the only line you can cite for a heading is one of its children's lines, you did not see that heading and must not emit it. Note that you also cannot know its title — a title you supply from memory of an earlier chunk, or by guessing, is invented text (rule: never invent titles).
 
 OUTPUT — return ONLY a JSON array, starting with `[` and ending with `]`. No prose, no markdown, no commentary. Schema per element:
 {{"level": "domain|strand|sub_strand|indicator", "code": "...", "title": "...", "description": "...", "age_band": "..." or null, "confidence": 0.0-1.0, "source_page": N, "source_text": "..."}}
@@ -277,6 +399,50 @@ def _sample_blocks_for_depth_map(
             if tokens >= target_tokens:
                 break
     return sampled
+
+
+def canonicalize_depth_map_levels(depth_map: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Force `canonical_level` to be a pure function of a depth's POSITION in the
+    document's own nesting, so the depth→level mapping cannot drift between
+    runs or between documents.
+
+    The canonical levels are filled from the top down and dropped from the
+    bottom of the middle: first depth is `domain`, deepest is `indicator`, the
+    depth directly under domain is `strand`, and anything between that and the
+    leaf is `sub_strand`. A 3-level document is therefore
+    domain > strand > indicator — it has NO sub_strand.
+
+    This is deterministic, document-agnostic post-processing: it reads only the
+    number and ordering of depths the LLM reported, never the document's own
+    label words. Mutates and returns `depth_map`.
+    """
+    depths = depth_map.get("doc_depths")
+    if not isinstance(depths, list) or len(depths) < 2:
+        return depth_map
+
+    ordered = sorted(
+        (d for d in depths if isinstance(d, dict)),
+        key=lambda d: (d.get("depth") if isinstance(d.get("depth"), int) else 0),
+    )
+    last = len(ordered) - 1
+    for i, entry in enumerate(ordered):
+        if i == last:
+            level = "indicator"
+        elif i == 0:
+            level = "domain"
+        elif i == 1:
+            level = "strand"
+        else:
+            level = "sub_strand"
+        if entry.get("canonical_level") != level:
+            logger.info(
+                f"Depth map: correcting depth={entry.get('depth')} "
+                f"{entry.get('canonical_level')!r} → {level!r} "
+                f"({len(ordered)}-level document)"
+            )
+            entry["canonical_level"] = level
+    return depth_map
 
 
 def infer_depth_map(
@@ -324,6 +490,8 @@ def infer_depth_map(
     if not isinstance(depth_map, dict) or "doc_depths" not in depth_map:
         logger.warning(f"Depth-map missing required key 'doc_depths': {depth_map}")
         return None
+
+    canonicalize_depth_map_levels(depth_map)
 
     logger.info(f"Depth map inferred: {len(depth_map['doc_depths'])} levels")
     for d in depth_map["doc_depths"]:
@@ -424,6 +592,60 @@ def _strip_label_prefix(title: Any) -> Any:
     return cleaned or title
 
 
+def _is_title_grounded(element: DetectedElement) -> bool:
+    """
+    True when a HEADING element's title actually appears in the text it cites.
+
+    Guards against a fabricated parent. A chunk that opens mid-section shows
+    the LLM child codes whose segments name their ancestors — an indicator
+    coded ``PK3.I.B.1.b`` announces that a sub_strand ``1`` exists — and the
+    model sometimes back-forms that ancestor into an element even though its
+    heading line was left behind in the previous chunk. The tell is always the
+    same: the invented element's ``source_text`` is the CHILD's line, so its
+    title is nowhere in the text it claims to have read. A real heading is
+    transcribed off the page, so its title is always present in its own
+    ``source_text``.
+
+    Scoped to domain/strand/sub_strand. Indicators are exempt, and must be: on
+    a side-by-side age-band layout, prompt rule 3 gives every column indicator
+    the row's shared header as its ``title`` while ``source_text`` holds only
+    that one column's cell — so a correct column indicator legitimately fails
+    this test. Fabrication is a heading-level failure anyway; nothing invents a
+    leaf out of its own code.
+
+    Comparison is on letters and digits alone (see ``_GROUNDING_STRIP_RE``), so
+    only a genuinely absent title fails rather than a re-punctuated one.
+    """
+    if element.level == HierarchyLevelEnum.INDICATOR:
+        return True
+    title = _GROUNDING_STRIP_RE.sub("", (element.title or "").lower())
+    if not title:
+        return True
+    source = _GROUNDING_STRIP_RE.sub("", (element.source_text or "").lower())
+    return title in source
+
+
+def _canonicalize_code(code: Any) -> Any:
+    """Fold a `<Label>: <id>` code to the canonical `<Label> <id>`.
+
+    Prompt rule 4 makes a heading's label-plus-id the element's code, but the
+    LLM sometimes carries the heading's own colon into it, and does so
+    inconsistently across chunks — the same strand arriving as "Strand: 1.0"
+    from one chunk and "Strand 2.0" from another. Two spellings of one
+    construct defeat the cross-chunk reconciliation in ``_dedup_elements``,
+    which keys on the code, and they compose into two different
+    ``standard_id``s downstream.
+
+    This is the same class of fix as ``_normalize_age_band``: a deterministic
+    canonicalization of an already-clean field whose only variation is
+    transcription noise. It reads the code's SHAPE, not its vocabulary, so it
+    is document-agnostic (see ``_CODE_LABEL_SEPARATOR_RE``). Anything without
+    that shape is returned untouched."""
+    if not isinstance(code, str):
+        return code
+    return _CODE_LABEL_SEPARATOR_RE.sub(r"\1 \2", code.strip())
+
+
 def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Optional[DetectedElement]:
     """
     Create a DetectedElement from validated element data.
@@ -449,17 +671,10 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
     age_band = _normalize_age_band(elem_data.get('age_band'))
 
     title = _strip_label_prefix(elem_data['title'])
-    # Indicator titles are full sentences transcribed from the source, so the LLM
-    # keeps the terminal period ("…diseases."). The canonical form drops it — the
-    # golden indicator titles are authored period-free. Scope this to indicators:
-    # domain/strand/sub_strand titles are short noun-phrase labels with no
-    # terminal punctuation, so they're left untouched.
-    if level == HierarchyLevelEnum.INDICATOR and isinstance(title, str):
-        title = title.rstrip().rstrip('.').rstrip() or title
 
     return DetectedElement(
         level=level,
-        code=elem_data['code'],
+        code=_canonicalize_code(elem_data['code']),
         title=title,
         description=elem_data.get('description') or "",
         confidence=confidence,
@@ -515,6 +730,14 @@ def parse_llm_response(response_text: str, blocks: List[TextBlock]) -> List[Dete
         # Create detected element
         element = _create_detected_element(elem_data, default_page)
         if element:
+            if not _is_title_grounded(element):
+                logger.warning(
+                    f"Element {idx}: ungrounded {element.level.value} "
+                    f"'{element.code} - {element.title[:50]}' — its title does not "
+                    f"appear in its own source_text ({element.source_text[:80]!r}); "
+                    f"dropping as a back-formed parent"
+                )
+                continue
             detected_elements.append(element)
             logger.debug(
                 f"Element {idx}: {element.level.value} - {element.code} - "
@@ -764,36 +987,282 @@ def _process_chunk(
     return []
 
 
+def _normalize_title(title: Optional[str]) -> str:
+    """Whitespace- and case-normalized title, for duplicate comparison only."""
+    return " ".join((title or "").lower().split())
+
+
+def _is_truncated_prefix(shorter: str, longer: str) -> bool:
+    """
+    True when ``shorter`` looks like a chunk-truncated twin of ``longer``.
+
+    A chunk boundary can cut an element's text mid-sentence, so the same
+    element is emitted once truncated (chunk N, whose text ran out) and once
+    complete (chunk N+1, which saw it whole). The truncated twin is always a
+    strict PREFIX of the complete one.
+
+    Two guards keep genuinely distinct siblings apart — "Physical Development"
+    and "Physical Development and Health" are different elements, not a
+    truncation pair:
+
+    * the prefix must be SUBSTANTIAL (> ``MIN_PREFIX_TITLE_CHARS`` characters),
+      so short label-like titles never trigger it; and
+    * the prefix must end on a WORD BOUNDARY in the longer title, i.e. the
+      longer title continues with a separator rather than finishing a word
+      that the shorter one cut in half.
+
+    Caller supplies the remaining guards (same level, age_band, code, and
+    owning domain).
+    """
+    if len(shorter) <= MIN_PREFIX_TITLE_CHARS:
+        return False
+    if shorter == longer or not longer.startswith(shorter):
+        return False
+    return not longer[len(shorter)].isalnum()
+
+
+def _reconcile_age_band_drift(elements: List[DetectedElement]) -> List[DetectedElement]:
+    """
+    Fold two spellings of ONE age-band column back into a single label.
+
+    Chunk N reads a column header as "PK3" while chunk N+1 reads the same
+    header as "PK3 Outcome". Both are correct transcriptions of the same
+    column, but ``_dedup_elements`` keys identity on ``age_band``, so the two
+    spellings split one column in two: the overlap copies never collapse, and
+    a truncated twin never meets its complete form in Pass 2. Downstream the
+    survivors become separate standards that collide on ``standard_id`` —
+    observed on TX as four colliding ids across 29 standards holding 25
+    distinct keys.
+
+    Two conditions must BOTH hold before folding, which is what keeps this
+    document-agnostic rather than a TX rule in disguise:
+
+    1. **Token-prefix shape.** One label's tokens are a leading run of the
+       other's ("PK3" ⊂ "PK3 Outcome"). This never fires on genuinely distinct
+       bands — CA's "Early (3 to 4 ½ Years)" / "Later (4 to 5 ½ Years)" and its
+       "Discovering" / "Developing" / "Broadening" are unrelated under it.
+    2. **Same-element evidence.** Some element carries both labels while being
+       otherwise identical (same level, code, title, page). That is what
+       distinguishes ONE column transcribed twice from two real bands that
+       merely share a prefix — a document with distinct "Age 3" and
+       "Age 3 to 4" columns has the prefix shape but never the evidence, so it
+       is left alone.
+
+    The longer label folds into the shorter, consistent with prompt rule 4
+    treating a trailing structural noun as the level word rather than part of
+    the name ("PK3 Outcome" is the PK3 band in an Outcome column).
+    """
+    bands = {e.age_band for e in elements if e.age_band}
+    if len(bands) < 2:
+        return elements
+
+    # Condition 1 — token-prefix candidates, longer -> shorter.
+    candidates: Dict[str, str] = {}
+    for short in bands:
+        for long in bands:
+            if short == long:
+                continue
+            st, lt = short.split(), long.split()
+            if len(st) < len(lt) and lt[:len(st)] == st:
+                # Keep the SHORTEST valid target if several prefixes match.
+                if long not in candidates or len(candidates[long].split()) > len(st):
+                    candidates[long] = short
+    if not candidates:
+        return elements
+
+    # Condition 2 — an otherwise-identical element carrying both labels.
+    by_identity: Dict[tuple, set] = {}
+    for e in elements:
+        key = (e.level.value, e.code, _normalize_title(e.title), e.source_page)
+        by_identity.setdefault(key, set()).add(e.age_band)
+
+    confirmed = {
+        long: short
+        for long, short in candidates.items()
+        if any(short in seen and long in seen for seen in by_identity.values())
+    }
+    if not confirmed:
+        return elements
+
+    for long, short in sorted(confirmed.items()):
+        logger.info(f"Age-band drift: folding {long!r} -> {short!r}")
+
+    return [
+        e.model_copy(update={"age_band": confirmed[e.age_band]})
+        if e.age_band in confirmed else e
+        for e in elements
+    ]
+
+
+def _merge_duplicate(keep: DetectedElement, other: DetectedElement) -> DetectedElement:
+    """
+    Fold ``other`` into ``keep``, retaining the richer content of the two.
+
+    Used for both duplicate shapes: an exact repeat across an overlap, and a
+    truncated/complete pair. The winner keeps the LONGER title (a truncated
+    twin is by definition the shorter one) and the LONGER description (the
+    chunk that saw the element whole captured more of its prose), and the
+    higher confidence.
+    """
+    title = keep.title if len(keep.title or "") >= len(other.title or "") else other.title
+    description = (
+        keep.description
+        if len(keep.description or "") >= len(other.description or "")
+        else other.description
+    )
+    return keep.model_copy(update={
+        "title": title,
+        "description": description,
+        "confidence": max(keep.confidence, other.confidence),
+    })
+
+
 def _dedup_elements(elements: List[DetectedElement]) -> List[DetectedElement]:
     """
     Drop duplicate elements produced by chunk overlap.
 
     Adjacent chunks intentionally overlap (DEFAULT_OVERLAP_TOKENS) so elements
-    at a chunk boundary can be re-emitted by both chunks. Collapse those on a
-    content key of (level, normalized title, age_band, source_page), keeping
-    the highest-confidence instance. Order is preserved by first appearance so
-    the document-ordered structure (and downstream domain context) is intact.
+    at a chunk boundary can be re-emitted by both chunks — in two shapes:
+
+    1. **Exact repeat.** The same element appears whole in both chunks, but the
+       LLM may label it with a different code each time ("SED" then "I" for one
+       domain, "1" then "1.b" for one sub_strand). Codes are reconciled FIRST,
+       by the shared cross-chunk machinery in ``parser.normalize_element_codes``,
+       so the two instances become byte-identical and collapse.
+    2. **Truncated twin.** The boundary cut the element's text, so chunk N
+       emitted a prefix of the title and chunk N+1 emitted it whole. Handled by
+       prefix dominance (see ``_is_truncated_prefix``): the longer title wins.
+
+    Neither pass may key on title alone: two different domains can legitimately
+    hold same-titled children — CA's ELD and FLD domains each have a
+    "Vocabulary" sub_strand and a "Listening and Speaking" strand — and those
+    must NOT be collapsed into one. Pass 1 separates them with the element's
+    OWN page and code (see below); Pass 2 uses the document-order domain scope
+    from ``parser.assign_domain_scopes``.
+
+    Order is preserved by first appearance so the document-ordered structure
+    (and downstream domain context) is intact. That matters more than it looks:
+    the parser resolves parentage by "the most-recent preceding sub_strand in
+    document order", so an element that de-duplication moves — or a header whose
+    surviving copy sits at the wrong position — silently reparents everything
+    after it.
     """
-    best: Dict[tuple, DetectedElement] = {}
+    if not elements:
+        return elements
+
+    # Reconcile cross-chunk code drift first — reusing the existing machinery
+    # rather than re-deriving it here — so instances of one entity that differ
+    # ONLY in code become identical and can collapse below.
+    elements = normalize_element_codes(elements)
+    # Age-band spellings must be reconciled BEFORE Pass 1: age_band is part of
+    # the identity key below, so two spellings of one column would otherwise
+    # survive as two elements no matter what the rest of this function does.
+    elements = _reconcile_age_band_drift(elements)
+    scopes = assign_domain_scopes(elements)
+
+    # Pass 1 — collapse exact repeats of the same OCCURRENCE.
+    #
+    # The key turns on SOURCE_PAGE plus a CODE-derived domain. Both are
+    # properties the element carries itself, and that is deliberate: an
+    # overlap-repeated element prints the identical `[Page N]` marker in both
+    # chunks, whereas a position-derived domain scope depends on the very list
+    # ordering that chunk overlap perturbs. Keying identity on document order is
+    # circular, and it failed in both directions:
+    #
+    #   * an order-derived scope SPLIT one occurrence in two whenever the
+    #     re-emission landed past a later domain heading — CO's page-4 Gross
+    #     Motor indicators, re-emitted from the head of a chunk whose overlap
+    #     had left their strand header behind, scored domain SED instead of PDH
+    #     and survived as three parentless rows the parser could only file under
+    #     "UNKNOWN";
+    #   * dropping source_page MERGED two genuinely distinct occurrences
+    #     whenever a document names an element twice on different pages. AZ
+    #     lists every Concept on a page-4 contents page AND again as its own
+    #     section header on pages 8-14; collapsing those kept the contents-page
+    #     copy, relocating all seven headers to the front of the document and
+    #     leaving 37 indicators with no preceding parent.
+    #
+    # Domains are exempt from the page component: they are the one level that
+    # reconciles safely on title alone (see parser.canonical_domain_codes), so a
+    # domain re-stated on a later page still collapses to one row.
+    best: Dict[tuple, tuple[DetectedElement, Optional[str]]] = {}
     order: List[tuple] = []
-    for el in elements:
+    identity_scopes = code_domain_scopes(elements)
+    for el, scope, identity_scope in zip(elements, scopes, identity_scopes):
         key = (
             el.level.value,
-            " ".join((el.title or "").lower().split()),
+            _normalize_title(el.title),
             el.age_band or None,
-            el.source_page,
+            None if el.level == HierarchyLevelEnum.DOMAIN else el.source_page,
+            identity_scope,
         )
         if key not in best:
-            best[key] = el
+            best[key] = (el, scope)
             order.append(key)
-        elif el.confidence > best[key].confidence:
-            best[key] = el
-    deduped = [best[k] for k in order]
-    dropped = len(elements) - len(deduped)
+        else:
+            kept, kept_scope = best[key]
+            best[key] = (_merge_duplicate(kept, el), kept_scope)
+    survivors = [best[k][0] for k in order]
+    survivor_scopes = [best[k][1] for k in order]
+
+    # Pass 2 — prefix dominance: collapse a truncated twin into its complete
+    # form. Only within one (level, age_band, code, domain) group: a truncated
+    # twin is the SAME element, so the document code the LLM read off the page
+    # is identical for both halves.
+    groups: Dict[tuple, List[int]] = {}
+    for idx, (el, scope) in enumerate(zip(survivors, survivor_scopes)):
+        groups.setdefault(
+            (el.level.value, el.age_band or None, el.code, scope), []
+        ).append(idx)
+
+    absorbed: Dict[int, int] = {}  # truncated index -> surviving index
+    for members in groups.values():
+        if len(members) < 2:
+            continue
+        # Longest title first, so a truncated twin is absorbed by the most
+        # complete form available rather than by another partial one.
+        ranked = sorted(members, key=lambda i: -len(_normalize_title(survivors[i].title)))
+        for pos, short_idx in enumerate(ranked):
+            short_title = _normalize_title(survivors[short_idx].title)
+            for long_idx in ranked[:pos]:
+                if long_idx in absorbed:
+                    continue
+                if _is_truncated_prefix(short_title, _normalize_title(survivors[long_idx].title)):
+                    absorbed[short_idx] = long_idx
+                    break
+
+    if absorbed:
+        # The complete form is the base (it carries the untruncated
+        # source_text); it takes the EARLIEST of the two document positions so
+        # the element stays where it first appears.
+        merged: Dict[int, DetectedElement] = {}
+        emit_at: Dict[int, int] = {}
+        for short_idx, long_idx in sorted(absorbed.items()):
+            logger.info(
+                f"Collapsing truncated chunk-boundary twin "
+                f"{survivors[short_idx].level.value} {survivors[short_idx].code!r} "
+                f"{survivors[short_idx].title[:60]!r} into "
+                f"{survivors[long_idx].title[:60]!r}"
+            )
+            merged[long_idx] = _merge_duplicate(
+                merged.get(long_idx, survivors[long_idx]), survivors[short_idx]
+            )
+            emit_at[long_idx] = min(emit_at.get(long_idx, long_idx), short_idx)
+
+        rebuilt: List[DetectedElement] = []
+        for i, el in enumerate(survivors):
+            target = absorbed.get(i, i if i in merged else None)
+            if target is None:
+                rebuilt.append(el)
+            elif emit_at[target] == i:
+                rebuilt.append(merged[target])
+        survivors = rebuilt
+
+    dropped = len(elements) - len(survivors)
     if dropped:
         logger.info(f"De-duplicated {dropped} overlap-repeated elements "
-                    f"({len(elements)} → {len(deduped)})")
-    return deduped
+                    f"({len(elements)} → {len(survivors)})")
+    return survivors
 
 
 def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> DetectionResult:

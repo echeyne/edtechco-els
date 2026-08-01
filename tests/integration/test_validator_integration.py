@@ -142,15 +142,18 @@ def test_schema_validation_with_missing_domain_code(sample_standard, sample_docu
 
 
 def test_schema_validation_with_missing_indicator_description(sample_standard, sample_document_meta):
-    """Test schema validation with missing standard.indicator.description."""
+    """standard.indicator.description is optional — a leaf's description can
+    legitimately be null (e.g. TX indicators that carry no descriptive prose
+    beyond the title; see evaluation/ground_truth_parser/TX.json, which
+    expects null for every indicator). A missing/null description alone must
+    not fail validation."""
     record = serialize_record(sample_standard, sample_document_meta)
     del record["standard"]["indicator"]["description"]
-    
+
     result = validate_record(record)
-    
-    assert result.is_valid is False
-    assert len(result.errors) > 0
-    assert any(error.field_path == "standard.indicator.description" for error in result.errors)
+
+    assert result.is_valid is True
+    assert not any(error.field_path == "standard.indicator.description" for error in result.errors)
 
 
 def test_schema_validation_with_null_strand(sample_standard, sample_document_meta):
