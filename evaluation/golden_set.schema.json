@@ -109,7 +109,7 @@
               "string",
               "null"
             ],
-            "description": "The DOCUMENT-LOCAL code the detector emits (e.g. domain 'ATL', strand '1.0', indicator '1.1'). NOT the full dotted parser code. Detector matching is code-agnostic (title + age_band + domain), so this is informational; null is fine where the document has no code."
+            "description": "The DOCUMENT-LOCAL code the detector emits (e.g. domain 'AL', strand '1.0', indicator '1.1'). NOT the full dotted parser code. Detector matching is code-agnostic (title + age_band + domain), so this is informational; null is fine where the document has no code."
           },
           "title": {
             "type": "string"
