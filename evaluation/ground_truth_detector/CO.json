@@ -53,7 +53,7 @@
       "test_case_id": "CO-IND-01",
       "level": "indicator",
       "code": "1",
-      "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases",
+      "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
       "description": null,
       "source_page": 3
     },
@@ -61,7 +61,7 @@
       "test_case_id": "CO-IND-02",
       "level": "indicator",
       "code": "6",
-      "title": "Communicate an understanding of the importance of health and safety routines and rules",
+      "title": "Communicate an understanding of the importance of health and safety routines and rules.",
       "description": null,
       "source_page": 3
     },
@@ -85,7 +85,7 @@
       "test_case_id": "CO-IND-03",
       "level": "indicator",
       "code": "3",
-      "title": "Manage actions, words, and behavior with increasing independence",
+      "title": "Manage actions, words, and behavior with increasing independence.",
       "description": null,
       "source_page": 8
     }
