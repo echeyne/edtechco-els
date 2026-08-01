@@ -12,9 +12,10 @@ the parser's hierarchy grading, etc.) lives in that stage's own module.
 from __future__ import annotations
 
 import hashlib
+import json
 import sys
 from pathlib import Path
-from typing import Callable, List, Optional, Tuple
+from typing import Any, Callable, List, Optional, Tuple
 
 # Make `src` imports work when run as a module from the repo root.
 ROOT = Path(__file__).resolve().parent.parent
@@ -48,6 +49,48 @@ def _norm_age_band(ab: Optional[str]) -> Optional[str]:
 
 
 # ---------- cache key hashing ----------
+
+# Source files whose contents decide what a cached artifact contains. The run
+# cache stores POST-PROCESSED stage output, so anything in these files can
+# change the answer: a prompt edit most obviously, but equally a change to the
+# JSON extraction, the overlap de-duplication, or the cross-chunk code
+# reconciliation. ``parser.py`` counts for the DETECTOR cache too — the
+# detector's ``_dedup_elements`` reuses ``normalize_element_codes`` and
+# ``assign_domain_scopes`` from it.
+#
+# Hashing the source into the cache key makes any such edit invalidate the
+# cache on its own. Without it a cached run after a prompt edit silently
+# replays the OLD output and reports it as a pass — a failure mode that is
+# invisible precisely when it matters most, right after a change you are
+# trying to validate. Coarse on purpose: a comment-only edit also busts the
+# cache, which costs one re-run and never costs a wrong answer.
+_CODE_SOURCES = (
+    SRC / "els_pipeline" / "detector.py",
+    SRC / "els_pipeline" / "parser.py",
+)
+
+
+def code_version_hash() -> str:
+    """Short hash of the pipeline source the cached stage output depends on."""
+    h = hashlib.sha256()
+    for path in sorted(_CODE_SOURCES):
+        h.update(path.read_bytes())
+    return h.hexdigest()[:8]
+
+
+def as_plain_json(obj: Any) -> Any:
+    """Round-trip a freshly-computed result through JSON.
+
+    A cache HIT returns whatever ``json.loads`` produces; a cache MISS returns
+    the live objects. Without this the two paths differ in shape — most
+    visibly ``level``, which is a ``HierarchyLevelEnum`` on the live path and a
+    plain string on the cached one. Matching survives that (the enum subclasses
+    ``str``), but reports render the enum's repr, and any future comparison
+    that is not str-based would silently behave differently depending on
+    whether the cache happened to be warm. Normalizing here makes a cached run
+    and an uncached run indistinguishable to everything downstream."""
+    return json.loads(json.dumps(obj, default=str, ensure_ascii=False))
+
 
 def _hash_blocks(items: List[dict], text_key: str = "text") -> str:
     """Stable short hash of a list of dicts by one text field — used to key the

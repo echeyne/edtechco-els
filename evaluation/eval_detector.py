@@ -4,8 +4,12 @@ Runs the detector against one or more state extractions, compares the output
 to the hand-annotated golden set, and reports the metrics most useful for
 iterating on prompts:
 
-  - Precision / recall / F1 on (level, code) tuples.
+  - Precision / recall / F1 on (domain, level, title, age_band) tuples. Codes
+    are excluded from matching on purpose — see ``_match_key``.
   - Per-level precision / recall.
+  - Code accuracy, reported as its own dimension over the matched pairs (see
+    ``StateReport.code_matches``). Codes compose ``standard_id``, so a wrong
+    code is a wrong primary key even on a perfectly detected element.
   - Level confusion matrix (e.g. "strand → sub_strand: 12") — surfaces the
     CO-style misclassification bug at a glance.
   - Age-band drop count: how many indicators present in the golden set as
@@ -19,8 +23,11 @@ iterating on prompts:
     case in the golden set runs as PASS / FAIL / SKIP with a short detail
     line.
 
-The detector LLM call is cached per (state, extraction-hash, suffix)
-in ``evaluation/.cache/`` so repeated runs are free unless the input changes.
+The detector LLM call is cached per (state, extraction-hash, code-hash, suffix)
+in ``evaluation/.cache/`` so repeated runs are free unless the input OR the
+pipeline source changes. The code hash covers ``detector.py`` and ``parser.py``
+(see ``eval_common.code_version_hash``), so editing a prompt invalidates the
+cache by itself — a cached run can never replay pre-edit output as a pass.
 
 Shared helpers live in ``evaluation/eval_common.py``; the parser counterpart is
 ``evaluation/eval_parser.py``.
@@ -48,6 +55,8 @@ from typing import Dict, List, Optional, Tuple
 from evaluation.eval_common import (
     CACHE_DIR,
     _hash_blocks,
+    as_plain_json,
+    code_version_hash,
     _norm,
     _norm_age_band,
     run_regressions,
@@ -87,6 +96,18 @@ def _tag_domains(elements: List[dict]) -> List[dict]:
     return elements
 
 
+def _code_key(code: Optional[str]) -> Optional[str]:
+    """Comparison form for a code: whitespace collapsed, case PRESERVED.
+
+    Case is significant — the abbreviation scheme is defined as uppercase
+    ("Vocabulary" → "VOCA"), so a lowercase emission is a real defect and must
+    not be normalized away. Only whitespace is folded, since "Strand 1.0" and
+    "Strand  1.0" differ by transcription noise rather than by content."""
+    if code is None:
+        return None
+    return " ".join(str(code).split())
+
+
 def _match_key(e: dict) -> Tuple[Optional[str], str, str, Optional[str]]:
     """Domain-scoped, code-agnostic matching key: (enclosing domain, level,
     normalized title, normalized age_band). Codes are deliberately excluded —
@@ -108,10 +129,16 @@ def run_detector_cached(
     use_cache: bool = True,
     cache_suffix: str = "",
 ) -> List[dict]:
-    """Run the detector once. Cache by (state, extraction-hash, suffix)."""
+    """Run the detector once. Cache by (state, extraction-hash, code-hash,
+    suffix). The code hash is what makes a prompt edit invalidate the cache
+    rather than silently replay the previous run's output — see
+    ``eval_common.code_version_hash``."""
     extraction = json.loads(extraction_path.read_text())
     blocks_data = extraction.get("blocks", [])
-    cache_key = f"detection-{state}-{_hash_blocks(blocks_data)}-{cache_suffix}.json"
+    cache_key = (
+        f"detection-{state}-{_hash_blocks(blocks_data)}-"
+        f"{code_version_hash()}-{cache_suffix}.json"
+    )
     cache_path = CACHE_DIR / cache_key
 
     if use_cache and cache_path.exists():
@@ -122,8 +149,9 @@ def run_detector_cached(
     logger.info(f"  [detector] running on {len(blocks)} blocks…")
     result = detect_structure(blocks, document_s3_key=str(extraction_path))
     elements = [e.model_dump() for e in result.elements]
-    cache_path.write_text(json.dumps(elements, indent=2, default=str))
-    return elements
+    cache_path.write_text(json.dumps(elements, indent=2, default=str, ensure_ascii=False))
+    # Return the same shape a cache hit would (see eval_common.as_plain_json).
+    return as_plain_json(elements)
 
 
 # ---------- metrics ----------
@@ -150,6 +178,23 @@ class StateReport:
 
     # Age-band drops: golden test_case_ids whose age_band variant is missing.
     age_band_drops: List[str] = field(default_factory=list)
+
+    # Code accuracy — graded SEPARATELY from precision/recall, and deliberately
+    # so. `_match_key` pairs golden to detected on (domain, level, title,
+    # age_band) and never on code, because a code mismatch is a different
+    # failure from a missed or misclassified element and must not be able to
+    # turn one into the other: keying identity on code would report a
+    # correctly-found element with the wrong code as BOTH a false negative and
+    # a false positive, hiding the actual defect behind two phantom ones. So
+    # matching stays code-agnostic and codes are scored here, over the matched
+    # pairs only. Codes matter because they compose `standard_id`
+    # ({country}-{state}-{year}-{indicator_code}), so a wrong code is a wrong
+    # primary key even when the element itself was detected perfectly.
+    # Golden entries with a null code are skipped (nothing is asserted).
+    code_matches: int = 0
+    code_total: int = 0
+    # (test_case_id, level, golden_code, detected_code)
+    code_mismatches: List[Tuple[str, str, str, str]] = field(default_factory=list)
 
     # Depth map
     depth_map_passed: Optional[bool] = None
@@ -182,6 +227,14 @@ class StateReport:
     def f1(self) -> float:
         p, r = self.precision, self.recall
         return 2 * p * r / (p + r) if (p + r) else 0.0
+
+    @property
+    def code_accuracy(self) -> Optional[float]:
+        """Share of matched pairs whose codes agree, or None when the golden
+        asserts no codes at all (nothing to grade)."""
+        if not self.code_total:
+            return None
+        return self.code_matches / self.code_total
 
 
 def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
@@ -246,6 +299,19 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
         rep.matched += 1
         rep.matched_pairs.append((g, d))
         matched_det_ids.add(id(d))
+
+        # Code accuracy, over matched pairs only (see StateReport.code_*).
+        # A golden code of null asserts nothing, so it is not graded.
+        gcode = g.get("code")
+        if gcode is not None:
+            gcode_n, dcode_n = _code_key(gcode), _code_key(d.get("code"))
+            rep.code_total += 1
+            if gcode_n == dcode_n:
+                rep.code_matches += 1
+            else:
+                rep.code_mismatches.append(
+                    (gid, glevel, str(gcode), str(d.get("code")))
+                )
 
         dlevel = d.get("level")
         rep.confusion[glevel][dlevel] += 1
@@ -388,6 +454,16 @@ def render_report(rep: StateReport) -> str:
                 marker = "" if g == d else "  ← MISCLASS"
                 out.append(f"    {g:<10} → {d:<10} : {n}{marker}")
 
+    if rep.code_accuracy is None:
+        out.append("  code accuracy: n/a (golden asserts no codes)")
+    else:
+        out.append(
+            f"  code accuracy: {rep.code_matches}/{rep.code_total} "
+            f"({rep.code_accuracy:.3f}) — graded over matched pairs only"
+        )
+        for cid, lvl, gc, dc in rep.code_mismatches:
+            out.append(f"    [CODE] {cid} ({lvl}): golden {gc!r} != detected {dc!r}")
+
     out.append(f"  depth-map: {'PASS' if rep.depth_map_passed else 'FAIL'} — {rep.depth_map_detail}")
 
     if rep.age_band_drops:
@@ -438,6 +514,15 @@ def write_review_dir(rep: StateReport, detected: List[dict], output_dir: Path) -
             "precision": round(rep.precision, 4),
             "recall": round(rep.recall, 4),
             "f1": round(rep.f1, 4),
+            "code_accuracy": (
+                round(rep.code_accuracy, 4) if rep.code_accuracy is not None else None
+            ),
+            "code_matches": rep.code_matches,
+            "code_total": rep.code_total,
+            "code_mismatches": [
+                {"test_case_id": cid, "level": lvl, "golden": gc, "detected": dc}
+                for cid, lvl, gc, dc in rep.code_mismatches
+            ],
         },
         "matched": [
             {"golden": g, "detected": d}
@@ -509,6 +594,12 @@ def main() -> int:
             out.append({
                 "state": r.state,
                 "precision": r.precision, "recall": r.recall, "f1": r.f1,
+                "code_accuracy": r.code_accuracy,
+                "code_matches": r.code_matches, "code_total": r.code_total,
+                "code_mismatches": [
+                    {"test_case_id": cid, "level": lvl, "golden": gc, "detected": dc}
+                    for cid, lvl, gc, dc in r.code_mismatches
+                ],
                 "matched": r.matched, "n_golden": r.n_golden, "n_detected": r.n_detected,
                 "per_level": {k: dict(v) for k, v in r.per_level.items()},
                 "confusion": {k: dict(v) for k, v in r.confusion.items()},

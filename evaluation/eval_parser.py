@@ -25,7 +25,10 @@ Metrics per state:
 
 Parser input is a FROZEN detection.json fixture, so runs are deterministic
 except for the parser LLM itself; the parser output is cached in
-``evaluation/.cache/`` keyed by (state, detection-hash, suffix).
+``evaluation/.cache/`` keyed by (state, detection-hash, code-hash, suffix). The
+code hash covers ``detector.py`` and ``parser.py`` (see
+``eval_common.code_version_hash``), so editing a prompt invalidates the cache by
+itself — a cached run can never replay pre-edit output as a pass.
 
 NOTE: parser.py is a work in progress — failing checks here are diagnostic
 (they pinpoint what to fix), not blockers.
@@ -52,6 +55,8 @@ from typing import Any, Dict, List, Optional, Tuple
 from evaluation.eval_common import (
     CACHE_DIR,
     _hash_blocks,
+    as_plain_json,
+    code_version_hash,
     _norm,
     _norm_age_band,
     run_regressions,
@@ -122,14 +127,19 @@ def run_parser_cached(
     cache_suffix: str = "",
 ) -> List[dict]:
     """Run the parser once on a frozen detection.json. Cache by
-    (state, detection-hash, suffix). Returns ParseResult.indicators (the
-    serialized NormalizedStandard list)."""
+    (state, detection-hash, code-hash, suffix). Returns ParseResult.indicators
+    (the serialized NormalizedStandard list). The code hash is what makes a
+    prompt edit invalidate the cache rather than silently replay the previous
+    run's output — see ``eval_common.code_version_hash``."""
     detection = json.loads(detection_path.read_text())
     # A detection file is either {"elements": [...]} (pipeline output) or a bare
     # element list (e.g. the detector eval's *-detected.json). Handle both.
     elements_data = detection if isinstance(detection, list) else detection.get("elements", [])
 
-    cache_key = f"parser-{state}-{_hash_blocks(elements_data, text_key='source_text')}-{cache_suffix}.json"
+    cache_key = (
+        f"parser-{state}-{_hash_blocks(elements_data, text_key='source_text')}-"
+        f"{code_version_hash()}-{cache_suffix}.json"
+    )
     cache_path = CACHE_DIR / cache_key
     if use_cache and cache_path.exists():
         logger.info(f"  [cache hit] {cache_path.name}")
@@ -150,7 +160,8 @@ def run_parser_cached(
         + (f", error={result.error}" if result.error else "") + ")"
     )
     cache_path.write_text(json.dumps(indicators, indent=2, default=str, ensure_ascii=False))
-    return indicators
+    # Return the same shape a cache hit would (see eval_common.as_plain_json).
+    return as_plain_json(indicators)
 
 
 # ---------- matching ----------
