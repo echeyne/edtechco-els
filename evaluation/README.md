@@ -53,7 +53,13 @@ Annotation tips:
   when the detector drops the Later column.
 - **Use copy-verbatim text** for `title` and `description`. Don't paraphrase
   — the matcher does fuzzy comparison but works much better when the
-  source is literal.
+  source is literal. `description` is now **graded** (see below), and graded
+  strictly: only whitespace is normalized, so a paraphrase, a dropped clause or
+  an added trailing period all register as failures. Annotating one is
+  optional — an element whose golden `description` is null or empty asserts
+  nothing and is skipped — but annotating one at all means annotating it
+  exactly. Domain/strand intro prose is the highest-value place to spend the
+  effort: that is where the detector truncates.
 - **`age_band`** is null for non-age-banded elements. For CA, use the exact
   document phrasing: `"Early (3 to 4 ½ Years)"` / `"Later (4 to 5 ½ Years)"`.
   For TX, use `"PK3"` / `"PK4"`.
@@ -98,6 +104,42 @@ files). `eval_detector` takes `--extraction-dir`; `eval_parser` takes
 
 See the docstring at the top of `evaluation/eval_detector.py` and
 `evaluation/eval_parser.py` for the full metric set and configuration knobs.
+
+## Dimensions graded outside P/R/F1 (detector)
+
+Precision/recall/F1 answer "was the right element found, at the right level?".
+Two per-element fields are graded **separately, over the matched pairs only**,
+and are deliberately kept out of `_match_key`:
+
+| Dimension              | Denominator                                  | Reported as                                       |
+| ---------------------- | -------------------------------------------- | ------------------------------------------------- |
+| `code accuracy`        | matched pairs whose golden has a `code`       | `code accuracy: 38/40 (0.950)` + a `[CODE]` line   |
+| `description accuracy` | matched pairs whose golden has a `description` | `description accuracy: 2/3 (0.667)` + `[DESC/…]` lines |
+
+Keeping them out of the match key is the whole point: if identity depended on
+them, a correctly-found element with a wrong code or a truncated description
+would be scored as a false negative **and** a false positive, hiding the real
+defect behind two phantom ones and taking every other field comparison for that
+element down with it.
+
+Description failures are **classified**, because the causes and the fixes
+differ:
+
+- `truncated` — the produced text is a strict prefix of the golden; reported
+  with both lengths (`truncated: 2410/3500 chars`). This is a budget/chunking
+  defect. It is why the dimension exists: the detector cut NV's Science domain
+  intro at 2410 of 3500 characters, and cut a *different* domain on the next
+  run, and no other graded field could see it.
+- `mismatch` — different text, reported with a short excerpt of each side.
+  Typically the wrong prose on the right element (CA's age-column crosswiring
+  handing the "Later" indicator the "Early" column's description).
+- `missing` — the detector emitted no description at all.
+
+Comparison normalizes **whitespace only** (`eval_common._norm_ws`: every run of
+spaces/tabs/newlines folds to one space, ends stripped), because a PDF's line
+breaks are typesetting artifacts. Nothing else is folded — no case, no
+punctuation, no length tolerance. Both counts and the classified failure list
+appear in `--report-json` and in `--output-dir`'s `{STATE}-review.json`.
 
 ## What a good result looks like
 

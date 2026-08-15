@@ -36,6 +36,21 @@ def _norm(s: Optional[str]) -> str:
     return " ".join((s or "").lower().split())
 
 
+def _norm_ws(s: Optional[str]) -> str:
+    """Collapse every whitespace run (spaces, tabs, NEWLINES) to a single space
+    and strip the ends. Case, punctuation and content are left alone.
+
+    This is the comparison form for verbatim prose — descriptions above all.
+    A description is transcribed from a PDF whose line breaks are an artifact of
+    typesetting, so the detector emitting '\\n' where the golden holds ' ' is a
+    transcription-noise difference, not a content defect (all four AZ
+    "differences" were exactly that, at identical length). Everything else IS a
+    defect and must survive: no case folding, no punctuation stripping, no
+    length tolerance — unlike ``_norm``, which lowercases and so is only safe
+    for identity keys like titles."""
+    return " ".join((s or "").split())
+
+
 def _norm_age_band(ab: Optional[str]) -> Optional[str]:
     """Canonicalize an age-band string for comparison. The detector (and the
     source PDFs) spell the half-year glyph inconsistently — unicode '½' vs

@@ -10,6 +10,16 @@ iterating on prompts:
   - Code accuracy, reported as its own dimension over the matched pairs (see
     ``StateReport.code_matches``). Codes compose ``standard_id``, so a wrong
     code is a wrong primary key even on a perfectly detected element.
+  - Description accuracy, likewise its own dimension over the matched pairs
+    (see ``StateReport.description_matches`` and ``compare_description``), and
+    likewise excluded from ``_match_key``. Scoped to the pairs whose GOLDEN
+    annotates a non-empty description — an unannotated element asserts nothing
+    and is not counted either way. Failures are classified: a produced
+    description that is a strict prefix of the golden reports as ``truncated``
+    with both lengths, anything else as a plain ``mismatch`` with excerpts,
+    because the two have different causes and different fixes. This is what
+    catches the detector cutting NV's domain intro prose short (Science: 2410
+    of 3500 chars, and a different domain on the next run).
   - Level confusion matrix (e.g. "strand → sub_strand: 12") — surfaces the
     CO-style misclassification bug at a glance.
   - Age-band drop count: how many indicators present in the golden set as
@@ -59,6 +69,7 @@ from evaluation.eval_common import (
     code_version_hash,
     _norm,
     _norm_age_band,
+    _norm_ws,
     run_regressions,
 )
 from els_pipeline.detector import (  # noqa: E402
@@ -110,14 +121,87 @@ def _code_key(code: Optional[str]) -> Optional[str]:
 
 def _match_key(e: dict) -> Tuple[Optional[str], str, str, Optional[str]]:
     """Domain-scoped, code-agnostic matching key: (enclosing domain, level,
-    normalized title, normalized age_band). Codes are deliberately excluded —
-    the detector emits document-local codes (e.g. '1.2') and invents
-    sub_strand codes ('CI', 'WM'), neither of which the golden can mirror."""
+    normalized title, normalized age_band). Codes and descriptions are
+    deliberately excluded — the detector emits document-local codes (e.g. '1.2')
+    and invents sub_strand codes ('CI', 'WM'), neither of which the golden can
+    mirror, and a truncated description must still PAIR with its golden element
+    so it can be reported as a description defect rather than as a phantom
+    missing element (see ``StateReport.code_matches`` for the same reasoning)."""
     return (
         e.get("_domain"),
         (e.get("level") or "").strip(),
         _title_key(e),
         _norm_age_band(e.get("age_band")),
+    )
+
+
+# ---------- description comparison ----------
+
+DESC_EXCERPT_CHARS = 60
+
+
+def _first_divergence(a: str, b: str) -> int:
+    """Index of the first character at which two strings differ."""
+    for i, (ca, cb) in enumerate(zip(a, b)):
+        if ca != cb:
+            return i
+    return min(len(a), len(b))
+
+
+def _excerpt_at(s: str, start: int, n: int = DESC_EXCERPT_CHARS) -> str:
+    """A window of ``s`` beginning where it starts to differ from its twin.
+
+    Anchoring on the divergence rather than on character 0 is what makes the
+    excerpt informative: descriptions run to hundreds of characters and two of
+    them can agree for far longer than any readable excerpt, so a head excerpt
+    renders the two sides identically and tells you nothing (CA's real
+    difference is a trailing period at char 169)."""
+    tail = s[start:start + n]
+    return ("…" if start else "") + tail + ("…" if len(s) > start + n else "")
+
+
+def compare_description(
+    golden: Optional[str], produced: Optional[str]
+) -> Tuple[str, str]:
+    """Compare one golden description against the detector's, returning
+    ``(status, detail)`` where status is one of:
+
+      - ``"skip"``     — the golden annotates no description; nothing asserted,
+                         so this pair is neither a pass nor a fail and must not
+                         enter the denominator.
+      - ``"match"``    — identical after whitespace normalization.
+      - ``"missing"``  — the golden has prose, the detector emitted none.
+      - ``"truncated"``— the produced text is a strict PREFIX of the golden.
+                         This is the defect that motivated the dimension: on NV
+                         the detector cut the Science domain intro at 2410 of
+                         3500 chars, and cut a DIFFERENT domain on the next run.
+      - ``"mismatch"`` — any other difference: different text, not a short one.
+
+    Truncation and mismatch are kept apart on purpose — they have different
+    causes and different fixes. A truncation is the model running out of budget
+    (or a chunk boundary) mid-prose and is fixed in the detector's chunking or
+    prompt; a mismatch is the wrong prose attached to the right element, which
+    on CA is the age-column bug handing the "Later" indicator the "Early"
+    column's text. Collapsing them into one bucket hides which one you have.
+
+    Comparison is whitespace-normalized (see ``eval_common._norm_ws``) and
+    NOTHING else — no case folding, no punctuation stripping, no length
+    tolerance."""
+    g = _norm_ws(golden)
+    if not g:
+        return "skip", "golden annotates no description"
+    p = _norm_ws(produced)
+    if g == p:
+        return "match", f"exact ({len(g)} chars)"
+    if not p:
+        return "missing", f"missing: detector emitted no description ({len(g)} golden chars)"
+    if g.startswith(p):
+        return "truncated", f"truncated: {len(p)}/{len(g)} chars"
+    i = _first_divergence(g, p)
+    return (
+        "mismatch",
+        f"mismatch ({len(p)} vs {len(g)} golden chars, diverges at char {i}): "
+        f"golden {_excerpt_at(g, i)!r} != detected {_excerpt_at(p, i)!r}",
     )
 
 
@@ -196,6 +280,28 @@ class StateReport:
     # (test_case_id, level, golden_code, detected_code)
     code_mismatches: List[Tuple[str, str, str, str]] = field(default_factory=list)
 
+    # Description accuracy — graded like codes: its OWN dimension over the
+    # matched pairs, never part of `_match_key`. Keying identity on description
+    # would turn every truncation into a phantom missing element and take every
+    # other field comparison for that element down with it.
+    #
+    # The denominator counts only pairs whose GOLDEN annotates a non-empty
+    # description; most goldens annotate few (AZ 4, CA 14, CO 4, TX 3, KY 26,
+    # NV 3), and an unannotated element asserts nothing. Reporting
+    # matches/total rather than a bare rate keeps that thin denominator visible.
+    #
+    # This dimension exists because the detector silently TRUNCATED domain intro
+    # prose on NV (Science: 2410 of 3500 chars) and did so nondeterministically
+    # — a different domain was cut on the next run — which no other graded field
+    # could see.
+    description_matches: int = 0
+    description_total: int = 0
+    # (test_case_id, level, status, detail) — status is 'truncated' | 'mismatch'
+    # | 'missing' (see compare_description). The detail carries lengths and
+    # short excerpts rather than the full prose, which runs to thousands of
+    # characters and would swamp the report.
+    description_mismatches: List[Tuple[str, str, str, str]] = field(default_factory=list)
+
     # Depth map
     depth_map_passed: Optional[bool] = None
     depth_map_detail: str = ""
@@ -235,6 +341,21 @@ class StateReport:
         if not self.code_total:
             return None
         return self.code_matches / self.code_total
+
+    @property
+    def description_accuracy(self) -> Optional[float]:
+        """Share of matched pairs whose descriptions agree, or None when the
+        golden annotates no descriptions at all (nothing to grade)."""
+        if not self.description_total:
+            return None
+        return self.description_matches / self.description_total
+
+    @property
+    def description_truncations(self) -> int:
+        """How many description failures are truncations specifically — the
+        defect class this dimension was added to catch."""
+        return sum(1 for _, _, status, _ in self.description_mismatches
+                   if status == "truncated")
 
 
 def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
@@ -312,6 +433,16 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
                 rep.code_mismatches.append(
                     (gid, glevel, str(gcode), str(d.get("code")))
                 )
+
+        # Description accuracy, over matched pairs only, and only where the
+        # golden actually annotates prose (see StateReport.description_*).
+        status, detail = compare_description(g.get("description"), d.get("description"))
+        if status != "skip":
+            rep.description_total += 1
+            if status == "match":
+                rep.description_matches += 1
+            else:
+                rep.description_mismatches.append((gid, glevel, status, detail))
 
         dlevel = d.get("level")
         rep.confusion[glevel][dlevel] += 1
@@ -464,6 +595,19 @@ def render_report(rep: StateReport) -> str:
         for cid, lvl, gc, dc in rep.code_mismatches:
             out.append(f"    [CODE] {cid} ({lvl}): golden {gc!r} != detected {dc!r}")
 
+    if rep.description_accuracy is None:
+        out.append("  description accuracy: n/a (golden annotates no descriptions)")
+    else:
+        trunc = rep.description_truncations
+        out.append(
+            f"  description accuracy: {rep.description_matches}/{rep.description_total} "
+            f"({rep.description_accuracy:.3f}) — graded over matched pairs whose "
+            f"golden annotates one"
+            + (f"; {trunc} truncated" if trunc else "")
+        )
+        for cid, lvl, status, detail in rep.description_mismatches:
+            out.append(f"    [DESC/{status.upper()}] {cid} ({lvl}): {detail}")
+
     out.append(f"  depth-map: {'PASS' if rep.depth_map_passed else 'FAIL'} — {rep.depth_map_detail}")
 
     if rep.age_band_drops:
@@ -522,6 +666,17 @@ def write_review_dir(rep: StateReport, detected: List[dict], output_dir: Path) -
             "code_mismatches": [
                 {"test_case_id": cid, "level": lvl, "golden": gc, "detected": dc}
                 for cid, lvl, gc, dc in rep.code_mismatches
+            ],
+            "description_accuracy": (
+                round(rep.description_accuracy, 4)
+                if rep.description_accuracy is not None else None
+            ),
+            "description_matches": rep.description_matches,
+            "description_total": rep.description_total,
+            "description_truncations": rep.description_truncations,
+            "description_mismatches": [
+                {"test_case_id": cid, "level": lvl, "status": status, "detail": detail}
+                for cid, lvl, status, detail in rep.description_mismatches
             ],
         },
         "matched": [
@@ -599,6 +754,14 @@ def main() -> int:
                 "code_mismatches": [
                     {"test_case_id": cid, "level": lvl, "golden": gc, "detected": dc}
                     for cid, lvl, gc, dc in r.code_mismatches
+                ],
+                "description_accuracy": r.description_accuracy,
+                "description_matches": r.description_matches,
+                "description_total": r.description_total,
+                "description_truncations": r.description_truncations,
+                "description_mismatches": [
+                    {"test_case_id": cid, "level": lvl, "status": status, "detail": detail}
+                    for cid, lvl, status, detail in r.description_mismatches
                 ],
                 "matched": r.matched, "n_golden": r.n_golden, "n_detected": r.n_detected,
                 "per_level": {k: dict(v) for k, v in r.per_level.items()},

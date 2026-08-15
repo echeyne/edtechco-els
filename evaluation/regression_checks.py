@@ -13,7 +13,7 @@ The eval suite logs SKIP if a case has no matching function.
 from __future__ import annotations
 
 import re
-from typing import Callable, Dict, List, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 CheckFn = Callable[[List[dict]], Tuple[bool, str]]
 
@@ -100,13 +100,6 @@ def check_co_numeric_strands(elements: List[dict]) -> Tuple[bool, str]:
     return True, "all numeric-prefixed sections correctly classified as strand"
 
 
-def check_co_indicator_parent_is_strand(elements: List[dict]) -> Tuple[bool, str]:
-    # This check needs parser output; the detector eval has no parentage info.
-    # The real check is check_parser_co_indicator_parent_is_strand, run by
-    # eval_parser.py. Here (detector context) it is a no-op.
-    return True, "deferred to parser-output check (see eval_parser.py)"
-
-
 # ------- TX -------
 
 def check_tx_pk3_pk4_distinct(elements: List[dict]) -> Tuple[bool, str]:
@@ -138,15 +131,6 @@ def check_tx_no_column_header_as_indicator(elements: List[dict]) -> Tuple[bool, 
 
 # ------- AZ -------
 
-def check_az_no_lettered_examples(elements: List[dict]) -> Tuple[bool, str]:
-    pat = re.compile(r"^\s*[a-z]\.\s")
-    bad = [e for e in elements
-           if e.get("level") == "indicator" and pat.match(e.get("source_text", ""))]
-    if bad:
-        return False, f"{len(bad)} lettered examples emitted as indicators"
-    return True, "no lettered examples emitted as indicators"
-
-
 def check_az_no_examples_header_as_element(elements: List[dict]) -> Tuple[bool, str]:
     needle = "Indicators and Examples in the Context"
     bad = [e for e in elements if needle in (e.get("title") or "")]
@@ -156,6 +140,183 @@ def check_az_no_examples_header_as_element(elements: List[dict]) -> Tuple[bool, 
 
 
 def check_az_four_level_hierarchy(elements: List[dict]) -> Tuple[bool, str]:
+    return check_ca_four_level_hierarchy(elements)
+
+
+# ------- KY -------
+
+def check_ky_benchmark_is_sub_strand(elements: List[dict]) -> Tuple[bool, str]:
+    """`Benchmark N.N` is KY's third level: it must land on sub_strand.
+
+    Two halves: (1) every element whose source_text starts with `Benchmark `
+    is a sub_strand, and (2) no element at any other level carries a code
+    starting with `Benchmark `.
+    """
+    src_pat = re.compile(r"^\s*Benchmark\s")
+    code_pat = re.compile(r"^\s*Benchmark\s")
+
+    from_src = [e for e in elements
+                if src_pat.match(e.get("source_text") or "")
+                and e.get("level") != "sub_strand"]
+    from_code = [e for e in elements
+                 if code_pat.match(e.get("code") or "")
+                 and e.get("level") != "sub_strand"]
+
+    seen_ids = {id(e) for e in from_src}
+    bad = from_src + [e for e in from_code if id(e) not in seen_ids]
+    total = len([e for e in elements
+                 if src_pat.match(e.get("source_text") or "")
+                 or code_pat.match(e.get("code") or "")])
+    if bad:
+        ex = bad[0]
+        return False, (
+            f"{len(bad)}/{total} Benchmark elements are not sub_strand "
+            f"(e.g. level={ex.get('level')!r}, code={ex.get('code')!r}, "
+            f"title={(ex.get('title') or '')[:60]!r})"
+        )
+    return True, f"all {total} Benchmark elements classified as sub_strand"
+
+
+def check_ky_four_level_hierarchy(elements: List[dict]) -> Tuple[bool, str]:
+    return check_ca_four_level_hierarchy(elements)
+
+
+# Prompt rule 4's first case: a `<Label words> <numeral>: <Title>` heading whose
+# label-and-id IS the code. Anchored on the numeral so it can't swallow a
+# title:description colon (CO's `1. Health, Safety and Nutrition: The
+# maintenance of ...`) — those have no numeral immediately before the colon and
+# are simply out of scope here.
+_LABELLED_HEADING_RE = re.compile(r"^([A-Za-z][^:\n]{0,70}?\s\d+(?:\.\d+)*)\s*:\s")
+
+
+def check_ky_strand_code_keeps_full_label(elements: List[dict]) -> Tuple[bool, str]:
+    """A labelled heading's code is the WHOLE label, not a truncation of it.
+
+    KY spells every strand as `<Domain Name> Standard N:`. The code is that
+    entire span; dropping the leading words yields a bare `Standard 2` that no
+    longer identifies which domain's Standard 2 it is, and collides with the
+    other domains' as soon as two of them truncate in the same run. Observed on
+    2026-08-13: 4 of 5 KY strands kept the full label and the fifth did not,
+    from one temperature-0 run — so this is a determinism guard, not a
+    correctness-in-principle one.
+
+    Compared case-insensitively: a document that shouts its heading (AZ's
+    `STRAND 1`) is not a truncation, and the detector is right to title-case it.
+    """
+    checked, bad = 0, []
+    for e in elements:
+        m = _LABELLED_HEADING_RE.match((e.get("source_text") or "").strip())
+        if not m:
+            continue
+        checked += 1
+        label = m.group(1).strip()
+        code = (e.get("code") or "").strip()
+        if code.casefold() != label.casefold():
+            bad.append((e.get("level"), code, label))
+    if not checked:
+        return False, "no '<Label> N:' headings found to check"
+    if bad:
+        lvl, code, label = bad[0]
+        return False, (
+            f"{len(bad)}/{checked} labelled heading(s) lost part of their label, e.g. "
+            f"{lvl} code={code!r} should be {label!r}"
+        )
+    return True, f"all {checked} labelled headings keep their full label as the code"
+
+
+# ------- NV -------
+
+# NV's indicator tables carry two prose columns and a page footnote, none of
+# which are structural. The indicator-group caption `Indicators (SS.ID)` is a
+# code label, not a heading, so it must not surface as an element title either.
+_NV_NON_STRUCTURAL_TITLE_RE = re.compile(
+    r"^\s*(Examples:|Supportive Practices:|Indicators\s*\(|This symbol indicates)"
+)
+
+
+def check_nv_no_column_header_as_element(elements: List[dict]) -> Tuple[bool, str]:
+    """Neither prose column, nor the `Indicators (XX.YY)` caption, nor the
+    cross-curricular footnote is a standard — and NV has no age columns at all,
+    so nothing may carry an age_band."""
+    titled = [e for e in elements
+              if _NV_NON_STRUCTURAL_TITLE_RE.match(e.get("title") or "")]
+    banded = [e for e in elements if e.get("age_band") is not None]
+    if titled or banded:
+        parts = []
+        if titled:
+            parts.append(
+                f"{len(titled)} non-structural column/caption element(s), e.g. "
+                f"{(titled[0].get('title') or '')[:60]!r}"
+            )
+        if banded:
+            parts.append(
+                f"{len(banded)} element(s) carry an age_band on a document with no age "
+                f"columns, e.g. {banded[0].get('age_band')!r} on "
+                f"{(banded[0].get('title') or '')[:50]!r}"
+            )
+        return False, "; ".join(parts)
+    return True, (
+        f"{len(elements)} elements: no column headers, captions or footnotes emitted, "
+        f"no age_band set"
+    )
+
+
+# The document's own indicator namespace: a 1-2 letter domain root, a dot, and a
+# 2-letter group token — `SS.ID`, `S.EO`, `T.CT`. Matched by SHAPE, not by any
+# specific NV token, so this reads as "the sub_strand kept the printed code"
+# rather than "the sub_strand equals one of seven hard-coded strings".
+_NV_SUB_STRAND_CODE_RE = re.compile(r"^[A-Z]{1,2}\.[A-Z]{2}$")
+
+
+def check_nv_sub_strand_code_from_document(elements: List[dict]) -> Tuple[bool, str]:
+    """Each indicator group is captioned with its own code (`Indicators (SS.ID)`).
+
+    That token is the group's document-local code and must win over an invented
+    title abbreviation. Two halves: (1) every sub_strand code has the document's
+    `XX.YY` shape, and (2) it is a proper dotted prefix of the indicator codes
+    beneath it — which is also what guarantees `SS.ID` never collides with
+    `SS.ID.PK1`.
+    """
+    subs = [e for e in elements if e.get("level") == "sub_strand"]
+    if not subs:
+        return False, "no sub_strand elements detected"
+
+    wrong_shape = [(e.get("code"), (e.get("title") or "")[:40])
+                   for e in subs if not _NV_SUB_STRAND_CODE_RE.match(e.get("code") or "")]
+
+    # A sub_strand "owns" an indicator when the indicator's code extends it.
+    # With no shape-valid sub_strand codes there is nothing to parent against,
+    # so the prefix half only runs on the ones that passed.
+    valid = [e.get("code") for e in subs if _NV_SUB_STRAND_CODE_RE.match(e.get("code") or "")]
+    orphan_indicators = []
+    for e in elements:
+        if e.get("level") != "indicator":
+            continue
+        code = e.get("code") or ""
+        root = code.rsplit(".", 1)[0] if "." in code else ""
+        if _NV_SUB_STRAND_CODE_RE.match(root) and root not in valid:
+            orphan_indicators.append(code)
+
+    if wrong_shape or orphan_indicators:
+        parts = []
+        if wrong_shape:
+            parts.append(
+                f"{len(wrong_shape)}/{len(subs)} sub_strand code(s) are invented "
+                f"abbreviations rather than the document's caption, e.g. {wrong_shape[0]}"
+            )
+        if orphan_indicators:
+            parts.append(
+                f"{len(orphan_indicators)} indicator code(s) have no matching sub_strand, "
+                f"e.g. {orphan_indicators[0]!r}"
+            )
+        return False, "; ".join(parts)
+    return True, (
+        f"all {len(subs)} sub_strands use the document's XX.YY caption code and prefix "
+        f"their indicators"
+    )
+
+
+def check_nv_four_level_hierarchy(elements: List[dict]) -> Tuple[bool, str]:
     return check_ca_four_level_hierarchy(elements)
 
 
@@ -229,6 +390,202 @@ def check_parser_tx_pk3_pk4_distinct_ids(indicators: List[dict]) -> Tuple[bool, 
     """TX PK3/PK4 variants of an outcome must survive as separate standards
     with distinct standard_ids (and distinct age_bands)."""
     return _distinct_within_code_groups(indicators)
+
+
+def check_parser_ky_four_level_resolved(indicators: List[dict]) -> Tuple[bool, str]:
+    """KY is a full 4-level document: every standard must carry both a strand
+    and a sub_strand (the parser-side twin of KY-FOUR-LEVEL-HIERARCHY)."""
+    bad = [i for i in indicators
+           if i.get("strand") is None or i.get("sub_strand") is None]
+    if bad:
+        ex = bad[0]
+        return False, (
+            f"{len(bad)}/{len(indicators)} standards flattened "
+            f"(e.g. {ex.get('standard_id')!r}: strand={_code(ex.get('strand'))!r}, "
+            f"sub_strand={_code(ex.get('sub_strand'))!r})"
+        )
+    return True, f"all {len(indicators)} standards have both a strand and a sub_strand"
+
+
+_LABEL_IN_CODE_RE = re.compile(r"\b(standard|benchmark)\b", re.IGNORECASE)
+
+
+def check_parser_ky_benchmark_code_normalized(indicators: List[dict]) -> Tuple[bool, str]:
+    """Structural labels never leak into a code, and codes are dotted paths.
+
+    Two halves, applied to every level of every standard:
+    (1) no code contains the word `Standard` or `Benchmark`;
+    (2) each of strand / sub_strand / indicator is prefixed by its nearest
+        non-null ancestor's code plus a dot. A level that is None is skipped
+        for the prefix half (the next level down is then checked against the
+        nearest ancestor that does exist).
+    """
+    label_leaks, prefix_breaks = [], []
+    checked_prefixes = 0
+    for ind in indicators:
+        chain = [
+            ("domain", ind.get("domain")),
+            ("strand", ind.get("strand")),
+            ("sub_strand", ind.get("sub_strand")),
+            ("indicator", ind.get("indicator")),
+        ]
+        parent_code = None
+        for name, level in chain:
+            if level is None:
+                continue
+            code = _code(level) or ""
+            if _LABEL_IN_CODE_RE.search(code):
+                label_leaks.append((ind.get("standard_id"), name, code))
+            if name != "domain":
+                if parent_code:
+                    checked_prefixes += 1
+                    if not code.startswith(parent_code + "."):
+                        prefix_breaks.append((ind.get("standard_id"), name, code, parent_code))
+            parent_code = code
+
+    if label_leaks or prefix_breaks:
+        parts = []
+        if label_leaks:
+            parts.append(
+                f"{len(label_leaks)} code(s) carry a structural label, e.g. "
+                f"{label_leaks[0][1]}={label_leaks[0][2]!r} on {label_leaks[0][0]!r}"
+            )
+        if prefix_breaks:
+            b = prefix_breaks[0]
+            parts.append(
+                f"{len(prefix_breaks)}/{checked_prefixes} code(s) not prefixed by parent, e.g. "
+                f"{b[1]}={b[2]!r} under parent {b[3]!r} on {b[0]!r}"
+            )
+        return False, "; ".join(parts)
+    return True, (
+        f"{len(indicators)} standards: no label text in any code, "
+        f"all {checked_prefixes} child codes prefixed by their parent"
+    )
+
+
+def check_parser_ky_sub_strand_not_indicator_code(indicators: List[dict]) -> Tuple[bool, str]:
+    """A sub_strand and the indicator beneath it are distinct levels: their
+    codes must differ, and the indicator's code must extend the sub_strand's
+    (`<sub_strand>.<segment>`). Standards with no sub_strand are out of scope
+    here — KY-FOUR-LEVEL-RESOLVED covers those."""
+    same, not_nested, missing = [], [], 0
+    for ind in indicators:
+        ss, i = _code(ind.get("sub_strand")), _code(ind.get("indicator"))
+        if not ss or not i:
+            missing += 1
+            continue
+        if ss == i:
+            same.append((ind.get("standard_id"), ss))
+        elif not i.startswith(ss + "."):
+            not_nested.append((ind.get("standard_id"), ss, i))
+
+    if same or not_nested:
+        parts = []
+        if same:
+            parts.append(f"{len(same)} sub_strand/indicator code collision(s), e.g. {same[0]}")
+        if not_nested:
+            parts.append(
+                f"{len(not_nested)} indicator code(s) not nested under their sub_strand, "
+                f"e.g. {not_nested[0]}"
+            )
+        return False, "; ".join(parts)
+    checked = len(indicators) - missing
+    detail = f"all {checked} standards keep sub_strand and indicator codes distinct and nested"
+    if missing:
+        detail += f" ({missing} skipped: no sub_strand)"
+    return True, detail
+
+
+def check_parser_nv_strand_parent_by_heading(indicators: List[dict]) -> Tuple[bool, str]:
+    """An indicator group belongs to exactly one strand.
+
+    NV repeats the `<Domain> Standard N:` heading above continued group content
+    on the next page (p5 and p6 both carry Standard 2 above SS.CI rows) and
+    opens a new strand partway down a page (Standard 3 below the tail of
+    Standard 2 on p6). Page position alone therefore can't pick the parent. The
+    observable consequence of getting it wrong is that one group's indicators
+    fan out across two strands, so that is what this asserts — without naming
+    any NV group, so it reads as "a group has one parent".
+
+    Identity here is the group's printed TITLE, scoped by domain name — not its
+    code. A mis-parented group tends to be handed a code derived from the wrong
+    strand, so grouping by code would split the group in two and let the very
+    failure this guards against report as a pass.
+    """
+    groups: Dict[Tuple[str, str], set] = {}
+    for ind in indicators:
+        sub, strand = ind.get("sub_strand"), ind.get("strand")
+        if not isinstance(sub, dict) or not isinstance(strand, dict):
+            continue
+        name, dom = sub.get("name"), (ind.get("domain") or {}).get("name")
+        if name and strand.get("name"):
+            groups.setdefault((dom or "", name), set()).add(strand["name"])
+    if not groups:
+        return False, "no standard carries both a named sub_strand and a named strand"
+
+    split = {g: sorted(s) for g, s in groups.items() if len(s) > 1}
+    if split:
+        (dom, name), strands = next(iter(split.items()))
+        return False, (
+            f"{len(split)}/{len(groups)} indicator group(s) split across strands, e.g. "
+            f"{name!r} ({dom}) parented by {len(strands)}: {[s[:45] for s in strands]}"
+        )
+    return True, f"all {len(groups)} indicator groups resolve to a single strand"
+
+
+# NV's printed indicator token: <domain root>.<group>.PK<n>, e.g. `SS.ID.PK1`,
+# `S.EO.PK4`. Shape-matched so the check states the document's code convention
+# rather than enumerating NV's seven groups.
+_NV_INDICATOR_CODE_RE = re.compile(r"^([A-Z]{1,2})\.([A-Z]{2})\.PK\d+$")
+
+
+def check_parser_nv_document_code_preserved(indicators: List[dict]) -> Tuple[bool, str]:
+    """The code printed on the page survives into the resolved standard.
+
+    NV prints a complete identifier for every indicator, so the parser should
+    never have to invent one: `standard_id` is that token verbatim, and the two
+    levels above it are its dotted prefixes. Anything else means a title
+    abbreviation displaced a real document code.
+    """
+    bad_shape, bad_sid, bad_prefix = [], [], []
+    for ind in indicators:
+        code = _code(ind.get("indicator")) or ""
+        m = _NV_INDICATOR_CODE_RE.match(code)
+        if not m:
+            bad_shape.append(code)
+            continue
+        root, group = m.group(1), m.group(2)
+        sid = ind.get("standard_id")
+        if sid != f"US-NV-2023-{code}":
+            bad_sid.append((sid, code))
+        if _code(ind.get("sub_strand")) != f"{root}.{group}":
+            bad_prefix.append(("sub_strand", _code(ind.get("sub_strand")), f"{root}.{group}"))
+        elif _code(ind.get("domain")) != root:
+            bad_prefix.append(("domain", _code(ind.get("domain")), root))
+
+    if bad_shape or bad_sid or bad_prefix:
+        parts = []
+        if bad_shape:
+            parts.append(
+                f"{len(bad_shape)}/{len(indicators)} indicator code(s) are not the document's "
+                f"XX.YY.PKn token, e.g. {bad_shape[0]!r}"
+            )
+        if bad_sid:
+            parts.append(
+                f"{len(bad_sid)} standard_id(s) not derived from the printed code, e.g. "
+                f"{bad_sid[0][0]!r} for code {bad_sid[0][1]!r}"
+            )
+        if bad_prefix:
+            lvl, got, want = bad_prefix[0]
+            parts.append(
+                f"{len(bad_prefix)} ancestor code(s) are not the printed prefix, e.g. "
+                f"{lvl}={got!r} should be {want!r}"
+            )
+        return False, "; ".join(parts)
+    return True, (
+        f"all {len(indicators)} standards keep the document's printed code at indicator, "
+        f"sub_strand and domain"
+    )
 
 
 def check_parser_no_id_collision(indicators: List[dict]) -> Tuple[bool, str]:

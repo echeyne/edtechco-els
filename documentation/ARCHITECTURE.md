@@ -64,6 +64,20 @@ Each element is classified as a domain, strand, sub-strand, or indicator with a 
 
 The detection prompt instructs the LLM to extract structured JSON with fields: level, code, title, description, confidence, source_page, source_text, and age_band (populated for indicators that come from age-banded columns, e.g. "Early (3 to 4 ½ Years)", "PK3").
 
+`description` and `age_band` are both optional and both spell absence as `null`, never `""` — most headings own no prose of their own, so a null description is the common case rather than an error. `models._blank_to_none` enforces that on every optional free-text field at model-construction time (see [CLAUDE.md](../CLAUDE.md)), so the same absence cannot arrive under two spellings and reach Aurora's nullable `description` columns as an empty string.
+
+#### Where an element's `code` comes from
+
+Prompt rule 4 prefers a code the **document prints** and only invents one as a last resort. It names three places a printed code can live and searches them in order: **inline** on the heading line (`1.0`, `I.A.2`, `Benchmark 1.1`, a list letter `a`), **in a caption beside the heading** (a parenthetical, caption line, or table header — a group titled "Working Memory" captioned `Indicators (CD.WM)` has code `CD.WM`), and **as the shared leading prefix of its descendants' codes** — an ancestor's code is the common prefix of its descendants' document codes, so indicators reading `CD.WM.PK1`/`CD.WM.PK2`/`CD.AT.PK1` give the groups above them `CD.WM` and `CD.AT` and the level above those `CD`. The prefix is peeled one whole segment per level going up (a level printing its own code takes it and consumes no segment), so it can cross a level the printed namespace skips without over-reaching in a chunk that shows only one group. Only when all three come up empty does the model derive a ≤5-char uppercase abbreviation from the title (`Approaches to Learning` → `AL`, `Engages in an activity for a sustained period of time` → `EASPT`).
+
+The recovery clause is prompt-only and has no Python counterpart: it reasons over page layout and over which codes in a chunk descend from which heading, neither of which is visible in the emitted JSON. It is guarded inside the prompt by shape alone — a descendant code needs more than one dot-separated segment, two descendants must agree on the prefix and differ after it, only whole segments count, and a descendant code carrying a structural label word (`Foundation 1.7`, `Benchmark 1.1`) is not a namespace path, since the label names the descendant's own level.
+
+That derivation is a deterministic string algorithm, so `_resolve_code` re-executes it in Python via `derive_code_from_title` rather than trusting the sampled answer. It is scoped to the invented branch by two guards: the code's **shape** must be one the abbreviation branch could have produced (uppercase letters only — a digit, separator or lowercase letter means a positional document code, including a lettered leaf's `a`), and the code must be **ungrounded** — `_is_code_grounded` checks whether it appears in the element's own `source_text`, since a document code was transcribed off the page and an invented abbreviation was not. A printed code is authoritative and is never overwritten.
+
+Grounding is what couples the two halves. A code recovered from a caption or a descendant prefix is short and uppercase (`T`, `SS`), so it has the abbreviation branch's shape and would be recomputed from the title unless it appears in the element's `source_text`. Rule 4 therefore requires the line that supplied the code to be cited in `source_text` alongside the heading line — which rule 7 already asks for, and which leaves rule 1's "a child's line alone is not evidence of the heading" self-check intact.
+
+The reason is reproducibility of the primary key. Three detector runs at temperature 0 over one frozen Kentucky extraction gave 11 of 44 elements (25%) a different code on at least one run — one run emitting a 4-character code, another transposing two initials, several keeping a connector word the rule excludes — while `level`, `source_page` and `age_band` never varied. Because `standard_id` is `{country}-{state}-{year}-{indicator_code}`, that churn is a different Aurora primary key for the same standard on each run. The rule stays in the prompt and the Python executes it; see the LLM-first design note in [CLAUDE.md](../CLAUDE.md) for why this pairing is the sanctioned shape and a per-state abbreviation branch is not.
+
 #### Layout coordinates in the prompt
 
 Textract records a normalized bounding box for every block, but a page-only serialization (`[Page 12] …`) throws that away — and on a multi-column page the blocks arrive interleaved line by line, so the model has no way to tell which column a line came from and crosses their contents. `_serialize_blocks_for_prompt` therefore tags each prompt line with its normalized left edge: `[Page 12 | x=0.09] …`.
@@ -162,12 +176,31 @@ Example: `US-CA-2021-LLD.1.2` = United States, California, 2021, indicator `LLD.
 
 There is **no separate `domain_code` component**. The `indicator_code` is already fully qualified — it carries the domain segment and any disambiguator it needs, so `generate_standard_id` (in `parser.py`) is a single clean rule rather than a stack of special cases. Disambiguators come in two shapes:
 
-| Shape           | Where it goes | Example                                                  |
-| --------------- | ------------- | -------------------------------------------------------- |
-| Age prefix      | Leading       | TX `PK3.I.A.2` vs `PK4.I.A.2`                            |
-| Column suffix   | Trailing      | CA `ELD.1.0.VOC.1.1.DISC` vs `ELD.1.0.VOC.1.1.BRD`       |
+| Shape            | Where it goes | Example                                                  |
+| ---------------- | ------------- | -------------------------------------------------------- |
+| Age prefix       | Leading       | TX `PK3.I.A.2` vs `PK4.I.A.2`                            |
+| Column suffix    | Trailing      | CA `ELD.1.0.VOC.1.1.DISC` vs `ELD.1.0.VOC.1.1.BRD`       |
+| Ancestor segment | Spliced in    | NV `SS.2.CI.PK3` vs `SS.5.CI.PK3`                        |
 
-This is what keeps side-by-side age/proficiency columns from collapsing into a single ID.
+The first two keep side-by-side age/proficiency columns from collapsing into a
+single ID. The third handles a different failure: a document whose **printed
+code namespace is not unique**. Nevada codes its indicators
+`<domain>.<sub_strand>.PKn`, skipping the strand — so two genuinely different
+standards both print `SS.CI.PK3` ("resolve conflicts with peers *with adult
+guidance*" under Social Studies Standard 5, and "*in an age-appropriate
+manner*" under Standard 2), and the strand is the only thing separating them.
+
+`disambiguate_colliding_standards` (in `parser.py`) resolves this after all
+chunks merge, ancestor-first: colliding rows are re-qualified with their own
+parent's segments. **Every member of the colliding set is rewritten, including
+the first one seen**, so the ids do not depend on which row was parsed first —
+the same document always yields the same keys. A numeric counter remains only
+as a fallback for rows no parent can separate; that path *is* order-dependent
+and logs a warning saying so.
+
+It runs after the merge rather than inside the per-chunk loop for two reasons:
+a collision can span two chunks, and `normalize_parsed_codes` can itself bring
+two rows onto one code.
 
 ## S3 Path Structure
 

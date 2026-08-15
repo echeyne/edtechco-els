@@ -17,6 +17,11 @@ Two document-agnostic concerns are covered here:
 * ``_is_title_grounded`` — whether an element's title actually appears in the
   text it cites is a property of the emitted JSON alone, checkable without
   knowing anything about the document.
+
+One prompt-side contract is asserted here too (``TestDetectionPromptCodeRecovery``).
+Rule 4's code-recovery clause has no Python counterpart by design, so the only
+thing a test can pin is that the instruction is actually in the prompt the model
+receives — and that the guards which keep it off the goldens travel with it.
 """
 
 import json
@@ -28,10 +33,14 @@ from els_pipeline.detector import (
     _block_left,
     _canonicalize_code,
     _dedup_elements,
+    _is_code_grounded,
     _is_title_grounded,
     _is_truncated_prefix,
+    _resolve_code,
     _serialize_blocks_for_prompt,
+    build_detection_prompt,
     canonicalize_depth_map_levels,
+    derive_code_from_title,
     parse_llm_response,
 )
 
@@ -659,3 +668,220 @@ class TestCanonicalizeDepthMapLevels:
         for dm in ({}, {"doc_depths": []}, _dm("domain"), {"doc_depths": "nope"}):
             assert canonicalize_depth_map_levels(dm) is dm
         assert _levels(canonicalize_depth_map_levels(_dm("domain"))) == ["domain"]
+
+
+class TestDeriveCodeFromTitle:
+    """Prompt rule 4's abbreviation procedure, executed deterministically.
+
+    The rule is a string algorithm; the LLM samples it. Three temperature-0
+    detector runs over one frozen Kentucky extraction gave 11 of 44 elements a
+    different code on at least one run, so the same standard would reach Aurora
+    under different primary keys depending on which run wrote it.
+    """
+
+    @pytest.mark.parametrize("title,expected", [
+        # (c) several content words -> initials, capped at 5
+        ("Approaches to Learning", "AL"),
+        ("Physical Development", "PD"),
+        ("Concepts About Print", "CP"),
+        ("Language and Early Literacy", "LEL"),
+        ("Engages in an activity for a sustained period of time", "EASPT"),
+        # (c) exactly one content word -> its first four letters
+        ("Vocabulary", "VOCA"),
+        ("Initiative", "INIT"),
+        # (a) a hyphenated compound is ONE word
+        ("Persists with self-selected activities until completed", "PSAUC"),
+        # (a) a slash splits
+        ("Health/Mental Wellness", "HMW"),
+        ("Takes care of personal health/safety needs with adult support as needed", "TCPHS"),
+        # (b) the symbol & is a connector
+        ("Social & Emotional Development", "SED"),
+    ])
+    def test_rule_four_examples(self, title, expected):
+        assert derive_code_from_title(title) == expected
+
+    def test_trailing_punctuation_is_ignored(self):
+        assert derive_code_from_title("Follows simple directions.") == "FSD"
+
+    def test_connectors_are_matched_case_insensitively(self):
+        assert derive_code_from_title("Uses Words And Signs") == "UWS"
+
+    def test_all_connector_title_keeps_its_words(self):
+        # Rule 4(d): dropping connectors would leave nothing, so (c) is applied
+        # to the words as they are rather than returning an empty code.
+        assert derive_code_from_title("Of the and") == "OTA"
+
+    @pytest.mark.parametrize("title", ["", "   ", None, 42])
+    def test_degenerate_titles_yield_no_code(self, title):
+        assert derive_code_from_title(title) is None
+
+
+class TestCodeGrounding:
+    """Which branch of rule 4 produced this code — the document, or the model?
+
+    A code the document prints is read off the page and so appears in the
+    element's own ``source_text``; an invented abbreviation is derived from the
+    title and appears nowhere in it. Only the invented kind is recomputed.
+    """
+
+    @pytest.mark.parametrize("code,source_text", [
+        ("Benchmark 1.1", "Benchmark 1.1: Maintains focus and sustains attention."),
+        ("Standard 2", "Language and Early Literacy Standard 2: Demonstrates the knowledge"),
+        ("I.A.2", "I.A.2 Child shows initiative in trying new activities"),
+        ("PK3.I.A.2", "PK3.I.A.2 Child uses language"),
+        ("1.0", "1.0 Listening and Speaking"),
+        ("a", "a. Demonstrates self-confidence."),
+        # The canonicalized spelling must still match the page's original one —
+        # `_canonicalize_code` folds "Strand: 1.0" to "Strand 1.0" first.
+        ("Strand 1.0", "Strand: 1.0 — Listening and Speaking"),
+    ])
+    def test_document_codes_are_grounded(self, code, source_text):
+        assert _is_code_grounded(code, source_text) is True
+
+    @pytest.mark.parametrize("code,source_text", [
+        ("EASPT", "Engages in an activity for a sustained period of time."),
+        ("AL", "Approaches to Learning"),
+        ("VOCA", "Vocabulary"),
+        # Case-sensitivity matters: the ordinary English word "as" must not
+        # ground a derived code "AS".
+        ("AS", "Uses gestures as needed"),
+        # Nor may a short code match inside a longer word.
+        ("CP", "Concepts About Print"),
+    ])
+    def test_invented_codes_are_not_grounded(self, code, source_text):
+        assert _is_code_grounded(code, source_text) is False
+
+    @pytest.mark.parametrize("code,source_text", [
+        (None, "text"), ("", "text"), ("  ", "text"), ("AL", None), ("AL", ""),
+    ])
+    def test_degenerate_input_is_not_grounded(self, code, source_text):
+        assert _is_code_grounded(code, source_text) is False
+
+
+class TestResolveCode:
+    """`_resolve_code` recomputes ONLY the codes the model invented."""
+
+    def test_document_code_is_never_overwritten(self):
+        # Even though the title would derive "MFSA", the document printed a code.
+        assert _resolve_code(
+            "Benchmark 1.1", "Maintains focus and sustains attention.",
+            "Benchmark 1.1: Maintains focus and sustains attention.",
+        ) == "Benchmark 1.1"
+
+    def test_invented_code_is_recomputed(self):
+        # The connector "and" must not reach the code — the model kept it.
+        assert _resolve_code(
+            "MFAAA", "Maintains focus and attention on activities despite distractions and interruptions",
+            "Maintains focus and attention on activities despite distractions and interruptions.",
+        ) == "MFAAD"
+
+    def test_a_correct_invented_code_is_left_as_is(self):
+        assert _resolve_code(
+            "EASPT", "Engages in an activity for a sustained period of time",
+            "Engages in an activity for a sustained period of time.",
+        ) == "EASPT"
+
+    def test_drifted_spellings_of_one_title_converge(self):
+        # The point of the pass: three runs, three codes, one answer.
+        title = "Experiments with combining objects and materials in new and imaginative ways"
+        src = title + "."
+        assert {_resolve_code(c, title, src) for c in ("ECOM", "EWCOM", "ECOMN")} == {"ECOMN"}
+
+    def test_untitled_element_keeps_its_code(self):
+        assert _resolve_code("XYZ", "", "no code here") == "XYZ"
+
+    def test_applied_when_building_an_element(self):
+        payload = json.dumps([
+            {"level": "indicator", "code": "MFAAA",
+             "title": "Maintains focus and attention on activities despite distractions and interruptions",
+             "description": "", "confidence": 0.95, "source_page": 2,
+             "source_text": "Maintains focus and attention on activities despite distractions and interruptions."},
+        ])
+        assert [e.code for e in parse_llm_response(payload, [])] == ["MFAAD"]
+
+    @pytest.mark.parametrize("code,source_text", [
+        # Rule 4's OTHER branch: a lettered leaf's code is just its list letter.
+        # The model sometimes drops the "a. " prefix from source_text, so
+        # grounding alone would read this as invented (observed on AZ).
+        ("a", "Demonstrates self-confidence."),
+        ("b", "Shows pride in accomplishments."),
+        # Positional document codes whose source_text got truncated.
+        ("1.0", "Listening and Speaking"),
+        ("PK3.I.A.2", "Child uses language"),
+        ("Benchmark 1.1", "Maintains focus and sustains attention."),
+    ])
+    def test_non_abbreviation_shapes_are_never_recomputed(self, code, source_text):
+        assert _resolve_code(code, "Demonstrates self-confidence", source_text) == code
+
+
+class TestDetectionPromptCodeRecovery:
+    """Rule 4's code-recovery clause is prompt-only — assert it is really there.
+    """
+
+    @staticmethod
+    def _prompt() -> str:
+        return build_detection_prompt([
+            TextBlock(text="Science", page_number=1, block_type="LINE",
+                      confidence=0.99, geometry={}),
+        ])
+
+    def test_names_all_three_places_a_code_can_live(self):
+        prompt = self._prompt()
+        assert "ON THE HEADING LINE" in prompt
+        assert "IN A CAPTION BESIDE THE HEADING" in prompt
+        assert "FROM ITS DESCENDANTS' CODES" in prompt
+
+    def test_states_the_ancestor_prefix_principle(self):
+        assert (
+            "An ancestor's code is the COMMON PREFIX of its descendants' document codes"
+            in self._prompt()
+        )
+
+    def test_recovered_code_outranks_a_derived_abbreviation(self):
+        prompt = self._prompt()
+        # Precedence must be explicit in both directions: recovery wins, and
+        # the abbreviation branch is reachable only once recovery has failed.
+        assert "ALWAYS beats one you would derive from the title" in prompt
+        assert "ONLY when all three come up empty" in prompt
+
+    def test_prefix_is_peeled_one_segment_per_level(self):
+        # A raw common prefix over-reaches when a chunk shows only one group
+        # under a heading; peeling per level is what keeps a domain at "CD".
+        prompt = self._prompt()
+        assert "Peel exactly ONE segment per level as you move UP" in prompt
+        assert "consumes NO segment" in prompt
+
+    def test_carries_the_guards_that_keep_it_off_the_goldens(self):
+        prompt = self._prompt()
+        # More than one segment (CO's "1"/"6", AZ's "a"/"b" carry no ancestor).
+        assert "MORE THAN ONE dot-separated segment" in prompt
+        # Two agreeing descendants (a lone "PK3.I.A.2" must not donate a prefix).
+        assert "At least TWO descendants must agree on the prefix" in prompt
+        assert "Only WHOLE segments count" in prompt
+        # A labelled id belongs to the descendant's own level — this is what
+        # stops CA's "Foundation 1.7" from coding its sub_strand "Foundation 1".
+        assert "structural LABEL word" in prompt
+        assert "is NOT a namespace path" in prompt
+
+    def test_requires_the_evidence_line_in_source_text(self):
+        # Load-bearing: a recovered short code ("T") has the abbreviation
+        # branch's shape, so `_resolve_code` recomputes it to "TECH" unless it
+        # is grounded in the element's own source_text.
+        prompt = self._prompt()
+        assert "cite the line it came from in `source_text` IN ADDITION to the heading line" in prompt
+
+    def test_does_not_license_emitting_an_unseen_ancestor(self):
+        # Rule 1 still owns WHETHER an element is emitted; this clause only
+        # decides WHICH code an element already being emitted gets.
+        assert "It NEVER licenses emitting an element you cannot see" in self._prompt()
+
+    def test_mentions_no_state_specific_token(self):
+        """The clause must be stated as document structure, not as Nevada.
+
+        Its examples are placeholders ("CD.WM", "CD.AT"); NV's own tokens must
+        never appear, or the prompt has been overfitted to the canary state the
+        change is supposed to generalize to.
+        """
+        prompt = self._prompt()
+        for token in ("SS.ID", "SS.CI", "SS.GH", "S.EO", "S.SI", "T.TT", "T.CT", "Nevada"):
+            assert token not in prompt

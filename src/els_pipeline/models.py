@@ -6,6 +6,18 @@ from pydantic import BaseModel, Field, field_validator
 import re
 
 
+def _blank_to_none(v: Any) -> Any:
+    """Fold an empty or whitespace-only string to ``None``.
+
+    Applied as a ``mode="before"`` field validator, it covers every construction
+    path — ``parser.parse_llm_response``, ``validator.deserialize_record``,
+    the batch merge handlers, and any future caller — rather than one call site.
+    """
+    if isinstance(v, str) and not v.strip():
+        return None
+    return v
+
+
 class HierarchyLevelEnum(str, Enum):
     """Valid hierarchy levels."""
     DOMAIN = "domain"
@@ -61,7 +73,12 @@ class DetectedElement(BaseModel):
     level: HierarchyLevelEnum
     code: str
     title: str
-    description: str
+    # None when the element owns no prose of its own — the common case for a
+    # heading (a domain/strand/sub_strand with no introduction, a leaf whose
+    # example run is claimed by a lead-in). Optional rather than `str` so that
+    # absence is spelled `None` here exactly as it is in the golden sets and in
+    # the parser's HierarchyLevel — see _blank_to_none.
+    description: Optional[str] = None
     confidence: float = Field(ge=0.0, le=1.0)
     source_page: int = Field(gt=0)
     source_text: str
@@ -69,6 +86,12 @@ class DetectedElement(BaseModel):
     # "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). None for
     # non-age-banded elements.
     age_band: Optional[str] = None
+
+    @field_validator('description', 'age_band', mode='before')
+    @classmethod
+    def normalize_blank_to_none(cls, v):
+        """An absent description/age_band is None, never "" — see _blank_to_none."""
+        return _blank_to_none(v)
 
 
 class DetectionResult(BaseModel):
@@ -87,6 +110,12 @@ class HierarchyLevel(BaseModel):
     name: str
     description: Optional[str] = None
 
+    @field_validator('description', mode='before')
+    @classmethod
+    def normalize_blank_to_none(cls, v):
+        """An absent description is None, never "" — see _blank_to_none."""
+        return _blank_to_none(v)
+
 
 class HierarchyNode(BaseModel):
     """Represents a node in the hierarchy tree."""
@@ -95,6 +124,12 @@ class HierarchyNode(BaseModel):
     name: str
     description: Optional[str] = None
     children: List["HierarchyNode"] = Field(default_factory=list)
+
+    @field_validator('description', mode='before')
+    @classmethod
+    def normalize_blank_to_none(cls, v):
+        """An absent description is None, never "" — see _blank_to_none."""
+        return _blank_to_none(v)
 
 
 class NormalizedStandard(BaseModel):
@@ -110,7 +145,13 @@ class NormalizedStandard(BaseModel):
     age_band: Optional[str] = None
     source_page: int = Field(gt=0)
     source_text: str
-    
+
+    @field_validator('age_band', mode='before')
+    @classmethod
+    def normalize_blank_to_none(cls, v):
+        """An absent age_band is None, never "" — see _blank_to_none."""
+        return _blank_to_none(v)
+
     @field_validator('country')
     @classmethod
     def validate_country_code(cls, v):

@@ -23,7 +23,7 @@
         "strand": {
           "code": "SED.1",
           "name": "Self-Awareness and Emotional Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "SED.1.1",
@@ -32,7 +32,7 @@
         },
         "indicator": {
           "code": "SED.1.1.a",
-          "name": "Demonstrates self-confidence",
+          "name": "Demonstrates self-confidence.",
           "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\""
         },
         "age_band": "36-60",
@@ -54,7 +54,7 @@
         "strand": {
           "code": "SED.1",
           "name": "Self-Awareness and Emotional Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "SED.1.1",
@@ -63,7 +63,7 @@
         },
         "indicator": {
           "code": "SED.1.1.b",
-          "name": "Makes personal preferences known to others",
+          "name": "Makes personal preferences known to others.",
           "description": "Chooses carrots over celery during mealtime. Tells friends, \"I don't like that.\""
         },
         "age_band": "36-60",
@@ -85,7 +85,7 @@
         "strand": {
           "code": "SED.1",
           "name": "Self-Awareness and Emotional Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "SED.1.1",
@@ -94,7 +94,7 @@
         },
         "indicator": {
           "code": "SED.1.1.c",
-          "name": "Demonstrates knowledge of self-identity/autonomy",
+          "name": "Demonstrates knowledge of self-identity/autonomy.",
           "description": "Declares, \"I'm the big brother,\" while looking at a family picture. Tells the teacher, \"I'm at school while mommy is at work.\" Holds up three fingers and says, \"I am this many.\""
         },
         "age_band": "36-60",
@@ -116,7 +116,7 @@
         "strand": {
           "code": "SED.1",
           "name": "Self-Awareness and Emotional Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "SED.1.1",
@@ -125,7 +125,7 @@
         },
         "indicator": {
           "code": "SED.1.1.d",
-          "name": "Displays an awareness of similarities and differences between self and others",
+          "name": "Displays an awareness of similarities and differences between self and others.",
           "description": "Says, \"My hair is curly and yours is straight.\" Points to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt."
         },
         "age_band": "36-60",
@@ -147,7 +147,7 @@
         "strand": {
           "code": "SED.1",
           "name": "Self-Awareness and Emotional Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "SED.1.1",
@@ -156,7 +156,7 @@
         },
         "indicator": {
           "code": "SED.1.1.e",
-          "name": "Demonstrates developmentally appropriate cultural curiosity and responsiveness",
+          "name": "Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
           "description": "Wonders about a friend's seaweed snack and asks for a taste. The group widens the story time circle to make room for the child and their wheelchair. A guest speaker (parent) shares a storybook and song in their home language to the class."
         },
         "age_band": "36-60",
@@ -178,7 +178,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -187,7 +187,7 @@
         },
         "indicator": {
           "code": "LL.2.3.a",
-          "name": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes)",
+          "name": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes).",
           "description": "Plays the game, Sound Bingo, and can differentiate between sounds - \"That's a telephone.\" \"That's a dog barking.\" Says, \"Hey, the beginning of my name sounds like that /t/.\""
         },
         "age_band": "36-60",
@@ -209,7 +209,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -218,7 +218,7 @@
         },
         "indicator": {
           "code": "LL.2.3.b",
-          "name": "Identifies rhyming words",
+          "name": "Identifies rhyming words.",
           "description": "Shows thumbs up when two words rhyme in a poem, cat/hat. Points to pictures of words that rhyme."
         },
         "age_band": "36-60",
@@ -240,7 +240,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -249,7 +249,7 @@
         },
         "indicator": {
           "code": "LL.2.3.c",
-          "name": "Produces rhyming words",
+          "name": "Produces rhyming words.",
           "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. \nFinishes the rhyme \"The fat cat sat on the _.\""
         },
         "age_band": "36-60",
@@ -271,7 +271,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -280,7 +280,7 @@
         },
         "indicator": {
           "code": "LL.2.3.d",
-          "name": "Recognizes spoken words that begin with the same sound",
+          "name": "Recognizes spoken words that begin with the same sound.",
           "description": "Exclaims Millie, \"My name starts like Mel's name!\" Selects man and mop as beginning with the same sound when presented with pictures of man, hat, and mop."
         },
         "age_band": "36-60",
@@ -302,7 +302,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -311,7 +311,7 @@
         },
         "indicator": {
           "code": "LL.2.3.e",
-          "name": "Hears and shows awareness of separate words within spoken phrases or sentences",
+          "name": "Hears and shows awareness of separate words within spoken phrases or sentences.",
           "description": "Jumps when hearing a specified word in a story/poem. Claps each word spoken in a sentence \"I like blocks.\""
         },
         "age_band": "36-60",
@@ -333,7 +333,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -342,7 +342,7 @@
         },
         "indicator": {
           "code": "LL.2.3.f",
-          "name": "Identifies and discriminates syllables in words",
+          "name": "Identifies and discriminates syllables in words.",
           "description": "Claps each syllable of a name during a name game or name song. (Ben-ja-min = clap, clap, clap) Takes a step for each syllable heard in a word. (hi-ber-na-tion = step, step, step, step)"
         },
         "age_band": "36-60",
@@ -364,7 +364,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.3",
@@ -373,7 +373,7 @@
         },
         "indicator": {
           "code": "LL.2.3.g",
-          "name": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support",
+          "name": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support.",
           "description": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rime components. (/c/ + /at/) Guesses, \"Dog.\" when teacher says the onset and rime /d/+/og/."
         },
         "age_band": "36-60",
@@ -395,7 +395,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.4",
@@ -404,7 +404,7 @@
         },
         "indicator": {
           "code": "LL.2.4.a",
-          "name": "Discriminates letters from other shapes and symbols",
+          "name": "Discriminates letters from other shapes and symbols.",
           "description": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' falling off coconut tree.\" Looks at an advertisement (environmental print) and the child points to the \"W\" for Walmart."
         },
         "age_band": "36-60",
@@ -426,7 +426,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.4",
@@ -435,7 +435,7 @@
         },
         "indicator": {
           "code": "LL.2.4.b",
-          "name": "Matches and recognizes similarities and differences in letters, with modeling and support",
+          "name": "Matches and recognizes similarities and differences in letters, with modeling and support.",
           "description": "Traces the letter S and says, \"The letter has curves.\" Says, \"My name starts with a big A.\" The teacher says, \"Let's make a letter A like the letter in your name.\" Then using playdough, the child and teacher create the letter A."
         },
         "age_band": "36-60",
@@ -457,7 +457,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.4",
@@ -466,7 +466,7 @@
         },
         "indicator": {
           "code": "LL.2.4.c",
-          "name": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends",
+          "name": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends.",
           "description": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. \nSays, \"My name starts with an [I].\"\nPaints the letter L like in her friend's name, while at the easel."
         },
         "age_band": "36-60",
@@ -488,7 +488,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.4",
@@ -497,7 +497,7 @@
         },
         "indicator": {
           "code": "LL.2.4.d",
-          "name": "Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g., playdough, blocks, marker, and paper",
+          "name": "Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g., playdough, blocks, marker, and paper.",
           "description": "Rolls out the first letter of their name, \"K\" in playdough. Writes letter \"M\" for \"mom\" on an envelope, while at the writing center."
         },
         "age_band": "36-60",
@@ -519,7 +519,7 @@
         "strand": {
           "code": "LL.2",
           "name": "Emergent Literacy",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.2.4",
@@ -528,7 +528,7 @@
         },
         "indicator": {
           "code": "LL.2.4.e",
-          "name": "Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an increasing number of letters",
+          "name": "Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an increasing number of letters.",
           "description": "Writes name (Taylor) by making the \"t\" sound and then prints the letter. Says, \"/S/, /s/, /s/, snake.\" when looking at a letter [S]. Replicates the letter sound when a teacher shows and says a letter."
         },
         "age_band": "36-60",
@@ -550,7 +550,7 @@
         "strand": {
           "code": "LL.3",
           "name": "Emergent Writing",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "LL.3.1",
@@ -559,7 +559,7 @@
         },
         "indicator": {
           "code": "LL.3.1.c",
-          "name": " Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes",
+          "name": " Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes.",
           "description": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad. Writes W L C M and says, \"This says, 'Welcome'.\""
         },
         "age_band": "36-60",

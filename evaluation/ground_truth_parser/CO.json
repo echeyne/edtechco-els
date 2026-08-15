@@ -6,7 +6,7 @@
   "default_age_band": "36-60",
   "annotator": "06-13-2026",
   "annotation_date": "Emily Cheyne",
-  "notes": "CO is a 3-level document: Domain -> Strand -> Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'. Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected. Removed former CO-IND-04 (SED.5.4 'Hold information in mind\u2026'): that content is not present in this trimmed subset extraction (page 10 is English Language Development, not SED Executive Function), so it was a golden annotation error, not a detector miss.",
+  "notes": "CO is a 3-level document: Domain -> Strand -> Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...'). Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected.",
   "standards": [
     {
       "test_case_id": "CO-IND-01",
@@ -28,7 +28,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "PDH.1.1",
-          "name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases",
+          "name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
           "description": null
         },
         "age_band": "36-60",
@@ -55,7 +55,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "PDH.1.6",
-          "name": "Communicate an understanding of the importance of health and safety routines and rules",
+          "name": "Communicate an understanding of the importance of health and safety routines and rules.",
           "description": null
         },
         "age_band": "36-60",
@@ -82,7 +82,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "SED.2.1",
-          "name": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests",
+          "name": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
           "description": null
         },
         "age_band": "36-60",
@@ -109,7 +109,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "SED.2.3",
-          "name": "Have a sense of belonging to family, community, and other groups",
+          "name": "Have a sense of belonging to family, community, and other groups.",
           "description": null
         },
         "age_band": "36-60",
@@ -136,7 +136,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "SED.3.1",
-          "name": "Express a broad range of emotions and recognize these emotions in self and others",
+          "name": "Express a broad range of emotions and recognize these emotions in self and others.",
           "description": null
         },
         "age_band": "36-60",
@@ -163,7 +163,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "SED.3.2",
-          "name": "Express care and concern toward others",
+          "name": "Express care and concern toward others.",
           "description": null
         },
         "age_band": "36-60",
@@ -190,7 +190,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "SED.3.3",
-          "name": "Manage emotions with increasing independence",
+          "name": "Manage emotions with increasing independence.",
           "description": null
         },
         "age_band": "36-60",
@@ -217,7 +217,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "SED.4.3",
-          "name": "Manage actions, words, and behavior with increasing independence",
+          "name": "Manage actions, words, and behavior with increasing independence.",
           "description": null
         },
         "age_band": "36-60",
@@ -244,7 +244,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "ELD.2.4",
-          "name": "Use increasingly complex and varied English vocabulary",
+          "name": "Use increasingly complex and varied English vocabulary.",
           "description": null
         },
         "age_band": "36-60",

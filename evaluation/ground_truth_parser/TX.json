@@ -27,7 +27,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "I.A.2.36-48",
-          "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted",
+          "name": "Child can identify own physical attributes and indicate some likes and dislikes when prompted.",
           "description": null
         },
         "age_band": "36-48",
@@ -54,7 +54,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "I.A.2.48-60",
-          "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities",
+          "name": "Child shows self-awareness of physical attributes, personal preferences, and own abilities.",
           "description": null
         },
         "age_band": "48-60",
@@ -81,11 +81,11 @@
         "sub_strand": {
           "code": "I.B.1",
           "name": "Behavior Control",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "I.B.1.a.36-48",
-          "name": " Child follows simple rules and routines when assisted by adults",
+          "name": " Child follows simple rules and routines when assisted by adults.",
           "description": null
         },
         "age_band": "36-48",
@@ -112,11 +112,11 @@
         "sub_strand": {
           "code": "I.B.1",
           "name": "Behavior Control",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "I.B.1.a.48-60",
-          "name": "Child follows classroom rules and routines with occasional reminders from adults",
+          "name": "Child follows classroom rules and routines with occasional reminders from adults.",
           "description": null
         },
         "age_band": "48-60",
@@ -143,11 +143,11 @@
         "sub_strand": {
           "code": "I.B.2",
           "name": "Emotional Control",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "I.B.2.c.36-48",
-          "name": "Child manages intensity of emotions with adult assistance",
+          "name": "Child manages intensity of emotions with adult assistance.",
           "description": null
         },
         "age_band": "36-48",
@@ -174,11 +174,11 @@
         "sub_strand": {
           "code": "I.B.2",
           "name": "Emotional Control",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "I.B.2.c.48-60",
-          "name": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary",
+          "name": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
           "description": null
         },
         "age_band": "48-60",
@@ -205,7 +205,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "VI.A.1.48-60",
-          "name": "Child observes, investigates, describes, and discusses characteristics of common objects",
+          "name": "Child observes, investigates, describes, and discusses characteristics of common objects.",
           "description": null
         },
         "age_band": "48-60",
@@ -232,7 +232,7 @@
         "sub_strand": null,
         "indicator": {
           "code": "VI.A.4.48-60",
-          "name": "Child observes, investigates, describes, and discusses sources of energy including light, heat, and electricity",
+          "name": "Child observes, investigates, describes, and discusses sources of energy including light, heat, and electricity.",
           "description": null
         },
         "age_band": "48-60",

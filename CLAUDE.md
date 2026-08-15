@@ -17,15 +17,116 @@ When a change alters behavior, config, schema, or architecture (not a small bug 
 **The problem we were fighting: overfitting to the golden set.** The golden states (CA, AZ, CO, TX) had each been made to pass by adding targeted, per-state Python logic that scored well on the goldens but **did not generalize**. The 2026-06 LLM-first migration (`tasking/detector_parser_llm_migration.md`, Tasks 1–8, completed 2026-06-27) removed that logic and moved each rule into the prompt as a general principle. The per-state helpers that are now **gone** — do not re-introduce them or anything shaped like them:
 
 - `detector._LABEL_PREFIX_RE` + the label-strip half of `_strip_label_prefix`, and `parser._LABEL_CODE_RE` (`Strand N:` / `Concept N:`) → detector prompt rule 4: a `<Label> <id>: <Title>` heading's label-and-id IS the code, the text after the colon is the title (any structural-label word, not a fixed list).
-- `parser._abbreviate_title` + `_CODE_ABBREV_LEN` → detector prompt rule 4: derive a ≤5-char uppercase code from the title. Split on spaces/slashes (hyphenated compound = one word), drop connector words (`a an the and or but nor of to in on at by for from with into about over under through as`, `&`), then single content word → first 4 letters (`Vocabulary`→`VOCA`), multiple → first letter of each, capped at 5 (`Concepts About Print`→`CP`, `Approaches to Learning`→`AL`). The parser prompt restates the same procedure for the sub_strand/indicator collision case — **keep the two in sync**.
+- `parser._abbreviate_title` + `_CODE_ABBREV_LEN` → detector prompt rule 4: derive a ≤5-char uppercase code from the title. Split on spaces/slashes (hyphenated compound = one word), drop connector words (`a an the and or but nor of to in on at by for from with into about over under through as`, `&`), then single content word → first 4 letters (`Vocabulary`→`VOCA`), multiple → first letter of each, capped at 5 (`Concepts About Print`→`CP`, `Approaches to Learning`→`AL`). The parser prompt restates the same procedure for the sub_strand/indicator collision case — **keep the two in sync**. ⚠️ **Partly reversed 2026-08-01** — the rule still lives in the prompt, but it is now also executed deterministically by `detector.derive_code_from_title`, because the prompt alone could not make it reproducible. See "The one derivation that came back to Python" below; that helper is the sanctioned form, and a per-state abbreviation branch remains forbidden.
 - `detector._TRAILING_DOMAIN_LABEL_RE` → detector prompt: a domain title's trailing structural noun (`Standard`, `Domain`) is not part of its name — emit the bare name.
 - `parser._COLUMN_PREFIX_RE` / `_strip_column_prefix` + the PK-strip inside `_infer_domain_code` → parser prompt: a leading age/column token (e.g. `PK3.`) is excluded from the base hierarchical code.
-- `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Only a thin numeric-counter uniqueness guard remains.
+- `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Uniqueness is enforced afterwards by `disambiguate_colliding_standards` (see "Where a printed code is not unique" below), which resolves collisions by ancestor and keeps a numeric counter only as a last resort.
 - the CA collision branch + `_PURE_NUMERIC_RE` in `abbreviate_element_codes` (and the now-empty `abbreviate_element_codes` / `normalize_code_to_canonical` shells) → parser prompt: a sub_strand and its child indicator must never share a code; the sub_strand derives its segment from its title with the same ≤5-char abbrev scheme.
 
-A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), and the JSON-extraction / schema-validation plumbing.
+A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), and the JSON-extraction / schema-validation plumbing.
 
 Each of those earns its place by reading the SHAPE of the output rather than any document's vocabulary, and each fixes a defect the prompt alone could not: the LLM emits both spellings intermittently at temperature 0, so a prompt rule reduces the rate but cannot make the output reconcilable. Pair them with the prompt rule, don't substitute one for the other.
+
+`models._blank_to_none` (2026-08-15) belongs to that same family, one layer up. Absence has one spelling in this schema — `None` — and the pipeline was producing two. `detector._create_detected_element` coerced a missing description to `""` (`.get('description') or ""`), so every description-less element carried an empty string (18/44 KY, 49/52 NV, 48/61 CO); those `""` were then serialized into the parser prompt and the LLM echoed them back for some rows while emitting `null` for others — on KY, 9 `""` vs 17 `null` across 26 standards at *each* of domain/strand/sub_strand, and 45/170/22/8 blanks on AZ/CA/NV/TX from the same run. Which spelling a row got was decided by sampling, so the prompt alone could not fix it. The remedy is the sanctioned pairing: both prompts now state "ABSENCE IS `null`, NEVER `""`", and a `mode="before"` field validator folds a blank string to `None` on every optional free-text field (`HierarchyLevel`/`HierarchyNode.description`, `DetectedElement.description`/`age_band`, `NormalizedStandard.age_band`). It lives in `models.py` rather than at the parser call site because `HierarchyLevel` is constructed from four places — `parser.parse_llm_response`, `validator.deserialize_record`, the batch-merge handlers — and a call-site fix covers one. It reads only whether a string is entirely whitespace, never any document's vocabulary, and it never touches a non-blank value (verified byte-identical over 695 real descriptions across all six states). Note that both golden sets already annotate absence as `null`, so this moves output toward the goldens; `eval_parser._norm_val` folds `""`/`None` together and so never surfaced the defect — the harm was downstream, in `db.py` writing `""` into Aurora's nullable `description` columns.
+
+### The one derivation that came back to Python (2026-08-01)
+
+Rule 4's ≤5-char abbreviation is a deterministic string algorithm, and the model samples it. Measured on Kentucky — three detector runs at temperature 0 over one frozen extraction — **11 of 44 elements (25%) got a different code on at least one run**, while `level`, `source_page` and `age_band` never varied once. The failures were not near-misses: one run emitted a 4-character code, one transposed two initials, several kept a connector the rule says to drop. On the parser side the same experiment moved **58% of KY `standard_id`s** across three runs. Since `standard_id` is `{country}-{state}-{year}-{indicator_code}`, that is a different Aurora primary key for the same standard depending on which run wrote it.
+
+So `detector.derive_code_from_title` now executes rule 4's procedure in Python, and `_resolve_code` applies it — but **only where the document supplied no code of its own**. Two independent guards decide that:
+
+1. **Shape** (`_DERIVABLE_CODE_RE`) — rule 4's abbreviation branch emits uppercase letters and nothing else, so a code carrying a digit, a separator or a lowercase letter is positional and is never touched. This is what protects rule 4's *other* branch, the lettered leaf whose code is just its list letter.
+2. **Grounding** (`_is_code_grounded`) — a document code was read off the page and so appears in the element's own `source_text` (`Benchmark 1.1`, `I.A.2`, `1.0`), while an invented abbreviation is derived from the title and appears nowhere in it.
+
+Both are needed, and the AZ generalization run is why: the model sometimes transcribes a lettered item's `source_text` without its `"a. "` prefix (8 of 9 AZ lettered leaves kept it, the ninth did not), so grounding alone read a real list code as invented and replaced it with an abbreviation of the title. A printed document code is authoritative and is never overwritten, however unlike our scheme it looks.
+
+This is a **pairing, not a substitution** — rule 4 stays in the prompt verbatim, and the parser prompt still restates it; all three copies must agree. Three properties keep it inside the LLM-first line, and a future change here should preserve all three:
+
+1. It reads only the SHAPE of a title — word boundaries and a fixed connector list — never any document's vocabulary, so it is the same class of helper as `_canonicalize_code` and `_is_title_grounded`.
+2. It is scoped to the case the prompt itself calls out as "otherwise", so it cannot override what a document actually prints.
+3. It was validated against the goldens rather than tuned to them: the rule executed correctly reproduces **40 of 40** hand-annotated derived codes across CA/CO/KY/NV, so no golden moved to accommodate it. If a future edit here needs a golden changed, that is the signal it has drifted from the documented rule.
+
+Two alternatives were measured and rejected: dropping the connector rule fixed ~⅓ of the churn and would have required rewriting 26 of 40 golden codes; shortening the cap from 5 to 3 fixed 36% of the churn and raised sibling collisions from 6 to 8 across 262 standards. Neither reaches zero, and a primary key needs zero.
+
+Rule 4(b)'s connector list survives that verdict but its *rationale* changed, and the prompt now says so: it was justified as a stability measure, which stopped being true once Python executes the rule — churn is zero either way. What it still buys is legibility, and the effect is large, because the code is the human-readable part of `standard_id` and has only 5 characters to spend: without the rule "Attends to an adult or peer who is communicating verbally or nonverbally" codes as `ATAAO` rather than `AAPWI`. Collisions are a wash (6/262 with the rule, 7/262 without). The list is admittedly arbitrary at its margins — it holds `through` but not `toward`, `during`, `between`, `despite` or `while`, which appear 19 times across the corpus — and that incoherence was a real liability while a model had to apply it from memory. Executed in Python it is free, so leave the list exactly as it is: any edit rewrites goldens for no measured gain.
+
+### Where rule 4 looks for a code (2026-08-15) — prompt-only, no Python counterpart
+
+Rule 4 always said "use the document's code if present. Otherwise abbreviate the title", and the whole weight sat on *present*. The model read only the heading line, so an element whose code the document prints **somewhere else** fell through to the abbreviation branch and got an invented code. Measured on Nevada (2026-08-13, `outputs/08-13-26/NV-detection.json`): detector code accuracy 28/41 (0.683), and **9 of the 13 mismatches were this one cause** — 7 sub_strands (`SS.ID`/`SS.CI`/`SS.GH`/`S.EO`/`S.SI`/`T.TT`/`T.CT` came out as `IDCI`/`CIP`/`GHE`/`EOH`/`SI`/`TT`/`CT`) and 2 domains (`S`→`SCIE`, `T`→`TECH`). Several of those sub_strands carried the printed code *in their own `source_text`* and were abbreviated anyway.
+
+Rule 4 now names three places a code can live and orders them, and everything after them is the last resort:
+
+1. **inline** on the heading line (unchanged — and it still wins outright: an element that prints its own id keeps it even when its descendants' codes use a different stem);
+2. **in a caption beside the heading** — parenthetical, caption line, table/column header, or a lead-in naming the group that follows;
+3. **as the shared leading prefix of its descendants' codes** — *an ancestor's code is the common prefix of its descendants' document codes*.
+
+(3) is the general principle the fix turns on, and the prompt operationalizes it as **peel one whole segment per level going up**, rather than as a raw common prefix — a chunk that happens to show only one group under a heading would otherwise hand the heading its child's code. A level that prints its own code takes it and consumes no segment, which is what lets the recovered prefix cross a level the printed namespace skips (NV codes `<domain>.<group>.PKn` and skips the strand entirely).
+
+Four shape-based guards keep (3) off the goldens, and the CA/KY cases are why each exists — check any edit here against them:
+
+- the descendant code must have **more than one** dot-separated segment (CO's `1`/`6` and AZ's `a`/`b` carry no ancestor);
+- **two** descendants must agree on the prefix and differ after it (a lone `PK3.I.A.2` must not donate `PK3.I.A` to its strand);
+- only **whole segments** count;
+- a descendant code carrying a **structural label word** (`Foundation 1.7`, `Benchmark 1.1`) is not a namespace path — the label names the descendant's own level, so the id after it is the descendant's. Without this, CA's `Foundation 1.7`/`1.8` would give the `Grammar` sub_strand the code `Foundation 1` instead of `GRAM`, and KY's `Benchmark 1.1`/`1.2` would rewrite their strand.
+
+**No Python counterpart, deliberately.** Unlike rule 4's abbreviation, this is not a deterministic string algorithm over one field — it is a judgement about page layout ((2), which no post-processor can see) and about which of several codes in a chunk are descendants of which heading ((3), which needs the depth map and the reading order, not the emitted JSON). `_resolve_code` cannot help either: it decides which rule-4 branch produced a code the model already emitted, and cannot recover one the model never produced.
+
+⚠️ **The clause is coupled to `_resolve_code` through `source_text`, and that coupling is load-bearing.** A recovered short domain code like `T` matches `_DERIVABLE_CODE_RE`, so if it is not grounded in its own `source_text` it gets recomputed to `TECH` and the fix is silently undone. Rule 4 therefore requires citing the caption/descendant line that supplied the code in `source_text` **in addition to** the heading line — which rule 7 ("the exact line(s) you used") already implies, and which the eval does not grade. Rule 1's self-check is unaffected: the heading line must still be there, and a child's line alone still means the heading was not seen. If NV domains still come back as `SCIE`/`TECH` while the sub_strands are right, this citation is the first thing to check.
+
+The parser prompt got the matching half, since the detector now hands it dotted codes at sub_strand level: an **already-qualified** code (a dotted path whose first segment is its own domain's code) is used as-is at every level and never re-prefixed (`AB.CD`, not `AB.2.AB.CD`), and peeling parents off a qualified code **stops where the namespace stops** — if the next peel would equal the parent's own code, that level is outside the namespace and takes its heading's identifier instead (`AB.2`). One consequence is deliberate and documented in `ground_truth_parser/NV.json`: the sub_strand's code does not extend the strand's, because the printed identifier outranks chain continuity.
+
+### Where a printed code is not unique (2026-08-15) — `_anchor_parent_chain` + `disambiguate_colliding_standards`
+
+Both of these exist because a document's printed code namespace can **skip a
+level**, and the parser previously assumed it never does.
+
+**`_anchor_parent_chain`.** `_anchor_parent_code` forces each parent code to be
+a prefix slice of the indicator's code — correct for documents that spell out
+every ancestor, and the fix for the CA case where the LLM borrows a sibling
+domain's prefix (`ELD.1.0.VOCA` under indicator `FLD.1.0.VOCA.1.1`). Nevada
+breaks the assumption: it codes indicators `<domain>.<sub_strand>.PKn` and
+gives the strand its own heading identifier ("Social Studies Standard 2") that
+appears nowhere in the indicator code. Anchoring each level independently then
+peeled the SAME prefix for two levels — NV's strand and sub_strand both became
+`SS.CI` — so the strand's real identity was discarded and five distinct strands
+collapsed onto three codes. This was **deterministic Python, not LLM variance**:
+`SS.2` has depth 2 and indicator `SS.CI.PK3` has three segments, so the old
+function returned `SS.CI` every time. NV could not have produced `SS.2` at all.
+
+The rule is the one this file already documented for the parser prompt —
+*peeling stops where the namespace stops* — and the tell is purely structural:
+if a level's anchored code EQUALS the anchored code of the level directly below
+it, the peel ran past the end of the namespace, and that level keeps the
+identifier its own heading supplied. It reads only dot-segment shape, never any
+document's vocabulary, and it is a no-op for AZ/CA/CO/KY/TX, where no two
+levels ever peel to the same prefix. Measured effect on NV: `strand.code` 0/15
+→ 12/15, field accuracy 0.933 → 0.978, with the four golden states unchanged.
+Check any edit here against all five shapes — NV `SS.CI.PK3` → (`SS`, `SS.2`,
+`SS.CI`), KY `AL.1.1.EASPT` → (`AL`, `AL.1`, `AL.1.1`), and the CA borrow
+`FLD.1.0.VOCA.1.1` → (`FLD`, `FLD.1.0`, `FLD.1.0.VOCA`).
+
+**`disambiguate_colliding_standards`.** Once the strand survives, the second
+half of the same problem is visible: NV prints `SS.CI.PK3` for two different
+standards (under Social Studies Standard 5 and Standard 2), because the strand
+that separates them is not in the code. That is one Aurora primary key for two
+rows. Resolution is ancestor-first — each colliding row is re-qualified with
+its own parent's segments (`SS.2.CI.PK3`, `SS.5.CI.PK3`) — and **every member
+of the set is rewritten, including the first seen**, so the result does not
+depend on parse order. The old in-loop numeric guard was order-dependent (first
+row kept the bare code, second got `.2`), which is the wrong property for a
+primary key; the counter survives only as a logged last resort for rows no
+parent separates. It runs after the merge because a collision can span chunks
+and because `normalize_parsed_codes` can itself bring two rows onto one code.
+
+⚠️ **Known gap, not yet fixed:** the collision resolver only sees rows the LLM
+actually emits. On NV the model emits 24 standards from 25 indicators — it
+merges the two `SS.CI.PK3` rows itself and the second is silently lost, so
+there is no collision left for Python to resolve. `NO-ID-COLLISION` passes
+*because* the row vanished, which is the worst way for a test to go green. The
+golden annotates only the Standard 2 row and so has never covered this. Fixing
+it needs the prompt to stop merging rows that share a printed code but differ
+in text or parent; a count check (indicators in vs standards out) would at
+least make the loss loud instead of silent.
 
 **When working in these two files, prefer in this order:**
 1. **Improve the prompt** so the LLM handles the case as a general principle. A rule that helps every document (e.g. "a structural label like `Strand 1:` is the code, not the title") belongs as a prompt instruction, stated generally — not as a Python regex keyed to specific label words.

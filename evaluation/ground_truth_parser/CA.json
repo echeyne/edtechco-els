@@ -11,27 +11,27 @@
     {
       "test_case_id": "CA-IND-01-EARLY",
       "expected": {
-        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2.36-54",
+        "standard_id": "US-CA-2021-AL.1.0.INIT.1.2.36-54",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
         "domain": {
-          "code": "ATL",
+          "code": "AL",
           "name": "Approaches to Learning",
-          "description": ""
+          "description": null
         },
         "strand": {
-          "code": "ATL.1.0",
+          "code": "AL.1.0",
           "name": "Motivation to Learn",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
-          "code": "ATL.1.0.INIT",
+          "code": "AL.1.0.INIT",
           "name": "Initiative",
-          "description": ""
+          "description": null
         },
         "indicator": {
-          "code": "ATL.1.0.INIT.1.2.36-54",
+          "code": "AL.1.0.INIT.1.2.36-54",
           "name": "Initiative",
           "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems."
         },
@@ -42,27 +42,27 @@
     {
       "test_case_id": "CA-IND-01-LATER",
       "expected": {
-        "standard_id": "US-CA-2021-ATL.1.0.INIT.1.2.48-66",
+        "standard_id": "US-CA-2021-AL.1.0.INIT.1.2.48-66",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
         "domain": {
-          "code": "ATL",
+          "code": "AL",
           "name": "Approaches to Learning",
-          "description": ""
+          "description": null
         },
         "strand": {
-          "code": "ATL.1.0",
+          "code": "AL.1.0",
           "name": "Motivation to Learn",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
-          "code": "ATL.1.0.INIT",
+          "code": "AL.1.0.INIT",
           "name": "Initiative",
-          "description": ""
+          "description": null
         },
         "indicator": {
-          "code": "ATL.1.0.INIT.1.2.48-66",
+          "code": "AL.1.0.INIT.1.2.48-66",
           "name": "Initiative",
           "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently."
         },
@@ -85,7 +85,7 @@
         "strand": {
           "code": "FLD.1.0",
           "name": "Listening and Speaking",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.1.0.VOCA",
@@ -116,7 +116,7 @@
         "strand": {
           "code": "FLD.1.0",
           "name": "Listening and Speaking",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.1.0.VOCA",
@@ -228,7 +228,7 @@
     {
       "test_case_id": "CA-IND-04-DISCOVERING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.DISC",
+        "standard_id": "US-CA-2021-ELD.2.0.CP.2.6.DISC",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -243,12 +243,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "ELD.2.0.CAP",
+          "code": "ELD.2.0.CP",
           "name": "Concepts About Print",
           "description": null
         },
         "indicator": {
-          "code": "ELD.2.0.CAP.2.6.DISC",
+          "code": "ELD.2.0.CP.2.6.DISC",
           "name": "Understanding the Concept of Print",
           "description": "Discovering: Interact with materials representing the letters of the English alphabet."
         },
@@ -259,7 +259,7 @@
     {
       "test_case_id": "CA-IND-04-DEVELOPING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.DEVE",
+        "standard_id": "US-CA-2021-ELD.2.0.CP.2.6.DEVE",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -274,12 +274,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "ELD.2.0.CAP",
+          "code": "ELD.2.0.CP",
           "name": "Concepts About Print",
           "description": null
         },
         "indicator": {
-          "code": "ELD.2.0.CAP.2.6.DEVE",
+          "code": "ELD.2.0.CP.2.6.DEVE",
           "name": "Understanding the Concept of Print",
           "description": "Developing: Demonstrate awareness that they are interacting with English print."
         },
@@ -290,7 +290,7 @@
     {
       "test_case_id": "CA-IND-04-BROADENING",
       "expected": {
-        "standard_id": "US-CA-2021-ELD.2.0.CAP.2.6.BROA",
+        "standard_id": "US-CA-2021-ELD.2.0.CP.2.6.BROA",
         "country": "US",
         "state": "CA",
         "version_year": 2021,
@@ -305,12 +305,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "ELD.2.0.CAP",
+          "code": "ELD.2.0.CP",
           "name": "Concepts About Print",
           "description": null
         },
         "indicator": {
-          "code": "ELD.2.0.CAP.2.6.BROA",
+          "code": "ELD.2.0.CP.2.6.BROA",
           "name": "Understanding the Concept of Print",
           "description": "Broadening: Demonstrate awareness of English print as something that can be read and has specific meaning."
         },
@@ -333,12 +333,12 @@
         "strand": {
           "code": "FLD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.2.0.PA.2.1.36-54",
@@ -364,12 +364,12 @@
         "strand": {
           "code": "FLD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.2.0.PA.2.1.48-66",
@@ -395,12 +395,12 @@
         "strand": {
           "code": "FLD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.2.0.PA.2.3.36-54",
@@ -426,12 +426,12 @@
         "strand": {
           "code": "FLD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.2.0.PA.2.3.48-66",
@@ -457,12 +457,12 @@
         "strand": {
           "code": "ELD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "ELD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "ELD.2.0.PA.2.3.DISC",
@@ -488,12 +488,12 @@
         "strand": {
           "code": "ELD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "ELD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "ELD.2.0.PA.2.3.DEVE",
@@ -519,12 +519,12 @@
         "strand": {
           "code": "ELD.2.0",
           "name": "Foundational Literacy Skills",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "ELD.2.0.PA",
           "name": "Phonological Awareness",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "ELD.2.0.PA.2.3.BROA",
@@ -550,12 +550,12 @@
         "strand": {
           "code": "FLD.1.0",
           "name": "Listening and Speaking",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.1.0.GRAM",
           "name": "Grammar",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.1.0.GRAM.1.8.36-54",
@@ -581,12 +581,12 @@
         "strand": {
           "code": "FLD.1.0",
           "name": "Listening and Speaking",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.1.0.GRAM",
           "name": "Grammar",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.1.0.GRAM.1.8.48-66",
@@ -612,12 +612,12 @@
         "strand": {
           "code": "FLD.1.0",
           "name": "Listening and Speaking",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.1.0.GRAM",
           "name": "Grammar",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.1.0.GRAM.1.7.36-54",
@@ -643,12 +643,12 @@
         "strand": {
           "code": "FLD.1.0",
           "name": "Listening and Speaking",
-          "description": ""
+          "description": null
         },
         "sub_strand": {
           "code": "FLD.1.0.GRAM",
           "name": "Grammar",
-          "description": ""
+          "description": null
         },
         "indicator": {
           "code": "FLD.1.0.GRAM.1.7.48-66",
