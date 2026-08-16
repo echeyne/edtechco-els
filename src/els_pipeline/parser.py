@@ -427,7 +427,6 @@ def parse_llm_response(
 
     required_fields = {"domain_code", "domain_name", "indicator_code", "indicator_name"}
     standards: List[NormalizedStandard] = []
-    used_codes: set[str] = set()
 
     for obj in data:
         if not isinstance(obj, dict):
@@ -447,14 +446,11 @@ def parse_llm_response(
             column_label = obj.get("column_label")
             canonical_age = canonicalize_age_band(obj.get("age_band"))
             indicator_code = obj["indicator_code"]
-            # Uniqueness is NOT resolved here. Two rows may legitimately arrive
-            # with the same printed code (a document whose namespace skips the
-            # strand can print one code for two different standards), and the
-            # ancestor that tells them apart is only knowable once every chunk
-            # has been merged. Renaming here would also make the winner depend
-            # on chunk order — the wrong property for a primary key. See
-            # `disambiguate_colliding_standards`, applied after the merge.
-            used_codes.add(indicator_code)
+            # Uniqueness is NOT resolved here. This function runs once per
+            # chunk, so it cannot see a collision that spans two of them, and
+            # renaming the second row to arrive would make the surviving code
+            # depend on chunk order — the wrong property for a primary key.
+            # `disambiguate_colliding_standards` handles it after the merge.
 
             # Build the parents AFTER the indicator code is finalized and anchor
             # every parent code to it. The indicator code is the ground truth for

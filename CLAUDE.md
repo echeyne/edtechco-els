@@ -105,28 +105,43 @@ Check any edit here against all five shapes — NV `SS.CI.PK3` → (`SS`, `SS.2`
 `SS.CI`), KY `AL.1.1.EASPT` → (`AL`, `AL.1`, `AL.1.1`), and the CA borrow
 `FLD.1.0.VOCA.1.1` → (`FLD`, `FLD.1.0`, `FLD.1.0.VOCA`).
 
-**`disambiguate_colliding_standards`.** Once the strand survives, the second
-half of the same problem is visible: NV prints `SS.CI.PK3` for two different
-standards (under Social Studies Standard 5 and Standard 2), because the strand
-that separates them is not in the code. That is one Aurora primary key for two
-rows. Resolution is ancestor-first — each colliding row is re-qualified with
-its own parent's segments (`SS.2.CI.PK3`, `SS.5.CI.PK3`) — and **every member
-of the set is rewritten, including the first seen**, so the result does not
-depend on parse order. The old in-loop numeric guard was order-dependent (first
-row kept the bare code, second got `.2`), which is the wrong property for a
-primary key; the counter survives only as a logged last resort for rows no
-parent separates. It runs after the merge because a collision can span chunks
-and because `normalize_parsed_codes` can itself bring two rows onto one code.
+**`disambiguate_colliding_standards`.** Uniqueness used to be enforced inside
+`parse_llm_response` by a numeric counter: the first row to arrive kept the
+bare code and the second got `.2`. That is order-dependent, which is the wrong
+property for a primary key — the same document could write two different Aurora
+keys depending on chunk order. The resolver replaces it with an ancestor-first
+rule applied after the merge: colliding rows are re-qualified with their own
+parent's segments, and **every member of the set is rewritten, including the
+first seen**, so the outcome does not depend on parse order. The counter
+survives only as a logged last resort for rows no parent separates. It runs
+after the merge because a collision can span chunks and because
+`normalize_parsed_codes` can itself bring two rows onto one code.
 
-⚠️ **Known gap, not yet fixed:** the collision resolver only sees rows the LLM
-actually emits. On NV the model emits 24 standards from 25 indicators — it
-merges the two `SS.CI.PK3` rows itself and the second is silently lost, so
-there is no collision left for Python to resolve. `NO-ID-COLLISION` passes
-*because* the row vanished, which is the worst way for a test to go green. The
-golden annotates only the Standard 2 row and so has never covered this. Fixing
-it needs the prompt to stop merging rows that share a printed code but differ
-in text or parent; a count check (indicators in vs standards out) would at
-least make the loss loud instead of silent.
+⚠️ **This resolver has no confirmed live case.** It was written for an apparent
+NV collision — two rows both coded `SS.CI.PK3` — that turned out not to be one
+(see below). It fires on no golden state. Treat it as a hardening of a
+previously order-dependent guard, not as a fix for an observed defect, and do
+not cite NV as its motivating example.
+
+**The NV `SS.CI.PK3` duplicate is a DETECTOR defect, not a collision
+(2026-08-15).** The detector emits 25 NV indicators where the document has 24
+distinct ones, and the parser collapsing them to 24 is CORRECT. The document
+contains exactly ONE `SS.CI.PK3`. The extra element is the same indicator
+emitted twice: its `source_text` is a truncated prefix of the real one
+(`SS.CI.PK3. Recognize and resolve conflicts with`) and its title carries a
+fabricated tail — "…with peers **with adult guidance**", a phrase that appears
+ZERO times in the extraction. NV's page 5 is a multi-column table that flattens
+into interleaved reading order, which is the likely trigger.
+
+Two things follow. First, `_is_title_grounded` would have caught it — the title
+is absent from its own `source_text` — but it is deliberately scoped to
+domain/strand/sub_strand, exempting indicators because an age-band column
+indicator legitimately carries the row's shared header as its title. Its
+docstring's premise that "nothing invents a leaf out of its own code" holds,
+but does not cover this shape: a leaf invented out of a TRUNCATED
+transcription. Second, do not "fix" the parser's 25 → 24 collapse, and do not
+add a count check that treats indicators-in ≠ standards-out as an error — the
+collapse is the parser compensating correctly for bad detector input.
 
 **When working in these two files, prefer in this order:**
 1. **Improve the prompt** so the LLM handles the case as a general principle. A rule that helps every document (e.g. "a structural label like `Strand 1:` is the code, not the title") belongs as a prompt instruction, stated generally — not as a Python regex keyed to specific label words.

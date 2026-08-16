@@ -59,33 +59,6 @@ re-verify if that detection is ever re-recorded.
    suite logs `SKIP`. `NO-ID-COLLISION` is pre-filled in both parser goldens
    and already has its function.
 
-## Status (2026-08-13, against `outputs/08-13-26/`)
-
-| Golden | State | Notes |
-| --- | --- | --- |
-| `ground_truth_detector/KY.json` | annotated, **exhaustive** (44 of 44) | Emily-reviewed. Precision 1.000 is a real document-level figure here — no Task 1b FP audit needed. |
-| `ground_truth_detector/NV.json` | annotated, **spot-check** (41 of 46 unique) | Emily-reviewed 2026-08-01; 4 strand codes corrected 2026-08-13. The 5 unannotated extras are all real strands whose indicator groups fall outside the 15pp subset, so reported precision 0.774 is a floor, **not** document precision. |
-| `ground_truth_parser/KY.json` | annotated (26 of 26) | Emily-reviewed. `source_detection` re-pointed at `outputs/08-13-26/` 2026-08-13 (verified code-equivalent to the old synthetic fixture). |
-| `ground_truth_parser/NV.json` | **first pass, awaiting review** (15 of 24) | Drafted from the PDF + the detector golden, not from parser output. The code-namespace question its `notes` field raised was resolved 2026-08-15 in the golden's favour — see below. |
-
-**Update 2026-08-15 (against `outputs/08-15-26/`).** NV's parser strand codes
-were failing 0/15 not because the golden was wrong but because
-`_anchor_parent_code` could not represent a namespace that skips a level;
-`_anchor_parent_chain` fixed it (0/15 → 12/15, field accuracy 0.933 → 0.978).
-The golden was right and needed no edit. The 3 residual misses are a *missing*
-strand (`None`), a separate LLM emission gap on three Science rows.
-
-**Outstanding NV golden work.** The document prints `SS.CI.PK3` for TWO
-different standards — "…with adult guidance" under Social Studies Standard 5
-and "…in an age-appropriate manner" under Standard 2. The golden annotates only
-the Standard 2 row, as `US-NV-2023-SS.CI.PK3`. The parser now resolves such
-collisions by ancestor, which would make these `US-NV-2023-SS.2.CI.PK3` and
-`US-NV-2023-SS.5.CI.PK3`. Annotating the second row is the change that would
-give this case coverage — but note the model currently merges the two rows and
-emits only 24 standards from 25 indicators, so the collision never reaches the
-resolver. **Do not treat the passing `NO-ID-COLLISION` case as evidence here:
-it passes because the duplicate row was silently dropped.**
-
 **Precision caveat for the paper.** A spot-check golden cannot produce a
 precision number. KY's detector golden happens to be exhaustive, so its
 precision is real; NV's is not, and neither parser golden is. Report NV/KY

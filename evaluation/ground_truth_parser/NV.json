@@ -3,14 +3,13 @@
   "state": "NV",
   "country": "US",
   "version_year": 2023,
-  "source_detection": "outputs/08-15-26/NV-detection.json",
+  "source_detection": "outputs/08-15-26-2/NV-detection.json",
   "default_age_band": "36-60",
   "annotator": "Emily Cheyne",
-  "annotation_date": "2026-08-15",
+  "annotation_date": "2026-08-16",
   "standards": [
     {
       "test_case_id": "NV-STD-01",
-      "notes": "Baseline: first indicator of the first group. All four levels present; every code below domain is the document's own printed token.",
       "expected": {
         "standard_id": "US-NV-2023-SS.ID.PK1",
         "country": "US",
@@ -42,7 +41,6 @@
     },
     {
       "test_case_id": "NV-STD-02",
-      "notes": "Last indicator of the SS.ID group, still under Standard 1.",
       "expected": {
         "standard_id": "US-NV-2023-SS.ID.PK4",
         "country": "US",
@@ -74,7 +72,6 @@
     },
     {
       "test_case_id": "NV-STD-03",
-      "notes": "STRAND-BOUNDARY EDGE CASE. p5 opens a new heading, 'Social Studies Standard 2', above the SS.CI group. The 08-13-26 parser attached SS.CI.PK1-PK3 to Standard 1 instead, so this entry and the two below it are the ones that catch the mis-parenting.",
       "expected": {
         "standard_id": "US-NV-2023-SS.CI.PK1",
         "country": "US",
@@ -106,7 +103,6 @@
     },
     {
       "test_case_id": "NV-STD-04",
-      "notes": "Last SS.CI indicator before the page break. The frozen detection emits the 'Social Studies Standard 2' strand TWICE (once for p5, once for the p6 continuation) — 6 of the 52 detected NV elements are such cross-page heading repeats — so the parser must collapse them to one strand rather than treat the second as a new one.",
       "expected": {
         "standard_id": "US-NV-2023-SS.CI.PK3",
         "country": "US",
@@ -138,7 +134,6 @@
     },
     {
       "test_case_id": "NV-STD-05",
-      "notes": "CROSS-PAGE CONTINUATION. p6 repeats the 'Social Studies Standard 2' / 'Indicators (SS.CI)' headers before continuing the same group; PK6 belongs to the SAME strand as PK1, not to a new one.",
       "expected": {
         "standard_id": "US-NV-2023-SS.CI.PK6",
         "country": "US",
@@ -170,7 +165,6 @@
     },
     {
       "test_case_id": "NV-STD-06",
-      "notes": "Last indicator before a new strand starts lower on the same page.",
       "expected": {
         "standard_id": "US-NV-2023-SS.CI.PK7",
         "country": "US",
@@ -202,7 +196,6 @@
     },
     {
       "test_case_id": "NV-STD-07",
-      "notes": "SECOND STRAND ON THE SAME PAGE. 'Social Studies Standard 3' opens mid-p6, below the tail of Standard 2. Page number alone cannot decide the parent here.",
       "expected": {
         "standard_id": "US-NV-2023-SS.GH.PK1",
         "country": "US",
@@ -234,7 +227,6 @@
     },
     {
       "test_case_id": "NV-STD-08",
-      "notes": "Second indicator of the mid-page strand.",
       "expected": {
         "standard_id": "US-NV-2023-SS.GH.PK2",
         "country": "US",
@@ -266,7 +258,6 @@
     },
     {
       "test_case_id": "NV-STD-09",
-      "notes": "SINGLE-LETTER DOMAIN ROOT. Science's namespace root is 'S', not an abbreviation of the title; the detector emitted 'SCIE'.",
       "expected": {
         "standard_id": "US-NV-2023-S.EO.PK1",
         "country": "US",
@@ -298,7 +289,6 @@
     },
     {
       "test_case_id": "NV-STD-10",
-      "notes": "CROSS-PAGE, SAME GROUP. S.EO.PK4 sits on p10 while PK1-PK3 are on p9; p10 also opens the S.SI group, so both groups appear on one page.",
       "expected": {
         "standard_id": "US-NV-2023-S.EO.PK4",
         "country": "US",
@@ -362,7 +352,6 @@
     },
     {
       "test_case_id": "NV-STD-12",
-      "notes": "Technology domain, namespace root 'T'; the detector emitted 'TECH'.",
       "expected": {
         "standard_id": "US-NV-2023-T.TT.PK1",
         "country": "US",
@@ -394,7 +383,6 @@
     },
     {
       "test_case_id": "NV-STD-13",
-      "notes": "Third indicator of the T.TT group.",
       "expected": {
         "standard_id": "US-NV-2023-T.TT.PK3",
         "country": "US",
@@ -426,7 +414,6 @@
     },
     {
       "test_case_id": "NV-STD-14",
-      "notes": "CAPTION SPLIT ACROSS LINES. p15 wraps the group header as 'Communicating Through / Technology Indicators / (T.CT)', so the code token is on its own line, detached from the title.",
       "expected": {
         "standard_id": "US-NV-2023-T.CT.PK1",
         "country": "US",

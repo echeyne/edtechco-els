@@ -176,31 +176,27 @@ Example: `US-CA-2021-LLD.1.2` = United States, California, 2021, indicator `LLD.
 
 There is **no separate `domain_code` component**. The `indicator_code` is already fully qualified — it carries the domain segment and any disambiguator it needs, so `generate_standard_id` (in `parser.py`) is a single clean rule rather than a stack of special cases. Disambiguators come in two shapes:
 
-| Shape            | Where it goes | Example                                                  |
-| ---------------- | ------------- | -------------------------------------------------------- |
-| Age prefix       | Leading       | TX `PK3.I.A.2` vs `PK4.I.A.2`                            |
-| Column suffix    | Trailing      | CA `ELD.1.0.VOC.1.1.DISC` vs `ELD.1.0.VOC.1.1.BRD`       |
-| Ancestor segment | Spliced in    | NV `SS.2.CI.PK3` vs `SS.5.CI.PK3`                        |
+| Shape         | Where it goes | Example                                            |
+| ------------- | ------------- | -------------------------------------------------- |
+| Age prefix    | Leading       | TX `PK3.I.A.2` vs `PK4.I.A.2`                      |
+| Column suffix | Trailing      | CA `ELD.1.0.VOC.1.1.DISC` vs `ELD.1.0.VOC.1.1.BRD` |
 
-The first two keep side-by-side age/proficiency columns from collapsing into a
-single ID. The third handles a different failure: a document whose **printed
-code namespace is not unique**. Nevada codes its indicators
-`<domain>.<sub_strand>.PKn`, skipping the strand — so two genuinely different
-standards both print `SS.CI.PK3` ("resolve conflicts with peers *with adult
-guidance*" under Social Studies Standard 5, and "*in an age-appropriate
-manner*" under Standard 2), and the strand is the only thing separating them.
+These keep side-by-side age/proficiency columns from collapsing into a single
+ID, and the parsing prompt emits them directly.
 
-`disambiguate_colliding_standards` (in `parser.py`) resolves this after all
-chunks merge, ancestor-first: colliding rows are re-qualified with their own
-parent's segments. **Every member of the colliding set is rewritten, including
-the first one seen**, so the ids do not depend on which row was parsed first —
-the same document always yields the same keys. A numeric counter remains only
-as a fallback for rows no parent can separate; that path *is* order-dependent
-and logs a warning saying so.
+Uniqueness is then enforced by `disambiguate_colliding_standards` (in
+`parser.py`), which runs after all chunks merge — a collision can span two
+chunks, and `normalize_parsed_codes` can itself bring two rows onto one code.
+If two standards still share an indicator code, it re-qualifies them
+ancestor-first, splicing in their own parent's segments; **every member of the
+colliding set is rewritten, including the first one seen**, so the resulting
+ids never depend on which row was parsed first. A numeric counter remains only
+as a fallback for rows no parent can separate, and that path *is*
+order-dependent, so it logs a warning saying so.
 
-It runs after the merge rather than inside the per-chunk loop for two reasons:
-a collision can span two chunks, and `normalize_parsed_codes` can itself bring
-two rows onto one code.
+This replaced an in-loop numeric guard whose first-come-first-served behavior
+made the primary key depend on chunk order. It currently fires on no state —
+treat it as hardening, not as a fix for an observed defect.
 
 ## S3 Path Structure
 

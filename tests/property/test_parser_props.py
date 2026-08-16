@@ -589,9 +589,15 @@ def test_property_2_3_age_band_fallback_and_passthrough(
         )
 
     assert isinstance(result, ParseResult)
+    # A caller-supplied fallback passes through verbatim, EXCEPT that absence
+    # has one spelling in this schema: `models._blank_to_none` folds an empty
+    # or whitespace-only band to None, so `""` and `" "` never reach the
+    # output as themselves. Asserting the fold here rather than filtering it
+    # out of the strategy keeps the blank case covered.
+    expected = age_band if age_band.strip() else None
     if result.standards:
         for std in result.standards:
-            assert std.age_band == age_band
+            assert std.age_band == expected
 
 
 # Property 1: parse_hierarchy always returns a ParseResult
