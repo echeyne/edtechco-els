@@ -1,0 +1,14 @@
+# LaTeX build artifacts — regenerate with:
+#   docker run --rm -v "$PWD":/paper -w /paper texlive/texlive:latest \
+#     bash -c "pdflatex -interaction=nonstopmode main.tex && bibtex main && \
+#              pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex"
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc

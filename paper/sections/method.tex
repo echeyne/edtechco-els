@@ -1,0 +1,46 @@
+% method.tex — Task 10 stub. Outline recovered verbatim from the original
+% plan file fragment (see ../OUTLINE_NOTES.md). Draft at Task 12.
+%
+% 6.1 Two-stage design rationale — detection (flat) vs. parsing (hierarchy
+%     resolution); why decoupled.
+% 6.2 Detection — Pass 1 depth-map inference over a stratified block sample
+%     -> Pass 2 per-chunk extraction with the depth map as authority. Core
+%     principle: classify by nesting POSITION, not document label.
+% 6.3 Parsing — domain-batched hierarchy resolution; code derivation/
+%     disambiguation (age -> month-range suffix, proficiency -> abbrev);
+%     collision avoidance.
+% 6.4 Model assignment: cheapest model that suffices — Haiku 4.5 for the
+%     depth map (cheap structural summary), Opus 4.6 for detection (the hard
+%     classification), Sonnet 4.6 for parsing (config.py:15-21). State the
+%     principle explicitly; the model-tier ablation (Task 7) is its evidence.
+% 6.5 Confidence and human verification — confidence is emitted and retained
+%     but gates nothing; verification is a separate per-element human
+%     workflow (guardrail 2). Discuss the open question for education use:
+%     must every standard be human-verified? Position: the durable win is
+%     standardized formatting, valuable before full verification;
+%     verification is a cost/trust dial, not a precondition.
+% 6.6 LLM-first design discipline — the "prompt-not-Python, general
+%     principle not per-state regex" stance and the 2026-06 migration that
+%     removed overfit rules (CLAUDE.md design section,
+%     tasking/detector_parser_llm_migration.md). The paper's differentiator.
+
+\section{Method}
+\label{sec:method}
+
+\subsection{Two-Stage Design Rationale}
+\label{sec:method-two-stage}
+
+\subsection{Detection}
+\label{sec:method-detection}
+
+\subsection{Parsing}
+\label{sec:method-parsing}
+
+\subsection{Model Assignment}
+\label{sec:method-model-assignment}
+
+\subsection{Confidence and Human Verification}
+\label{sec:method-confidence}
+
+\subsection{LLM-First Design Discipline}
+\label{sec:method-llm-first}

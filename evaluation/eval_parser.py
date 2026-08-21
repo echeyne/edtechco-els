@@ -184,7 +184,9 @@ def _variant_suffix(std: dict) -> Optional[str]:
     ELD.1.0.VOC.1.1.DISC vs .DEVE vs .BROA (all "Understanding Words", all
     36-66). Returns the suffix only when it's an all-caps label; age-distinguished
     variants (Early/Later) are already separated by age_band, so their numeric
-    "…36-54" suffix is intentionally ignored here."""
+    "…36-54" suffix is intentionally ignored here.
+
+    TIE-BREAKER ONLY — never part of `_match_key`. See that docstring for why."""
     ind = std.get("indicator")
     code = (ind or {}).get("code") if isinstance(ind, dict) else None
     if not code or "." not in code:
@@ -193,21 +195,38 @@ def _variant_suffix(std: dict) -> Optional[str]:
     return last if _VARIANT_SUFFIX_RE.match(last) else None
 
 
-def _match_key(std: dict) -> Tuple[str, Optional[str], Optional[str]]:
+def _match_key(std: dict) -> Tuple[str, Optional[str]]:
     """Identity of a standard for matching: (normalized indicator name,
-    canonicalized age_band, proficiency-variant suffix).
+    canonicalized age_band).
 
     The age band is folded via `_norm_age_band` so the unicode-'½' vs ASCII-'1/2'
     glyph split documented in eval_common can't turn a produced standard into a
     spurious "dropped" — which would otherwise hide EVERY other field comparison
-    for that standard. The variant suffix disambiguates proficiency columns that
-    share a name AND age_band (DISC/DEVE/BROA) so they don't collide and mis-pair.
-    This is identity/pairing only; the graded fields are still compared strictly
-    via `_norm_val` below."""
+    for that standard. This is identity/pairing only; the graded fields are still
+    compared strictly via `_norm_val` below.
+
+    ⚠️ THE IDENTITY MUST NOT BE DERIVED FROM THE CODE (repaired 2026-08-16,
+    arXiv paper Task 2). `_variant_suffix` used to be a third key component, so a
+    standard whose code came out MALFORMED could not pair with its golden at all
+    and reported as `dropped` — which silently removes it from `field_stats`, and
+    therefore from `field_accuracy`, instead of grading it as the wrong code it
+    is. Kentucky is the live case: the parser emitted bare `TCPHS` / `IHFC` /
+    `PARTO` / `PSGPB` where the golden has `HMW.1.1.TCPHS` etc., so the golden
+    side keyed on suffix 'TCPHS' and the parsed side on None. The suite reported
+    coverage 0.846 with field accuracy **1.000** — a perfect score that existed
+    only because the four malformed rows had been excluded from the denominator.
+    A metric must never be able to hide a defect by failing to pair.
+
+    The suffix still does its job (separating CA/TX proficiency columns that
+    share a name AND an age_band), but as a TIE-BREAKER inside `grade_parser`,
+    applied only when more than one candidate shares this key — which is the
+    condition its own docstring describes. `measure_stability` keys on this too,
+    and gains the same property: a run-to-run code change now counts as a field
+    disagreement (`_sig` covers `indicator.code` and `standard_id`) rather than
+    dropping the element out of the comparison unseen."""
     return (
         _indicator_name(std),
         _norm_age_band(std.get("age_band")),
-        _variant_suffix(std),
     )
 
 
@@ -278,6 +297,18 @@ def grade_parser(golden: dict, standards: List[dict]) -> ParserStateReport:
         # Reuse _match_key so the golden side and the parsed side can never drift.
         key = _match_key(expected)
         cands = [c for c in index.get(key, []) if id(c) not in matched_ids]
+
+        # Proficiency-column tie-break. Only meaningful when several candidates
+        # share (name, age_band) — the exact condition `_variant_suffix`
+        # describes. Narrowing here rather than in the key means a MALFORMED code
+        # can no longer stop a standard from pairing (see `_match_key`): if no
+        # candidate carries the golden's suffix we keep them all and let the
+        # field comparison report the wrong code, which is the honest outcome.
+        if len(cands) > 1:
+            want = _variant_suffix(expected)
+            exact = [c for c in cands if _variant_suffix(c) == want]
+            if exact:
+                cands = exact
 
         if not cands:
             rep.dropped.append(gid)

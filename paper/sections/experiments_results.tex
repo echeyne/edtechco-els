@@ -1,0 +1,29 @@
+% experiments_results.tex — Task 10 stub, but with the results-plumbing
+% mechanism (guardrail 6) wired in and demonstrated: the two \input tables
+% below are auto-generated from paper/results/task{1,2}_20260816/summary.json
+% by paper/analysis/generate_tables.py — regenerate with
+% `python paper/analysis/generate_tables.py`, never hand-edit
+% paper/tables/*.tex directly.
+%
+% Subsections to add as later tasks land (Task 3-8 each contribute a table
+% via the same generate_tables.py mechanism — extend it, don't hand-type):
+%   - Headline quality (below) — DONE, Tasks 1/2.
+%   - Verified precision / hallucination rate (Task 1b) — not yet run.
+%   - Depth-map on/off ablation (Task 3).
+%   - Rule-based baseline comparison (Task 4).
+%   - Stability/determinism (Task 5).
+%   - Cost/latency/scale, full-document tier, clearly separated from the
+%     subset-tier quality tables above (Task 6, guardrail 1).
+%   - Model tier / chunk overlap / two-stage ablations (Task 7).
+%   - Dataset descriptive stats + re-measured confidence distribution
+%     (Task 8, guardrail 4 — no unmeasured Medium numbers).
+
+\section{Experiments and Results}
+\label{sec:experiments-results}
+
+\subsection{Headline Quality: Golden and Held-Out States}
+\label{sec:experiments-headline}
+
+\input{tables/detector_headline}
+
+\input{tables/parser_headline}

@@ -1,0 +1,93 @@
+{
+  "finding": "The parser intermittently leaves the document's structural label inside the indicator code segment when composing the qualified code, producing ELD.1.0.VOCA.Foundation 1.1.DISC instead of ELD.1.0.VOCA.1.1.DISC — a standard_id (Aurora primary key) containing a space and a label word.",
+  "date": "2026-08-16",
+  "state_observed": "CA",
+  "status": "CONFIRMED on current code (code_version_hash 3b445471): 2 occurrences, byte-identical, in 18 end-to-end runs. Source component NOT yet localized.",
+
+  "rate_estimate": {
+    "naive": "2 of 18 end-to-end runs = 11%",
+    "unbiased": "1 of 17 runs = 5.9%, and this is the figure to use",
+    "why_the_naive_figure_is_biased_upward": "The first observation is not a random draw — it is the trigger that started the investigation, so conditioning on it inflates the rate. Only samples drawn AFTER the trigger are unbiased. This is also why the reported rate fell from '29%' to '20%' to '11%' to '5.9%' as sampling continued; each earlier figure was quoted with more confidence than the sample supported.",
+    "confidence_interval": "1/17 gives a 95% CI of roughly 0.2% to 30%. The rate is poorly determined and should be described as 'a few percent', not as a point estimate.",
+    "cost_to_localize": "Catching one occurrence takes ~17 full CA parses on average (~1.7h, ~$12). See 'recommended_instrumentation' for a way to get the answer for free instead."
+  },
+
+  "scope_correction": "An earlier draft of this file pooled runs across THREE different parser.py versions and reported '2 of 7 (~29%), a different chunk each time'. That was wrong and is withdrawn. outputs/08-13-26 (parsed 2026-08-13T19:59Z) and outputs/08-15-26 (2026-08-15T20:30Z) both ran parser.py as of 6e31777 (2026-08-01) — two commits behind current, and the intervening 0b222f7 is precisely the commit that reworked code composition (_anchor_parent_chain, rule 4's code-lookup clause). Only runs under code_version_hash 3b445471 are evidence about current behaviour. The corrected numbers below are scoped to that hash.",
+
+  "provenance_method": "eval_common.code_version_hash() is a SHA-256 over detector.py + parser.py and is embedded in every run-cache filename, so a cached artifact carries a cryptographic record of which pipeline source produced it. code_version_hash() at HEAD (fbff414) = 3b445471.",
+
+  "current_code_samples": {
+    "code_version_hash": "3b445471",
+    "git": "fbff414; src/ byte-identical to 29b22f0 (git diff 29b22f0 HEAD -- src/ is empty)",
+    "detection_input": "outputs/08-16-26/CA-detection.json (detection hash 54239bf51ad930e8)",
+    "total_end_to_end_runs": 18,
+    "hits": 2,
+    "runs": [
+      {"source": "Task 1 parser eval (--no-cache) — THE TRIGGER, not a random sample", "path": "direct", "artifact": "evaluation/.cache/parser-CA-54239bf51ad930e8-3b445471-.json", "bad_codes": 12},
+      {"source": "repeats 1-2", "path": "direct", "n": 2, "bad_codes": 0},
+      {"source": "batch-of-6 run 5", "path": "direct", "bad_codes": 12},
+      {"source": "batch-of-6 runs 1,2,3,4,6", "path": "direct", "n": 5, "bad_codes": 0},
+      {"source": "outputs/08-16-26 (deployed, Lambdas built 2026-08-16T20:37:52Z from 29b22f0)", "path": "batched", "n": 1, "bad_codes": 0},
+      {"source": "localize.py attempts 1-8", "path": "direct", "n": 8, "bad_codes": 0}
+    ]
+  },
+
+  "per_chunk_probe": {
+    "method": "build_parsing_prompt -> call_bedrock_llm -> parse_llm_response on ONE chunk, repeated. Verified to reproduce the end-to-end code shape exactly (emits ELD.1.0.VOCA.1.1.DISC with the standard_id composed), so it exercises the right code path.",
+    "samples": {"chunk 4 (FLD, VOCA+GRAM, 2 age columns)": "0/12", "chunk 6 (ELD, VOCA+GRAM, 3 proficiency columns)": "0/13", "chunk 7 (ELD, LU, 3 proficiency columns)": "0/12", "chunk 9 (ELD, PA+AP+CP, 3 proficiency columns)": "0/12"},
+    "power_warning": "0/13 on chunk 6 argues against a ~20% per-chunk rate (p=0.055) but says little about 5-10% (p=0.25-0.51). It does NOT refute any hypothesis; an earlier draft of this file claimed it did.",
+    "hypotheses_status": {
+      "three_proficiency_column_shape": "WEAK — chunks 7, 8 and 9 share that exact shape and have never failed end-to-end, and chunk 7/9 probes were clean.",
+      "sub_strand_code_collision_with_FLD (VOCA/GRAM appear in both chunk 4 and chunk 6)": "UNTESTED — the distinguishing feature of chunk 6, but no experiment has isolated it.",
+      "post_merge_python": "NARROWED. Only two steps run after the chunk loop. normalize_parsed_codes builds counters for domain/strand/sub_strand ONLY and never rewrites s.indicator — despite a docstring claiming it 'works at every hierarchy level: domain, strand, sub_strand, indicator'. That leaves disambiguate_colliding_standards as the only post-merge step that rewrites indicator codes, and CLAUDE.md records it as having no confirmed live case."
+    },
+    "unresolved": "8 instrumented end-to-end runs (localize.py, which records every chunk's RAW parse_llm_response output) failed to catch an occurrence, so there is still no raw-vs-final comparison and the source component is unknown."
+  },
+
+  "recommended_instrumentation": "Do NOT pay ~17 runs to reproduce this. The failure shape is unambiguous and cheap to assert — an indicator code segment containing whitespace or a leading label word is always wrong, in every document. Add that as a guard OUTSIDE parser.py (validator.py or the db write path, neither of which CLAUDE.md guards), and have it log the raw per-chunk output alongside the final code when it fires. The next natural occurrence then localizes the defect for free AND is prevented from reaching Aurora.",
+
+  "the_two_hits_are_identical": {
+    "note": "Both current-code failures produced the SAME 12 codes — verified byte-identical. This is a chunk-LOCALIZED instability, not a random chunk each time (the 'different chunk each time' claim rested on the withdrawn 08-13 run).",
+    "chunk": "chunk 6 of 9 from chunk_elements_by_domain: domain ELD, sub_strands VOCA + GRAM, Foundations 1.1-1.4, each x3 proficiency columns = 12 standards",
+    "codes": [
+      "ELD.1.0.GRAM.Foundation 1.3.BROA", "ELD.1.0.GRAM.Foundation 1.3.DEVE", "ELD.1.0.GRAM.Foundation 1.3.DISC",
+      "ELD.1.0.GRAM.Foundation 1.4.BROA", "ELD.1.0.GRAM.Foundation 1.4.DEVE", "ELD.1.0.GRAM.Foundation 1.4.DISC",
+      "ELD.1.0.VOCA.Foundation 1.1.BROA", "ELD.1.0.VOCA.Foundation 1.1.DEVE", "ELD.1.0.VOCA.Foundation 1.1.DISC",
+      "ELD.1.0.VOCA.Foundation 1.2.BROA", "ELD.1.0.VOCA.Foundation 1.2.DEVE", "ELD.1.0.VOCA.Foundation 1.2.DISC"
+    ],
+    "why_chunk_6_and_not_chunk_4": "UNVERIFIED HYPOTHESIS, worth testing before fixing: chunk 4 is the near-identical FLD structure (same domain shape, same VOCA + GRAM sub_strands, Foundations 1.1-1.6) and has never failed. The structural difference is that ELD indicators carry three proficiency columns (DISC/DEVE/BROA) where FLD carries two age columns, so chunk 6 asks for 12 standards from 4 foundations against chunk 4's 12 from 6."
+  },
+
+  "mechanism": {
+    "detector_input": "All 94 CA detector indicator codes carry the 'Foundation N.N' label, so stripping it is work the parser does on every CA indicator, not an edge case. The detector is not at fault — its code accuracy is 25/25 against a golden that annotates the codes that way.",
+    "granularity": "Per chunk. A failure takes out exactly one chunk's standards and leaves the other 8 correct (82 of 94 right in both failing runs).",
+    "ruled_out": [
+      "Stale deployment / code drift: git diff 29b22f0 HEAD -- src/ is empty; Lambdas deployed 2026-08-16T20:37:52Z from that commit, 90s before the run.",
+      "Model override: neither els-parse-batch-dev nor els-hierarchy-parser-dev sets BEDROCK_PARSER_LLM_MODEL_ID, so both used the config.py default us.anthropic.claude-sonnet-4-6.",
+      "Path difference: both parse_hierarchy and parse_batching run normalize_element_codes then chunk_elements_by_domain, and process_parse_batch calls the same build_parsing_prompt per domain chunk."
+    ],
+    "not_ruled_out": "Whether the deployed BATCHED path fails at the same rate. Only 1 current-code deployed sample exists (clean). Both observed hits are on the direct path, so a path-dependent rate cannot be excluded — but with 2 hits total the comparison has no power either way."
+  },
+
+  "eval_visibility": "The CA parser golden annotates 9 of the 94 indicators. Chunk 6 contains 3 of them (CA-IND-03 x3), so when this fires the eval reports 6 field mismatches (standard_id and indicator.code) — the whole of CA's gap from field accuracy 1.000. The other 9 bad standards are invisible to the golden.",
+
+  "commands": {
+    "repeat_runs": "python paper/analysis/../../scratchpad/ca_repeat_n.py — loads outputs/08-16-26/CA-detection.json, calls parse_hierarchy(country='US', state='CA', version_year=2021, age_band='36-66') N times, counts indicator codes matching /[A-Za-z]{3,}\\s+\\d/",
+    "historical_scan": "python3 - <<'EOF'\nimport json, glob, re\nLBL=re.compile(r'[A-Za-z]{3,}\\s+\\d')\nfor f in sorted(glob.glob('outputs/*/*-parsing.json')):\n    d=json.load(open(f)); inds=d.get('indicators', d.get('standards', []))\n    bad=[s for s in inds if LBL.search(((s.get('indicator') or {}).get('code') or ''))]\n    if bad: print(f, len(bad), len(inds))\nEOF",
+    "cache_provenance": "ls evaluation/.cache/parser-CA-* — filename is parser-{state}-{detection_hash}-{code_version_hash}-{suffix}.json"
+  },
+
+  "historical_scan_result": {
+    "files_scanned": 109,
+    "note": "Retained for the record, but only the 08-16 entries are current-code. The June AZ files predate the LLM-first migration and were not investigated.",
+    "hits": [
+      {"file": "outputs/08-13-26/CA-parsing.json", "bad": 12, "total": 94, "parser_version": "6e31777 (2026-08-01) — NOT current code"},
+      {"file": "outputs/06-13-26-2/AZ-parsing.json", "bad": 6, "total": 39, "parser_version": "pre-migration"},
+      {"file": "outputs/06-14-26/AZ-parsing.json", "bad": 5, "total": 38, "parser_version": "pre-migration"},
+      {"file": "outputs/06-14-26-2/AZ-parsing.json", "bad": 5, "total": 38, "parser_version": "pre-migration"},
+      {"file": "outputs/06-14-26-3/AZ-parsing.json", "bad": 5, "total": 26, "parser_version": "pre-migration"}
+    ]
+  },
+
+  "recommendation": "OPEN — needs Emily's decision. Fix would follow the CLAUDE.md pairing doctrine: keep the prompt rule, add a document-agnostic post-processor rejecting a code segment that contains whitespace or a leading label word when the element's document code is available in bare form. Shape only, never a per-state list. Touches parser.py. Worth testing the chunk-6-vs-chunk-4 hypothesis above first — if the trigger is the 3-column shape rather than the label itself, the fix may belong in how the parser is prompted for proficiency columns."
+}

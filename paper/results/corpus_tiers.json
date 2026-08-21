@@ -1,0 +1,19 @@
+{
+  "description": "Page counts per state per corpus tier. Not a suite output — verified by directly counting pages in the source PDFs with PyMuPDF, re-verified 2026-08-16 (see paper/results/task1_20260816/manifest.json -> corpus_pages_verified).",
+  "verification_command": "python -c \"import fitz; print(fitz.open(path).page_count)\"  # run once per PDF under standards/",
+  "verified_date": "2026-08-16",
+  "tiers": {
+    "AZ": {"role": "golden", "full": 217, "trimmed": 65, "only_subset": 15},
+    "CA": {"role": "golden", "full": 68, "trimmed": null, "only_subset": 13},
+    "CO": {"role": "golden", "full_birth_to_8": 187, "full_3_5": 41, "trimmed": 41, "only_subset": 10},
+    "TX": {"role": "golden", "full": 87, "trimmed": 71, "only_subset": 9},
+    "NV_2023": {"role": "held-out", "full": 98, "trimmed": 71, "only_subset": 15},
+    "KY": {"role": "held-out", "full": 120, "trimmed": 52, "only_subset": 8}
+  },
+  "notes": [
+    "CO has no single 'full' page count: the birth-to-8 document is 187pp, the 3-5-only document is 41pp; the _only_subset (10pp) and _trimmed (41pp) tiers both derive from the 3-5 document.",
+    "CA has no _trimmed tier — its full (68pp) PTKLF 'at a glance' document was cut directly to the 13pp _only_subset.",
+    "The held-out canary is NV-2023 (nevada_standards_2023_only_subset.pdf, multi-domain), not NV-SES-2025 (single-domain, too narrow for a generalization claim).",
+    "All current eval numbers in paper/results/task{1,2}_20260816/ are from the _only_subset tier only — no table anywhere in this paper may present them as full-document numbers (guardrail 1)."
+  ]
+}

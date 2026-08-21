@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+
+% Final (camera-ready) mode: non-anonymous, no review-mode line numbers.
+% Per tasking/arxiv_paper.md Task 10: "final/non-anonymous mode."
+\usepackage{acl}
+
+% Standard package includes (from the ACL template, acl_latex.tex)
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\title{Classify by Position, Not by Label: LLM-Driven Extraction of Hierarchical Structure from Fragmented US Early Learning Standards}
+
+% TODO(Emily): confirm the correspondence email before this is compiled for
+% arXiv — everything uploaded is public and permanently archived (Task 13).
+\author{
+  Emily Cheyne \\
+  Founder, EdTech Co. \\
+  \texttt{author@edtechco.example}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+% TODO(Task 12): draft abstract last, after all sections are written.
+% Framing (tasking/arxiv_paper.md): method + system paper, cs.CL primary /
+% cs.AI cross-list, leading with the LLM-first methodology (depth-map
+% inference, classify-by-nesting-position prompting, two-stage
+% detection-then-parsing, serverless batching), evaluation supporting the
+% method claims. State the headline generalization result (detector recall
+% 1.000 at every level across 4 golden + 2 held-out states) and the corpus
+% tier (subset-scoped) plainly.
+\end{abstract}
+
+% ---------------------------------------------------------------------
+% Section order below is Task 10's reconstruction of the 12-part outline
+% that used to live in ~/.claude/plans/i-want-to-create-silly-pnueli.md.
+% That file was removed by an automatic cleanup before this task started
+% and could not be recovered in full (see paper/OUTLINE_NOTES.md). Sections
+% 6-12 below are recovered verbatim from a partial fragment of the original
+% plan (found in an old session transcript); sections 1, 3, 4 and 5 are a
+% reasonable reconstruction, not the original wording. Cheap to reorder —
+% these are \input'd stubs, not inlined text.
+% ---------------------------------------------------------------------
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/corpus}
+\input{sections/schema}
+\input{sections/pipeline_overview}
+\input{sections/method}
+\input{sections/system_architecture}
+\input{sections/experiments_results}
+\input{sections/discussion_limitations}
+\input{sections/conclusion}
+\input{sections/ethics}
+\input{sections/artifacts_statement}
+
+% Bibliography: paper/references.bib (Task 9 deliverable). Task 13 keeps the
+% compiled .bbl and deletes the .bib from the arXiv tarball.
+\bibliography{references}
+
+\appendix
+
+\section{Prompts}
+\label{sec:appendix-prompts}
+% TODO(Task 11/12): representative detector and parser prompts, in-paper
+% disclosure only (no code/dataset release — see sections/artifacts_statement.tex).
+
+\section{Canonical Schema}
+\label{sec:appendix-schema}
+% TODO(Task 11/12): the full Pydantic/TS schema, or a rendered tree diagram
+% (Task 11 deliverable).
+
+\section{Representative Golden Examples}
+\label{sec:appendix-goldens}
+% TODO(Task 11/12): a handful of annotated examples per guardrail-safe
+% state, illustrating the code/title/hierarchy conventions.
+
+\section{Corpus}
+\label{sec:appendix-corpus}
+% TODO(Task 11): the corpus appendix table (source URL, year, retained page
+% ranges after trimming) built from standards/standards_tracking.md — this
+% is what replaces shipping the source PDFs (guardrail: third-party
+% state-agency documents, not ours to redistribute).
+
+\end{document}

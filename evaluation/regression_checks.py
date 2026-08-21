@@ -15,6 +15,12 @@ from __future__ import annotations
 import re
 from typing import Callable, Dict, List, Optional, Tuple
 
+# Imported rather than re-implemented: `_distinct_within_code_groups` decides
+# "same indicator" with the SAME normalized-name identity `eval_parser._match_key`
+# uses to pair a parsed standard with its golden, and a second copy of that
+# normalizer would be free to drift away from it.
+from evaluation.eval_common import _norm as _norm_name
+
 CheckFn = Callable[[List[dict]], Tuple[bool, str]]
 
 
@@ -338,29 +344,89 @@ def _code(level: Optional[dict]) -> Optional[str]:
     return (level or {}).get("code") if isinstance(level, dict) else None
 
 
+# A trailing code segment that separates side-by-side variants of ONE
+# indicator: an age range ("36-54", "48-60") or an all-caps proficiency label
+# ("DISC"/"DEVE"/"BROA"). Deliberately NOT the same as
+# `eval_parser._VARIANT_SUFFIX_RE`, which covers only the all-caps form —
+# there, age variants are already separated by `age_band` and folding them in
+# would mis-pair; here the age form is exactly what we need to collect.
+# The >=2-letter bound keeps lettered leaves ("…1.1.a") out.
+_VARIANT_SEGMENT_RE = re.compile(r"^(?:\d+-\d+|[A-Z]{2,})$")
+
+
+def _variant_base_code(code: Optional[str]) -> Optional[str]:
+    """The indicator code with a trailing variant disambiguator removed, or the
+    code unchanged when its last segment is not one."""
+    if not code or "." not in code:
+        return code
+    head, last = code.rsplit(".", 1)
+    return head if _VARIANT_SEGMENT_RE.match(last) else code
+
+
 def _distinct_within_code_groups(indicators: List[dict]) -> Tuple[bool, str]:
-    """For every group of standards sharing the same (domain_code, indicator
-    code), assert their standard_ids and age_bands are all distinct — i.e.
-    age-band variants of one indicator survived parsing as separate standards
-    instead of collapsing onto one id."""
-    groups: Dict[Tuple[Optional[str], Optional[str]], List[dict]] = {}
+    """For every group of standards that are side-by-side variants of ONE
+    indicator, assert their standard_ids are all distinct — i.e. the variants
+    survived parsing as separate standards instead of collapsing onto one id.
+
+    Variants are grouped by the indicator code with its trailing DISAMBIGUATOR
+    segment removed. Grouping by the whole code is what this check used to do,
+    and it silently went dead: the parser now carries the disambiguator INSIDE
+    the indicator code (`…1.1.36-54` vs `…1.1.48-66`, `…1.1.DISC` vs
+    `…1.1.DEVE` — see the standard_id note in CLAUDE.md), so every variant
+    landed in its own singleton group, no group ever reached two members, and
+    the check passed on an empty population in every run.
+
+    Only a trailing segment that LOOKS like a disambiguator is stripped — an
+    age range (`36-54`, `48-60`) or an all-caps token (`DISC`) — so
+    `…VOCA.1.1` and `…VOCA.1.2` stay in separate groups rather than both
+    collapsing to `…VOCA.1`. Grouping by indicator NAME instead would be wrong:
+    CA's variants share a name but TX's PK3/PK4 columns do not (they are two
+    different behavioural descriptions of one outcome), and only the code
+    collects both shapes.
+
+    Sharing a base code is necessary but not sufficient, because the all-caps
+    branch also matches a DERIVED TITLE ABBREVIATION — KY's leaf codes end in
+    one (`AL.1.1.1.EASPT`, `…MFAAD`, `…SADGA`), and those are siblings, not
+    variants of one indicator. A group therefore only counts once it also
+    looks like a variant set: its members either all share one indicator name
+    (CA's Early/Later and Discovering/Developing/Broadening) or have pairwise
+    distinct age bands (TX's PK3/PK4). KY's sibling groups satisfy neither —
+    different names, one shared band — and drop out.
+
+    An empty population is a FAILURE, not a pass. Both callers are states
+    whose documents are known to contain side-by-side variant columns, so
+    finding zero variant groups means they collapsed — exactly the defect the
+    check exists to catch — and reporting that as PASS is how it went unnoticed.
+
+    Age-band distinctness is deliberately NOT asserted as the pass condition:
+    it holds for age-column variants but not for proficiency-column variants,
+    where DISC/DEVE/BROA all legitimately share one band (36-66) and are
+    separated by the code suffix instead."""
+    groups: Dict[Optional[str], List[dict]] = {}
     for ind in indicators:
-        key = (_code(ind.get("domain")), _code(ind.get("indicator")))
-        groups.setdefault(key, []).append(ind)
+        groups.setdefault(_variant_base_code(_code(ind.get("indicator"))), []).append(ind)
 
     bad = []
     multi = 0
     for key, members in groups.items():
         if len(members) < 2:
             continue
+        names = {_norm_name((m.get("indicator") or {}).get("name")) for m in members}
+        bands = [m.get("age_band") for m in members]
+        if len(names) != 1 and len(set(bands)) != len(bands):
+            continue  # siblings sharing a base code, not variants of one indicator
         multi += 1
         ids = [m.get("standard_id") for m in members]
-        bands = [m.get("age_band") for m in members]
-        if len(set(ids)) != len(ids) or len(set(bands)) != len(bands):
+        if len(set(ids)) != len(ids):
             bad.append((key, ids))
     if bad:
-        return False, f"{len(bad)} multi-variant indicator code(s) collapsed/duplicated, e.g. {bad[0]}"
-    return True, f"{multi} multi-variant indicator code(s) all kept distinct ids+bands"
+        return False, f"{len(bad)} variant group(s) collapsed onto one standard_id, e.g. {bad[0]}"
+    if not multi:
+        return False, (
+            "no multi-variant indicator groups found at all — this document's "
+            "side-by-side variant columns collapsed to a single standard each"
+        )
+    return True, f"{multi} multi-variant indicator group(s) all kept distinct standard_ids"
 
 
 def check_parser_co_indicator_parent_is_strand(indicators: List[dict]) -> Tuple[bool, str]:

@@ -73,7 +73,67 @@ Four shape-based guards keep (3) off the goldens, and the CA/KY cases are why ea
 
 ⚠️ **The clause is coupled to `_resolve_code` through `source_text`, and that coupling is load-bearing.** A recovered short domain code like `T` matches `_DERIVABLE_CODE_RE`, so if it is not grounded in its own `source_text` it gets recomputed to `TECH` and the fix is silently undone. Rule 4 therefore requires citing the caption/descendant line that supplied the code in `source_text` **in addition to** the heading line — which rule 7 ("the exact line(s) you used") already implies, and which the eval does not grade. Rule 1's self-check is unaffected: the heading line must still be there, and a child's line alone still means the heading was not seen. If NV domains still come back as `SCIE`/`TECH` while the sub_strands are right, this citation is the first thing to check.
 
+**Measured 2026-08-16 (arXiv paper Task 2, `paper/results/task2_20260816/`): that is exactly what happens, and the prediction above is confirmed.** All 8 NV sub_strands now carry the document's `XX.YY` caption code, while 2 of 3 domains do not — detector code accuracy 39/41, and both misses are domains. Diagnosed with this file's own guards (`heldout_evidence.json` → `nv_domain_code_diagnosis` imports them rather than reimplementing):
+
+- **`Technology`** is the clean confirmation. Emitted `TECH`; derivable shape, ungrounded, so `_resolve_code` recomputed it — and the *golden* code `T` would **also** be ungrounded in that element's `source_text` (which is the bare word "Technology"). So even a successful recovery of `T` would have been overwritten. The citation is the load-bearing half, as warned.
+- **`Science`** never reached `_resolve_code` at all: it was emitted as the literal `Science`, which contains lowercase and so fails `_DERIVABLE_CODE_RE`. It lost to cross-chunk drift instead — the run log shows `canonical code 'Science', replaced: ['SCIE']`, i.e. chunks disagreed and `normalize_element_codes` canonicalized on the long form. The two domains drifted in **opposite** directions in one run (`Science` kept the name, `TECH` the abbreviation), so the winner is arbitrary.
+- ⚠️ **`Social Studies` passes for the wrong reason and must not be read as evidence the clause works.** `SS` is ungrounded in its `source_text`, was recomputed, and `derive_code_from_title("Social Studies")` happens to return `SS`. The recovery clause did not fire; the abbreviation collided with the right answer. A future change to `derive_code_from_title` or the connector list would silently turn this pass into a failure.
+
+Blast radius is bounded and worth knowing before prioritizing: NV indicator codes are the document's own (`SS.ID.PK1`), so **no NV `standard_id` is affected**. The cost is `domain.code` plus the 4 `strand.code` cells it propagates into (`TECH.1`/`TECH.2` where the golden has `T.1`/`T.2`).
+
 The parser prompt got the matching half, since the detector now hands it dotted codes at sub_strand level: an **already-qualified** code (a dotted path whose first segment is its own domain's code) is used as-is at every level and never re-prefixed (`AB.CD`, not `AB.2.AB.CD`), and peeling parents off a qualified code **stops where the namespace stops** — if the next peel would equal the parent's own code, that level is outside the namespace and takes its heading's identifier instead (`AB.2`). One consequence is deliberate and documented in `ground_truth_parser/NV.json`: the sub_strand's code does not extend the strand's, because the printed identifier outranks chain continuity.
+
+### The code-shape guard at the validation boundary (2026-08-20) — `validator._validate_code_shape`
+
+A record whose codes are malformed is now **rejected by the validator** and never
+reaches Aurora. This is the first thing in the pipeline that can drop a parsed
+standard on quality grounds, so know it exists before debugging a "missing"
+record: look for `CODE_SHAPE_GUARD` in the logs and for `error_type:
+"code_shape"` in the run's validation summary.
+
+`standard_id` is `{country}-{state}-{year}-{indicator_code}`, so a malformed
+indicator code IS a malformed primary key. The parser emits one intermittently,
+in two observed surface forms — CA 2026-08-13 left the structural label in
+(`ELD.2.0.PA.Foundation 2.3.DISC`, 12 rows) and KY 2026-08-01/08-16 dropped the
+parent chain entirely (bare `TCPHS` → `US-KY-2021-TCPHS`, 4 and 2 rows). It is
+**sampling variance, not a code regression**: it appears at 8 distinct code
+versions, and runs over an identical frozen input at temperature 0 disagree with
+each other. A prompt rule lowers the rate but cannot reach zero, and a primary
+key needs zero — the same argument that put `derive_code_from_title` in Python.
+
+Three conditions, all shape-only (no per-state branch, no vocabulary, and
+notably **no label-word list** — whitespace alone is the tell, which is how it
+catches `Foundation 2.3` without knowing the word):
+
+1. no code contains whitespace;
+2. the **indicator's** code extends its nearest present ancestor's code;
+3. `standard_id` ends with the indicator code.
+
+⚠️ **(2) is scoped to the indicator level, and that scoping is load-bearing.**
+A printed namespace may legitimately skip a level: NV's sub_strand `SS.ID` does
+not extend its strand `SS.1`, and **15 of 15 NV standards break the chain there
+by design**. Widening the rule to every level rejects all of Nevada. The leaf,
+however, is nested in all six annotated states.
+`tests/unit/test_validator_code_shape.py::test_nevada_sub_strand_may_break_the_chain`
+is the canary — if it fails, the guard has stopped being document-agnostic.
+
+Validated before being enabled: **zero false positives** across all six states of
+`outputs/08-16-26` (262 standards) on all three conditions, while blocking
+exactly the 18 historical defect rows. A future document that legitimately trips
+a condition is a finding about the canonical code namespace — take it to a design
+discussion, do not add a per-state exemption.
+
+**Why it lives in `validator.py`.** It is the chokepoint (`validation_handler`
+writes an S3 record only for a valid result and `persister.persist_records` reads
+only those keys, so there is no bypass); refusing to store something structurally
+impossible is the validator's concern rather than the parser's; and
+`eval_common.code_version_hash` covers only `detector.py`/`parser.py`, so it
+changes no recorded evaluation number. That last point is deliberate — it let the
+guard ship without invalidating the arXiv paper's frozen Task 1/Task 2
+measurements. Localization is therefore partial: the validator sees only the
+final record, so the log carries the chain, page and `standard_id` but not the
+LLM's pre-normalization code. Capturing that needs logging inside `parser.py`,
+which busts the hash; do it when the measurement chain is next re-recorded.
 
 ### Where a printed code is not unique (2026-08-15) — `_anchor_parent_chain` + `disambiguate_colliding_standards`
 

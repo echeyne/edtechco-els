@@ -1,0 +1,22 @@
+% introduction.tex — Task 10 stub. Reconstructed section (see ../OUTLINE_NOTES.md).
+% Draft at Task 12. Outline:
+%   - Motivation: US early learning standards are published independently by
+%     50+ jurisdictions as fragmented, inconsistently formatted PDFs; no
+%     national machine-readable corpus exists (unlike K-12).
+%   - The core claim: an LLM can recover a document's hierarchical structure
+%     by classifying each element's NESTING POSITION rather than by its
+%     document-specific label vocabulary — this is what generalizes across
+%     states with no shared typography.
+%   - Contributions (method + system framing, per tasking/arxiv_paper.md):
+%     1. a two-stage depth-map + classify-by-position detection method;
+%     2. a normalization/parsing stage that resolves the hierarchy into a
+%        canonical schema with deterministic, collision-free IDs;
+%     3. a serverless batching architecture that scales to full documents;
+%     4. an evaluation on 4 golden + 2 held-out states showing the approach
+%        generalizes (recall 1.000 at every level, all 6 states) without
+%        state-specific rules or fine-tuning.
+%   - State plainly, up front: current quality numbers are subset-scoped
+%     (guardrail 1) and full-document numbers are cost/scale only (Task 6).
+
+\section{Introduction}
+\label{sec:introduction}

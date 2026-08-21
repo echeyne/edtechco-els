@@ -1,0 +1,96 @@
+{
+  "AZ": {
+    "n_direct": 66,
+    "n_batched": 66,
+    "levels_direct": {
+      "domain": 2,
+      "strand": 8,
+      "sub_strand": 11,
+      "indicator": 45
+    },
+    "levels_batched": {
+      "domain": 2,
+      "strand": 8,
+      "sub_strand": 11,
+      "indicator": 45
+    },
+    "shared_elements": 65,
+    "jaccard": 0.9701,
+    "only_in_direct": [
+      [
+        "indicator",
+        "recognizes when the listener does not understand and varies the amount of information to clarify the message.",
+        null
+      ]
+    ],
+    "only_in_batched": [
+      [
+        "indicator",
+        "recognizes when the listener does not understand and varies the amount of information\u00b9\u00b2 to clarify the message.",
+        null
+      ]
+    ],
+    "code_disagreements_on_shared": []
+  },
+  "CA": {
+    "n_direct": 122,
+    "n_batched": 122,
+    "levels_direct": {
+      "domain": 3,
+      "strand": 7,
+      "sub_strand": 18,
+      "indicator": 94
+    },
+    "levels_batched": {
+      "domain": 3,
+      "strand": 7,
+      "sub_strand": 18,
+      "indicator": 94
+    },
+    "shared_elements": 122,
+    "jaccard": 1.0,
+    "only_in_direct": [],
+    "only_in_batched": [],
+    "code_disagreements_on_shared": []
+  },
+  "CO": {
+    "n_direct": 61,
+    "n_batched": 61,
+    "levels_direct": {
+      "domain": 3,
+      "strand": 10,
+      "indicator": 48
+    },
+    "levels_batched": {
+      "domain": 3,
+      "strand": 10,
+      "indicator": 48
+    },
+    "shared_elements": 61,
+    "jaccard": 1.0,
+    "only_in_direct": [],
+    "only_in_batched": [],
+    "code_disagreements_on_shared": []
+  },
+  "TX": {
+    "n_direct": 33,
+    "n_batched": 33,
+    "levels_direct": {
+      "domain": 2,
+      "strand": 4,
+      "indicator": 25,
+      "sub_strand": 2
+    },
+    "levels_batched": {
+      "domain": 2,
+      "strand": 4,
+      "indicator": 25,
+      "sub_strand": 2
+    },
+    "shared_elements": 33,
+    "jaccard": 1.0,
+    "only_in_direct": [],
+    "only_in_batched": [],
+    "code_disagreements_on_shared": []
+  }
+}

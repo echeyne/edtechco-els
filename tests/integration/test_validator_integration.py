@@ -28,7 +28,10 @@ def s3_client():
 def sample_standard():
     """Create a sample NormalizedStandard."""
     return NormalizedStandard(
-        standard_id="US-CA-2021-LLD-1.2",
+        # standard_id is {COUNTRY}-{STATE}-{YEAR}-{INDICATOR_CODE}; there is no
+        # separate domain_code component (see parser.generate_standard_id and
+        # CLAUDE.md). The old "US-CA-2021-LLD-1.2" form predates that change.
+        standard_id="US-CA-2021-LLD.A.1.a",
         country="US",
         state="CA",
         version_year=2021,
@@ -160,14 +163,15 @@ def test_schema_validation_with_null_strand(sample_standard, sample_document_met
     """Test schema validation allows null strand."""
     # Create a standard without strand
     standard = NormalizedStandard(
-        standard_id="US-CA-2021-LLD-1",
+        standard_id="US-CA-2021-LLD.1",
         country="US",
         state="CA",
         version_year=2021,
         domain=HierarchyLevel(code="LLD", name="Language and Literacy Development"),
         strand=None,
         sub_strand=None,
-        indicator=HierarchyLevel(code="1", name="", description="Test indicator"),
+        # Fully qualified: an indicator code always extends its nearest ancestor.
+        indicator=HierarchyLevel(code="LLD.1", name="", description="Test indicator"),
         source_page=1,
         source_text="Test",
     )
@@ -201,14 +205,14 @@ def test_serialization_round_trip_with_full_hierarchy(sample_standard, sample_do
 def test_serialization_round_trip_with_minimal_hierarchy(sample_document_meta):
     """Test serialization and deserialization with minimal hierarchy (2 levels)."""
     standard = NormalizedStandard(
-        standard_id="US-TX-2020-MATH-1",
+        standard_id="US-TX-2020-MATH.1",
         country="US",
         state="TX",
         version_year=2020,
         domain=HierarchyLevel(code="MATH", name="Mathematics"),
         strand=None,
         sub_strand=None,
-        indicator=HierarchyLevel(code="1", name="", description="Count to 10"),
+        indicator=HierarchyLevel(code="MATH.1", name="", description="Count to 10"),
         source_page=5,
         source_text="Test text",
     )

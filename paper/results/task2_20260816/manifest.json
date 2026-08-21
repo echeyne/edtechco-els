@@ -1,0 +1,125 @@
+{
+  "task": "Task 2 \u2014 held-out generalization evals on NV (2023) and KY (2021)",
+  "date": "2026-08-16",
+  "relationship_to_task1": "Companion to paper/results/task1_20260816/. Same outputs folder, same code version hash (3b445471), same suites, same consolidation script \u2014 so the held-out numbers and the golden-four numbers are directly comparable. consolidate_task1.py gained a --state flag for this purpose rather than being forked, because the generalization table must be computed by the identical code path as the golden-state table.",
+  "git_commit": "fbff414cda50bec3200a3b0ed6a3bd32558c672a",
+  "code_version_hash": "3b445471",
+  "code_version_hash_note": "eval_common.code_version_hash covers detector.py and parser.py (which is where both prompts live). It does NOT cover eval_parser.py, which is why the matcher repair made during this task could be validated by re-grading the IDENTICAL cached stage output.",
+  "git_note": "src/els_pipeline last changed at 29b22f0 (2026-08-16) for both detector.py and parser.py. src/ was clean at run time; the modified files in the working tree are evaluation goldens/checks and paper/ analysis scripts.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). NV 15pp of 98; KY 8pp of 120.",
+  "corpus_pages_correction": "tasking/arxiv_paper.md's background table lists KY _only_subset as 9pp; the file is 8pp, and this run's extraction confirms total_pages=8. It also names the NV held-out subset 'nevada_standards_2023_trimmed_only_subset.pdf'; the file that exists and that the pipeline ran on is 'nevada_standards_2023_only_subset.pdf'.",
+  "inputs": {
+    "outputs_dir": "outputs/08-16-26",
+    "detector_eval_reads": "{STATE}-extraction.json (the detector is re-run LIVE in-process \u2014 the direct path)",
+    "parser_eval_reads": "{STATE}-detection.json (the DEPLOYED BATCHED detections from this run)",
+    "extraction_provenance": {
+      "NV": {
+        "s3_key": "US/NV/2023/nevada_standards_2023_only_subset.pdf",
+        "version_id": "eRemPvdHjSXK5iKmvuv7OjsGS9kg5uTl",
+        "pages": 15,
+        "blocks": 752,
+        "extracted_at": "2026-08-16T20:39:22.227043+00:00"
+      },
+      "KY": {
+        "s3_key": "US/KY/2021/kentucky_all_standards_2021_only_subset.pdf",
+        "version_id": "giB5mLiFI6.vXJqHxZTjxxj8XeYTqDy3",
+        "pages": 8,
+        "blocks": 252,
+        "extracted_at": "2026-08-16T20:39:17.982127+00:00"
+      }
+    },
+    "deployed_detection_timestamps": {
+      "NV": "2026-08-16T20:40:47.135788+00:00",
+      "KY": "2026-08-16T20:40:36.788503+00:00"
+    },
+    "golden_sizes": {
+      "detector_elements": {
+        "NV": 41,
+        "KY": 44
+      },
+      "parser_standards": {
+        "NV": 15,
+        "KY": 26
+      },
+      "note": "Far denser than the golden four's 5-25-element detector spot-checks. KY's detector golden is EXHAUSTIVE (44 golden vs 44 in-scope detections, level counts identical), which is what makes KY's precision a real precision number rather than an annotation-coverage figure."
+    },
+    "golden_annotation": {
+      "annotator": "Emily Cheyne",
+      "detector_NV": "2026-08-01",
+      "detector_KY": "2026-08-01",
+      "parser_NV": "2026-08-16",
+      "parser_KY": "2026-08-01",
+      "last_commit_touching_heldout_goldens": "29b22f0 (2026-08-16)"
+    },
+    "parser_golden_provenance_drift": {
+      "NV": "ground_truth_parser/NV.json records source_detection outputs/08-15-26-2/NV-detection.json. Graded here against outputs/08-16-26, which is ELEMENT-IDENTICAL to it (0 field diffs across all 53 elements; only file-level timestamps differ).",
+      "KY": "ground_truth_parser/KY.json records source_detection outputs/08-13-26/KY-detection.json. Graded here against outputs/08-16-26, which differs in exactly 3 benign ways, all from landed changes: 15 description fields '' -> null (models._blank_to_none, 2026-08-15); 1 strand code 'Standard 2' -> 'Language and Early Literacy Standard 2' (rule 4's code-lookup clause \u2014 the fix KY-STRAND-CODE-KEEPS-FULL-LABEL was written for, now PASSing); 1 source_text differing by one newline. Element count, levels, titles and all other codes identical.",
+      "no_golden_was_edited": "No held-out golden was edited during this task. The only evaluation-code change was the eval_parser matcher repair below, which was verified score-neutral on the four golden states."
+    }
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "temperature": 0,
+    "note": "config.py defaults; the eval harness does not load .env, so these are the values that ran."
+  },
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "# 1. detector \u2014 fresh, no cache, direct path, live Bedrock",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_detector --extraction-dir outputs/08-16-26 --state NV --state KY --no-cache --report-json paper/results/task2_20260816/detector_heldout2.json --output-dir paper/results/task2_20260816/review_detector",
+    "# 2. parser \u2014 fresh, no cache, on the DEPLOYED batched detections",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_parser --detection-dir outputs/08-16-26 --state NV --state KY --no-cache --report-json paper/results/task2_20260816/parser_heldout2.json --output-dir paper/results/task2_20260816/review_parser",
+    "# 3. verify the eval_parser._match_key repair is score-neutral on the golden four.",
+    "#    No Bedrock calls: code_version_hash covers only detector.py/parser.py, neither of which",
+    "#    changed, so the cache hits and the IDENTICAL parser output is re-graded. Result: 0 diffs",
+    "#    across every field of every one of the four state reports.",
+    "python -m evaluation.eval_parser --detection-dir outputs/08-16-26 --state AZ --state CA --state CO --state TX --report-json <scratch>/parser_golden4_postfix.json",
+    "# 4. re-grade NV/KY from cache with the repaired matcher (pre-repair report preserved)",
+    "python -m evaluation.eval_parser --detection-dir outputs/08-16-26 --state NV --state KY --report-json paper/results/task2_20260816/parser_heldout2.json --output-dir paper/results/task2_20260816/review_parser",
+    "# 5. consolidation \u2014 same script as Task 1, restricted to the held-out states",
+    "python paper/analysis/consolidate_task1.py --state NV --state KY --detector-report paper/results/task2_20260816/detector_heldout2.json --parser-report paper/results/task2_20260816/parser_heldout2.json --detector-review-dir paper/results/task2_20260816/review_detector --parser-review-dir paper/results/task2_20260816/review_parser --out paper/results/task2_20260816/summary.json",
+    "# 6. evidence artifacts: annotation coverage, drafted FP audit, NV domain-code diagnosis, KY code-qualification history",
+    "python paper/analysis/heldout_evidence.py",
+    "# 7. parser determinism probe on the frozen KY detection (5 independent runs, no cache)",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_parser --detection-dir outputs/08-16-26 --state KY --stability-runs 5 --no-cache --report-json paper/results/task2_20260816/parser_KY_stability5.json",
+    "# 8. regenerate evidence after the stability probe (adds ky_direct_path_cache_runs)",
+    "python paper/analysis/heldout_evidence.py"
+  ],
+  "files": {
+    "findings.md": "Narrative: what the paper may and may not claim from these numbers.",
+    "summary.json": "Consolidated numbers, produced by paper/analysis/consolidate_task1.py --state NV --state KY.",
+    "detector_heldout2.json": "Raw eval_detector report.",
+    "parser_heldout2.json": "Raw eval_parser report, POST matcher repair.",
+    "parser_heldout2_prerepair.json": "The same run graded by the pre-repair matcher; retained because the difference IS the instrument finding (KY coverage 0.846 / field accuracy 1.000 vs 1.000 / 0.983).",
+    "heldout_evidence.json": "Annotation coverage, drafted FP audit verdicts, NV domain-code diagnosis, KY indicator-code qualification history.",
+    "parser_KY_stability5.json": "5-run parser determinism probe on the frozen KY detection. Reports 0.000 disagreement \u2014 see the measure_stability entry under instrument_repairs_made_during_this_task before quoting that number.",
+    "review_detector/, review_parser/": "Per-state review files ({STATE}-report.txt, -detected/-parsed.json, -review.json).",
+    "detector_run.log, parser_run.log, parser_KY_stability5.log": "Full stdout including per-call LLM_METRICS (tokens, latency, cost)."
+  },
+  "instrument_repairs_made_during_this_task": [
+    "evaluation/eval_parser.py::_match_key \u2014 identity was (indicator name, age_band, _variant_suffix), and _variant_suffix is derived FROM THE CODE. A standard whose code came out malformed therefore could not pair with its golden at all and reported as `dropped`, which removes it from field_stats and so from field_accuracy. Kentucky is the live case: the parser emitted bare TCPHS/IHFC/PARTO/PSGPB where the golden has HMW.1.1.TCPHS etc., and the suite reported coverage 0.846 with field accuracy 1.000 \u2014 a perfect score that existed only because the four malformed rows had been excluded from the denominator of the metric meant to catch them. Repair: the suffix is no longer part of the key; it is applied as a TIE-BREAKER inside grade_parser, used only when more than one candidate shares (name, age_band), which is the condition its own docstring already described. Tightening only. Verified score-neutral on AZ/CA/CO/TX (0 diffs across every field of every state report, re-grading identical cached output); CA's 39 proficiency-variant groups and TX's 10 still resolve through the tie-breaker. KY after repair: coverage 1.000, field accuracy 0.983, 8 real mismatches now visible. NV unchanged. Side benefit: measure_stability keys on _match_key too, so a run-to-run code change now counts as a field disagreement (_sig covers indicator.code and standard_id) instead of dropping the element from the comparison unseen \u2014 one of the two repairs Task 5 lists as a prerequisite.",
+    "evaluation/eval_parser.py::measure_stability \u2014 NOT REPAIRED, DIAGNOSED ONLY, and it blocks Task 5. It spawns its own N runs (stab-0..N) and compares them ONLY to each other; the run the suite actually GRADED is a separate call and is never in the comparison. On 2026-08-16 it reported field disagreement rate 0.000 and size stdev 0.00 for KY in the very same invocation whose graded output carried 4 malformed standard_ids \u2014 the graded run (18:19:22) fired and the five probe runs (18:22-18:33) did not. Before Task 5 spends its ~60 runs: (1) include the graded run in the comparison (N+1 observations, zero extra cost); (2) report the observed range, not only the rate ('1 of 6 runs differed in 8 cells' vs '5 runs, 0 disagreements'); (3) report the denominator and the time span. The _match_key repair above already fixed the other half of this instrument \u2014 identity no longer depends on the code, so a run-to-run code change counts as a disagreement instead of dropping the element from the comparison unseen."
+  ],
+  "golden_data_corrections_made_during_this_task": [],
+  "defects_found": [
+    "NV, detector, REPRODUCED KNOWN: the SS.CI.PK3 duplicate documented in CLAUDE.md. Two elements share the code; the defective twin's source_text is a truncated prefix and its title carries a fabricated tail ('with adult guidance', which appears 0 times in the extraction). Trigger visible in the extraction: NV p5 is a multi-column table whose reading order interleaves columns. The parser's 25 -> 24 collapse is the CORRECT compensation and must not be 'fixed'. This is NV's only hallucination \u2014 1 of 53 detections.",
+    "NV, detector, PREDICTED BY CLAUDE.md: two of three domain codes wrong (Science 'S' -> 'Science', Technology 'T' -> 'TECH') while all 8 sub_strands correctly carry the document's XX.YY caption code. Mechanism pinned using detector.py's own guards: 'TECH' has derivable shape and is ungrounded so _resolve_code recomputed it, AND the golden code 'T' would ALSO be ungrounded in that source_text \u2014 so citing only the heading line defeats rule 4's code-recovery clause exactly as CLAUDE.md warns. 'Science' contains lowercase so nothing recomputed it; it lost to cross-chunk drift instead (log: canonical code 'Science', replaced ['SCIE']). NOTE Social Studies 'SS' is correct only BY COINCIDENCE \u2014 it is ungrounded, was recomputed, and derive_code_from_title('Social Studies') happens to return 'SS'. No NV standard_id is affected (NV indicator codes are the document's own); the cost is domain.code plus 4 propagated strand.code cells.",
+    "NV, detector: Science domain intro description truncated at 2410 of 3500 chars; propagates to 3 parser domain.description cells.",
+    "KY, parser, BLOCKING (not new): 4 indicator codes emitted UNQUALIFIED (bare TCPHS/IHFC/PARTO/PSGPB instead of HMW.1.1.TCPHS etc.), writing malformed Aurora primary keys of the form US-KY-2021-TCPHS. Domain/strand/sub_strand all correct; only the leaf lost its parent chain. NOT a detector-input problem \u2014 the HMW detector elements are structurally identical to the domains that parsed correctly. INTERMITTENT AND SAMPLING-DRIVEN, established from two independent records: 2 of 6 deployed batched runs fired, and 10 of 20 cached direct-path runs fired across 8 code hashes and 2 detection inputs, affecting 2 to 15 of 26 standards when they do. Causation is settled by two same-input clusters where code version, input and temperature are all identical: code hash c335e73a gave (graded 0, stab-0 6, stab-1 0, stab-2 4) and 6c193627 gave (graded 0, stab-0 4, stab-1 0, stab-2 15). DO NOT attribute this to a recent change \u2014 it appears at 8 distinct code hashes. DO NOT cite the direct-vs-batched disagreement on outputs/08-16-26 as evidence the paths differ; given the within-path variance it is a draw from the same distribution. Same defect CLASS as Task 1's CA 'Foundation N.N' finding but a DIFFERENT surface form, which matters: Task 1's recommended shape guard (block a code segment containing whitespace or a leading label word) would NOT catch this, because TCPHS has neither. The guard needs the parent-prefix condition added \u2014 exactly what the KY-BENCHMARK-CODE-NORMALIZED regression check asserts, and what caught it."
+  ],
+  "caveats": [
+    "CORPUS TIER: every number in this folder is from the _only_subset tier (NV 15pp, KY 8pp), never full documents.",
+    "KY'S DETECTOR GOLDEN IS EXHAUSTIVE AND NV'S IS NOT, AND THE TWO MUST NOT BE PRESENTED THE SAME WAY. KY: 44 golden vs 44 in-scope detections with identical level counts and zero unmatched detections, so its raw precision 1.000 is a genuine hallucination-free result. NV: ceiling 0.7736 (41/53), and raw precision EQUALS the ceiling to four decimals, so the raw figure carries no information about correctness \u2014 NV's real number comes from the audit.",
+    "THE FP AUDIT VERDICTS HERE ARE AN UNSIGNED FIRST PASS. All 12 NV verdicts carry verified_by 'claude-first-pass-UNSIGNED'. Task 1b's methodology requires Emily as annotator of record, and the paper sentence 'all unmatched in-scope detections of the recorded run were manually audited by the author' is NOT true until she signs off. NV verified precision 0.981 is not quotable before then.",
+    "TASK 1b HAS NEVER BEEN RUN. paper/results/task1b_fp_audit.json does not exist, so Task 2 step 4's instruction to 'extend the Task 1b audit' had nothing to extend; the NV/KY audit was drafted standalone. Task 1b still owes the golden four their ~165 verdicts.",
+    "NV DESCRIPTION ACCURACY HAS A DENOMINATOR OF 3. Only 3 of NV's 41 golden elements annotate a description, so report 2/3 and never the rate 0.667. KY's denominator is 26 and is sound.",
+    "AGE-BAND DROPS CARRY NO INDEPENDENT SIGNAL WHEN RECALL IS 1.000: age_band_drops is a strict subset of missing_test_cases, so 'age-band drops: 0' follows arithmetically from recall 1.000 in both states and is not a separate confirmation.",
+    "CODE AND DESCRIPTION ACCURACY ARE CONDITIONED ON THE TITLE ALREADY MATCHING EXACTLY: both are graded over matched pairs only. Vacuous this run because recall is 1.000 in both states, but the metric names do not say so.",
+    "THE GRADED DEPTH MAP IS NOT THE ONE THAT DROVE THE GRADED DETECTION: evaluate_state calls infer_depth_map a second time purely for grading. Both states PASS and the two calls agreed, but a PASS is not proof the detection ran on a correct map.",
+    "PARSER FIELD ACCURACY AVERAGES OVER CELLS WHOSE GOLDEN IS NULL: 16.67% of graded cells in BOTH states. summary.json reports field_accuracy_over_asserted_cells_only alongside (NV 0.969, KY 0.980).",
+    "NEITHER BATCHING LAYER IS EXERCISED AT THIS CORPUS TIER: NV produces 5 chunks and KY 3 against MAX_CHUNKS_PER_BATCH=5, and both have 3 domains against MAX_DOMAINS_PER_BATCH=3, so detection and parsing each run as exactly one batch. No batching/scale claim may rest on these states; that is Task 6.",
+    "THE PARSER EVAL RUNS THE DIRECT PATH WHILE PRODUCTION RUNS THE BATCHED PATH, AND THEY DEMONSTRABLY DISAGREE HERE: on the identical KY detection at the identical code version, the batched production run emitted 0 unqualified indicator codes and this direct-path eval emitted 4. Consistent with Task 1's finding that parsing does not converge between paths.",
+    "THE KY STABILITY RESULT 0.000 IS NOT A DETERMINISM CLAIM. measure_stability excludes the graded run from its own comparison, and the graded run of that same invocation emitted 4 malformed standard_ids. Five probe runs agreeing is compatible with a defect that fires in a minority of runs; at N=5 that is not a null result."
+  ]
+}

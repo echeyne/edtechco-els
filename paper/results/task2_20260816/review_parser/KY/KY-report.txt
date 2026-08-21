@@ -1,0 +1,26 @@
+
+=== KY ===
+  golden standards: 26
+  parsed:           26
+  matched:          26  (coverage 1.000)
+  fully correct:    22/26
+  field accuracy:   0.983
+  per-field (ok/total) — only fields with a mismatch shown:
+    standard_id             22/26  (0.85)  ← MISMATCH
+    indicator.code          22/26  (0.85)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (8):
+    KY-STD-14 standard_id: expected 'US-KY-2021-HMW.1.1.TCPHS' got 'US-KY-2021-TCPHS'
+    KY-STD-14 indicator.code: expected 'HMW.1.1.TCPHS' got 'TCPHS'
+    KY-STD-15 standard_id: expected 'US-KY-2021-HMW.1.1.IHFC' got 'US-KY-2021-IHFC'
+    KY-STD-15 indicator.code: expected 'HMW.1.1.IHFC' got 'IHFC'
+    KY-STD-16 standard_id: expected 'US-KY-2021-HMW.1.2.PARTO' got 'US-KY-2021-PARTO'
+    KY-STD-16 indicator.code: expected 'HMW.1.2.PARTO' got 'PARTO'
+    KY-STD-17 standard_id: expected 'US-KY-2021-HMW.1.2.PSGPB' got 'US-KY-2021-PSGPB'
+    KY-STD-17 indicator.code: expected 'HMW.1.2.PSGPB' got 'PSGPB'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 26 standard_ids unique
+    [PASS] KY-FOUR-LEVEL-RESOLVED — all 26 standards have both a strand and a sub_strand
+    [FAIL] KY-BENCHMARK-CODE-NORMALIZED — 4/78 code(s) not prefixed by parent, e.g. indicator='TCPHS' under parent 'HMW.1.1' on 'US-KY-2021-TCPHS'
+    [FAIL] KY-SUB-STRAND-NOT-INDICATOR-CODE — 4 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-TCPHS', 'HMW.1.1', 'TCPHS')

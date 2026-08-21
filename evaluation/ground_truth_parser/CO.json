@@ -4,8 +4,8 @@
   "country": "US",
   "version_year": 2020,
   "default_age_band": "36-60",
-  "annotator": "06-13-2026",
-  "annotation_date": "Emily Cheyne",
+  "annotator": "Emily Cheyne",
+  "annotation_date": "06-13-2026",
   "notes": "CO is a 3-level document: Domain -> Strand -> Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...'). Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected.",
   "standards": [
     {

@@ -1,0 +1,16 @@
+% schema.tex — Task 10 stub. Reconstructed section (see ../OUTLINE_NOTES.md).
+% Draft at Task 12. Outline:
+%   - The canonical target hierarchy: domain -> strand -> sub_strand (optional)
+%     -> indicator, each level with code/name/description/age_band.
+%   - standard_id format: {country}-{state}-{year}-{indicator_code}, fully
+%     qualified, deterministic, no separate domain_code component
+%     (src/els_pipeline/parser.py generate_standard_id; models.py is the
+%     Python source of truth, packages/shared/src/types.ts mirrors it).
+%   - Why a single canonical schema across 50+ independently-formatted state
+%     documents is itself a nontrivial contribution — most states do not
+%     share a level count (CO has no sub_strand) or a code namespace shape.
+%   - Point forward to Appendix~\ref{sec:appendix-schema} for the full
+%     schema and Appendix~\ref{sec:appendix-goldens} for annotated examples.
+
+\section{Canonical Schema}
+\label{sec:schema}

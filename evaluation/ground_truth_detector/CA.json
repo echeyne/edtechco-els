@@ -2,7 +2,7 @@
   "$schema": "../golden_set.schema.json",
   "state": "CA",
   "country": "US",
-  "version_year": 2008,
+  "version_year": 2021,
   "source_document": "california_all_standards_2021_only_subset.pdf",
   "annotator": "Emily Cheyne",
   "annotation_date": "05-31-26",

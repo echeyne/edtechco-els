@@ -1,0 +1,163 @@
+[
+  {
+    "state": "KY",
+    "coverage": 1.0,
+    "field_accuracy": 0.9829059829059829,
+    "matched": 26,
+    "fully_correct": 22,
+    "n_golden": 26,
+    "n_parsed": 26,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 22,
+        "total": 26
+      },
+      "country": {
+        "ok": 26,
+        "total": 26
+      },
+      "state": {
+        "ok": 26,
+        "total": 26
+      },
+      "version_year": {
+        "ok": 26,
+        "total": 26
+      },
+      "age_band": {
+        "ok": 26,
+        "total": 26
+      },
+      "source_page": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "indicator.code": {
+        "ok": 22,
+        "total": 26
+      },
+      "indicator.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "indicator.description": {
+        "ok": 26,
+        "total": 26
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "KY-STD-14",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.1.TCPHS",
+        "got": "US-KY-2021-TCPHS"
+      },
+      {
+        "test_case_id": "KY-STD-14",
+        "field": "indicator.code",
+        "expected": "HMW.1.1.TCPHS",
+        "got": "TCPHS"
+      },
+      {
+        "test_case_id": "KY-STD-15",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.1.IHFC",
+        "got": "US-KY-2021-IHFC"
+      },
+      {
+        "test_case_id": "KY-STD-15",
+        "field": "indicator.code",
+        "expected": "HMW.1.1.IHFC",
+        "got": "IHFC"
+      },
+      {
+        "test_case_id": "KY-STD-16",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.2.PARTO",
+        "got": "US-KY-2021-PARTO"
+      },
+      {
+        "test_case_id": "KY-STD-16",
+        "field": "indicator.code",
+        "expected": "HMW.1.2.PARTO",
+        "got": "PARTO"
+      },
+      {
+        "test_case_id": "KY-STD-17",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.2.PSGPB",
+        "got": "US-KY-2021-PSGPB"
+      },
+      {
+        "test_case_id": "KY-STD-17",
+        "field": "indicator.code",
+        "expected": "HMW.1.2.PSGPB",
+        "got": "PSGPB"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 26 standard_ids unique"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-RESOLVED",
+        "status": "PASS",
+        "detail": "all 26 standards have both a strand and a sub_strand"
+      },
+      {
+        "id": "KY-BENCHMARK-CODE-NORMALIZED",
+        "status": "FAIL",
+        "detail": "4/78 code(s) not prefixed by parent, e.g. indicator='TCPHS' under parent 'HMW.1.1' on 'US-KY-2021-TCPHS'"
+      },
+      {
+        "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
+        "status": "FAIL",
+        "detail": "4 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-TCPHS', 'HMW.1.1', 'TCPHS')"
+      }
+    ],
+    "stability_runs": 5,
+    "stability_disagreement_rate": 0.0,
+    "stability_size_stdev": 0.0
+  }
+]

@@ -3,9 +3,9 @@
   "state": "CO",
   "country": "US",
   "version_year": 2020,
-  "source_document": "colorado_3_5_trimmed_2020_subset.pdf",
-  "annotator": "05-31-26",
-  "annotation_date": "Emily Cheyne",
+  "source_document": "colorado_3_5_trimmed_2020_only_subset.pdf",
+  "annotator": "Emily Cheyne",
+  "annotation_date": "05-31-26",
   "notes": "CO is a 3-level document: Domain → Strand → Indicator. There is NO sub_strand. The strands are introduced with a numeric prefix ('1. Relationships with Adults and Peers: ...') which the old detector mistakenly classified as sub_strand because it pattern-matched 'numeric prefix = sub_strand'. Codes are document-local (strand '4', indicator '4.3'); full dotted codes live under parser_expected. Removed former CO-IND-04 (SED.5.4 'Hold information in mind…'): that content is not present in this trimmed subset extraction (page 10 is English Language Development, not SED Executive Function), so it was a golden annotation error, not a detector miss.",
   "expected_depth_map": {
     "doc_depths": [

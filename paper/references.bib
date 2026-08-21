@@ -1,0 +1,373 @@
+% references.bib — Task 9 (related-work literature survey), created 2026-08-17.
+% Every entry's metadata was verified against the publisher page, ACL Anthology,
+% arXiv abstract page, or dblp on 2026-08-17 (verification source noted per entry).
+% NOTE (Task 13): this .bib is DELETED from the arXiv tarball; only the compiled
+% .bbl ships. Comments here are working notes and never reach the public archive.
+
+% ======================================================================
+% 1. LLMs for information extraction / in-context vs. fine-tuning
+% ======================================================================
+
+% Verified: NeurIPS 2020 proceedings (seed anchor from Medium article 02).
+@inproceedings{brown2020language,
+  title     = {Language Models are Few-Shot Learners},
+  author    = {Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D. and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel and Wu, Jeffrey and Winter, Clemens and Hesse, Chris and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {33},
+  pages     = {1877--1901},
+  year      = {2020}
+}
+
+% Verified: NeurIPS 2022 proceedings (seed anchor from Medium article 02).
+@inproceedings{wei2022chain,
+  title     = {Chain-of-Thought Prompting Elicits Reasoning in Large Language Models},
+  author    = {Wei, Jason and Wang, Xuezhi and Schuurmans, Dale and Bosma, Maarten and Ichter, Brian and Xia, Fei and Chi, Ed and Le, Quoc V. and Zhou, Denny},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {35},
+  pages     = {24824--24837},
+  year      = {2022}
+}
+
+% Verified: ICLR 2023 (arXiv:2203.11171). Cited for run-to-run sampling
+% variance at fixed prompts — context for our determinism/stability measurements.
+@inproceedings{wang2023selfconsistency,
+  title     = {Self-Consistency Improves Chain of Thought Reasoning in Language Models},
+  author    = {Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc V. and Chi, Ed H. and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
+  booktitle = {The Eleventh International Conference on Learning Representations (ICLR)},
+  year      = {2023}
+}
+
+% Verified: ACL Anthology 2022.emnlp-main.130, pages 1998–2022.
+@inproceedings{agrawal2022large,
+  title     = {Large Language Models are Few-Shot Clinical Information Extractors},
+  author    = {Agrawal, Monica and Hegselmann, Stefan and Lang, Hunter and Kim, Yoon and Sontag, David},
+  booktitle = {Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {1998--2022},
+  year      = {2022},
+  address   = {Abu Dhabi, United Arab Emirates}
+}
+
+% Verified: ACL Anthology 2023.acl-long.868, pages 15566–15589.
+@inproceedings{wadhwa2023revisiting,
+  title     = {Revisiting Relation Extraction in the Era of Large Language Models},
+  author    = {Wadhwa, Somin and Amir, Silvio and Wallace, Byron C.},
+  booktitle = {Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {15566--15589},
+  year      = {2023},
+  address   = {Toronto, Canada}
+}
+
+% Verified: arXiv:2312.17617; accepted at Frontiers of Computer Science,
+% DOI 10.1007/s11704-024-40555-y.
+@article{xu2024large,
+  title   = {Large Language Models for Generative Information Extraction: A Survey},
+  author  = {Xu, Derong and Chen, Wei and Peng, Wenjun and Zhang, Chao and Xu, Tong and Zhao, Xiangyu and Wu, Xian and Zheng, Yefeng and Wang, Yang and Chen, Enhong},
+  journal = {Frontiers of Computer Science},
+  year    = {2024},
+  doi     = {10.1007/s11704-024-40555-y}
+}
+
+% Verified: ICLR 2024 proceedings + arXiv:2310.03668.
+@inproceedings{sainz2024gollie,
+  title     = {{GoLLIE}: Annotation Guidelines Improve Zero-Shot Information-Extraction},
+  author    = {Sainz, Oscar and Garc{\'i}a-Ferrero, Iker and Agerri, Rodrigo and Lopez de Lacalle, Oier and Rigau, German and Agirre, Eneko},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024}
+}
+
+% Verified: NeurIPS 2022 (arXiv:2205.05638). The fine-tuning counterpoint to
+% Brown 2020 — cite when arguing in-context vs. fine-tuning honestly.
+@inproceedings{liu2022fewshot,
+  title     = {Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning},
+  author    = {Liu, Haokun and Tam, Derek and Muqeeth, Mohammed and Mohta, Jay and Huang, Tenghao and Bansal, Mohit and Raffel, Colin},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {35},
+  pages     = {1950--1965},
+  year      = {2022}
+}
+
+% Verified: arXiv:2307.09702 (the Outlines library paper). Cited for
+% constrained/schema-guided generation as the alternative to our
+% generate-then-validate (Pydantic) approach.
+@misc{willard2023efficient,
+  title  = {Efficient Guided Generation for Large Language Models},
+  author = {Willard, Brandon T. and Louf, R{\'e}mi},
+  year   = {2023},
+  note   = {arXiv:2307.09702}
+}
+
+% Verified: TACL vol. 12, pages 157–173, DOI 10.1162/tacl_a_00638.
+% Motivates domain-scoped chunking over whole-document prompting.
+@article{liu2024lost,
+  title   = {Lost in the Middle: How Language Models Use Long Contexts},
+  author  = {Liu, Nelson F. and Lin, Kevin and Hewitt, John and Paranjape, Ashwin and Bevilacqua, Michele and Petroni, Fabio and Liang, Percy},
+  journal = {Transactions of the Association for Computational Linguistics},
+  volume  = {12},
+  pages   = {157--173},
+  year    = {2024},
+  doi     = {10.1162/tacl_a_00638}
+}
+
+% Verified: ACM Computing Surveys 55(12), article 248, DOI 10.1145/3571730
+% (seed anchor from Medium articles 03/05).
+@article{ji2023survey,
+  title   = {Survey of Hallucination in Natural Language Generation},
+  author  = {Ji, Ziwei and Lee, Nayeon and Frieske, Rita and Yu, Tiezheng and Su, Dan and Xu, Yan and Ishii, Etsuko and Bang, Ye Jin and Madotto, Andrea and Fung, Pascale},
+  journal = {ACM Computing Surveys},
+  volume  = {55},
+  number  = {12},
+  pages   = {248:1--248:38},
+  year    = {2023},
+  doi     = {10.1145/3571730}
+}
+
+% Verified: arXiv:2511.10659; workshop at ACM ICAIF 2025. Closest applied
+% neighbor: LLM pipeline turning long government PDFs into a research database,
+% using the documents' own hierarchical structure for validation.
+@misc{aggarwal2025fiscal,
+  title  = {Information Extraction From Fiscal Documents Using {LLM}s},
+  author = {Aggarwal, Vikram and Kulkarni, Jay and Mascarenhas, Aditi and Narang, Aakriti and Raman, Siddarth and Shah, Ajay and Thomas, Susan},
+  year   = {2025},
+  note   = {arXiv:2511.10659. Presented at the AI for Financial Inclusion, Risk Modeling and Resilience in Emerging Markets workshop at ACM ICAIF 2025}
+}
+
+% ======================================================================
+% 2. Document structure and layout analysis
+% ======================================================================
+
+% Verified: KDD 2020, pages 1192–1200 (arXiv:1912.13318).
+@inproceedings{xu2020layoutlm,
+  title     = {{LayoutLM}: Pre-training of Text and Layout for Document Image Understanding},
+  author    = {Xu, Yiheng and Li, Minghao and Cui, Lei and Huang, Shaohan and Wei, Furu and Zhou, Ming},
+  booktitle = {Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+  pages     = {1192--1200},
+  year      = {2020}
+}
+
+% Verified: ACM Multimedia 2022, DOI 10.1145/3503161.3548112 (arXiv:2204.08387).
+@inproceedings{huang2022layoutlmv3,
+  title     = {{LayoutLMv3}: Pre-training for Document {AI} with Unified Text and Image Masking},
+  author    = {Huang, Yupan and Lv, Tengchao and Cui, Lei and Lu, Yutong and Wei, Furu},
+  booktitle = {Proceedings of the 30th ACM International Conference on Multimedia},
+  year      = {2022},
+  doi       = {10.1145/3503161.3548112}
+}
+
+% Verified: ECCV 2022 (arXiv:2111.15664).
+@inproceedings{kim2022donut,
+  title     = {{OCR}-Free Document Understanding Transformer},
+  author    = {Kim, Geewook and Hong, Teakgyu and Yim, Moonbin and Nam, JeongYeon and Park, Jinyoung and Yim, Jinyeong and Hwang, Wonseok and Yun, Sangdoo and Han, Dongyoon and Park, Seunghyun},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2022}
+}
+
+% Verified: arXiv:2308.13418.
+@misc{blecher2023nougat,
+  title  = {Nougat: Neural Optical Understanding for Academic Documents},
+  author = {Blecher, Lukas and Cucurull, Guillem and Scialom, Thomas and Stojnic, Robert},
+  year   = {2023},
+  note   = {arXiv:2308.13418}
+}
+
+% Verified: ICDAR 2019, pages 1015–1022 (arXiv:1908.07836).
+@inproceedings{zhong2019publaynet,
+  title     = {{PubLayNet}: Largest Dataset Ever for Document Layout Analysis},
+  author    = {Zhong, Xu and Tang, Jianbin and Jimeno Yepes, Antonio},
+  booktitle = {2019 International Conference on Document Analysis and Recognition (ICDAR)},
+  pages     = {1015--1022},
+  year      = {2019}
+}
+
+% Verified: ECDL 2009 (GROBID system paper).
+@inproceedings{lopez2009grobid,
+  title     = {{GROBID}: Combining Automatic Bibliographic Data Recognition and Term Extraction for Scholarship Publications},
+  author    = {Lopez, Patrice},
+  booktitle = {Research and Advanced Technology for Digital Libraries (ECDL 2009)},
+  pages     = {473--474},
+  year      = {2009}
+}
+
+% Verified: AAAI 2021 (arXiv:1911.01702).
+@inproceedings{rausch2021docparser,
+  title     = {{DocParser}: Hierarchical Document Structure Parsing from Renderings},
+  author    = {Rausch, Johannes and Martinez, Octavio and Bissig, Fabian and Zhang, Ce and Feuerriegel, Stefan},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {35},
+  year      = {2021}
+}
+
+% Verified: AAAI 2023 (arXiv:2303.13839; ojs.aaai.org article 25277).
+@inproceedings{ma2023hrdoc,
+  title     = {{HRDoc}: Dataset and Baseline Method Toward Hierarchical Reconstruction of Document Structures},
+  author    = {Ma, Jiefeng and Du, Jun and Hu, Pengfei and Zhang, Zhenrong and Zhang, Jianshu and Zhu, Huihui and Liu, Cong},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume    = {37},
+  year      = {2023}
+}
+
+% Verified: dblp — Pattern Recognition 156:110836 (2024) (arXiv:2401.11874).
+% Introduces the Comp-HRDoc benchmark; hierarchical structure via detect →
+% reading order → tree construction, trained on layout supervision.
+@article{wang2024detect,
+  title   = {Detect-Order-Construct: A Tree Construction Based Approach for Hierarchical Document Structure Analysis},
+  author  = {Wang, Jiawei and Hu, Kai and Zhong, Zhuoyao and Sun, Lei and Huo, Qiang},
+  journal = {Pattern Recognition},
+  volume  = {156},
+  pages   = {110836},
+  year    = {2024}
+}
+
+% Verified: arXiv:2509.00909 (v2 title; accepted as ICAIL 2026 demo).
+% TOC-based + LLM-refined hierarchical segmentation of deeply nested books.
+@misc{wehnert2025hips,
+  title  = {{HiPS}: Hierarchical {PDF} Segmentation of Doctrinal Legal Books},
+  author = {Wehnert, Sabine and Changaramkulath, Harikrishnan and Habernal, Ivan},
+  year   = {2025},
+  note   = {arXiv:2509.00909. Accepted as a demo paper at ICAIL 2026}
+}
+
+% ======================================================================
+% 3. Human-in-the-loop machine learning / annotation
+% ======================================================================
+
+% Verified: Manning (seed anchor from Medium articles 02/04).
+@book{monarch2021human,
+  title     = {Human-in-the-Loop Machine Learning: Active Learning and Annotation for Human-Centered {AI}},
+  author    = {Monarch, Robert},
+  publisher = {Manning},
+  address   = {Shelter Island, NY},
+  year      = {2021}
+}
+
+% Verified: Artificial Intelligence Review 56:3005–3054,
+% DOI 10.1007/s10462-022-10246-w (seed anchor from Medium articles 01/04).
+@article{mosqueirarey2023human,
+  title   = {Human-in-the-Loop Machine Learning: A State of the Art},
+  author  = {Mosqueira-Rey, Eduardo and Hern{\'a}ndez-Pereira, Elena and Alonso-R{\'i}os, David and Bobes-Bascar{\'a}n, Jos{\'e} and Fern{\'a}ndez-Leal, {\'A}ngel},
+  journal = {Artificial Intelligence Review},
+  volume  = {56},
+  pages   = {3005--3054},
+  year    = {2023},
+  doi     = {10.1007/s10462-022-10246-w}
+}
+
+% Classic technical report; standard citation form.
+@techreport{settles2009active,
+  title       = {Active Learning Literature Survey},
+  author      = {Settles, Burr},
+  institution = {University of Wisconsin--Madison},
+  number      = {Computer Sciences Technical Report 1648},
+  year        = {2009}
+}
+
+% Verified: ACL Anthology 2023.emnlp-main.92.
+@inproceedings{li2023coannotating,
+  title     = {{CoAnnotating}: Uncertainty-Guided Work Allocation between Human and Large Language Models for Data Annotation},
+  author    = {Li, Minzhi and Shi, Taiwei and Ziems, Caleb and Kan, Min-Yen and Chen, Nancy F. and Liu, Zhengyuan and Yang, Diyi},
+  booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  year      = {2023},
+  address   = {Singapore}
+}
+
+% Verified: ACL Anthology 2024.emnlp-main.54, pages 930–957 (arXiv:2402.13446).
+@inproceedings{tan2024large,
+  title     = {Large Language Models for Data Annotation and Synthesis: A Survey},
+  author    = {Tan, Zhen and Li, Dawei and Wang, Song and Beigi, Alimohammad and Jiang, Bohan and Bhattacharjee, Amrita and Karami, Mansooreh and Li, Jundong and Cheng, Lu and Liu, Huan},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
+  pages     = {930--957},
+  year      = {2024}
+}
+
+% Verified: PNAS 120(30):e2305016120, DOI 10.1073/pnas.2305016120.
+@article{gilardi2023chatgpt,
+  title   = {{ChatGPT} Outperforms Crowd Workers for Text-Annotation Tasks},
+  author  = {Gilardi, Fabrizio and Alizadeh, Meysam and Kubli, Ma{\"e}l},
+  journal = {Proceedings of the National Academy of Sciences},
+  volume  = {120},
+  number  = {30},
+  pages   = {e2305016120},
+  year    = {2023},
+  doi     = {10.1073/pnas.2305016120}
+}
+
+% ======================================================================
+% 4. Educational standards, curriculum, and alignment
+% ======================================================================
+
+% Verified: DC-2008 (Dublin Core conference), Berlin;
+% dcpapers.dublincore.org/article/952109190.
+@inproceedings{sutton2008achievement,
+  title     = {Achievement Standards Network ({ASN}): An Application Profile for Mapping {K}-12 Educational Resources to Achievement Standards},
+  author    = {Sutton, Stuart A. and Golder, Diny},
+  booktitle = {Proceedings of the International Conference on Dublin Core and Metadata Applications (DC-2008)},
+  year      = {2008},
+  address   = {Berlin, Germany}
+}
+
+% Verified: 1edtech.org/standards/case (spec v1.0 2017; v1.1 released 2025).
+@misc{1edtech2017case,
+  title        = {Competencies and Academic Standards Exchange ({CASE}) Specification},
+  author       = {{1EdTech Consortium}},
+  year         = {2017},
+  howpublished = {\url{https://www.1edtech.org/standards/case}},
+  note         = {Version 1.0 (2017); version 1.1 released 2025. Accessed August 2026}
+}
+
+% Classic; Educational Researcher 31(7):3–14. The SEC content-analysis
+% methodology — the manual-expert-panel baseline our pipeline replaces the
+% extraction step of.
+@article{porter2002measuring,
+  title   = {Measuring the Content of Instruction: Uses in Research and Practice},
+  author  = {Porter, Andrew C.},
+  journal = {Educational Researcher},
+  volume  = {31},
+  number  = {7},
+  pages   = {3--14},
+  year    = {2002}
+}
+
+% Verified via search (AERJ 2011; 138 standards–assessment pairs).
+@article{polikoff2011howwell,
+  title   = {How Well Aligned Are State Assessments of Student Achievement with State Content Standards?},
+  author  = {Polikoff, Morgan S. and Porter, Andrew C. and Smithson, John},
+  journal = {American Educational Research Journal},
+  volume  = {48},
+  number  = {4},
+  pages   = {965--995},
+  year    = {2011}
+}
+
+% Verified: arXiv:2510.05129 (submitted 2025-09-30, cs.CL).
+@misc{xu2025automated,
+  title  = {Automated Alignment of Math Items to Content Standards in Large-Scale Assessments Using Language Models},
+  author = {Xu, Qingshu and Jiao, Hong and Zhou, Tianyi and Li, Ming and Zhang, Nan and Peters, Sydney and Fu, Yanbin},
+  year   = {2025},
+  note   = {arXiv:2510.05129}
+}
+
+% Verified: childcareta.acf.hhs.gov (title confirmed via search; PDF itself
+% returns 403 to non-browser fetches).
+@misc{ncecqa_elgs,
+  title        = {Early Learning Standards and Guidelines},
+  author       = {{National Center on Early Childhood Quality Assurance}},
+  howpublished = {\url{https://childcareta.acf.hhs.gov/sites/default/files/state_elgs_web_final_2.pdf}},
+  note         = {Office of Child Care, Administration for Children and Families, U.S. Department of Health and Human Services. Accessed August 2026}
+}
+
+% From Medium article 05 (URL verified there); federal framework, Head Start only.
+@misc{ohs2015elof,
+  title        = {Head Start Early Learning Outcomes Framework: Ages Birth to Five},
+  author       = {{Office of Head Start}},
+  year         = {2015},
+  howpublished = {\url{https://headstart.gov/school-readiness/article/head-start-early-learning-outcomes-framework}},
+  note         = {U.S. Department of Health and Human Services. Accessed August 2026}
+}
+
+% From Medium article 01 (URL verified there); governance fragmentation context.
+@misc{ecs2024governance,
+  title        = {50-State Comparison: Early Care and Education Governance},
+  author       = {{Education Commission of the States}},
+  year         = {2024},
+  howpublished = {\url{https://www.ecs.org/50-state-comparison-early-care-and-education-governance-2024/}},
+  note         = {Accessed August 2026}
+}

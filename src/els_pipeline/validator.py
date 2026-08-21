@@ -1,6 +1,8 @@
 """Validator for canonical JSON records."""
 
 import json
+import logging
+import re
 import boto3
 from typing import Dict, Any, Set, Optional
 from .models import (
@@ -10,6 +12,9 @@ from .models import (
     ValidationResult,
 )
 from .config import Config
+
+
+logger = logging.getLogger(__name__)
 
 
 # JSON Schema for Canonical JSON
@@ -370,6 +375,184 @@ def _validate_schema(record: Dict[str, Any]) -> list[ValidationError]:
     return errors
 
 
+# --- Code-shape guard -------------------------------------------------------
+#
+# See `_validate_code_shape`. These are deliberately the only two constants the
+# guard needs: it reads the SHAPE of a code, never any document's vocabulary.
+
+_CODE_WHITESPACE_RE = re.compile(r"\s")
+
+_LEVELS_ROOT_TO_LEAF = ("domain", "strand", "sub_strand", "indicator")
+
+
+def _validate_code_shape(record: Dict[str, Any]) -> list[ValidationError]:
+    """Reject a record whose codes are malformed, before it can reach Aurora.
+
+    ``standard_id`` is ``{country}-{state}-{year}-{indicator_code}``, so a
+    malformed indicator code IS a malformed primary key. The parser produces
+    one intermittently — twice observed, with two different surface forms:
+
+    - **California, 2026-08-13** — the structural label survived into the code:
+      ``ELD.2.0.PA.Foundation 2.3.DISC`` instead of ``...PA.2.3.DISC``. 12 rows.
+    - **Kentucky, 2026-08-01 and 2026-08-16** — the parent chain was dropped
+      entirely: a bare ``TCPHS`` instead of ``HMW.1.1.TCPHS``, yielding the
+      primary key ``US-KY-2021-TCPHS``. 4 rows and 2 rows.
+
+    Both are sampling variance, not a code regression: the defect appears at 8
+    distinct pipeline code versions, and runs over an IDENTICAL frozen input at
+    temperature 0 disagree with each other (arXiv paper Task 2,
+    ``paper/results/task2_20260816/heldout_evidence.json``). A prompt rule can
+    lower the rate but cannot drive it to zero, and a primary key needs zero —
+    the same argument that put ``derive_code_from_title`` in Python.
+
+    **Why here and not in `parser.py`.** Three reasons, in order of importance:
+
+    1. This is the chokepoint. ``validation_handler`` only writes an S3 record
+       for a valid result, and ``persister.persist_records`` only reads keys
+       listed in the validation summary — so returning an error here is what
+       actually stops a bad key reaching the database. There is no bypass.
+    2. It belongs to a different concern than parsing. The parser's job is to
+       produce a best reading of the document; the validator's job is to refuse
+       to store something structurally impossible. A guard that must hold
+       regardless of which model produced the record belongs at the boundary.
+    3. It keeps the paper's measurement chain intact.
+       ``evaluation.eval_common.code_version_hash`` covers ``detector.py`` and
+       ``parser.py`` only, and ``eval_parser`` imports ``parse_hierarchy``
+       directly, so editing this file changes no recorded evaluation number and
+       forces no re-run.
+
+    Three conditions, each reading only the SHAPE of a code so that the guard
+    stays document-agnostic in the sense CLAUDE.md's design direction requires
+    (no per-state branch, no vocabulary, no label-word list):
+
+    1. **No code contains whitespace.** A canonical code is a dot-separated
+       path of whitespace-free segments. Whitespace means a structural label
+       leaked in from the page. Note this needs no list of label words — the
+       whitespace alone is the tell, which is why the guard catches
+       ``Foundation 2.3`` without ever knowing the word "Foundation".
+    2. **The indicator's code extends its nearest present ancestor's code.**
+       Scoped to the INDICATOR level on purpose, and that scoping is
+       load-bearing: a document's printed namespace may legitimately skip an
+       intermediate level. Nevada codes indicators ``<domain>.<sub_strand>.PKn``
+       and gives the strand its own heading identifier, so NV's sub_strand
+       ``SS.ID`` does NOT extend its strand ``SS.1`` — 15 of 15 NV standards
+       break the chain at that level BY DESIGN (see CLAUDE.md, "Where a printed
+       code is not unique", and ``ground_truth_parser/NV.json``). Applying the
+       rule at every level would reject all of Nevada. The leaf, however, is
+       nested in every one of the six annotated states.
+    3. **``standard_id`` ends with the indicator code.** True by construction —
+       ``generate_standard_id`` derives it, and
+       ``disambiguate_colliding_standards`` regenerates the id whenever it
+       rewrites a code — so a violation means the two desynchronized somewhere
+       and the key no longer names its own row.
+
+    Validated against every recorded parser output before being enabled: **zero
+    false positives** across all six states of the current run
+    (``outputs/08-16-26``: AZ 45, CA 94, CO 48, KY 26, NV 24, TX 25 standards)
+    on all three conditions, while firing on exactly the historical defects
+    above. If a future document legitimately trips one of these, that is a
+    finding about the canonical code namespace and belongs in a design
+    discussion — do NOT add a per-state exemption here.
+
+    WARNING: localization is partial. Task 1 asked this guard to log "raw vs
+    final" so the next natural occurrence pinpoints the source component. The
+    validator only ever sees the final record, so the message below carries the
+    full ancestor chain, the page and the ``standard_id`` — enough to identify
+    the offending row and its chunk — but not the LLM's pre-normalization code.
+    Capturing that requires logging inside ``parser.py``, which would change
+    ``code_version_hash`` and force a re-run of the paper's Tasks 1 and 2; do it
+    when the measurement chain is next re-recorded, not before.
+    """
+    errors: list[ValidationError] = []
+    std = record.get("standard")
+    if not isinstance(std, dict):
+        return errors
+
+    # Ancestor chain, root to leaf, skipping absent levels. A missing or blank
+    # code is already reported by `_validate_schema`; re-reporting it here would
+    # turn one defect into two errors.
+    chain: list[tuple[str, str]] = []
+    for name in _LEVELS_ROOT_TO_LEAF:
+        level = std.get(name)
+        if not isinstance(level, dict):
+            continue
+        code = level.get("code")
+        if isinstance(code, str) and code:
+            chain.append((name, code))
+
+    chain_repr = " -> ".join(f"{name}={code}" for name, code in chain)
+    standard_id = std.get("standard_id")
+
+    # (1) No whitespace in any code.
+    for name, code in chain:
+        if _CODE_WHITESPACE_RE.search(code):
+            errors.append(
+                ValidationError(
+                    field_path=f"standard.{name}.code",
+                    message=(
+                        f"Code contains whitespace: {code!r}. A canonical code is a "
+                        f"dot-separated path of whitespace-free segments, so whitespace "
+                        f"means a structural label leaked in from the page. "
+                        f"standard_id={standard_id!r}; chain: {chain_repr}"
+                    ),
+                    error_type="code_shape",
+                )
+            )
+
+    # (2) The indicator extends its nearest present ancestor. Indicator level
+    #     only — read the docstring on Nevada before widening this.
+    if len(chain) >= 2 and chain[-1][0] == "indicator":
+        indicator_code = chain[-1][1]
+        parent_name, parent_code = chain[-2]
+        if not indicator_code.startswith(f"{parent_code}."):
+            errors.append(
+                ValidationError(
+                    field_path="standard.indicator.code",
+                    message=(
+                        f"Indicator code {indicator_code!r} is not nested under its "
+                        f"nearest ancestor ({parent_name}={parent_code!r}), so the "
+                        f"primary key would carry no namespace. "
+                        f"standard_id={standard_id!r}; chain: {chain_repr}"
+                    ),
+                    error_type="code_shape",
+                )
+            )
+
+    # (3) standard_id names its own indicator code.
+    indicator = std.get("indicator")
+    if isinstance(standard_id, str) and isinstance(indicator, dict):
+        indicator_code = indicator.get("code")
+        if (
+            isinstance(indicator_code, str)
+            and indicator_code
+            and not standard_id.endswith(indicator_code)
+        ):
+            errors.append(
+                ValidationError(
+                    field_path="standard.standard_id",
+                    message=(
+                        f"standard_id {standard_id!r} does not end with its indicator "
+                        f"code {indicator_code!r}; the id and the code have "
+                        f"desynchronized. chain: {chain_repr}"
+                    ),
+                    error_type="code_shape",
+                )
+            )
+
+    if errors:
+        # Logged here as well as by the caller so the signature stays greppable
+        # in CloudWatch regardless of how the handler reports validation errors.
+        logger.warning(
+            "CODE_SHAPE_GUARD blocked standard_id=%r page=%r chain=%r: %s",
+            standard_id,
+            (record.get("metadata") or {}).get("page_number"),
+            chain_repr,
+            "; ".join(e.message for e in errors),
+        )
+
+    return errors
+
+
 def validate_record(
     record: Dict[str, Any],
     existing_ids: Optional[Set[tuple[str, str, int, str]]] = None,
@@ -389,6 +572,12 @@ def validate_record(
     # Schema validation
     schema_errors = _validate_schema(record)
     errors.extend(schema_errors)
+
+    # Code-shape validation. Separate from the schema because the schema asks
+    # "is this a non-empty string?" while this asks "is this a usable primary
+    # key?" - see `_validate_code_shape` for why an intermittent parser defect
+    # has to be caught at this boundary rather than fixed upstream.
+    errors.extend(_validate_code_shape(record))
     
     # Uniqueness check
     if existing_ids is not None and "standard" in record and "document" in record and "country" in record and "state" in record:
