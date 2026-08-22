@@ -25,19 +25,38 @@ These were established by verifying the live tree during planning. Several contr
 5. **Never invent a fine-tuning cost to compare against.** Argue cost on **no-labeled-corpus** grounds — the dominant cost of the fine-tuning alternative is annotation, not compute — and report real measured per-run cost.
 6. **Every number must be regenerable.** Record each result as JSON under `paper/results/` alongside the exact command that produced it, plus the model IDs and `outputs/` run used. Tables regenerate from those files; they are never hand-typed.
 7. **Report generalization honestly.** If the held-out states collapse, that is the most interesting finding either way — it becomes a stated limitation, not a quiet omission.
-8. **Never report the detector suite's raw "precision" as detector quality** — *unless that state's golden is verifiably exhaustive.* (Established by Task 1, decided 2026-07-17; the exhaustive-golden carve-out added by Task 2, 2026-08-16.) **Kentucky is the one state that qualifies today**: 44 golden elements against 44 in-scope detections with identical per-level counts and zero unmatched detections, so its raw precision 1.000 is a real hallucination rate. Establish exhaustiveness from `heldout_evidence.json`'s `golden_is_exhaustive` before invoking this — never assume it. Every other state still follows the rule below. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
+8. **Never report the detector suite's raw "precision" as detector quality** — *unless that state's golden is verifiably exhaustive.* (Established by Task 1, decided 2026-07-17; the exhaustive-golden carve-out added by Task 2, 2026-08-16.) **Kentucky is still the one state that qualifies**: 44 golden elements against 44 in-scope detections with identical per-level counts and zero unmatched detections, so its raw precision 1.000 is a real hallucination rate. Establish exhaustiveness from `heldout_evidence.json`'s `golden_is_exhaustive` before invoking this — never assume it. Every other state still follows the rule below.
+
+   ⚠️ **NV does NOT qualify, despite the 2026-08-22 exhaustive pass — measured, not assumed.** `HELD_OUT_ANNOTATION_GUIDE.md` states that both held-out goldens are now exhaustive and that NV's raw precision is therefore a real hallucination rate. The first half is true in one sense and the second does not follow. Two different properties are involved:
+   - **Content-exhaustive** — the golden annotates every distinct structural element the subset prints. NV is now this: 46 elements, up from 41, including all twelve `<Domain> Standard N:` headings.
+   - **Detection-exhaustive** — every in-scope detection is accounted for by a golden entry. NV is **not** this, and cannot be while the golden holds one entry per element: the detector emits **53** in-scope elements for NV because the document reprints 6 headings on a second page spread (verified: 6 duplicate `(level, title)` pairs in the detection, 0 in the golden) and one is the known `SS.CI.PK3` hallucination.
+
+   So NV's ceiling is **46/53 = 0.8679**, and reporting its raw precision as a hallucination rate would count 6 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now 7 verdicts instead of 12, because the 5 previously-unannotated standards are annotated. Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
 
 ## How to run evaluations
 
-Use **`outputs/08-16-26/`** — it supersedes every earlier `outputs/` folder. Cache is on by default; use `--no-cache` for final recorded numbers.
+Use **`outputs/08-22-26-4/`** (set 2026-08-22) — it supersedes every earlier `outputs/` folder, including `08-16-26`, `08-22-26`, `-2` and `-3`. Cache is on by default; use `--no-cache` for final recorded numbers.
 
-> **Depth map is healthy in this folder (verified 2026-08-16).** The old warning about the detection-batch-preparer role lacking `bedrock:InvokeModel` applied to `outputs/07-16-26-2` and was fixed and deployed 2026-07-17. `outputs/08-16-26` shows the post-fix signature on the state that diagnoses it: CO detection is 61 elements with **0 sub_strands** (the pre-fix run was 93 with 9), and CO parser coverage is 1.000 with field accuracy 1.000. All four states' depth maps also PASS on a fresh direct-path run.
+> **Why `-4` and not `08-22-26`.** `-4` is run 040, the first carrying `detector._splice_overlapping_prose`. Its NV detection differs from `08-22-26` in **exactly one field** — the Science `domain.description`, 2410 → **3500 chars**, byte-exact against the golden — and is otherwise identical across all 53 elements. `ground_truth_parser/NV.json` still names `outputs/08-22-26/NV-detection.json` in `source_detection`; the drift is in the favorable direction and needs a one-line provenance update, **not** re-annotation.
+>
+> **Do NOT use `08-22-26-2`** — its KY detection is 38 elements against the other runs' 44, which breaks KY's exhaustive detector golden and drops parser coverage to 21/26. `-4` restores KY to 44 with levels matching the golden exactly (3/5/10/26).
+>
+> **Depth map was healthy in `08-16-26` (verified 2026-08-16)** — the detection-batch-preparer IAM fix landed 2026-07-17. Re-verify on `-4` as part of the re-record rather than assuming it carried over.
+>
+> **AZ detection changed in this folder — diagnosed 2026-08-22, and it is benign.** 66 → **77** elements, sub_strands 11 → **21**, indicators unchanged at 45. Decomposed against the extraction (no Bedrock spend — both detections were already on disk):
+> - **4 genuinely new sub_strands**, all verbatim in the extraction: `Attachment`, `Social Interactions`, `Respect` (SED, p2) and `Comprehension and Text Structure` (p4).
+> - **7 additional cross-page duplicate copies** of strands/sub_strands that were already present.
+> - 1 indicator title edited in place.
+>
+> The duplicates are **not** a de-duplication regression: **0 same-page duplicates in either folder**, and every duplicated title has **page 4 as its first occurrence** — AZ's contents/listing page, which prints the strand and concept headings whose content lives on later pages. `08-16-26` already showed the same pattern on two titles (`Emergent Literacy` ×3, `Emergent Writing` ×2); the new run simply emits the listing page's entries consistently. This is the same phenomenon `HELD_OUT_ANNOTATION_GUIDE.md` documents for NV's "The `<Domain>` Standards include:" pages.
+>
+> Consequence for the re-record: AZ's raw precision will fall because those copies are unmatched in-scope detections, and that is an **artifact of a listing page plus a 5-element spot-check golden**, not a quality change. AZ was already on the verified-precision path (guardrail 8) and stays there.
 
 ```bash
 source venv/bin/activate
-python -m evaluation.eval_detector --state CA
-python -m evaluation.eval_detector --state CA --stability-runs 3   # LLM-determinism check
-python -m evaluation.eval_parser --detection-dir outputs/08-16-26 --state CA
+python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state CA
+python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state CA --stability-runs 3
+python -m evaluation.eval_parser --detection-dir outputs/08-22-26-4 --state CA
 ```
 
 - Detector grades against `evaluation/ground_truth_detector/{STATE}.json` (flat element list, run on `{STATE}-extraction.json`).
@@ -62,7 +81,7 @@ python -m evaluation.eval_parser --detection-dir outputs/08-16-26 --state CA
 
 - **The held-out canary is NV-2023** (`nevada_standards_2023_only_subset.pdf`, multi-domain). **Not** NV-SES-2025 — that document is Social-Emotional Standards only, a single domain, and far too narrow to support a generalization claim.
 - **California's source is the PTKLF "at a glance" document** (`ptklfataglance.pdf`, 68pp) — confirmed correct, not an error in `standards/standards_tracking.md`. Name it precisely in the paper.
-- **Batched vs. direct path.** The detector eval runs the direct path; the parser eval and production run on the batched path's output (`detection_batching.py`, `parse_batching.py`). **Measured 2026-08-16:** at the `_only_subset` tier every state produces ≤5 chunks (AZ 4, CA 3, CO 4, TX 3, NV 5, KY 3) against `MAX_CHUNKS_PER_BATCH=5` and ≤3 domains against `MAX_DOMAINS_PER_BATCH=3`, so **both** batching layers run as exactly one batch per state — the Map has a single iteration and the merge is a no-op. Detection consequently converges almost exactly (CA/CO/TX identical, AZ differs by two footnote characters), but that is structural, not evidence. Parsing does **not** converge (12 of CA's 94 `standard_id`s differ). The batching claim needs a full-document run (Task 6).
+- **Batched vs. direct path.** The detector eval runs the direct path; the parser eval and production run on the batched path's output (`detection_batching.py`, `parse_batching.py`). ⚠️ **The chunk/domain counts below were measured on `outputs/08-16-26` and are stale for AZ** — its detection grew 66 → 77 elements in `08-22-26-4`, so re-derive them during the re-record. **Measured 2026-08-16:** at the `_only_subset` tier every state produces ≤5 chunks (AZ 4, CA 3, CO 4, TX 3, NV 5, KY 3) against `MAX_CHUNKS_PER_BATCH=5` and ≤3 domains against `MAX_DOMAINS_PER_BATCH=3`, so **both** batching layers run as exactly one batch per state — the Map has a single iteration and the merge is a no-op. Detection consequently converges almost exactly (CA/CO/TX identical, AZ differs by two footnote characters), but that is structural, not evidence. Parsing does **not** converge (12 of CA's 94 `standard_id`s differ). The batching claim needs a full-document run (Task 6).
 - **Model assignment is deliberate** — Haiku 4.5 for the depth map, Opus 4.6 for detection, Sonnet 4.6 for parsing (`config.py:15-21`). The principle is "cheapest model that suffices per stage"; the model-tier ablation (Task 7) is its evidence.
 - **Cost data already exists.** `PipelineRunMetrics.summary()` (`src/els_pipeline/metrics.py`) gives per-stage tokens/cost/latency/call-counts; the `els-pipeline-metrics-{env}` CloudWatch dashboard (`infra/cdk/lib/constructs/pipeline-dashboard.ts`) is the cross-check. `BEDROCK_PRICING` rates are hardcoded as of April 2026 — re-verify and cite the date.
 
@@ -74,7 +93,14 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 ### Task 1 — Run headline evals on the 4 golden states and sanity-check every metric
 
-> **STATUS: DONE (re-run from scratch) 2026-08-16 against `outputs/08-16-26`.** Results in **`paper/results/task1_20260816/`** — narrative `findings.md`, consolidated numbers `summary.json`, provenance + regenerating commands `manifest.json`, raw suite reports `detector_golden4.json` / `parser_golden4.json`, path comparison `direct_vs_batched.json`. The July results (`paper/results/task1_*`) are **superseded** — they graded code that no longer exists (`derive_code_from_title` 2026-08-01; rule 4's code-lookup clause, `_anchor_parent_chain`, `disambiguate_colliding_standards`, `models._blank_to_none` 2026-08-15) — and are retained only for the reproducibility narrative.
+> ⚠️ **SUPERSEDED 2026-08-22 — RE-RUN REQUIRED. The numbers below describe code that no longer exists.** `eval_common.code_version_hash` moved **`3b445471` → `2ac17ac2`** because commit `92c8288` ("updates for cleanup of detection and adding NV full coverage") changed **both** `detector.py` and `parser.py`, and then to **`288c64f1`** when Task 3's depth-map flag landed on 2026-08-22. **Re-record at `288c64f1`** — that single freeze covers Tasks 1, 2 and the Task 3 on-arm. Every cached artifact is invalidated and every figure in `paper/results/task1_20260816/` is now historical, exactly as the July results became historical on 2026-08-16. Three things changed at once and the re-run must be against **`outputs/08-22-26-4`**, `--no-cache`:
+> 1. **pipeline source** (hash above);
+> 2. **inputs** — AZ detection 66 → **77** elements (sub_strands 11 → **21**), which is unmeasured and is the single most important thing the re-record must explain;
+> 3. **the harness** — `eval_parser._match_key` no longer derives identity from the code (Task 2 repair, verified score-neutral on these four at the old hash, but that verification does not carry across a source change).
+>
+> Retain `task1_20260816/` as the reproducibility record; write the new run to `paper/results/task1_2026MMDD/`.
+>
+> **STATUS (historical): DONE (re-run from scratch) 2026-08-16 against `outputs/08-16-26`.** Results in **`paper/results/task1_20260816/`** — narrative `findings.md`, consolidated numbers `summary.json`, provenance + regenerating commands `manifest.json`, raw suite reports `detector_golden4.json` / `parser_golden4.json`, path comparison `direct_vs_batched.json`. The July results (`paper/results/task1_*`) are **superseded** — they graded code that no longer exists (`derive_code_from_title` 2026-08-01; rule 4's code-lookup clause, `_anchor_parent_chain`, `disambiguate_colliding_standards`, `models._blank_to_none` 2026-08-15) — and are retained only for the reproducibility narrative.
 >
 > **Headline:** detector recall **1.000 at every level in all four states**, code accuracy 4/4 · 25/25 · 7/7 · 8/8, description accuracy 4/4 · 14/14 · 4/4 · 3/3, depth map PASS ×4, all 11 detector regression cases PASS. Parser coverage **1.000** ×4, field accuracy 0.997 / 0.984 / 1.000 / 1.000, 0 `standard_id` collisions, all 8 parser regression cases PASS.
 >
@@ -114,7 +140,15 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Risk:** HIGH + LONG POLE. This is the main net-new effort and it gates the paper's strongest claim. **Start early; it can run in parallel with Task 1.**
 
-> **STATUS: DONE 2026-08-16 against `outputs/08-16-26`** (code version hash `3b445471` — the same code Task 1 graded, so the two are directly comparable). Results in **`paper/results/task2_20260816/`** — narrative `findings.md`, consolidated numbers `summary.json`, provenance + regenerating commands `manifest.json`, raw suite reports `detector_heldout2.json` / `parser_heldout2.json`, evidence `heldout_evidence.json`, determinism probe `parser_KY_stability5.json`.
+> ⚠️ **SUPERSEDED 2026-08-22 — RE-RUN REQUIRED, and the NV half is re-run against DIFFERENT GOLDENS.** Same source change as Task 1 (`3b445471` → `2ac17ac2` at commit `92c8288`, then → **`288c64f1`** with Task 3's flag), plus the held-out goldens themselves moved:
+> - **NV detector golden 41 → 46 elements**, **NV parser golden 15 → 24 standards** (exhaustive pass, Emily, 2026-08-22). NV's annotation-coverage ceiling therefore moves **0.7736 → 0.8679** and its raw precision moves with it — **that is an annotation-coverage change, not a quality improvement, and must be labelled as such.**
+> - KY goldens unchanged (44 / 26).
+> - The drafted NV FP audit shrinks from **12 verdicts to 7** (the 5 real-but-unannotated standards are now annotated), so `nv_fp_audit_signoff.md` must be regenerated before sign-off — **do not sign the 12-row version.**
+> - NV's `SS.CI.PK3` hallucination and the 6 reprinted-heading duplicates both persist in `08-22-26-4`, so verified precision should land at **52/53 = 0.981** again. If it does, that is a genuine cross-golden replication and worth saying so.
+>
+> Re-run against **`outputs/08-22-26-4`**, `--no-cache`. Retain `task2_20260816/` as the record; write the new run to `paper/results/task2_2026MMDD/`.
+>
+> **STATUS (historical): DONE 2026-08-16 against `outputs/08-16-26`** (code version hash `3b445471` — the same code Task 1 graded, so the two are directly comparable). Results in **`paper/results/task2_20260816/`** — narrative `findings.md`, consolidated numbers `summary.json`, provenance + regenerating commands `manifest.json`, raw suite reports `detector_heldout2.json` / `parser_heldout2.json`, evidence `heldout_evidence.json`, determinism probe `parser_KY_stability5.json`.
 >
 > **Headline — generalization HOLDS.** Detector recall **1.000 at every level in both states**, depth map PASS ×2, 0 level confusion, 100% domain-scoped matches (0 fallback). Parser coverage **1.000** ×2, 0 `standard_id` collisions. **KY is a clean sweep: precision 1.000, code 44/44, description 26/26, all 3 detector regressions PASS — against an EXHAUSTIVE golden.** NV: code 39/41, description 2/3, 3/3 regressions PASS. Parser field accuracy NV 0.974 / KY 0.983.
 >
@@ -146,6 +180,27 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Deliverable:** the on/off delta table in `paper/results/`.
 
+> **STATUS: FLAG LANDED 2026-08-22. Both arms still need recording.** `code_version_hash` is now **`288c64f1`** (this edit touched `detector.py`), which is the hash the combined re-record of Tasks 1 + 2 + this ablation must run at.
+>
+> **What landed.** `Config.DEPTH_MAP_ENABLED` (`ELS_DEPTH_MAP_ENABLED=false` to ablate; production default ON, asserted by a test). The gate is **inside `infer_depth_map`**, not at its call sites, so `detect_structure` and `detection_batching.prepare_detection_batches` cannot drift apart. Returning `None` reuses the signal an inference failure already produces, so the off-arm exercises the system's real graceful-degradation path rather than a strawman. `eval_detector` reports a third state, **`ABLATED`**, instead of grading a depth map that was never produced. 19 unit tests in `tests/unit/test_depth_map_ablation.py`; full suite 436 pass.
+>
+> ⚠️ **A cache-collision hazard was found and fixed before any run — read this before touching the cache key.** The flag lives in `config.py`, which `eval_common.code_version_hash` does **not** cover, so flipping it does not invalidate the cache. Without a key component the on-arm's cached detection would be replayed for the off-arm and the ablation would report **"no difference" having never run the off-arm at all** — a fabricated null result for the paper's central experiment. `--no-cache` does not save you either: it still WRITES to the shared key, poisoning the other arm's next cached run. `run_detector_cached` now appends `nodepthmap-` to the key when the flag is off.
+>
+> **Live smoke test (KY, off-arm, `--no-cache`, `outputs/08-22-26-4`) — the effect is large and lands exactly where the thesis predicts.** Against the on-arm's frozen Task 2 numbers (recall 1.000 every level, precision 1.000, code 44/44, 3/3 regressions PASS):
+>
+> | | on-arm (frozen, `3b445471`) | off-arm (`288c64f1`) |
+> |---|---|---|
+> | recall | **1.000** | 0.886 |
+> | precision | **1.000** | 0.867 |
+> | sub_strand recall | 1.00 | **0.60** |
+> | strand precision | 1.00 | **0.40** |
+> | code accuracy | 44/44 | 35/39 |
+> | regressions | 3/3 PASS | **2 of 3 FAIL** |
+>
+> The failure mode is **level collapse, classified by label**: 6 of 12 `Benchmark N.N` elements came back as **strand** instead of sub_strand (`KY-BENCHMARK-IS-SUB-STRAND` FAIL), which is what drives sub_strand recall to 0.60 and strand precision to 0.40 simultaneously — the same 6 elements counted as both misses and false positives. `KY-STRAND-CODE-KEEPS-FULL-LABEL` also fails (4 strand codes lost their domain prefix). Indicators and domains are untouched (recall and precision 1.000 at both), so the depth map's contribution is specifically at the levels whose identity depends on *position* rather than on a distinctive surface form.
+>
+> ⚠️ This is **one run on one state** and the parser is known to vary between runs; treat it as a promising smoke test, not the recorded result. Record both arms across all six states before quoting anything.
+>
 > **Concrete outline (scoped 2026-08-20 against the live tree).**
 >
 > **The off-state already exists — do not write a second prompt.** `build_detection_prompt(chunk, depth_map=None)` is already a supported path with its own `depth_map_block` else-branch (`detector.py:334-344`); it is the graceful-degradation route used when Bedrock fails mid-run. The ablation only has to force it. That also makes the off-arm honest: it is the system's real no-depth-map behavior, not a strawman built for the paper.

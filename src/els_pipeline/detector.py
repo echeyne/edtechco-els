@@ -512,7 +512,31 @@ def infer_depth_map(
 
     Returns the parsed depth_map dict, or None on failure (caller should
     fall back to no-depth-map mode rather than aborting detection).
+
+    ABLATION HOOK (arXiv paper Task 3). `Config.DEPTH_MAP_ENABLED` is checked
+    HERE rather than at the call sites on purpose: `infer_depth_map` has two
+    production callers — `detect_structure` (the direct path, which is what
+    `eval_detector` runs) and `detection_batching.prepare_detection_batches`
+    (the batched path) — and gating only one would leave the other unablated,
+    making any comparison between them meaningless. One gate at the source
+    cannot be half-applied.
+
+    Returning None is deliberately the SAME signal an inference failure
+    already produces, so no caller needs to learn a new state: both callers
+    already treat None as "run without a depth map", which is the system's
+    real graceful-degradation path rather than a strawman written for the
+    paper. `build_detection_prompt` has carried a `depth_map=None` branch all
+    along.
     """
+    if not Config.DEPTH_MAP_ENABLED:
+        logger.warning(
+            "DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via "
+            "ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. "
+            "This is not the production default — if you did not intend an "
+            "ablation run, unset the variable."
+        )
+        return None
+
     sample = _sample_blocks_for_depth_map(blocks)
     if not sample:
         return None

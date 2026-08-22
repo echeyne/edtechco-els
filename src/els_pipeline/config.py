@@ -20,6 +20,16 @@ class Config:
     )
     BEDROCK_PARSER_LLM_MODEL_ID = os.getenv("BEDROCK_PARSER_LLM_MODEL_ID", "us.anthropic.claude-sonnet-4-6")
 
+    # Pass-1 depth-map inference on/off. PRODUCTION DEFAULT IS ON and must stay
+    # that way — this exists solely for the arXiv paper's depth-map ablation
+    # (Task 3), which is the evidence for the "classify by nesting POSITION,
+    # not document label" claim. Set ELS_DEPTH_MAP_ENABLED=false to run the
+    # off-arm. Read through `Config.DEPTH_MAP_ENABLED` at CALL time (not
+    # captured at import) so a test can monkeypatch the attribute.
+    DEPTH_MAP_ENABLED = os.getenv("ELS_DEPTH_MAP_ENABLED", "true").strip().lower() not in (
+        "0", "false", "no", "off",
+    )
+
     # Batch Configuration
     MAX_CHUNKS_PER_BATCH = int(os.getenv("MAX_CHUNKS_PER_BATCH", "5"))
     MAX_DOMAINS_PER_BATCH = int(os.getenv("MAX_DOMAINS_PER_BATCH", "3"))

@@ -74,18 +74,45 @@ re-verify if that detection is ever re-recorded.
 
 **Precision caveat for the paper.** A spot-check golden cannot produce a
 precision number, which is why the four golden states report verified
-precision from the Task 1b manual FP audit instead. That caveat no longer
-applies to the held-out pair: **both NV and KY detector goldens are now
-exhaustive**, so their raw suite precision is a real hallucination rate.
+precision from the Task 1b manual FP audit instead.
 
-⚠️ NV became exhaustive on **2026-08-22**, *after* the frozen Task 2
+⚠️ **Corrected 2026-08-22 (measured against `outputs/08-22-26-4`).** An earlier
+revision of this section said both held-out goldens are now exhaustive and that
+their raw suite precision is therefore a real hallucination rate. That conflates
+two different properties, and it holds for KY but **not** for NV:
+
+- **Content-exhaustive** — the golden annotates every distinct structural
+  element the subset prints. **NV is now this** (46 elements, all twelve
+  `<Domain> Standard N:` headings included). This is what the 2026-08-22 pass
+  achieved and it is a real improvement.
+- **Detection-exhaustive** — every in-scope detection is accounted for by a
+  golden entry, i.e. `n_golden == n_in_scope`. This is the property that
+  licenses reporting raw precision, and **NV is not it**: the detector emits
+  **53** in-scope elements against the golden's 46, because NV reprints 6
+  headings on a second page spread (6 duplicate `(level, title)` pairs in the
+  detection, 0 in the golden) and one detection is the known `SS.CI.PK3`
+  hallucination.
+
+So NV's ceiling is **46/53 = 0.8679**. Reporting that as a hallucination rate
+would count 6 correct re-detections of genuinely reprinted headings as
+hallucinations. **NV keeps the verified-precision path** — the audit is just
+much smaller now, 7 verdicts instead of 12. KY remains detection-exhaustive
+(44/44) and its raw precision 1.000 is a real hallucination rate.
+
+A one-entry-per-element golden can never be detection-exhaustive for a document
+that reprints headings, so this is a property of NV's layout, not a gap in the
+annotation. Do not "fix" it by annotating the repeats twice.
+
+⚠️ NV became content-exhaustive on **2026-08-22**, *after* the frozen Task 2
 measurement. `paper/results/task2_20260816/` was recorded against the
 41-element NV golden and its NV annotation-coverage ceiling (0.7736) and raw
 precision are historical figures for that golden — leave them as the record of
-what was measured, and re-record rather than retro-fit if the paper is to cite
-the exhaustive number. Guardrail 8 in `tasking/arxiv_paper.md` names KY as
-"the one state that qualifies today" for reporting raw precision; NV now
-qualifies too, on the same `golden_is_exhaustive` evidence test.
+what was measured, and re-record rather than retro-fit. When the new ceiling
+(0.8679) is reported, label it as an **annotation-coverage change, not a
+quality improvement**: the detector's behaviour on NV did not change, the
+denominator's accounting did. Guardrail 8 in `tasking/arxiv_paper.md` still
+names KY as the one state that qualifies for raw-precision reporting, and NV
+does **not** join it — see the corrected caveat above for why.
 
 ## Conventions worth restating
 

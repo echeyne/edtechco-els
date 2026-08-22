@@ -72,6 +72,7 @@ from evaluation.eval_common import (
     _norm_ws,
     run_regressions,
 )
+from els_pipeline.config import Config
 from els_pipeline.detector import (  # noqa: E402
     detect_structure,
     infer_depth_map,
@@ -214,14 +215,28 @@ def run_detector_cached(
     cache_suffix: str = "",
 ) -> List[dict]:
     """Run the detector once. Cache by (state, extraction-hash, code-hash,
-    suffix). The code hash is what makes a prompt edit invalidate the cache
-    rather than silently replay the previous run's output — see
-    ``eval_common.code_version_hash``."""
+    depth-map arm, suffix). The code hash is what makes a prompt edit
+    invalidate the cache rather than silently replay the previous run's output
+    — see ``eval_common.code_version_hash``.
+
+    ⚠️ THE DEPTH-MAP ARM MUST BE IN THE KEY (added for Task 3's ablation). The
+    flag lives in `Config`, not in `detector.py`, so flipping it does NOT move
+    `code_version_hash`. Without a key component the two ablation arms collide:
+    the on-arm writes a cache entry, the off-arm hits it, and the ablation
+    reports "no difference" while never having run the off-arm at all — a
+    fabricated null result for the experiment that is supposed to be the
+    paper's central evidence. `--no-cache` alone does not save you: it still
+    WRITES to the shared key, so whichever arm ran last silently poisons the
+    other's next cached run.
+
+    The marker is appended only when the flag is OFF, so the production-default
+    key keeps its existing shape."""
     extraction = json.loads(extraction_path.read_text())
     blocks_data = extraction.get("blocks", [])
+    arm_suffix = cache_suffix if Config.DEPTH_MAP_ENABLED else f"nodepthmap-{cache_suffix}"
     cache_key = (
         f"detection-{state}-{_hash_blocks(blocks_data)}-"
-        f"{code_version_hash()}-{cache_suffix}.json"
+        f"{code_version_hash()}-{arm_suffix}.json"
     )
     cache_path = CACHE_DIR / cache_key
 
@@ -544,12 +559,28 @@ def evaluate_state(
 
     # Depth map (re-run; usually cached identically by the same prompt hash —
     # for now we just call infer_depth_map once for grading).
-    extraction = json.loads(extraction_path.read_text())
-    blocks = [TextBlock(**b) for b in extraction.get("blocks", [])]
-    actual_dm = infer_depth_map(blocks)
-    passed, detail = grade_depth_map(golden.get("expected_depth_map", {}), actual_dm)
-    rep.depth_map_passed = passed
-    rep.depth_map_detail = detail
+    #
+    # ABLATION (arXiv paper Task 3): with Pass-1 disabled there is no depth map
+    # to grade, and grading anyway would report `depth-map: FAIL — inference
+    # returned None`, which reads as a quality failure rather than as the
+    # ablation working. Skip the call and record a THIRD state instead
+    # (`depth_map_passed = None`), so the off-arm's own report cannot be
+    # mistaken for a regression. Without this the off-arm silently contradicts
+    # itself: `Config.DEPTH_MAP_ENABLED` gates `infer_depth_map` at the source,
+    # so this grading call — a SECOND, separate invocation that never drove the
+    # graded detection — would return None too.
+    if not Config.DEPTH_MAP_ENABLED:
+        rep.depth_map_passed = None
+        rep.depth_map_detail = (
+            "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded"
+        )
+    else:
+        extraction = json.loads(extraction_path.read_text())
+        blocks = [TextBlock(**b) for b in extraction.get("blocks", [])]
+        actual_dm = infer_depth_map(blocks)
+        passed, detail = grade_depth_map(golden.get("expected_depth_map", {}), actual_dm)
+        rep.depth_map_passed = passed
+        rep.depth_map_detail = detail
 
     rep.regressions = run_regressions(golden, detected, regression_checks.lookup)
 
@@ -608,7 +639,8 @@ def render_report(rep: StateReport) -> str:
         for cid, lvl, status, detail in rep.description_mismatches:
             out.append(f"    [DESC/{status.upper()}] {cid} ({lvl}): {detail}")
 
-    out.append(f"  depth-map: {'PASS' if rep.depth_map_passed else 'FAIL'} — {rep.depth_map_detail}")
+    _dm = "ABLATED" if rep.depth_map_passed is None else ("PASS" if rep.depth_map_passed else "FAIL")
+    out.append(f"  depth-map: {_dm} — {rep.depth_map_detail}")
 
     if rep.age_band_drops:
         out.append(f"  age-band drops ({len(rep.age_band_drops)}): {rep.age_band_drops[:8]}{'…' if len(rep.age_band_drops) > 8 else ''}")
