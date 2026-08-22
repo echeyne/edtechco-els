@@ -1,0 +1,1207 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-CO-2020-PDH.1.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.1",
+        "name": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "1. Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.2",
+        "name": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "2. Participate in prevention and management of chronic health conditions and avoid toxins, such as lead."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.3",
+        "name": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "3. Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.4",
+        "name": "Get sufficient rest and exercise to support healthy development.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "4. Get sufficient rest and exercise to support healthy development.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.5",
+        "name": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "5. Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.6",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.6",
+        "name": "Communicate an understanding of the importance of health and safety routines and rules.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "6. Communicate an understanding of the importance of health and safety routines and rules.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.7",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.7",
+        "name": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "7. Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.8",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.8",
+        "name": "Distinguish food on a continuum from most healthy to less healthy.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "8. Distinguish food on a continuum from most healthy to less healthy."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.9",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.9",
+        "name": "Eat a variety of nutritious foods.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "9. Eat a variety of nutritious foods."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.10",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.10",
+        "name": "Participate in structured and unstructured physical activities.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "10. Participate in structured and unstructured physical activities.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.11",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.11",
+        "name": "Recognize the importance of doctor and dentist visits.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "11. Recognize the importance of doctor and dentist visits."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.1.12",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.1",
+        "name": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.1.12",
+        "name": "Cooperate during doctor and dentist visits and health and developmental screening.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 3,
+      "source_text": "12. Cooperate during doctor and dentist visits and health and developmental screening."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.2.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.2",
+        "name": "Gross Motor Skills",
+        "description": "The control of large muscles for movement, navigation, and balance."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.2.1",
+        "name": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "1. Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.2.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.2",
+        "name": "Gross Motor Skills",
+        "description": "The control of large muscles for movement, navigation, and balance."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.2.2",
+        "name": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "2. Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.2.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.2",
+        "name": "Gross Motor Skills",
+        "description": "The control of large muscles for movement, navigation, and balance."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.2.3",
+        "name": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "3. Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*"
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.3.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.3",
+        "name": "Fine Motor Skills",
+        "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.3.1",
+        "name": "Develop hand strength and dexterity.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "1. Develop hand strength and dexterity."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.3.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.3",
+        "name": "Fine Motor Skills",
+        "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.3.2",
+        "name": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "2. Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.3.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.3",
+        "name": "Fine Motor Skills",
+        "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.3.3",
+        "name": "Manipulate a range of objects, such as blocks or books.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "3. Manipulate a range of objects, such as blocks or books."
+    },
+    {
+      "standard_id": "US-CO-2020-PDH.3.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "PDH",
+        "name": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies."
+      },
+      "strand": {
+        "code": "PDH.3",
+        "name": "Fine Motor Skills",
+        "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "PDH.3.4",
+        "name": "Manipulate writing, drawing, and art tools.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "4. Manipulate writing, drawing, and art\ntools."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.1",
+        "name": "Engage in and maintains positive relationships and interactions with adults.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "1. Engage in and maintains\npositive relationships and\ninteractions with adults.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.2",
+        "name": "Engage in prosocial and cooperative behavior with adults.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "2. Engage in prosocial and\ncooperative behavior with\nadults.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.3",
+        "name": "Engage in and maintains positive interactions and relationships with other children.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "3. Engage in and maintains\npositive interactions and\nrelationships with other\nchildren.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.4",
+        "name": "Engage in cooperative play with other children.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "4. Engage in cooperative play\nwith other children."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.1.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.1",
+        "name": "Relationships with Adults and Peers",
+        "description": "The healthy relationships and interactions with adults and peers."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.1.5",
+        "name": "Use basic problem-solving skills to resolve conflicts with other children.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "5. Use basic problem-solving\nskills to resolve conflicts\nwith other children."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.2.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.2",
+        "name": "Sense of Identity and Belonging",
+        "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.1",
+        "name": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "1. Recognize self as a unique\nindividual having own\nabilities, characteristics,\nemotions, and interests.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.2.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.2",
+        "name": "Sense of Identity and Belonging",
+        "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.2",
+        "name": "Express confidence in own skills and positive feelings about self.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "2. Express confidence in own\nskills and positive feelings\nabout self.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.2.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.2",
+        "name": "Sense of Identity and Belonging",
+        "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.2.3",
+        "name": "Have a sense of belonging to family, community, and other groups.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "3. Have a sense of belonging\nto family, community, and\nother groups."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.3.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.3",
+        "name": "Emotional Functioning",
+        "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.1",
+        "name": "Express a broad range of emotions and recognize these emotions in self and others.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "1. Express a broad range of\nemotions and recognize\nthese emotions in self and\nothers.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.3.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.3",
+        "name": "Emotional Functioning",
+        "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.2",
+        "name": "Express care and concern toward others.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "2. Express care and concern\ntoward others."
+    },
+    {
+      "standard_id": "US-CO-2020-SED.3.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.3",
+        "name": "Emotional Functioning",
+        "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.3.3",
+        "name": "Manage emotions with increasing independence.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 7,
+      "source_text": "3. Manage emotions with\nincreasing independence.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.4.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.4",
+        "name": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.4.1",
+        "name": "Follow classroom rules and routines with increasing independence.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "1. Follow classroom rules and\nroutines with increasing\nindependence.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.4.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.4",
+        "name": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.4.2",
+        "name": "Appropriately handle and take care of classroom materials.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "2. Appropriately handle and\ntake care of classroom\nmaterials.*"
+    },
+    {
+      "standard_id": "US-CO-2020-SED.4.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "SED",
+        "name": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language."
+      },
+      "strand": {
+        "code": "SED.4",
+        "name": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "SED.4.3",
+        "name": "Manage actions, words, and behavior with increasing independence.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 8,
+      "source_text": "3. Manage actions, words, and\nbehavior with increasing\nindependence.*"
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.1.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.1",
+        "name": "Receptive English Language Skills",
+        "description": "The ability to comprehend or understand the English language."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.1.1",
+        "name": "Participate with movement and gestures while other children and the teachers dance and sing in English.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "1. Participate with movement and gestures while other\nchildren and the teachers dance and sing in English."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.1.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.1",
+        "name": "Receptive English Language Skills",
+        "description": "The ability to comprehend or understand the English language."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.1.2",
+        "name": "Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\" when accompanied by adult gestures.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "2. Acknowledge or respond nonverbally to common words\nor phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or\n\"bathroom,\" when accompanied by adult gestures."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.1.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.1",
+        "name": "Receptive English Language Skills",
+        "description": "The ability to comprehend or understand the English language."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.1.3",
+        "name": "Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "3. Point to body parts when asked, \"Where is your nose,\nhand, leg...?\""
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.1.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.1",
+        "name": "Receptive English Language Skills",
+        "description": "The ability to comprehend or understand the English language."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.1.4",
+        "name": "Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why do you think the caterpillar is hungry?\"",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "4. Comprehend and respond to increasingly complex\nand varied English vocabulary, such as \"Which stick\nis the longest?\" \"Why do you think the caterpillar is\nhungry?\""
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.1.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.1",
+        "name": "Receptive English Language Skills",
+        "description": "The ability to comprehend or understand the English language."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.1.5",
+        "name": "Follow multi-step directions in English with minimal cues or assistance.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "5. Follow multi-step directions in English with minimal\ncues or assistance."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.2.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.2",
+        "name": "Expressive English Language Skills",
+        "description": "The ability to speak or use English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.2.1",
+        "name": "Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "1. Repeat word or phrase to self, such as \"bus\" while\ngroup sings the \"Wheels on the Bus\" or \"brush teeth\"\nafter lunch."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.2.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.2",
+        "name": "Expressive English Language Skills",
+        "description": "The ability to speak or use English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.2.2",
+        "name": "Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "2. Request items in English, such as \"car,\" \"milk,\" \"book,\"\n\"ball.\""
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.2.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.2",
+        "name": "Expressive English Language Skills",
+        "description": "The ability to speak or use English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.2.3",
+        "name": "Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "3. Use one or two English words, sometimes joined to\nrepresent a bigger idea, such as \"throwball.\""
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.2.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.2",
+        "name": "Expressive English Language Skills",
+        "description": "The ability to speak or use English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.2.4",
+        "name": "Use increasingly complex and varied English vocabulary.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "4. Use increasingly complex and varied English\nvocabulary."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.2.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.2",
+        "name": "Expressive English Language Skills",
+        "description": "The ability to speak or use English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.2.5",
+        "name": "Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "5. Construct sentences, such as \"The apple is round,\" or\n\"I see a fire truck with lights on.\""
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.3.1",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.3",
+        "name": "Engagement in English Literacy Activities",
+        "description": "Understanding and responding to books, storytelling, and songs presented in English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.3.1",
+        "name": "Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "1. Demonstrate eagerness to participate in songs,\nrhymes, and stories in English."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.3.2",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.3",
+        "name": "Engagement in English Literacy Activities",
+        "description": "Understanding and responding to books, storytelling, and songs presented in English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.3.2",
+        "name": "Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "2. Point to pictures and says the word in English, such\nas \"frog,\" \"baby,\" \"run.\""
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.3.3",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.3",
+        "name": "Engagement in English Literacy Activities",
+        "description": "Understanding and responding to books, storytelling, and songs presented in English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.3.3",
+        "name": "Learn part of a song or poem in English and repeat it.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "3. Learn part of a song or poem in English and repeat\nit."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.3.4",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.3",
+        "name": "Engagement in English Literacy Activities",
+        "description": "Understanding and responding to books, storytelling, and songs presented in English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.3.4",
+        "name": "Talk with peers or adults about a story read in English.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "4. Talk with peers or adults about a story read in\nEnglish."
+    },
+    {
+      "standard_id": "US-CO-2020-ELD.3.5",
+      "country": "US",
+      "state": "CO",
+      "version_year": 2020,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "The English Language Development domain describes skills for children who are English language learners (ELL). Similar to those acquiring a first language, children who are learning English as a second language understand more English initially than they can produce. This domain includes children's receptive skills, or their ability to understand spoken English as well as children's expressive skills or their ability to speak English. The indicators and examples describe a variety of the types of skills children may exhibit over time as they acquire English. As children gradually learn more English, they will be able to express themselves in English more often. The English Language Development domain also describes the types of literacy activities that support ELL student's language acquisition. However, children should also continue to develop the ability to communicate effectively in their home language because such skills provide a foundation for learning English."
+      },
+      "strand": {
+        "code": "ELD.3",
+        "name": "Engagement in English Literacy Activities",
+        "description": "Understanding and responding to books, storytelling, and songs presented in English."
+      },
+      "sub_strand": null,
+      "indicator": {
+        "code": "ELD.3.5",
+        "name": "Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "5. Tell a story in English with a beginning, middle, and\nend from a book or about a personal experience."
+    }
+  ],
+  "total_indicators": 48,
+  "parsing_timestamp": "2026-08-21T22:10:31.829766+00:00",
+  "source_detection_key": ""
+}

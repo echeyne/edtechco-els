@@ -1,0 +1,2733 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-CA-2021-AL.1.0.CI.1.1.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.CI",
+        "name": "Curiosity and Interest",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.CI.1.1.36-54",
+        "name": "Curiosity and Interest",
+        "description": "Express interest in some familiar and new objects, people, and activities in their immediate environment. Seek information by exploring with their senses, describing their observations, and asking simple questions."
+      },
+      "age_band": "36-54",
+      "source_page": 2,
+      "source_text": "Foundation 1.1 Curiosity and Interest"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.CI.1.1.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.CI",
+        "name": "Curiosity and Interest",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.CI.1.1.48-66",
+        "name": "Curiosity and Interest",
+        "description": "Express interest in a broader range of familiar and new objects, people, and activities by exploring more extensively with their senses, describing their observations in greater detail, and asking more detailed questions."
+      },
+      "age_band": "48-66",
+      "source_page": 2,
+      "source_text": "Foundation 1.1 Curiosity and Interest"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.INIT.1.2.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.INIT",
+        "name": "Initiative",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.INIT.1.2.36-54",
+        "name": "Initiative",
+        "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems."
+      },
+      "age_band": "36-54",
+      "source_page": 2,
+      "source_text": "Foundation 1.2 Initiative"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.INIT.1.2.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.INIT",
+        "name": "Initiative",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.INIT.1.2.48-66",
+        "name": "Initiative",
+        "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently."
+      },
+      "age_band": "48-66",
+      "source_page": 2,
+      "source_text": "Foundation 1.2 Initiative"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.ENGA.1.3.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.ENGA",
+        "name": "Engagement",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.ENGA.1.3.36-54",
+        "name": "Engagement",
+        "description": "Actively engage by focusing and concentrating on activities for brief periods of time with adult support."
+      },
+      "age_band": "36-54",
+      "source_page": 2,
+      "source_text": "Foundation 1.3 Engagement"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.ENGA.1.3.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.ENGA",
+        "name": "Engagement",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.ENGA.1.3.48-66",
+        "name": "Engagement",
+        "description": "Actively engage by focusing and concentrating on activities for longer periods of time with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 2,
+      "source_text": "Foundation 1.3 Engagement"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.PERS.1.4.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.PERS",
+        "name": "Perseverance",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.PERS.1.4.36-54",
+        "name": "Persisting Despite Difficulties",
+        "description": "Demonstrate persistence, with adult support, when engaging in an activity despite encountering setbacks or boredom. Make an effort, with adult support, to cope with emotions that arise (for instance, frustration, sadness, anger, excitement), although may shift to another activity after a short while."
+      },
+      "age_band": "36-54",
+      "source_page": 3,
+      "source_text": "Foundation 1.4 Persisting Despite Difficulties"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.1.0.PERS.1.4.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.1.0",
+        "name": "Motivation to Learn",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.1.0.PERS",
+        "name": "Perseverance",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.1.0.PERS.1.4.48-66",
+        "name": "Persisting Despite Difficulties",
+        "description": "Demonstrate persistence for longer periods of time when engaging in an activity despite encountering setbacks or boredom. More consistently cope with emotions that arise (for instance, frustration, anger, sadness, excitement) and can continue engaging in an activity with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 3,
+      "source_text": "Foundation 1.4 Persisting Despite Difficulties"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.WM.2.1.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.WM",
+        "name": "Working Memory",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.WM.2.1.36-54",
+        "name": "Working Memory",
+        "description": "Hold approximately one to two pieces of information in their mind for a short time and use the knowledge to guide behavior when performing tasks and engaging in play, with adult support."
+      },
+      "age_band": "36-54",
+      "source_page": 3,
+      "source_text": "Foundation 2.1 Working Memory"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.WM.2.1.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.WM",
+        "name": "Working Memory",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.WM.2.1.48-66",
+        "name": "Working Memory",
+        "description": "Hold approximately two to three pieces of information in their mind for longer periods of time and use the knowledge to guide behavior when engaging in multistep tasks and more complex play, with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 3,
+      "source_text": "Foundation 2.1 Working Memory"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.IC.2.2.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.IC",
+        "name": "Inhibitory Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.IC.2.2.36-54",
+        "name": "Managing Impulsive Behaviors",
+        "description": "Demonstrate emerging ability to manage habitual reactions (habits that are not useful in a particular context), impulsive behaviors (acting on a whim), and delaying gratification (resisting temptation for an instant reward) with adult support."
+      },
+      "age_band": "36-54",
+      "source_page": 3,
+      "source_text": "Foundation 2.2 Managing Impulsive Behaviors"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.IC.2.2.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.IC",
+        "name": "Inhibitory Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.IC.2.2.48-66",
+        "name": "Managing Impulsive Behaviors",
+        "description": "Manage habitual reactions (habits that are not useful in a particular context), impulsive behaviors (acting on a whim), and delaying gratification (resisting temptation for an instant reward) with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 3,
+      "source_text": "Foundation 2.2 Managing Impulsive Behaviors"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.IC.2.3.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.IC",
+        "name": "Inhibitory Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.IC.2.3.36-54",
+        "name": "Managing Attention and Distractions",
+        "description": "Demonstrate an emerging ability to ignore distractions and interruptions during independent or group activities; however, often need adult support to manage attention when distracted or interrupted."
+      },
+      "age_band": "36-54",
+      "source_page": 4,
+      "source_text": "Foundation 2.3 Managing Attention and Distractions"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.IC.2.3.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.IC",
+        "name": "Inhibitory Control",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.IC.2.3.48-66",
+        "name": "Managing Attention and Distractions",
+        "description": "Demonstrate an emerging ability to ignore distractions and interruptions during independent or group activities with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 4,
+      "source_text": "Foundation 2.3 Managing Attention and Distractions"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.FLEX.2.4.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.FLEX",
+        "name": "Flexibility",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.FLEX.2.4.36-54",
+        "name": "Flexibility",
+        "description": "Demonstrate emerging ability to shift behavior and think about things in a new way, with adult support."
+      },
+      "age_band": "36-54",
+      "source_page": 4,
+      "source_text": "Foundation 2.4 Flexibility"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.2.0.FLEX.2.4.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.2.0",
+        "name": "Executive Functioning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.2.0.FLEX",
+        "name": "Flexibility",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.2.0.FLEX.2.4.48-66",
+        "name": "Flexibility",
+        "description": "More consistently shift behavior and think about things in a new way, with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 4,
+      "source_text": "Foundation 2.4 Flexibility"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.PROB.3.1.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.PROB",
+        "name": "Problem-Solving",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.PROB.3.1.36-54",
+        "name": "Planning",
+        "description": "Demonstrate emerging ability to set and carry out simple goals (for example, one- to two-step plans and goals), with adult support."
+      },
+      "age_band": "36-54",
+      "source_page": 4,
+      "source_text": "Foundation 3.1 Planning"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.PROB.3.1.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.PROB",
+        "name": "Problem-Solving",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.PROB.3.1.48-66",
+        "name": "Planning",
+        "description": "Demonstrate ability to set and carry out more complex plans (for example, two- to three-step plans and goals), with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 4,
+      "source_text": "Foundation 3.1 Planning"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.PROB.3.2.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.PROB",
+        "name": "Problem-Solving",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.PROB.3.2.36-54",
+        "name": "Reflecting and Analyzing",
+        "description": "Make attempts to adjust a problem-solving approach or strategy by reflecting on and analyzing their current approach, with adult support."
+      },
+      "age_band": "36-54",
+      "source_page": 4,
+      "source_text": "Foundation 3.2 Reflecting and Analyzing"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.PROB.3.2.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.PROB",
+        "name": "Problem-Solving",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.PROB.3.2.48-66",
+        "name": "Reflecting and Analyzing",
+        "description": "Make attempts to adjust a problem-solving approach or strategy by reflecting on and analyzing their current approach, with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 4,
+      "source_text": "Foundation 3.2 Reflecting and Analyzing"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.CE.3.3.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.CE",
+        "name": "Collaborative Effort",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.CE.3.3.36-54",
+        "name": "Problem-Solving Together",
+        "description": "Collaborate with peers in problem-solving during play and learning activities, sometimes for a short period of time and sometimes longer."
+      },
+      "age_band": "36-54",
+      "source_page": 5,
+      "source_text": "Foundation 3.3 Problem-Solving Together"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.CE.3.3.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.CE",
+        "name": "Collaborative Effort",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.CE.3.3.48-66",
+        "name": "Problem-Solving Together",
+        "description": "Engage in extended collaborative problem-solving during play and learning activities. Communicate with peers about how to solve a problem and help peers when needed."
+      },
+      "age_band": "48-66",
+      "source_page": 5,
+      "source_text": "Foundation 3.3 Problem-Solving Together"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.CE.3.4.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.CE",
+        "name": "Collaborative Effort",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.CE.3.4.36-54",
+        "name": "Understanding Others",
+        "description": "Notice, with adult support, that others have different approaches and preferences, although often have difficulty accepting others' approaches or preferences."
+      },
+      "age_band": "36-54",
+      "source_page": 5,
+      "source_text": "Foundation 3.4 Understanding Others"
+    },
+    {
+      "standard_id": "US-CA-2021-AL.3.0.CE.3.4.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "AL",
+        "name": "Approaches to Learning",
+        "description": null
+      },
+      "strand": {
+        "code": "AL.3.0",
+        "name": "Goal-Directed Learning",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "AL.3.0.CE",
+        "name": "Collaborative Effort",
+        "description": null
+      },
+      "indicator": {
+        "code": "AL.3.0.CE.3.4.48-66",
+        "name": "Understanding Others",
+        "description": "Demonstrate understanding and explain that others can have different approaches and preferences and more consistently accept others' approaches and preferences, with less adult support."
+      },
+      "age_band": "48-66",
+      "source_page": 5,
+      "source_text": "Foundation 3.4 Understanding Others"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.1.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.VOCA.1.1.36-54",
+        "name": "Understanding and Using Vocabulary",
+        "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories."
+      },
+      "age_band": "36-54",
+      "source_page": 6,
+      "source_text": "Foundation 1.1 Understanding and Using Vocabulary"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.1.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.VOCA.1.1.48-66",
+        "name": "Understanding and Using Vocabulary",
+        "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories."
+      },
+      "age_band": "48-66",
+      "source_page": 6,
+      "source_text": "Foundation 1.1 Understanding and Using Vocabulary"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.2.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.VOCA.1.2.36-54",
+        "name": "Understanding and Using Words for Categories",
+        "description": "Understand and use commonly experienced vocabulary to describe categories and the relationships within them."
+      },
+      "age_band": "36-54",
+      "source_page": 6,
+      "source_text": "Foundation 1.2 Understanding and Using Words for Categories"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.2.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.VOCA.1.2.48-66",
+        "name": "Understanding and Using Words for Categories",
+        "description": "Understand and use increasingly specific vocabulary to describe categories and the relationships within them."
+      },
+      "age_band": "48-66",
+      "source_page": 6,
+      "source_text": "Foundation 1.2 Understanding and Using Words for Categories"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.3.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.VOCA.1.3.36-54",
+        "name": "Understanding and Using Size and Location Words",
+        "description": "Understand and use words to describe the size and location of objects (such as \"tiny\" and \"on\"), including simple comparisons (such as \"bigger\")."
+      },
+      "age_band": "36-54",
+      "source_page": 6,
+      "source_text": "Foundation 1.3 Understanding and Using Size and Location Words"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.VOCA.1.3.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.VOCA.1.3.48-66",
+        "name": "Understanding and Using Size and Location Words",
+        "description": "Understand and use increasingly specific words to describe and compare the size and location of objects (such as \"longer\" and \"between\")."
+      },
+      "age_band": "48-66",
+      "source_page": 6,
+      "source_text": "Foundation 1.3 Understanding and Using Size and Location Words"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.4.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.4.36-54",
+        "name": "Using Grammatical Features and Sentence Structure",
+        "description": "Use common word forms and sentence forms to express thoughts and ideas."
+      },
+      "age_band": "36-54",
+      "source_page": 7,
+      "source_text": "Foundation 1.4 Using Grammatical Features and Sentence Structure*"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.4.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.4.48-66",
+        "name": "Using Grammatical Features and Sentence Structure",
+        "description": "Use both common and less common word forms and sentence forms to express complex thoughts and ideas."
+      },
+      "age_band": "48-66",
+      "source_page": 7,
+      "source_text": "Foundation 1.4 Using Grammatical Features and Sentence Structure*"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.5.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.5.36-54",
+        "name": "Asking Questions",
+        "description": "Use questions to seek information and to clarify and confirm understanding."
+      },
+      "age_band": "36-54",
+      "source_page": 7,
+      "source_text": "Foundation 1.5 Asking Questions"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.5.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.5.48-66",
+        "name": "Asking Questions",
+        "description": "Use questions and follow-up questions to seek information and to clarify and confirm understanding."
+      },
+      "age_band": "48-66",
+      "source_page": 7,
+      "source_text": "Foundation 1.5 Asking Questions"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.6.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.6.36-54",
+        "name": "Constructing Narratives",
+        "description": "Use language to construct real or fictional short narratives."
+      },
+      "age_band": "36-54",
+      "source_page": 7,
+      "source_text": "Foundation 1.6 Constructing Narratives"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.6.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.6.48-66",
+        "name": "Constructing Narratives",
+        "description": "Use language to construct real or fictional extended narratives that have several details or a plotline."
+      },
+      "age_band": "48-66",
+      "source_page": 7,
+      "source_text": "Foundation 1.6 Constructing Narratives"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.7.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.7.36-54",
+        "name": "Sharing Explanations and Opinions",
+        "description": "Share descriptions, opinions, and explanations."
+      },
+      "age_band": "36-54",
+      "source_page": 7,
+      "source_text": "Foundation 1.7 Sharing Explanations and Opinions"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.7.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.7.48-66",
+        "name": "Sharing Explanations and Opinions",
+        "description": "Share detailed descriptions, opinions, and explanations."
+      },
+      "age_band": "48-66",
+      "source_page": 7,
+      "source_text": "Foundation 1.7 Sharing Explanations and Opinions"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.8.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.8.36-54",
+        "name": "Participating in Conversations",
+        "description": "Participate in back-and-forth conversations with adults and peers. Respond on topic for at least one turn in a conversation."
+      },
+      "age_band": "36-54",
+      "source_page": 8,
+      "source_text": "Foundation 1.8 Participating in Conversations"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.1.0.GRAM.1.8.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.1.0.GRAM.1.8.48-66",
+        "name": "Participating in Conversations",
+        "description": "Participate in increasingly long and complex back-and-forth conversations with adults and peers. Respond on topic across several turns in the conversation."
+      },
+      "age_band": "48-66",
+      "source_page": 8,
+      "source_text": "Foundation 1.8 Participating in Conversations"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.2.0.PA.2.1.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.2.0.PA.2.1.36-54",
+        "name": "Isolating Initial Sounds",
+        "description": "Match words that have the same first sound in speech, with adult support or the support of pictures or objects."
+      },
+      "age_band": "36-54",
+      "source_page": 8,
+      "source_text": "Foundation 2.1 Isolating Initial Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.2.0.PA.2.1.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.2.0.PA.2.1.48-66",
+        "name": "Isolating Initial Sounds",
+        "description": "Isolate and pronounce the first sound of a word, with adult support or the support of pictures or objects."
+      },
+      "age_band": "48-66",
+      "source_page": 8,
+      "source_text": "Foundation 2.1 Isolating Initial Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.2.0.PA.2.2.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.2.0.PA.2.2.36-54",
+        "name": "Recognizing and Blending Sounds",
+        "description": "When presented with two single-syllable words (such as \"sand\" and \"box\"), blend them into a compound word in speech with adult support or the support of pictures or objects."
+      },
+      "age_band": "36-54",
+      "source_page": 8,
+      "source_text": "Foundation 2.2 Recognizing and Blending Sounds*"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.2.0.PA.2.2.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.2.0.PA.2.2.48-66",
+        "name": "Recognizing and Blending Sounds",
+        "description": "When presented with syllables and individual sounds, blend them into words in speech with adult support or the support of pictures or objects."
+      },
+      "age_band": "48-66",
+      "source_page": 8,
+      "source_text": "Foundation 2.2 Recognizing and Blending Sounds*"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.2.0.PA.2.3.36-54",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.2.0.PA.2.3.36-54",
+        "name": "Participating in Rhyming and Wordplay",
+        "description": "Recognize or participate in familiar rhymes or songs."
+      },
+      "age_band": "36-54",
+      "source_page": 8,
+      "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay"
+    },
+    {
+      "standard_id": "US-CA-2021-FLD.2.0.PA.2.3.48-66",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "FLD",
+        "name": "Foundational Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "FLD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "FLD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "FLD.2.0.PA.2.3.48-66",
+        "name": "Participating in Rhyming and Wordplay",
+        "description": "Produce rhyming sounds or words. Rhymes may be imperfect and can be real or nonsense words."
+      },
+      "age_band": "48-66",
+      "source_page": 8,
+      "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.1.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.VOCA.1.1.DISC",
+        "name": "Understanding Words",
+        "description": "Discovering: Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.1 Understanding Words"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.1.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.VOCA.1.1.DEVE",
+        "name": "Understanding Words",
+        "description": "Developing: Demonstrate understanding of words in English for objects and actions as well as phrases encountered frequently in interactions with adults and peers."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.1 Understanding Words"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.1.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.VOCA.1.1.BROA",
+        "name": "Understanding Words",
+        "description": "Broadening: Demonstrate understanding of a larger set of words in English (for example, objects and actions, personal pronouns, possessives, and descriptive terms) in interactions with adults and peers."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.1 Understanding Words"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.2.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.VOCA.1.2.DISC",
+        "name": "Using Words",
+        "description": "Discovering: Use English words, mainly consisting of concrete nouns."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.2 Using Words"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.2.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.VOCA.1.2.DEVE",
+        "name": "Using Words",
+        "description": "Developing: Use varied English words, including an increasing number of concrete nouns and some verbs and pronouns."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.2 Using Words"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.VOCA.1.2.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.VOCA",
+        "name": "Vocabulary",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.VOCA.1.2.BROA",
+        "name": "Using Words",
+        "description": "Broadening: Use a wide variety of English words to share knowledge of concepts, including words across all parts of speech, with some inaccuracies."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.2 Using Words"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.GRAM.1.3.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.GRAM.1.3.DISC",
+        "name": "Using Grammatical Features",
+        "description": "Discovering: Use one or two familiar English verbs as all-purpose verbs, with some inaccuracies."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.3 Using Grammatical Features"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.GRAM.1.3.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.GRAM.1.3.DEVE",
+        "name": "Using Grammatical Features",
+        "description": "Developing: Use some grammatical rules in English, such as using -S or -es for plural nouns and -ing for verbs, sometimes with inaccuracies."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.3 Using Grammatical Features"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.GRAM.1.3.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.GRAM.1.3.BROA",
+        "name": "Using Grammatical Features",
+        "description": "Broadening: Broaden the use of English grammatical rules, such as irregular plurals or simple past tense verbs, sometimes with inaccuracies."
+      },
+      "age_band": "36-66",
+      "source_page": 9,
+      "source_text": "Foundation 1.3 Using Grammatical Features"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.GRAM.1.4.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.GRAM.1.4.DISC",
+        "name": "Using Complex Sentence Structures",
+        "description": "Discovering: Use words or phrases repeatedly experienced in English to communicate."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.4 Using Complex Sentence Structures"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.GRAM.1.4.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.GRAM.1.4.DEVE",
+        "name": "Using Complex Sentence Structures",
+        "description": "Developing: Use a few formulaic English sentence structures to communicate on a range of topics by switching out key words in a phrase."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.4 Using Complex Sentence Structures"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.GRAM.1.4.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.GRAM",
+        "name": "Grammar",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.GRAM.1.4.BROA",
+        "name": "Using Complex Sentence Structures",
+        "description": "Broadening: Use a variety of English grammatical forms, with some inaccuracies, to produce many different types of sentence structures. Grammatical forms can include adding appropriate possessive pronouns (for example, your, my); conjunctions (for example, and, or); and other elements (for example, adjectives, adverbs)."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.4 Using Complex Sentence Structures"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.5.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.5.DISC",
+        "name": "Communicating Needs",
+        "description": "Discovering: Use single English words and nonverbal communication with English speakers, such as gestures or behaviors, to seek attention, make a request, or initiate a response."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.5 Communicating Needs"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.5.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.5.DEVE",
+        "name": "Communicating Needs",
+        "description": "Developing: Combine nonverbal communication and some English phrases to be understood by English speakers."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.5 Communicating Needs"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.5.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.5.BROA",
+        "name": "Communicating Needs",
+        "description": "Broadening: Show increasing reliance on verbal communication in English to be understood by English speakers."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.5 Communicating Needs"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.6.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.6.DISC",
+        "name": "Understanding Requests and Directions",
+        "description": "Discovering: Follow simple directions in English when given additional contextual clues."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.6 Understanding Requests and Directions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.6.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.6.DEVE",
+        "name": "Understanding Requests and Directions",
+        "description": "Developing: Follow directions in English that involve repeatedly experienced routines or contextual clues."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.6 Understanding Requests and Directions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.6.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.6.BROA",
+        "name": "Understanding Requests and Directions",
+        "description": "Broadening: Follow directions that involve more than one step, relying less on contextual clues."
+      },
+      "age_band": "36-66",
+      "source_page": 10,
+      "source_text": "Foundation 1.6 Understanding Requests and Directions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.7.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.7.DISC",
+        "name": "Asking Questions",
+        "description": "Discovering: Use a frequently experienced question phrase (such as \"What's that?\") or use one or two English words with a rising pitch to ask questions."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.7 Asking Questions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.7.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.7.DEVE",
+        "name": "Asking Questions",
+        "description": "Developing: Use a few question structures as a formula, filling in different words to ask about various topics."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.7 Asking Questions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.7.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.7.BROA",
+        "name": "Asking Questions",
+        "description": "Broadening: Use \"who,\" \"what,\" \"why,\" \"how,\" \"when,\" and \"where\" to produce questions in many forms to ask about a variety of topics in English."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.7 Asking Questions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.8.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.8.DISC",
+        "name": "Constructing Narratives",
+        "description": "Discovering: Identify parts of real or fictional narratives using a few English vocabulary words."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.8 Constructing Narratives"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.8.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.8.DEVE",
+        "name": "Constructing Narratives",
+        "description": "Developing: Construct real or fictional short narratives using English vocabulary in a few simple English sentence structures."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.8 Constructing Narratives"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.8.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.8.BROA",
+        "name": "Constructing Narratives",
+        "description": "Broadening: Construct real or fictional narratives by stringing together sentences with varied structures in English."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.8 Constructing Narratives"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.9.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.9.DISC",
+        "name": "Sharing Explanations and Opinions",
+        "description": "Discovering: Use English vocabulary and gestures to share descriptions, opinions, and explanations."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.9 Sharing Explanations and Opinions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.9.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.9.DEVE",
+        "name": "Sharing Explanations and Opinions",
+        "description": "Developing: Use a few simple sentence structures to share descriptions, opinions, and explanations."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.9 Sharing Explanations and Opinions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.9.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.9.BROA",
+        "name": "Sharing Explanations and Opinions",
+        "description": "Broadening: Use varied sentence structures to share descriptions, opinions, and explanations."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.9 Sharing Explanations and Opinions"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.10.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.10.DISC",
+        "name": "Participating in Conversations",
+        "description": "Discovering: Engage in conversation with English speakers, by mostly listening and responding with a few English words, gestures, or other nonverbal responses."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.10 Participating in Conversations"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.10.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.10.DEVE",
+        "name": "Participating in Conversations",
+        "description": "Developing: Converse with others using frequently heard vocabulary in English, often using short, commonly used sentences and phrases and a few repeated grammatical structures, sometimes with inaccuracies."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.10 Participating in Conversations"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.1.0.LU.1.10.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.1.0",
+        "name": "Listening and Speaking",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.1.0.LU",
+        "name": "Language Use",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.1.0.LU.1.10.BROA",
+        "name": "Participating in Conversations",
+        "description": "Broadening: Engage in conversations in English using increasingly complex vocabulary and varied grammatical structures, sometimes with inaccuracies."
+      },
+      "age_band": "36-66",
+      "source_page": 11,
+      "source_text": "Foundation 1.10 Participating in Conversations"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.1.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.1.DISC",
+        "name": "Recognizing and Segmenting Sounds",
+        "description": "Discovering: Recognize and produce sounds of spoken English."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.1 Recognizing and Segmenting Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.1.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.1.DEVE",
+        "name": "Recognizing and Segmenting Sounds",
+        "description": "Developing: Match English words that have the same first sound in speech, with adult support or the support of pictures or objects."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.1 Recognizing and Segmenting Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.1.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.1.BROA",
+        "name": "Recognizing and Segmenting Sounds",
+        "description": "Broadening: Isolate and pronounce the first sound of a word in English, with adult support or the support of pictures or objects."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.1 Recognizing and Segmenting Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.2.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.2.DISC",
+        "name": "Recognizing and Blending Sounds",
+        "description": "Discovering: Recognize and produce sounds of spoken English."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.2 Recognizing and Blending Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.2.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.2.DEVE",
+        "name": "Recognizing and Blending Sounds",
+        "description": "Developing: When presented with two single-syllable English words (such as \"sand\" and \"box\"), blend them into a compound word in speech, with adult support or the support of pictures or objects."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.2 Recognizing and Blending Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.2.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.2.BROA",
+        "name": "Recognizing and Blending Sounds",
+        "description": "Broadening: When presented with syllables and individual sounds, blend them into English words in speech, with adult support or the support of pictures or objects."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.2 Recognizing and Blending Sounds"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.3.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.3.DISC",
+        "name": "Participating in Rhyming and Wordplay",
+        "description": "Discovering: Attend to and participate in frequently experienced simple songs, poems, and fingerplays in English, with gestures and some key words."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.3.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.3.DEVE",
+        "name": "Participating in Rhyming and Wordplay",
+        "description": "Developing: Repeat or recite parts of simple songs, poems, and fingerplays that emphasize rhyme in English."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.PA.2.3.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.PA",
+        "name": "Phonological Awareness",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.PA.2.3.BROA",
+        "name": "Participating in Rhyming and Wordplay",
+        "description": "Broadening: Repeat, recite, produce, or initiate simple songs, poems, and fingerplays that emphasize rhyme in English."
+      },
+      "age_band": "36-66",
+      "source_page": 12,
+      "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.AP.2.4.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.AP",
+        "name": "Alphabetics and Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.AP.2.4.DISC",
+        "name": "Recognizing and Identifying Letters",
+        "description": "Discovering: Recognize the first letter in their own name in the English alphabet."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.4 Recognizing and Identifying Letters"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.AP.2.4.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.AP",
+        "name": "Alphabetics and Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.AP.2.4.DEVE",
+        "name": "Recognizing and Identifying Letters",
+        "description": "Developing: Accurately identify a few letters of the alphabet in English."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.4 Recognizing and Identifying Letters"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.AP.2.4.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.AP",
+        "name": "Alphabetics and Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.AP.2.4.BROA",
+        "name": "Recognizing and Identifying Letters",
+        "description": "Broadening: Accurately identify many uppercase and some lowercase letters of the alphabet in English."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.4 Recognizing and Identifying Letters"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.AP.2.5.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.AP",
+        "name": "Alphabetics and Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.AP.2.5.DISC",
+        "name": "Learning Letter-Sound Correspondence",
+        "description": "Discovering: Demonstrate awareness that English alphabet letters have sounds."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.5 Learning Letter-Sound Correspondence"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.AP.2.5.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.AP",
+        "name": "Alphabetics and Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.AP.2.5.DEVE",
+        "name": "Learning Letter-Sound Correspondence",
+        "description": "Developing: Accurately identify or produce the sound associated with one or two letters in the English alphabet."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.5 Learning Letter-Sound Correspondence"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.AP.2.5.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.AP",
+        "name": "Alphabetics and Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.AP.2.5.BROA",
+        "name": "Learning Letter-Sound Correspondence",
+        "description": "Broadening: Accurately identify or produce the sounds of a few letters of the English alphabet (about 5-10), with adult support."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.5 Learning Letter-Sound Correspondence"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.CP.2.6.DISC",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.CP",
+        "name": "Concepts About Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.CP.2.6.DISC",
+        "name": "Understanding the Concept of Print",
+        "description": "Discovering: Interact with materials representing the letters of the English alphabet."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.6 Understanding the Concept of Print"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.CP.2.6.DEVE",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.CP",
+        "name": "Concepts About Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.CP.2.6.DEVE",
+        "name": "Understanding the Concept of Print",
+        "description": "Developing: Demonstrate awareness that they are interacting with English print."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.6 Understanding the Concept of Print"
+    },
+    {
+      "standard_id": "US-CA-2021-ELD.2.0.CP.2.6.BROA",
+      "country": "US",
+      "state": "CA",
+      "version_year": 2021,
+      "domain": {
+        "code": "ELD",
+        "name": "English Language Development",
+        "description": "This is one out of two sub-domains in the Language and Literacy Development domain."
+      },
+      "strand": {
+        "code": "ELD.2.0",
+        "name": "Foundational Literacy Skills",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "ELD.2.0.CP",
+        "name": "Concepts About Print",
+        "description": null
+      },
+      "indicator": {
+        "code": "ELD.2.0.CP.2.6.BROA",
+        "name": "Understanding the Concept of Print",
+        "description": "Broadening: Demonstrate awareness of English print as something that can be read and has specific meaning."
+      },
+      "age_band": "36-66",
+      "source_page": 13,
+      "source_text": "Foundation 2.6 Understanding the Concept of Print"
+    }
+  ],
+  "total_indicators": 94,
+  "parsing_timestamp": "2026-08-21T22:11:24.348372+00:00",
+  "source_detection_key": ""
+}
