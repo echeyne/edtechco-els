@@ -1,0 +1,121 @@
+[
+  {
+    "state": "NV",
+    "precision": 0.8846153846153846,
+    "recall": 1.0,
+    "f1": 0.9387755102040816,
+    "code_accuracy": 0.9782608695652174,
+    "code_matches": 45,
+    "code_total": 46,
+    "code_mismatches": [
+      {
+        "test_case_id": "NV-DOM-02",
+        "level": "domain",
+        "golden": "Science",
+        "detected": "SCIE"
+      }
+    ],
+    "description_accuracy": 0.6666666666666666,
+    "description_matches": 2,
+    "description_total": 3,
+    "description_truncations": 1,
+    "description_mismatches": [
+      {
+        "test_case_id": "NV-DOM-02",
+        "level": "domain",
+        "status": "truncated",
+        "detail": "truncated: 2410/3500 chars"
+      }
+    ],
+    "matched": 46,
+    "n_golden": 46,
+    "n_detected": 52,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 12,
+        "fp": 5,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 24,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "strand": {
+        "strand": 12
+      },
+      "sub_strand": {
+        "sub_strand": 7
+      },
+      "indicator": {
+        "indicator": 24
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "strand",
+        "Social Studies Standard 2"
+      ],
+      [
+        "strand",
+        "Social Studies Standard 3"
+      ],
+      [
+        "strand",
+        "Science Standard 1"
+      ],
+      [
+        "sub_strand",
+        "S.EO"
+      ],
+      [
+        "strand",
+        "Science Standard 2"
+      ],
+      [
+        "strand",
+        "Technology Standard 2"
+      ]
+    ],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "NV-NO-COLUMN-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "52 elements: no column headers, captions or footnotes emitted, no age_band set"
+      },
+      {
+        "id": "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+        "status": "PASS",
+        "detail": "all 8 sub_strands use the document's XX.YY caption code and prefix their indicators"
+      },
+      {
+        "id": "NV-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

@@ -1,0 +1,703 @@
+{
+  "indicators": [
+    {
+      "standard_id": "US-NV-2023-SS.ID.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.ID",
+        "name": "Individual Development and Cultural Identity",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.ID.PK1",
+        "name": "Identify and describe characteristics of self that are unique from others.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "SS.ID.PK1. Identify and\ndescribe characteristics of\nself that are unique from\nothers."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.ID.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.ID",
+        "name": "Individual Development and Cultural Identity",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.ID.PK2",
+        "name": "Identify self as a member of a family.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "SS.ID.PK2. Identify self as a\nmember of a family."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.ID.PK3",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.ID",
+        "name": "Individual Development and Cultural Identity",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.ID.PK3",
+        "name": "Share information about their family practices, customs, and culture.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "SS.ID.PK3. Share\ninformation about their\nfamily practices, customs,\nand culture."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.ID.PK4",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.ID",
+        "name": "Individual Development and Cultural Identity",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.ID.PK4",
+        "name": "Identify and describe family traditions and daily rituals that are important to their family.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 4,
+      "source_text": "SS.ID.PK4. Identify and\ndescribe family traditions\nand daily rituals that are\nimportant to their family."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK1",
+        "name": "Identify self as member of a classroom or community.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "SS.CI.PK1. Identify self as\nmember of a classroom or\ncommunity."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK2",
+        "name": "Identify classroom teachers/practitioners and peers by name.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "SS.CI.PK2. Identify\nclassroom teachers/\npractitioners and peers by\nname."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK3",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.1",
+        "name": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK3",
+        "name": "Recognize and resolve conflicts with peers in an age-appropriate manner.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "SS.CI.PK3. Recognize\nand resolve conflicts with\npeers in an age-appropriate\nmanner."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK4",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.2",
+        "name": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK4",
+        "name": "Show awareness of and follow group routines and rules.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "SS.CI.PK4. Show\nawareness of and follow\ngroup routines and rules."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK5",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.2",
+        "name": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK5",
+        "name": "Participate in group decision-making.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 5,
+      "source_text": "SS.CI.PK5. Participate in\ngroup decision-making."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK6",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.2",
+        "name": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK6",
+        "name": "Work together to complete simple tasks with peers.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "SS.CI.PK6. Work together\nto complete simple tasks\nwith peers."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.CI.PK7",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.2",
+        "name": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.CI",
+        "name": "Civic Ideas and Practices",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.CI.PK7",
+        "name": "Identify and describe the roles of different community helpers.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "SS.CI.PK7. Identify and\ndescribe the roles of\ndifferent community helpers."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.GH.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.3",
+        "name": "Demonstrate knowledge of the relationship between people and places.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.GH",
+        "name": "Geography, Humans, and the Environment",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.GH.PK1",
+        "name": "Use spatial words to identify direction and location.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "SS.GH.PK1. Use spatial\nwords to identify direction\nand location."
+    },
+    {
+      "standard_id": "US-NV-2023-SS.GH.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "SS",
+        "name": "Social Studies",
+        "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "SS.3",
+        "name": "Demonstrate knowledge of the relationship between people and places.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "SS.GH",
+        "name": "Geography, Humans, and the Environment",
+        "description": null
+      },
+      "indicator": {
+        "code": "SS.GH.PK2",
+        "name": "Identify and describe their classroom, home, or community.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 6,
+      "source_text": "SS.GH.PK2. Identify and\ndescribe their classroom,\nhome, or community."
+    },
+    {
+      "standard_id": "US-NV-2023-S.EO.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "S",
+        "name": "Science",
+        "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "Science.1",
+        "name": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "S.EO",
+        "name": "Exploration, Observation, and Hypotheses",
+        "description": null
+      },
+      "indicator": {
+        "code": "S.EO.PK1",
+        "name": "Use smell, touch, sight, sound, and taste to make observations.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "S.EO.PK1. Use smell,\ntouch, sight, sound, and\ntaste to make observations."
+    },
+    {
+      "standard_id": "US-NV-2023-S.EO.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "S",
+        "name": "Science",
+        "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "Science.1",
+        "name": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "S.EO",
+        "name": "Exploration, Observation, and Hypotheses",
+        "description": null
+      },
+      "indicator": {
+        "code": "S.EO.PK2",
+        "name": "Use tools to observe and describe objects, the environment, and processes.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "S.EO.PK2. Use tools to\nobserve and describe\nobjects, the environment,\nand processes."
+    },
+    {
+      "standard_id": "US-NV-2023-S.EO.PK3",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "S",
+        "name": "Science",
+        "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "Science.1",
+        "name": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "S.EO",
+        "name": "Exploration, Observation, and Hypotheses",
+        "description": null
+      },
+      "indicator": {
+        "code": "S.EO.PK3",
+        "name": "Use observations and information to notice patterns, create groups based on similarities/differences observed, and/or make predictions.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 9,
+      "source_text": "S.EO.PK3. Use\nobservations and\ninformation to notice\npatterns, create groups\nbased on similarities/\ndifferences observed, and/\nor make predictions."
+    },
+    {
+      "standard_id": "US-NV-2023-S.EO.PK4",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "S",
+        "name": "Science",
+        "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "Science.1",
+        "name": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "S.EO",
+        "name": "Exploration, Observation, and Hypotheses",
+        "description": null
+      },
+      "indicator": {
+        "code": "S.EO.PK4",
+        "name": "Make predictions using prior knowledge and experience.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "S.EO.PK4. Make\npredictions using prior\nknowledge and experience."
+    },
+    {
+      "standard_id": "US-NV-2023-S.SI.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "S",
+        "name": "Science",
+        "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "Science.2",
+        "name": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "S.SI",
+        "name": "Scientific Investigation",
+        "description": null
+      },
+      "indicator": {
+        "code": "S.SI.PK1",
+        "name": "Show curiosity and ask questions about things they are interested in that can be answered through an investigation.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "S.SI.PK1. Show curiosity\nand ask questions about\nthings they are interested\nin that can be answered\nthrough an investigation."
+    },
+    {
+      "standard_id": "US-NV-2023-S.SI.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "S",
+        "name": "Science",
+        "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below."
+      },
+      "strand": {
+        "code": "Science.2",
+        "name": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "S.SI",
+        "name": "Scientific Investigation",
+        "description": null
+      },
+      "indicator": {
+        "code": "S.SI.PK2",
+        "name": "Describe some of the steps and/or materials needed for an investigation or experiment.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 10,
+      "source_text": "S.SI.PK2. Describe some of\nthe steps and/or materials\nneeded for an investigation\nor experiment."
+    },
+    {
+      "standard_id": "US-NV-2023-T.TT.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "T",
+        "name": "Technology",
+        "description": "Technology represents the \"T\" in STEAM and is the second domain of the STEAM section of the prekindergarten standards. Although children engage in STEAM disciplines through their everyday play, the foundational principles of STEAM cannot be met without knowledgeable teachers and practitioners explicitly engaging children in technology exploration during the preschool years. Preschoolers with a developing understanding of technology benefit from enhanced cognitive and social skills as they explore, play make-believe, create their own technology tools, actively engage in challenging activities, and more (U.S. Department of Education [ED] & U.S. Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children. This new Technology domain was added to the Nevada Pre-Kindergarten Standards in 2023. Digital literacy and citizenship are necessary skills for prekindergarten children to learn in today's increasingly technology-centered world. When using technology, children develop a variety of skills including creative thinking, problem-solving, fine motor, literacy, and number sense. They also learn to use technology safely and responsibly by engaging in appropriate activities with guidance. Teachers are not presumed to be experts to implement technology activities right away in their classrooms. The National Association for the Education of Young Children (NAEYC) and the Fred Rogers Center for Early Learning and Children's Media at Saint Vincent College (2012) published a position statement endorsing the use of digital technology for young children, stating: Technology and interactive media are tools that can promote effective learning and development when they are used intentionally by early childhood educators, within the framework of developmentally appropriate practice, to support learning goals established for individual children. (p. 5) Interactive media and digital technology can have many benefits when used as age-appropriate learning tools that are intentionally integrated into playful activities to increase access to information (ED & HHS, 2016). Utilizing simple applications can help children develop the necessary digital literacy skills to help them to become digital citizens. NAEYC and the Fred Rogers Center (2012) also offer several guidelines for successfully using digital tools with preschoolers: Teachers should be intentional about incorporating technology into any lesson plan. Electronic devices must be used in a way that promotes active, hands-on learning experiences. Lesson plans should emphasize co-viewing or co-usage alongside teachers and peers. Teachers must take the time to observe children's use of technology to identify potential problems, evaluate learning outcomes, and adapt accordingly. These standards define technology broadly as the creation and use of tools to meet a purpose, and not simply limited to digital, screen-based devices. Furthermore, this domain does not require children's individual use of digital devices, and standards can be met without using screen time at all. When screen-based devices are used in the classroom, teachers need to carefully consider current research and recommendations for children's active versus passive digital use, screen-time limits for young children, and other guidance as technology evolves. Technology tools, like all other classroom materials, must support learning and not be used as an isolated activity. Thus, many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below. In this context, the new Technology Standards explore digital technology, nondigital technology, and assistive technology. Unless otherwise specified in the standard or indicator, the term \"technology\" can be adapted to fit any of these three types of technology: 1. Digital technology includes but is not limited to cameras, speakers, computers, tablets, keyboard and mouse, projector screens, smartboards, smartphones, etc. 2. Nondigital technology includes but is not limited to make-believe or symbolic representations of a digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc. 3. Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen readers, voice recognition, walking canes, wheelchairs, etc."
+      },
+      "strand": {
+        "code": "T.1",
+        "name": "Demonstrate knowledge that different types of technology tools have different uses, including digital, nondigital, and assistive technology.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "T.TT",
+        "name": "Technology as a Tool",
+        "description": null
+      },
+      "indicator": {
+        "code": "T.TT.PK1",
+        "name": "Identify a variety of digital technology tools and their uses.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "T.TT.PK1. Identify a variety\nof digital technology tools\nand their uses."
+    },
+    {
+      "standard_id": "US-NV-2023-T.TT.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "T",
+        "name": "Technology",
+        "description": "Technology represents the \"T\" in STEAM and is the second domain of the STEAM section of the prekindergarten standards. Although children engage in STEAM disciplines through their everyday play, the foundational principles of STEAM cannot be met without knowledgeable teachers and practitioners explicitly engaging children in technology exploration during the preschool years. Preschoolers with a developing understanding of technology benefit from enhanced cognitive and social skills as they explore, play make-believe, create their own technology tools, actively engage in challenging activities, and more (U.S. Department of Education [ED] & U.S. Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children. This new Technology domain was added to the Nevada Pre-Kindergarten Standards in 2023. Digital literacy and citizenship are necessary skills for prekindergarten children to learn in today's increasingly technology-centered world. When using technology, children develop a variety of skills including creative thinking, problem-solving, fine motor, literacy, and number sense. They also learn to use technology safely and responsibly by engaging in appropriate activities with guidance. Teachers are not presumed to be experts to implement technology activities right away in their classrooms. The National Association for the Education of Young Children (NAEYC) and the Fred Rogers Center for Early Learning and Children's Media at Saint Vincent College (2012) published a position statement endorsing the use of digital technology for young children, stating: Technology and interactive media are tools that can promote effective learning and development when they are used intentionally by early childhood educators, within the framework of developmentally appropriate practice, to support learning goals established for individual children. (p. 5) Interactive media and digital technology can have many benefits when used as age-appropriate learning tools that are intentionally integrated into playful activities to increase access to information (ED & HHS, 2016). Utilizing simple applications can help children develop the necessary digital literacy skills to help them to become digital citizens. NAEYC and the Fred Rogers Center (2012) also offer several guidelines for successfully using digital tools with preschoolers: Teachers should be intentional about incorporating technology into any lesson plan. Electronic devices must be used in a way that promotes active, hands-on learning experiences. Lesson plans should emphasize co-viewing or co-usage alongside teachers and peers. Teachers must take the time to observe children's use of technology to identify potential problems, evaluate learning outcomes, and adapt accordingly. These standards define technology broadly as the creation and use of tools to meet a purpose, and not simply limited to digital, screen-based devices. Furthermore, this domain does not require children's individual use of digital devices, and standards can be met without using screen time at all. When screen-based devices are used in the classroom, teachers need to carefully consider current research and recommendations for children's active versus passive digital use, screen-time limits for young children, and other guidance as technology evolves. Technology tools, like all other classroom materials, must support learning and not be used as an isolated activity. Thus, many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below. In this context, the new Technology Standards explore digital technology, nondigital technology, and assistive technology. Unless otherwise specified in the standard or indicator, the term \"technology\" can be adapted to fit any of these three types of technology: 1. Digital technology includes but is not limited to cameras, speakers, computers, tablets, keyboard and mouse, projector screens, smartboards, smartphones, etc. 2. Nondigital technology includes but is not limited to make-believe or symbolic representations of a digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc. 3. Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen readers, voice recognition, walking canes, wheelchairs, etc."
+      },
+      "strand": {
+        "code": "T.1",
+        "name": "Demonstrate knowledge that different types of technology tools have different uses, including digital, nondigital, and assistive technology.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "T.TT",
+        "name": "Technology as a Tool",
+        "description": null
+      },
+      "indicator": {
+        "code": "T.TT.PK2",
+        "name": "Identify a variety of nondigital technology tools and their uses.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "T.TT.PK2. Identify a variety\nof nondigital technology\ntools and their uses."
+    },
+    {
+      "standard_id": "US-NV-2023-T.TT.PK3",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "T",
+        "name": "Technology",
+        "description": "Technology represents the \"T\" in STEAM and is the second domain of the STEAM section of the prekindergarten standards. Although children engage in STEAM disciplines through their everyday play, the foundational principles of STEAM cannot be met without knowledgeable teachers and practitioners explicitly engaging children in technology exploration during the preschool years. Preschoolers with a developing understanding of technology benefit from enhanced cognitive and social skills as they explore, play make-believe, create their own technology tools, actively engage in challenging activities, and more (U.S. Department of Education [ED] & U.S. Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children. This new Technology domain was added to the Nevada Pre-Kindergarten Standards in 2023. Digital literacy and citizenship are necessary skills for prekindergarten children to learn in today's increasingly technology-centered world. When using technology, children develop a variety of skills including creative thinking, problem-solving, fine motor, literacy, and number sense. They also learn to use technology safely and responsibly by engaging in appropriate activities with guidance. Teachers are not presumed to be experts to implement technology activities right away in their classrooms. The National Association for the Education of Young Children (NAEYC) and the Fred Rogers Center for Early Learning and Children's Media at Saint Vincent College (2012) published a position statement endorsing the use of digital technology for young children, stating: Technology and interactive media are tools that can promote effective learning and development when they are used intentionally by early childhood educators, within the framework of developmentally appropriate practice, to support learning goals established for individual children. (p. 5) Interactive media and digital technology can have many benefits when used as age-appropriate learning tools that are intentionally integrated into playful activities to increase access to information (ED & HHS, 2016). Utilizing simple applications can help children develop the necessary digital literacy skills to help them to become digital citizens. NAEYC and the Fred Rogers Center (2012) also offer several guidelines for successfully using digital tools with preschoolers: Teachers should be intentional about incorporating technology into any lesson plan. Electronic devices must be used in a way that promotes active, hands-on learning experiences. Lesson plans should emphasize co-viewing or co-usage alongside teachers and peers. Teachers must take the time to observe children's use of technology to identify potential problems, evaluate learning outcomes, and adapt accordingly. These standards define technology broadly as the creation and use of tools to meet a purpose, and not simply limited to digital, screen-based devices. Furthermore, this domain does not require children's individual use of digital devices, and standards can be met without using screen time at all. When screen-based devices are used in the classroom, teachers need to carefully consider current research and recommendations for children's active versus passive digital use, screen-time limits for young children, and other guidance as technology evolves. Technology tools, like all other classroom materials, must support learning and not be used as an isolated activity. Thus, many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below. In this context, the new Technology Standards explore digital technology, nondigital technology, and assistive technology. Unless otherwise specified in the standard or indicator, the term \"technology\" can be adapted to fit any of these three types of technology: 1. Digital technology includes but is not limited to cameras, speakers, computers, tablets, keyboard and mouse, projector screens, smartboards, smartphones, etc. 2. Nondigital technology includes but is not limited to make-believe or symbolic representations of a digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc. 3. Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen readers, voice recognition, walking canes, wheelchairs, etc."
+      },
+      "strand": {
+        "code": "T.1",
+        "name": "Demonstrate knowledge that different types of technology tools have different uses, including digital, nondigital, and assistive technology.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "T.TT",
+        "name": "Technology as a Tool",
+        "description": null
+      },
+      "indicator": {
+        "code": "T.TT.PK3",
+        "name": "Identify a variety of assistive technology tools and their uses.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 13,
+      "source_text": "T.TT.PK3. Identify a variety\nof assistive technology tools\nand their uses."
+    },
+    {
+      "standard_id": "US-NV-2023-T.CT.PK1",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "T",
+        "name": "Technology",
+        "description": "Technology represents the \"T\" in STEAM and is the second domain of the STEAM section of the prekindergarten standards. Although children engage in STEAM disciplines through their everyday play, the foundational principles of STEAM cannot be met without knowledgeable teachers and practitioners explicitly engaging children in technology exploration during the preschool years. Preschoolers with a developing understanding of technology benefit from enhanced cognitive and social skills as they explore, play make-believe, create their own technology tools, actively engage in challenging activities, and more (U.S. Department of Education [ED] & U.S. Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children. This new Technology domain was added to the Nevada Pre-Kindergarten Standards in 2023. Digital literacy and citizenship are necessary skills for prekindergarten children to learn in today's increasingly technology-centered world. When using technology, children develop a variety of skills including creative thinking, problem-solving, fine motor, literacy, and number sense. They also learn to use technology safely and responsibly by engaging in appropriate activities with guidance. Teachers are not presumed to be experts to implement technology activities right away in their classrooms. The National Association for the Education of Young Children (NAEYC) and the Fred Rogers Center for Early Learning and Children's Media at Saint Vincent College (2012) published a position statement endorsing the use of digital technology for young children, stating: Technology and interactive media are tools that can promote effective learning and development when they are used intentionally by early childhood educators, within the framework of developmentally appropriate practice, to support learning goals established for individual children. (p. 5) Interactive media and digital technology can have many benefits when used as age-appropriate learning tools that are intentionally integrated into playful activities to increase access to information (ED & HHS, 2016). Utilizing simple applications can help children develop the necessary digital literacy skills to help them to become digital citizens. NAEYC and the Fred Rogers Center (2012) also offer several guidelines for successfully using digital tools with preschoolers: Teachers should be intentional about incorporating technology into any lesson plan. Electronic devices must be used in a way that promotes active, hands-on learning experiences. Lesson plans should emphasize co-viewing or co-usage alongside teachers and peers. Teachers must take the time to observe children's use of technology to identify potential problems, evaluate learning outcomes, and adapt accordingly. These standards define technology broadly as the creation and use of tools to meet a purpose, and not simply limited to digital, screen-based devices. Furthermore, this domain does not require children's individual use of digital devices, and standards can be met without using screen time at all. When screen-based devices are used in the classroom, teachers need to carefully consider current research and recommendations for children's active versus passive digital use, screen-time limits for young children, and other guidance as technology evolves. Technology tools, like all other classroom materials, must support learning and not be used as an isolated activity. Thus, many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below. In this context, the new Technology Standards explore digital technology, nondigital technology, and assistive technology. Unless otherwise specified in the standard or indicator, the term \"technology\" can be adapted to fit any of these three types of technology: 1. Digital technology includes but is not limited to cameras, speakers, computers, tablets, keyboard and mouse, projector screens, smartboards, smartphones, etc. 2. Nondigital technology includes but is not limited to make-believe or symbolic representations of a digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc. 3. Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen readers, voice recognition, walking canes, wheelchairs, etc."
+      },
+      "strand": {
+        "code": "T.2",
+        "name": "Use technology for communication and to gather and share information.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "T.CT",
+        "name": "Communicating Through Technology",
+        "description": null
+      },
+      "indicator": {
+        "code": "T.CT.PK1",
+        "name": "Use technology to communicate information, with teacher assistance.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 15,
+      "source_text": "T.CT.PK1. Use technology\nto communicate\ninformation, with teacher\nassistance."
+    },
+    {
+      "standard_id": "US-NV-2023-T.CT.PK2",
+      "country": "US",
+      "state": "NV",
+      "version_year": 2023,
+      "domain": {
+        "code": "T",
+        "name": "Technology",
+        "description": "Technology represents the \"T\" in STEAM and is the second domain of the STEAM section of the prekindergarten standards. Although children engage in STEAM disciplines through their everyday play, the foundational principles of STEAM cannot be met without knowledgeable teachers and practitioners explicitly engaging children in technology exploration during the preschool years. Preschoolers with a developing understanding of technology benefit from enhanced cognitive and social skills as they explore, play make-believe, create their own technology tools, actively engage in challenging activities, and more (U.S. Department of Education [ED] & U.S. Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children. This new Technology domain was added to the Nevada Pre-Kindergarten Standards in 2023. Digital literacy and citizenship are necessary skills for prekindergarten children to learn in today's increasingly technology-centered world. When using technology, children develop a variety of skills including creative thinking, problem-solving, fine motor, literacy, and number sense. They also learn to use technology safely and responsibly by engaging in appropriate activities with guidance. Teachers are not presumed to be experts to implement technology activities right away in their classrooms. The National Association for the Education of Young Children (NAEYC) and the Fred Rogers Center for Early Learning and Children's Media at Saint Vincent College (2012) published a position statement endorsing the use of digital technology for young children, stating: Technology and interactive media are tools that can promote effective learning and development when they are used intentionally by early childhood educators, within the framework of developmentally appropriate practice, to support learning goals established for individual children. (p. 5) Interactive media and digital technology can have many benefits when used as age-appropriate learning tools that are intentionally integrated into playful activities to increase access to information (ED & HHS, 2016). Utilizing simple applications can help children develop the necessary digital literacy skills to help them to become digital citizens. NAEYC and the Fred Rogers Center (2012) also offer several guidelines for successfully using digital tools with preschoolers: Teachers should be intentional about incorporating technology into any lesson plan. Electronic devices must be used in a way that promotes active, hands-on learning experiences. Lesson plans should emphasize co-viewing or co-usage alongside teachers and peers. Teachers must take the time to observe children's use of technology to identify potential problems, evaluate learning outcomes, and adapt accordingly. These standards define technology broadly as the creation and use of tools to meet a purpose, and not simply limited to digital, screen-based devices. Furthermore, this domain does not require children's individual use of digital devices, and standards can be met without using screen time at all. When screen-based devices are used in the classroom, teachers need to carefully consider current research and recommendations for children's active versus passive digital use, screen-time limits for young children, and other guidance as technology evolves. Technology tools, like all other classroom materials, must support learning and not be used as an isolated activity. Thus, many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below. In this context, the new Technology Standards explore digital technology, nondigital technology, and assistive technology. Unless otherwise specified in the standard or indicator, the term \"technology\" can be adapted to fit any of these three types of technology: 1. Digital technology includes but is not limited to cameras, speakers, computers, tablets, keyboard and mouse, projector screens, smartboards, smartphones, etc. 2. Nondigital technology includes but is not limited to make-believe or symbolic representations of a digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc. 3. Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen readers, voice recognition, walking canes, wheelchairs, etc."
+      },
+      "strand": {
+        "code": "T.2",
+        "name": "Use technology for communication and to gather and share information.",
+        "description": null
+      },
+      "sub_strand": {
+        "code": "T.CT",
+        "name": "Communicating Through Technology",
+        "description": null
+      },
+      "indicator": {
+        "code": "T.CT.PK2",
+        "name": "Use technology to explore and answer questions about the world, with teacher assistance.",
+        "description": null
+      },
+      "age_band": "36-60",
+      "source_page": 15,
+      "source_text": "T.CT.PK2. Use technology\nto explore and answer\nquestions about the world,\nwith teacher assistance."
+    }
+  ],
+  "total_indicators": 24,
+  "parsing_timestamp": "2026-08-22T18:20:31.936865+00:00",
+  "source_detection_key": ""
+}

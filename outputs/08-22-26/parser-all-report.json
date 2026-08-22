@@ -1,0 +1,891 @@
+[
+  {
+    "state": "AZ",
+    "coverage": 1.0,
+    "field_accuracy": 0.9969135802469136,
+    "matched": 18,
+    "fully_correct": 17,
+    "n_golden": 18,
+    "n_parsed": 45,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 18,
+        "total": 18
+      },
+      "country": {
+        "ok": 18,
+        "total": 18
+      },
+      "state": {
+        "ok": 18,
+        "total": 18
+      },
+      "version_year": {
+        "ok": 18,
+        "total": 18
+      },
+      "age_band": {
+        "ok": 18,
+        "total": 18
+      },
+      "source_page": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.description": {
+        "ok": 17,
+        "total": 18
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "AZ-IND-15",
+        "field": "indicator.description",
+        "expected": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel.",
+        "got": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [1].\" Paints the letter L like in her friend's name, while at the easel."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 45 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 21,
+    "fully_correct": 21,
+    "n_golden": 21,
+    "n_parsed": 94,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 21,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 21,
+        "total": 21
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CA-EARLY-LATER-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "39 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 94 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 9,
+    "fully_correct": 9,
+    "n_golden": 9,
+    "n_parsed": 48,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 9,
+        "total": 9
+      },
+      "country": {
+        "ok": 9,
+        "total": 9
+      },
+      "state": {
+        "ok": 9,
+        "total": 9
+      },
+      "version_year": {
+        "ok": 9,
+        "total": 9
+      },
+      "age_band": {
+        "ok": 9,
+        "total": 9
+      },
+      "source_page": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.description": {
+        "ok": 9,
+        "total": 9
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CO-INDICATOR-PARENT-IS-STRAND",
+        "status": "PASS",
+        "detail": "all 48 indicators have a strand parent and null sub_strand"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 48 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "KY",
+    "coverage": 1.0,
+    "field_accuracy": 0.9209401709401709,
+    "matched": 26,
+    "fully_correct": 13,
+    "n_golden": 26,
+    "n_parsed": 26,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 13,
+        "total": 26
+      },
+      "country": {
+        "ok": 26,
+        "total": 26
+      },
+      "state": {
+        "ok": 26,
+        "total": 26
+      },
+      "version_year": {
+        "ok": 26,
+        "total": 26
+      },
+      "age_band": {
+        "ok": 26,
+        "total": 26
+      },
+      "source_page": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.code": {
+        "ok": 15,
+        "total": 26
+      },
+      "sub_strand.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "indicator.code": {
+        "ok": 13,
+        "total": 26
+      },
+      "indicator.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "indicator.description": {
+        "ok": 26,
+        "total": 26
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "KY-STD-01",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.1.EASPT",
+        "got": "US-KY-2021-AL.1.1.1.EASPT"
+      },
+      {
+        "test_case_id": "KY-STD-01",
+        "field": "sub_strand.code",
+        "expected": "AL.1.1",
+        "got": "AL.1.1.1"
+      },
+      {
+        "test_case_id": "KY-STD-01",
+        "field": "indicator.code",
+        "expected": "AL.1.1.EASPT",
+        "got": "AL.1.1.1.EASPT"
+      },
+      {
+        "test_case_id": "KY-STD-02",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.1.MFAAD",
+        "got": "US-KY-2021-AL.1.1.1.MFAAD"
+      },
+      {
+        "test_case_id": "KY-STD-02",
+        "field": "sub_strand.code",
+        "expected": "AL.1.1",
+        "got": "AL.1.1.1"
+      },
+      {
+        "test_case_id": "KY-STD-02",
+        "field": "indicator.code",
+        "expected": "AL.1.1.MFAAD",
+        "got": "AL.1.1.1.MFAAD"
+      },
+      {
+        "test_case_id": "KY-STD-03",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.1.SADGA",
+        "got": "US-KY-2021-AL.1.1.1.SADGA"
+      },
+      {
+        "test_case_id": "KY-STD-03",
+        "field": "sub_strand.code",
+        "expected": "AL.1.1",
+        "got": "AL.1.1.1"
+      },
+      {
+        "test_case_id": "KY-STD-03",
+        "field": "indicator.code",
+        "expected": "AL.1.1.SADGA",
+        "got": "AL.1.1.1.SADGA"
+      },
+      {
+        "test_case_id": "KY-STD-04",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.2.PSAUC",
+        "got": "US-KY-2021-AL.1.1.2.PSAUC"
+      },
+      {
+        "test_case_id": "KY-STD-04",
+        "field": "sub_strand.code",
+        "expected": "AL.1.2",
+        "got": "AL.1.1.2"
+      },
+      {
+        "test_case_id": "KY-STD-04",
+        "field": "indicator.code",
+        "expected": "AL.1.2.PSAUC",
+        "got": "AL.1.1.2.PSAUC"
+      },
+      {
+        "test_case_id": "KY-STD-05",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.2.CWSAD",
+        "got": "US-KY-2021-AL.1.1.2.CWSAD"
+      },
+      {
+        "test_case_id": "KY-STD-05",
+        "field": "sub_strand.code",
+        "expected": "AL.1.2",
+        "got": "AL.1.1.2"
+      },
+      {
+        "test_case_id": "KY-STD-05",
+        "field": "indicator.code",
+        "expected": "AL.1.2.CWSAD",
+        "got": "AL.1.1.2.CWSAD"
+      },
+      {
+        "test_case_id": "KY-STD-06",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.2.PATSN",
+        "got": "US-KY-2021-AL.1.1.2.PATSN"
+      },
+      {
+        "test_case_id": "KY-STD-06",
+        "field": "sub_strand.code",
+        "expected": "AL.1.2",
+        "got": "AL.1.1.2"
+      },
+      {
+        "test_case_id": "KY-STD-06",
+        "field": "indicator.code",
+        "expected": "AL.1.2.PATSN",
+        "got": "AL.1.1.2.PATSN"
+      },
+      {
+        "test_case_id": "KY-STD-07",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.3.PSDSP",
+        "got": "US-KY-2021-AL.1.1.3.PSDSP"
+      },
+      {
+        "test_case_id": "KY-STD-07",
+        "field": "sub_strand.code",
+        "expected": "AL.1.3",
+        "got": "AL.1.1.3"
+      },
+      {
+        "test_case_id": "KY-STD-07",
+        "field": "indicator.code",
+        "expected": "AL.1.3.PSDSP",
+        "got": "AL.1.1.3.PSDSP"
+      },
+      {
+        "test_case_id": "KY-STD-08",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.1.3.DPTET",
+        "got": "US-KY-2021-AL.1.1.3.DPTET"
+      },
+      {
+        "test_case_id": "KY-STD-08",
+        "field": "sub_strand.code",
+        "expected": "AL.1.3",
+        "got": "AL.1.1.3"
+      },
+      {
+        "test_case_id": "KY-STD-08",
+        "field": "indicator.code",
+        "expected": "AL.1.3.DPTET",
+        "got": "AL.1.1.3.DPTET"
+      },
+      {
+        "test_case_id": "KY-STD-09",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.2.1.FNWUF",
+        "got": "US-KY-2021-AL.2.2.1.FNWUF"
+      },
+      {
+        "test_case_id": "KY-STD-09",
+        "field": "sub_strand.code",
+        "expected": "AL.2.1",
+        "got": "AL.2.2.1"
+      },
+      {
+        "test_case_id": "KY-STD-09",
+        "field": "indicator.code",
+        "expected": "AL.2.1.FNWUF",
+        "got": "AL.2.2.1.FNWUF"
+      },
+      {
+        "test_case_id": "KY-STD-10",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.2.1.INMUC",
+        "got": "US-KY-2021-AL.2.2.1.INMUC"
+      },
+      {
+        "test_case_id": "KY-STD-10",
+        "field": "sub_strand.code",
+        "expected": "AL.2.1",
+        "got": "AL.2.2.1"
+      },
+      {
+        "test_case_id": "KY-STD-10",
+        "field": "indicator.code",
+        "expected": "AL.2.1.INMUC",
+        "got": "AL.2.2.1.INMUC"
+      },
+      {
+        "test_case_id": "KY-STD-11",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.2.1.ECOMN",
+        "got": "US-KY-2021-AL.2.2.1.ECOMN"
+      },
+      {
+        "test_case_id": "KY-STD-11",
+        "field": "sub_strand.code",
+        "expected": "AL.2.1",
+        "got": "AL.2.2.1"
+      },
+      {
+        "test_case_id": "KY-STD-11",
+        "field": "indicator.code",
+        "expected": "AL.2.1.ECOMN",
+        "got": "AL.2.2.1.ECOMN"
+      },
+      {
+        "test_case_id": "KY-STD-12",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.2.2.UMNDW",
+        "got": "US-KY-2021-UMNDW"
+      },
+      {
+        "test_case_id": "KY-STD-12",
+        "field": "indicator.code",
+        "expected": "AL.2.2.UMNDW",
+        "got": "UMNDW"
+      },
+      {
+        "test_case_id": "KY-STD-13",
+        "field": "standard_id",
+        "expected": "US-KY-2021-AL.2.2.ESSDP",
+        "got": "US-KY-2021-ESSDP"
+      },
+      {
+        "test_case_id": "KY-STD-13",
+        "field": "indicator.code",
+        "expected": "AL.2.2.ESSDP",
+        "got": "ESSDP"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 26 standard_ids unique"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-RESOLVED",
+        "status": "PASS",
+        "detail": "all 26 standards have both a strand and a sub_strand"
+      },
+      {
+        "id": "KY-BENCHMARK-CODE-NORMALIZED",
+        "status": "FAIL",
+        "detail": "2/78 code(s) not prefixed by parent, e.g. indicator='UMNDW' under parent 'AL.2.2' on 'US-KY-2021-UMNDW'"
+      },
+      {
+        "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
+        "status": "FAIL",
+        "detail": "2 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-UMNDW', 'AL.2.2', 'UMNDW')"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "NV",
+    "coverage": 1.0,
+    "field_accuracy": 0.9861111111111112,
+    "matched": 24,
+    "fully_correct": 18,
+    "n_golden": 24,
+    "n_parsed": 24,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 24,
+        "total": 24
+      },
+      "country": {
+        "ok": 24,
+        "total": 24
+      },
+      "state": {
+        "ok": 24,
+        "total": 24
+      },
+      "version_year": {
+        "ok": 24,
+        "total": 24
+      },
+      "age_band": {
+        "ok": 24,
+        "total": 24
+      },
+      "source_page": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.description": {
+        "ok": 18,
+        "total": 24
+      },
+      "strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.description": {
+        "ok": 24,
+        "total": 24
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "NV-STD-14",
+        "field": "domain.description",
+        "expected": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+        "got": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children."
+      },
+      {
+        "test_case_id": "NV-STD-15",
+        "field": "domain.description",
+        "expected": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+        "got": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children."
+      },
+      {
+        "test_case_id": "NV-STD-16",
+        "field": "domain.description",
+        "expected": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+        "got": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children."
+      },
+      {
+        "test_case_id": "NV-STD-17",
+        "field": "domain.description",
+        "expected": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+        "got": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children."
+      },
+      {
+        "test_case_id": "NV-STD-18",
+        "field": "domain.description",
+        "expected": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+        "got": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children."
+      },
+      {
+        "test_case_id": "NV-STD-19",
+        "field": "domain.description",
+        "expected": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+        "got": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 24 standard_ids unique"
+      },
+      {
+        "id": "NV-STRAND-PARENT-BY-HEADING",
+        "status": "PASS",
+        "detail": "all 7 indicator groups resolve to a single strand"
+      },
+      {
+        "id": "NV-DOCUMENT-CODE-PRESERVED",
+        "status": "PASS",
+        "detail": "all 24 standards keep the document's printed code at indicator, sub_strand and domain"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 8,
+    "fully_correct": 8,
+    "n_golden": 8,
+    "n_parsed": 25,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 8,
+        "total": 8
+      },
+      "country": {
+        "ok": 8,
+        "total": 8
+      },
+      "state": {
+        "ok": 8,
+        "total": 8
+      },
+      "version_year": {
+        "ok": 8,
+        "total": 8
+      },
+      "age_band": {
+        "ok": 8,
+        "total": 8
+      },
+      "source_page": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.description": {
+        "ok": 8,
+        "total": 8
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "10 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 25 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

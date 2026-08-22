@@ -1,0 +1,118 @@
+[
+  {
+    "state": "NV",
+    "precision": 0.8679245283018868,
+    "recall": 1.0,
+    "f1": 0.9292929292929293,
+    "code_accuracy": 0.9782608695652174,
+    "code_matches": 45,
+    "code_total": 46,
+    "code_mismatches": [
+      {
+        "test_case_id": "NV-SUB-06",
+        "level": "sub_strand",
+        "golden": "T.TT",
+        "detected": "TT"
+      }
+    ],
+    "description_accuracy": 1.0,
+    "description_matches": 3,
+    "description_total": 3,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 46,
+    "n_golden": 46,
+    "n_detected": 53,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 12,
+        "fp": 5,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 7,
+        "fp": 1,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 24,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "strand": {
+        "strand": 12
+      },
+      "sub_strand": {
+        "sub_strand": 7
+      },
+      "indicator": {
+        "indicator": 24
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "SS.CI.PK3"
+      ],
+      [
+        "strand",
+        "Social Studies Standard 2"
+      ],
+      [
+        "strand",
+        "Social Studies Standard 3"
+      ],
+      [
+        "strand",
+        "Science Standard 1"
+      ],
+      [
+        "sub_strand",
+        "S.EO"
+      ],
+      [
+        "strand",
+        "Science Standard 2"
+      ],
+      [
+        "strand",
+        "Technology Standard 2"
+      ]
+    ],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "NV-NO-COLUMN-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "53 elements: no column headers, captions or footnotes emitted, no age_band set"
+      },
+      {
+        "id": "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+        "status": "FAIL",
+        "detail": "1/8 sub_strand code(s) are invented abbreviations rather than the document's caption, e.g. ('TT', 'Technology as a Tool'); 3 indicator code(s) have no matching sub_strand, e.g. 'T.TT.PK1'"
+      },
+      {
+        "id": "NV-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

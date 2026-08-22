@@ -1,0 +1,716 @@
+[
+  {
+    "state": "AZ",
+    "coverage": 1.0,
+    "field_accuracy": 0.9814814814814815,
+    "matched": 18,
+    "fully_correct": 12,
+    "n_golden": 18,
+    "n_parsed": 45,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 18,
+        "total": 18
+      },
+      "country": {
+        "ok": 18,
+        "total": 18
+      },
+      "state": {
+        "ok": 18,
+        "total": 18
+      },
+      "version_year": {
+        "ok": 18,
+        "total": 18
+      },
+      "age_band": {
+        "ok": 18,
+        "total": 18
+      },
+      "source_page": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.description": {
+        "ok": 12,
+        "total": 18
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "AZ-IND-06",
+        "field": "indicator.description",
+        "expected": "Plays the game, Sound Bingo, and can differentiate between sounds - \"That's a telephone.\" \"That's a dog barking.\" Says, \"Hey, the beginning of my name sounds like that /t/.\"",
+        "got": null
+      },
+      {
+        "test_case_id": "AZ-IND-07",
+        "field": "indicator.description",
+        "expected": "Shows thumbs up when two words rhyme in a poem, cat/hat. Points to pictures of words that rhyme.",
+        "got": null
+      },
+      {
+        "test_case_id": "AZ-IND-08",
+        "field": "indicator.description",
+        "expected": "Sings, \"Joy, noy, boy, loy, toy,\" while playing. Finishes the rhyme \"The fat cat sat on the_.\"",
+        "got": null
+      },
+      {
+        "test_case_id": "AZ-IND-09",
+        "field": "indicator.description",
+        "expected": "Exclaims Millie, \"My name starts like Mel's name!\" Selects man and mop as beginning with the same sound when presented with pictures of man, hat, and mop.",
+        "got": null
+      },
+      {
+        "test_case_id": "AZ-IND-10",
+        "field": "indicator.description",
+        "expected": "Jumps when hearing a specified word in a story/poem. Claps each word spoken in a sentence \"I like blocks.\"",
+        "got": null
+      },
+      {
+        "test_case_id": "AZ-IND-15",
+        "field": "indicator.description",
+        "expected": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel.",
+        "got": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [1].\" Paints the letter L like in her friend's name, while at the easel."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 45 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 21,
+    "fully_correct": 21,
+    "n_golden": 21,
+    "n_parsed": 94,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 21,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 21,
+        "total": 21
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CA-EARLY-LATER-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "39 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 94 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 9,
+    "fully_correct": 9,
+    "n_golden": 9,
+    "n_parsed": 48,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 9,
+        "total": 9
+      },
+      "country": {
+        "ok": 9,
+        "total": 9
+      },
+      "state": {
+        "ok": 9,
+        "total": 9
+      },
+      "version_year": {
+        "ok": 9,
+        "total": 9
+      },
+      "age_band": {
+        "ok": 9,
+        "total": 9
+      },
+      "source_page": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.description": {
+        "ok": 9,
+        "total": 9
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CO-INDICATOR-PARENT-IS-STRAND",
+        "status": "PASS",
+        "detail": "all 48 indicators have a strand parent and null sub_strand"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 48 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "KY",
+    "coverage": 0.8076923076923077,
+    "field_accuracy": 0.9788359788359788,
+    "matched": 21,
+    "fully_correct": 17,
+    "n_golden": 26,
+    "n_parsed": 21,
+    "dropped": [
+      "KY-STD-22",
+      "KY-STD-23",
+      "KY-STD-24",
+      "KY-STD-25",
+      "KY-STD-26"
+    ],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 17,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 17,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 21,
+        "total": 21
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "KY-STD-14",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.1.TCPHS",
+        "got": "US-KY-2021-TCPHS"
+      },
+      {
+        "test_case_id": "KY-STD-14",
+        "field": "indicator.code",
+        "expected": "HMW.1.1.TCPHS",
+        "got": "TCPHS"
+      },
+      {
+        "test_case_id": "KY-STD-15",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.1.IHFC",
+        "got": "US-KY-2021-IHFC"
+      },
+      {
+        "test_case_id": "KY-STD-15",
+        "field": "indicator.code",
+        "expected": "HMW.1.1.IHFC",
+        "got": "IHFC"
+      },
+      {
+        "test_case_id": "KY-STD-16",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.2.PARTO",
+        "got": "US-KY-2021-PARTO"
+      },
+      {
+        "test_case_id": "KY-STD-16",
+        "field": "indicator.code",
+        "expected": "HMW.1.2.PARTO",
+        "got": "PARTO"
+      },
+      {
+        "test_case_id": "KY-STD-17",
+        "field": "standard_id",
+        "expected": "US-KY-2021-HMW.1.2.PSGPB",
+        "got": "US-KY-2021-PSGPB"
+      },
+      {
+        "test_case_id": "KY-STD-17",
+        "field": "indicator.code",
+        "expected": "HMW.1.2.PSGPB",
+        "got": "PSGPB"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 21 standard_ids unique"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-RESOLVED",
+        "status": "PASS",
+        "detail": "all 21 standards have both a strand and a sub_strand"
+      },
+      {
+        "id": "KY-BENCHMARK-CODE-NORMALIZED",
+        "status": "FAIL",
+        "detail": "4/63 code(s) not prefixed by parent, e.g. indicator='TCPHS' under parent 'HMW.1.1' on 'US-KY-2021-TCPHS'"
+      },
+      {
+        "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
+        "status": "FAIL",
+        "detail": "4 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-TCPHS', 'HMW.1.1', 'TCPHS')"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "NV",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 24,
+    "fully_correct": 24,
+    "n_golden": 24,
+    "n_parsed": 24,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 24,
+        "total": 24
+      },
+      "country": {
+        "ok": 24,
+        "total": 24
+      },
+      "state": {
+        "ok": 24,
+        "total": 24
+      },
+      "version_year": {
+        "ok": 24,
+        "total": 24
+      },
+      "age_band": {
+        "ok": 24,
+        "total": 24
+      },
+      "source_page": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.description": {
+        "ok": 24,
+        "total": 24
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 24 standard_ids unique"
+      },
+      {
+        "id": "NV-STRAND-PARENT-BY-HEADING",
+        "status": "PASS",
+        "detail": "all 7 indicator groups resolve to a single strand"
+      },
+      {
+        "id": "NV-DOCUMENT-CODE-PRESERVED",
+        "status": "PASS",
+        "detail": "all 24 standards keep the document's printed code at indicator, sub_strand and domain"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 8,
+    "fully_correct": 8,
+    "n_golden": 8,
+    "n_parsed": 25,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 8,
+        "total": 8
+      },
+      "country": {
+        "ok": 8,
+        "total": 8
+      },
+      "state": {
+        "ok": 8,
+        "total": 8
+      },
+      "version_year": {
+        "ok": 8,
+        "total": 8
+      },
+      "age_band": {
+        "ok": 8,
+        "total": 8
+      },
+      "source_page": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.description": {
+        "ok": 8,
+        "total": 8
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "10 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 25 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]
