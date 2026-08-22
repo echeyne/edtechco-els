@@ -4,7 +4,7 @@ Compares pipeline output against human-annotated ground truth to compute
 precision, recall, and F1 for element detection and hierarchy assignment.
 
 Usage:
-    python evaluation/evaluate.py --ground-truth evaluation/ground_truth/TX.json \
+    python evaluation/evaluate.py --ground-truth evaluation/ground_truth_detector/TX.json \
                                    --pipeline-output path/to/detection_output.json \
                                    --parsing-output path/to/parsing_output.json
 """

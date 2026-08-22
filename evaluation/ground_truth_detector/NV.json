@@ -5,7 +5,7 @@
   "version_year": 2023,
   "source_document": "nevada_standards_2023_only_subset.pdf",
   "annotator": "Emily Cheyne",
-  "annotation_date": "2026-08-01",
+  "annotation_date": "2026-08-22",
   "expected_depth_map": {
     "doc_depths": [
       {
@@ -213,6 +213,22 @@
       "source_page": 6
     },
     {
+      "test_case_id": "NV-STR-04",
+      "level": "strand",
+      "code": "Social Studies Standard 4",
+      "title": "Demonstrate the ability to differentiate between the concepts of past, present, and future, and recognize that people and things change over time.",
+      "description": null,
+      "source_page": 3
+    },
+    {
+      "test_case_id": "NV-STR-05",
+      "level": "strand",
+      "code": "Social Studies Standard 5",
+      "title": "Demonstrate an awareness of basic economic concepts.",
+      "description": null,
+      "source_page": 3
+    },
+    {
       "test_case_id": "NV-DOM-02",
       "level": "domain",
       "code": "S",
@@ -307,6 +323,22 @@
       "source_page": 10
     },
     {
+      "test_case_id": "NV-STR-08",
+      "level": "strand",
+      "code": "Science Standard 3",
+      "title": "Demonstrate the ability to describe, analyze, and draw conclusions about the outcome of an investigation.",
+      "description": null,
+      "source_page": 8
+    },
+    {
+      "test_case_id": "NV-STR-09",
+      "level": "strand",
+      "code": "Science Standard 4",
+      "title": "Demonstrate the ability to communicate about observations, investigations, and outcomes.",
+      "description": null,
+      "source_page": 8
+    },
+    {
       "test_case_id": "NV-DOM-03",
       "level": "domain",
       "code": "T",
@@ -390,6 +422,14 @@
       "description": null,
       "age_band": null,
       "source_page": 15
+    },
+    {
+      "test_case_id": "NV-STR-12",
+      "level": "strand",
+      "code": "Technology Standard 3",
+      "title": "Demonstrate safe and responsible use of technology and resources.",
+      "description": null,
+      "source_page": 12
     }
   ],
   "regression_cases": [
@@ -408,6 +448,5 @@
       "description": "NV is a full 4-level document; a missing level means Pass-1 depth inference collapsed it.",
       "assertion": "the detected element list contains at least one element at each of domain, strand, sub_strand and indicator."
     }
-  ],
-  "notes": "Held-out generalization state for the arXiv paper. Spot-check coverage (41 of ~53 detectable elements) across all three domains, per HELD_OUT_ANNOTATION_GUIDE.md — precision here is NOT a document-level precision figure. 2026-08-15 revision: NV-STR-06/07/10/11 codes were 'Standard 1'/'Standard 2'; the document prints the domain-prefixed form on every strand heading ('Science Standard 1:' p8, 'Technology Standard 1:' p12), exactly as already annotated for Social Studies (NV-STR-01..03). The bare form was an annotation slip and would also collide across domains. Codes left deliberately unchanged: NV-DOM-02 'S' / NV-DOM-03 'T' and the seven 'XX.YY' sub_strand codes are the document's own namespace (captioned 'Indicators (SS.ID)' and echoed in every child indicator code) — the detector's title-derived abbreviations (SCIE, TECH, IDCI, ...) are the defect, not the golden. See regression case NV-SUB-STRAND-CODE-FROM-DOCUMENT."
+  ]
 }

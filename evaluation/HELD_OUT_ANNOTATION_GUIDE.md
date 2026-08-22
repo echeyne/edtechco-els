@@ -26,9 +26,12 @@ pulled down. `download-pipeline-outputs` now fetches NV and KY alongside the
 four golden states, discovering their year from S3 and skipping a state that
 run didn't produce.
 
-**Current inputs: `outputs/08-13-26/`** — the first run carrying all six states
-(and the first NV/KY run produced by a pipeline that includes the deterministic
-`detector.derive_code_from_title` pass).
+**Current inputs: `outputs/08-22-26/`** — what the exhaustive 2026-08-22 NV
+pass was annotated and checked against, and what `ground_truth_parser/NV.json`
+now names in `source_detection`. (`outputs/08-13-26/` was the first run
+carrying all six states, and the first NV/KY run produced by a pipeline that
+includes the deterministic `detector.derive_code_from_title` pass; it is what
+the frozen `paper/results/task2_20260816/` numbers were measured on.)
 
 Order matters: the **parser** golden is annotated against a specific frozen
 `{STATE}-detection.json` — record which one in `source_detection`, and
@@ -43,16 +46,26 @@ re-verify if that detection is ever re-recorded.
    actually exists. Delete the `sub_strand` entry if the document is 3-level.
    This is graded standalone, so Pass-1 correctness is visible independently of
    per-chunk extraction.
-3. **`elements`** (detector) — delete the `TEMPLATE-` rows and annotate 1–2
-   representative domains fully plus a handful of edge cases (~50 elements).
-   Spot-check coverage is correct and intended: **do not attempt exhaustive
-   annotation.** Precision for NV/KY comes from extending the Task 1b manual
-   FP audit to their in-scope extras, which keeps the generalization table's
-   methodology identical to the golden states'.
-4. **`standards`** (parser) — delete the `TEMPLATE-` entries and annotate
-   representative indicators plus whatever the regression cases target. Each
-   entry is matched by `(indicator.name, age_band)` then graded field-by-field
-   for exact equality. `source_text` is neither expected nor compared.
+3. **`elements`** (detector) — delete the `TEMPLATE-` rows. The original
+   instruction here was to spot-check 1–2 representative domains (~50
+   elements) and take precision from the Task 1b manual FP audit instead.
+   **Both held-out goldens are now exhaustive** (KY always was by accident;
+   NV was completed 2026-08-22), so for these two states annotate every
+   structural element the subset prints. Note that on a 15-page subset that
+   includes headings whose own content falls outside the subset — NV prints
+   twelve `<Domain> Standard N:` headings on its three "The `<Domain>`
+   Standards include:" list pages while only seven have indicator tables in
+   range, and the detector emits all twelve, so all twelve are annotated.
+   Order matters: `eval_detector._tag_domains` scopes each element to the
+   most-recent domain **above it in list order**, so a childless heading goes
+   at the end of its domain's block, not at its printed page position.
+4. **`standards`** (parser) — delete the `TEMPLATE-` entries. As of
+   2026-08-22 both held-out parser goldens cover every indicator in their
+   subset (NV 24, KY 26); annotate all of them rather than a representative
+   sample, and keep `test_case_id` numbering contiguous in document order.
+   Each entry is matched by `(indicator.name, age_band)` then graded
+   field-by-field for exact equality. `source_text` is neither expected nor
+   compared.
 5. **`regression_cases`** — every case `id` needs a matching function in
    `evaluation/regression_checks.py` (`check_<id>` for the detector via
    `lookup`, `check_parser_<id>` for the parser via `lookup_parser`) or the
@@ -60,10 +73,19 @@ re-verify if that detection is ever re-recorded.
    and already has its function.
 
 **Precision caveat for the paper.** A spot-check golden cannot produce a
-precision number. KY's detector golden happens to be exhaustive, so its
-precision is real; NV's is not, and neither parser golden is. Report NV/KY
-precision from the Task 1b manual FP audit, or state the coverage denominator
-explicitly.
+precision number, which is why the four golden states report verified
+precision from the Task 1b manual FP audit instead. That caveat no longer
+applies to the held-out pair: **both NV and KY detector goldens are now
+exhaustive**, so their raw suite precision is a real hallucination rate.
+
+⚠️ NV became exhaustive on **2026-08-22**, *after* the frozen Task 2
+measurement. `paper/results/task2_20260816/` was recorded against the
+41-element NV golden and its NV annotation-coverage ceiling (0.7736) and raw
+precision are historical figures for that golden — leave them as the record of
+what was measured, and re-record rather than retro-fit if the paper is to cite
+the exhaustive number. Guardrail 8 in `tasking/arxiv_paper.md` names KY as
+"the one state that qualifies today" for reporting raw precision; NV now
+qualifies too, on the same `golden_is_exhaustive` evidence test.
 
 ## Conventions worth restating
 

@@ -368,15 +368,57 @@ def _anchor_parent_chain(
     an already-resolved child. Idempotent, and a no-op for documents whose
     indicator codes do spell out every ancestor (AZ/CA/CO/KY/TX), where no two
     levels ever peel to the same prefix.
+
+    A level held OUTSIDE the namespace keeps its heading identifier, and that
+    identifier is the LLM's, not the document's — so its leading segment can
+    carry a stale domain code. Nevada shows both spellings of the same leak
+    across two runs of one document: strand ``TECH.1`` under domain ``T``, and
+    strand ``Science.1`` under domain ``S``, where the detector's title-derived
+    domain code leaked into a strand code the anchor could not rebuild. A
+    strand's code always extends its own domain's code — measured at 106/106
+    over every annotated standard in all six golden states, and 508/508 over
+    two full six-state pipeline runs once NV's 11 leaked rows are excluded. So
+    when the strand's leading segment disagrees with the resolved domain, the
+    domain wins and the segment is replaced.
+
+    Two guards keep that from cutting the wrong way, and both are load-bearing:
+
+    * It fires only when the DOMAIN was successfully anchored. If the domain is
+      the level that fell outside the namespace, its code is the unreliable one
+      — re-rooting an anchored strand onto it would corrupt a correct code.
+    * It REPLACES a leading segment, never prepends one, so it only acts on a
+      strand code that already has a domain-code slot to correct. A
+      single-segment strand identifier is left alone: there is nothing to
+      replace, and prepending would invent a qualification the document never
+      printed.
     """
     anchored_sub = _anchor_parent_code(sub_strand_code, indicator_code)
     anchored_strand = _anchor_parent_code(strand_code, indicator_code)
     anchored_domain = _anchor_parent_code(domain_code, indicator_code)
 
-    if anchored_strand and anchored_sub and anchored_strand == anchored_sub:
+    strand_outside = bool(
+        anchored_strand and anchored_sub and anchored_strand == anchored_sub
+    )
+    if strand_outside:
         anchored_strand = strand_code
-    if anchored_domain and anchored_strand and anchored_domain == anchored_strand:
+    domain_outside = bool(
+        anchored_domain and anchored_strand and anchored_domain == anchored_strand
+    )
+    if domain_outside:
         anchored_domain = domain_code
+
+    if (
+        strand_outside
+        and not domain_outside
+        and anchored_domain
+        and anchored_strand
+        and "." in anchored_strand
+        and anchored_strand != anchored_domain
+        and not anchored_strand.startswith(anchored_domain + ".")
+    ):
+        anchored_strand = ".".join(
+            [anchored_domain] + anchored_strand.split(".")[1:]
+        )
 
     return anchored_domain, anchored_strand, anchored_sub
 

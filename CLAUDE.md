@@ -23,7 +23,7 @@ When a change alters behavior, config, schema, or architecture (not a small bug 
 - `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Uniqueness is enforced afterwards by `disambiguate_colliding_standards` (see "Where a printed code is not unique" below), which resolves collisions by ancestor and keeps a numeric counter only as a last resort.
 - the CA collision branch + `_PURE_NUMERIC_RE` in `abbreviate_element_codes` (and the now-empty `abbreviate_element_codes` / `normalize_code_to_canonical` shells) → parser prompt: a sub_strand and its child indicator must never share a code; the sub_strand derives its segment from its title with the same ≤5-char abbrev scheme.
 
-A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), and the JSON-extraction / schema-validation plumbing.
+A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), `_splice_overlapping_prose` (see below), and the JSON-extraction / schema-validation plumbing.
 
 Each of those earns its place by reading the SHAPE of the output rather than any document's vocabulary, and each fixes a defect the prompt alone could not: the LLM emits both spellings intermittently at temperature 0, so a prompt rule reduces the rate but cannot make the output reconcilable. Pair them with the prompt rule, don't substitute one for the other.
 
@@ -135,6 +135,118 @@ final record, so the log carries the chain, page and `standard_id` but not the
 LLM's pre-normalization code. Capturing that needs logging inside `parser.py`,
 which busts the hash; do it when the measurement chain is next re-recorded.
 
+### Where a description crosses a page break (2026-08-22) — `_splice_overlapping_prose` (the prompt half was reverted)
+
+A long domain/strand introduction can run past the bottom of a page, and the
+document puts furniture in the seam: a bare page number, then a running header
+repeating the domain name. The detector read that furniture as the end of the
+prose and stopped. Measured on Nevada: the Science domain intro came out at
+**2410 of 3500 chars**, cut exactly at the page 7 → 8 seam (extraction blocks
+356 `…for all young children.` / 357 `50` / 358 `Science` / 359 `NAEYC's 10
+Tips…`). CLAUDE.md's earlier note that "a different domain [truncates] on the
+next run" is the same defect sampling differently, not a second one.
+
+⚠️ **The prompt half of this was TRIED, DEPLOYED, and REVERTED on 2026-08-22.
+Only `_splice_overlapping_prose` remains. Read the record below before
+re-attempting a rule-8 page-break bullet — three wordings were measured and all
+three cost more than they bought.**
+
+**What was tried.** A rule 8 bullet saying a page break does not end an
+element's prose: page number, running header/footer, copyright or citation line
+are typography, not a boundary, recognized by SHAPE (short, no sentence
+structure, recurs on other pages) rather than by wording. It DID fix the target
+defect — NV Science went 2410 → 3500 chars, description accuracy 2/3 → 3/3,
+reproduced across four runs including a 3-run stability check.
+
+**Why it was reverted: it generalizes BACKWARDS, on two independent axes.**
+Told that matter near a page seam is typography to skip, the model also skips
+real content near a seam.
+
+* **AZ — descriptions dropped.** Deployed to dev, run `08-22-26-2`: **12 of 45**
+  indicators came back `description: null`, including five consecutive lettered
+  ones (`a`-`e`, pages 11-12, the `LL.2.3` group) that had carried
+  173/96/94/154/106 chars the run before. Parser `indicator.description`
+  17/18 → 12/18. Deterministic, not sampling: A/B on one frozen extraction —
+  remove the bullet and all five return at byte-identical lengths, restore it
+  and all five vanish, twice.
+* **KY — whole ELEMENTS dropped.** Recall **1.000 → 0.864**: 6 of 44 golden
+  elements lost, and they leave as a coherent block (a sub_strand plus all its
+  child indicators, e.g. `Benchmark 2.2` and its five). Two no-rule samples
+  give 44/44; three with-rule samples give 38.
+
+**Three wordings, none of which clears both:**
+
+| variant | KY recall | NV desc | AZ nulls |
+|---|---|---|---|
+| no rule | **44/44 (1.000)** | 2/3 | 0/45 |
+| original bullet | 38 | **3/3** | 12/45 |
+| + "never justifies OMITTING a description" guard | 38/44 (0.864) | **3/3** | 0/45 |
+| + "only ever ADDS, never removes" (elements too) | 38/44 (0.864) | 2/3 | 0/45 |
+
+The omit-guard fixes AZ and keeps NV, but does NOT recover KY. Broadening that
+guard to cover element emission loses NV's fix without helping KY. Scoping the
+bullet to "domain/strand/sub_strand introductions only" also fixed AZ and also
+lost NV — leading with a restriction buries the directive.
+
+**The verdict: the rule was not just costly, it was UNNECESSARY.** It costs SIX
+real standards on KY, and the thing it was written to buy — NV's complete
+Science description — the Python half delivers on its own in the batched
+pipeline (run 040: 3500 chars byte-exact, no prompt rule). So it is reverted
+with nothing outstanding.
+
+If some future case does need a page-break prompt rule, A/B it against **KY**
+(element recall) and **AZ** (indicator `description` null count) on frozen
+extractions, and confirm the batched path does not already handle it. NV alone
+will tell you the rule works when it is doing nothing the splice was not
+already doing.
+
+**What survives — `_splice_overlapping_prose`.** It is kept because it is
+correct independently of the prompt rule and can never lose data. Chunks
+overlap, so a long passage can be split such that NEITHER chunk holds it whole:
+the earlier one has the head (chars 0-2410), the later one opens mid-passage and
+has the tail (~540-3500). `_merge_duplicate` picked the LONGER of the two, so
+the fuller-but-late-starting view won and the description began mid-sentence.
+(That is what made the prompt rule look like it had merely changed the failure
+shape from `truncated` to `mismatch` while the metric stayed at 2/3.)
+
+Because the two views come from an overlap, the shared span is in both, so
+`a`'s tail IS `b`'s head and splicing there reconstructs the passage exactly —
+no invented and no duplicated text. Containment is handled first; a shared run
+of at least `_MIN_PROSE_OVERLAP` (60) chars is required so a common sentence
+opener cannot fake an anchor; with no anchor it returns `None` and
+`_merge_duplicate` falls back to longest-wins. It reads only string shape,
+never any document's vocabulary. Verified on the real NV strings: the two
+partial views splice back to the golden 3500 chars byte-exactly, in either
+order, while two unrelated domain intros refuse to splice.
+
+⚠️ **It fixes NV on its own in the BATCHED path, but looks inert in the eval —
+know which path you are measuring.** This is the sharpest live example of the
+direct-vs-batched divergence:
+
+* **Direct path (`eval_detector`)** — NV Science stays `truncated: 2410/3500`,
+  description accuracy 2/3. One chunk holds a single truncated view, so there
+  is no second view to splice against and the helper is a no-op.
+* **Batched path (the real pipeline)** — NV Science comes back at **3500 chars,
+  byte-exact against the golden**, with NO prompt rule in play. Batched
+  chunking hands `_merge_duplicate` the two overlapping partial views the
+  splice is designed to join.
+
+Isolated by a clean before/after on the pipeline itself: run `08-22-26` (037,
+no splice, no prompt rule) → 2410; run `08-22-26-4` (040, splice, no prompt
+rule) → 3500 exact. The splice is the only functional detector change between
+them.
+
+So do NOT judge this helper by the detector eval, and do not delete it because
+`eval_detector` shows no movement — that is the expected direct-path reading of
+a batched-path fix. It can only ever reconstruct more of a passage, never less,
+and it removes an order-dependent way for `_merge_duplicate` to pick a
+description that starts mid-sentence.
+
+⚠️ `_merge_duplicate`'s longest-wins fallback is now only a FALLBACK. Its old
+premise — "the chunk that saw the element whole captured more of its prose" —
+holds for a plain repeat but not for a head/tail split, which is why the splice
+runs first.
+
 ### Where a printed code is not unique (2026-08-15) — `_anchor_parent_chain` + `disambiguate_colliding_standards`
 
 Both of these exist because a document's printed code namespace can **skip a
@@ -164,6 +276,58 @@ levels ever peel to the same prefix. Measured effect on NV: `strand.code` 0/15
 Check any edit here against all five shapes — NV `SS.CI.PK3` → (`SS`, `SS.2`,
 `SS.CI`), KY `AL.1.1.EASPT` → (`AL`, `AL.1`, `AL.1.1`), and the CA borrow
 `FLD.1.0.VOCA.1.1` → (`FLD`, `FLD.1.0`, `FLD.1.0.VOCA`).
+
+**A strand's code always extends its own domain's code (2026-08-22).** The
+level held OUTSIDE the namespace keeps its heading identifier, and that
+identifier is the LLM's rather than the document's — so its leading segment can
+carry a stale domain code straight into the output. Nevada shows both spellings
+of the one leak across two runs of the SAME document: `08-22-26` has 5 rows of
+strand `TECH.1` under domain `T`, `08-22-26-2` has 6 rows of strand `Science.1`
+under domain `S`. Do not read that as a Technology quirk or as an asymmetry
+between "plausible" and "malformed" domain codes — the earlier hypothesis that
+a malformed code is safe because the parser ignores it is REFUTED by run 2.
+Either domain leaks, depending only on which way `_pick_code`'s frequency vote
+falls, so the repair is keyed to neither spelling.
+
+The invariant is measured, not assumed: **106/106** over every annotated
+standard in all six parser goldens, and **508/508** over two full six-state
+pipeline runs once NV's 11 leaked rows are excluded. So when the strand's
+leading segment disagrees with the resolved domain, the domain wins and the
+segment is replaced. Blast radius, measured by replaying every production row
+through the new chain: **519 rows, 11 changed — exactly the 11 leaked NV rows,
+zero in AZ/CA/CO/KY/TX.** Measured effect on NV: `strand.code` 19/24 → 24/24,
+field accuracy 0.975 → 0.986 on `08-22-26` (its remaining miss is the Science
+`domain.description`, a DETECTOR truncation frozen into that detection input),
+and **1.000 / 24-of-24 fully correct** on `08-22-26-2`, whose detection carries
+the description intact. `strand.code` appears in no state's mismatch list in
+either run.
+
+Two things in those runs are NOT attributable to this change, and both look
+alarming at a glance. KY coverage 26/26 → 21/26 tracks its detection input
+(44 → 38 elements from the pipeline's own detector), and KY's
+`KY-BENCHMARK-CODE-NORMALIZED` / `KY-SUB-STRAND-NOT-INDICATOR-CODE` failures
+are the documented bare-code defect (`TCPHS`/`UMNDW`, 2 and 4 rows, matching
+the 08-01/08-16 rate) that `validator._validate_code_shape` rejects before
+Aurora. AZ `indicator.description` 17/18 → 12/18 is description sampling. In
+both cases the mismatched fields are never `strand.code`, and the replay
+changed zero rows in either state.
+
+⚠️ Two guards, both load-bearing — check any edit here against
+`tests/unit/test_parser_domain_anchor.py::TestStrandExtendsDomain`:
+
+1. It fires **only when the DOMAIN was successfully anchored**. If the domain
+   is instead the level that fell outside the namespace, its code is the
+   unreliable one, and re-rooting an anchored strand onto it would corrupt a
+   correct code.
+2. It **replaces** a leading segment, never **prepends** one, so it acts only
+   on a strand code that already has a domain-code slot to correct. A
+   single-segment strand identifier is left alone: prepending would invent a
+   qualification the document never printed.
+
+⚠️ It must stay **strand-vs-domain**. Widening it to sub_strand-vs-strand
+rejects all of Nevada, whose `SS.ID` deliberately does not extend `SS.1` —
+the same reason `validator._validate_code_shape` is scoped to the indicator
+level. `test_nevada_sub_strand_may_still_break_the_chain` is the canary.
 
 **`disambiguate_colliding_standards`.** Uniqueness used to be enforced inside
 `parse_llm_response` by a numeric counter: the first row to arrive kept the

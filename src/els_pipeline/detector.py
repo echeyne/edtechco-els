@@ -77,6 +77,12 @@ _CODE_WORD_STRIP_RE = re.compile(r"^[^0-9A-Za-z]+|[^0-9A-Za-z]+$")
 DERIVED_CODE_MAX_LEN = 5
 DERIVED_CODE_SINGLE_WORD_LEN = 4
 
+# Shortest run of shared characters that may anchor a cross-chunk prose splice
+# (`_splice_overlapping_prose`). Long enough that a shared sentence opener or a
+# boilerplate clause repeated across domains cannot pass for a real overlap,
+# short enough to survive a chunk boundary landing mid-sentence.
+_MIN_PROSE_OVERLAP = 60
+
 # The same `<Label>: <id>` → `<Label> <id>` fold `_CODE_LABEL_SEPARATOR_RE`
 # performs, but unanchored so it can be applied inside a source_text line as
 # well as to a code. Used by `_is_code_grounded` to compare a canonicalized
@@ -1257,21 +1263,74 @@ def _reconcile_age_band_drift(elements: List[DetectedElement]) -> List[DetectedE
     ]
 
 
+def _splice_overlapping_prose(a: Optional[str], b: Optional[str]) -> Optional[str]:
+    """Join two partial views of ONE passage on the text they share.
+
+    Chunks overlap, so an element's prose can be split such that NEITHER chunk
+    holds it whole: the earlier chunk has the head and the later chunk — which
+    opens part-way through the passage — has the tail. Picking the longer of
+    the two then silently drops one end (observed on NV's Science domain intro:
+    chunk 2 carried chars 0-2410, chunk 3 carried chars ~540-3500, and the
+    longer one won while starting mid-sentence).
+
+    Because the two views come from an OVERLAP, the shared span is present in
+    both: the tail of ``a`` is the head of ``b``. Splicing there reconstructs
+    the passage exactly, with no invented or duplicated text.
+
+    Returns the spliced text, or ``None`` when the two share no anchor and the
+    caller must fall back. Containment is handled first — a strict superset
+    needs no splice. Matching is exact and requires a run of at least
+    ``_MIN_PROSE_OVERLAP`` characters, long enough that a shared sentence
+    opener or boilerplate clause cannot fake an anchor.
+    """
+    if not a:
+        return b
+    if not b:
+        return a
+    if b in a:
+        return a
+    if a in b:
+        return b
+    if len(b) < _MIN_PROSE_OVERLAP:
+        return None
+    probe = b[:_MIN_PROSE_OVERLAP]
+    idx = a.find(probe)
+    while idx != -1:
+        # a[idx:] is a's tail; it anchors only if b actually continues it.
+        if b.startswith(a[idx:]):
+            return a + b[len(a) - idx:]
+        idx = a.find(probe, idx + 1)
+    return None
+
+
 def _merge_duplicate(keep: DetectedElement, other: DetectedElement) -> DetectedElement:
     """
     Fold ``other`` into ``keep``, retaining the richer content of the two.
 
     Used for both duplicate shapes: an exact repeat across an overlap, and a
     truncated/complete pair. The winner keeps the LONGER title (a truncated
-    twin is by definition the shorter one) and the LONGER description (the
-    chunk that saw the element whole captured more of its prose), and the
-    higher confidence.
+    twin is by definition the shorter one) and the higher confidence.
+
+    The description is RECONCILED rather than chosen: two chunks can hold
+    different partial views of one passage, so they are spliced on the text
+    they share (:func:`_splice_overlapping_prose`). Longest-wins is only the
+    fallback, for the case where the two share no anchor — it assumes the
+    longer view is the more complete one, which holds for a plain repeat but
+    NOT for a head/tail split.
+
+    ``keep`` is passed first because it is the earlier of the two in document
+    order, so it supplies the head and ``other`` the tail. The reversed splice
+    is attempted too, since chunk-overlap re-emission can invert that order.
     """
     title = keep.title if len(keep.title or "") >= len(other.title or "") else other.title
     description = (
-        keep.description
-        if len(keep.description or "") >= len(other.description or "")
-        else other.description
+        _splice_overlapping_prose(keep.description, other.description)
+        or _splice_overlapping_prose(other.description, keep.description)
+        or (
+            keep.description
+            if len(keep.description or "") >= len(other.description or "")
+            else other.description
+        )
     )
     return keep.model_copy(update={
         "title": title,
