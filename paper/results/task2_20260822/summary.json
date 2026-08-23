@@ -1,0 +1,319 @@
+{
+  "detector": {
+    "NV": {
+      "precision_raw": 0.8679,
+      "recall": 1.0,
+      "f1_raw": 0.9293,
+      "matched": 46,
+      "annotation_coverage": {
+        "n_golden": 46,
+        "n_detected_total": 53,
+        "n_detected_in_annotated_domains": 53,
+        "precision_ceiling_from_annotation_coverage": 0.8679
+      },
+      "per_level": {
+        "domain": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 12,
+          "fp": 5,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 7,
+          "fp": 1,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 24,
+          "fp": 1,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 3
+          },
+          "indicator": {
+            "indicator": 24
+          },
+          "strand": {
+            "strand": 12
+          },
+          "sub_strand": {
+            "sub_strand": 7
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "match_path": {
+        "matched_domain_scoped": 46,
+        "matched_via_fallback": 0,
+        "fallback_crossed_domain": [],
+        "unmatched": []
+      },
+      "code_accuracy": 0.9565217391304348,
+      "code_matches": 44,
+      "code_total": 46,
+      "code_mismatches": [
+        {
+          "test_case_id": "NV-DOM-02",
+          "level": "domain",
+          "golden": "S",
+          "detected": "Science"
+        },
+        {
+          "test_case_id": "NV-DOM-03",
+          "level": "domain",
+          "golden": "T",
+          "detected": "TECH"
+        }
+      ],
+      "description_accuracy": 0.6666666666666666,
+      "description_matches": 2,
+      "description_total": 3,
+      "description_truncations": 1,
+      "description_mismatches": [
+        {
+          "test_case_id": "NV-DOM-02",
+          "level": "domain",
+          "status": "truncated",
+          "detail": "truncated: 2410/3500 chars"
+        }
+      ],
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "NV-NO-COLUMN-HEADER-AS-ELEMENT",
+          "status": "PASS",
+          "detail": "53 elements: no column headers, captions or footnotes emitted, no age_band set"
+        },
+        {
+          "id": "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+          "status": "PASS",
+          "detail": "all 8 sub_strands use the document's XX.YY caption code and prefix their indicators"
+        },
+        {
+          "id": "NV-FOUR-LEVEL-HIERARCHY",
+          "status": "PASS",
+          "detail": "all four levels present"
+        }
+      ]
+    },
+    "KY": {
+      "precision_raw": 1.0,
+      "recall": 1.0,
+      "f1_raw": 1.0,
+      "matched": 44,
+      "annotation_coverage": {
+        "n_golden": 44,
+        "n_detected_total": 44,
+        "n_detected_in_annotated_domains": 44,
+        "precision_ceiling_from_annotation_coverage": 1.0
+      },
+      "per_level": {
+        "domain": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 10,
+          "fp": 0,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 26,
+          "fp": 0,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 3
+          },
+          "indicator": {
+            "indicator": 26
+          },
+          "strand": {
+            "strand": 5
+          },
+          "sub_strand": {
+            "sub_strand": 10
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "match_path": {
+        "matched_domain_scoped": 44,
+        "matched_via_fallback": 0,
+        "fallback_crossed_domain": [],
+        "unmatched": []
+      },
+      "code_accuracy": 1.0,
+      "code_matches": 44,
+      "code_total": 44,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 26,
+      "description_total": 26,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "KY-BENCHMARK-IS-SUB-STRAND",
+          "status": "PASS",
+          "detail": "all 10 Benchmark elements classified as sub_strand"
+        },
+        {
+          "id": "KY-FOUR-LEVEL-HIERARCHY",
+          "status": "PASS",
+          "detail": "all four levels present"
+        },
+        {
+          "id": "KY-STRAND-CODE-KEEPS-FULL-LABEL",
+          "status": "PASS",
+          "detail": "all 13 labelled headings keep their full label as the code"
+        }
+      ]
+    }
+  },
+  "parser": {
+    "NV": {
+      "coverage": 1.0,
+      "field_accuracy": 1.0,
+      "matched": 24,
+      "n_golden": 24,
+      "n_parsed": 24,
+      "fully_correct": 24,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 1.0
+      },
+      "n_field_mismatches": 0,
+      "field_decomposition": {
+        "value_correct": 360,
+        "null_correct": 72,
+        "total_cells": 432,
+        "share_of_cells_whose_golden_is_null": 0.1667,
+        "field_accuracy_over_asserted_cells_only": 1.0
+      },
+      "regressions": [
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 24 standard_ids unique"
+        },
+        {
+          "id": "NV-STRAND-PARENT-BY-HEADING",
+          "status": "PASS",
+          "detail": "all 7 indicator groups resolve to a single strand"
+        },
+        {
+          "id": "NV-DOCUMENT-CODE-PRESERVED",
+          "status": "PASS",
+          "detail": "all 24 standards keep the document's printed code at indicator, sub_strand and domain"
+        }
+      ]
+    },
+    "KY": {
+      "coverage": 1.0,
+      "field_accuracy": 1.0,
+      "matched": 26,
+      "n_golden": 26,
+      "n_parsed": 26,
+      "fully_correct": 26,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 1.0
+      },
+      "n_field_mismatches": 0,
+      "field_decomposition": {
+        "value_correct": 390,
+        "null_correct": 78,
+        "total_cells": 468,
+        "share_of_cells_whose_golden_is_null": 0.1667,
+        "field_accuracy_over_asserted_cells_only": 1.0
+      },
+      "regressions": [
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 26 standard_ids unique"
+        },
+        {
+          "id": "KY-FOUR-LEVEL-RESOLVED",
+          "status": "PASS",
+          "detail": "all 26 standards have both a strand and a sub_strand"
+        },
+        {
+          "id": "KY-BENCHMARK-CODE-NORMALIZED",
+          "status": "PASS",
+          "detail": "26 standards: no label text in any code, all 78 child codes prefixed by their parent"
+        },
+        {
+          "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
+          "status": "PASS",
+          "detail": "all 26 standards keep sub_strand and indicator codes distinct and nested"
+        }
+      ]
+    }
+  }
+}

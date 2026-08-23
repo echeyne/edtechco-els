@@ -1,0 +1,23 @@
+
+=== CO ===
+  golden:   7
+  detected: 61
+  matched:  7
+  precision: 0.167  recall: 1.000  f1: 0.286
+  per-level:
+    domain      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=3   fp=30  fn=0   p=0.09 r=1.00
+    strand      tp=2   fp=5   fn=0   p=0.29 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    indicator  → indicator  : 3
+    strand     → strand     : 2
+  code accuracy: 7/7 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (35): [('indicator', '2'), ('indicator', '3'), ('indicator', '4'), ('indicator', '5'), ('indicator', '7'), ('indicator', '8'), ('indicator', '9'), ('indicator', '10'), ('indicator', '11'), ('indicator', '12')]…
+  ignored (out-of-scope domains): 19
+  regression cases:
+    [PASS] CO-NO-SUB-STRAND — no sub_strands (correct for CO)
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand

@@ -1,0 +1,185 @@
+{
+  "task": "Task 1 (re-record) \u2014 headline evals on the 4 golden states (AZ, CA, CO, TX), run from scratch",
+  "date": "2026-08-22",
+  "supersedes": {
+    "folder": "paper/results/task1_20260816/",
+    "date": "2026-08-16",
+    "outputs_dir": "outputs/08-16-26",
+    "reason": "Three things moved. (1) SOURCE: eval_common.code_version_hash went 3b445471 -> 2ac17ac2 -> 288c64f1, so the 08-16 folder grades detector.py/parser.py that no longer exist (detector._splice_overlapping_prose and the ablation-arm changes landed after it). (2) INPUTS: tasking/arxiv_paper.md designates outputs/08-22-26-4 (run 040) as superseding every earlier outputs folder including 08-16-26, 08-22-26, -2 and -3. (3) GOLDENS: the held-out NV/KY goldens grew under Emily's exhaustive annotation pass \u2014 that affects Task 2, NOT Task 1; the golden four's detector and parser goldens are unchanged and none was edited this run. The 08-16 numbers are retained for the reproducibility narrative, not as current results."
+  },
+  "git_commit": "628829b34b409a50821adc510a9f8c0d53c12ccc",
+  "code_version_hash": "288c64f1",
+  "code_version_hash_note": "eval_common.code_version_hash is a SHA-256 over src/els_pipeline/detector.py and src/els_pipeline/parser.py ONLY \u2014 which is where both prompts live, so a prompt edit invalidates the run cache. It does NOT cover evaluation/eval_parser.py, src/els_pipeline/config.py, or src/els_pipeline/validator.py. Consequences to keep straight: an eval-harness repair can be validated by re-grading IDENTICAL cached stage output; a config change (e.g. the Task 3 depth-map ablation flag) does not change the hash and is separated instead by the 'nodepthmap-' cache-key segment; and validator._validate_code_shape can be hardened without invalidating any recorded number in this folder. Every artifact of this run carries the hash in its cache filename, e.g. evaluation/.cache/detection-AZ-87969cc272b6b44f-288c64f1-.json and evaluation/.cache/parser-CA-54239bf51ad930e8-288c64f1-.json.",
+  "git_note": "Working tree was CLEAN at run time, at commit 628829b ('updates for the ablation arm', 2026-08-22 16:48:36 -0700). detector.py last changed at 628829b; parser.py last changed at 92c8288 (2026-08-22). There is no prompts.py \u2014 both prompts are defined inside detector.py and parser.py.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs; NOT full documents). Front matter, introductions and acknowledgements were removed by hand to produce these subsets \u2014 favorable preprocessing that must be disclosed with every table (guardrail 3). Page counts of the trimmed subsets THIS RUN USED, read from each {STATE}-extraction.json total_pages: AZ 15, CA 13, CO 10, TX 9.",
+  "inputs": {
+    "outputs_dir": "outputs/08-22-26-4",
+    "outputs_dir_note": "Run 040, the first carrying detector._splice_overlapping_prose. tasking/arxiv_paper.md designates it as superseding every earlier outputs folder and warns specifically against 08-22-26-2, whose KY detection is 38 elements instead of 44.",
+    "detector_eval_reads": "{STATE}-extraction.json (the detector is re-run LIVE in-process \u2014 the DIRECT path)",
+    "parser_eval_reads": "{STATE}-detection.json (the DEPLOYED BATCHED detections from this run)",
+    "extraction_provenance": {
+      "AZ": {
+        "s3_key": "US/AZ/2018/arizona_all_standards_2018_only_subset.pdf",
+        "version_id": "7fQuZBRJq9VH5qxvQXrHSDh6lSlrStC2",
+        "pages": 15,
+        "blocks": 388,
+        "extracted_at": "2026-08-22T21:17:19.301523+00:00"
+      },
+      "CA": {
+        "s3_key": "US/CA/2021/california_all_standards_2021_only_subset.pdf",
+        "version_id": "pHSn2rjDdw4xKzUSWwDalT248Z.aTYqg",
+        "pages": 13,
+        "blocks": 659,
+        "extracted_at": "2026-08-22T21:17:17.691200+00:00"
+      },
+      "CO": {
+        "s3_key": "US/CO/2020/colorado_3_5_trimmed_2020_only_subset.pdf",
+        "version_id": "M3U8HvF74b.MNlRFLwxDdQeZpulSoVla",
+        "pages": 10,
+        "blocks": 893,
+        "extracted_at": "2026-08-22T21:17:20.887532+00:00"
+      },
+      "TX": {
+        "s3_key": "US/TX/2022/texas_all_standards_2022_only_subset.pdf",
+        "version_id": "HptxP2td5uye_WABTEOD3m4JfPDIKnxP",
+        "pages": 9,
+        "blocks": 306,
+        "extracted_at": "2026-08-22T21:17:18.785873+00:00"
+      }
+    },
+    "deployed_detection_timestamps": {
+      "AZ": "2026-08-22T21:19:19.758725+00:00",
+      "CA": "2026-08-22T21:19:51.619808+00:00",
+      "CO": "2026-08-22T21:18:53.594170+00:00",
+      "TX": "2026-08-22T21:18:22.727856+00:00"
+    },
+    "deployed_batched_detection_sizes": {
+      "AZ": 77,
+      "CA": 122,
+      "CO": 61,
+      "TX": 33,
+      "note": "These are what the PARSER eval read. The DETECTOR eval re-ran the direct path in-process and produced AZ 66 / CA 122 / CO 61 / TX 33. AZ therefore differs between the two halves of this folder (66 vs 77) \u2014 see the caveat and findings.md finding 4."
+    },
+    "detector_golden_dir": "evaluation/ground_truth_detector",
+    "parser_golden_dir": "evaluation/ground_truth_parser",
+    "golden_sizes": {
+      "detector_elements": {
+        "AZ": 5,
+        "CA": 25,
+        "CO": 7,
+        "TX": 8
+      },
+      "detector_elements_with_code": {
+        "AZ": 4,
+        "CA": 25,
+        "CO": 7,
+        "TX": 8
+      },
+      "detector_elements_with_description": {
+        "AZ": 4,
+        "CA": 14,
+        "CO": 4,
+        "TX": 3
+      },
+      "parser_standards": {
+        "AZ": 18,
+        "CA": 21,
+        "CO": 9,
+        "TX": 8
+      },
+      "note": "The golden-four detector goldens are 5-25 element SPOT CHECKS against 33-122 detected elements. None is exhaustive, so guardrail 8's Kentucky carve-out applies to none of them."
+    },
+    "golden_last_edited": {
+      "detector": {
+        "AZ": "2979f61 2026-08-01",
+        "CA": "d6ccfa2 2026-08-21",
+        "CO": "d6ccfa2 2026-08-21",
+        "TX": "2979f61 2026-08-01"
+      },
+      "parser": {
+        "AZ": "fbff414 2026-08-16",
+        "CA": "0b222f7 2026-08-15",
+        "CO": "d6ccfa2 2026-08-21",
+        "TX": "0b222f7 2026-08-15"
+      },
+      "annotator": "Emily Cheyne",
+      "note": "All predate commit 628829b. No golden-four golden was edited during this task."
+    }
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "temperature": 0,
+    "note": "config.py defaults; the eval harness does not load .env, so these are the values that ran."
+  },
+  "run_window_utc": {
+    "detector": "2026-08-22T23:50:33Z - 2026-08-22T23:57:38Z (rc=0)",
+    "parser": "2026-08-22T23:57:38Z - 2026-08-23T00:12:52Z (rc=0)",
+    "source": "paper/results/rerecord_20260822.log (shared with Task 2 and the aborted Task 3 off-arm)"
+  },
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "export AWS_PROFILE=kinder-readiness-dev-cli",
+    "# 1. detector \u2014 fresh, no cache, direct path, live Bedrock",
+    "python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state AZ --state CA --state CO --state TX --no-cache --report-json paper/results/task1_20260822/detector_golden4.json --output-dir paper/results/task1_20260822/review_detector",
+    "# 2. parser \u2014 fresh, no cache, on the DEPLOYED batched detections",
+    "python -m evaluation.eval_parser --detection-dir outputs/08-22-26-4 --state AZ --state CA --state CO --state TX --no-cache --report-json paper/results/task1_20260822/parser_golden4.json --output-dir paper/results/task1_20260822/review_parser",
+    "# 3. consolidation (adds annotation-coverage context, level-agnostic confusion, match-path audit, parser field decomposition)",
+    "python paper/analysis/consolidate_task1.py --state AZ --state CA --state CO --state TX --detector-report paper/results/task1_20260822/detector_golden4.json --parser-report paper/results/task1_20260822/parser_golden4.json --detector-review-dir paper/results/task1_20260822/review_detector --parser-review-dir paper/results/task1_20260822/review_parser --out paper/results/task1_20260822/summary.json"
+  ],
+  "files": {
+    "findings.md": "Narrative: what the paper may and may not claim from these numbers.",
+    "manifest.json": "This file \u2014 provenance, commands, caveats.",
+    "summary.json": "Consolidated paper-facing numbers, produced by paper/analysis/consolidate_task1.py. AUTHORITATIVE for every figure quoted in findings.md.",
+    "detector_golden4.json": "Raw eval_detector report (a 4-element list, one entry per state).",
+    "parser_golden4.json": "Raw eval_parser report (a 4-element list, one entry per state).",
+    "review_detector/": "Per-state detector review files ({STATE}-report.txt, {STATE}-detected.json, {STATE}-review.json). {STATE}-detected.json is the DIRECT-path detection this run produced \u2014 not the batched one in outputs/08-22-26-4.",
+    "review_parser/": "Per-state parser review files ({STATE}-report.txt, {STATE}-parsed.json, {STATE}-review.json). AZ's single field mismatch (AZ-IND-15) is named in AZ-review.json.",
+    "../rerecord_20260822.log": "Full stdout for this run including per-call LLM_METRICS (tokens, latency, cost) and both infer_depth_map calls per state. Shared with Task 2 and the aborted Task 3 off-arm; this folder has no log of its own."
+  },
+  "instrument_repairs_made_during_this_task": [],
+  "golden_data_corrections_made_during_this_task": [],
+  "related_runs": {
+    "task2": "paper/results/task2_20260822/ \u2014 held-out generalization (NV, KY). Ran in the SAME invocation, at the SAME code_version_hash 288c64f1, on the SAME outputs folder (outputs/08-22-26-4), through the SAME consolidation script (paper/analysis/consolidate_task1.py, restricted with --state). The held-out numbers and these golden-four numbers are therefore DIRECTLY COMPARABLE and the paper may put them in one table. Note its goldens DID change (NV detector 41 -> 46, NV parser 15 -> 24); Task 1's did not.",
+    "task3": "paper/results/task3_20260822/ \u2014 depth-map ablation. Its ON-arm is this run (all four states PASS). Its OFF-arm ABORTED at 2026-08-23T00:21:56Z-00:25:38Z on a Bedrock ThrottlingException ('Too many tokens per day', Opus-specific; Sonnet and Haiku probed OK afterwards) after completing only AZ. The folder CONTAINS NO VALID NUMBERS \u2014 five of its six states record n_detected=0 / recall=0.0, which is the throttle and not the ablation. See paper/results/task3_20260822/DO_NOT_USE.md. No ablation figure may be quoted, and Tasks 1 and 2 must NOT be re-run to accompany a redone off-arm \u2014 re-running would change these frozen numbers.",
+    "superseded": "paper/results/task1_20260816/ \u2014 same task, previous code version (3b445471) and previous outputs folder (08-16-26). Retained for the reproducibility narrative only."
+  },
+  "caveats": [
+    "CORPUS TIER: every number in this folder is from the _only_subset tier (AZ 15pp, CA 13pp, CO 10pp, TX 9pp of manually trimmed subset PDFs), never full documents. The trimming removed front matter, introductions and acknowledgements and is favorable preprocessing \u2014 state it with the table, do not bury it (guardrail 3).",
+    "THE DETECTOR SUITE'S RAW PRECISION IS ARITHMETICALLY ANNOTATION COVERAGE, NOT A HALLUCINATION RATE (guardrail 8, confirmed exactly this run): for CA, CO and TX the raw precision EQUALS the annotation-coverage ceiling to four decimal places (CA 0.2049 = 25/122, CO 0.1667 = 7/42, TX 0.3200 = 8/25). The suite's precision denominator is matched + in-scope extras and the ceiling denominator is n_detected_in_annotated_domains; with zero fallback matches those are the same set, so the raw figure is a pure restatement of how much of the document a 5-25 element spot-check golden annotates and carries ZERO information about detector correctness. No golden-four golden is exhaustive, so Kentucky's carve-out applies to none of them.",
+    "AZ'S RAW PRECISION AND ITS CEILING ARE COMPUTED BY TWO DIFFERENT COUNTERS THAT BOTH CLAIM TO COUNT 'IN-SCOPE DETECTIONS', AND THE GAP IS BOOKKEEPING, NOT AZ QUALITY: eval_detector.grade_elements divides by 12 (matched=5 GOLDENS + 7 in-scope extra DETECTIONS) giving 0.4167, while consolidate_task1.in_scope_counts reports n_detected_in_annotated_domains=11 giving a ceiling of 0.4545. The one-element gap is AZ-IND-LL-1-2-b, annotated without its Language-and-Literacy domain header: the golden tags it to Social Emotional Development (AZ's only annotated domain) while the detection correctly places it under Language and Literacy, so its detection sits among the 54 ignored_out_of_scope while grade_elements still pairs it via the domain-agnostic fallback. match_path.unmatched is [] and per-level fn is 0 at all four AZ levels, so NO golden failed to match. Reconcile the two counters onto one convention before quoting either: detections-consistently gives 4/11 = 0.3636 (the strictly-scoped figure the 08-16 folder recorded), goldens-consistently gives 5/12 = 0.4167, and the ceiling 5/11 mixes them. Never write this up as an AZ defect.",
+    "THE TWO HALVES OF THIS FOLDER DO NOT READ THE SAME AZ DETECTION: the detector eval re-ran the DIRECT path and produced 66 AZ elements (45 indicator / 11 sub_strand / 8 strand / 2 domain), while the parser eval read the DEPLOYED BATCHED detection in outputs/08-22-26-4/AZ-detection.json, which has 77 (45 / 21 / 9 / 2). This is the documented direct-vs-batched divergence, and tasking/arxiv_paper.md already diagnoses the batched change as benign \u2014 re-verified against both files here: 4 genuinely new sub_strands (Attachment, Social Interactions, Respect, Comprehension and Text Structure), 7 additional cross-page duplicate copies of already-present strands/sub_strands whose FIRST occurrence is page 4 (AZ's contents/listing page) in every case, and 0 same-page duplicates in either detection. Indicators are identical at 45, which is why parser coverage is unaffected. Do not present AZ's detector row and AZ's parser row as measurements of one artifact.",
+    "CODE AND DESCRIPTION ACCURACY ARE CONDITIONED ON THE TITLE ALREADY MATCHING EXACTLY: both are graded over MATCHED PAIRS ONLY, and matching requires an exact (case/whitespace-folded) title match, so a garbled title silently removes an element from both denominators. The conditioning is vacuous this run because recall is 1.000 in every state, but the metric names do not say so and a future run with misses must report the denominator.",
+    "BOTH CONTENT DENOMINATORS ARE THIN \u2014 REPORT MATCHES/TOTAL, NEVER A BARE RATE: descriptions are annotated on only 4/5 (AZ), 14/25 (CA), 4/7 (CO) and 3/8 (TX) golden elements, and codes on 4/5 (AZ \u2014 its domain entry annotates none), 25/25 (CA), 7/7 (CO) and 8/8 (TX). AZ desc 4/4, CO desc 4/4 and TX desc 3/3 are three- and four-cell measurements; an unannotated element asserts nothing and is skipped.",
+    "THE GRADED DEPTH MAP IS NOT THE ONE THAT DROVE THE GRADED DETECTION: evaluate_state calls infer_depth_map a SECOND time purely for grading, after run_detector_cached has already called it once inside detect_structure. Eight Haiku calls this run, two per state, and only the second is graded. Verified from paper/results/rerecord_20260822.log that the two calls produced IDENTICAL canonical-level sequences in all four states (AZ/CA/TX 4-level, CO 3-level), so the risk did not materialize \u2014 but a PASS is not proof the detection ran on a correct map. The call SHAPE is faithful to production: both detect_structure and detection_batching.prepare_detection_batches call infer_depth_map on the full block list, which samples ~6000 tokens internally.",
+    "AGE-BAND DROPS AND THE LEVEL-CONFUSION MATRIX CARRY NO INDEPENDENT SIGNAL WHEN RECALL IS 1.000: age_band_drops is a strict subset of missing_test_cases, so 'age-band drops: 0' follows arithmetically from recall 1.000. Likewise `level` is part of the match key in BOTH matching tiers, so the suite's confusion matrix is structurally diagonal, and consolidate_task1.py's level-agnostic re-pairing only does work when goldens go unmatched \u2014 with none unmatched, off_diagonal_total: 0 is arithmetic, not evidence.",
+    "PARSER FIELD ACCURACY AVERAGES OVER CELLS WHOSE GOLDEN IS NULL: 5.56% (AZ), 11.64% (CA), 22.22% (CO) and 16.67% (TX) of graded cells have an expected value of None \u2014 chiefly the three sub_strand.* cells per standard on a 3-level document. Those cells are not free (a spuriously invented sub_strand fails there, which is how the July depth-map regression showed itself), but 'field accuracy' and 'accuracy on the fields the golden asserts' are different numbers. summary.json reports both; with 0 spurious values in any state this run they differ only for AZ (0.9969 vs 0.9967).",
+    "NEITHER BATCHING LAYER IS EXERCISED AT THIS CORPUS TIER, AND NO TABLE MAY CLAIM OTHERWISE: chunk_text_blocks produced 4/3/4/3 chunks for AZ/CA/CO/TX against MAX_CHUNKS_PER_BATCH=5, and the detector emitted 2/3/3/2 domains against MAX_DOMAINS_PER_BATCH=3, so detection and parsing each ran as exactly ONE batch per state \u2014 the Step Functions Map has a single iteration and the merge merges one batch. The fan-out and the merge, which are the actual risk, are entirely untested here. That is Task 6's job.",
+    "THE PARSER EVAL RUNS THE DIRECT PATH WHILE PRODUCTION RUNS THE BATCHED PATH: eval_parser calls the parser in-process on the detection file, so this folder's parser numbers are not production-path numbers even though the detections they consume are the deployed batched ones. CLAUDE.md and Task 2 both record cases where the two paths disagree on identical input at identical code version.",
+    "ONE CLEAN RUN CANNOT RETIRE THE INTERMITTENT MALFORMED-PRIMARY-KEY DEFECT: all four states show 0 standard_id collisions, all four NO-ID-COLLISION regressions PASS, and every indicator.code and standard_id cell is correct. Per CLAUDE.md that defect is SAMPLING VARIANCE, not a code regression \u2014 it appears at 8 distinct code versions and runs over an identical frozen input at temperature 0 disagree with each other. The paper must not present this run as evidence it is fixed. The durable mitigation is validator._validate_code_shape, which is outside code_version_hash's coverage and is exercised by neither eval suite.",
+    "TASK 1b IS COMPLETE AND SIGNED (Emily Cheyne, 2026-08-23, 156 verdicts, 0 changed). Verified precision is 1.000 for all four golden states and 0.9966 corpus-wide (296/297). The paper sentence 'all unmatched in-scope detections of the recorded run were manually audited by the author' is now TRUE FOR ALL SIX STATES.",
+    "THE 39 CO/TX SPLIT TITLES WERE MISLABELLED 'hallucinated' BEFORE 2026-08-23, which would have reported CO verified precision as 0.357 against a state with recall 1.000 and a perfect parser. fp_audit gained a real_split_title verdict gated on in-order reconstruction. Never quote a pre-2026-08-23 CO or TX precision figure."
+  ],
+  "signed_off": {
+    "task1b_fp_audit": {
+      "annotator": "Emily Cheyne",
+      "date": "2026-08-23",
+      "verdicts_changed": 0,
+      "n_verdicts": 156,
+      "authoritative_record": "task1b_fp_audit_SIGNED.json",
+      "verified_precision": {
+        "AZ": 1.0,
+        "CA": 1.0,
+        "CO": 1.0,
+        "TX": 1.0
+      },
+      "corpus_wide": {
+        "in_scope": 297,
+        "hallucinations": 1,
+        "verified_precision": 0.9966,
+        "note": "Includes NV (53, 1 hallucination) and KY (44, 0) from task2_20260822."
+      }
+    }
+  }
+}

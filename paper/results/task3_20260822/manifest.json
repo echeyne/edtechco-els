@@ -1,0 +1,118 @@
+{
+  "task": "Task 3 \u2014 depth-map ablation (arXiv paper). RECORDED 2026-08-23 (six states, both arms).",
+  "date": "2026-08-22",
+  "status": "COMPLETE. detector_nodepthmap.json is the VALID off-arm. The INVALID_THROTTLED_* files are the aborted first attempt and must never be quoted.",
+  "run_window_utc": "OFF-arm (valid): 2026-08-23T16:05:28Z\u201316:14:12Z, six separate per-state invocations. First attempt (aborted): 2026-08-23T00:21:56Z\u201300:25:38Z.",
+  "on_arm_location": "The ON-arm is the frozen Task 1 + Task 2 detector reports (paper/results/task1_20260822/detector_golden4.json and paper/results/task2_20260822/detector_heldout2.json), depth_map PASS in all six states at hash 288c64f1 on outputs/08-22-26-4. It was NOT re-run for Task 3 and must not be.",
+  "ablation_instrument_verified_working": [
+    "Pre-flight assertion passed: Config.DEPTH_MAP_ENABLED = False (asserted in-process before the eval was allowed to start).",
+    "Log carries 'DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED'.",
+    "Detection proceeded via the real graceful-degradation path: 'Depth-map inference failed; falling back to no-depth-map mode'.",
+    "eval_detector reported the third state ABLATED (depth_map_passed = None) rather than grading a map that was never produced.",
+    "The 'nodepthmap-' cache-key component kept the off-arm off the on-arm's cached detections.",
+    "AZ completed end-to-end off-arm before the quota ran out, confirming the whole path works.",
+    "tests/unit/test_depth_map_ablation.py (19 tests) passes; full suite 436 passed."
+  ],
+  "git_commit": "628829b34b409a50821adc510a9f8c0d53c12ccc",
+  "code_version_hash": "288c64f1",
+  "code_version_hash_note": "The ablation flag lives in config.py, which code_version_hash does NOT cover, so the on-arm and off-arm share the hash 288c64f1. That is exactly why eval_detector's detection cache key carries a 'nodepthmap-' component when the flag is off. Without it the off-arm hits the on-arm's cached detection and reports 'no difference' having never run \u2014 a fabricated null result. --no-cache alone does NOT save you: it still WRITES to the shared key. Do not undo this.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). AZ 15pp, CA 13pp, CO 10pp, TX 9pp, NV 15pp of 98, KY 8pp of 120.",
+  "inputs": {
+    "outputs_dir": "outputs/08-22-26-4",
+    "detector_eval_reads": "{STATE}-extraction.json (direct path)"
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "temperature": 0,
+    "note": "config.py defaults. In the off-arm the depth_map model is not invoked at all \u2014 infer_depth_map returns None before any Bedrock call."
+  },
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "export AWS_PROFILE=kinder-readiness-dev-cli",
+    "# Flag exported in a SUBSHELL, not as a `VAR=val func` prefix: for shell FUNCTIONS",
+    "# that form is shell-dependent about reaching the child process, and a silent",
+    "# failure to propagate runs the off-arm WITH the depth map.",
+    "export ELS_DEPTH_MAP_ENABLED=false",
+    "python -c \"from els_pipeline.config import Config; assert Config.DEPTH_MAP_ENABLED is False\"",
+    "# Six SEPARATE invocations so a mid-sweep throttle costs one state, not five.",
+    "for ST in AZ CA CO TX NV KY; do python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state $ST --no-cache --report-json paper/results/task3_20260822/per_state/detector_nodepthmap_$ST.json --output-dir paper/results/task3_20260822/review_detector_off; done",
+    "# Merge per_state/*.json into detector_nodepthmap.json in AZ,CA,CO,TX,NV,KY order.",
+    "python paper/analysis/compare_ablation.py --on-report paper/results/task1_20260822/detector_golden4.json --on-report paper/results/task2_20260822/detector_heldout2.json --off-report paper/results/task3_20260822/detector_nodepthmap.json --out paper/results/task3_20260822/ablation_comparison.json"
+  ],
+  "files": {
+    "findings.md": "The narrative deliverable. Read this first.",
+    "ablation_comparison.json": "ON vs OFF per state and pooled by level (compare_ablation.py).",
+    "detector_nodepthmap.json": "VALID merged off-arm report, six states.",
+    "per_state/": "The six individual off-arm reports the merge was built from.",
+    "review_detector_off/": "Per-state off-arm detected JSON and review output.",
+    "offarm_run.log": "Full off-arm stdout incl. per-call LLM_METRICS.",
+    "DO_NOT_USE.md": "Covers the ABORTED first attempt only.",
+    "INVALID_THROTTLED_detector_nodepthmap.json": "QUARANTINED first attempt. Never quote.",
+    "manifest.json": "This file."
+  },
+  "instrument_repairs_made_during_this_task": [
+    "paper/analysis/compare_ablation.py ADDED. Produces ablation_comparison.json from raw eval_detector reports. consolidate_task1.py was deliberately not reused (it requires a parser report, and there is no parser off-arm). The script refuses to emit a comparison for any state whose off-arm has n_detected == 0 or a non-null depth_map_passed, marking it INVALID and excluding it from all aggregates \u2014 the two signatures of the throttle failure and of an ablation flag that did not take. This run excluded 0 states."
+  ],
+  "golden_data_corrections_made_during_this_task": [],
+  "caveats": [
+    "CORPUS TIER: every number here is from the _only_subset tier (AZ 15pp, CA 13pp, CO 10pp, TX 9pp, NV 15pp of 98, KY 8pp of 120), never full documents.",
+    "REPORT THE PER-STATE TABLE, NOT THE MEAN. Four of six states are completely unaffected (recall 1.000 in both arms); the entire effect lives in CO and KY. 'Mean recall 1.000 -> 0.961' simultaneously understates CO/KY and overstates AZ/CA/TX/NV. The honest claim is conditional: the depth map matters for documents whose level identity depends on nesting position.",
+    "THE ABLATION DOES NOT ISOLATE PASS 1 FROM PROMPT QUALITY. The off-arm still runs the full detection prompt; only the inferred depth map is withheld. This measures the MARGINAL contribution of Pass 1 given everything else, not the value of hierarchy information in general.",
+    "NO PARSER NUMBER BELONGS IN AN ABLATION TABLE. The parser never receives a depth map, so Task 1's and Task 2's parser results are unaffected by this flag.",
+    "ONE RUN PER STATE, NOT A STABILITY STUDY. CO's golden is 7 elements and KY's 44, so one element moving shifts CO's recall by 0.14. The DIRECTION is corroborated by categorical regression failures, but the magnitudes are single samples. Repetition is Task 5.",
+    "CODE ACCURACY DENOMINATORS DIFFER BETWEEN ARMS because code accuracy is graded over matched pairs only and the off-arm matches fewer elements (KY 44 vs 40, CO 7 vs 6). Report matches/total for both arms and never compare the two rates as if they shared a denominator.",
+    "NV CODE ACCURACY IMPROVED IN THE OFF-ARM (44/46 -> 45/46) AND THIS IS NOISE. One cell on one state; NV's on-arm code misses are both domain.code arising from _resolve_code grounding, which has no dependence on the depth map. Omit it or label it as sampling noise; it is not evidence the ablation helps.",
+    "THE EARLIER KY SMOKE TEST OVER-STATED THE EFFECT AND MUST NOT BE QUOTED. It reported recall 0.886 / sub_strand recall 0.60 / strand precision 0.40 and '6 of 12' Benchmark misclassifications; the recorded run gives 0.909 / 0.700 / 0.500 and 4 of 11. Same phenomenon, smaller magnitude. Quote the recorded numbers.",
+    "THE FIRST ATTEMPT'S ARTIFACT IS STILL ON DISK AND IS POISON. INVALID_THROTTLED_detector_nodepthmap.json records five states at recall 0.0 that never ran. It is retained only for the reproducibility narrative. Never quote it, and never merge it with the valid report.",
+    "A NON-ZERO EXIT CODE IS AMBIGUOUS. eval_detector exits non-zero both when a regression fails (expected in the off-arm) and when the run throttles (invalid). CO and KY are the former. Always confirm n_detected > 0 and depth_map_passed is null before trusting an off-arm state."
+  ],
+  "first_attempt_aborted": {
+    "what_failed": "Bedrock returned ThrottlingException: 'Too many tokens per day' partway through the off-arm. The account's DAILY token quota had been exhausted by the Task 1 and Task 2 arms that ran immediately before (35 minutes of Opus detection plus Sonnet parsing). This was NOT a concurrency problem: the run was strictly sequential. A daily cap cannot be avoided by pacing within the same day. MEASURED 2026-08-23T00:45Z: the exhausted quota is MODEL-SPECIFIC to Opus (us.anthropic.claude-opus-4-6-v1). A probe at that moment showed Opus still ThrottlingException while us.anthropic.claude-sonnet-4-6 and us.anthropic.claude-haiku-4-5 both responded normally. Since the detector runs on Opus and Task 3's off-arm is detector-only, the off-arm is blocked specifically on the Opus daily token budget; parser work (Sonnet) and depth-map work (Haiku) are unaffected.",
+    "why_the_artifact_is_dangerous": "INVALID_THROTTLED_detector_nodepthmap.json records six states, and five of them read n_detected=0, matched=0, recall=0.0, precision=0.0. Those zeros are the throttle, NOT the ablation: detect_structure raised, the harness recorded an empty detection, and the grader scored the empty set. Taken at face value the file says removing the depth map drops detector recall from 1.000 to 0.000 on five of six states \u2014 a fabricated catastrophic result for the paper's central experiment. This is precisely the failure mode guardrail 6 exists to prevent, which is why the file is renamed with an INVALID_THROTTLED_ prefix and accompanied by DO_NOT_USE.md.",
+    "retained_as": [
+      "INVALID_THROTTLED_detector_nodepthmap.json",
+      "INVALID_THROTTLED_review_detector_off/"
+    ],
+    "see": "DO_NOT_USE.md"
+  },
+  "headline_results": {
+    "mean_recall_on": 1.0,
+    "mean_recall_off": 0.961,
+    "states_unaffected": [
+      "AZ",
+      "CA",
+      "TX",
+      "NV"
+    ],
+    "states_degraded": {
+      "CO": {
+        "recall": "1.000 -> 0.857",
+        "regressions": "2/2 -> 1/2"
+      },
+      "KY": {
+        "recall": "1.000 -> 0.909",
+        "regressions": "3/3 -> 1/3"
+      }
+    },
+    "regressions_newly_failing": [
+      "CO-NO-SUB-STRAND",
+      "KY-BENCHMARK-IS-SUB-STRAND",
+      "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+    ],
+    "pooled_by_level": {
+      "domain": "1.000 -> 1.000",
+      "strand": "1.000 -> 0.960",
+      "sub_strand": "1.000 -> 0.875",
+      "indicator": "1.000 -> 0.9863"
+    },
+    "code_accuracy_moves": {
+      "TX": "8/8 -> 6/8 (recall unchanged at 1.000)",
+      "KY": "44/44 -> 36/40",
+      "CO": "7/7 -> 6/6",
+      "NV": "44/46 -> 45/46 (noise, n=1; do not report as the ablation helping)"
+    }
+  },
+  "exit_code_note": "eval_detector exits non-zero when a regression case FAILS. CO and KY returned rc=1 for that reason \u2014 the expected signal in an ablation off-arm, not a crash. A genuine throttle also yields rc=1, so always check the log and confirm n_detected > 0."
+}

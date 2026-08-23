@@ -1,0 +1,412 @@
+[
+  {
+    "state": "AZ",
+    "coverage": 1.0,
+    "field_accuracy": 0.9969135802469136,
+    "matched": 18,
+    "fully_correct": 17,
+    "n_golden": 18,
+    "n_parsed": 45,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 18,
+        "total": 18
+      },
+      "country": {
+        "ok": 18,
+        "total": 18
+      },
+      "state": {
+        "ok": 18,
+        "total": 18
+      },
+      "version_year": {
+        "ok": 18,
+        "total": 18
+      },
+      "age_band": {
+        "ok": 18,
+        "total": 18
+      },
+      "source_page": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.description": {
+        "ok": 17,
+        "total": 18
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "AZ-IND-15",
+        "field": "indicator.description",
+        "expected": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel.",
+        "got": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [1].\" Paints the letter L like in her friend's name, while at the easel."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 45 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 21,
+    "fully_correct": 21,
+    "n_golden": 21,
+    "n_parsed": 94,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 21,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 21,
+        "total": 21
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CA-EARLY-LATER-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "39 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 94 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 9,
+    "fully_correct": 9,
+    "n_golden": 9,
+    "n_parsed": 48,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 9,
+        "total": 9
+      },
+      "country": {
+        "ok": 9,
+        "total": 9
+      },
+      "state": {
+        "ok": 9,
+        "total": 9
+      },
+      "version_year": {
+        "ok": 9,
+        "total": 9
+      },
+      "age_band": {
+        "ok": 9,
+        "total": 9
+      },
+      "source_page": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.description": {
+        "ok": 9,
+        "total": 9
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CO-INDICATOR-PARENT-IS-STRAND",
+        "status": "PASS",
+        "detail": "all 48 indicators have a strand parent and null sub_strand"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 48 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 8,
+    "fully_correct": 8,
+    "n_golden": 8,
+    "n_parsed": 25,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 8,
+        "total": 8
+      },
+      "country": {
+        "ok": 8,
+        "total": 8
+      },
+      "state": {
+        "ok": 8,
+        "total": 8
+      },
+      "version_year": {
+        "ok": 8,
+        "total": 8
+      },
+      "age_band": {
+        "ok": 8,
+        "total": 8
+      },
+      "source_page": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.description": {
+        "ok": 8,
+        "total": 8
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "10 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 25 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

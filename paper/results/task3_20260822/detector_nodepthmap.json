@@ -1,0 +1,1213 @@
+[
+  {
+    "state": "AZ",
+    "precision": 0.5,
+    "recall": 1.0,
+    "f1": 0.6666666666666666,
+    "code_accuracy": 1.0,
+    "code_matches": 4,
+    "code_total": 4,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 5,
+    "n_golden": 5,
+    "n_detected": 65,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 2,
+        "fp": 4,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 1
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      },
+      "indicator": {
+        "indicator": 2
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "strand",
+        "Strand 2"
+      ],
+      [
+        "indicator",
+        "b"
+      ],
+      [
+        "indicator",
+        "c"
+      ],
+      [
+        "indicator",
+        "d"
+      ],
+      [
+        "indicator",
+        "e"
+      ]
+    ],
+    "ignored_out_of_scope": 55,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "no examples-section headers emitted"
+      },
+      {
+        "id": "AZ-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "precision": 0.20491803278688525,
+    "recall": 1.0,
+    "f1": 0.3401360544217687,
+    "code_accuracy": 1.0,
+    "code_matches": 25,
+    "code_total": 25,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 14,
+    "description_total": 14,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 25,
+    "n_golden": 25,
+    "n_detected": 122,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 3,
+        "fp": 4,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 5,
+        "fp": 13,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 14,
+        "fp": 80,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "strand": {
+        "strand": 3
+      },
+      "sub_strand": {
+        "sub_strand": 5
+      },
+      "indicator": {
+        "indicator": 14
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "strand",
+        "Strand 1.0"
+      ],
+      [
+        "sub_strand",
+        "CI"
+      ],
+      [
+        "indicator",
+        "Foundation 1.1"
+      ],
+      [
+        "indicator",
+        "Foundation 1.1"
+      ],
+      [
+        "sub_strand",
+        "INIT"
+      ],
+      [
+        "sub_strand",
+        "ENGA"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "sub_strand",
+        "PERS"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "sub_strand",
+        "WM"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "sub_strand",
+        "FLEX"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "strand",
+        "Strand 3.0"
+      ],
+      [
+        "sub_strand",
+        "PROB"
+      ],
+      [
+        "indicator",
+        "Foundation 3.1"
+      ],
+      [
+        "indicator",
+        "Foundation 3.1"
+      ],
+      [
+        "indicator",
+        "Foundation 3.2"
+      ],
+      [
+        "indicator",
+        "Foundation 3.2"
+      ],
+      [
+        "sub_strand",
+        "CE"
+      ],
+      [
+        "indicator",
+        "Foundation 3.3"
+      ],
+      [
+        "indicator",
+        "Foundation 3.3"
+      ],
+      [
+        "indicator",
+        "Foundation 3.4"
+      ],
+      [
+        "indicator",
+        "Foundation 3.4"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "strand",
+        "Strand 2.0"
+      ],
+      [
+        "sub_strand",
+        "PA"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "sub_strand",
+        "LU"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "indicator",
+        "Foundation 1.7"
+      ],
+      [
+        "indicator",
+        "Foundation 1.7"
+      ],
+      [
+        "indicator",
+        "Foundation 1.7"
+      ],
+      [
+        "indicator",
+        "Foundation 1.8"
+      ],
+      [
+        "indicator",
+        "Foundation 1.8"
+      ],
+      [
+        "indicator",
+        "Foundation 1.8"
+      ],
+      [
+        "indicator",
+        "Foundation 1.9"
+      ],
+      [
+        "indicator",
+        "Foundation 1.9"
+      ],
+      [
+        "indicator",
+        "Foundation 1.9"
+      ],
+      [
+        "indicator",
+        "Foundation 1.10"
+      ],
+      [
+        "indicator",
+        "Foundation 1.10"
+      ],
+      [
+        "indicator",
+        "Foundation 1.10"
+      ],
+      [
+        "strand",
+        "Strand 2.0"
+      ],
+      [
+        "sub_strand",
+        "PA"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "sub_strand",
+        "AP"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "indicator",
+        "Foundation 2.5"
+      ],
+      [
+        "indicator",
+        "Foundation 2.5"
+      ],
+      [
+        "indicator",
+        "Foundation 2.5"
+      ],
+      [
+        "sub_strand",
+        "CP"
+      ],
+      [
+        "indicator",
+        "Foundation 2.6"
+      ],
+      [
+        "indicator",
+        "Foundation 2.6"
+      ],
+      [
+        "indicator",
+        "Foundation 2.6"
+      ]
+    ],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "CA-AGE-COLUMNS-EMITTED",
+        "status": "PASS",
+        "detail": "all 16 Early/Later foundations emit both columns"
+      },
+      {
+        "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+        "status": "PASS",
+        "detail": "no age-band labels in titles"
+      },
+      {
+        "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+        "status": "PASS",
+        "detail": "no lettered examples emitted as indicators"
+      },
+      {
+        "id": "CA-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "precision": 0.13953488372093023,
+    "recall": 0.8571428571428571,
+    "f1": 0.24,
+    "code_accuracy": 1.0,
+    "code_matches": 6,
+    "code_total": 6,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 6,
+    "n_golden": 7,
+    "n_detected": 47,
+    "per_level": {
+      "domain": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 5,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 2,
+        "fp": 23,
+        "fn": 1
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 9,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 2
+      },
+      "strand": {
+        "strand": 2
+      },
+      "indicator": {
+        "indicator": 2
+      }
+    },
+    "missing_test_cases": [
+      "CO-IND-03"
+    ],
+    "extra_elements": [
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "indicator",
+        "5"
+      ],
+      [
+        "indicator",
+        "7"
+      ],
+      [
+        "indicator",
+        "8"
+      ],
+      [
+        "indicator",
+        "9"
+      ],
+      [
+        "indicator",
+        "10"
+      ],
+      [
+        "indicator",
+        "11"
+      ],
+      [
+        "indicator",
+        "12"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "indicator",
+        "5"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "sub_strand",
+        "1"
+      ],
+      [
+        "sub_strand",
+        "2"
+      ],
+      [
+        "sub_strand",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "sub_strand",
+        "1"
+      ],
+      [
+        "sub_strand",
+        "2"
+      ],
+      [
+        "sub_strand",
+        "3"
+      ],
+      [
+        "sub_strand",
+        "1"
+      ],
+      [
+        "sub_strand",
+        "2"
+      ],
+      [
+        "sub_strand",
+        "3"
+      ]
+    ],
+    "ignored_out_of_scope": 4,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "CO-NO-SUB-STRAND",
+        "status": "FAIL",
+        "detail": "9 unexpected sub_strands present: [('1', 'Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.'), ('2', 'Express confidence in own skills and positive feelings about self.'), ('3', 'Have a sense of belonging to family, community, and other groups.'), ('1', 'Express a broad range of emotions and recognize these emotions in self and others.'), ('2', 'Express care and concern toward others.')]"
+      },
+      {
+        "id": "CO-NUMERIC-STRANDS",
+        "status": "PASS",
+        "detail": "all numeric-prefixed sections correctly classified as strand"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "precision": 0.32,
+    "recall": 1.0,
+    "f1": 0.48484848484848486,
+    "code_accuracy": 0.75,
+    "code_matches": 6,
+    "code_total": 8,
+    "code_mismatches": [
+      {
+        "test_case_id": "TX-STR-01",
+        "level": "strand",
+        "golden": "A",
+        "detected": "I.A"
+      },
+      {
+        "test_case_id": "TX-STR-02",
+        "level": "strand",
+        "golden": "B",
+        "detected": "I.B"
+      }
+    ],
+    "description_accuracy": 1.0,
+    "description_matches": 3,
+    "description_total": 3,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 8,
+    "n_golden": 8,
+    "n_detected": 33,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 4,
+        "fp": 16,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 2
+      },
+      "indicator": {
+        "indicator": 4
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "PK3.I.A.1"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.1"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.4"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.4"
+      ],
+      [
+        "sub_strand",
+        "I.B.1"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.c"
+      ]
+    ],
+    "ignored_out_of_scope": 8,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT",
+        "status": "PASS",
+        "detail": "PK3 count=10, PK4 count=15"
+      },
+      {
+        "id": "TX-AGE-BAND-SET",
+        "status": "PASS",
+        "detail": "all 25 indicators have a valid age_band"
+      },
+      {
+        "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+        "status": "PASS",
+        "detail": "no column headers emitted as indicators"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "NV",
+    "precision": 0.8679245283018868,
+    "recall": 1.0,
+    "f1": 0.9292929292929293,
+    "code_accuracy": 0.9782608695652174,
+    "code_matches": 45,
+    "code_total": 46,
+    "code_mismatches": [
+      {
+        "test_case_id": "NV-DOM-02",
+        "level": "domain",
+        "golden": "S",
+        "detected": "SCIE"
+      }
+    ],
+    "description_accuracy": 0.3333333333333333,
+    "description_matches": 1,
+    "description_total": 3,
+    "description_truncations": 2,
+    "description_mismatches": [
+      {
+        "test_case_id": "NV-DOM-02",
+        "level": "domain",
+        "status": "truncated",
+        "detail": "truncated: 2410/3500 chars"
+      },
+      {
+        "test_case_id": "NV-DOM-03",
+        "level": "domain",
+        "status": "truncated",
+        "detail": "truncated: 4087/4627 chars"
+      }
+    ],
+    "matched": 46,
+    "n_golden": 46,
+    "n_detected": 53,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 12,
+        "fp": 6,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 24,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "strand": {
+        "strand": 12
+      },
+      "sub_strand": {
+        "sub_strand": 7
+      },
+      "indicator": {
+        "indicator": 24
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "SS.CI.PK3"
+      ],
+      [
+        "strand",
+        "Social Studies Standard 2"
+      ],
+      [
+        "strand",
+        "Social Studies Standard 3"
+      ],
+      [
+        "strand",
+        "Science Standard 1"
+      ],
+      [
+        "strand",
+        "Science Standard 2"
+      ],
+      [
+        "strand",
+        "Technology Standard 1"
+      ],
+      [
+        "strand",
+        "Technology Standard 2"
+      ]
+    ],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "NV-NO-COLUMN-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "53 elements: no column headers, captions or footnotes emitted, no age_band set"
+      },
+      {
+        "id": "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+        "status": "PASS",
+        "detail": "all 7 sub_strands use the document's XX.YY caption code and prefix their indicators"
+      },
+      {
+        "id": "NV-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "KY",
+    "precision": 0.9090909090909091,
+    "recall": 0.9090909090909091,
+    "f1": 0.9090909090909091,
+    "code_accuracy": 0.9,
+    "code_matches": 36,
+    "code_total": 40,
+    "code_mismatches": [
+      {
+        "test_case_id": "KY-STR-02",
+        "level": "strand",
+        "golden": "Approaches to Learning Standard 2",
+        "detected": "Standard 2"
+      },
+      {
+        "test_case_id": "KY-STR-03",
+        "level": "strand",
+        "golden": "Health/Mental Wellness Standard 1",
+        "detected": "Standard 1"
+      },
+      {
+        "test_case_id": "KY-STR-04",
+        "level": "strand",
+        "golden": "Language and Early Literacy Standard 1",
+        "detected": "Standard 1"
+      },
+      {
+        "test_case_id": "KY-STR-05",
+        "level": "strand",
+        "golden": "Language and Early Literacy Standard 2",
+        "detected": "Standard 2"
+      }
+    ],
+    "description_accuracy": 1.0,
+    "description_matches": 26,
+    "description_total": 26,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 40,
+    "n_golden": 44,
+    "n_detected": 44,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 4,
+        "fp": 4,
+        "fn": 1
+      },
+      "sub_strand": {
+        "tp": 7,
+        "fp": 0,
+        "fn": 3
+      },
+      "indicator": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "indicator": {
+        "indicator": 26
+      },
+      "strand": {
+        "strand": 4
+      },
+      "sub_strand": {
+        "sub_strand": 7
+      }
+    },
+    "missing_test_cases": [
+      "KY-STR-01",
+      "KY-SUB-01",
+      "KY-SUB-02",
+      "KY-SUB-03"
+    ],
+    "extra_elements": [
+      [
+        "strand",
+        "Benchmark 1.1"
+      ],
+      [
+        "strand",
+        "Benchmark 1.2"
+      ],
+      [
+        "strand",
+        "Benchmark 1.3"
+      ],
+      [
+        "strand",
+        "Benchmark 2.1"
+      ]
+    ],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "KY-BENCHMARK-IS-SUB-STRAND",
+        "status": "FAIL",
+        "detail": "4/11 Benchmark elements are not sub_strand (e.g. level='strand', code='Benchmark 1.1', title='Maintains focus and sustains attention.')"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      },
+      {
+        "id": "KY-STRAND-CODE-KEEPS-FULL-LABEL",
+        "status": "FAIL",
+        "detail": "4/13 labelled heading(s) lost part of their label, e.g. strand code='Standard 2' should be 'Approaches to Learning Standard 2'"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

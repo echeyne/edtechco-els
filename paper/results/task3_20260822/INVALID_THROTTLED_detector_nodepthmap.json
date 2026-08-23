@@ -1,0 +1,583 @@
+[
+  {
+    "state": "AZ",
+    "precision": 0.5,
+    "recall": 1.0,
+    "f1": 0.6666666666666666,
+    "code_accuracy": 1.0,
+    "code_matches": 4,
+    "code_total": 4,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 5,
+    "n_golden": 5,
+    "n_detected": 65,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 2,
+        "fp": 4,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 1
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      },
+      "indicator": {
+        "indicator": 2
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "strand",
+        "Strand 2"
+      ],
+      [
+        "indicator",
+        "b"
+      ],
+      [
+        "indicator",
+        "c"
+      ],
+      [
+        "indicator",
+        "d"
+      ],
+      [
+        "indicator",
+        "e"
+      ]
+    ],
+    "ignored_out_of_scope": 55,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "no examples-section headers emitted"
+      },
+      {
+        "id": "AZ-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 0,
+    "n_golden": 25,
+    "n_detected": 0,
+    "per_level": {
+      "domain": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 14
+      }
+    },
+    "confusion": {},
+    "missing_test_cases": [
+      "CA-DOM-01",
+      "CA-STR-01",
+      "CA-SUB-01",
+      "CA-IND-01-EARLY",
+      "CA-IND-01-LATER",
+      "CA-DOM-02",
+      "CA-STR-02",
+      "CA-SUB-02",
+      "CA-IND-02-EARLY",
+      "CA-IND-02-LATER",
+      "CA-SUB-05",
+      "CA-IND-05-EARLY",
+      "CA-IND-05-LATER",
+      "CA-IND-06-EARLY",
+      "CA-IND-06-LATER",
+      "CA-DOM-03",
+      "CA-STR-03",
+      "CA-SUB-03",
+      "CA-IND-03-DISCOVERING",
+      "CA-IND-03-DEVELOPING",
+      "CA-IND-03-BROADENING",
+      "CA-SUB-04",
+      "CA-IND-04-DISCOVERING",
+      "CA-IND-04-DEVELOPING",
+      "CA-IND-04-BROADENING"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [
+      "CA-IND-01-EARLY",
+      "CA-IND-01-LATER",
+      "CA-IND-02-EARLY",
+      "CA-IND-02-LATER",
+      "CA-IND-05-EARLY",
+      "CA-IND-05-LATER",
+      "CA-IND-06-EARLY",
+      "CA-IND-06-LATER",
+      "CA-IND-03-DISCOVERING",
+      "CA-IND-03-DEVELOPING",
+      "CA-IND-03-BROADENING",
+      "CA-IND-04-DISCOVERING",
+      "CA-IND-04-DEVELOPING",
+      "CA-IND-04-BROADENING"
+    ],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "CA-AGE-COLUMNS-EMITTED",
+        "status": "PASS",
+        "detail": "all 0 Early/Later foundations emit both columns"
+      },
+      {
+        "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+        "status": "PASS",
+        "detail": "no age-band labels in titles"
+      },
+      {
+        "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+        "status": "PASS",
+        "detail": "no lettered examples emitted as indicators"
+      },
+      {
+        "id": "CA-FOUR-LEVEL-HIERARCHY",
+        "status": "FAIL",
+        "detail": "missing levels: {'domain', 'strand', 'sub_strand', 'indicator'}"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 0,
+    "n_golden": 7,
+    "n_detected": 0,
+    "per_level": {
+      "domain": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      }
+    },
+    "confusion": {},
+    "missing_test_cases": [
+      "CO-DOM-01",
+      "CO-STR-01",
+      "CO-IND-01",
+      "CO-IND-02",
+      "CO-DOM-02",
+      "CO-STR-02",
+      "CO-IND-03"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "CO-NO-SUB-STRAND",
+        "status": "PASS",
+        "detail": "no sub_strands (correct for CO)"
+      },
+      {
+        "id": "CO-NUMERIC-STRANDS",
+        "status": "PASS",
+        "detail": "all numeric-prefixed sections correctly classified as strand"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 0,
+    "n_golden": 8,
+    "n_detected": 0,
+    "per_level": {
+      "domain": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 2
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 4
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "confusion": {},
+    "missing_test_cases": [
+      "TX-DOM-01",
+      "TX-STR-01",
+      "TX-IND-01-PK3",
+      "TX-IND-01-PK4",
+      "TX-STR-02",
+      "TX-SUB-01",
+      "TX-IND-02-PK3",
+      "TX-IND-02-PK4"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [
+      "TX-IND-01-PK3",
+      "TX-IND-01-PK4",
+      "TX-IND-02-PK3",
+      "TX-IND-02-PK4"
+    ],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT",
+        "status": "FAIL",
+        "detail": "PK3 count=0, PK4 count=0 (both should be > 0)"
+      },
+      {
+        "id": "TX-AGE-BAND-SET",
+        "status": "PASS",
+        "detail": "all 0 indicators have a valid age_band"
+      },
+      {
+        "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+        "status": "PASS",
+        "detail": "no column headers emitted as indicators"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "NV",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 0,
+    "n_golden": 46,
+    "n_detected": 0,
+    "per_level": {
+      "domain": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 12
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 7
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 24
+      }
+    },
+    "confusion": {},
+    "missing_test_cases": [
+      "NV-DOM-01",
+      "NV-STR-01",
+      "NV-SUB-01",
+      "NV-IND-01",
+      "NV-IND-02",
+      "NV-IND-03",
+      "NV-IND-04",
+      "NV-STR-02",
+      "NV-SUB-02",
+      "NV-IND-05",
+      "NV-IND-06",
+      "NV-IND-07",
+      "NV-IND-08",
+      "NV-IND-09",
+      "NV-IND-10",
+      "NV-IND-11",
+      "NV-STR-03",
+      "NV-SUB-03",
+      "NV-IND-12",
+      "NV-IND-13",
+      "NV-STR-04",
+      "NV-STR-05",
+      "NV-DOM-02",
+      "NV-STR-06",
+      "NV-SUB-04",
+      "NV-IND-14",
+      "NV-IND-15",
+      "NV-IND-16",
+      "NV-IND-17",
+      "NV-STR-07",
+      "NV-SUB-05",
+      "NV-IND-18",
+      "NV-IND-19",
+      "NV-STR-08",
+      "NV-STR-09",
+      "NV-DOM-03",
+      "NV-STR-10",
+      "NV-SUB-06",
+      "NV-IND-20",
+      "NV-IND-21",
+      "NV-IND-22",
+      "NV-STR-11",
+      "NV-SUB-07",
+      "NV-IND-23",
+      "NV-IND-24",
+      "NV-STR-12"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "NV-NO-COLUMN-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "0 elements: no column headers, captions or footnotes emitted, no age_band set"
+      },
+      {
+        "id": "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+        "status": "FAIL",
+        "detail": "no sub_strand elements detected"
+      },
+      {
+        "id": "NV-FOUR-LEVEL-HIERARCHY",
+        "status": "FAIL",
+        "detail": "missing levels: {'domain', 'strand', 'sub_strand', 'indicator'}"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "KY",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 0,
+    "n_golden": 44,
+    "n_detected": 0,
+    "per_level": {
+      "domain": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 10
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 26
+      }
+    },
+    "confusion": {},
+    "missing_test_cases": [
+      "KY-DOM-01",
+      "KY-STR-01",
+      "KY-SUB-01",
+      "KY-IND-01",
+      "KY-IND-02",
+      "KY-IND-03",
+      "KY-SUB-02",
+      "KY-IND-04",
+      "KY-IND-05",
+      "KY-IND-06",
+      "KY-SUB-03",
+      "KY-IND-07",
+      "KY-IND-08",
+      "KY-STR-02",
+      "KY-SUB-04",
+      "KY-IND-09",
+      "KY-IND-10",
+      "KY-IND-11",
+      "KY-SUB-05",
+      "KY-IND-12",
+      "KY-IND-13",
+      "KY-DOM-02",
+      "KY-STR-03",
+      "KY-SUB-06",
+      "KY-IND-14",
+      "KY-IND-15",
+      "KY-SUB-07",
+      "KY-IND-16",
+      "KY-IND-17",
+      "KY-DOM-03",
+      "KY-STR-04",
+      "KY-SUB-08",
+      "KY-IND-18",
+      "KY-IND-19",
+      "KY-IND-20",
+      "KY-IND-21",
+      "KY-STR-05",
+      "KY-SUB-09",
+      "KY-IND-22",
+      "KY-IND-23",
+      "KY-IND-24",
+      "KY-SUB-10",
+      "KY-IND-25",
+      "KY-IND-26"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "KY-BENCHMARK-IS-SUB-STRAND",
+        "status": "PASS",
+        "detail": "all 0 Benchmark elements classified as sub_strand"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-HIERARCHY",
+        "status": "FAIL",
+        "detail": "missing levels: {'domain', 'strand', 'sub_strand', 'indicator'}"
+      },
+      {
+        "id": "KY-STRAND-CODE-KEEPS-FULL-LABEL",
+        "status": "FAIL",
+        "detail": "no '<Label> N:' headings found to check"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

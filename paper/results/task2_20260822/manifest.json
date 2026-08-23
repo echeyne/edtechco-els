@@ -1,0 +1,209 @@
+{
+  "task": "Task 2 (re-record) \u2014 held-out generalization evals on NV (2023) and KY (2021)",
+  "date": "2026-08-22",
+  "run_window_utc": "2026-08-23T00:12:52Z\u201300:21:56Z (detector 00:12:52\u201300:15:43, parser 00:15:43\u201300:21:56)",
+  "supersedes": {
+    "folder": "paper/results/task2_20260816/",
+    "reason": "Three things moved: (1) SOURCE \u2014 commit 92c8288 changed detector.py and parser.py, then the Task 3 ablation flag changed detector.py again, taking code_version_hash 3b445471 -> 2ac17ac2 -> 288c64f1, invalidating every cached artifact; (2) INPUTS \u2014 new outputs folder outputs/08-22-26-4 (run 040, first carrying detector._splice_overlapping_prose); (3) GOLDENS \u2014 Emily's exhaustive annotation pass took NV detector 41 -> 46 and NV parser 15 -> 24. The superseded folder is retained solely as the reproducibility record.",
+    "do_not_reuse": "paper/results/task2_20260816/nv_fp_audit_signoff.md was built for the OLD 12-verdict audit against the 41-element golden and MUST NOT be signed. This folder's sheet replaces it at 7 verdicts."
+  },
+  "relationship_to_task1": "Task 1 (paper/results/task1_20260822/) ran in the SAME invocation, at the SAME code_version_hash (288c64f1), on the SAME outputs folder (outputs/08-22-26-4), graded by the same two suites and consolidated by the same script (paper/analysis/consolidate_task1.py, which takes repeatable --state rather than being forked). The two folders are therefore directly comparable.",
+  "relationship_to_task3": "This run IS Task 3's ON-arm: the depth map PASSed in both held-out states. Task 3's OFF-arm ABORTED on a Bedrock ThrottlingException ('Too many tokens per day') after completing only AZ. See paper/results/task3_20260822/DO_NOT_USE.md. NO ablation number is recorded and none may be quoted.",
+  "git_commit": "628829b34b409a50821adc510a9f8c0d53c12ccc",
+  "code_version_hash": "288c64f1",
+  "code_version_hash_note": "eval_common.code_version_hash() hashes src/els_pipeline/detector.py + parser.py ONLY. It does NOT cover eval_detector.py, eval_parser.py, config.py or validator.py. Consequence for this run: the Task 3 ablation flag lives in config.py, so the on/off arms share a hash \u2014 which is exactly why eval_detector's detection cache key carries a 'nodepthmap-' component. Without it the off-arm would hit the on-arm's cache and report a fabricated null result.",
+  "git_note": "Commit 628829b ('updates for the ablation arm') landed config.py Config.DEPTH_MAP_ENABLED, the gate inside detector.infer_depth_map, eval_detector's ABLATED third state + nodepthmap- cache key, tests/unit/test_depth_map_ablation.py (19 tests), and doc updates to tasking/arxiv_paper.md and evaluation/HELD_OUT_ANNOTATION_GUIDE.md. Working tree was clean at run time apart from a one-line provenance edit to evaluation/ground_truth_parser/NV.json (see golden_data_corrections_made_during_this_task). Full test suite: 436 passed.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). NV 15pp of 98; KY 8pp of 120.",
+  "inputs": {
+    "outputs_dir": "outputs/08-22-26-4",
+    "outputs_dir_note": "Run 040 \u2014 the first carrying detector._splice_overlapping_prose. Supersedes 08-16-26, 08-22-26, -2 and -3. NEVER use 08-22-26-2: its KY detection is 38 elements against the correct 44, which breaks KY's exhaustive detector golden.",
+    "detector_eval_reads": "{STATE}-extraction.json (the detector is re-run LIVE in-process \u2014 the DIRECT path)",
+    "parser_eval_reads": "{STATE}-detection.json (the DEPLOYED BATCHED detections from this run)",
+    "extraction_provenance": {
+      "NV": {
+        "s3_key": "US/NV/2023/nevada_standards_2023_only_subset.pdf",
+        "version_id": "UdZQlBif4TokSjyU6jqvk4N0oHU42Ke_",
+        "pages": 15,
+        "blocks": 752,
+        "extracted_at": "2026-08-22T21:17:22.568789+00:00"
+      },
+      "KY": {
+        "s3_key": "US/KY/2021/kentucky_all_standards_2021_only_subset.pdf",
+        "version_id": "Ytp9BnZ49g_.txMAS4Kt1VU65fN4NUds",
+        "pages": 8,
+        "blocks": 252,
+        "extracted_at": "2026-08-22T21:17:18.241666+00:00"
+      }
+    },
+    "deployed_detection": {
+      "NV": {
+        "n_elements": 53,
+        "timestamp": "2026-08-22T21:18:48.753699+00:00",
+        "keys": [
+          "detection_timestamp",
+          "source_extraction_key"
+        ]
+      },
+      "KY": {
+        "n_elements": 44,
+        "timestamp": "2026-08-22T21:19:45.752743+00:00",
+        "keys": [
+          "detection_timestamp",
+          "source_extraction_key"
+        ]
+      }
+    },
+    "golden_sizes": {
+      "detector_elements": {
+        "NV": 46,
+        "KY": 44
+      },
+      "parser_standards": {
+        "NV": 24,
+        "KY": 26
+      },
+      "note": "NV grew 41 -> 46 (detector) and 15 -> 24 (parser) in Emily's 2026-08-22 exhaustive pass. KY unchanged."
+    },
+    "golden_annotation": {
+      "annotator": "Emily Cheyne",
+      "detector_NV": {
+        "n": 46,
+        "annotator": "Emily Cheyne",
+        "date": "2026-08-22",
+        "source": null
+      },
+      "detector_KY": {
+        "n": 44,
+        "annotator": "Emily Cheyne",
+        "date": "2026-08-01",
+        "source": null
+      },
+      "parser_NV": {
+        "n": 24,
+        "annotator": "Emily Cheyne",
+        "date": "2026-08-22",
+        "source": "outputs/08-22-26-4/NV-detection.json"
+      },
+      "parser_KY": {
+        "n": 26,
+        "annotator": "Emily Cheyne",
+        "date": "2026-08-01",
+        "source": "outputs/08-13-26/KY-detection.json"
+      }
+    }
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "temperature": 0,
+    "note": "config.py defaults; the eval harness does not load .env, so these are the values that ran."
+  },
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "export AWS_PROFILE=kinder-readiness-dev-cli",
+    "# 1. Detector, held-out states, fresh (direct path).",
+    "python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state NV --state KY --no-cache --report-json paper/results/task2_20260822/detector_heldout2.json --output-dir paper/results/task2_20260822/review_detector",
+    "# 2. Parser, held-out states, run on the DEPLOYED BATCHED detections.",
+    "python -m evaluation.eval_parser --detection-dir outputs/08-22-26-4 --state NV --state KY --no-cache --report-json paper/results/task2_20260822/parser_heldout2.json --output-dir paper/results/task2_20260822/review_parser",
+    "# 3. Consolidate (same script as Task 1, deliberately \u2014 identical code path).",
+    "python paper/analysis/consolidate_task1.py --state NV --state KY --detector-report paper/results/task2_20260822/detector_heldout2.json --parser-report paper/results/task2_20260822/parser_heldout2.json --detector-review-dir paper/results/task2_20260822/review_detector --parser-review-dir paper/results/task2_20260822/review_parser --out paper/results/task2_20260822/summary.json",
+    "# 4. Held-out-specific evidence (annotation coverage, FP audit, NV domain-code diagnosis).",
+    "python paper/analysis/heldout_evidence.py --detector-review-dir paper/results/task2_20260822/review_detector --outputs-dir outputs/08-22-26-4 --out paper/results/task2_20260822/heldout_evidence.json"
+  ],
+  "files": {
+    "findings.md": "The narrative deliverable. Read this first.",
+    "summary.json": "Consolidated per-state detector + parser metrics (consolidate_task1.py).",
+    "heldout_evidence.json": "annotation_coverage (incl. golden_is_exhaustive), fp_audit_first_pass, nv_domain_code_diagnosis, KY code-qualification history.",
+    "detector_heldout2.json": "Raw eval_detector report.",
+    "parser_heldout2.json": "Raw eval_parser report.",
+    "nv_fp_audit_signoff.md": "UNSIGNED sign-off sheet, 7 verdicts. NV verified precision 0.9811 is NOT quotable until Emily signs.",
+    "review_detector/{ST}/": "Per-state detected JSON, human-readable report, and review JSON.",
+    "review_parser/{ST}/": "Per-state parsed JSON, human-readable report, and review JSON.",
+    "../rerecord_20260822.log": "Full stdout of all five eval steps including per-call LLM_METRICS (tokens, latency, cost)."
+  },
+  "headline_results": {
+    "detector": {
+      "NV": {
+        "golden": 46,
+        "in_scope": 53,
+        "recall": 1.0,
+        "raw_precision": 0.8679,
+        "ceiling": 0.8679,
+        "golden_is_exhaustive": false,
+        "verified_precision": 0.9811,
+        "code": "44/46",
+        "description": "2/3",
+        "depth_map": "PASS",
+        "regressions": "3/3 PASS"
+      },
+      "KY": {
+        "golden": 44,
+        "in_scope": 44,
+        "recall": 1.0,
+        "raw_precision": 1.0,
+        "ceiling": 1.0,
+        "golden_is_exhaustive": true,
+        "verified_precision": 1.0,
+        "code": "44/44",
+        "description": "26/26",
+        "depth_map": "PASS",
+        "regressions": "3/3 PASS"
+      }
+    },
+    "parser": {
+      "NV": {
+        "coverage": "24/24",
+        "field_accuracy": 1.0,
+        "asserted_only": 1.0,
+        "fully_correct": "24/24",
+        "id_collisions": 0,
+        "regressions": "3/3 PASS"
+      },
+      "KY": {
+        "coverage": "26/26",
+        "field_accuracy": 1.0,
+        "asserted_only": 1.0,
+        "fully_correct": "26/26",
+        "id_collisions": 0,
+        "regressions": "4/4 PASS"
+      }
+    }
+  },
+  "instrument_repairs_made_during_this_task": [],
+  "golden_data_corrections_made_during_this_task": [
+    "evaluation/ground_truth_parser/NV.json: source_detection updated 'outputs/08-22-26/NV-detection.json' -> 'outputs/08-22-26-4/NV-detection.json'. PROVENANCE ONLY \u2014 no annotation changed, standards still 24, regression_cases still 3. Verified before editing that the two detections differ in exactly one field (Science domain.description, 2410 -> 3500 chars) and that the golden already expects 3500, so the drift is favourable. Verified that no code in evaluation/ reads source_detection."
+  ],
+  "defects_found": [
+    "NV, detector, REPRODUCED KNOWN: 2 of 46 code cells wrong, both domain.code (Science -> 'Science', Technology -> 'TECH'; golden 'S' and 'T'). CLAUDE.md's 2026-08-16 diagnosis reproduced exactly, including that Social Studies passes only because derive_code_from_title('Social Studies') coincidentally returns 'SS'. No standard_id affected \u2014 NV indicator codes are the document's own.",
+    "NV, detector, PREDICTED BY CLAUDE.md: NV-DOM-02 (Science) description truncated 2410/3500 on the DIRECT path. _splice_overlapping_prose is inert there (one chunk, one view); the batched detection in outputs/08-22-26-4 carries the full 3500 byte-exact. NOT a regression and NOT grounds to delete the helper.",
+    "NV, detector, KNOWN HALLUCINATION: one fabricated SS.CI.PK3 indicator whose title tail reads 'with adult guidance'. Verified this run that the phrase occurs 0 times in the NV extraction and that SS.CI.PK3 appears in exactly one extraction block (218, p5), whose true text ends 'in an age-appropriate manner'. This is the sole hallucination behind verified precision 52/53.",
+    "Task 3 off-arm, infrastructure, BLOCKING (not a code defect): Bedrock ThrottlingException 'Too many tokens per day' aborted the ablation off-arm after AZ. Sequential execution did not avoid it \u2014 it is a DAILY cap, exhausted by the Task 1 + Task 2 arms. Re-run required after quota reset."
+  ],
+  "caveats": [
+    "CORPUS TIER: every number in this folder is from the _only_subset tier (NV 15pp of 98, KY 8pp of 120), never full documents.",
+    "KY'S DETECTOR GOLDEN IS EXHAUSTIVE AND NV'S IS NOT, AND THE TWO MUST NOT BE PRESENTED THE SAME WAY. KY: 44 golden vs 44 in-scope detections with zero unmatched detections, so its raw precision 1.000 is a genuine hallucination-free result and guardrail 8's carve-out applies. NV: golden_is_exhaustive is false (46 vs 53), and raw precision 0.8679 EQUALS the annotation-coverage ceiling 0.8679 to four decimals, so the raw figure carries no information about correctness. NV's real number comes from the audit.",
+    "NV'S CEILING MOVING 0.7736 -> 0.8679 IS AN ANNOTATION-COVERAGE CHANGE, NOT A QUALITY IMPROVEMENT. It moved because the golden grew from 41 to 46 entries. Nothing about the detector got better. Label it that way or the paper misleads.",
+    "THE NV FP AUDIT IS SIGNED (Emily Cheyne, 2026-08-23, 0 verdicts changed), so NV verified precision 0.9811 IS quotable. BUT the paper sentence 'all unmatched in-scope detections of the recorded run were manually audited by the author' is true ONLY for the held-out states. Task 1b still owes 156 verdicts for AZ/CA/CO/TX, so that sentence must be scoped to NV/KY until Task 1b lands. The signature lives in nv_fp_audit_SIGNED.json because heldout_evidence.py hardcodes verified_by='claude-first-pass-UNSIGNED' and re-running it would clobber the signature in heldout_evidence.json.",
+    "NEITHER AUTOMATED TEXT PROBE IN fp_audit IS SUFFICIENT, IN EITHER DIRECTION (measured 2026-08-23). title_contiguous_in_extraction OVER-flags: multi-column tables flatten into interleaved reading order, so correct titles score 0 contiguous matches \u2014 it flags 39 plainly-real rows across CO/TX. title_spans_found_in_order UNDER-flags: greedy longest-first decomposition shatters a title into fragments that occur somewhere in any document, and NV's one CONFIRMED hallucination PASSES it ('peers with'/'adult'/'guidance' all found) despite the phrase 'with adult guidance' occurring 0 times. A verdict must rest on phrase-level checking of the DIFFERING portion plus structural comparison against the matched twin, never on either probe alone.",
+    "NV DESCRIPTION ACCURACY HAS A DENOMINATOR OF 3. Only 3 of NV's 46 golden elements annotate a description, so report 2/3 and never the rate 0.667. KY's denominator is 26 and is sound.",
+    "NV'S DESCRIPTION MISS IS A DIRECT-PATH ARTIFACT OF A BATCHED-PATH FIX. _splice_overlapping_prose cannot fire on the direct path the detector eval runs, so this suite will always show the Science description truncated at 2410/3500 while the batched pipeline reconstructs it to 3500 byte-exact. Do not judge that helper by this eval and do not delete it because this number does not move.",
+    "AGE-BAND DROPS CARRY NO INDEPENDENT SIGNAL WHEN RECALL IS 1.000: age_band_drops is a strict subset of missing_test_cases, so 'age-band drops: 0' follows arithmetically from recall 1.000 in both states and is not a separate confirmation.",
+    "CODE AND DESCRIPTION ACCURACY ARE CONDITIONED ON THE TITLE ALREADY MATCHING EXACTLY: both are graded over matched pairs only. Vacuous this run because recall is 1.000 in both states, but the metric names do not say so.",
+    "THE GRADED DEPTH MAP IS NOT THE ONE THAT DROVE THE GRADED DETECTION: evaluate_state calls infer_depth_map a SECOND time purely for grading. Both states PASS and the two calls agreed, but a PASS is not proof the detection ran on a correct map.",
+    "PARSER FIELD ACCURACY AVERAGES OVER CELLS WHOSE GOLDEN IS NULL. Both states also report field_accuracy_over_asserted_cells_only in summary.json; this run both are 1.0000, so the distinction happens not to bite \u2014 but it must still be stated.",
+    "NEITHER BATCHING LAYER IS EXERCISED AT THIS CORPUS TIER: NV produces 5 chunks and KY 3 against MAX_CHUNKS_PER_BATCH=5, and both have 3 domains against MAX_DOMAINS_PER_BATCH=3, so detection and parsing each run as exactly one batch. No batching or scale claim may rest on these states; that is Task 6.",
+    "THE PARSER EVAL RUNS THE DIRECT PATH FOR DETECTION WHILE READING BATCHED DETECTIONS, AND THE TWO PATHS DEMONSTRABLY DIVERGE. The detector half of this folder re-runs detection live; the parser half reads outputs/08-22-26-4. They are not grading the same detection of the same document.",
+    "A CLEAN RUN DOES NOT RETIRE THE INTERMITTENT MALFORMED-PRIMARY-KEY DEFECT. Zero standard_id collisions and all 7 parser regressions PASS this run, including the two that failed on 08-01/08-16 with bare codes (TCPHS, UMNDW). Per CLAUDE.md that defect is sampling variance across identical frozen inputs at temperature 0, so one clean run is not evidence of a fix. The durable mitigation is validator._validate_code_shape, which neither eval suite exercises.",
+    "NO TASK 3 ABLATION NUMBER EXISTS. The off-arm aborted on a Bedrock daily-token-quota ThrottlingException after completing only AZ. paper/results/task3_20260822/ contains a quarantined report in which five of six states read n_detected=0/recall=0.0 \u2014 those zeros are the throttle, not the ablation, and must never be quoted."
+  ],
+  "signed_off": {
+    "nv_fp_audit": {
+      "annotator": "Emily Cheyne",
+      "date": "2026-08-23",
+      "verdicts_changed": 0,
+      "authoritative_record": "nv_fp_audit_SIGNED.json",
+      "note": "Date on the sheet was corrected from a slip reading 08-23-2023; the audited run is dated 2026-08-22."
+    }
+  }
+}

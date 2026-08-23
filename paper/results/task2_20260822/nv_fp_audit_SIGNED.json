@@ -1,0 +1,66 @@
+{
+  "_why_this_file_exists": "heldout_evidence.py HARDCODES verified_by='claude-first-pass-UNSIGNED', so RE-RUNNING IT OVERWRITES THE SIGNATURE in heldout_evidence.json. This file is the authoritative signed record and is never regenerated. If heldout_evidence.json is rebuilt, re-apply from here.",
+  "annotator": "Emily Cheyne",
+  "date": "2026-08-23",
+  "verdicts_changed": 0,
+  "sheet": "paper/results/task2_20260822/nv_fp_audit_signoff.md",
+  "scope": "Nevada's 7 unmatched in-scope detections. KY required no audit (exhaustive golden, 0 extras). Does NOT cover AZ/CA/CO/TX \u2014 that is Task 1b, 156 verdicts, outstanding.",
+  "verified_precision": {
+    "NV": 0.9811,
+    "KY": 1.0
+  },
+  "verdicts": {
+    "NV": [
+      {
+        "level": "indicator",
+        "code": "SS.CI.PK3",
+        "title": "Recognize and resolve conflicts with peers with adult guidance.",
+        "page": 5,
+        "verdict": "hallucinated"
+      },
+      {
+        "level": "strand",
+        "code": "Social Studies Standard 2",
+        "title": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+        "page": 5,
+        "verdict": "real_repeat_of_matched"
+      },
+      {
+        "level": "strand",
+        "code": "Social Studies Standard 3",
+        "title": "Demonstrate knowledge of the relationship between people and places.",
+        "page": 6,
+        "verdict": "real_repeat_of_matched"
+      },
+      {
+        "level": "strand",
+        "code": "Science Standard 1",
+        "title": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+        "page": 10,
+        "verdict": "real_repeat_of_matched"
+      },
+      {
+        "level": "sub_strand",
+        "code": "S.EO",
+        "title": "Exploration, Observation, and Hypotheses",
+        "page": 10,
+        "verdict": "real_repeat_of_matched"
+      },
+      {
+        "level": "strand",
+        "code": "Science Standard 2",
+        "title": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+        "page": 10,
+        "verdict": "real_repeat_of_matched"
+      },
+      {
+        "level": "strand",
+        "code": "Technology Standard 2",
+        "title": "Use technology for communication and to gather and share information.",
+        "page": 15,
+        "verdict": "real_repeat_of_matched"
+      }
+    ],
+    "KY": []
+  }
+}

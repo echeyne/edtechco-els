@@ -1,0 +1,646 @@
+{
+  "comparison": "depth-map ablation (arXiv paper Task 3)",
+  "on_arm_note": "Frozen Task 1 + Task 2 detector reports; depth_map PASS in every state. NOT re-run for Task 3.",
+  "off_arm_note": "ELS_DEPTH_MAP_ENABLED=false; infer_depth_map returns None at the source, so both detect_structure and the batch preparer degrade identically.",
+  "aggregate": {
+    "states_compared": [
+      "AZ",
+      "CA",
+      "CO",
+      "TX",
+      "NV",
+      "KY"
+    ],
+    "states_excluded_invalid": [],
+    "mean_recall_on": 1.0,
+    "mean_recall_off": 0.961,
+    "states_with_recall_drop": [
+      "CO",
+      "KY"
+    ],
+    "total_regressions_newly_failing": [
+      "CO-NO-SUB-STRAND",
+      "KY-BENCHMARK-IS-SUB-STRAND",
+      "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+    ],
+    "pooled_by_level": {
+      "domain": {
+        "on_recall": 1.0,
+        "off_recall": 1.0,
+        "on_precision": 1.0,
+        "off_precision": 1.0
+      },
+      "strand": {
+        "on_recall": 1.0,
+        "off_recall": 0.96,
+        "on_precision": 0.625,
+        "off_precision": 0.5455
+      },
+      "sub_strand": {
+        "on_recall": 1.0,
+        "off_recall": 0.875,
+        "on_precision": 0.5854,
+        "off_precision": 0.6
+      },
+      "indicator": {
+        "on_recall": 1.0,
+        "off_recall": 0.9863,
+        "on_precision": 0.3578,
+        "off_precision": 0.3673
+      }
+    }
+  },
+  "per_state": {
+    "AZ": {
+      "status": "OK",
+      "on": {
+        "n_detected": 66,
+        "matched": 5,
+        "recall": 1.0,
+        "precision": 0.4167,
+        "code": "4/4",
+        "description": "4/4",
+        "depth_map": "PASS",
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 2,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.3333
+          },
+          "indicator": {
+            "tp": 2,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.3333
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        }
+      },
+      "off": {
+        "n_detected": 65,
+        "matched": 5,
+        "recall": 1.0,
+        "precision": 0.5,
+        "code": "4/4",
+        "description": "4/4",
+        "depth_map": "ABLATED",
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 2,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.3333
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        }
+      },
+      "delta": {
+        "recall": 0.0,
+        "precision": 0.0833,
+        "n_detected": -1,
+        "code_matches": 0,
+        "regressions_newly_failing": []
+      }
+    },
+    "CA": {
+      "status": "OK",
+      "on": {
+        "n_detected": 122,
+        "matched": 25,
+        "recall": 1.0,
+        "precision": 0.2049,
+        "code": "25/25",
+        "description": "14/14",
+        "depth_map": "PASS",
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 3,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.4286
+          },
+          "sub_strand": {
+            "tp": 5,
+            "fp": 13,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2778
+          },
+          "indicator": {
+            "tp": 14,
+            "fp": 80,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.1489
+          }
+        },
+        "regressions": {
+          "passed": 4,
+          "total": 4,
+          "failed_ids": []
+        }
+      },
+      "off": {
+        "n_detected": 122,
+        "matched": 25,
+        "recall": 1.0,
+        "precision": 0.2049,
+        "code": "25/25",
+        "description": "14/14",
+        "depth_map": "ABLATED",
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 3,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.4286
+          },
+          "sub_strand": {
+            "tp": 5,
+            "fp": 13,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2778
+          },
+          "indicator": {
+            "tp": 14,
+            "fp": 80,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.1489
+          }
+        },
+        "regressions": {
+          "passed": 4,
+          "total": 4,
+          "failed_ids": []
+        }
+      },
+      "delta": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "n_detected": 0,
+        "code_matches": 0,
+        "regressions_newly_failing": []
+      }
+    },
+    "CO": {
+      "status": "OK",
+      "on": {
+        "n_detected": 61,
+        "matched": 7,
+        "recall": 1.0,
+        "precision": 0.1667,
+        "code": "7/7",
+        "description": "4/4",
+        "depth_map": "PASS",
+        "per_level": {
+          "domain": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 5,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2857
+          },
+          "indicator": {
+            "tp": 3,
+            "fp": 30,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.0909
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        }
+      },
+      "off": {
+        "n_detected": 47,
+        "matched": 6,
+        "recall": 0.8571,
+        "precision": 0.1395,
+        "code": "6/6",
+        "description": "4/4",
+        "depth_map": "ABLATED",
+        "per_level": {
+          "domain": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 5,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2857
+          },
+          "sub_strand": {
+            "tp": 0,
+            "fp": 9,
+            "fn": 0,
+            "recall": null,
+            "precision": 0.0
+          },
+          "indicator": {
+            "tp": 2,
+            "fp": 23,
+            "fn": 1,
+            "recall": 0.6667,
+            "precision": 0.08
+          }
+        },
+        "regressions": {
+          "passed": 1,
+          "total": 2,
+          "failed_ids": [
+            "CO-NO-SUB-STRAND"
+          ]
+        }
+      },
+      "delta": {
+        "recall": -0.1429,
+        "precision": -0.0271,
+        "n_detected": -14,
+        "code_matches": -1,
+        "regressions_newly_failing": [
+          "CO-NO-SUB-STRAND"
+        ]
+      }
+    },
+    "TX": {
+      "status": "OK",
+      "on": {
+        "n_detected": 33,
+        "matched": 8,
+        "recall": 1.0,
+        "precision": 0.32,
+        "code": "8/8",
+        "description": "3/3",
+        "depth_map": "PASS",
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "indicator": {
+            "tp": 4,
+            "fp": 16,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        }
+      },
+      "off": {
+        "n_detected": 33,
+        "matched": 8,
+        "recall": 1.0,
+        "precision": 0.32,
+        "code": "6/8",
+        "description": "3/3",
+        "depth_map": "ABLATED",
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "indicator": {
+            "tp": 4,
+            "fp": 16,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        }
+      },
+      "delta": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "n_detected": 0,
+        "code_matches": -2,
+        "regressions_newly_failing": []
+      }
+    },
+    "NV": {
+      "status": "OK",
+      "on": {
+        "n_detected": 53,
+        "matched": 46,
+        "recall": 1.0,
+        "precision": 0.8679,
+        "code": "44/46",
+        "description": "2/3",
+        "depth_map": "PASS",
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 12,
+            "fp": 5,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.7059
+          },
+          "sub_strand": {
+            "tp": 7,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.875
+          },
+          "indicator": {
+            "tp": 24,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.96
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        }
+      },
+      "off": {
+        "n_detected": 53,
+        "matched": 46,
+        "recall": 1.0,
+        "precision": 0.8679,
+        "code": "45/46",
+        "description": "1/3",
+        "depth_map": "ABLATED",
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 12,
+            "fp": 6,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.6667
+          },
+          "sub_strand": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 24,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.96
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        }
+      },
+      "delta": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "n_detected": 0,
+        "code_matches": 1,
+        "regressions_newly_failing": []
+      }
+    },
+    "KY": {
+      "status": "OK",
+      "on": {
+        "n_detected": 44,
+        "matched": 44,
+        "recall": 1.0,
+        "precision": 1.0,
+        "code": "44/44",
+        "description": "26/26",
+        "depth_map": "PASS",
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sub_strand": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 26,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        }
+      },
+      "off": {
+        "n_detected": 44,
+        "matched": 40,
+        "recall": 0.9091,
+        "precision": 0.9091,
+        "code": "36/40",
+        "description": "26/26",
+        "depth_map": "ABLATED",
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 4,
+            "fp": 4,
+            "fn": 1,
+            "recall": 0.8,
+            "precision": 0.5
+          },
+          "sub_strand": {
+            "tp": 7,
+            "fp": 0,
+            "fn": 3,
+            "recall": 0.7,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 26,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "regressions": {
+          "passed": 1,
+          "total": 3,
+          "failed_ids": [
+            "KY-BENCHMARK-IS-SUB-STRAND",
+            "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+          ]
+        }
+      },
+      "delta": {
+        "recall": -0.0909,
+        "precision": -0.0909,
+        "n_detected": 0,
+        "code_matches": -8,
+        "regressions_newly_failing": [
+          "KY-BENCHMARK-IS-SUB-STRAND",
+          "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+        ]
+      }
+    }
+  }
+}

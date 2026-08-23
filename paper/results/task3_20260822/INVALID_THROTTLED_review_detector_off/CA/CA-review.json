@@ -1,0 +1,261 @@
+{
+  "state": "CA",
+  "summary": {
+    "golden": 25,
+    "detected": 0,
+    "matched": 0,
+    "ignored_out_of_scope": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": []
+  },
+  "matched": [],
+  "missing_from_detected": [
+    {
+      "test_case_id": "CA-DOM-01",
+      "level": "domain",
+      "code": "AL",
+      "title": "Approaches to Learning",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-STR-01",
+      "level": "strand",
+      "code": "Strand 2.0",
+      "title": "Executive Functioning",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-SUB-01",
+      "level": "sub_strand",
+      "code": "IC",
+      "title": "Inhibitory Control",
+      "description": null,
+      "source_page": 4
+    },
+    {
+      "test_case_id": "CA-IND-01-EARLY",
+      "level": "indicator",
+      "code": "Foundation 1.2",
+      "title": "Initiative",
+      "age_band": "Early (3 to 4 \u00bd Years)",
+      "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems.",
+      "source_page": 3
+    },
+    {
+      "test_case_id": "CA-IND-01-LATER",
+      "level": "indicator",
+      "code": "Foundation 1.2",
+      "title": "Initiative",
+      "age_band": "Later (4 to 5 \u00bd Years)",
+      "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently.",
+      "source_page": 3
+    },
+    {
+      "test_case_id": "CA-DOM-02",
+      "level": "domain",
+      "code": "FLD",
+      "title": "Foundational Language Development",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-STR-02",
+      "level": "strand",
+      "code": "Strand 1.0",
+      "title": "Listening and Speaking",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-SUB-02",
+      "level": "sub_strand",
+      "code": "VOCA",
+      "title": "Vocabulary",
+      "description": null,
+      "source_page": 8
+    },
+    {
+      "test_case_id": "CA-IND-02-EARLY",
+      "level": "indicator",
+      "code": "Foundation 1.1",
+      "title": "Understanding and Using Vocabulary",
+      "age_band": "Early (3 to 4 \u00bd Years)",
+      "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories.",
+      "source_page": 8
+    },
+    {
+      "test_case_id": "CA-IND-02-LATER",
+      "level": "indicator",
+      "code": "Foundation 1.1",
+      "title": "Understanding and Using Vocabulary",
+      "age_band": "Later (4 to 5 \u00bd Years)",
+      "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories.",
+      "source_page": 8
+    },
+    {
+      "test_case_id": "CA-SUB-05",
+      "level": "sub_strand",
+      "code": "GRAM",
+      "title": "Grammar",
+      "description": null,
+      "source_page": 7
+    },
+    {
+      "test_case_id": "CA-IND-05-EARLY",
+      "level": "indicator",
+      "code": "Foundation 1.7",
+      "title": "Sharing Explanations and Opinions",
+      "description": "Share descriptions, opinions, and explanations.",
+      "source_page": 7,
+      "age_band": "Early (3 to 4 \u00bd Years)"
+    },
+    {
+      "test_case_id": "CA-IND-05-LATER",
+      "level": "indicator",
+      "code": "Foundation 1.7",
+      "title": "Sharing Explanations and Opinions",
+      "description": "Share detailed descriptions, opinions, and explanations.",
+      "source_page": 7,
+      "age_band": "Later (4 to 5 \u00bd Years)"
+    },
+    {
+      "test_case_id": "CA-IND-06-EARLY",
+      "level": "indicator",
+      "code": "Foundation 1.8",
+      "title": "Participating in Conversations",
+      "description": "Participate in back-and-forth conversations with adults and peers. Respond on topic for at least one turn in a conversation.",
+      "source_page": 8,
+      "age_band": "Early (3 to 4 \u00bd Years)"
+    },
+    {
+      "test_case_id": "CA-IND-06-LATER",
+      "level": "indicator",
+      "code": "Foundation 1.8",
+      "title": "Participating in Conversations",
+      "description": "Participate in increasingly long and complex back-and-forth conversations with adults and peers. Respond on topic across several turns in the conversation.",
+      "source_page": 8,
+      "age_band": "Later (4 to 5 \u00bd Years)"
+    },
+    {
+      "test_case_id": "CA-DOM-03",
+      "level": "domain",
+      "code": "ELD",
+      "title": "English Language Development",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-STR-03",
+      "level": "strand",
+      "code": "Strand 1.0",
+      "title": "Listening and Speaking",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-SUB-03",
+      "level": "sub_strand",
+      "code": "VOCA",
+      "title": "Vocabulary",
+      "description": null,
+      "source_page": 1
+    },
+    {
+      "test_case_id": "CA-IND-03-DISCOVERING",
+      "level": "indicator",
+      "code": "Foundation 1.1",
+      "title": "Understanding Words",
+      "age_band": "Discovering",
+      "description": "Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers.",
+      "source_page": 11
+    },
+    {
+      "test_case_id": "CA-IND-03-DEVELOPING",
+      "level": "indicator",
+      "code": "Foundation 1.1",
+      "title": "Understanding Words",
+      "age_band": "Developing",
+      "description": "Demonstrate understanding of words in English for objects and actions as well as phrases encountered frequently in interactions with adults and peers.",
+      "source_page": 11
+    },
+    {
+      "test_case_id": "CA-IND-03-BROADENING",
+      "level": "indicator",
+      "code": "Foundation 1.1",
+      "title": "Understanding Words",
+      "age_band": "Broadening",
+      "description": "Demonstrate understanding of a larger set of words in English (for example, objects and actions, personal pronouns, possessives, and descriptive terms) in interactions with adults and peers.",
+      "source_page": 11
+    },
+    {
+      "test_case_id": "CA-SUB-04",
+      "level": "sub_strand",
+      "code": "GRAM",
+      "title": "Grammar",
+      "description": null,
+      "source_page": 11
+    },
+    {
+      "test_case_id": "CA-IND-04-DISCOVERING",
+      "level": "indicator",
+      "code": "Foundation 1.4",
+      "title": "Using Complex Sentence Structures",
+      "age_band": "Discovering",
+      "description": "Use words or phrases repeatedly experienced in English to communicate.",
+      "source_page": 12
+    },
+    {
+      "test_case_id": "CA-IND-04-DEVELOPING",
+      "level": "indicator",
+      "code": "Foundation 1.4",
+      "title": "Using Complex Sentence Structures",
+      "age_band": "Developing",
+      "description": "Use a few formulaic English sentence structures to communicate on a range of topics by switching out key words in a phrase.",
+      "source_page": 12
+    },
+    {
+      "test_case_id": "CA-IND-04-BROADENING",
+      "level": "indicator",
+      "code": "Foundation 1.4",
+      "title": "Using Complex Sentence Structures",
+      "age_band": "Broadening",
+      "description": "Use a variety of English grammatical forms, with some inaccuracies, to produce many different types of sentence structures. Grammatical forms can include adding appropriate possessive pronouns (for example, your, my); conjunctions (for example, and, or); and other elements (for example, adjectives, adverbs).",
+      "source_page": 12
+    }
+  ],
+  "extra_in_detected": [],
+  "regressions": [
+    {
+      "id": "CA-AGE-COLUMNS-EMITTED",
+      "status": "PASS",
+      "detail": "all 0 Early/Later foundations emit both columns"
+    },
+    {
+      "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+      "status": "PASS",
+      "detail": "no age-band labels in titles"
+    },
+    {
+      "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+      "status": "PASS",
+      "detail": "no lettered examples emitted as indicators"
+    },
+    {
+      "id": "CA-FOUR-LEVEL-HIERARCHY",
+      "status": "FAIL",
+      "detail": "missing levels: {'domain', 'strand', 'sub_strand', 'indicator'}"
+    }
+  ]
+}

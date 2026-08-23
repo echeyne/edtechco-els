@@ -372,7 +372,7 @@ collapse is the parser compensating correctly for bad detector input.
 2. **Only fall back to Python** for things that are genuinely deterministic post-processing and document-agnostic (JSON extraction, schema validation, ID derivation from already-clean fields, true cross-chunk reconciliation). New per-state regexes/branches are a smell — flag them rather than adding them.
 3. **Never loosen the eval matchers or edit goldens to paper over a generalization gap.** Fix the golden DATA and canonicalize the model output instead (see the golden-consistency note below).
 
-**Test for generalization, not just the goldens.** A change that raises a golden score but relies on a document-specific rule is a regression in disguise. Validate against a held-out state (Nevada is the current canary; PDFs in `standards/nevada_ses_standards_2025*.pdf`) before considering a detector/parser change done. The `evaluation-runner` skill auto-runs additional states for exactly this reason — use it.
+**Test for generalization, not just the goldens.** A change that raises a golden score but relies on a document-specific rule is a regression in disguise. Validate against a held-out state (Nevada is the current canary; PDFs in `standards/nevada_standards_2023*.pdf` — note the **2023** document, 98pp full / 15pp `_only_subset`, which is what every NV golden and measurement uses. `standards/nevada_ses_standards_2025*.pdf` is an unrelated 36pp document with no golden; do not validate against it) before considering a detector/parser change done. The `evaluation-runner` skill auto-runs additional states for exactly this reason — use it.
 
 ## Two-language monorepo
 

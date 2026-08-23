@@ -320,7 +320,6 @@ Cover: document structure/layout extraction; LLM information extraction, in-cont
 >   "pdflatex -interaction=nonstopmode main.tex && bibtex main && \
 >    pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex"
 > ```
-> **Open for Emily:** the author block currently has a placeholder correspondence email (`author@edtechco.example`) — this is permanently public once submitted (Task 13), so it needs Emily's real preferred address before final compile, not a guess.
 
 **Risk:** low.
 

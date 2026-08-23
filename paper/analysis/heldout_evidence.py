@@ -117,6 +117,75 @@ def _greedy_spans(title: str, text: str) -> list:
     return spans
 
 
+def _inorder_window(probe: str, text: str):
+    """Smallest character window in which the title's spans occur IN READING
+    ORDER, or None if no such ordering exists.
+
+    This is the discriminator `_greedy_spans` alone cannot provide. Presence of
+    every span says almost nothing: greedy longest-first decomposition shatters a
+    title into fragments short enough to occur SOMEWHERE in any document, and
+    NV's one confirmed hallucination passes that test ('peers with' / 'adult' /
+    'guidance' are all present) even though the phrase "with adult guidance"
+    occurs zero times.
+
+    Order is what separates the two cases. A multi-column table splits a REAL
+    title by interleaving a neighbouring column, but the fragments still appear
+    in reading order and close together. An invented tail assembled from words
+    used elsewhere does not reconstruct in order. Measured 2026-08-23 over every
+    non-contiguous extra in the corpus: NV's real split `S.EO` reconstructs in
+    118 chars and all 39 CO/TX split titles in 51-456, while NV's hallucination
+    returns None.
+
+    The window is REPORTED, not thresholded -- the real/invented split here is
+    None-vs-not-None, and picking a character cutoff would be fitting the four
+    documents we happen to have.
+    """
+    spans = [s["span"] for s in _greedy_spans(probe, text) if s["found"]]
+    if not spans:
+        return None
+    best = None
+    for m in re.finditer(re.escape(spans[0]), text):
+        end, ok = m.end(), True
+        for sp in spans[1:]:
+            nxt = text.find(sp, end)
+            if nxt < 0:
+                ok = False
+                break
+            end = nxt + len(sp)
+        if ok:
+            w = end - m.start()
+            best = w if best is None else min(best, w)
+    return best
+
+
+def _twin_evidence(elem: dict, review: dict) -> dict:
+    """Structural check for the NV hallucination signature: another element
+    carries the SAME code, and this one's `source_text` is a truncated prefix of
+    the twin's. That is what actually established the SS.CI.PK3 verdict -- a
+    duplicate code whose twin is complete while this row stops mid-sentence and
+    then continues with text that is not on the page.
+
+    Reads only shape (code equality, string prefix), never any document's
+    vocabulary."""
+    code = elem.get("code")
+    if not code:
+        return {"duplicate_code_of_matched": False}
+    src = re.sub(r"\s+", " ", elem.get("source_text") or "").strip()
+    for m in review.get("matched", []):
+        tw = m.get("detected") or {}
+        if tw.get("code") != code:
+            continue
+        tsrc = re.sub(r"\s+", " ", tw.get("source_text") or "").strip()
+        return {
+            "duplicate_code_of_matched": True,
+            "twin_title": tw.get("title"),
+            "this_source_text_is_truncated_prefix_of_twin": bool(
+                src and tsrc and tsrc.startswith(src) and len(src) < len(tsrc)
+            ),
+        }
+    return {"duplicate_code_of_matched": False}
+
+
 def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
     """Classify every in-scope extra, verifying each verdict against the text.
 
@@ -129,8 +198,18 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
       heading, not inventions. The parser collapses them.
     - `real_unannotated` — real document content the spot-check golden simply
       did not annotate. Verified by finding the title in the extraction.
-    - `hallucinated` — the title is NOT in the extraction. This is the only
-      verdict that counts against detector precision.
+    - `real_split_title` — the title is not contiguous, but its spans
+      reconstruct IN READING ORDER within a local window. This is a real title
+      split by column interleaving. Added 2026-08-23: previously these fell
+      through to `hallucinated`, which mislabelled 39 plainly-real CO/TX rows
+      (CO verified precision read 0.357 against a state with recall 1.000, all
+      regressions PASS and a perfect parser).
+    - `hallucinated` — not a repeat, not contiguous, and NOT reconstructable in
+      reading order. This is the only verdict that counts against detector
+      precision, and it still requires human confirmation before being counted.
+
+    ⚠️ Mere PRESENCE of every span is not evidence of anything — see
+    `_inorder_window`. NV's confirmed hallucination has all spans present.
     """
     review = json.loads((review_dir / state / f"{state}-review.json").read_text())
     text = _extraction_text(state, outputs_dir)
@@ -160,10 +239,26 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
                 "document content the spot-check golden did not annotate"
             )
         else:
-            verdict, reason = "hallucinated", (
-                "title is not contiguous in the extraction AND does not repeat a "
-                "matched element - see structural_evidence"
-            )
+            # Not contiguous. That alone is NOT evidence of invention: a
+            # multi-column table interleaves a neighbouring column into a real
+            # title. Reading ORDER is the discriminator -- see _inorder_window.
+            window = _inorder_window(probe, text)
+            if window is not None:
+                verdict, reason = "real_split_title", (
+                    f"title is not contiguous, but every span reconstructs IN "
+                    f"READING ORDER within {window} characters, which is the "
+                    f"signature of a real title split by column interleaving "
+                    f"rather than an invented one. An invented tail does not "
+                    f"reconstruct in order (NV's confirmed hallucination returns "
+                    f"no ordering at all)."
+                )
+            else:
+                verdict, reason = "hallucinated", (
+                    "title does not repeat a matched element, is not contiguous, "
+                    "AND its spans cannot be reconstructed in reading order "
+                    "anywhere in the extraction - the signature of an invented "
+                    "tail. Confirm against the PDF before counting it."
+                )
         row = {
             "state": state,
             "level": e.get("level"),
@@ -175,6 +270,8 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
             "reason": reason,
             "verified_by": "claude-first-pass-UNSIGNED",
         }
+        if verdict in ("hallucinated", "real_split_title"):
+            row.update(_twin_evidence(e, review))
         if not contiguous:
             # A title can be non-contiguous WITHOUT being invented: NV's
             # multi-column tables interleave columns in reading order, so a real
@@ -184,6 +281,7 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
             # twice, separated by a Supportive-Practices cell. Recording the
             # decomposition stops a reviewer reading `false` as "fabricated".
             row["title_spans_found_in_order"] = _greedy_spans(probe, text)
+            row["inorder_reconstruction_window_chars"] = _inorder_window(probe, text)
             row["needs_human_check"] = verdict == "hallucinated"
         verdicts.append(row)
 
@@ -195,7 +293,8 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
         "n_extras_audited": len(verdicts),
         "counts_by_verdict": {
             v: sum(1 for x in verdicts if x["verdict"] == v)
-            for v in ("real_repeat_of_matched", "real_unannotated", "hallucinated")
+            for v in ("real_repeat_of_matched", "real_unannotated",
+                      "real_split_title", "hallucinated")
         },
         "hallucination_count": n_hall,
         "verified_precision": round((n_in - n_hall) / n_in, 4) if n_in else None,
@@ -345,19 +444,30 @@ def main() -> None:
     ap.add_argument("--ky-cache-glob", default=str(ROOT / "evaluation/.cache/parser-KY-*.json"))
     ap.add_argument("--out", type=Path,
                     default=ROOT / "paper/results/task2_20260816/heldout_evidence.json")
+    ap.add_argument("--state", action="append", dest="states", metavar="ST",
+                    help="state to audit; repeatable. Defaults to the held-out "
+                         "pair (NV, KY). Pass e.g. --state CO --state TX to run "
+                         "the same first pass over golden states for Task 1b.")
     args = ap.parse_args()
+    states = args.states or STATES
 
     out = {
+        "states_audited": states,
         "annotation_coverage": {
-            st: annotation_coverage(st, args.detector_review_dir) for st in STATES
+            st: annotation_coverage(st, args.detector_review_dir) for st in states
         },
         "fp_audit_first_pass": {
-            st: fp_audit(st, args.detector_review_dir, args.outputs_dir) for st in STATES
+            st: fp_audit(st, args.detector_review_dir, args.outputs_dir) for st in states
         },
-        "nv_domain_code_diagnosis": nv_domain_code_diagnosis(args.detector_review_dir),
-        "ky_code_qualification_history": ky_code_qualification_history(args.ky_parsing_glob),
-        "ky_direct_path_cache_runs": ky_direct_path_cache_runs(args.ky_cache_glob),
     }
+    # The three blocks below are specific to one state each and are emitted only
+    # when that state is actually in scope, so a golden-four run does not carry
+    # empty NV/KY keys that a reader could mistake for measured nulls.
+    if "NV" in states:
+        out["nv_domain_code_diagnosis"] = nv_domain_code_diagnosis(args.detector_review_dir)
+    if "KY" in states:
+        out["ky_code_qualification_history"] = ky_code_qualification_history(args.ky_parsing_glob)
+        out["ky_direct_path_cache_runs"] = ky_direct_path_cache_runs(args.ky_cache_glob)
     args.out.write_text(json.dumps(out, indent=2))
     print(f"Wrote {args.out}")
 

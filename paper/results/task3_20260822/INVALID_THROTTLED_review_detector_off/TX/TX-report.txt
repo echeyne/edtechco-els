@@ -1,0 +1,21 @@
+
+=== TX ===
+  golden:   8
+  detected: 0
+  matched:  0
+  precision: 0.000  recall: 0.000  f1: 0.000
+  per-level:
+    domain      tp=0   fp=0   fn=1   p=0.00 r=0.00
+    indicator   tp=0   fp=0   fn=4   p=0.00 r=0.00
+    strand      tp=0   fp=0   fn=2   p=0.00 r=0.00
+    sub_strand  tp=0   fp=0   fn=1   p=0.00 r=0.00
+  code accuracy: n/a (golden asserts no codes)
+  description accuracy: n/a (golden annotates no descriptions)
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops (4): ['TX-IND-01-PK3', 'TX-IND-01-PK4', 'TX-IND-02-PK3', 'TX-IND-02-PK4']
+  missing test cases (8): ['TX-DOM-01', 'TX-STR-01', 'TX-IND-01-PK3', 'TX-IND-01-PK4', 'TX-STR-02', 'TX-SUB-01', 'TX-IND-02-PK3', 'TX-IND-02-PK4']
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [FAIL] TX-PK3-PK4-DISTINCT — PK3 count=0, PK4 count=0 (both should be > 0)
+    [PASS] TX-AGE-BAND-SET — all 0 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators

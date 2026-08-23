@@ -1,0 +1,93 @@
+{
+  "state": "CO",
+  "summary": {
+    "golden": 7,
+    "detected": 0,
+    "matched": 0,
+    "ignored_out_of_scope": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": []
+  },
+  "matched": [],
+  "missing_from_detected": [
+    {
+      "test_case_id": "CO-DOM-01",
+      "level": "domain",
+      "code": "PDH",
+      "title": "Physical Development & Health",
+      "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
+      "source_page": 2
+    },
+    {
+      "test_case_id": "CO-STR-01",
+      "level": "strand",
+      "code": "1",
+      "title": "Health, Safety and Nutrition",
+      "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+      "source_page": 3
+    },
+    {
+      "test_case_id": "CO-IND-01",
+      "level": "indicator",
+      "code": "1",
+      "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+      "description": null,
+      "source_page": 3
+    },
+    {
+      "test_case_id": "CO-IND-02",
+      "level": "indicator",
+      "code": "6",
+      "title": "Communicate an understanding of the importance of health and safety routines and rules.",
+      "description": null,
+      "source_page": 3
+    },
+    {
+      "test_case_id": "CO-DOM-02",
+      "level": "domain",
+      "code": "SED",
+      "title": "Social & Emotional Development",
+      "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
+      "source_page": 7
+    },
+    {
+      "test_case_id": "CO-STR-02",
+      "level": "strand",
+      "code": "4",
+      "title": "Emotional and Behavioral Self-Regulation",
+      "description": "The ability to recognize and regulate emotions and behavior.",
+      "source_page": 8
+    },
+    {
+      "test_case_id": "CO-IND-03",
+      "level": "indicator",
+      "code": "3",
+      "title": "Manage actions, words, and behavior with increasing independence.",
+      "description": null,
+      "source_page": 8
+    }
+  ],
+  "extra_in_detected": [],
+  "regressions": [
+    {
+      "id": "CO-NO-SUB-STRAND",
+      "status": "PASS",
+      "detail": "no sub_strands (correct for CO)"
+    },
+    {
+      "id": "CO-NUMERIC-STRANDS",
+      "status": "PASS",
+      "detail": "all numeric-prefixed sections correctly classified as strand"
+    }
+  ]
+}

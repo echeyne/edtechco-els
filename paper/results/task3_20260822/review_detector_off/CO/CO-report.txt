@@ -1,0 +1,25 @@
+
+=== CO ===
+  golden:   7
+  detected: 47
+  matched:  6
+  precision: 0.140  recall: 0.857  f1: 0.240
+  per-level:
+    domain      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=23  fn=1   p=0.08 r=0.67
+    strand      tp=2   fp=5   fn=0   p=0.29 r=1.00
+    sub_strand  tp=0   fp=9   fn=0   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    indicator  → indicator  : 2
+    strand     → strand     : 2
+  code accuracy: 6/6 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  missing test cases (1): ['CO-IND-03']
+  extra detected (in-scope FPs) (37): [('indicator', '2'), ('indicator', '3'), ('indicator', '4'), ('indicator', '5'), ('indicator', '7'), ('indicator', '8'), ('indicator', '9'), ('indicator', '10'), ('indicator', '11'), ('indicator', '12')]…
+  ignored (out-of-scope domains): 4
+  regression cases:
+    [FAIL] CO-NO-SUB-STRAND — 9 unexpected sub_strands present: [('1', 'Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.'), ('2', 'Express confidence in own skills and positive feelings about self.'), ('3', 'Have a sense of belonging to family, community, and other groups.'), ('1', 'Express a broad range of emotions and recognize these emotions in self and others.'), ('2', 'Express care and concern toward others.')]
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand

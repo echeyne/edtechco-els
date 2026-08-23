@@ -1,0 +1,21 @@
+
+=== NV ===
+  golden:   46
+  detected: 0
+  matched:  0
+  precision: 0.000  recall: 0.000  f1: 0.000
+  per-level:
+    domain      tp=0   fp=0   fn=3   p=0.00 r=0.00
+    indicator   tp=0   fp=0   fn=24  p=0.00 r=0.00
+    strand      tp=0   fp=0   fn=12  p=0.00 r=0.00
+    sub_strand  tp=0   fp=0   fn=7   p=0.00 r=0.00
+  code accuracy: n/a (golden asserts no codes)
+  description accuracy: n/a (golden annotates no descriptions)
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  missing test cases (46): ['NV-DOM-01', 'NV-STR-01', 'NV-SUB-01', 'NV-IND-01', 'NV-IND-02', 'NV-IND-03', 'NV-IND-04', 'NV-STR-02', 'NV-SUB-02', 'NV-IND-05']…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] NV-NO-COLUMN-HEADER-AS-ELEMENT — 0 elements: no column headers, captions or footnotes emitted, no age_band set
+    [FAIL] NV-SUB-STRAND-CODE-FROM-DOCUMENT — no sub_strand elements detected
+    [FAIL] NV-FOUR-LEVEL-HIERARCHY — missing levels: {'domain', 'strand', 'sub_strand', 'indicator'}

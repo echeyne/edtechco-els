@@ -1,0 +1,553 @@
+{
+  "detector": {
+    "AZ": {
+      "precision_raw": 0.4167,
+      "recall": 1.0,
+      "f1_raw": 0.5882,
+      "matched": 5,
+      "annotation_coverage": {
+        "n_golden": 5,
+        "n_detected_total": 66,
+        "n_detected_in_annotated_domains": 11,
+        "precision_ceiling_from_annotation_coverage": 0.4545
+      },
+      "per_level": {
+        "domain": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 1,
+          "fp": 2,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 2,
+          "fp": 4,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 1
+          },
+          "indicator": {
+            "indicator": 2
+          },
+          "strand": {
+            "strand": 1
+          },
+          "sub_strand": {
+            "sub_strand": 1
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "match_path": {
+        "matched_domain_scoped": 4,
+        "matched_via_fallback": 1,
+        "fallback_crossed_domain": [
+          {
+            "test_case_id": "AZ-IND-LL-1-2-b",
+            "level": "indicator",
+            "title": "Speaks clearly and understandably to express ideas, feelings, and needs.",
+            "golden_domain": "social emotional development",
+            "detected_domain": "language and literacy"
+          }
+        ],
+        "unmatched": []
+      },
+      "code_accuracy": 1.0,
+      "code_matches": 4,
+      "code_total": 4,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 4,
+      "description_total": 4,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+          "status": "PASS",
+          "detail": "no examples-section headers emitted"
+        },
+        {
+          "id": "AZ-FOUR-LEVEL-HIERARCHY",
+          "status": "PASS",
+          "detail": "all four levels present"
+        }
+      ]
+    },
+    "CA": {
+      "precision_raw": 0.2049,
+      "recall": 1.0,
+      "f1_raw": 0.3401,
+      "matched": 25,
+      "annotation_coverage": {
+        "n_golden": 25,
+        "n_detected_total": 122,
+        "n_detected_in_annotated_domains": 122,
+        "precision_ceiling_from_annotation_coverage": 0.2049
+      },
+      "per_level": {
+        "domain": {
+          "tp": 3,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 3,
+          "fp": 4,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 5,
+          "fp": 13,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 14,
+          "fp": 80,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 3
+          },
+          "indicator": {
+            "indicator": 14
+          },
+          "strand": {
+            "strand": 3
+          },
+          "sub_strand": {
+            "sub_strand": 5
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "match_path": {
+        "matched_domain_scoped": 25,
+        "matched_via_fallback": 0,
+        "fallback_crossed_domain": [],
+        "unmatched": []
+      },
+      "code_accuracy": 1.0,
+      "code_matches": 25,
+      "code_total": 25,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 14,
+      "description_total": 14,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "CA-AGE-COLUMNS-EMITTED",
+          "status": "PASS",
+          "detail": "all 16 Early/Later foundations emit both columns"
+        },
+        {
+          "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+          "status": "PASS",
+          "detail": "no age-band labels in titles"
+        },
+        {
+          "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+          "status": "PASS",
+          "detail": "no lettered examples emitted as indicators"
+        },
+        {
+          "id": "CA-FOUR-LEVEL-HIERARCHY",
+          "status": "PASS",
+          "detail": "all four levels present"
+        }
+      ]
+    },
+    "CO": {
+      "precision_raw": 0.1667,
+      "recall": 1.0,
+      "f1_raw": 0.2857,
+      "matched": 7,
+      "annotation_coverage": {
+        "n_golden": 7,
+        "n_detected_total": 61,
+        "n_detected_in_annotated_domains": 42,
+        "precision_ceiling_from_annotation_coverage": 0.1667
+      },
+      "per_level": {
+        "domain": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 2,
+          "fp": 5,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 3,
+          "fp": 30,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 2
+          },
+          "indicator": {
+            "indicator": 3
+          },
+          "strand": {
+            "strand": 2
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "match_path": {
+        "matched_domain_scoped": 7,
+        "matched_via_fallback": 0,
+        "fallback_crossed_domain": [],
+        "unmatched": []
+      },
+      "code_accuracy": 1.0,
+      "code_matches": 7,
+      "code_total": 7,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 4,
+      "description_total": 4,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "CO-NO-SUB-STRAND",
+          "status": "PASS",
+          "detail": "no sub_strands (correct for CO)"
+        },
+        {
+          "id": "CO-NUMERIC-STRANDS",
+          "status": "PASS",
+          "detail": "all numeric-prefixed sections correctly classified as strand"
+        }
+      ]
+    },
+    "TX": {
+      "precision_raw": 0.32,
+      "recall": 1.0,
+      "f1_raw": 0.4848,
+      "matched": 8,
+      "annotation_coverage": {
+        "n_golden": 8,
+        "n_detected_total": 33,
+        "n_detected_in_annotated_domains": 25,
+        "precision_ceiling_from_annotation_coverage": 0.32
+      },
+      "per_level": {
+        "domain": {
+          "tp": 1,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "indicator": {
+          "tp": 4,
+          "fp": 16,
+          "fn": 0
+        },
+        "sub_strand": {
+          "tp": 1,
+          "fp": 1,
+          "fn": 0
+        }
+      },
+      "level_confusion_level_agnostic": {
+        "golden_to_detected": {
+          "domain": {
+            "domain": 1
+          },
+          "indicator": {
+            "indicator": 4
+          },
+          "strand": {
+            "strand": 2
+          },
+          "sub_strand": {
+            "sub_strand": 1
+          }
+        },
+        "off_diagonal_total": 0,
+        "missing_with_no_title_match_at_any_level": []
+      },
+      "match_path": {
+        "matched_domain_scoped": 8,
+        "matched_via_fallback": 0,
+        "fallback_crossed_domain": [],
+        "unmatched": []
+      },
+      "code_accuracy": 1.0,
+      "code_matches": 8,
+      "code_total": 8,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 3,
+      "description_total": 3,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "age_band_drops": [],
+      "missing_test_cases": [],
+      "depth_map_passed": true,
+      "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+      "regressions": [
+        {
+          "id": "TX-PK3-PK4-DISTINCT",
+          "status": "PASS",
+          "detail": "PK3 count=10, PK4 count=15"
+        },
+        {
+          "id": "TX-AGE-BAND-SET",
+          "status": "PASS",
+          "detail": "all 25 indicators have a valid age_band"
+        },
+        {
+          "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+          "status": "PASS",
+          "detail": "no column headers emitted as indicators"
+        }
+      ]
+    }
+  },
+  "parser": {
+    "AZ": {
+      "coverage": 1.0,
+      "field_accuracy": 0.9969,
+      "matched": 18,
+      "n_golden": 18,
+      "n_parsed": 45,
+      "fully_correct": 17,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 0.9444
+      },
+      "n_field_mismatches": 1,
+      "field_decomposition": {
+        "value_correct": 305,
+        "null_correct": 18,
+        "value_wrong": 1,
+        "total_cells": 324,
+        "share_of_cells_whose_golden_is_null": 0.0556,
+        "field_accuracy_over_asserted_cells_only": 0.9967
+      },
+      "regressions": [
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 45 standard_ids unique"
+        }
+      ]
+    },
+    "CA": {
+      "coverage": 1.0,
+      "field_accuracy": 1.0,
+      "matched": 21,
+      "n_golden": 21,
+      "n_parsed": 94,
+      "fully_correct": 21,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 1.0
+      },
+      "n_field_mismatches": 0,
+      "field_decomposition": {
+        "value_correct": 334,
+        "null_correct": 44,
+        "total_cells": 378,
+        "share_of_cells_whose_golden_is_null": 0.1164,
+        "field_accuracy_over_asserted_cells_only": 1.0
+      },
+      "regressions": [
+        {
+          "id": "CA-EARLY-LATER-DISTINCT-IDS",
+          "status": "PASS",
+          "detail": "39 multi-variant indicator group(s) all kept distinct standard_ids"
+        },
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 94 standard_ids unique"
+        }
+      ]
+    },
+    "CO": {
+      "coverage": 1.0,
+      "field_accuracy": 1.0,
+      "matched": 9,
+      "n_golden": 9,
+      "n_parsed": 48,
+      "fully_correct": 9,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 1.0
+      },
+      "n_field_mismatches": 0,
+      "field_decomposition": {
+        "value_correct": 126,
+        "null_correct": 36,
+        "total_cells": 162,
+        "share_of_cells_whose_golden_is_null": 0.2222,
+        "field_accuracy_over_asserted_cells_only": 1.0
+      },
+      "regressions": [
+        {
+          "id": "CO-INDICATOR-PARENT-IS-STRAND",
+          "status": "PASS",
+          "detail": "all 48 indicators have a strand parent and null sub_strand"
+        },
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 48 standard_ids unique"
+        }
+      ]
+    },
+    "TX": {
+      "coverage": 1.0,
+      "field_accuracy": 1.0,
+      "matched": 8,
+      "n_golden": 8,
+      "n_parsed": 25,
+      "fully_correct": 8,
+      "dropped": [],
+      "duplicated": [],
+      "id_collisions": [],
+      "per_field_accuracy": {
+        "standard_id": 1.0,
+        "country": 1.0,
+        "state": 1.0,
+        "version_year": 1.0,
+        "age_band": 1.0,
+        "source_page": 1.0,
+        "domain.code": 1.0,
+        "domain.name": 1.0,
+        "domain.description": 1.0,
+        "strand.code": 1.0,
+        "strand.name": 1.0,
+        "strand.description": 1.0,
+        "sub_strand.code": 1.0,
+        "sub_strand.name": 1.0,
+        "sub_strand.description": 1.0,
+        "indicator.code": 1.0,
+        "indicator.name": 1.0,
+        "indicator.description": 1.0
+      },
+      "n_field_mismatches": 0,
+      "field_decomposition": {
+        "value_correct": 120,
+        "null_correct": 24,
+        "total_cells": 144,
+        "share_of_cells_whose_golden_is_null": 0.1667,
+        "field_accuracy_over_asserted_cells_only": 1.0
+      },
+      "regressions": [
+        {
+          "id": "TX-PK3-PK4-DISTINCT-IDS",
+          "status": "PASS",
+          "detail": "10 multi-variant indicator group(s) all kept distinct standard_ids"
+        },
+        {
+          "id": "NO-ID-COLLISION",
+          "status": "PASS",
+          "detail": "all 25 standard_ids unique"
+        }
+      ]
+    }
+  }
+}

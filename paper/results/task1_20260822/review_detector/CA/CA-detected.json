@@ -1,0 +1,1222 @@
+[
+  {
+    "level": "domain",
+    "code": "AL",
+    "title": "Approaches to Learning",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Approaches to Learning",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1.0",
+    "title": "Motivation to Learn",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Strand: 1.0 \u2014 Motivation to Learn",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "CI",
+    "title": "Curiosity and Interest",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Sub-Strand \u2014 Curiosity and Interest",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Curiosity and Interest",
+    "description": "Express interest in some familiar and new objects, people, and activities in their immediate environment. Seek information by exploring with their senses, describing their observations, and asking simple questions.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Foundation 1.1 Curiosity and Interest",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Curiosity and Interest",
+    "description": "Express interest in a broader range of familiar and new objects, people, and activities by exploring more extensively with their senses, describing their observations in greater detail, and asking more detailed questions.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Foundation 1.1 Curiosity and Interest",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "INIT",
+    "title": "Initiative",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Sub-Strand - Initiative",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Initiative",
+    "description": "Demonstrate initiative by starting activities (such as simple play scenarios), initiating social interactions (such as helping others), and seeking solutions to problems.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Foundation 1.2 Initiative",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Initiative",
+    "description": "Demonstrate initiative by starting activities (such as detailed and more complex play scenarios), initiating social interactions (such as helping others) more often, and seeking solutions to problems more persistently.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Foundation 1.2 Initiative",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "ENGA",
+    "title": "Engagement",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Sub-Strand \u2014 Engagement",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Engagement",
+    "description": "Actively engage by focusing and concentrating on activities for brief periods of time with adult support.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Foundation 1.3 Engagement",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Engagement",
+    "description": "Actively engage by focusing and concentrating on activities for longer periods of time with less adult support.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Foundation 1.3 Engagement",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "PERS",
+    "title": "Perseverance",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Sub-Strand \u2014 Perseverance",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Persisting Despite Difficulties",
+    "description": "Demonstrate persistence, with adult support, when engaging in an activity despite encountering setbacks or boredom. Make an effort, with adult support, to cope with emotions that arise (for instance, frustration, sadness, anger, excitement), although may shift to another activity after a short while.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Foundation 1.4 Persisting Despite Difficulties",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Persisting Despite Difficulties",
+    "description": "Demonstrate persistence for longer periods of time when engaging in an activity despite encountering setbacks or boredom. More consistently cope with emotions that arise (for instance, frustration, anger, sadness, excitement) and can continue engaging in an activity with less adult support.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Foundation 1.4 Persisting Despite Difficulties",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2.0",
+    "title": "Executive Functioning",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Strand: 2.0 \u2014 Executive Functioning",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "WM",
+    "title": "Working Memory",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Sub-Strand - Working Memory",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Working Memory",
+    "description": "Hold approximately one to two pieces of information in their mind for a short time and use the knowledge to guide behavior when performing tasks and engaging in play, with adult support.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Foundation 2.1 Working Memory",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Working Memory",
+    "description": "Hold approximately two to three pieces of information in their mind for longer periods of time and use the knowledge to guide behavior when engaging in multistep tasks and more complex play, with less adult support.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Foundation 2.1 Working Memory",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "IC",
+    "title": "Inhibitory Control",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Sub-Strand \u2014 Inhibitory Control",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Managing Impulsive Behaviors",
+    "description": "Demonstrate emerging ability to manage habitual reactions (habits that are not useful in a particular context), impulsive behaviors (acting on a whim), and delaying gratification (resisting temptation for an instant reward) with adult support.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Foundation 2.2 Managing Impulsive Behaviors",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Managing Impulsive Behaviors",
+    "description": "Manage habitual reactions (habits that are not useful in a particular context), impulsive behaviors (acting on a whim), and delaying gratification (resisting temptation for an instant reward) with less adult support.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Foundation 2.2 Managing Impulsive Behaviors",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Managing Attention and Distractions",
+    "description": "Demonstrate an emerging ability to ignore distractions and interruptions during independent or group activities; however, often need adult support to manage attention when distracted or interrupted.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 2.3 Managing Attention and Distractions",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Managing Attention and Distractions",
+    "description": "Demonstrate an emerging ability to ignore distractions and interruptions during independent or group activities with less adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 2.3 Managing Attention and Distractions",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "FLEX",
+    "title": "Flexibility",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Sub-Strand - Flexibility",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.4",
+    "title": "Flexibility",
+    "description": "Demonstrate emerging ability to shift behavior and think about things in a new way, with adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 2.4 Flexibility",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.4",
+    "title": "Flexibility",
+    "description": "More consistently shift behavior and think about things in a new way, with less adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 2.4 Flexibility",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "strand",
+    "code": "Strand 3.0",
+    "title": "Goal-Directed Learning",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Strand: 3.0 \u2014 Goal-Directed Learning",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "PROB",
+    "title": "Problem-Solving",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Sub-Strand - Problem-Solving",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.1",
+    "title": "Planning",
+    "description": "Demonstrate emerging ability to set and carry out simple goals (for example, one- to two-step plans and goals), with adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 3.1 Planning",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.1",
+    "title": "Planning",
+    "description": "Demonstrate ability to set and carry out more complex plans (for example, two- to three-step plans and goals), with less adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 3.1 Planning",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.2",
+    "title": "Reflecting and Analyzing",
+    "description": "Make attempts to adjust a problem-solving approach or strategy by reflecting on and analyzing their current approach, with adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 3.2 Reflecting and Analyzing",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.2",
+    "title": "Reflecting and Analyzing",
+    "description": "Make attempts to adjust a problem-solving approach or strategy by reflecting on and analyzing their current approach, with less adult support.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Foundation 3.2 Reflecting and Analyzing",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "CE",
+    "title": "Collaborative Effort",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 5,
+    "source_text": "Sub-Strand - - Collaborative Effort",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.3",
+    "title": "Problem-Solving Together",
+    "description": "Collaborate with peers in problem-solving during play and learning activities, sometimes for a short period of time and sometimes longer.",
+    "confidence": 0.97,
+    "source_page": 5,
+    "source_text": "Foundation 3.3 Problem-Solving Together",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.3",
+    "title": "Problem-Solving Together",
+    "description": "Engage in extended collaborative problem-solving during play and learning activities. Communicate with peers about how to solve a problem and help peers when needed.",
+    "confidence": 0.97,
+    "source_page": 5,
+    "source_text": "Foundation 3.3 Problem-Solving Together",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.4",
+    "title": "Understanding Others",
+    "description": "Notice, with adult support, that others have different approaches and preferences, although often have difficulty accepting others' approaches or preferences.",
+    "confidence": 0.97,
+    "source_page": 5,
+    "source_text": "Foundation 3.4 Understanding Others",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 3.4",
+    "title": "Understanding Others",
+    "description": "Demonstrate understanding and explain that others can have different approaches and preferences and more consistently accept others' approaches and preferences, with less adult support.",
+    "confidence": 0.97,
+    "source_page": 5,
+    "source_text": "Foundation 3.4 Understanding Others",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "domain",
+    "code": "FLD",
+    "title": "Foundational Language Development",
+    "description": "This is one out of two sub-domains in the Language and Literacy Development domain.",
+    "confidence": 0.95,
+    "source_page": 6,
+    "source_text": "Foundational Language Development\nThis is one out of two sub-domains in the Language and Literacy Development domain.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1.0",
+    "title": "Listening and Speaking",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Strand: 1.0 \u2014 Listening and Speaking",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "VOCA",
+    "title": "Vocabulary",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 6,
+    "source_text": "Sub-Strand - Vocabulary",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Understanding and Using Vocabulary",
+    "description": "Understand and use words for objects, actions, and attributes frequently experienced in everyday life, such as through play, conversations, or stories.",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Foundation 1.1 Understanding and Using Vocabulary",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Understanding and Using Vocabulary",
+    "description": "Understand and use an increasing variety of words for objects, actions, and attributes experienced in everyday life, such as through play, conversations, or stories.",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Foundation 1.1 Understanding and Using Vocabulary",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Understanding and Using Words for Categories",
+    "description": "Understand and use commonly experienced vocabulary to describe categories and the relationships within them.",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Foundation 1.2 Understanding and Using Words for Categories",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Understanding and Using Words for Categories",
+    "description": "Understand and use increasingly specific vocabulary to describe categories and the relationships within them.",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Foundation 1.2 Understanding and Using Words for Categories",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Understanding and Using Size and Location Words",
+    "description": "Understand and use words to describe the size and location of objects (such as \"tiny\" and \"on\"), including simple comparisons (such as \"bigger\").",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Foundation 1.3 Understanding and Using Size and Location Words",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Understanding and Using Size and Location Words",
+    "description": "Understand and use increasingly specific words to describe and compare the size and location of objects (such as \"longer\" and \"between\").",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Foundation 1.3 Understanding and Using Size and Location Words",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "sub_strand",
+    "code": "GRAM",
+    "title": "Grammar",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 7,
+    "source_text": "Sub-Strand - Grammar",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Using Grammatical Features and Sentence Structure",
+    "description": "Use common word forms and sentence forms to express thoughts and ideas.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.4 Using Grammatical Features and Sentence Structure*",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Using Grammatical Features and Sentence Structure",
+    "description": "Use both common and less common word forms and sentence forms to express complex thoughts and ideas.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.4 Using Grammatical Features and Sentence Structure*",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.5",
+    "title": "Asking Questions",
+    "description": "Use questions to seek information and to clarify and confirm understanding.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.5 Asking Questions",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.5",
+    "title": "Asking Questions",
+    "description": "Use questions and follow-up questions to seek information and to clarify and confirm understanding.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.5 Asking Questions",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.6",
+    "title": "Constructing Narratives",
+    "description": "Use language to construct real or fictional short narratives.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.6 Constructing Narratives",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.6",
+    "title": "Constructing Narratives",
+    "description": "Use language to construct real or fictional extended narratives that have several details or a plotline.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.6 Constructing Narratives",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.7",
+    "title": "Sharing Explanations and Opinions",
+    "description": "Share descriptions, opinions, and explanations.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.7 Sharing Explanations and Opinions",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.7",
+    "title": "Sharing Explanations and Opinions",
+    "description": "Share detailed descriptions, opinions, and explanations.",
+    "confidence": 0.97,
+    "source_page": 7,
+    "source_text": "Foundation 1.7 Sharing Explanations and Opinions",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.8",
+    "title": "Participating in Conversations",
+    "description": "Participate in back-and-forth conversations with adults and peers. Respond on topic for at least one turn in a conversation.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 1.8 Participating in Conversations",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.8",
+    "title": "Participating in Conversations",
+    "description": "Participate in increasingly long and complex back-and-forth conversations with adults and peers. Respond on topic across several turns in the conversation.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 1.8 Participating in Conversations",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2.0",
+    "title": "Foundational Literacy Skills",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Strand: 2.0 \u2014 Foundational Literacy Skills",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "PA",
+    "title": "Phonological Awareness",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 8,
+    "source_text": "Sub-Strand \u2014 Phonological Awareness",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Isolating Initial Sounds",
+    "description": "Match words that have the same first sound in speech, with adult support or the support of pictures or objects.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 2.1 Isolating Initial Sounds",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Isolating Initial Sounds",
+    "description": "Isolate and pronounce the first sound of a word, with adult support or the support of pictures or objects.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 2.1 Isolating Initial Sounds",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Recognizing and Blending Sounds",
+    "description": "When presented with two single-syllable words (such as \"sand\" and \"box\"), blend them into a compound word in speech with adult support or the support of pictures or objects.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 2.2 Recognizing and Blending Sounds*",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Recognizing and Blending Sounds",
+    "description": "When presented with syllables and individual sounds, blend them into words in speech with adult support or the support of pictures or objects.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 2.2 Recognizing and Blending Sounds*",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Participating in Rhyming and Wordplay",
+    "description": "Recognize or participate in familiar rhymes or songs.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay",
+    "age_band": "Early (3 to 4 \u00bd Years)"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Participating in Rhyming and Wordplay",
+    "description": "Produce rhyming sounds or words. Rhymes may be imperfect and can be real or nonsense words.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay",
+    "age_band": "Later (4 to 5 \u00bd Years)"
+  },
+  {
+    "level": "domain",
+    "code": "ELD",
+    "title": "English Language Development",
+    "description": "This is one out of two sub-domains in the Language and Literacy Development domain.",
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "English Language Development\nThis is one out of two sub-domains in the Language and Literacy Development domain.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1.0",
+    "title": "Listening and Speaking",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Strand: 1.0 \u2014 Listening and Speaking",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "VOCA",
+    "title": "Vocabulary",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "Sub-Strand \u2014 Vocabulary",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Understanding Words",
+    "description": "Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.1 Understanding Words",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Understanding Words",
+    "description": "Demonstrate understanding of words in English for objects and actions as well as phrases encountered frequently in interactions with adults and peers.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.1 Understanding Words",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Understanding Words",
+    "description": "Demonstrate understanding of a larger set of words in English (for example, objects and actions, personal pronouns, possessives, and descriptive terms) in interactions with adults and peers.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.1 Understanding Words",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Using Words",
+    "description": "Use English words, mainly consisting of concrete nouns.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.2 Using Words",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Using Words",
+    "description": "Use varied English words, including an increasing number of concrete nouns and some verbs and pronouns.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.2 Using Words",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.2",
+    "title": "Using Words",
+    "description": "Use a wide variety of English words to share knowledge of concepts, including words across all parts of speech, with some inaccuracies.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.2 Using Words",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "sub_strand",
+    "code": "GRAM",
+    "title": "Grammar",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "Sub-Strand \u2014 Grammar",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Using Grammatical Features",
+    "description": "Use one or two familiar English verbs as all-purpose verbs, with some inaccuracies.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.3 Using Grammatical Features",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Using Grammatical Features",
+    "description": "Use some grammatical rules in English, such as using -S or -es for plural nouns and -ing for verbs, sometimes with inaccuracies.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.3 Using Grammatical Features",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.3",
+    "title": "Using Grammatical Features",
+    "description": "Broaden the use of English grammatical rules, such as irregular plurals or simple past tense verbs, sometimes with inaccuracies.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Foundation 1.3 Using Grammatical Features",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Using Complex Sentence Structures",
+    "description": "Use words or phrases repeatedly experienced in English to communicate.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.4 Using Complex Sentence Structures",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Using Complex Sentence Structures",
+    "description": "Use a few formulaic English sentence structures to communicate on a range of topics by switching out key words in a phrase.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.4 Using Complex Sentence Structures",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.4",
+    "title": "Using Complex Sentence Structures",
+    "description": "Use a variety of English grammatical forms, with some inaccuracies, to produce many different types of sentence structures. Grammatical forms can include adding appropriate possessive pronouns (for example, your, my); conjunctions (for example, and, or); and other elements (for example, adjectives, adverbs).",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.4 Using Complex Sentence Structures",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "sub_strand",
+    "code": "LU",
+    "title": "Language Use",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 10,
+    "source_text": "Sub-Strand \u2014 Language Use",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.5",
+    "title": "Communicating Needs",
+    "description": "Use single English words and nonverbal communication with English speakers, such as gestures or behaviors, to seek attention, make a request, or initiate a response.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.5 Communicating Needs",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.5",
+    "title": "Communicating Needs",
+    "description": "Combine nonverbal communication and some English phrases to be understood by English speakers.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.5 Communicating Needs",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.5",
+    "title": "Communicating Needs",
+    "description": "Show increasing reliance on verbal communication in English to be understood by English speakers.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.5 Communicating Needs",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.6",
+    "title": "Understanding Requests and Directions",
+    "description": "Follow simple directions in English when given additional contextual clues.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.6 Understanding Requests and Directions",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.6",
+    "title": "Understanding Requests and Directions",
+    "description": "Follow directions in English that involve repeatedly experienced routines or contextual clues.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.6 Understanding Requests and Directions",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.6",
+    "title": "Understanding Requests and Directions",
+    "description": "Follow directions that involve more than one step, relying less on contextual clues.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Foundation 1.6 Understanding Requests and Directions",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.7",
+    "title": "Asking Questions",
+    "description": "Use a frequently experienced question phrase (such as \"What's that?\") or use one or two English words with a rising pitch to ask questions.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.7 Asking Questions",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.7",
+    "title": "Asking Questions",
+    "description": "Use a few question structures as a formula, filling in different words to ask about various topics.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.7 Asking Questions",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.7",
+    "title": "Asking Questions",
+    "description": "Use \"who,\" \"what,\" \"why,\" \"how,\" \"when,\" and \"where\" to produce questions in many forms to ask about a variety of topics in English.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.7 Asking Questions",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.8",
+    "title": "Constructing Narratives",
+    "description": "Identify parts of real or fictional narratives using a few English vocabulary words.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.8 Constructing Narratives",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.8",
+    "title": "Constructing Narratives",
+    "description": "Construct real or fictional short narratives using English vocabulary in a few simple English sentence structures.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.8 Constructing Narratives",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.8",
+    "title": "Constructing Narratives",
+    "description": "Construct real or fictional narratives by stringing together sentences with varied structures in English.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.8 Constructing Narratives",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.9",
+    "title": "Sharing Explanations and Opinions",
+    "description": "Use English vocabulary and gestures to share descriptions, opinions, and explanations.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.9 Sharing Explanations and Opinions",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.9",
+    "title": "Sharing Explanations and Opinions",
+    "description": "Use a few simple sentence structures to share descriptions, opinions, and explanations.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.9 Sharing Explanations and Opinions",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.9",
+    "title": "Sharing Explanations and Opinions",
+    "description": "Use varied sentence structures to share descriptions, opinions, and explanations.",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Foundation 1.9 Sharing Explanations and Opinions",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.10",
+    "title": "Participating in Conversations",
+    "description": "Engage in conversation with English speakers, by mostly listening and responding with a few English words, gestures, or other nonverbal responses.",
+    "confidence": 0.95,
+    "source_page": 11,
+    "source_text": "Foundation 1.10 Participating in Conversations",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.10",
+    "title": "Participating in Conversations",
+    "description": "Converse with others using frequently heard vocabulary in English, often using short, commonly used sentences and phrases and a few repeated grammatical structures, sometimes with inaccuracies.",
+    "confidence": 0.95,
+    "source_page": 11,
+    "source_text": "Foundation 1.10 Participating in Conversations",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.10",
+    "title": "Participating in Conversations",
+    "description": "Engage in conversations in English using increasingly complex vocabulary and varied grammatical structures, sometimes with inaccuracies.",
+    "confidence": 0.95,
+    "source_page": 11,
+    "source_text": "Foundation 1.10 Participating in Conversations",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2.0",
+    "title": "Foundational Literacy Skills",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 12,
+    "source_text": "Strand: 2.0 \u2014 Foundational Literacy Skills",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "PA",
+    "title": "Phonological Awareness",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Sub-Strand - Phonological Awareness",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Recognizing and Segmenting Sounds",
+    "description": "Recognize and produce sounds of spoken English.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.1 Recognizing and Segmenting Sounds",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Recognizing and Segmenting Sounds",
+    "description": "Match English words that have the same first sound in speech, with adult support or the support of pictures or objects.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.1 Recognizing and Segmenting Sounds",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.1",
+    "title": "Recognizing and Segmenting Sounds",
+    "description": "Isolate and pronounce the first sound of a word in English, with adult support or the support of pictures or objects.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.1 Recognizing and Segmenting Sounds",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Recognizing and Blending Sounds",
+    "description": "Recognize and produce sounds of spoken English.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.2 Recognizing and Blending Sounds",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Recognizing and Blending Sounds",
+    "description": "When presented with two single-syllable English words (such as \"sand\" and \"box\"), blend them into a compound word in speech, with adult support or the support of pictures or objects.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.2 Recognizing and Blending Sounds",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.2",
+    "title": "Recognizing and Blending Sounds",
+    "description": "When presented with syllables and individual sounds, blend them into English words in speech, with adult support or the support of pictures or objects.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.2 Recognizing and Blending Sounds",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Participating in Rhyming and Wordplay",
+    "description": "Attend to and participate in frequently experienced simple songs, poems, and fingerplays in English, with gestures and some key words.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Participating in Rhyming and Wordplay",
+    "description": "Repeat or recite parts of simple songs, poems, and fingerplays that emphasize rhyme in English.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.3",
+    "title": "Participating in Rhyming and Wordplay",
+    "description": "Repeat, recite, produce, or initiate simple songs, poems, and fingerplays that emphasize rhyme in English.",
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "Foundation 2.3 Participating in Rhyming and Wordplay",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "sub_strand",
+    "code": "AP",
+    "title": "Alphabetics and Print",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Sub-Strand - Alphabetics and Print*",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.4",
+    "title": "Recognizing and Identifying Letters",
+    "description": "Recognize the first letter in their own name in the English alphabet.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.4 Recognizing and Identifying Letters",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.4",
+    "title": "Recognizing and Identifying Letters",
+    "description": "Accurately identify a few letters of the alphabet in English.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.4 Recognizing and Identifying Letters",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.4",
+    "title": "Recognizing and Identifying Letters",
+    "description": "Accurately identify many uppercase and some lowercase letters of the alphabet in English.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.4 Recognizing and Identifying Letters",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.5",
+    "title": "Learning Letter-Sound Correspondence",
+    "description": "Demonstrate awareness that English alphabet letters have sounds.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.5 Learning Letter-Sound Correspondence",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.5",
+    "title": "Learning Letter-Sound Correspondence",
+    "description": "Accurately identify or produce the sound associated with one or two letters in the English alphabet.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.5 Learning Letter-Sound Correspondence",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.5",
+    "title": "Learning Letter-Sound Correspondence",
+    "description": "Accurately identify or produce the sounds of a few letters of the English alphabet (about 5-10), with adult support.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.5 Learning Letter-Sound Correspondence",
+    "age_band": "Broadening"
+  },
+  {
+    "level": "sub_strand",
+    "code": "CP",
+    "title": "Concepts About Print",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Sub-Strand - Concepts About Print*",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.6",
+    "title": "Understanding the Concept of Print",
+    "description": "Interact with materials representing the letters of the English alphabet.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.6 Understanding the Concept of Print",
+    "age_band": "Discovering"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.6",
+    "title": "Understanding the Concept of Print",
+    "description": "Demonstrate awareness that they are interacting with English print.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.6 Understanding the Concept of Print",
+    "age_band": "Developing"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 2.6",
+    "title": "Understanding the Concept of Print",
+    "description": "Demonstrate awareness of English print as something that can be read and has specific meaning.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Foundation 2.6 Understanding the Concept of Print",
+    "age_band": "Broadening"
+  }
+]

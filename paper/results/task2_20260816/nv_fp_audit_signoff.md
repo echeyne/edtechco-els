@@ -1,3 +1,39 @@
+# ⚠️ SUPERSEDED — DO NOT SIGN THIS SHEET
+
+**This sheet is obsolete and is retained only as part of the reproducibility
+record. Signing it would put a stale claim in the paper.**
+
+It audits **12 verdicts** against the **41-element** NV detector golden. Emily's
+2026-08-22 exhaustive pass took that golden to **46 elements**, which annotated 5
+of the rows below — so the live audit is **7 verdicts**, not 12, and the ceiling
+is 46/53 = 0.8679, not 41/53 = 0.7736.
+
+### ➡️ The sheet to sign is `paper/results/task2_20260822/nv_fp_audit_signoff.md`
+
+### Why this file is kept rather than deleted
+
+Its verdicts are preserved independently in this folder's
+`heldout_evidence.json`, so nothing here is the sole copy of any measurement.
+It is retained because the two audits together show the verdict methodology is
+**stable under a golden change**:
+
+| verdict | this sheet (41-elem golden) | current sheet (46-elem golden) |
+|---|---|---|
+| `real_repeat_of_matched` | 6 | 6 |
+| `real_unannotated` | **5** | **0** |
+| `hallucinated` | 1 | 1 |
+| verified precision | 0.9811 | 0.9811 |
+
+Every verdict that bears on the reported number is identical. The exhaustive pass
+moved 5 rows from "needs a verdict" to "annotated" and changed nothing else —
+same 6 reprinted-heading re-detections, same single `SS.CI.PK3` hallucination,
+same 0.9811. That equivalence is only demonstrable while both sheets exist.
+
+---
+
+<details>
+<summary>Original (superseded) sheet — expand only for the historical record</summary>
+
 # NV false-positive audit — sign-off sheet
 
 **You are the annotator of record.** Task 1b's methodology sentence for the paper is
@@ -116,3 +152,6 @@ If *"with adult guidance"* does appear on the page, then NV has **0 hallucinatio
 verified precision becomes **53/53 = 1.000**, and the CLAUDE.md note describing this as
 a fabricated tail needs correcting. Tell me either way — a null result here is just as
 useful and I'd rather correct the doc than carry a wrong claim into the paper.
+
+
+</details>
