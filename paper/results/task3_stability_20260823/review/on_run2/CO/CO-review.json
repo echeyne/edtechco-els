@@ -1,0 +1,528 @@
+{
+  "state": "CO",
+  "summary": {
+    "golden": 7,
+    "detected": 61,
+    "matched": 7,
+    "ignored_out_of_scope": 19,
+    "precision": 0.1667,
+    "recall": 1.0,
+    "f1": 0.2857,
+    "code_accuracy": 1.0,
+    "code_matches": 7,
+    "code_total": 7,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": []
+  },
+  "matched": [
+    {
+      "golden": {
+        "test_case_id": "CO-DOM-01",
+        "level": "domain",
+        "code": "PDH",
+        "title": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
+        "source_page": 2
+      },
+      "detected": {
+        "level": "domain",
+        "code": "PDH",
+        "title": "Physical Development & Health",
+        "description": "The Physical Development & Health domain describes children's physical well-being, knowledge of their body, health, safety, nutrition practices, and development of motor skills. Children who have health problems, delays in development, and frequent illness may suffer from a range of poor educational outcomes. Children's knowledge of their body and health impact their development of healthy habits early in life, habits which are key to life-long health. This domain includes skills that enable children to develop healthy habits, such as staying safe, performing self-care tasks independently of others, exercising, and eating healthy food. The development of motor skills allows children to explore and learn about their world and develop healthy bodies.",
+        "confidence": 0.95,
+        "source_page": 2,
+        "source_text": "Physical Development & Health\nThe Physical Development & Health domain\ndescribes children's physical well-being,\nknowledge of their body, health, safety, nutrition\npractices, and development of motor skills.\nChildren who have health problems, delays in\ndevelopment, and frequent illness may suffer\nfrom a range of poor educational outcomes.\nChildren's knowledge of their body and health\nimpact their development of healthy habits early\nin life, habits which are key to life-long health.\nThis domain includes skills that enable children\nto develop healthy habits, such as staying safe,\nperforming self-care tasks independently of\nothers, exercising, and eating healthy food. The\ndevelopment of motor skills allows children to\nexplore and learn about their world and develop\nhealthy bodies.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "CO-STR-01",
+        "level": "strand",
+        "code": "1",
+        "title": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "source_page": 3
+      },
+      "detected": {
+        "level": "strand",
+        "code": "1",
+        "title": "Health, Safety and Nutrition",
+        "description": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "confidence": 0.97,
+        "source_page": 3,
+        "source_text": "1. Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing\nhealthy habits.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "CO-IND-01",
+        "level": "indicator",
+        "code": "1",
+        "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+        "description": null,
+        "source_page": 3
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "1",
+        "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+        "description": null,
+        "confidence": 0.96,
+        "source_page": 3,
+        "source_text": "1. Possess good overall health, including\noral, visual, and auditory health,\nand be free from communicable or\npreventable diseases.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "CO-IND-02",
+        "level": "indicator",
+        "code": "6",
+        "title": "Communicate an understanding of the importance of health and safety routines and rules.",
+        "description": null,
+        "source_page": 3
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "6",
+        "title": "Communicate an understanding of the importance of health and safety routines and rules.",
+        "description": null,
+        "confidence": 0.96,
+        "source_page": 3,
+        "source_text": "6. Communicate an understanding of\nthe importance of health and safety\nroutines and rules.*",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "CO-DOM-02",
+        "level": "domain",
+        "code": "SED",
+        "title": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
+        "source_page": 7
+      },
+      "detected": {
+        "level": "domain",
+        "code": "SED",
+        "title": "Social & Emotional Development",
+        "description": "The Social & Emotional domain describes children's ability to develop positive relationships and ideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and express emotions. Appropriate social and emotional development is critical to life-long development and learning and is associated with a wide array of positive outcomes. Such skills allow children to feel confident in their abilities to interact with others, approach new situations, and express their individuality. Children who are English language learners should be allowed to express their emotions and relationships in their home language.",
+        "confidence": 0.97,
+        "source_page": 5,
+        "source_text": "Social & Emotional Development\nThe Social & Emotional domain describes children's ability to develop positive relationships and\nideas about themselves and their abilities, regulate their emotions, behavior, and impulses, and\nexpress emotions. Appropriate social and emotional development is critical to life-long development\nand learning and is associated with a wide array of positive outcomes. Such skills allow children to\nfeel confident in their abilities to interact with others, approach new situations, and express their\nindividuality. Children who are English language learners should be allowed to express their emotions\nand relationships in their home language.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "CO-STR-02",
+        "level": "strand",
+        "code": "4",
+        "title": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior.",
+        "source_page": 8
+      },
+      "detected": {
+        "level": "strand",
+        "code": "4",
+        "title": "Emotional and Behavioral Self-Regulation",
+        "description": "The ability to recognize and regulate emotions and behavior.",
+        "confidence": 0.97,
+        "source_page": 8,
+        "source_text": "4. Emotional and Behavioral Self-Regulation: The ability to recognize and regulate emotions and behavior.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "CO-IND-03",
+        "level": "indicator",
+        "code": "3",
+        "title": "Manage actions, words, and behavior with increasing independence.",
+        "description": null,
+        "source_page": 8
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "3",
+        "title": "Manage actions, words, and behavior with increasing independence.",
+        "description": null,
+        "confidence": 0.96,
+        "source_page": 8,
+        "source_text": "3. Manage actions, words, and\nbehavior with increasing\nindependence.*",
+        "age_band": null
+      }
+    }
+  ],
+  "missing_from_detected": [],
+  "extra_in_detected": [
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "2. Participate in prevention and\nmanagement of chronic health\nconditions and avoid toxins, such as\nlead.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "3. Maintain physical growth within the\nCenters for Disease Control and\nPrevention (CDC) recommended\nranges for weight by height by age.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Get sufficient rest and exercise to support healthy development.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "4. Get sufficient rest and exercise to\nsupport healthy development.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "5",
+      "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "5. Complete personal care tasks, such\nas dressing, brushing teeth, toileting,\nand washing hands independently\nfrom adults.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "7",
+      "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "7. Follow basic health and safety rules\nand respond appropriately to harmful\nor unsafe situations.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "8",
+      "title": "Distinguish food on a continuum from most healthy to less healthy.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "8. Distinguish food on a continuum\nfrom most healthy to less healthy.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "9",
+      "title": "Eat a variety of nutritious foods.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "9. Eat a variety of nutritious foods.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "10",
+      "title": "Participate in structured and unstructured physical activities.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "10. Participate in structured and\nunstructured physical activities.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "11",
+      "title": "Recognize the importance of doctor and dentist visits.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "11. Recognize the importance of doctor\nand dentist visits.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "12",
+      "title": "Cooperate during doctor and dentist visits and health and developmental screening.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 3,
+      "source_text": "12. Cooperate during doctor and dentist\nvisits and health and developmental\nscreening.",
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "Gross Motor Skills",
+      "description": "The control of large muscles for movement, navigation, and balance.",
+      "confidence": 0.97,
+      "source_page": 4,
+      "source_text": "2. Gross Motor Skills: The control of large muscles for movement, navigation, and balance.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 4,
+      "source_text": "1. Develop motor control and balance\nfor a range of physical activities, such\nas walking, propelling a wheelchair\nor mobility device, skipping, running,\nclimbing, and hopping.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 4,
+      "source_text": "2. Develop motor coordination and\nskill in using objects for a range of\nphysical activities, such as pulling,\nthrowing, catching, kicking, bouncing\nor hitting balls, and riding a tricycle.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 4,
+      "source_text": "3. Understand movement concepts,\nsuch as control of the body, how the\nbody moves (such as an awareness of\nspace and directionality), and that the\nbody can move independently or in\ncoordination with other objects.*",
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "3",
+      "title": "Fine Motor Skills",
+      "description": "The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+      "confidence": 0.97,
+      "source_page": 4,
+      "source_text": "3. Fine Motor Skills: The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Develop hand strength and dexterity.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 4,
+      "source_text": "1. Develop hand strength and dexterity.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 4,
+      "source_text": "2. Develop eye-hand coordination to\nuse everyday tools, such as pitchers\nfor pouring or utensils for eating.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Manipulate a range of objects, such as blocks or books.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 4,
+      "source_text": "3. Manipulate a range of objects, such\nas blocks or books.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Manipulate writing, drawing, and art tools.",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 4,
+      "source_text": "4. Manipulate writing, drawing, and art\ntools.",
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "1",
+      "title": "Relationships with Adults and Peers",
+      "description": "The healthy relationships and interactions with adults and peers.",
+      "confidence": 0.96,
+      "source_page": 6,
+      "source_text": "1. Relationships with Adults and Peers: The healthy relationships and interactions with adults and peers.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Engage in and maintains positive relationships and interactions with adults.",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "1. Engage in and maintains\npositive relationships and\ninteractions with adults.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Engage in prosocial and cooperative behavior with adults.",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "2. Engage in prosocial and\ncooperative behavior with\nadults.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Engage in and maintains positive interactions and relationships with other children.",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "3. Engage in and maintains\npositive interactions and\nrelationships with other\nchildren.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "4",
+      "title": "Engage in cooperative play with other children.",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "4. Engage in cooperative play\nwith other children.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "5",
+      "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 6,
+      "source_text": "5. Use basic problem-solving\nskills to resolve conflicts\nwith other children.",
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "2",
+      "title": "Sense of Identity and Belonging",
+      "description": "The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals.",
+      "confidence": 0.97,
+      "source_page": 7,
+      "source_text": "2. Sense of Identity and Belonging: The perception that one is capable of successfully making decisions, accomplishing tasks, and meeting goals.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 7,
+      "source_text": "1. Recognize self as a unique\nindividual having own\nabilities, characteristics,\nemotions, and interests.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Express confidence in own skills and positive feelings about self.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 7,
+      "source_text": "2. Express confidence in own\nskills and positive feelings\nabout self.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Have a sense of belonging to family, community, and other groups.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 7,
+      "source_text": "3. Have a sense of belonging\nto family, community, and\nother groups.",
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "3",
+      "title": "Emotional Functioning",
+      "description": "A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors.",
+      "confidence": 0.97,
+      "source_page": 7,
+      "source_text": "3. Emotional Functioning: A healthy range of emotional expression and learning positive alternatives to aggressive or isolating behaviors.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Express a broad range of emotions and recognize these emotions in self and others.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 7,
+      "source_text": "1. Express a broad range of\nemotions and recognize\nthese emotions in self and\nothers.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Express care and concern toward others.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 7,
+      "source_text": "2. Express care and concern\ntoward others.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "3",
+      "title": "Manage emotions with increasing independence.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 7,
+      "source_text": "3. Manage emotions with\nincreasing independence.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "1",
+      "title": "Follow classroom rules and routines with increasing independence.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 8,
+      "source_text": "1. Follow classroom rules and\nroutines with increasing\nindependence.*",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "2",
+      "title": "Appropriately handle and take care of classroom materials.",
+      "description": null,
+      "confidence": 0.96,
+      "source_page": 8,
+      "source_text": "2. Appropriately handle and\ntake care of classroom\nmaterials.*",
+      "age_band": null
+    }
+  ],
+  "regressions": [
+    {
+      "id": "CO-NO-SUB-STRAND",
+      "status": "PASS",
+      "detail": "no sub_strands (correct for CO)"
+    },
+    {
+      "id": "CO-NUMERIC-STRANDS",
+      "status": "PASS",
+      "detail": "all numeric-prefixed sections correctly classified as strand"
+    }
+  ]
+}

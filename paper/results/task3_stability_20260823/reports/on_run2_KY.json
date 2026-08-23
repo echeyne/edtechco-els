@@ -1,0 +1,82 @@
+[
+  {
+    "state": "KY",
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "code_accuracy": 1.0,
+    "code_matches": 44,
+    "code_total": 44,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 26,
+    "description_total": 26,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 44,
+    "n_golden": 44,
+    "n_detected": 44,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 5,
+        "fp": 0,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "strand": {
+        "strand": 5
+      },
+      "sub_strand": {
+        "sub_strand": 10
+      },
+      "indicator": {
+        "indicator": 26
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "KY-BENCHMARK-IS-SUB-STRAND",
+        "status": "PASS",
+        "detail": "all 10 Benchmark elements classified as sub_strand"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      },
+      {
+        "id": "KY-STRAND-CODE-KEEPS-FULL-LABEL",
+        "status": "PASS",
+        "detail": "all 13 labelled headings keep their full label as the code"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

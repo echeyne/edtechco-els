@@ -1,0 +1,106 @@
+[
+  {
+    "state": "AZ",
+    "precision": 0.4166666666666667,
+    "recall": 1.0,
+    "f1": 0.5882352941176471,
+    "code_accuracy": 1.0,
+    "code_matches": 4,
+    "code_total": 4,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 5,
+    "n_golden": 5,
+    "n_detected": 76,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 2,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 2,
+        "fp": 4,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 1
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      },
+      "indicator": {
+        "indicator": 2
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "strand",
+        "Strand 2"
+      ],
+      [
+        "indicator",
+        "b"
+      ],
+      [
+        "indicator",
+        "c"
+      ],
+      [
+        "indicator",
+        "d"
+      ],
+      [
+        "indicator",
+        "e"
+      ],
+      [
+        "sub_strand",
+        "Concept 2"
+      ],
+      [
+        "sub_strand",
+        "Concept 3"
+      ]
+    ],
+    "ignored_out_of_scope": 64,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "no examples-section headers emitted"
+      },
+      {
+        "id": "AZ-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

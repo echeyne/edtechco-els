@@ -1,0 +1,25 @@
+
+=== AZ ===
+  golden:   5
+  detected: 65
+  matched:  5
+  precision: 0.500  recall: 1.000  f1: 0.667
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=4   fn=0   p=0.33 r=1.00
+    strand      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    sub_strand  tp=1   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  extra detected (in-scope FPs) (5): [('strand', 'Strand 2'), ('indicator', 'b'), ('indicator', 'c'), ('indicator', 'd'), ('indicator', 'e')]
+  ignored (out-of-scope domains): 55
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present

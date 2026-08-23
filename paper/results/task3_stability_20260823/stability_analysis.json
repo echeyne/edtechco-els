@@ -1,0 +1,686 @@
+{
+  "what_this_measures": "n=3 per arm per state. Sample 1 is the frozen recorded run (task1/task2 for ON, task3 for OFF); samples 2-3 are repeats at the same code_version_hash on the same outputs folder.",
+  "aggregate": {
+    "states": [
+      "AZ",
+      "CA",
+      "CO",
+      "KY",
+      "NV",
+      "TX"
+    ],
+    "states_with_reproducible_degradation": [
+      "CO",
+      "KY"
+    ],
+    "states_with_no_measured_effect": [
+      "AZ",
+      "CA",
+      "NV",
+      "TX"
+    ],
+    "categorical_cases_unstable_across_runs": [],
+    "states_whose_recall_gap_changed_SIGN": [],
+    "reproducible_ablation_failures": [
+      "CO-NO-SUB-STRAND",
+      "KY-BENCHMARK-IS-SUB-STRAND",
+      "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+    ]
+  },
+  "per_state": {
+    "AZ": {
+      "on": {
+        "n_runs": 3,
+        "recall_by_run": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          66,
+          76,
+          76
+        ],
+        "code_by_run": [
+          "4/4",
+          "4/4",
+          "4/4"
+        ],
+        "depth_map_by_run": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "off": {
+        "n_runs": 3,
+        "recall_by_run": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          65,
+          65,
+          65
+        ],
+        "code_by_run": [
+          "4/4",
+          "4/4",
+          "4/4"
+        ],
+        "depth_map_by_run": [
+          "ABLATED",
+          "ABLATED",
+          "ABLATED"
+        ]
+      },
+      "regressions": {
+        "on": {
+          "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "AZ-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        },
+        "off": {
+          "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "AZ-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        }
+      },
+      "reproducible_ablation_failures": [],
+      "recall_gap_off_minus_on_by_run": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "gap_sign_consistent": true,
+      "effect": "no measured effect"
+    },
+    "CA": {
+      "on": {
+        "n_runs": 3,
+        "recall_by_run": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          122,
+          122,
+          122
+        ],
+        "code_by_run": [
+          "25/25",
+          "25/25",
+          "25/25"
+        ],
+        "depth_map_by_run": [
+          "PASS",
+          "PASS",
+          "PASS"
+        ]
+      },
+      "off": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          122,
+          122
+        ],
+        "code_by_run": [
+          "25/25",
+          "25/25"
+        ],
+        "depth_map_by_run": [
+          "ABLATED",
+          "ABLATED"
+        ]
+      },
+      "regressions": {
+        "on": {
+          "CA-AGE-COLUMNS-EMITTED": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CA-AGE-LABEL-NOT-IN-TITLE": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CA-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        },
+        "off": {
+          "CA-AGE-COLUMNS-EMITTED": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CA-AGE-LABEL-NOT-IN-TITLE": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CA-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        }
+      },
+      "reproducible_ablation_failures": [],
+      "recall_gap_off_minus_on_by_run": [
+        0.0,
+        0.0
+      ],
+      "gap_sign_consistent": true,
+      "effect": "no measured effect"
+    },
+    "CO": {
+      "on": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          61,
+          61
+        ],
+        "code_by_run": [
+          "7/7",
+          "7/7"
+        ],
+        "depth_map_by_run": [
+          "PASS",
+          "PASS"
+        ]
+      },
+      "off": {
+        "n_runs": 2,
+        "recall_by_run": [
+          0.8571,
+          0.7143
+        ],
+        "recall_mean": 0.7857,
+        "recall_stdev": 0.101,
+        "recall_range": [
+          0.7143,
+          0.8571
+        ],
+        "n_detected_by_run": [
+          47,
+          47
+        ],
+        "code_by_run": [
+          "6/6",
+          "5/5"
+        ],
+        "depth_map_by_run": [
+          "ABLATED",
+          "ABLATED"
+        ]
+      },
+      "regressions": {
+        "on": {
+          "CO-NO-SUB-STRAND": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "CO-NUMERIC-STRANDS": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        },
+        "off": {
+          "CO-NO-SUB-STRAND": {
+            "statuses": [
+              "FAIL",
+              "FAIL"
+            ],
+            "stable": true
+          },
+          "CO-NUMERIC-STRANDS": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        }
+      },
+      "reproducible_ablation_failures": [
+        "CO-NO-SUB-STRAND"
+      ],
+      "recall_gap_off_minus_on_by_run": [
+        -0.1429,
+        -0.2857
+      ],
+      "gap_sign_consistent": true,
+      "effect": "DEGRADED"
+    },
+    "KY": {
+      "on": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          44,
+          44
+        ],
+        "code_by_run": [
+          "44/44",
+          "44/44"
+        ],
+        "depth_map_by_run": [
+          "PASS",
+          "PASS"
+        ]
+      },
+      "off": {
+        "n_runs": 2,
+        "recall_by_run": [
+          0.9091,
+          0.9773
+        ],
+        "recall_mean": 0.9432,
+        "recall_stdev": 0.0482,
+        "recall_range": [
+          0.9091,
+          0.9773
+        ],
+        "n_detected_by_run": [
+          44,
+          45
+        ],
+        "code_by_run": [
+          "36/40",
+          "39/43"
+        ],
+        "depth_map_by_run": [
+          "ABLATED",
+          "ABLATED"
+        ]
+      },
+      "regressions": {
+        "on": {
+          "KY-BENCHMARK-IS-SUB-STRAND": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "KY-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "KY-STRAND-CODE-KEEPS-FULL-LABEL": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        },
+        "off": {
+          "KY-BENCHMARK-IS-SUB-STRAND": {
+            "statuses": [
+              "FAIL",
+              "FAIL"
+            ],
+            "stable": true
+          },
+          "KY-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "KY-STRAND-CODE-KEEPS-FULL-LABEL": {
+            "statuses": [
+              "FAIL",
+              "FAIL"
+            ],
+            "stable": true
+          }
+        }
+      },
+      "reproducible_ablation_failures": [
+        "KY-BENCHMARK-IS-SUB-STRAND",
+        "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+      ],
+      "recall_gap_off_minus_on_by_run": [
+        -0.0909,
+        -0.0227
+      ],
+      "gap_sign_consistent": true,
+      "effect": "DEGRADED"
+    },
+    "NV": {
+      "on": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          53,
+          53
+        ],
+        "code_by_run": [
+          "44/46",
+          "44/46"
+        ],
+        "depth_map_by_run": [
+          "PASS",
+          "PASS"
+        ]
+      },
+      "off": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          53,
+          53
+        ],
+        "code_by_run": [
+          "45/46",
+          "45/46"
+        ],
+        "depth_map_by_run": [
+          "ABLATED",
+          "ABLATED"
+        ]
+      },
+      "regressions": {
+        "on": {
+          "NV-NO-COLUMN-HEADER-AS-ELEMENT": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "NV-SUB-STRAND-CODE-FROM-DOCUMENT": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "NV-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        },
+        "off": {
+          "NV-NO-COLUMN-HEADER-AS-ELEMENT": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "NV-SUB-STRAND-CODE-FROM-DOCUMENT": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "NV-FOUR-LEVEL-HIERARCHY": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        }
+      },
+      "reproducible_ablation_failures": [],
+      "recall_gap_off_minus_on_by_run": [
+        0.0,
+        0.0
+      ],
+      "gap_sign_consistent": true,
+      "effect": "no measured effect"
+    },
+    "TX": {
+      "on": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          33,
+          33
+        ],
+        "code_by_run": [
+          "8/8",
+          "8/8"
+        ],
+        "depth_map_by_run": [
+          "PASS",
+          "PASS"
+        ]
+      },
+      "off": {
+        "n_runs": 2,
+        "recall_by_run": [
+          1.0,
+          1.0
+        ],
+        "recall_mean": 1.0,
+        "recall_stdev": 0.0,
+        "recall_range": [
+          1.0,
+          1.0
+        ],
+        "n_detected_by_run": [
+          33,
+          33
+        ],
+        "code_by_run": [
+          "6/8",
+          "6/8"
+        ],
+        "depth_map_by_run": [
+          "ABLATED",
+          "ABLATED"
+        ]
+      },
+      "regressions": {
+        "on": {
+          "TX-PK3-PK4-DISTINCT": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "TX-AGE-BAND-SET": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "TX-NO-COLUMN-HEADER-AS-INDICATOR": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        },
+        "off": {
+          "TX-PK3-PK4-DISTINCT": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "TX-AGE-BAND-SET": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          },
+          "TX-NO-COLUMN-HEADER-AS-INDICATOR": {
+            "statuses": [
+              "PASS",
+              "PASS"
+            ],
+            "stable": true
+          }
+        }
+      },
+      "reproducible_ablation_failures": [],
+      "recall_gap_off_minus_on_by_run": [
+        0.0,
+        0.0
+      ],
+      "gap_sign_consistent": true,
+      "effect": "no measured effect"
+    }
+  }
+}

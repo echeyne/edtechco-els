@@ -1,0 +1,210 @@
+[
+  {
+    "state": "CO",
+    "precision": 0.16666666666666666,
+    "recall": 1.0,
+    "f1": 0.2857142857142857,
+    "code_accuracy": 1.0,
+    "code_matches": 7,
+    "code_total": 7,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 7,
+    "n_golden": 7,
+    "n_detected": 61,
+    "per_level": {
+      "domain": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 5,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 3,
+        "fp": 30,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 2
+      },
+      "strand": {
+        "strand": 2
+      },
+      "indicator": {
+        "indicator": 3
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "indicator",
+        "5"
+      ],
+      [
+        "indicator",
+        "7"
+      ],
+      [
+        "indicator",
+        "8"
+      ],
+      [
+        "indicator",
+        "9"
+      ],
+      [
+        "indicator",
+        "10"
+      ],
+      [
+        "indicator",
+        "11"
+      ],
+      [
+        "indicator",
+        "12"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "indicator",
+        "5"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ]
+    ],
+    "ignored_out_of_scope": 19,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "CO-NO-SUB-STRAND",
+        "status": "PASS",
+        "detail": "no sub_strands (correct for CO)"
+      },
+      {
+        "id": "CO-NUMERIC-STRANDS",
+        "status": "PASS",
+        "detail": "all numeric-prefixed sections correctly classified as strand"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

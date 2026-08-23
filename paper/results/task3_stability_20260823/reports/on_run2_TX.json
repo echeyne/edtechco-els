@@ -1,0 +1,151 @@
+[
+  {
+    "state": "TX",
+    "precision": 0.32,
+    "recall": 1.0,
+    "f1": 0.48484848484848486,
+    "code_accuracy": 1.0,
+    "code_matches": 8,
+    "code_total": 8,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 3,
+    "description_total": 3,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 8,
+    "n_golden": 8,
+    "n_detected": 33,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 4,
+        "fp": 16,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 2
+      },
+      "indicator": {
+        "indicator": 4
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      }
+    },
+    "missing_test_cases": [],
+    "extra_elements": [
+      [
+        "indicator",
+        "PK3.I.A.1"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.1"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.4"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.4"
+      ],
+      [
+        "sub_strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.c"
+      ]
+    ],
+    "ignored_out_of_scope": 8,
+    "age_band_drops": [],
+    "depth_map_passed": true,
+    "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']",
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT",
+        "status": "PASS",
+        "detail": "PK3 count=10, PK4 count=15"
+      },
+      {
+        "id": "TX-AGE-BAND-SET",
+        "status": "PASS",
+        "detail": "all 25 indicators have a valid age_band"
+      },
+      {
+        "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+        "status": "PASS",
+        "detail": "no column headers emitted as indicators"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

@@ -1,0 +1,115 @@
+[
+  {
+    "state": "CA",
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "code_accuracy": null,
+    "code_matches": 0,
+    "code_total": 0,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 0,
+    "n_golden": 25,
+    "n_detected": 0,
+    "per_level": {
+      "domain": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 3
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 14
+      }
+    },
+    "confusion": {},
+    "missing_test_cases": [
+      "CA-DOM-01",
+      "CA-STR-01",
+      "CA-SUB-01",
+      "CA-IND-01-EARLY",
+      "CA-IND-01-LATER",
+      "CA-DOM-02",
+      "CA-STR-02",
+      "CA-SUB-02",
+      "CA-IND-02-EARLY",
+      "CA-IND-02-LATER",
+      "CA-SUB-05",
+      "CA-IND-05-EARLY",
+      "CA-IND-05-LATER",
+      "CA-IND-06-EARLY",
+      "CA-IND-06-LATER",
+      "CA-DOM-03",
+      "CA-STR-03",
+      "CA-SUB-03",
+      "CA-IND-03-DISCOVERING",
+      "CA-IND-03-DEVELOPING",
+      "CA-IND-03-BROADENING",
+      "CA-SUB-04",
+      "CA-IND-04-DISCOVERING",
+      "CA-IND-04-DEVELOPING",
+      "CA-IND-04-BROADENING"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 0,
+    "age_band_drops": [
+      "CA-IND-01-EARLY",
+      "CA-IND-01-LATER",
+      "CA-IND-02-EARLY",
+      "CA-IND-02-LATER",
+      "CA-IND-05-EARLY",
+      "CA-IND-05-LATER",
+      "CA-IND-06-EARLY",
+      "CA-IND-06-LATER",
+      "CA-IND-03-DISCOVERING",
+      "CA-IND-03-DEVELOPING",
+      "CA-IND-03-BROADENING",
+      "CA-IND-04-DISCOVERING",
+      "CA-IND-04-DEVELOPING",
+      "CA-IND-04-BROADENING"
+    ],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "CA-AGE-COLUMNS-EMITTED",
+        "status": "PASS",
+        "detail": "all 0 Early/Later foundations emit both columns"
+      },
+      {
+        "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+        "status": "PASS",
+        "detail": "no age-band labels in titles"
+      },
+      {
+        "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+        "status": "PASS",
+        "detail": "no lettered examples emitted as indicators"
+      },
+      {
+        "id": "CA-FOUR-LEVEL-HIERARCHY",
+        "status": "FAIL",
+        "detail": "missing levels: {'sub_strand', 'strand', 'domain', 'indicator'}"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

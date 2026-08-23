@@ -1,0 +1,61 @@
+{
+  "task": "Task 3 stability \u2014 repeated ablation runs",
+  "date": "2026-08-23",
+  "status": "PARTIAL (16 of 24 runs; Bedrock Opus daily throttle). n=2 all six states both arms; n=3 AZ; n=3 CA ON-arm only.",
+  "git_commit": "628829b34b409a50821adc510a9f8c0d53c12ccc",
+  "code_version_hash": "288c64f1",
+  "inputs": {
+    "outputs_dir": "outputs/08-22-26-4",
+    "sample_1_frozen": {
+      "on": [
+        "paper/results/task1_20260822/detector_golden4.json",
+        "paper/results/task2_20260822/detector_heldout2.json"
+      ],
+      "off": [
+        "paper/results/task3_20260822/detector_nodepthmap.json"
+      ]
+    }
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "temperature": 0
+  },
+  "headline": {
+    "on_arm_recall_stdev_all_states": 0.0,
+    "null_reproduced": [
+      "AZ",
+      "CA",
+      "NV",
+      "TX"
+    ],
+    "degraded_every_run": [
+      "CO",
+      "KY"
+    ],
+    "regression_cases_unstable_across_runs": 0,
+    "reproducible_ablation_failures": [
+      "CO-NO-SUB-STRAND",
+      "KY-BENCHMARK-IS-SUB-STRAND",
+      "KY-STRAND-CODE-KEEPS-FULL-LABEL"
+    ],
+    "off_arm_recall_ranges": {
+      "CO": [
+        0.7143,
+        0.8571
+      ],
+      "KY": [
+        0.9091,
+        0.9773
+      ]
+    }
+  },
+  "caveats": [
+    "n=2 IS NOT A DISTRIBUTION. For CO and KY the reported 'range' is two points. It establishes that the magnitude is unstable \u2014 the claim being made \u2014 but does not characterise the spread. Do not compute a mean or a confidence interval from it.",
+    "REPORT OFF-ARM RECALL AS A RANGE, NEVER A POINT VALUE. CO 0.71-0.86, KY 0.91-0.98. The frozen task3_20260822 figures (CO 0.857, KY 0.909) are ONE DRAW each, and KY's second sample (0.977) is close to no effect at all.",
+    "THE CATEGORICAL EVIDENCE AND THE RATE EVIDENCE HAVE VERY DIFFERENT STRENGTH. Zero regression cases changed status across any run, and the three OFF-arm failures reproduce in every sample; those findings do not depend on golden size. The rates do, and CO's golden is 7 elements. Lead on the categorical result.",
+    "THE SWEEP IS PARTIAL. 16 of 24 runs completed before a Bedrock Opus daily throttle. off_run3_CA was written with n_detected=0 and is quarantined as INVALID_THROTTLED_*; ablation_stability.py refuses such a row rather than averaging it in.",
+    "CORPUS TIER: _only_subset (8-15pp). Nothing here speaks to full documents; that is Task 6.",
+    "THIS IS NOT eval_detector --stability-runs. That path (measure_stability, gotcha 6) compares only its own probe runs and EXCLUDES the graded run. These are plain repeats with the graded run included in every comparison."
+  ]
+}
