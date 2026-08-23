@@ -33,6 +33,44 @@ These were established by verifying the live tree during planning. Several contr
 
    So NV's ceiling is **46/53 = 0.8679**, and reporting its raw precision as a hallucination rate would count 6 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now 7 verdicts instead of 12, because the 5 previously-unannotated standards are annotated. Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
 
+## Compute budget — the Bedrock Opus daily token quota (measured 2026-08-23)
+
+The dev account has a **per-model daily token quota**, and the detector runs on
+Opus, so detector-heavy work is what exhausts it. `us.anthropic.claude-opus-4-6-v1`
+is capped at **2,592,000 tokens/day** (cross-region). Sonnet and Haiku have their
+own budgets and were unaffected when Opus was exhausted, so parser work and
+depth-map work can continue after an Opus throttle.
+
+Measured costs, for planning:
+
+| work | Opus tokens | share of daily quota |
+|---|---|---|
+| Task 1 detector (4 states) | 208,835 | 8% |
+| Task 2 detector (2 states) | 106,606 | 4% |
+| Task 3 off-arm (6 states) | 299,216 | 12% |
+| one ON+OFF ablation pair, 6 states | ~615,000 | 24% |
+| ablation stability, 2 extra runs × both arms × 6 states | ~1,230,000 | 47% |
+| **Task 6, all six FULL documents** | **~3,500,000** | **135% — needs two days** |
+
+Full documents are **777pp against 70pp of subsets, 11.1x**: AZ 217, CO 187,
+KY 120, NV 98, TX 87, CA 68.
+
+**Three rules learned the hard way:**
+
+1. **Sequential execution does NOT avoid a daily cap.** The 2026-08-23T00:25Z
+   throttle happened during a strictly sequential run. Budget across days.
+2. **Prefer one invocation per state**, with separate `--report-json` files, over
+   one multi-state call. A mid-run throttle in a six-state call recorded five
+   states as `n_detected=0, recall=0.0` — which reads as a catastrophic result
+   rather than an infrastructure failure. Every analysis script under
+   `paper/analysis/` now refuses such a row rather than averaging it in.
+3. **Probe before committing to a long run:**
+   ```
+   python -c "import boto3,json;boto3.client('bedrock-runtime',region_name='us-east-1').invoke_model(modelId='us.anthropic.claude-opus-4-6-v1',body=json.dumps({'anthropic_version':'bedrock-2023-05-31','max_tokens':5,'messages':[{'role':'user','content':'hi'}]}))"
+   ```
+   The reset boundary is **not** UTC midnight — a throttle was observed at
+   00:25Z with only ~198K tokens spent that UTC day.
+
 ## How to run evaluations
 
 Use **`outputs/08-22-26-4/`** (set 2026-08-22) — it supersedes every earlier `outputs/` folder, including `08-16-26`, `08-22-26`, `-2` and `-3`. Cache is on by default; use `--no-cache` for final recorded numbers.
@@ -41,7 +79,7 @@ Use **`outputs/08-22-26-4/`** (set 2026-08-22) — it supersedes every earlier `
 >
 > **Do NOT use `08-22-26-2`** — its KY detection is 38 elements against the other runs' 44, which breaks KY's exhaustive detector golden and drops parser coverage to 21/26. `-4` restores KY to 44 with levels matching the golden exactly (3/5/10/26).
 >
-> **Depth map was healthy in `08-16-26` (verified 2026-08-16)** — the detection-batch-preparer IAM fix landed 2026-07-17. Re-verify on `-4` as part of the re-record rather than assuming it carried over.
+> **Depth map is healthy on `-4` — verified 2026-08-23, not assumed.** PASS in all six states in the re-record, which discharges the earlier instruction to re-verify rather than carry the `08-16-26` result forward. (The detection-batch-preparer IAM fix landed 2026-07-17.)
 >
 > **AZ detection changed in this folder — diagnosed 2026-08-22, and it is benign.** 66 → **77** elements, sub_strands 11 → **21**, indicators unchanged at 45. Decomposed against the extraction (no Bedrock spend — both detections were already on disk):
 > - **4 genuinely new sub_strands**, all verbatim in the extraction: `Attachment`, `Social Interactions`, `Respect` (SED, p2) and `Comprehension and Text Structure` (p4).
@@ -55,6 +93,11 @@ Use **`outputs/08-22-26-4/`** (set 2026-08-22) — it supersedes every earlier `
 ```bash
 source venv/bin/activate
 python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state CA
+# ⚠️ --stability-runs is BROKEN (gotcha: measure_stability compares only its own
+# probe runs and EXCLUDES the graded run; it reported 0.000 disagreement in the
+# same invocation whose graded output had 4 malformed primary keys). For real
+# stability use plain repeats with one --report-json per run, as
+# paper/analysis/ablation_stability.py expects. Fix before Task 5.
 python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state CA --stability-runs 3
 python -m evaluation.eval_parser --detection-dir outputs/08-22-26-4 --state CA
 ```
@@ -93,7 +136,7 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 ### Task 1 — Run headline evals on the 4 golden states and sanity-check every metric
 
-> ⚠️ **SUPERSEDED 2026-08-22 — RE-RUN REQUIRED. The numbers below describe code that no longer exists.** `eval_common.code_version_hash` moved **`3b445471` → `2ac17ac2`** because commit `92c8288` ("updates for cleanup of detection and adding NV full coverage") changed **both** `detector.py` and `parser.py`, and then to **`288c64f1`** when Task 3's depth-map flag landed on 2026-08-22. **Re-record at `288c64f1`** — that single freeze covers Tasks 1, 2 and the Task 3 on-arm. Every cached artifact is invalidated and every figure in `paper/results/task1_20260816/` is now historical, exactly as the July results became historical on 2026-08-16. Three things changed at once and the re-run must be against **`outputs/08-22-26-4`**, `--no-cache`:
+> ✅ **RE-RECORDED 2026-08-22/23 at `288c64f1` — COMPLETE. Results: `paper/results/task1_20260822/`.** Recall **1.000 in all four states and at every level** (`fn=0` per level); code accuracy 4/4, 25/25, 7/7, 8/8; description 4/4, 14/14, 4/4, 3/3; depth map PASS ×4; all 18 regression cases PASS. Parser: coverage 100% in all four, field accuracy AZ 0.9969 / CA, CO, TX 1.0000, **zero `standard_id` collisions**. `paper/results/task1_20260816/` is retained ONLY as the reproducibility record and every figure in it is historical — its hash was `3b445471`, then `2ac17ac2` (commit `92c8288`), now **`288c64f1`**. ⚠️ `paper/analysis/generate_tables.py` was hard-pinned to the superseded folder and rendered its numbers into the paper until 2026-08-23; it now carries a `RUN_TAG` constant and refuses a superseded tag.
 > 1. **pipeline source** (hash above);
 > 2. **inputs** — AZ detection 66 → **77** elements (sub_strands 11 → **21**), which is unmeasured and is the single most important thing the re-record must explain;
 > 3. **the harness** — `eval_parser._match_key` no longer derives identity from the code (Task 2 repair, verified score-neutral on these four at the old hash, but that verification does not carry across a source change).
@@ -132,7 +175,15 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 4. ~~**Extend the same audit to NV/KY after Task 2**~~ **DONE (drafted, unsigned) 2026-08-16 — see `paper/results/task2_20260816/heldout_evidence.json`.** NV: 12 verdicts (6 correct re-detections of a reprinted heading, 5 real-but-unannotated, 1 hallucinated) → verified precision 52/53 = 0.981. KY: 0 extras, exhaustive golden → 1.000. Both carry `verified_by: claude-first-pass-UNSIGNED` and need Emily's sign-off. **Adopt the held-out verdict vocabulary for the golden four**, since it separates two things a binary verdict conflates: a *correct re-detection of content the document genuinely reprints* is not the same as *content the golden merely failed to annotate*, and neither is a hallucination.
 5. Every verified-real extra is a seed golden entry (title/level/page already captured) — if a reviewer later demands exhaustive goldens, upgrade CA first from this file.
 
-**Deliverable:** `paper/results/task1b_fp_audit.json` + verified-precision numbers, Emily-signed.
+**Deliverable:** verified-precision numbers, Emily-signed.
+
+> ✅ **DONE 2026-08-23. Signed by Emily Cheyne, 156 verdicts, 0 changed.** Artifacts: `paper/results/task1_20260822/task1b_fp_audit_SIGNED.json` (authoritative — the evidence JSON's `verified_by` is reset by regeneration), `task1b_evidence.json`, and per-state sheets in `task1_20260822/signoff/`.
+>
+> **Verified precision 1.000 for AZ, CA, CO and TX — zero hallucinations.** Combined with NV (53 in-scope, 1) and KY (44, 0): **297 in-scope detections corpus-wide, ONE hallucination, verified precision 0.9966.** The methodology sentence is now true for all six states.
+>
+> The count is **156**, not the ~165 estimated here (AZ 7 + CA 97 + CO 35 + TX 17, from each state's `extra_in_detected`).
+>
+> ⚠️ **`fp_audit` had a defect that this task exposed.** Its `hallucinated` verdict was a catch-all for "not contiguous and not a structural repeat", so it flagged **39 CO/TX rows** that are real titles merely split across lines/columns — CO would have reported verified precision **0.357** against a state with recall 1.000 and a perfect parser. Fixed 2026-08-23 with a fourth verdict `real_split_title`, gated on whether the title's spans reconstruct **in reading order**. Validated against the one known hallucination: NV's `SS.CI.PK3` returns no ordering, while NV's real split `S.EO` reconstructs in 118 chars and all 39 CO/TX rows in 51–456. **Mere presence of every span proves nothing** — the greedy decomposition shatters NV's fabricated tail into `'peers with'`/`'adult'`/`'guidance'`, all present, though the phrase occurs 0 times. NV/KY verdicts re-verified bit-identical after the fix.
 
 ---
 
@@ -140,7 +191,7 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Risk:** HIGH + LONG POLE. This is the main net-new effort and it gates the paper's strongest claim. **Start early; it can run in parallel with Task 1.**
 
-> ⚠️ **SUPERSEDED 2026-08-22 — RE-RUN REQUIRED, and the NV half is re-run against DIFFERENT GOLDENS.** Same source change as Task 1 (`3b445471` → `2ac17ac2` at commit `92c8288`, then → **`288c64f1`** with Task 3's flag), plus the held-out goldens themselves moved:
+> ✅ **RE-RECORDED 2026-08-22/23 at `288c64f1` against the NEW goldens — COMPLETE. Results: `paper/results/task2_20260822/`.** **Generalization holds, and the parser half is perfect on both held-out states.** Detector recall **1.000** at every level in both; NV code 44/46, description 2/3, verified precision **0.9811**; KY code 44/44, description 26/26, raw precision **1.000** (its golden is detection-exhaustive). Parser: NV **24/24** and KY **26/26** fully correct at field accuracy **1.0000**, zero collisions, all 7 parser regression cases PASS. The NV FP audit is **7 verdicts, signed by Emily 2026-08-23, 0 changed**. `paper/results/task2_20260816/` is retained only as the reproducibility record; its `nv_fp_audit_signoff.md` is the OLD 12-verdict sheet and carries a DO-NOT-SIGN banner. Still true and unchanged below: the NV golden moved 41→46 (detector) and 15→24 (parser), so
 > - **NV detector golden 41 → 46 elements**, **NV parser golden 15 → 24 standards** (exhaustive pass, Emily, 2026-08-22). NV's annotation-coverage ceiling therefore moves **0.7736 → 0.8679** and its raw precision moves with it — **that is an annotation-coverage change, not a quality improvement, and must be labelled as such.**
 > - KY goldens unchanged (44 / 26).
 > - The drafted NV FP audit shrinks from **12 verdicts to 7** (the 5 real-but-unannotated standards are now annotated), so `nv_fp_audit_signoff.md` must be regenerated before sign-off — **do not sign the 12-row version.**
@@ -152,7 +203,7 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 >
 > **Headline — generalization HOLDS.** Detector recall **1.000 at every level in both states**, depth map PASS ×2, 0 level confusion, 100% domain-scoped matches (0 fallback). Parser coverage **1.000** ×2, 0 `standard_id` collisions. **KY is a clean sweep: precision 1.000, code 44/44, description 26/26, all 3 detector regressions PASS — against an EXHAUSTIVE golden.** NV: code 39/41, description 2/3, 3/3 regressions PASS. Parser field accuracy NV 0.974 / KY 0.983.
 >
-> **The load-bearing fact: KY's detector golden is EXHAUSTIVE** (44 golden vs 44 in-scope detections, identical level counts, zero unmatched), so KY's precision is a genuine hallucination rate and not the annotation-coverage figure guardrail 8 warns about. NV is the familiar case — ceiling 0.7736, raw precision equal to it to four decimals.
+> **The load-bearing fact: KY's detector golden is EXHAUSTIVE** (44 golden vs 44 in-scope detections, identical level counts, zero unmatched), so KY's precision is a genuine hallucination rate and not the annotation-coverage figure guardrail 8 warns about. NV is the familiar case — ceiling **0.8679** (46/53) after the exhaustive pass, raw precision equal to it to four decimals. (The 0.7736 figure predates the 41→46 golden change.)
 >
 > **Step 4 revised — its premise did not survive contact.** Task 1b has never been run (`paper/results/task1b_fp_audit.json` does not exist), so there was nothing to "extend"; and the held-out goldens are dense enough that the audit is nearly free — **12 verdicts for NV, 0 for KY**, vs ~165 for the golden four. All 12 NV verdicts are drafted in `heldout_evidence.json`, each checked against the extraction text: 6 correct re-detections of headings the document reprints, 5 real-but-unannotated (the golden's `test_case_id` gaps confirm they were skipped deliberately), and **1 hallucination**. **NV verified precision 52/53 = 0.981; KY 44/44 = 1.000.** ⚠️ Verdicts carry `verified_by: claude-first-pass-UNSIGNED` — Emily must sign off before the Task 1b methodology sentence is true or 0.981 is quotable. Recommend the paper report *verified precision* for all six states on this one definition; KY needs no audit simply because it has no extras.
 >
@@ -165,7 +216,7 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 1. Annotate `evaluation/ground_truth_detector/{NV,KY}.json` and `evaluation/ground_truth_parser/{NV,KY}.json` per `evaluation/README.md` conventions — ~50 elements per state, verbatim titles/descriptions, `test_case_id` pattern `<STATE>-<KIND>-<N>`.
 2. Sources: `standards/nevada_standards_2023_trimmed_only_subset.pdf` (15pp, multi-domain) and `standards/kentucky_all_standards_2021_only_subset.pdf` (9pp). Both already exist.
 3. Run both suites on NV and KY; report alongside the golden states.
-4. ~~Spot-check annotation is fine (same style as the golden states) — **do not** attempt exhaustive coverage; precision for NV/KY comes from extending the Task 1b audit to their in-scope extras, keeping the generalization table's methodology identical to the golden states'.~~ **SUPERSEDED 2026-08-16 by what the run found.** KY's golden turned out exhaustive, so its precision needs no audit; NV's audit is 12 verdicts and is drafted in `paper/results/task2_20260816/heldout_evidence.json`. Methodological uniformity is preserved by reporting **verified precision** (in-scope detections minus hallucinations, over in-scope detections) for all six states on that one definition — not by keeping every golden equally thin. **Still owed: Emily's sign-off on the 12 NV verdicts, and Task 1b's ~165 verdicts for the golden four.**
+4. ~~Spot-check annotation is fine (same style as the golden states) — **do not** attempt exhaustive coverage; precision for NV/KY comes from extending the Task 1b audit to their in-scope extras, keeping the generalization table's methodology identical to the golden states'.~~ **SUPERSEDED 2026-08-16 by what the run found.** KY's golden turned out exhaustive, so its precision needs no audit; NV's audit is 12 verdicts and is drafted in `paper/results/task2_20260816/heldout_evidence.json`. Methodological uniformity is preserved by reporting **verified precision** (in-scope detections minus hallucinations, over in-scope detections) for all six states on that one definition — not by keeping every golden equally thin. ~~**Still owed: Emily's sign-off on the 12 NV verdicts, and Task 1b's ~165 verdicts for the golden four.**~~ **BOTH DONE 2026-08-23** — NV signed at 7 verdicts (the audit shrank from 12 when the 5 unannotated standards were annotated), and Task 1b signed at 156 verdicts for the golden four. Corpus-wide verified precision **0.9966**.
 
 **Deliverable:** two held-out golden sets + their scores. Per guardrail 7 — if generalization doesn't hold, report it. **Delivered:** it holds; see the STATUS block.
 
@@ -179,6 +230,16 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 2. Run the detector eval with the flag on and off across the golden states.
 
 **Deliverable:** the on/off delta table in `paper/results/`.
+
+> ✅ **BOTH ARMS RECORDED 2026-08-23 across all six states. Results: `paper/results/task3_20260822/`; repeated-run stability in `paper/results/task3_stability_20260823/`.**
+>
+> **The effect is real, reproducible in direction, and CONDITIONAL.** Pooled by level, removing the depth map leaves **domain recall untouched at 1.000** and degrades exactly the levels whose identity depends on nesting position: strand 1.000→0.960, **sub_strand 1.000→0.875**, indicator 1.000→0.986. Per state, only **CO** and **KY** degrade; AZ, CA, TX and NV hold recall 1.000 in both arms.
+>
+> **Lead on the categorical evidence, not the rates.** Three regression cases fail with the depth map off and pass with it on, in *every* run: `CO-NO-SUB-STRAND` (the detector invents a sub_strand level in a document that has none — 9 spurious, tp=0/fp=9), `KY-BENCHMARK-IS-SUB-STRAND` (`Benchmark N.N` promoted to strand — literally classifying by LABEL), and `KY-STRAND-CODE-KEEPS-FULL-LABEL`.
+>
+> ⚠️ **Report off-arm recall as a RANGE, never a point value.** Repeated runs (n=2–3 per arm per state) reproduce the direction in every sample and never flip its sign, and **zero regression cases changed status**, but the magnitude swings: CO **0.71–0.86**, KY **0.91–0.98**. KY's second sample (0.977) is close to no effect at all. The frozen `task3_20260822` figures are one draw each.
+>
+> ⚠️ **The first off-arm attempt (2026-08-23T00:21Z) aborted on a Bedrock Opus daily-token throttle** and left a report in which five of six states read `recall=0.0` having never run. Quarantined as `INVALID_THROTTLED_*` with a `DO_NOT_USE.md`; never quote it. `compare_ablation.py` and `ablation_stability.py` both now REFUSE any state with `n_detected == 0` or a `depth_map_passed` that does not match its arm.
 
 > **STATUS: FLAG LANDED 2026-08-22. Both arms still need recording.** `code_version_hash` is now **`288c64f1`** (this edit touched `detector.py`), which is the hash the combined re-record of Tasks 1 + 2 + this ablation must run at.
 >
