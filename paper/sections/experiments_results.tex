@@ -10,7 +10,7 @@
 %   - Headline quality (below) — DONE, Tasks 1/2.
 %   - Verified precision / hallucination rate (Task 1b) — not yet run.
 %   - Depth-map on/off ablation (Task 3).
-%   - Rule-based baseline comparison (Task 4).
+%   - Rule-based baseline comparison (Task 4) — DONE.
 %   - Stability/determinism (Task 5).
 %   - Cost/latency/scale, full-document tier, clearly separated from the
 %     subset-tier quality tables above (Task 6, guardrail 1).
@@ -39,3 +39,36 @@
 % magnitude but never the sign); see paper/results/task3_stability_20260823/.
 
 \input{tables/ablation_depthmap}
+
+\subsection{Comparison: A Rule-Based Structure Extractor}
+\label{sec:experiments-baseline}
+
+% TODO(Task 12): prose. Four things to lead with, in this order.
+%
+% 1. LEAD ON THE PER-LEVEL POOLED ROW, not the mean. The rule-based arm matches
+%    the LLM exactly at DOMAIN (13/13 both) and collapses below it: strand
+%    24.0%, sub_strand 66.7%, indicator 13.7%. That gradient is the paper's
+%    thesis measured on its own foil -- typography identifies the top division
+%    in every document, and nothing below it is identifiable without nesting
+%    position. A mean ("1.000 vs 0.500") hides exactly the structure that makes
+%    the point.
+%
+% 2. DO NOT READ THE RAW-PRECISION COLUMNS AS QUALITY (guardrail 8). AZ shows
+%    the rule-based arm ABOVE the LLM (50.0 vs 41.7) purely because it emits
+%    fewer in-scope detections against a 5-element spot-check golden. Say so in
+%    the same breath, or the table invites the wrong reading. KY is the one
+%    state where precision means what it says.
+%
+% 3. THE HELD-OUT COLLAPSE IS THE GENERALIZATION EVIDENCE, and it must be
+%    reported with the brittleness probe attached or it overstates the case: NV
+%    6.5% is dominated by one token shape the four development documents never
+%    printed (SS.ID.PK1), and widening the pattern post hoc recovers 52.2%.
+%    The honest claim is the one that survives the repair -- rules encode the
+%    shapes their author has seen, and even repaired they reach roughly half
+%    the LLM's recall.
+%
+% 4. Note what the baseline is NOT: it has no depth-map stage, so that column
+%    reads ABLATED rather than FAIL, and it is deterministic, so a single run
+%    is sufficient (contrast \S\ref{sec:experiments-ablation}).
+
+\input{tables/baseline_comparison}

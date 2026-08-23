@@ -1,0 +1,142 @@
+[
+  {
+    "level": "domain",
+    "code": "KEC",
+    "title": "Kentucky's Early Childhood",
+    "description": "Revised 2021",
+    "confidence": 0.6,
+    "source_page": 1,
+    "source_text": "Kentucky's Early Childhood Standards",
+    "age_band": null
+  },
+  {
+    "level": "domain",
+    "code": "AL",
+    "title": "Approaches to Learning",
+    "description": "THREE AND FOUR YEAR OLDS Approaches to Learning Standard 1: Sustains attention and persists with challenging activities and experiences.",
+    "confidence": 0.6,
+    "source_page": 2,
+    "source_text": "Approaches to Learning",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 1.1",
+    "title": "Maintains focus and sustains attention.",
+    "description": "Engages in an activity for a sustained period of time. Kinsley strings beads one by one until she has made a long necklace. Miles carefully cuts various pieces of colored tissue paper, then glues them on paper to make a collage. Nicolas moves the clear, colored geometric shapes around on the light table, creating one design, then moving them to create a new design, and repeating the process again. Lea fills three cups with water, then uses a jumbo eye dropper to add blue food coloring to one cup, red food coloring to the second, and yellow food coloring to the third. She adds a few drops of red water to the blue to see what happens, then keeps mixing colors and watching the results. Maintains focus and attention on activities despite distractions and interruptions. Amir concentrates on drawing a picture of his family while classmates play instruments nearby. Emerson closely examines the leaves through the microscope while Shane and Landon talk about the pictures in a science book on the table beside him. Mario looks closely at his large print name card, running his fingers across the raised lines, then carefully makes each letter of his name while his teacher talks to a classmate sitting beside him at the table. When Paula's friend asks her where she got the counting bears, Paula pauses to answer her friend, then returns to placing the counting bears in the matching colored cups. Sustains attention during group activities that last a short period of time. Hunter sits with his classmates, watching his caregiver and listening as she reads a short story, Under My Hijab. Levi and three of his classmates watch as his caregiver shows them how to use the stamps that have been added to the writing center. Alexis pays attention to her teacher as he demonstrates, and explains in Alexis' home language, the hand motions that go with Wheels on the Bus, then joins her classmates in singing the song and making the hand motions that go with it. Jayden and his classmates play a game with the parachute, lifting it up, lowering it down, then running under it.",
+    "confidence": 0.75,
+    "source_page": 2,
+    "source_text": "Benchmark 1.1: Maintains focus and sustains attention.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 1.2",
+    "title": "Persists at challenging tasks.",
+    "description": "Persists with self-selected activities until completed. Braydon works at placing jumbo teddy bear counters into bowls of the same color until all of the teddy bears are sorted. Ashley drops objects into the water table to see which float and which sink, then uses a scooper to get them all out. Malik walks around the playground looking for the six items he needs to find on his nature walk, then returns to the class after locating each item and marking it off his list. One by one, Kayla picks out the letter stamps she needs to spell for her name, then presses each one to her paper and returns them to the tray. Continues working on self-selected activities despite setbacks. After struggling to snip paper strips, Sophie adjusts the position of the scissors in her hand and tries again with success. After his first tower collapses, Evan adds more blocks to the base and builds another tower. Amelia is using a tape measure to measure the length of the table, but the end of the tape measure keeps moving and won't stay at the edge of the table, so she signs \"Help\" to a friend, and he holds the tape measure in place so Ameila can try again. When some of the Dominoes Wyatt has been standing on end and lining up begin to fall over and knock others down, he sighs, then picks up those that have fallen and puts them back in the line. Persists with adult-directed tasks with support as needed. Mason carefully pushes the grass seeds into the dirt in his paper cup while his teacher offers suggestions for covering them up. With her teacher's help, Stella uses a balance scale to compare the weights of a variety of objects. Katie's teacher demonstrates, and explains in Katie's home language, how to match the numbers on the dice to the numbers in the cups of the ice cube tray. Then Katie places all of the dice in the matching cups. Parker's teacher tells the class they will be making cards for Father's Day, so he uses the stamps and ink pad to decorate his card and the teacher writes the message he dictates to her.",
+    "confidence": 0.75,
+    "source_page": 3,
+    "source_text": "Benchmark 1.2: Persists at challenging tasks.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 1.3",
+    "title": "Makes a plan and engages in the planned activity or project to completion.",
+    "description": "With prompting and support, develops a simple plan and works toward completing planned activities. When Amelia's teacher asks her what center she wants to go to, Amelia slips her name card in the slot beside the picture of the Art Center, says, \"I want to make something,\" then goes to the Art Center and draws a picture.",
+    "confidence": 0.75,
+    "source_page": 3,
+    "source_text": "Benchmark 1.3: Makes a plan and engages in the planned activity or project to completion.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 2.1",
+    "title": "Uses creative approaches for learning.",
+    "description": "Finds new ways to use familiar objects and materials. William creates a balance beam by placing large unit blocks end to end, then attempts walking back and forth on it. Emma hangs a doll blanket over the side of the table and tells her friend \"We're camping.\" Ellie collects shells from the Science Center and uses them to press into the playdoh and make designs. Kyle gathers small pine cones from the playground and piles them into the back of his dump truck, pretending they are dirt and rocks. Identifies new materials to use in completing a task.",
+    "confidence": 0.75,
+    "source_page": 4,
+    "source_text": "Benchmark 2.1: Uses creative approaches for learning.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 2.2",
+    "title": "Uses imagination in play and interactions with others.",
+    "description": "the baby doll, pretending the baby is shaking a rattle. Uses materials in new and different ways to represent objects, characters, and ideas. Rose slips a bead on a string, asks her teacher to tie it around her neck, and then uses it to listen to the teddy bear's heart. Silas and Caleb climb on a bench under the tree and pretend to be jockeys in a horse race. As Ava and Iris are playing Three Billy Goats Gruff in the block center, Ava holds up one of the blocks and says to Iris, \"This can be our troll!\" Philip borrows the headset from the Listening Center and pretends to be a 911 dispatcher. Engages in short sequences of dramatic play that include some interaction with peers. In the Dramatic Play area, Emery prepares food at the stove, then Callie feeds Emery's meal to the baby. Using his therapy handle to hold a marker, Peyton writes a letter, seals it in an envelope, and gives it to Nolan, who delivers it to the post office box in the Writing Center. In the Dramatic Play area, Maria prepares churros for her friends, and they pretend to eat them at a birthday party. Liza and Nora play in the Car Repair Shop, with Liza pretending her car is broken and Nora working to fix it. In the Block Center, Felix uses his home language to count the number of blocks he and Joseph used to build a tower.",
+    "confidence": 0.75,
+    "source_page": 5,
+    "source_text": "Benchmark 2.2: Uses imagination in play and interactions with others.",
+    "age_band": null
+  },
+  {
+    "level": "domain",
+    "code": "HMW",
+    "title": "Health/Mental Wellness",
+    "description": "THREE AND FOUR YEAR OLDS Health/Mental Wellness Standard 1: Demonstrates health/mental wellness and social skills needed to participate cooperatively as a member of a group.",
+    "confidence": 0.6,
+    "source_page": 6,
+    "source_text": "Health/Mental Wellness",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 1.1",
+    "title": "Demonstrates knowledge and skills that contribute to healthy lifestyles.",
+    "description": "Takes care of personal health/safety needs with adult support as needed. Melvin goes to the water fountain when thirsty. Nina goes to the bathroom without prompting. Carlos covers his mouth when he coughs and then washes his hands after the teacher reminds him. In the dramatic play center, DaShon explains to Sarah, \"We don't go with strangers.\" On the playground, Remi tells a friend, \"Hold on [to the safety bar] with two hands when you go up the steps\" while climbing up the steps for the slide. Identifies healthy food choices. Before taking a bite of peas, Myra tells a friend, \"This helps you grow.\" Kianna cuts pictures of healthy foods out of a magazine. After lunch, the teacher uses the food pyramid to identify what categories of food the class had for lunch. Aiden notices that green beans are in the vegetable group.",
+    "confidence": 0.75,
+    "source_page": 6,
+    "source_text": "Benchmark 1.1: Demonstrates knowledge and skills that contribute to healthy lifestyles.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 1.2",
+    "title": "Demonstrates knowledge and skills needed to participate successfully in groups.",
+    "description": "Plays alongside rather than with other children. Kevin plays with blocks in the block area while Steven plays with trucks in the same area. Playing separately in the housekeeping area, Matt irons clothes and Kira cooks dinner and feeds the baby. Plays in small groups or pairs based on similar interests. Troy watches two children dig in the sandbox and then slowly sits down next to them and begins to dig. Hayden, Everett, and Clara play together in the housekeeping area, taking turns pretending to feed a baby doll and serving each other dinner. Mitchell asks Paul to play Candy Land at the activity table. On the playground, Melanie says to Jimmy & Tanisha, \"Let's play our chase game again. Tanisha, you be the monster this time!\"",
+    "confidence": 0.75,
+    "source_page": 6,
+    "source_text": "Benchmark 1.2: Demonstrates knowledge and skills needed to participate successfully in groups.",
+    "age_band": null
+  },
+  {
+    "level": "domain",
+    "code": "LEL",
+    "title": "Language and Early Literacy",
+    "description": "THREE AND FOUR YEAR OLDS Language and Early Literacy Standard 1: Demonstrates skills and strategies needed for receptive communication.",
+    "confidence": 0.6,
+    "source_page": 7,
+    "source_text": "Language and Early Literacy",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 1.1",
+    "title": "Attends and responds to nonverbal and verbal communication of others in a variety of situations.",
+    "description": "Attends to an adult or peer who is communicating verbally or nonverbally. As Mykyla listens to her caregiver talking about cookies, she smiles and nods enthusiastically. At story time, Max watches as his teacher signs \"Mama, Do You Love Me?\" Liam looks at his caregiver when he talks about the day's activities. William focuses on the classmate who is telling a story during share time. Follows simple directions. When the teacher asks Carter to choose a center to begin working, Carter points to the Art Center. When his teacher signs, \"Get your coat and wait at the door,\" Carlos does so. When the teacher states, \"Throw away your cup and your napkin and come to the rug,\" Olivia complies. When the therapist asks Mary and Albert to get out the box of markers, put it on the table, and come over for circle time, they both follow his directions. Gains information by listening to/processing communications from others. After listening to the story, Sarah tells her friend, \"There are three bears in Goldilocks\". Kelly's teacher tells the class that a nurse is going to visit the classroom tomorrow. At the end of the day, Kelly tells her mommy, \"A nurse is coming to our class!\" After a fire fighter visits their class, the teacher asks what materials the children think they need in the fire station they are creating in dramatic play. Paisley responds, \"We need hats and coats and boots!\" Emily listens to the book The Snowy Day, and signs to the teacher that she thinks Peter's snowball went away because his house was warm. Interprets or applies information someone else communicates verbally or nonverbally. A nurse visits Becky's classroom and talks with the class about why it is important to wash your hands. Later, Becky tells a doll, \"Wash your hands before you eat. Germs make you sick.\" On the playground, Crystal reminds Jason, \"We can't play on the slide. Remember? The teacher told us that it's closed. It's all wet.\"",
+    "confidence": 0.75,
+    "source_page": 7,
+    "source_text": "Benchmark 1.1 Attends and responds to nonverbal and verbal communication of others in a variety of situations.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 2.1",
+    "title": "Uses non-verbal communication for a variety of purposes.",
+    "description": "Uses non-verbal communication to convey emotions. Elizabeth frowns when she hears the clean-up song begin. Frustrated that he could not open the container, Lucas stomps his feet on the ground and shrugs his shoulders. When the teacher announces that a special visitor is coming to read a book later that day, Ella smiles and claps. Identifies or chooses an object or person by pointing, physically touching, or moving toward another. While playing \"Farmer in the Dell\" Simone chooses Elly to be the \"farmer's wife\" by taking her hand. When asked what he wants for a snack, Darius points to the graham crackers from the assortment on the table. Uses gestures and/or movements to initiate interactions or to get needs met. Kyle touches another child on the arm, takes his hand, and then walks over to the dramatic play center. Victor consistently waves his hands to indicate he wants more food. Kelsey points to indicate who she wants to sit by at circle time.",
+    "confidence": 0.75,
+    "source_page": 8,
+    "source_text": "Benchmark 2.1 Uses non-verbal communication for a variety of purposes.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Benchmark 2.2",
+    "title": "Uses language (verbal, signed, symbolic) for a variety of purposes.",
+    "description": "Initiates communication to have needs met. Easton looks at the interventionist, who says, \"Easton, do you want to use this block?\" and Easton says, \"Yes, I want to build a bridge.\" As the children are walking in from the playground, Craig signs, \"I want a drink of water\" to his therapist. During center time Millie walks over to where her teacher is standing and asks, \"How long until lunch?\" Chance asks William for the puzzle piece he cannot reach. Uses words, signs, pictures, and/or symbols to communicate. Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside.",
+    "confidence": 0.75,
+    "source_page": 8,
+    "source_text": "Benchmark 2.2: Uses language (verbal, signed, symbolic) for a variety of purposes.",
+    "age_band": null
+  }
+]

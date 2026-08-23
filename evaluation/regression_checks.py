@@ -81,7 +81,12 @@ def check_ca_four_level_hierarchy(elements: List[dict]) -> Tuple[bool, str]:
     expected = {"domain", "strand", "sub_strand", "indicator"}
     missing = expected - levels
     if missing:
-        return False, f"missing levels: {missing}"
+        # Sorted, not the raw set: a set renders in hash order, so the same
+        # failure produced "{'indicator', 'strand'}" on one run and
+        # "{'strand', 'indicator'}" on the next. The verdict never moved, but
+        # it made a recorded --report-json fail a byte-for-byte regeneration
+        # check (guardrail 6) for a purely cosmetic reason.
+        return False, f"missing levels: {sorted(missing)}"
     return True, "all four levels present"
 
 

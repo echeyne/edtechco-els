@@ -60,7 +60,7 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Callable, Dict, List, Optional, Tuple
 
 from evaluation.eval_common import (
     CACHE_DIR,
@@ -81,6 +81,11 @@ from els_pipeline.models import TextBlock  # noqa: E402
 from evaluation import regression_checks  # noqa: E402
 
 logger = logging.getLogger("eval_detector")
+
+#: Signature of a graded detector: ``(state, extraction_path, use_cache)`` ->
+#: a list of plain-JSON detected elements. ``run_detector_cached`` is the LLM
+#: implementation; ``evaluation.baselines`` supplies the rule-based one.
+DetectFn = Callable[[str, Path, bool], List[dict]]
 
 
 # ---------- helpers ----------
@@ -549,11 +554,29 @@ def evaluate_state(
     golden_path: Path,
     use_cache: bool,
     stability_runs: int,
+    detect_fn: Optional[DetectFn] = None,
+    grade_depth_map_pass: bool = True,
+    depth_map_skip_detail: str = "",
 ) -> Tuple[StateReport, List[dict]]:
+    """Grade one state.
+
+    ``detect_fn`` exists so a NON-LLM detector can be graded by this exact
+    path (arXiv paper Task 4's rule-based baseline). It defaults to the LLM
+    detector, so every existing caller is unaffected — and it must stay that
+    way: the whole value of the baseline number is that it comes out of the
+    same ``grade_elements``, the same ``_match_key`` and the same goldens as
+    the LLM number. A second grader would make the two incomparable, which is
+    the one thing Task 4 cannot afford.
+
+    ``grade_depth_map_pass=False`` records the third depth-map state
+    (``depth_map_passed = None``, rendered ABLATED) without calling Bedrock —
+    for a detector that has no Pass-1 to grade at all.
+    """
     logger.info(f"== {state} ==")
     golden = json.loads(golden_path.read_text())
 
-    detected = run_detector_cached(state, extraction_path, use_cache=use_cache)
+    runner = detect_fn or run_detector_cached
+    detected = runner(state, extraction_path, use_cache)
     rep = grade_elements(golden.get("elements", []), detected)
     rep.state = state
 
@@ -569,7 +592,13 @@ def evaluate_state(
     # itself: `Config.DEPTH_MAP_ENABLED` gates `infer_depth_map` at the source,
     # so this grading call — a SECOND, separate invocation that never drove the
     # graded detection — would return None too.
-    if not Config.DEPTH_MAP_ENABLED:
+    if not grade_depth_map_pass:
+        # Same third state, different cause: this detector has no Pass-1 at
+        # all (Task 4's rule-based baseline). Grading it would report FAIL,
+        # which reads as a quality failure rather than as an absent stage.
+        rep.depth_map_passed = None
+        rep.depth_map_detail = depth_map_skip_detail or "depth map not applicable"
+    elif not Config.DEPTH_MAP_ENABLED:
         rep.depth_map_passed = None
         rep.depth_map_detail = (
             "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded"
@@ -776,40 +805,9 @@ def main() -> int:
         print(f"\nReview files written to {output_dir}/")
 
     if args.report_json:
-        out = []
-        for r in reports:
-            out.append({
-                "state": r.state,
-                "precision": r.precision, "recall": r.recall, "f1": r.f1,
-                "code_accuracy": r.code_accuracy,
-                "code_matches": r.code_matches, "code_total": r.code_total,
-                "code_mismatches": [
-                    {"test_case_id": cid, "level": lvl, "golden": gc, "detected": dc}
-                    for cid, lvl, gc, dc in r.code_mismatches
-                ],
-                "description_accuracy": r.description_accuracy,
-                "description_matches": r.description_matches,
-                "description_total": r.description_total,
-                "description_truncations": r.description_truncations,
-                "description_mismatches": [
-                    {"test_case_id": cid, "level": lvl, "status": status, "detail": detail}
-                    for cid, lvl, status, detail in r.description_mismatches
-                ],
-                "matched": r.matched, "n_golden": r.n_golden, "n_detected": r.n_detected,
-                "per_level": {k: dict(v) for k, v in r.per_level.items()},
-                "confusion": {k: dict(v) for k, v in r.confusion.items()},
-                "missing_test_cases": r.missing_test_cases,
-                "extra_elements": [list(t) for t in r.extra_elements],
-                "ignored_out_of_scope": r.ignored_out_of_scope,
-                "age_band_drops": r.age_band_drops,
-                "depth_map_passed": r.depth_map_passed,
-                "depth_map_detail": r.depth_map_detail,
-                "regressions": [{"id": c, "status": s, "detail": d} for c, s, d in r.regressions],
-                "stability_runs": r.stability_runs,
-                "stability_disagreement_rate": r.stability_disagreement_rate,
-                "stability_size_stdev": r.stability_size_stdev,
-            })
-        Path(args.report_json).write_text(json.dumps(out, indent=2, default=str))
+        Path(args.report_json).write_text(
+            json.dumps([report_to_dict(r) for r in reports], indent=2, default=str)
+        )
         print(f"\nFull report written to {args.report_json}")
 
     failures = sum(
@@ -818,6 +816,46 @@ def main() -> int:
         if status in ("FAIL", "ERROR")
     )
     return 1 if failures else 0
+
+
+def report_to_dict(r: StateReport) -> dict:
+    """Serialize one StateReport the way ``--report-json`` always has.
+
+    Factored out of ``main`` so the Task 4 baseline driver writes a
+    byte-comparable report rather than a look-alike of its own — every
+    downstream analysis script in ``paper/analysis/`` reads this shape.
+    """
+    return {
+        "state": r.state,
+        "precision": r.precision, "recall": r.recall, "f1": r.f1,
+        "code_accuracy": r.code_accuracy,
+        "code_matches": r.code_matches, "code_total": r.code_total,
+        "code_mismatches": [
+            {"test_case_id": cid, "level": lvl, "golden": gc, "detected": dc}
+            for cid, lvl, gc, dc in r.code_mismatches
+        ],
+        "description_accuracy": r.description_accuracy,
+        "description_matches": r.description_matches,
+        "description_total": r.description_total,
+        "description_truncations": r.description_truncations,
+        "description_mismatches": [
+            {"test_case_id": cid, "level": lvl, "status": status, "detail": detail}
+            for cid, lvl, status, detail in r.description_mismatches
+        ],
+        "matched": r.matched, "n_golden": r.n_golden, "n_detected": r.n_detected,
+        "per_level": {k: dict(v) for k, v in r.per_level.items()},
+        "confusion": {k: dict(v) for k, v in r.confusion.items()},
+        "missing_test_cases": r.missing_test_cases,
+        "extra_elements": [list(t) for t in r.extra_elements],
+        "ignored_out_of_scope": r.ignored_out_of_scope,
+        "age_band_drops": r.age_band_drops,
+        "depth_map_passed": r.depth_map_passed,
+        "depth_map_detail": r.depth_map_detail,
+        "regressions": [{"id": c, "status": s, "detail": d} for c, s, d in r.regressions],
+        "stability_runs": r.stability_runs,
+        "stability_disagreement_rate": r.stability_disagreement_rate,
+        "stability_size_stdev": r.stability_size_stdev,
+    }
 
 
 if __name__ == "__main__":

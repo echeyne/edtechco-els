@@ -22,6 +22,7 @@ Inputs (all under paper/results/):
     task1_<RUN_TAG>/task1b_fp_audit_SIGNED.json  verified precision, golden four
     task2_<RUN_TAG>/nv_fp_audit_SIGNED.json      verified precision, held-out
     task3_<RUN_TAG>/ablation_comparison.json     depth-map on/off
+    task4_<BASELINE_TAG>/baseline_comparison.json  rule-based baseline vs LLM
     task3_stability_<STABILITY_TAG>/stability_analysis.json   (optional)
     corpus_tiers.json
 
@@ -29,6 +30,7 @@ Outputs:
     paper/tables/detector_headline.tex
     paper/tables/parser_headline.tex
     paper/tables/ablation_depthmap.tex
+    paper/tables/baseline_comparison.tex
 
 Usage (from repo root):
     python paper/analysis/generate_tables.py
@@ -44,6 +46,7 @@ TABLES_DIR = PAPER_DIR / "tables"
 # The recorded freeze these tables describe. Edit ONLY this after a re-record.
 RUN_TAG = "20260822"
 STABILITY_TAG = "20260823"
+BASELINE_TAG = "20260823"
 
 # Runs that have been superseded. Pointing RUN_TAG at one of these is almost
 # always a mistake -- the whole reason this constant exists.
@@ -186,6 +189,89 @@ def build_ablation_table(abl, stab):
     return "\n".join(L) + "\n"
 
 
+def build_baseline_table(cmp_):
+    """Rule-based baseline vs LLM detector, per state and pooled by level.
+
+    ⚠️ RAW precision is printed for BOTH arms, never verified precision for
+    either. See compare_baseline.py's docstring: the FP audit's verdicts turn
+    on whether a title appears in the source text, so a rule-based extractor --
+    which copies text verbatim and cannot invent -- scores ~1.000 by
+    construction. Printing that beside the LLM's 0.9966 would read as the
+    baseline being the more faithful system.
+    """
+    L = header(f"paper/results/task4_{BASELINE_TAG}/baseline_comparison.json")
+    ps = cmp_["per_state"]
+    states = [s for s in ALL_STATES if ps.get(s, {}).get("status") == "OK"]
+
+    L += [r"\begin{table*}", r"  \centering", r"  \begin{tabular}{lrrrrrrr}", r"    \hline",
+          r"    & \multicolumn{2}{c}{\textbf{Recall}} & "
+          r"\multicolumn{2}{c}{\textbf{Raw precision}} & "
+          r"\multicolumn{2}{c}{\textbf{Code acc.}} & \\",
+          r"    \textbf{State} & \textbf{LLM} & \textbf{Rule} & \textbf{LLM} & "
+          r"\textbf{Rule} & \textbf{LLM} & \textbf{Rule} & "
+          r"\textbf{Rule: found, wrong level} \\", r"    \hline"]
+    for st in states:
+        d = ps[st]
+        l, b = d["llm"], d["baseline"]
+        fd = b.get("failure_decomposition") or {}
+        wrong = (f"{fd.get('found_but_wrong_level', 0)}/{fd.get('n_golden', 0)}"
+                 if fd else "--")
+        L.append(f"    {st} & {fmt_pct(l['recall'])} & {fmt_pct(b['recall'])} & "
+                 f"{fmt_pct(l['raw_precision'])} & {fmt_pct(b['raw_precision'])} & "
+                 f"{l['code_matches']}/{l['code_total']} & "
+                 f"{b['code_matches']}/{b['code_total']} & {wrong} \\\\")
+    L += [r"    \hline"]
+
+    pooled = cmp_["aggregate"]["pooled_by_level"]
+    L += [r"    \multicolumn{8}{l}{\emph{Pooled recall by level, all six states}} \\",
+          r"    \hline"]
+    for lv in ("domain", "strand", "sub_strand", "indicator"):
+        v = pooled.get(lv)
+        if not v:
+            continue
+        L.append(rf"    {esc(lv)} & {fmt_pct(v['llm_recall'])} & "
+                 rf"{fmt_pct(v['baseline_recall'])} & "
+                 rf"\multicolumn{{5}}{{l}}{{LLM {v['llm_tp']}/{v['llm_tp'] + v['llm_fn']}, "
+                 rf"rule-based {v['baseline_tp']}/{v['baseline_tp'] + v['baseline_fn']}}} \\")
+    L += [r"    \hline", r"  \end{tabular}"]
+
+    probe = cmp_.get("brittleness_probe", {}).get("per_state", {})
+    probe_txt = ""
+    moved = []
+    for st, arms in probe.items():
+        lo = arms.get("as_recorded", {}).get("recall")
+        hi = arms.get("widened_numbering_and_midline_labels", {}).get("recall")
+        if lo is not None and hi is not None and hi - lo > 0.01:
+            moved.append(rf"{st} {lo * 100:.1f}\%$\rightarrow${hi * 100:.1f}\%")
+    if moved:
+        probe_txt = (r" A post-hoc probe widening two of the baseline's patterns to "
+                     r"admit token shapes only the held-out documents use recovers "
+                     + ", ".join(moved) +
+                     r"; the widenings are \emph{not} adopted, since they were "
+                     r"motivated by the held-out set itself. Even repaired, the "
+                     r"rule-based arm does not approach the LLM's recall.")
+
+    L += [r"  \caption{Rule-based baseline versus the LLM detector, graded by the "
+          r"\emph{same} suite against the \emph{same} goldens "
+          r"(Table~\ref{tab:detector-headline}). The baseline is document-agnostic: numbering "
+          r"depth, structural label words, ALL-CAPS and font-size cues from the "
+          r"bounding boxes, and column-aware reading order. It was developed against "
+          r"the four golden states only; NV and KY were first scored in the recorded "
+          r"run. \textbf{Raw precision is shown for both arms and is not a quality "
+          r"measure} except for KY, whose golden is detection-exhaustive: elsewhere "
+          r"it tracks annotation coverage, and it rewards under-emission, which is "
+          r"why the rule-based arm can exceed the LLM on AZ while finding fewer "
+          r"elements. Verified precision is not compared at all: the false-positive "
+          r"audit asks whether a title appears in the source text, and a rule-based "
+          r"extractor copies text rather than inventing it, so it scores near 1.000 "
+          r"by construction (\S\ref{sec:discussion-limitations})." + probe_txt +
+          r" All numbers are on the \emph{\_only\_subset} corpus tier (8--15pp "
+          r"manually trimmed subsets), never full documents. "
+          rf"Source: \texttt{{paper/results/task4\_{BASELINE_TAG}/}}.}}",
+          r"  \label{tab:baseline-comparison}", r"\end{table*}"]
+    return "\n".join(L) + "\n"
+
+
 def verified_precision_by_state():
     """Read the SIGNED audits. These files exist precisely because regenerating
     the evidence JSON resets `verified_by` to UNSIGNED, so they -- not
@@ -216,6 +302,8 @@ def main():
     abl = load_json(RESULTS_DIR / f"task3_{RUN_TAG}" / "ablation_comparison.json")
     sp = RESULTS_DIR / f"task3_stability_{STABILITY_TAG}" / "stability_analysis.json"
     stab = load_json(sp) if sp.exists() else None
+    bp = RESULTS_DIR / f"task4_{BASELINE_TAG}" / "baseline_comparison.json"
+    baseline = load_json(bp) if bp.exists() else None
 
     det = {**t1["detector"], **t2["detector"]}
     par = {**t1["parser"], **t2["parser"]}
@@ -229,12 +317,17 @@ def main():
         ("parser_headline.tex", build_parser_table(par, tiers)),
         ("ablation_depthmap.tex", build_ablation_table(abl, stab)),
     ]
+    if baseline:
+        written.append(("baseline_comparison.tex", build_baseline_table(baseline)))
     for name, body in written:
         (TABLES_DIR / name).write_text(body)
         print(f"wrote {TABLES_DIR / name}")
     if stab is None:
         print("NOTE: no stability_analysis.json found; ablation caption omits the "
               "repeated-run ranges.")
+    if baseline is None:
+        print(f"NOTE: no task4_{BASELINE_TAG}/baseline_comparison.json found; "
+              "the baseline comparison table was not generated.")
 
 
 if __name__ == "__main__":

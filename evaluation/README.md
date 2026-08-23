@@ -105,6 +105,36 @@ files). `eval_detector` takes `--extraction-dir`; `eval_parser` takes
 See the docstring at the top of `evaluation/eval_detector.py` and
 `evaluation/eval_parser.py` for the full metric set and configuration knobs.
 
+## The rule-based baseline (`evaluation/baselines/`)
+
+`evaluation/baselines/rule_based.py` is a regex/heuristic structure extractor
+built for the arXiv paper's Task 4, so the paper can quantify the LLM lift. It
+takes the same `list[TextBlock]` and returns the same `DetectionResult` as
+`detect_structure`, and it is graded by **this** suite — `eval_baseline` injects
+it into `eval_detector.evaluate_state` via `detect_fn` rather than grading it
+itself, so both arms come out of the same `grade_elements` against the same
+goldens.
+
+```sh
+python -m evaluation.baselines.eval_baseline --extraction-dir outputs/08-22-26-4
+python -m evaluation.baselines.eval_baseline --extraction-dir outputs/08-22-26-4 \
+    --state CA --report-json /tmp/base.json --output-dir /tmp/review
+```
+
+It uses no Bedrock and is deterministic, so there is no cache and no
+`--stability-runs`; it has no Pass-1, so the depth map reports **ABLATED**
+rather than FAIL.
+
+⚠️ **It is a throwaway, and it is not a licence to move rule-driven logic into
+`detector.py` / `parser.py`** — see CLAUDE.md's design direction. Two properties
+keep its numbers meaningful and must survive any edit: it carries **no
+per-document branch** (enforced by
+`tests/unit/test_baseline_rule_based.py::test_no_state_name_appears_in_the_source`),
+and it was developed against **AZ/CA/CO/TX only**, with NV and KY held out until
+the recorded run. Tuning it against a held-out state would void the
+generalization comparison it exists to support. Results and the caveats that
+must travel with them: `paper/results/task4_20260823/findings.md`.
+
 ## Dimensions graded outside P/R/F1 (detector)
 
 Precision/recall/F1 answer "was the right element found, at the right level?".

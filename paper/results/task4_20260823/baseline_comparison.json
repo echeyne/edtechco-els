@@ -1,0 +1,4030 @@
+{
+  "task": "Task 4 \u2014 rule-based baseline vs LLM detector",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). AZ 15pp, CA 13pp, CO 10pp, TX 9pp, NV 15pp of 98, KY 8pp of 120.",
+  "grading": "Both arms graded by evaluation/eval_detector.grade_elements against evaluation/ground_truth_detector/{STATE}.json. The baseline arm runs through eval_detector.evaluate_state with detect_fn injected; no second grader exists.",
+  "precision_caveat": "RAW precision is reported for BOTH arms and is NOT detector quality (guardrail 8) except for KY, whose golden is detection-exhaustive. Verified precision is deliberately NOT compared: fp_audit's verdicts turn on whether a title appears in the extraction, and a rule-based extractor copies text verbatim and so cannot hallucinate by construction. Its verified precision is therefore ~1.000 and means nothing about its quality.",
+  "invalid_states": [],
+  "per_state": {
+    "AZ": {
+      "status": "OK",
+      "n_golden": 5,
+      "llm": {
+        "recall": 1.0,
+        "raw_precision": 0.4166666666666667,
+        "n_detected": 66,
+        "in_scope_detections": 12,
+        "matched": 5,
+        "code_accuracy": 1.0,
+        "code_matches": 4,
+        "code_total": 4,
+        "description_accuracy": 1.0,
+        "description_matches": 4,
+        "description_total": 4,
+        "depth_map_passed": true,
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 2,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.3333
+          },
+          "indicator": {
+            "tp": 2,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.3333
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 5,
+          "titles_found": 5,
+          "title_recall": 1.0,
+          "correct_level_among_found": 5,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        }
+      },
+      "baseline": {
+        "recall": 0.8,
+        "raw_precision": 0.5,
+        "n_detected": 103,
+        "in_scope_detections": 8,
+        "matched": 4,
+        "code_accuracy": 1.0,
+        "code_matches": 3,
+        "code_total": 3,
+        "description_accuracy": 0.3333333333333333,
+        "description_matches": 1,
+        "description_total": 3,
+        "depth_map_passed": null,
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "strand": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 1,
+            "fp": 3,
+            "fn": 1,
+            "recall": 0.5,
+            "precision": 0.25
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 5,
+          "titles_found": 4,
+          "title_recall": 0.8,
+          "correct_level_among_found": 4,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        },
+        "failure_decomposition": {
+          "n_golden": 5,
+          "title_not_found": 1,
+          "found_but_wrong_level": 0,
+          "right_level_but_age_band_differs": 0,
+          "fully_matched": 4,
+          "note": "title_not_found + found_but_wrong_level + right_level_but_age_band_differs + fully_matched == n_golden"
+        }
+      },
+      "recall_delta": 0.2
+    },
+    "CA": {
+      "status": "OK",
+      "n_golden": 25,
+      "llm": {
+        "recall": 1.0,
+        "raw_precision": 0.20491803278688525,
+        "n_detected": 122,
+        "in_scope_detections": 122,
+        "matched": 25,
+        "code_accuracy": 1.0,
+        "code_matches": 25,
+        "code_total": 25,
+        "description_accuracy": 1.0,
+        "description_matches": 14,
+        "description_total": 14,
+        "depth_map_passed": true,
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 3,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.4286
+          },
+          "sub_strand": {
+            "tp": 5,
+            "fp": 13,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2778
+          },
+          "indicator": {
+            "tp": 14,
+            "fp": 80,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.1489
+          }
+        },
+        "regressions": {
+          "passed": 4,
+          "total": 4,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 25,
+          "titles_found": 25,
+          "title_recall": 1.0,
+          "correct_level_among_found": 25,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        }
+      },
+      "baseline": {
+        "recall": 0.64,
+        "raw_precision": 0.18181818181818182,
+        "n_detected": 90,
+        "in_scope_detections": 88,
+        "matched": 16,
+        "code_accuracy": 1.0,
+        "code_matches": 16,
+        "code_total": 16,
+        "description_accuracy": 0.6,
+        "description_matches": 3,
+        "description_total": 5,
+        "depth_map_passed": null,
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 16,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.1579
+          },
+          "strand": {
+            "tp": 3,
+            "fp": 4,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.4286
+          },
+          "sub_strand": {
+            "tp": 5,
+            "fp": 13,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2778
+          },
+          "indicator": {
+            "tp": 5,
+            "fp": 39,
+            "fn": 9,
+            "recall": 0.3571,
+            "precision": 0.1136
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 4,
+          "failed_ids": [
+            "CA-AGE-COLUMNS-EMITTED"
+          ]
+        },
+        "level_accuracy": {
+          "n_golden": 25,
+          "titles_found": 19,
+          "title_recall": 0.76,
+          "correct_level_among_found": 19,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        },
+        "failure_decomposition": {
+          "n_golden": 25,
+          "title_not_found": 6,
+          "found_but_wrong_level": 0,
+          "right_level_but_age_band_differs": 3,
+          "fully_matched": 16,
+          "note": "title_not_found + found_but_wrong_level + right_level_but_age_band_differs + fully_matched == n_golden"
+        }
+      },
+      "recall_delta": 0.36
+    },
+    "CO": {
+      "status": "OK",
+      "n_golden": 7,
+      "llm": {
+        "recall": 1.0,
+        "raw_precision": 0.16666666666666666,
+        "n_detected": 61,
+        "in_scope_detections": 42,
+        "matched": 7,
+        "code_accuracy": 1.0,
+        "code_matches": 7,
+        "code_total": 7,
+        "description_accuracy": 1.0,
+        "description_matches": 4,
+        "description_total": 4,
+        "depth_map_passed": true,
+        "per_level": {
+          "domain": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 5,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2857
+          },
+          "indicator": {
+            "tp": 3,
+            "fp": 30,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.0909
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 7,
+          "titles_found": 7,
+          "title_recall": 1.0,
+          "correct_level_among_found": 7,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        }
+      },
+      "baseline": {
+        "recall": 0.5714285714285714,
+        "raw_precision": 0.08163265306122448,
+        "n_detected": 97,
+        "in_scope_detections": 49,
+        "matched": 4,
+        "code_accuracy": 1.0,
+        "code_matches": 4,
+        "code_total": 4,
+        "description_accuracy": 0.5,
+        "description_matches": 2,
+        "description_total": 4,
+        "depth_map_passed": null,
+        "per_level": {
+          "domain": {
+            "tp": 2,
+            "fp": 6,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.25
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 38,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.05
+          },
+          "indicator": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 3,
+            "recall": 0.0,
+            "precision": 0.0
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 2,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 7,
+          "titles_found": 5,
+          "title_recall": 0.7143,
+          "correct_level_among_found": 4,
+          "level_accuracy_given_title_found": 0.8,
+          "misclassified": [
+            {
+              "test_case_id": "CO-IND-01",
+              "title": "Possess good overall health, including oral, visual, and auditory health, and be",
+              "golden_level": "indicator",
+              "detected_levels": [
+                "strand"
+              ]
+            }
+          ]
+        },
+        "failure_decomposition": {
+          "n_golden": 7,
+          "title_not_found": 2,
+          "found_but_wrong_level": 1,
+          "right_level_but_age_band_differs": 0,
+          "fully_matched": 4,
+          "note": "title_not_found + found_but_wrong_level + right_level_but_age_band_differs + fully_matched == n_golden"
+        }
+      },
+      "recall_delta": 0.4286
+    },
+    "TX": {
+      "status": "OK",
+      "n_golden": 8,
+      "llm": {
+        "recall": 1.0,
+        "raw_precision": 0.32,
+        "n_detected": 33,
+        "in_scope_detections": 25,
+        "matched": 8,
+        "code_accuracy": 1.0,
+        "code_matches": 8,
+        "code_total": 8,
+        "description_accuracy": 1.0,
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 2,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sub_strand": {
+            "tp": 1,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.5
+          },
+          "indicator": {
+            "tp": 4,
+            "fp": 16,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 8,
+          "titles_found": 8,
+          "title_recall": 1.0,
+          "correct_level_among_found": 8,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        }
+      },
+      "baseline": {
+        "recall": 0.625,
+        "raw_precision": 0.13513513513513514,
+        "n_detected": 45,
+        "in_scope_detections": 37,
+        "matched": 5,
+        "code_accuracy": 0.8,
+        "code_matches": 4,
+        "code_total": 5,
+        "description_accuracy": 0.0,
+        "description_matches": 0,
+        "description_total": 1,
+        "depth_map_passed": null,
+        "per_level": {
+          "domain": {
+            "tp": 1,
+            "fp": 9,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.1
+          },
+          "strand": {
+            "tp": 0,
+            "fp": 6,
+            "fn": 2,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "sub_strand": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 1,
+            "recall": 0.0,
+            "precision": null
+          },
+          "indicator": {
+            "tp": 4,
+            "fp": 17,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.1905
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 3,
+          "failed_ids": [
+            "TX-AGE-BAND-SET"
+          ]
+        },
+        "level_accuracy": {
+          "n_golden": 8,
+          "titles_found": 6,
+          "title_recall": 0.75,
+          "correct_level_among_found": 5,
+          "level_accuracy_given_title_found": 0.8333,
+          "misclassified": [
+            {
+              "test_case_id": "TX-SUB-01",
+              "title": "Emotional Control",
+              "golden_level": "sub_strand",
+              "detected_levels": [
+                "strand"
+              ]
+            }
+          ]
+        },
+        "failure_decomposition": {
+          "n_golden": 8,
+          "title_not_found": 2,
+          "found_but_wrong_level": 1,
+          "right_level_but_age_band_differs": 0,
+          "fully_matched": 5,
+          "note": "title_not_found + found_but_wrong_level + right_level_but_age_band_differs + fully_matched == n_golden"
+        }
+      },
+      "recall_delta": 0.375
+    },
+    "NV": {
+      "status": "OK",
+      "n_golden": 46,
+      "llm": {
+        "recall": 1.0,
+        "raw_precision": 0.8679245283018868,
+        "n_detected": 53,
+        "in_scope_detections": 53,
+        "matched": 46,
+        "code_accuracy": 0.9565217391304348,
+        "code_matches": 44,
+        "code_total": 46,
+        "description_accuracy": 0.6666666666666666,
+        "description_matches": 2,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 12,
+            "fp": 5,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.7059
+          },
+          "sub_strand": {
+            "tp": 7,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.875
+          },
+          "indicator": {
+            "tp": 24,
+            "fp": 1,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.96
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 46,
+          "titles_found": 46,
+          "title_recall": 1.0,
+          "correct_level_among_found": 46,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        }
+      },
+      "baseline": {
+        "recall": 0.06521739130434782,
+        "raw_precision": 0.16666666666666666,
+        "n_detected": 24,
+        "in_scope_detections": 18,
+        "matched": 3,
+        "code_accuracy": 0.3333333333333333,
+        "code_matches": 1,
+        "code_total": 3,
+        "description_accuracy": 0.0,
+        "description_matches": 0,
+        "description_total": 3,
+        "depth_map_passed": null,
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 11,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 0.2143
+          },
+          "strand": {
+            "tp": 0,
+            "fp": 3,
+            "fn": 12,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "sub_strand": {
+            "tp": 0,
+            "fp": 1,
+            "fn": 7,
+            "recall": 0.0,
+            "precision": 0.0
+          },
+          "indicator": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 24,
+            "recall": 0.0,
+            "precision": null
+          }
+        },
+        "regressions": {
+          "passed": 1,
+          "total": 3,
+          "failed_ids": [
+            "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+            "NV-FOUR-LEVEL-HIERARCHY"
+          ]
+        },
+        "level_accuracy": {
+          "n_golden": 46,
+          "titles_found": 3,
+          "title_recall": 0.0652,
+          "correct_level_among_found": 3,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        },
+        "failure_decomposition": {
+          "n_golden": 46,
+          "title_not_found": 43,
+          "found_but_wrong_level": 0,
+          "right_level_but_age_band_differs": 0,
+          "fully_matched": 3,
+          "note": "title_not_found + found_but_wrong_level + right_level_but_age_band_differs + fully_matched == n_golden"
+        }
+      },
+      "recall_delta": 0.9348
+    },
+    "KY": {
+      "status": "OK",
+      "n_golden": 44,
+      "llm": {
+        "recall": 1.0,
+        "raw_precision": 1.0,
+        "n_detected": 44,
+        "in_scope_detections": 44,
+        "matched": 44,
+        "code_accuracy": 1.0,
+        "code_matches": 44,
+        "code_total": 44,
+        "description_accuracy": 1.0,
+        "description_matches": 26,
+        "description_total": 26,
+        "depth_map_passed": true,
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 5,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "sub_strand": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 26,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          }
+        },
+        "regressions": {
+          "passed": 3,
+          "total": 3,
+          "failed_ids": []
+        },
+        "level_accuracy": {
+          "n_golden": 44,
+          "titles_found": 44,
+          "title_recall": 1.0,
+          "correct_level_among_found": 44,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        }
+      },
+      "baseline": {
+        "recall": 0.29545454545454547,
+        "raw_precision": 1.0,
+        "n_detected": 14,
+        "in_scope_detections": 13,
+        "matched": 13,
+        "code_accuracy": 1.0,
+        "code_matches": 13,
+        "code_total": 13,
+        "description_accuracy": null,
+        "description_matches": 0,
+        "description_total": 0,
+        "depth_map_passed": null,
+        "per_level": {
+          "domain": {
+            "tp": 3,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "strand": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 5,
+            "recall": 0.0,
+            "precision": null
+          },
+          "sub_strand": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 0,
+            "recall": 1.0,
+            "precision": 1.0
+          },
+          "indicator": {
+            "tp": 0,
+            "fp": 0,
+            "fn": 26,
+            "recall": 0.0,
+            "precision": null
+          }
+        },
+        "regressions": {
+          "passed": 2,
+          "total": 3,
+          "failed_ids": [
+            "KY-FOUR-LEVEL-HIERARCHY"
+          ]
+        },
+        "level_accuracy": {
+          "n_golden": 44,
+          "titles_found": 13,
+          "title_recall": 0.2955,
+          "correct_level_among_found": 13,
+          "level_accuracy_given_title_found": 1.0,
+          "misclassified": []
+        },
+        "failure_decomposition": {
+          "n_golden": 44,
+          "title_not_found": 31,
+          "found_but_wrong_level": 0,
+          "right_level_but_age_band_differs": 0,
+          "fully_matched": 13,
+          "note": "title_not_found + found_but_wrong_level + right_level_but_age_band_differs + fully_matched == n_golden"
+        }
+      },
+      "recall_delta": 0.7045
+    }
+  },
+  "aggregate": {
+    "states_compared": [
+      "AZ",
+      "CA",
+      "CO",
+      "TX",
+      "NV",
+      "KY"
+    ],
+    "pooled_by_level": {
+      "domain": {
+        "llm_recall": 1.0,
+        "baseline_recall": 1.0,
+        "llm_tp": 13,
+        "llm_fn": 0,
+        "baseline_tp": 13,
+        "baseline_fn": 0
+      },
+      "strand": {
+        "llm_recall": 1.0,
+        "baseline_recall": 0.24,
+        "llm_tp": 25,
+        "llm_fn": 0,
+        "baseline_tp": 6,
+        "baseline_fn": 19
+      },
+      "sub_strand": {
+        "llm_recall": 1.0,
+        "baseline_recall": 0.6667,
+        "llm_tp": 24,
+        "llm_fn": 0,
+        "baseline_tp": 16,
+        "baseline_fn": 8
+      },
+      "indicator": {
+        "llm_recall": 1.0,
+        "baseline_recall": 0.137,
+        "llm_tp": 73,
+        "llm_fn": 0,
+        "baseline_tp": 10,
+        "baseline_fn": 63
+      }
+    },
+    "mean_recall_llm": 1.0,
+    "mean_recall_baseline": 0.4995
+  },
+  "baseline_fp_audit": {
+    "note": "Run so the claim above is measured rather than asserted. A near-1.000 verified precision here is the EXPECTED and UNINFORMATIVE result \u2014 it reflects that rules copy text rather than invent it, not that the baseline is accurate. Do not put it in a table beside the LLM's.",
+    "verified_by": "claude-first-pass-UNSIGNED",
+    "per_state": {
+      "AZ": {
+        "n_in_scope_detections": 5,
+        "n_extras_audited": 4,
+        "counts_by_verdict": {
+          "real_repeat_of_matched": 1,
+          "real_unannotated": 3,
+          "real_split_title": 0,
+          "hallucinated": 0
+        },
+        "hallucination_count": 0,
+        "verified_precision": 1.0,
+        "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+        "verdicts": [
+          {
+            "state": "AZ",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social Emotional Development",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "title_spans_found_in_order": [
+              {
+                "span": "Social",
+                "found": true
+              },
+              {
+                "span": "Emotional Development",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 28,
+            "needs_human_check": false
+          },
+          {
+            "state": "AZ",
+            "level": "indicator",
+            "code": "b",
+            "title": "Makes personal preferences known to others.",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "AZ",
+            "level": "indicator",
+            "code": "d",
+            "title": "Displays an awareness of similarities and differences between self and others.",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "AZ",
+            "level": "indicator",
+            "code": "e",
+            "title": "Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          }
+        ]
+      },
+      "CA": {
+        "n_in_scope_detections": 88,
+        "n_extras_audited": 72,
+        "counts_by_verdict": {
+          "real_repeat_of_matched": 17,
+          "real_unannotated": 39,
+          "real_split_title": 11,
+          "hallucinated": 5
+        },
+        "hallucination_count": 5,
+        "verified_precision": 0.9432,
+        "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+        "verdicts": [
+          {
+            "state": "CA",
+            "level": "strand",
+            "code": "Strand 1.0",
+            "title": "Motivation to Learn",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "CI",
+            "title": "Curiosity and Interest",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.1",
+            "title": "Curiosity and Interest",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "INIT",
+            "title": "Initiative",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "ENGA",
+            "title": "Engagement",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.3",
+            "title": "Engagement",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "PERS",
+            "title": "Perseverance",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.4",
+            "title": "Persisting Despite Difficulties",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "WM",
+            "title": "Working Memory",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.1",
+            "title": "Working Memory",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.2",
+            "title": "Managing Impulsive Behaviors",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.3",
+            "title": "Managing Attention and Distractions",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "FLEX",
+            "title": "Flexibility",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.4",
+            "title": "Flexibility",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "strand",
+            "code": "Strand 3.0",
+            "title": "Goal-Directed Learning",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "PROB",
+            "title": "Problem-Solving",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 3.1",
+            "title": "Planning",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 3.2",
+            "title": "Reflecting and Analyzing",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "CE",
+            "title": "- Collaborative Effort",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 3.3",
+            "title": "Problem-Solving Together",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 3.4",
+            "title": "Understanding Others",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "AL",
+            "title": "Approaches to Learning",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "FLD",
+            "title": "Foundational Language Development",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.2",
+            "title": "Understanding and Using Words for Categories",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.2",
+            "title": "Understanding and Using Words for Categories",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.2",
+            "title": "Understanding and Using Words for Categories",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.3",
+            "title": "Understanding and Using Size and Location Words",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.3",
+            "title": "Understanding and Using Size and Location Words",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "FLD",
+            "title": "Foundational Language Development",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.4",
+            "title": "Using Grammatical Features and Sentence Structure*",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.5",
+            "title": "Asking Questions",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.6",
+            "title": "Constructing Narratives",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.7",
+            "title": "Sharing Explanations and Opinions",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "strand",
+            "code": "Strand 2.0",
+            "title": "Foundational Literacy Skills",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "PA",
+            "title": "Phonological Awareness",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.1",
+            "title": "Isolating Initial Sounds",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.2",
+            "title": "Recognizing and Blending Sounds*",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.3",
+            "title": "Participating in Rhyming and Wordplay",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "FLD",
+            "title": "Foundational Language Development",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "FLD",
+            "title": "Foundational Language Development",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "page": 9,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.1",
+            "title": "Understanding Words Discovering Pay attention to English oral language and understand a few common English words, while relying mainly on intonation, facial expressions, and gestures of the speaker in interactions with adults and peers.",
+            "page": 9,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 592 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Understanding and Using Vocabulary",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Understanding Words",
+                "found": true
+              },
+              {
+                "span": "Discovering Pay attention to English oral",
+                "found": true
+              },
+              {
+                "span": "language and understand",
+                "found": true
+              },
+              {
+                "span": "a few common English words, while relying",
+                "found": true
+              },
+              {
+                "span": "mainly on intonation, facial",
+                "found": true
+              },
+              {
+                "span": "expressions, and gestures of the speaker in interactions",
+                "found": true
+              },
+              {
+                "span": "with adults and peers",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 592,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.2",
+            "title": "Using Words Discovering Use English words, mainly consisting of concrete nouns.",
+            "page": 9,
+            "title_contiguous_in_extraction": false,
+            "verdict": "hallucinated",
+            "reason": "title does not repeat a matched element, is not contiguous, AND its spans cannot be reconstructed in reading order anywhere in the extraction - the signature of an invented tail. Confirm against the PDF before counting it.",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Initiative",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Using Words",
+                "found": true
+              },
+              {
+                "span": "Discovering Use",
+                "found": true
+              },
+              {
+                "span": "English words, mainly",
+                "found": true
+              },
+              {
+                "span": "consisting of concrete nouns",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": null,
+            "needs_human_check": true
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.3",
+            "title": "Using Grammatical Features Discovering Use one or two familiar English verbs as all- purpose verbs, with some inaccuracies.",
+            "page": 9,
+            "title_contiguous_in_extraction": false,
+            "verdict": "hallucinated",
+            "reason": "title does not repeat a matched element, is not contiguous, AND its spans cannot be reconstructed in reading order anywhere in the extraction - the signature of an invented tail. Confirm against the PDF before counting it.",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Using Grammatical Features",
+                "found": true
+              },
+              {
+                "span": "Discovering Use",
+                "found": true
+              },
+              {
+                "span": "one or two familiar",
+                "found": true
+              },
+              {
+                "span": "English verbs as all-",
+                "found": true
+              },
+              {
+                "span": "purpose verbs, with some",
+                "found": true
+              },
+              {
+                "span": "inaccuracies",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": null,
+            "needs_human_check": true
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.4",
+            "title": "Using Complex Sentence Structures Discovering Use words or phrases repeatedly experienced in English to communicate.",
+            "page": 10,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 285 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Using Complex Sentence Structures",
+                "found": true
+              },
+              {
+                "span": "Discovering Use",
+                "found": true
+              },
+              {
+                "span": "words or phrases",
+                "found": true
+              },
+              {
+                "span": "repeatedly experienced in",
+                "found": true
+              },
+              {
+                "span": "English to communicate",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 285,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "LU",
+            "title": "Language Use",
+            "page": 10,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.5",
+            "title": "Communicating Needs Discovering Use single English words and nonverbal communication with English speakers, such as gestures or behaviors, to seek attention, make a request, or initiate a response.",
+            "page": 10,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 411 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Communicating Needs",
+                "found": true
+              },
+              {
+                "span": "Discovering Use single English words and",
+                "found": true
+              },
+              {
+                "span": "nonverbal communication",
+                "found": true
+              },
+              {
+                "span": "with English speakers, such as gestures or behaviors,",
+                "found": true
+              },
+              {
+                "span": "to seek attention, make",
+                "found": true
+              },
+              {
+                "span": "a request, or initiate a response",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 411,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.6",
+            "title": "Understanding Requests and Directions Discovering Follow simple directions in English when given additional contextual clues.",
+            "page": 10,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 284 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Understanding Requests and Directions",
+                "found": true
+              },
+              {
+                "span": "Discovering Follow",
+                "found": true
+              },
+              {
+                "span": "simple directions",
+                "found": true
+              },
+              {
+                "span": "in English when given",
+                "found": true
+              },
+              {
+                "span": "additional contextual clues",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 284,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "page": 10,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.7",
+            "title": "Asking Questions Discovering Use a frequently experienced question phrase (such as \"What's that?\") or use one or two English words with a rising pitch to ask questions.",
+            "page": 11,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 6284 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Sharing Explanations and Opinions",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Asking Questions",
+                "found": true
+              },
+              {
+                "span": "Discovering Use a",
+                "found": true
+              },
+              {
+                "span": "frequently experienced",
+                "found": true
+              },
+              {
+                "span": "question phrase (such as",
+                "found": true
+              },
+              {
+                "span": "\"What's that?\") or use one",
+                "found": true
+              },
+              {
+                "span": "or two English words with a",
+                "found": true
+              },
+              {
+                "span": "rising pitch to ask questions",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 6284,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.8",
+            "title": "Constructing Narratives Discovering Identify parts of real or fictional narratives using a few English vocabulary words.",
+            "page": 11,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 362 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Participating in Conversations",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Constructing Narratives",
+                "found": true
+              },
+              {
+                "span": "Discovering Identify parts of real or",
+                "found": true
+              },
+              {
+                "span": "fictional narratives using",
+                "found": true
+              },
+              {
+                "span": "a few English vocabulary",
+                "found": true
+              },
+              {
+                "span": "words",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 362,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.9",
+            "title": "Sharing Explanations and Opinions Discovering Use English vocabulary and gestures to share descriptions, opinions, and explanations.",
+            "page": 11,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 295 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Sharing Explanations and Opinions",
+                "found": true
+              },
+              {
+                "span": "Discovering Use",
+                "found": true
+              },
+              {
+                "span": "English vocabulary",
+                "found": true
+              },
+              {
+                "span": "and gestures to share",
+                "found": true
+              },
+              {
+                "span": "descriptions, opinions, and explanations",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 295,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 1.10",
+            "title": "Participating in Conversations Discovering Engage in conversation with English speakers, by mostly listening and responding with a few English words, gestures, or other nonverbal responses.",
+            "page": 11,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 500 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Participating in Conversations",
+                "found": true
+              },
+              {
+                "span": "Discovering Engage in conversation with",
+                "found": true
+              },
+              {
+                "span": "English speakers, by mostly",
+                "found": true
+              },
+              {
+                "span": "listening and responding",
+                "found": true
+              },
+              {
+                "span": "with a few English words,",
+                "found": true
+              },
+              {
+                "span": "gestures, or other nonverbal",
+                "found": true
+              },
+              {
+                "span": "responses",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 500,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "page": 11,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "strand",
+            "code": "Strand 2.0",
+            "title": "Foundational Literacy Skills",
+            "page": 12,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "PA",
+            "title": "Phonological Awareness",
+            "page": 12,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.1",
+            "title": "Recognizing and Segmenting Sounds Discovering Recognize and produce sounds of spoken English.",
+            "page": 12,
+            "title_contiguous_in_extraction": false,
+            "verdict": "hallucinated",
+            "reason": "title does not repeat a matched element, is not contiguous, AND its spans cannot be reconstructed in reading order anywhere in the extraction - the signature of an invented tail. Confirm against the PDF before counting it.",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Recognizing and Segmenting Sounds",
+                "found": true
+              },
+              {
+                "span": "Discovering Recognize",
+                "found": true
+              },
+              {
+                "span": "and produce sounds of spoken English",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": null,
+            "needs_human_check": true
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.2",
+            "title": "Recognizing and Blending Sounds Discovering Recognize and produce sounds of spoken English.",
+            "page": 12,
+            "title_contiguous_in_extraction": false,
+            "verdict": "hallucinated",
+            "reason": "title does not repeat a matched element, is not contiguous, AND its spans cannot be reconstructed in reading order anywhere in the extraction - the signature of an invented tail. Confirm against the PDF before counting it.",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Recognizing and Blending Sounds",
+                "found": true
+              },
+              {
+                "span": "Discovering Recognize",
+                "found": true
+              },
+              {
+                "span": "and produce sounds of spoken English",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": null,
+            "needs_human_check": true
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.3",
+            "title": "Participating in Rhyming and Wordplay Discovering Attend to and participate in frequently experienced simple songs, poems, and fingerplays in English, with gestures and some key words.",
+            "page": 12,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 408 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Participating in Rhyming and Wordplay",
+                "found": true
+              },
+              {
+                "span": "Discovering",
+                "found": true
+              },
+              {
+                "span": "Attend to and participate",
+                "found": true
+              },
+              {
+                "span": "in frequently experienced simple songs, poems, and",
+                "found": true
+              },
+              {
+                "span": "fingerplays in English, with",
+                "found": true
+              },
+              {
+                "span": "gestures and some key words",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 408,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "page": 12,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "AP",
+            "title": "Alphabetics and Print*",
+            "page": 13,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.4",
+            "title": "Recognizing and Identifying Letters Discovering Recognize the first letter in their own name in the English alphabet.",
+            "page": 13,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 260 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Recognizing and Identifying Letters",
+                "found": true
+              },
+              {
+                "span": "Discovering Recognize the first letter",
+                "found": true
+              },
+              {
+                "span": "in their own name in the",
+                "found": true
+              },
+              {
+                "span": "English alphabet",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 260,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.5",
+            "title": "Learning Letter-Sound Correspondence Discovering Demonstrate awareness that English alphabet letters have sounds.",
+            "page": 13,
+            "title_contiguous_in_extraction": false,
+            "verdict": "hallucinated",
+            "reason": "title does not repeat a matched element, is not contiguous, AND its spans cannot be reconstructed in reading order anywhere in the extraction - the signature of an invented tail. Confirm against the PDF before counting it.",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Learning Letter-Sound Correspondence",
+                "found": true
+              },
+              {
+                "span": "Discovering Demonstrate awareness",
+                "found": true
+              },
+              {
+                "span": "that",
+                "found": true
+              },
+              {
+                "span": "English alphabet letters have",
+                "found": true
+              },
+              {
+                "span": "sounds",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": null,
+            "needs_human_check": true
+          },
+          {
+            "state": "CA",
+            "level": "sub_strand",
+            "code": "CP",
+            "title": "Concepts About Print*",
+            "page": 13,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CA",
+            "level": "indicator",
+            "code": "Foundation 2.6",
+            "title": "Understanding the Concept of Print Discovering Interact with materials",
+            "page": 13,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 144 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Understanding the Concept of Print",
+                "found": true
+              },
+              {
+                "span": "Discovering",
+                "found": true
+              },
+              {
+                "span": "Interact with materials",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 144,
+            "needs_human_check": false
+          },
+          {
+            "state": "CA",
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "page": 13,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          }
+        ]
+      },
+      "CO": {
+        "n_in_scope_detections": 49,
+        "n_extras_audited": 45,
+        "counts_by_verdict": {
+          "real_repeat_of_matched": 6,
+          "real_unannotated": 9,
+          "real_split_title": 30,
+          "hallucinated": 0
+        },
+        "hallucination_count": 0,
+        "verified_precision": 1.0,
+        "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+        "verdicts": [
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 259 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Health, Safety and Nutrition",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Possess good overall health, including",
+                "found": true
+              },
+              {
+                "span": "oral, visual, and auditory health,",
+                "found": true
+              },
+              {
+                "span": "and be free from communicable or",
+                "found": true
+              },
+              {
+                "span": "preventable diseases",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 259,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 262 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Participate in prevention and",
+                "found": true
+              },
+              {
+                "span": "management of chronic health",
+                "found": true
+              },
+              {
+                "span": "conditions and avoid toxins, such as",
+                "found": true
+              },
+              {
+                "span": "lead",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 262,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 304 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Maintain physical growth within the",
+                "found": true
+              },
+              {
+                "span": "Centers for Disease Control and",
+                "found": true
+              },
+              {
+                "span": "Prevention (CDC) recommended ranges for weight by height by age",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 304,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "4",
+            "title": "Get sufficient rest and exercise to support healthy development.*",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "5",
+            "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.*",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 381 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Complete personal care tasks, such",
+                "found": true
+              },
+              {
+                "span": "as dressing, brushing teeth, toileting,",
+                "found": true
+              },
+              {
+                "span": "and washing hands independently",
+                "found": true
+              },
+              {
+                "span": "from adults.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 381,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "6",
+            "title": "Communicate an understanding of the importance of health and safety routines and rules.*",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 235 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Communicate an understanding of",
+                "found": true
+              },
+              {
+                "span": "the importance of health and safety",
+                "found": true
+              },
+              {
+                "span": "routines and rules.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 235,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "7",
+            "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.*",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 222 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Follow basic health and safety rules",
+                "found": true
+              },
+              {
+                "span": "and respond appropriately to harmful",
+                "found": true
+              },
+              {
+                "span": "or unsafe situations.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 222,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "8",
+            "title": "Distinguish food on a continuum from most healthy to less healthy.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 121 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Distinguish food on a continuum",
+                "found": true
+              },
+              {
+                "span": "from most healthy to less healthy",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 121,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "9",
+            "title": "Eat a variety of nutritious foods.",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "10",
+            "title": "Participate in structured and unstructured physical activities.*",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 186 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Participate in structured and",
+                "found": true
+              },
+              {
+                "span": "unstructured physical activities.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 186,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "11",
+            "title": "Recognize the importance of doctor and dentist visits.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 95 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Recognize the importance of doctor",
+                "found": true
+              },
+              {
+                "span": "and dentist visits",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 95,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "12",
+            "title": "Cooperate during doctor and dentist visits and health and developmental screening.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 174 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Cooperate during doctor and dentist",
+                "found": true
+              },
+              {
+                "span": "visits and health and developmental",
+                "found": true
+              },
+              {
+                "span": "screening",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 174,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Gross Motor Skills",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.*",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 307 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Health, Safety and Nutrition",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Develop motor control and balance",
+                "found": true
+              },
+              {
+                "span": "for a range of physical activities, such",
+                "found": true
+              },
+              {
+                "span": "as walking, propelling a wheelchair",
+                "found": true
+              },
+              {
+                "span": "or mobility device, skipping, running, climbing, and hopping.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 307,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Develop motor coordination and",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "indicator",
+            "code": "UORPA",
+            "title": "in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 350 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "in using objects for a range of",
+                "found": true
+              },
+              {
+                "span": "physical activities, such as pulling,",
+                "found": true
+              },
+              {
+                "span": "throwing, catching, kicking, bouncing",
+                "found": true
+              },
+              {
+                "span": "or hitting balls, and riding a tricycle",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 350,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.*",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 330 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Understand movement concepts,",
+                "found": true
+              },
+              {
+                "span": "such as control of the body, how the",
+                "found": true
+              },
+              {
+                "span": "body moves (such as an awareness of",
+                "found": true
+              },
+              {
+                "span": "space and directionality), and that the body can move independently or in coordination with other objects.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 330,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "domain",
+            "code": "PDH",
+            "title": "Physical Development & Health",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Fine Motor Skills",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Develop hand strength and dexterity.",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 268 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Develop eye-hand coordination to",
+                "found": true
+              },
+              {
+                "span": "use everyday tools, such as pitchers",
+                "found": true
+              },
+              {
+                "span": "for pouring or utensils for eating",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 268,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Manipulate a range of objects, such as blocks or books.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 127 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Manipulate a range of objects, such",
+                "found": true
+              },
+              {
+                "span": "as blocks or books",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 127,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "4",
+            "title": "Manipulate writing, drawing, and art tools.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 146 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Emotional and Behavioral Self-Regulation",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Manipulate writing, drawing, and art",
+                "found": true
+              },
+              {
+                "span": "tools",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 146,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social & Emotional Development",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social & Emotional Development",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Relationships with Adults and Peers",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Engage in and maintains positive relationships and interactions with adults.*",
+            "page": 6,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 271 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Health, Safety and Nutrition",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Engage in and maintains",
+                "found": true
+              },
+              {
+                "span": "positive relationships and",
+                "found": true
+              },
+              {
+                "span": "interactions with adults.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 271,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Engage in prosocial and cooperative behavior with adults.*",
+            "page": 6,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 241 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Engage in prosocial and",
+                "found": true
+              },
+              {
+                "span": "cooperative behavior with",
+                "found": true
+              },
+              {
+                "span": "adults.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 241,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Engage in and maintains positive interactions and relationships with other children.*",
+            "page": 6,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 356 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Engage in and maintains",
+                "found": true
+              },
+              {
+                "span": "positive interactions and",
+                "found": true
+              },
+              {
+                "span": "relationships with other",
+                "found": true
+              },
+              {
+                "span": "children.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 356,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "4",
+            "title": "Engage in cooperative play with other children.",
+            "page": 6,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 98 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Emotional and Behavioral Self-Regulation",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Engage in cooperative play",
+                "found": true
+              },
+              {
+                "span": "with other children",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 98,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "5",
+            "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+            "page": 6,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 132 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Use basic problem-solving",
+                "found": true
+              },
+              {
+                "span": "skills to resolve conflicts",
+                "found": true
+              },
+              {
+                "span": "with other children",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 132,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social & Emotional Development",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Sense of Identity and Belonging",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.*",
+            "page": 7,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 346 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Health, Safety and Nutrition",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Recognize self as a unique",
+                "found": true
+              },
+              {
+                "span": "individual having own",
+                "found": true
+              },
+              {
+                "span": "abilities, characteristics,",
+                "found": true
+              },
+              {
+                "span": "emotions, and interests.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 346,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Express confidence in own skills and positive feelings about self.*",
+            "page": 7,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 249 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Express confidence in own",
+                "found": true
+              },
+              {
+                "span": "skills and positive feelings",
+                "found": true
+              },
+              {
+                "span": "about self.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 249,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Have a sense of belonging to family, community, and other groups.",
+            "page": 7,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 169 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Have a sense of belonging",
+                "found": true
+              },
+              {
+                "span": "to family, community, and",
+                "found": true
+              },
+              {
+                "span": "other groups",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 169,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Emotional Functioning",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Express a broad range of emotions and recognize these emotions in self and others.*",
+            "page": 7,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 274 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Health, Safety and Nutrition",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Express a broad range of",
+                "found": true
+              },
+              {
+                "span": "emotions and recognize",
+                "found": true
+              },
+              {
+                "span": "these emotions in self and",
+                "found": true
+              },
+              {
+                "span": "others.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 274,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Express care and concern toward others.",
+            "page": 7,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 135 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Express care and concern",
+                "found": true
+              },
+              {
+                "span": "toward others",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 135,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Manage emotions with increasing independence.*",
+            "page": 7,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 164 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Manage emotions with",
+                "found": true
+              },
+              {
+                "span": "increasing independence.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 164,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social & Emotional Development",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "1",
+            "title": "Follow classroom rules and routines with increasing independence.*",
+            "page": 8,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 291 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": true,
+            "twin_title": "Health, Safety and Nutrition",
+            "this_source_text_is_truncated_prefix_of_twin": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Follow classroom rules and",
+                "found": true
+              },
+              {
+                "span": "routines with increasing",
+                "found": true
+              },
+              {
+                "span": "independence.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 291,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "2",
+            "title": "Appropriately handle and take care of classroom materials.*",
+            "page": 8,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 305 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Appropriately handle and",
+                "found": true
+              },
+              {
+                "span": "take care of classroom",
+                "found": true
+              },
+              {
+                "span": "materials.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 305,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "strand",
+            "code": "3",
+            "title": "Manage actions, words, and behavior with increasing independence.*",
+            "page": 8,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 200 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Manage actions, words, and",
+                "found": true
+              },
+              {
+                "span": "behavior with increasing",
+                "found": true
+              },
+              {
+                "span": "independence.*",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 200,
+            "needs_human_check": false
+          },
+          {
+            "state": "CO",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social & Emotional Development",
+            "page": 9,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          }
+        ]
+      },
+      "TX": {
+        "n_in_scope_detections": 37,
+        "n_extras_audited": 32,
+        "counts_by_verdict": {
+          "real_repeat_of_matched": 9,
+          "real_unannotated": 12,
+          "real_split_title": 11,
+          "hallucinated": 0
+        },
+        "hallucination_count": 0,
+        "verified_precision": 1.0,
+        "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+        "verdicts": [
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "LRPSS",
+            "title": "for language, reasoning, problem solving, social skills, behavior, and emotional health. Daily experiences such as transitioning from home to school, sharing a space or materials, resolving conflicts, and demonstrating empathy contribute to a child's social and emotional development. However, childr",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "strand",
+            "code": "A",
+            "title": "Self-Concept Central to understanding emotional development is the idea of self-concept",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social and Emotional Development",
+            "page": 2,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.A.1",
+            "title": "Child is aware of where own body is in space and respects personal boundaries.",
+            "page": 2,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 109 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child is aware of where own body is in",
+                "found": true
+              },
+              {
+                "span": "space and respects personal boundaries",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 109,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "I",
+            "title": "Social and Emotional Development",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.I.A.3",
+            "title": "Child begins to show awareness of own abilities.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 51 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child begins to show awareness of own",
+                "found": true
+              },
+              {
+                "span": "abilities",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 51,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.A.3",
+            "title": "Child shows reasonable opinion of his own abilities and limitations.",
+            "page": 3,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 115 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child shows reasonable opinion of his",
+                "found": true
+              },
+              {
+                "span": "own abilities and limitations",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 115,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social and Emotional Development",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "I",
+            "title": "Social and Emotional Development",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.1.A.4",
+            "title": "Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 148 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child shows initiative in trying new activities but may not persist when obstacles",
+                "found": true
+              },
+              {
+                "span": "or challenges arise",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 148,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.A.4",
+            "title": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 196 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child shows initiative in trying new activities",
+                "found": true
+              },
+              {
+                "span": "and demonstrates perseverance when",
+                "found": true
+              },
+              {
+                "span": "attempting to overcome obstacles or challenges",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 196,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "strand",
+            "code": "B",
+            "title": "Self-Regulation Prekindergarten children feel safer and function more successfully in the classroom when rules and routines are consistently implemented. A well-organized classroom with well-prepared activities helps children expand their attention span and build self-control and personal responsibi",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social and Emotional Development",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "strand",
+            "code": "1",
+            "title": "Behavior Control",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.I.B.1.a",
+            "title": "Child follows simple rules and routines when assisted by adults.",
+            "page": 4,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 157 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child follows simple rules and routines",
+                "found": true
+              },
+              {
+                "span": "when assisted by adults",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 157,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.B.1.a",
+            "title": "Child follows classroom rules and routines with occasional reminders from adults.",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "I",
+            "title": "Social and Emotional Development",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.I.B.1.b",
+            "title": "Child takes care of and manages classroom materials with adult assistance.",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.I.B.1.c",
+            "title": "Child manages own behavior with adult guidance and assistance.",
+            "page": 5,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 109 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child manages own behavior with",
+                "found": true
+              },
+              {
+                "span": "adult guidance and assistance",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 109,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.B.1.b",
+            "title": "Child takes care of and manages classroom materials.",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.B.1.c",
+            "title": "Child regulates own behavior with occasional reminders or assistance from adults.",
+            "page": 5,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 124 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child regulates own behavior with",
+                "found": true
+              },
+              {
+                "span": "occasional reminders or assistance from adults",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 124,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social and Emotional Development",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "strand",
+            "code": "2",
+            "title": "Emotional Control",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.I.B.2.a",
+            "title": "Child recognizes and expresses a range of emotions.",
+            "page": 5,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 125 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child recognizes and expresses a range",
+                "found": true
+              },
+              {
+                "span": "of emotions",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 125,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.B.2.a",
+            "title": "Child begins to understand the connection between emotions and behaviors.",
+            "page": 5,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 85 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child begins to understand the connection between emotions and",
+                "found": true
+              },
+              {
+                "span": "behaviors",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 85,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "I",
+            "title": "Social and Emotional Development",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK3.I.B.2.c",
+            "title": "Child manages intensity of emotions with adult assistance.",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.I.B.2.c",
+            "title": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
+            "page": 6,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 182 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Child is able to manage intensity of",
+                "found": true
+              },
+              {
+                "span": "emotions more consistently, although adult guidance is sometimes necessary",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 182,
+            "needs_human_check": false
+          },
+          {
+            "state": "TX",
+            "level": "domain",
+            "code": "SED",
+            "title": "Social and Emotional Development",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "strand",
+            "code": "VI",
+            "title": "Science Domain Young children often think that events simply happen without a specific cause or effect. To mature past this developmental stage, prekindergarten children need exposure to inquiry-based science, which gives them the opportunity to explore and to make sense of their world with adult gu",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "strand",
+            "code": "A",
+            "title": "Physical Science Prekindergarten children begin to explore properties of materials, positions, and motion of objects through investigations. These explorations using the senses continue as children use attributes to classify and sort objects, make observations and predictions, problem solve, questio",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "TX",
+            "level": "indicator",
+            "code": "PK4.VI.A.1",
+            "title": "Child observes, investigates, describes, and discusses characteristics of common objects.",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          }
+        ]
+      },
+      "NV": {
+        "n_in_scope_detections": 18,
+        "n_extras_audited": 15,
+        "counts_by_verdict": {
+          "real_repeat_of_matched": 11,
+          "real_unannotated": 2,
+          "real_split_title": 2,
+          "hallucinated": 0
+        },
+        "hallucination_count": 0,
+        "verified_precision": 1.0,
+        "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+        "verdicts": [
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SS",
+            "title": "Social Studies",
+            "page": 3,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SS",
+            "title": "Social Studies",
+            "page": 4,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SS",
+            "title": "Social Studies",
+            "page": 5,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SS",
+            "title": "Social Studies",
+            "page": 6,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SCIE",
+            "title": "Science",
+            "page": 7,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SCIE",
+            "title": "Science",
+            "page": 8,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SCIE",
+            "title": "Science",
+            "page": 9,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "SCIE",
+            "title": "Science",
+            "page": 10,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "sub_strand",
+            "code": "U.S",
+            "title": "Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children.",
+            "page": 11,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "strand",
+            "code": "1",
+            "title": "Digital technology includes but is not limited to cameras, speakers, computers, tablets, keyboard and mouse, projector screens, smartboards, smartphones, etc.",
+            "page": 12,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_unannotated",
+            "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "strand",
+            "code": "2",
+            "title": "Nondigital technology includes but is not limited to make-believe or symbolic representations of a digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc.",
+            "page": 12,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 212 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Nondigital technology includes but is not limited to make-believe or symbolic representations of a",
+                "found": true
+              },
+              {
+                "span": "digital device, writing tools, books, other objects created by adults or children to help solve a problem, etc",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 212,
+            "needs_human_check": false
+          },
+          {
+            "state": "NV",
+            "level": "strand",
+            "code": "3",
+            "title": "Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen readers, voice recognition, walking canes, wheelchairs, etc. The Technology Standards include: Technology Standard 1: Demonstrate knowledge that different types of technology tools have different uses",
+            "page": 12,
+            "title_contiguous_in_extraction": false,
+            "verdict": "real_split_title",
+            "reason": "title is not contiguous, but every span reconstructs IN READING ORDER within 310 characters, which is the signature of a real title split by column interleaving rather than an invented one. An invented tail does not reconstruct in order (NV's confirmed hallucination returns no ordering at all).",
+            "verified_by": "claude-first-pass-UNSIGNED",
+            "duplicate_code_of_matched": false,
+            "title_spans_found_in_order": [
+              {
+                "span": "Assistive technology includes but is not limited to glasses, hearing aids, prosthetic limbs, screen",
+                "found": true
+              },
+              {
+                "span": "readers, voice recognition, walking canes, wheelchairs, etc.",
+                "found": true
+              },
+              {
+                "span": "The Technology Standards include: Technology Standard 1: Demonstrate knowledge that different types of technology tools have different uses",
+                "found": true
+              }
+            ],
+            "inorder_reconstruction_window_chars": 310,
+            "needs_human_check": false
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "TECH",
+            "title": "Technology",
+            "page": 13,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "TECH",
+            "title": "Technology",
+            "page": 14,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          },
+          {
+            "state": "NV",
+            "level": "domain",
+            "code": "TECH",
+            "title": "Technology",
+            "page": 15,
+            "title_contiguous_in_extraction": true,
+            "verdict": "real_repeat_of_matched",
+            "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+            "verified_by": "claude-first-pass-UNSIGNED"
+          }
+        ]
+      },
+      "KY": {
+        "n_in_scope_detections": 13,
+        "n_extras_audited": 0,
+        "counts_by_verdict": {
+          "real_repeat_of_matched": 0,
+          "real_unannotated": 0,
+          "real_split_title": 0,
+          "hallucinated": 0
+        },
+        "hallucination_count": 0,
+        "verified_precision": 1.0,
+        "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+        "verdicts": []
+      }
+    }
+  },
+  "brittleness_probe": {
+    "status": "MEASURED BUT NOT ADOPTED",
+    "why_not_adopted": "Both widenings were motivated by inspecting the held-out states AFTER the recorded run. Adopting them would make NV and KY development data and void the generalization claim they support.",
+    "per_state": {
+      "AZ": {
+        "as_recorded": {
+          "recall": 0.8,
+          "matched": 4,
+          "n_detected": 103,
+          "n_golden": 5
+        },
+        "widened_numbering": {
+          "recall": 0.8,
+          "matched": 4,
+          "n_detected": 103,
+          "n_golden": 5
+        },
+        "widened_numbering_and_midline_labels": {
+          "recall": 0.8,
+          "matched": 4,
+          "n_detected": 107,
+          "n_golden": 5
+        }
+      },
+      "CA": {
+        "as_recorded": {
+          "recall": 0.64,
+          "matched": 16,
+          "n_detected": 90,
+          "n_golden": 25
+        },
+        "widened_numbering": {
+          "recall": 0.64,
+          "matched": 16,
+          "n_detected": 90,
+          "n_golden": 25
+        },
+        "widened_numbering_and_midline_labels": {
+          "recall": 0.64,
+          "matched": 16,
+          "n_detected": 95,
+          "n_golden": 25
+        }
+      },
+      "CO": {
+        "as_recorded": {
+          "recall": 0.5714285714285714,
+          "matched": 4,
+          "n_detected": 97,
+          "n_golden": 7
+        },
+        "widened_numbering": {
+          "recall": 0.5714285714285714,
+          "matched": 4,
+          "n_detected": 97,
+          "n_golden": 7
+        },
+        "widened_numbering_and_midline_labels": {
+          "recall": 0.5714285714285714,
+          "matched": 4,
+          "n_detected": 104,
+          "n_golden": 7
+        }
+      },
+      "TX": {
+        "as_recorded": {
+          "recall": 0.625,
+          "matched": 5,
+          "n_detected": 45,
+          "n_golden": 8
+        },
+        "widened_numbering": {
+          "recall": 0.625,
+          "matched": 5,
+          "n_detected": 45,
+          "n_golden": 8
+        },
+        "widened_numbering_and_midline_labels": {
+          "recall": 0.625,
+          "matched": 5,
+          "n_detected": 52,
+          "n_golden": 8
+        }
+      },
+      "NV": {
+        "as_recorded": {
+          "recall": 0.06521739130434782,
+          "matched": 3,
+          "n_detected": 24,
+          "n_golden": 46
+        },
+        "widened_numbering": {
+          "recall": 0.5217391304347826,
+          "matched": 24,
+          "n_detected": 48,
+          "n_golden": 46
+        },
+        "widened_numbering_and_midline_labels": {
+          "recall": 0.5217391304347826,
+          "matched": 24,
+          "n_detected": 84,
+          "n_golden": 46
+        }
+      },
+      "KY": {
+        "as_recorded": {
+          "recall": 0.29545454545454547,
+          "matched": 13,
+          "n_detected": 14,
+          "n_golden": 44
+        },
+        "widened_numbering": {
+          "recall": 0.29545454545454547,
+          "matched": 13,
+          "n_detected": 14,
+          "n_golden": 44
+        },
+        "widened_numbering_and_midline_labels": {
+          "recall": 0.4090909090909091,
+          "matched": 18,
+          "n_detected": 20,
+          "n_golden": 44
+        }
+      }
+    }
+  }
+}
