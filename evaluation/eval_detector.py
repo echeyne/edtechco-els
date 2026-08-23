@@ -338,6 +338,11 @@ class StateReport:
     stability_runs: int = 0
     stability_disagreement_rate: Optional[float] = None
     stability_size_stdev: Optional[float] = None
+    # Full result from measure_stability. The two scalars above are retained so
+    # existing report consumers keep working, but they are NOT sufficient on
+    # their own -- a bare rate is what made the pre-2026-08-23 stability result
+    # misleading. Read `stability_detail` when interpreting.
+    stability_detail: Optional[dict] = None
 
     @property
     def precision(self) -> float:
@@ -512,38 +517,159 @@ def measure_stability(
     state: str,
     extraction_path: Path,
     runs: int,
-) -> Tuple[float, float]:
-    """Re-run detector `runs` times (cache disabled) and report:
-       - mean per-element level disagreement rate (matched on (code, title))
-       - stdev of output size
+    graded_elements: Optional[List[dict]] = None,
+) -> dict:
+    """Re-run the detector and report how much its output moves between runs.
+
+    REWRITTEN 2026-08-23. The previous implementation reported a reassuring
+    0.000 in the very same invocation whose graded output carried four malformed
+    ``standard_id``s, because of three separate blind spots. Each is fixed here,
+    and each is easy to reintroduce:
+
+    1. **It excluded the graded run.** It spawned N fresh runs and compared them
+       only to each other, so the run the suite actually scored was never an
+       observation. Five probe runs agreeing says nothing about the sixth.
+       ``graded_elements`` is now observation 0, which costs nothing -- that run
+       already happened.
+
+    2. **Identity was keyed on the code.** With ``(code, title)`` as the key, an
+       element whose CODE changed between runs got a different key, failed the
+       ``k in other_map`` test, and was silently skipped rather than counted as
+       a disagreement -- so the instrument was blindest to exactly the defect
+       (intermittent malformed codes) it most needed to catch. Identity is now
+       the normalized TITLE alone, and code is a compared FIELD.
+
+       ⚠️ Do not "improve" this by adding level or code back into the key. A
+       field under test cannot also be the identity: put it in the key and a
+       change to it removes the element from the comparison instead of
+       registering as instability. That is the same bug in a new place.
+
+    3. **Absence was invisible.** An element present in one run and missing from
+       another was skipped, so element churn showed up only in the size stdev.
+       Presence is now a compared dimension.
+
+    Returns a dict rather than a rate, because a bare rate is what made the
+    original result misleading: "5 runs, 0 disagreements" and "1 of 6 runs
+    differed in 8 cells" can both be true of one invocation, and only the second
+    is informative. ⚠️ **A 0.000 at small N is NOT a null result** for a defect
+    that fires in a minority of runs -- report the denominator alongside it.
     """
     import statistics
 
-    outputs: List[List[dict]] = []
+    observations: List[List[dict]] = []
+    labels: List[str] = []
+    if graded_elements is not None:
+        observations.append(graded_elements)
+        labels.append("graded")
     for i in range(runs):
-        elems = run_detector_cached(
-            state, extraction_path, use_cache=False, cache_suffix=f"stab-{i}"
+        observations.append(
+            run_detector_cached(
+                state, extraction_path, use_cache=False, cache_suffix=f"stab-{i}"
+            )
         )
-        outputs.append(elems)
+        labels.append(f"probe-{i}")
 
-    sizes = [len(o) for o in outputs]
+    sizes = [len(o) for o in observations]
     size_stdev = statistics.pstdev(sizes) if len(sizes) > 1 else 0.0
 
-    # Disagreement: for each (code, title) present in run 0, check whether
-    # all runs agree on `level`.
-    disagreements = 0
-    compared = 0
-    base = {(e.get("code"), _title_key(e)): e.get("level") for e in outputs[0]}
-    for k, lvl in base.items():
-        for other in outputs[1:]:
-            other_map = {(e.get("code"), _title_key(e)): e.get("level") for e in other}
-            if k in other_map:
-                compared += 1
-                if other_map[k] != lvl:
-                    disagreements += 1
+    # Identity is the title; every other observable is a compared field.
+    FIELDS = ("level", "code", "age_band")
+    per_run = []
+    for obs in observations:
+        m = {}
+        for e in obs:
+            m.setdefault(_title_key(e), []).append(e)
+        per_run.append(m)
 
-    rate = disagreements / compared if compared else 0.0
-    return rate, size_stdev
+    all_titles = sorted({k for m in per_run for k in m})
+    field_disagreements = {f: 0 for f in FIELDS}
+    field_disagreements["description_present"] = 0
+    presence_disagreements = 0
+    unstable: List[dict] = []
+    # DISTINCT titles that moved in ANY dimension. Tracked separately from the
+    # per-dimension counters because one title can be unstable in several
+    # dimensions at once; summing the counters to get a "rate" produced values
+    # above 1.0 (a title unstable in level, code and description counted three
+    # times against a denominator of one).
+    unstable_titles: set = set()
+
+    for title in all_titles:
+        present = [title in m for m in per_run]
+        if not all(present):
+            presence_disagreements += 1
+            unstable_titles.add(title)
+            unstable.append({
+                "title": title[:80],
+                "dimension": "presence",
+                "detail": {labels[i]: ("present" if p else "MISSING")
+                           for i, p in enumerate(present)},
+            })
+            continue
+        # multiplicity counts too: a title detected once here and twice there
+        counts = [len(m[title]) for m in per_run]
+        if len(set(counts)) > 1:
+            presence_disagreements += 1
+            unstable_titles.add(title)
+            unstable.append({
+                "title": title[:80], "dimension": "multiplicity",
+                "detail": {labels[i]: c for i, c in enumerate(counts)},
+            })
+            continue
+        for f in list(field_disagreements):
+            if f == "description_present":
+                vals = [bool((m[title][0].get("description") or "").strip())
+                        for m in per_run]
+            else:
+                vals = [m[title][0].get(f) for m in per_run]
+            if len(set(map(str, vals))) > 1:
+                field_disagreements[f] += 1
+                unstable_titles.add(title)
+                unstable.append({
+                    "title": title[:80], "dimension": f,
+                    "detail": {labels[i]: v for i, v in enumerate(vals)},
+                })
+
+    n_titles = len(all_titles)
+    n_unstable = len(unstable_titles)          # DISTINCT titles, so rate <= 1.0
+    rate = (n_unstable / n_titles) if n_titles else 0.0
+
+    # how many observations differ from the graded run in ANY way
+    runs_differing = None
+    if graded_elements is not None and len(per_run) > 1:
+        base = per_run[0]
+        runs_differing = 0
+        for other in per_run[1:]:
+            if set(base) != set(other) or any(
+                str(base[k][0].get(f)) != str(other[k][0].get(f))
+                for k in set(base) & set(other) for f in FIELDS
+            ):
+                runs_differing += 1
+
+    return {
+        "n_observations": len(observations),
+        "n_probe_runs": runs,
+        "graded_run_included": graded_elements is not None,
+        "observation_labels": labels,
+        "size_by_observation": sizes,
+        "size_range": [min(sizes), max(sizes)] if sizes else None,
+        "size_stdev": round(size_stdev, 4),
+        "n_titles_compared": n_titles,
+        "n_titles_unstable": n_unstable,
+        "disagreement_rate": round(rate, 4),
+        "n_dimension_disagreements": presence_disagreements + sum(field_disagreements.values()),
+        "disagreements_by_dimension": {
+            "presence_or_multiplicity": presence_disagreements,
+            **field_disagreements,
+        },
+        "observations_differing_from_graded_run": runs_differing,
+        "unstable_examples": unstable[:20],
+        "interpretation_warning": (
+            f"{n_unstable} of {n_titles} titles moved across {len(observations)} "
+            "observations. A rate of 0.000 at this N is NOT evidence of "
+            "determinism for a defect that fires in a minority of runs -- quote "
+            "the denominator."
+        ),
+    }
 
 
 # ---------- main ----------
@@ -615,9 +741,16 @@ def evaluate_state(
 
     if stability_runs > 1:
         rep.stability_runs = stability_runs
-        rep.stability_disagreement_rate, rep.stability_size_stdev = measure_stability(
-            state, extraction_path, stability_runs
+        # `detected` IS the graded run. Passing it in makes it observation 0, so
+        # the comparison includes the run the suite actually scored -- the fix
+        # for the defect where five probe runs agreed while the graded run
+        # carried four malformed primary keys.
+        detail = measure_stability(
+            state, extraction_path, stability_runs, graded_elements=detected
         )
+        rep.stability_detail = detail
+        rep.stability_disagreement_rate = detail["disagreement_rate"]
+        rep.stability_size_stdev = detail["size_stdev"]
 
     return rep, detected
 
@@ -689,8 +822,36 @@ def render_report(rep: StateReport) -> str:
 
     if rep.stability_runs > 1:
         out.append(f"  stability ({rep.stability_runs} runs):")
-        out.append(f"    level disagreement rate: {rep.stability_disagreement_rate:.3f}")
-        out.append(f"    output size stdev:        {rep.stability_size_stdev:.2f}")
+        d = rep.stability_detail or {}
+        out.append(
+            f"    observations:        {d.get('n_observations')} "
+            f"({d.get('n_probe_runs')} probes"
+            + (" + the graded run)" if d.get("graded_run_included") else
+               ", GRADED RUN EXCLUDED)")
+        )
+        out.append(
+            f"    unstable titles:     {d.get('n_titles_unstable')}"
+            f" / {d.get('n_titles_compared')}"
+            f"  (rate {rep.stability_disagreement_rate:.3f})"
+        )
+        dims = d.get("disagreements_by_dimension") or {}
+        nz = {k: v for k, v in dims.items() if v}
+        out.append(f"    by dimension:        {nz or 'none'}")
+        out.append(
+            f"    output size:         {d.get('size_by_observation')} "
+            f"(stdev {rep.stability_size_stdev:.2f})"
+        )
+        if d.get("observations_differing_from_graded_run") is not None:
+            out.append(
+                f"    runs differing from the graded run: "
+                f"{d['observations_differing_from_graded_run']}"
+                f" / {d.get('n_observations', 1) - 1}"
+            )
+        if d.get("n_titles_unstable") == 0:
+            out.append(
+                f"    NOTE: 0 disagreements over {d.get('n_observations')} "
+                "observations is NOT proof of determinism at this N."
+            )
 
     return "\n".join(out)
 
@@ -854,6 +1015,7 @@ def report_to_dict(r: StateReport) -> dict:
         "regressions": [{"id": c, "status": s, "detail": d} for c, s, d in r.regressions],
         "stability_runs": r.stability_runs,
         "stability_disagreement_rate": r.stability_disagreement_rate,
+        "stability_detail": r.stability_detail,
         "stability_size_stdev": r.stability_size_stdev,
     }
 

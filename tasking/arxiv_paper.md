@@ -125,7 +125,9 @@ python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state C
 # probe runs and EXCLUDES the graded run; it reported 0.000 disagreement in the
 # same invocation whose graded output had 4 malformed primary keys). For real
 # stability use plain repeats with one --report-json per run, as
-# paper/analysis/ablation_stability.py expects. Fix before Task 5.
+# paper/analysis/ablation_stability.py expects.
+# ^ REPAIRED 2026-08-23: --stability-runs now includes the graded run, keys
+# identity on title (not code), compares presence, and reports denominators.
 python -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state CA --stability-runs 3
 python -m evaluation.eval_parser --detection-dir outputs/08-22-26-4 --state CA
 ```
@@ -342,9 +344,44 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Risk:** low. Supports the determinism claim; a known reviewer question for any LLM pipeline.
 
+> ✅ **BLOCKER 1 CLEARED 2026-08-23 — `measure_stability` is repaired and Task 5 is unblocked.**
+> `evaluation/eval_detector.py::measure_stability` was rewritten; 9 tests in
+> `tests/unit/test_measure_stability.py` pin each fixed blind spot. Full suite: 475 pass.
+> **This does NOT invalidate any recorded measurement** — `eval_common.code_version_hash`
+> covers `detector.py` and `parser.py` only, and it is still `288c64f1`.
+>
+> Three blind spots fixed, all three of which the old code needed simultaneously to
+> report its misleading 0.000:
+> 1. **The graded run is now observation 0.** It previously spawned N probes and compared
+>    them only to each other, so the run the suite actually scored was never in the
+>    comparison. Costs nothing — that run already happened.
+> 2. **Identity is the normalized TITLE, and `code` is now a compared FIELD.** Keying on
+>    `(code, title)` meant an element whose code changed got a different key, failed the
+>    membership test, and was silently skipped — the instrument was blindest to exactly the
+>    intermittent malformed-code defect it most needed to catch. ⚠️ **Never put a field
+>    under test back into the identity key**; that is the same bug in a new place, which is
+>    why `level` is not in the key either.
+> 3. **Presence and multiplicity are compared.** An element present in one run and absent
+>    from another previously showed up only in the size stdev.
+>
+> It now returns a **dict, not a bare rate**: observation count and labels, size per
+> observation and range, distinct unstable titles over titles compared, a per-dimension
+> breakdown, how many observations differ from the graded run, up to 20 concrete examples,
+> and an explicit warning that 0.000 at small N is not evidence of determinism. The
+> rendered report prints denominators, and a clean result prints the NOTE rather than a
+> bare 0.000.
+>
+> ⚠️ One bug was caught only by rendering a report, not by the unit tests written first:
+> summing the per-dimension counters produced a "rate" of **2.000** — a title unstable in
+> level, code and description counted three times against a denominator of one. The rate
+> now counts DISTINCT unstable titles and is bounded [0, 1]; the per-dimension sum is
+> reported separately as `n_dimension_disagreements`.
+>
+> **Blocker 2 still stands: split the runs across at least two sessions/days** (see below).
+>
 > **N DECIDED 2026-08-16: 5 runs per state per suite.** Budget is not the constraint (~60 runs ≈ $30–40, a few hours of wall time). Two things bind before N does, and both must be handled or the 5 runs measure the wrong thing:
 >
-> 1. **Repair `measure_stability` first.** It keys elements on `(code, title)` and counts a disagreement only when a matched pair differs in `level`. It is therefore blind to the two failure modes actually observed — title truncation/fusion (July) and the `Foundation N.N` code defect (2026-08-16), the latter because a changed CODE changes the key, so the element silently drops out of the comparison instead of counting against stability. Fix the match key before spending the runs.
+> 1. ~~**Repair `measure_stability` first.**~~ **DONE 2026-08-23 — see the block above.** Historical detail: It keys elements on `(code, title)` and counts a disagreement only when a matched pair differs in `level`. It is therefore blind to the two failure modes actually observed — title truncation/fusion (July) and the `Foundation N.N` code defect (2026-08-16), the latter because a changed CODE changes the key, so the element silently drops out of the comparison instead of counting against stability. Fix the match key before spending the runs.
 >
 >    **Half done, and a SECOND blind spot found — Task 2, 2026-08-16.** The key half is fixed on the parser side: `eval_parser._match_key` no longer derives identity from the code, so a run-to-run code change now counts as a field disagreement (`_sig` covers `indicator.code` and `standard_id`) instead of vanishing. The detector-side key still needs the same treatment. **But the remaining defect is about which runs get compared, not what gets compared:** `measure_stability` spawns its own N runs and compares them **only to each other** — the run the suite actually GRADED is never in the comparison. Live proof: `--state KY --stability-runs 5 --no-cache` reported **field disagreement rate 0.000** in the very same invocation whose graded output carried **4 malformed `standard_id`s**. Five probe runs agreed; the graded run three minutes earlier did not. Fix before spending the budget: **(a)** include the graded run in the comparison (N+1 observations, zero extra cost); **(b)** report the observed range and the denominator, not only the rate — "1 of 6 runs differed in 8 cells" and "5 runs, 0 disagreements" are both true of that invocation and only the first is informative; **(c)** treat a 0.000 at N=5 as *not yet a null result* for a defect that fires in a minority of runs. Evidence: `paper/results/task2_20260816/heldout_evidence.json` → `ky_direct_path_cache_runs`, where **10 of 20** cached KY parser runs fired across 8 code hashes.
 > 2. **Split the runs across at least two sessions/days.** July's headline finding was that 3 same-session runs agreed perfectly while a 24h-separated run differed by up to 9 elements. Five back-to-back runs risk measuring a falsely low variance.
