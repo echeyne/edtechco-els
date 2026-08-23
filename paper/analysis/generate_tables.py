@@ -235,38 +235,28 @@ def build_baseline_table(cmp_):
                  rf"rule-based {v['baseline_tp']}/{v['baseline_tp'] + v['baseline_fn']}}} \\")
     L += [r"    \hline", r"  \end{tabular}"]
 
-    probe = cmp_.get("brittleness_probe", {}).get("per_state", {})
-    probe_txt = ""
-    moved = []
-    for st, arms in probe.items():
-        lo = arms.get("as_recorded", {}).get("recall")
-        hi = arms.get("widened_numbering_and_midline_labels", {}).get("recall")
-        if lo is not None and hi is not None and hi - lo > 0.01:
-            moved.append(rf"{st} {lo * 100:.1f}\%$\rightarrow${hi * 100:.1f}\%")
-    if moved:
-        probe_txt = (r" A post-hoc probe widening two of the baseline's patterns to "
-                     r"admit token shapes only the held-out documents use recovers "
-                     + ", ".join(moved) +
-                     r"; the widenings are \emph{not} adopted, since they were "
-                     r"motivated by the held-out set itself. Even repaired, the "
-                     r"rule-based arm does not approach the LLM's recall.")
-
+    # ⚠️ KEEP THIS CAPTION SHORT. The first version ran to 13 lines and made the
+    # table* float overflow the page: bottom margin fell to 2pt and the
+    # bibliography ran off the sheet edge (one Overfull \\vbox, 81pt, isolated
+    # by an A/B build with and without this \\input). A caption carries only
+    # what must never be separated from the numbers -- guardrail 1's corpus
+    # tier, guardrail 8's precision caveat, and the source path. Everything
+    # else belongs in the prose; see the TODO(Task 12) brief in
+    # sections/experiments_results.tex, which covers the verified-precision
+    # argument and the brittleness probe in full.
     L += [r"  \caption{Rule-based baseline versus the LLM detector, graded by the "
-          r"\emph{same} suite against the \emph{same} goldens "
-          r"(Table~\ref{tab:detector-headline}). The baseline is document-agnostic: numbering "
-          r"depth, structural label words, ALL-CAPS and font-size cues from the "
-          r"bounding boxes, and column-aware reading order. It was developed against "
-          r"the four golden states only; NV and KY were first scored in the recorded "
-          r"run. \textbf{Raw precision is shown for both arms and is not a quality "
-          r"measure} except for KY, whose golden is detection-exhaustive: elsewhere "
-          r"it tracks annotation coverage, and it rewards under-emission, which is "
-          r"why the rule-based arm can exceed the LLM on AZ while finding fewer "
-          r"elements. Verified precision is not compared at all: the false-positive "
-          r"audit asks whether a title appears in the source text, and a rule-based "
-          r"extractor copies text rather than inventing it, so it scores near 1.000 "
-          r"by construction (\S\ref{sec:discussion-limitations})." + probe_txt +
-          r" All numbers are on the \emph{\_only\_subset} corpus tier (8--15pp "
-          r"manually trimmed subsets), never full documents. "
+          r"\emph{same} suite against the \emph{same} goldens as "
+          r"Table~\ref{tab:detector-headline}. The baseline uses numbering depth, "
+          r"structural label words, and typography and column geometry from the "
+          r"bounding boxes; it was developed against the four golden states only, "
+          r"with NV and KY first scored in the recorded run. \textbf{Raw precision "
+          r"is shown for both arms and is not a quality measure} except for KY, "
+          r"whose golden is detection-exhaustive; elsewhere it tracks annotation "
+          r"coverage and rewards under-emission, which is why the rule-based arm "
+          r"exceeds the LLM on AZ while finding fewer elements "
+          r"(\S\ref{sec:discussion-limitations}). All numbers are on the "
+          r"\emph{\_only\_subset} corpus tier (8--15pp manually trimmed subsets), "
+          r"never full documents. "
           rf"Source: \texttt{{paper/results/task4\_{BASELINE_TAG}/}}.}}",
           r"  \label{tab:baseline-comparison}", r"\end{table*}"]
     return "\n".join(L) + "\n"

@@ -8,6 +8,13 @@
 *.log
 *.out
 *.pdf
+
+# ...but figure PDFs are SOURCE, not build output. The blanket *.pdf above
+# is aimed at main.pdf; without this exception it also swallows
+# figures/*.pdf, which sections/system_architecture.tex \includegraphics.
+# A fresh clone would then fail to build, and Task 13's arXiv tarball would
+# ship without the figure.
+!figures/*.pdf
 *.fls
 *.fdb_latexmk
 *.synctex.gz

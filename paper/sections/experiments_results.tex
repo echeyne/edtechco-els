@@ -67,8 +67,23 @@
 %    shapes their author has seen, and even repaired they reach roughly half
 %    the LLM's recall.
 %
-% 4. Note what the baseline is NOT: it has no depth-map stage, so that column
+% 4. VERIFIED PRECISION IS ABSENT FROM THE TABLE ON PURPOSE, and the prose must
+%    say why or a reader will ask. The false-positive audit decides its verdicts
+%    by asking whether a detected title appears in the source text -- a test for
+%    INVENTION. A rule-based extractor copies text verbatim and cannot invent,
+%    so it measures 1.000 in five of six states against the LLM's 0.9966. That
+%    number is real and substantively backwards. (CA is the lone exception at
+%    0.9432, and all five of its flagged rows are column FUSION, not
+%    fabrication -- a finding about the audit instrument, worth a sentence in
+%    \S\ref{sec:discussion-limitations}.) Evidence: baseline_fp_audit in
+%    paper/results/task4_20260823/baseline_comparison.json.
+%
+% 5. Note what the baseline is NOT: it has no depth-map stage, so that column
 %    reads ABLATED rather than FAIL, and it is deterministic, so a single run
 %    is sufficient (contrast \S\ref{sec:experiments-ablation}).
+%
+% ⚠️ Keep tables/baseline_comparison.tex's caption SHORT when revising it. The
+% first version carried all of the above and ran to 13 lines, which made the
+% float overflow page 4 -- bottom margin 2pt, bibliography off the sheet edge.
 
 \input{tables/baseline_comparison}

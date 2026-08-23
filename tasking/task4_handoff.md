@@ -1,3 +1,13 @@
+# ⚠️ SUPERSEDED — TASK 4 IS DONE
+
+**Completed 2026-08-23. Results: `paper/results/task4_20260823/`, table
+`paper/tables/baseline_comparison.tex`, section `sec:experiments-baseline`.**
+
+This document is the brief that was written *before* the work and is retained
+only as the record of what was asked for. Do not read it as a pending task.
+
+---
+
 # Task 4 handoff — rule-based baseline (arXiv paper)
 
 Repo: `/Users/emilycheyne/Development/kinder-readiness`

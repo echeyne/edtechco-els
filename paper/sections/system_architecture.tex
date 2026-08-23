@@ -9,3 +9,22 @@
 
 \section{System Architecture}
 \label{sec:system-architecture}
+
+\begin{figure*}
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig_architecture.pdf}
+  \caption{Pipeline architecture. Documents flow through eight serverless
+  stages; solid arrows carry data, dashed arrows are model calls, and dotted
+  arrows show that stages exchange JSON through S3 rather than direct payloads.
+  Detection and parsing are batched through a prepare $\rightarrow$ Step
+  Functions \texttt{Map} $\rightarrow$ merge pattern (at most three concurrent
+  workers) so that large documents do not exhaust the Lambda timeout; detection
+  batches by text-block chunk and parsing by domain, which keeps related
+  elements together. Detection is two-pass: a depth-map pass infers the
+  document's nesting hierarchy before elements are classified against it.
+  \textbf{Note that the evaluation suites exercise the direct path rather than
+  this batched one, and the two are known to diverge}
+  (\S\ref{sec:discussion-limitations}). Regenerate with
+  \texttt{python paper/analysis/make\_architecture\_figure.py}.}
+  \label{fig:architecture}
+\end{figure*}

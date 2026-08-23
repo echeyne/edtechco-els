@@ -33,6 +33,34 @@ These were established by verifying the live tree during planning. Several contr
 
    So NV's ceiling is **46/53 = 0.8679**, and reporting its raw precision as a hallucination rate would count 6 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now 7 verdicts instead of 12, because the 5 previously-unannotated standards are annotated. Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
 
+## Next session — the run queue (as of 2026-08-23)
+
+Everything below is blocked ONLY on the Opus daily quota resetting. Probe first
+(see the Compute budget section); the reset boundary is not UTC midnight.
+
+**Run in this order — the total is ~2.3M Opus tokens, ~89% of a daily quota, so
+these two fill a day and nothing else Opus-heavy should share it.**
+
+1. **Finish Task 3's stability run 3** — 8 runs (CA off-arm, plus CO/TX/NV/KY in
+   both arms). **~400K tokens, ~20 min.** Cheap, and it takes CO and KY, which
+   carry the entire ablation effect, from n=2 to n=3. Do this FIRST: if the day
+   throttles early, this is the piece that most improves a claim already in the
+   paper.
+2. **Task 6 — full documents, KY + CO first** (Emily's call, 2026-08-23).
+   **~1.9M tokens.** KY 8pp→120pp is the largest relative jump AND its golden is
+   detection-exhaustive, so the 44 annotated elements can be graded *inside* the
+   full run — the only quality-at-scale evidence available without new
+   annotation. CO 10pp→187pp is the other state carrying the Task 3 effect, so it
+   also informs the framing question. AZ (217pp, the real batching stress test)
+   and the remaining three follow on a later day; all six is ~3.5M, over one
+   day's cap.
+
+**Zero-Opus work available any time** (does not compete for quota): Task 8
+(descriptive stats + confidence distribution — data already on disk), Task 11's
+local figures and the corpus appendix table, the `measure_stability` repair that
+blocks Task 5, and Task 12 drafting for every section whose numbers are recorded
+(Tasks 1, 1b, 2, 3, 4, 9 are all done).
+
 ## Compute budget — the Bedrock Opus daily token quota (measured 2026-08-23)
 
 The dev account has a **per-model daily token quota**, and the detector runs on
@@ -233,6 +261,10 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 > ✅ **BOTH ARMS RECORDED 2026-08-23 across all six states. Results: `paper/results/task3_20260822/`; repeated-run stability in `paper/results/task3_stability_20260823/`.**
 >
+> ⚠️ **THE STABILITY SWEEP IS PARTIAL AND ONE ACTION REMAINS.** 16 of 24 runs completed before a Bedrock Opus daily throttle. **Run 2 finished for all six states in both arms**, so every state has n=2; AZ has n=3, and CA has n=3 on the ON arm only. `off_run3_CA` was written with `n_detected=0` and is quarantined as `INVALID_THROTTLED_*`.
+>
+> **OUTSTANDING: finish run 3** — 8 runs (CA off, plus CO/TX/NV/KY in both arms), **~400K Opus tokens, ~15% of a daily quota, ~20 min.** That takes CO and KY — the two states carrying the entire effect — from n=2 to n=3. n=2 is enough to show the magnitude is unstable, which is the claim being made, but it is not a distribution and no mean or interval may be computed from it. Command shape is in `paper/results/task3_stability_20260823/manifest.json`; keep one report file per (arm, run, state) so `ablation_stability.py` can read them.
+>
 > **The effect is real, reproducible in direction, and CONDITIONAL.** Pooled by level, removing the depth map leaves **domain recall untouched at 1.000** and degrades exactly the levels whose identity depends on nesting position: strand 1.000→0.960, **sub_strand 1.000→0.875**, indicator 1.000→0.986. Per state, only **CO** and **KY** degrade; AZ, CA, TX and NV hold recall 1.000 in both arms.
 >
 > **Lead on the categorical evidence, not the rates.** Three regression cases fail with the depth map off and pass with it on, in *every* run: `CO-NO-SUB-STRAND` (the detector invents a sub_strand level in a document that has none — 9 spurious, tp=0/fp=9), `KY-BENCHMARK-IS-SUB-STRAND` (`Benchmark N.N` promoted to strand — literally classifying by LABEL), and `KY-STRAND-CODE-KEEPS-FULL-LABEL`.
@@ -412,9 +444,14 @@ Cover: document structure/layout extraction; LLM information extraction, in-cont
 
 **Risk:** low. **Has a dependency on Emily.**
 
-1. Generate locally from `paper/results/`: confidence distribution, level-confusion matrix, cost-by-tier. Plus a canonical-schema tree diagram.
-2. **Request from Emily:** the AWS architecture diagram, and any Standards Explorer / CloudWatch dashboard screenshots. Ask with specifics when you get here.
-3. Build the corpus appendix table from `standards/standards_tracking.md` — source URL, year, retained page ranges after trimming. **This is what replaces shipping the PDFs** (they are third-party state-agency documents; only US *federal* works are automatically public domain under 17 USC §105, so redistributing them isn't ours to grant). Name California's source precisely.
+1. Generate locally from `paper/results/`: confidence distribution, level-confusion matrix, cost-by-tier. Plus a canonical-schema tree diagram. **Still to do.**
+
+   > **PROPOSED, decide during Task 12 when the figure budget is known: a small eval-methodology figure showing the DIRECT-vs-BATCHED split.** This is the hardest part of the methodology to convey in prose and it is load-bearing: `eval_detector` **re-runs detection live in-process** (direct path) against `{STATE}-extraction.json`, while `eval_parser` reads `{STATE}-detection.json`, the **deployed batched** detection. So the detector and parser tables in the same results folder are **not describing the same detection of the same document** — for AZ that is literally 66 elements vs 77. It also explains a result the paper must otherwise assert without mechanism: NV's Science description grades as `truncated 2410/3500` in the detector eval while the batched pipeline produces the full 3500 byte-exact, same code and same document. The figure would also carry the two-decoupled-goldens point (flat element list vs nested `NormalizedStandard`, annotated independently), currently documented only in `evaluation/README.md`. **Draw it in TikZ, not `diagrams`** — it is boxes and arrows with no AWS services, so icons add nothing — and place it in §Experiments rather than §System Architecture. If the figure budget forces a cut, this one outranks cost-by-tier: it is a correctness caveat rather than a nice-to-have.
+2. ~~**Request from Emily:** the AWS architecture diagram, and any Standards Explorer / CloudWatch dashboard screenshots.~~ **RESOLVED 2026-08-23, with one item still OUTSTANDING:**
+   - **Architecture diagram — DONE, and it is generated, not hand-drawn.** `paper/analysis/make_architecture_figure.py` renders `paper/figures/fig_architecture.{pdf,png}` from `documentation/ARCHITECTURE.md` using `diagrams` + graphviz with official AWS icons (`brew install graphviz && pip install diagrams`). Embedded as `\label{fig:architecture}` in `sections/system_architecture.tex`; the paper builds to 6pp with 0 undefined refs. Emily confirmed the stage order and that validation → persistence → Aurora is correct (see `persister.py`: `_load_validation_summary` reads the validation summary from the processed bucket, `_persist_single_record` loads each canonical record from S3, then `persist_standard` writes to Aurora). Model labels carry versions and were checked against `config.py`: Opus 4.6 (detection), **Haiku 4.5** (depth map — NOT 4.6), Sonnet 4.6 (parsing).
+   - **CloudWatch dashboards — DROPPED, by Emily's call (2026-08-23).** They carry a lot of errors and support no claim the paper makes. Do not reinstate without a specific claim that needs them.
+   - ⚠️ **OUTSTANDING — EMILY: retake the Standards Explorer screenshot once standards without the `SUBSET - ` prefix exist.** The current screenshot (AZ, `LL` → `LL.1` → `LL.1.1` → `LL.1.1.a`, age bands, page numbers, `Unverified` status) is good and shows no account IDs, ARNs, internal URLs or emails — but its document title reads **`SUBSET - Arizona Early Learning Standards`**. In a paper that already discloses subset-tier *evaluation*, a screenshot captioned SUBSET invites the reader to conclude the *product* only ever holds subsets, which is a stronger and false claim. **Task 6 produces full-document runs, so retake it after Task 6 lands.** The screenshot is worth keeping regardless: its `Unverified` status column is the `human_verified` workflow, which guardrail 2 requires be kept distinct from confidence scores.
+3. **Emily confirmed every row of `standards/standards_tracking.md` is accurate (2026-08-23)**, so the source URLs are ready to use. Build the table from the **seven `File Cleaned: true` rows** (CA, AZ, TX, CO, NV-2023, KY — plus NV-2025, which is collected but has no golden); the two Florida rows and NV-2025 are `false` and are **not** in the six-state corpus. List them as collected-but-unused rather than dropping them silently, so the table does not imply the corpus is larger than it is. Build the corpus appendix table from `standards/standards_tracking.md` — source URL, year, retained page ranges after trimming. **This is what replaces shipping the PDFs** (they are third-party state-agency documents; only US *federal* works are automatically public domain under 17 USC §105, so redistributing them isn't ours to grant). Name California's source precisely.
 4. All figures: vector PDF, fonts embedded, flat filenames (they get flattened to root in Task 13).
 
 **Deliverable:** all figures + the corpus appendix table.

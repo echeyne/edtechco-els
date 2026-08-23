@@ -250,6 +250,43 @@ which the rule-based approach wins outright.
    `sec:experiments-baseline` subsection with the `\input` and a
    `TODO(Task 12)` prose brief.
 
+## The LaTeX build (verified 2026-08-23, not assumed)
+
+TeX Live 2026 was installed on this machine (`brew install texlive` — the
+bottled formula, no sudo; the `basictex` cask needs a `.pkg` installer and a
+password). Full cycle run: `pdflatex` → `bibtex` → `pdflatex` ×3.
+
+**Result: 6 pages, 0 undefined references, 0 undefined citations, 0 LaTeX
+warnings.** Table 4 renders with every row, the pooled-by-level block, and both
+cross-references resolved. `bibtex` reports one warning, `empty year in
+ncecqa_elgs`, which is pre-existing and belongs to Task 9's bibliography.
+
+Two defects were found and fixed by actually building, neither of which the
+structural check had caught:
+
+1. **A dangling cross-reference I introduced.** The caption referenced
+   `\S\ref{sec:evaluation}` — a label that exists nowhere in the paper. It
+   would have rendered as `??`. Now points at
+   `Table~\ref{tab:detector-headline}`, which exists and is more precise: that
+   is the table the baseline is being compared against.
+2. **The caption overflowed the page.** At 13 lines it made the `table*` float
+   push page 4's bottom margin to **2.0pt** (normal: 66.4pt) — the bibliography
+   ran off the sheet edge. Isolated by an A/B build with and without the
+   `\input`: the table added exactly one `Overfull \vbox`, 81.4pt. The caption
+   is now trimmed to what must never be separated from the numbers (guardrail
+   1's corpus tier, guardrail 8's precision caveat, the source path); the
+   removed material moved into the `TODO(Task 12)` prose brief, which is where
+   it belonged anyway.
+
+**Residual, and why it is not chased:** one `Overfull \vbox` of 21.4pt remains,
+with page 4's bottom margin at 45.3pt — inside the sheet, nothing clipped. It
+is an artifact of the paper being a stub skeleton: sections 3–12 currently have
+no body text, so a full-width float has nothing to flow against. **Measured, not
+assumed** — rebuilding a copy with one filler paragraph per stub section takes
+the count to **zero** `Overfull \vbox` (back to the 4 pre-existing overfull
+hboxes, all long bibliography URLs). Tuning float placement against a skeleton
+would be premature; re-check after Task 12.
+
 ---
 
 ## Caveats to carry into the paper
