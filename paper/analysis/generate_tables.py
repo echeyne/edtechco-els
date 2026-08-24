@@ -24,6 +24,8 @@ Inputs (all under paper/results/):
     task3_<RUN_TAG>/ablation_comparison.json     depth-map on/off
     task4_<BASELINE_TAG>/baseline_comparison.json  rule-based baseline vs LLM
     task3_stability_<STABILITY_TAG>/stability_analysis.json   (optional)
+    task8_<STATS_TAG>/dataset_stats.json           descriptive stats
+    task8_<STATS_TAG>/confidence_distribution.json re-measured confidence
     corpus_tiers.json
 
 Outputs:
@@ -31,6 +33,8 @@ Outputs:
     paper/tables/parser_headline.tex
     paper/tables/ablation_depthmap.tex
     paper/tables/baseline_comparison.tex
+    paper/tables/dataset_stats.tex
+    paper/tables/confidence_distribution.tex
 
 Usage (from repo root):
     python paper/analysis/generate_tables.py
@@ -47,6 +51,7 @@ TABLES_DIR = PAPER_DIR / "tables"
 RUN_TAG = "20260822"
 STABILITY_TAG = "20260823"
 BASELINE_TAG = "20260823"
+STATS_TAG = "20260823"
 
 # Runs that have been superseded. Pointing RUN_TAG at one of these is almost
 # always a mistake -- the whole reason this constant exists.
@@ -262,6 +267,133 @@ def build_baseline_table(cmp_):
     return "\n".join(L) + "\n"
 
 
+def build_dataset_table(stats):
+    """Corpus descriptive statistics, per state.
+
+    The hierarchy columns are the PARSED distinct counts, not the detector's
+    element counts, so that every column in the row describes the same object:
+    the standards this corpus actually contains. They are legitimately smaller
+    than the detected counts -- see the note in dataset_stats.json.
+    """
+    L = header(f"paper/results/task8_{STATS_TAG}/dataset_stats.json")
+    ps, t = stats["per_state"], stats["totals"]
+    L += [r"\begin{table*}", r"  \centering", r"  \begin{tabular}{llrrrrrrrr}", r"    \hline",
+          r"    \textbf{State} & \textbf{Role} & \textbf{Subset pp} & "
+          r"\textbf{Full pp} & \textbf{Dom.} & \textbf{Str.} & \textbf{Sub.} & "
+          r"\textbf{Standards} & \textbf{Age bands} & \textbf{ID coll.} \\",
+          r"    \hline"]
+    for st in ALL_STATES:
+        d = ps[st]
+        full = d["pages_full"]
+        # CO's subset comes from the 41pp 3-5 document, not the 187pp
+        # birth-to-8 one; flag it rather than printing a bare number.
+        mark = r"$^{\dagger}$" if d.get("pages_full_note") else ""
+        L.append(f"    {st} & {d['role']} & {d['pages_subset']} & {full}{mark} & "
+                 f"{d['distinct_domains']} & {d['distinct_strands']} & "
+                 f"{d['distinct_sub_strands']} & {d['standards']} & "
+                 f"{len([k for k in d['age_bands'] if k])} & "
+                 f"{d['standard_id_collisions']} \\\\")
+    L += [r"    \hline",
+          rf"    \textbf{{Total}} & & {t['subset_pages']} & & "
+          rf"{t['distinct_domains']} & {t['distinct_strands']} & "
+          rf"{t['distinct_sub_strands']} & {t['standards']} & "
+          rf"{len(t['distinct_age_bands'])} & "
+          rf"\textbf{{{t['standard_id_collisions_corpus_wide']}}} \\",
+          r"    \hline", r"  \end{tabular}",
+          r"  \caption{Corpus descriptive statistics. Domain, strand and "
+          r"sub-strand columns count \emph{distinct} nodes appearing in at least "
+          r"one standard's ancestor chain, so they are smaller than the "
+          r"detector's element counts in Table~\ref{tab:detector-headline}. "
+          r"\textbf{\texttt{standard\_id} collisions are 0 everywhere}, which "
+          r"matters because \texttt{standard\_id} is the primary key under which "
+          r"a standard is stored. \textbf{Age bands} counts the state's distinct "
+          r"bands, and every standard in every state carries one; its total is "
+          r"the union across states, not a column sum. "
+          r"CO's subsets derive from the 41pp ages-3--5 document, not "
+          r"the separate 187pp birth-to-8 one ($\dagger$). All quality numbers "
+          r"elsewhere in this paper are measured on the \emph{\_only\_subset} "
+          r"tier shown here (\S\ref{sec:corpus}), never on the full documents. "
+          rf"Source: \texttt{{paper/results/task8\_{STATS_TAG}/}}.}}",
+          r"  \label{tab:dataset-stats}", r"\end{table*}"]
+    return "\n".join(L) + "\n"
+
+
+def build_confidence_table(conf):
+    """The detector's self-reported confidence, by level and by audit verdict.
+
+    ⚠️ This table must never be presented as a calibration or quality result.
+    It is evidence for the OPPOSITE claim -- that the score is uninformative,
+    which is why nothing in the pipeline gates on it (guardrail 2). The verdict
+    block is the point: the score does not separate the audit's categories.
+    """
+    L = header(f"paper/results/task8_{STATS_TAG}/confidence_distribution.json")
+    d = conf["direct_path"]
+    o = d["overall"]
+
+    # ⚠️ THIS TABLE IS WIDTH-CONSTRAINED. It is a single-column ACL float
+    # (~239pt), and the row labels are what blow it out. Measured by A/B build:
+    # the raw JSON verdict keys overflowed by 69.6pt, and spelling them out in
+    # full English ("real, title split by columns") made it 77.9pt. What fits is
+    # FOUR columns at \small with short labels -- the mean was dropped for the
+    # width and moved into the caption, and it loses nothing, since a mean over
+    # seven discrete values a tenth apart is not informative. If you add a
+    # column back, re-run the A/B before committing.
+    LABEL = {
+        "sub_strand": "sub-strand",
+        "matched_golden": "matched a golden",
+        "real_unannotated": "real, unannotated",
+        "real_split_title": "real, split title",
+        "real_repeat_of_matched": "real, reprinted",
+        "hallucinated": r"\textbf{invented}",
+    }
+
+    def row(label, s):
+        label = LABEL.get(label, label)
+        return (rf"    {esc(label)} & {s['n']} & {s['min']:.2f}--{s['max']:.2f} & "
+                rf"{s['at_or_above_0.95']}/{s['n']} \\")
+
+    L += [r"\begin{table}", r"  \centering", r"  \small",
+          r"  \begin{tabular}{lrrr}", r"    \hline",
+          r"    & \textbf{n} & \textbf{Range} & $\mathbf{\geq 0.95}$ \\",
+          r"    \hline",
+          r"    \multicolumn{4}{l}{\emph{By hierarchy level}} \\"]
+    for lv in ("domain", "strand", "sub_strand", "indicator"):
+        s = d["by_level"].get(lv)
+        if s:
+            L.append(row(lv, s))
+    L += [r"    \hline",
+          r"    \multicolumn{4}{l}{\emph{By human false-positive audit verdict}} \\"]
+    for v, s in conf["by_audit_verdict"]["by_verdict"].items():
+        L.append(row(v, s))
+    L += [r"    \hline", row("All", o), r"    \hline", r"  \end{tabular}"]
+
+    n_hall = conf["by_audit_verdict"]["verdict_counts"].get("hallucinated", 0)
+    stab = conf["separation_stability"]
+    bands = o["prompt_band_occupancy"]
+    mid = bands["0.80-0.94 (ambiguous but likely)"]
+    guess = bands["below 0.70 (guessing)"]
+    L += [r"  \caption{Detector self-reported confidence, re-measured over the "
+          rf"{o['n']} elements of the recorded run. The prompt asks for "
+          r"$\geq 0.95$ when the depth map clearly applies, $0.80$--$0.94$ when "
+          r"the chunk is ambiguous, and $<0.70$ when guessing; in practice the "
+          rf"score takes {o['n_distinct_values']} distinct values in "
+          rf"$[{o['min']:.2f}, {o['max']:.2f}]$ (mean {o['mean']:.3f}), uses the "
+          r"middle band for "
+          rf"{mid} of {o['n']} elements and the bottom band "
+          rf"{'never' if guess == 0 else f'{guess} times'}. The audit's "
+          rf"{n_hall} confirmed invented element also holds the lowest score, "
+          rf"and no correct element falls below $0.90$ in "
+          rf"{stab['n_samples']} same-configuration runs "
+          rf"({stab['elements_examined']} elements); with a single positive "
+          r"case that is an observation, not a validated threshold. "
+          r"\textbf{Nothing in the pipeline thresholds this score} -- human "
+          r"verification is a separate, explicit mechanism "
+          r"(\S\ref{sec:discussion-limitations}). \emph{\_only\_subset} tier. "
+          rf"Source: \texttt{{paper/results/task8\_{STATS_TAG}/}}.}}",
+          r"  \label{tab:confidence-distribution}", r"\end{table}"]
+    return "\n".join(L) + "\n"
+
+
 def verified_precision_by_state():
     """Read the SIGNED audits. These files exist precisely because regenerating
     the evidence JSON resets `verified_by` to UNSIGNED, so they -- not
@@ -294,6 +426,10 @@ def main():
     stab = load_json(sp) if sp.exists() else None
     bp = RESULTS_DIR / f"task4_{BASELINE_TAG}" / "baseline_comparison.json"
     baseline = load_json(bp) if bp.exists() else None
+    sd = RESULTS_DIR / f"task8_{STATS_TAG}"
+    stats = load_json(sd / "dataset_stats.json") if (sd / "dataset_stats.json").exists() else None
+    conf = (load_json(sd / "confidence_distribution.json")
+            if (sd / "confidence_distribution.json").exists() else None)
 
     det = {**t1["detector"], **t2["detector"]}
     par = {**t1["parser"], **t2["parser"]}
@@ -309,6 +445,10 @@ def main():
     ]
     if baseline:
         written.append(("baseline_comparison.tex", build_baseline_table(baseline)))
+    if stats:
+        written.append(("dataset_stats.tex", build_dataset_table(stats)))
+    if conf:
+        written.append(("confidence_distribution.tex", build_confidence_table(conf)))
     for name, body in written:
         (TABLES_DIR / name).write_text(body)
         print(f"wrote {TABLES_DIR / name}")
@@ -318,6 +458,9 @@ def main():
     if baseline is None:
         print(f"NOTE: no task4_{BASELINE_TAG}/baseline_comparison.json found; "
               "the baseline comparison table was not generated.")
+    if stats is None or conf is None:
+        print(f"NOTE: task8_{STATS_TAG}/ is incomplete; run "
+              "`python paper/analysis/dataset_stats.py` first.")
 
 
 if __name__ == "__main__":

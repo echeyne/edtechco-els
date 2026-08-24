@@ -16,3 +16,25 @@
 
 \section{Corpus}
 \label{sec:corpus}
+
+% TODO(Task 12): prose. The table below is Task 8's deliverable and it already
+% carries the guardrail-1 tier columns (Subset pp / Full pp), so Task 11's
+% "corpus appendix table" should EXTEND this one -- adding the _trimmed tier
+% and the source document names -- rather than introduce a second table that
+% restates the same page counts.
+%
+% Three things the prose must do that the table cannot:
+%   1. Disclose the manual trimming (guardrail 3) with retained page ranges.
+%      The subset tier is favourable preprocessing and must be stated plainly,
+%      not inferred from a page-count column.
+%   2. Name California's source precisely: the PTKLF "at a glance" document
+%      (ptklfataglance.pdf, 68pp).
+%   3. Say that the held-out canary is NV-2023, explicitly NOT NV-SES-2025.
+%
+% Read the "Age bands" column carefully before writing about it: it is the
+% count of DISTINCT bands in that state, not coverage. Coverage is 1.000
+% everywhere -- every one of the 262 standards carries an age band -- which is
+% worth a sentence because it is a schema-completeness result, not a document
+% property.
+
+\input{tables/dataset_stats}

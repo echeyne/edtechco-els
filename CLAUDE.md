@@ -14,6 +14,26 @@ When a change alters behavior, config, schema, or architecture (not a small bug 
 
 **Goal: `detector.py` and `parser.py` should be LLM-driven, not rule-driven.** The intended architecture is "let the model reason about the document; keep the Python thin." Detection/parsing decisions — how to classify a level, how to build a code, how to handle age-band columns, how to strip a structural label — belong in the **prompt**, expressed as general document-structure principles, not in Python regexes and special-case branches.
 
+### ⚠️ These two files are COST-GATED right now (as of 2026-08-23) — batch your edits
+
+`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`288c64f1`**, and that value is cited by every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8). Editing either file — **including a comment or a docstring** — changes it, and two things follow:
+
+1. **The eval cache invalidates.** All 53 entries / 2.8MB in `evaluation/.cache` become misses, so evals that are currently free become live Bedrock calls. Re-recording the detector arms alone is ~315K Opus tokens (Task 1 208,835 + Task 2 106,606), about **12% of the 2,592,000/day quota**.
+2. **Recorded results stop matching HEAD.** The numbers stay valid — they were validly produced by that code — but reproducing them needs a `git checkout` of the recording commit rather than just running the script, and a reader diffing the hash cannot tell a docstring change from a logic change.
+
+This is **a cost, not a prohibition.** A real defect still gets fixed. But a cosmetic fix should wait and ride along with a change that busts the hash anyway — the next one scheduled is the arXiv paper's Task 6 full-document re-record (`tasking/arxiv_paper.md`).
+
+**The deferred queue — do all of these in that same window:**
+
+| # | file | what | why it is deferred, not done |
+|---|---|---|---|
+| 1 | `detector.py:1516,1520` | `detect_structure`'s docstring says detection runs on "Claude Sonnet 4.5". It runs on **Opus 4.6** (`config.BEDROCK_DETECTOR_LLM_MODEL_ID`). Lines 113 and 961 already say Opus 4.6 correctly, so it is only this docstring. | cosmetic |
+| 2 | `detector.py:1522` | Step 4 of the same docstring, "Flags low-confidence elements for review", describes a gate that **does not exist** — nothing thresholds `confidence` and there is no `needs_review` field. This is the single most misleading line in either file: it is exactly the false claim the arXiv paper's guardrail 2 exists to catch, sitting in the function a reader checks first. | cosmetic, but fix it FIRST in the batch |
+| 3 | `detector.py:1514-1524` | The same numbered docstring **omits Pass-1 depth-map inference entirely**, though `detect_structure` calls `infer_depth_map(blocks)` before chunk classification. That pass is the paper's central method claim; the docstring credits a step that does not exist while missing the one that does. Found 2026-08-23. | cosmetic |
+| 4 | `parser.py` | Add logging of the LLM's **pre-normalization** code, so a `validator._validate_code_shape` rejection can be localized. The validator sees only the final record, so today's log carries the chain, page and `standard_id` but not what the model actually emitted. See "Why it lives in `validator.py`" below. | genuinely useful, but not urgent enough to spend the quota alone |
+
+`parser.py` was swept on 2026-08-23 and carries **no** stale model name and no `needs_review` language — item 4 is an addition, not a correction. If you add to this queue, note the date and keep the table's "why deferred" column honest: a real defect does not belong here.
+
 **The problem we were fighting: overfitting to the golden set.** The golden states (CA, AZ, CO, TX) had each been made to pass by adding targeted, per-state Python logic that scored well on the goldens but **did not generalize**. The 2026-06 LLM-first migration (`tasking/detector_parser_llm_migration.md`, Tasks 1–8, completed 2026-06-27) removed that logic and moved each rule into the prompt as a general principle. The per-state helpers that are now **gone** — do not re-introduce them or anything shaped like them:
 
 - `detector._LABEL_PREFIX_RE` + the label-strip half of `_strip_label_prefix`, and `parser._LABEL_CODE_RE` (`Strand N:` / `Concept N:`) → detector prompt rule 4: a `<Label> <id>: <Title>` heading's label-and-id IS the code, the text after the colon is the title (any structural-label word, not a fixed list).
@@ -133,7 +153,9 @@ guard ship without invalidating the arXiv paper's frozen Task 1/Task 2
 measurements. Localization is therefore partial: the validator sees only the
 final record, so the log carries the chain, page and `standard_id` but not the
 LLM's pre-normalization code. Capturing that needs logging inside `parser.py`,
-which busts the hash; do it when the measurement chain is next re-recorded.
+which busts the hash; do it when the measurement chain is next re-recorded —
+it is **item 4 of the deferred queue** at the top of this section, which is
+where the batch is tracked.
 
 ### Where a description crosses a page break (2026-08-22) — `_splice_overlapping_prose` (the prompt half was reverted)
 

@@ -1,0 +1,560 @@
+{
+  "_meta": {
+    "task": "Task 8 -- dataset descriptive stats + confidence distribution",
+    "description": "Dataset descriptive statistics over the recorded six-state run.",
+    "generated_by": "paper/analysis/dataset_stats.py",
+    "regenerate_with": "python paper/analysis/dataset_stats.py",
+    "run_tag": "20260822",
+    "outputs_dir": "outputs/08-22-26-4",
+    "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents) -- guardrail 1",
+    "git_commit": "fa0b0eddc317785e65599f10514e379a4965d9d8",
+    "code_version_hash": "288c64f1",
+    "bedrock_tokens_spent": 0,
+    "inputs": [
+      "outputs/08-22-26-4/{STATE}-detection.json (batched, production path)",
+      "outputs/08-22-26-4/{STATE}-parsing.json",
+      "evaluation/ground_truth_{detector,parser}/{STATE}.json",
+      "paper/results/corpus_tiers.json"
+    ]
+  },
+  "per_state": {
+    "AZ": {
+      "role": "golden",
+      "version_year": 2018,
+      "pages_subset": 15,
+      "pages_full": 217,
+      "pages_full_note": null,
+      "tier_record": {
+        "role": "golden",
+        "full": 217,
+        "trimmed": 65,
+        "only_subset": 15
+      },
+      "detected_elements": 77,
+      "detected_by_level": {
+        "domain": 2,
+        "strand": 9,
+        "sub_strand": 21,
+        "indicator": 45
+      },
+      "standards": 45,
+      "unique_standard_ids": 45,
+      "standard_id_collisions": 0,
+      "colliding_ids": [],
+      "distinct_domains": 2,
+      "distinct_strands": 4,
+      "distinct_sub_strands": 9,
+      "levels_realized": [
+        "domain",
+        "strand",
+        "sub_strand",
+        "indicator"
+      ],
+      "age_band_coverage": 1.0,
+      "age_bands": {
+        "36-60": 45
+      },
+      "description_coverage": {
+        "domain": {
+          "distinct_nodes": 2,
+          "with_description": 2,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "strand": {
+          "distinct_nodes": 4,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "sub_strand": {
+          "distinct_nodes": 9,
+          "with_description": 9,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "indicator": {
+          "distinct_nodes": 45,
+          "with_description": 45,
+          "blank_string": 0,
+          "coverage": 1.0
+        }
+      },
+      "source_page_span": [
+        3,
+        15
+      ]
+    },
+    "CA": {
+      "role": "golden",
+      "version_year": 2021,
+      "pages_subset": 13,
+      "pages_full": 68,
+      "pages_full_note": null,
+      "tier_record": {
+        "role": "golden",
+        "full": 68,
+        "trimmed": null,
+        "only_subset": 13
+      },
+      "detected_elements": 122,
+      "detected_by_level": {
+        "domain": 3,
+        "strand": 7,
+        "sub_strand": 18,
+        "indicator": 94
+      },
+      "standards": 94,
+      "unique_standard_ids": 94,
+      "standard_id_collisions": 0,
+      "colliding_ids": [],
+      "distinct_domains": 3,
+      "distinct_strands": 7,
+      "distinct_sub_strands": 18,
+      "levels_realized": [
+        "domain",
+        "strand",
+        "sub_strand",
+        "indicator"
+      ],
+      "age_band_coverage": 1.0,
+      "age_bands": {
+        "36-54": 23,
+        "36-66": 48,
+        "48-66": 23
+      },
+      "description_coverage": {
+        "domain": {
+          "distinct_nodes": 3,
+          "with_description": 2,
+          "blank_string": 0,
+          "coverage": 0.6667
+        },
+        "strand": {
+          "distinct_nodes": 7,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "sub_strand": {
+          "distinct_nodes": 18,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "indicator": {
+          "distinct_nodes": 94,
+          "with_description": 94,
+          "blank_string": 0,
+          "coverage": 1.0
+        }
+      },
+      "source_page_span": [
+        2,
+        13
+      ]
+    },
+    "CO": {
+      "role": "golden",
+      "version_year": 2020,
+      "pages_subset": 10,
+      "pages_full": 41,
+      "pages_full_note": "the subset derives from the 41pp 3-5 document; the separate birth-to-8 document is 187pp and is not this subset's parent",
+      "tier_record": {
+        "role": "golden",
+        "full_birth_to_8": 187,
+        "full_3_5": 41,
+        "trimmed": 41,
+        "only_subset": 10
+      },
+      "detected_elements": 61,
+      "detected_by_level": {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 0,
+        "indicator": 48
+      },
+      "standards": 48,
+      "unique_standard_ids": 48,
+      "standard_id_collisions": 0,
+      "colliding_ids": [],
+      "distinct_domains": 3,
+      "distinct_strands": 10,
+      "distinct_sub_strands": 0,
+      "levels_realized": [
+        "domain",
+        "strand",
+        "indicator"
+      ],
+      "age_band_coverage": 1.0,
+      "age_bands": {
+        "36-60": 48
+      },
+      "description_coverage": {
+        "domain": {
+          "distinct_nodes": 3,
+          "with_description": 3,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "strand": {
+          "distinct_nodes": 10,
+          "with_description": 10,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "sub_strand": {
+          "distinct_nodes": 0,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": null
+        },
+        "indicator": {
+          "distinct_nodes": 48,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        }
+      },
+      "source_page_span": [
+        3,
+        10
+      ]
+    },
+    "TX": {
+      "role": "golden",
+      "version_year": 2022,
+      "pages_subset": 9,
+      "pages_full": 87,
+      "pages_full_note": null,
+      "tier_record": {
+        "role": "golden",
+        "full": 87,
+        "trimmed": 71,
+        "only_subset": 9
+      },
+      "detected_elements": 33,
+      "detected_by_level": {
+        "domain": 2,
+        "strand": 4,
+        "sub_strand": 2,
+        "indicator": 25
+      },
+      "standards": 25,
+      "unique_standard_ids": 25,
+      "standard_id_collisions": 0,
+      "colliding_ids": [],
+      "distinct_domains": 2,
+      "distinct_strands": 4,
+      "distinct_sub_strands": 2,
+      "levels_realized": [
+        "domain",
+        "strand",
+        "sub_strand",
+        "indicator"
+      ],
+      "age_band_coverage": 1.0,
+      "age_bands": {
+        "36-48": 10,
+        "48-60": 15
+      },
+      "description_coverage": {
+        "domain": {
+          "distinct_nodes": 2,
+          "with_description": 2,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "strand": {
+          "distinct_nodes": 4,
+          "with_description": 4,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "sub_strand": {
+          "distinct_nodes": 2,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "indicator": {
+          "distinct_nodes": 25,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        }
+      },
+      "source_page_span": [
+        2,
+        9
+      ]
+    },
+    "NV": {
+      "role": "held-out",
+      "version_year": 2023,
+      "pages_subset": 15,
+      "pages_full": 98,
+      "pages_full_note": null,
+      "tier_record": {
+        "role": "held-out",
+        "full": 98,
+        "trimmed": 71,
+        "only_subset": 15
+      },
+      "detected_elements": 53,
+      "detected_by_level": {
+        "domain": 3,
+        "strand": 17,
+        "sub_strand": 8,
+        "indicator": 25
+      },
+      "standards": 24,
+      "unique_standard_ids": 24,
+      "standard_id_collisions": 0,
+      "colliding_ids": [],
+      "distinct_domains": 3,
+      "distinct_strands": 7,
+      "distinct_sub_strands": 7,
+      "levels_realized": [
+        "domain",
+        "strand",
+        "sub_strand",
+        "indicator"
+      ],
+      "age_band_coverage": 1.0,
+      "age_bands": {
+        "36-60": 24
+      },
+      "description_coverage": {
+        "domain": {
+          "distinct_nodes": 3,
+          "with_description": 3,
+          "blank_string": 0,
+          "coverage": 1.0
+        },
+        "strand": {
+          "distinct_nodes": 7,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "sub_strand": {
+          "distinct_nodes": 7,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "indicator": {
+          "distinct_nodes": 24,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        }
+      },
+      "source_page_span": [
+        4,
+        15
+      ]
+    },
+    "KY": {
+      "role": "held-out",
+      "version_year": 2021,
+      "pages_subset": 8,
+      "pages_full": 120,
+      "pages_full_note": null,
+      "tier_record": {
+        "role": "held-out",
+        "full": 120,
+        "trimmed": 52,
+        "only_subset": 8
+      },
+      "detected_elements": 44,
+      "detected_by_level": {
+        "domain": 3,
+        "strand": 5,
+        "sub_strand": 10,
+        "indicator": 26
+      },
+      "standards": 26,
+      "unique_standard_ids": 26,
+      "standard_id_collisions": 0,
+      "colliding_ids": [],
+      "distinct_domains": 3,
+      "distinct_strands": 5,
+      "distinct_sub_strands": 10,
+      "levels_realized": [
+        "domain",
+        "strand",
+        "sub_strand",
+        "indicator"
+      ],
+      "age_band_coverage": 1.0,
+      "age_bands": {
+        "36-60": 26
+      },
+      "description_coverage": {
+        "domain": {
+          "distinct_nodes": 3,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "strand": {
+          "distinct_nodes": 5,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "sub_strand": {
+          "distinct_nodes": 10,
+          "with_description": 0,
+          "blank_string": 0,
+          "coverage": 0.0
+        },
+        "indicator": {
+          "distinct_nodes": 26,
+          "with_description": 26,
+          "blank_string": 0,
+          "coverage": 1.0
+        }
+      },
+      "source_page_span": [
+        2,
+        8
+      ]
+    }
+  },
+  "annotation": {
+    "AZ": {
+      "detector_golden_elements": 5,
+      "detector_golden_by_level": {
+        "domain": 1,
+        "strand": 1,
+        "sub_strand": 1,
+        "indicator": 2
+      },
+      "detector_regression_cases": 2,
+      "parser_golden_standards": 18,
+      "parser_regression_cases": 1,
+      "annotator": "Emily Cheyne",
+      "annotation_date": "05-25-2026"
+    },
+    "CA": {
+      "detector_golden_elements": 25,
+      "detector_golden_by_level": {
+        "domain": 3,
+        "strand": 3,
+        "sub_strand": 5,
+        "indicator": 14
+      },
+      "detector_regression_cases": 4,
+      "parser_golden_standards": 21,
+      "parser_regression_cases": 2,
+      "annotator": "Emily Cheyne",
+      "annotation_date": "05-31-26"
+    },
+    "CO": {
+      "detector_golden_elements": 7,
+      "detector_golden_by_level": {
+        "domain": 2,
+        "strand": 2,
+        "sub_strand": 0,
+        "indicator": 3
+      },
+      "detector_regression_cases": 2,
+      "parser_golden_standards": 9,
+      "parser_regression_cases": 2,
+      "annotator": "Emily Cheyne",
+      "annotation_date": "05-31-26"
+    },
+    "TX": {
+      "detector_golden_elements": 8,
+      "detector_golden_by_level": {
+        "domain": 1,
+        "strand": 2,
+        "sub_strand": 1,
+        "indicator": 4
+      },
+      "detector_regression_cases": 3,
+      "parser_golden_standards": 8,
+      "parser_regression_cases": 2,
+      "annotator": "Emily Cheyne",
+      "annotation_date": "05-25-26"
+    },
+    "NV": {
+      "detector_golden_elements": 46,
+      "detector_golden_by_level": {
+        "domain": 3,
+        "strand": 12,
+        "sub_strand": 7,
+        "indicator": 24
+      },
+      "detector_regression_cases": 3,
+      "parser_golden_standards": 24,
+      "parser_regression_cases": 3,
+      "annotator": "Emily Cheyne",
+      "annotation_date": "2026-08-22"
+    },
+    "KY": {
+      "detector_golden_elements": 44,
+      "detector_golden_by_level": {
+        "domain": 3,
+        "strand": 5,
+        "sub_strand": 10,
+        "indicator": 26
+      },
+      "detector_regression_cases": 3,
+      "parser_golden_standards": 26,
+      "parser_regression_cases": 4,
+      "annotator": "Emily Cheyne",
+      "annotation_date": "2026-08-01"
+    }
+  },
+  "totals": {
+    "states": 6,
+    "states_golden": 4,
+    "states_heldout": 2,
+    "subset_pages": 70,
+    "detected_elements": 390,
+    "detected_by_level": {
+      "domain": 16,
+      "strand": 52,
+      "sub_strand": 59,
+      "indicator": 263
+    },
+    "standards": 262,
+    "unique_standard_ids": 262,
+    "standard_id_collisions_within_state": 0,
+    "standard_id_collisions_corpus_wide": 0,
+    "distinct_domains": 16,
+    "distinct_strands": 37,
+    "distinct_sub_strands": 46,
+    "age_band_coverage": 1.0,
+    "distinct_age_bands": [
+      "36-48",
+      "36-54",
+      "36-60",
+      "36-66",
+      "48-60",
+      "48-66"
+    ],
+    "age_bands": {
+      "36-48": 10,
+      "36-54": 23,
+      "36-60": 143,
+      "36-66": 48,
+      "48-60": 15,
+      "48-66": 23
+    },
+    "detector_golden_elements": 135,
+    "parser_golden_standards": 106
+  },
+  "notes": [
+    "standard_id is {country}-{state}-{year}-{indicator_code} and is the Aurora primary key, so a collision is a correctness defect, not a cosmetic one. Corpus-wide collisions are counted as well as within-state, but cross-state collisions are impossible by construction -- the state code is part of the id.",
+    "Detected-element counts are the BATCHED (production) path and do not equal the direct path the detector eval grades. AZ is the widest gap in this run, 77 batched against 66 direct, from cross-page duplicate copies of its contents/listing page; diagnosed 2026-08-22 and benign (tasking/arxiv_paper.md).",
+    "distinct_domains/strands/sub_strands count ancestors that appear in at least one standard's chain, so they are NOT the detected counts and are legitimately smaller (corpus-wide, 37 distinct parsed strands against 52 detected). Two reasons, both benign: the detection contains cross-page reprints of the same heading, and a heading with no indicator beneath it inside the subset has no standard to appear in.",
+    "description_coverage is over DISTINCT nodes, not per standard row -- every row carries its whole ancestor chain, so a per-row count would report CO's three domains as 48. It varies by document rather than by pipeline behaviour: AZ, CA and KY print a description on every indicator, CO, TX and NV print none. blank_string is 0 everywhere, which is the check that models._blank_to_none is holding -- absence has exactly one spelling in this schema.",
+    "levels_realized shows that a four-level schema is not a four-level document: CO's subset prints no sub_strand tier at all, and TX's prints two. This is the variation the parser's optional-level handling exists for.",
+    "Every number here is the _only_subset corpus tier (guardrail 1) -- 8-15pp manually trimmed subsets, never full documents."
+  ]
+}

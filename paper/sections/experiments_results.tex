@@ -16,7 +16,9 @@
 %     subset-tier quality tables above (Task 6, guardrail 1).
 %   - Model tier / chunk overlap / two-stage ablations (Task 7).
 %   - Dataset descriptive stats + re-measured confidence distribution
-%     (Task 8, guardrail 4 — no unmeasured Medium numbers).
+%     (Task 8, guardrail 4 — no unmeasured Medium numbers) — DONE. The
+%     confidence half is below; the descriptive-stats table lives in
+%     \S\ref{sec:corpus}, where it describes the corpus rather than a result.
 
 \section{Experiments and Results}
 \label{sec:experiments-results}
@@ -87,3 +89,54 @@
 % float overflow page 4 -- bottom margin 2pt, bibliography off the sheet edge.
 
 \input{tables/baseline_comparison}
+
+\subsection{What the Confidence Score Measures}
+\label{sec:experiments-confidence}
+
+% TODO(Task 12): prose. This subsection exists to RETIRE a claim, not to
+% support one. Four points, in this order.
+%
+% 1. THE FRAMING IS NEGATIVE AND MUST STAY NEGATIVE. The detector emits a
+%    confidence float on every element and NOTHING GATES ON IT (guardrail 2).
+%    This table is the evidence that not gating is the right call. Do not
+%    write a sentence that could be read as "the model knows when it is
+%    uncertain" -- the measurement says close to the opposite.
+%
+% 2. THE DISTRIBUTION IS DEGENERATE. 7 distinct values in [0.85, 0.97] over
+%    379 elements; the band the prompt reserves for a guess (<0.70) is never
+%    used once; the middle band is used 32 times. A score that never exercises
+%    two thirds of the range it was given is not carrying information about
+%    difficulty.
+%
+% 3. THE MEDIUM ARTICLES' NUMBER IS RE-MEASURED, AND HALF OF IT IS WRONG
+%    (guardrail 4). "85-90% of indicators at 0.95+" reproduces at 89.7%
+%    (236/263) -- cite the measurement, never the article. But the SECOND half
+%    of that sentence, that the low tail comes from "tables, footnotes, or
+%    sections with unusual formatting", is REFUTED: four of six states have no
+%    sub-0.95 indicator at all and the tail is essentially all of Kentucky,
+%    where every one of the 26 indicators scores below the line. The score
+%    moves per DOCUMENT, not per hard passage. The same article's claim of a
+%    0.70 review gate is doubly dead -- no such gate exists, and zero elements
+%    in the corpus would have tripped it.
+%
+% 4. KENTUCKY IS THE CLEANEST SINGLE ILLUSTRATION and it belongs in the prose,
+%    not the caption. KY is the one state with a detection-exhaustive golden;
+%    it scores recall 1.000, code accuracy 1.000 and verified precision 1.000
+%    -- the best-evidenced detection in the corpus -- while carrying the
+%    LOWEST confidence of any state. CA earns the same recall and code
+%    accuracy with all 94 indicators at 0.95+.
+%
+% ⚠️ Be careful with the one hallucination. It IS the lowest-scoring element,
+% and that reproduces across 14 same-configuration runs (966 elements, no
+% correct element below 0.90). It is tempting to present that as a working
+% detector. It is not one: there is exactly ONE distinct invented element in
+% the audited corpus, so the false-negative rate of such a cut is unmeasurable
+% here, and the prompt's own boundary (0.80) catches nothing. Report it as an
+% observation and say why it cannot be promoted -- that honesty is the point of
+% the subsection. Note too that the score is blind to the corpus's other
+% non-verbatim category: all 39 real_split_title rows, real titles broken by
+% column interleaving, score at or above 0.95.
+%
+% ⚠️ Keep the caption short (see the warning above Table~4).
+
+\input{tables/confidence_distribution}

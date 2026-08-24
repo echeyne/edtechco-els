@@ -100,10 +100,6 @@ export default function InfoPage() {
             Edit or flag records that need correction before they enter the
             shared standards database.
           </li>
-          <li>
-            Review confidence scores assigned during extraction to prioritize
-            which records need attention.
-          </li>
         </ul>
       </Section>
 
@@ -138,7 +134,7 @@ export default function InfoPage() {
           <PipelineStep
             number={5}
             label="Human Verification"
-            detail="Every extracted record carries a confidence score. Reviewers use this Explorer app to verify, edit, or flag items before they are used downstream."
+            detail="Reviewers use this Explorer app to verify, edit, or flag items before they are used downstream."
           />
         </ol>
       </Section>

@@ -55,11 +55,12 @@ these two fill a day and nothing else Opus-heavy should share it.**
    and the remaining three follow on a later day; all six is ~3.5M, over one
    day's cap.
 
-**Zero-Opus work available any time** (does not compete for quota): Task 8
-(descriptive stats + confidence distribution — data already on disk), Task 11's
-local figures and the corpus appendix table, the `measure_stability` repair that
-blocks Task 5, and Task 12 drafting for every section whose numbers are recorded
-(Tasks 1, 1b, 2, 3, 4, 9 are all done).
+**Zero-Opus work available any time** (does not compete for quota): ~~Task 8~~
+**(done 2026-08-23)**, Task 11's local figures and the corpus appendix table —
+note it should now EXTEND Task 8's dataset table rather than duplicate it — and
+Task 12 drafting for every section whose numbers are recorded (Tasks 1, 1b, 2,
+3, 4, 8, 9 are all done). The `measure_stability` repair that blocked Task 5 has
+also landed (`fa0b0ed`).
 
 ## Compute budget — the Bedrock Opus daily token quota (measured 2026-08-23)
 
@@ -406,6 +407,12 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Deliverable:** a cost/latency/scale table, explicitly labelled as full-document tier and separate from the subset-tier quality tables.
 
+> 🔗 **This task carries an attached chore list — do it in the same window.** `detector.py` and `parser.py` are cost-gated between re-records: `eval_common.code_version_hash` hashes their raw bytes, currently **`288c64f1`**, and every recorded manifest under `paper/results/` cites it. So a docstring fix that would otherwise cost ~315K Opus tokens (12% of a daily quota) to re-validate is free once you are re-recording anyway.
+>
+> **The queue lives in [CLAUDE.md](../CLAUDE.md), "These two files are COST-GATED right now"** — that is the canonical copy, because it is the file a session reads *before* deciding to edit. As of 2026-08-23 it holds four items: three stale/missing claims in `detect_structure`'s docstring (wrong model, a confidence review-gate that does not exist, and Pass-1 depth-map inference omitted entirely) plus adding pre-normalization code logging inside `parser.py` so `validator._validate_code_shape` rejections can be localized.
+>
+> **Order matters.** Apply the queue, re-run, and record the **new** hash in this run's manifest — do not carry `288c64f1` forward. Then update `RUN_TAG`/`STATS_TAG` in `paper/analysis/generate_tables.py` and add the superseded tag to `SUPERSEDED_TAGS`, or the tables will silently keep rendering the old freeze (that failure has happened once already — see Task 1).
+
 ---
 
 ### Task 7 — Run secondary ablations: model tier, chunk overlap, two-stage vs single-stage
@@ -428,6 +435,20 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 2. **Re-measure the confidence distribution from scratch** — per guardrail 4, the "85–90% at 0.95+" figure is unvalidated Medium prose and must not enter the paper unmeasured. Remember confidence gates nothing (guardrail 2).
 
 **Deliverable:** descriptive stats + confidence distribution data in `paper/results/`.
+
+> ✅ **COMPLETE 2026-08-23 at `288c64f1`. Results: `paper/results/task8_20260823/`.** Zero Bedrock tokens — every input was already on disk. Regenerate with `python paper/analysis/dataset_stats.py && python paper/analysis/generate_tables.py`. Two tables now `\input` from the paper: `tables/dataset_stats.tex` in **§Corpus** (it describes the corpus, not a result) and `tables/confidence_distribution.tex` in §Experiments. LaTeX verified — 7pp, 0 undefined refs/citations, 0 warnings, and an A/B build confirms the two new tables add **zero** overfull boxes.
+>
+> **Descriptive:** 6 states, 70pp, 390 detected elements → **262 standards, 0 `standard_id` collisions**, age-band coverage **1.000** in every state (6 distinct bands). CO/TX realize no or almost no sub-strand tier — a four-level schema is not a four-level document. `blank_string` is 0 at every level, which is the standing check that `models._blank_to_none` is holding.
+>
+> **Confidence — the finding is NEGATIVE and must stay that way.** 7 distinct values in [0.85, 0.97] over 379 elements; the prompt's `<0.70` "guessing" band is used **zero** times and the `0.80–0.94` band only 32 times. The Medium claim splits: "85–90% of indicators at 0.95+" **reproduces** (236/263 = 89.7%, cite the measurement not the article), its second half — that the tail is "tables, footnotes, or unusual formatting" — is **REFUTED** (4 of 6 states have no sub-0.95 indicator; the tail is essentially all of KY, where all 26 score below the line, so the score moves per *document*), and the same article's 0.70 review gate is dead twice over — it does not exist, and zero elements would have tripped it.
+>
+> ⚠️ **The one trap in this result.** The single confirmed hallucination (NV `SS.CI.PK3`, 0.85) is also the single lowest-scoring element, and that reproduces across 14 same-config runs (966 elements, nothing else below 0.90). It looks like a working gate. It is not one, and the paper must say so in the same breath: there is exactly ONE distinct invented element, so a cut's false-negative rate is unmeasurable here; the prompt's own 0.80 boundary catches nothing; and the score is blind to the corpus's other non-verbatim category (all 39 `real_split_title` rows score ≥0.95). KY is the cleanest illustration — the best-evidenced detection in the corpus (recall/code/verified-precision all 1.000, detection-exhaustive golden) carries the *lowest* confidence.
+>
+> **Guardrail 2 re-verified against the live tree**, with a trap recorded: a repo-wide grep hits `needs_review`/`CONFIDENCE_THRESHOLD` under `infra/cdk/dist/` and `infra/cdk/cdk.out.deploy-dev/`. Those are stale build artifacts of a pre-2026 revision that really did gate; both are gitignored and untracked, so absent from a clean checkout and the arXiv tarball.
+>
+> **Repairs identified and deliberately deferred.** A sweep of both frozen files found `detector.detect_structure`'s docstring carries **three** defects: it names the wrong model ("Claude Sonnet 4.5"; it is Opus 4.6), it claims a step that does not exist ("Flags low-confidence elements for review" — precisely the false claim guardrail 2 exists to catch, in the function a reader opens first), and it **omits Pass-1 depth-map inference entirely** despite `detect_structure` calling `infer_depth_map` before chunking — the paper's central method claim, missing from the docstring of the function that implements it. `parser.py` swept clean; its one item is an addition (pre-normalization code logging). Fixing any of them changes `code_version_hash` `288c64f1`, which every recorded manifest cites, so they wait for the next hash-busting window — **Task 6**, which now carries the pointer. **Canonical queue: [CLAUDE.md](../CLAUDE.md), "These two files are COST-GATED right now."**
+>
+> **Note for Task 11:** the dataset table already carries the guardrail-1 tier columns, so the "corpus appendix table" should EXTEND it (adding `_trimmed` and source document names) rather than restate the same page counts in a second table.
 
 ---
 
