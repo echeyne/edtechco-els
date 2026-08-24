@@ -33,12 +33,32 @@
 \subsection{Ablation: Does the Depth-Map Pass Do Real Work?}
 \label{sec:experiments-ablation}
 
-% TODO(Task 12): prose. Lead on the LEVEL-WISE result and the categorical
-% evidence, not on a mean across states: four of six states are unaffected, so
-% an aggregate understates CO/KY and overstates the rest. The supportable claim
-% is conditional -- the depth map is what makes position-dependent levels
-% recoverable. Report off-arm recall as a RANGE (repeated runs move the
-% magnitude but never the sign); see paper/results/task3_stability_20260823/.
+% TODO(Task 12): prose. Lead on the LEVEL-WISE result, not on a mean across
+% states: four of six states are unaffected, so an aggregate understates CO/KY
+% and overstates the rest. The supportable claim is conditional -- the depth map
+% is what makes position-dependent levels recoverable.
+%
+% STRONGEST EVIDENCE IS THE LEVEL DISTRIBUTION, not recall and not the
+% regression cases. KY's golden is 3 domain / 5 strand / 10 sub_strand / 26
+% indicator. The ON arm reproduces that EXACTLY in all three runs; the OFF arm
+% inflates strand and deflates sub_strand in all three (5 -> 8/7/10, 10 ->
+% 7/9/6) with domain and indicator untouched at 3 and 26. Invariant across runs
+% and independent of golden size, which recall is not (CO's golden is 7
+% elements).
+%
+% Report off-arm recall as a RANGE, never a point value: CO 0.71-0.86, KY
+% 0.89-0.98 at n=3. The ON arm is 1.000 in all 18 runs, stdev 0.000.
+%
+% ⚠️ DO NOT write "no regression case changed status across runs" -- that was an
+% n=2 finding and n=3 REFUTED it (2026-08-24). CO-NO-SUB-STRAND went FAIL, FAIL,
+% PASS. Two cases are reproducible, both KY: KY-BENCHMARK-IS-SUB-STRAND and
+% KY-STRAND-CODE-KEEPS-FULL-LABEL. The table caption is generated from
+% stability_analysis.json and already says this correctly -- do not contradict
+% it in prose. CO still degrades in run 3 (recall 0.857, dropping a golden
+% strand the ON arm never drops), so the state-level effect IS reproducible;
+% only its surface form on CO is not.
+%
+% See paper/results/task3_stability_20260823/findings.md.
 
 \input{tables/ablation_depthmap}
 

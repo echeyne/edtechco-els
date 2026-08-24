@@ -15,6 +15,12 @@
 # A fresh clone would then fail to build, and Task 13's arXiv tarball would
 # ship without the figure.
 !figures/*.pdf
+# ...and results/ run logs are EVIDENCE, not build output. The blanket *.log
+# above is aimed at main.log, but it also swallowed every eval sweep log under
+# results/ -- and those logs are the ONLY source for the measured Bedrock token
+# spend and cost cited in each task's manifest.json (guardrail 6: every number
+# regenerable). Same reasoning as the figures exception above.
+!results/**/*.log
 *.fls
 *.fdb_latexmk
 *.synctex.gz

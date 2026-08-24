@@ -1,0 +1,203 @@
+== AZ ==
+  [baseline] running on 388 blocks…
+Starting RULE-BASED BASELINE detection for: outputs/08-22-26-4/AZ-extraction.json
+Input: 388 text blocks
+Baseline detection complete: 103 elements
+Elements by level: {'domain': 17, 'strand': 26, 'sub_strand': 24, 'indicator': 36}
+== CA ==
+  [baseline] running on 659 blocks…
+Starting RULE-BASED BASELINE detection for: outputs/08-22-26-4/CA-extraction.json
+Input: 659 text blocks
+Baseline detection complete: 90 elements
+Elements by level: {'domain': 21, 'strand': 7, 'sub_strand': 18, 'indicator': 44}
+== CO ==
+  [baseline] running on 893 blocks…
+Starting RULE-BASED BASELINE detection for: outputs/08-22-26-4/CO-extraction.json
+Input: 893 text blocks
+Baseline detection complete: 97 elements
+Elements by level: {'domain': 38, 'strand': 58, 'indicator': 1}
+== TX ==
+  [baseline] running on 306 blocks…
+Starting RULE-BASED BASELINE detection for: outputs/08-22-26-4/TX-extraction.json
+Input: 306 text blocks
+Baseline detection complete: 45 elements
+Elements by level: {'domain': 13, 'indicator': 25, 'strand': 7}
+== NV ==
+  [baseline] running on 752 blocks…
+Starting RULE-BASED BASELINE detection for: outputs/08-22-26-4/NV-extraction.json
+Input: 752 text blocks
+Baseline detection complete: 24 elements
+Elements by level: {'domain': 20, 'sub_strand': 1, 'strand': 3}
+== KY ==
+  [baseline] running on 252 blocks…
+Starting RULE-BASED BASELINE detection for: outputs/08-22-26-4/KY-extraction.json
+Input: 252 text blocks
+Baseline detection complete: 14 elements
+Elements by level: {'domain': 4, 'sub_strand': 10}
+
+=== AZ ===
+  golden:   5
+  detected: 103
+  matched:  4
+  precision: 0.500  recall: 0.800  f1: 0.615
+  per-level:
+    domain      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    indicator   tp=1   fp=3   fn=1   p=0.25 r=0.50
+    strand      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=1   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 1
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 3/3 (1.000) — graded over matched pairs only
+  description accuracy: 1/3 (0.333) — graded over matched pairs whose golden annotates one
+    [DESC/MISSING] AZ-DOM-SED (domain): missing: detector emitted no description (1389 golden chars)
+    [DESC/MISSING] AZ-SUB-SE-1-1 (sub_strand): missing: detector emitted no description (200 golden chars)
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (1): ['AZ-IND-SE-1-1-a']
+  extra detected (in-scope FPs) (4): [('domain', 'SED'), ('indicator', 'b'), ('indicator', 'd'), ('indicator', 'e')]
+  ignored (out-of-scope domains): 95
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present
+
+=== CA ===
+  golden:   25
+  detected: 90
+  matched:  16
+  precision: 0.182  recall: 0.640  f1: 0.283
+  per-level:
+    domain      tp=3   fp=16  fn=0   p=0.16 r=1.00
+    indicator   tp=5   fp=39  fn=9   p=0.11 r=0.36
+    strand      tp=3   fp=4   fn=0   p=0.43 r=1.00
+    sub_strand  tp=5   fp=13  fn=0   p=0.28 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 5
+    strand     → strand     : 3
+    sub_strand → sub_strand : 5
+  code accuracy: 16/16 (1.000) — graded over matched pairs only
+  description accuracy: 3/5 (0.600) — graded over matched pairs whose golden annotates one
+    [DESC/MISMATCH] CA-IND-05-EARLY (indicator): mismatch (556 vs 47 golden chars, diverges at char 47): golden '…' != detected '… Use both common and less common word forms and sentence for…'
+    [DESC/MISMATCH] CA-IND-05-LATER (indicator): mismatch (556 vs 56 golden chars, diverges at char 8): golden '…tailed descriptions, opinions, and explanations.' != detected '…scriptions, opinions, and explanations. Use both common and …'
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops (9): ['CA-IND-01-LATER', 'CA-IND-02-LATER', 'CA-IND-06-LATER', 'CA-IND-03-DISCOVERING', 'CA-IND-03-DEVELOPING', 'CA-IND-03-BROADENING', 'CA-IND-04-DISCOVERING', 'CA-IND-04-DEVELOPING']…
+  missing test cases (9): ['CA-IND-01-LATER', 'CA-IND-02-LATER', 'CA-IND-06-LATER', 'CA-IND-03-DISCOVERING', 'CA-IND-03-DEVELOPING', 'CA-IND-03-BROADENING', 'CA-IND-04-DISCOVERING', 'CA-IND-04-DEVELOPING', 'CA-IND-04-BROADENING']
+  extra detected (in-scope FPs) (72): [('strand', 'Strand 1.0'), ('sub_strand', 'CI'), ('indicator', 'Foundation 1.1'), ('sub_strand', 'INIT'), ('sub_strand', 'ENGA'), ('indicator', 'Foundation 1.3'), ('domain', 'AL'), ('sub_strand', 'PERS'), ('indicator', 'Foundation 1.4'), ('sub_strand', 'WM')]…
+  ignored (out-of-scope domains): 2
+  regression cases:
+    [FAIL] CA-AGE-COLUMNS-EMITTED — 13 Early/Later foundations missing a column: ['Foundation 1.1', 'Foundation 1.4', 'Foundation 2.1', 'Foundation 2.2', 'Foundation 2.3']…
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [PASS] CA-FOUR-LEVEL-HIERARCHY — all four levels present
+
+=== CO ===
+  golden:   7
+  detected: 97
+  matched:  4
+  precision: 0.082  recall: 0.571  f1: 0.143
+  per-level:
+    domain      tp=2   fp=6   fn=0   p=0.25 r=1.00
+    indicator   tp=0   fp=1   fn=3   p=0.00 r=0.00
+    strand      tp=2   fp=38  fn=0   p=0.05 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    strand     → strand     : 2
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 2/4 (0.500) — graded over matched pairs whose golden annotates one
+    [DESC/MISMATCH] CO-DOM-01 (domain): mismatch (29 vs 758 golden chars, diverges at char 0): golden "The Physical Development & Health domain describes children'…" != detected 'Suggested Supports Adults may'
+    [DESC/MISSING] CO-DOM-02 (domain): missing: detector emitted no description (640 golden chars)
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (3): ['CO-IND-01', 'CO-IND-02', 'CO-IND-03']
+  extra detected (in-scope FPs) (45): [('strand', '1'), ('strand', '2'), ('strand', '3'), ('strand', '4'), ('strand', '5'), ('strand', '6'), ('strand', '7'), ('strand', '8'), ('strand', '9'), ('strand', '10')]…
+  ignored (out-of-scope domains): 48
+  regression cases:
+    [PASS] CO-NO-SUB-STRAND — no sub_strands (correct for CO)
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand
+
+=== TX ===
+  golden:   8
+  detected: 45
+  matched:  5
+  precision: 0.135  recall: 0.625  f1: 0.222
+  per-level:
+    domain      tp=1   fp=9   fn=0   p=0.10 r=1.00
+    indicator   tp=4   fp=17  fn=0   p=0.19 r=1.00
+    strand      tp=0   fp=6   fn=2   p=0.00 r=0.00
+    sub_strand  tp=0   fp=0   fn=1   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+  code accuracy: 4/5 (0.800) — graded over matched pairs only
+    [CODE] TX-IND-01-PK3 (indicator): golden 'PK3.I.A.2' != detected 'PK3.1.A.2'
+  description accuracy: 0/1 (0.000) — graded over matched pairs whose golden annotates one; 1 truncated
+    [DESC/TRUNCATED] TX-DOM-01 (domain): truncated: 1049/1650 chars
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (3): ['TX-STR-01', 'TX-STR-02', 'TX-SUB-01']
+  extra detected (in-scope FPs) (32): [('indicator', 'LRPSS'), ('strand', 'A'), ('domain', 'SED'), ('indicator', 'PK4.I.A.1'), ('domain', 'I'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('domain', 'SED'), ('domain', 'I'), ('indicator', 'PK3.1.A.4')]…
+  ignored (out-of-scope domains): 8
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=9, PK4 count=15
+    [FAIL] TX-AGE-BAND-SET — 1/25 indicators have age_band != PK3/PK4 (e.g. None)
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators
+
+=== NV ===
+  golden:   46
+  detected: 24
+  matched:  3
+  precision: 0.167  recall: 0.065  f1: 0.094
+  per-level:
+    domain      tp=3   fp=11  fn=0   p=0.21 r=1.00
+    indicator   tp=0   fp=0   fn=24  p=0.00 r=0.00
+    strand      tp=0   fp=3   fn=12  p=0.00 r=0.00
+    sub_strand  tp=0   fp=1   fn=7   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+  code accuracy: 1/3 (0.333) — graded over matched pairs only
+    [CODE] NV-DOM-02 (domain): golden 'S' != detected 'SCIE'
+    [CODE] NV-DOM-03 (domain): golden 'T' != detected 'TECH'
+  description accuracy: 0/3 (0.000) — graded over matched pairs whose golden annotates one; 1 truncated
+    [DESC/MISSING] NV-DOM-01 (domain): missing: detector emitted no description (1959 golden chars)
+    [DESC/TRUNCATED] NV-DOM-02 (domain): truncated: 2410/3500 chars
+    [DESC/MISMATCH] NV-DOM-03 (domain): mismatch (2041 vs 4627 golden chars, diverges at char 1): golden '…echnology represents the "T" in STEAM and is the second doma…' != detected '…his new Technology domain was added to the Nevada Pre-Kinder…'
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (43): ['NV-STR-01', 'NV-SUB-01', 'NV-IND-01', 'NV-IND-02', 'NV-IND-03', 'NV-IND-04', 'NV-STR-02', 'NV-SUB-02', 'NV-IND-05', 'NV-IND-06']…
+  extra detected (in-scope FPs) (15): [('domain', 'SS'), ('domain', 'SS'), ('domain', 'SS'), ('domain', 'SS'), ('domain', 'SCIE'), ('domain', 'SCIE'), ('domain', 'SCIE'), ('domain', 'SCIE'), ('sub_strand', 'U.S'), ('strand', '1')]…
+  ignored (out-of-scope domains): 6
+  regression cases:
+    [PASS] NV-NO-COLUMN-HEADER-AS-ELEMENT — 24 elements: no column headers, captions or footnotes emitted, no age_band set
+    [FAIL] NV-SUB-STRAND-CODE-FROM-DOCUMENT — 1/1 sub_strand code(s) are invented abbreviations rather than the document's caption, e.g. ('U.S', 'Department of Health and Human Services ')
+    [FAIL] NV-FOUR-LEVEL-HIERARCHY — missing levels: ['indicator']
+
+=== KY ===
+  golden:   44
+  detected: 14
+  matched:  13
+  precision: 1.000  recall: 0.295  f1: 0.456
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=0   fp=0   fn=26  p=0.00 r=0.00
+    strand      tp=0   fp=0   fn=5   p=0.00 r=0.00
+    sub_strand  tp=10  fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    sub_strand → sub_strand : 10
+  code accuracy: 13/13 (1.000) — graded over matched pairs only
+  description accuracy: n/a (golden annotates no descriptions)
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (31): ['KY-STR-01', 'KY-IND-01', 'KY-IND-02', 'KY-IND-03', 'KY-IND-04', 'KY-IND-05', 'KY-IND-06', 'KY-IND-07', 'KY-IND-08', 'KY-STR-02']…
+  ignored (out-of-scope domains): 1
+  regression cases:
+    [PASS] KY-BENCHMARK-IS-SUB-STRAND — all 10 Benchmark elements classified as sub_strand
+    [FAIL] KY-FOUR-LEVEL-HIERARCHY — missing levels: ['indicator', 'strand']
+    [PASS] KY-STRAND-CODE-KEEPS-FULL-LABEL — all 8 labelled headings keep their full label as the code
+
+Review files written to paper/results/task4_20260823/review_baseline/
+
+Full report written to paper/results/task4_20260823/detector_baseline.json

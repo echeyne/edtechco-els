@@ -1,8 +1,8 @@
 {
   "task": "Task 3 stability \u2014 repeated ablation runs",
-  "date": "2026-08-23",
-  "status": "PARTIAL (16 of 24 runs; Bedrock Opus daily throttle). n=2 all six states both arms; n=3 AZ; n=3 CA ON-arm only.",
-  "git_commit": "628829b34b409a50821adc510a9f8c0d53c12ccc",
+  "date": "2026-08-23 (samples 1-2), 2026-08-24 (sample 3)",
+  "status": "COMPLETE. n=3 per arm per state, all six states (36 graded runs). The 2026-08-23 sweep stopped at 16 of 24 on a Bedrock Opus daily throttle; the remaining 9 runs completed 2026-08-24.",
+  "git_commit": "9aa025b (sample 3); 628829b (samples 1-2). Neither touches detector.py/parser.py, so code_version_hash is 288c64f1 for all runs.",
   "code_version_hash": "288c64f1",
   "inputs": {
     "outputs_dir": "outputs/08-22-26-4",
@@ -22,7 +22,9 @@
     "temperature": 0
   },
   "headline": {
+    "n_per_arm_per_state": 3,
     "on_arm_recall_stdev_all_states": 0.0,
+    "on_arm_recall_all_18_runs": 1.0,
     "null_reproduced": [
       "AZ",
       "CA",
@@ -33,9 +35,21 @@
       "CO",
       "KY"
     ],
-    "regression_cases_unstable_across_runs": 0,
+    "recall_gap_changed_sign": [],
+    "regression_cases_unstable_across_runs": 1,
+    "regression_cases_unstable_detail": [
+      {
+        "state": "CO",
+        "arm": "off",
+        "case": "CO-NO-SUB-STRAND",
+        "statuses": [
+          "FAIL",
+          "FAIL",
+          "PASS"
+        ]
+      }
+    ],
     "reproducible_ablation_failures": [
-      "CO-NO-SUB-STRAND",
       "KY-BENCHMARK-IS-SUB-STRAND",
       "KY-STRAND-CODE-KEEPS-FULL-LABEL"
     ],
@@ -45,17 +59,118 @@
         0.8571
       ],
       "KY": [
-        0.9091,
+        0.8864,
         0.9773
       ]
-    }
+    },
+    "level_distribution_KY_golden": {
+      "domain": 3,
+      "strand": 5,
+      "sub_strand": 10,
+      "indicator": 26
+    },
+    "level_distribution_KY_on_by_run": [
+      {
+        "domain": 3,
+        "strand": 5,
+        "sub_strand": 10,
+        "indicator": 26
+      },
+      {
+        "domain": 3,
+        "strand": 5,
+        "sub_strand": 10,
+        "indicator": 26
+      },
+      {
+        "domain": 3,
+        "strand": 5,
+        "sub_strand": 10,
+        "indicator": 26
+      }
+    ],
+    "level_distribution_KY_off_by_run": [
+      {
+        "domain": 3,
+        "strand": 8,
+        "sub_strand": 7,
+        "indicator": 26
+      },
+      {
+        "domain": 3,
+        "strand": 7,
+        "sub_strand": 9,
+        "indicator": 26
+      },
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 6,
+        "indicator": 26
+      }
+    ],
+    "level_distribution_CO_on_by_run": [
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 0,
+        "indicator": 48
+      },
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 0,
+        "indicator": 48
+      },
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 0,
+        "indicator": 48
+      }
+    ],
+    "level_distribution_CO_off_by_run": [
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 9,
+        "indicator": 25
+      },
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 9,
+        "indicator": 25
+      },
+      {
+        "domain": 3,
+        "strand": 10,
+        "sub_strand": 0,
+        "indicator": 48
+      }
+    ]
   },
   "caveats": [
-    "n=2 IS NOT A DISTRIBUTION. For CO and KY the reported 'range' is two points. It establishes that the magnitude is unstable \u2014 the claim being made \u2014 but does not characterise the spread. Do not compute a mean or a confidence interval from it.",
-    "REPORT OFF-ARM RECALL AS A RANGE, NEVER A POINT VALUE. CO 0.71-0.86, KY 0.91-0.98. The frozen task3_20260822 figures (CO 0.857, KY 0.909) are ONE DRAW each, and KY's second sample (0.977) is close to no effect at all.",
-    "THE CATEGORICAL EVIDENCE AND THE RATE EVIDENCE HAVE VERY DIFFERENT STRENGTH. Zero regression cases changed status across any run, and the three OFF-arm failures reproduce in every sample; those findings do not depend on golden size. The rates do, and CO's golden is 7 elements. Lead on the categorical result.",
-    "THE SWEEP IS PARTIAL. 16 of 24 runs completed before a Bedrock Opus daily throttle. off_run3_CA was written with n_detected=0 and is quarantined as INVALID_THROTTLED_*; ablation_stability.py refuses such a row rather than averaging it in.",
+    "REPORT OFF-ARM RECALL AS A RANGE, NEVER A POINT VALUE. CO 0.71-0.86, KY 0.89-0.98. The frozen task3_20260822 figures (CO 0.857, KY 0.909) are ONE DRAW each.",
+    "CO-NO-SUB-STRAND IS NOT REPRODUCIBLE EVIDENCE. It went FAIL/FAIL/PASS across the three off-arm runs: in run 3 the off arm did not invent the sub_strand level at all, and its CO level distribution was identical to the on arm's. The 2026-08-23 claim that zero regression cases changed status was true at n=2 and is FALSE at n=3. Only the two KY cases are reproducible. generate_tables.build_ablation_table now takes its case list from this file rather than from the single frozen run.",
+    "CO STILL DEGRADES IN RUN 3 despite that case passing (recall 0.857; it drops the golden strand 'Health, Safety and Nutrition', which the on arm never drops). State-level degradation is reproducible in all three runs; its surface form on CO is not.",
+    "LEAD ON THE LEVEL-DISTRIBUTION TABLE, NOT THE RATES. KY's on arm reproduces the golden 3/5/10/26 exactly in all three runs while the off arm inflates strand and deflates sub_strand in all three (5->8/7/10, 10->7/9/6) with domain and indicator untouched. That mechanism is invariant across runs and independent of golden size; the rates are not, and CO's golden is 7 elements.",
+    "n=3 IS STILL A SMALL SAMPLE. Enough to establish the direction and to catch one case n=2 called stable. No confidence interval is computed and none should be.",
     "CORPUS TIER: _only_subset (8-15pp). Nothing here speaks to full documents; that is Task 6.",
-    "THIS IS NOT eval_detector --stability-runs. That path (measure_stability, gotcha 6) compares only its own probe runs and EXCLUDES the graded run. These are plain repeats with the graded run included in every comparison."
-  ]
+    "THIS IS NOT eval_detector --stability-runs. That path (measure_stability, gotcha 6) compares only its own probe runs and EXCLUDES the graded run. These are plain repeats with the graded run included in every comparison.",
+    "AZ's ON-arm n_detected moved 66/76/76 with recall pinned at 1.000 -- the known listing-page duplication against a 5-element spot-check golden, present in the ON arm and orthogonal to this ablation."
+  ],
+  "commands": {
+    "per_run": "ELS_DEPTH_MAP_ENABLED=false  # off arm only; unset for the on arm\npython -m evaluation.eval_detector --extraction-dir outputs/08-22-26-4 --state {STATE} --no-cache --report-json paper/results/task3_stability_20260823/reports/{arm}_run{N}_{STATE}.json --output-dir paper/results/task3_stability_20260823/review/{arm}_run{N}",
+    "analysis": "python -m paper.analysis.ablation_stability --reports-dir paper/results/task3_stability_20260823/reports --frozen-on paper/results/task1_20260822/detector_golden4.json --frozen-on paper/results/task2_20260822/detector_heldout2.json --frozen-off paper/results/task3_20260822/detector_nodepthmap.json --out paper/results/task3_stability_20260823/stability_analysis.json",
+    "tables": "python -m paper.analysis.generate_tables",
+    "note": "rc=1 from eval_detector is EXPECTED where a regression case fails (off-arm CO/KY) and is not a run failure. The health check is n_detected != 0 plus depth_map_passed matching the arm; the run-3 driver asserts both after every run and aborts rather than spending into a throttle."
+  },
+  "cost_sample_3": {
+    "opus_tokens": 454113,
+    "share_of_daily_quota": 0.175,
+    "haiku_tokens": 97340,
+    "estimated_cost_usd": 4.04,
+    "wall_clock": "14 min for 9 runs (2026-08-24T16:25Z-16:39Z)"
+  }
 }

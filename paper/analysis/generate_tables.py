@@ -167,8 +167,16 @@ def build_ablation_table(abl, stab):
 
     degraded = abl["aggregate"]["states_with_recall_drop"]
     unaffected = [s for s in ALL_STATES if s not in degraded]
-    cases = ", ".join(rf"\texttt{{{esc(c)}}}"
-                      for c in abl["aggregate"]["total_regressions_newly_failing"])
+    # `abl` is ONE run. Where repeated runs exist they OVERRULE it on which
+    # cases count as categorical evidence: a case that fails in the recorded
+    # draw but passes in another run is a one-draw observation, not a
+    # reproducible failure, and naming it here would put an unreproducible
+    # claim in the paper (guardrail 7). Measured 2026-08-24: CO-NO-SUB-STRAND
+    # went FAIL/FAIL/PASS at n=3, so the reproducible set is KY's two.
+    recorded = abl["aggregate"]["total_regressions_newly_failing"]
+    reproducible = (stab["aggregate"]["reproducible_ablation_failures"]
+                    if stab else recorded)
+    cases = ", ".join(rf"\texttt{{{esc(c)}}}" for c in reproducible)
     extra = ""
     if stab:
         ag = stab["aggregate"]
@@ -177,11 +185,30 @@ def build_ablation_table(abl, stab):
         for s in ag["states_with_reproducible_degradation"]:
             lo, hi = rng[s]["off"]["recall_range"]
             parts.append(f"{s} {lo * 100:.0f}--{hi * 100:.0f}\\%")
-        extra = (r" Repeated runs ($n{=}2$--$3$ per arm per state) reproduce the "
+        # Sample size comes from the analysis file, never a literal: the sweep
+        # was partial once already (throttle, 2026-08-23) and a hardcoded n
+        # would have survived the repair silently.
+        sz = stab.get("sample_sizes")
+        if sz:
+            n_tex = (rf"$n{{=}}{sz['min']}$" if sz["min"] == sz["max"]
+                     else rf"$n{{=}}{sz['min']}$--${sz['max']}$")
+        else:
+            n_tex = r"$n{=}2$--$3$"
+        extra = (rf" Repeated runs ({n_tex} per arm per state) reproduce the "
                  r"\emph{direction} in every sample and never flip its sign, but the "
                  r"\emph{magnitude} varies: off-arm recall spans "
-                 + ", ".join(parts) + r". No regression case changed status in any run. "
+                 + ", ".join(parts) + r". "
                  r"Point estimates from a single run are therefore not reported.")
+        unstable = [c["case"] for c in ag["categorical_cases_unstable_across_runs"]]
+        dropped = [c for c in recorded if c in unstable]
+        if dropped:
+            extra += (r" One further case, "
+                      + ", ".join(rf"\texttt{{{esc(c)}}}" for c in dropped)
+                      + r", fails with the depth map disabled in the recorded run but "
+                        r"passes in one repeat, and is reported as unstable rather than "
+                        r"as evidence.")
+        else:
+            extra += r" No regression case changed status in any run."
 
     L += [r"  \caption{Depth-map ablation, pooled over all six states. Removing the "
           r"Pass-1 depth map leaves \emph{domain} recall untouched and degrades the "

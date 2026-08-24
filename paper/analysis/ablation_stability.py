@@ -131,11 +131,20 @@ def main():
         per_state[st] = entry
 
     affected = [s for s in states if per_state[s]["effect"] == "DEGRADED"]
+    # Derive n from the runs actually read rather than asserting it. A partial
+    # sweep (2026-08-23: a throttle cut 16 of 24 runs) must not be described by
+    # a hardcoded sample size -- guardrail 6, every number regenerable.
+    n_by_arm_state = {s: {a: per_state[s][a]["n_runs"] for a in ("on", "off")}
+                      for s in states}
+    n_all = [v[a] for v in n_by_arm_state.values() for a in ("on", "off")]
+    n_lo, n_hi = min(n_all), max(n_all)
+    n_desc = f"n={n_lo}" if n_lo == n_hi else f"n={n_lo}-{n_hi}"
     out = {
         "what_this_measures": (
-            "n=3 per arm per state. Sample 1 is the frozen recorded run "
-            "(task1/task2 for ON, task3 for OFF); samples 2-3 are repeats at the "
+            f"{n_desc} per arm per state. Sample 1 is the frozen recorded run "
+            "(task1/task2 for ON, task3 for OFF); later samples are repeats at the "
             "same code_version_hash on the same outputs folder."),
+        "sample_sizes": {"min": n_lo, "max": n_hi, "by_state": n_by_arm_state},
         "aggregate": {
             "states": states,
             "states_with_reproducible_degradation": affected,

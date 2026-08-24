@@ -33,19 +33,16 @@ These were established by verifying the live tree during planning. Several contr
 
    So NV's ceiling is **46/53 = 0.8679**, and reporting its raw precision as a hallucination rate would count 6 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now 7 verdicts instead of 12, because the 5 previously-unannotated standards are annotated. Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
 
-## Next session — the run queue (as of 2026-08-23)
+## Next session — the run queue (as of 2026-08-24)
 
-Everything below is blocked ONLY on the Opus daily quota resetting. Probe first
-(see the Compute budget section); the reset boundary is not UTC midnight.
+Probe the Opus quota first (see the Compute budget section); the reset boundary
+is not UTC midnight.
 
-**Run in this order — the total is ~2.3M Opus tokens, ~89% of a daily quota, so
-these two fill a day and nothing else Opus-heavy should share it.**
-
-1. **Finish Task 3's stability run 3** — 8 runs (CA off-arm, plus CO/TX/NV/KY in
-   both arms). **~400K tokens, ~20 min.** Cheap, and it takes CO and KY, which
-   carry the entire ablation effect, from n=2 to n=3. Do this FIRST: if the day
-   throttles early, this is the piece that most improves a claim already in the
-   paper.
+1. ~~**Finish Task 3's stability run 3**~~ — ✅ **DONE 2026-08-24.** 9 runs
+   (CA off-arm, plus CO/TX/NV/KY in both arms) in 14 min for **454,113 Opus
+   tokens, 17.5% of the daily quota, $4.04**. All six states are now n=3 per
+   arm. It changed a finding: `CO-NO-SUB-STRAND` is unstable (`FAIL, FAIL,
+   PASS`), so the categorical evidence is two KY cases, not three — see Task 3.
 2. **Task 6 — full documents, KY + CO first** (Emily's call, 2026-08-23).
    **~1.9M tokens.** KY 8pp→120pp is the largest relative jump AND its golden is
    detection-exhaustive, so the 44 annotated elements can be graded *inside* the
@@ -54,6 +51,14 @@ these two fill a day and nothing else Opus-heavy should share it.**
    also informs the framing question. AZ (217pp, the real batching stress test)
    and the remaining three follow on a later day; all six is ~3.5M, over one
    day's cap.
+
+   ⚠️ **Budget check for 2026-08-24 specifically:** Task 3's completion already
+   spent **454K** of today's 2,592,000. Task 6's KY+CO at ~1.9M brings the day
+   to ~2.35M, **~91% of the cap** — it fits, but with only ~240K of headroom, so
+   nothing else Opus-heavy should run today and a mid-run throttle is a real
+   risk. Rule 2 from the Compute budget section applies with full force: **one
+   invocation per state, separate `--report-json`**, so a throttle costs one
+   state rather than recording the rest as `n_detected=0`.
 
 **Zero-Opus work available any time** (does not compete for quota): ~~Task 8~~
 **(done 2026-08-23)**, Task 11's local figures and the corpus appendix table —
@@ -70,7 +75,9 @@ is capped at **2,592,000 tokens/day** (cross-region). Sonnet and Haiku have thei
 own budgets and were unaffected when Opus was exhausted, so parser work and
 depth-map work can continue after an Opus throttle.
 
-Measured costs, for planning:
+Measured costs, for planning (the stability row is now an actual, not an
+estimate — 782,419 on 2026-08-23 + 454,113 on 2026-08-24, and it landed within
+0.5% of the ~1,230,000 forecast, so these estimates are trustworthy):
 
 | work | Opus tokens | share of daily quota |
 |---|---|---|
@@ -78,7 +85,7 @@ Measured costs, for planning:
 | Task 2 detector (2 states) | 106,606 | 4% |
 | Task 3 off-arm (6 states) | 299,216 | 12% |
 | one ON+OFF ablation pair, 6 states | ~615,000 | 24% |
-| ablation stability, 2 extra runs × both arms × 6 states | ~1,230,000 | 47% |
+| ablation stability, 2 extra runs × both arms × 6 states | **1,236,532 (measured)** | **47.7%** |
 | **Task 6, all six FULL documents** | **~3,500,000** | **135% — needs two days** |
 
 Full documents are **777pp against 70pp of subsets, 11.1x**: AZ 217, CO 187,
@@ -264,15 +271,15 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 > ✅ **BOTH ARMS RECORDED 2026-08-23 across all six states. Results: `paper/results/task3_20260822/`; repeated-run stability in `paper/results/task3_stability_20260823/`.**
 >
-> ⚠️ **THE STABILITY SWEEP IS PARTIAL AND ONE ACTION REMAINS.** 16 of 24 runs completed before a Bedrock Opus daily throttle. **Run 2 finished for all six states in both arms**, so every state has n=2; AZ has n=3, and CA has n=3 on the ON arm only. `off_run3_CA` was written with `n_detected=0` and is quarantined as `INVALID_THROTTLED_*`.
+> ✅ **THE STABILITY SWEEP IS COMPLETE (2026-08-24). n=3 per arm per state, all six states, 36 graded runs. NOTHING OUTSTANDING.** The 9 runs the 2026-08-23 throttle left behind finished in 14 min for **454,113 Opus tokens (17.5% of the daily quota), $4.04** — close to the ~400K estimate. Driver: `paper/results/task3_stability_20260823/finish_run3.sh`. `off_run3_CA` was re-executed cleanly; the throttled attempt stays quarantined as `INVALID_THROTTLED_*` (report and review dir both).
 >
-> **OUTSTANDING: finish run 3** — 8 runs (CA off, plus CO/TX/NV/KY in both arms), **~400K Opus tokens, ~15% of a daily quota, ~20 min.** That takes CO and KY — the two states carrying the entire effect — from n=2 to n=3. n=2 is enough to show the magnitude is unstable, which is the claim being made, but it is not a distribution and no mean or interval may be computed from it. Command shape is in `paper/results/task3_stability_20260823/manifest.json`; keep one report file per (arm, run, state) so `ablation_stability.py` can read them.
+> ⚠️ **GOING TO n=3 REFUTED ONE OF THE n=2 FINDINGS — the write-up must not carry it forward.** `CO-NO-SUB-STRAND` came back **`FAIL, FAIL, PASS`**: in run 3 the off arm did not invent CO's sub_strand level at all, and its level distribution was *identical to the on arm's* (3/10/0/48, 61 elements). So the claim "zero regression cases changed status across any run" was true at n=2 and is **false at n=3**, and the categorical evidence is **two cases, both KY**, not three. `generate_tables.build_ablation_table` now takes its case list from `stability_analysis.json` rather than from the single frozen run, and names the demoted case explicitly as unstable — check that wiring before hand-editing the caption. CO still degrades in run 3 (recall 0.857, dropping the golden strand `Health, Safety and Nutrition`, which the on arm never drops), so the *state-level* effect is reproducible in all three runs; only its surface form on CO is not.
 >
 > **The effect is real, reproducible in direction, and CONDITIONAL.** Pooled by level, removing the depth map leaves **domain recall untouched at 1.000** and degrades exactly the levels whose identity depends on nesting position: strand 1.000→0.960, **sub_strand 1.000→0.875**, indicator 1.000→0.986. Per state, only **CO** and **KY** degrade; AZ, CA, TX and NV hold recall 1.000 in both arms.
 >
-> **Lead on the categorical evidence, not the rates.** Three regression cases fail with the depth map off and pass with it on, in *every* run: `CO-NO-SUB-STRAND` (the detector invents a sub_strand level in a document that has none — 9 spurious, tp=0/fp=9), `KY-BENCHMARK-IS-SUB-STRAND` (`Benchmark N.N` promoted to strand — literally classifying by LABEL), and `KY-STRAND-CODE-KEEPS-FULL-LABEL`.
+> **Lead on the LEVEL-DISTRIBUTION table, then the categorical cases — not the rates.** (Revised 2026-08-24 at n=3; the earlier "three regression cases in every run" version is superseded.) The mechanism is what reproduces perfectly. KY's golden is 3 domain / 5 strand / 10 sub_strand / 26 indicator; the **on arm reproduces it exactly in all three runs**, while the **off arm inflates strand and deflates sub_strand in all three** (strand 5→8/7/10, sub_strand 10→7/9/6) with domain and indicator untouched at 3 and 26. That is the paper's thesis in one table, it is invariant across runs, and unlike recall it does not depend on golden size. Two regression cases back it in *every* run: `KY-BENCHMARK-IS-SUB-STRAND` (`Benchmark N.N` promoted to strand — literally classifying by LABEL) and `KY-STRAND-CODE-KEEPS-FULL-LABEL`. `CO-NO-SUB-STRAND` (the off arm inventing a sub_strand level in a document that has none — 9 spurious, absorbing 23 elements that belong at indicator) fails in runs 1 and 2 and **passes in run 3**; report it as unstable, not as evidence.
 >
-> ⚠️ **Report off-arm recall as a RANGE, never a point value.** Repeated runs (n=2–3 per arm per state) reproduce the direction in every sample and never flip its sign, and **zero regression cases changed status**, but the magnitude swings: CO **0.71–0.86**, KY **0.91–0.98**. KY's second sample (0.977) is close to no effect at all. The frozen `task3_20260822` figures are one draw each.
+> ⚠️ **Report off-arm recall as a RANGE, never a point value.** Repeated runs (**n=3** per arm per state) reproduce the direction in every sample and never flip its sign, but the magnitude swings: CO **0.71–0.86** (0.857, 0.714, 0.857), KY **0.89–0.98** (0.909, 0.977, 0.886). KY's widest samples bracket a near-null (0.977) and the largest effect measured on that state (0.886). The frozen `task3_20260822` figures are one draw each. The on arm, by contrast, is **1.000 in all 18 runs, stdev 0.000**, and the null holds at n=3 on AZ/CA/NV/TX including the held-out canary. n=3 is still a small sample: no mean or confidence interval is computed from it, and none should be.
 >
 > ⚠️ **The first off-arm attempt (2026-08-23T00:21Z) aborted on a Bedrock Opus daily-token throttle** and left a report in which five of six states read `recall=0.0` having never run. Quarantined as `INVALID_THROTTLED_*` with a `DO_NOT_USE.md`; never quote it. `compare_ablation.py` and `ablation_stability.py` both now REFUSE any state with `n_detected == 0` or a `depth_map_passed` that does not match its arm.
 

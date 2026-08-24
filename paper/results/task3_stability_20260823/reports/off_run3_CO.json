@@ -1,0 +1,217 @@
+[
+  {
+    "state": "CO",
+    "precision": 0.14285714285714285,
+    "recall": 0.8571428571428571,
+    "f1": 0.24489795918367344,
+    "code_accuracy": 1.0,
+    "code_matches": 6,
+    "code_total": 6,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 3,
+    "description_total": 3,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 6,
+    "n_golden": 7,
+    "n_detected": 61,
+    "per_level": {
+      "domain": {
+        "tp": 2,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 1,
+        "fp": 6,
+        "fn": 1
+      },
+      "indicator": {
+        "tp": 3,
+        "fp": 30,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 2
+      },
+      "indicator": {
+        "indicator": 3
+      },
+      "strand": {
+        "strand": 1
+      }
+    },
+    "missing_test_cases": [
+      "CO-STR-01"
+    ],
+    "extra_elements": [
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "indicator",
+        "5"
+      ],
+      [
+        "indicator",
+        "7"
+      ],
+      [
+        "indicator",
+        "8"
+      ],
+      [
+        "indicator",
+        "9"
+      ],
+      [
+        "indicator",
+        "10"
+      ],
+      [
+        "indicator",
+        "11"
+      ],
+      [
+        "indicator",
+        "12"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "4"
+      ],
+      [
+        "indicator",
+        "5"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ],
+      [
+        "indicator",
+        "3"
+      ],
+      [
+        "indicator",
+        "1"
+      ],
+      [
+        "indicator",
+        "2"
+      ]
+    ],
+    "ignored_out_of_scope": 19,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "CO-NO-SUB-STRAND",
+        "status": "PASS",
+        "detail": "no sub_strands (correct for CO)"
+      },
+      {
+        "id": "CO-NUMERIC-STRANDS",
+        "status": "PASS",
+        "detail": "all numeric-prefixed sections correctly classified as strand"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  }
+]

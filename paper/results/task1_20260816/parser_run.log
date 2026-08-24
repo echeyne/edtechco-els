@@ -1,0 +1,178 @@
+== AZ ==
+  [parser] running on 66 detected elements…
+Split 66 elements into 5 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5766, "output_tokens": 3157, "total_tokens": 8923, "latency_ms": 34626.1, "estimated_cost_usd": 0.064653, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 13431 chars, 5766 in / 3157 out tokens, 34626ms
+Chunk 1/5: parsed 5 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 7465, "output_tokens": 7337, "total_tokens": 14802, "latency_ms": 77999.1, "estimated_cost_usd": 0.13245, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 31649 chars, 7465 in / 7337 out tokens, 77999ms
+Chunk 2/5: parsed 11 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6978, "output_tokens": 7036, "total_tokens": 14014, "latency_ms": 71470.6, "estimated_cost_usd": 0.126474, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 29622 chars, 6978 in / 7036 out tokens, 71471ms
+Chunk 3/5: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 7033, "output_tokens": 7385, "total_tokens": 14418, "latency_ms": 74076.5, "estimated_cost_usd": 0.131874, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 32356 chars, 7033 in / 7385 out tokens, 74077ms
+Chunk 4/5: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5494, "output_tokens": 3347, "total_tokens": 8841, "latency_ms": 40308.1, "estimated_cost_usd": 0.066687, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15014 chars, 5494 in / 3347 out tokens, 40308ms
+Chunk 5/5: parsed 5 standards
+  [parser] produced 45 standards (status=success)
+== CA ==
+  [parser] running on 122 detected elements…
+Split 122 elements into 9 domain chunk(s)
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6007, "output_tokens": 2638, "total_tokens": 8645, "latency_ms": 24422.4, "estimated_cost_usd": 0.057591, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8078 chars, 6007 in / 2638 out tokens, 24422ms
+Chunk 1/9: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5804, "output_tokens": 3126, "total_tokens": 8930, "latency_ms": 27356.1, "estimated_cost_usd": 0.064302, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8894 chars, 5804 in / 3126 out tokens, 27356ms
+Chunk 2/9: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 4783, "output_tokens": 1395, "total_tokens": 6178, "latency_ms": 15526.7, "estimated_cost_usd": 0.035274, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 4042 chars, 4783 in / 1395 out tokens, 15527ms
+Chunk 3/9: parsed 4 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5837, "output_tokens": 3665, "total_tokens": 9502, "latency_ms": 32575.5, "estimated_cost_usd": 0.072486, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11276 chars, 5837 in / 3665 out tokens, 32575ms
+Chunk 4/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5754, "output_tokens": 3093, "total_tokens": 8847, "latency_ms": 27928.8, "estimated_cost_usd": 0.063657, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9045 chars, 5754 in / 3093 out tokens, 27929ms
+Chunk 5/9: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5768, "output_tokens": 3508, "total_tokens": 9276, "latency_ms": 33511.6, "estimated_cost_usd": 0.069924, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11004 chars, 5768 in / 3508 out tokens, 33512ms
+Chunk 6/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5617, "output_tokens": 3313, "total_tokens": 8930, "latency_ms": 30640.8, "estimated_cost_usd": 0.066546, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10213 chars, 5617 in / 3313 out tokens, 30641ms
+Chunk 7/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5879, "output_tokens": 3553, "total_tokens": 9432, "latency_ms": 30357.6, "estimated_cost_usd": 0.070932, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10925 chars, 5879 in / 3553 out tokens, 30358ms
+Chunk 8/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5803, "output_tokens": 3678, "total_tokens": 9481, "latency_ms": 32357.3, "estimated_cost_usd": 0.072579, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11139 chars, 5803 in / 3678 out tokens, 32357ms
+Chunk 9/9: parsed 12 standards
+  [parser] produced 94 standards (status=success)
+== CO ==
+  [parser] running on 61 detected elements…
+Split 61 elements into 6 domain chunk(s)
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5694, "output_tokens": 4553, "total_tokens": 10247, "latency_ms": 37192.3, "estimated_cost_usd": 0.085377, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 19356 chars, 5694 in / 4553 out tokens, 37192ms
+Chunk 1/6: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5426, "output_tokens": 2871, "total_tokens": 8297, "latency_ms": 26627.5, "estimated_cost_usd": 0.059343, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11536 chars, 5426 in / 2871 out tokens, 26628ms
+Chunk 2/6: parsed 7 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5725, "output_tokens": 3888, "total_tokens": 9613, "latency_ms": 34181.3, "estimated_cost_usd": 0.075495, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15857 chars, 5725 in / 3888 out tokens, 34181ms
+Chunk 3/6: parsed 11 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 4748, "output_tokens": 996, "total_tokens": 5744, "latency_ms": 11052.0, "estimated_cost_usd": 0.029184, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 4065 chars, 4748 in / 996 out tokens, 11052ms
+Chunk 4/6: parsed 3 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5835, "output_tokens": 4036, "total_tokens": 9871, "latency_ms": 34702.1, "estimated_cost_usd": 0.078045, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 17494 chars, 5835 in / 4036 out tokens, 34702ms
+Chunk 5/6: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5102, "output_tokens": 2107, "total_tokens": 7209, "latency_ms": 21780.9, "estimated_cost_usd": 0.046911, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9134 chars, 5102 in / 2107 out tokens, 21781ms
+Chunk 6/6: parsed 5 standards
+  [parser] produced 48 standards (status=success)
+== TX ==
+  [parser] running on 33 detected elements…
+Split 33 elements into 3 domain chunk(s)
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6311, "output_tokens": 8550, "total_tokens": 14861, "latency_ms": 70265.4, "estimated_cost_usd": 0.147183, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 39807 chars, 6311 in / 8550 out tokens, 70265ms
+Chunk 1/3: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5695, "output_tokens": 5780, "total_tokens": 11475, "latency_ms": 49256.6, "estimated_cost_usd": 0.103785, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 25942 chars, 5695 in / 5780 out tokens, 49257ms
+Chunk 2/3: parsed 8 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6011, "output_tokens": 3645, "total_tokens": 9656, "latency_ms": 37687.5, "estimated_cost_usd": 0.072708, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 16511 chars, 6011 in / 3645 out tokens, 37688ms
+Chunk 3/3: parsed 5 standards
+  [parser] produced 25 standards (status=success)
+
+=== AZ ===
+  golden standards: 18
+  parsed:           45
+  matched:          18  (coverage 1.000)
+  fully correct:    17/18
+  field accuracy:   0.997
+  per-field (ok/total) — only fields with a mismatch shown:
+    indicator.description   17/18  (0.94)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (1):
+    AZ-IND-15 indicator.description: expected 'Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, "My name starts with an [I]." Paints the letter L like in her friend\'s name, while at the easel.' got 'Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, "My name starts with an [1]." Paints the letter L like in her friend\'s name, while at the easel.'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 45 standard_ids unique
+
+=== CA ===
+  golden standards: 21
+  parsed:           94
+  matched:          21  (coverage 1.000)
+  fully correct:    18/21
+  field accuracy:   0.984
+  per-field (ok/total) — only fields with a mismatch shown:
+    standard_id             18/21  (0.86)  ← MISMATCH
+    indicator.code          18/21  (0.86)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (6):
+    CA-IND-03-DISCOVERING standard_id: expected 'US-CA-2021-ELD.1.0.VOCA.1.1.DISC' got 'US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DISC'
+    CA-IND-03-DISCOVERING indicator.code: expected 'ELD.1.0.VOCA.1.1.DISC' got 'ELD.1.0.VOCA.Foundation 1.1.DISC'
+    CA-IND-03-DEVELOPING standard_id: expected 'US-CA-2021-ELD.1.0.VOCA.1.1.DEVE' got 'US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DEVE'
+    CA-IND-03-DEVELOPING indicator.code: expected 'ELD.1.0.VOCA.1.1.DEVE' got 'ELD.1.0.VOCA.Foundation 1.1.DEVE'
+    CA-IND-03-BROADENING standard_id: expected 'US-CA-2021-ELD.1.0.VOCA.1.1.BROA' got 'US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.BROA'
+    CA-IND-03-BROADENING indicator.code: expected 'ELD.1.0.VOCA.1.1.BROA' got 'ELD.1.0.VOCA.Foundation 1.1.BROA'
+  regression cases:
+    [PASS] CA-EARLY-LATER-DISTINCT-IDS — 0 multi-variant indicator code(s) all kept distinct ids+bands
+    [PASS] NO-ID-COLLISION — all 94 standard_ids unique
+
+=== CO ===
+  golden standards: 9
+  parsed:           48
+  matched:          9  (coverage 1.000)
+  fully correct:    9/9
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] CO-INDICATOR-PARENT-IS-STRAND — all 48 indicators have a strand parent and null sub_strand
+    [PASS] NO-ID-COLLISION — all 48 standard_ids unique
+
+=== TX ===
+  golden standards: 8
+  parsed:           25
+  matched:          8  (coverage 1.000)
+  fully correct:    8/8
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT-IDS — 0 multi-variant indicator code(s) all kept distinct ids+bands
+    [PASS] NO-ID-COLLISION — all 25 standard_ids unique
+
+Review files written to paper/results/task1_20260816/review_parser/
+
+Full report written to paper/results/task1_20260816/parser_golden4.json

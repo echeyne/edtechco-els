@@ -1,3 +1,11 @@
 off run2 CO rc=1
 off run2 KY rc=1
 off run3 CA rc=1
+--- run 3 completion, 2026-08-24 ---
+off run3 KY rc=1   (EXPECTED: KY-BENCHMARK-IS-SUB-STRAND and
+                    KY-STRAND-CODE-KEEPS-FULL-LABEL fail in the off arm by design.
+                    rc=1 means a regression case failed, not that the run failed.)
+No throttles. All 9 remaining runs completed.
+off run3 CA was re-executed cleanly; the 2026-08-23 throttled attempt stays
+quarantined as reports/INVALID_THROTTLED_off_run3_CA.json and
+review/INVALID_THROTTLED_off_run3_CA/.

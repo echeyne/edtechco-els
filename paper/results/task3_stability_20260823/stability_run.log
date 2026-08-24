@@ -1,0 +1,1313 @@
+arm=on run=2 state=AZ DEPTH_MAP_ENABLED=True
+=== START on run2 AZ 2026-08-23T18:32:44Z ===
+== AZ ==
+  [detector] running on 388 blocks…
+Starting structure detection for document: outputs/08-22-26-4/AZ-extraction.json
+Input: 388 text blocks
+Inferring depth map from 388 sampled blocks (~5957 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 11402, "output_tokens": 334, "total_tokens": 11736, "latency_ms": 3676.3, "estimated_cost_usd": 0.013072, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1004 chars, 11402 in / 334 out tokens, 3676ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: '<STANDARD NAME> STANDARD')
+  depth=2 → strand (pattern: 'Strand N: <Title>')
+  depth=3 → sub_strand (pattern: 'Concept N: <Title>')
+  depth=4 → indicator (pattern: '<letter>. <Indicator statement>')
+Created 4 chunks from 388 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/4 (132 blocks, ~1982 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10772, "output_tokens": 4776, "total_tokens": 15548, "latency_ms": 34584.7, "estimated_cost_usd": 0.17326, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 17053 chars, 10772 in / 4776 out tokens, 34585ms
+Parsed 30 elements from LLM response
+Successfully created 30 DetectedElement objects
+Chunk 1/4: Successfully detected 30 elements
+Progress: 1/4 chunks processed, 30 total elements detected so far
+Processing chunk 2/4 (115 blocks, ~1981 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10705, "output_tokens": 2988, "total_tokens": 13693, "latency_ms": 22371.0, "estimated_cost_usd": 0.128225, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11561 chars, 10705 in / 2988 out tokens, 22371ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 2/4: Successfully detected 17 elements
+Progress: 2/4 chunks processed, 47 total elements detected so far
+Processing chunk 3/4 (134 blocks, ~1979 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10948, "output_tokens": 4009, "total_tokens": 14957, "latency_ms": 29709.2, "estimated_cost_usd": 0.154965, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15273 chars, 10948 in / 4009 out tokens, 29709ms
+Parsed 26 elements from LLM response
+Successfully created 26 DetectedElement objects
+Chunk 3/4: Successfully detected 26 elements
+Progress: 3/4 chunks processed, 73 total elements detected so far
+Processing chunk 4/4 (95 blocks, ~1462 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9938, "output_tokens": 2765, "total_tokens": 12703, "latency_ms": 20827.0, "estimated_cost_usd": 0.118815, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9857 chars, 9938 in / 2765 out tokens, 20827ms
+Parsed 16 elements from LLM response
+Successfully created 16 DetectedElement objects
+Chunk 4/4: Successfully detected 16 elements
+Progress: 4/4 chunks processed, 89 total elements detected so far
+De-duplicated 13 overlap-repeated elements (89 → 76)
+Detection complete: 76 total elements detected
+Elements by level: {'domain': 2, 'strand': 8, 'sub_strand': 21, 'indicator': 45}
+Inferring depth map from 388 sampled blocks (~5957 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 11402, "output_tokens": 334, "total_tokens": 11736, "latency_ms": 3521.8, "estimated_cost_usd": 0.013072, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1004 chars, 11402 in / 334 out tokens, 3522ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: '<STANDARD NAME> STANDARD')
+  depth=2 → strand (pattern: 'Strand N: <Title>')
+  depth=3 → sub_strand (pattern: 'Concept N: <Title>')
+  depth=4 → indicator (pattern: '<letter>. <Indicator statement>')
+
+=== AZ ===
+  golden:   5
+  detected: 76
+  matched:  5
+  precision: 0.417  recall: 1.000  f1: 0.588
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=4   fn=0   p=0.33 r=1.00
+    strand      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    sub_strand  tp=1   fp=2   fn=0   p=0.33 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (7): [('strand', 'Strand 2'), ('indicator', 'b'), ('indicator', 'c'), ('indicator', 'd'), ('indicator', 'e'), ('sub_strand', 'Concept 2'), ('sub_strand', 'Concept 3')]
+  ignored (out-of-scope domains): 64
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/on_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run2_AZ.json
+=== END on run2 AZ rc=0 2026-08-23T18:34:42Z ===
+arm=off run=2 state=AZ DEPTH_MAP_ENABLED=False
+=== START off run2 AZ 2026-08-23T18:34:42Z ===
+== AZ ==
+  [detector] running on 388 blocks…
+Starting structure detection for document: outputs/08-22-26-4/AZ-extraction.json
+Input: 388 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 4 chunks from 388 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/4 (132 blocks, ~1982 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10306, "output_tokens": 2913, "total_tokens": 13219, "latency_ms": 22206.7, "estimated_cost_usd": 0.124355, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10813 chars, 10306 in / 2913 out tokens, 22207ms
+Parsed 18 elements from LLM response
+Successfully created 18 DetectedElement objects
+Chunk 1/4: Successfully detected 18 elements
+Progress: 1/4 chunks processed, 18 total elements detected so far
+Processing chunk 2/4 (115 blocks, ~1981 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10239, "output_tokens": 3050, "total_tokens": 13289, "latency_ms": 23210.1, "estimated_cost_usd": 0.127445, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11737 chars, 10239 in / 3050 out tokens, 23210ms
+Parsed 18 elements from LLM response
+Successfully created 18 DetectedElement objects
+Chunk 2/4: Successfully detected 18 elements
+Progress: 2/4 chunks processed, 36 total elements detected so far
+Processing chunk 3/4 (134 blocks, ~1979 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10482, "output_tokens": 4009, "total_tokens": 14491, "latency_ms": 28756.0, "estimated_cost_usd": 0.152635, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15273 chars, 10482 in / 4009 out tokens, 28756ms
+Parsed 26 elements from LLM response
+Successfully created 26 DetectedElement objects
+Chunk 3/4: Successfully detected 26 elements
+Progress: 3/4 chunks processed, 62 total elements detected so far
+Processing chunk 4/4 (95 blocks, ~1462 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9472, "output_tokens": 2749, "total_tokens": 12221, "latency_ms": 20516.9, "estimated_cost_usd": 0.116085, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9849 chars, 9472 in / 2749 out tokens, 20517ms
+Parsed 16 elements from LLM response
+Successfully created 16 DetectedElement objects
+Chunk 4/4: Successfully detected 16 elements
+Progress: 4/4 chunks processed, 78 total elements detected so far
+De-duplicated 13 overlap-repeated elements (78 → 65)
+Detection complete: 65 total elements detected
+Elements by level: {'domain': 2, 'strand': 9, 'sub_strand': 9, 'indicator': 45}
+
+=== AZ ===
+  golden:   5
+  detected: 65
+  matched:  5
+  precision: 0.500  recall: 1.000  f1: 0.667
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=4   fn=0   p=0.33 r=1.00
+    strand      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    sub_strand  tp=1   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  extra detected (in-scope FPs) (5): [('strand', 'Strand 2'), ('indicator', 'b'), ('indicator', 'c'), ('indicator', 'd'), ('indicator', 'e')]
+  ignored (out-of-scope domains): 55
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/off_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run2_AZ.json
+=== END off run2 AZ rc=0 2026-08-23T18:36:19Z ===
+arm=on run=2 state=CA DEPTH_MAP_ENABLED=True
+=== START on run2 CA 2026-08-23T18:36:19Z ===
+== CA ==
+  [detector] running on 659 blocks…
+Starting structure detection for document: outputs/08-22-26-4/CA-extraction.json
+Input: 659 text blocks
+Inferring depth map from 659 sampled blocks (~4195 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 13679, "output_tokens": 412, "total_tokens": 14091, "latency_ms": 4302.0, "estimated_cost_usd": 0.015739, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1216 chars, 13679 in / 412 out tokens, 4302ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: 'DOMAIN TITLE (all-caps or title case, appears at x=0.07 as section header)')
+  depth=2 → strand (pattern: 'Strand: N.0 — <Title>')
+  depth=3 → sub_strand (pattern: 'Sub-Strand[—-] <Title>')
+  depth=4 → indicator (pattern: 'Foundation N.N <Title>')
+Created 3 chunks from 659 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (260 blocks, ~1995 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12890, "output_tokens": 6361, "total_tokens": 19251, "latency_ms": 54087.9, "estimated_cost_usd": 0.223475, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 19803 chars, 12890 in / 6361 out tokens, 54088ms
+Parsed 53 elements from LLM response
+Successfully created 53 DetectedElement objects
+Chunk 1/3: Successfully detected 53 elements
+Progress: 1/3 chunks processed, 53 total elements detected so far
+Processing chunk 2/3 (329 blocks, ~1999 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 13743, "output_tokens": 6119, "total_tokens": 19862, "latency_ms": 59347.0, "estimated_cost_usd": 0.22169, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 20718 chars, 13743 in / 6119 out tokens, 59347ms
+Parsed 62 elements from LLM response
+Successfully created 62 DetectedElement objects
+Chunk 2/3: Successfully detected 62 elements
+Progress: 2/3 chunks processed, 115 total elements detected so far
+Processing chunk 3/3 (236 blocks, ~1193 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11612, "output_tokens": 3961, "total_tokens": 15573, "latency_ms": 34765.0, "estimated_cost_usd": 0.157085, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 13599 chars, 11612 in / 3961 out tokens, 34765ms
+Parsed 41 elements from LLM response
+Successfully created 41 DetectedElement objects
+Chunk 3/3: Successfully detected 41 elements
+Progress: 3/3 chunks processed, 156 total elements detected so far
+De-duplicated 34 overlap-repeated elements (156 → 122)
+Detection complete: 122 total elements detected
+Elements by level: {'domain': 3, 'strand': 7, 'sub_strand': 18, 'indicator': 94}
+Inferring depth map from 659 sampled blocks (~4195 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 13679, "output_tokens": 412, "total_tokens": 14091, "latency_ms": 4425.3, "estimated_cost_usd": 0.015739, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1216 chars, 13679 in / 412 out tokens, 4425ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: 'DOMAIN TITLE (all-caps or title case, appears at x=0.07 as section header)')
+  depth=2 → strand (pattern: 'Strand: N.0 — <Title>')
+  depth=3 → sub_strand (pattern: 'Sub-Strand[—-] <Title>')
+  depth=4 → indicator (pattern: 'Foundation N.N <Title>')
+
+=== CA ===
+  golden:   25
+  detected: 122
+  matched:  25
+  precision: 0.205  recall: 1.000  f1: 0.340
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=14  fp=80  fn=0   p=0.15 r=1.00
+    strand      tp=3   fp=4   fn=0   p=0.43 r=1.00
+    sub_strand  tp=5   fp=13  fn=0   p=0.28 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 14
+    strand     → strand     : 3
+    sub_strand → sub_strand : 5
+  code accuracy: 25/25 (1.000) — graded over matched pairs only
+  description accuracy: 14/14 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (97): [('strand', 'Strand 1.0'), ('sub_strand', 'CI'), ('indicator', 'Foundation 1.1'), ('indicator', 'Foundation 1.1'), ('sub_strand', 'INIT'), ('sub_strand', 'ENGA'), ('indicator', 'Foundation 1.3'), ('indicator', 'Foundation 1.3'), ('sub_strand', 'PERS'), ('indicator', 'Foundation 1.4')]…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] CA-AGE-COLUMNS-EMITTED — all 16 Early/Later foundations emit both columns
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [PASS] CA-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/on_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run2_CA.json
+=== END on run2 CA rc=0 2026-08-23T18:38:58Z ===
+arm=off run=2 state=CA DEPTH_MAP_ENABLED=False
+=== START off run2 CA 2026-08-23T18:38:59Z ===
+== CA ==
+  [detector] running on 659 blocks…
+Starting structure detection for document: outputs/08-22-26-4/CA-extraction.json
+Input: 659 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 3 chunks from 659 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (260 blocks, ~1995 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12333, "output_tokens": 5302, "total_tokens": 17635, "latency_ms": 47412.0, "estimated_cost_usd": 0.194215, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 17895 chars, 12333 in / 5302 out tokens, 47412ms
+Parsed 53 elements from LLM response
+Successfully created 53 DetectedElement objects
+Chunk 1/3: Successfully detected 53 elements
+Progress: 1/3 chunks processed, 53 total elements detected so far
+Processing chunk 2/3 (329 blocks, ~1999 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 13186, "output_tokens": 6119, "total_tokens": 19305, "latency_ms": 59894.1, "estimated_cost_usd": 0.218905, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 20718 chars, 13186 in / 6119 out tokens, 59894ms
+Parsed 62 elements from LLM response
+Successfully created 62 DetectedElement objects
+Chunk 2/3: Successfully detected 62 elements
+Progress: 2/3 chunks processed, 115 total elements detected so far
+Processing chunk 3/3 (236 blocks, ~1193 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11055, "output_tokens": 3961, "total_tokens": 15016, "latency_ms": 34303.9, "estimated_cost_usd": 0.1543, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 13599 chars, 11055 in / 3961 out tokens, 34304ms
+Parsed 41 elements from LLM response
+Successfully created 41 DetectedElement objects
+Chunk 3/3: Successfully detected 41 elements
+Progress: 3/3 chunks processed, 156 total elements detected so far
+De-duplicated 34 overlap-repeated elements (156 → 122)
+Detection complete: 122 total elements detected
+Elements by level: {'domain': 3, 'strand': 7, 'sub_strand': 18, 'indicator': 94}
+
+=== CA ===
+  golden:   25
+  detected: 122
+  matched:  25
+  precision: 0.205  recall: 1.000  f1: 0.340
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=14  fp=80  fn=0   p=0.15 r=1.00
+    strand      tp=3   fp=4   fn=0   p=0.43 r=1.00
+    sub_strand  tp=5   fp=13  fn=0   p=0.28 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 14
+    strand     → strand     : 3
+    sub_strand → sub_strand : 5
+  code accuracy: 25/25 (1.000) — graded over matched pairs only
+  description accuracy: 14/14 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  extra detected (in-scope FPs) (97): [('strand', 'Strand 1.0'), ('sub_strand', 'CI'), ('indicator', 'Foundation 1.1'), ('indicator', 'Foundation 1.1'), ('sub_strand', 'INIT'), ('sub_strand', 'ENGA'), ('indicator', 'Foundation 1.3'), ('indicator', 'Foundation 1.3'), ('sub_strand', 'PERS'), ('indicator', 'Foundation 1.4')]…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] CA-AGE-COLUMNS-EMITTED — all 16 Early/Later foundations emit both columns
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [PASS] CA-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/off_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run2_CA.json
+=== END off run2 CA rc=0 2026-08-23T18:41:22Z ===
+arm=on run=2 state=CO DEPTH_MAP_ENABLED=True
+=== START on run2 CO 2026-08-23T18:41:22Z ===
+== CO ==
+  [detector] running on 893 blocks…
+Starting structure detection for document: outputs/08-22-26-4/CO-extraction.json
+Input: 893 text blocks
+Inferring depth map from 869 sampled blocks (~6011 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 17640, "output_tokens": 464, "total_tokens": 18104, "latency_ms": 5469.7, "estimated_cost_usd": 0.01996, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1615 chars, 17640 in / 464 out tokens, 5470ms
+Depth map inferred: 3 levels
+  depth=1 → domain (pattern: "Title-case heading, often with '&' connector, introducing a major content area")
+  depth=2 → strand (pattern: 'Numbered (1, 2, 3, ...) with colon, followed by strand title and brief description')
+  depth=3 → indicator (pattern: 'Numbered (1, 2, 3, ...) with period, followed by indicator text; may include asterisk (*) for alignment to Colorado Academic Standards')
+Created 4 chunks from 893 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/4 (309 blocks, ~1997 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 13356, "output_tokens": 2943, "total_tokens": 16299, "latency_ms": 28316.0, "estimated_cost_usd": 0.140355, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10086 chars, 13356 in / 2943 out tokens, 28316ms
+Parsed 22 elements from LLM response
+Successfully created 22 DetectedElement objects
+Chunk 1/4: Successfully detected 22 elements
+Progress: 1/4 chunks processed, 22 total elements detected so far
+Processing chunk 2/4 (285 blocks, ~1996 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12998, "output_tokens": 2235, "total_tokens": 15233, "latency_ms": 24068.2, "estimated_cost_usd": 0.120865, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 7717 chars, 12998 in / 2235 out tokens, 24068ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 2/4: Successfully detected 17 elements
+Progress: 2/4 chunks processed, 39 total elements detected so far
+Processing chunk 3/4 (283 blocks, ~1996 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12938, "output_tokens": 1389, "total_tokens": 14327, "latency_ms": 13758.1, "estimated_cost_usd": 0.099415, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 4433 chars, 12938 in / 1389 out tokens, 13758ms
+Parsed 13 elements from LLM response
+Successfully created 13 DetectedElement objects
+Chunk 3/4: Successfully detected 13 elements
+Progress: 3/4 chunks processed, 52 total elements detected so far
+Processing chunk 4/4 (216 blocks, ~1715 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11824, "output_tokens": 2596, "total_tokens": 14420, "latency_ms": 20630.2, "estimated_cost_usd": 0.12402, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8968 chars, 11824 in / 2596 out tokens, 20630ms
+Parsed 19 elements from LLM response
+Successfully created 19 DetectedElement objects
+Chunk 4/4: Successfully detected 19 elements
+Progress: 4/4 chunks processed, 71 total elements detected so far
+Collapsing truncated chunk-boundary twin indicator '1' 'Recognize self as a unique individual having own abilities, ' into 'Recognize self as a unique individual having own abilities, '
+De-duplicated 10 overlap-repeated elements (71 → 61)
+Detection complete: 61 total elements detected
+Elements by level: {'domain': 3, 'strand': 10, 'indicator': 48}
+Inferring depth map from 869 sampled blocks (~6011 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 17640, "output_tokens": 464, "total_tokens": 18104, "latency_ms": 5445.7, "estimated_cost_usd": 0.01996, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1615 chars, 17640 in / 464 out tokens, 5446ms
+Depth map inferred: 3 levels
+  depth=1 → domain (pattern: "Title-case heading, often with '&' connector, introducing a major content area")
+  depth=2 → strand (pattern: 'Numbered (1, 2, 3, ...) with colon, followed by strand title and brief description')
+  depth=3 → indicator (pattern: 'Numbered (1, 2, 3, ...) with period, followed by indicator text; may include asterisk (*) for alignment to Colorado Academic Standards')
+
+=== CO ===
+  golden:   7
+  detected: 61
+  matched:  7
+  precision: 0.167  recall: 1.000  f1: 0.286
+  per-level:
+    domain      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=3   fp=30  fn=0   p=0.09 r=1.00
+    strand      tp=2   fp=5   fn=0   p=0.29 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    indicator  → indicator  : 3
+    strand     → strand     : 2
+  code accuracy: 7/7 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (35): [('indicator', '2'), ('indicator', '3'), ('indicator', '4'), ('indicator', '5'), ('indicator', '7'), ('indicator', '8'), ('indicator', '9'), ('indicator', '10'), ('indicator', '11'), ('indicator', '12')]…
+  ignored (out-of-scope domains): 19
+  regression cases:
+    [PASS] CO-NO-SUB-STRAND — no sub_strands (correct for CO)
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand
+
+Review files written to paper/results/task3_stability_20260823/review/on_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run2_CO.json
+=== END on run2 CO rc=0 2026-08-23T18:43:03Z ===
+arm=off run=2 state=CO DEPTH_MAP_ENABLED=False
+=== START off run2 CO 2026-08-23T18:43:03Z ===
+== CO ==
+  [detector] running on 893 blocks…
+Starting structure detection for document: outputs/08-22-26-4/CO-extraction.json
+Input: 893 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 4 chunks from 893 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/4 (309 blocks, ~1997 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12756, "output_tokens": 2946, "total_tokens": 15702, "latency_ms": 27965.5, "estimated_cost_usd": 0.13743, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10098 chars, 12756 in / 2946 out tokens, 27966ms
+Parsed 22 elements from LLM response
+Successfully created 22 DetectedElement objects
+Chunk 1/4: Successfully detected 22 elements
+Progress: 1/4 chunks processed, 22 total elements detected so far
+Processing chunk 2/4 (285 blocks, ~1996 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12398, "output_tokens": 1475, "total_tokens": 13873, "latency_ms": 15219.3, "estimated_cost_usd": 0.098865, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 5512 chars, 12398 in / 1475 out tokens, 15219ms
+Parsed 14 elements from LLM response
+Successfully created 14 DetectedElement objects
+Chunk 2/4: Successfully detected 14 elements
+Progress: 2/4 chunks processed, 36 total elements detected so far
+Processing chunk 3/4 (283 blocks, ~1996 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12338, "output_tokens": 1034, "total_tokens": 13372, "latency_ms": 10916.6, "estimated_cost_usd": 0.08754, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 3749 chars, 12338 in / 1034 out tokens, 10917ms
+Parsed 12 elements from LLM response
+Successfully created 12 DetectedElement objects
+Chunk 3/4: Successfully detected 12 elements
+Progress: 3/4 chunks processed, 48 total elements detected so far
+Processing chunk 4/4 (216 blocks, ~1715 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11224, "output_tokens": 779, "total_tokens": 12003, "latency_ms": 8295.1, "estimated_cost_usd": 0.075595, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 3369 chars, 11224 in / 779 out tokens, 8295ms
+Parsed 4 elements from LLM response
+Successfully created 4 DetectedElement objects
+Chunk 4/4: Successfully detected 4 elements
+Progress: 4/4 chunks processed, 52 total elements detected so far
+Collapsing truncated chunk-boundary twin strand '2' 'Sense of Identity and Belonging' into 'Sense of Identity and Belonging: The perception that one is '
+De-duplicated 5 overlap-repeated elements (52 → 47)
+Detection complete: 47 total elements detected
+Elements by level: {'domain': 3, 'strand': 10, 'indicator': 25, 'sub_strand': 9}
+
+=== CO ===
+  golden:   7
+  detected: 47
+  matched:  5
+  precision: 0.116  recall: 0.714  f1: 0.200
+  per-level:
+    domain      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=23  fn=1   p=0.08 r=0.67
+    strand      tp=1   fp=6   fn=1   p=0.14 r=0.50
+    sub_strand  tp=0   fp=9   fn=0   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+  code accuracy: 5/5 (1.000) — graded over matched pairs only
+  description accuracy: 3/3 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  missing test cases (2): ['CO-STR-01', 'CO-IND-03']
+  extra detected (in-scope FPs) (38): [('strand', '1'), ('indicator', '2'), ('indicator', '3'), ('indicator', '4'), ('indicator', '5'), ('indicator', '7'), ('indicator', '8'), ('indicator', '9'), ('indicator', '10'), ('indicator', '11')]…
+  ignored (out-of-scope domains): 4
+  regression cases:
+    [FAIL] CO-NO-SUB-STRAND — 9 unexpected sub_strands present: [('1', 'Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.'), ('2', 'Express confidence in own skills and positive feelings about self.'), ('3', 'Have a sense of belonging to family, community, and other groups.'), ('1', 'Express a broad range of emotions and recognize these emotions in self and others.'), ('2', 'Express care and concern toward others.')]
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand
+
+Review files written to paper/results/task3_stability_20260823/review/off_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run2_CO.json
+=== END off run2 CO rc=1 2026-08-23T18:44:08Z ===
+arm=on run=2 state=TX DEPTH_MAP_ENABLED=True
+=== START on run2 TX 2026-08-23T18:44:08Z ===
+== TX ==
+  [detector] running on 306 blocks…
+Starting structure detection for document: outputs/08-22-26-4/TX-extraction.json
+Input: 306 text blocks
+Inferring depth map from 306 sampled blocks (~3715 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 8158, "output_tokens": 474, "total_tokens": 8632, "latency_ms": 4246.8, "estimated_cost_usd": 0.010528, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1346 chars, 8158 in / 474 out tokens, 4247ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: "Roman numeral + period + domain name (e.g., 'I. Social and Emotional Development Domain', 'VI. Science Domain')")
+  depth=2 → strand (pattern: "Capital letter + period + skill name (e.g., 'A. Self-Concept', 'B. Self-Regulation', 'A. Physical Science')")
+  depth=3 → sub_strand (pattern: "Numeral + period + subskill name (e.g., '1. Behavior Control', '2. Emotional Control')")
+  depth=4 → indicator (pattern: "Grade code + Roman numeral + letter + numeral + optional lowercase letter (e.g., 'PK3.I.A.1', 'PK4.I.B.1.a', 'PK4.VI.A.1')")
+Created 3 chunks from 306 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (171 blocks, ~1992 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11489, "output_tokens": 3201, "total_tokens": 14690, "latency_ms": 24175.3, "estimated_cost_usd": 0.13747, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10797 chars, 11489 in / 3201 out tokens, 24175ms
+Parsed 23 elements from LLM response
+Successfully created 23 DetectedElement objects
+Chunk 1/3: Successfully detected 23 elements
+Progress: 1/3 chunks processed, 23 total elements detected so far
+Processing chunk 2/3 (173 blocks, ~1999 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11577, "output_tokens": 2688, "total_tokens": 14265, "latency_ms": 21661.1, "estimated_cost_usd": 0.125085, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10206 chars, 11577 in / 2688 out tokens, 21661ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 2/3: Successfully detected 17 elements
+Progress: 2/3 chunks processed, 40 total elements detected so far
+Processing chunk 3/3 (65 blocks, ~707 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9007, "output_tokens": 852, "total_tokens": 9859, "latency_ms": 7766.5, "estimated_cost_usd": 0.066335, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 2872 chars, 9007 in / 852 out tokens, 7766ms
+Parsed 6 elements from LLM response
+Successfully created 6 DetectedElement objects
+Chunk 3/3: Successfully detected 6 elements
+Progress: 3/3 chunks processed, 46 total elements detected so far
+Collapsing truncated chunk-boundary twin indicator 'PK3.I.B.2.b' 'Child is familiar with basic feeling' into 'Child is familiar with basic feeling words (e.g., happy, sad'
+Collapsing truncated chunk-boundary twin indicator 'PK4.I.B.2.b' 'Child uses verbal and nonverbal' into 'Child uses verbal and nonverbal communication to communicate'
+De-duplicated 13 overlap-repeated elements (46 → 33)
+Detection complete: 33 total elements detected
+Elements by level: {'domain': 2, 'strand': 4, 'indicator': 25, 'sub_strand': 2}
+Inferring depth map from 306 sampled blocks (~3715 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 8158, "output_tokens": 474, "total_tokens": 8632, "latency_ms": 4725.8, "estimated_cost_usd": 0.010528, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1346 chars, 8158 in / 474 out tokens, 4726ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: "Roman numeral + period + domain name (e.g., 'I. Social and Emotional Development Domain', 'VI. Science Domain')")
+  depth=2 → strand (pattern: "Capital letter + period + skill name (e.g., 'A. Self-Concept', 'B. Self-Regulation', 'A. Physical Science')")
+  depth=3 → sub_strand (pattern: "Numeral + period + subskill name (e.g., '1. Behavior Control', '2. Emotional Control')")
+  depth=4 → indicator (pattern: "Grade code + Roman numeral + letter + numeral + optional lowercase letter (e.g., 'PK3.I.A.1', 'PK4.I.B.1.a', 'PK4.VI.A.1')")
+
+=== TX ===
+  golden:   8
+  detected: 33
+  matched:  8
+  precision: 0.320  recall: 1.000  f1: 0.485
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=4   fp=16  fn=0   p=0.20 r=1.00
+    strand      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=1   fp=1   fn=0   p=0.50 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+    strand     → strand     : 2
+    sub_strand → sub_strand : 1
+  code accuracy: 8/8 (1.000) — graded over matched pairs only
+  description accuracy: 3/3 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (17): [('indicator', 'PK3.I.A.1'), ('indicator', 'PK4.I.A.1'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('indicator', 'PK3.I.A.4'), ('indicator', 'PK4.I.A.4'), ('sub_strand', '1'), ('indicator', 'PK3.I.B.1.a'), ('indicator', 'PK4.I.B.1.a'), ('indicator', 'PK3.I.B.1.b')]…
+  ignored (out-of-scope domains): 8
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=10, PK4 count=15
+    [PASS] TX-AGE-BAND-SET — all 25 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators
+
+Review files written to paper/results/task3_stability_20260823/review/on_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run2_TX.json
+=== END on run2 TX rc=0 2026-08-23T18:45:13Z ===
+arm=off run=2 state=TX DEPTH_MAP_ENABLED=False
+=== START off run2 TX 2026-08-23T18:45:13Z ===
+== TX ==
+  [detector] running on 306 blocks…
+Starting structure detection for document: outputs/08-22-26-4/TX-extraction.json
+Input: 306 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 3 chunks from 306 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (171 blocks, ~1992 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10886, "output_tokens": 3213, "total_tokens": 14099, "latency_ms": 23868.5, "estimated_cost_usd": 0.134755, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10809 chars, 10886 in / 3213 out tokens, 23868ms
+Parsed 23 elements from LLM response
+Successfully created 23 DetectedElement objects
+Chunk 1/3: Successfully detected 23 elements
+Progress: 1/3 chunks processed, 23 total elements detected so far
+Processing chunk 2/3 (173 blocks, ~1999 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10974, "output_tokens": 2202, "total_tokens": 13176, "latency_ms": 17712.5, "estimated_cost_usd": 0.10992, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 7751 chars, 10974 in / 2202 out tokens, 17712ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 2/3: Successfully detected 17 elements
+Progress: 2/3 chunks processed, 40 total elements detected so far
+Processing chunk 3/3 (65 blocks, ~707 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 8404, "output_tokens": 852, "total_tokens": 9256, "latency_ms": 7745.3, "estimated_cost_usd": 0.06332, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 2872 chars, 8404 in / 852 out tokens, 7745ms
+Parsed 6 elements from LLM response
+Successfully created 6 DetectedElement objects
+Chunk 3/3: Successfully detected 6 elements
+Progress: 3/3 chunks processed, 46 total elements detected so far
+Code normalization: sub_strand 'emotional control' (domain=I) — canonical code '2', replaced: ['I.B.2']
+Age-band drift: folding 'PK3 Outcome' -> 'PK3'
+Age-band drift: folding 'PK4 Outcome' -> 'PK4'
+Collapsing truncated chunk-boundary twin indicator 'PK3.I.B.2.b' 'Child is familiar with basic feeling' into 'Child is familiar with basic feeling words (e.g., happy, sad'
+Collapsing truncated chunk-boundary twin indicator 'PK4.I.B.2.b' 'Child uses verbal and nonverbal' into 'Child uses verbal and nonverbal communication to communicate'
+De-duplicated 13 overlap-repeated elements (46 → 33)
+Detection complete: 33 total elements detected
+Elements by level: {'domain': 2, 'strand': 4, 'indicator': 25, 'sub_strand': 2}
+
+=== TX ===
+  golden:   8
+  detected: 33
+  matched:  8
+  precision: 0.320  recall: 1.000  f1: 0.485
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=4   fp=16  fn=0   p=0.20 r=1.00
+    strand      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=1   fp=1   fn=0   p=0.50 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+    strand     → strand     : 2
+    sub_strand → sub_strand : 1
+  code accuracy: 6/8 (0.750) — graded over matched pairs only
+    [CODE] TX-STR-01 (strand): golden 'A' != detected 'I.A'
+    [CODE] TX-STR-02 (strand): golden 'B' != detected 'I.B'
+  description accuracy: 3/3 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  extra detected (in-scope FPs) (17): [('indicator', 'PK3.I.A.1'), ('indicator', 'PK4.I.A.1'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('indicator', 'PK3.I.A.4'), ('indicator', 'PK4.I.A.4'), ('sub_strand', 'I.B.1'), ('indicator', 'PK3.I.B.1.a'), ('indicator', 'PK4.I.B.1.a'), ('indicator', 'PK3.I.B.1.b')]…
+  ignored (out-of-scope domains): 8
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=10, PK4 count=15
+    [PASS] TX-AGE-BAND-SET — all 25 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators
+
+Review files written to paper/results/task3_stability_20260823/review/off_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run2_TX.json
+=== END off run2 TX rc=0 2026-08-23T18:46:04Z ===
+arm=on run=2 state=NV DEPTH_MAP_ENABLED=True
+=== START on run2 NV 2026-08-23T18:46:04Z ===
+== NV ==
+  [detector] running on 752 blocks…
+Starting structure detection for document: outputs/08-22-26-4/NV-extraction.json
+Input: 752 text blocks
+Inferring depth map from 567 sampled blocks (~6012 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 13234, "output_tokens": 484, "total_tokens": 13718, "latency_ms": 4896.2, "estimated_cost_usd": 0.015654, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1553 chars, 13234 in / 484 out tokens, 4896ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: "CAPITALIZED HEADING (e.g., 'Social Studies', 'Science')")
+  depth=2 → strand (pattern: '<Domain> Standard N: <Description>')
+  depth=3 → sub_strand (pattern: '<Thematic Category Name>')
+  depth=4 → indicator (pattern: '<Domain Abbr>.<Category Abbr>.PK<N>. <Goal Statement>')
+Created 5 chunks from 752 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/5 (223 blocks, ~1997 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12067, "output_tokens": 2029, "total_tokens": 14096, "latency_ms": 17338.8, "estimated_cost_usd": 0.11106, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 7148 chars, 12067 in / 2029 out tokens, 17339ms
+Parsed 15 elements from LLM response
+Successfully created 15 DetectedElement objects
+Chunk 1/5: Successfully detected 15 elements
+Progress: 1/5 chunks processed, 15 total elements detected so far
+Processing chunk 2/5 (193 blocks, ~2000 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11696, "output_tokens": 2255, "total_tokens": 13951, "latency_ms": 18742.3, "estimated_cost_usd": 0.114855, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 7940 chars, 11696 in / 2255 out tokens, 18742ms
+Parsed 14 elements from LLM response
+Successfully created 14 DetectedElement objects
+Chunk 2/5: Successfully detected 14 elements
+Progress: 2/5 chunks processed, 29 total elements detected so far
+Processing chunk 3/5 (175 blocks, ~1997 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11430, "output_tokens": 1798, "total_tokens": 13228, "latency_ms": 15423.4, "estimated_cost_usd": 0.1021, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 6553 chars, 11430 in / 1798 out tokens, 15423ms
+Parsed 12 elements from LLM response
+Successfully created 12 DetectedElement objects
+Chunk 3/5: Successfully detected 12 elements
+Progress: 3/5 chunks processed, 41 total elements detected so far
+Processing chunk 4/5 (148 blocks, ~2000 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11014, "output_tokens": 2023, "total_tokens": 13037, "latency_ms": 16711.7, "estimated_cost_usd": 0.105645, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8546 chars, 11014 in / 2023 out tokens, 16712ms
+Parsed 13 elements from LLM response
+Successfully created 13 DetectedElement objects
+Chunk 4/5: Successfully detected 13 elements
+Progress: 4/5 chunks processed, 54 total elements detected so far
+Processing chunk 5/5 (184 blocks, ~1844 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11422, "output_tokens": 1112, "total_tokens": 12534, "latency_ms": 10748.5, "estimated_cost_usd": 0.08491, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 3322 chars, 11422 in / 1112 out tokens, 10748ms
+Parsed 10 elements from LLM response
+Successfully created 10 DetectedElement objects
+Chunk 5/5: Successfully detected 10 elements
+Progress: 5/5 chunks processed, 64 total elements detected so far
+Code normalization: domain 'science' — canonical code 'Science', replaced: ['SCIE']
+Code normalization: domain 'technology' — canonical code 'TECH', replaced: ['Technology']
+Collapsing truncated chunk-boundary twin indicator 'S.SI.PK1' 'Show curiosity and ask questions about' into 'Show curiosity and ask questions about things they are inter'
+De-duplicated 11 overlap-repeated elements (64 → 53)
+Detection complete: 53 total elements detected
+Elements by level: {'domain': 3, 'strand': 17, 'sub_strand': 8, 'indicator': 25}
+Inferring depth map from 567 sampled blocks (~6012 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 13234, "output_tokens": 484, "total_tokens": 13718, "latency_ms": 5010.6, "estimated_cost_usd": 0.015654, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1553 chars, 13234 in / 484 out tokens, 5011ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: "CAPITALIZED HEADING (e.g., 'Social Studies', 'Science')")
+  depth=2 → strand (pattern: '<Domain> Standard N: <Description>')
+  depth=3 → sub_strand (pattern: '<Thematic Category Name>')
+  depth=4 → indicator (pattern: '<Domain Abbr>.<Category Abbr>.PK<N>. <Goal Statement>')
+
+=== NV ===
+  golden:   46
+  detected: 53
+  matched:  46
+  precision: 0.868  recall: 1.000  f1: 0.929
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=24  fp=1   fn=0   p=0.96 r=1.00
+    strand      tp=12  fp=5   fn=0   p=0.71 r=1.00
+    sub_strand  tp=7   fp=1   fn=0   p=0.88 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 24
+    strand     → strand     : 12
+    sub_strand → sub_strand : 7
+  code accuracy: 44/46 (0.957) — graded over matched pairs only
+    [CODE] NV-DOM-02 (domain): golden 'S' != detected 'Science'
+    [CODE] NV-DOM-03 (domain): golden 'T' != detected 'TECH'
+  description accuracy: 3/3 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (7): [('indicator', 'SS.CI.PK3'), ('strand', 'Social Studies Standard 2'), ('strand', 'Social Studies Standard 3'), ('strand', 'Science Standard 1'), ('sub_strand', 'S.EO'), ('strand', 'Science Standard 2'), ('strand', 'Technology Standard 2')]
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] NV-NO-COLUMN-HEADER-AS-ELEMENT — 53 elements: no column headers, captions or footnotes emitted, no age_band set
+    [PASS] NV-SUB-STRAND-CODE-FROM-DOCUMENT — all 8 sub_strands use the document's XX.YY caption code and prefix their indicators
+    [PASS] NV-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/on_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run2_NV.json
+=== END on run2 NV rc=0 2026-08-23T18:47:36Z ===
+arm=off run=2 state=NV DEPTH_MAP_ENABLED=False
+=== START off run2 NV 2026-08-23T18:47:36Z ===
+== NV ==
+  [detector] running on 752 blocks…
+Starting structure detection for document: outputs/08-22-26-4/NV-extraction.json
+Input: 752 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 5 chunks from 752 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/5 (223 blocks, ~1997 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11451, "output_tokens": 2404, "total_tokens": 13855, "latency_ms": 19773.7, "estimated_cost_usd": 0.117355, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9124 chars, 11451 in / 2404 out tokens, 19774ms
+Parsed 15 elements from LLM response
+Successfully created 15 DetectedElement objects
+Chunk 1/5: Successfully detected 15 elements
+Progress: 1/5 chunks processed, 15 total elements detected so far
+Processing chunk 2/5 (193 blocks, ~2000 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11080, "output_tokens": 2334, "total_tokens": 13414, "latency_ms": 19670.2, "estimated_cost_usd": 0.11375, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8151 chars, 11080 in / 2334 out tokens, 19670ms
+Parsed 15 elements from LLM response
+Successfully created 15 DetectedElement objects
+Chunk 2/5: Successfully detected 15 elements
+Progress: 2/5 chunks processed, 30 total elements detected so far
+Processing chunk 3/5 (175 blocks, ~1997 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10814, "output_tokens": 1654, "total_tokens": 12468, "latency_ms": 14131.1, "estimated_cost_usd": 0.09542, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 5725 chars, 10814 in / 1654 out tokens, 14131ms
+Parsed 12 elements from LLM response
+Successfully created 12 DetectedElement objects
+Chunk 3/5: Successfully detected 12 elements
+Progress: 3/5 chunks processed, 42 total elements detected so far
+Processing chunk 4/5 (148 blocks, ~2000 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10398, "output_tokens": 1948, "total_tokens": 12346, "latency_ms": 17001.7, "estimated_cost_usd": 0.10069, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8433 chars, 10398 in / 1948 out tokens, 17002ms
+Parsed 10 elements from LLM response
+Successfully created 10 DetectedElement objects
+Chunk 4/5: Successfully detected 10 elements
+Progress: 4/5 chunks processed, 52 total elements detected so far
+Processing chunk 5/5 (184 blocks, ~1844 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10806, "output_tokens": 1217, "total_tokens": 12023, "latency_ms": 10968.2, "estimated_cost_usd": 0.084455, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 3678 chars, 10806 in / 1217 out tokens, 10968ms
+Parsed 11 elements from LLM response
+Successfully created 11 DetectedElement objects
+Chunk 5/5: Successfully detected 11 elements
+Progress: 5/5 chunks processed, 63 total elements detected so far
+Code normalization: domain 'science' — canonical code 'SCIE', replaced: ['Science']
+Code normalization: domain 'technology' — canonical code 'T', replaced: ['TECH']
+Collapsing truncated chunk-boundary twin indicator 'S.SI.PK1' 'Show curiosity and ask questions about' into 'Show curiosity and ask questions about things they are inter'
+De-duplicated 10 overlap-repeated elements (63 → 53)
+Detection complete: 53 total elements detected
+Elements by level: {'domain': 3, 'strand': 18, 'sub_strand': 7, 'indicator': 25}
+
+=== NV ===
+  golden:   46
+  detected: 53
+  matched:  46
+  precision: 0.868  recall: 1.000  f1: 0.929
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=24  fp=1   fn=0   p=0.96 r=1.00
+    strand      tp=12  fp=6   fn=0   p=0.67 r=1.00
+    sub_strand  tp=7   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 24
+    strand     → strand     : 12
+    sub_strand → sub_strand : 7
+  code accuracy: 45/46 (0.978) — graded over matched pairs only
+    [CODE] NV-DOM-02 (domain): golden 'S' != detected 'SCIE'
+  description accuracy: 1/3 (0.333) — graded over matched pairs whose golden annotates one; 2 truncated
+    [DESC/TRUNCATED] NV-DOM-02 (domain): truncated: 2410/3500 chars
+    [DESC/TRUNCATED] NV-DOM-03 (domain): truncated: 4087/4627 chars
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  extra detected (in-scope FPs) (7): [('indicator', 'SS.CI.PK3'), ('strand', 'Social Studies Standard 2'), ('strand', 'Social Studies Standard 3'), ('strand', 'Science Standard 1'), ('strand', 'Science Standard 2'), ('strand', 'Technology Standard 1'), ('strand', 'Technology Standard 2')]
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] NV-NO-COLUMN-HEADER-AS-ELEMENT — 53 elements: no column headers, captions or footnotes emitted, no age_band set
+    [PASS] NV-SUB-STRAND-CODE-FROM-DOCUMENT — all 7 sub_strands use the document's XX.YY caption code and prefix their indicators
+    [PASS] NV-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/off_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run2_NV.json
+=== END off run2 NV rc=0 2026-08-23T18:49:00Z ===
+arm=on run=2 state=KY DEPTH_MAP_ENABLED=True
+=== START on run2 KY 2026-08-23T18:49:00Z ===
+== KY ==
+  [detector] running on 252 blocks…
+Starting structure detection for document: outputs/08-22-26-4/KY-extraction.json
+Input: 252 text blocks
+Inferring depth map from 252 sampled blocks (~3899 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 7812, "output_tokens": 404, "total_tokens": 8216, "latency_ms": 4320.3, "estimated_cost_usd": 0.009832, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1344 chars, 7812 in / 404 out tokens, 4320ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: 'CONTENT AREA HEADING')
+  depth=2 → strand (pattern: '[Content Area] Standard N: [Title]')
+  depth=3 → sub_strand (pattern: 'Benchmark N.N: [Title]')
+  depth=4 → indicator (pattern: '[Descriptive statement of observable behavior]')
+Created 3 chunks from 252 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (124 blocks, ~1987 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10861, "output_tokens": 3478, "total_tokens": 14339, "latency_ms": 27054.3, "estimated_cost_usd": 0.141255, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 12732 chars, 10861 in / 3478 out tokens, 27054ms
+Parsed 18 elements from LLM response
+Successfully created 18 DetectedElement objects
+Chunk 1/3: Successfully detected 18 elements
+Progress: 1/3 chunks processed, 18 total elements detected so far
+Processing chunk 2/3 (128 blocks, ~1992 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10976, "output_tokens": 3637, "total_tokens": 14613, "latency_ms": 29037.7, "estimated_cost_usd": 0.145805, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 13424 chars, 10976 in / 3637 out tokens, 29038ms
+Parsed 25 elements from LLM response
+Successfully created 25 DetectedElement objects
+Chunk 2/3: Successfully detected 25 elements
+Progress: 2/3 chunks processed, 43 total elements detected so far
+Processing chunk 3/3 (61 blocks, ~908 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9039, "output_tokens": 1860, "total_tokens": 10899, "latency_ms": 15418.6, "estimated_cost_usd": 0.091695, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 6479 chars, 9039 in / 1860 out tokens, 15419ms
+Parsed 11 elements from LLM response
+Successfully created 11 DetectedElement objects
+Chunk 3/3: Successfully detected 11 elements
+Progress: 3/3 chunks processed, 54 total elements detected so far
+De-duplicated 10 overlap-repeated elements (54 → 44)
+Detection complete: 44 total elements detected
+Elements by level: {'domain': 3, 'strand': 5, 'sub_strand': 10, 'indicator': 26}
+Inferring depth map from 252 sampled blocks (~3899 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 7812, "output_tokens": 404, "total_tokens": 8216, "latency_ms": 4123.3, "estimated_cost_usd": 0.009832, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1344 chars, 7812 in / 404 out tokens, 4123ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: 'CONTENT AREA HEADING')
+  depth=2 → strand (pattern: '[Content Area] Standard N: [Title]')
+  depth=3 → sub_strand (pattern: 'Benchmark N.N: [Title]')
+  depth=4 → indicator (pattern: '[Descriptive statement of observable behavior]')
+
+=== KY ===
+  golden:   44
+  detected: 44
+  matched:  44
+  precision: 1.000  recall: 1.000  f1: 1.000
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=26  fp=0   fn=0   p=1.00 r=1.00
+    strand      tp=5   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=10  fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 26
+    strand     → strand     : 5
+    sub_strand → sub_strand : 10
+  code accuracy: 44/44 (1.000) — graded over matched pairs only
+  description accuracy: 26/26 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] KY-BENCHMARK-IS-SUB-STRAND — all 10 Benchmark elements classified as sub_strand
+    [PASS] KY-FOUR-LEVEL-HIERARCHY — all four levels present
+    [PASS] KY-STRAND-CODE-KEEPS-FULL-LABEL — all 13 labelled headings keep their full label as the code
+
+Review files written to paper/results/task3_stability_20260823/review/on_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run2_KY.json
+=== END on run2 KY rc=0 2026-08-23T18:50:22Z ===
+arm=off run=2 state=KY DEPTH_MAP_ENABLED=False
+=== START off run2 KY 2026-08-23T18:50:22Z ===
+== KY ==
+  [detector] running on 252 blocks…
+Starting structure detection for document: outputs/08-22-26-4/KY-extraction.json
+Input: 252 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 3 chunks from 252 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (124 blocks, ~1987 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10328, "output_tokens": 3135, "total_tokens": 13463, "latency_ms": 24508.6, "estimated_cost_usd": 0.130015, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 12084 chars, 10328 in / 3135 out tokens, 24509ms
+Parsed 18 elements from LLM response
+Successfully created 18 DetectedElement objects
+Chunk 1/3: Successfully detected 18 elements
+Progress: 1/3 chunks processed, 18 total elements detected so far
+Processing chunk 2/3 (128 blocks, ~1992 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10443, "output_tokens": 3694, "total_tokens": 14137, "latency_ms": 28097.3, "estimated_cost_usd": 0.144565, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 13577 chars, 10443 in / 3694 out tokens, 28097ms
+Parsed 26 elements from LLM response
+Successfully created 26 DetectedElement objects
+Chunk 2/3: Successfully detected 26 elements
+Progress: 2/3 chunks processed, 44 total elements detected so far
+Processing chunk 3/3 (61 blocks, ~908 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 8506, "output_tokens": 1840, "total_tokens": 10346, "latency_ms": 14995.2, "estimated_cost_usd": 0.08853, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 6376 chars, 8506 in / 1840 out tokens, 14995ms
+Parsed 11 elements from LLM response
+Successfully created 11 DetectedElement objects
+Chunk 3/3: Successfully detected 11 elements
+Progress: 3/3 chunks processed, 55 total elements detected so far
+Code normalization: strand 'approaches learning with flexibility, creativity, and imagination.' (domain=AL) — canonical code 'Standard 2', replaced: ['Approaches to Learning Standard 2']
+De-duplicated 10 overlap-repeated elements (55 → 45)
+Detection complete: 45 total elements detected
+Elements by level: {'domain': 3, 'strand': 7, 'sub_strand': 9, 'indicator': 26}
+
+=== KY ===
+  golden:   44
+  detected: 45
+  matched:  43
+  precision: 0.956  recall: 0.977  f1: 0.966
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=26  fp=0   fn=0   p=1.00 r=1.00
+    strand      tp=5   fp=2   fn=0   p=0.71 r=1.00
+    sub_strand  tp=9   fp=0   fn=1   p=1.00 r=0.90
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 26
+    strand     → strand     : 5
+    sub_strand → sub_strand : 9
+  code accuracy: 39/43 (0.907) — graded over matched pairs only
+    [CODE] KY-STR-02 (strand): golden 'Approaches to Learning Standard 2' != detected 'Standard 2'
+    [CODE] KY-STR-03 (strand): golden 'Health/Mental Wellness Standard 1' != detected 'Standard 1'
+    [CODE] KY-STR-04 (strand): golden 'Language and Early Literacy Standard 1' != detected 'Standard 1'
+    [CODE] KY-STR-05 (strand): golden 'Language and Early Literacy Standard 2' != detected 'Standard 2'
+  description accuracy: 26/26 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  missing test cases (1): ['KY-SUB-10']
+  extra detected (in-scope FPs) (2): [('strand', 'Benchmark 2.1'), ('strand', 'Benchmark 2.2')]
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [FAIL] KY-BENCHMARK-IS-SUB-STRAND — 2/11 Benchmark elements are not sub_strand (e.g. level='strand', code='Benchmark 2.1', title='Uses non-verbal communication for a variety of purposes.')
+    [PASS] KY-FOUR-LEVEL-HIERARCHY — all four levels present
+    [FAIL] KY-STRAND-CODE-KEEPS-FULL-LABEL — 4/13 labelled heading(s) lost part of their label, e.g. strand code='Standard 2' should be 'Approaches to Learning Standard 2'
+
+Review files written to paper/results/task3_stability_20260823/review/off_run2/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run2_KY.json
+=== END off run2 KY rc=1 2026-08-23T18:51:32Z ===
+arm=on run=3 state=AZ DEPTH_MAP_ENABLED=True
+=== START on run3 AZ 2026-08-23T18:51:32Z ===
+== AZ ==
+  [detector] running on 388 blocks…
+Starting structure detection for document: outputs/08-22-26-4/AZ-extraction.json
+Input: 388 text blocks
+Inferring depth map from 388 sampled blocks (~5957 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 11402, "output_tokens": 334, "total_tokens": 11736, "latency_ms": 3415.2, "estimated_cost_usd": 0.013072, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1004 chars, 11402 in / 334 out tokens, 3415ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: '<STANDARD NAME> STANDARD')
+  depth=2 → strand (pattern: 'Strand N: <Title>')
+  depth=3 → sub_strand (pattern: 'Concept N: <Title>')
+  depth=4 → indicator (pattern: '<letter>. <Indicator statement>')
+Created 4 chunks from 388 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/4 (132 blocks, ~1982 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10772, "output_tokens": 4776, "total_tokens": 15548, "latency_ms": 35084.6, "estimated_cost_usd": 0.17326, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 17053 chars, 10772 in / 4776 out tokens, 35085ms
+Parsed 30 elements from LLM response
+Successfully created 30 DetectedElement objects
+Chunk 1/4: Successfully detected 30 elements
+Progress: 1/4 chunks processed, 30 total elements detected so far
+Processing chunk 2/4 (115 blocks, ~1981 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10705, "output_tokens": 2988, "total_tokens": 13693, "latency_ms": 22424.4, "estimated_cost_usd": 0.128225, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11561 chars, 10705 in / 2988 out tokens, 22424ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 2/4: Successfully detected 17 elements
+Progress: 2/4 chunks processed, 47 total elements detected so far
+Processing chunk 3/4 (134 blocks, ~1979 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10948, "output_tokens": 4009, "total_tokens": 14957, "latency_ms": 29796.8, "estimated_cost_usd": 0.154965, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15273 chars, 10948 in / 4009 out tokens, 29797ms
+Parsed 26 elements from LLM response
+Successfully created 26 DetectedElement objects
+Chunk 3/4: Successfully detected 26 elements
+Progress: 3/4 chunks processed, 73 total elements detected so far
+Processing chunk 4/4 (95 blocks, ~1462 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9938, "output_tokens": 2765, "total_tokens": 12703, "latency_ms": 20604.9, "estimated_cost_usd": 0.118815, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9857 chars, 9938 in / 2765 out tokens, 20605ms
+Parsed 16 elements from LLM response
+Successfully created 16 DetectedElement objects
+Chunk 4/4: Successfully detected 16 elements
+Progress: 4/4 chunks processed, 89 total elements detected so far
+De-duplicated 13 overlap-repeated elements (89 → 76)
+Detection complete: 76 total elements detected
+Elements by level: {'domain': 2, 'strand': 8, 'sub_strand': 21, 'indicator': 45}
+Inferring depth map from 388 sampled blocks (~5957 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 11402, "output_tokens": 334, "total_tokens": 11736, "latency_ms": 3423.7, "estimated_cost_usd": 0.013072, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1004 chars, 11402 in / 334 out tokens, 3424ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: '<STANDARD NAME> STANDARD')
+  depth=2 → strand (pattern: 'Strand N: <Title>')
+  depth=3 → sub_strand (pattern: 'Concept N: <Title>')
+  depth=4 → indicator (pattern: '<letter>. <Indicator statement>')
+
+=== AZ ===
+  golden:   5
+  detected: 76
+  matched:  5
+  precision: 0.417  recall: 1.000  f1: 0.588
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=4   fn=0   p=0.33 r=1.00
+    strand      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    sub_strand  tp=1   fp=2   fn=0   p=0.33 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (7): [('strand', 'Strand 2'), ('indicator', 'b'), ('indicator', 'c'), ('indicator', 'd'), ('indicator', 'e'), ('sub_strand', 'Concept 2'), ('sub_strand', 'Concept 3')]
+  ignored (out-of-scope domains): 64
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/on_run3/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run3_AZ.json
+=== END on run3 AZ rc=0 2026-08-23T18:53:29Z ===
+arm=off run=3 state=AZ DEPTH_MAP_ENABLED=False
+=== START off run3 AZ 2026-08-23T18:53:29Z ===
+== AZ ==
+  [detector] running on 388 blocks…
+Starting structure detection for document: outputs/08-22-26-4/AZ-extraction.json
+Input: 388 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 4 chunks from 388 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/4 (132 blocks, ~1982 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10306, "output_tokens": 2913, "total_tokens": 13219, "latency_ms": 21953.2, "estimated_cost_usd": 0.124355, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10813 chars, 10306 in / 2913 out tokens, 21953ms
+Parsed 18 elements from LLM response
+Successfully created 18 DetectedElement objects
+Chunk 1/4: Successfully detected 18 elements
+Progress: 1/4 chunks processed, 18 total elements detected so far
+Processing chunk 2/4 (115 blocks, ~1981 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10239, "output_tokens": 4492, "total_tokens": 14731, "latency_ms": 33450.7, "estimated_cost_usd": 0.163495, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 16851 chars, 10239 in / 4492 out tokens, 33451ms
+Parsed 22 elements from LLM response
+Successfully created 22 DetectedElement objects
+Chunk 2/4: Successfully detected 22 elements
+Progress: 2/4 chunks processed, 40 total elements detected so far
+Processing chunk 3/4 (134 blocks, ~1979 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 10482, "output_tokens": 4009, "total_tokens": 14491, "latency_ms": 29035.1, "estimated_cost_usd": 0.152635, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15273 chars, 10482 in / 4009 out tokens, 29035ms
+Parsed 26 elements from LLM response
+Successfully created 26 DetectedElement objects
+Chunk 3/4: Successfully detected 26 elements
+Progress: 3/4 chunks processed, 66 total elements detected so far
+Processing chunk 4/4 (95 blocks, ~1462 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9472, "output_tokens": 2833, "total_tokens": 12305, "latency_ms": 21372.2, "estimated_cost_usd": 0.118185, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10074 chars, 9472 in / 2833 out tokens, 21372ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 4/4: Successfully detected 17 elements
+Progress: 4/4 chunks processed, 83 total elements detected so far
+De-duplicated 18 overlap-repeated elements (83 → 65)
+Detection complete: 65 total elements detected
+Elements by level: {'domain': 2, 'strand': 9, 'sub_strand': 9, 'indicator': 45}
+
+=== AZ ===
+  golden:   5
+  detected: 65
+  matched:  5
+  precision: 0.500  recall: 1.000  f1: 0.667
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=4   fn=0   p=0.33 r=1.00
+    strand      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    sub_strand  tp=1   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  extra detected (in-scope FPs) (5): [('strand', 'Strand 2'), ('indicator', 'b'), ('indicator', 'c'), ('indicator', 'd'), ('indicator', 'e')]
+  ignored (out-of-scope domains): 55
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/off_run3/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run3_AZ.json
+=== END off run3 AZ rc=0 2026-08-23T18:55:17Z ===
+arm=on run=3 state=CA DEPTH_MAP_ENABLED=True
+=== START on run3 CA 2026-08-23T18:55:17Z ===
+== CA ==
+  [detector] running on 659 blocks…
+Starting structure detection for document: outputs/08-22-26-4/CA-extraction.json
+Input: 659 text blocks
+Inferring depth map from 659 sampled blocks (~4195 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 13679, "output_tokens": 412, "total_tokens": 14091, "latency_ms": 4411.0, "estimated_cost_usd": 0.015739, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1216 chars, 13679 in / 412 out tokens, 4411ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: 'DOMAIN TITLE (all-caps or title case, appears at x=0.07 as section header)')
+  depth=2 → strand (pattern: 'Strand: N.0 — <Title>')
+  depth=3 → sub_strand (pattern: 'Sub-Strand[—-] <Title>')
+  depth=4 → indicator (pattern: 'Foundation N.N <Title>')
+Created 3 chunks from 659 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (260 blocks, ~1995 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 12890, "output_tokens": 6361, "total_tokens": 19251, "latency_ms": 53316.3, "estimated_cost_usd": 0.223475, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 19803 chars, 12890 in / 6361 out tokens, 53316ms
+Parsed 53 elements from LLM response
+Successfully created 53 DetectedElement objects
+Chunk 1/3: Successfully detected 53 elements
+Progress: 1/3 chunks processed, 53 total elements detected so far
+Processing chunk 2/3 (329 blocks, ~1999 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 13743, "output_tokens": 6119, "total_tokens": 19862, "latency_ms": 59141.0, "estimated_cost_usd": 0.22169, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 20718 chars, 13743 in / 6119 out tokens, 59141ms
+Parsed 62 elements from LLM response
+Successfully created 62 DetectedElement objects
+Chunk 2/3: Successfully detected 62 elements
+Progress: 2/3 chunks processed, 115 total elements detected so far
+Processing chunk 3/3 (236 blocks, ~1193 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11612, "output_tokens": 3961, "total_tokens": 15573, "latency_ms": 34209.9, "estimated_cost_usd": 0.157085, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 13599 chars, 11612 in / 3961 out tokens, 34210ms
+Parsed 41 elements from LLM response
+Successfully created 41 DetectedElement objects
+Chunk 3/3: Successfully detected 41 elements
+Progress: 3/3 chunks processed, 156 total elements detected so far
+De-duplicated 34 overlap-repeated elements (156 → 122)
+Detection complete: 122 total elements detected
+Elements by level: {'domain': 3, 'strand': 7, 'sub_strand': 18, 'indicator': 94}
+Inferring depth map from 659 sampled blocks (~4195 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 13679, "output_tokens": 412, "total_tokens": 14091, "latency_ms": 4517.4, "estimated_cost_usd": 0.015739, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1216 chars, 13679 in / 412 out tokens, 4517ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: 'DOMAIN TITLE (all-caps or title case, appears at x=0.07 as section header)')
+  depth=2 → strand (pattern: 'Strand: N.0 — <Title>')
+  depth=3 → sub_strand (pattern: 'Sub-Strand[—-] <Title>')
+  depth=4 → indicator (pattern: 'Foundation N.N <Title>')
+
+=== CA ===
+  golden:   25
+  detected: 122
+  matched:  25
+  precision: 0.205  recall: 1.000  f1: 0.340
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=14  fp=80  fn=0   p=0.15 r=1.00
+    strand      tp=3   fp=4   fn=0   p=0.43 r=1.00
+    sub_strand  tp=5   fp=13  fn=0   p=0.28 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 14
+    strand     → strand     : 3
+    sub_strand → sub_strand : 5
+  code accuracy: 25/25 (1.000) — graded over matched pairs only
+  description accuracy: 14/14 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (97): [('strand', 'Strand 1.0'), ('sub_strand', 'CI'), ('indicator', 'Foundation 1.1'), ('indicator', 'Foundation 1.1'), ('sub_strand', 'INIT'), ('sub_strand', 'ENGA'), ('indicator', 'Foundation 1.3'), ('indicator', 'Foundation 1.3'), ('sub_strand', 'PERS'), ('indicator', 'Foundation 1.4')]…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] CA-AGE-COLUMNS-EMITTED — all 16 Early/Later foundations emit both columns
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [PASS] CA-FOUR-LEVEL-HIERARCHY — all four levels present
+
+Review files written to paper/results/task3_stability_20260823/review/on_run3/
+
+Full report written to paper/results/task3_stability_20260823/reports/on_run3_CA.json
+=== END on run3 CA rc=0 2026-08-23T18:57:55Z ===
+arm=off run=3 state=CA DEPTH_MAP_ENABLED=False
+=== START off run3 CA 2026-08-23T18:57:55Z ===
+== CA ==
+  [detector] running on 659 blocks…
+Starting structure detection for document: outputs/08-22-26-4/CA-extraction.json
+Input: 659 text blocks
+DEPTH_MAP_ABLATION: Pass-1 depth-map inference DISABLED via ELS_DEPTH_MAP_ENABLED. Detection will run without a depth map. This is not the production default — if you did not intend an ablation run, unset the variable.
+Depth-map inference failed; falling back to no-depth-map mode
+Created 3 chunks from 659 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (260 blocks, ~1995 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+Bedrock API call failed (attempt 1/3): An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 0): Too many tokens per day, please wait before trying again.
+Bedrock API call failed (attempt 2/3): An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 0): Too many tokens per day, please wait before trying again.
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "latency_ms": 0.0, "estimated_cost_usd": 0.0, "retry_count": 2, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": false, "error": "An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 0): Too many tokens per day, please wait before trying again."}
+Bedrock API call failed after 3 attempts: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 0): Too many tokens per day, please wait before trying again.
+Structure detection failed: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 0): Too many tokens per day, please wait before trying again.
+Traceback (most recent call last):
+  File "/Users/emilycheyne/Development/kinder-readiness/src/els_pipeline/detector.py", line 1569, in detect_structure
+    chunk_elements = _process_chunk(
+        chunk, chunk_idx, len(chunks), depth_map=depth_map
+    )
+  File "/Users/emilycheyne/Development/kinder-readiness/src/els_pipeline/detector.py", line 1152, in _process_chunk
+    response_text = call_bedrock_llm(prompt)
+  File "/Users/emilycheyne/Development/kinder-readiness/src/els_pipeline/detector.py", line 1051, in call_bedrock_llm
+    response = bedrock.invoke_model(
+        modelId=effective_model_id,
+        body=json.dumps(request_body)
+    )
+  File "/Users/emilycheyne/Development/kinder-readiness/venv/lib/python3.14/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/emilycheyne/Development/kinder-readiness/venv/lib/python3.14/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/emilycheyne/Development/kinder-readiness/venv/lib/python3.14/site-packages/botocore/client.py", line 1078, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.ThrottlingException: An error occurred (ThrottlingException) when calling the InvokeModel operation (reached max retries: 0): Too many tokens per day, please wait before trying again.
+
+=== CA ===
+  golden:   25
+  detected: 0
+  matched:  0
+  precision: 0.000  recall: 0.000  f1: 0.000
+  per-level:
+    domain      tp=0   fp=0   fn=3   p=0.00 r=0.00
+    indicator   tp=0   fp=0   fn=14  p=0.00 r=0.00
+    strand      tp=0   fp=0   fn=3   p=0.00 r=0.00
+    sub_strand  tp=0   fp=0   fn=5   p=0.00 r=0.00
+  code accuracy: n/a (golden asserts no codes)
+  description accuracy: n/a (golden annotates no descriptions)
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops (14): ['CA-IND-01-EARLY', 'CA-IND-01-LATER', 'CA-IND-02-EARLY', 'CA-IND-02-LATER', 'CA-IND-05-EARLY', 'CA-IND-05-LATER', 'CA-IND-06-EARLY', 'CA-IND-06-LATER']…
+  missing test cases (25): ['CA-DOM-01', 'CA-STR-01', 'CA-SUB-01', 'CA-IND-01-EARLY', 'CA-IND-01-LATER', 'CA-DOM-02', 'CA-STR-02', 'CA-SUB-02', 'CA-IND-02-EARLY', 'CA-IND-02-LATER']…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] CA-AGE-COLUMNS-EMITTED — all 0 Early/Later foundations emit both columns
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [FAIL] CA-FOUR-LEVEL-HIERARCHY — missing levels: {'sub_strand', 'strand', 'domain', 'indicator'}
+
+Review files written to paper/results/task3_stability_20260823/review/off_run3/
+
+Full report written to paper/results/task3_stability_20260823/reports/off_run3_CA.json
+=== END off run3 CA rc=1 2026-08-23T18:57:57Z ===
+THROTTLED — stopping sweep. Completed pairs are still valid.
