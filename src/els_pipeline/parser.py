@@ -340,6 +340,168 @@ def _anchor_parent_code(parent_code: str | None, indicator_code: str) -> str | N
     return ".".join(ind_segs[:depth])
 
 
+def _collapse_duplicated_parent_segment(
+    strand_code: str | None,
+    sub_strand_code: str | None,
+    indicator_code: str,
+) -> tuple[str | None, str]:
+    """Drop a parent position the child's own printed id already carries.
+
+    A document whose sub-level id is itself DOTTED states its parent's position
+    inside that id: Kentucky prints "Benchmark 1.1" under
+    "Approaches to Learning Standard 1", where the leading ``1`` IS the
+    standard. Composing that id onto the whole strand code counts the standard
+    twice — ``AL.1`` + ``1.1`` gives ``AL.1.1.1`` where the document means
+    ``AL.1.1``. It is the same principle the parser prompt already states for
+    Nevada — peeling stops where the namespace stops — read downward: a child
+    that is already qualified relative to its grandparent must not be qualified
+    again against its parent.
+
+    The LLM composes this correctly only some of the time, so a prompt rule
+    cannot reach zero and `standard_id` needs zero — the argument that put
+    `derive_code_from_title` in Python. Measured on the KY full-document run of
+    2026-08-25 (`pipeline-US-KY-2021-full08252026`), where the detector input
+    was uniform (all 51 sub_strands arrived as ``Benchmark N.N``) and the parser
+    still emitted both shapes WITHIN one domain — ``AL.1.1.1`` beside
+    ``AL.2.2``, ``CA.1.1`` beside ``CA.1.1.4`` — 78 of 202 rows carried the
+    duplicate.
+
+    The tell is purely structural: the sub_strand extends the strand, and the
+    first segment it adds repeats the strand's own last segment. That requires
+    the added tail to be DOTTED — a single added segment (``AL.2`` → ``AL.2.2``)
+    is an ordinary child position and is left alone, which is what keeps the
+    rule off documents that simply number their children from 1.
+
+    Scoped to the strand/sub_strand pair, and deliberately not applied to
+    domain/strand or to a bare strand+indicator: with no intermediate level to
+    compare against there is no way to tell a repeated position from a genuine
+    one, and inventing the distinction would corrupt correct codes. Validated
+    at ZERO false positives across all 106 annotated standards in all six
+    parser goldens.
+
+    Returns the repaired ``(sub_strand_code, indicator_code)`` — the indicator
+    is rebuilt too, since it was composed on the duplicated prefix.
+    """
+    if not strand_code or not sub_strand_code:
+        return sub_strand_code, indicator_code
+    if not sub_strand_code.startswith(strand_code + "."):
+        return sub_strand_code, indicator_code
+    tail = sub_strand_code[len(strand_code) + 1:]
+    if "." not in tail:
+        return sub_strand_code, indicator_code
+    if tail.split(".")[0] != strand_code.split(".")[-1]:
+        return sub_strand_code, indicator_code
+
+    repaired_sub = strand_code + "." + tail.split(".", 1)[1]
+    repaired_indicator = indicator_code
+    if indicator_code.startswith(sub_strand_code + "."):
+        repaired_indicator = repaired_sub + indicator_code[len(sub_strand_code):]
+    logger.info(
+        f"DUPLICATED_PARENT_SEGMENT sub_strand {sub_strand_code!r} -> "
+        f"{repaired_sub!r} (strand {strand_code!r}); indicator "
+        f"{indicator_code!r} -> {repaired_indicator!r}"
+    )
+    return repaired_sub, repaired_indicator
+
+
+def _collapse_duplicated_indicator_segment(
+    strand_code: str | None,
+    sub_strand_code: str | None,
+    indicator_code: str,
+) -> str:
+    """Collapse a duplicated parent position the LLM left in the INDICATOR only.
+
+    `_collapse_duplicated_parent_segment` keys on the strand/sub_strand pair, so
+    it cannot see a row where the model composed the sub_strand correctly and
+    duplicated the segment only in the leaf — KY 2026-08-25 produced exactly one
+    (`sub_strand` ``SCIE.1.3`` with `indicator` ``SCIE.1.1.3.DCBO``).
+
+    This repair is SELF-VERIFYING, which is what makes it safe to apply to a
+    code no sibling level corroborates: it fires only when the indicator
+    currently fails to extend its sub_strand, and only when collapsing makes it
+    extend that sub_strand exactly. A change that does not demonstrably repair
+    the row's own ancestry is not made. It reads dot structure alone.
+    """
+    if not strand_code or not sub_strand_code or not indicator_code:
+        return indicator_code
+    if indicator_code.startswith(sub_strand_code + "."):
+        return indicator_code
+    if not indicator_code.startswith(strand_code + "."):
+        return indicator_code
+    tail = indicator_code[len(strand_code) + 1:]
+    if "." not in tail or tail.split(".")[0] != strand_code.split(".")[-1]:
+        return indicator_code
+    collapsed = strand_code + "." + tail.split(".", 1)[1]
+    if not collapsed.startswith(sub_strand_code + "."):
+        return indicator_code
+    logger.info(
+        f"DUPLICATED_PARENT_SEGMENT (indicator only) {indicator_code!r} -> "
+        f"{collapsed!r} (sub_strand {sub_strand_code!r})"
+    )
+    return collapsed
+
+
+def _qualify_bare_indicator_code(
+    domain_code: str | None,
+    strand_code: str | None,
+    sub_strand_code: str | None,
+    indicator_code: str,
+) -> str:
+    """Give a bare indicator code the parent chain the LLM dropped.
+
+    The parser intermittently emits the leaf's own abbreviation with no chain
+    at all — a bare ``UMNDW`` where the row's own ancestors say
+    ``AL.2.2.UMNDW``. Because `standard_id` is
+    ``{country}-{state}-{year}-{indicator_code}``, that is a malformed Aurora
+    primary key, and `validator._validate_code_shape` rejects the record before
+    it is stored. It is sampling variance rather than a code regression — the
+    same defect appears at several code versions and this file already records
+    it by name (``TCPHS``, ``UMNDW``) — so the prompt can lower the rate but
+    only Python can make the floor zero.
+
+    Measured on the KY full-document run of 2026-08-25: 45 of the 49 rejected
+    rows were this, with a correct ancestor chain sitting right beside the bare
+    code.
+
+    Fires only on a code carrying NO separator at all, and only when an
+    ancestor is present to qualify it with. Every one of the 106 annotated
+    standards in the six parser goldens has an indicator code that extends its
+    nearest present ancestor, and none is bare — the shallowest is three
+    segments — so this only ever moves output toward the goldens. It reads dot
+    structure alone, never any document's vocabulary.
+
+    Declines to act when the nearest ancestor is itself malformed: prefixing a
+    `<Label> <id>` code that the parser failed to convert would inject
+    whitespace into the primary key, replacing one defect with another and
+    hiding the real cause from `CODE_SHAPE_GUARD`.
+    """
+    if not indicator_code or "." in indicator_code:
+        return indicator_code
+    ancestor = sub_strand_code or strand_code or domain_code
+    if not ancestor or ancestor == indicator_code:
+        return indicator_code
+    if any(c.isspace() for c in ancestor):
+        # The nearest ancestor is ITSELF malformed — the parser left a
+        # `<Label> <id>` code (e.g. "Benchmark 1.4") unconverted. Prefixing it
+        # would inject whitespace into the `standard_id`, i.e. manufacture a
+        # SECOND defect on top of the first, and the record would be rejected on
+        # the injected whitespace rather than on the real cause. Observed live
+        # on `pipeline-US-KY-2021-full08252026-02` (3 rows). A repair must never
+        # turn one malformation into a different one, so leave the code alone
+        # and let the guard reject it with the diagnosis intact.
+        logger.warning(
+            f"BARE_INDICATOR_CODE {indicator_code!r} left unqualified: nearest "
+            f"ancestor {ancestor!r} is itself malformed (contains whitespace)"
+        )
+        return indicator_code
+    qualified = f"{ancestor}.{indicator_code}"
+    logger.info(
+        f"BARE_INDICATOR_CODE {indicator_code!r} -> {qualified!r} "
+        f"(qualified with nearest ancestor {ancestor!r})"
+    )
+    return qualified
+
+
 def _anchor_parent_chain(
     domain_code: str | None,
     strand_code: str | None,
@@ -494,6 +656,26 @@ def parse_llm_response(
             # depend on chunk order — the wrong property for a primary key.
             # `disambiguate_colliding_standards` handles it after the merge.
 
+            # Repair the codes the LLM composed BEFORE anchoring. The indicator
+            # code is the ground truth for the whole chain, so a duplicated
+            # segment left in it here is faithfully propagated into every
+            # parent. Order matters: collapsing the duplicate can itself make an
+            # otherwise non-extending indicator extend its ancestor again (a
+            # sub_strand `MATH.1.1.2` repaired to `MATH.1.2` is exactly the
+            # ancestor `MATH.1.2.RNSBS` was built on), so it runs first.
+            sub_strand_code, indicator_code = _collapse_duplicated_parent_segment(
+                obj.get("strand_code"), obj.get("sub_strand_code"), indicator_code
+            )
+            indicator_code = _collapse_duplicated_indicator_segment(
+                obj.get("strand_code"), sub_strand_code, indicator_code
+            )
+            indicator_code = _qualify_bare_indicator_code(
+                obj["domain_code"],
+                obj.get("strand_code"),
+                sub_strand_code,
+                indicator_code,
+            )
+
             # Build the parents AFTER the indicator code is finalized and anchor
             # every parent code to it. The indicator code is the ground truth for
             # the parent chain, so this keeps same-titled strands/sub_strands in
@@ -502,7 +684,7 @@ def parse_llm_response(
             anchored_domain, anchored_strand, anchored_sub = _anchor_parent_chain(
                 obj["domain_code"],
                 obj.get("strand_code"),
-                obj.get("sub_strand_code"),
+                sub_strand_code,
                 indicator_code,
             )
 
@@ -554,6 +736,28 @@ def parse_llm_response(
 
             standard_id = generate_standard_id(
                 country, state, version_year, indicator_code
+            )
+
+            # Localization for `validator._validate_code_shape`. That guard is
+            # the pipeline's chokepoint for a malformed primary key, but it sees
+            # only the FINAL record — so a CODE_SHAPE_GUARD rejection reports the
+            # chain, the page and the standard_id while saying nothing about what
+            # the model actually emitted. The two historical defect shapes are
+            # distinguishable only from the pre-normalization codes: a structural
+            # label left in ("ELD.2.0.PA.Foundation 2.3.DISC") versus a parent
+            # chain dropped entirely (bare "TCPHS"). Emitting the raw codes keyed
+            # by standard_id lets a rejection be grepped straight back to the
+            # LLM's own output. Logged for every row, not just changed ones,
+            # because whether a row will be rejected is not knowable here.
+            logger.info(
+                f"PRE_NORMALIZATION_CODES {standard_id}: "
+                f"llm_emitted={{'domain': {obj['domain_code']!r}, "
+                f"'strand': {obj.get('strand_code')!r}, "
+                f"'sub_strand': {obj.get('sub_strand_code')!r}, "
+                f"'indicator': {obj['indicator_code']!r}}} "
+                f"anchored={{'domain': {anchored_domain!r}, "
+                f"'strand': {anchored_strand!r}, "
+                f"'sub_strand': {anchored_sub!r}}}"
             )
 
             source_page = obj.get("source_page", 1)

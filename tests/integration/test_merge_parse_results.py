@@ -257,3 +257,55 @@ def test_merge_passthrough_fields(s3_setup):
     assert result["state"] == "CA"
     assert result["version_year"] == 2021
     assert result["run_id"] == "run-1"
+
+
+def test_colliding_indicator_codes_are_disambiguated_across_batches(s3_setup):
+    """THE CANARY for direct-vs-batched parity.
+
+    `parse_hierarchy` (the direct path) runs `normalize_parsed_codes` and then
+    `disambiguate_colliding_standards`. The batched merge ran only the first, so
+    a duplicate indicator code reached persistence as a duplicate Aurora primary
+    key. Live case: the KY run of 2026-08-25
+    (`pipeline-US-KY-2021-full08252026-03`) persisted two distinct page-30
+    indicators — "…using scribble writing" and "…using letter-like forms" —
+    both under `US-KY-2021-LEL.4.2.LPPST`, because rule 4's 5-char cap
+    abbreviates the two titles identically.
+
+    The collision is placed in SEPARATE batches on purpose: that is the case no
+    per-batch resolution can see, and the reason the step belongs in the merge.
+    """
+    s3 = s3_setup
+    event = _base_event()
+
+    batch0_key = "US/CA/2021/intermediate/parsing/batch-0/run-1.json"
+    batch1_key = "US/CA/2021/intermediate/parsing/batch-1/run-1.json"
+    _put_json(s3, event["manifest_key"], _make_manifest([(0, batch0_key), (1, batch1_key)]))
+
+    def _colliding(name):
+        std = _make_standard(
+            standard_id="US-CA-2021-D1.1.LPPST", domain_code="D1", indicator_code="D1.1.LPPST"
+        )
+        std["indicator"]["name"] = name
+        return std
+
+    _put_json(
+        s3,
+        batch0_key.replace("/batch-", "/result-"),
+        _make_batch_result(0, [_colliding("Labels pictures using scribble writing.")]),
+    )
+    _put_json(
+        s3,
+        batch1_key.replace("/batch-", "/result-"),
+        _make_batch_result(1, [_colliding("Labels pictures using letter-like forms.")]),
+    )
+
+    result = merge_parse_results(event, None)
+
+    assert result["status"] == "success"
+    assert result["total_indicators"] == 2
+
+    body = s3.get_object(
+        Bucket=Config.S3_PROCESSED_BUCKET, Key=result["output_artifact"]
+    )["Body"].read()
+    ids = [s["standard_id"] for s in json.loads(body)["indicators"]]
+    assert len(set(ids)) == 2, f"duplicate standard_id survived the merge: {ids}"

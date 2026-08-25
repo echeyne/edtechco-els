@@ -27,6 +27,7 @@ from .parser import (
     build_parsing_prompt,
     call_bedrock_llm,
     chunk_elements_by_domain,
+    disambiguate_colliding_standards,
     normalize_element_codes,
     normalize_parsed_codes,
     parse_llm_response,
@@ -360,17 +361,31 @@ def merge_parse_results(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             "error": error_msg,
         }
 
-    # Canonicalize codes across ALL merged standards — same final step the direct
-    # parse_hierarchy path runs — so the same hierarchy entity uses one code even
-    # when its indicators were split across batches. Reconstruct the models,
-    # normalize, then re-serialize to the dict shape the output expects.
+    # Canonicalize codes across ALL merged standards, then resolve any duplicate
+    # indicator codes — BOTH final steps the direct parse_hierarchy path runs, in
+    # the same order. Reconstruct the models, normalize, disambiguate, then
+    # re-serialize to the dict shape the output expects.
+    #
+    # `disambiguate_colliding_standards` has to run HERE and not per batch: a
+    # collision can span two batches, and `normalize_parsed_codes` can itself
+    # bring two rows onto one code. Omitting it was a live defect — the KY run of
+    # 2026-08-25 (`pipeline-US-KY-2021-full08252026-03`) persisted two distinct
+    # page-30 indicators, "…using scribble writing" and "…using letter-like
+    # forms", under one `US-KY-2021-LEL.4.2.LPPST`, because rule 4's 5-char cap
+    # abbreviates both titles identically and nothing downstream separated them.
+    # That is a duplicate Aurora primary key reaching persistence.
     try:
-        normalized = normalize_parsed_codes(
+        merged = normalize_parsed_codes(
             [NormalizedStandard(**s) for s in all_standards]
         )
-        all_standards = [s.model_dump() for s in normalized]
+        merged = disambiguate_colliding_standards(
+            merged, country, state, version_year
+        )
+        all_standards = [s.model_dump() for s in merged]
     except Exception as e:
-        logger.warning(f"normalize_parsed_codes skipped on merge ({e}); using raw standards")
+        logger.warning(
+            f"normalize/disambiguate skipped on merge ({e}); using raw standards"
+        )
 
     # Determine overall status
     if all_errors and all_standards:

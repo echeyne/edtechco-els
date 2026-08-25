@@ -7,6 +7,7 @@ from typing import List, Dict, Any, Optional
 import boto3
 from botocore.config import Config as BotocoreConfig
 from botocore.exceptions import ClientError
+from pydantic import ValidationError
 
 from .models import TextBlock, DetectedElement, DetectionResult, HierarchyLevelEnum
 from .config import Config
@@ -210,6 +211,17 @@ def chunk_text_blocks(
 
 DEPTH_MAP_SAMPLE_TOKENS = 6000
 
+# Layout buckets for depth-map sampling. `_block_left` is rounded to the same
+# 2 decimals `_serialize_blocks_for_prompt` prints, so a bucket is exactly the
+# x value Pass-1 reads. Every bucket is guaranteed this many blocks, which is
+# what keeps a rare depth in the sample — see `_sample_blocks_for_depth_map`.
+DEPTH_MAP_MIN_PER_BUCKET = 12
+
+# Geometry-free fallback only: a line this short with no terminal sentence
+# punctuation reads as a heading rather than prose. Shape alone (length and
+# final character) — never a document's vocabulary.
+DEPTH_MAP_HEADING_MAX_WORDS = 8
+
 
 # --------------------------------------------------------------------------
 # Layout geometry (EXPERIMENTAL — self-contained; remove `_block_left`, drop
@@ -378,7 +390,7 @@ EXTRACTION RULES:
    Either way, such a run is never promoted to elements of its own.
 3. Side-by-side age-band columns: emit ONE element PER column. Different age bands = different indicators, even when they share a code stem and title. Set `age_band` to the column label (e.g. "Early (3 to 4 ½ Years)", "PK3", "By 36 months"). Strip the age-band label from `title`. Put only that column's prose in `description`. If a row shows N age columns it MUST yield exactly N indicators — emit EVERY column even when a column's prose is short, nearly identical to its neighbor, or visually sparse. Never collapse or skip a column.
    - Spell each age-band label identically every time, using the document's exact glyphs (write "½", not "1/2").
-4. `code`: use the document's code if present. Before you decide none is present, LOOK for it — a document often prints an element's code somewhere other than on its heading line, and a code you can RECOVER from the page ALWAYS beats one you would derive from the title. Search these three places, in this order, and stop at the first that yields a code:
+4. `code`: REQUIRED on every element you emit. It is NEVER `null`, never an empty string, and the key is never omitted — an element without a code cannot be stored, and emitting one costs us the whole chunk it sits in. If the document prints no code for the element, the abbreviation procedure at the end of this rule ALWAYS supplies one; that is precisely what it is for, so "uncoded" is never a reason to answer `null`. The `ABSENCE IS null` instruction in rule 8 governs `description` and nothing else — it does NOT apply to `code`. Now: use the document's code if present. Before you decide none is present, LOOK for it — a document often prints an element's code somewhere other than on its heading line, and a code you can RECOVER from the page ALWAYS beats one you would derive from the title. Search these three places, in this order, and stop at the first that yields a code:
    (i) ON THE HEADING LINE — a code printed inline with the title ("1.0", "I.A.2", "PK3.I.A.2"), including the `<Label> <id>` form described in the bullets below. This always wins: an element that prints its own id keeps it, even when its descendants' codes are built on a different stem.
    (ii) IN A CAPTION BESIDE THE HEADING — a code the document prints just above, below, or beside the title rather than on it: inside parentheses, on a small caption line, in a table or column header, or in a lead-in that names the group of items which follows. A heading "Working Memory" whose next line reads "Indicators (CD.WM)" has code "CD.WM". Take only the IDENTIFIER — the caption's surrounding words ("Indicators", "Standards", "Codes") name what the caption points at and are not part of the code — and copy it VERBATIM, dots included.
    (iii) FROM ITS DESCENDANTS' CODES — the heading prints no code of its own anywhere, but the elements BENEATH it carry dotted codes that all begin with the same segments. An ancestor's code is the COMMON PREFIX of its descendants' document codes. Indicators coded "CD.WM.PK1", "CD.WM.PK2", "CD.AT.PK1", "CD.AT.PK2" say that the group heading above the first two is "CD.WM", the group above the last two is "CD.AT", and the level above all four is "CD". Emit the WHOLE shared prefix with its dots ("CD.WM") — never just its last segment ("WM"), and never an abbreviation of the title.
@@ -409,6 +421,7 @@ EXTRACTION RULES:
 NEGATIVE EXAMPLES (do NOT do these):
 - Do not emit "Indicators and Examples in the Context of Daily Routines" as a structural element. It is a section header. It is not an owner either: structural indicators follow it, so its claim is spent on them (rule 2a) — the example lines nested under each of those indicators belong to that indicator, not to this header.
 - Do not merge "Early" and "Later" age columns into one indicator.
+- Do not emit `"code": null` (or `""`, or omit the key) for an element the document leaves uncoded. Derive the ≤5-char abbreviation from the title instead: "Nutrition" → "NUTR", not `null`. A null code is never the right answer for any element at any level.
 - Do not keep a structural label inside the title: "Strand 1: Self-Awareness" → title is "Self-Awareness", NOT "Strand 1: Self-Awareness".
 - Do not keep a trailing structural noun inside the title: "Social and Emotional Development Domain" → title is "Social and Emotional Development", NOT "Social and Emotional Development Domain". "Language and Literacy Standard" → title is "Language and Literacy".
 - Do not classify a numeric prefix ("1.", "2.") as `sub_strand` just because numeric-under-letter is sub_strand in some other doc — use the depth map.
@@ -435,28 +448,116 @@ DOCUMENT CHUNK:
 {text_content}"""
 
 
+def _layout_bucket_key(block: TextBlock) -> Any:
+    """Group a block by the layout signal Pass-1 itself reads.
+
+    Indentation tracks nesting, so a block's normalized left edge stands in for
+    its depth. It is rounded to the same 2 decimals
+    ``_serialize_blocks_for_prompt`` prints, so a bucket is exactly one of the
+    x values the model sees rather than a second, private notion of position.
+
+    A page with unusable geometry has no left edge to group on, so those blocks
+    fall back to a coarse text-shape key: a short line carrying no terminal
+    sentence punctuation reads as a heading, anything longer or
+    sentence-terminated as prose. That fallback reads only line SHAPE — word
+    count and final character — never any document's vocabulary, so it stays
+    inside the same document-agnostic family as ``_canonicalize_code`` and
+    ``_is_title_grounded``.
+    """
+    left = _block_left(block)
+    if left is not None:
+        return round(left, 2)
+    text = block.text.strip()
+    is_heading_shaped = (
+        len(text.split()) <= DEPTH_MAP_HEADING_MAX_WORDS and text[-1:] not in ".!?"
+    )
+    return ("no-geometry", is_heading_shaped)
+
+
+def _evenly_spaced(items: List[int], count: int) -> List[int]:
+    """Pick ``count`` items spread evenly across ``items``, preserving order."""
+    if count <= 0:
+        return []
+    if count >= len(items):
+        return list(items)
+    step = len(items) / count
+    return [items[int(i * step)] for i in range(count)]
+
+
 def _sample_blocks_for_depth_map(
     blocks: List[TextBlock],
     target_tokens: int = DEPTH_MAP_SAMPLE_TOKENS,
 ) -> List[TextBlock]:
-    """Sample evenly across the document so depth_map sees structure from
-    beginning, middle, and end (TOC pages, body, appendix all differ)."""
+    """Sample the document for Pass-1, preserving every distinct layout depth.
+
+    Pass-1 infers nesting DEPTHS, so what the sample must not lose is a depth —
+    including one that appears only a handful of times. A uniform stride cannot
+    promise that: it keeps a line with probability 1/stride no matter how
+    load-bearing the line is, so the rarest lines in a document — the headings
+    that open a section — are the likeliest to vanish, while body prose
+    survives on volume alone.
+
+    Measured on the 52-page Kentucky document (1741 blocks, stride 4): 7 of the
+    9 bare content-area headings were dropped, Pass-1 never saw a bare heading
+    beside its own "<Area> Standard N" line, and — following the prompt's "if
+    you cannot tell whether two depths are distinct, assume they are the same
+    depth" rule — reported a 3-level hierarchy for a 4-level document. Every
+    level then shifted up one, the domain level was never emitted at all, the
+    parser had no domain code to qualify its label-form codes against, and 102
+    of 202 standards were rejected by `validator._validate_code_shape`. The
+    15-page subset of the same document stayed under `target_tokens`, was
+    therefore never sampled, and reported the correct 4 levels.
+
+    So stratify by layout instead of striding. Every bucket is guaranteed
+    `DEPTH_MAP_MIN_PER_BUCKET` blocks, spread across the document; rare buckets
+    are filled FIRST, so if the floor alone cannot fit the budget it is the
+    structurally distinctive levels that survive. Whatever budget remains is
+    spent on the bulk of the document, also evenly spread. The guarantee is
+    cheap precisely because the interesting buckets are small: KY's six
+    heading buckets hold 19 of 1741 blocks between them.
+
+    Blocks are returned in DOCUMENT order — `build_depth_map_prompt` renders
+    them as a running sample, and out-of-order lines would misrepresent the
+    nesting it is being asked to read.
+    """
     if not blocks:
         return []
     total_tokens = sum(estimate_tokens(b.text) for b in blocks)
     if total_tokens <= target_tokens:
         return blocks
-    # Take a contiguous middle slice — mid-document is usually the cleanest
-    # repeat of the structural pattern (TOC and appendices are noisy).
-    stride = max(1, total_tokens // target_tokens)
-    sampled, tokens = [], 0
-    for i, b in enumerate(blocks):
-        if i % stride == 0:
-            sampled.append(b)
-            tokens += estimate_tokens(b.text)
-            if tokens >= target_tokens:
-                break
-    return sampled
+
+    buckets: Dict[Any, List[int]] = {}
+    for i, block in enumerate(blocks):
+        buckets.setdefault(_layout_bucket_key(block), []).append(i)
+
+    keep: set = set()
+    tokens = 0
+
+    # Rarest buckets first — a bucket with few members is a depth that occurs
+    # rarely, which is exactly the evidence a stride destroys.
+    for idxs in sorted(buckets.values(), key=len):
+        for i in _evenly_spaced(idxs, min(len(idxs), DEPTH_MAP_MIN_PER_BUCKET)):
+            cost = estimate_tokens(blocks[i].text)
+            if tokens + cost > target_tokens:
+                continue
+            keep.add(i)
+            tokens += cost
+
+    # Spend the remainder on the body of the document, still evenly spread so
+    # the sample spans first page to last rather than stopping at the budget.
+    remaining = [i for i in range(len(blocks)) if i not in keep]
+    if remaining and tokens < target_tokens:
+        avg_cost = max(
+            1, sum(estimate_tokens(blocks[i].text) for i in remaining) // len(remaining)
+        )
+        for i in _evenly_spaced(remaining, (target_tokens - tokens) // avg_cost):
+            cost = estimate_tokens(blocks[i].text)
+            if tokens + cost > target_tokens:
+                continue
+            keep.add(i)
+            tokens += cost
+
+    return [blocks[i] for i in sorted(keep)]
 
 
 def canonicalize_depth_map_levels(depth_map: Dict[str, Any]) -> Dict[str, Any]:
@@ -821,8 +922,35 @@ def _resolve_code(code: Any, title: Any, source_text: Any) -> Any:
     prefix, and grounding alone would then read a real list code as invented and
     overwrite it with an abbreviation of the title (observed on AZ: 8 of 9
     lettered leaves kept the prefix, the ninth did not).
+
+    A code the model did not supply at all — `null`, `""`, or whitespace — is
+    handled FIRST, and is handled by deriving one. Rule 4's abbreviation branch
+    is by definition the "the document leaves this element uncoded" case, so an
+    absent code is precisely the input it exists to serve; the old guard instead
+    folded `None` to `""`, failed to match `_DERIVABLE_CODE_RE`, and returned the
+    `None` unchanged for `DetectedElement` to reject. That rejection was not
+    survivable: it escaped the per-element loop and took every sibling element in
+    the chunk with it. Measured on the KY full-document run of 2026-08-24
+    (`pipeline-US-KY-2021-full08242026`), one `"code": null` element apiece cost
+    12 of 18 chunks — 31 of 52 pages ended with zero surviving coverage, and the
+    execution still reported SUCCEEDED. Deriving here is document-agnostic (it
+    reads only the title's word shape) and cannot overwrite anything the document
+    printed, because a printed code is not absent.
     """
-    if not _DERIVABLE_CODE_RE.match(str(code or "")):
+    if code is None or (isinstance(code, str) and not code.strip()):
+        derived = derive_code_from_title(title)
+        if derived is None:
+            logger.warning(
+                f"Element supplied no code and none could be derived from its "
+                f"title {str(title)[:60]!r}; it will be skipped"
+            )
+            return code
+        logger.warning(
+            f"Element supplied no code; derived {derived!r} from title "
+            f"{str(title)[:60]!r} per rule 4's abbreviation branch"
+        )
+        return derived
+    if not _DERIVABLE_CODE_RE.match(str(code)):
         return code
     if _is_code_grounded(code, source_text):
         return code
@@ -861,20 +989,43 @@ def _create_detected_element(elem_data: Dict[str, Any], default_page: int) -> Op
 
     title = _strip_label_prefix(elem_data['title'])
 
-    return DetectedElement(
-        level=level,
-        code=_resolve_code(
-            _canonicalize_code(elem_data['code']), title, elem_data['source_text']
-        ),
-        title=title,
-        # Pass the raw value through: DetectedElement folds a missing/blank
-        # description to None (models._blank_to_none).
-        description=elem_data.get('description'),
-        confidence=confidence,
-        source_page=elem_data.get('source_page', default_page),
-        source_text=elem_data['source_text'],
-        age_band=age_band,
+    code = _resolve_code(
+        _canonicalize_code(elem_data['code']), title, elem_data['source_text']
     )
+    # A JSON number is a legitimate way for a printed code to arrive
+    # (`"code": 1`), but `DetectedElement.code` is `str` and would reject it.
+    # Coerce the scalar rather than lose the element; `None` is deliberately
+    # left alone so the guard below reports the real problem.
+    if isinstance(code, (int, float)) and not isinstance(code, bool):
+        code = str(code)
+
+    try:
+        return DetectedElement(
+            level=level,
+            code=code,
+            title=title,
+            # Pass the raw value through: DetectedElement folds a missing/blank
+            # description to None (models._blank_to_none).
+            description=elem_data.get('description'),
+            confidence=confidence,
+            source_page=elem_data.get('source_page', default_page),
+            source_text=elem_data['source_text'],
+            age_band=age_band,
+        )
+    except ValidationError as e:
+        # Contain a malformed element to ITSELF. This construction used to sit
+        # outside any try, and pydantic's ValidationError subclasses ValueError,
+        # so it escaped the per-element loop in `parse_llm_response`, discarding
+        # every valid sibling already accumulated for the chunk, and was then
+        # caught by `detection_batching.detect_batch`'s `except ValueError` and
+        # retried 3x against an identical prompt at temperature 0 — deterministic,
+        # so all three attempts failed the same way and the chunk was dropped.
+        # Returning None routes into the caller's existing skip-and-warn path.
+        logger.warning(
+            f"Element failed schema validation and was skipped (the rest of the "
+            f"chunk is unaffected): {e}"
+        )
+        return None
 
 
 def parse_llm_response(response_text: str, blocks: List[TextBlock]) -> List[DetectedElement]:
@@ -1513,14 +1664,30 @@ def _dedup_elements(elements: List[DetectedElement]) -> List[DetectedElement]:
 
 def detect_structure(blocks: List[TextBlock], document_s3_key: str = "") -> DetectionResult:
     """
-    Detect hierarchical structure in extracted text blocks using Claude Sonnet 4.5.
-    
+    Detect hierarchical structure in extracted text blocks.
+
+    Runs on the detector LLM named by `config.BEDROCK_DETECTOR_LLM_MODEL_ID`
+    (Opus 4.6 by default). Named through the config var rather than spelled out,
+    because a hard-coded model name here went stale once already.
+
     This function:
-    1. Chunks text blocks into manageable sizes with overlap
-    2. Sends each chunk to Claude Sonnet 4.5 for structure detection
-    3. Parses and validates the LLM responses
-    4. Flags low-confidence elements for review
-    5. Aggregates results across all chunks
+    1. Infers a document-wide depth map from the blocks (PASS 1,
+       `infer_depth_map`) — the mapping from a line's numbering/indentation
+       SHAPE to its hierarchy level, inferred once for the whole document so
+       that per-chunk classification is anchored to one consistent reading
+       rather than re-derived (and re-guessed) chunk by chunk
+    2. Chunks text blocks into manageable sizes with overlap
+    3. Sends each chunk for structure detection, passing the depth map as context
+    4. Parses and validates the LLM responses, skipping any individual element
+       that fails schema validation while keeping the rest of its chunk
+    5. Aggregates across chunks: de-duplicates overlap repeats
+       (`_dedup_elements`) and reconciles codes that drifted between chunks
+       (`normalize_element_codes`)
+
+    Every element carries a `confidence` score, but nothing thresholds it: no
+    element is gated, flagged, or dropped on confidence, and there is no
+    `needs_review` field. Every element flows through to parsing and
+    persistence, because each one is reviewed by a human downstream regardless.
     
     The function is resilient to:
     - Malformed LLM responses (with retry)

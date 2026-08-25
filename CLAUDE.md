@@ -16,23 +16,23 @@ When a change alters behavior, config, schema, or architecture (not a small bug 
 
 ### ⚠️ These two files are COST-GATED right now (as of 2026-08-23) — batch your edits
 
-`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`288c64f1`**, and that value is cited by every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8). Editing either file — **including a comment or a docstring** — changes it, and two things follow:
+`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`61b7243e`**. The **previous** value **`288c64f1`** is what every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8) cites — those manifests were NOT re-recorded when the hash moved on 2026-08-24 — three times across 2026-08-24/25, `288c64f1` → `b35b9666` (the absent-code fix) → `99b853cc` (the Pass-1 sampling fix) → `04e4924c` (the code-composition repairs) → `61b7243e` (the malformed-ancestor guard) — so a reader diffing them against HEAD will see a mismatch. Reproducing them needs `git checkout` of their recording commit. The eval cache was invalidated by the same change. Editing either file — **including a comment or a docstring** — changes it, and two things follow:
 
 1. **The eval cache invalidates.** All 53 entries / 2.8MB in `evaluation/.cache` become misses, so evals that are currently free become live Bedrock calls. Re-recording the detector arms alone is ~315K Opus tokens (Task 1 208,835 + Task 2 106,606), about **12% of the 2,592,000/day quota**.
 2. **Recorded results stop matching HEAD.** The numbers stay valid — they were validly produced by that code — but reproducing them needs a `git checkout` of the recording commit rather than just running the script, and a reader diffing the hash cannot tell a docstring change from a logic change.
 
 This is **a cost, not a prohibition.** A real defect still gets fixed. But a cosmetic fix should wait and ride along with a change that busts the hash anyway — the next one scheduled is the arXiv paper's Task 6 full-document re-record (`tasking/arxiv_paper.md`).
 
-**The deferred queue — do all of these in that same window:**
+**The deferred queue is EMPTY — all four items were done on 2026-08-24**, in the window opened by the absent-code defect fix below (which busted the hash on its own merits). Kept here as the record of what that batch contained; do not re-do these.
 
-| # | file | what | why it is deferred, not done |
+| # | file | what | status |
 |---|---|---|---|
-| 1 | `detector.py:1516,1520` | `detect_structure`'s docstring says detection runs on "Claude Sonnet 4.5". It runs on **Opus 4.6** (`config.BEDROCK_DETECTOR_LLM_MODEL_ID`). Lines 113 and 961 already say Opus 4.6 correctly, so it is only this docstring. | cosmetic |
-| 2 | `detector.py:1522` | Step 4 of the same docstring, "Flags low-confidence elements for review", describes a gate that **does not exist** — nothing thresholds `confidence` and there is no `needs_review` field. This is the single most misleading line in either file: it is exactly the false claim the arXiv paper's guardrail 2 exists to catch, sitting in the function a reader checks first. | cosmetic, but fix it FIRST in the batch |
-| 3 | `detector.py:1514-1524` | The same numbered docstring **omits Pass-1 depth-map inference entirely**, though `detect_structure` calls `infer_depth_map(blocks)` before chunk classification. That pass is the paper's central method claim; the docstring credits a step that does not exist while missing the one that does. Found 2026-08-23. | cosmetic |
-| 4 | `parser.py` | Add logging of the LLM's **pre-normalization** code, so a `validator._validate_code_shape` rejection can be localized. The validator sees only the final record, so today's log carries the chain, page and `standard_id` but not what the model actually emitted. See "Why it lives in `validator.py`" below. | genuinely useful, but not urgent enough to spend the quota alone |
+| 1 | `detector.py:1516,1520` | `detect_structure`'s docstring says detection runs on "Claude Sonnet 4.5". It runs on **Opus 4.6** (`config.BEDROCK_DETECTOR_LLM_MODEL_ID`). Lines 113 and 961 already say Opus 4.6 correctly, so it is only this docstring. | ✅ **Done 2026-08-24.** The docstring now names the model through `config.BEDROCK_DETECTOR_LLM_MODEL_ID` rather than spelling a version out, so it cannot go stale the same way again. |
+| 2 | `detector.py:1522` | Step 4 of the same docstring, "Flags low-confidence elements for review", describes a gate that **does not exist** — nothing thresholds `confidence` and there is no `needs_review` field. This is the single most misleading line in either file: it is exactly the false claim the arXiv paper's guardrail 2 exists to catch, sitting in the function a reader checks first. | ✅ **Done 2026-08-24.** The false step is gone, and the docstring now states positively that `confidence` gates nothing and no `needs_review` field exists. |
+| 3 | `detector.py:1514-1524` | The same numbered docstring **omits Pass-1 depth-map inference entirely**, though `detect_structure` calls `infer_depth_map(blocks)` before chunk classification. That pass is the paper's central method claim; the docstring credits a step that does not exist while missing the one that does. Found 2026-08-23. | ✅ **Done 2026-08-24.** Pass-1 `infer_depth_map` is now step 1 of the numbered list, with a note on why it is inferred once per document rather than per chunk. |
+| 4 | `parser.py` | Add logging of the LLM's **pre-normalization** code, so a `validator._validate_code_shape` rejection can be localized. The validator sees only the final record, so today's log carries the chain, page and `standard_id` but not what the model actually emitted. See "Why it lives in `validator.py`" below. | ✅ **Done 2026-08-24.** `parse_llm_response` emits a `PRE_NORMALIZATION_CODES <standard_id>: llm_emitted={...} anchored={...}` line for every row, so a `CODE_SHAPE_GUARD` rejection greps straight back to the model's own output. Logged for every row, not just changed ones, because whether a row will be rejected is not knowable at parse time. |
 
-`parser.py` was swept on 2026-08-23 and carries **no** stale model name and no `needs_review` language — item 4 is an addition, not a correction. If you add to this queue, note the date and keep the table's "why deferred" column honest: a real defect does not belong here.
+`parser.py` was swept on 2026-08-23 and carries **no** stale model name and no `needs_review` language — item 4 was an addition, not a correction. If you add to this queue, note the date and keep its last column honest: a real defect does not belong here, it gets fixed.
 
 **The problem we were fighting: overfitting to the golden set.** The golden states (CA, AZ, CO, TX) had each been made to pass by adding targeted, per-state Python logic that scored well on the goldens but **did not generalize**. The 2026-06 LLM-first migration (`tasking/detector_parser_llm_migration.md`, Tasks 1–8, completed 2026-06-27) removed that logic and moved each rule into the prompt as a general principle. The per-state helpers that are now **gone** — do not re-introduce them or anything shaped like them:
 
@@ -43,7 +43,7 @@ This is **a cost, not a prohibition.** A real defect still gets fixed. But a cos
 - `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Uniqueness is enforced afterwards by `disambiguate_colliding_standards` (see "Where a printed code is not unique" below), which resolves collisions by ancestor and keeps a numeric counter only as a last resort.
 - the CA collision branch + `_PURE_NUMERIC_RE` in `abbreviate_element_codes` (and the now-empty `abbreviate_element_codes` / `normalize_code_to_canonical` shells) → parser prompt: a sub_strand and its child indicator must never share a code; the sub_strand derives its segment from its title with the same ≤5-char abbrev scheme.
 
-A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), `_splice_overlapping_prose` (see below), and the JSON-extraction / schema-validation plumbing.
+A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), `_collapse_duplicated_parent_segment` / `_collapse_duplicated_indicator_segment` / `_qualify_bare_indicator_code` (see below), `_splice_overlapping_prose` (see below), `_sample_blocks_for_depth_map` / `_layout_bucket_key` (layout-stratified Pass-1 sampling — reads a block's left edge and bucket counts, never its words; see below), and the JSON-extraction / schema-validation plumbing.
 
 Each of those earns its place by reading the SHAPE of the output rather than any document's vocabulary, and each fixes a defect the prompt alone could not: the LLM emits both spellings intermittently at temperature 0, so a prompt rule reduces the rate but cannot make the output reconcilable. Pair them with the prompt rule, don't substitute one for the other.
 
@@ -69,6 +69,184 @@ This is a **pairing, not a substitution** — rule 4 stays in the prompt verbati
 Two alternatives were measured and rejected: dropping the connector rule fixed ~⅓ of the churn and would have required rewriting 26 of 40 golden codes; shortening the cap from 5 to 3 fixed 36% of the churn and raised sibling collisions from 6 to 8 across 262 standards. Neither reaches zero, and a primary key needs zero.
 
 Rule 4(b)'s connector list survives that verdict but its *rationale* changed, and the prompt now says so: it was justified as a stability measure, which stopped being true once Python executes the rule — churn is zero either way. What it still buys is legibility, and the effect is large, because the code is the human-readable part of `standard_id` and has only 5 characters to spend: without the rule "Attends to an adult or peer who is communicating verbally or nonverbally" codes as `ATAAO` rather than `AAPWI`. Collisions are a wash (6/262 with the rule, 7/262 without). The list is admittedly arbitrary at its margins — it holds `through` but not `toward`, `during`, `between`, `despite` or `while`, which appear 19 times across the corpus — and that incoherence was a real liability while a model had to apply it from memory. Executed in Python it is free, so leave the list exactly as it is: any edit rewrites goldens for no measured gain.
+
+### Where the model supplies NO code (2026-08-24) — `_resolve_code`'s absent-code branch
+
+`DetectedElement.code` is a required `str`, and the detector LLM intermittently
+answers `"code": null` for an element the document leaves uncoded — even though
+rule 4's abbreviation branch exists for exactly that case. Until 2026-08-24 that
+single null destroyed the **entire chunk** it appeared in.
+
+**What it cost.** The KY full-document run of 2026-08-24
+(`pipeline-US-KY-2021-full08242026`, Step Functions `kentucky-execution-1787591739`):
+
+| | |
+|---|---|
+| chunks lost | **12 of 18 (67%)**, one `"code": null` element apiece |
+| pages with zero surviving coverage | **31 of 52** — 8-23, 28-34, 45-52 |
+| detection batch 3 (pages 43-52) | **0 elements**, all three chunks lost |
+| element detections discarded | ~233, against 116 kept (LLM parsed 815 across all attempts) |
+| execution status | **`SUCCEEDED`** |
+
+⚠️ **It presents as throttling and is not.** The Step Functions history shows
+17/17 `TaskSucceeded` with zero retries, and the detection Lambda logs contain no
+`Throttl*` / `TooManyRequests` / `Rate exceeded` event. Stage status went
+`partial`/`error` but nothing propagates that into a failed execution, so the run
+reported success while persisting 52 records from 40% of the document. If a run
+comes back suspiciously thin, read `total_elements` and the merge `error` string
+before reaching for a quota explanation.
+
+**The three compounding causes, all now fixed:**
+
+1. **`_resolve_code` could not see an absent code.** Its guard was
+   `_DERIVABLE_CODE_RE.match(str(code or ""))` — `None` folds to `""`, which
+   fails the pattern, so it returned the `None` unchanged and
+   `derive_code_from_title` never ran. An absent code now short-circuits to
+   derivation **before** the shape and grounding guards. This stays inside the
+   LLM-first line for the same three reasons the 2026-08-01 derivation does: it
+   reads only the title's word shape, it is scoped to the case rule 4 itself
+   calls "otherwise", and it cannot overwrite a printed code because a printed
+   code is not absent. It defers to `derive_code_from_title` rather than
+   reimplementing the abbreviation, so the connector list cannot drift.
+2. **One bad element killed its siblings.** `DetectedElement(...)` was built
+   outside any `try`, and pydantic's `ValidationError` subclasses `ValueError`,
+   so it escaped the per-element loop in `parse_llm_response`, discarding every
+   valid element already accumulated for that chunk *and* every one after it.
+   `_create_detected_element` now catches `ValidationError` and returns `None`,
+   routing into the caller's existing skip-and-warn path. A JSON-number code
+   (`"code": 1`) is coerced to `str` rather than dropped, since that is a
+   legitimate way for a printed code to arrive.
+3. **The retries were futile.** `detection_batching.detect_batch` caught it as a
+   `ValueError` and retried 3x against an identical prompt at temperature 0 —
+   deterministic, so all three attempts failed identically before the chunk was
+   dropped. ~24 wasted Opus calls on this run. No change was needed in
+   `detect_batch`: with (2) in place a `ValidationError` no longer escapes
+   `parse_llm_response` at all.
+
+**The prompt half.** Rule 4 now opens by stating that `code` is REQUIRED and
+never `null`/`""`/omitted, that the abbreviation procedure always supplies one
+so "uncoded" is never a reason to answer `null`, and — the likely bleed — that
+rule 8's `ABSENCE IS null` instruction governs `description` **only**. A matching
+negative example was added. This is the sanctioned pairing, not a substitution:
+the prompt rule lowers the rate, the Python makes the floor zero.
+
+⚠️ **Scale is what exposed it.** Earlier KY runs used the 15-page
+`_only_subset` PDF; this was the first against the full 52-page
+`kentucky_all_standards_2021_trimmed.pdf`, so 18 chunks instead of a handful.
+The defect was already live at lower volume: `kentucky-execution-1787431610`
+(2026-08-22) shows `status=partial`, exactly 1 failed chunk, and 44 → 38
+elements. **That is worth checking against this file's page-break record below,
+which attributes the same 44 → 38 to the reverted rule-8 bullet.** That
+attribution came from a controlled eval A/B on frozen extractions and is not
+invalidated by this, but a *pipeline* run losing 6 elements while losing exactly
+one chunk is a confound — if the page-break question is ever reopened, re-measure
+on the direct path, where chunk loss cannot contribute.
+
+Covered by `tests/unit/test_detector_absent_code.py` (10 cases; 8 of them fail
+against the pre-fix code). `TestDocumentCodeStillWins` is the canary — if it
+fails, the absent-code branch has started overwriting printed codes.
+
+### Where Pass-1 loses a LEVEL (2026-08-24) — `_sample_blocks_for_depth_map`
+
+Pass-1 infers how many nesting depths a document uses, and every element's
+level is assigned from that map — so **a depth missing from the SAMPLE is a
+depth missing from the whole run.** The sampler took every Nth block, which
+keeps a line with probability 1/stride no matter how load-bearing it is. The
+rarest lines in a document are the headings that open a section — precisely the
+evidence for the TOP of the hierarchy — while body prose survives on volume
+alone.
+
+**What it cost.** The KY full-document run of 2026-08-24
+(`pipeline-US-KY-2021-full08242026-3`, Step Functions
+`kentucky-execution-1787597738`), on 1741 blocks / 26,581 tokens against a
+6000-token budget, i.e. **stride 4**:
+
+| | |
+|---|---|
+| bare content-area headings sampled | **2 of 9** |
+| pages the sample spanned | 1-46 of 52 (the tail was dropped outright) |
+| depths Pass-1 reported | **3**, for a document the goldens annotate as **4** |
+| `sub_strand` elements in 267 detected | **0** |
+| standards rejected by `_validate_code_shape` | **102 of 202** |
+
+Pass-1 saw two orphan bare headings, never one beside its own
+`<Area> Standard N` line, and — following the prompt's own "if you cannot tell
+whether two depths are distinct, assume they are the same depth" rule —
+collapsed. Every level then shifted up one: `Approaches to Learning Standard 1`
+was emitted as the **domain** and the true domain (`AL` / "Approaches to
+Learning") was never emitted at all.
+
+⚠️ **The rejections are a SYMPTOM; the validator was right.** The detector
+goldens deliberately carry whitespace at strand/sub_strand level
+(`Approaches to Learning Standard 1`, `Benchmark 1.1`) — that is rule 4's
+`<Label> <id>` form working as intended. The **parser** converts them to `AL.1`
+/ `AL.1.1` by prefixing the domain code. With no domain element there was
+nothing to prefix with, so the label-form codes reached the final record raw
+and condition 1 (no whitespace) rejected them. Do not loosen the guard to
+"fix" this, and do not read a whitespace rejection as a code defect until you
+have checked that the domain level exists.
+
+⚠️ **It presents as a KY-specific parsing problem and is not.** The indicator
+codes were correct throughout (`EASPT`, `MFAAD`, `SADGA` match the golden
+suffixes exactly) — only the two top levels were wrong, and the cause was
+upstream of the detector prompt entirely.
+
+**Why the same document passed before.** The 15-page `_only_subset` PDF is
+3899 tokens, *under* the budget, so `_sample_blocks_for_depth_map` returned it
+whole and never sampled. That run reported the correct 4 levels and validated
+**26/26**. The defect is invisible below the budget and unconditional above it,
+which is why it surfaced only at full-document scale. It was also masked until
+2026-08-24 by the absent-code defect above, which was destroying 12 of 18
+chunks on the same document.
+
+**The fix: stratify by LAYOUT instead of striding.** A block's normalized left
+edge is the signal `_serialize_blocks_for_prompt` already hands the model, and
+indentation tracks nesting, so *a rare x-bucket IS a rare depth*. Every bucket
+is guaranteed `DEPTH_MAP_MIN_PER_BUCKET` (12) blocks spread across the
+document; **rarest buckets are filled first**, so if the floor cannot fit the
+budget it is the structurally distinctive levels that survive. The remaining
+budget goes to the bulk, also evenly spread, so the sample now spans the whole
+document rather than stopping when the budget fills. The guarantee is cheap
+because the interesting buckets are small — KY's six heading buckets hold **19
+of 1741** blocks between them.
+
+It reads only layout position and counts, never any document's vocabulary. A
+page with unusable geometry has no left edge to group on, so those blocks fall
+back to a coarse text-shape key (short line with no terminal sentence
+punctuation = heading), which reads word count and final character only.
+
+**Measured after the change**, on the same full KY document: content-area
+headings sampled **9 of 9**, sample spans pages **1-52**, and Pass-1 reports
+`domain > strand > sub_strand > indicator` — matching the golden — **stably
+across 3 runs**.
+
+⚠️ **`DEPTH_MAP_SAMPLE_TOKENS` (6000) is a CLIFF, and Arizona sits on it.** AZ
+has landed on both sides across runs — 6205 tokens in the 06-13/06-14 runs
+(sampled) versus 5954-5957 since 06-19 (returned whole) — so a few tokens of
+extraction drift silently flips which code path it takes. Verified explicitly
+against the over-budget 06-13 extraction: Pass-1 still reports
+`domain > strand > sub_strand > indicator`, matching the AZ golden, so AZ is
+correct either side. Re-check this if `estimate_tokens`, the extractor, or the
+budget changes, and do not assume a state that is under the budget today will
+stay there.
+
+Generalization, per the held-out rule: **CA/KY-subset/TX are comfortably under
+the budget, so they are returned whole and their behaviour is byte-identical.**
+Only CO and NV sample at all. NV (the canary) improves — the old sampler
+spanned pages 1-12 of 15 and saw 29 layout buckets, the new one spans 1-15 and
+sees 32 — and still reports the 4 levels its golden annotates. CO still reports
+3 levels (`domain > strand > indicator`, no sub_strand), matching its golden.
+
+Covered by `tests/unit/test_detector_depth_map_sampling.py` (11 cases).
+`test_a_rare_layout_bucket_survives` is the canary — it keeps 4 of 9 headings
+against the old stride sampler and 9 of 9 against this one; if it fails, the
+sampler has gone back to letting volume decide what Pass-1 sees.
+
+⚠️ **A single Haiku call on a fraction of the document decides the level of
+every element downstream, and nothing cross-checks the result.** A run whose
+depth count is wrong fails silently and completely. If this bites again, the
+cheap guard is to re-run Pass-1 on a second, disjoint sample and compare depth
+counts before trusting either.
 
 ### Where rule 4 looks for a code (2026-08-15) — prompt-only, no Python counterpart
 
@@ -121,6 +299,16 @@ versions, and runs over an identical frozen input at temperature 0 disagree with
 each other. A prompt rule lowers the rate but cannot reach zero, and a primary
 key needs zero — the same argument that put `derive_code_from_title` in Python.
 
+⚠️ **As of 2026-08-25 the guard is no longer the first line of defence for the
+bare-code shape.** `_qualify_bare_indicator_code` and the two duplicated-segment
+repairs now run inside `parse_llm_response` and rebuild these codes before the
+record is ever built — see "Where the composed code double-counts or loses a
+parent" below. The guard stays as the backstop for anything they cannot repair,
+so a `CODE_SHAPE_GUARD` rejection now means the row was malformed in a way the
+repairs could not verify, which is a stronger signal than it used to be. Check
+the run's parsing log for `BARE_INDICATOR_CODE` / `DUPLICATED_PARENT_SEGMENT`
+lines before concluding the parser emitted something new.
+
 Three conditions, all shape-only (no per-state branch, no vocabulary, and
 notably **no label-word list** — whitespace alone is the tell, which is how it
 catches `Foundation 2.3` without knowing the word):
@@ -150,12 +338,16 @@ impossible is the validator's concern rather than the parser's; and
 `eval_common.code_version_hash` covers only `detector.py`/`parser.py`, so it
 changes no recorded evaluation number. That last point is deliberate — it let the
 guard ship without invalidating the arXiv paper's frozen Task 1/Task 2
-measurements. Localization is therefore partial: the validator sees only the
-final record, so the log carries the chain, page and `standard_id` but not the
-LLM's pre-normalization code. Capturing that needs logging inside `parser.py`,
-which busts the hash; do it when the measurement chain is next re-recorded —
-it is **item 4 of the deferred queue** at the top of this section, which is
-where the batch is tracked.
+measurements. **Localization is now complete (2026-08-24).** The validator still
+sees only the final record, so its own log carries the chain, page and
+`standard_id` but not what the model emitted — `parser.parse_llm_response` now
+supplies the missing half, emitting
+`PRE_NORMALIZATION_CODES <standard_id>: llm_emitted={...} anchored={...}` for
+every row. To diagnose a rejection, grep the run's parsing logs for the rejected
+`standard_id`: the two historical defect shapes are distinguishable only from the
+pre-normalization codes — a structural label left in
+(`ELD.2.0.PA.Foundation 2.3.DISC`) versus a parent chain dropped entirely (bare
+`TCPHS`).
 
 ### Where a description crosses a page break (2026-08-22) — `_splice_overlapping_prose` (the prompt half was reverted)
 
@@ -269,6 +461,88 @@ premise — "the chunk that saw the element whole captured more of its prose" �
 holds for a plain repeat but not for a head/tail split, which is why the splice
 runs first.
 
+### Where the composed code double-counts or loses a parent (2026-08-25) — three repairs in `parser.py`
+
+The parser builds the indicator code from a chain of headings, and
+`standard_id` is `{country}-{state}-{year}-{indicator_code}`, so it is building
+an Aurora primary key. It gets it right only most of the time. Three shapes
+were measured on the KY full-document run of 2026-08-25
+(`pipeline-US-KY-2021-full08252026`, Step Functions
+`kentucky-execution-1787668414`, 202 standards):
+
+| # | shape | rows | example |
+|---|---|---|---|
+| 1 | duplicated parent position | **78** | `AL.1.1.1` for `Benchmark 1.1` under `…Standard 1` |
+| 2 | the same, in the INDICATOR only | 1 | `SCIE.1.1.3.DCBO` under sub_strand `SCIE.1.3` |
+| 3 | bare code, chain dropped | **45** | `UMNDW` where the row's ancestors say `AL.2.2.UMNDW` |
+
+**(1) is the interesting one.** A document whose sub-level id is itself DOTTED
+states its parent's position inside that id: `Benchmark 1.1`'s leading `1` IS
+Standard 1. Composing it onto the whole strand code counts the standard twice.
+This is the principle the parser prompt already states for Nevada — *peeling
+stops where the namespace stops* — read downward: a child already qualified
+relative to its GRANDparent must not be qualified again against its parent.
+
+⚠️ **It is sampling, not a rule difference, and the detector is not at fault.**
+The detector input was perfectly uniform — all 51 sub_strands arrived as
+`Benchmark N.N` — and the parser still emitted both shapes *within a single
+domain*: `AL.1.1.1` beside `AL.2.2`, `CA.1.1` beside `CA.1.1.4`. So a prompt
+rule can lower the rate but not reach zero, and a primary key needs zero. Same
+argument as `derive_code_from_title`.
+
+**The tells are structural, and each guard earns its place:**
+
+- **(1)** the sub_strand extends the strand AND the first segment it adds
+  repeats the strand's own last segment. The added tail must be **dotted** — a
+  single added segment (`AL.2` → `AL.2.2`) is an ordinary child index, and
+  without that guard every correctly-composed code is mangled. Scoped to the
+  strand/sub_strand pair: with no intermediate level to compare against there
+  is no way to tell a repeated position from a genuine one.
+- **(2)** is **self-verifying**, which is what makes it safe on a code no
+  sibling level corroborates: it fires only when the indicator currently fails
+  to extend its sub_strand *and* collapsing makes it extend that sub_strand
+  exactly. A change that does not demonstrably repair the row's own ancestry is
+  not made.
+- **(3)** fires only on a code with no separator at all. Every one of the 106
+  annotated standards across the six parser goldens has an indicator code that
+  extends its nearest present ancestor, and none is bare (the shallowest is
+  three segments) — so this only ever moves output toward the goldens. It also
+  **refuses to act when the nearest ancestor is itself malformed**: prefixing a
+  `<Label> <id>` code the parser failed to convert (`Benchmark 1.4`) would
+  inject whitespace into the primary key, swapping a `not nested` rejection for
+  a `whitespace` one and hiding the real cause. Seen live on
+  `pipeline-US-KY-2021-full08252026-02` (3 rows). **A repair must never turn one
+  malformation into a different one** — that rule is enforced for all three by
+  `tests/property/test_parser_code_repair_props.py`, whose properties (no
+  whitespace introduced, a valid chain untouched, nesting never broken,
+  idempotent) hold over generated code shapes rather than only the ones we have
+  seen.
+
+Order matters and is asserted by the call site: (1) runs before (2)/(3),
+because collapsing a duplicate can itself make an otherwise non-extending
+indicator extend again — a sub_strand `MATH.1.1.2` repaired to `MATH.1.2` is
+exactly the ancestor `MATH.1.2.RNSBS` was built on. That alone fixed 4 rows.
+
+**Validated before being enabled, the same way the code-shape guard was:**
+
+| | |
+|---|---|
+| rows changed in two full six-state production runs | **0 of 524** |
+| annotated golden standards changed | **0 of 106** |
+| KY run passing `_validate_code_shape` | 153/202 → **202/202** |
+| KY golden `standard_id`s recovered | 13/26 → **26/26** |
+
+Covered by `tests/unit/test_parser_code_composition.py` (18 cases).
+`TestGoldenShapesAreUntouched` parametrizes over all six goldens and
+`test_a_sub_strand_that_does_not_extend_its_strand_is_left_alone` is the NV
+canary — if either fails, a repair has stopped being document-agnostic.
+
+⚠️ These repair the code the model composed; they do not second-guess a code
+the DOCUMENT printed. If a future document legitimately nests a dotted id whose
+head repeats its parent, guard (1) will collapse it — that is a finding about
+the canonical namespace, and it belongs in a design discussion, not a per-state
+exemption.
+
 ### Where a printed code is not unique (2026-08-15) — `_anchor_parent_chain` + `disambiguate_colliding_standards`
 
 Both of these exist because a document's printed code namespace can **skip a
@@ -363,11 +637,39 @@ survives only as a logged last resort for rows no parent separates. It runs
 after the merge because a collision can span chunks and because
 `normalize_parsed_codes` can itself bring two rows onto one code.
 
-⚠️ **This resolver has no confirmed live case.** It was written for an apparent
-NV collision — two rows both coded `SS.CI.PK3` — that turned out not to be one
-(see below). It fires on no golden state. Treat it as a hardening of a
-previously order-dependent guard, not as a fix for an observed defect, and do
-not cite NV as its motivating example.
+⚠️ **It had no confirmed live case until 2026-08-25; now it has one, and it
+was NOT WIRED INTO THE BATCHED PATH.** It was written for an apparent NV
+collision — two rows both coded `SS.CI.PK3` — that turned out not to be one
+(see below), and it fires on no golden state. Do not cite NV as its motivating
+example; cite Kentucky.
+
+**The live case.** The KY run of 2026-08-25
+(`pipeline-US-KY-2021-full08252026-03`) persisted two DISTINCT page-30
+indicators — "Labels pictures or produces simple texts using **scribble
+writing**" and "…using **letter-like forms**" — under one
+`US-KY-2021-LEL.4.2.LPPST`. Rule 4's 5-char cap abbreviates both titles
+identically because everything that distinguishes them falls past the cap. That
+is a duplicate Aurora primary key reaching persistence: 202 rows, 201 distinct
+ids.
+
+⚠️ **The cause was direct-vs-batched divergence, the recurring hazard in this
+file.** `parse_hierarchy` (the direct path, which is what the evals run) calls
+`normalize_parsed_codes` and then `disambiguate_colliding_standards`.
+`parse_batching.merge_parse_results` — the path production actually takes —
+called only the first, while its comment claimed it ran "the same final step the
+direct parse_hierarchy path runs". So the resolver could not fire in production
+no matter what it found. Fixed 2026-08-25; both steps now run in the merge, in
+the same order as the direct path. `tests/integration/test_merge_parse_results.py::test_colliding_indicator_codes_are_disambiguated_across_batches`
+is the canary and puts the colliding rows in SEPARATE batches — the case no
+per-batch resolution can see, and the reason the step belongs in the merge.
+
+⚠️ **The KY pair resolves via the ORDER-DEPENDENT numeric fallback**, since the
+two rows share every parent: one keeps `LEL.4.2.LPPST` and the other becomes
+`LEL.4.2.LPPST.2`, decided by parse order. Those two `standard_id`s are
+therefore not stable across runs, and the resolver logs exactly that. The
+underlying cause is rule 4's 5-char cap, not the resolver — and per the
+2026-08-01 measurements, changing the cap or the connector list rewrites golden
+codes for no net gain, so this is a known limitation rather than an open bug.
 
 **The NV `SS.CI.PK3` duplicate is a DETECTOR defect, not a collision
 (2026-08-15).** The detector emits 25 NV indicators where the document has 24
