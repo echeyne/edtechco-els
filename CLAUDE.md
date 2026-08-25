@@ -532,10 +532,14 @@ exactly the ancestor `MATH.1.2.RNSBS` was built on. That alone fixed 4 rows.
 | KY run passing `_validate_code_shape` | 153/202 → **202/202** |
 | KY golden `standard_id`s recovered | 13/26 → **26/26** |
 
-Covered by `tests/unit/test_parser_code_composition.py` (18 cases).
+Covered by `tests/unit/test_parser_code_composition.py` (20 cases).
 `TestGoldenShapesAreUntouched` parametrizes over all six goldens and
 `test_a_sub_strand_that_does_not_extend_its_strand_is_left_alone` is the NV
 canary — if either fails, a repair has stopped being document-agnostic.
+`tests/property/test_parser_code_repair_props.py` adds the generated-input
+properties (no whitespace introduced, a valid chain untouched, nesting never
+broken, idempotent, codes never emptied).
+
 
 ⚠️ These repair the code the model composed; they do not second-guess a code
 the DOCUMENT printed. If a future document legitimately nests a dotted id whose
