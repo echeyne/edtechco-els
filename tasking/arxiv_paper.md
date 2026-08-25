@@ -33,6 +33,49 @@ These were established by verifying the live tree during planning. Several contr
 
    So NV's ceiling is **46/53 = 0.8679**, and reporting its raw precision as a hallucination rate would count 6 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now 7 verdicts instead of 12, because the 5 previously-unannotated standards are annotated. Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
 
+### Evidence FOR the guardrails argument, found in the pipeline itself (2026-08-24/25)
+
+Three defects surfaced while debugging KY at full-document scale, and together
+they are the strongest concrete motivation the paper has for why guardrails 1,
+2 and 6 exist. They are worth citing in the motivation/limitations discussion
+rather than only being fixed quietly.
+
+**The headline instance: a run that reported success while dropping 60% of the
+document.** `pipeline-US-KY-2021-full08242026` (Step Functions
+`kentucky-execution-1787591739`) finished with status **`SUCCEEDED`**, 17/17
+`TaskSucceeded`, **zero retries**, and no throttling anywhere in the logs —
+while persisting 52 records from a 52-page document in which **31 pages had zero
+surviving coverage**. A single `"code": null` element destroyed each chunk it
+appeared in (12 of 18), because the pydantic `ValidationError` escaped the
+per-element loop; the three retries were futile at temperature 0. Stage status
+went `partial`/`error` but nothing propagates that into a failed execution.
+
+The other two are the same shape — silent, total, and invisible to the status
+field:
+
+- **Pass-1 losing a LEVEL.** Stride sampling kept 2 of 9 content-area headings,
+  so Pass-1 reported a 3-level hierarchy for a 4-level document, the domain was
+  never emitted, and 102 of 202 standards were rejected downstream. **Invisible
+  below the token budget and unconditional above it** — the same document passed
+  at subset scale, which is exactly the corpus-tier hazard guardrail 1 names.
+- **Parser code composition sampling.** The detector input was uniform (all 51
+  sub_strands as `Benchmark N.N`) and the parser still emitted two different
+  code shapes *within one domain*, silently producing a different Aurora primary
+  key for the same standard depending on the run.
+
+Three things a reader should take from this, and all three are already the
+paper's positions: a green orchestration status is not a quality signal
+(guardrail 2's theme, generalized); a subset metric does not transfer to full
+documents (guardrail 1, now with a measured instance rather than a caution); and
+results are only meaningful when tied to the exact code version that produced
+them (guardrail 6 — these were found *because* `code_version_hash` made the
+mismatch visible).
+
+⚠️ Mechanism, measurements and fixes are in [CLAUDE.md](../CLAUDE.md) — sections
+"Where the model supplies NO code", "Where Pass-1 loses a LEVEL", and "Where the
+composed code double-counts or loses a parent". Do not re-derive them here; cite
+them.
+
 ## Next session — the run queue (as of 2026-08-24)
 
 Probe the Opus quota first (see the Compute budget section); the reset boundary

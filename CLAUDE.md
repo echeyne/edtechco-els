@@ -16,7 +16,7 @@ When a change alters behavior, config, schema, or architecture (not a small bug 
 
 ### ⚠️ These two files are COST-GATED right now (as of 2026-08-23) — batch your edits
 
-`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`61b7243e`**. The **previous** value **`288c64f1`** is what every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8) cites — those manifests were NOT re-recorded when the hash moved on 2026-08-24 — three times across 2026-08-24/25, `288c64f1` → `b35b9666` (the absent-code fix) → `99b853cc` (the Pass-1 sampling fix) → `04e4924c` (the code-composition repairs) → `61b7243e` (the malformed-ancestor guard) — so a reader diffing them against HEAD will see a mismatch. Reproducing them needs `git checkout` of their recording commit. The eval cache was invalidated by the same change. Editing either file — **including a comment or a docstring** — changes it, and two things follow:
+`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`51056ea2`**. The **previous** value **`288c64f1`** is what every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8) cites — those manifests were NOT re-recorded when the hash moved on 2026-08-24 — three times across 2026-08-24/25, `288c64f1` → `b35b9666` (the absent-code fix) → `99b853cc` (the Pass-1 sampling fix) → `04e4924c` (the code-composition repairs) → `61b7243e` (the malformed-ancestor guard) → `51056ea2` (the deterministic collision fallback) — so a reader diffing them against HEAD will see a mismatch. Reproducing them needs `git checkout` of their recording commit. The eval cache was invalidated by the same change. Editing either file — **including a comment or a docstring** — changes it, and two things follow:
 
 1. **The eval cache invalidates.** All 53 entries / 2.8MB in `evaluation/.cache` become misses, so evals that are currently free become live Bedrock calls. Re-recording the detector arms alone is ~315K Opus tokens (Task 1 208,835 + Task 2 106,606), about **12% of the 2,592,000/day quota**.
 2. **Recorded results stop matching HEAD.** The numbers stay valid — they were validly produced by that code — but reproducing them needs a `git checkout` of the recording commit rather than just running the script, and a reader diffing the hash cannot tell a docstring change from a logic change.
@@ -40,7 +40,7 @@ This is **a cost, not a prohibition.** A real defect still gets fixed. But a cos
 - `parser._abbreviate_title` + `_CODE_ABBREV_LEN` → detector prompt rule 4: derive a ≤5-char uppercase code from the title. Split on spaces/slashes (hyphenated compound = one word), drop connector words (`a an the and or but nor of to in on at by for from with into about over under through as`, `&`), then single content word → first 4 letters (`Vocabulary`→`VOCA`), multiple → first letter of each, capped at 5 (`Concepts About Print`→`CP`, `Approaches to Learning`→`AL`). The parser prompt restates the same procedure for the sub_strand/indicator collision case — **keep the two in sync**. ⚠️ **Partly reversed 2026-08-01** — the rule still lives in the prompt, but it is now also executed deterministically by `detector.derive_code_from_title`, because the prompt alone could not make it reproducible. See "The one derivation that came back to Python" below; that helper is the sanctioned form, and a per-state abbreviation branch remains forbidden.
 - `detector._TRAILING_DOMAIN_LABEL_RE` → detector prompt: a domain title's trailing structural noun (`Standard`, `Domain`) is not part of its name — emit the bare name.
 - `parser._COLUMN_PREFIX_RE` / `_strip_column_prefix` + the PK-strip inside `_infer_domain_code` → parser prompt: a leading age/column token (e.g. `PK3.`) is excluded from the base hierarchical code.
-- `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Uniqueness is enforced afterwards by `disambiguate_colliding_standards` (see "Where a printed code is not unique" below), which resolves collisions by ancestor and keeps a numeric counter only as a last resort.
+- `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Uniqueness is enforced afterwards by `disambiguate_colliding_standards` (see "Where a printed code is not unique" below), which resolves collisions by ancestor and keeps a numeric counter, assigned in document order, only as a last resort.
 - the CA collision branch + `_PURE_NUMERIC_RE` in `abbreviate_element_codes` (and the now-empty `abbreviate_element_codes` / `normalize_code_to_canonical` shells) → parser prompt: a sub_strand and its child indicator must never share a code; the sub_strand derives its segment from its title with the same ≤5-char abbrev scheme.
 
 A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), `_collapse_duplicated_parent_segment` / `_collapse_duplicated_indicator_segment` / `_qualify_bare_indicator_code` (see below), `_splice_overlapping_prose` (see below), `_sample_blocks_for_depth_map` / `_layout_bucket_key` (layout-stratified Pass-1 sampling — reads a block's left edge and bucket counts, never its words; see below), and the JSON-extraction / schema-validation plumbing.
@@ -540,6 +540,23 @@ canary — if either fails, a repair has stopped being document-agnostic.
 properties (no whitespace introduced, a valid chain untouched, nesting never
 broken, idempotent, codes never emptied).
 
+**Confirmed in production on both held-out/sampled states (2026-08-25), per the
+generalization rule.** The two states that actually sample the depth map are NV
+and CO, and on this build **neither fired a single repair** — the three helpers
+are a complete no-op outside KY, as the offline replay predicted.
+
+| run | result |
+|---|---|
+| `test-pipeline-US-NV-2021-041` (subset; run_id says 2021, document and records are 2023, artifacts under `US/NV/2023/`) | Pass-1 **4** levels; **24/24** golden ids; **24/24** rows exact on every code AND name; all 24 sub_strands still decline to extend their strand, so the deliberate namespace break survives |
+| `test-pipeline-US-CO-2020-041` | the OVER-correction guard: Pass-1 still **3** levels (no sub_strand); detection unchanged at 61 elements; the 48 `standard_id`s **identical** to the pre-change run; **9/9** golden rows exact |
+| `pipeline-US-KY-2021-full08252026-04` | 202/202 validated, 202 distinct ids, **26/26** golden rows exact |
+
+NV also came back with domain codes `S`/`SS`/`T` matching its golden, where the
+run before this build had `SS`/`Science`/`TECH` — plausibly a downstream effect
+of the wider Pass-1 sample (pages 1-15 rather than 1-12, 32 buckets rather than
+29) feeding rule 4's descendant-prefix recovery. **One run is not causation**,
+and this file already records those two domains drifting in opposite directions
+within a single run, so confirm before citing it.
 
 ⚠️ These repair the code the model composed; they do not second-guess a code
 the DOCUMENT printed. If a future document legitimately nests a dotted id whose
@@ -641,6 +658,18 @@ survives only as a logged last resort for rows no parent separates. It runs
 after the merge because a collision can span chunks and because
 `normalize_parsed_codes` can itself bring two rows onto one code.
 
+⚠️ **The counter itself was still order-dependent until 2026-08-25** — it
+enumerated the colliding group in ARRIVAL order, so which row kept the bare code
+depended on chunk and batch scheduling. That is the very property this resolver
+exists to remove, surviving inside its own fallback. The group is now sorted by
+`_collision_tiebreak_key` (page, source line, then indicator name and
+description), so the suffix is assigned in DOCUMENT order and the same document
+always writes the same keys — verified stable across 8 input orderings of the
+real KY run, including full reversal. Every component is read off the document;
+rows identical on all four are indistinguishable in the output anyway.
+`tests/unit/test_parser_collision_determinism.py` is the guard (3 of its 5 cases
+fail against arrival order).
+
 ⚠️ **It had no confirmed live case until 2026-08-25; now it has one, and it
 was NOT WIRED INTO THE BATCHED PATH.** It was written for an apparent NV
 collision — two rows both coded `SS.CI.PK3` — that turned out not to be one
@@ -667,10 +696,11 @@ the same order as the direct path. `tests/integration/test_merge_parse_results.p
 is the canary and puts the colliding rows in SEPARATE batches — the case no
 per-batch resolution can see, and the reason the step belongs in the merge.
 
-⚠️ **The KY pair resolves via the ORDER-DEPENDENT numeric fallback**, since the
-two rows share every parent: one keeps `LEL.4.2.LPPST` and the other becomes
-`LEL.4.2.LPPST.2`, decided by parse order. Those two `standard_id`s are
-therefore not stable across runs, and the resolver logs exactly that. The
+⚠️ **The KY pair resolves via the numeric fallback**, since the two rows share
+every parent: the row printed EARLIER keeps `LEL.4.2.LPPST` and the other becomes
+`LEL.4.2.LPPST.2`. Since 2026-08-25 that assignment is made in document order, so
+the ids are reproducible; the suffix still encodes nothing about the standard,
+which is why it remains a last resort and is logged as one. The
 underlying cause is rule 4's 5-char cap, not the resolver — and per the
 2026-08-01 measurements, changing the cap or the connector list rewrites golden
 codes for no net gain, so this is a known limitation rather than an open bug.

@@ -785,6 +785,31 @@ def parse_llm_response(
     return standards
 
 
+def _collision_tiebreak_key(standard: NormalizedStandard) -> tuple:
+    """Order colliding rows by where they sit in the DOCUMENT, not by when they
+    happened to be parsed.
+
+    The numeric fallback below hands one row the bare code and the next a `.2`
+    suffix, and those become Aurora primary keys. Enumerating the group in
+    arrival order made that assignment depend on chunk/batch scheduling, so the
+    same document could write different keys on different runs — the exact
+    property `disambiguate_colliding_standards` exists to remove, reintroduced
+    in its own last resort.
+
+    Every component is read off the document: the page the standard was found
+    on, the source line, then the indicator's name and description to separate
+    two rows printed on one page. Rows identical on all four are
+    indistinguishable in the output anyway, so their relative order cannot
+    matter.
+    """
+    return (
+        standard.source_page or 0,
+        standard.source_text or "",
+        standard.indicator.name or "",
+        standard.indicator.description or "",
+    )
+
+
 def disambiguate_colliding_standards(
     standards: List[NormalizedStandard],
     country: str,
@@ -867,14 +892,19 @@ def disambiguate_colliding_standards(
                 taken.add(new_code)  # type: ignore[arg-type]
             continue
 
-        # Fallback: numeric counter. Order-dependent — flagged loudly.
+        # Fallback: numeric counter, assigned in DOCUMENT order so the result
+        # is reproducible. Nothing in the hierarchy separates these rows, so the
+        # suffix carries no meaning — but it must at least be the same suffix
+        # every run, since it lands in a primary key. See
+        # `_collision_tiebreak_key`.
         logger.warning(
             "Indicator code '%s' shared by %d standards and their parents do "
-            "not separate them; falling back to an ORDER-DEPENDENT numeric "
-            "suffix. The resulting standard_ids are not stable across runs.",
+            "not separate them; falling back to a positional numeric suffix "
+            "assigned in document order (page, source line, name). The ids are "
+            "reproducible, but the suffix encodes nothing about the standard.",
             code, len(group),
         )
-        for idx, s in enumerate(group):
+        for idx, s in enumerate(sorted(group, key=_collision_tiebreak_key)):
             new_code = code if idx == 0 else f"{code}.{idx + 1}"
             while new_code in taken:
                 idx += 1
