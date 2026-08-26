@@ -9,9 +9,18 @@ what currently feeds the paper's tables. It also uses the same 46-element NV
 golden as this run, which makes the comparison apples-to-apples — the 20260816
 recording predates the golden extension and has a 41-element denominator.
 
-**Headline: NV detector code accuracy 44/46 (0.9565) → 46/46 (1.000) and
-description accuracy 2/3 → 3/3, on an unchanged golden. KY is unchanged at
-44/44 on every dimension.**
+**Headline (detector): NV code accuracy 44/46 (0.9565) → 46/46 (1.000) and
+description accuracy 2/3 → 3/3, on an unchanged golden. KY unchanged at 44/44
+on every dimension.**
+
+**Headline (parser): NV unchanged and perfect at 24/24. KY regressed to 17/26
+on parser sampling — see "Parser arm" below. The detection input is
+byte-identical to the baseline and the parser prompt did not change, so this is
+not a code regression, and in production the validator would reject all nine
+affected rows rather than store them.**
+
+⚠️ The two arms disagree about KY. Do not quote "KY unchanged" without saying
+which arm.
 
 ## Numbers
 
