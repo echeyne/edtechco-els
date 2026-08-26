@@ -1,0 +1,33 @@
+{
+  "doc_depths": [
+    {
+      "depth": 1,
+      "canonical_level": "domain",
+      "label_in_doc": "Content Area (e.g., 'Approaches to Learning', 'Health/Mental Wellness', 'Language and Early Literacy')",
+      "prefix_pattern": "CONTENT AREA HEADING",
+      "example": "Approaches to Learning"
+    },
+    {
+      "depth": 2,
+      "canonical_level": "strand",
+      "label_in_doc": "Standard",
+      "prefix_pattern": "[Content Area] Standard N: [Title]",
+      "example": "Approaches to Learning Standard 1: Sustains attention and persists with challenging activities and experiences."
+    },
+    {
+      "depth": 3,
+      "canonical_level": "sub_strand",
+      "label_in_doc": "Benchmark",
+      "prefix_pattern": "Benchmark N.N: [Title]",
+      "example": "Benchmark 1.1: Maintains focus and sustains attention."
+    },
+    {
+      "depth": 4,
+      "canonical_level": "indicator",
+      "label_in_doc": "Learning Goal (unlabeled; appears as indented statement followed by examples)",
+      "prefix_pattern": "[Descriptive statement of observable behavior]",
+      "example": "Engages in an activity for a sustained period of time."
+    }
+  ],
+  "notes": "Document uses a single age band (THREE AND FOUR YEAR OLDS) repeated across content areas; each indicator is followed by multiple concrete anecdotal examples at x=0.21."
+}

@@ -1,0 +1,33 @@
+{
+  "doc_depths": [
+    {
+      "depth": 1,
+      "canonical_level": "domain",
+      "label_in_doc": "Domain",
+      "prefix_pattern": "Roman numeral + period + domain name (e.g., 'I. Social and Emotional Development Domain', 'VI. Science Domain')",
+      "example": "I. Social and Emotional Development Domain"
+    },
+    {
+      "depth": 2,
+      "canonical_level": "strand",
+      "label_in_doc": "Skill/Strand",
+      "prefix_pattern": "Capital letter + period + skill name (e.g., 'A. Self-Concept', 'B. Self-Regulation', 'A. Physical Science')",
+      "example": "A. Self-Concept"
+    },
+    {
+      "depth": 3,
+      "canonical_level": "sub_strand",
+      "label_in_doc": "Subskill",
+      "prefix_pattern": "Numeral + period + subskill name (e.g., '1. Behavior Control', '2. Emotional Control')",
+      "example": "1. Behavior Control"
+    },
+    {
+      "depth": 4,
+      "canonical_level": "indicator",
+      "label_in_doc": "Outcome",
+      "prefix_pattern": "Grade code + Roman numeral + letter + numeral + optional lowercase letter (e.g., 'PK3.I.A.1', 'PK4.I.B.1.a', 'PK4.VI.A.1')",
+      "example": "PK3.I.A.1 Child is building competence in controlling own body movements."
+    }
+  ],
+  "notes": "Two age-band columns (PK3 and PK4) repeat the same four-level hierarchy side-by-side; treat as one continuous structure."
+}

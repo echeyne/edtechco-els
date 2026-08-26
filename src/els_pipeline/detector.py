@@ -90,11 +90,29 @@ _MIN_PROSE_OVERLAP = 60
 # code against the page's original spelling.
 _CODE_LABEL_COLON_RE = re.compile(r"(?<=[A-Za-z])\s*:\s*")
 
-# The only shape rule 4's abbreviation branch can produce: uppercase letters,
-# at most `DERIVED_CODE_MAX_LEN` of them. A code outside this shape came from
-# the document — a number ("1.0"), a dotted path ("PK3.I.A.2"), a labelled id
-# ("Benchmark 1.1"), or a list letter ("a") — and is never recomputed.
-_DERIVABLE_CODE_RE = re.compile(rf"^[A-Z]{{1,{DERIVED_CODE_MAX_LEN}}}$")
+# The shape rule 4's abbreviation branch produces: uppercase letters and
+# nothing else. A code outside this shape came from the document — a number
+# ("1.0"), a dotted path ("PK3.I.A.2"), a labelled id ("Benchmark 1.1"), or a
+# list letter ("a") — and is never recomputed.
+#
+# Deliberately NOT bounded at `DERIVED_CODE_MAX_LEN` (2026-08-26). The bound
+# used to be `{1,5}`, which excluded an OVER-LONG abbreviation from the guard
+# entirely: the model emitted `ICOPPPTM` (8 chars) for KY's "Identifies or
+# chooses an object or person by pointing…", `_resolve_code` read the
+# non-matching shape as "this is a document code", and a malformed
+# `standard_id` (`US-KY-2021-LEL.2.1.ICOPPPTM` against the golden's
+# `…LEL.2.1.ICOPP`) reached Aurora. A code longer than the cap is the one thing
+# rule 4's abbreviation branch, executed correctly, CANNOT produce — so it is
+# either a document code or a miscapped abbreviation, and `_is_code_grounded`
+# is exactly the discriminator for that. Widening the shape hands the decision
+# to grounding instead of pre-empting it; a real all-caps document code appears
+# in its own `source_text` and is still kept.
+#
+# Blast radius measured before enabling: 1 element in 377 across all six
+# states' detections (that one KY code, ungrounded, which `derive_code_from_title`
+# maps to the golden's `ICOPP`). Codes of length 1..DERIVED_CODE_MAX_LEN matched
+# before and match now, so nothing that previously round-tripped can change.
+_DERIVABLE_CODE_RE = re.compile(r"^[A-Z]+$")
 
 DEFAULT_OVERLAP_TOKENS = 500
 

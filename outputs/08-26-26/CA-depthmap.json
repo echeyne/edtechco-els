@@ -1,0 +1,33 @@
+{
+  "doc_depths": [
+    {
+      "depth": 1,
+      "canonical_level": "domain",
+      "label_in_doc": "Domain (e.g., 'Approaches to Learning', 'Foundational Language Development', 'English Language Development')",
+      "prefix_pattern": "DOMAIN TITLE (all-caps or title case, appears at x=0.07 as section header)",
+      "example": "Approaches to Learning"
+    },
+    {
+      "depth": 2,
+      "canonical_level": "strand",
+      "label_in_doc": "Strand",
+      "prefix_pattern": "Strand: N.0 \u2014 <Title>",
+      "example": "Strand: 1.0 \u2014 Motivation to Learn"
+    },
+    {
+      "depth": 3,
+      "canonical_level": "sub_strand",
+      "label_in_doc": "Sub-Strand",
+      "prefix_pattern": "Sub-Strand[\u2014-] <Title>",
+      "example": "Sub-Strand \u2014 Curiosity and Interest"
+    },
+    {
+      "depth": 4,
+      "canonical_level": "indicator",
+      "label_in_doc": "Foundation",
+      "prefix_pattern": "Foundation N.N <Title>",
+      "example": "Foundation 1.1 Curiosity and Interest"
+    }
+  ],
+  "notes": "Age-band columns (Early/Later, or Discovering/Developing/Broadening) repeat at x=0.09 and x=0.37\u20130.64, representing parallel developmental progressions within a single indicator; treat as one depth."
+}

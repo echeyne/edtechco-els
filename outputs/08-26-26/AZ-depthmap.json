@@ -1,0 +1,33 @@
+{
+  "doc_depths": [
+    {
+      "depth": 1,
+      "canonical_level": "domain",
+      "label_in_doc": "STANDARD",
+      "prefix_pattern": "<STANDARD NAME> STANDARD",
+      "example": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD"
+    },
+    {
+      "depth": 2,
+      "canonical_level": "strand",
+      "label_in_doc": "Strand",
+      "prefix_pattern": "Strand N: <Title>",
+      "example": "Strand 1: Self-Awareness and Emotional Skills"
+    },
+    {
+      "depth": 3,
+      "canonical_level": "sub_strand",
+      "label_in_doc": "Concept",
+      "prefix_pattern": "Concept N: <Title>",
+      "example": "Concept 1: Self-Awareness"
+    },
+    {
+      "depth": 4,
+      "canonical_level": "indicator",
+      "label_in_doc": "Indicator (lettered a\u2013h)",
+      "prefix_pattern": "<letter>. <Indicator statement>",
+      "example": "a. Demonstrates self-confidence."
+    }
+  ],
+  "notes": "Document uses 4 distinct nesting levels with consistent hierarchical structure across all standards and strands."
+}

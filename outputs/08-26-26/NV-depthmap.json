@@ -1,0 +1,33 @@
+{
+  "doc_depths": [
+    {
+      "depth": 1,
+      "canonical_level": "domain",
+      "label_in_doc": "Domain (e.g., 'Social Studies', 'Science', 'Technology')",
+      "prefix_pattern": "DOMAIN TITLE in large heading, e.g. 'Social Studies', 'Science', 'Technology'",
+      "example": "Social Studies"
+    },
+    {
+      "depth": 2,
+      "canonical_level": "strand",
+      "label_in_doc": "Standard (e.g., 'Social Studies Standard 1', 'Science Standard 1')",
+      "prefix_pattern": "[DOMAIN] Standard N: [Goal statement]",
+      "example": "Social Studies Standard 1: Demonstrate a basic awareness of self as an individual, within the context of a group and community."
+    },
+    {
+      "depth": 3,
+      "canonical_level": "sub_strand",
+      "label_in_doc": "Sub-category or thematic grouping (e.g., 'Individual Development and Cultural Identity', 'Exploration, Observation, and Hypotheses')",
+      "prefix_pattern": "Thematic heading in bold, e.g. 'Individual Development and Cultural Identity' or 'Exploration, Observation, and Hypotheses'",
+      "example": "Individual Development and Cultural Identity"
+    },
+    {
+      "depth": 4,
+      "canonical_level": "indicator",
+      "label_in_doc": "Indicator (e.g., 'SS.ID.PK2', 'S.EO.PK1', 'T.TT.PK1')",
+      "prefix_pattern": "[DOMAIN_ABBR].[CATEGORY_ABBR].PK[N]. [Goal text]",
+      "example": "SS.ID.PK2. Identify self as a member of a family."
+    }
+  ],
+  "notes": "Document uses a three-column layout on content pages: left column contains indicators and goal text (x\u22480.10), middle column contains examples (x\u22480.26\u20130.30), and right column contains supportive practices (x\u22480.55). All three columns represent the same depth level and should be read as one continuous row."
+}

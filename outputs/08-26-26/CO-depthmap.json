@@ -1,0 +1,26 @@
+{
+  "doc_depths": [
+    {
+      "depth": 1,
+      "canonical_level": "domain",
+      "label_in_doc": "Domain (e.g., 'Physical Development & Health', 'Social & Emotional Development', 'English Language Development')",
+      "prefix_pattern": "Title in large text, e.g., 'Physical Development & Health' or 'Social & Emotional Development'",
+      "example": "Physical Development & Health"
+    },
+    {
+      "depth": 2,
+      "canonical_level": "strand",
+      "label_in_doc": "Subsection (e.g., 'Health, Safety and Nutrition', 'Gross Motor Skills', 'Relationships with Adults and Peers')",
+      "prefix_pattern": "Numbered section with colon, e.g., '1. Health, Safety and Nutrition: <description>' or '2. Gross Motor Skills: <description>'",
+      "example": "1. Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+    },
+    {
+      "depth": 3,
+      "canonical_level": "indicator",
+      "label_in_doc": "Indicator (individual learning goal)",
+      "prefix_pattern": "Numbered item under strand, e.g., '1. <goal statement>' or '2. <goal statement>'",
+      "example": "1. Possess good overall health, including oral, visual, and auditory health, and be free from communicable or preventable diseases."
+    }
+  ],
+  "notes": "Document uses a three-column layout (Indicators at x\u22480.06, Examples at x\u22480.24\u20130.37, Suggested Supports at x\u22480.60\u20130.66) that repeats the same depth structure across all pages; treat as a single hierarchy."
+}
