@@ -1,0 +1,46 @@
+{
+  "task": "Task 2 re-record — held-out DETECTOR arm only, on NV (2023) and KY (2021)",
+  "date": "2026-08-26",
+  "baseline_for_comparison": "paper/results/task2_20260822/ (code_version_hash 288c64f1, commit 628829b34b40). That is what generate_tables.py currently reads (RUN_TAG = \"20260822\") and it uses the SAME 46-element NV golden as this run, so the comparison is apples-to-apples. Do NOT compare against task2_20260816 — it predates the 2026-08-22 NV golden extension and has a 41-element denominator.",
+  "supersedes": "paper/results/task2_20260822/detector_heldout2.json — the detector arm only.",
+  "does_not_supersede": "paper/results/task2_20260822/parser_heldout2.json and nv_fp_audit_SIGNED.json. Neither was re-run. The signed FP audit covers 53 NV detections; this run produced 52.",
+  "git_commit": "20cf2f72b371424c3fb9d6a5df21442cc44f784a",
+  "code_version_hash": "7da92182",
+  "code_version_hash_note": "eval_common.code_version_hash covers detector.py and parser.py, where both prompts live. Baseline 288c64f1 -> b35b9666 (absent-code fix) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE). src/ was clean at run time.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). NV 15pp of 98; KY 8pp of 120. Same tier as the baseline, so the two are comparable on that axis.",
+  "extraction_source": "outputs/08-26-26-2 (pipeline run 043, re-downloaded after deploying 20cf2f7). NV 752 blocks / 15 pages; KY 252 blocks / 8 pages.",
+  "goldens": {
+    "NV": "evaluation/ground_truth_detector/NV.json — 46 elements, annotated 2026-08-22 (the exhaustive-coverage pass, commit 92c8288). Same file the 20260822 baseline used.",
+    "KY": "evaluation/ground_truth_detector/KY.json — 44 elements, annotated 2026-08-01. Unchanged."
+  },
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+  },
+  "cache": "--no-cache. Every call was live Bedrock; the eval cache was invalid at this hash regardless.",
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "# detector — fresh, no cache, direct path, live Bedrock",
+    "AWS_PROFILE=kinder-readiness-dev-cli python -m evaluation.eval_detector --extraction-dir outputs/08-26-26-2 --state NV --state KY --no-cache --report-json paper/results/task2_20260826/detector_heldout2.json --output-dir paper/results/task2_20260826/review_detector"
+  ],
+  "headline": {
+    "NV_code_accuracy": "44/46 (0.9565) -> 46/46 (1.0000). Both recorded domain mismatches gone: NV-DOM-02 golden S detected Science, NV-DOM-03 golden T detected TECH.",
+    "NV_description_accuracy": "2/3 (0.6667) -> 3/3 (1.0000). The one truncation (Science domain intro, 2410 of 3500 chars at the page 7->8 seam) is resolved.",
+    "NV_detected": "53 -> 52",
+    "KY": "unchanged on every dimension: 44/44 matched, precision/recall/f1 all 1.0000, code 44/44, description 26/26.",
+    "denominators": "n_golden and matched are identical on both sides for both states, so no cell moved for denominator reasons."
+  },
+  "caveats": [
+    "ATTRIBUTION IS NOT ISOLATED. The improvement lies inside 288c64f1 -> 7da92182, but two changes in that window can move NV detection: the Pass-1 layout-stratified sampler (99b853cc; NV is over the token budget and samples, and the new sample spans pages 1-15 vs 1-12 with 32 buckets vs 29) and rule 4's 'code is REQUIRED, never null' prompt clarification (b35b9666). The parser repairs cannot affect this arm, and the widened _DERIVABLE_CODE_RE cannot either since TECH is 4 chars and already matched the old {1,5} bound. An A/B is needed to separate them.",
+    "The batched run outputs/08-22-26-4 produced S/SS/T on 2026-08-22 while the direct-path recording the same day (288c64f1) still emitted Science/TECH. That is the direct-vs-batched divergence, not evidence that the fix predates this week.",
+    "NV's SS domain code still passes BY COINCIDENCE — derive_code_from_title('Social Studies') happens to return SS (see task2_20260816/findings.md section 4). A change to derive_code_from_title or the connector list turns 46/46 into 45/46 with nothing else moving.",
+    "GUARDRAIL 8 STILL APPLIES TO NV. Raw precision 0.8846 is not a hallucination rate; 5 of the 6 in-scope non-golden detections are correct re-detections of headings the document reprints on a second page spread. NV keeps the verified-precision path. KY remains the one detection-exhaustive golden (44 golden vs 44 in-scope), so its raw precision 1.0000 is a real hallucination rate.",
+    "The description 2/3 -> 3/3 move is on the DIRECT path, where CLAUDE.md records _splice_overlapping_prose as inert. The splice is therefore NOT the cause; the changed Pass-1 sample is the likeliest one. One run, not isolated.",
+    "The ICOPPPTM over-long-code defect that motivated 7da92182 does not appear in this arm — KY's direct-path run coded ICOPP correctly at both hashes. It was a batched-path observation (pipeline run 043)."
+  ],
+  "not_wired_into_tables": "generate_tables.py reads task1_<RUN_TAG>/summary.json AND task2_<RUN_TAG>/summary.json for one shared RUN_TAG, currently 20260822. Moving the tag to 20260826 requires three things that do not exist yet: (1) task1_20260826/ — the golden four have not been re-recorded at this hash, so moving the tag now breaks table generation; (2) a summary.json here, which consolidate_task1.py --state NV --state KY produces and which needs a parser report to consolidate against; (3) a re-signed nv_fp_audit_SIGNED.json, since the existing signature covers 53 detections and this run produced 52. Until all three land, the tables keep reporting 20260822 and this recording stands as detector-arm evidence only. A half-migrated RUN_TAG would silently mix hashes across the generalization table, which guardrail 6 exists to prevent.",
+  "regression_cases": {
+    "NV": ["NV-NO-COLUMN-HEADER-AS-ELEMENT PASS", "NV-SUB-STRAND-CODE-FROM-DOCUMENT PASS", "NV-FOUR-LEVEL-HIERARCHY PASS"],
+    "KY": ["KY-BENCHMARK-IS-SUB-STRAND PASS", "KY-FOUR-LEVEL-HIERARCHY PASS", "KY-STRAND-CODE-KEEPS-FULL-LABEL PASS"]
+  }
+}
