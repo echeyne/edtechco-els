@@ -1,0 +1,82 @@
+{
+  "note": "Replay of the current parser repair chain over the parsed standards this recording saved, re-graded with eval_parser.grade_parser. No Bedrock calls. See the module docstring for the anchoring approximation.",
+  "results_dir": "paper/results/task1_20260826",
+  "states": {
+    "AZ": {
+      "before": {
+        "coverage": 1.0,
+        "field_accuracy": 0.9969135802469136,
+        "fully_correct": 17,
+        "n_golden": 18,
+        "n_parsed": 45,
+        "matched": 18
+      },
+      "after": {
+        "coverage": 1.0,
+        "field_accuracy": 0.9969135802469136,
+        "fully_correct": 17,
+        "n_golden": 18,
+        "n_parsed": 45,
+        "matched": 18
+      },
+      "rows_changed_by_repairs": 0
+    },
+    "CA": {
+      "before": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 21,
+        "n_golden": 21,
+        "n_parsed": 94,
+        "matched": 21
+      },
+      "after": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 21,
+        "n_golden": 21,
+        "n_parsed": 94,
+        "matched": 21
+      },
+      "rows_changed_by_repairs": 0
+    },
+    "CO": {
+      "before": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 9,
+        "n_golden": 9,
+        "n_parsed": 48,
+        "matched": 9
+      },
+      "after": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 9,
+        "n_golden": 9,
+        "n_parsed": 48,
+        "matched": 9
+      },
+      "rows_changed_by_repairs": 0
+    },
+    "TX": {
+      "before": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 8,
+        "n_golden": 8,
+        "n_parsed": 25,
+        "matched": 8
+      },
+      "after": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 8,
+        "n_golden": 8,
+        "n_parsed": 25,
+        "matched": 8
+      },
+      "rows_changed_by_repairs": 0
+    }
+  }
+}

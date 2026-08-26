@@ -74,6 +74,18 @@ lets the held-out improvements in `task2_20260826` be read as generalization
 rather than as a global shift. NV's code accuracy moved 44/46 → 46/46 while the
 four states used to tune the system moved not at all.
 
+## Re-graded at `14374dba` — still unchanged
+
+The `_delabel_parent_code` repair added on 2026-08-26 was replayed over this
+recording's saved parser output and re-graded with `eval_parser.grade_parser`:
+**0 rows changed in any of the four states**, and every metric identical (AZ
+17/18, CA 21/21, CO 9/9, TX 8/8). The detector arm is unaffected by
+construction — the repair is in `parser.py`, which `eval_detector` never loads.
+
+Results in `parser_regraded.json`; reproduce with
+`paper/analysis/regrade_parser_repairs.py`. The repair fires only on the
+held-out KY sample (9 rows), which is the state that exhibited the defect.
+
 ## ⚠️ Not done
 
 1. **`task1b_fp_audit_SIGNED.json` is stale.** The existing signature was

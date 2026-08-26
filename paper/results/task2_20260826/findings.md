@@ -203,9 +203,36 @@ rebuilds as `<resolved domain code>.<id>`. Shape-only, no label-word list.
 | production codes changed (1974, two six-state runs) | **0** |
 
 It composes with the existing bare-leaf repair: once the ancestor is
-well-formed, `AAPWI` qualifies to `LEL.1.1.AAPWI`, taking all nine rows to the
-golden and KY back to **26/26**. Not implemented — it needs the usual validation
-pass and a hash-busting window.
+well-formed, `AAPWI` qualifies to `LEL.1.1.AAPWI`.
+
+### ✅ Implemented 2026-08-26 as `_delabel_parent_code` (hash `14374dba`)
+
+Replayed over **this recording's own saved output** — the same LLM sample, so
+the repair's effect is isolated from sampling — and re-graded with
+`eval_parser.grade_parser`, the identical function that produced the numbers
+above:
+
+| | before | after |
+|---|---|---|
+| KY fully correct | 17/26 | **26/26** |
+| KY field accuracy | 0.9423 | **1.0000** |
+| KY rows changed by the repairs | — | 9 |
+| NV | 24/24 | 24/24 (0 rows changed) |
+
+Reproduce with `paper/analysis/regrade_parser_repairs.py`; results in
+`parser_regraded.json`. The golden four were re-graded the same way and **0 rows
+changed** in any of them.
+
+⚠️ This is a **replay, not a re-execution**: the repairs run pre-anchoring in
+`parse_llm_response`, while the saved output is post-anchoring. For these shapes
+the outcome is the same, but treat it as strong evidence for the repair on that
+sample rather than as a live recording at `14374dba`.
+
+⚠️ Implementing it also surfaced a **pre-existing** defect:
+`_collapse_duplicated_parent_segment` was not idempotent on a code whose
+segments repeat, and had shipped that way at `04e4924c`. It now iterates to a
+fixed point. Caught by the property suite once the de-label change shifted
+Hypothesis's search.
 
 ## ⚠️ Not done — this does NOT yet reach the paper's tables
 

@@ -16,7 +16,7 @@ When a change alters behavior, config, schema, or architecture (not a small bug 
 
 ### ⚠️ These two files are COST-GATED right now (as of 2026-08-23) — batch your edits
 
-`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`7da92182`**. The **previous** value **`288c64f1`** is what every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8) cites — those manifests were NOT re-recorded when the hash moved on 2026-08-24 — three times across 2026-08-24/25, `288c64f1` → `b35b9666` (the absent-code fix) → `99b853cc` (the Pass-1 sampling fix) → `04e4924c` (the code-composition repairs) → `61b7243e` (the malformed-ancestor guard) → `51056ea2` (the deterministic collision fallback) → `7da92182` (the widened shape guard) — so a reader diffing them against HEAD will see a mismatch. Reproducing them needs `git checkout` of their recording commit. The eval cache was invalidated by the same change. Editing either file — **including a comment or a docstring** — changes it, and two things follow:
+`eval_common.code_version_hash` hashes the **raw bytes** of `detector.py` and `parser.py` and nothing else. It currently reads **`14374dba`**. The **previous** value **`288c64f1`** is what every recorded manifest under `paper/results/` (Tasks 1, 1b, 2, 3, 3-stability, 4, 8) cites — those manifests were NOT re-recorded when the hash moved on 2026-08-24 — three times across 2026-08-24/25, `288c64f1` → `b35b9666` (the absent-code fix) → `99b853cc` (the Pass-1 sampling fix) → `04e4924c` (the code-composition repairs) → `61b7243e` (the malformed-ancestor guard) → `51056ea2` (the deterministic collision fallback) → `7da92182` (the widened shape guard) → `14374dba` (the label-form de-label + the collapse idempotence fix) — so a reader diffing them against HEAD will see a mismatch. Reproducing them needs `git checkout` of their recording commit. The eval cache was invalidated by the same change. Editing either file — **including a comment or a docstring** — changes it, and two things follow:
 
 1. **The eval cache invalidates.** All 53 entries / 2.8MB in `evaluation/.cache` become misses, so evals that are currently free become live Bedrock calls. Re-recording the detector arms alone is ~315K Opus tokens (Task 1 208,835 + Task 2 106,606), about **12% of the 2,592,000/day quota**.
 2. **Recorded results stop matching HEAD.** The numbers stay valid — they were validly produced by that code — but reproducing them needs a `git checkout` of the recording commit rather than just running the script, and a reader diffing the hash cannot tell a docstring change from a logic change.
@@ -43,7 +43,7 @@ This is **a cost, not a prohibition.** A real defect still gets fixed. But a cos
 - `parser._disambiguator_suffix`, `_derive_label_abbrev`, `_COLUMN_ABBREV_LEN` + the suffix re-application in `parse_llm_response` → parser prompt DISAMBIGUATE rule: side-by-side columns emit DISTINCT codes directly (age-range → month range `.36-48`; proficiency → first-4-uppercased `.DISC`). Uniqueness is enforced afterwards by `disambiguate_colliding_standards` (see "Where a printed code is not unique" below), which resolves collisions by ancestor and keeps a numeric counter, assigned in document order, only as a last resort.
 - the CA collision branch + `_PURE_NUMERIC_RE` in `abbreviate_element_codes` (and the now-empty `abbreviate_element_codes` / `normalize_code_to_canonical` shells) → parser prompt: a sub_strand and its child indicator must never share a code; the sub_strand derives its segment from its title with the same ≤5-char abbrev scheme.
 
-A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), `_collapse_duplicated_parent_segment` / `_collapse_duplicated_indicator_segment` / `_qualify_bare_indicator_code` (see below), `_splice_overlapping_prose` (see below), `_sample_blocks_for_depth_map` / `_layout_bucket_key` (layout-stratified Pass-1 sampling — reads a block's left edge and bucket counts, never its words; see below), and the JSON-extraction / schema-validation plumbing.
+A new per-state regex/branch in `detector.py` or `parser.py` is a regression in disguise even if it raises a golden score — flag it rather than adding it. The justified Python that survives is document-agnostic only: `generate_standard_id`, `normalize_parsed_codes`, `normalize_element_codes` (cross-chunk drift), `chunk_elements_by_domain` / `_split_oversized_chunk` / `chunk_text_blocks` / `_dedup_elements`, `_infer_domain_code` routing (PK strip removed), the generic age-band canonicalizers (`canonicalize_age_band`, `_normalize_age_band`, `_reconcile_age_band_drift`, `_TRAILING_MARKER_RE`), `_canonicalize_code` (folds `<Label>: <id>` → `<Label> <id>` by shape, never by label word), `_is_title_grounded` (drops a heading whose title is absent from its own `source_text` — a parent back-formed from a child's code), `derive_code_from_title` / `_is_code_grounded` / `_resolve_code` (see below), `_anchor_parent_chain` / `disambiguate_colliding_standards` (see below), `_delabel_parent_code` / `_collapse_duplicated_parent_segment` / `_collapse_duplicated_indicator_segment` / `_qualify_bare_indicator_code` (see below), `_splice_overlapping_prose` (see below), `_sample_blocks_for_depth_map` / `_layout_bucket_key` (layout-stratified Pass-1 sampling — reads a block's left edge and bucket counts, never its words; see below), and the JSON-extraction / schema-validation plumbing.
 
 Each of those earns its place by reading the SHAPE of the output rather than any document's vocabulary, and each fixes a defect the prompt alone could not: the LLM emits both spellings intermittently at temperature 0, so a prompt rule reduces the rate but cannot make the output reconcilable. Pair them with the prompt rule, don't substitute one for the other.
 
@@ -518,7 +518,46 @@ argument as `derive_code_from_title`.
   idempotent) hold over generated code shapes rather than only the ones we have
   seen.
 
-Order matters and is asserted by the call site: (1) runs before (2)/(3),
+**(4) `_delabel_parent_code` — the label form the parser left unconverted
+(2026-08-26).** Rule 4 makes a heading's label-and-id the element's code, so the
+DETECTOR correctly emits `Benchmark 1.1` at sub_strand level — the KY detector
+golden annotates exactly that. Converting it to the domain-qualified `LEL.1.1`
+is the PARSER's job, stated in the parser prompt, and it samples. Measured on
+the Task 2 re-record (`paper/results/task2_20260826/`): **9 of 26 KY rows** kept
+the label form, all inside a single domain, on a detection input byte-identical
+to the previous recording and with no parser-prompt change between the two
+hashes. The leaf then went bare, so `standard_id` was malformed too.
+
+The tell is shape-only: one label token followed by a **dotted** numeric id.
+The dotted requirement is the guard — a bare `Standard 1` carries no position
+beyond its own index and is not enough evidence to rebuild a qualified code
+from, and a multi-word heading identifier (`Language and Early Literacy
+Standard 1`) never matches. There is deliberately **no list of label words**,
+the same reason `validator._validate_code_shape` keys on whitespace rather than
+vocabulary. It declines when the domain code is itself unusable, exactly as
+`_qualify_bare_indicator_code` does.
+
+⚠️ **A repaired row can only improve.** A code containing whitespace is
+guaranteed to fail `_validate_code_shape` condition 1, so the record was going
+to be rejected before Aurora either way — the repair can recover a row and
+cannot cost one that was already valid. Validated the usual way: **0** of the
+106 annotated golden standards and **0** of 524 rows across two full six-state
+production runs change. Replayed over the Task 2 recording's own saved output it
+takes KY from **17/26 to 26/26** fully correct.
+
+⚠️ **`_collapse_duplicated_parent_segment` was NOT idempotent until 2026-08-26.**
+A code whose segments repeat (`X.1` / `X.1.1.1`) still satisfies the trigger
+after one collapse, so each application stripped another segment. Found by
+`tests/property/test_parser_code_repair_props.py` once the de-label change
+shifted Hypothesis's search — it shipped non-idempotent at `04e4924c`. It now
+iterates to a fixed point. Real cases are unaffected because they reach the
+fixed point on the first pass (`AL.1`/`AL.1.1.1` → `AL.1.1`, whose remaining
+tail is a single segment and stops), and the re-validation confirms 0 golden and
+0 production rows change.
+
+Order matters and is asserted by the call site: (4) runs FIRST, because every
+other repair reasons about dot structure and a `<Label> <id>` code has none they
+can read. Then (1) before (2)/(3),
 because collapsing a duplicate can itself make an otherwise non-extending
 indicator extend again — a sub_strand `MATH.1.1.2` repaired to `MATH.1.2` is
 exactly the ancestor `MATH.1.2.RNSBS` was built on. That alone fixed 4 rows.

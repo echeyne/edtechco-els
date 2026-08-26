@@ -36,12 +36,15 @@ import pytest
 from els_pipeline.parser import (
     _collapse_duplicated_indicator_segment,
     _collapse_duplicated_parent_segment,
+    _delabel_parent_code,
     _qualify_bare_indicator_code,
 )
 
 
 def _repair(domain, strand, sub_strand, indicator):
-    """The three repairs in the order `parse_llm_response` applies them."""
+    """The four repairs in the order `parse_llm_response` applies them."""
+    strand = _delabel_parent_code(strand, domain)
+    sub_strand = _delabel_parent_code(sub_strand, domain)
     sub, ind = _collapse_duplicated_parent_segment(strand, sub_strand, indicator)
     ind = _collapse_duplicated_indicator_segment(strand, sub, ind)
     ind = _qualify_bare_indicator_code(domain, strand, sub, ind)
@@ -136,3 +139,58 @@ class TestGoldenShapesAreUntouched:
             if got != (sub, ind):
                 changed.append((sub, ind, got))
         assert not changed, f"{path} rewrote annotated codes: {changed}"
+
+
+class TestLabelFormParentCode:
+    """Rule 4's `<Label> <id>` form is CORRECT detector output — the KY detector
+    golden annotates `Benchmark 1.1` at sub_strand level. Converting it to the
+    domain-qualified form is the parser's job, and it samples.
+
+    Measured on paper/results/task2_20260826: 9 of 26 KY rows kept the label
+    form, all inside one domain, on a detection input byte-identical to the
+    previous recording. Replaying this repair over that exact recorded sample
+    takes KY from 17/26 to 26/26 fully correct.
+    """
+
+    def test_the_ky_case(self):
+        assert _delabel_parent_code("Benchmark 1.1", "LEL") == "LEL.1.1"
+
+    def test_the_ca_foundation_form(self):
+        assert _delabel_parent_code("Foundation 1.7", "ELD") == "ELD.1.7"
+
+    def test_it_needs_no_list_of_label_words(self):
+        """Shape only — an unknown label word behaves identically."""
+        assert _delabel_parent_code("Zzz 2.4", "AB") == "AB.2.4"
+
+    def test_a_bare_integer_id_is_not_enough_evidence(self):
+        """THE GUARD. `Standard 1` carries no position beyond its own index, so
+        there is nothing to rebuild a qualified code from."""
+        assert _delabel_parent_code("Standard 1", "LEL") == "Standard 1"
+
+    def test_a_multi_word_heading_identifier_is_left_alone(self):
+        assert (
+            _delabel_parent_code("Language and Early Literacy Standard 1", "LEL")
+            == "Language and Early Literacy Standard 1"
+        )
+
+    def test_an_already_qualified_code_is_untouched(self):
+        assert _delabel_parent_code("LEL.1.1", "LEL") == "LEL.1.1"
+
+    def test_the_nevada_sub_strand_is_untouched(self):
+        assert _delabel_parent_code("SS.ID", "SS") == "SS.ID"
+
+    def test_it_declines_a_malformed_domain_code(self):
+        """Prefixing with a whitespace-bearing domain would manufacture a second
+        malformed code instead of repairing the first."""
+        assert (
+            _delabel_parent_code("Benchmark 1.1", "Language and Early Literacy")
+            == "Benchmark 1.1"
+        )
+
+    def test_it_composes_with_the_bare_leaf_repair(self):
+        """The end-to-end KY row: de-label the ancestor, and the bare leaf then
+        qualifies against it."""
+        assert _repair("LEL", "LEL.1", "Benchmark 1.1", "AAPWI") == (
+            "LEL.1.1",
+            "LEL.1.1.AAPWI",
+        )

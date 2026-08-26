@@ -63,5 +63,20 @@
     "candidate_repair": "Deterministic de-label: a parent code shaped '<token-with-no-leading-digit> <dotted-numeric-id>' is the label form, and rebuilds as '<resolved domain code>.<id>'. Shape-only, no label-word list.",
     "measured": "Repairs 9/9 of the failing KY sub_strand codes exactly. Changes ZERO codes across all six parser goldens (106 standards) and ZERO of 1974 codes across two full six-state production runs. Composes with the existing _qualify_bare_indicator_code: once the ancestor is well-formed the bare leaf qualifies to 'LEL.1.1.AAPWI', taking all 9 rows to the golden and KY back to 26/26.",
     "status": "NOT IMPLEMENTED. Proposed; needs the usual validation pass and a hash-busting window."
-  }
+  },
+  "superseded_by_hash": "14374dba",
+  "superseded_note": "Superseded in part by the 14374dba de-label repair. The DETECTOR arm is unaffected by construction \u2014 the repair is in parser.py and eval_detector never loads it. The PARSER arm was re-graded OFFLINE over this recording's own saved output rather than re-run, because a fresh run would draw a new LLM sample and confound the repair with sampling; see parser_regraded.json and paper/analysis/regrade_parser_repairs.py.",
+  "parser_regraded_offline": {
+    "NV": {
+      "fully_correct": "24 -> 24 of 24",
+      "field_accuracy": "1.0000 -> 1.0000",
+      "rows_changed": 0
+    },
+    "KY": {
+      "fully_correct": "17 -> 26 of 26",
+      "field_accuracy": "0.9423 -> 1.0000",
+      "rows_changed": 9
+    }
+  },
+  "parser_regrade_command": "python paper/analysis/regrade_parser_repairs.py --results-dir paper/results/task2_20260826 --state NV --state KY --out paper/results/task2_20260826/parser_regraded.json"
 }

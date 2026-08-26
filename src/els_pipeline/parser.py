@@ -340,6 +340,60 @@ def _anchor_parent_code(parent_code: str | None, indicator_code: str) -> str | N
     return ".".join(ind_segs[:depth])
 
 
+# A parent code the parser failed to convert: one label token followed by a
+# DOTTED numeric id, e.g. "Benchmark 1.1" or "Foundation 1.7". The id must be
+# dotted — a bare "Standard 1" carries no position beyond its own index and is
+# not enough evidence to rebuild a qualified code from. Matches on SHAPE only;
+# there is deliberately no list of label words, which is what keeps it
+# document-agnostic (the same reason `validator._validate_code_shape` keys on
+# whitespace rather than on vocabulary).
+_LABEL_FORM_CODE_RE = re.compile(r"^(?!\d)(\S+)\s+(\d+(?:\.\d+)+)$")
+
+
+def _delabel_parent_code(code: str | None, domain_code: str | None) -> str | None:
+    """Rebuild a `<Label> <dotted-id>` parent code as `<domain>.<id>`.
+
+    Rule 4 makes a heading's label-and-id the element's code, so the DETECTOR
+    correctly emits `Benchmark 1.1` at sub_strand level — the KY detector golden
+    annotates exactly that. Converting it to the domain-qualified `LEL.1.1` is
+    the PARSER's job, and the parser prompt states it. The model performs it
+    most of the time and intermittently does not.
+
+    When it does not, the label form survives into the final record, and because
+    `standard_id` is `{country}-{state}-{year}-{indicator_code}`, a whitespace-
+    bearing ancestor takes the leaf down with it: the indicator either inherits
+    the whitespace or is left bare. Measured on the Task 2 re-record of
+    2026-08-26 (`paper/results/task2_20260826/`): 9 of 26 KY rows, all inside a
+    single domain — parsing batches by domain, so one call sampled badly while
+    the other two were clean. The detection input was byte-identical to the
+    previous recording and the parser prompt had not changed, so it is sampling,
+    and a primary key needs zero. Same argument as `derive_code_from_title`.
+
+    **A repaired row can only improve.** A code containing whitespace is
+    guaranteed to fail `_validate_code_shape` condition 1, so the record was
+    going to be rejected before Aurora either way; rebuilding it can recover the
+    row and cannot cost one that was already valid.
+
+    Declines when the domain code is itself unusable (absent, or carrying
+    whitespace of its own), since prefixing with it would produce a second
+    malformed code rather than a repair — the same rule
+    `_qualify_bare_indicator_code` follows.
+    """
+    if not code or not domain_code:
+        return code
+    if any(c.isspace() for c in domain_code):
+        return code
+    m = _LABEL_FORM_CODE_RE.match(code)
+    if not m:
+        return code
+    rebuilt = f"{domain_code}.{m.group(2)}"
+    logger.info(
+        f"LABEL_FORM_PARENT_CODE {code!r} -> {rebuilt!r} "
+        f"(domain {domain_code!r}); the parser left rule 4's label form unconverted"
+    )
+    return rebuilt
+
+
 def _collapse_duplicated_parent_segment(
     strand_code: str | None,
     sub_strand_code: str | None,
@@ -384,24 +438,40 @@ def _collapse_duplicated_parent_segment(
     """
     if not strand_code or not sub_strand_code:
         return sub_strand_code, indicator_code
-    if not sub_strand_code.startswith(strand_code + "."):
-        return sub_strand_code, indicator_code
-    tail = sub_strand_code[len(strand_code) + 1:]
-    if "." not in tail:
-        return sub_strand_code, indicator_code
-    if tail.split(".")[0] != strand_code.split(".")[-1]:
-        return sub_strand_code, indicator_code
 
-    repaired_sub = strand_code + "." + tail.split(".", 1)[1]
-    repaired_indicator = indicator_code
-    if indicator_code.startswith(sub_strand_code + "."):
-        repaired_indicator = repaired_sub + indicator_code[len(sub_strand_code):]
+    original_sub, original_indicator = sub_strand_code, indicator_code
+
+    # Iterate to a FIXED POINT rather than collapsing once. A code whose
+    # segments repeat ("X.1" / "X.1.1.1") still satisfies the trigger after one
+    # collapse, so a single pass leaves a result that would change again if the
+    # repair were re-applied — and a repair that is not idempotent cannot be
+    # safely re-run on its own output. Real cases are unaffected because they
+    # reach the fixed point on the first pass: `AL.1` / `AL.1.1.1` collapses to
+    # `AL.1.1`, whose remaining tail is a single segment and stops. Found by
+    # `tests/property/test_parser_code_repair_props.py`; shipped non-idempotent
+    # at 04e4924c and repaired 2026-08-26.
+    while True:
+        if not sub_strand_code.startswith(strand_code + "."):
+            break
+        tail = sub_strand_code[len(strand_code) + 1:]
+        if "." not in tail:
+            break
+        if tail.split(".")[0] != strand_code.split(".")[-1]:
+            break
+        collapsed = strand_code + "." + tail.split(".", 1)[1]
+        if indicator_code.startswith(sub_strand_code + "."):
+            indicator_code = collapsed + indicator_code[len(sub_strand_code):]
+        sub_strand_code = collapsed
+
+    if sub_strand_code == original_sub:
+        return original_sub, original_indicator
+
     logger.info(
-        f"DUPLICATED_PARENT_SEGMENT sub_strand {sub_strand_code!r} -> "
-        f"{repaired_sub!r} (strand {strand_code!r}); indicator "
-        f"{indicator_code!r} -> {repaired_indicator!r}"
+        f"DUPLICATED_PARENT_SEGMENT sub_strand {original_sub!r} -> "
+        f"{sub_strand_code!r} (strand {strand_code!r}); indicator "
+        f"{original_indicator!r} -> {indicator_code!r}"
     )
-    return repaired_sub, repaired_indicator
+    return sub_strand_code, indicator_code
 
 
 def _collapse_duplicated_indicator_segment(
@@ -663,15 +733,22 @@ def parse_llm_response(
             # otherwise non-extending indicator extend its ancestor again (a
             # sub_strand `MATH.1.1.2` repaired to `MATH.1.2` is exactly the
             # ancestor `MATH.1.2.RNSBS` was built on), so it runs first.
+            # De-label first: the later repairs all reason about dot structure,
+            # and a `<Label> <id>` code has none they can read.
+            strand_code = _delabel_parent_code(
+                obj.get("strand_code"), obj["domain_code"]
+            )
             sub_strand_code, indicator_code = _collapse_duplicated_parent_segment(
-                obj.get("strand_code"), obj.get("sub_strand_code"), indicator_code
+                strand_code,
+                _delabel_parent_code(obj.get("sub_strand_code"), obj["domain_code"]),
+                indicator_code,
             )
             indicator_code = _collapse_duplicated_indicator_segment(
-                obj.get("strand_code"), sub_strand_code, indicator_code
+                strand_code, sub_strand_code, indicator_code
             )
             indicator_code = _qualify_bare_indicator_code(
                 obj["domain_code"],
-                obj.get("strand_code"),
+                strand_code,
                 sub_strand_code,
                 indicator_code,
             )
@@ -683,7 +760,7 @@ def parse_llm_response(
             # one domain's prefix when the LLM borrows it.
             anchored_domain, anchored_strand, anchored_sub = _anchor_parent_chain(
                 obj["domain_code"],
-                obj.get("strand_code"),
+                strand_code,
                 sub_strand_code,
                 indicator_code,
             )

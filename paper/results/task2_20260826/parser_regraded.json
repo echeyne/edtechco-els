@@ -1,0 +1,44 @@
+{
+  "note": "Replay of the current parser repair chain over the parsed standards this recording saved, re-graded with eval_parser.grade_parser. No Bedrock calls. See the module docstring for the anchoring approximation.",
+  "results_dir": "paper/results/task2_20260826",
+  "states": {
+    "NV": {
+      "before": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 24,
+        "n_golden": 24,
+        "n_parsed": 24,
+        "matched": 24
+      },
+      "after": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 24,
+        "n_golden": 24,
+        "n_parsed": 24,
+        "matched": 24
+      },
+      "rows_changed_by_repairs": 0
+    },
+    "KY": {
+      "before": {
+        "coverage": 1.0,
+        "field_accuracy": 0.9423076923076923,
+        "fully_correct": 17,
+        "n_golden": 26,
+        "n_parsed": 26,
+        "matched": 26
+      },
+      "after": {
+        "coverage": 1.0,
+        "field_accuracy": 1.0,
+        "fully_correct": 26,
+        "n_golden": 26,
+        "n_parsed": 26,
+        "matched": 26
+      },
+      "rows_changed_by_repairs": 9
+    }
+  }
+}

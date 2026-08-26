@@ -17,6 +17,7 @@ from hypothesis import given, strategies as st
 from els_pipeline.parser import (
     _collapse_duplicated_indicator_segment,
     _collapse_duplicated_parent_segment,
+    _delabel_parent_code,
     _qualify_bare_indicator_code,
 )
 
@@ -28,6 +29,8 @@ _OPTIONAL_CODE = st.one_of(st.none(), _CODE)
 
 
 def _repair(domain, strand, sub_strand, indicator):
+    strand = _delabel_parent_code(strand, domain)
+    sub_strand = _delabel_parent_code(sub_strand, domain)
     sub, ind = _collapse_duplicated_parent_segment(strand, sub_strand, indicator)
     ind = _collapse_duplicated_indicator_segment(strand, sub, ind)
     ind = _qualify_bare_indicator_code(domain, strand, sub, ind)

@@ -1,14 +1,14 @@
 {
-  "task": "Task 1 re-record — detector + parser arms on the golden four (AZ, CA, CO, TX)",
+  "task": "Task 1 re-record \u2014 detector + parser arms on the golden four (AZ, CA, CO, TX)",
   "date": "2026-08-26",
-  "baseline_for_comparison": "paper/results/task1_20260822/ (code_version_hash 288c64f1, commit 628829b34b40) — what generate_tables.py currently reads via RUN_TAG = \"20260822\".",
-  "supersedes": "paper/results/task1_20260822/detector_golden4.json, parser_golden4.json and summary.json — pending the RUN_TAG migration, which has NOT happened.",
-  "does_not_supersede": "paper/results/task1_20260822/task1b_fp_audit_SIGNED.json — the FP audit was not re-signed at this hash and AZ's detection count moved.",
+  "baseline_for_comparison": "paper/results/task1_20260822/ (code_version_hash 288c64f1, commit 628829b34b40) \u2014 what generate_tables.py currently reads via RUN_TAG = \"20260822\".",
+  "supersedes": "paper/results/task1_20260822/detector_golden4.json, parser_golden4.json and summary.json \u2014 pending the RUN_TAG migration, which has NOT happened.",
+  "does_not_supersede": "paper/results/task1_20260822/task1b_fp_audit_SIGNED.json \u2014 the FP audit was not re-signed at this hash and AZ's detection count moved.",
   "git_commit": "20cf2f72b371424c3fb9d6a5df21442cc44f784a",
   "code_version_hash": "7da92182",
   "code_version_hash_note": "Baseline 288c64f1 -> b35b9666 (absent-code fix) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE). src/ was clean at run time.",
-  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). Front matter, introductions and acknowledgements were removed by hand — favorable preprocessing that must be disclosed with every table (guardrail 3). Page counts read from each {STATE}-extraction.json total_pages: AZ 15, CA 13, CO 10, TX 9. Same tier as the baseline.",
-  "extraction_source": "outputs/08-26-26-2 — pipeline run 044, which ran AFTER the 20cf2f7 deploy, so its detections were produced by current code. Verified independently: zero elements across all six states would change under the widened _DERIVABLE_CODE_RE. The parser arm runs on these detection files, so post-deploy provenance matters and is confirmed.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). Front matter, introductions and acknowledgements were removed by hand \u2014 favorable preprocessing that must be disclosed with every table (guardrail 3). Page counts read from each {STATE}-extraction.json total_pages: AZ 15, CA 13, CO 10, TX 9. Same tier as the baseline.",
+  "extraction_source": "outputs/08-26-26-2 \u2014 pipeline run 044, which ran AFTER the 20cf2f7 deploy, so its detections were produced by current code. Verified independently: zero elements across all six states would change under the widened _DERIVABLE_CODE_RE. The parser arm runs on these detection files, so post-deploy provenance matters and is confirmed.",
   "models": {
     "detector": "us.anthropic.claude-opus-4-6-v1",
     "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
@@ -18,9 +18,9 @@
   "commands_in_order": [
     "source venv/bin/activate",
     "export AWS_PROFILE=kinder-readiness-dev-cli",
-    "# 1. detector — fresh, no cache, direct path, live Bedrock",
+    "# 1. detector \u2014 fresh, no cache, direct path, live Bedrock",
     "python -m evaluation.eval_detector --extraction-dir outputs/08-26-26-2 --state AZ --state CA --state CO --state TX --no-cache --report-json paper/results/task1_20260826/detector_golden4.json --output-dir paper/results/task1_20260826/review_detector",
-    "# 2. parser — fresh, no cache, on the DEPLOYED batched detections",
+    "# 2. parser \u2014 fresh, no cache, on the DEPLOYED batched detections",
     "python -m evaluation.eval_parser --detection-dir outputs/08-26-26-2 --state AZ --state CA --state CO --state TX --no-cache --report-json paper/results/task1_20260826/parser_golden4.json --output-dir paper/results/task1_20260826/review_parser",
     "# 3. consolidation",
     "python paper/analysis/consolidate_task1.py --state AZ --state CA --state CO --state TX --detector-report paper/results/task1_20260826/detector_golden4.json --parser-report paper/results/task1_20260826/parser_golden4.json --detector-review-dir paper/results/task1_20260826/review_detector --parser-review-dir paper/results/task1_20260826/review_parser --out paper/results/task1_20260826/summary.json"
@@ -32,8 +32,33 @@
   },
   "caveats": [
     "THE AZ DUPLICATE-DETECTION DROP DOES NOT APPEAR IN THIS ARM. A batched-path observation on pipeline run 043 showed AZ detection falling 77 -> 65, entirely listing-page duplicate sub_strands, prompting a prediction that AZ raw precision would rise and invert the caution at tasking/arxiv_paper.md line 127. On the direct path AZ went 66 -> 67 and in-scope precision did not move. The line-127 caution stands unmodified for the eval numbers; the batched-path observation is an open question about production output, not about this table.",
-    "GUARDRAIL 8 UNCHANGED. Raw precision on the golden four (AZ 0.4167, CA 0.2049, CO 0.1667, TX 0.3200) measures annotation coverage, not detector quality — these goldens are 5-25 element spot checks against 12-122 in-scope detections. None may be reported as detector precision; the verified-precision path via the Task 1b FP audit is still required.",
+    "GUARDRAIL 8 UNCHANGED. Raw precision on the golden four (AZ 0.4167, CA 0.2049, CO 0.1667, TX 0.3200) measures annotation coverage, not detector quality \u2014 these goldens are 5-25 element spot checks against 12-122 in-scope detections. None may be reported as detector precision; the verified-precision path via the Task 1b FP audit is still required.",
     "task1b_fp_audit_SIGNED.json is STALE at this hash and AZ's detection count moved. Re-sign with paper/analysis/make_fp_signoff.py before quoting verified precision."
   ],
-  "not_wired_into_tables": "RUN_TAG in paper/analysis/generate_tables.py is still 20260822. Moving it to 20260826 additionally requires the task 2 parser arm consolidated into task2_20260826/summary.json and both FP audits re-signed. See task2_20260826/manifest.json."
+  "not_wired_into_tables": "RUN_TAG in paper/analysis/generate_tables.py is still 20260822. Moving it to 20260826 additionally requires the task 2 parser arm consolidated into task2_20260826/summary.json and both FP audits re-signed. See task2_20260826/manifest.json.",
+  "superseded_by_hash": "14374dba",
+  "superseded_note": "Superseded in part by the 14374dba de-label repair. The DETECTOR arm is unaffected by construction \u2014 the repair is in parser.py and eval_detector never loads it. The PARSER arm was re-graded OFFLINE over this recording's own saved output rather than re-run, because a fresh run would draw a new LLM sample and confound the repair with sampling; see parser_regraded.json and paper/analysis/regrade_parser_repairs.py.",
+  "parser_regraded_offline": {
+    "AZ": {
+      "fully_correct": "17 -> 17 of 18",
+      "field_accuracy": "0.9969 -> 0.9969",
+      "rows_changed": 0
+    },
+    "CA": {
+      "fully_correct": "21 -> 21 of 21",
+      "field_accuracy": "1.0000 -> 1.0000",
+      "rows_changed": 0
+    },
+    "CO": {
+      "fully_correct": "9 -> 9 of 9",
+      "field_accuracy": "1.0000 -> 1.0000",
+      "rows_changed": 0
+    },
+    "TX": {
+      "fully_correct": "8 -> 8 of 8",
+      "field_accuracy": "1.0000 -> 1.0000",
+      "rows_changed": 0
+    }
+  },
+  "parser_regrade_command": "python paper/analysis/regrade_parser_repairs.py --results-dir paper/results/task1_20260826 --state AZ --state CA --state CO --state TX --out paper/results/task1_20260826/parser_regraded.json"
 }
