@@ -1,7 +1,7 @@
-# Task 2 re-record — held-out detector arm (2026-08-26)
+# Task 2 re-record — held-out detector + parser arms (2026-08-26)
 
-Re-records the **detector arm only** of Task 2 on the held-out states, at
-`code_version_hash` **`7da92182`**. The parser arm was not re-run.
+Re-records **both arms** of Task 2 on the held-out states, at `code_version_hash`
+**`7da92182`**.
 
 **Baseline is `task2_20260822` (hash `288c64f1`), not `task2_20260816`.**
 `paper/analysis/generate_tables.py` has `RUN_TAG = "20260822"`, so 20260822 is
@@ -139,22 +139,80 @@ sub_strands carry the document's `XX.YY` caption code), `NV-FOUR-LEVEL-HIERARCHY
 KY: `KY-BENCHMARK-IS-SUB-STRAND`, `KY-FOUR-LEVEL-HIERARCHY`,
 `KY-STRAND-CODE-KEEPS-FULL-LABEL`.
 
+## Parser arm — NV perfect, KY regressed on sampling
+
+| | NV `288c64f1` | NV `7da92182` | KY `288c64f1` | KY `7da92182` |
+|---|---|---|---|---|
+| coverage | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| matched | 24 | 24 | 26 | 26 |
+| field accuracy | 1.0000 | 1.0000 | 1.0000 | **0.9423** |
+| fully correct | 24/24 | 24/24 | 26/26 | **17/26** |
+
+**NV is untouched and perfect.** KY lost 9 rows, each failing on exactly three
+fields — `sub_strand.code`, `indicator.code`, `standard_id`:
+
+```
+KY-STD-18  sub_strand.code  expected 'LEL.1.1'        got 'Benchmark 1.1'
+           indicator.code   expected 'LEL.1.1.AAPWI'  got 'AAPWI'
+           standard_id      expected 'US-KY-2021-LEL.1.1.AAPWI'  got 'US-KY-2021-AAPWI'
+```
+
+The parser left the detector's label-form sub_strand code unconverted and the
+leaf then went bare. All nine are `LEL` (`LEL.1.1` ×4, `LEL.2.1` ×3, `LEL.2.2`
+×2); AL and HMW are clean.
+
+### ⚠️ This is sampling, and it is NOT caused by the new repairs
+
+- The detection **input is byte-identical** between this run and the baseline —
+  same 44 elements, same codes at domain, strand and sub_strand.
+- Parsing batches by domain, and all nine failures sit in **one** domain. That
+  is a single parser call sampling badly, not a systematic rule change.
+- The **parser prompt did not change** between `288c64f1` and `7da92182`.
+
+`_qualify_bare_indicator_code` **declined these rows by design.** Its
+malformed-ancestor guard refuses to prefix a whitespace-bearing ancestor,
+because that would inject whitespace into the primary key and swap a
+`not nested` rejection for a `whitespace` one, hiding the cause. Removing the
+guard would not recover the golden either — it yields `Benchmark 1.1.AAPWI`.
+
+⚠️ **In production these nine rows would be rejected by
+`validator._validate_code_shape` and never reach Aurora.** The eval does not run
+the validator, so it scores them as field errors rather than as drops. The
+recorded 0.9423 is therefore a *parser* number, not a statement about what
+Aurora would hold.
+
+### The repair that would close it — measured, not implemented
+
+A deterministic de-label: a parent code shaped
+`<token-with-no-leading-digit> <dotted-numeric-id>` is the label form and
+rebuilds as `<resolved domain code>.<id>`. Shape-only, no label-word list.
+
+| | |
+|---|---|
+| failing KY sub_strand codes repaired exactly | **9/9** |
+| golden codes changed (106 standards, six states) | **0** |
+| production codes changed (1974, two six-state runs) | **0** |
+
+It composes with the existing bare-leaf repair: once the ancestor is
+well-formed, `AAPWI` qualifies to `LEL.1.1.AAPWI`, taking all nine rows to the
+golden and KY back to **26/26**. Not implemented — it needs the usual validation
+pass and a hash-busting window.
+
 ## ⚠️ Not done — this does NOT yet reach the paper's tables
 
 `generate_tables.py` reads `task1_<RUN_TAG>/summary.json` **and**
 `task2_<RUN_TAG>/summary.json` for a single shared `RUN_TAG`. Three things are
 missing before the tag can move to `20260826`:
 
-1. **`task1_20260826/` does not exist.** The golden four (AZ, CA, CO, TX) have
-   not been re-recorded at `7da92182`. Moving `RUN_TAG` now would break table
-   generation outright.
-2. **No `summary.json` here.** `consolidate_task1.py --state NV --state KY`
-   produces it, and it needs a parser report to consolidate against — which
-   this task did not re-run.
-3. **No re-signed `nv_fp_audit_SIGNED.json`.** The verified-precision path
+1. **No `summary.json` here.** Run `consolidate_task1.py --state NV --state KY`
+   against this folder's two reports. (`task1_20260826/` now exists and has
+   its own.)
+2. **No re-signed `nv_fp_audit_SIGNED.json`.** The verified-precision path
    depends on it, and the existing signature covers 53 detections, not 52.
+   `task1_20260826`'s `task1b_fp_audit_SIGNED.json` is stale for the same
+   reason — AZ's detection count moved.
 
-Until all three land, the tables keep reporting `20260822` and this recording
+Until both land, the tables keep reporting `20260822` and this recording
 stands as the detector-arm evidence only. That is deliberate: a half-migrated
 `RUN_TAG` would silently mix hashes across the generalization table, which
 guardrail 6 exists to prevent.

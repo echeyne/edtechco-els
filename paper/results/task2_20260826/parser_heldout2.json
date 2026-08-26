@@ -1,0 +1,384 @@
+[
+  {
+    "state": "NV",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 24,
+    "fully_correct": 24,
+    "n_golden": 24,
+    "n_parsed": 24,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 24,
+        "total": 24
+      },
+      "country": {
+        "ok": 24,
+        "total": 24
+      },
+      "state": {
+        "ok": 24,
+        "total": 24
+      },
+      "version_year": {
+        "ok": 24,
+        "total": 24
+      },
+      "age_band": {
+        "ok": 24,
+        "total": 24
+      },
+      "source_page": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.description": {
+        "ok": 24,
+        "total": 24
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 24 standard_ids unique"
+      },
+      {
+        "id": "NV-STRAND-PARENT-BY-HEADING",
+        "status": "PASS",
+        "detail": "all 7 indicator groups resolve to a single strand"
+      },
+      {
+        "id": "NV-DOCUMENT-CODE-PRESERVED",
+        "status": "PASS",
+        "detail": "all 24 standards keep the document's printed code at indicator, sub_strand and domain"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "KY",
+    "coverage": 1.0,
+    "field_accuracy": 0.9423076923076923,
+    "matched": 26,
+    "fully_correct": 17,
+    "n_golden": 26,
+    "n_parsed": 26,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 17,
+        "total": 26
+      },
+      "country": {
+        "ok": 26,
+        "total": 26
+      },
+      "state": {
+        "ok": 26,
+        "total": 26
+      },
+      "version_year": {
+        "ok": 26,
+        "total": 26
+      },
+      "age_band": {
+        "ok": 26,
+        "total": 26
+      },
+      "source_page": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "domain.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.code": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "strand.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.code": {
+        "ok": 17,
+        "total": 26
+      },
+      "sub_strand.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "sub_strand.description": {
+        "ok": 26,
+        "total": 26
+      },
+      "indicator.code": {
+        "ok": 17,
+        "total": 26
+      },
+      "indicator.name": {
+        "ok": 26,
+        "total": 26
+      },
+      "indicator.description": {
+        "ok": 26,
+        "total": 26
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "KY-STD-18",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.1.1.AAPWI",
+        "got": "US-KY-2021-AAPWI"
+      },
+      {
+        "test_case_id": "KY-STD-18",
+        "field": "sub_strand.code",
+        "expected": "LEL.1.1",
+        "got": "Benchmark 1.1"
+      },
+      {
+        "test_case_id": "KY-STD-18",
+        "field": "indicator.code",
+        "expected": "LEL.1.1.AAPWI",
+        "got": "AAPWI"
+      },
+      {
+        "test_case_id": "KY-STD-19",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.1.1.FSD",
+        "got": "US-KY-2021-FSD"
+      },
+      {
+        "test_case_id": "KY-STD-19",
+        "field": "sub_strand.code",
+        "expected": "LEL.1.1",
+        "got": "Benchmark 1.1"
+      },
+      {
+        "test_case_id": "KY-STD-19",
+        "field": "indicator.code",
+        "expected": "LEL.1.1.FSD",
+        "got": "FSD"
+      },
+      {
+        "test_case_id": "KY-STD-20",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.1.1.GILPC",
+        "got": "US-KY-2021-GILPC"
+      },
+      {
+        "test_case_id": "KY-STD-20",
+        "field": "sub_strand.code",
+        "expected": "LEL.1.1",
+        "got": "Benchmark 1.1"
+      },
+      {
+        "test_case_id": "KY-STD-20",
+        "field": "indicator.code",
+        "expected": "LEL.1.1.GILPC",
+        "got": "GILPC"
+      },
+      {
+        "test_case_id": "KY-STD-21",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.1.1.IAISE",
+        "got": "US-KY-2021-IAISE"
+      },
+      {
+        "test_case_id": "KY-STD-21",
+        "field": "sub_strand.code",
+        "expected": "LEL.1.1",
+        "got": "Benchmark 1.1"
+      },
+      {
+        "test_case_id": "KY-STD-21",
+        "field": "indicator.code",
+        "expected": "LEL.1.1.IAISE",
+        "got": "IAISE"
+      },
+      {
+        "test_case_id": "KY-STD-22",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.2.1.UNCCE",
+        "got": "US-KY-2021-UNCCE"
+      },
+      {
+        "test_case_id": "KY-STD-22",
+        "field": "sub_strand.code",
+        "expected": "LEL.2.1",
+        "got": "Benchmark 2.1"
+      },
+      {
+        "test_case_id": "KY-STD-22",
+        "field": "indicator.code",
+        "expected": "LEL.2.1.UNCCE",
+        "got": "UNCCE"
+      },
+      {
+        "test_case_id": "KY-STD-23",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.2.1.ICOPP",
+        "got": "US-KY-2021-ICOPP"
+      },
+      {
+        "test_case_id": "KY-STD-23",
+        "field": "sub_strand.code",
+        "expected": "LEL.2.1",
+        "got": "Benchmark 2.1"
+      },
+      {
+        "test_case_id": "KY-STD-23",
+        "field": "indicator.code",
+        "expected": "LEL.2.1.ICOPP",
+        "got": "ICOPP"
+      },
+      {
+        "test_case_id": "KY-STD-24",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.2.1.UGMII",
+        "got": "US-KY-2021-UGMII"
+      },
+      {
+        "test_case_id": "KY-STD-24",
+        "field": "sub_strand.code",
+        "expected": "LEL.2.1",
+        "got": "Benchmark 2.1"
+      },
+      {
+        "test_case_id": "KY-STD-24",
+        "field": "indicator.code",
+        "expected": "LEL.2.1.UGMII",
+        "got": "UGMII"
+      },
+      {
+        "test_case_id": "KY-STD-25",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.2.2.ICHNM",
+        "got": "US-KY-2021-ICHNM"
+      },
+      {
+        "test_case_id": "KY-STD-25",
+        "field": "sub_strand.code",
+        "expected": "LEL.2.2",
+        "got": "Benchmark 2.2"
+      },
+      {
+        "test_case_id": "KY-STD-25",
+        "field": "indicator.code",
+        "expected": "LEL.2.2.ICHNM",
+        "got": "ICHNM"
+      },
+      {
+        "test_case_id": "KY-STD-26",
+        "field": "standard_id",
+        "expected": "US-KY-2021-LEL.2.2.UWSPS",
+        "got": "US-KY-2021-UWSPS"
+      },
+      {
+        "test_case_id": "KY-STD-26",
+        "field": "sub_strand.code",
+        "expected": "LEL.2.2",
+        "got": "Benchmark 2.2"
+      },
+      {
+        "test_case_id": "KY-STD-26",
+        "field": "indicator.code",
+        "expected": "LEL.2.2.UWSPS",
+        "got": "UWSPS"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 26 standard_ids unique"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-RESOLVED",
+        "status": "PASS",
+        "detail": "all 26 standards have both a strand and a sub_strand"
+      },
+      {
+        "id": "KY-BENCHMARK-CODE-NORMALIZED",
+        "status": "FAIL",
+        "detail": "9 code(s) carry a structural label, e.g. sub_strand='Benchmark 1.1' on 'US-KY-2021-AAPWI'; 18/78 code(s) not prefixed by parent, e.g. sub_strand='Benchmark 1.1' under parent 'LEL.1' on 'US-KY-2021-AAPWI'"
+      },
+      {
+        "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
+        "status": "FAIL",
+        "detail": "9 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-AAPWI', 'Benchmark 1.1', 'AAPWI')"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]
