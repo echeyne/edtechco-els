@@ -1,0 +1,388 @@
+{
+  "states_audited": [
+    "NV",
+    "KY"
+  ],
+  "annotation_coverage": {
+    "NV": {
+      "n_golden": 46,
+      "n_detected_total": 52,
+      "n_detected_in_annotated_domains": 52,
+      "precision_ceiling_from_annotation_coverage": 0.8846,
+      "golden_is_exhaustive": false
+    },
+    "KY": {
+      "n_golden": 44,
+      "n_detected_total": 44,
+      "n_detected_in_annotated_domains": 44,
+      "precision_ceiling_from_annotation_coverage": 1.0,
+      "golden_is_exhaustive": true
+    }
+  },
+  "fp_audit_first_pass": {
+    "NV": {
+      "n_in_scope_detections": 52,
+      "n_extras_audited": 6,
+      "counts_by_verdict": {
+        "real_repeat_of_matched": 5,
+        "real_unannotated": 0,
+        "real_split_title": 0,
+        "hallucinated": 1
+      },
+      "hallucination_count": 1,
+      "verified_precision": 0.9808,
+      "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+      "verdicts": [
+        {
+          "state": "NV",
+          "level": "indicator",
+          "code": "SS.CI.PK3",
+          "title": "Recognize and resolve conflicts with peers with adult guidance.",
+          "page": 5,
+          "title_contiguous_in_extraction": false,
+          "verdict": "hallucinated",
+          "reason": "title does not repeat a matched element, is not contiguous, AND its spans cannot be reconstructed in reading order anywhere in the extraction - the signature of an invented tail. Confirm against the PDF before counting it.",
+          "verified_by": "claude-first-pass-UNSIGNED",
+          "duplicate_code_of_matched": true,
+          "twin_title": "Recognize and resolve conflicts with peers in an age-appropriate manner.",
+          "this_source_text_is_truncated_prefix_of_twin": true,
+          "title_spans_found_in_order": [
+            {
+              "span": "Recognize and",
+              "found": true
+            },
+            {
+              "span": "resolve conflicts with",
+              "found": true
+            },
+            {
+              "span": "peers with",
+              "found": true
+            },
+            {
+              "span": "adult",
+              "found": true
+            },
+            {
+              "span": "guidance",
+              "found": true
+            }
+          ],
+          "inorder_reconstruction_window_chars": null,
+          "needs_human_check": true
+        },
+        {
+          "state": "NV",
+          "level": "strand",
+          "code": "Social Studies Standard 2",
+          "title": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+          "page": 5,
+          "title_contiguous_in_extraction": true,
+          "verdict": "real_repeat_of_matched",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verified_by": "claude-first-pass-UNSIGNED"
+        },
+        {
+          "state": "NV",
+          "level": "strand",
+          "code": "Social Studies Standard 3",
+          "title": "Demonstrate knowledge of the relationship between people and places.",
+          "page": 6,
+          "title_contiguous_in_extraction": true,
+          "verdict": "real_repeat_of_matched",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verified_by": "claude-first-pass-UNSIGNED"
+        },
+        {
+          "state": "NV",
+          "level": "sub_strand",
+          "code": "S.EO",
+          "title": "Exploration, Observation, and Hypotheses",
+          "page": 10,
+          "title_contiguous_in_extraction": false,
+          "verdict": "real_repeat_of_matched",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verified_by": "claude-first-pass-UNSIGNED",
+          "title_spans_found_in_order": [
+            {
+              "span": "Exploration, Observation,",
+              "found": true
+            },
+            {
+              "span": "and Hypotheses",
+              "found": true
+            }
+          ],
+          "inorder_reconstruction_window_chars": 118,
+          "needs_human_check": false
+        },
+        {
+          "state": "NV",
+          "level": "strand",
+          "code": "Science Standard 2",
+          "title": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+          "page": 10,
+          "title_contiguous_in_extraction": true,
+          "verdict": "real_repeat_of_matched",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verified_by": "claude-first-pass-UNSIGNED"
+        },
+        {
+          "state": "NV",
+          "level": "strand",
+          "code": "Technology Standard 2",
+          "title": "Use technology for communication and to gather and share information.",
+          "page": 15,
+          "title_contiguous_in_extraction": true,
+          "verdict": "real_repeat_of_matched",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verified_by": "claude-first-pass-UNSIGNED"
+        }
+      ]
+    },
+    "KY": {
+      "n_in_scope_detections": 44,
+      "n_extras_audited": 0,
+      "counts_by_verdict": {
+        "real_repeat_of_matched": 0,
+        "real_unannotated": 0,
+        "real_split_title": 0,
+        "hallucinated": 0
+      },
+      "hallucination_count": 0,
+      "verified_precision": 1.0,
+      "verified_precision_definition": "(in-scope detections - hallucinated) / in-scope detections. Counts a correct re-detection of a repeated heading as real, because it is.",
+      "verdicts": []
+    }
+  },
+  "nv_domain_code_diagnosis": {
+    "domains": [
+      {
+        "title": "Social Studies",
+        "golden_code": "SS",
+        "detected_code": "SS",
+        "correct": true,
+        "detected_code_has_derivable_shape": true,
+        "detected_code_grounded": false,
+        "golden_code_would_be_grounded_in_this_source_text": false,
+        "derive_code_from_title_would_yield": "SS",
+        "source_text_excerpt": "Social Studies\nSocial Studies highlights the knowledge children gain about the people and places in their world through "
+      },
+      {
+        "title": "Science",
+        "golden_code": "S",
+        "detected_code": "S",
+        "correct": true,
+        "detected_code_has_derivable_shape": true,
+        "detected_code_grounded": true,
+        "golden_code_would_be_grounded_in_this_source_text": true,
+        "derive_code_from_title_would_yield": "SCIE",
+        "source_text_excerpt": "Science\nThe Science domain is the \"S\" in STEAM (Science, Technology, Engineering,\nthe Arts, and Mathematics) and the sta"
+      },
+      {
+        "title": "Technology",
+        "golden_code": "T",
+        "detected_code": "T",
+        "correct": true,
+        "detected_code_has_derivable_shape": true,
+        "detected_code_grounded": true,
+        "golden_code_would_be_grounded_in_this_source_text": true,
+        "derive_code_from_title_would_yield": "TECH",
+        "source_text_excerpt": "Technology\nTechnology represents the \"T\" in STEAM and is the second domain of the STEAM\nIndicators (S.SI)"
+      }
+    ]
+  },
+  "ky_code_qualification_history": {
+    "runs": [
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/07-26-26/KY-parsing.json",
+        "parsing_timestamp": "2026-07-26T18:55:54.636661+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-01-26/KY-parsing.json",
+        "parsing_timestamp": "2026-08-01T20:02:42.985642+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 4,
+        "unqualified_standard_ids": [
+          "US-KY-2021-TCOPH",
+          "US-KY-2021-IHFC",
+          "US-KY-2021-PARTW",
+          "US-KY-2021-PISGP"
+        ]
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-13-26/KY-parsing.json",
+        "parsing_timestamp": "2026-08-13T19:58:26.790457+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 2,
+        "unqualified_standard_ids": [
+          "US-KY-2021-UMNDW",
+          "US-KY-2021-ESSDP"
+        ]
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-15-26-2/KY-parsing.json",
+        "parsing_timestamp": "2026-08-15T22:31:57.160464+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-15-26/KY-parsing.json",
+        "parsing_timestamp": "2026-08-15T20:30:09.188427+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-16-26/KY-parsing.json",
+        "parsing_timestamp": "2026-08-16T20:42:48.494387+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-22-26-2/KY-parsing.json",
+        "parsing_timestamp": "2026-08-22T18:20:25.115944+00:00",
+        "n_standards": 21,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-22-26-3/KY-parsing.json",
+        "parsing_timestamp": "2026-08-22T20:51:07.066277+00:00",
+        "n_standards": 21,
+        "n_unqualified_indicator_codes": 4,
+        "unqualified_standard_ids": [
+          "US-KY-2021-TCPHS",
+          "US-KY-2021-IHFC",
+          "US-KY-2021-PARTO",
+          "US-KY-2021-PSGPB"
+        ]
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-22-26-4/KY-parsing.json",
+        "parsing_timestamp": "2026-08-22T21:21:49.440250+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-22-26/KY-parsing.json",
+        "parsing_timestamp": "2026-08-21T22:10:35.861149+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-26-26-2/KY-parsing.json",
+        "parsing_timestamp": "2026-08-26T19:45:52.628953+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-26-26/KY-parsing.json",
+        "parsing_timestamp": "2026-08-26T16:01:44.957679+00:00",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      }
+    ],
+    "n_runs": 12,
+    "n_runs_with_at_least_one_unqualified_code": 3,
+    "note": "These are the DEPLOYED BATCHED production runs only. The Task 2 direct-path eval run on the 08-16-26 detection is a further observation and fired (4 unqualified, all in the HMW domain), while the batched run over that same detection did not."
+  },
+  "ky_direct_path_cache_runs": {
+    "runs": [
+      {
+        "file": "parser-KY-2f76820857ecfab2-288c64f1-.json",
+        "detection_hash": "2f76820857ecfab2",
+        "code_hash": "288c64f1",
+        "run": "(graded)",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "parser-KY-2f76820857ecfab2-2ac17ac2-.json",
+        "detection_hash": "2f76820857ecfab2",
+        "code_hash": "2ac17ac2",
+        "run": "(graded)",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 0,
+        "unqualified_standard_ids": []
+      },
+      {
+        "file": "parser-KY-2f76820857ecfab2-a1bfbe67-.json",
+        "detection_hash": "2f76820857ecfab2",
+        "code_hash": "a1bfbe67",
+        "run": "(graded)",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 2,
+        "unqualified_standard_ids": [
+          "US-KY-2021-UMNDW",
+          "US-KY-2021-ESSDP"
+        ]
+      },
+      {
+        "file": "parser-KY-a77909d78ac6fccf-7da92182-.json",
+        "detection_hash": "a77909d78ac6fccf",
+        "code_hash": "7da92182",
+        "run": "(graded)",
+        "n_standards": 26,
+        "n_unqualified_indicator_codes": 9,
+        "unqualified_standard_ids": [
+          "US-KY-2021-AAPWI",
+          "US-KY-2021-FSD",
+          "US-KY-2021-GILPC",
+          "US-KY-2021-IAISE",
+          "US-KY-2021-UNCCE",
+          "US-KY-2021-ICOPP",
+          "US-KY-2021-UGMII",
+          "US-KY-2021-ICHNM",
+          "US-KY-2021-UWSPS"
+        ]
+      },
+      {
+        "file": "parser-KY-b2ece219de770782-a1bfbe67-.json",
+        "detection_hash": "b2ece219de770782",
+        "code_hash": "a1bfbe67",
+        "run": "(graded)",
+        "n_standards": 21,
+        "n_unqualified_indicator_codes": 4,
+        "unqualified_standard_ids": [
+          "US-KY-2021-TCPHS",
+          "US-KY-2021-IHFC",
+          "US-KY-2021-PARTO",
+          "US-KY-2021-PSGPB"
+        ]
+      }
+    ],
+    "by_code_hash": {
+      "288c64f1": {
+        "n_runs": 1,
+        "n_fired": 0,
+        "max_affected": 0
+      },
+      "2ac17ac2": {
+        "n_runs": 1,
+        "n_fired": 0,
+        "max_affected": 0
+      },
+      "a1bfbe67": {
+        "n_runs": 2,
+        "n_fired": 2,
+        "max_affected": 4
+      },
+      "7da92182": {
+        "n_runs": 1,
+        "n_fired": 1,
+        "max_affected": 9
+      }
+    }
+  }
+}

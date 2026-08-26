@@ -1,0 +1,57 @@
+# AZ false-positive audit — sign-off sheet
+
+**You are the annotator of record.** The paper will say:
+
+> *all unmatched in-scope detections of the recorded run were manually audited by the author*
+
+That sentence is **not true for AZ until you sign this**, and AZ's verified precision **1.0** is not quotable before then. Every verdict below carries `verified_by: "claude-first-pass-UNSIGNED"`.
+
+## ✅ No candidate hallucinations in this state
+
+All **7** unmatched detections classify as real document content. There is **no row here needing the deep scrutiny** that Nevada's `SS.CI.PK3` required — no title in this state failed the in-order reconstruction test.
+
+So verified precision is **11/11 = 1.0**: signing this sheet asserts that the rows below are real, not that any of them is a defect.
+
+## How to sign off
+
+1. Open `the state's trimmed subset PDF in standards/`.
+2. Work the groups below — they are ordered least-to-most consequential, and each says how hard to look.
+3. Write `AGREE`, or the corrected verdict, in the **Your call** column.
+4. Fill the block and tell Claude, who will fold the verdicts into the evidence JSON, replacing `claude-first-pass-UNSIGNED`.
+
+```
+ANNOTATOR:        Emily Cheyne
+DATE:             ____-__-__
+VERDICTS CHANGED: ____   (0 if you agree with all 7)
+SIGNED:           [ ]
+```
+
+## Scope — what you are and are not signing
+
+- The detector emitted **11** in-scope elements for AZ.
+- **4** matched a golden entry and are not in question.
+- The **7** rows below are the leftovers. You are ruling on these 7 only.
+
+Verified precision = (in-scope detections − hallucinations) / in-scope detections. With 0 hallucination(s) that is **11/11 = 1.0**.
+
+⚠️ **Do not judge a row by searching the extraction for its title.** This document's layout breaks titles across lines and columns, so real text often does not appear as one contiguous string. That is what Group C is about, and it is why a plain substring test is not the instrument here.
+
+## Group A — real content the golden simply did not annotate (7 rows)
+
+**Why I'm confident:** Each title occurs **verbatim and contiguously** in the extraction. The golden is a spot-check, so unannotated real content is expected and is not a defect.
+
+**What to check:** Confirm a couple really are elements on the page cited. Spot-checking two is enough.
+
+| # | Page | Level | Code | Title | My verdict | Your call |
+|---|---|---|---|---|---|---|
+| A1 | 2 | strand | `Strand 2` | Relationships and Skills | real, unannotated | |
+| A2 | 3 | indicator | `b` | Makes personal preferences known to others. | real, unannotated | |
+| A3 | 3 | indicator | `c` | Demonstrates knowledge of self-identity/autonomy. | real, unannotated | |
+| A4 | 3 | indicator | `d` | Displays an awareness of similarities and differences betw | real, unannotated | |
+| A5 | 3 | indicator | `e` | Demonstrates developmentally appropriate cultural curiosit | real, unannotated | |
+| A6 | 2 | sub_strand | `Concept 2` | Recognizes and Expresses Feelings | real, unannotated | |
+| A7 | 2 | sub_strand | `Concept 3` | Self-Regulation | real, unannotated | |
+
+## If you disagree
+
+If any row above is in fact **not** in the document, tell me which and AZ's verified precision drops by 0.0909 per row. A null result is just as useful — I would rather correct the analysis than carry a wrong claim into the paper.
