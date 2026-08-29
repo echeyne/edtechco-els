@@ -21,9 +21,9 @@ So verified precision is **11/11 = 1.0**: signing this sheet asserts that the ro
 
 ```
 ANNOTATOR:        Emily Cheyne
-DATE:             ____-__-__
-VERDICTS CHANGED: ____   (0 if you agree with all 7)
-SIGNED:           [ ]
+DATE:             2026-08-29
+VERDICTS CHANGED: 0
+SIGNED:           Emily Cheyne
 ```
 
 ## Scope — what you are and are not signing
@@ -44,13 +44,13 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 
 | # | Page | Level | Code | Title | My verdict | Your call |
 |---|---|---|---|---|---|---|
-| A1 | 2 | strand | `Strand 2` | Relationships and Skills | real, unannotated | |
-| A2 | 3 | indicator | `b` | Makes personal preferences known to others. | real, unannotated | |
-| A3 | 3 | indicator | `c` | Demonstrates knowledge of self-identity/autonomy. | real, unannotated | |
-| A4 | 3 | indicator | `d` | Displays an awareness of similarities and differences betw | real, unannotated | |
-| A5 | 3 | indicator | `e` | Demonstrates developmentally appropriate cultural curiosit | real, unannotated | |
-| A6 | 2 | sub_strand | `Concept 2` | Recognizes and Expresses Feelings | real, unannotated | |
-| A7 | 2 | sub_strand | `Concept 3` | Self-Regulation | real, unannotated | |
+| A1 | 2 | strand | `Strand 2` | Relationships and Skills | real, unannotated | AGREE |
+| A2 | 3 | indicator | `b` | Makes personal preferences known to others. | real, unannotated | AGREE |
+| A3 | 3 | indicator | `c` | Demonstrates knowledge of self-identity/autonomy. | real, unannotated | AGREE |
+| A4 | 3 | indicator | `d` | Displays an awareness of similarities and differences betw | real, unannotated | AGREE |
+| A5 | 3 | indicator | `e` | Demonstrates developmentally appropriate cultural curiosit | real, unannotated | AGREE |
+| A6 | 2 | sub_strand | `Concept 2` | Recognizes and Expresses Feelings | real, unannotated | AGREE |
+| A7 | 2 | sub_strand | `Concept 3` | Self-Regulation | real, unannotated | AGREE |
 
 ## If you disagree
 

@@ -21,9 +21,9 @@ So verified precision is **42/42 = 1.0**: signing this sheet asserts that the ro
 
 ```
 ANNOTATOR:        Emily Cheyne
-DATE:             ____-__-__
-VERDICTS CHANGED: ____   (0 if you agree with all 35)
-SIGNED:           [ ]
+DATE:             2026-08-29
+VERDICTS CHANGED: 0
+SIGNED:           Emily Cheyne
 ```
 
 ## Scope — what you are and are not signing
@@ -44,14 +44,14 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 
 | # | Page | Level | Code | Title | My verdict | Your call |
 |---|---|---|---|---|---|---|
-| A1 | 3 | indicator | `4` | Get sufficient rest and exercise to support healthy develo | real, unannotated | |
-| A2 | 3 | indicator | `9` | Eat a variety of nutritious foods. | real, unannotated | |
-| A3 | 4 | strand | `2` | Gross Motor Skills | real, unannotated | |
-| A4 | 4 | strand | `3` | Fine Motor Skills | real, unannotated | |
-| A5 | 4 | indicator | `1` | Develop hand strength and dexterity. | real, unannotated | |
-| A6 | 6 | strand | `1` | Relationships with Adults and Peers | real, unannotated | |
-| A7 | 7 | strand | `2` | Sense of Identity and Belonging | real, unannotated | |
-| A8 | 7 | strand | `3` | Emotional Functioning | real, unannotated | |
+| A1 | 3 | indicator | `4` | Get sufficient rest and exercise to support healthy develo | real, unannotated | AGREE |
+| A2 | 3 | indicator | `9` | Eat a variety of nutritious foods. | real, unannotated | AGREE |
+| A3 | 4 | strand | `2` | Gross Motor Skills | real, unannotated | AGREE |
+| A4 | 4 | strand | `3` | Fine Motor Skills | real, unannotated | AGREE |
+| A5 | 4 | indicator | `1` | Develop hand strength and dexterity. | real, unannotated | AGREE |
+| A6 | 6 | strand | `1` | Relationships with Adults and Peers | real, unannotated | AGREE |
+| A7 | 7 | strand | `2` | Sense of Identity and Belonging | real, unannotated | AGREE |
+| A8 | 7 | strand | `3` | Emotional Functioning | real, unannotated | AGREE |
 
 ## Group C — real titles split across lines or columns (27 rows)
 
@@ -63,33 +63,33 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 
 | # | Page | Level | Code | Title | In-order window | My verdict | Your call |
 |---|---|---|---|---|---|---|---|
-| C1 | 3 | indicator | `2` | Participate in prevention and management of chronic health | 262 chars | real, split | |
-| C2 | 3 | indicator | `3` | Maintain physical growth within the Centers for Disease Co | 304 chars | real, split | |
-| C3 | 3 | indicator | `5` | Complete personal care tasks, such as dressing, brushing t | 379 chars | real, split | |
-| C4 | 3 | indicator | `7` | Follow basic health and safety rules and respond appropria | 220 chars | real, split | |
-| C5 | 3 | indicator | `8` | Distinguish food on a continuum from most healthy to less  | 121 chars | real, split | |
-| C6 | 3 | indicator | `10` | Participate in structured and unstructured physical activi | 184 chars | real, split | |
-| C7 | 3 | indicator | `11` | Recognize the importance of doctor and dentist visits. | 95 chars | real, split | |
-| C8 | 3 | indicator | `12` | Cooperate during doctor and dentist visits and health and  | 174 chars | real, split | |
-| C9 | 4 | indicator | `1` | Develop motor control and balance for a range of physical  | 305 chars | real, split | |
-| C10 | 4 | indicator | `2` | Develop motor coordination and skill in using objects for  | 456 chars | real, split | |
-| C11 | 4 | indicator | `3` | Understand movement concepts, such as control of the body, | 328 chars | real, split | |
-| C12 | 4 | indicator | `2` | Develop eye-hand coordination to use everyday tools, such  | 268 chars | real, split | |
-| C13 | 4 | indicator | `3` | Manipulate a range of objects, such as blocks or books. | 127 chars | real, split | |
-| C14 | 4 | indicator | `4` | Manipulate writing, drawing, and art tools. | 146 chars | real, split | |
-| C15 | 6 | indicator | `1` | Engage in and maintains positive relationships and interac | 269 chars | real, split | |
-| C16 | 6 | indicator | `2` | Engage in prosocial and cooperative behavior with adults. | 219 chars | real, split | |
-| C17 | 6 | indicator | `3` | Engage in and maintains positive interactions and relation | 354 chars | real, split | |
-| C18 | 6 | indicator | `4` | Engage in cooperative play with other children. | 98 chars | real, split | |
-| C19 | 6 | indicator | `5` | Use basic problem-solving skills to resolve conflicts with | 132 chars | real, split | |
-| C20 | 7 | indicator | `1` | Recognize self as a unique individual having own abilities | 344 chars | real, split | |
-| C21 | 7 | indicator | `2` | Express confidence in own skills and positive feelings abo | 247 chars | real, split | |
-| C22 | 7 | indicator | `3` | Have a sense of belonging to family, community, and other  | 169 chars | real, split | |
-| C23 | 7 | indicator | `1` | Express a broad range of emotions and recognize these emot | 272 chars | real, split | |
-| C24 | 7 | indicator | `2` | Express care and concern toward others. | 135 chars | real, split | |
-| C25 | 7 | indicator | `3` | Manage emotions with increasing independence. | 162 chars | real, split | |
-| C26 | 8 | indicator | `1` | Follow classroom rules and routines with increasing indepe | 289 chars | real, split | |
-| C27 | 8 | indicator | `2` | Appropriately handle and take care of classroom materials. | 303 chars | real, split | |
+| C1 | 3 | indicator | `2` | Participate in prevention and management of chronic health | 262 chars | real, split | AGREE |
+| C2 | 3 | indicator | `3` | Maintain physical growth within the Centers for Disease Co | 304 chars | real, split | AGREE |
+| C3 | 3 | indicator | `5` | Complete personal care tasks, such as dressing, brushing t | 379 chars | real, split | AGREE |
+| C4 | 3 | indicator | `7` | Follow basic health and safety rules and respond appropria | 220 chars | real, split | AGREE |
+| C5 | 3 | indicator | `8` | Distinguish food on a continuum from most healthy to less  | 121 chars | real, split | AGREE |
+| C6 | 3 | indicator | `10` | Participate in structured and unstructured physical activi | 184 chars | real, split | AGREE |
+| C7 | 3 | indicator | `11` | Recognize the importance of doctor and dentist visits. | 95 chars | real, split | AGREE |
+| C8 | 3 | indicator | `12` | Cooperate during doctor and dentist visits and health and  | 174 chars | real, split | AGREE |
+| C9 | 4 | indicator | `1` | Develop motor control and balance for a range of physical  | 305 chars | real, split | AGREE |
+| C10 | 4 | indicator | `2` | Develop motor coordination and skill in using objects for  | 456 chars | real, split | AGREE |
+| C11 | 4 | indicator | `3` | Understand movement concepts, such as control of the body, | 328 chars | real, split | AGREE |
+| C12 | 4 | indicator | `2` | Develop eye-hand coordination to use everyday tools, such  | 268 chars | real, split | AGREE |
+| C13 | 4 | indicator | `3` | Manipulate a range of objects, such as blocks or books. | 127 chars | real, split | AGREE |
+| C14 | 4 | indicator | `4` | Manipulate writing, drawing, and art tools. | 146 chars | real, split | AGREE |
+| C15 | 6 | indicator | `1` | Engage in and maintains positive relationships and interac | 269 chars | real, split | AGREE |
+| C16 | 6 | indicator | `2` | Engage in prosocial and cooperative behavior with adults. | 219 chars | real, split | AGREE |
+| C17 | 6 | indicator | `3` | Engage in and maintains positive interactions and relation | 354 chars | real, split | AGREE |
+| C18 | 6 | indicator | `4` | Engage in cooperative play with other children. | 98 chars | real, split | AGREE |
+| C19 | 6 | indicator | `5` | Use basic problem-solving skills to resolve conflicts with | 132 chars | real, split | AGREE |
+| C20 | 7 | indicator | `1` | Recognize self as a unique individual having own abilities | 344 chars | real, split | AGREE |
+| C21 | 7 | indicator | `2` | Express confidence in own skills and positive feelings abo | 247 chars | real, split | AGREE |
+| C22 | 7 | indicator | `3` | Have a sense of belonging to family, community, and other  | 169 chars | real, split | AGREE |
+| C23 | 7 | indicator | `1` | Express a broad range of emotions and recognize these emot | 272 chars | real, split | AGREE |
+| C24 | 7 | indicator | `2` | Express care and concern toward others. | 135 chars | real, split | AGREE |
+| C25 | 7 | indicator | `3` | Manage emotions with increasing independence. | 162 chars | real, split | AGREE |
+| C26 | 8 | indicator | `1` | Follow classroom rules and routines with increasing indepe | 289 chars | real, split | AGREE |
+| C27 | 8 | indicator | `2` | Appropriately handle and take care of classroom materials. | 303 chars | real, split | AGREE |
 
 ## If you disagree
 
