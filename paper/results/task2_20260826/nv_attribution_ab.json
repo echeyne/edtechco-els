@@ -1,0 +1,74 @@
+{
+  "question": "Did the Pass-1 layout-stratified SAMPLER (99b853cc) or rule 4's 'code is REQUIRED, never null' prompt clarification (b35b9666) fix NV's two domain codes and its description truncation between 288c64f1 and 7da92182?",
+  "answer": "THE SAMPLER. Confirmed by controlled A/B.",
+  "date": "2026-08-26",
+  "code_version_hash": "14374dba",
+  "method": "Three arms on ONE frozen extraction (outputs/08-26-26-2/NV-extraction.json), all at 14374dba, all --no-cache, all graded by evaluation.eval_detector.evaluate_state. The ONLY thing that varies between arm A and arm B is which blocks Pass-1 sees: arm B monkeypatches detector._sample_blocks_for_depth_map back to the pre-99b853cc stride implementation. Rule 4's prompt clarification is present in BOTH arms, which is what exonerates it.",
+  "arms": {
+    "A_new_layout_sampler": {
+      "code": "46/46",
+      "code_accuracy": 1.0,
+      "description": "3/3",
+      "recall": 1.0,
+      "n_detected": 52,
+      "code_mismatches": []
+    },
+    "B_old_stride_sampler": {
+      "code": "43/46",
+      "code_accuracy": 0.9348,
+      "description": "2/3",
+      "recall": 1.0,
+      "n_detected": 52,
+      "code_mismatches": [
+        [
+          "NV-DOM-02",
+          "domain",
+          "S",
+          "Science"
+        ],
+        [
+          "NV-DOM-03",
+          "domain",
+          "T",
+          "TECH"
+        ],
+        [
+          "NV-SUB-06",
+          "sub_strand",
+          "T.TT",
+          "TT"
+        ]
+      ]
+    },
+    "C_depth_map_disabled": {
+      "code": "44/46",
+      "code_accuracy": 0.9565,
+      "description": "2/3",
+      "recall": 1.0,
+      "n_detected": 53,
+      "code_mismatches": [
+        {
+          "test_case_id": "NV-DOM-02",
+          "level": "domain",
+          "golden": "S",
+          "detected": "SCIE"
+        },
+        {
+          "test_case_id": "NV-DOM-03",
+          "level": "domain",
+          "golden": "T",
+          "detected": "TECH"
+        }
+      ],
+      "_source": "paper/results/task3_20260826 off-arm; included because it brackets the effect"
+    }
+  },
+  "conclusion": [
+    "Reverting ONLY the sampler reproduces BOTH previously-unattributed failures: the same two domain mismatches (NV-DOM-02 S->Science, NV-DOM-03 T->TECH) that 288c64f1 recorded, and the description truncation (2/3). Nothing else changed, so the sampler is the cause of both.",
+    "Rule 4's prompt clarification (b35b9666) is EXONERATED: it is present in both arms and the failure returns anyway.",
+    "The effect is bracketed by arm C. Disabling the depth map entirely gives 44/46 with the same domain pair, so NV's domain-code failure is depth-map-mediated and the sampler determines whether the map is good enough to prevent it.",
+    "Arm B scores 43/46, slightly WORSE than the 44/46 that 288c64f1 recorded, because of a third mismatch (NV-SUB-06 T.TT -> TT) that is ordinary detector sampling variance. The two DOMAIN mismatches are the stable, reproducible part and are what the A/B turns on."
+  ],
+  "supersedes": "The 'ATTRIBUTION IS NOT ISOLATED' caveat in paper/results/task2_20260826/manifest.json.",
+  "reproduce": "python /tmp/nv_ab_detector.py (script body recorded in this file's sibling findings.md)"
+}

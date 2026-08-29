@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The Early Learning Standards (ELS) Platform: a serverless AWS pipeline that ingests US state early-learning-standards PDFs, uses Bedrock (Claude) + Textract to detect and normalize their hierarchy into a canonical schema, and stores the result in Aurora PostgreSQL. On top of it sit three web apps (Standards Explorer, Planning App, Landing Site). See [README.md](README.md) and [documentation/ARCHITECTURE.md](documentation/ARCHITECTURE.md) for the full picture — this file covers only what isn't obvious from those.
 
+## Never commit changes
+
+Never run `git commit` (or `git push`) in this repo unless the user explicitly asks for that specific commit in that specific message. The user always wants to review the diff themselves before it's committed. Leave changes staged/unstaged in the working tree and tell them what changed instead of committing on their behalf — an earlier approval to commit does not carry forward to later changes.
+
 ## Keep documentation in sync with substantial changes
 
 When a change alters behavior, config, schema, or architecture (not a small bug fix), grep the docs (`README.md`, `CLAUDE.md`, `documentation/*.md`, and any other `.md` that describes the touched area) for stale references and update them in the same pass — don't leave the code change and the docs update as separate follow-up work. A doc describing removed/changed behavior is worse than no doc at all, since it reads as authoritative.
@@ -219,6 +223,23 @@ punctuation = heading), which reads word count and final character only.
 headings sampled **9 of 9**, sample spans pages **1-52**, and Pass-1 reports
 `domain > strand > sub_strand > indicator` — matching the golden — **stably
 across 3 runs**.
+
+**It also fixed Nevada, and that is now measured rather than assumed
+(2026-08-26).** A three-arm A/B on one frozen NV extraction, everything else at
+`14374dba`: the new sampler gives detector code accuracy **46/46** and
+description **3/3**; reverting ONLY the sampler to the old stride version gives
+**43/46** and **2/3**, reproducing the same two domain mismatches
+(`NV-DOM-02` `S`→`Science`, `NV-DOM-03` `T`→`TECH`) that the 2026-08-16 and
+-08-22 recordings both carried; disabling the depth map entirely gives 44/46
+with the same pair. So NV's long-standing domain-code failure was
+depth-map-mediated, the sampler determines whether the map is good enough to
+prevent it, and rule 4's `code is REQUIRED` prompt clarification is exonerated.
+Record: `paper/results/task2_20260826/nv_attribution_ab.json`.
+
+⚠️ This retires the caution in "Where rule 4 looks for a code" that NV's domains
+were expected to keep coming back as `SCIE`/`TECH`. They do not, provided Pass-1
+sees a good sample. The `source_text` citation coupling described there is still
+real — it is simply no longer the binding constraint on this document.
 
 ⚠️ **`DEPTH_MAP_SAMPLE_TOKENS` (6000) is a CLIFF, and Arizona sits on it.** AZ
 has landed on both sides across runs — 6205 tokens in the 06-13/06-14 runs

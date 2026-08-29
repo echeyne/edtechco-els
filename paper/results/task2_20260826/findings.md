@@ -70,47 +70,42 @@ length — `Science` losing to drift because lowercase fails the derivable shape
 `T`. That section's *mechanism* is still correct and should be kept; its
 *outcome* is superseded.
 
-### ⚠️ Attribution: the delta is this week's code, but not isolated to one change
+### ✅ Attribution: the Pass-1 SAMPLER, confirmed by A/B (2026-08-26)
 
-The improvement sits entirely inside `288c64f1 → 7da92182` on the **direct**
-path. Two changes in that window can plausibly move NV detection:
+Settled by a controlled three-arm test on one frozen extraction, all at
+`14374dba`, all `--no-cache`, all graded by the same `evaluate_state`. The only
+thing that varies between A and B is which blocks Pass-1 sees:
 
-1. **Pass-1 layout-stratified sampling** (`99b853cc`). NV is over the
-   `DEPTH_MAP_SAMPLE_TOKENS` budget and does sample, and the new sampler spans
-   pages 1-15 rather than 1-12 and sees 32 layout buckets rather than 29 — so
-   the depth map injected into the detection prompt is built from different
-   evidence.
-2. **Rule 4's "code is REQUIRED, never null" clarification** (`b35b9666`), a
-   detection-prompt change that could shift domain-code emission.
+| arm | code | desc |
+|---|---|---|
+| **A** — new layout-stratified sampler | **46/46** | **3/3** |
+| **B** — old stride sampler, everything else identical | **43/46** | **2/3** |
+| **C** — depth map disabled entirely | 44/46 | 2/3 |
 
-The parser-side repairs (`04e4924c`, `61b7243e`, `51056ea2`) cannot affect this
-arm, and the widened `_DERIVABLE_CODE_RE` (`7da92182`) cannot either — `TECH` is
-four characters and already matched the old `{1,5}` bound. **Do not attribute
-the fix to a single change without an A/B.**
+**Reverting only the sampler reproduces both failures**, including the same two
+domain mismatches `288c64f1` recorded (`NV-DOM-02` S→`Science`, `NV-DOM-03`
+T→`TECH`). Rule 4's prompt clarification (`b35b9666`) is **exonerated** — it is
+present in both arms and the failure returns anyway.
 
-⚠️ An earlier reading of this — that the batched run `outputs/08-22-26-4`
-already produced `S`/`SS`/`T` before this week, so the fix predated it — is
-**not** evidence against the above. That is the direct-vs-batched divergence
-again: the batched path had it right on 2026-08-22 while the direct path,
-recorded the same day at `288c64f1`, still emitted `Science`/`TECH`. The two
-paths simply disagreed.
+Arm C brackets the effect: with no depth map at all NV scores 44/46 with the
+same domain pair, so the failure is depth-map-mediated and the sampler
+determines whether the map is good enough to prevent it.
 
-⚠️ `SS` still passes **by coincidence**: `derive_code_from_title("Social
-Studies")` happens to return `SS` (task2_20260816 §4). A future change to
-`derive_code_from_title` or the connector list turns 46/46 into 45/46 with
-nothing else moving.
+⚠️ Arm B scores 43/46, slightly worse than the 44/46 `288c64f1` recorded, because
+of a third mismatch (`NV-SUB-06` `T.TT`→`TT`) that is ordinary detector sampling
+variance. The two DOMAIN mismatches are the stable part and are what the A/B
+turns on. Full record in `nv_attribution_ab.json`.
 
-## Description accuracy 2/3 → 3/3
+## Description accuracy 2/3 → 3/3 — also the sampler
 
 The `288c64f1` miss was one truncation — the NV Science domain intro cut at 2410
-of 3500 chars on the page 7→8 seam. It is now correct on the direct path.
+of 3500 chars on the page 7→8 seam. The A/B above settles this too: arm B (old
+sampler) scores **2/3** and arm A **3/3**, so the sampler fixed the description
+as well as the codes.
 
-⚠️ CLAUDE.md records `_splice_overlapping_prose` as fixing this on the
-**batched** path while being inert on the **direct** path, because a single
-chunk holds one truncated view with nothing to splice against. This run is the
-direct path, so the splice is not what fixed it — the likeliest cause is again
-the changed Pass-1 sample altering the detection prompt. **One run, not
-isolated.** If the page-break question is reopened, start here.
+⚠️ This is NOT `_splice_overlapping_prose`, which CLAUDE.md records as inert on
+the direct path the eval runs. The mechanism is the depth map injected into the
+detection prompt being built from a better sample.
 
 ## Guardrail 8 still applies to NV — unchanged
 
