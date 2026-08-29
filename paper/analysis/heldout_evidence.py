@@ -213,15 +213,42 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
     """
     review = json.loads((review_dir / state / f"{state}-review.json").read_text())
     text = _extraction_text(state, outputs_dir)
-    matched_keys = {
-        (m["detected"].get("level"), _norm(m["detected"].get("title", "")))
-        for m in review["matched"]
-    }
+    # ⚠️ The repeat key is (level, title, CODE, age_band) — widened 2026-08-26.
+    # It used to be (level, title) alone, which asserts that two elements
+    # sharing a level and a title are the same element re-detected. In CA they
+    # are not: the ELD and FLD domains use the SAME indicator titles, so
+    # "Sharing Explanations and Opinions" appears as `Foundation 1.7` in the
+    # age-banded FLD columns (Early / Later) and again as `Foundation 1.9` in
+    # the ELD proficiency columns (Discovering / Developing / Broadening).
+    # Different code, different domain, different column scheme, different
+    # description — six distinct standards, labelled `real_repeat_of_matched`
+    # and handed to the annotator with an instruction to go confirm a reprint
+    # that does not exist. Caught by Emily Cheyne reviewing CA's sheet,
+    # 2026-08-26; her call ("real, different indicator") was correct.
+    #
+    # A genuine repeat is the SAME element read twice, so it must agree on the
+    # code and the column as well as the title. NV's five reprinted
+    # `<Domain> Standard N:` headings agree on all four and are unaffected.
+    #
+    # Verified precision does not move — both verdicts are "real" and only
+    # `hallucinated` counts against it — but the classification and the
+    # instruction it carries were wrong, and CLAUDE.md's cross-chunk scoping
+    # note ("reconcile by hierarchy position, not title; CA ELD/FLD share
+    # titles") is the same hazard one layer down.
+    def _repeat_key(el: dict) -> tuple:
+        return (
+            el.get("level"),
+            _norm(el.get("title", "")),
+            el.get("code"),
+            el.get("age_band"),
+        )
+
+    matched_keys = {_repeat_key(m["detected"]) for m in review["matched"]}
 
     verdicts = []
     for e in review["extra_in_detected"]:
         title = e.get("title", "")
-        key = (e.get("level"), _norm(title))
+        key = _repeat_key(e)
         # A title ending in '.' is a sentence; the probe drops the final period
         # so a transcription that keeps or drops it is not scored as absent.
         probe = re.sub(r"\s+", " ", title).strip().rstrip(".")
@@ -230,8 +257,10 @@ def fp_audit(state: str, review_dir: Path, outputs_dir: Path) -> dict:
             verdict, reason = "real_repeat_of_matched", (
                 "second detection of an element already matched to a golden; the "
                 "document reprints this heading on another page. Verified "
-                "STRUCTURALLY (same level and title as a matched element), which "
-                "does not depend on the text probe below."
+                "STRUCTURALLY (same level, title, code AND age_band as a "
+                "matched element), which does not depend on the text probe "
+                "below. An element that shares a title but differs in code or "
+                "column is a DIFFERENT element and is not classified here."
             )
         elif contiguous:
             verdict, reason = "real_unannotated", (

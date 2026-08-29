@@ -79,7 +79,7 @@
           "page": 5,
           "title_contiguous_in_extraction": true,
           "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level, title, code AND age_band as a matched element), which does not depend on the text probe below. An element that shares a title but differs in code or column is a DIFFERENT element and is not classified here.",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -90,7 +90,7 @@
           "page": 6,
           "title_contiguous_in_extraction": true,
           "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level, title, code AND age_band as a matched element), which does not depend on the text probe below. An element that shares a title but differs in code or column is a DIFFERENT element and is not classified here.",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -101,7 +101,7 @@
           "page": 10,
           "title_contiguous_in_extraction": false,
           "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level, title, code AND age_band as a matched element), which does not depend on the text probe below. An element that shares a title but differs in code or column is a DIFFERENT element and is not classified here.",
           "verified_by": "claude-first-pass-UNSIGNED",
           "title_spans_found_in_order": [
             {
@@ -124,7 +124,7 @@
           "page": 10,
           "title_contiguous_in_extraction": true,
           "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level, title, code AND age_band as a matched element), which does not depend on the text probe below. An element that shares a title but differs in code or column is a DIFFERENT element and is not classified here.",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -135,7 +135,7 @@
           "page": 15,
           "title_contiguous_in_extraction": true,
           "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level, title, code AND age_band as a matched element), which does not depend on the text probe below. An element that shares a title but differs in code or column is a DIFFERENT element and is not classified here.",
           "verified_by": "claude-first-pass-UNSIGNED"
         }
       ]

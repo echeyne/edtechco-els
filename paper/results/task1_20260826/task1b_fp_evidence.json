@@ -132,8 +132,8 @@
       "n_in_scope_detections": 122,
       "n_extras_audited": 97,
       "counts_by_verdict": {
-        "real_repeat_of_matched": 6,
-        "real_unannotated": 91,
+        "real_repeat_of_matched": 0,
+        "real_unannotated": 97,
         "real_split_title": 0,
         "hallucinated": 0
       },
@@ -907,8 +907,8 @@
           "title": "Sharing Explanations and Opinions",
           "page": 11,
           "title_contiguous_in_extraction": true,
-          "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verdict": "real_unannotated",
+          "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -918,8 +918,8 @@
           "title": "Sharing Explanations and Opinions",
           "page": 11,
           "title_contiguous_in_extraction": true,
-          "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verdict": "real_unannotated",
+          "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -929,8 +929,8 @@
           "title": "Sharing Explanations and Opinions",
           "page": 11,
           "title_contiguous_in_extraction": true,
-          "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verdict": "real_unannotated",
+          "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -940,8 +940,8 @@
           "title": "Participating in Conversations",
           "page": 11,
           "title_contiguous_in_extraction": true,
-          "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verdict": "real_unannotated",
+          "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -951,8 +951,8 @@
           "title": "Participating in Conversations",
           "page": 11,
           "title_contiguous_in_extraction": true,
-          "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verdict": "real_unannotated",
+          "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
@@ -962,8 +962,8 @@
           "title": "Participating in Conversations",
           "page": 11,
           "title_contiguous_in_extraction": true,
-          "verdict": "real_repeat_of_matched",
-          "reason": "second detection of an element already matched to a golden; the document reprints this heading on another page. Verified STRUCTURALLY (same level and title as a matched element), which does not depend on the text probe below.",
+          "verdict": "real_unannotated",
+          "reason": "title found verbatim and contiguously in the extraction; real document content the spot-check golden did not annotate",
           "verified_by": "claude-first-pass-UNSIGNED"
         },
         {
