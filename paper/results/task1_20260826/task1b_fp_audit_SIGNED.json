@@ -1,0 +1,1313 @@
+{
+  "_why_this_file_exists": "heldout_evidence.py HARDCODES verified_by='claude-first-pass-UNSIGNED', so RE-RUNNING IT OVERWRITES THE SIGNATURE in the evidence JSON. This file is the authoritative signed record and is never regenerated. If the evidence JSON is rebuilt, re-apply from here.",
+  "task": "Task 1b \u2014 false-positive audit of the golden four (AZ, CA, CO, TX) at 14374dba",
+  "annotator": "Emily Cheyne",
+  "date": "2026-08-29",
+  "code_version_hash": "14374dba",
+  "git_commit": "4dadb01",
+  "evidence_source": "paper/results/task1_20260826/task1b_fp_evidence.json",
+  "sheets": [
+    "paper/results/task1_20260826/az_fp_audit_signoff.md",
+    "paper/results/task1_20260826/ca_fp_audit_signoff.md",
+    "paper/results/task1_20260826/co_fp_audit_signoff.md",
+    "paper/results/task1_20260826/tx_fp_audit_signoff.md"
+  ],
+  "scope": "All unmatched in-scope detections of the 20260826 recording for AZ, CA, CO and TX. Does NOT cover NV/KY \u2014 that is task2_20260826/nv_fp_audit_SIGNED.json.",
+  "verified_precision": {
+    "AZ": 1.0,
+    "CA": 1.0,
+    "CO": 1.0,
+    "TX": 1.0
+  },
+  "counts": {
+    "AZ": {
+      "real_repeat_of_matched": 0,
+      "real_unannotated": 7,
+      "real_split_title": 0,
+      "hallucinated": 0
+    },
+    "CA": {
+      "real_repeat_of_matched": 0,
+      "real_unannotated": 97,
+      "real_split_title": 0,
+      "hallucinated": 0
+    },
+    "CO": {
+      "real_repeat_of_matched": 0,
+      "real_unannotated": 8,
+      "real_split_title": 27,
+      "hallucinated": 0
+    },
+    "TX": {
+      "real_repeat_of_matched": 0,
+      "real_unannotated": 5,
+      "real_split_title": 12,
+      "hallucinated": 0
+    }
+  },
+  "verdicts": {
+    "AZ": [
+      {
+        "level": "strand",
+        "code": "Strand 2",
+        "title": "Relationships and Skills",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "b",
+        "title": "Makes personal preferences known to others.",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "c",
+        "title": "Demonstrates knowledge of self-identity/autonomy.",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "d",
+        "title": "Displays an awareness of similarities and differences between self and others.",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "e",
+        "title": "Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "Concept 2",
+        "title": "Recognizes and Expresses Feelings",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "Concept 3",
+        "title": "Self-Regulation",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      }
+    ],
+    "CA": [
+      {
+        "level": "strand",
+        "code": "Strand 1.0",
+        "title": "Motivation to Learn",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "CI",
+        "title": "Curiosity and Interest",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.1",
+        "title": "Curiosity and Interest",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.1",
+        "title": "Curiosity and Interest",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "INIT",
+        "title": "Initiative",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "ENGA",
+        "title": "Engagement",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Engagement",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Engagement",
+        "page": 2,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "PERS",
+        "title": "Perseverance",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.4",
+        "title": "Persisting Despite Difficulties",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.4",
+        "title": "Persisting Despite Difficulties",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "WM",
+        "title": "Working Memory",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Working Memory",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Working Memory",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Managing Impulsive Behaviors",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Managing Impulsive Behaviors",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Managing Attention and Distractions",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Managing Attention and Distractions",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "FLEX",
+        "title": "Flexibility",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.4",
+        "title": "Flexibility",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.4",
+        "title": "Flexibility",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Strand 3.0",
+        "title": "Goal-Directed Learning",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "PROB",
+        "title": "Problem-Solving",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.1",
+        "title": "Planning",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.1",
+        "title": "Planning",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.2",
+        "title": "Reflecting and Analyzing",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.2",
+        "title": "Reflecting and Analyzing",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "CE",
+        "title": "Collaborative Effort",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.3",
+        "title": "Problem-Solving Together",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.3",
+        "title": "Problem-Solving Together",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.4",
+        "title": "Understanding Others",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 3.4",
+        "title": "Understanding Others",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.2",
+        "title": "Understanding and Using Words for Categories",
+        "page": 6,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.2",
+        "title": "Understanding and Using Words for Categories",
+        "page": 6,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Understanding and Using Size and Location Words",
+        "page": 6,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Understanding and Using Size and Location Words",
+        "page": 6,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.4",
+        "title": "Using Grammatical Features and Sentence Structure",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.4",
+        "title": "Using Grammatical Features and Sentence Structure",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.5",
+        "title": "Asking Questions",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.5",
+        "title": "Asking Questions",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.6",
+        "title": "Constructing Narratives",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.6",
+        "title": "Constructing Narratives",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Strand 2.0",
+        "title": "Foundational Literacy Skills",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "PA",
+        "title": "Phonological Awareness",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Isolating Initial Sounds",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Isolating Initial Sounds",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Recognizing and Blending Sounds",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Recognizing and Blending Sounds",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Participating in Rhyming and Wordplay",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Participating in Rhyming and Wordplay",
+        "page": 8,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.2",
+        "title": "Using Words",
+        "page": 9,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.2",
+        "title": "Using Words",
+        "page": 9,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.2",
+        "title": "Using Words",
+        "page": 9,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Using Grammatical Features",
+        "page": 9,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Using Grammatical Features",
+        "page": 9,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.3",
+        "title": "Using Grammatical Features",
+        "page": 9,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "LU",
+        "title": "Language Use",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.5",
+        "title": "Communicating Needs",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.5",
+        "title": "Communicating Needs",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.5",
+        "title": "Communicating Needs",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.6",
+        "title": "Understanding Requests and Directions",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.6",
+        "title": "Understanding Requests and Directions",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.6",
+        "title": "Understanding Requests and Directions",
+        "page": 10,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.7",
+        "title": "Asking Questions",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.7",
+        "title": "Asking Questions",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.7",
+        "title": "Asking Questions",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.8",
+        "title": "Constructing Narratives",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.8",
+        "title": "Constructing Narratives",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.8",
+        "title": "Constructing Narratives",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.9",
+        "title": "Sharing Explanations and Opinions",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.9",
+        "title": "Sharing Explanations and Opinions",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.9",
+        "title": "Sharing Explanations and Opinions",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.10",
+        "title": "Participating in Conversations",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.10",
+        "title": "Participating in Conversations",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 1.10",
+        "title": "Participating in Conversations",
+        "page": 11,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Strand 2.0",
+        "title": "Foundational Literacy Skills",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "PA",
+        "title": "Phonological Awareness",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Recognizing and Segmenting Sounds",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Recognizing and Segmenting Sounds",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.1",
+        "title": "Recognizing and Segmenting Sounds",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Recognizing and Blending Sounds",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Recognizing and Blending Sounds",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.2",
+        "title": "Recognizing and Blending Sounds",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Participating in Rhyming and Wordplay",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Participating in Rhyming and Wordplay",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.3",
+        "title": "Participating in Rhyming and Wordplay",
+        "page": 12,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "AP",
+        "title": "Alphabetics and Print",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.4",
+        "title": "Recognizing and Identifying Letters",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.4",
+        "title": "Recognizing and Identifying Letters",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.4",
+        "title": "Recognizing and Identifying Letters",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.5",
+        "title": "Learning Letter-Sound Correspondence",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.5",
+        "title": "Learning Letter-Sound Correspondence",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.5",
+        "title": "Learning Letter-Sound Correspondence",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "CP",
+        "title": "Concepts About Print",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.6",
+        "title": "Understanding the Concept of Print",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.6",
+        "title": "Understanding the Concept of Print",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "Foundation 2.6",
+        "title": "Understanding the Concept of Print",
+        "page": 13,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      }
+    ],
+    "CO": [
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "3",
+        "title": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by height by age.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "4",
+        "title": "Get sufficient rest and exercise to support healthy development.",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "5",
+        "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "7",
+        "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "8",
+        "title": "Distinguish food on a continuum from most healthy to less healthy.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "9",
+        "title": "Eat a variety of nutritious foods.",
+        "page": 3,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "10",
+        "title": "Participate in structured and unstructured physical activities.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "11",
+        "title": "Recognize the importance of doctor and dentist visits.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "12",
+        "title": "Cooperate during doctor and dentist visits and health and developmental screening.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "2",
+        "title": "Gross Motor Skills",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "1",
+        "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobility device, skipping, running, climbing, and hopping.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, catching, kicking, bouncing or hitting balls, and riding a tricycle.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "3",
+        "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directionality), and that the body can move independently or in coordination with other objects.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "3",
+        "title": "Fine Motor Skills",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "1",
+        "title": "Develop hand strength and dexterity.",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "3",
+        "title": "Manipulate a range of objects, such as blocks or books.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "4",
+        "title": "Manipulate writing, drawing, and art tools.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "1",
+        "title": "Relationships with Adults and Peers",
+        "page": 6,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "1",
+        "title": "Engage in and maintains positive relationships and interactions with adults.",
+        "page": 6,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Engage in prosocial and cooperative behavior with adults.",
+        "page": 6,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "3",
+        "title": "Engage in and maintains positive interactions and relationships with other children.",
+        "page": 6,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "4",
+        "title": "Engage in cooperative play with other children.",
+        "page": 6,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "5",
+        "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+        "page": 6,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "2",
+        "title": "Sense of Identity and Belonging",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "1",
+        "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
+        "page": 7,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Express confidence in own skills and positive feelings about self.",
+        "page": 7,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "3",
+        "title": "Have a sense of belonging to family, community, and other groups.",
+        "page": 7,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "3",
+        "title": "Emotional Functioning",
+        "page": 7,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "1",
+        "title": "Express a broad range of emotions and recognize these emotions in self and others.",
+        "page": 7,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Express care and concern toward others.",
+        "page": 7,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "3",
+        "title": "Manage emotions with increasing independence.",
+        "page": 7,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "1",
+        "title": "Follow classroom rules and routines with increasing independence.",
+        "page": 8,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "2",
+        "title": "Appropriately handle and take care of classroom materials.",
+        "page": 8,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      }
+    ],
+    "TX": [
+      {
+        "level": "indicator",
+        "code": "PK3.I.A.1",
+        "title": "Child is building competence in controlling own body movements.",
+        "page": 2,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.A.1",
+        "title": "Child is aware of where own body is in space and respects personal boundaries.",
+        "page": 2,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.A.3",
+        "title": "Child begins to show awareness of own abilities.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.A.3",
+        "title": "Child shows reasonable opinion of his own abilities and limitations.",
+        "page": 3,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.A.4",
+        "title": "Child shows initiative in trying new activities but may not persist when obstacles or challenges arise.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.A.4",
+        "title": "Child shows initiative in trying new activities and demonstrates perseverance when attempting to overcome obstacles or challenges.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "1",
+        "title": "Behavior Control",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.B.1.a",
+        "title": "Child follows simple rules and routines when assisted by adults.",
+        "page": 4,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.B.1.a",
+        "title": "Child follows classroom rules and routines with occasional reminders from adults.",
+        "page": 4,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.B.1.b",
+        "title": "Child takes care of and manages classroom materials with adult assistance.",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.B.1.b",
+        "title": "Child takes care of and manages classroom materials.",
+        "page": 5,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.B.1.c",
+        "title": "Child manages own behavior with adult guidance and assistance.",
+        "page": 5,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.B.1.c",
+        "title": "Child regulates own behavior with occasional reminders or assistance from adults.",
+        "page": 5,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.B.2.a",
+        "title": "Child recognizes and expresses a range of emotions.",
+        "page": 5,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.B.2.a",
+        "title": "Child begins to understand the connection between emotions and behaviors.",
+        "page": 5,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK3.I.B.2.c",
+        "title": "Child manages intensity of emotions with adult assistance.",
+        "page": 6,
+        "verdict": "real_unannotated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "indicator",
+        "code": "PK4.I.B.2.c",
+        "title": "Child is able to manage intensity of emotions more consistently, although adult guidance is sometimes necessary.",
+        "page": 6,
+        "verdict": "real_split_title",
+        "verified_by": "Emily Cheyne"
+      }
+    ]
+  },
+  "verdicts_changed": {
+    "AZ": 0,
+    "CO": 0,
+    "TX": 0,
+    "CA": "6 \u2014 CLASSIFICATION ONLY. Six ELD proficiency-column rows (Foundation 1.9 x3, Foundation 1.10 x3) were first presented as Group B repeats; Emily identified them as distinct indicators and the classifier was corrected (commit eb3952e) to key on (level, title, code, age_band). They are real_unannotated here. No verdict moved to or from 'hallucinated', so CA verified precision is unchanged."
+  },
+  "_tx_a1_note": "TX row A1 (sub_strand '1', 'Behavior Control') was left blank on the sheet while the signature block records VERDICTS CHANGED: 0. Per that block the classifier verdict stands unoverridden, so it is recorded as real_unannotated. TX has no Group D, so this cannot affect its verified precision either way."
+}

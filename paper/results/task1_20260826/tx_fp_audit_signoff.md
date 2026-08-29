@@ -21,9 +21,9 @@ So verified precision is **25/25 = 1.0**: signing this sheet asserts that the ro
 
 ```
 ANNOTATOR:        Emily Cheyne
-DATE:             ____-__-__
-VERDICTS CHANGED: ____   (0 if you agree with all 17)
-SIGNED:           [ ]
+DATE:             2026-08-29
+VERDICTS CHANGED: 0
+SIGNED:           Emily Cheyne
 ```
 
 ## Scope — what you are and are not signing
@@ -45,10 +45,10 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 | # | Page | Level | Code | Title | My verdict | Your call |
 |---|---|---|---|---|---|---|
 | A1 | 4 | sub_strand | `1` | Behavior Control | real, unannotated | |
-| A2 | 4 | indicator | `PK4.I.B.1.a` | Child follows classroom rules and routines with occasional | real, unannotated | |
-| A3 | 5 | indicator | `PK3.I.B.1.b` | Child takes care of and manages classroom materials with a | real, unannotated | |
-| A4 | 5 | indicator | `PK4.I.B.1.b` | Child takes care of and manages classroom materials. | real, unannotated | |
-| A5 | 6 | indicator | `PK3.I.B.2.c` | Child manages intensity of emotions with adult assistance. | real, unannotated | |
+| A2 | 4 | indicator | `PK4.I.B.1.a` | Child follows classroom rules and routines with occasional | real, unannotated | AGREE |
+| A3 | 5 | indicator | `PK3.I.B.1.b` | Child takes care of and manages classroom materials with a | real, unannotated | AGREE |
+| A4 | 5 | indicator | `PK4.I.B.1.b` | Child takes care of and manages classroom materials. | real, unannotated | AGREE |
+| A5 | 6 | indicator | `PK3.I.B.2.c` | Child manages intensity of emotions with adult assistance. | real, unannotated | AGREE |
 
 ## Group C — real titles split across lines or columns (12 rows)
 
@@ -60,18 +60,18 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 
 | # | Page | Level | Code | Title | In-order window | My verdict | Your call |
 |---|---|---|---|---|---|---|---|
-| C1 | 2 | indicator | `PK3.I.A.1` | Child is building competence in controlling own body movem | 111 chars | real, split | |
-| C2 | 2 | indicator | `PK4.I.A.1` | Child is aware of where own body is in space and respects  | 109 chars | real, split | |
-| C3 | 3 | indicator | `PK3.I.A.3` | Child begins to show awareness of own abilities. | 51 chars | real, split | |
-| C4 | 3 | indicator | `PK4.I.A.3` | Child shows reasonable opinion of his own abilities and li | 115 chars | real, split | |
-| C5 | 4 | indicator | `PK3.I.A.4` | Child shows initiative in trying new activities but may no | 148 chars | real, split | |
-| C6 | 4 | indicator | `PK4.I.A.4` | Child shows initiative in trying new activities and demons | 196 chars | real, split | |
-| C7 | 4 | indicator | `PK3.I.B.1.a` | Child follows simple rules and routines when assisted by a | 157 chars | real, split | |
-| C8 | 5 | indicator | `PK3.I.B.1.c` | Child manages own behavior with adult guidance and assista | 109 chars | real, split | |
-| C9 | 5 | indicator | `PK4.I.B.1.c` | Child regulates own behavior with occasional reminders or  | 124 chars | real, split | |
-| C10 | 5 | indicator | `PK3.I.B.2.a` | Child recognizes and expresses a range of emotions. | 125 chars | real, split | |
-| C11 | 5 | indicator | `PK4.I.B.2.a` | Child begins to understand the connection between emotions | 85 chars | real, split | |
-| C12 | 6 | indicator | `PK4.I.B.2.c` | Child is able to manage intensity of emotions more consist | 182 chars | real, split | |
+| C1 | 2 | indicator | `PK3.I.A.1` | Child is building competence in controlling own body movem | 111 chars | real, split | AGREE |
+| C2 | 2 | indicator | `PK4.I.A.1` | Child is aware of where own body is in space and respects  | 109 chars | real, split | AGREE |
+| C3 | 3 | indicator | `PK3.I.A.3` | Child begins to show awareness of own abilities. | 51 chars | real, split | AGREE |
+| C4 | 3 | indicator | `PK4.I.A.3` | Child shows reasonable opinion of his own abilities and li | 115 chars | real, split | AGREE |
+| C5 | 4 | indicator | `PK3.I.A.4` | Child shows initiative in trying new activities but may no | 148 chars | real, split | AGREE |
+| C6 | 4 | indicator | `PK4.I.A.4` | Child shows initiative in trying new activities and demons | 196 chars | real, split | AGREE |
+| C7 | 4 | indicator | `PK3.I.B.1.a` | Child follows simple rules and routines when assisted by a | 157 chars | real, split | AGREE |
+| C8 | 5 | indicator | `PK3.I.B.1.c` | Child manages own behavior with adult guidance and assista | 109 chars | real, split | AGREE |
+| C9 | 5 | indicator | `PK4.I.B.1.c` | Child regulates own behavior with occasional reminders or  | 124 chars | real, split | AGREE |
+| C10 | 5 | indicator | `PK3.I.B.2.a` | Child recognizes and expresses a range of emotions. | 125 chars | real, split | AGREE |
+| C11 | 5 | indicator | `PK4.I.B.2.a` | Child begins to understand the connection between emotions | 85 chars | real, split | AGREE |
+| C12 | 6 | indicator | `PK4.I.B.2.c` | Child is able to manage intensity of emotions more consist | 182 chars | real, split | AGREE |
 
 ## If you disagree
 

@@ -1,0 +1,89 @@
+{
+  "_why_this_file_exists": "heldout_evidence.py HARDCODES verified_by='claude-first-pass-UNSIGNED', so RE-RUNNING IT OVERWRITES THE SIGNATURE in the evidence JSON. This file is the authoritative signed record and is never regenerated. If the evidence JSON is rebuilt, re-apply from here.",
+  "task": "Task 2 \u2014 false-positive audit of the held-out states (NV, KY) at 14374dba",
+  "annotator": "Emily Cheyne",
+  "date": "2026-08-29",
+  "code_version_hash": "14374dba",
+  "git_commit": "4dadb01",
+  "evidence_source": "paper/results/task2_20260826/heldout_evidence.json",
+  "sheets": [
+    "paper/results/task2_20260826/nv_fp_audit_signoff.md",
+    "paper/results/task2_20260826/ky_fp_audit_signoff.md"
+  ],
+  "scope": "Nevada's 6 unmatched in-scope detections. KY required no audit (detection-exhaustive golden, 0 extras). Does NOT cover AZ/CA/CO/TX \u2014 that is task1_20260826/task1b_fp_audit_SIGNED.json.",
+  "verified_precision": {
+    "NV": 0.9808,
+    "KY": 1.0
+  },
+  "counts": {
+    "NV": {
+      "real_repeat_of_matched": 5,
+      "real_unannotated": 0,
+      "real_split_title": 0,
+      "hallucinated": 1
+    },
+    "KY": {
+      "real_repeat_of_matched": 0,
+      "real_unannotated": 0,
+      "real_split_title": 0,
+      "hallucinated": 0
+    }
+  },
+  "verdicts": {
+    "NV": [
+      {
+        "level": "indicator",
+        "code": "SS.CI.PK3",
+        "title": "Recognize and resolve conflicts with peers with adult guidance.",
+        "page": 5,
+        "verdict": "hallucinated",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Social Studies Standard 2",
+        "title": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+        "page": 5,
+        "verdict": "real_repeat_of_matched",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Social Studies Standard 3",
+        "title": "Demonstrate knowledge of the relationship between people and places.",
+        "page": 6,
+        "verdict": "real_repeat_of_matched",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "sub_strand",
+        "code": "S.EO",
+        "title": "Exploration, Observation, and Hypotheses",
+        "page": 10,
+        "verdict": "real_repeat_of_matched",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Science Standard 2",
+        "title": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+        "page": 10,
+        "verdict": "real_repeat_of_matched",
+        "verified_by": "Emily Cheyne"
+      },
+      {
+        "level": "strand",
+        "code": "Technology Standard 2",
+        "title": "Use technology for communication and to gather and share information.",
+        "page": 15,
+        "verdict": "real_repeat_of_matched",
+        "verified_by": "Emily Cheyne"
+      }
+    ],
+    "KY": []
+  },
+  "verdicts_changed": {
+    "NV": 0,
+    "KY": 0
+  }
+}

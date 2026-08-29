@@ -21,7 +21,7 @@ Inputs (all under paper/results/):
     task2_<RUN_TAG>/summary.json                 (NV, KY)
     task1_<RUN_TAG>/task1b_fp_audit_SIGNED.json  verified precision, golden four
     task2_<RUN_TAG>/nv_fp_audit_SIGNED.json      verified precision, held-out
-    task3_<RUN_TAG>/ablation_comparison.json     depth-map on/off
+    task3_<ABLATION_TAG>/ablation_comparison.json depth-map on/off (SEPARATE TAG — see below)
     task4_<BASELINE_TAG>/baseline_comparison.json  rule-based baseline vs LLM
     task3_stability_<STABILITY_TAG>/stability_analysis.json   (optional)
     task8_<STATS_TAG>/dataset_stats.json           descriptive stats
@@ -48,7 +48,24 @@ RESULTS_DIR = PAPER_DIR / "results"
 TABLES_DIR = PAPER_DIR / "tables"
 
 # The recorded freeze these tables describe. Edit ONLY this after a re-record.
-RUN_TAG = "20260822"
+RUN_TAG = "20260826"
+
+# ⚠️ The depth-map ablation is tagged SEPARATELY (2026-08-29). Task 3 has not
+# been re-recorded at 14374dba, and it cannot simply ride RUN_TAG because it is
+# the one table whose subject this week's work changed: Task 3 measures what the
+# Pass-1 depth map buys, and `99b853cc` replaced the depth-map SAMPLER (stride →
+# layout-stratified). So its "depth map ON" arm was recorded with the OLD
+# sampler — the one that read KY as a 3-level document.
+#
+# Pointing this at 20260822 keeps the ablation table internally consistent and
+# reproducible from its own recording, at the cost of citing a different hash
+# from the headline tables. That is disclosed in the table's own source note.
+# It is very likely CONSERVATIVE: the new sampler strictly improved what Pass-1
+# sees, so a re-record should widen the on/off gap rather than narrow it.
+#
+# Re-recording Task 3 at the current hash is the right fix and is the top
+# outstanding paper item.
+ABLATION_TAG = "20260822"
 STABILITY_TAG = "20260823"
 BASELINE_TAG = "20260823"
 STATS_TAG = "20260823"
@@ -152,7 +169,7 @@ def build_parser_table(par, tiers):
 
 
 def build_ablation_table(abl, stab):
-    L = header(f"paper/results/task3_{RUN_TAG}/ablation_comparison.json",
+    L = header(f"paper/results/task3_{ABLATION_TAG}/ablation_comparison.json",
                f"task3_stability_{STABILITY_TAG}/stability_analysis.json")
     pooled = abl["aggregate"]["pooled_by_level"]
     L += [r"\begin{table}", r"  \centering", r"  \begin{tabular}{lrr}", r"    \hline",
@@ -448,7 +465,7 @@ def main():
     t1 = load_json(RESULTS_DIR / f"task1_{RUN_TAG}" / "summary.json")
     t2 = load_json(RESULTS_DIR / f"task2_{RUN_TAG}" / "summary.json")
     tiers = load_json(RESULTS_DIR / "corpus_tiers.json")
-    abl = load_json(RESULTS_DIR / f"task3_{RUN_TAG}" / "ablation_comparison.json")
+    abl = load_json(RESULTS_DIR / f"task3_{ABLATION_TAG}" / "ablation_comparison.json")
     sp = RESULTS_DIR / f"task3_stability_{STABILITY_TAG}" / "stability_analysis.json"
     stab = load_json(sp) if sp.exists() else None
     bp = RESULTS_DIR / f"task4_{BASELINE_TAG}" / "baseline_comparison.json"
