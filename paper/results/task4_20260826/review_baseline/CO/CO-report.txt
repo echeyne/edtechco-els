@@ -1,0 +1,25 @@
+
+=== CO ===
+  golden:   7
+  detected: 97
+  matched:  4
+  precision: 0.082  recall: 0.571  f1: 0.143
+  per-level:
+    domain      tp=2   fp=6   fn=0   p=0.25 r=1.00
+    indicator   tp=0   fp=1   fn=3   p=0.00 r=0.00
+    strand      tp=2   fp=38  fn=0   p=0.05 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    strand     → strand     : 2
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 2/4 (0.500) — graded over matched pairs whose golden annotates one
+    [DESC/MISMATCH] CO-DOM-01 (domain): mismatch (29 vs 758 golden chars, diverges at char 0): golden "The Physical Development & Health domain describes children'…" != detected 'Suggested Supports Adults may'
+    [DESC/MISSING] CO-DOM-02 (domain): missing: detector emitted no description (640 golden chars)
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (3): ['CO-IND-01', 'CO-IND-02', 'CO-IND-03']
+  extra detected (in-scope FPs) (45): [('strand', '1'), ('strand', '2'), ('strand', '3'), ('strand', '4'), ('strand', '5'), ('strand', '6'), ('strand', '7'), ('strand', '8'), ('strand', '9'), ('strand', '10')]…
+  ignored (out-of-scope domains): 48
+  regression cases:
+    [PASS] CO-NO-SUB-STRAND — no sub_strands (correct for CO)
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand

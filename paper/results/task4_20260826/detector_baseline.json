@@ -1,0 +1,1319 @@
+[
+  {
+    "state": "AZ",
+    "precision": 0.5,
+    "recall": 0.8,
+    "f1": 0.6153846153846154,
+    "code_accuracy": 1.0,
+    "code_matches": 3,
+    "code_total": 3,
+    "code_mismatches": [],
+    "description_accuracy": 0.3333333333333333,
+    "description_matches": 1,
+    "description_total": 3,
+    "description_truncations": 0,
+    "description_mismatches": [
+      {
+        "test_case_id": "AZ-DOM-SED",
+        "level": "domain",
+        "status": "missing",
+        "detail": "missing: detector emitted no description (1389 golden chars)"
+      },
+      {
+        "test_case_id": "AZ-SUB-SE-1-1",
+        "level": "sub_strand",
+        "status": "missing",
+        "detail": "missing: detector emitted no description (200 golden chars)"
+      }
+    ],
+    "matched": 4,
+    "n_golden": 5,
+    "n_detected": 103,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 1,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 1,
+        "fp": 3,
+        "fn": 1
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "strand": {
+        "strand": 1
+      },
+      "sub_strand": {
+        "sub_strand": 1
+      },
+      "indicator": {
+        "indicator": 1
+      }
+    },
+    "missing_test_cases": [
+      "AZ-IND-SE-1-1-a"
+    ],
+    "extra_elements": [
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "indicator",
+        "b"
+      ],
+      [
+        "indicator",
+        "d"
+      ],
+      [
+        "indicator",
+        "e"
+      ]
+    ],
+    "ignored_out_of_scope": 95,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "N/A \u2014 the rule-based baseline has no Pass-1 depth-map stage to grade",
+    "regressions": [
+      {
+        "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "no examples-section headers emitted"
+      },
+      {
+        "id": "AZ-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CA",
+    "precision": 0.18181818181818182,
+    "recall": 0.64,
+    "f1": 0.2831858407079646,
+    "code_accuracy": 1.0,
+    "code_matches": 16,
+    "code_total": 16,
+    "code_mismatches": [],
+    "description_accuracy": 0.6,
+    "description_matches": 3,
+    "description_total": 5,
+    "description_truncations": 0,
+    "description_mismatches": [
+      {
+        "test_case_id": "CA-IND-05-EARLY",
+        "level": "indicator",
+        "status": "mismatch",
+        "detail": "mismatch (556 vs 47 golden chars, diverges at char 47): golden '\u2026' != detected '\u2026 Use both common and less common word forms and sentence for\u2026'"
+      },
+      {
+        "test_case_id": "CA-IND-05-LATER",
+        "level": "indicator",
+        "status": "mismatch",
+        "detail": "mismatch (556 vs 56 golden chars, diverges at char 8): golden '\u2026tailed descriptions, opinions, and explanations.' != detected '\u2026scriptions, opinions, and explanations. Use both common and \u2026'"
+      }
+    ],
+    "matched": 16,
+    "n_golden": 25,
+    "n_detected": 90,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 16,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 3,
+        "fp": 4,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 5,
+        "fp": 13,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 5,
+        "fp": 39,
+        "fn": 9
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "strand": {
+        "strand": 3
+      },
+      "sub_strand": {
+        "sub_strand": 5
+      },
+      "indicator": {
+        "indicator": 5
+      }
+    },
+    "missing_test_cases": [
+      "CA-IND-01-LATER",
+      "CA-IND-02-LATER",
+      "CA-IND-06-LATER",
+      "CA-IND-03-DISCOVERING",
+      "CA-IND-03-DEVELOPING",
+      "CA-IND-03-BROADENING",
+      "CA-IND-04-DISCOVERING",
+      "CA-IND-04-DEVELOPING",
+      "CA-IND-04-BROADENING"
+    ],
+    "extra_elements": [
+      [
+        "strand",
+        "Strand 1.0"
+      ],
+      [
+        "sub_strand",
+        "CI"
+      ],
+      [
+        "indicator",
+        "Foundation 1.1"
+      ],
+      [
+        "sub_strand",
+        "INIT"
+      ],
+      [
+        "sub_strand",
+        "ENGA"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "sub_strand",
+        "PERS"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "sub_strand",
+        "WM"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "sub_strand",
+        "FLEX"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "strand",
+        "Strand 3.0"
+      ],
+      [
+        "sub_strand",
+        "PROB"
+      ],
+      [
+        "indicator",
+        "Foundation 3.1"
+      ],
+      [
+        "indicator",
+        "Foundation 3.2"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "sub_strand",
+        "CE"
+      ],
+      [
+        "indicator",
+        "Foundation 3.3"
+      ],
+      [
+        "indicator",
+        "Foundation 3.4"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "domain",
+        "AL"
+      ],
+      [
+        "domain",
+        "FLD"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "domain",
+        "FLD"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "indicator",
+        "Foundation 1.7"
+      ],
+      [
+        "strand",
+        "Strand 2.0"
+      ],
+      [
+        "sub_strand",
+        "PA"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "domain",
+        "FLD"
+      ],
+      [
+        "domain",
+        "FLD"
+      ],
+      [
+        "domain",
+        "ELD"
+      ],
+      [
+        "indicator",
+        "Foundation 1.1"
+      ],
+      [
+        "indicator",
+        "Foundation 1.2"
+      ],
+      [
+        "indicator",
+        "Foundation 1.3"
+      ],
+      [
+        "indicator",
+        "Foundation 1.4"
+      ],
+      [
+        "sub_strand",
+        "LU"
+      ],
+      [
+        "indicator",
+        "Foundation 1.5"
+      ],
+      [
+        "indicator",
+        "Foundation 1.6"
+      ],
+      [
+        "domain",
+        "ELD"
+      ],
+      [
+        "indicator",
+        "Foundation 1.7"
+      ],
+      [
+        "indicator",
+        "Foundation 1.8"
+      ],
+      [
+        "indicator",
+        "Foundation 1.9"
+      ],
+      [
+        "indicator",
+        "Foundation 1.10"
+      ],
+      [
+        "domain",
+        "ELD"
+      ],
+      [
+        "strand",
+        "Strand 2.0"
+      ],
+      [
+        "sub_strand",
+        "PA"
+      ],
+      [
+        "indicator",
+        "Foundation 2.1"
+      ],
+      [
+        "indicator",
+        "Foundation 2.2"
+      ],
+      [
+        "indicator",
+        "Foundation 2.3"
+      ],
+      [
+        "domain",
+        "ELD"
+      ],
+      [
+        "sub_strand",
+        "AP"
+      ],
+      [
+        "indicator",
+        "Foundation 2.4"
+      ],
+      [
+        "indicator",
+        "Foundation 2.5"
+      ],
+      [
+        "sub_strand",
+        "CP"
+      ],
+      [
+        "indicator",
+        "Foundation 2.6"
+      ],
+      [
+        "domain",
+        "ELD"
+      ]
+    ],
+    "ignored_out_of_scope": 2,
+    "age_band_drops": [
+      "CA-IND-01-LATER",
+      "CA-IND-02-LATER",
+      "CA-IND-06-LATER",
+      "CA-IND-03-DISCOVERING",
+      "CA-IND-03-DEVELOPING",
+      "CA-IND-03-BROADENING",
+      "CA-IND-04-DISCOVERING",
+      "CA-IND-04-DEVELOPING",
+      "CA-IND-04-BROADENING"
+    ],
+    "depth_map_passed": null,
+    "depth_map_detail": "N/A \u2014 the rule-based baseline has no Pass-1 depth-map stage to grade",
+    "regressions": [
+      {
+        "id": "CA-AGE-COLUMNS-EMITTED",
+        "status": "FAIL",
+        "detail": "13 Early/Later foundations missing a column: ['Foundation 1.1', 'Foundation 1.4', 'Foundation 2.1', 'Foundation 2.2', 'Foundation 2.3']\u2026"
+      },
+      {
+        "id": "CA-AGE-LABEL-NOT-IN-TITLE",
+        "status": "PASS",
+        "detail": "no age-band labels in titles"
+      },
+      {
+        "id": "CA-NO-LETTERED-EXAMPLES-AS-INDICATORS",
+        "status": "PASS",
+        "detail": "no lettered examples emitted as indicators"
+      },
+      {
+        "id": "CA-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "CO",
+    "precision": 0.08163265306122448,
+    "recall": 0.5714285714285714,
+    "f1": 0.14285714285714285,
+    "code_accuracy": 1.0,
+    "code_matches": 4,
+    "code_total": 4,
+    "code_mismatches": [],
+    "description_accuracy": 0.5,
+    "description_matches": 2,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": [
+      {
+        "test_case_id": "CO-DOM-01",
+        "level": "domain",
+        "status": "mismatch",
+        "detail": "mismatch (29 vs 758 golden chars, diverges at char 0): golden \"The Physical Development & Health domain describes children'\u2026\" != detected 'Suggested Supports Adults may'"
+      },
+      {
+        "test_case_id": "CO-DOM-02",
+        "level": "domain",
+        "status": "missing",
+        "detail": "missing: detector emitted no description (640 golden chars)"
+      }
+    ],
+    "matched": 4,
+    "n_golden": 7,
+    "n_detected": 97,
+    "per_level": {
+      "domain": {
+        "tp": 2,
+        "fp": 6,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 2,
+        "fp": 38,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 3
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 2
+      },
+      "strand": {
+        "strand": 2
+      }
+    },
+    "missing_test_cases": [
+      "CO-IND-01",
+      "CO-IND-02",
+      "CO-IND-03"
+    ],
+    "extra_elements": [
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "strand",
+        "4"
+      ],
+      [
+        "strand",
+        "5"
+      ],
+      [
+        "strand",
+        "6"
+      ],
+      [
+        "strand",
+        "7"
+      ],
+      [
+        "strand",
+        "8"
+      ],
+      [
+        "strand",
+        "9"
+      ],
+      [
+        "strand",
+        "10"
+      ],
+      [
+        "strand",
+        "11"
+      ],
+      [
+        "strand",
+        "12"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "UORPA"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "domain",
+        "PDH"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "strand",
+        "4"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "strand",
+        "4"
+      ],
+      [
+        "strand",
+        "5"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "domain",
+        "SED"
+      ]
+    ],
+    "ignored_out_of_scope": 48,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "N/A \u2014 the rule-based baseline has no Pass-1 depth-map stage to grade",
+    "regressions": [
+      {
+        "id": "CO-NO-SUB-STRAND",
+        "status": "PASS",
+        "detail": "no sub_strands (correct for CO)"
+      },
+      {
+        "id": "CO-NUMERIC-STRANDS",
+        "status": "PASS",
+        "detail": "all numeric-prefixed sections correctly classified as strand"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "TX",
+    "precision": 0.13513513513513514,
+    "recall": 0.625,
+    "f1": 0.22222222222222224,
+    "code_accuracy": 0.8,
+    "code_matches": 4,
+    "code_total": 5,
+    "code_mismatches": [
+      {
+        "test_case_id": "TX-IND-01-PK3",
+        "level": "indicator",
+        "golden": "PK3.I.A.2",
+        "detected": "PK3.1.A.2"
+      }
+    ],
+    "description_accuracy": 0.0,
+    "description_matches": 0,
+    "description_total": 1,
+    "description_truncations": 1,
+    "description_mismatches": [
+      {
+        "test_case_id": "TX-DOM-01",
+        "level": "domain",
+        "status": "truncated",
+        "detail": "truncated: 1049/1650 chars"
+      }
+    ],
+    "matched": 5,
+    "n_golden": 8,
+    "n_detected": 45,
+    "per_level": {
+      "domain": {
+        "tp": 1,
+        "fp": 9,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 6,
+        "fn": 2
+      },
+      "indicator": {
+        "tp": 4,
+        "fp": 17,
+        "fn": 0
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 1
+      },
+      "indicator": {
+        "indicator": 4
+      }
+    },
+    "missing_test_cases": [
+      "TX-STR-01",
+      "TX-STR-02",
+      "TX-SUB-01"
+    ],
+    "extra_elements": [
+      [
+        "indicator",
+        "LRPSS"
+      ],
+      [
+        "strand",
+        "A"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.1"
+      ],
+      [
+        "domain",
+        "I"
+      ],
+      [
+        "indicator",
+        "PK3.I.A.3"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.3"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "domain",
+        "I"
+      ],
+      [
+        "indicator",
+        "PK3.1.A.4"
+      ],
+      [
+        "indicator",
+        "PK4.I.A.4"
+      ],
+      [
+        "strand",
+        "B"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.a"
+      ],
+      [
+        "domain",
+        "I"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.1.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.b"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.1.c"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.a"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.a"
+      ],
+      [
+        "domain",
+        "I"
+      ],
+      [
+        "indicator",
+        "PK3.I.B.2.c"
+      ],
+      [
+        "indicator",
+        "PK4.I.B.2.c"
+      ],
+      [
+        "domain",
+        "SED"
+      ],
+      [
+        "strand",
+        "VI"
+      ],
+      [
+        "strand",
+        "A"
+      ],
+      [
+        "indicator",
+        "PK4.VI.A.1"
+      ]
+    ],
+    "ignored_out_of_scope": 8,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "N/A \u2014 the rule-based baseline has no Pass-1 depth-map stage to grade",
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT",
+        "status": "PASS",
+        "detail": "PK3 count=9, PK4 count=15"
+      },
+      {
+        "id": "TX-AGE-BAND-SET",
+        "status": "FAIL",
+        "detail": "1/25 indicators have age_band != PK3/PK4 (e.g. None)"
+      },
+      {
+        "id": "TX-NO-COLUMN-HEADER-AS-INDICATOR",
+        "status": "PASS",
+        "detail": "no column headers emitted as indicators"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "NV",
+    "precision": 0.16666666666666666,
+    "recall": 0.06521739130434782,
+    "f1": 0.09375000000000001,
+    "code_accuracy": 0.3333333333333333,
+    "code_matches": 1,
+    "code_total": 3,
+    "code_mismatches": [
+      {
+        "test_case_id": "NV-DOM-02",
+        "level": "domain",
+        "golden": "S",
+        "detected": "SCIE"
+      },
+      {
+        "test_case_id": "NV-DOM-03",
+        "level": "domain",
+        "golden": "T",
+        "detected": "TECH"
+      }
+    ],
+    "description_accuracy": 0.0,
+    "description_matches": 0,
+    "description_total": 3,
+    "description_truncations": 1,
+    "description_mismatches": [
+      {
+        "test_case_id": "NV-DOM-01",
+        "level": "domain",
+        "status": "missing",
+        "detail": "missing: detector emitted no description (1959 golden chars)"
+      },
+      {
+        "test_case_id": "NV-DOM-02",
+        "level": "domain",
+        "status": "truncated",
+        "detail": "truncated: 2410/3500 chars"
+      },
+      {
+        "test_case_id": "NV-DOM-03",
+        "level": "domain",
+        "status": "mismatch",
+        "detail": "mismatch (2041 vs 4627 golden chars, diverges at char 1): golden '\u2026echnology represents the \"T\" in STEAM and is the second doma\u2026' != detected '\u2026his new Technology domain was added to the Nevada Pre-Kinder\u2026'"
+      }
+    ],
+    "matched": 3,
+    "n_golden": 46,
+    "n_detected": 24,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 11,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 12
+      },
+      "sub_strand": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 7
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 24
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      }
+    },
+    "missing_test_cases": [
+      "NV-STR-01",
+      "NV-SUB-01",
+      "NV-IND-01",
+      "NV-IND-02",
+      "NV-IND-03",
+      "NV-IND-04",
+      "NV-STR-02",
+      "NV-SUB-02",
+      "NV-IND-05",
+      "NV-IND-06",
+      "NV-IND-07",
+      "NV-IND-08",
+      "NV-IND-09",
+      "NV-IND-10",
+      "NV-IND-11",
+      "NV-STR-03",
+      "NV-SUB-03",
+      "NV-IND-12",
+      "NV-IND-13",
+      "NV-STR-04",
+      "NV-STR-05",
+      "NV-STR-06",
+      "NV-SUB-04",
+      "NV-IND-14",
+      "NV-IND-15",
+      "NV-IND-16",
+      "NV-IND-17",
+      "NV-STR-07",
+      "NV-SUB-05",
+      "NV-IND-18",
+      "NV-IND-19",
+      "NV-STR-08",
+      "NV-STR-09",
+      "NV-STR-10",
+      "NV-SUB-06",
+      "NV-IND-20",
+      "NV-IND-21",
+      "NV-IND-22",
+      "NV-STR-11",
+      "NV-SUB-07",
+      "NV-IND-23",
+      "NV-IND-24",
+      "NV-STR-12"
+    ],
+    "extra_elements": [
+      [
+        "domain",
+        "SS"
+      ],
+      [
+        "domain",
+        "SS"
+      ],
+      [
+        "domain",
+        "SS"
+      ],
+      [
+        "domain",
+        "SS"
+      ],
+      [
+        "domain",
+        "SCIE"
+      ],
+      [
+        "domain",
+        "SCIE"
+      ],
+      [
+        "domain",
+        "SCIE"
+      ],
+      [
+        "domain",
+        "SCIE"
+      ],
+      [
+        "sub_strand",
+        "U.S"
+      ],
+      [
+        "strand",
+        "1"
+      ],
+      [
+        "strand",
+        "2"
+      ],
+      [
+        "strand",
+        "3"
+      ],
+      [
+        "domain",
+        "TECH"
+      ],
+      [
+        "domain",
+        "TECH"
+      ],
+      [
+        "domain",
+        "TECH"
+      ]
+    ],
+    "ignored_out_of_scope": 6,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "N/A \u2014 the rule-based baseline has no Pass-1 depth-map stage to grade",
+    "regressions": [
+      {
+        "id": "NV-NO-COLUMN-HEADER-AS-ELEMENT",
+        "status": "PASS",
+        "detail": "24 elements: no column headers, captions or footnotes emitted, no age_band set"
+      },
+      {
+        "id": "NV-SUB-STRAND-CODE-FROM-DOCUMENT",
+        "status": "FAIL",
+        "detail": "1/1 sub_strand code(s) are invented abbreviations rather than the document's caption, e.g. ('U.S', 'Department of Health and Human Services ')"
+      },
+      {
+        "id": "NV-FOUR-LEVEL-HIERARCHY",
+        "status": "FAIL",
+        "detail": "missing levels: ['indicator']"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  },
+  {
+    "state": "KY",
+    "precision": 1.0,
+    "recall": 0.29545454545454547,
+    "f1": 0.456140350877193,
+    "code_accuracy": 1.0,
+    "code_matches": 13,
+    "code_total": 13,
+    "code_mismatches": [],
+    "description_accuracy": null,
+    "description_matches": 0,
+    "description_total": 0,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 13,
+    "n_golden": 44,
+    "n_detected": 14,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 5
+      },
+      "sub_strand": {
+        "tp": 10,
+        "fp": 0,
+        "fn": 0
+      },
+      "indicator": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 26
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "sub_strand": {
+        "sub_strand": 10
+      }
+    },
+    "missing_test_cases": [
+      "KY-STR-01",
+      "KY-IND-01",
+      "KY-IND-02",
+      "KY-IND-03",
+      "KY-IND-04",
+      "KY-IND-05",
+      "KY-IND-06",
+      "KY-IND-07",
+      "KY-IND-08",
+      "KY-STR-02",
+      "KY-IND-09",
+      "KY-IND-10",
+      "KY-IND-11",
+      "KY-IND-12",
+      "KY-IND-13",
+      "KY-STR-03",
+      "KY-IND-14",
+      "KY-IND-15",
+      "KY-IND-16",
+      "KY-IND-17",
+      "KY-STR-04",
+      "KY-IND-18",
+      "KY-IND-19",
+      "KY-IND-20",
+      "KY-IND-21",
+      "KY-STR-05",
+      "KY-IND-22",
+      "KY-IND-23",
+      "KY-IND-24",
+      "KY-IND-25",
+      "KY-IND-26"
+    ],
+    "extra_elements": [],
+    "ignored_out_of_scope": 1,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "N/A \u2014 the rule-based baseline has no Pass-1 depth-map stage to grade",
+    "regressions": [
+      {
+        "id": "KY-BENCHMARK-IS-SUB-STRAND",
+        "status": "PASS",
+        "detail": "all 10 Benchmark elements classified as sub_strand"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-HIERARCHY",
+        "status": "FAIL",
+        "detail": "missing levels: ['indicator', 'strand']"
+      },
+      {
+        "id": "KY-STRAND-CODE-KEEPS-FULL-LABEL",
+        "status": "PASS",
+        "detail": "all 8 labelled headings keep their full label as the code"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  }
+]

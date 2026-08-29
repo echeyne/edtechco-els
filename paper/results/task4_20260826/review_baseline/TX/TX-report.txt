@@ -1,0 +1,27 @@
+
+=== TX ===
+  golden:   8
+  detected: 45
+  matched:  5
+  precision: 0.135  recall: 0.625  f1: 0.222
+  per-level:
+    domain      tp=1   fp=9   fn=0   p=0.10 r=1.00
+    indicator   tp=4   fp=17  fn=0   p=0.19 r=1.00
+    strand      tp=0   fp=6   fn=2   p=0.00 r=0.00
+    sub_strand  tp=0   fp=0   fn=1   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+  code accuracy: 4/5 (0.800) — graded over matched pairs only
+    [CODE] TX-IND-01-PK3 (indicator): golden 'PK3.I.A.2' != detected 'PK3.1.A.2'
+  description accuracy: 0/1 (0.000) — graded over matched pairs whose golden annotates one; 1 truncated
+    [DESC/TRUNCATED] TX-DOM-01 (domain): truncated: 1049/1650 chars
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (3): ['TX-STR-01', 'TX-STR-02', 'TX-SUB-01']
+  extra detected (in-scope FPs) (32): [('indicator', 'LRPSS'), ('strand', 'A'), ('domain', 'SED'), ('indicator', 'PK4.I.A.1'), ('domain', 'I'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('domain', 'SED'), ('domain', 'I'), ('indicator', 'PK3.1.A.4')]…
+  ignored (out-of-scope domains): 8
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=9, PK4 count=15
+    [FAIL] TX-AGE-BAND-SET — 1/25 indicators have age_band != PK3/PK4 (e.g. None)
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators

@@ -1,0 +1,24 @@
+
+=== KY ===
+  golden:   44
+  detected: 14
+  matched:  13
+  precision: 1.000  recall: 0.295  f1: 0.456
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=0   fp=0   fn=26  p=0.00 r=0.00
+    strand      tp=0   fp=0   fn=5   p=0.00 r=0.00
+    sub_strand  tp=10  fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    sub_strand → sub_strand : 10
+  code accuracy: 13/13 (1.000) — graded over matched pairs only
+  description accuracy: n/a (golden annotates no descriptions)
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (31): ['KY-STR-01', 'KY-IND-01', 'KY-IND-02', 'KY-IND-03', 'KY-IND-04', 'KY-IND-05', 'KY-IND-06', 'KY-IND-07', 'KY-IND-08', 'KY-STR-02']…
+  ignored (out-of-scope domains): 1
+  regression cases:
+    [PASS] KY-BENCHMARK-IS-SUB-STRAND — all 10 Benchmark elements classified as sub_strand
+    [FAIL] KY-FOUR-LEVEL-HIERARCHY — missing levels: ['indicator', 'strand']
+    [PASS] KY-STRAND-CODE-KEEPS-FULL-LABEL — all 8 labelled headings keep their full label as the code

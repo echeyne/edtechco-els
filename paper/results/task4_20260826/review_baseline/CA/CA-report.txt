@@ -1,0 +1,30 @@
+
+=== CA ===
+  golden:   25
+  detected: 90
+  matched:  16
+  precision: 0.182  recall: 0.640  f1: 0.283
+  per-level:
+    domain      tp=3   fp=16  fn=0   p=0.16 r=1.00
+    indicator   tp=5   fp=39  fn=9   p=0.11 r=0.36
+    strand      tp=3   fp=4   fn=0   p=0.43 r=1.00
+    sub_strand  tp=5   fp=13  fn=0   p=0.28 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 5
+    strand     → strand     : 3
+    sub_strand → sub_strand : 5
+  code accuracy: 16/16 (1.000) — graded over matched pairs only
+  description accuracy: 3/5 (0.600) — graded over matched pairs whose golden annotates one
+    [DESC/MISMATCH] CA-IND-05-EARLY (indicator): mismatch (556 vs 47 golden chars, diverges at char 47): golden '…' != detected '… Use both common and less common word forms and sentence for…'
+    [DESC/MISMATCH] CA-IND-05-LATER (indicator): mismatch (556 vs 56 golden chars, diverges at char 8): golden '…tailed descriptions, opinions, and explanations.' != detected '…scriptions, opinions, and explanations. Use both common and …'
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops (9): ['CA-IND-01-LATER', 'CA-IND-02-LATER', 'CA-IND-06-LATER', 'CA-IND-03-DISCOVERING', 'CA-IND-03-DEVELOPING', 'CA-IND-03-BROADENING', 'CA-IND-04-DISCOVERING', 'CA-IND-04-DEVELOPING']…
+  missing test cases (9): ['CA-IND-01-LATER', 'CA-IND-02-LATER', 'CA-IND-06-LATER', 'CA-IND-03-DISCOVERING', 'CA-IND-03-DEVELOPING', 'CA-IND-03-BROADENING', 'CA-IND-04-DISCOVERING', 'CA-IND-04-DEVELOPING', 'CA-IND-04-BROADENING']
+  extra detected (in-scope FPs) (72): [('strand', 'Strand 1.0'), ('sub_strand', 'CI'), ('indicator', 'Foundation 1.1'), ('sub_strand', 'INIT'), ('sub_strand', 'ENGA'), ('indicator', 'Foundation 1.3'), ('domain', 'AL'), ('sub_strand', 'PERS'), ('indicator', 'Foundation 1.4'), ('sub_strand', 'WM')]…
+  ignored (out-of-scope domains): 2
+  regression cases:
+    [FAIL] CA-AGE-COLUMNS-EMITTED — 13 Early/Later foundations missing a column: ['Foundation 1.1', 'Foundation 1.4', 'Foundation 2.1', 'Foundation 2.2', 'Foundation 2.3']…
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [PASS] CA-FOUR-LEVEL-HIERARCHY — all four levels present

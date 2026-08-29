@@ -1,0 +1,37 @@
+{
+  "task": "Task 4 refresh — rule-based baseline vs the LLM detector, six states",
+  "date": "2026-08-26",
+  "baseline_for_comparison": "paper/results/task4_20260823/ (LLM arm at 288c64f1)",
+  "supersedes": "paper/results/task4_20260823/baseline_comparison.json",
+  "why_refreshed": "The rule-based arm is deterministic and did not change. The LLM arm did: task4_20260823 quoted the 288c64f1 Task 1/2 detector reports, which have been superseded. That left the paper with two tables disagreeing about Nevada — detector_headline reporting code 46/46 while baseline_comparison reported 44/46. Same underlying system, different recordings. Refreshed to remove the inconsistency; the CONCLUSION was never in question.",
+  "git_commit": "419b770",
+  "code_version_hash": "14374dba",
+  "bedrock_tokens_spent_by_this_task": 0,
+  "cost_note": "ZERO Bedrock. The baseline is pure Python (evaluation/baselines/rule_based.py, deterministic, no cache because it needs none), and the LLM arm is NOT re-run — compare_baseline.py reads the frozen Task 1 + Task 2 detector reports.",
+  "corpus_tier": "_only_subset. Both arms now run on outputs/08-26-26-2, so they share one extraction — the 20260823 recording had the baseline on 08-22-26-4 against an LLM arm recorded there too, which was internally consistent but is no longer the current extraction.",
+  "models": {
+    "baseline": "NONE — evaluation/baselines/rule_based.py is pure Python, deterministic",
+    "llm_arm_detector": "us.anthropic.claude-opus-4-6-v1 (frozen, not re-run)",
+    "llm_arm_depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0 (frozen, not re-run)"
+  },
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "# 1. The baseline run. A SINGLE invocation is safe: it cannot throttle and is deterministic,",
+    "#    so the per-state-invocation rule from tasking/arxiv_paper.md does not apply.",
+    "python -m evaluation.baselines.eval_baseline --extraction-dir outputs/08-26-26-2 --state AZ --state CA --state CO --state TX --state NV --state KY --report-json paper/results/task4_20260826/detector_baseline.json --output-dir paper/results/task4_20260826/review_baseline > paper/results/task4_20260826/baseline_run.log 2>&1",
+    "# 2. The comparison, including the baseline's own FP audit and the brittleness probe.",
+    "python paper/analysis/compare_baseline.py --llm-report paper/results/task1_20260826/detector_golden4.json --llm-report paper/results/task2_20260826/detector_heldout2.json --baseline-report paper/results/task4_20260826/detector_baseline.json --baseline-review-dir paper/results/task4_20260826/review_baseline --llm-review-dir paper/results/task1_20260826/review_detector --llm-review-dir paper/results/task2_20260826/review_detector --outputs-dir outputs/08-26-26-2 --probe-brittleness --out paper/results/task4_20260826/baseline_comparison.json",
+    "# 3. The table (guardrail 6 — never hand-typed).",
+    "python paper/analysis/generate_tables.py"
+  ],
+  "headline": {
+    "unchanged": "mean recall LLM 1.0000 vs baseline 0.4995 — IDENTICAL to the 20260823 recording. The rule-based arm is deterministic, so its side did not move, and the LLM arm was already 1.0000.",
+    "what_moved": "Only the LLM column's NV cells: code accuracy 44/46 -> 46/46 and raw precision 86.8 -> 88.5, tracking the superseding Task 2 recording.",
+    "conclusion_unaffected": "Pooled recall by level is untouched: LLM 13/13 domain, 25/25 strand, 24/24 sub_strand, 73/73 indicator, against rule-based 13/13, 6/25, 16/24, 10/73. The gap was never close enough for two NV cells to matter."
+  },
+  "caveats": [
+    "GUARDRAIL 8 applies to the raw precision columns in BOTH arms, and the table says so. Raw precision on a spot-check golden measures annotation coverage, not correctness. It is reported for both arms here only because the alternative — verified precision — is documented in task4_20260823/findings.md as substantively BACKWARDS for this comparison: a rule-based extractor copies text verbatim and so scores verified precision 1.000 in five of six states against the LLM's 0.9966. That number is real and must never sit in a table beside the LLM's.",
+    "AZ raw precision remains HIGHER for the baseline (50.0 vs 41.7). Not a quality result — raw precision rewards under-emission, and the baseline puts fewer detections in scope against a 5-element golden. Recorded per guardrail 7."
+  ],
+  "see_also": "paper/results/task4_20260823/findings.md — the precision caveats travel with these results and were not re-derived here."
+}

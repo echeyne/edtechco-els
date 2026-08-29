@@ -181,5 +181,13 @@
     "code_version_hash_at_head_2026_08_29": "14374dba",
     "hash_chain_since": "288c64f1 -> b35b9666 (absent-code fix, 2026-08-24) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE) -> 14374dba (label-form de-label + collapse idempotence, 2026-08-26)",
     "affected_by_the_chain": "\u26a0\ufe0f Same subject as task3_20260822 \u2014 depth-map on/off stability. The sampler change affects the ON arm, so these stability numbers describe the old sampler."
+  },
+  "status_at_2026_08_29": {
+    "verdict": "STILL VALID \u2014 deliberately NOT re-recorded.",
+    "why": "This describes the OLD Pass-1 sampler (pre-99b853cc), so it is nominally stale. Its CLAIM survives unchanged: that the ablation result is reproducible rather than a one-off. On-arm recall was 1.0000 with stdev 0.0 across all 18 runs, which the new sampler cannot improve on, and CO/KY degraded in every off-arm run.",
+    "checked_against": "The single off-arm run in task3_20260826 lands INSIDE this analysis's recorded envelope: CO 0.8571 against the range [0.7143, 0.8571] and KY 0.8864 against [0.8864, 0.9773].",
+    "one_stale_detail": "This analysis flagged CO-NO-SUB-STRAND as unstable across runs (FAIL, FAIL, PASS). In the 14374dba ablation it PASSES and has dropped off the newly-failing list \u2014 a small real improvement in the ON arm attributable to the new sampler, CO being one of the two states that samples. That is a footnote, not a claim.",
+    "cost_of_re_recording": "~450,000 Opus tokens (18 runs, 9 per arm) \u2014 roughly 18% of the daily cap.",
+    "re_record_trigger": "Do it if a reviewer challenges the REPRODUCIBILITY of the ablation, or if the single-run task3_20260826 numbers are ever quoted as though they carried variance bounds. Absent that, the spend buys precision the argument does not need."
   }
 }

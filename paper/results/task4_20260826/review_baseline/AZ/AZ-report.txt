@@ -1,0 +1,28 @@
+
+=== AZ ===
+  golden:   5
+  detected: 103
+  matched:  4
+  precision: 0.500  recall: 0.800  f1: 0.615
+  per-level:
+    domain      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    indicator   tp=1   fp=3   fn=1   p=0.25 r=0.50
+    strand      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=1   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 1
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 3/3 (1.000) — graded over matched pairs only
+  description accuracy: 1/3 (0.333) — graded over matched pairs whose golden annotates one
+    [DESC/MISSING] AZ-DOM-SED (domain): missing: detector emitted no description (1389 golden chars)
+    [DESC/MISSING] AZ-SUB-SE-1-1 (sub_strand): missing: detector emitted no description (200 golden chars)
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (1): ['AZ-IND-SE-1-1-a']
+  extra detected (in-scope FPs) (4): [('domain', 'SED'), ('indicator', 'b'), ('indicator', 'd'), ('indicator', 'e')]
+  ignored (out-of-scope domains): 95
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present

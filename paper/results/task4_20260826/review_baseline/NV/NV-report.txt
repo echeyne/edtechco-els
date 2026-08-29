@@ -1,0 +1,29 @@
+
+=== NV ===
+  golden:   46
+  detected: 24
+  matched:  3
+  precision: 0.167  recall: 0.065  f1: 0.094
+  per-level:
+    domain      tp=3   fp=11  fn=0   p=0.21 r=1.00
+    indicator   tp=0   fp=0   fn=24  p=0.00 r=0.00
+    strand      tp=0   fp=3   fn=12  p=0.00 r=0.00
+    sub_strand  tp=0   fp=1   fn=7   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+  code accuracy: 1/3 (0.333) — graded over matched pairs only
+    [CODE] NV-DOM-02 (domain): golden 'S' != detected 'SCIE'
+    [CODE] NV-DOM-03 (domain): golden 'T' != detected 'TECH'
+  description accuracy: 0/3 (0.000) — graded over matched pairs whose golden annotates one; 1 truncated
+    [DESC/MISSING] NV-DOM-01 (domain): missing: detector emitted no description (1959 golden chars)
+    [DESC/TRUNCATED] NV-DOM-02 (domain): truncated: 2410/3500 chars
+    [DESC/MISMATCH] NV-DOM-03 (domain): mismatch (2041 vs 4627 golden chars, diverges at char 1): golden '…echnology represents the "T" in STEAM and is the second doma…' != detected '…his new Technology domain was added to the Nevada Pre-Kinder…'
+  depth-map: ABLATED — N/A — the rule-based baseline has no Pass-1 depth-map stage to grade
+  age-band drops: 0
+  missing test cases (43): ['NV-STR-01', 'NV-SUB-01', 'NV-IND-01', 'NV-IND-02', 'NV-IND-03', 'NV-IND-04', 'NV-STR-02', 'NV-SUB-02', 'NV-IND-05', 'NV-IND-06']…
+  extra detected (in-scope FPs) (15): [('domain', 'SS'), ('domain', 'SS'), ('domain', 'SS'), ('domain', 'SS'), ('domain', 'SCIE'), ('domain', 'SCIE'), ('domain', 'SCIE'), ('domain', 'SCIE'), ('sub_strand', 'U.S'), ('strand', '1')]…
+  ignored (out-of-scope domains): 6
+  regression cases:
+    [PASS] NV-NO-COLUMN-HEADER-AS-ELEMENT — 24 elements: no column headers, captions or footnotes emitted, no age_band set
+    [FAIL] NV-SUB-STRAND-CODE-FROM-DOCUMENT — 1/1 sub_strand code(s) are invented abbreviations rather than the document's caption, e.g. ('U.S', 'Department of Health and Human Services ')
+    [FAIL] NV-FOUR-LEVEL-HIERARCHY — missing levels: ['indicator']

@@ -59,7 +59,7 @@ RUN_TAG = "20260826"
 # that the older number was conservative.
 ABLATION_TAG = "20260826"
 STABILITY_TAG = "20260823"
-BASELINE_TAG = "20260823"
+BASELINE_TAG = "20260826"
 STATS_TAG = "20260823"
 
 # Runs that have been superseded. Pointing RUN_TAG at one of these is almost
