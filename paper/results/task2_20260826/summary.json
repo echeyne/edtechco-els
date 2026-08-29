@@ -236,16 +236,16 @@
     },
     "KY": {
       "coverage": 1.0,
-      "field_accuracy": 0.9423,
+      "field_accuracy": 1.0,
       "matched": 26,
       "n_golden": 26,
       "n_parsed": 26,
-      "fully_correct": 17,
+      "fully_correct": 26,
       "dropped": [],
       "duplicated": [],
       "id_collisions": [],
       "per_field_accuracy": {
-        "standard_id": 0.6538,
+        "standard_id": 1.0,
         "country": 1.0,
         "state": 1.0,
         "version_year": 1.0,
@@ -257,21 +257,20 @@
         "strand.code": 1.0,
         "strand.name": 1.0,
         "strand.description": 1.0,
-        "sub_strand.code": 0.6538,
+        "sub_strand.code": 1.0,
         "sub_strand.name": 1.0,
         "sub_strand.description": 1.0,
-        "indicator.code": 0.6538,
+        "indicator.code": 1.0,
         "indicator.name": 1.0,
         "indicator.description": 1.0
       },
-      "n_field_mismatches": 27,
+      "n_field_mismatches": 0,
       "field_decomposition": {
-        "value_correct": 363,
+        "value_correct": 390,
         "null_correct": 78,
-        "value_wrong": 27,
         "total_cells": 468,
         "share_of_cells_whose_golden_is_null": 0.1667,
-        "field_accuracy_over_asserted_cells_only": 0.9308
+        "field_accuracy_over_asserted_cells_only": 1.0
       },
       "regressions": [
         {
@@ -286,13 +285,13 @@
         },
         {
           "id": "KY-BENCHMARK-CODE-NORMALIZED",
-          "status": "FAIL",
-          "detail": "9 code(s) carry a structural label, e.g. sub_strand='Benchmark 1.1' on 'US-KY-2021-AAPWI'; 18/78 code(s) not prefixed by parent, e.g. sub_strand='Benchmark 1.1' under parent 'LEL.1' on 'US-KY-2021-AAPWI'"
+          "status": "PASS",
+          "detail": "26 standards: no label text in any code, all 78 child codes prefixed by their parent"
         },
         {
           "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
-          "status": "FAIL",
-          "detail": "9 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-AAPWI', 'Benchmark 1.1', 'AAPWI')"
+          "status": "PASS",
+          "detail": "all 26 standards keep sub_strand and indicator codes distinct and nested"
         }
       ]
     }

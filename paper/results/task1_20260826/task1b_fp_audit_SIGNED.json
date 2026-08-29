@@ -4,7 +4,6 @@
   "annotator": "Emily Cheyne",
   "date": "2026-08-29",
   "code_version_hash": "14374dba",
-  "git_commit": "4dadb01",
   "evidence_source": "paper/results/task1_20260826/task1b_fp_evidence.json",
   "sheets": [
     "paper/results/task1_20260826/az_fp_audit_signoff.md",
@@ -1308,6 +1307,5 @@
     "CO": 0,
     "TX": 0,
     "CA": "6 \u2014 CLASSIFICATION ONLY. Six ELD proficiency-column rows (Foundation 1.9 x3, Foundation 1.10 x3) were first presented as Group B repeats; Emily identified them as distinct indicators and the classifier was corrected (commit eb3952e) to key on (level, title, code, age_band). They are real_unannotated here. No verdict moved to or from 'hallucinated', so CA verified precision is unchanged."
-  },
-  "_tx_a1_note": "TX row A1 (sub_strand '1', 'Behavior Control') was left blank on the sheet while the signature block records VERDICTS CHANGED: 0. Per that block the classifier verdict stands unoverridden, so it is recorded as real_unannotated. TX has no Group D, so this cannot affect its verified precision either way."
+  }
 }

@@ -4,9 +4,9 @@
     "golden_standards": 26,
     "parsed": 26,
     "matched": 26,
-    "fully_correct": 17,
+    "fully_correct": 26,
     "coverage": 1.0,
-    "field_accuracy": 0.9423,
+    "field_accuracy": 1.0,
     "dropped": 0,
     "duplicated": 0,
     "id_collisions": 0
@@ -1100,7 +1100,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-AAPWI",
+        "standard_id": "US-KY-2021-LEL.1.1.AAPWI",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1115,12 +1115,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 1.1",
+          "code": "LEL.1.1",
           "name": "Attends and responds to nonverbal and verbal communication of others in a variety of situations.",
           "description": null
         },
         "indicator": {
-          "code": "AAPWI",
+          "code": "LEL.1.1.AAPWI",
           "name": "Attends to an adult or peer who is communicating verbally or nonverbally.",
           "description": "As Mykyla listens to her caregiver talking about cookies, she smiles and nods enthusiastically.\nAt story time, Max watches as his teacher signs \"Mama, Do You Love Me?\"\nLiam looks at his caregiver when he talks about the day's activities.\nWilliam focuses on the classmate who is telling a story during share time."
         },
@@ -1162,7 +1162,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-FSD",
+        "standard_id": "US-KY-2021-LEL.1.1.FSD",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1177,12 +1177,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 1.1",
+          "code": "LEL.1.1",
           "name": "Attends and responds to nonverbal and verbal communication of others in a variety of situations.",
           "description": null
         },
         "indicator": {
-          "code": "FSD",
+          "code": "LEL.1.1.FSD",
           "name": "Follows simple directions.",
           "description": "When the teacher asks Carter to choose a center to begin working, Carter points to the Art Center.\nWhen his teacher signs, \"Get your coat and wait at the door,\" Carlos does so.\nWhen the teacher states, \"Throw away your cup and your napkin and come to the rug,\" Olivia complies.\nWhen the therapist asks Mary and Albert to get out the box of markers, put it on the table, and come over for circle time, they both follow his directions."
         },
@@ -1224,7 +1224,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-GILPC",
+        "standard_id": "US-KY-2021-LEL.1.1.GILPC",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1239,12 +1239,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 1.1",
+          "code": "LEL.1.1",
           "name": "Attends and responds to nonverbal and verbal communication of others in a variety of situations.",
           "description": null
         },
         "indicator": {
-          "code": "GILPC",
+          "code": "LEL.1.1.GILPC",
           "name": "Gains information by listening to/processing communications from others.",
           "description": "After listening to the story, Sarah tells her friend, \"There are three bears in Goldilocks\".\nKelly's teacher tells the class that a nurse is going to visit the classroom tomorrow. At the end of the day, Kelly tells her mommy, \"A nurse is coming to our class!\"\nAfter a fire fighter visits their class, the teacher asks what materials the children think they need in the fire station they are creating in dramatic play. Paisley responds, \"We need hats and coats and boots!\"\nEmily listens to the book The Snowy Day, and signs to the teacher that she thinks Peter's snowball went away because his house was warm."
         },
@@ -1286,7 +1286,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-IAISE",
+        "standard_id": "US-KY-2021-LEL.1.1.IAISE",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1301,12 +1301,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 1.1",
+          "code": "LEL.1.1",
           "name": "Attends and responds to nonverbal and verbal communication of others in a variety of situations.",
           "description": null
         },
         "indicator": {
-          "code": "IAISE",
+          "code": "LEL.1.1.IAISE",
           "name": "Interprets or applies information someone else communicates verbally or nonverbally.",
           "description": "A nurse visits Becky's classroom and talks with the class about why it is important to wash your hands. Later, Becky tells a doll, \"Wash your hands before you eat. Germs make you sick.\"\nOn the playground, Crystal reminds Jason, \"We can't play on the slide. Remember? The teacher told us that it's closed. It's all wet.\"\nJackson holds up the book about firefighters that was read earlier that morning. \"Let's play fire fighters! Use the hoses just like they did in the book.\""
         },
@@ -1348,7 +1348,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-UNCCE",
+        "standard_id": "US-KY-2021-LEL.2.1.UNCCE",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1363,12 +1363,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 2.1",
+          "code": "LEL.2.1",
           "name": "Uses non-verbal communication for a variety of purposes.",
           "description": null
         },
         "indicator": {
-          "code": "UNCCE",
+          "code": "LEL.2.1.UNCCE",
           "name": "Uses non-verbal communication to convey emotions.",
           "description": "Elizabeth frowns when she hears the clean-up song begin.\nFrustrated that he could not open the container, Lucas stomps his feet on the ground and shrugs his shoulders.\nWhen the teacher announces that a special visitor is coming to read a book later that day, Ella smiles and claps."
         },
@@ -1410,7 +1410,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-ICOPP",
+        "standard_id": "US-KY-2021-LEL.2.1.ICOPP",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1425,12 +1425,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 2.1",
+          "code": "LEL.2.1",
           "name": "Uses non-verbal communication for a variety of purposes.",
           "description": null
         },
         "indicator": {
-          "code": "ICOPP",
+          "code": "LEL.2.1.ICOPP",
           "name": "Identifies or chooses an object or person by pointing, physically touching, or moving toward another.",
           "description": "While playing \"Farmer in the Dell\" Simone chooses Elly to be the \"farmer's wife\" by taking her hand.\nWhen asked what he wants for a snack, Darius points to the graham crackers from the assortment on the table."
         },
@@ -1472,7 +1472,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-UGMII",
+        "standard_id": "US-KY-2021-LEL.2.1.UGMII",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1487,12 +1487,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 2.1",
+          "code": "LEL.2.1",
           "name": "Uses non-verbal communication for a variety of purposes.",
           "description": null
         },
         "indicator": {
-          "code": "UGMII",
+          "code": "LEL.2.1.UGMII",
           "name": "Uses gestures and/or movements to initiate interactions or to get needs met.",
           "description": "Kyle touches another child on the arm, takes his hand, and then walks over to the dramatic play center.\nVictor consistently waves his hands to indicate he wants more food.\nKelsey points to indicate who she wants to sit by at circle time."
         },
@@ -1534,7 +1534,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-ICHNM",
+        "standard_id": "US-KY-2021-LEL.2.2.ICHNM",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1549,12 +1549,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 2.2",
+          "code": "LEL.2.2",
           "name": "Uses language (verbal, signed, symbolic) for a variety of purposes.",
           "description": null
         },
         "indicator": {
-          "code": "ICHNM",
+          "code": "LEL.2.2.ICHNM",
           "name": "Initiates communication to have needs met.",
           "description": "Easton looks at the interventionist, who says, \"Easton, do you want to use this block?\" and Easton says, \"Yes, I want to build a bridge.\"\nAs the children are walking in from the playground, Craig signs, \"I want a drink of water\" to his therapist.\nDuring center time Millie walks over to where her teacher is standing and asks, \"How long until lunch?\"\nChance asks William for the puzzle piece he cannot reach."
         },
@@ -1596,7 +1596,7 @@
         }
       },
       "parsed": {
-        "standard_id": "US-KY-2021-UWSPS",
+        "standard_id": "US-KY-2021-LEL.2.2.UWSPS",
         "country": "US",
         "state": "KY",
         "version_year": 2021,
@@ -1611,12 +1611,12 @@
           "description": null
         },
         "sub_strand": {
-          "code": "Benchmark 2.2",
+          "code": "LEL.2.2",
           "name": "Uses language (verbal, signed, symbolic) for a variety of purposes.",
           "description": null
         },
         "indicator": {
-          "code": "UWSPS",
+          "code": "LEL.2.2.UWSPS",
           "name": "Uses words, signs, pictures, and/or symbols to communicate.",
           "description": "Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside."
         },
@@ -1627,170 +1627,7 @@
     }
   ],
   "dropped_from_parsed": [],
-  "field_mismatches": [
-    {
-      "test_case_id": "KY-STD-18",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.1.1.AAPWI",
-      "got": "US-KY-2021-AAPWI"
-    },
-    {
-      "test_case_id": "KY-STD-18",
-      "field": "sub_strand.code",
-      "expected": "LEL.1.1",
-      "got": "Benchmark 1.1"
-    },
-    {
-      "test_case_id": "KY-STD-18",
-      "field": "indicator.code",
-      "expected": "LEL.1.1.AAPWI",
-      "got": "AAPWI"
-    },
-    {
-      "test_case_id": "KY-STD-19",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.1.1.FSD",
-      "got": "US-KY-2021-FSD"
-    },
-    {
-      "test_case_id": "KY-STD-19",
-      "field": "sub_strand.code",
-      "expected": "LEL.1.1",
-      "got": "Benchmark 1.1"
-    },
-    {
-      "test_case_id": "KY-STD-19",
-      "field": "indicator.code",
-      "expected": "LEL.1.1.FSD",
-      "got": "FSD"
-    },
-    {
-      "test_case_id": "KY-STD-20",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.1.1.GILPC",
-      "got": "US-KY-2021-GILPC"
-    },
-    {
-      "test_case_id": "KY-STD-20",
-      "field": "sub_strand.code",
-      "expected": "LEL.1.1",
-      "got": "Benchmark 1.1"
-    },
-    {
-      "test_case_id": "KY-STD-20",
-      "field": "indicator.code",
-      "expected": "LEL.1.1.GILPC",
-      "got": "GILPC"
-    },
-    {
-      "test_case_id": "KY-STD-21",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.1.1.IAISE",
-      "got": "US-KY-2021-IAISE"
-    },
-    {
-      "test_case_id": "KY-STD-21",
-      "field": "sub_strand.code",
-      "expected": "LEL.1.1",
-      "got": "Benchmark 1.1"
-    },
-    {
-      "test_case_id": "KY-STD-21",
-      "field": "indicator.code",
-      "expected": "LEL.1.1.IAISE",
-      "got": "IAISE"
-    },
-    {
-      "test_case_id": "KY-STD-22",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.2.1.UNCCE",
-      "got": "US-KY-2021-UNCCE"
-    },
-    {
-      "test_case_id": "KY-STD-22",
-      "field": "sub_strand.code",
-      "expected": "LEL.2.1",
-      "got": "Benchmark 2.1"
-    },
-    {
-      "test_case_id": "KY-STD-22",
-      "field": "indicator.code",
-      "expected": "LEL.2.1.UNCCE",
-      "got": "UNCCE"
-    },
-    {
-      "test_case_id": "KY-STD-23",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.2.1.ICOPP",
-      "got": "US-KY-2021-ICOPP"
-    },
-    {
-      "test_case_id": "KY-STD-23",
-      "field": "sub_strand.code",
-      "expected": "LEL.2.1",
-      "got": "Benchmark 2.1"
-    },
-    {
-      "test_case_id": "KY-STD-23",
-      "field": "indicator.code",
-      "expected": "LEL.2.1.ICOPP",
-      "got": "ICOPP"
-    },
-    {
-      "test_case_id": "KY-STD-24",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.2.1.UGMII",
-      "got": "US-KY-2021-UGMII"
-    },
-    {
-      "test_case_id": "KY-STD-24",
-      "field": "sub_strand.code",
-      "expected": "LEL.2.1",
-      "got": "Benchmark 2.1"
-    },
-    {
-      "test_case_id": "KY-STD-24",
-      "field": "indicator.code",
-      "expected": "LEL.2.1.UGMII",
-      "got": "UGMII"
-    },
-    {
-      "test_case_id": "KY-STD-25",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.2.2.ICHNM",
-      "got": "US-KY-2021-ICHNM"
-    },
-    {
-      "test_case_id": "KY-STD-25",
-      "field": "sub_strand.code",
-      "expected": "LEL.2.2",
-      "got": "Benchmark 2.2"
-    },
-    {
-      "test_case_id": "KY-STD-25",
-      "field": "indicator.code",
-      "expected": "LEL.2.2.ICHNM",
-      "got": "ICHNM"
-    },
-    {
-      "test_case_id": "KY-STD-26",
-      "field": "standard_id",
-      "expected": "US-KY-2021-LEL.2.2.UWSPS",
-      "got": "US-KY-2021-UWSPS"
-    },
-    {
-      "test_case_id": "KY-STD-26",
-      "field": "sub_strand.code",
-      "expected": "LEL.2.2",
-      "got": "Benchmark 2.2"
-    },
-    {
-      "test_case_id": "KY-STD-26",
-      "field": "indicator.code",
-      "expected": "LEL.2.2.UWSPS",
-      "got": "UWSPS"
-    }
-  ],
+  "field_mismatches": [],
   "regressions": [
     {
       "id": "NO-ID-COLLISION",
@@ -1804,13 +1641,13 @@
     },
     {
       "id": "KY-BENCHMARK-CODE-NORMALIZED",
-      "status": "FAIL",
-      "detail": "9 code(s) carry a structural label, e.g. sub_strand='Benchmark 1.1' on 'US-KY-2021-AAPWI'; 18/78 code(s) not prefixed by parent, e.g. sub_strand='Benchmark 1.1' under parent 'LEL.1' on 'US-KY-2021-AAPWI'"
+      "status": "PASS",
+      "detail": "26 standards: no label text in any code, all 78 child codes prefixed by their parent"
     },
     {
       "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
-      "status": "FAIL",
-      "detail": "9 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-AAPWI', 'Benchmark 1.1', 'AAPWI')"
+      "status": "PASS",
+      "detail": "all 26 standards keep sub_strand and indicator codes distinct and nested"
     }
   ]
 }

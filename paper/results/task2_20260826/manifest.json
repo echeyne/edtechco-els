@@ -5,8 +5,8 @@
   "supersedes": "paper/results/task2_20260822/detector_heldout2.json and parser_heldout2.json.",
   "does_not_supersede": "paper/results/task2_20260822/nv_fp_audit_SIGNED.json \u2014 not re-signed. It covers 53 NV detections; this run produced 52.",
   "git_commit": "20cf2f72b371424c3fb9d6a5df21442cc44f784a",
-  "code_version_hash": "7da92182",
-  "code_version_hash_note": "eval_common.code_version_hash covers detector.py and parser.py, where both prompts live. Baseline 288c64f1 -> b35b9666 (absent-code fix) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE). src/ was clean at run time.",
+  "code_version_hash": "14374dba",
+  "code_version_hash_note": "Detector arms were recorded at 7da92182; the PARSER arms were re-run live at 14374dba on 2026-08-29 after _delabel_parent_code was added, so every parser number in this folder is a live measurement at the current hash. The detector arms were NOT re-run and did not need to be: the repair is in parser.py and eval_detector never loads it, so those numbers are unchanged by construction. Chain: 288c64f1 -> b35b9666 -> 99b853cc -> 04e4924c -> 61b7243e -> 51056ea2 -> 7da92182 -> 14374dba.",
   "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). NV 15pp of 98; KY 8pp of 120. Same tier as the baseline, so the two are comparable on that axis.",
   "extraction_source": "outputs/08-26-26-2 \u2014 pipeline run 044, which ran AFTER the 20cf2f7 deploy, so its detections were produced by current code (verified: zero elements across all six states would change under the widened _DERIVABLE_CODE_RE). NV 752 blocks / 15 pages; KY 252 blocks / 8 pages.",
   "goldens": {
@@ -45,7 +45,7 @@
     "The description 2/3 -> 3/3 move is on the DIRECT path, where CLAUDE.md records _splice_overlapping_prose as inert. The splice is therefore NOT the cause; the changed Pass-1 sample is the likeliest one. One run, not isolated.",
     "The ICOPPPTM over-long-code defect that motivated 7da92182 does not appear in this arm \u2014 KY's direct-path run coded ICOPP correctly at both hashes. It was a batched-path observation (pipeline run 043)."
   ],
-  "not_wired_into_tables": "RUN_TAG in paper/analysis/generate_tables.py is still 20260822. task1_20260826/ now exists with a summary.json, and both task 2 arms are recorded. Two things remain: (1) a summary.json here \u2014 run consolidate_task1.py --state NV --state KY against this folder's two reports; (2) re-signed FP audits, nv_fp_audit_SIGNED.json here (53 -> 52 detections) and task1b_fp_audit_SIGNED.json in task1_20260826 (AZ's count moved). A half-migrated RUN_TAG would silently mix hashes across the generalization table, which guardrail 6 exists to prevent.",
+  "not_wired_into_tables": "RESOLVED 2026-08-29. RUN_TAG is 20260826 and all six tables regenerate. The depth-map ablation is pinned separately at ABLATION_TAG = 20260822 because Task 3 has not been re-recorded and its 'depth map ON' arm exercises the OLD Pass-1 sampler that 99b853cc replaced; re-recording it is the top outstanding paper item.",
   "regression_cases": {
     "NV": [
       "NV-NO-COLUMN-HEADER-AS-ELEMENT PASS",
@@ -64,9 +64,8 @@
     "measured": "Repairs 9/9 of the failing KY sub_strand codes exactly. Changes ZERO codes across all six parser goldens (106 standards) and ZERO of 1974 codes across two full six-state production runs. Composes with the existing _qualify_bare_indicator_code: once the ancestor is well-formed the bare leaf qualifies to 'LEL.1.1.AAPWI', taking all 9 rows to the golden and KY back to 26/26.",
     "status": "NOT IMPLEMENTED. Proposed; needs the usual validation pass and a hash-busting window."
   },
-  "superseded_by_hash": "14374dba",
-  "superseded_note": "Superseded in part by the 14374dba de-label repair. The DETECTOR arm is unaffected by construction \u2014 the repair is in parser.py and eval_detector never loads it. The PARSER arm was re-graded OFFLINE over this recording's own saved output rather than re-run, because a fresh run would draw a new LLM sample and confound the repair with sampling; see parser_regraded.json and paper/analysis/regrade_parser_repairs.py.",
   "parser_regraded_offline": {
+    "_status": "SUPERSEDED by the live re-run above; kept as the record of how the repair was validated before it shipped. parser_regraded.json still holds the replay.",
     "NV": {
       "fully_correct": "24 -> 24 of 24",
       "field_accuracy": "1.0000 -> 1.0000",
@@ -78,5 +77,6 @@
       "rows_changed": 9
     }
   },
-  "parser_regrade_command": "python paper/analysis/regrade_parser_repairs.py --results-dir paper/results/task2_20260826 --state NV --state KY --out paper/results/task2_20260826/parser_regraded.json"
+  "parser_regrade_command": "python paper/analysis/regrade_parser_repairs.py --results-dir paper/results/task2_20260826 --state NV --state KY --out paper/results/task2_20260826/parser_regraded.json",
+  "parser_arm_rerecorded": "Re-run live at 14374dba on 2026-08-29: python -m evaluation.eval_parser --detection-dir outputs/08-26-26-2 --state NV --state KY --no-cache --report-json paper/results/task2_20260826/parser_heldout2.json --output-dir paper/results/task2_20260826/review_parser"
 }

@@ -4,7 +4,6 @@
   "annotator": "Emily Cheyne",
   "date": "2026-08-29",
   "code_version_hash": "14374dba",
-  "git_commit": "4dadb01",
   "evidence_source": "paper/results/task2_20260826/heldout_evidence.json",
   "sheets": [
     "paper/results/task2_20260826/nv_fp_audit_signoff.md",

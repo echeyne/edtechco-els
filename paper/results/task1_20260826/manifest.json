@@ -5,8 +5,8 @@
   "supersedes": "paper/results/task1_20260822/detector_golden4.json, parser_golden4.json and summary.json \u2014 pending the RUN_TAG migration, which has NOT happened.",
   "does_not_supersede": "paper/results/task1_20260822/task1b_fp_audit_SIGNED.json \u2014 the FP audit was not re-signed at this hash and AZ's detection count moved.",
   "git_commit": "20cf2f72b371424c3fb9d6a5df21442cc44f784a",
-  "code_version_hash": "7da92182",
-  "code_version_hash_note": "Baseline 288c64f1 -> b35b9666 (absent-code fix) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE). src/ was clean at run time.",
+  "code_version_hash": "14374dba",
+  "code_version_hash_note": "Detector arms were recorded at 7da92182; the PARSER arms were re-run live at 14374dba on 2026-08-29 after _delabel_parent_code was added, so every parser number in this folder is a live measurement at the current hash. The detector arms were NOT re-run and did not need to be: the repair is in parser.py and eval_detector never loads it, so those numbers are unchanged by construction. Chain: 288c64f1 -> b35b9666 -> 99b853cc -> 04e4924c -> 61b7243e -> 51056ea2 -> 7da92182 -> 14374dba.",
   "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). Front matter, introductions and acknowledgements were removed by hand \u2014 favorable preprocessing that must be disclosed with every table (guardrail 3). Page counts read from each {STATE}-extraction.json total_pages: AZ 15, CA 13, CO 10, TX 9. Same tier as the baseline.",
   "extraction_source": "outputs/08-26-26-2 \u2014 pipeline run 044, which ran AFTER the 20cf2f7 deploy, so its detections were produced by current code. Verified independently: zero elements across all six states would change under the widened _DERIVABLE_CODE_RE. The parser arm runs on these detection files, so post-deploy provenance matters and is confirmed.",
   "models": {
@@ -35,10 +35,9 @@
     "GUARDRAIL 8 UNCHANGED. Raw precision on the golden four (AZ 0.4167, CA 0.2049, CO 0.1667, TX 0.3200) measures annotation coverage, not detector quality \u2014 these goldens are 5-25 element spot checks against 12-122 in-scope detections. None may be reported as detector precision; the verified-precision path via the Task 1b FP audit is still required.",
     "task1b_fp_audit_SIGNED.json is STALE at this hash and AZ's detection count moved. Re-sign with paper/analysis/make_fp_signoff.py before quoting verified precision."
   ],
-  "not_wired_into_tables": "RUN_TAG in paper/analysis/generate_tables.py is still 20260822. Moving it to 20260826 additionally requires the task 2 parser arm consolidated into task2_20260826/summary.json and both FP audits re-signed. See task2_20260826/manifest.json.",
-  "superseded_by_hash": "14374dba",
-  "superseded_note": "Superseded in part by the 14374dba de-label repair. The DETECTOR arm is unaffected by construction \u2014 the repair is in parser.py and eval_detector never loads it. The PARSER arm was re-graded OFFLINE over this recording's own saved output rather than re-run, because a fresh run would draw a new LLM sample and confound the repair with sampling; see parser_regraded.json and paper/analysis/regrade_parser_repairs.py.",
+  "not_wired_into_tables": "RESOLVED 2026-08-29. RUN_TAG is 20260826 and all six tables regenerate. The depth-map ablation is pinned separately at ABLATION_TAG = 20260822 because Task 3 has not been re-recorded and its 'depth map ON' arm exercises the OLD Pass-1 sampler that 99b853cc replaced; re-recording it is the top outstanding paper item.",
   "parser_regraded_offline": {
+    "_status": "SUPERSEDED by the live re-run above; kept as the record of how the repair was validated before it shipped. parser_regraded.json still holds the replay.",
     "AZ": {
       "fully_correct": "17 -> 17 of 18",
       "field_accuracy": "0.9969 -> 0.9969",
@@ -60,5 +59,6 @@
       "rows_changed": 0
     }
   },
-  "parser_regrade_command": "python paper/analysis/regrade_parser_repairs.py --results-dir paper/results/task1_20260826 --state AZ --state CA --state CO --state TX --out paper/results/task1_20260826/parser_regraded.json"
+  "parser_regrade_command": "python paper/analysis/regrade_parser_repairs.py --results-dir paper/results/task1_20260826 --state AZ --state CA --state CO --state TX --out paper/results/task1_20260826/parser_regraded.json",
+  "parser_arm_rerecorded": "Re-run live at 14374dba on 2026-08-29: python -m evaluation.eval_parser --detection-dir outputs/08-26-26-2 --state AZ --state CA --state CO --state TX --no-cache --report-json paper/results/task1_20260826/parser_golden4.json --output-dir paper/results/task1_20260826/review_parser"
 }

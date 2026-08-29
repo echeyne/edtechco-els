@@ -109,9 +109,9 @@
   {
     "state": "KY",
     "coverage": 1.0,
-    "field_accuracy": 0.9423076923076923,
+    "field_accuracy": 1.0,
     "matched": 26,
-    "fully_correct": 17,
+    "fully_correct": 26,
     "n_golden": 26,
     "n_parsed": 26,
     "dropped": [],
@@ -119,7 +119,7 @@
     "id_collisions": [],
     "field_stats": {
       "standard_id": {
-        "ok": 17,
+        "ok": 26,
         "total": 26
       },
       "country": {
@@ -167,7 +167,7 @@
         "total": 26
       },
       "sub_strand.code": {
-        "ok": 17,
+        "ok": 26,
         "total": 26
       },
       "sub_strand.name": {
@@ -179,7 +179,7 @@
         "total": 26
       },
       "indicator.code": {
-        "ok": 17,
+        "ok": 26,
         "total": 26
       },
       "indicator.name": {
@@ -191,170 +191,7 @@
         "total": 26
       }
     },
-    "mismatches": [
-      {
-        "test_case_id": "KY-STD-18",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.1.1.AAPWI",
-        "got": "US-KY-2021-AAPWI"
-      },
-      {
-        "test_case_id": "KY-STD-18",
-        "field": "sub_strand.code",
-        "expected": "LEL.1.1",
-        "got": "Benchmark 1.1"
-      },
-      {
-        "test_case_id": "KY-STD-18",
-        "field": "indicator.code",
-        "expected": "LEL.1.1.AAPWI",
-        "got": "AAPWI"
-      },
-      {
-        "test_case_id": "KY-STD-19",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.1.1.FSD",
-        "got": "US-KY-2021-FSD"
-      },
-      {
-        "test_case_id": "KY-STD-19",
-        "field": "sub_strand.code",
-        "expected": "LEL.1.1",
-        "got": "Benchmark 1.1"
-      },
-      {
-        "test_case_id": "KY-STD-19",
-        "field": "indicator.code",
-        "expected": "LEL.1.1.FSD",
-        "got": "FSD"
-      },
-      {
-        "test_case_id": "KY-STD-20",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.1.1.GILPC",
-        "got": "US-KY-2021-GILPC"
-      },
-      {
-        "test_case_id": "KY-STD-20",
-        "field": "sub_strand.code",
-        "expected": "LEL.1.1",
-        "got": "Benchmark 1.1"
-      },
-      {
-        "test_case_id": "KY-STD-20",
-        "field": "indicator.code",
-        "expected": "LEL.1.1.GILPC",
-        "got": "GILPC"
-      },
-      {
-        "test_case_id": "KY-STD-21",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.1.1.IAISE",
-        "got": "US-KY-2021-IAISE"
-      },
-      {
-        "test_case_id": "KY-STD-21",
-        "field": "sub_strand.code",
-        "expected": "LEL.1.1",
-        "got": "Benchmark 1.1"
-      },
-      {
-        "test_case_id": "KY-STD-21",
-        "field": "indicator.code",
-        "expected": "LEL.1.1.IAISE",
-        "got": "IAISE"
-      },
-      {
-        "test_case_id": "KY-STD-22",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.2.1.UNCCE",
-        "got": "US-KY-2021-UNCCE"
-      },
-      {
-        "test_case_id": "KY-STD-22",
-        "field": "sub_strand.code",
-        "expected": "LEL.2.1",
-        "got": "Benchmark 2.1"
-      },
-      {
-        "test_case_id": "KY-STD-22",
-        "field": "indicator.code",
-        "expected": "LEL.2.1.UNCCE",
-        "got": "UNCCE"
-      },
-      {
-        "test_case_id": "KY-STD-23",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.2.1.ICOPP",
-        "got": "US-KY-2021-ICOPP"
-      },
-      {
-        "test_case_id": "KY-STD-23",
-        "field": "sub_strand.code",
-        "expected": "LEL.2.1",
-        "got": "Benchmark 2.1"
-      },
-      {
-        "test_case_id": "KY-STD-23",
-        "field": "indicator.code",
-        "expected": "LEL.2.1.ICOPP",
-        "got": "ICOPP"
-      },
-      {
-        "test_case_id": "KY-STD-24",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.2.1.UGMII",
-        "got": "US-KY-2021-UGMII"
-      },
-      {
-        "test_case_id": "KY-STD-24",
-        "field": "sub_strand.code",
-        "expected": "LEL.2.1",
-        "got": "Benchmark 2.1"
-      },
-      {
-        "test_case_id": "KY-STD-24",
-        "field": "indicator.code",
-        "expected": "LEL.2.1.UGMII",
-        "got": "UGMII"
-      },
-      {
-        "test_case_id": "KY-STD-25",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.2.2.ICHNM",
-        "got": "US-KY-2021-ICHNM"
-      },
-      {
-        "test_case_id": "KY-STD-25",
-        "field": "sub_strand.code",
-        "expected": "LEL.2.2",
-        "got": "Benchmark 2.2"
-      },
-      {
-        "test_case_id": "KY-STD-25",
-        "field": "indicator.code",
-        "expected": "LEL.2.2.ICHNM",
-        "got": "ICHNM"
-      },
-      {
-        "test_case_id": "KY-STD-26",
-        "field": "standard_id",
-        "expected": "US-KY-2021-LEL.2.2.UWSPS",
-        "got": "US-KY-2021-UWSPS"
-      },
-      {
-        "test_case_id": "KY-STD-26",
-        "field": "sub_strand.code",
-        "expected": "LEL.2.2",
-        "got": "Benchmark 2.2"
-      },
-      {
-        "test_case_id": "KY-STD-26",
-        "field": "indicator.code",
-        "expected": "LEL.2.2.UWSPS",
-        "got": "UWSPS"
-      }
-    ],
+    "mismatches": [],
     "regressions": [
       {
         "id": "NO-ID-COLLISION",
@@ -368,13 +205,13 @@
       },
       {
         "id": "KY-BENCHMARK-CODE-NORMALIZED",
-        "status": "FAIL",
-        "detail": "9 code(s) carry a structural label, e.g. sub_strand='Benchmark 1.1' on 'US-KY-2021-AAPWI'; 18/78 code(s) not prefixed by parent, e.g. sub_strand='Benchmark 1.1' under parent 'LEL.1' on 'US-KY-2021-AAPWI'"
+        "status": "PASS",
+        "detail": "26 standards: no label text in any code, all 78 child codes prefixed by their parent"
       },
       {
         "id": "KY-SUB-STRAND-NOT-INDICATOR-CODE",
-        "status": "FAIL",
-        "detail": "9 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-AAPWI', 'Benchmark 1.1', 'AAPWI')"
+        "status": "PASS",
+        "detail": "all 26 standards keep sub_strand and indicator codes distinct and nested"
       }
     ],
     "stability_runs": 0,

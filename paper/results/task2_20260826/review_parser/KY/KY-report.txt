@@ -3,33 +3,14 @@
   golden standards: 26
   parsed:           26
   matched:          26  (coverage 1.000)
-  fully correct:    17/26
-  field accuracy:   0.942
+  fully correct:    26/26
+  field accuracy:   1.000
   per-field (ok/total) — only fields with a mismatch shown:
-    standard_id             17/26  (0.65)  ← MISMATCH
-    sub_strand.code         17/26  (0.65)  ← MISMATCH
-    indicator.code          17/26  (0.65)  ← MISMATCH
+    (all graded fields matched)
   dropped: 0
   standard_id collisions: 0
-  field mismatches (27):
-    KY-STD-18 standard_id: expected 'US-KY-2021-LEL.1.1.AAPWI' got 'US-KY-2021-AAPWI'
-    KY-STD-18 sub_strand.code: expected 'LEL.1.1' got 'Benchmark 1.1'
-    KY-STD-18 indicator.code: expected 'LEL.1.1.AAPWI' got 'AAPWI'
-    KY-STD-19 standard_id: expected 'US-KY-2021-LEL.1.1.FSD' got 'US-KY-2021-FSD'
-    KY-STD-19 sub_strand.code: expected 'LEL.1.1' got 'Benchmark 1.1'
-    KY-STD-19 indicator.code: expected 'LEL.1.1.FSD' got 'FSD'
-    KY-STD-20 standard_id: expected 'US-KY-2021-LEL.1.1.GILPC' got 'US-KY-2021-GILPC'
-    KY-STD-20 sub_strand.code: expected 'LEL.1.1' got 'Benchmark 1.1'
-    KY-STD-20 indicator.code: expected 'LEL.1.1.GILPC' got 'GILPC'
-    KY-STD-21 standard_id: expected 'US-KY-2021-LEL.1.1.IAISE' got 'US-KY-2021-IAISE'
-    KY-STD-21 sub_strand.code: expected 'LEL.1.1' got 'Benchmark 1.1'
-    KY-STD-21 indicator.code: expected 'LEL.1.1.IAISE' got 'IAISE'
-    KY-STD-22 standard_id: expected 'US-KY-2021-LEL.2.1.UNCCE' got 'US-KY-2021-UNCCE'
-    KY-STD-22 sub_strand.code: expected 'LEL.2.1' got 'Benchmark 2.1'
-    KY-STD-22 indicator.code: expected 'LEL.2.1.UNCCE' got 'UNCCE'
-    … and 12 more
   regression cases:
     [PASS] NO-ID-COLLISION — all 26 standard_ids unique
     [PASS] KY-FOUR-LEVEL-RESOLVED — all 26 standards have both a strand and a sub_strand
-    [FAIL] KY-BENCHMARK-CODE-NORMALIZED — 9 code(s) carry a structural label, e.g. sub_strand='Benchmark 1.1' on 'US-KY-2021-AAPWI'; 18/78 code(s) not prefixed by parent, e.g. sub_strand='Benchmark 1.1' under parent 'LEL.1' on 'US-KY-2021-AAPWI'
-    [FAIL] KY-SUB-STRAND-NOT-INDICATOR-CODE — 9 indicator code(s) not nested under their sub_strand, e.g. ('US-KY-2021-AAPWI', 'Benchmark 1.1', 'AAPWI')
+    [PASS] KY-BENCHMARK-CODE-NORMALIZED — 26 standards: no label text in any code, all 78 child codes prefixed by their parent
+    [PASS] KY-SUB-STRAND-NOT-INDICATOR-CODE — all 26 standards keep sub_strand and indicator codes distinct and nested

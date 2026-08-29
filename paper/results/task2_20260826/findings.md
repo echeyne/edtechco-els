@@ -13,8 +13,14 @@ recording predates the golden extension and has a 41-element denominator.
 description accuracy 2/3 → 3/3, on an unchanged golden. KY unchanged at 44/44
 on every dimension.**
 
-**Headline (parser): NV unchanged and perfect at 24/24. KY regressed to 17/26
-on parser sampling — see "Parser arm" below. The detection input is
+**Headline (parser, re-run live at `14374dba` on 2026-08-29): NV 24/24 and
+KY 26/26, both at field accuracy 1.0000.** The KY regression recorded below was
+measured at `7da92182`, before `_delabel_parent_code`; the section is kept as
+the diagnosis that motivated the repair. The numbers in the paper's tables are
+the live `14374dba` ones.
+
+**Headline (parser, as first recorded at `7da92182`): NV unchanged and perfect
+at 24/24. KY regressed to 17/26 on parser sampling — see "Parser arm" below. The detection input is
 byte-identical to the baseline and the parser prompt did not change, so this is
 not a code regression, and in production the validator would reject all nine
 affected rows rather than store them.**

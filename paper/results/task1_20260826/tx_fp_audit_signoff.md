@@ -44,7 +44,7 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 
 | # | Page | Level | Code | Title | My verdict | Your call |
 |---|---|---|---|---|---|---|
-| A1 | 4 | sub_strand | `1` | Behavior Control | real, unannotated | |
+| A1 | 4 | sub_strand | `1` | Behavior Control | real, unannotated | AGREE |
 | A2 | 4 | indicator | `PK4.I.B.1.a` | Child follows classroom rules and routines with occasional | real, unannotated | AGREE |
 | A3 | 5 | indicator | `PK3.I.B.1.b` | Child takes care of and manages classroom materials with a | real, unannotated | AGREE |
 | A4 | 5 | indicator | `PK4.I.B.1.b` | Child takes care of and manages classroom materials. | real, unannotated | AGREE |
