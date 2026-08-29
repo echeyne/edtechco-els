@@ -105,5 +105,14 @@
     "ONE RUN PER STATE IS SUFFICIENT HERE AND ONLY HERE \u2014 the baseline is deterministic (tests/unit/test_baseline_rule_based.py::test_it_is_deterministic). The LLM arm's stability is Task 5.",
     "THE BASELINE'S DOMINANT FAILURE IS NOT MISCLASSIFICATION. The failure decomposition shows the missing elements are overwhelmingly never emitted at all (NV 43 of 46, KY 31 of 44), not emitted at the wrong level. Do not write the comparison as 'rules find the text but mislabel it' \u2014 that was the prior expectation and the data contradicts it.",
     "THE PAPER NOW BUILDS LOCALLY (TeX Live 2026 via Homebrew). Building found two defects a structural check had missed \u2014 a dangling \\ref that would have printed '??', and a caption long enough to push the bibliography off the page. Structural validation of a .tex is not a substitute for compiling it."
-  ]
+  ],
+  "reproduces_at_commit": {
+    "_why": "HEAD has moved eight code_version_hash steps past this recording (2026-08-24 to -26). Running the commands in this manifest against HEAD will NOT reproduce these numbers. Check out the commit below first. Guardrail 6.",
+    "commit": "47b568e569f8338261eecfb15e344ee63b57a731",
+    "checkout": "git checkout 47b568e",
+    "code_version_hash_at_recording": "288c64f1",
+    "code_version_hash_at_head_2026_08_29": "14374dba",
+    "hash_chain_since": "288c64f1 -> b35b9666 (absent-code fix, 2026-08-24) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE) -> 14374dba (label-form de-label + collapse idempotence, 2026-08-26)",
+    "affected_by_the_chain": "Baseline comparison. The rule-based arm in evaluation/baselines/ is deterministic and uses no Bedrock, so its side is unaffected. The LLM side is the task1/task2 recordings, which have since been superseded \u2014 re-check before quoting the two arms side by side."
+  }
 }

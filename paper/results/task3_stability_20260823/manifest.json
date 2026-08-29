@@ -172,5 +172,14 @@
     "haiku_tokens": 97340,
     "estimated_cost_usd": 4.04,
     "wall_clock": "14 min for 9 runs (2026-08-24T16:25Z-16:39Z)"
+  },
+  "reproduces_at_commit": {
+    "_why": "HEAD has moved eight code_version_hash steps past this recording (2026-08-24 to -26). Running the commands in this manifest against HEAD will NOT reproduce these numbers. Check out the commit below first. Guardrail 6.",
+    "commit": "9aa025b",
+    "checkout": "git checkout 9aa025b",
+    "code_version_hash_at_recording": "288c64f1",
+    "code_version_hash_at_head_2026_08_29": "14374dba",
+    "hash_chain_since": "288c64f1 -> b35b9666 (absent-code fix, 2026-08-24) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE) -> 14374dba (label-form de-label + collapse idempotence, 2026-08-26)",
+    "affected_by_the_chain": "\u26a0\ufe0f Same subject as task3_20260822 \u2014 depth-map on/off stability. The sampler change affects the ON arm, so these stability numbers describe the old sampler."
   }
 }

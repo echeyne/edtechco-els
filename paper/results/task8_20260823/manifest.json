@@ -1,27 +1,27 @@
 {
-  "task": "Task 8 — dataset descriptive statistics and the re-measured detector confidence distribution (arXiv paper). RECORDED 2026-08-23, six states, no new pipeline run.",
+  "task": "Task 8 \u2014 dataset descriptive statistics and the re-measured detector confidence distribution (arXiv paper). RECORDED 2026-08-23, six states, no new pipeline run.",
   "date": "2026-08-23",
   "status": "COMPLETE.",
   "git_commit": "fa0b0eddc317785e65599f10514e379a4965d9d8",
   "code_version_hash": "288c64f1",
-  "code_version_hash_note": "eval_common.code_version_hash covers detector.py and parser.py only. Nothing in this task touched either file — and the one repair this task IDENTIFIED in detector.py was deliberately NOT made for exactly that reason (see outstanding.detector_docstring_is_stale). The hash is unchanged from the Task 1/2/3/4 freeze, so every recorded measurement remains valid.",
-  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents) — guardrail 1. AZ 15pp, CA 13pp, CO 10pp, TX 9pp, NV 15pp, KY 8pp; 70pp total. ⚠️ Against the PARENT documents each subset was cut from that is 631pp, counting CO as its 41pp ages-3-5 source. Do NOT confuse this with the 777pp figure in tasking/arxiv_paper.md's Task 6 budget, which counts CO's separate 187pp birth-to-8 document — that is the right basis for a full-document run and the wrong one for describing this corpus's trim ratio.",
+  "code_version_hash_note": "eval_common.code_version_hash covers detector.py and parser.py only. Nothing in this task touched either file \u2014 and the one repair this task IDENTIFIED in detector.py was deliberately NOT made for exactly that reason (see outstanding.detector_docstring_is_stale). The hash is unchanged from the Task 1/2/3/4 freeze, so every recorded measurement remains valid.",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents) \u2014 guardrail 1. AZ 15pp, CA 13pp, CO 10pp, TX 9pp, NV 15pp, KY 8pp; 70pp total. \u26a0\ufe0f Against the PARENT documents each subset was cut from that is 631pp, counting CO as its 41pp ages-3-5 source. Do NOT confuse this with the 777pp figure in tasking/arxiv_paper.md's Task 6 budget, which counts CO's separate 187pp birth-to-8 document \u2014 that is the right basis for a full-document run and the wrong one for describing this corpus's trim ratio.",
   "inputs": {
     "outputs_dir": "outputs/08-22-26-4",
-    "dataset_stats_read": "{STATE}-detection.json and {STATE}-parsing.json — the BATCHED (production) path, since the dataset is what production emits.",
-    "confidence_direct_path": "paper/results/task{1,2}_20260822/review_detector/{STATE}/{STATE}-detected.json — the frozen detections the recorded evals graded.",
+    "dataset_stats_read": "{STATE}-detection.json and {STATE}-parsing.json \u2014 the BATCHED (production) path, since the dataset is what production emits.",
+    "confidence_direct_path": "paper/results/task{1,2}_20260822/review_detector/{STATE}/{STATE}-detected.json \u2014 the frozen detections the recorded evals graded.",
     "confidence_verdict_join": "paper/results/task1_20260822/task1b_fp_audit_SIGNED.json and task2_20260822/nv_fp_audit_SIGNED.json. The SIGNED files, never heldout_evidence.json, whose verified_by resets to UNSIGNED on regeneration.",
-    "stability_repeats": "paper/results/task3_stability_20260823/review/on_run{2,3}/ — the ON-arm only. Same code_version_hash, same model IDs, temperature 0. The OFF-arm repeats are excluded: a different configuration is a different system.",
-    "goldens": "evaluation/ground_truth_{detector,parser}/{STATE}.json — 135 detector elements, 106 parser standards.",
+    "stability_repeats": "paper/results/task3_stability_20260823/review/on_run{2,3}/ \u2014 the ON-arm only. Same code_version_hash, same model IDs, temperature 0. The OFF-arm repeats are excluded: a different configuration is a different system.",
+    "goldens": "evaluation/ground_truth_{detector,parser}/{STATE}.json \u2014 135 detector elements, 106 parser standards.",
     "tiers": "paper/results/corpus_tiers.json"
   },
   "models": {
-    "used_by_this_task": "NONE — every input was already on disk.",
+    "used_by_this_task": "NONE \u2014 every input was already on disk.",
     "recorded_run_detector": "us.anthropic.claude-opus-4-6-v1",
     "recorded_run_depth_map": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
     "recorded_run_parser": "us.anthropic.claude-sonnet-4-6",
     "bedrock_tokens_spent_by_this_task": 0,
-    "note": "Task 8 consumed no Opus quota, by design — it was the zero-Opus work available while the daily cap was exhausted."
+    "note": "Task 8 consumed no Opus quota, by design \u2014 it was the zero-Opus work available while the daily cap was exhausted."
   },
   "commands_in_order": [
     "source venv/bin/activate",
@@ -30,7 +30,7 @@
     "cd paper && pdflatex -interaction=nonstopmode main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex"
   ],
   "files": {
-    "findings.md": "The narrative deliverable. Read this first — it carries the caveats without which the confidence table invites exactly the wrong reading.",
+    "findings.md": "The narrative deliverable. Read this first \u2014 it carries the caveats without which the confidence table invites exactly the wrong reading.",
     "dataset_stats.json": "Per-state and corpus-wide descriptive statistics: standards, realized hierarchy levels, distinct ancestors, age-band coverage, description coverage, standard_id collisions, and the golden annotation counts.",
     "confidence_distribution.json": "The re-measured confidence distribution on both paths, by level, by state, by prompt band, and joined to the human false-positive verdicts; plus the cross-run separation probe and the Medium-claim adjudication.",
     "manifest.json": "This file."
@@ -44,7 +44,10 @@
     "age_band_coverage": 1.0,
     "distinct_age_bands": 6,
     "verified_precision_corpus_wide": 0.9966,
-    "confidence_range": [0.85, 0.97],
+    "confidence_range": [
+      0.85,
+      0.97
+    ],
     "confidence_distinct_values_direct": 7,
     "confidence_prompt_band_occupancy": {
       "0.95+": 347,
@@ -52,73 +55,82 @@
       "below 0.70": 0,
       "of": 379
     },
-    "the_result_to_lead_with": "The confidence score is uninformative, and that is the finding. It takes 7 distinct values in [0.85, 0.97], never once enters the band its own prompt reserves for a guess, and the state with the best-evidenced detection in the corpus (KY: recall 1.000, code 1.000, verified precision 1.000, detection-exhaustive golden) is the state carrying the LOWEST scores. This is the evidence that gating on confidence would be wrong — which is what the pipeline already does not do (guardrail 2)."
+    "the_result_to_lead_with": "The confidence score is uninformative, and that is the finding. It takes 7 distinct values in [0.85, 0.97], never once enters the band its own prompt reserves for a guess, and the state with the best-evidenced detection in the corpus (KY: recall 1.000, code 1.000, verified precision 1.000, detection-exhaustive golden) is the state carrying the LOWEST scores. This is the evidence that gating on confidence would be wrong \u2014 which is what the pipeline already does not do (guardrail 2)."
   },
   "medium_claim_adjudication": {
     "source": "documentation/medium-articles/02-teaching-ai-to-read-curriculum.md lines 98 and 100",
-    "claim_1_85_90_pct_at_0.95": "REPRODUCES — 236/263 indicators = 0.8973, identical on both paths. Cite the measurement, never the article.",
-    "claim_2_low_tail_is_tables_footnotes_odd_formatting": "REFUTED — 4 of 6 states have NO sub-0.95 indicator; the tail is essentially all of Kentucky, where all 26 indicators score below the line. The score moves per DOCUMENT, not per hard passage.",
-    "claim_3_a_0.70_review_gate": "DEAD TWICE OVER — no such gate exists in the live code (guardrail 2), and zero of 379 recorded elements (and zero across 966 elements of repeats) score below 0.70, so it would have been inert if it did."
+    "claim_1_85_90_pct_at_0.95": "REPRODUCES \u2014 236/263 indicators = 0.8973, identical on both paths. Cite the measurement, never the article.",
+    "claim_2_low_tail_is_tables_footnotes_odd_formatting": "REFUTED \u2014 4 of 6 states have NO sub-0.95 indicator; the tail is essentially all of Kentucky, where all 26 indicators score below the line. The score moves per DOCUMENT, not per hard passage.",
+    "claim_3_a_0.70_review_gate": "DEAD TWICE OVER \u2014 no such gate exists in the live code (guardrail 2), and zero of 379 recorded elements (and zero across 966 elements of repeats) score below 0.70, so it would have been inert if it did."
   },
   "the_hallucination_threshold_trap": {
     "observation": "The single confirmed invented element (NV SS.CI.PK3) scores 0.85 and is the single lowest-scoring element in the corpus. Across 14 same-configuration direct-path runs (966 elements) the ONLY element below 0.90 is that one, so the separation is not an artifact of one draw.",
     "why_it_must_not_be_promoted": [
       "There is exactly ONE distinct invented element in the audited corpus. One positive case cannot establish a false-negative rate.",
       "The prompt's own boundary is 0.80 and catches nothing; a cut at 0.90 is fitted after the fact to that single case.",
-      "The score is blind to the corpus's other non-verbatim category: all 39 real_split_title rows — real titles broken by multi-column interleaving — score at or above 0.95."
+      "The score is blind to the corpus's other non-verbatim category: all 39 real_split_title rows \u2014 real titles broken by multi-column interleaving \u2014 score at or above 0.95."
     ],
     "required_framing": "Report it as an observation and state in the same breath why it cannot be promoted. Presenting it as a working hallucination detector would be a false claim in a permanently-archived paper."
   },
   "guardrail_2_verification": {
     "result": "CONFIRMED against the live tree, 2026-08-23.",
-    "method": "grep for needs_review and CONFIDENCE_THRESHOLD across src/, evaluation/, tests/ and infra/cdk/lib/ — zero hits.",
+    "method": "grep for needs_review and CONFIDENCE_THRESHOLD across src/, evaluation/, tests/ and infra/cdk/lib/ \u2014 zero hits.",
     "trap_for_the_next_person": "A repo-wide grep DOES hit both names under infra/cdk/dist/ and infra/cdk/cdk.out.deploy-dev/. Those are stale build artifacts of a pre-2026 revision that genuinely had CONFIDENCE_THRESHOLD=0.7, a needs_review field on DetectedElement, and a parse_batching filter dropping low-confidence elements. Both paths are gitignored and untracked (verified with git check-ignore), so they are absent from a clean checkout and from the arXiv tarball. Do not read them as a live gate."
   },
   "two_paths_measured": {
     "why": "The detector eval runs the direct path, production runs the batched one, and they do not converge (CLAUDE.md, 'batched vs direct'). Recorded side by side rather than pooled.",
-    "dataset_stats_use": "BATCHED — the dataset is what production emits.",
-    "confidence_verdict_join_uses": "DIRECT — the only path the false-positive audit covers.",
+    "dataset_stats_use": "BATCHED \u2014 the dataset is what production emits.",
+    "confidence_verdict_join_uses": "DIRECT \u2014 the only path the false-positive audit covers.",
     "batched_path_caveat": "Biased UPWARD by construction: detector._merge_duplicate keeps max(keep.confidence, other.confidence). A direct-vs-batched difference in this distribution is an artifact of merging, not a statement about the model.",
     "observed": "direct 379 elements / 7 distinct values; batched 390 / 5. Indicators at 0.95+ are 236/263 on both."
   },
   "guards_in_the_analysis_script": [
-    "A detection file with zero elements raises rather than being averaged in — a mid-run Bedrock throttle once recorded five states as n_detected=0 (tasking/arxiv_paper.md, Compute budget rule 2).",
-    "An unmatched in-scope detection with no SIGNED audit verdict raises — an unsigned first pass is not quotable (guardrail 8).",
+    "A detection file with zero elements raises rather than being averaged in \u2014 a mid-run Bedrock throttle once recorded five states as n_detected=0 (tasking/arxiv_paper.md, Compute budget rule 2).",
+    "An unmatched in-scope detection with no SIGNED audit verdict raises \u2014 an unsigned first pass is not quotable (guardrail 8).",
     "The SIGNED audits are read, never heldout_evidence.json.",
     "A non-zero standard_id collision count prints a loud warning: it is a correctness defect, not a statistic."
   ],
   "paper_wiring": {
     "generate_tables": "Added STATS_TAG, build_dataset_table -> paper/tables/dataset_stats.tex and build_confidence_table -> paper/tables/confidence_distribution.tex. The four pre-existing tables regenerate byte-identically.",
     "corpus_section": "paper/sections/corpus.tex gained \\input{tables/dataset_stats} plus a TODO(Task 12) prose brief. The dataset table lives here, NOT in Experiments, because it describes the corpus rather than a result.",
-    "task_11_note": "The dataset table already carries the guardrail-1 tier columns (Subset pp / Full pp), so Task 11's 'corpus appendix table' should EXTEND this one — adding the _trimmed tier and source document names — rather than introduce a second table restating the same page counts. A note to that effect is in corpus.tex.",
+    "task_11_note": "The dataset table already carries the guardrail-1 tier columns (Subset pp / Full pp), so Task 11's 'corpus appendix table' should EXTEND this one \u2014 adding the _trimmed tier and source document names \u2014 rather than introduce a second table restating the same page counts. A note to that effect is in corpus.tex.",
     "experiments_section": "paper/sections/experiments_results.tex gained sec:experiments-confidence with the \\input and a TODO(Task 12) prose brief that leads on the negative framing.",
     "latex_build": {
       "verified": "YES, 2026-08-23.",
       "result": "7 pages (was 6), 0 undefined references, 0 undefined citations, 0 LaTeX warnings. Both new tables render complete.",
-      "overfull_boxes": "4 — IDENTICAL to the baseline measured by an A/B build with both \\input lines commented out. The two new tables add zero overfull boxes. The 4 that remain are pre-existing (detector_headline, ablation_depthmap, and two bibliography URLs).",
-      "width_lesson_worth_keeping": "The confidence table is single-column and width-constrained. Raw JSON verdict keys overflowed by 69.6pt; spelling them out in full English made it WORSE at 77.9pt. What fits is four columns at \\small with short labels — the mean was moved into the caption. If a column is added back, re-run the A/B before committing. A comment to that effect sits above the builder."
+      "overfull_boxes": "4 \u2014 IDENTICAL to the baseline measured by an A/B build with both \\input lines commented out. The two new tables add zero overfull boxes. The 4 that remain are pre-existing (detector_headline, ablation_depthmap, and two bibliography URLs).",
+      "width_lesson_worth_keeping": "The confidence table is single-column and width-constrained. Raw JSON verdict keys overflowed by 69.6pt; spelling them out in full English made it WORSE at 77.9pt. What fits is four columns at \\small with short labels \u2014 the mean was moved into the caption. If a column is added back, re-run the A/B before committing. A comment to that effect sits above the builder."
     }
   },
   "golden_data_corrections_made_during_this_task": [],
   "outstanding": {
-    "_canonical_queue": "CLAUDE.md, section 'These two files are COST-GATED right now' — that is the authoritative copy and the one a session reads BEFORE deciding to edit. tasking/arxiv_paper.md Task 6 carries the pointer so the re-record executes it. This block is the record of what THIS task found; if it and CLAUDE.md ever disagree, CLAUDE.md wins.",
+    "_canonical_queue": "CLAUDE.md, section 'These two files are COST-GATED right now' \u2014 that is the authoritative copy and the one a session reads BEFORE deciding to edit. tasking/arxiv_paper.md Task 6 carries the pointer so the re-record executes it. This block is the record of what THIS task found; if it and CLAUDE.md ever disagree, CLAUDE.md wins.",
     "detector_docstring_is_stale": {
-      "what": "detector.detect_structure's numbered docstring (detector.py:1514-1524) carries THREE defects, found by a sweep of both frozen files on 2026-08-23: (1) it names 'Claude Sonnet 4.5' twice, at lines 1516 and 1520, when detection runs on Opus 4.6; (2) line 1522 claims a step that does not exist — 'Flags low-confidence elements for review'; (3) it OMITS Pass-1 depth-map inference entirely, although detect_structure calls infer_depth_map(blocks) before chunk classification.",
+      "what": "detector.detect_structure's numbered docstring (detector.py:1514-1524) carries THREE defects, found by a sweep of both frozen files on 2026-08-23: (1) it names 'Claude Sonnet 4.5' twice, at lines 1516 and 1520, when detection runs on Opus 4.6; (2) line 1522 claims a step that does not exist \u2014 'Flags low-confidence elements for review'; (3) it OMITS Pass-1 depth-map inference entirely, although detect_structure calls infer_depth_map(blocks) before chunk classification.",
       "why_it_matters": "Defect 2 is precisely the false claim guardrail 2 exists to catch, sitting in the source file a reader verifying that guardrail would open first. Defect 3 is the substantive one: the depth-map pass is the paper's central method claim, and the docstring of the function implementing it credits a step that does not exist while missing the one that does.",
-      "parser_swept_clean": "parser.py carries no stale model name and no needs_review language — the only parser.py hits for those terms are in the gitignored infra/cdk/cdk.out.deploy-dev/ artifact copy, not the live file. Its queue item is an ADDITION (pre-normalization code logging so validator._validate_code_shape rejections can be localized), not a correction.",
-      "why_it_was_not_fixed_here": "eval_common.code_version_hash hashes the raw bytes of detector.py and parser.py, so editing even a docstring changes 288c64f1 — the hash cited by every recorded manifest under paper/results/. Two concrete costs: the 53-entry / 2.8MB evaluation/.cache invalidates so free evals become live Bedrock calls, and recorded results stop matching HEAD (the numbers stay valid, but reproducing them needs a git checkout of the recording commit). Re-recording the detector arms alone is ~315K Opus tokens, about 12% of a daily quota. Repairing a comment is not worth that.",
-      "when_to_fix": "The next window that busts the hash anyway — Task 6's full-document re-record. Apply the queue, re-run, and record the NEW hash; do not carry 288c64f1 forward, and update RUN_TAG/STATS_TAG plus SUPERSEDED_TAGS in paper/analysis/generate_tables.py at the same time."
+      "parser_swept_clean": "parser.py carries no stale model name and no needs_review language \u2014 the only parser.py hits for those terms are in the gitignored infra/cdk/cdk.out.deploy-dev/ artifact copy, not the live file. Its queue item is an ADDITION (pre-normalization code logging so validator._validate_code_shape rejections can be localized), not a correction.",
+      "why_it_was_not_fixed_here": "eval_common.code_version_hash hashes the raw bytes of detector.py and parser.py, so editing even a docstring changes 288c64f1 \u2014 the hash cited by every recorded manifest under paper/results/. Two concrete costs: the 53-entry / 2.8MB evaluation/.cache invalidates so free evals become live Bedrock calls, and recorded results stop matching HEAD (the numbers stay valid, but reproducing them needs a git checkout of the recording commit). Re-recording the detector arms alone is ~315K Opus tokens, about 12% of a daily quota. Repairing a comment is not worth that.",
+      "when_to_fix": "The next window that busts the hash anyway \u2014 Task 6's full-document re-record. Apply the queue, re-run, and record the NEW hash; do not carry 288c64f1 forward, and update RUN_TAG/STATS_TAG plus SUPERSEDED_TAGS in paper/analysis/generate_tables.py at the same time."
     }
   },
   "caveats": [
     "CORPUS TIER: _only_subset, 8-15pp. Nothing here speaks to full documents; that is Task 6.",
     "THE CONFIDENCE RESULT IS A NEGATIVE ONE AND MUST BE PRESENTED AS SUCH. Any sentence implying the model knows when it is uncertain is unsupported by this data.",
-    "DO NOT PROMOTE THE 0.90 SEPARATION TO A THRESHOLD. See the_hallucination_threshold_trap — one positive case, and the prompt's own boundary catches nothing.",
+    "DO NOT PROMOTE THE 0.90 SEPARATION TO A THRESHOLD. See the_hallucination_threshold_trap \u2014 one positive case, and the prompt's own boundary catches nothing.",
     "89.7% AT 0.95+ IS NOT A QUALITY NUMBER. It measures how the model was asked to fill in a field. Reporting it without the degeneracy of the distribution beside it would mislead.",
     "THE VERDICT JOIN IS DIRECT-PATH ONLY. The false-positive audit was performed against the frozen eval detections; there is no audited batched-path population, so no verdict statistic can be quoted for production output.",
     "distinct_domains/strands/sub_strands COUNT PARSED ANCESTORS, not detected elements, and are legitimately smaller (37 vs 52 strands). Do not cross-reference them against the detector table's counts without saying which is which.",
     "AGE-BAND COVERAGE OF 1.000 IS SCHEMA COMPLETENESS, NOT DOCUMENT RICHNESS. Most documents state their range once in prose and the canonicalizers propagate it; it does not mean each standard printed its own band.",
     "n=14 STABILITY SAMPLES ARE NOT EVENLY DISTRIBUTED. AZ and CA have 3 each, the other four have 2 (Task 3's sweep was cut short by an Opus throttle). The probe establishes that no correct element drops below 0.90 in any sample; it does not characterise a per-state spread.",
     "THE MEDIUM ARTICLES REMAIN UNCORRECTED. This task adjudicates their claims for the paper's benefit; it does not edit documentation/medium-articles/, which are prose seed and outside this task's scope."
-  ]
+  ],
+  "reproduces_at_commit": {
+    "_why": "HEAD has moved eight code_version_hash steps past this recording (2026-08-24 to -26). Running the commands in this manifest against HEAD will NOT reproduce these numbers. Check out the commit below first. Guardrail 6.",
+    "commit": "fa0b0eddc317785e65599f10514e379a4965d9d8",
+    "checkout": "git checkout fa0b0ed",
+    "code_version_hash_at_recording": "288c64f1",
+    "code_version_hash_at_head_2026_08_29": "14374dba",
+    "hash_chain_since": "288c64f1 -> b35b9666 (absent-code fix, 2026-08-24) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE) -> 14374dba (label-form de-label + collapse idempotence, 2026-08-26)",
+    "affected_by_the_chain": "Not known to be affected; nothing in the 288c64f1 -> 14374dba chain targets what this task measures. Verify before quoting rather than assuming."
+  }
 }

@@ -114,5 +114,14 @@
       "NV": "44/46 -> 45/46 (noise, n=1; do not report as the ablation helping)"
     }
   },
-  "exit_code_note": "eval_detector exits non-zero when a regression case FAILS. CO and KY returned rc=1 for that reason \u2014 the expected signal in an ablation off-arm, not a crash. A genuine throttle also yields rc=1, so always check the log and confirm n_detected > 0."
+  "exit_code_note": "eval_detector exits non-zero when a regression case FAILS. CO and KY returned rc=1 for that reason \u2014 the expected signal in an ablation off-arm, not a crash. A genuine throttle also yields rc=1, so always check the log and confirm n_detected > 0.",
+  "reproduces_at_commit": {
+    "_why": "HEAD has moved eight code_version_hash steps past this recording (2026-08-24 to -26). Running the commands in this manifest against HEAD will NOT reproduce these numbers. Check out the commit below first. Guardrail 6.",
+    "commit": "628829b34b409a50821adc510a9f8c0d53c12ccc",
+    "checkout": "git checkout 628829b",
+    "code_version_hash_at_recording": "288c64f1",
+    "code_version_hash_at_head_2026_08_29": "14374dba",
+    "hash_chain_since": "288c64f1 -> b35b9666 (absent-code fix, 2026-08-24) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE) -> 14374dba (label-form de-label + collapse idempotence, 2026-08-26)",
+    "affected_by_the_chain": "\u26a0\ufe0f MATERIALLY AFFECTED. This is the depth-map ablation, and 99b853cc REPLACED the depth-map sampler its 'depth map ON' arm exercises (stride -> layout-stratified). The recorded on/off gap is very likely CONSERVATIVE: the new sampler strictly improved what Pass-1 sees (KY went from a 3-level to a 4-level read). generate_tables.py pins ABLATION_TAG here for exactly this reason. Re-recording at 14374dba is the top outstanding paper item."
+  }
 }

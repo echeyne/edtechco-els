@@ -121,5 +121,14 @@
     "NEITHER BATCHING LAYER IS EXERCISED AT THIS CORPUS TIER: NV produces 5 chunks and KY 3 against MAX_CHUNKS_PER_BATCH=5, and both have 3 domains against MAX_DOMAINS_PER_BATCH=3, so detection and parsing each run as exactly one batch. No batching/scale claim may rest on these states; that is Task 6.",
     "THE PARSER EVAL RUNS THE DIRECT PATH WHILE PRODUCTION RUNS THE BATCHED PATH, AND THEY DEMONSTRABLY DISAGREE HERE: on the identical KY detection at the identical code version, the batched production run emitted 0 unqualified indicator codes and this direct-path eval emitted 4. Consistent with Task 1's finding that parsing does not converge between paths.",
     "THE KY STABILITY RESULT 0.000 IS NOT A DETERMINISM CLAIM. measure_stability excludes the graded run from its own comparison, and the graded run of that same invocation emitted 4 malformed standard_ids. Five probe runs agreeing is compatible with a defect that fires in a minority of runs; at N=5 that is not a null result."
-  ]
+  ],
+  "reproduces_at_commit": {
+    "_why": "HEAD has moved eight code_version_hash steps past this recording (2026-08-24 to -26). Running the commands in this manifest against HEAD will NOT reproduce these numbers. Check out the commit below first. Guardrail 6.",
+    "commit": "fbff414cda50bec3200a3b0ed6a3bd32558c672a",
+    "checkout": "git checkout fbff414",
+    "code_version_hash_at_recording": "3b445471",
+    "code_version_hash_at_head_2026_08_29": "14374dba",
+    "hash_chain_since": "288c64f1 -> b35b9666 (absent-code fix, 2026-08-24) -> 99b853cc (Pass-1 layout-stratified sampling) -> 04e4924c (parser code-composition repairs) -> 61b7243e (malformed-ancestor guard) -> 51056ea2 (deterministic collision fallback) -> 7da92182 (widened _DERIVABLE_CODE_RE) -> 14374dba (label-form de-label + collapse idempotence, 2026-08-26)",
+    "affected_by_the_chain": "SUPERSEDED twice (by task2_20260822, then task2_20260826). Its findings.md \u00a74 remains the authoritative DIAGNOSIS of the NV domain-code failure even though the outcome it reports is fixed."
+  }
 }
