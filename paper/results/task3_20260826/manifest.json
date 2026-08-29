@@ -1,0 +1,40 @@
+{
+  "task": "Task 3 re-record — depth-map on/off ablation, six states",
+  "date": "2026-08-26",
+  "baseline_for_comparison": "paper/results/task3_20260822/ (code_version_hash 288c64f1, commit 628829b34b40)",
+  "supersedes": "paper/results/task3_20260822/ablation_comparison.json",
+  "why_rerecorded": "Task 3 measures what Pass-1 buys, and 99b853cc replaced the Pass-1 SAMPLER (stride -> layout-stratified). The baseline's 'depth map ON' arm therefore exercised the old sampler, the one that read Kentucky as a 3-level document. Every other superseded recording is merely stale; this one measured a component that changed underneath it.",
+  "git_commit": "2c0142d",
+  "code_version_hash": "14374dba",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). Same tier as the baseline.",
+  "extraction_source": "outputs/08-26-26-2 (pipeline run 044, post-deploy of 20cf2f7).",
+  "arms": {
+    "on": "NOT re-run. Frozen task1_20260826/detector_golden4.json + task2_20260826/detector_heldout2.json, which record depth_map PASS in every state. Those detector arms were recorded at 7da92182; the parser repair that moved the hash to 14374dba is in parser.py and eval_detector never loads it, so they are valid at this hash by construction.",
+    "off": "Fresh detector-only sweep with ELS_DEPTH_MAP_ENABLED=false, six separate invocations."
+  },
+  "models": {"detector": "us.anthropic.claude-opus-4-6-v1", "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0 (OFF arm makes no Pass-1 call)"},
+  "cache": "--no-cache on every off-arm invocation.",
+  "commands_in_order": [
+    "source venv/bin/activate",
+    "export AWS_PROFILE=kinder-readiness-dev-cli",
+    "# Flag exported in a SUBSHELL, not as a `VAR=val func` prefix: that form is shell-dependent",
+    "# about reaching the child, and a silent failure to propagate runs the off-arm WITH the map.",
+    "export ELS_DEPTH_MAP_ENABLED=false",
+    "python -c \"from els_pipeline.config import Config; assert Config.DEPTH_MAP_ENABLED is False\"",
+    "# Six SEPARATE invocations so a mid-sweep throttle costs one state, not five.",
+    "for ST in AZ CA CO TX NV KY; do python -m evaluation.eval_detector --extraction-dir outputs/08-26-26-2 --state $ST --no-cache --report-json paper/results/task3_20260826/per_state/detector_nodepthmap_$ST.json --output-dir paper/results/task3_20260826/review_detector_off; done",
+    "# Merge per_state/*.json into detector_nodepthmap.json in AZ,CA,CO,TX,NV,KY order.",
+    "python paper/analysis/compare_ablation.py --on-report paper/results/task1_20260826/detector_golden4.json --on-report paper/results/task2_20260826/detector_heldout2.json --off-report paper/results/task3_20260826/detector_nodepthmap.json --out paper/results/task3_20260826/ablation_comparison.json"
+  ],
+  "headline": {
+    "gap": "mean recall OFF 0.9610 -> 0.9573 against an ON arm that is 1.0000 in both, so the measured cost of removing the depth map GREW from 0.0390 to 0.0427. The prediction that a re-record would be conservative rather than favourable is confirmed.",
+    "two_failure_modes": "CO and KY lose RECALL (KY 0.8864, code 35/39). TX and NV keep recall 1.0000 and lose CODE accuracy instead (TX 8/8 -> 5/8 on identical detections). An aggregate recall number hides this split.",
+    "by_level": "The entire effect sits at strand (recall 1.0000 -> 0.9200) and sub_strand (1.0000 -> 0.8333). Domain and indicator are untouched -- exactly the mechanism CLAUDE.md documents, since Pass-1 decides how many nesting depths a document uses and the levels that go missing are the intermediate ones.",
+    "regressions": "KY-BENCHMARK-IS-SUB-STRAND and KY-STRAND-CODE-KEEPS-FULL-LABEL newly fail with the map off. The baseline also lost CO-NO-SUB-STRAND, which now survives -- a small real improvement in the ON arm attributable to the new sampler, CO being one of the two states that samples."
+  },
+  "caveats": [
+    "AZ and CA are insensitive on every metric, and that is an ARTEFACT OF THEIR GOLDENS, not a result: both are small spot checks (5 and 25 elements) against 67 and 122 in-scope detections, so recall saturates either way. Do not read them as evidence the depth map does not matter -- they are the states least able to show it. AZ's detections rise 67 -> 77 with the map off, which is the listing-page duplicates returning.",
+    "NV's OFF arm reproduces the OLD defect exactly: code 44/46, desc 2/3, 53 detections, failing on NV-DOM-02 (S -> SCIE) and NV-DOM-03 (T -> TECH) -- the same two domains the 288c64f1 recording missed with the map ON. NV's domain-code failure is therefore depth-map-mediated. That does not by itself attribute the 46/46 fix to the sampler, since the baseline had the map ON and still failed, but it does rule out the rule-4 prompt clarification (b35b9666), which governs whether code may be null. See nv_attribution_ab.json.",
+    "All six states returned non-zero detections, so none was excluded as INVALID -- the 2026-08-23 throttle signature did not recur."
+  ]
+}

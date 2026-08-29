@@ -1,0 +1,131 @@
+[
+  {
+    "state": "KY",
+    "precision": 0.9069767441860465,
+    "recall": 0.8863636363636364,
+    "f1": 0.896551724137931,
+    "code_accuracy": 0.8974358974358975,
+    "code_matches": 35,
+    "code_total": 39,
+    "code_mismatches": [
+      {
+        "test_case_id": "KY-STR-02",
+        "level": "strand",
+        "golden": "Approaches to Learning Standard 2",
+        "detected": "Standard 2"
+      },
+      {
+        "test_case_id": "KY-STR-03",
+        "level": "strand",
+        "golden": "Health/Mental Wellness Standard 1",
+        "detected": "Standard 1"
+      },
+      {
+        "test_case_id": "KY-STR-04",
+        "level": "strand",
+        "golden": "Language and Early Literacy Standard 1",
+        "detected": "Standard 1"
+      },
+      {
+        "test_case_id": "KY-STR-05",
+        "level": "strand",
+        "golden": "Language and Early Literacy Standard 2",
+        "detected": "Standard 2"
+      }
+    ],
+    "description_accuracy": 1.0,
+    "description_matches": 26,
+    "description_total": 26,
+    "description_truncations": 0,
+    "description_mismatches": [],
+    "matched": 39,
+    "n_golden": 44,
+    "n_detected": 46,
+    "per_level": {
+      "domain": {
+        "tp": 3,
+        "fp": 0,
+        "fn": 0
+      },
+      "strand": {
+        "tp": 4,
+        "fp": 4,
+        "fn": 1
+      },
+      "sub_strand": {
+        "tp": 6,
+        "fp": 0,
+        "fn": 4
+      },
+      "indicator": {
+        "tp": 26,
+        "fp": 0,
+        "fn": 0
+      }
+    },
+    "confusion": {
+      "domain": {
+        "domain": 3
+      },
+      "indicator": {
+        "indicator": 26
+      },
+      "strand": {
+        "strand": 4
+      },
+      "sub_strand": {
+        "sub_strand": 6
+      }
+    },
+    "missing_test_cases": [
+      "KY-STR-01",
+      "KY-SUB-01",
+      "KY-SUB-02",
+      "KY-SUB-03",
+      "KY-SUB-10"
+    ],
+    "extra_elements": [
+      [
+        "strand",
+        "Benchmark 1.1"
+      ],
+      [
+        "strand",
+        "Benchmark 1.2"
+      ],
+      [
+        "strand",
+        "Benchmark 1.3"
+      ],
+      [
+        "strand",
+        "Benchmark 2.1"
+      ]
+    ],
+    "ignored_out_of_scope": 3,
+    "age_band_drops": [],
+    "depth_map_passed": null,
+    "depth_map_detail": "Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded",
+    "regressions": [
+      {
+        "id": "KY-BENCHMARK-IS-SUB-STRAND",
+        "status": "FAIL",
+        "detail": "6/12 Benchmark elements are not sub_strand (e.g. level='strand', code='Benchmark 1.1', title='Maintains focus and sustains attention.')"
+      },
+      {
+        "id": "KY-FOUR-LEVEL-HIERARCHY",
+        "status": "PASS",
+        "detail": "all four levels present"
+      },
+      {
+        "id": "KY-STRAND-CODE-KEEPS-FULL-LABEL",
+        "status": "FAIL",
+        "detail": "5/14 labelled heading(s) lost part of their label, e.g. strand code='Standard 2' should be 'Approaches to Learning Standard 2'"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_detail": null,
+    "stability_size_stdev": null
+  }
+]

@@ -1,0 +1,31 @@
+
+=== KY ===
+  golden:   44
+  detected: 46
+  matched:  39
+  precision: 0.907  recall: 0.886  f1: 0.897
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=26  fp=0   fn=0   p=1.00 r=1.00
+    strand      tp=4   fp=4   fn=1   p=0.50 r=0.80
+    sub_strand  tp=6   fp=0   fn=4   p=1.00 r=0.60
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 26
+    strand     → strand     : 4
+    sub_strand → sub_strand : 6
+  code accuracy: 35/39 (0.897) — graded over matched pairs only
+    [CODE] KY-STR-02 (strand): golden 'Approaches to Learning Standard 2' != detected 'Standard 2'
+    [CODE] KY-STR-03 (strand): golden 'Health/Mental Wellness Standard 1' != detected 'Standard 1'
+    [CODE] KY-STR-04 (strand): golden 'Language and Early Literacy Standard 1' != detected 'Standard 1'
+    [CODE] KY-STR-05 (strand): golden 'Language and Early Literacy Standard 2' != detected 'Standard 2'
+  description accuracy: 26/26 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — Pass-1 disabled via ELS_DEPTH_MAP_ENABLED; not graded
+  age-band drops: 0
+  missing test cases (5): ['KY-STR-01', 'KY-SUB-01', 'KY-SUB-02', 'KY-SUB-03', 'KY-SUB-10']
+  extra detected (in-scope FPs) (4): [('strand', 'Benchmark 1.1'), ('strand', 'Benchmark 1.2'), ('strand', 'Benchmark 1.3'), ('strand', 'Benchmark 2.1')]
+  ignored (out-of-scope domains): 3
+  regression cases:
+    [FAIL] KY-BENCHMARK-IS-SUB-STRAND — 6/12 Benchmark elements are not sub_strand (e.g. level='strand', code='Benchmark 1.1', title='Maintains focus and sustains attention.')
+    [PASS] KY-FOUR-LEVEL-HIERARCHY — all four levels present
+    [FAIL] KY-STRAND-CODE-KEEPS-FULL-LABEL — 5/14 labelled heading(s) lost part of their label, e.g. strand code='Standard 2' should be 'Approaches to Learning Standard 2'

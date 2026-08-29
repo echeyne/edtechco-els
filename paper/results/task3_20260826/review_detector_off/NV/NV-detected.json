@@ -1,0 +1,532 @@
+[
+  {
+    "level": "domain",
+    "code": "SS",
+    "title": "Social Studies",
+    "description": "Social Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young children begin learning about social studies content as they learn about their family and their community, and also as they learn about themselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community, they develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and appreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different groups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their interactions with their own family, classroom, and places they go regularly. Children begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and responsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their knowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council for the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers can create learning experiences and classroom environments to support the integration of social studies themes into play-based learning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children learn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Social Studies\nSocial Studies highlights the knowledge children gain about the people and places in their world through their experiences. Young\nchildren begin learning about social studies content as they learn about their family and their community, and also as they learn about\nthemselves and their roles within the community. As they gain knowledge of the people, places, and roles within their community,\nthey develop awareness of similarities and differences between people they meet, laying the foundation for their understanding of and\nappreciation for cultural differences within their community. Children also have the opportunity to notice how persons from different\ngroups speak different languages, a key feature of the cultures that they learn about through their direct experiences-through their\ninteractions with their own family, classroom, and places they go regularly.\nChildren begin to learn about how their communities work through classroom experiences as they learn about roles, rights, and\nresponsibilities. For example, they learn clean-up routines and their responsibility to put away their toys. Gradually they expand their\nknowledge of the world and come to understand important concepts included in the Social Studies Standards. The National Council\nfor the Social Studies (2019) position statement Early Childhood in the Social Studies Context provides an overview of how teachers\ncan create learning experiences and classroom environments to support the integration of social studies themes into play-based\nlearning for children. The Social Studies Standards use play-based instruction to integrate all other content areas into how children\nlearn about the people, places, and roles that are important in their world. Many of the practices that teachers use to support children\nin this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an\nasterisk (*) in the charts below.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 1",
+    "title": "Demonstrate a basic awareness of self as an individual, within the context of a group and community.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Social Studies Standard 1:\nDemonstrate a basic awareness of self as an individual, within the context of a group and community.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 2",
+    "title": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Social Studies Standard 2:\nDemonstrate a basic understanding of roles, rights, and responsibilities in their\nclassroom and home.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 3",
+    "title": "Demonstrate knowledge of the relationship between people and places.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Social Studies Standard 3:\nDemonstrate knowledge of the relationship between people and places.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 4",
+    "title": "Demonstrate the ability to differentiate between the concepts of past, present, and future, and recognize that people and things change over time.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Social Studies Standard 4:\nDemonstrate the ability to differentiate between the concepts of past, present,\nand future, and recognize that people and things change over time.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 5",
+    "title": "Demonstrate an awareness of basic economic concepts.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "Social Studies Standard 5:\nDemonstrate an awareness of basic economic concepts.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "SS.ID",
+    "title": "Individual Development and Cultural Identity",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Individual Development\nand Cultural Identity\nIndicators (SS.ID)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.ID.PK1",
+    "title": "Identify and describe characteristics of self that are unique from others.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "SS.ID.PK1. Identify and\ndescribe characteristics of\nself that are unique from\nothers.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.ID.PK2",
+    "title": "Identify self as a member of a family.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "SS.ID.PK2. Identify self as a\nmember of a family.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.ID.PK3",
+    "title": "Share information about their family practices, customs, and culture.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "SS.ID.PK3. Share\ninformation about their\nfamily practices, customs,\nand culture.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.ID.PK4",
+    "title": "Identify and describe family traditions and daily rituals that are important to their family.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "SS.ID.PK4. Identify and\ndescribe family traditions\nand daily rituals that are\nimportant to their family.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "SS.CI",
+    "title": "Civic Ideas and Practices",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 5,
+    "source_text": "Civic Ideas and Practices\nIndicators (SS.CI)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK1",
+    "title": "Identify self as member of a classroom or community.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 5,
+    "source_text": "SS.CI.PK1. Identify self as\nmember of a classroom or\ncommunity.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK2",
+    "title": "Identify classroom teachers/practitioners and peers by name.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 5,
+    "source_text": "SS.CI.PK2. Identify\nclassroom teachers/\npractitioners and peers by\nname.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK3",
+    "title": "Recognize and resolve conflicts with peers with adult guidance.",
+    "description": null,
+    "confidence": 0.9,
+    "source_page": 5,
+    "source_text": "SS.CI.PK3. Recognize\nand resolve conflicts with",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 2",
+    "title": "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+    "description": null,
+    "confidence": 0.92,
+    "source_page": 5,
+    "source_text": "Social Studies Standard 2:\nDemonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK3",
+    "title": "Recognize and resolve conflicts with peers in an age-appropriate manner.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 5,
+    "source_text": "SS.CI.PK3. Recognize\nand resolve conflicts with\npeers in an age-appropriate\nmanner.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK4",
+    "title": "Show awareness of and follow group routines and rules.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 5,
+    "source_text": "SS.CI.PK4. Show\nawareness of and follow\ngroup routines and rules.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK5",
+    "title": "Participate in group decision-making.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 5,
+    "source_text": "SS.CI.PK5. Participate in\ngroup decision-making.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK6",
+    "title": "Work together to complete simple tasks with peers.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "SS.CI.PK6. Work together\nto complete simple tasks\nwith peers.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.CI.PK7",
+    "title": "Identify and describe the roles of different community helpers.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "SS.CI.PK7. Identify and\ndescribe the roles of\ndifferent community helpers.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Social Studies Standard 3",
+    "title": "Demonstrate knowledge of the relationship between people and places.",
+    "description": null,
+    "confidence": 0.92,
+    "source_page": 6,
+    "source_text": "Social Studies Standard 3:\nDemonstrate knowledge of the relationship between people and places.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "SS.GH",
+    "title": "Geography, Humans, and the Environment",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 6,
+    "source_text": "Geography, Humans,\nand the Environment\nIndicators (SS.GH)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.GH.PK1",
+    "title": "Use spatial words to identify direction and location.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "SS.GH.PK1. Use spatial\nwords to identify direction\nand location.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "SS.GH.PK2",
+    "title": "Identify and describe their classroom, home, or community.",
+    "description": null,
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "SS.GH.PK2. Identify and\ndescribe their classroom,\nhome, or community.",
+    "age_band": null
+  },
+  {
+    "level": "domain",
+    "code": "SCIE",
+    "title": "Science",
+    "description": "The Science domain is the \"S\" in STEAM (Science, Technology, Engineering, the Arts, and Mathematics) and the starting point for the STEAM section of the standards. Developmentally appropriate early childhood STEAM experiences guide and engage young children in their natural curiosity to critically explore and ask questions about the world around them. Teachers/practitioners can intentionally build on children's interests in teaching the STEAM concepts of reasoning and inquiry (National Science Teachers Association [NSTA], 2014). Children's STEAM proficiency is developed over time as they engage in STEAM explorations that meet multiple learning standards, through a combination of their own investigations and teacher/practitioner guidance along the way. Teachers can set the stage for STEAM by setting up the environment with a wide array of open-ended materials that can be used for construction; by providing creative engineering problems for children to solve; and by asking open-ended questions as children hypothesize, design, experiment, analyze, report, and try again (Linder & Eckhoff, 2020). Preschool children are natural scientists, filled with curiosity about the world and how it works (Larimore, 2020). They learn science concepts and refine their skills in observation and inquiry by doing science through active play and exploration of their environment. Teachers can deepen children's interest and build children's skills and knowledge in this area by supporting, extending, and providing vocabulary for the cycle of inquiry. Practicing the scientific process in prekindergarten by asking questions, making predictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes and builds on children's natural curiosity and gives them the vocabulary and experiences that will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers can model the scientific questions and observations by wondering or noticing things aloud as they pose questions or state observations to embed language into explorations. This practice builds children's oral language and encourages them to also wonder aloud as they formulate their own thoughts and begin wondering or noticing. Teachers can use multilingual approaches to bring science to life in children's home languages and support cross-linguistic connections that facilitate meaning-making for all young children. NAEYC's 10 Tips to Support Children's Science Learning (Lan, n.d.) offers guidance on how teachers can create learning experiences and classroom environments to support science exploration by giving children time and space to explore, find answers to questions together, learn from mistakes, and even make a little mess sometimes. Teachers can also apply the Science Standards in other content areas and domains, giving children the opportunity to observe and discover as they learn other skills. Science concepts can be taught and integrated within other learning and developmental domains. For example, an integrated literacy activity can include reading a fictional book together, then identifying a challenge or problem the characters experienced in the story and challenging children to creatively solve the problem from the story by applying STEAM concepts. Many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below.",
+    "confidence": 0.93,
+    "source_page": 7,
+    "source_text": "Science\nThe Science domain is the \"S\" in STEAM (Science, Technology, Engineering,\nthe Arts, and Mathematics) and the starting point for the STEAM section of the\nstandards. Developmentally appropriate early childhood STEAM experiences\nguide and engage young children in their natural curiosity to critically explore\nand ask questions about the world around them. Teachers/practitioners can\nintentionally build on children's interests in teaching the STEAM concepts of\nreasoning and inquiry (National Science Teachers Association [NSTA], 2014).\nChildren's STEAM proficiency is developed over time as they engage in STEAM\nexplorations that meet multiple learning standards, through a combination\nof their own investigations and teacher/practitioner guidance along the way.\nTeachers can set the stage for STEAM by setting up the environment with\na wide array of open-ended materials that can be used for construction; by\nproviding creative engineering problems for children to solve; and by asking\nopen-ended questions as children hypothesize, design, experiment, analyze,\nreport, and try again (Linder & Eckhoff, 2020).\nPreschool children are natural scientists, filled with curiosity about the world and how it\nworks (Larimore, 2020). They learn science concepts and refine their skills in observation\nand inquiry by doing science through active play and exploration of their environment.\nTeachers can deepen children's interest and build children's skills and knowledge in\nthis area by supporting, extending, and providing vocabulary for the cycle of inquiry.\nPracticing the scientific process in prekindergarten by asking questions, making\npredictions, gathering data, analyzing outcomes, and drawing conclusions capitalizes\nand builds on children's natural curiosity and gives them the vocabulary and experiences\nthat will prepare them for success in kindergarten and beyond (NSTA, 2014). Teachers\ncan model the scientific questions and observations by wondering or noticing things\naloud as they pose questions or state observations to embed language into explorations.\nThis practice builds children's oral language and encourages them to also wonder aloud\nas they formulate their own thoughts and begin wondering or noticing. Teachers can use\nmultilingual approaches to bring science to life in children's home languages and support\ncross-linguistic connections that facilitate meaning-making for all young children.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Science Standard 1",
+    "title": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 8,
+    "source_text": "Science Standard 1:\nDemonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Science Standard 2",
+    "title": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 8,
+    "source_text": "Science Standard 2:\nDemonstrate the ability to use information gathered in different ways to conduct investigations.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Science Standard 3",
+    "title": "Demonstrate the ability to describe, analyze, and draw conclusions about the outcome of an investigation.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 8,
+    "source_text": "Science Standard 3:\nDemonstrate the ability to describe, analyze, and draw conclusions about the outcome of an investigation.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Science Standard 4",
+    "title": "Demonstrate the ability to communicate about observations, investigations, and outcomes.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 8,
+    "source_text": "Science Standard 4:\nDemonstrate the ability to communicate about observations, investigations, and outcomes.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "S.EO",
+    "title": "Exploration, Observation, and Hypotheses",
+    "description": null,
+    "confidence": 0.93,
+    "source_page": 9,
+    "source_text": "Exploration, Observation,\nand Hypotheses\nIndicators (S.EO)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "S.EO.PK1",
+    "title": "Use smell, touch, sight, sound, and taste to make observations.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "S.EO.PK1. Use smell,\ntouch, sight, sound, and\ntaste to make observations.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "S.EO.PK2",
+    "title": "Use tools to observe and describe objects, the environment, and processes.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "S.EO.PK2. Use tools to\nobserve and describe\nobjects, the environment,\nand processes.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "S.EO.PK3",
+    "title": "Use observations and information to notice patterns, create groups based on similarities/differences observed, and/or make predictions.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "S.EO.PK3. Use\nobservations and\ninformation to notice\npatterns, create groups\nbased on similarities/\ndifferences observed, and/\nor make predictions.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "S.EO.PK4",
+    "title": "Make predictions using prior knowledge and experience.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 10,
+    "source_text": "S.EO.PK4. Make\npredictions using prior\nknowledge and experience.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "S.SI",
+    "title": "Scientific Investigation",
+    "description": null,
+    "confidence": 0.93,
+    "source_page": 10,
+    "source_text": "Scientific Investigation\nIndicators (S.SI)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "S.SI.PK1",
+    "title": "Show curiosity and ask questions about things they are interested in that can be answered through an investigation.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 10,
+    "source_text": "S.SI.PK1. Show curiosity\nand ask questions about\nthings they are interested\nin that can be answered\nthrough an investigation.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Science Standard 1",
+    "title": "Exploration, Observation, and Hypotheses",
+    "description": "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.",
+    "confidence": 0.88,
+    "source_page": 10,
+    "source_text": "Science Standard 1:\nDemonstrate the ability to use senses and tools to explore, make observations, and make predictions.\nExploration, Observation,\nand Hypotheses\nIndicators (S.EO)",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Science Standard 2",
+    "title": "Scientific Investigation",
+    "description": "Demonstrate the ability to use information gathered in different ways to conduct investigations.",
+    "confidence": 0.88,
+    "source_page": 10,
+    "source_text": "Science Standard 2:\nDemonstrate the ability to use information gathered in different ways to conduct investigations.\nScientific Investigation\nIndicators (S.SI)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "S.SI.PK2",
+    "title": "Describe some of the steps and/or materials needed for an investigation or experiment.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 10,
+    "source_text": "S.SI.PK2. Describe some of\nthe steps and/or materials\nneeded for an investigation\nor experiment.",
+    "age_band": null
+  },
+  {
+    "level": "domain",
+    "code": "TECH",
+    "title": "Technology",
+    "description": "Technology represents the \"T\" in STEAM and is the second domain of the STEAM section of the prekindergarten standards. Although children engage in STEAM disciplines through their everyday play, the foundational principles of STEAM cannot be met without knowledgeable teachers and practitioners explicitly engaging children in technology exploration during the preschool years. Preschoolers with a developing understanding of technology benefit from enhanced cognitive and social skills as they explore, play make-believe, create their own technology tools, actively engage in challenging activities, and more (U.S. Department of Education [ED] & U.S. Department of Health and Human Services [HHS], 2016). Teachers should use developmentally appropriate practices and principles to intentionally integrate technology and content domains into daily activities for young children. This new Technology domain was added to the Nevada Pre-Kindergarten Standards in 2023. Digital literacy and citizenship are necessary skills for prekindergarten children to learn in today's increasingly technology-centered world. When using technology, children develop a variety of skills including creative thinking, problem-solving, fine motor, literacy, and number sense. They also learn to use technology safely and responsibly by engaging in appropriate activities with guidance. Teachers are not presumed to be experts to implement technology activities right away in their classrooms. The National Association for the Education of Young Children (NAEYC) and the Fred Rogers Center for Early Learning and Children's Media at Saint Vincent College (2012) published a position statement endorsing the use of digital technology for young children, stating: Technology and interactive media are tools that can promote effective learning and development when they are used intentionally by early childhood educators, within the framework of developmentally appropriate practice, to support learning goals established for individual children. (p. 5) Interactive media and digital technology can have many benefits when used as age-appropriate learning tools that are intentionally integrated into playful activities to increase access to information (ED & HHS, 2016). Utilizing simple applications can help children develop the necessary digital literacy skills to help them to become digital citizens. These standards define technology broadly as the creation and use of tools to meet a purpose, and not simply limited to digital, screen-based devices. Furthermore, this domain does not require children's individual use of digital devices, and standards can be met without using screen time at all. When screen-based devices are used in the classroom, teachers need to carefully consider current research and recommendations for children's active versus passive digital use, screen-time limits for young children, and other guidance as technology evolves. Technology tools, like all other classroom materials, must support learning and not be used as an isolated activity. Thus, many of the practices that teachers use to support children in this domain also support children's progress in other domains. These cross-curricular supportive practices are indicated with an asterisk (*) in the charts below. In this context, the new Technology Standards explore digital technology, nondigital technology, and assistive technology.",
+    "confidence": 0.92,
+    "source_page": 11,
+    "source_text": "Technology\nTechnology represents the \"T\" in STEAM and is the second domain of the STEAM",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Technology Standard 1",
+    "title": "Technology as a Tool",
+    "description": "Demonstrate knowledge that different types of technology tools have different uses, including digital, nondigital, and assistive technology.",
+    "confidence": 0.9,
+    "source_page": 13,
+    "source_text": "Technology Standard 1:\nDemonstrate knowledge that different types of technology tools have different uses, including digital,\nnondigital, and assistive technology.\nTechnology as a Tool",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Technology Standard 2",
+    "title": "Use technology for communication and to gather and share information.",
+    "description": null,
+    "confidence": 0.85,
+    "source_page": 12,
+    "source_text": "Technology Standard 2:\nUse technology for communication and to gather and share information.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Technology Standard 3",
+    "title": "Demonstrate safe and responsible use of technology and resources.",
+    "description": null,
+    "confidence": 0.92,
+    "source_page": 12,
+    "source_text": "Technology Standard 3:\nDemonstrate safe and responsible use of technology and resources.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Technology Standard 1",
+    "title": "Demonstrate knowledge that different types of technology tools have different uses, including digital, nondigital, and assistive technology.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Technology Standard 1:\nDemonstrate knowledge that different types of technology tools have different uses, including digital,\nnondigital, and assistive technology.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "T.TT",
+    "title": "Technology as a Tool",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "Technology as a Tool\nIndicators (T.TT)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "T.TT.PK1",
+    "title": "Identify a variety of digital technology tools and their uses.",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 13,
+    "source_text": "T.TT.PK1. Identify a variety\nof digital technology tools\nand their uses.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "T.TT.PK2",
+    "title": "Identify a variety of nondigital technology tools and their uses.",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 13,
+    "source_text": "T.TT.PK2. Identify a variety\nof nondigital technology\ntools and their uses.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "T.TT.PK3",
+    "title": "Identify a variety of assistive technology tools and their uses.",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 13,
+    "source_text": "T.TT.PK3. Identify a variety\nof assistive technology tools\nand their uses.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Technology Standard 2",
+    "title": "Use technology for communication and to gather and share information.",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 15,
+    "source_text": "Technology Standard 2:\nUse technology for communication and to gather and share information.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "T.CT",
+    "title": "Communicating Through Technology",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 15,
+    "source_text": "Communicating Through\nTechnology Indicators\n(T.CT)",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "T.CT.PK1",
+    "title": "Use technology to communicate information, with teacher assistance.",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 15,
+    "source_text": "T.CT.PK1. Use technology\nto communicate\ninformation, with teacher\nassistance.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "T.CT.PK2",
+    "title": "Use technology to explore and answer questions about the world, with teacher assistance.",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 15,
+    "source_text": "T.CT.PK2. Use technology\nto explore and answer\nquestions about the world,\nwith teacher assistance.",
+    "age_band": null
+  }
+]

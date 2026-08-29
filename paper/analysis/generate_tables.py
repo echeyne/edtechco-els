@@ -50,22 +50,14 @@ TABLES_DIR = PAPER_DIR / "tables"
 # The recorded freeze these tables describe. Edit ONLY this after a re-record.
 RUN_TAG = "20260826"
 
-# ⚠️ The depth-map ablation is tagged SEPARATELY (2026-08-29). Task 3 has not
-# been re-recorded at 14374dba, and it cannot simply ride RUN_TAG because it is
-# the one table whose subject this week's work changed: Task 3 measures what the
-# Pass-1 depth map buys, and `99b853cc` replaced the depth-map SAMPLER (stride →
-# layout-stratified). So its "depth map ON" arm was recorded with the OLD
-# sampler — the one that read KY as a 3-level document.
-#
-# Pointing this at 20260822 keeps the ablation table internally consistent and
-# reproducible from its own recording, at the cost of citing a different hash
-# from the headline tables. That is disclosed in the table's own source note.
-# It is very likely CONSERVATIVE: the new sampler strictly improved what Pass-1
-# sees, so a re-record should widen the on/off gap rather than narrow it.
-#
-# Re-recording Task 3 at the current hash is the right fix and is the top
-# outstanding paper item.
-ABLATION_TAG = "20260822"
+# The depth-map ablation keeps its OWN tag even though it now matches RUN_TAG.
+# It is a genuinely separate recording with a separate cadence: its ON arm is
+# the frozen Task 1 + Task 2 detector reports and only its OFF arm is swept, so
+# it can fall out of step with RUN_TAG without either being wrong. Re-recorded
+# at 14374dba on 2026-08-26 because 99b853cc replaced the Pass-1 SAMPLER its ON
+# arm exercises; the gap WIDENED (mean recall off 0.9610 -> 0.9573), confirming
+# that the older number was conservative.
+ABLATION_TAG = "20260826"
 STABILITY_TAG = "20260823"
 BASELINE_TAG = "20260823"
 STATS_TAG = "20260823"
