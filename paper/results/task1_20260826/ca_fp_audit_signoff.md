@@ -26,7 +26,7 @@ VERDICTS CHANGED: 6   (classification only: 6 rows moved Group B -> Group A
                        after Emily identified them as distinct indicators.
                        No verdict changed from "real" to "hallucinated", so
                        CA verified precision is unchanged at 1.0.)
-SIGNED:           [ ]
+SIGNED:           Emily Cheyne
 ```
 
 ## Scope — what you are and are not signing

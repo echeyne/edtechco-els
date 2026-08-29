@@ -15,9 +15,9 @@ That sentence is **not true for NV until you sign this**, and NV's verified prec
 
 ```
 ANNOTATOR:        Emily Cheyne
-DATE:             ____-__-__
-VERDICTS CHANGED: ____   (0 if you agree with all 6)
-SIGNED:           [ ]
+DATE:             2026-08-29
+VERDICTS CHANGED: 0
+SIGNED:           Emily Cheyne
 ```
 
 ## Scope — what you are and are not signing
@@ -38,11 +38,11 @@ Verified precision = (in-scope detections − hallucinations) / in-scope detecti
 
 | # | Page | Level | Code | Title | My verdict | Your call |
 |---|---|---|---|---|---|---|
-| B1 | 5 | strand | `Social Studies Standard 2` | Demonstrate a basic understanding of roles, rights, and re | real, repeat | |
-| B2 | 6 | strand | `Social Studies Standard 3` | Demonstrate knowledge of the relationship between people a | real, repeat | |
-| B3 | 10 | sub_strand | `S.EO` | Exploration, Observation, and Hypotheses | real, repeat | |
-| B4 | 10 | strand | `Science Standard 2` | Demonstrate the ability to use information gathered in dif | real, repeat | |
-| B5 | 15 | strand | `Technology Standard 2` | Use technology for communication and to gather and share i | real, repeat | |
+| B1 | 5 | strand | `Social Studies Standard 2` | Demonstrate a basic understanding of roles, rights, and re | real, repeat | AGREE |
+| B2 | 6 | strand | `Social Studies Standard 3` | Demonstrate knowledge of the relationship between people a | real, repeat | AGREE |
+| B3 | 10 | sub_strand | `S.EO` | Exploration, Observation, and Hypotheses | real, repeat | AGREE |
+| B4 | 10 | strand | `Science Standard 2` | Demonstrate the ability to use information gathered in dif | real, repeat | AGREE |
+| B5 | 15 | strand | `Technology Standard 2` | Use technology for communication and to gather and share i | real, repeat | AGREE |
 
 ## Group D — candidate hallucinations — THESE ARE THE ROWS THAT MATTER (1 rows)
 
@@ -70,5 +70,5 @@ Another element carries the **same code**:
 
 | # | Page | Level | Code | My verdict | Your call |
 |---|---|---|---|---|---|
-| D1 | 5 | indicator | `SS.CI.PK3` | **hallucinated** | |
+| D1 | 5 | indicator | `SS.CI.PK3` | **hallucinated** | AGREE |
 

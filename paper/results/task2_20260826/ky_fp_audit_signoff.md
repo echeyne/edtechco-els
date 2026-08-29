@@ -21,9 +21,9 @@ So verified precision is **44/44 = 1.0**: signing this sheet asserts that the ro
 
 ```
 ANNOTATOR:        Emily Cheyne
-DATE:             ____-__-__
-VERDICTS CHANGED: ____   (0 if you agree with all 0)
-SIGNED:           [ ]
+DATE:             2026-08-29
+VERDICTS CHANGED: 0
+SIGNED:           Emily Cheyne
 ```
 
 ## Scope — what you are and are not signing
