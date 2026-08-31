@@ -1,0 +1,71 @@
+{
+  "task": "Task 5 \u2014 stability / determinism, both suites, six states",
+  "date_started": "2026-08-30",
+  "status": "IN PROGRESS. Runs 1-3 on 2026-08-30; runs 4-5 planned 2026-08-31.",
+  "git_commit": "a160593346316d2eff0a168ec608f0f37d83288e",
+  "code_version_hash": "14374dba",
+  "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). Same tier as every other quality recording, so the stability numbers are comparable with the Task 1/2 headline tables and must carry the same tier label (guardrail 1).",
+  "extraction_source": "outputs/08-26-26-2 (pipeline run 044)",
+  "models": {
+    "detector": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "_verified": "Model ids confirmed against CloudWatch AWS/Bedrock list-metrics on 2026-08-30: exactly three ids have had activity in the trailing ~14 days, and they are these three. This check was added after task1_20260826/manifest.json was found to record a parser id (us.anthropic.claude-sonnet-4-5-v1) that was never invoked."
+  },
+  "cache": "--no-cache on EVERY invocation. Each run is an independent live Bedrock sample; that is the entire point of the measurement.",
+  "protocol": {
+    "shape": "Plain repeats, ONE invocation per state per run, each with its own --report-json and --output-dir.",
+    "why_not_stability_runs_flag": "eval_detector/eval_parser accept --stability-runs N, and Task 5's original step 1 named it. It is NOT used, deliberately. --stability-runs executes all N observations inside a single invocation, i.e. one session, which defeats Task 5's blocker 2: July's finding was that 3 same-session runs agreed perfectly while a run separated by 24h differed by up to 9 elements. Five back-to-back observations would measure a falsely low variance. Plain repeats also let the sweep be split across days and are the shape paper/analysis/ already consumes.",
+    "why_one_invocation_per_state": "Compute-budget rule 2. A mid-run throttle inside a six-state invocation once recorded five states as n_detected=0, recall=0.0 \u2014 which reads as a catastrophic result rather than an infrastructure failure.",
+    "day_split": "Runs 1-3 on 2026-08-30, runs 4-5 on 2026-08-31, so BOTH suites have observations spanning more than one day. This is what blocker 2 requires; running one suite entirely on each day would not satisfy it.",
+    "\u26a0\ufe0f_day_split_honesty": "Runs 1, 2 and 3 all executed back-to-back on the evening of 2026-08-30 local (22:54Z to ~01:00Z), so run 3 carries a 2026-08-31 UTC timestamp purely because it crossed UTC midnight. DO NOT present runs 1-3 as spanning two days: they are effectively one session, and blocker 2's whole point is that same-session runs understate variance (July: 3 same-session runs agreed perfectly while a 24h-separated run differed by up to 9 elements). The genuine temporal separation in this measurement comes from exactly two places: the frozen parser observation recorded 2026-08-29, and runs 4-5 planned for 2026-08-31. The DETECTOR suite therefore has NO cross-day observation until run 4 lands \u2014 its runs 1-3 are one session. State that plainly wherever the detector stability number is quoted."
+  },
+  "quota_context": {
+    "opus_daily_cap": 2592000,
+    "opus_spent_before_this_sweep_2026_08_30": 8,
+    "note": "Measured, not assumed, via CloudWatch AWS/Bedrock InputTokenCount. The prior day's full-document runs (925,871 Opus tokens total on 2026-08-29) had fully rolled off. Run 2 is gated behind a re-probe that refuses to start if today's spend has passed 1.6M input tokens."
+  },
+  "analysis": {
+    "script": "paper/analysis/task5_stability.py",
+    "self_check": "python paper/analysis/task5_stability.py --self-check",
+    "command": "python paper/analysis/task5_stability.py --results-dir paper/results/task5_20260830 --out paper/results/task5_20260830/stability_analysis.json",
+    "instrument_caveats": [
+      "Identity is the normalized TITLE (detector) / normalized indicator.name (parser). level, code, description, age_band, source_page and standard_id are COMPARED FIELDS and are never in the identity key. The predecessor instrument keyed on (code, title) and was therefore blind to exactly the malformed-code defect it existed to catch.",
+      "detector_sort_key was FIXED on review 2026-08-30: as first drafted it ordered within-identity occurrences by `level` and `code`, both fields under test, so a code drift reordered the occurrences and paired run A's element against a different element in run B. It now sorts on source_text and source_page only. Pinned by self-check (f), which FAILS against the old key.",
+      "A 0.000 rate at N=5 is NOT evidence of determinism. A defect firing in a minority of runs easily yields five clean observations; 10 of 20 cached KY parser runs fired the bare-code defect historically. Treat every rate here as a LOWER BOUND on variance.",
+      "compute_stability compares the MULTISET of each field's values within an identity group, NOT occurrence-i-to-occurrence-i after a sort. Changed 2026-08-30 on review. Reason, measured on the real CA parser output: 94 standards collapse to 33 distinct indicator names, and 32 occurrences are separated by NO combination of age_band, source_page and source_text -- CA prints the same foundation once per proficiency column, so the columns differ only in indicator.code, the field under test. Positional pairing there would have required sorting by a field under test, which does not mask a change but inflates it: one drifted code would report as two code disagreements plus spurious description/standard_id ones. Multiset comparison is order-insensitive, needs no tie-break, and is equivalent to direct comparison at multiplicity 1."
+    ],
+    "frozen_observation": {
+      "what": "The parser arms of task1_20260826 and task2_20260826 are folded in as observation 0 via --frozen-parser.",
+      "why_legitimate": "Same code_version_hash (14374dba), same frozen detections (outputs/08-26-26-2), same --no-cache, all six states. They are observations of exactly this configuration and they cost nothing -- those runs already happened. Same argument that repaired eval_detector.measure_stability, whose central defect was excluding the run it had actually graded.",
+      "bonus": "They were run on 2026-08-29, a DIFFERENT DAY from this sweep, which is what blocker 2 asks for.",
+      "detector_excluded": "\u26a0\ufe0f PARSER ONLY. The detector arms of those same recordings were produced at 7da92182, a different hash. Folding them into detector stability would compare two code versions and report a code change as run-to-run variance."
+    }
+  },
+  "runs": {
+    "1": "2026-08-30, both suites, six states",
+    "2": "2026-08-30 (chained, quota-gated)",
+    "3": "2026-08-30 planned",
+    "4": "2026-08-31 planned",
+    "5": "2026-08-31 planned"
+  },
+  "interim_result_after_runs_1_2": {
+    "_status": "PARTIAL \u2014 n=2 detector, n=3 parser (incl. frozen). Superseded once runs 3-5 land.",
+    "detector": {
+      "corpus_disagreement_rate": 0.013158,
+      "n_identities_compared": 304,
+      "n_distinct_unstable": 4,
+      "AZ": "3 unstable, all presence/multiplicity; output size 74 vs 77 \u2014 the listing-page duplicate phenomenon",
+      "NV": "1 unstable, code",
+      "CA/CO/KY/TX": "0"
+    },
+    "parser": {
+      "corpus_disagreement_rate": 0.039801,
+      "n_identities_compared": 201,
+      "n_distinct_unstable": 8,
+      "CA": "4 identities / 12 rows. Run 2 emitted ELD.1.0.VOCA.Foundation 1.1.BROA \u2014 the DOCUMENTED structural-label-in-code defect, in the documented surface form and at the documented ~12-row scale. Every one contains whitespace, so validator._validate_code_shape rejects all 12 before Aurora. This is the stability instrument catching, live, the exact defect the code-shape guard was built for.",
+      "NV": "4 identities. Run 1 put NV-STD-05/06/07 under strand SS.1 instead of SS.2, with the matching strand.name \u2014 the _anchor_parent_chain / strand-keeps-its-heading area. Frozen and run 2 agree; run 1 is the outlier. Run 1's eval exited 1 on the NV-STRAND-PARENT-BY-HEADING regression case, which is a QUALITY failure, not an infrastructure one \u2014 the report is complete and valid and must NOT be excluded.",
+      "AZ/CO/KY/TX": "0"
+    }
+  }
+}

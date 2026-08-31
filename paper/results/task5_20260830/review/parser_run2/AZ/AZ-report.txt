@@ -1,0 +1,15 @@
+
+=== AZ ===
+  golden standards: 18
+  parsed:           45
+  matched:          18  (coverage 1.000)
+  fully correct:    17/18
+  field accuracy:   0.997
+  per-field (ok/total) — only fields with a mismatch shown:
+    indicator.description   17/18  (0.94)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (1):
+    AZ-IND-15 indicator.description: expected 'Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, "My name starts with an [I]." Paints the letter L like in her friend\'s name, while at the easel.' got 'Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, "My name starts with an [1]." Paints the letter L like in her friend\'s name, while at the easel.'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 45 standard_ids unique

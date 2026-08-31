@@ -1,0 +1,85 @@
+== TX ==
+  [detector] running on 306 blocks…
+Starting structure detection for document: outputs/08-26-26-2/TX-extraction.json
+Input: 306 text blocks
+Inferring depth map from 306 sampled blocks (~3715 tokens)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 8158, "output_tokens": 472, "total_tokens": 8630, "latency_ms": 4883.9, "estimated_cost_usd": 0.010518, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1373 chars, 8158 in / 472 out tokens, 4884ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: "Roman numeral + period + title (e.g., 'I. Social and Emotional Development Domain', 'VI. Science Domain')")
+  depth=2 → strand (pattern: "Capital letter + period + title (e.g., 'A. Self-Concept', 'B. Self-Regulation', 'A. Physical Science')")
+  depth=3 → sub_strand (pattern: "Arabic numeral + period + title (e.g., '1. Behavior Control', '2. Emotional Control')")
+  depth=4 → indicator (pattern: "Grade code + Roman numeral + capital letter + Arabic numeral + optional lowercase letter (e.g., 'PK3.I.A.1', 'PK4.I.B.1.a')")
+Created 3 chunks from 306 text blocks (target: 2000 tokens, overlap: 500 tokens)
+Processing chunk 1/3 (171 blocks, ~1992 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11694, "output_tokens": 3962, "total_tokens": 15656, "latency_ms": 30106.6, "estimated_cost_usd": 0.15752, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 14272 chars, 11694 in / 3962 out tokens, 30107ms
+Parsed 23 elements from LLM response
+Successfully created 23 DetectedElement objects
+Chunk 1/3: Successfully detected 23 elements
+Progress: 1/3 chunks processed, 23 total elements detected so far
+Processing chunk 2/3 (173 blocks, ~1999 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 11782, "output_tokens": 3055, "total_tokens": 14837, "latency_ms": 23282.9, "estimated_cost_usd": 0.135285, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10930 chars, 11782 in / 3055 out tokens, 23283ms
+Parsed 17 elements from LLM response
+Successfully created 17 DetectedElement objects
+Chunk 2/3: Successfully detected 17 elements
+Progress: 2/3 chunks processed, 40 total elements detected so far
+Processing chunk 3/3 (65 blocks, ~707 tokens)
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 9212, "output_tokens": 1212, "total_tokens": 10424, "latency_ms": 13410.5, "estimated_cost_usd": 0.07636, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 4229 chars, 9212 in / 1212 out tokens, 13411ms
+Parsed 6 elements from LLM response
+Successfully created 6 DetectedElement objects
+Chunk 3/3: Successfully detected 6 elements
+Progress: 3/3 chunks processed, 46 total elements detected so far
+Age-band drift: folding 'PK3 Outcome' -> 'PK3'
+Age-band drift: folding 'PK4 Outcome' -> 'PK4'
+Collapsing truncated chunk-boundary twin indicator 'PK3.I.B.2.b' 'Child is familiar with basic feeling' into 'Child is familiar with basic feeling words (e.g., happy, sad'
+Collapsing truncated chunk-boundary twin indicator 'PK4.I.B.2.b' 'Child uses verbal and nonverbal' into 'Child uses verbal and nonverbal communication to communicate'
+De-duplicated 13 overlap-repeated elements (46 → 33)
+Detection complete: 33 total elements detected
+Elements by level: {'domain': 2, 'strand': 4, 'indicator': 25, 'sub_strand': 2}
+Inferring depth map from 306 sampled blocks (~3715 tokens)
+Calling Bedrock with model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0", "input_tokens": 8158, "output_tokens": 472, "total_tokens": 8630, "latency_ms": 4846.2, "estimated_cost_usd": 0.010518, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 1373 chars, 8158 in / 472 out tokens, 4846ms
+Depth map inferred: 4 levels
+  depth=1 → domain (pattern: "Roman numeral + period + title (e.g., 'I. Social and Emotional Development Domain', 'VI. Science Domain')")
+  depth=2 → strand (pattern: "Capital letter + period + title (e.g., 'A. Self-Concept', 'B. Self-Regulation', 'A. Physical Science')")
+  depth=3 → sub_strand (pattern: "Arabic numeral + period + title (e.g., '1. Behavior Control', '2. Emotional Control')")
+  depth=4 → indicator (pattern: "Grade code + Roman numeral + capital letter + Arabic numeral + optional lowercase letter (e.g., 'PK3.I.A.1', 'PK4.I.B.1.a')")
+
+=== TX ===
+  golden:   8
+  detected: 33
+  matched:  8
+  precision: 0.320  recall: 1.000  f1: 0.485
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=4   fp=16  fn=0   p=0.20 r=1.00
+    strand      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=1   fp=1   fn=0   p=0.50 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+    strand     → strand     : 2
+    sub_strand → sub_strand : 1
+  code accuracy: 8/8 (1.000) — graded over matched pairs only
+  description accuracy: 3/3 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: PASS — matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']
+  age-band drops: 0
+  extra detected (in-scope FPs) (17): [('indicator', 'PK3.I.A.1'), ('indicator', 'PK4.I.A.1'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('indicator', 'PK3.I.A.4'), ('indicator', 'PK4.I.A.4'), ('sub_strand', '1'), ('indicator', 'PK3.I.B.1.a'), ('indicator', 'PK4.I.B.1.a'), ('indicator', 'PK3.I.B.1.b')]…
+  ignored (out-of-scope domains): 8
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=10, PK4 count=15
+    [PASS] TX-AGE-BAND-SET — all 25 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators
+
+Review files written to paper/results/task5_20260830/review/detector_run3/
+
+Full report written to paper/results/task5_20260830/reports/detector_run3_TX.json

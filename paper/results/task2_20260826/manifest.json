@@ -15,7 +15,9 @@
   },
   "models": {
     "detector": "us.anthropic.claude-opus-4-6-v1",
-    "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+    "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "_parser_addition": "ADDED 2026-08-30. The parser model was absent from this manifest even though the parser arm was re-run live at 14374dba on 2026-08-29 (see parser_arm_rerecorded). Same CloudWatch evidence as the task1 correction."
   },
   "cache": "--no-cache. Every call was live Bedrock; the eval cache was invalid at this hash regardless.",
   "commands_in_order": [

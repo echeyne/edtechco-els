@@ -1,0 +1,109 @@
+[
+  {
+    "state": "NV",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 24,
+    "fully_correct": 24,
+    "n_golden": 24,
+    "n_parsed": 24,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 24,
+        "total": 24
+      },
+      "country": {
+        "ok": 24,
+        "total": 24
+      },
+      "state": {
+        "ok": 24,
+        "total": 24
+      },
+      "version_year": {
+        "ok": 24,
+        "total": 24
+      },
+      "age_band": {
+        "ok": 24,
+        "total": 24
+      },
+      "source_page": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "domain.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "sub_strand.description": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.code": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.name": {
+        "ok": 24,
+        "total": 24
+      },
+      "indicator.description": {
+        "ok": 24,
+        "total": 24
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 24 standard_ids unique"
+      },
+      {
+        "id": "NV-STRAND-PARENT-BY-HEADING",
+        "status": "PASS",
+        "detail": "all 7 indicator groups resolve to a single strand"
+      },
+      {
+        "id": "NV-DOCUMENT-CODE-PRESERVED",
+        "status": "PASS",
+        "detail": "all 24 standards keep the document's printed code at indicator, sub_strand and domain"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

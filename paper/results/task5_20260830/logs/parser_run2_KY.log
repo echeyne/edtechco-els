@@ -1,0 +1,67 @@
+== KY ==
+  [parser] running on 44 detected elements…
+Split 44 elements into 4 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 7443, "output_tokens": 4795, "total_tokens": 12238, "latency_ms": 64264.0, "estimated_cost_usd": 0.094254, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 16728 chars, 7443 in / 4795 out tokens, 64264ms
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.1.EASPT: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.1', 'indicator': 'AL.1.1.EASPT'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.1.MFAAD: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.1', 'indicator': 'AL.1.1.MFAAD'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.1.SADGA: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.1', 'indicator': 'AL.1.1.SADGA'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.2.PSAUC: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.2', 'indicator': 'AL.1.2.PSAUC'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.2'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.2.CWSAD: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.2', 'indicator': 'AL.1.2.CWSAD'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.2'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.2.PATSN: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.2', 'indicator': 'AL.1.2.PATSN'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.2'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.3.PSDSP: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.3', 'indicator': 'AL.1.3.PSDSP'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.3'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.1.3.DPTET: llm_emitted={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.3', 'indicator': 'AL.1.3.DPTET'} anchored={'domain': 'AL', 'strand': 'AL.1', 'sub_strand': 'AL.1.3'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.2.1.FNWUF: llm_emitted={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.1', 'indicator': 'AL.2.1.FNWUF'} anchored={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.2.1.INMUC: llm_emitted={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.1', 'indicator': 'AL.2.1.INMUC'} anchored={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.2.1.ECOMN: llm_emitted={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.1', 'indicator': 'AL.2.1.ECOMN'} anchored={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.1'}
+Chunk 1/4: parsed 11 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 4817, "output_tokens": 940, "total_tokens": 5757, "latency_ms": 13568.0, "estimated_cost_usd": 0.028551, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 3131 chars, 4817 in / 940 out tokens, 13568ms
+PRE_NORMALIZATION_CODES US-KY-2021-AL.2.2.UMNDW: llm_emitted={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.2', 'indicator': 'AL.2.2.UMNDW'} anchored={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.2'}
+PRE_NORMALIZATION_CODES US-KY-2021-AL.2.2.ESSDP: llm_emitted={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.2', 'indicator': 'AL.2.2.ESSDP'} anchored={'domain': 'AL', 'strand': 'AL.2', 'sub_strand': 'AL.2.2'}
+Chunk 2/4: parsed 2 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5137, "output_tokens": 1639, "total_tokens": 6776, "latency_ms": 20800.7, "estimated_cost_usd": 0.039996, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 5381 chars, 5137 in / 1639 out tokens, 20801ms
+PRE_NORMALIZATION_CODES US-KY-2021-HMW.1.1.TCPHS: llm_emitted={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.1', 'indicator': 'HMW.1.1.TCPHS'} anchored={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-HMW.1.1.IHFC: llm_emitted={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.1', 'indicator': 'HMW.1.1.IHFC'} anchored={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-HMW.1.2.PARTO: llm_emitted={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.2', 'indicator': 'HMW.1.2.PARTO'} anchored={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.2'}
+PRE_NORMALIZATION_CODES US-KY-2021-HMW.1.2.PSGPB: llm_emitted={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.2', 'indicator': 'HMW.1.2.PSGPB'} anchored={'domain': 'HMW', 'strand': 'HMW.1', 'sub_strand': 'HMW.1.2'}
+Chunk 3/4: parsed 4 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6272, "output_tokens": 3284, "total_tokens": 9556, "latency_ms": 38958.2, "estimated_cost_usd": 0.068076, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11132 chars, 6272 in / 3284 out tokens, 38958ms
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.1.1.AAPWI: llm_emitted={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1', 'indicator': 'LEL.1.1.AAPWI'} anchored={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.1.1.FSD: llm_emitted={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1', 'indicator': 'LEL.1.1.FSD'} anchored={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.1.1.GILPC: llm_emitted={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1', 'indicator': 'LEL.1.1.GILPC'} anchored={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.1.1.IAISE: llm_emitted={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1', 'indicator': 'LEL.1.1.IAISE'} anchored={'domain': 'LEL', 'strand': 'LEL.1', 'sub_strand': 'LEL.1.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.2.1.UNCCE: llm_emitted={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.1', 'indicator': 'LEL.2.1.UNCCE'} anchored={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.2.1.ICOPP: llm_emitted={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.1', 'indicator': 'LEL.2.1.ICOPP'} anchored={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.2.1.UGMII: llm_emitted={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.1', 'indicator': 'LEL.2.1.UGMII'} anchored={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.1'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.2.2.ICHNM: llm_emitted={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.2', 'indicator': 'LEL.2.2.ICHNM'} anchored={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.2'}
+PRE_NORMALIZATION_CODES US-KY-2021-LEL.2.2.UWSPS: llm_emitted={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.2', 'indicator': 'LEL.2.2.UWSPS'} anchored={'domain': 'LEL', 'strand': 'LEL.2', 'sub_strand': 'LEL.2.2'}
+Chunk 4/4: parsed 9 standards
+  [parser] produced 26 standards (status=success)
+
+=== KY ===
+  golden standards: 26
+  parsed:           26
+  matched:          26  (coverage 1.000)
+  fully correct:    26/26
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 26 standard_ids unique
+    [PASS] KY-FOUR-LEVEL-RESOLVED — all 26 standards have both a strand and a sub_strand
+    [PASS] KY-BENCHMARK-CODE-NORMALIZED — 26 standards: no label text in any code, all 78 child codes prefixed by their parent
+    [PASS] KY-SUB-STRAND-NOT-INDICATOR-CODE — all 26 standards keep sub_strand and indicator codes distinct and nested
+
+Review files written to paper/results/task5_20260830/review/parser_run2/
+
+Full report written to paper/results/task5_20260830/reports/parser_run2_KY.json

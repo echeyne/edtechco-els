@@ -1,0 +1,89 @@
+== AZ ==
+  [parser] running on 65 detected elements…
+Split 65 elements into 5 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5592, "output_tokens": 2975, "total_tokens": 8567, "latency_ms": 27067.9, "estimated_cost_usd": 0.061401, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 12873 chars, 5592 in / 2975 out tokens, 27068ms
+PRE_NORMALIZATION_CODES US-AZ-2018-SED.1.1.a: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1', 'indicator': 'SED.1.1.a'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-SED.1.1.b: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1', 'indicator': 'SED.1.1.b'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-SED.1.1.c: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1', 'indicator': 'SED.1.1.c'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-SED.1.1.d: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1', 'indicator': 'SED.1.1.d'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-SED.1.1.e: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1', 'indicator': 'SED.1.1.e'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': 'SED.1.1'}
+Chunk 1/5: parsed 5 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 8089, "output_tokens": 7868, "total_tokens": 15957, "latency_ms": 68586.0, "estimated_cost_usd": 0.142287, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 33512 chars, 8089 in / 7868 out tokens, 68586ms
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.1.a: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.1', 'indicator': 'LL.1.1.a'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.1.b: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.1', 'indicator': 'LL.1.1.b'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.1.c: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.1', 'indicator': 'LL.1.1.c'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.a: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.a'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.b: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.b'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.c: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.c'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.d: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.d'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.e: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.e'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.f: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.f'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.g: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.g'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.2.h: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2', 'indicator': 'LL.1.2.h'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.2'}
+Chunk 2/5: parsed 11 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 7208, "output_tokens": 6955, "total_tokens": 14163, "latency_ms": 58317.6, "estimated_cost_usd": 0.125949, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 29664 chars, 7208 in / 6955 out tokens, 58318ms
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.3.a: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3', 'indicator': 'LL.1.3.a'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.3.b: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3', 'indicator': 'LL.1.3.b'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.3.c: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3', 'indicator': 'LL.1.3.c'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.1.3.d: llm_emitted={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3', 'indicator': 'LL.1.3.d'} anchored={'domain': 'LL', 'strand': 'LL.1', 'sub_strand': 'LL.1.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.1.a: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1', 'indicator': 'LL.2.1.a'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.1.b: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1', 'indicator': 'LL.2.1.b'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.1.c: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1', 'indicator': 'LL.2.1.c'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.1.d: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1', 'indicator': 'LL.2.1.d'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.1.e: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1', 'indicator': 'LL.2.1.e'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.2.a: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.2', 'indicator': 'LL.2.2.a'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.2.b: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.2', 'indicator': 'LL.2.2.b'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.2'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.2.c: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.2', 'indicator': 'LL.2.2.c'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.2'}
+Chunk 3/5: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 7033, "output_tokens": 7529, "total_tokens": 14562, "latency_ms": 64765.9, "estimated_cost_usd": 0.134034, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 32745 chars, 7033 in / 7529 out tokens, 64766ms
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.a: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.a'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.b: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.b'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.c: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.c'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.d: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.d'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.e: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.e'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.f: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.f'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.3.g: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3', 'indicator': 'LL.2.3.g'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.3'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.4.a: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4', 'indicator': 'LL.2.4.a'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.4.b: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4', 'indicator': 'LL.2.4.b'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.4.c: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4', 'indicator': 'LL.2.4.c'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.4.d: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4', 'indicator': 'LL.2.4.d'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.2.4.e: llm_emitted={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4', 'indicator': 'LL.2.4.e'} anchored={'domain': 'LL', 'strand': 'LL.2', 'sub_strand': 'LL.2.4'}
+Chunk 4/5: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5513, "output_tokens": 3442, "total_tokens": 8955, "latency_ms": 34162.9, "estimated_cost_usd": 0.068169, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15049 chars, 5513 in / 3442 out tokens, 34163ms
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.3.1.a: llm_emitted={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1', 'indicator': 'LL.3.1.a'} anchored={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.3.1.b: llm_emitted={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1', 'indicator': 'LL.3.1.b'} anchored={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.3.1.c: llm_emitted={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1', 'indicator': 'LL.3.1.c'} anchored={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.3.1.d: llm_emitted={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1', 'indicator': 'LL.3.1.d'} anchored={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1'}
+PRE_NORMALIZATION_CODES US-AZ-2018-LL.3.1.e: llm_emitted={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1', 'indicator': 'LL.3.1.e'} anchored={'domain': 'LL', 'strand': 'LL.3', 'sub_strand': 'LL.3.1'}
+Chunk 5/5: parsed 5 standards
+  [parser] produced 45 standards (status=success)
+
+=== AZ ===
+  golden standards: 18
+  parsed:           45
+  matched:          18  (coverage 1.000)
+  fully correct:    17/18
+  field accuracy:   0.997
+  per-field (ok/total) — only fields with a mismatch shown:
+    indicator.description   17/18  (0.94)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (1):
+    AZ-IND-15 indicator.description: expected 'Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, "My name starts with an [I]." Paints the letter L like in her friend\'s name, while at the easel.' got 'Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, "My name starts with an [1]." Paints the letter L like in her friend\'s name, while at the easel.'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 45 standard_ids unique
+
+Review files written to paper/results/task5_20260830/review/parser_run2/
+
+Full report written to paper/results/task5_20260830/reports/parser_run2_AZ.json

@@ -1,0 +1,23 @@
+
+=== NV ===
+  golden standards: 24
+  parsed:           24
+  matched:          24  (coverage 1.000)
+  fully correct:    21/24
+  field accuracy:   0.986
+  per-field (ok/total) — only fields with a mismatch shown:
+    strand.code             21/24  (0.88)  ← MISMATCH
+    strand.name             21/24  (0.88)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (6):
+    NV-STD-05 strand.code: expected 'SS.2' got 'SS.1'
+    NV-STD-05 strand.name: expected 'Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.' got 'Demonstrate a basic awareness of self as an individual, within the context of a group and community.'
+    NV-STD-06 strand.code: expected 'SS.2' got 'SS.1'
+    NV-STD-06 strand.name: expected 'Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.' got 'Demonstrate a basic awareness of self as an individual, within the context of a group and community.'
+    NV-STD-07 strand.code: expected 'SS.2' got 'SS.1'
+    NV-STD-07 strand.name: expected 'Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home.' got 'Demonstrate a basic awareness of self as an individual, within the context of a group and community.'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 24 standard_ids unique
+    [FAIL] NV-STRAND-PARENT-BY-HEADING — 1/7 indicator group(s) split across strands, e.g. 'Civic Ideas and Practices' (Social Studies) parented by 2: ['Demonstrate a basic awareness of self as an i', 'Demonstrate a basic understanding of roles, r']
+    [PASS] NV-DOCUMENT-CODE-PRESERVED — all 24 standards keep the document's printed code at indicator, sub_strand and domain

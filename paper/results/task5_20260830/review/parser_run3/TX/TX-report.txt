@@ -1,0 +1,14 @@
+
+=== TX ===
+  golden standards: 8
+  parsed:           25
+  matched:          8  (coverage 1.000)
+  fully correct:    8/8
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT-IDS — 10 multi-variant indicator group(s) all kept distinct standard_ids
+    [PASS] NO-ID-COLLISION — all 25 standard_ids unique

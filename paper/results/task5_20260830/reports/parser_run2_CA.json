@@ -1,0 +1,141 @@
+[
+  {
+    "state": "CA",
+    "coverage": 1.0,
+    "field_accuracy": 0.9841269841269841,
+    "matched": 21,
+    "fully_correct": 18,
+    "n_golden": 21,
+    "n_parsed": 94,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 18,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 18,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 21,
+        "total": 21
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "CA-IND-03-DISCOVERING",
+        "field": "standard_id",
+        "expected": "US-CA-2021-ELD.1.0.VOCA.1.1.DISC",
+        "got": "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DISC"
+      },
+      {
+        "test_case_id": "CA-IND-03-DISCOVERING",
+        "field": "indicator.code",
+        "expected": "ELD.1.0.VOCA.1.1.DISC",
+        "got": "ELD.1.0.VOCA.Foundation 1.1.DISC"
+      },
+      {
+        "test_case_id": "CA-IND-03-DEVELOPING",
+        "field": "standard_id",
+        "expected": "US-CA-2021-ELD.1.0.VOCA.1.1.DEVE",
+        "got": "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DEVE"
+      },
+      {
+        "test_case_id": "CA-IND-03-DEVELOPING",
+        "field": "indicator.code",
+        "expected": "ELD.1.0.VOCA.1.1.DEVE",
+        "got": "ELD.1.0.VOCA.Foundation 1.1.DEVE"
+      },
+      {
+        "test_case_id": "CA-IND-03-BROADENING",
+        "field": "standard_id",
+        "expected": "US-CA-2021-ELD.1.0.VOCA.1.1.BROA",
+        "got": "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.BROA"
+      },
+      {
+        "test_case_id": "CA-IND-03-BROADENING",
+        "field": "indicator.code",
+        "expected": "ELD.1.0.VOCA.1.1.BROA",
+        "got": "ELD.1.0.VOCA.Foundation 1.1.BROA"
+      }
+    ],
+    "regressions": [
+      {
+        "id": "CA-EARLY-LATER-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "39 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 94 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

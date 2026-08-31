@@ -1,0 +1,104 @@
+[
+  {
+    "state": "CA",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 21,
+    "fully_correct": 21,
+    "n_golden": 21,
+    "n_parsed": 94,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 21,
+        "total": 21
+      },
+      "country": {
+        "ok": 21,
+        "total": 21
+      },
+      "state": {
+        "ok": 21,
+        "total": 21
+      },
+      "version_year": {
+        "ok": 21,
+        "total": 21
+      },
+      "age_band": {
+        "ok": 21,
+        "total": 21
+      },
+      "source_page": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "domain.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "sub_strand.description": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.code": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.name": {
+        "ok": 21,
+        "total": 21
+      },
+      "indicator.description": {
+        "ok": 21,
+        "total": 21
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CA-EARLY-LATER-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "39 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 94 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

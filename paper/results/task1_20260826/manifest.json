@@ -12,7 +12,8 @@
   "models": {
     "detector": "us.anthropic.claude-opus-4-6-v1",
     "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
-    "parser": "us.anthropic.claude-sonnet-4-5-v1"
+    "parser": "us.anthropic.claude-sonnet-4-6",
+    "_parser_correction": "CORRECTED 2026-08-30. This field previously read 'us.anthropic.claude-sonnet-4-5-v1', which is wrong and was never invoked. Evidence: CloudWatch AWS/Bedrock list-metrics (which reports any model with activity in the trailing ~14 days, so it covers the 2026-08-29 parser re-run) knows exactly one Sonnet id in this account, us.anthropic.claude-sonnet-4-6. config.py's default, the tracked .env, .env.example, the CDK pipeline stack and every deployed els-*-dev Lambda all agree on sonnet-4-6. The wrong id also has no BEDROCK_PRICING entry, so had it been real the parsing stage would have priced at $0.00 silently -- see paper/results/task6_20260830/pricing_verification.md."
   },
   "cache": "--no-cache on both arms. Every call was live Bedrock; the eval cache was invalid at this hash regardless.",
   "commands_in_order": [

@@ -1,0 +1,104 @@
+[
+  {
+    "state": "CO",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 9,
+    "fully_correct": 9,
+    "n_golden": 9,
+    "n_parsed": 48,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 9,
+        "total": 9
+      },
+      "country": {
+        "ok": 9,
+        "total": 9
+      },
+      "state": {
+        "ok": 9,
+        "total": 9
+      },
+      "version_year": {
+        "ok": 9,
+        "total": 9
+      },
+      "age_band": {
+        "ok": 9,
+        "total": 9
+      },
+      "source_page": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "domain.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "sub_strand.description": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.code": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.name": {
+        "ok": 9,
+        "total": 9
+      },
+      "indicator.description": {
+        "ok": 9,
+        "total": 9
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "CO-INDICATOR-PARENT-IS-STRAND",
+        "status": "PASS",
+        "detail": "all 48 indicators have a strand parent and null sub_strand"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 48 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

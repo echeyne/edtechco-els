@@ -1,0 +1,14 @@
+
+=== CA ===
+  golden standards: 21
+  parsed:           94
+  matched:          21  (coverage 1.000)
+  fully correct:    21/21
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] CA-EARLY-LATER-DISTINCT-IDS — 39 multi-variant indicator group(s) all kept distinct standard_ids
+    [PASS] NO-ID-COLLISION — all 94 standard_ids unique

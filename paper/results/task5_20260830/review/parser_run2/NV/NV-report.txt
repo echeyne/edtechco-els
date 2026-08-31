@@ -1,0 +1,19 @@
+
+=== NV ===
+  golden standards: 24
+  parsed:           24
+  matched:          24  (coverage 1.000)
+  fully correct:    23/24
+  field accuracy:   0.995
+  per-field (ok/total) — only fields with a mismatch shown:
+    strand.code             23/24  (0.96)  ← MISMATCH
+    strand.name             23/24  (0.96)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (2):
+    NV-STD-18 strand.code: expected 'S.2' got 'S.1'
+    NV-STD-18 strand.name: expected 'Demonstrate the ability to use information gathered in different ways to conduct investigations.' got 'Demonstrate the ability to use senses and tools to explore, make observations, and make predictions.'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 24 standard_ids unique
+    [FAIL] NV-STRAND-PARENT-BY-HEADING — 1/7 indicator group(s) split across strands, e.g. 'Scientific Investigation' (Science) parented by 2: ['Demonstrate the ability to use information ga', 'Demonstrate the ability to use senses and too']
+    [PASS] NV-DOCUMENT-CODE-PRESERVED — all 24 standards keep the document's printed code at indicator, sub_strand and domain

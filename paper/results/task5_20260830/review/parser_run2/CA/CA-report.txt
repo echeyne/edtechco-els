@@ -1,0 +1,22 @@
+
+=== CA ===
+  golden standards: 21
+  parsed:           94
+  matched:          21  (coverage 1.000)
+  fully correct:    18/21
+  field accuracy:   0.984
+  per-field (ok/total) — only fields with a mismatch shown:
+    standard_id             18/21  (0.86)  ← MISMATCH
+    indicator.code          18/21  (0.86)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (6):
+    CA-IND-03-DISCOVERING standard_id: expected 'US-CA-2021-ELD.1.0.VOCA.1.1.DISC' got 'US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DISC'
+    CA-IND-03-DISCOVERING indicator.code: expected 'ELD.1.0.VOCA.1.1.DISC' got 'ELD.1.0.VOCA.Foundation 1.1.DISC'
+    CA-IND-03-DEVELOPING standard_id: expected 'US-CA-2021-ELD.1.0.VOCA.1.1.DEVE' got 'US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DEVE'
+    CA-IND-03-DEVELOPING indicator.code: expected 'ELD.1.0.VOCA.1.1.DEVE' got 'ELD.1.0.VOCA.Foundation 1.1.DEVE'
+    CA-IND-03-BROADENING standard_id: expected 'US-CA-2021-ELD.1.0.VOCA.1.1.BROA' got 'US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.BROA'
+    CA-IND-03-BROADENING indicator.code: expected 'ELD.1.0.VOCA.1.1.BROA' got 'ELD.1.0.VOCA.Foundation 1.1.BROA'
+  regression cases:
+    [PASS] CA-EARLY-LATER-DISTINCT-IDS — 39 multi-variant indicator group(s) all kept distinct standard_ids
+    [PASS] NO-ID-COLLISION — all 94 standard_ids unique

@@ -1,0 +1,742 @@
+[
+  {
+    "level": "domain",
+    "code": "SED",
+    "title": "Social Emotional Development",
+    "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place.\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive.\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD\nSocial emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place.\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive.\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1",
+    "title": "Self-Awareness and Emotional Skills",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Strand 1: Self-Awareness and Emotional Skills",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 1",
+    "title": "Self-Awareness",
+    "description": "The child demonstrates an awareness of self.\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+    "confidence": 0.97,
+    "source_page": 3,
+    "source_text": "Concept 1: Self-Awareness\nThe child demonstrates an awareness of self.\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Demonstrates self-confidence.",
+    "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\"\nExplains, \"I'm learning how to take care of myself and my friends.\"\nSigns, \"I can do it myself.\"",
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "a.\nDemonstrates self-confidence.\nAcknowledges her own accomplishments and says, \"I can hit the ball.\"\nExplains, \"I'm learning how to take care of myself and my friends.\"\nSigns, \"I can do it myself.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Makes personal preferences known to others.",
+    "description": "Chooses carrots over celery during mealtime.\nTells friends, \"I don't like that.\"",
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "b. Makes personal preferences known to others.\nChooses carrots over celery during mealtime.\nTells friends, \"I don't like that.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Demonstrates knowledge of self-identity/autonomy.",
+    "description": "Declares, \"I'm the big brother,\" while looking at a family picture.\nTells the teacher, \"I'm at school while mommy is at work.\"\nHolds up three fingers and says, \"I am this many.\"",
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "C.\nDemonstrates knowledge of self-identity/autonomy.\nDeclares, \"I'm the big brother,\" while looking at a family picture.\nTells the teacher, \"I'm at school while mommy is at work.\"\nHolds up three fingers and says, \"I am this many.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Displays an awareness of similarities and differences between self and others.",
+    "description": "Says, \"My hair is curly and yours is straight.\"\nPoints to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt.",
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "d. Displays an awareness of similarities and differences between self and others.\nSays, \"My hair is curly and yours is straight.\"\nPoints to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "e",
+    "title": "Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
+    "description": "Wonders about a friend's seaweed snack and asks for a taste.\nThe group widens the story time circle to make room for the child and their wheelchair.\nA guest speaker (parent) shares a storybook and song in their home language to the class.",
+    "confidence": 0.95,
+    "source_page": 3,
+    "source_text": "e. Demonstrates developmentally appropriate cultural curiosity and responsiveness.\nWonders about a friend's seaweed snack and asks for a taste.\nThe group widens the story time circle to make room for the child and their wheelchair.\nA guest speaker (parent) shares a storybook and song in their home language to the class.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2",
+    "title": "Relationships and Skills",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 2,
+    "source_text": "Strand 2: Relationships and Skills",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 2",
+    "title": "Recognizes and Expresses Feelings",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Concept 2: Recognizes and Expresses Feelings",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 3",
+    "title": "Self-Regulation",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Concept 3: Self-Regulation",
+    "age_band": null
+  },
+  {
+    "level": "domain",
+    "code": "LL",
+    "title": "Language and Literacy",
+    "description": "Environments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs.",
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "LANGUAGE AND LITERACY STANDARD\nEnvironments rich with print, language, storytelling, books, digital tools, and writing materials allow children to experience the joy and power associated with reading and writing, while mastering basic concepts of print.\nChildren learn language BEST when they are actively engaged in meaningful and purposeful interactions. Daily exposure to verbal and written language provides young children with the opportunities to begin acquiring understanding of the concepts of early literacy and its functions. Through play and intentional activities, children learn to create meaning from language and communicate with others using verbal and non-verbal language, pictures, symbols, and print.\nThe preschool environment is respectful and supportive of children's cultural heritages and home languages while encouraging English language acquisition. The ability to listen, speak, read, and write emerge interdependently in environments designed to meet each child's unique skills, abilities, interests, and needs.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1",
+    "title": "Language",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Strand 1: Language",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 1",
+    "title": "Receptive Language Understanding",
+    "description": "The child demonstrates understanding of directions, stories, conversations, and nonverbal cues.\nReceptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations.\n\"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\"\u00b9\u2070\nAssociating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend.\nListening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading.",
+    "confidence": 0.97,
+    "source_page": 5,
+    "source_text": "Concept 1: Receptive Language Understanding\nThe child demonstrates understanding of directions, stories, conversations, and nonverbal cues.\nReceptive language is the ability to understand or comprehend language that is heard or read. During the preschool years, children continue to learn language at a rapid pace. Connections within the brain supporting vision and hearing develop first, followed by pathways for early language skills and higher cognitive functions that build on earlier neurological foundations.\n\"Sensory pathways like those for basic vision and hearing are the first to develop, followed by early language skills and higher cognitive functions. Connections proliferate and prune in a prescribed order, with later, more complex brain circuits built upon earlier, simpler circuits.\"\u00b9\u2070\nAssociating language with pleasant and stimulating experiences nurtures this development. Young children's sense of words and sentences, sensitivity to tone, and understanding of ideas communicated, influences their abilities to listen and to comprehend.\nListening involves active engagement with adults and peers as they share their ideas, feelings, and needs. Language is learned through engaging conversations, related literacy activities such as oral storytelling and interactive shared reading.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Demonstrates understanding of a variety of finger-plays, rhymes, chants and songs, poems, conversations, and stories.",
+    "description": "Follows gestures and actions.\nTeacher asks, \"Where would you like to play? It's time to work.\" Child points to blocks or answers, \"Blocks.\"\nTeacher extends the interaction and builds on child's response by saying, \"Oh, you want to play in the block area.\"",
+    "confidence": 0.95,
+    "source_page": 5,
+    "source_text": "a. Demonstrates understanding of a variety of finger-plays, rhymes, chants and songs, poems, conversations, andstories.\nFollows gestures and actions.\nTeacher asks, \"Where would you like to play? It's time to work.\" Child points to blocks or answers, \"Blocks.\"\nTeacher extends the interaction and builds on child's response by saying, \"Oh, you want to play in the block area.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Engages actively in finger-plays, rhymes, chants and songs, poems, conversations, and stories.",
+    "description": "Claps when prompted with, \"If you're happy and you know it, clap your hands.\"\nParticipates in story, Going on a Bear Hunt.",
+    "confidence": 0.95,
+    "source_page": 5,
+    "source_text": "b. Engages actively in finger-plays, rhymes, chants and songs, poems, conversations, and stories.\nClaps when prompted with, \"If you're happy and you know it, clap your hands.\"\nParticipates in story, Going on a Bear Hunt.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Demonstrates understanding and follows directions that involve one step, two steps, or multiple steps.",
+    "description": "Places toy truck on shelf when adult says, \"Please put the truck on the shelf.\"\nResponds to the directions, \"Put the block on the table, put your paper in the cubby, and line up to go outside.\"",
+    "confidence": 0.95,
+    "source_page": 5,
+    "source_text": "C. Demonstrates understanding and follows directions that involve one step, two steps, or multiple steps.\nPlaces toy truck on shelf when adult says, \"Please put the truck on the shelf.\"\nResponds to the directions, \"Put the block on the table, put your paper in the cubby, and line up to go outside.\"",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 2",
+    "title": "Expressive Language and Communication Skills",
+    "description": "The child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections.\nChildren develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9 Children who are encouraged to share their personal experiences, ideas, feelings, and opinions use increasingly complex language. By noticing serves, you'll learn a lot about a child's abilities, interests, and needs.",
+    "confidence": 0.97,
+    "source_page": 6,
+    "source_text": "Concept 2: Expressive Language and Communication Skills\nThe child uses verbal and nonverbal communication for a variety of purposes; to share observations, experiences, problem-solve, reason, predict, seek new information, and make connections.\nChildren develop language by engaging in conversations with others and listening and responding to rhymes, chants, songs, stories, and poems. This kind of shared interaction is called \"serve and return.\"\u00b9",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 3",
+    "title": "Vocabulary",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 3: Vocabulary",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2",
+    "title": "Emergent Literacy",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Strand 2: Emergent Literacy",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 1",
+    "title": "Concepts of Print",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 1: Concepts of Print",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 2",
+    "title": "Book Handling Skills",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 2: Book Handling Skills",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 3",
+    "title": "Phonological Awareness",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 3: Phonological Awareness",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 4",
+    "title": "Alphabet Knowledge",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 4: Alphabet Knowledge",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 5",
+    "title": "Comprehension and Text Structure",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 5: Comprehension and Text Structure",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 3",
+    "title": "Emergent Writing",
+    "description": null,
+    "confidence": 0.97,
+    "source_page": 4,
+    "source_text": "Strand 3: Emergent Writing",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 1",
+    "title": "Writing Processes and Writing Applications",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 4,
+    "source_text": "Concept 1: Writing Processes and Writing Applications",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1",
+    "title": "Language",
+    "description": null,
+    "confidence": 0.92,
+    "source_page": 6,
+    "source_text": "STRAND 1: LANGUAGE",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Communicates needs, wants, ideas, and feelings through three to five-word sentences.",
+    "description": "Engages intentionally in simple or multi-turn conversations with peers and adults at snack time replying to the question, \"What did you have for breakfast?\" \"My mom made pancakes.\" \"What kind of pancakes did your mom make?\" \"She made blueberry pancakes.\" \"Oh, yum! I love blueberry pancakes too.\"\nTalks with a peer about a trip to a park, another child utilizes sign language which includes social rules; pragmatics; age appropriate tone, and volume and responds, \"I went to the park too.\" \"What did you do at the park?\" \"We had a picnic.\"",
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "a. Communicates needs, wants, ideas, and feelings through three to five-word sentences.\nEngages intentionally in simple or multi-turn conversations with peers and adults at snack time replying to\nthe question, \"What did you have for breakfast?\" \"My mom made pancakes.\" \"What kind of pancakes did\nyour mom make?\" \"She made blueberry pancakes.\" \"Oh, yum! I love blueberry pancakes too.\"\nTalks with a peer about a trip to a park, another child utilizes sign language which includes social rules;\npragmatics; age appropriate tone, and volume and responds, \"I went to the park too.\" \"What did you do at the\npark?\" \"We had a picnic.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Speaks clearly and understandably to express ideas, feelings, and needs.",
+    "description": "Combines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\"\nSays, \"I want to go play at the water table.\"",
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "b. Speaks clearly and understandably to express ideas, feelings, and needs.\nCombines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\"\nSays, \"I want to go play at the water table.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Makes culturally relevant responses (both verbal and nonverbal) to questions and comments from others.",
+    "description": "Exclaims, \"I did it!\" after teacher asks, \"Did you get your jacket on?\"\nSays, \"I have a cat, too,\" after teacher shows a picture of a cat.\nResponds, \"\u00a1S\u00cd, mam\u00e1! I have my peanut butter sandwich,\" during drop off, after a parent asks, \u00a1Adi\u00f3s! \u00bf Tienes tu s\u00e1ndwich?",
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "C. Makes culturally relevant responses (both verbal and nonverbal) to questions and comments from others.\nExclaims, \"I did it!\" after teacher asks, \"Did you get your jacket on?\"\nSays, \"I have a cat, too,\" after teacher shows a picture of a cat.\nResponds, \"\u00a1S\u00cd, mam\u00e1! I have my peanut butter sandwich,\" during drop off, after a parent asks, \u00a1Adi\u00f3s! \u00bf Tienes\ntus\u00e1ndwich?",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Initiates, sustains, and expands conversations with peers and adults using open-ended responses.",
+    "description": "Approaches peers and asks, \"What are you making?\"\nSays, \"I went to the zoo.\" Teacher expands by asking, \"What was your favorite animal?\" Child replies, \"The lion.\" Teacher responds, \"The lion is your favorite. Why?\" Child answers, \"I like the way he roars.\"",
+    "confidence": 0.96,
+    "source_page": 6,
+    "source_text": "d. Initiates, sustains, and expands conversations with peers and adults using open-ended responses.\nApproaches peers and asks, \"What are you making?\"\nSays, \"I went to the zoo.\" Teacher expands by asking, \"What was your favorite animal?\" Child replies,\n\"The lion.\" Teacher responds, \"The lion is your favorite. Why?\" Child answers, \"I like the way he roars.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "e",
+    "title": "With modeling and support, child uses language that includes social rules; e.g., pragmatics, appropriate tone, volume, and inflection to express ideas, feelings, and needs.",
+    "description": "Responds excitedly, \"That's my favorite!\" when an adult begins to read a book.\nTells a classmate emphatically, \"Stop, I don't like that!\" or whispers in a classmate's ear during circle time.",
+    "confidence": 0.96,
+    "source_page": 7,
+    "source_text": "e. With modeling and support, child uses language that includes social rules; e.g., pragmatics,\nappropriate tone, volume, and inflection to express ideas, feelings, and needs.\nResponds excitedly, \"That's my favorite!\" when an adult begins to read a book.\nTells a classmate emphatically, \"Stop, I don't like that!\" or whispers in a classmate's ear during circle time.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "f",
+    "title": "Uses culturally relevant responses such as eye contact, turn taking, and intonation while having conversations with adults and peers.",
+    "description": "Uses turn-taking during conversations with peers and adults.\nLooks towards her friend, while speaking.",
+    "confidence": 0.96,
+    "source_page": 7,
+    "source_text": "f. Uses culturally relevant responses such as eye contact, turn taking, and intonation while having conversations\nwith adults and peers.\nUses turn-taking during conversations with peers and adults.\nLooks towards her friend, while speaking.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "g",
+    "title": "Recognizes when the listener does not understand and varies the amount of information\u00b9\u00b2 to clarify the message.",
+    "description": "Uses a different word to clarify the intended message when child realizes he has been misunderstood.\nPoints to a picture to clarify his intent.",
+    "confidence": 0.96,
+    "source_page": 7,
+    "source_text": "g. Recognizes when the listener does not understand and varies the amount of information\u00b9\u00b2 to clarify the message.\nUses a different word to clarify the intended message when child realizes he has been misunderstood.\nPoints to a picture to clarify his intent.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "h",
+    "title": "With modeling and support, uses increasingly complex phrases and sentences.",
+    "description": "Says, \"Let's put the cars up higher on the ramp so they will go really fast.\"\nSays, \"I want to go home because my grandma is there.\"",
+    "confidence": 0.96,
+    "source_page": 7,
+    "source_text": "h. With modeling and support, uses increasingly complex phrases and sentences.\nSays, \"Let's put the cars up higher on the ramp so they will go really fast.\"\nSays, \"I want to go home because my grandma is there.\"",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 3",
+    "title": "Vocabulary",
+    "description": "The child understands and uses increasingly complex vocabulary.\nThe early childhood years are a period of vocabulary expansion and exploration. Research indicates that there is a strong connection between vocabulary development and reading comprehension which correlates to academic success. Children gain language and vocabulary skills by having multiple and frequent opportunities to listen, talk, read, share ideas, relate experiences, and engage in meaningful conversations. They need to play with familiar language and experiment with language in different settings. Rhymes, songs, and read-alouds that use rare words allow children to talk about and develop an understanding of words they would not otherwise hear in everyday conversations.",
+    "confidence": 0.97,
+    "source_page": 8,
+    "source_text": "Concept 3: Vocabulary\nThe child understands and uses increasingly complex vocabulary.\nThe early childhood years are a period of vocabulary expansion and exploration. Research indicates that there is a strong\nconnection between vocabulary development and reading comprehension which correlates to academic success. Children\ngain language and vocabulary skills by having multiple and frequent opportunities to listen, talk, read, share ideas, relate\nexperiences, and engage in meaningful conversations. They need to play with familiar language and experiment with\nlanguage in different settings. Rhymes, songs, and read-alouds that use rare words allow children to talk about and develop an\nunderstanding of words they would not otherwise hear in everyday conversations.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Uses rich vocabulary across many topic areas.",
+    "description": "Says, \"Let me listen to your heart with a stethoscope\" while in dramatic play.\nReads The Very Hungry Caterpillar and exclaims, \"I see a cocoon.\"\nThe child uses new words or signs during play and other activities.",
+    "confidence": 0.96,
+    "source_page": 8,
+    "source_text": "a. Uses rich vocabulary across many topic areas.\nSays, \"Let me listen to your heart with a stethoscope\" while in dramatic play.\nReads The Very Hungry Caterpillar and exclaims, \"I see a cocoon.\"\nThe child uses new words or signs during play and other activities.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Figures out the meanings of unfamiliar words and concepts using the context of conversations, pictures that accompany text, or concrete objects.",
+    "description": "Explains, \"I am making skyscraper,\" while playing with the wooden blocks.\nSays, \"I will get the colander to rinse the grapes\" while playing in the dramatic play area.",
+    "confidence": 0.96,
+    "source_page": 8,
+    "source_text": "b. Figures out the meanings of unfamiliar words and concepts using the context of conversations, pictures\nthat accompany text, or concrete objects.\nExplains, \"I am making skyscraper,\" while playing with the wooden blocks.\nSays, \"I will get the colander to rinse the grapes\" while playing in the dramatic play area.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Uses category labels and names objects within a category; e.g., fruit, vegetable, animal, transportation.",
+    "description": "Replies, \"I want a carrot,\" when asked, \"Which vegetable do you want?\"\nGathers a variety of animals and says, \"I found a dog, two pigs, and a duck.\"",
+    "confidence": 0.96,
+    "source_page": 8,
+    "source_text": "C. Uses category labels and names objects within a category; e.g., fruit, vegetable, animal, transportation.\nReplies, \"I want a carrot,\" when asked, \"Which vegetable do you want?\"\nGathers a variety of animals and says, \"I found a dog, two pigs, and a duck.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Demonstrates understanding of and uses words that indicate position and direction; e.g., in, on, out, under, over, off, besides, behind.",
+    "description": "Responds to the teacher's requests to return his car to the shelf, put blocks in the container, or stand beside a peer.\nSays, \"I am standing between Billy and Rita.\"",
+    "confidence": 0.96,
+    "source_page": 8,
+    "source_text": "d. Demonstrates understanding of and uses words that indicate position and direction; e.g., in, on, out,\nunder, over, off, besides, behind.\nResponds to the teacher's requests to return his car to the shelf, put blocks in the container, or stand beside a peer.\nSays, \"I am standing between Billy and Rita.\"",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2",
+    "title": "Emergent Literacy",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 9,
+    "source_text": "STRAND 2: EMERGENT LITERACY",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 1",
+    "title": "Concepts of Print",
+    "description": "The child knows that print carries messages.\nThrough daily experiences with materials, in a print rich environment, young children delight in discovering the connections between spoken and written words. They learn what print is used for and that print conveys meaning such as in signs, letters, menus, storybooks, and magazines.",
+    "confidence": 0.97,
+    "source_page": 9,
+    "source_text": "Concept 1: Concepts of Print\nThe child knows that print carries messages.\nThrough daily experiences with materials, in a print rich environment, young children delight in discovering the\nconnections between spoken and written words. They learn what print is used for and that print conveys meaning such as\nin signs, letters, menus, storybooks, and magazines.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Identifies signs, symbols, and labels in a variety of environments (environmental print).",
+    "description": "Points to a stop sign and says, \"That says stop.\"\nSees recycling symbol and says, \"This is the recycling bin.\"",
+    "confidence": 0.96,
+    "source_page": 9,
+    "source_text": "a. Identifies signs, symbols, and labels in a variety of environments (environmental print).\nPoints to a stop sign and says, \"That says stop.\"\nSees recycling symbol and says, \"This is the recycling bin.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Demonstrates and understands that print conveys meaning and that each spoken word can be written and read.",
+    "description": "Finds name on her placemat at lunch.\nPretends to read a letter while playing Post Office.",
+    "confidence": 0.96,
+    "source_page": 9,
+    "source_text": "b. Demonstrates and understands that print conveys meaning and that each spoken word can be written and read.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Recognizes that letters are grouped to form words.",
+    "description": "Asks teacher to write name on paper.\nGroups letters together and asks, \"What does this say?\"",
+    "confidence": 0.96,
+    "source_page": 9,
+    "source_text": "C. Recognizes that letters are grouped to form words.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Recognizes own written name and the written names of friends and family.",
+    "description": "Reads job chart naming classmates.\nPicks up a name card and says, \"This says Jose.\"",
+    "confidence": 0.96,
+    "source_page": 9,
+    "source_text": "d. Recognizes own written name and the written names of friends and family.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "e",
+    "title": "Seeks information in printed materials.",
+    "description": "Says, \"We caught a cricket in our bug jar. Let's find a book about crickets.\"\nLooks at grocery advertisements while creating a shopping list.",
+    "confidence": 0.96,
+    "source_page": 9,
+    "source_text": "e. Seeks information in printed materials.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 2",
+    "title": "Book Handling Skills",
+    "description": "The child demonstrates how to handle books appropriately and with care.\nIt is important to provide young children with many opportunities to interact with and care for books in all environments. Young children need to have access to a variety of fiction and nonfiction books throughout the day, including those that reflect diverse cultures. Through these experiences, children learn to hold books right side up and to turn the pages one at a time to view the illustrations and to gain a sense of the story or content.",
+    "confidence": 0.97,
+    "source_page": 10,
+    "source_text": "Concept 2: Book Handling Skills\nThe child demonstrates how to handle books appropriately and with care.\nIt is important to provide young children with many opportunities to interact with and care for books in all environments.\nYoung children need to have access to a variety of fiction and nonfiction books throughout the day, including those that\nreflect diverse cultures. Through these experiences, children learn to hold books right side up and to turn the pages\none at a time to view the illustrations and to gain a sense of the story or content.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Holds a book right side up with the front cover facing the reader and understands left to right and top to bottom directionality.",
+    "description": "Turns the pages one page at a time to continue reading.\nTurns the book right side up before beginning to look at it, when handed a book upside down.",
+    "confidence": 0.96,
+    "source_page": 10,
+    "source_text": "a. Holds a book right side up with the front cover facing the reader and understands left to right and top to\nbottom directionality.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Identifies where in the book to begin reading.",
+    "description": "Finds the front of the book, the first page of the text, and the first word on the page.\nPoints to the first page and says, \"Start here.\"",
+    "confidence": 0.96,
+    "source_page": 10,
+    "source_text": "b. Identifies where in the book to begin reading.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Understands a book has a title, author, and/or illustrator.",
+    "description": "Makes a book and says, \"My book is called My Mom, and I'm the author.\"\nIdentifies that the illustrator draws the pictures in a book.",
+    "confidence": 0.96,
+    "source_page": 10,
+    "source_text": "C. Understands a book has a title, author, and/or illustrator.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 3",
+    "title": "Phonological Awareness",
+    "description": "The child develops awareness that language can be broken in words, syllables, and smaller units of sounds (phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the foundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness). Research indicates how quickly and how easily children learn to read often depends on how much phonological awareness they have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways, including using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological awareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters (phonics).",
+    "confidence": 0.97,
+    "source_page": 11,
+    "source_text": "Concept 3: Phonological Awareness\nThe child develops awareness that language can be broken in words, syllables, and smaller units of sounds\n(phonemes).\nYoung children learn to discriminate between the similarities and differences in spoken language. Such awareness is the\nfoundation of young children's abilities to hear and discriminate different sounds in words (phonological awareness).\nResearch indicates how quickly and how easily children learn to read often depends on how much phonological awareness\nthey have.\nChildren's abilities to play with or manipulate the smallest units of speech (phonemes) are demonstrated in a variety of ways,\nincluding using rhymes, alliteration, blending, segmenting, and experimenting with beginning and ending sounds. Phonological\nawareness and phonemic awareness are the foundations that enable preschool children to later match sounds to their letters\n(phonics).",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Differentiates between sounds that are the same and different (e.g., environmental sounds, animal sounds, phonemes).",
+    "description": "Plays the game, Sound Bingo, and can differentiate between sounds - \"That's a telephone.\" \"That's a dog barking.\"\nSays, \"Hey, the beginning of my name sounds like that /t/.\"",
+    "confidence": 0.96,
+    "source_page": 11,
+    "source_text": "a. Differentiates between sounds that are the same and different (e.g., environmental sounds, animal\nsounds, phonemes).",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Identifies rhyming words.",
+    "description": "Shows thumbs up when two words rhyme in a poem, cat/hat.\nPoints to pictures of words that rhyme.",
+    "confidence": 0.96,
+    "source_page": 11,
+    "source_text": "b. Identifies rhyming words.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Produces rhyming words.",
+    "description": "Sings, \"Joy, noy, boy, loy, toy,\" while playing.\nFinishes the rhyme \"The fat cat sat on the_.\"",
+    "confidence": 0.96,
+    "source_page": 11,
+    "source_text": "C. Produces rhyming words.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Recognizes spoken words that begin with the same sound.",
+    "description": "Exclaims Millie, \"My name starts like Mel's name!\"\nSelects man and mop as beginning with the same sound when presented with pictures of man, hat, and mop.",
+    "confidence": 0.96,
+    "source_page": 11,
+    "source_text": "d. Recognizes spoken words that begin with the same sound.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "e",
+    "title": "Hears and shows awareness of separate words within spoken phrases or sentences.",
+    "description": "Jumps when hearing a specified word in a story/poem.\nClaps each word spoken in a sentence \"I like blocks.\"",
+    "confidence": 0.96,
+    "source_page": 12,
+    "source_text": "e. Hears and shows awareness of separate words within spoken phrases or sentences.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "f",
+    "title": "Identifies and discriminates syllables in words.",
+    "description": "Claps each syllable of a name during a name game or name song. (Ben-ja-min = clap, clap, clap)\nTakes a step for each syllable heard in a word. (hi-ber-na-tion = step, step, step, step)",
+    "confidence": 0.96,
+    "source_page": 12,
+    "source_text": "f. Identifies and discriminates syllables in words.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "g",
+    "title": "Combines onset and rime to form a familiar one-syllable word with and without pictorial support.",
+    "description": "Selects the correct picture of the cat when the adult says the name by segmenting it into its onset and rime components. (/c/ + /at/)\nGuesses, \"Dog.\" when teacher says the onset and rime /d/+/og/.",
+    "confidence": 0.96,
+    "source_page": 12,
+    "source_text": "g. Combines onset and rime to form a familiar one-syllable word with and without pictorial support.",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 4",
+    "title": "Alphabet Knowledge",
+    "description": "The child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces correct sounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet as a system and learn how the letters function in written language.13 Young children begin to recognize some printed alphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults need to provide children with easy and repeated meaningful interactions with written letters and words within the context of daily experiences and engage them in activities that are fun and interesting.",
+    "confidence": 0.97,
+    "source_page": 12,
+    "source_text": "Concept 4: Alphabet Knowledge\nThe child demonstrates knowledge of the alphabet. Child identifies letters of the alphabet and produces\ncorrect sounds associated with several letters.\nLearning the alphabet involves more than teaching letter identification. Children must also come to understand the alphabet\nas a system and learn how the letters function in written language.13 Young children begin to recognize some printed\nalphabet letters, especially those letters found in their own names. To support young learners' knowledge of letters, adults\nneed to provide children with easy and repeated meaningful interactions with written letters and words within the context of\ndaily experiences and engage them in activities that are fun and interesting.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "Discriminates letters from other shapes and symbols.",
+    "description": "Reads the book Chicka Chicka Boom Boom, and child points to the letter [a] and says, \"That's the letter 'A' falling off coconut tree.\"\nLooks at an advertisement (environmental print) and the child points to the \"W\" for Walmart.",
+    "confidence": 0.96,
+    "source_page": 13,
+    "source_text": "a. Discriminates letters from other shapes and symbols.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Matches and recognizes similarities and differences in letters, with modeling and support.",
+    "description": "Traces the letter S and says, \"The letter has curves.\"\nSays, \"My name starts with a big A.\" The teacher says, \"Let's make a letter A like the letter in your name.\" Then using playdough, the child and teacher create the letter A.",
+    "confidence": 0.96,
+    "source_page": 13,
+    "source_text": "b. Matches and recognizes similarities and differences in letters, with modeling and support.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 2",
+    "title": "Emergent Literacy",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 12,
+    "source_text": "STRAND 2: EMERGENT LITERACY",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends.",
+    "description": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles.\nSays, \"My name starts with an [1].\"\nPaints the letter L like in her friend's name, while at the easel.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "C. Recognizes an increasing number of letters, especially those in own name, familiar objects, family, and friends.\nNames some letters while playing with alphabet stamps, magnets, cards, or puzzles.\nSays, \"My name starts with an [1].\"\nPaints the letter L like in her friend's name, while at the easel.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g., playdough, blocks, marker, and paper.",
+    "description": "Rolls out the first letter of their name, \"K\" in playdough.\nWrites letter \"M\" for \"mom\" on an envelope, while at the writing center.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "d. Demonstrates understanding of letters by producing letter forms using a variety of materials; e.g.,\nplaydough, blocks, marker, and paper.\nRolls out the first letter of their name, \"K\" in playdough.\nWrites letter \"M\" for \"mom\" on an envelope, while at the writing center.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "e",
+    "title": "Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an increasing number of letters.",
+    "description": "Writes name (Taylor) by making the \"t\" sound and then prints the letter.\nSays, \"/S/, /s/, /s/, snake.\" when looking at a letter [S].\nReplicates the letter sound when a teacher shows and says a letter.",
+    "confidence": 0.95,
+    "source_page": 13,
+    "source_text": "e. Uses letter-sound knowledge, identifying the sounds of a few letters and producing the correct sounds for an\nincreasing number of letters.\nWrites name (Taylor) by making the \"t\" sound and then prints the letter.\nSays, \"/S/, /s/, /s/, snake.\" when looking at a letter [S].\nReplicates the letter sound when a teacher shows and says a letter.",
+    "age_band": null
+  },
+  {
+    "level": "strand",
+    "code": "Strand 3",
+    "title": "Emergent Writing",
+    "description": null,
+    "confidence": 0.95,
+    "source_page": 14,
+    "source_text": "STRAND 3: EMERGENT WRITING",
+    "age_band": null
+  },
+  {
+    "level": "sub_strand",
+    "code": "Concept 1",
+    "title": "Writing Processes and Writing Applications",
+    "description": "Children engage in a variety of writing activities and begin to convey meaning through their increasingly sophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the understanding of print, the development of motor skills, and the generation of ideas.\nChildren begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and related activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures and rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an environment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that represents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in a conventional manner. 15",
+    "confidence": 0.96,
+    "source_page": 14,
+    "source_text": "Concept 1: Writing Processes and Writing Applications\nChildren engage in a variety of writing activities and begin to convey meaning through their increasingly\nsophisticated marks. Children write to communicate ideas and to convey meaning. These skills include the\nunderstanding of print, the development of motor skills, and the generation of ideas.\nChildren begin to recognize the relationship between spoken and written messages by engaging in writing, drawing, and\nrelated activities that have meaning and purpose for them. Children receive powerful messages about literacy's pleasures\nand rewards by observing others' reading and writing. Children develop as writers when they are encouraged to write in an\nenvironment that has readily accessible writing materials. Children's writing develops in a well-defined sequence that\nrepresents their understanding of how print works. The stages begin with simple scribbles and progress to writing words in\na conventional manner. 15",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "a",
+    "title": "In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols.",
+    "description": "Draws random lines/scribbles on a page.\nScribbles a note to mom, prior to leaving school.\nDraws to produce letter-like forms - creating a mock word - the child says, \"This is 'Papa'.\"\nListens to a book about where people live, and paints a picture of their home.\nUses an interactive whiteboard to make an onscreen drawing of the snake from a story about snakes.",
+    "confidence": 0.95,
+    "source_page": 14,
+    "source_text": "a. In writing process, uses a variety of writing tools, materials, and surfaces to create drawings or symbols.\nDraws random lines/scribbles on a page.\nScribbles a note to mom, prior to leaving school.\nDraws to produce letter-like forms - creating a mock word - the child says, \"This is 'Papa'.\"\nListens to a book about where people live, and paints a picture of their home.\nUses an interactive whiteboard to make an onscreen drawing of the snake from a story about snakes.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "b",
+    "title": "Writes own name using letter-like forms or conventional print.",
+    "description": "Writes own name on drawing.\nWrites own name from left to right on the sidewalk when playing with chalk on sidewalk.",
+    "confidence": 0.95,
+    "source_page": 14,
+    "source_text": "b. Writes own name using letter-like forms or conventional print.\nWrites own name on drawing.\nWrites own name from left to right on the sidewalk when playing with chalk on sidewalk.",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "c",
+    "title": "Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story; e.g., signing artwork, captioning, labeling, creating lists, making notes.",
+    "description": "Asks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad.\nWrites W L C M and says, \"This says, 'Welcome'.\"",
+    "confidence": 0.95,
+    "source_page": 15,
+    "source_text": "C. Intentionally uses scribbles/writing and inventive writing to convey meaning, ideas, or to tell a story;\ne.g., signing artwork, captioning, labeling, creating lists, making notes.\nAsks, \"What would you like to eat?\" while playing restaurant and scribbles the order on a pad.\nWrites W L C M and says, \"This says, 'Welcome'.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "d",
+    "title": "Forms letters starting with large motor (sky writing, paint brush and water, sidewalk chalk) progressing to fine motor (paper and writing utensil).",
+    "description": "Writes letters from name on the sidewalk with chalk.\nWrites letter-like forms on a page and says, \"This is a note for my mommy.\"",
+    "confidence": 0.95,
+    "source_page": 15,
+    "source_text": "d. Forms letters starting with large motor (sky writing, paint brush and water, sidewalk chalk) progressing to\nfine motor (paper and writing utensil).\nWrites letters from name on the sidewalk with chalk.\nWrites letter-like forms on a page and says, \"This is a note for my mommy.\"",
+    "age_band": null
+  },
+  {
+    "level": "indicator",
+    "code": "e",
+    "title": "Organizes writing from left to right, indicating a print awareness that letters cluster as words and words cluster into phrases or sentences by use of spacing or marks.",
+    "description": "Plays at writing a message by placing spaces between the \"words\" on the page.\nWrites a series of letters and asks, \"What word does this make?\"",
+    "confidence": 0.95,
+    "source_page": 15,
+    "source_text": "e. Organizes writing from left to right, indicating a print awareness that letters cluster as words and\nwords cluster into phrases or sentences by use of spacing or marks.\nPlays at writing a message by placing spaces between the \"words\" on the page.\nWrites a series of letters and asks, \"What word does this make?\"",
+    "age_band": null
+  }
+]

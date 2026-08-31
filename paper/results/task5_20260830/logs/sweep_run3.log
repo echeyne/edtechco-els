@@ -1,0 +1,27 @@
+=== Task 5 run 3 (both) started 2026-08-31T00:24:30Z ===
+code_version_hash: 14374dba
+--- detector run3 AZ 00:24:30Z ---
+    exit=0 00:26:56Z
+--- parser   run3 AZ 00:26:56Z ---
+    exit=0 00:31:08Z
+--- detector run3 CA 00:31:08Z ---
+    exit=0 00:34:32Z
+--- parser   run3 CA 00:34:32Z ---
+    exit=0 00:38:09Z
+--- detector run3 CO 00:38:09Z ---
+    exit=0 00:40:08Z
+--- parser   run3 CO 00:40:08Z ---
+    exit=0 00:42:33Z
+--- detector run3 TX 00:42:33Z ---
+    exit=0 00:43:53Z
+--- parser   run3 TX 00:43:53Z ---
+    exit=0 00:46:09Z
+--- detector run3 NV 00:46:09Z ---
+    exit=0 00:47:56Z
+--- parser   run3 NV 00:47:56Z ---
+    exit=0 00:50:45Z
+--- detector run3 KY 00:50:45Z ---
+    exit=0 00:52:13Z
+--- parser   run3 KY 00:52:13Z ---
+    exit=0 00:54:34Z
+=== Task 5 run 3 (both) finished 2026-08-31T00:54:34Z ===

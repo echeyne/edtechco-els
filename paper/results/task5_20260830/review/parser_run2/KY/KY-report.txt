@@ -1,0 +1,16 @@
+
+=== KY ===
+  golden standards: 26
+  parsed:           26
+  matched:          26  (coverage 1.000)
+  fully correct:    26/26
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 26 standard_ids unique
+    [PASS] KY-FOUR-LEVEL-RESOLVED — all 26 standards have both a strand and a sub_strand
+    [PASS] KY-BENCHMARK-CODE-NORMALIZED — 26 standards: no label text in any code, all 78 child codes prefixed by their parent
+    [PASS] KY-SUB-STRAND-NOT-INDICATOR-CODE — all 26 standards keep sub_strand and indicator codes distinct and nested

@@ -1,0 +1,14 @@
+
+=== CO ===
+  golden standards: 9
+  parsed:           48
+  matched:          9  (coverage 1.000)
+  fully correct:    9/9
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] CO-INDICATOR-PARENT-IS-STRAND — all 48 indicators have a strand parent and null sub_strand
+    [PASS] NO-ID-COLLISION — all 48 standard_ids unique

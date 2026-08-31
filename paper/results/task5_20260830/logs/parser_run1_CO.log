@@ -1,0 +1,95 @@
+== CO ==
+  [parser] running on 61 detected elements…
+Split 61 elements into 6 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5794, "output_tokens": 4632, "total_tokens": 10426, "latency_ms": 33342.1, "estimated_cost_usd": 0.086862, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 19397 chars, 5794 in / 4632 out tokens, 33342ms
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.1: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.1'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.2: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.2'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.3: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.3'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.4: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.4'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.5: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.5'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.6: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.6'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.7: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.7'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.8: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.8'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.9: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.9'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.10: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.10'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.11: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.11'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.1.12: llm_emitted={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None, 'indicator': 'PDH.1.12'} anchored={'domain': 'PDH', 'strand': 'PDH.1', 'sub_strand': None}
+Chunk 1/6: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5503, "output_tokens": 2878, "total_tokens": 8381, "latency_ms": 22944.2, "estimated_cost_usd": 0.059679, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 11487 chars, 5503 in / 2878 out tokens, 22944ms
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.2.1: llm_emitted={'domain': 'PDH', 'strand': 'PDH.2', 'sub_strand': None, 'indicator': 'PDH.2.1'} anchored={'domain': 'PDH', 'strand': 'PDH.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.2.2: llm_emitted={'domain': 'PDH', 'strand': 'PDH.2', 'sub_strand': None, 'indicator': 'PDH.2.2'} anchored={'domain': 'PDH', 'strand': 'PDH.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.2.3: llm_emitted={'domain': 'PDH', 'strand': 'PDH.2', 'sub_strand': None, 'indicator': 'PDH.2.3'} anchored={'domain': 'PDH', 'strand': 'PDH.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.3.1: llm_emitted={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None, 'indicator': 'PDH.3.1'} anchored={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.3.2: llm_emitted={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None, 'indicator': 'PDH.3.2'} anchored={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.3.3: llm_emitted={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None, 'indicator': 'PDH.3.3'} anchored={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-PDH.3.4: llm_emitted={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None, 'indicator': 'PDH.3.4'} anchored={'domain': 'PDH', 'strand': 'PDH.3', 'sub_strand': None}
+Chunk 2/6: parsed 7 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5725, "output_tokens": 3824, "total_tokens": 9549, "latency_ms": 27197.0, "estimated_cost_usd": 0.074535, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 15686 chars, 5725 in / 3824 out tokens, 27197ms
+PRE_NORMALIZATION_CODES US-CO-2020-SED.1.1: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None, 'indicator': 'SED.1.1'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.1.2: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None, 'indicator': 'SED.1.2'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.1.3: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None, 'indicator': 'SED.1.3'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.1.4: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None, 'indicator': 'SED.1.4'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.1.5: llm_emitted={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None, 'indicator': 'SED.1.5'} anchored={'domain': 'SED', 'strand': 'SED.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.2.1: llm_emitted={'domain': 'SED', 'strand': 'SED.2', 'sub_strand': None, 'indicator': 'SED.2.1'} anchored={'domain': 'SED', 'strand': 'SED.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.2.2: llm_emitted={'domain': 'SED', 'strand': 'SED.2', 'sub_strand': None, 'indicator': 'SED.2.2'} anchored={'domain': 'SED', 'strand': 'SED.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.2.3: llm_emitted={'domain': 'SED', 'strand': 'SED.2', 'sub_strand': None, 'indicator': 'SED.2.3'} anchored={'domain': 'SED', 'strand': 'SED.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.3.1: llm_emitted={'domain': 'SED', 'strand': 'SED.3', 'sub_strand': None, 'indicator': 'SED.3.1'} anchored={'domain': 'SED', 'strand': 'SED.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.3.2: llm_emitted={'domain': 'SED', 'strand': 'SED.3', 'sub_strand': None, 'indicator': 'SED.3.2'} anchored={'domain': 'SED', 'strand': 'SED.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.3.3: llm_emitted={'domain': 'SED', 'strand': 'SED.3', 'sub_strand': None, 'indicator': 'SED.3.3'} anchored={'domain': 'SED', 'strand': 'SED.3', 'sub_strand': None}
+Chunk 3/6: parsed 11 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 4748, "output_tokens": 996, "total_tokens": 5744, "latency_ms": 9274.7, "estimated_cost_usd": 0.029184, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 4065 chars, 4748 in / 996 out tokens, 9275ms
+PRE_NORMALIZATION_CODES US-CO-2020-SED.4.1: llm_emitted={'domain': 'SED', 'strand': 'SED.4', 'sub_strand': None, 'indicator': 'SED.4.1'} anchored={'domain': 'SED', 'strand': 'SED.4', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.4.2: llm_emitted={'domain': 'SED', 'strand': 'SED.4', 'sub_strand': None, 'indicator': 'SED.4.2'} anchored={'domain': 'SED', 'strand': 'SED.4', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-SED.4.3: llm_emitted={'domain': 'SED', 'strand': 'SED.4', 'sub_strand': None, 'indicator': 'SED.4.3'} anchored={'domain': 'SED', 'strand': 'SED.4', 'sub_strand': None}
+Chunk 4/6: parsed 3 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5835, "output_tokens": 4036, "total_tokens": 9871, "latency_ms": 29487.3, "estimated_cost_usd": 0.078045, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 17494 chars, 5835 in / 4036 out tokens, 29487ms
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.1.1: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None, 'indicator': 'ELD.1.1'} anchored={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.1.2: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None, 'indicator': 'ELD.1.2'} anchored={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.1.3: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None, 'indicator': 'ELD.1.3'} anchored={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.1.4: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None, 'indicator': 'ELD.1.4'} anchored={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.1.5: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None, 'indicator': 'ELD.1.5'} anchored={'domain': 'ELD', 'strand': 'ELD.1', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.2.1: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None, 'indicator': 'ELD.2.1'} anchored={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.2.2: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None, 'indicator': 'ELD.2.2'} anchored={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.2.3: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None, 'indicator': 'ELD.2.3'} anchored={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.2.4: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None, 'indicator': 'ELD.2.4'} anchored={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.2.5: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None, 'indicator': 'ELD.2.5'} anchored={'domain': 'ELD', 'strand': 'ELD.2', 'sub_strand': None}
+Chunk 5/6: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5102, "output_tokens": 2101, "total_tokens": 7203, "latency_ms": 18183.9, "estimated_cost_usd": 0.046821, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9115 chars, 5102 in / 2101 out tokens, 18184ms
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.3.1: llm_emitted={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None, 'indicator': 'ELD.3.1'} anchored={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.3.2: llm_emitted={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None, 'indicator': 'ELD.3.2'} anchored={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.3.3: llm_emitted={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None, 'indicator': 'ELD.3.3'} anchored={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.3.4: llm_emitted={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None, 'indicator': 'ELD.3.4'} anchored={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-CO-2020-ELD.3.5: llm_emitted={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None, 'indicator': 'ELD.3.5'} anchored={'domain': 'ELD', 'strand': 'ELD.3', 'sub_strand': None}
+Chunk 6/6: parsed 5 standards
+  [parser] produced 48 standards (status=success)
+
+=== CO ===
+  golden standards: 9
+  parsed:           48
+  matched:          9  (coverage 1.000)
+  fully correct:    9/9
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] CO-INDICATOR-PARENT-IS-STRAND — all 48 indicators have a strand parent and null sub_strand
+    [PASS] NO-ID-COLLISION — all 48 standard_ids unique
+
+Review files written to paper/results/task5_20260830/review/parser_run1/
+
+Full report written to paper/results/task5_20260830/reports/parser_run1_CO.json

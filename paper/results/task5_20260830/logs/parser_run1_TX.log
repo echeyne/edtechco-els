@@ -1,0 +1,60 @@
+== TX ==
+  [parser] running on 33 detected elements…
+Split 33 elements into 3 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6311, "output_tokens": 8647, "total_tokens": 14958, "latency_ms": 59364.8, "estimated_cost_usd": 0.148638, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 39819 chars, 6311 in / 8647 out tokens, 59365ms
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.1.36-48: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.1.36-48'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.1.48-60: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.1.48-60'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.2.36-48: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.2.36-48'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.2.48-60: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.2.48-60'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.3.36-48: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.3.36-48'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.3.48-60: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.3.48-60'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.4.36-48: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.4.36-48'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.A.4.48-60: llm_emitted={'domain': 'I', 'strand': 'I.A', 'sub_strand': None, 'indicator': 'I.A.4.48-60'} anchored={'domain': 'I', 'strand': 'I.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.1.a.36-48: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1', 'indicator': 'I.B.1.a.36-48'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.1.a.48-60: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1', 'indicator': 'I.B.1.a.48-60'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.1.b.36-48: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1', 'indicator': 'I.B.1.b.36-48'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.1.b.48-60: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1', 'indicator': 'I.B.1.b.48-60'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1'}
+Chunk 1/3: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5695, "output_tokens": 5584, "total_tokens": 11279, "latency_ms": 40023.2, "estimated_cost_usd": 0.100845, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 25520 chars, 5695 in / 5584 out tokens, 40023ms
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.1.c.36-48: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1', 'indicator': 'I.B.1.c.36-48'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.1.c.48-60: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1', 'indicator': 'I.B.1.c.48-60'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.1'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.2.a.36-48: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2', 'indicator': 'I.B.2.a.36-48'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.2.a.48-60: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2', 'indicator': 'I.B.2.a.48-60'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.2.b.36-48: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2', 'indicator': 'I.B.2.b.36-48'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.2.b.48-60: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2', 'indicator': 'I.B.2.b.48-60'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.2.c.36-48: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2', 'indicator': 'I.B.2.c.36-48'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2'}
+PRE_NORMALIZATION_CODES US-TX-2022-I.B.2.c.48-60: llm_emitted={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2', 'indicator': 'I.B.2.c.48-60'} anchored={'domain': 'I', 'strand': 'I.B', 'sub_strand': 'I.B.2'}
+Chunk 2/3: parsed 8 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6011, "output_tokens": 3645, "total_tokens": 9656, "latency_ms": 32098.3, "estimated_cost_usd": 0.072708, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 16511 chars, 6011 in / 3645 out tokens, 32098ms
+PRE_NORMALIZATION_CODES US-TX-2022-VI.A.1.48-60: llm_emitted={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None, 'indicator': 'VI.A.1.48-60'} anchored={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-VI.A.2.48-60: llm_emitted={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None, 'indicator': 'VI.A.2.48-60'} anchored={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-VI.A.3.48-60: llm_emitted={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None, 'indicator': 'VI.A.3.48-60'} anchored={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-VI.A.4.48-60: llm_emitted={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None, 'indicator': 'VI.A.4.48-60'} anchored={'domain': 'VI', 'strand': 'VI.A', 'sub_strand': None}
+PRE_NORMALIZATION_CODES US-TX-2022-VI.B.1.48-60: llm_emitted={'domain': 'VI', 'strand': 'VI.B', 'sub_strand': None, 'indicator': 'VI.B.1.48-60'} anchored={'domain': 'VI', 'strand': 'VI.B', 'sub_strand': None}
+Chunk 3/3: parsed 5 standards
+  [parser] produced 25 standards (status=success)
+
+=== TX ===
+  golden standards: 8
+  parsed:           25
+  matched:          8  (coverage 1.000)
+  fully correct:    8/8
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT-IDS — 10 multi-variant indicator group(s) all kept distinct standard_ids
+    [PASS] NO-ID-COLLISION — all 25 standard_ids unique
+
+Review files written to paper/results/task5_20260830/review/parser_run1/
+
+Full report written to paper/results/task5_20260830/reports/parser_run1_TX.json
