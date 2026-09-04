@@ -31,3 +31,146 @@
 
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}
+
+\subsection{What the results support}
+
+The central claim survives its strongest available test. Classifying by nesting
+position rather than by label vocabulary yields recall of 1.000 at every
+hierarchy level in all six states, including the two held out from development
+entirely --- states whose documents print label words, code namespaces and level
+counts that appear nowhere in the four the prompts were written against. Nevada
+skips a level in its printed namespace and Kentucky names its sub-strands
+\texttt{Benchmark N.N}; neither is special-cased anywhere in the system.
+
+The two comparisons locate that result rather than merely asserting it.
+Ablating the depth-map pass leaves domain and indicator recall untouched while
+strand and sub-strand degrade, which is what the claim predicts: the levels that
+survive are those with a distinctive surface form, and the levels that fail are
+those whose identity is purely positional. The rule-based comparison shows the
+same boundary from the other side, matching the language model exactly at domain
+and collapsing beneath it. Typography identifies a document's top division
+reliably and identifies almost nothing below it.
+
+\subsection{Corpus scope, and what the tiers do and do not mean}
+
+\textbf{Every quality number in this paper is computed at the
+\texttt{\_only\_subset} tier} --- roughly one to two domains per state, 70 pages
+in total, hand-trimmed and exhaustively annotated. This is favorable
+preprocessing and we state it rather than leaving it to be inferred. It is the
+tier that makes annotation affordable, and it is a genuine reduction in
+coverage: a subset metric is not a whole-document metric, and no table here
+should be read as one.
+
+The scale measurements are a different tier and a different kind of claim. They
+run at \texttt{\_trimmed}, which removes only non-standards matter --- front
+matter, guiding-principles essays, appendices, acknowledgements --- and
+\textbf{retains every standard in the document}. Kentucky's 52 processed pages
+are all of Kentucky's standards, not 43\% of them, and Colorado's 41 are the
+complete Ages 3--5 publication. A trimmed-to-published page ratio is therefore
+never a coverage fraction, and we are explicit about this because the opposite
+reading is the more natural one and would understate the result.
+
+What remains limited about scale is \textbf{page count, as a cost and batching
+question rather than a coverage one}. These runs chunk 18 and 17 times across
+four \texttt{Map} iterations; their token and latency figures should not be
+extrapolated to untrimmed page counts, and no document as large as Arizona's
+217-page publication has been run end to end. Trimming also remains
+preprocessing that a deployment would have to perform or absorb: the pipeline
+was never asked to ignore 68 pages of Kentucky preamble on its own, and we do
+not claim it would. Colorado carries one further qualification --- its
+out-of-scope content is other \emph{age bands}, the birth-to-three and five-to-
+eight portions of a 187-page publication, not standards removed by trimming. Every
+Colorado figure in this paper is the Ages 3--5 band.
+
+\subsection{What the goldens can and cannot establish}
+
+The detector goldens vary a great deal in density, and that governs what each
+can establish. In the four development states they are deliberate spot checks
+--- 5, 25, 7 and 8 annotated elements against detection sets of 67, 122, 61 and
+33. Because the evaluation suite counts every unmatched in-scope detection as a
+false positive, \emph{raw} precision on those states largely measures annotation
+coverage rather than detector quality, and we do not report it as quality.
+Precision instead comes from a manual audit of all 296 in-scope detections
+across the corpus, which found a single hallucinated element.
+
+The two held-out states are annotated densely rather than as spot checks, and
+they separate two properties that are easily conflated. Nevada's golden is
+content-exhaustive --- 46 elements covering every distinct structural element
+the document prints --- but not \emph{detection}-exhaustive, because the
+document reprints several headings on a second page spread and the detector
+correctly finds them twice; at 46 golden against 52 in-scope detections its raw
+precision has a ceiling below 1 no matter how well it performs. Kentucky's
+golden is the one that is detection-exhaustive, 44 against 44, so its precision
+is a genuine hallucination rate rather than a coverage figure. It is also, for that reason, the only avenue to
+quality-at-scale evidence that does not require new annotation --- its 44
+annotated elements could be graded inside a trimmed-tier run. We have not yet
+done so, and that measurement is the most valuable single addition available to
+this work.
+
+\subsection{Nondeterminism, and why we do not claim determinism}
+
+The pipeline is not deterministic, and the stability measurements should be read
+as \textbf{lower bounds rather than estimates}. A defect firing in a minority of
+runs survives five clean draws comfortably, so a zero in our stability table
+means we did not observe instability at $n{=}5$, not that a component is stable.
+
+We take our own experience as the cautionary case. An earlier recording measured
+Nevada's detector code accuracy at $46/46$ and we reported it as a held-out
+gain; five fresh runs on identical code give 44, 45, 44, 44, 44. The point value
+was the top of a distribution, not its centre. The same caution applies to
+single-run ablation arms generally, including our attribution of Nevada's
+domain-code behaviour to the Pass-1 sampler, which rests on one draw per arm
+with an arm-to-arm gap no larger than the run-to-run spread we later measured.
+We report that attribution as suggested rather than established. Where an
+experiment is repeated --- the depth-map ablation, at three runs per arm across
+six states --- we report the range and note that the direction never reverses,
+rather than quoting a single number.
+
+The practical consequence is that correctness here rests on the validation
+boundary rather than on the model agreeing with itself. The clearest instance is
+California's intermittent structural-label defect: when it fires it produces
+twelve malformed identifiers, all of which contain whitespace and are rejected
+on shape before persistence.
+
+\subsection{Limitations of the measuring instruments}
+
+Three are worth stating because each could mislead a reader who assumed
+otherwise.
+
+\textbf{The false-positive audit tests for invention.} Its verdicts turn on
+whether a detected title appears in the source text, which is the right question
+for a generative system and the wrong one for a copier --- a rule-based
+extractor cannot invent and therefore scores near 1.000 by construction. Applied
+to the baseline the metric also detects something other than hallucination:
+California's five flagged rows are column \emph{fusion}, where a table header
+has been merged into an adjacent title, rather than fabrication. We report raw
+precision for both arms instead, and treat the audit as informative only about
+the language-model arm.
+
+\textbf{The two evaluation suites do not grade the same detection.} The detector
+suite re-runs detection in process against a frozen extraction --- the direct
+path --- while the parser suite grades the deployed batched path's stored
+output. On the recording this paper uses, Arizona's direct-path detection holds
+67 elements where the batched output the parser suite reads holds 65; earlier
+recordings have differed by more. The two suites also use
+independently annotated goldens with different shapes, a flat element list and
+nested normalized records. A detector number and a parser number from the same
+results directory therefore describe related but not identical objects, and
+should not be composed into a single end-to-end figure.
+
+\textbf{Extraction quality bounds everything downstream.} The pipeline reads OCR
+and PDF text-layer output; a heading the extractor fuses or drops is not
+recoverable by any amount of downstream reasoning. Nevada's one confirmed
+hallucination originates this way, in a multi-column table that flattens into
+interleaved reading order.
+
+\subsection{Scope}
+
+The corpus is six US states of more than fifty jurisdictions, all in English,
+all early learning standards. We make no claim about other document families,
+other languages, or other countries' standards traditions, though the method
+assumes only that a document has a nesting structure and prints some evidence
+of it. Neither code nor corpus is released (\S\ref{sec:artifacts-statement}):
+the source documents are third-party state-agency publications that are not ours
+to redistribute, which limits direct reproducibility to the prompts and schema
+disclosed in the appendices.
