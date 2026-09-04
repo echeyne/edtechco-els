@@ -1,22 +1,92 @@
-% introduction.tex — Task 10 stub. Reconstructed section (see ../OUTLINE_NOTES.md).
-% Draft at Task 12. Outline:
-%   - Motivation: US early learning standards are published independently by
-%     50+ jurisdictions as fragmented, inconsistently formatted PDFs; no
-%     national machine-readable corpus exists (unlike K-12).
-%   - The core claim: an LLM can recover a document's hierarchical structure
-%     by classifying each element's NESTING POSITION rather than by its
-%     document-specific label vocabulary — this is what generalizes across
-%     states with no shared typography.
-%   - Contributions (method + system framing, per tasking/arxiv_paper.md):
-%     1. a two-stage depth-map + classify-by-position detection method;
-%     2. a normalization/parsing stage that resolves the hierarchy into a
-%        canonical schema with deterministic, collision-free IDs;
-%     3. a serverless batching architecture that scales to full documents;
-%     4. an evaluation on 4 golden + 2 held-out states showing the approach
-%        generalizes (recall 1.000 at every level, all 6 states) without
-%        state-specific rules or fine-tuning.
-%   - State plainly, up front: current quality numbers are subset-scoped
-%     (guardrail 1) and full-document numbers are cost/scale only (Task 6).
+% introduction.tex — drafted Task 12 (2026-08-30).
+% Guardrails observed: corpus tier stated explicitly for every quality number
+% (1); no confidence-gate language (2); trimming disclosed here and in
+% \S\ref{sec:corpus} (3); no unmeasured Medium numbers (4); the in-context
+% argument is made on no-labeled-corpus grounds, with no invented fine-tuning
+% cost (5); held-out results reported as measured (7).
 
 \section{Introduction}
 \label{sec:introduction}
+
+Every US state publishes early learning standards: the developmental
+expectations that shape curriculum, assessment, and teacher preparation for
+children from birth through kindergarten entry. More than fifty jurisdictions
+issue them independently~\citep{ncecqa_elgs,ohs2015elof}, and each designs its
+own document. The result is a body of policy that is public, consequential, and
+almost entirely unavailable to software. Unlike K--12 academic standards, which
+have machine-readable distribution
+formats~\citep{1edtech2017case,ecs2024governance}, early learning standards
+exist as PDFs --- multi-column tables, age-banded grids, and prose narratives
+whose typography is shared by no two states.
+
+The obstacle is not optical character recognition. It is that a standards
+document is a \emph{tree} rendered as a page. A single indicator is meaningful
+only through its ancestry: which domain, which strand, which sub-strand it sits
+under, and at what age band. Recovering that tree requires deciding, for every
+line, how deeply it is nested --- and the surface cues that would answer the
+question are exactly what varies between states. Arizona writes
+\texttt{Strand 1: Language and Literacy}; Kentucky writes
+\texttt{Benchmark 1.1}; Nevada prints a code namespace that skips a level
+entirely; Colorado publishes no sub-strand tier at all. A rule tuned to one
+document's vocabulary is, by construction, a rule that fails on the next.
+
+Our central claim is that a language model can recover this structure by
+classifying each element's \textbf{nesting position} rather than its
+document-specific label, and that doing so is what generalizes. Concretely, we
+first infer a per-document \emph{depth map} --- how many nesting levels this
+particular document uses, and what each looks like --- and then classify every
+element against that map as an authority, rather than against a fixed
+vocabulary of level names. The label \texttt{Benchmark 1.1} then does not have
+to be recognized as a sub-strand; it has to be recognized as sitting one level
+below whatever \texttt{Language and Early Literacy Standard 1} is.
+
+This framing also determines how the system is built. We hold a deliberate
+design discipline that structural decisions belong in the prompt as general
+document principles, not in Python as per-document branches. That discipline
+was adopted after an earlier rule-driven revision scored well on the states it
+had been developed against and failed to transfer; the migration that removed
+those rules is described in \S\ref{sec:method-llm-first}. Deterministic code is
+retained only where it reads the \emph{shape} of an output --- dot-segment
+structure, whitespace, string containment --- and never any document's words.
+
+The absence of a labeled corpus is what rules out the obvious supervised
+alternative. There is no annotated dataset of hierarchically-parsed early
+learning standards at any scale, so a fine-tuned model would first require one
+to be built, and the dominant cost of that path is annotation rather than
+compute. Our own goldens took expert effort to produce and cover six states;
+they are an evaluation instrument, not a training set. An in-context approach
+that needs no labeled data is therefore not merely cheaper here, it is the only
+approach available without first solving a different problem
+(cf.~\citealp{liu2022fewshot} for the counterargument where labels do exist).
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item A two-stage detection method built on per-document depth-map inference
+    and classify-by-nesting-position prompting, with no per-state rules
+    (\S\ref{sec:method-detection}).
+  \item A parsing stage that resolves detected elements into a single canonical
+    schema across documents that do not agree on level count or code namespace,
+    producing deterministic, collision-free identifiers
+    (\S\ref{sec:method-parsing}).
+  \item A serverless architecture that batches detection and parsing through a
+    prepare--map--merge pattern so the method applies to whole standards
+    documents rather than excerpts (\S\ref{sec:system-architecture}).
+  \item An evaluation over four development states and two held-out states.
+    Detector recall is 1.000 at every hierarchy level in all six states, and a
+    manual audit of all 296 in-scope detections finds a single hallucinated
+    element (verified precision 0.997). An ablation shows the depth-map pass is
+    what carries the intermediate levels: removing it leaves domain and
+    indicator recall untouched while strand falls to 0.920 and sub-strand to
+    0.833 (\S\ref{sec:experiments-ablation}).
+\end{enumerate}
+
+\paragraph{Scope of the reported numbers.} All quality measurements in this
+paper are computed at the \emph{subset} corpus tier: hand-trimmed excerpts of
+one to two domains per state, 70 pages in total, fully annotated. This is
+favorable preprocessing and we state it plainly rather than leaving it to be
+inferred; \S\ref{sec:corpus} gives the tiers and retained page ranges, and
+\S\ref{sec:discussion-limitations} discusses what does and does not transfer to
+whole documents. Cost and scale figures are reported separately, at the
+\emph{trimmed} tier---a document's standards content in full, with front
+matter, expository essays and appendices removed---and are never mixed with the
+quality tables.

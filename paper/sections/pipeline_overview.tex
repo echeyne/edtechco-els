@@ -1,13 +1,39 @@
-% pipeline_overview.tex — Task 10 stub. Reconstructed section (see
-% ../OUTLINE_NOTES.md). Draft at Task 12. Outline:
-%   - A brief, figure-led overview of the six pipeline stages (ingestion ->
-%     extraction -> detection -> parsing -> validation -> persistence)
-%     before \S\ref{sec:method} and \S\ref{sec:system-architecture} go deep
-%     on the method and the infrastructure, respectively.
-%   - The architecture diagram (Task 11 deliverable, requested from Emily)
-%     belongs here.
-%   - Keep this section short — it exists to orient the reader before the
-%     two sections that follow, not to duplicate their content.
+% pipeline_overview.tex — drafted Task 12 (2026-08-30).
+% Deliberately short: it orients the reader before \S\ref{sec:method} (how the
+% structure is recovered) and \S\ref{sec:system-architecture} (how it is run at
+% scale), and duplicates neither.
+%
+% NOTE: the outline placed the architecture figure here. It is instead in
+% \S\ref{sec:system-architecture} alongside the batching discussion it
+% illustrates, and referenced forward from this section. Moving it costs
+% nothing if the figure budget changes -- main.tex only \input's.
 
 \section{Pipeline Overview}
 \label{sec:pipeline-overview}
+
+The system is a six-stage pipeline. \textbf{Ingestion} registers a source PDF
+and its provenance. \textbf{Extraction} recovers text blocks with their page
+numbers and page coordinates, using a hybrid of OCR and the PDF's own text
+layer, since either alone is unreliable on the multi-column and tabular layouts
+these documents favor. \textbf{Detection} is where structure is recovered: it
+infers the document's depth map and then classifies every element against it,
+emitting a flat list of typed elements, each carrying a level, a code, a title,
+an optional description, an age band, and the source text it was read from.
+\textbf{Parsing} resolves that flat list into the canonical schema of
+\S\ref{sec:schema}, attaching each indicator to its full ancestry and composing
+its identifier. \textbf{Validation} checks each record against the schema and
+against structural invariants on the identifier, and \textbf{persistence}
+writes the surviving records to a relational store.
+
+Two things about this decomposition matter for what follows. First, detection
+and parsing are separate stages with separate prompts and separate models,
+rather than one prompt that reads a page and emits normalized records; the
+rationale is in \S\ref{sec:method-two-stage}. Second, the interface between
+them is a flat element list rather than a tree, which is what allows detection
+to be evaluated on its own --- against its own golden annotations --- without
+the parser's ancestry resolution confounding the measurement. The two
+evaluation suites in \S\ref{sec:experiments-results} grade the two stages
+independently against separately annotated goldens for exactly this reason.
+
+Figure~\ref{fig:architecture} shows the deployed form, including the batching
+that lets the method run over whole standards documents.

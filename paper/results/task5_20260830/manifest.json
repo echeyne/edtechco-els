@@ -1,7 +1,7 @@
 {
   "task": "Task 5 \u2014 stability / determinism, both suites, six states",
   "date_started": "2026-08-30",
-  "status": "IN PROGRESS. Runs 1-3 on 2026-08-30; runs 4-5 planned 2026-08-31.",
+  "status": "COMPLETE. n=5 detector / n=6 parser, six states, both suites.",
   "git_commit": "a160593346316d2eff0a168ec608f0f37d83288e",
   "code_version_hash": "14374dba",
   "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents). Same tier as every other quality recording, so the stability numbers are comparable with the Task 1/2 headline tables and must carry the same tier label (guardrail 1).",
@@ -43,29 +43,51 @@
     }
   },
   "runs": {
-    "1": "2026-08-30, both suites, six states",
-    "2": "2026-08-30 (chained, quota-gated)",
-    "3": "2026-08-30 planned",
-    "4": "2026-08-31 planned",
-    "5": "2026-08-31 planned"
+    "1": "2026-08-30 22:54Z",
+    "2": "2026-08-30 23:22Z",
+    "3": "2026-08-31 00:24Z (same session as 1-2; crossed UTC midnight)",
+    "4": "2026-08-31 18:45Z",
+    "5": "2026-08-31 19:19Z",
+    "0": "frozen parser arm recorded 2026-08-29 (parser suite only)"
   },
-  "interim_result_after_runs_1_2": {
-    "_status": "PARTIAL \u2014 n=2 detector, n=3 parser (incl. frozen). Superseded once runs 3-5 land.",
+  "result": {
     "detector": {
-      "corpus_disagreement_rate": 0.013158,
+      "n_observations": 5,
       "n_identities_compared": 304,
-      "n_distinct_unstable": 4,
-      "AZ": "3 unstable, all presence/multiplicity; output size 74 vs 77 \u2014 the listing-page duplicate phenomenon",
-      "NV": "1 unstable, code",
-      "CA/CO/KY/TX": "0"
+      "n_distinct_unstable": 5,
+      "disagreement_rate": 0.016447,
+      "stable_states": [
+        "CA",
+        "CO",
+        "KY",
+        "TX"
+      ],
+      "AZ": "3 presence disagreements; sizes [74,77,77,77,77], run1 alone under-detected. Graded recall 1.000 in every run, so invisible to the headline metric.",
+      "NV": "2 \u2014 the Science/S domain-code drift, plus a day-boundary presence change; sizes [54,54,54,53,53]."
     },
     "parser": {
-      "corpus_disagreement_rate": 0.039801,
+      "n_observations": 6,
       "n_identities_compared": 201,
-      "n_distinct_unstable": 8,
-      "CA": "4 identities / 12 rows. Run 2 emitted ELD.1.0.VOCA.Foundation 1.1.BROA \u2014 the DOCUMENTED structural-label-in-code defect, in the documented surface form and at the documented ~12-row scale. Every one contains whitespace, so validator._validate_code_shape rejects all 12 before Aurora. This is the stability instrument catching, live, the exact defect the code-shape guard was built for.",
-      "NV": "4 identities. Run 1 put NV-STD-05/06/07 under strand SS.1 instead of SS.2, with the matching strand.name \u2014 the _anchor_parent_chain / strand-keeps-its-heading area. Frozen and run 2 agree; run 1 is the outlier. Run 1's eval exited 1 on the NV-STRAND-PARENT-BY-HEADING regression case, which is a QUALITY failure, not an infrastructure one \u2014 the report is complete and valid and must NOT be excluded.",
-      "AZ/CO/KY/TX": "0"
+      "n_distinct_unstable": 9,
+      "disagreement_rate": 0.044776,
+      "stable_states": [
+        "AZ",
+        "CO",
+        "KY",
+        "TX"
+      ],
+      "CA": "4 identities / 12 rows in 2 of 5 comparisons \u2014 the documented structural-label-in-code defect (ELD.1.0.VOCA.Foundation 1.1.BROA). All 12 carry whitespace and are rejected by validator._validate_code_shape before Aurora.",
+      "NV": "5 identities \u2014 strand.code/strand.name on three standards (SS.1 vs golden SS.2) plus one sub_strand.name. NV-STRAND-PARENT-BY-HEADING failed in runs 1, 2, 4 and passed in 3, 5."
     }
-  }
+  },
+  "\u26a0\ufe0f_headline_finding": {
+    "what": "paper/results/task2_20260826 records NV detector code accuracy 46/46 (1.0000) as the held-out generalization gain. It does NOT reproduce: five fresh runs give 44, 45, 44, 44, 44.",
+    "denominators": "n_golden=46 and matched=46 in all five runs, so nothing moved for denominator reasons.",
+    "n_detected": "frozen recording 52; the five runs give 54, 54, 54, 53, 53 \u2014 the recorded value is below all of them.",
+    "confound_ruled_out": "The frozen arm is at 7da92182 and these runs at 14374dba, but the only commit between them (42dd8d3) touches parser.py alone \u2014 `git diff 42dd8d3^ 42dd8d3 -- src/els_pipeline/detector.py` is empty. Identical detector code, identical extraction, both --no-cache.",
+    "mechanism": "The documented NV domain-code drift: run 2 emitted `S` (the golden value), runs 1/3/4/5 emitted `Science`.",
+    "consequence_for_attribution": "nv_attribution_ab.json concludes 'THE SAMPLER, confirmed by controlled A/B' from three SINGLE-DRAW arms (new sampler 46/46, old stride 43/46, no depth map 44/46). The new-sampler arm's own range is now measured at 44-45, so its recorded 46 was the top of its distribution and the 3-point gap sits inside that spread. NOT established at n=1 per arm. This does NOT overturn Task 3's ablation, which is a different experiment at n=3 across six states whose effect never changes sign.",
+    "recommended_paper_treatment": "Report NV detector code accuracy as a RANGE (44-45 of 46), never 1.000, and downgrade the sampler attribution from 'confirmed' to 'suggested, not established at n=1 per arm'. Guardrail 7."
+  },
+  "\u26a0\ufe0f_day_boundary_evidence": "NV detector sizes split exactly on the session boundary: [54,54,54] for runs 1-3 (one session) and [53,53] for runs 4-5 (next day). One indicator present in all three same-session runs is missing from both next-day runs. This is July's finding reproduced and is the direct justification for blocker 2 \u2014 five back-to-back runs would have reported that element as perfectly stable."
 }

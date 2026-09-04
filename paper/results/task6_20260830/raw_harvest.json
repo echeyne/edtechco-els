@@ -1,0 +1,407 @@
+{
+  "⚠️_CORRECTION_20260831": {
+    "_read_this_first": "This file is the raw 2026-08-30 harvest and is kept as evidence; its verdicts below are NOT edited. Two of its conclusions are corrected here and superseded by findings.md / manifest.json.",
+    "1_the_trimmed_input_was_INTENTIONAL_not_an_error": "The harvest calls the trimmed file_path a 'wrong-input-selection error at invocation time'. It was not: Emily chose the _trimmed files deliberately. Only the run_id ('full08292026') is a misnomer.",
+    "2_page_ratio_is_not_a_coverage_ratio": "The harvest treats 52/120 and 41/187 as coverage fractions and concludes the runs say nothing about full documents. Per Emily, who did the trimming, the _trimmed tier retains 100% OF THE STANDARDS — what was removed is preamble, introductions, essays, appendices and acknowledgements. So these runs processed every standard in both documents. CO was not trimmed at all: its 41pp file equals the full Ages 3-5 document, drawn from a wider 187pp birth-to-8 publication whose other age bands are out of scope rather than cut.",
+    "what_still_stands": "Everything measured: page counts, per-page coverage, batching counts, per-stage tokens, latency, and the instrumentation defects. The residual caveat is PAGE-COUNT scale (chunk counts, the ~6000-token Pass-1 budget, cost extrapolation), not coverage.",
+    "date": "2026-08-31"
+  },
+  "investigation_metadata": {
+    "date_performed": "2026-08-30",
+    "aws_profile": "kinder-readiness-dev-cli",
+    "aws_account": "390888050716",
+    "region": "us-east-1",
+    "mode": "read-only, no writes/commits/pipeline-runs/eval-spend performed",
+    "note_on_tooling": "The aws-mcp run_script (boto3 sandbox) tool operates under a DIFFERENT AWS account (521351599843, user 'restaurant-menu-optimizer') and returned false-negative results (0 state machines, ResourceNotFoundException for log groups, 0 CloudWatch datapoints) for this investigation. All findings in this file were obtained via the AWS CLI (`aws` binary) under AWS_PROFILE=kinder-readiness-dev-cli, which correctly resolves to account 390888050716."
+  },
+  "HEADLINE_FINDING": {
+    "verdict": "NEITHER run processed the full document described in the task brief. Both 'full08292026' executions ingested the pre-existing TRIMMED PDFs, not the true full documents.",
+    "kentucky": {
+      "expected_full_document": "standards/kentucky_all_standards_2021.pdf, 120 pages (confirmed via PyMuPDF page_count locally)",
+      "actual_document_processed": "US/KY/2021/kentucky_all_standards_2021_trimmed.pdf, 52 pages (confirmed via extraction stage total_pages=52 AND local PyMuPDF page_count=52)",
+      "pages_not_processed": 68,
+      "fraction_of_true_document_covered": "52/120 = 43.3%"
+    },
+    "colorado": {
+      "expected_full_document": "standards/colorado_birth_to_8_2020.pdf, 187 pages (confirmed via PyMuPDF page_count locally)",
+      "actual_document_processed": "US/CO/2020/colorado_3_5_trimmed_2020.pdf, 41 pages (confirmed via extraction stage total_pages=41 AND local PyMuPDF page_count=41)",
+      "pages_not_processed": 146,
+      "fraction_of_true_document_covered": "41/187 = 21.9%"
+    },
+    "cause": "The Step Functions execution input's file_path pointed at the 'trimmed' S3 object (already used in prior 08-22 through 08-26 eval runs) rather than the untrimmed full source PDF. This is a wrong-input-selection error at invocation time, not a pipeline defect (no silent data-dropping bug of the kind documented in CLAUDE.md was observed within the documents that WERE processed -- see per-run funnel below, which shows full accounted-for coverage of the trimmed documents themselves).",
+    "token_forecast_reconciliation": "The day's aggregate Opus spend (925,871 tokens) is LESS than the ~1.9M forecast for two reasons that are independent of each other, both confirmed: (1) the pipeline processed 52pp+41pp=93pp of real document content instead of the forecast's 120pp+187pp=307pp (30% of forecast pages), consistent with the pipeline itself using only 536,505 of the day's 925,871 Opus tokens; and (2) a separate, non-pipeline block of 302,948 input / 86,418 output Opus tokens (389,366 total) was spent by 27 local/CLI Bedrock InvokeModel calls (see cloudtrail_reconciliation below) between 10:15:23 and 10:59:06 -07:00, BEFORE either Step Functions execution started (KY started 11:43:25, CO started 11:40:36). These local calls are NOT part of either 'full08292026' Step Functions execution and must not be counted in Task 6's per-run pipeline cost table."
+  },
+  "step_functions_executions": {
+    "state_machine_arn": "arn:aws:states:us-east-1:390888050716:stateMachine:els-core-pipeline-dev",
+    "kentucky": {
+      "execution_arn": "arn:aws:states:us-east-1:390888050716:execution:els-core-pipeline-dev:kentucky-execution-1788029003",
+      "run_id": "pipeline-US-KY-2021-full08292026",
+      "status": "SUCCEEDED",
+      "start_date": "2026-08-29T11:43:25.985000-07:00",
+      "stop_date": "2026-08-29T11:56:45.100000-07:00",
+      "duration_seconds": 799.1,
+      "file_path_used": "US/KY/2021/kentucky_all_standards_2021_trimmed.pdf",
+      "task_events_summary": "17/17 TaskSucceeded, 0 TaskFailed, 0 retries at the state-machine level"
+    },
+    "colorado": {
+      "execution_arn": "arn:aws:states:us-east-1:390888050716:execution:els-core-pipeline-dev:colorado-execution-1788028830",
+      "run_id": "pipeline-US-CO-2020-full08292026",
+      "status": "SUCCEEDED",
+      "start_date": "2026-08-29T11:40:36.725000-07:00",
+      "stop_date": "2026-08-29T11:50:28.967000-07:00",
+      "duration_seconds": 592.2,
+      "file_path_used": "US/CO/2020/colorado_3_5_trimmed_2020.pdf",
+      "task_events_summary": "17/17 TaskSucceeded, 0 TaskFailed, 0 retries at the state-machine level"
+    }
+  },
+  "document_coverage": {
+    "kentucky": {
+      "document_processed_pages": 52,
+      "document_processed_total_text_blocks": 1741,
+      "distinct_pages_appearing_in_detected_elements": 50,
+      "missing_pages_within_processed_document": [
+        1,
+        14
+      ],
+      "missing_pages_content_check": {
+        "page_1": "Title page only: \"Kentucky's Early Childhood Standards\" / \"Revised 2021\" -- no standards content, correctly has no elements.",
+        "page_14": "Anecdotal illustrative vignettes only (e.g. 'Kyle listens as his caregiver reads the story of Three Billy...') -- narrative examples tied to indicators elsewhere, not new hierarchy content."
+      },
+      "coverage_verdict_for_the_52pp_trimmed_document": "COMPLETE. The 2 missing pages are legitimately content-free (title page, anecdote-only page). No evidence of the dropped-chunk/absent-code silent-failure pattern described in CLAUDE.md within this 52pp document."
+    },
+    "colorado": {
+      "document_processed_pages": 41,
+      "document_processed_total_text_blocks": 3670,
+      "distinct_pages_appearing_in_detected_elements": 37,
+      "missing_pages_within_processed_document": [
+        1,
+        2,
+        40,
+        41
+      ],
+      "missing_pages_content_check": {
+        "page_1": "Cover page: \"Colorado / Early / Learning / CDEC / & Development / Guidelines\" -- no standards content.",
+        "page_2": "Section divider: \"Ages 3-5\" only -- no standards content.",
+        "page_40": "\"This page Intentionally left blank\" -- literally blank.",
+        "page_41": "Publication/grant acknowledgment boilerplate (HHS/ACF funding notice) -- no standards content."
+      },
+      "coverage_verdict_for_the_41pp_trimmed_document": "COMPLETE. All 4 missing pages are legitimately content-free (cover, divider, blank, and acknowledgment page). No evidence of silent data loss within this 41pp document."
+    },
+    "caveat": "This coverage analysis is ONLY valid for the trimmed documents that were actually processed (52pp KY, 41pp CO). It says nothing about whether the pipeline would correctly cover the true 120pp KY / 187pp CO full documents -- that was never tested by these two runs."
+  },
+  "per_stage_funnel": {
+    "kentucky": {
+      "text_blocks_extracted": 1741,
+      "detection_batches_prepared": 4,
+      "detection_chunks_total": 18,
+      "detection_chunks_producing_zero_elements": 0,
+      "raw_elements_per_batch": {
+        "batch_0": 94,
+        "batch_1": 106,
+        "batch_2": 106,
+        "batch_3": 57
+      },
+      "raw_elements_sum": 363,
+      "elements_after_merge_dedup": 329,
+      "parse_batches_prepared": 9,
+      "standards_per_parse_batch": {
+        "batch_0": 34,
+        "batch_1": 21,
+        "batch_2": 21,
+        "batch_3": 29,
+        "batch_4": 24,
+        "batch_5": 27,
+        "batch_6": 26,
+        "batch_7": 18,
+        "batch_8": 14
+      },
+      "total_indicators_parsed": 214,
+      "total_validated": 214,
+      "validation_errors": 0,
+      "records_persisted": 214,
+      "persistence_errors": 0,
+      "funnel_narrowing_point": "329 detected elements -> 214 parsed standards. This is EXPECTED, not a defect: only leaf 'indicator'-level elements become standalone standard rows; domain/strand/sub_strand elements are folded into the hierarchy fields of their descendant indicators (per generate_standard_id / the parser's nested-to-flat conversion), so element_count > standard_count is normal."
+    },
+    "colorado": {
+      "text_blocks_extracted": 3670,
+      "detection_batches_prepared": 4,
+      "detection_chunks_total": 17,
+      "detection_chunks_producing_zero_elements": 0,
+      "raw_elements_per_batch": {
+        "batch_0": 105,
+        "batch_1": 128,
+        "batch_2": 129,
+        "batch_3": 28
+      },
+      "raw_elements_sum": 390,
+      "elements_after_merge_dedup": 300,
+      "parse_batches_prepared": 9,
+      "standards_per_parse_batch": {
+        "batch_0": 30,
+        "batch_1": 23,
+        "batch_2": 27,
+        "batch_3": 21,
+        "batch_4": 25,
+        "batch_5": 33,
+        "batch_6": 16,
+        "batch_7": 34,
+        "batch_8": 31
+      },
+      "total_indicators_parsed": 240,
+      "total_validated": 240,
+      "validation_errors": 0,
+      "records_persisted": 240,
+      "persistence_errors": 0,
+      "funnel_narrowing_point": "300 detected elements -> 240 parsed standards, same expected leaf-only reason as KY."
+    }
+  },
+  "pass1_depth_map": {
+    "kentucky": {
+      "levels_reported": 4,
+      "canonical_levels": [
+        "domain",
+        "strand",
+        "sub_strand",
+        "indicator"
+      ],
+      "matches_golden_annotation": true,
+      "golden_expected_levels": 4,
+      "verdict": "PASS -- Pass-1 defect NOT present in this run. Full 4-level hierarchy correctly inferred."
+    },
+    "colorado": {
+      "levels_reported": 3,
+      "canonical_levels": [
+        "domain",
+        "strand",
+        "indicator"
+      ],
+      "matches_golden_annotation": true,
+      "golden_expected_levels": 3,
+      "verdict": "PASS -- correctly reports no sub_strand level, matching golden."
+    }
+  },
+  "validator_rejections": {
+    "kentucky": {
+      "total_indicators": 214,
+      "total_validated": 214,
+      "rejected": 0,
+      "code_shape_guard_hits_in_logs": 0
+    },
+    "colorado": {
+      "total_indicators": 240,
+      "total_validated": 240,
+      "rejected": 0,
+      "code_shape_guard_hits_in_logs": 0
+    },
+    "note": "Zero validation_errors entries in either run's validation artifact; zero CODE_SHAPE_GUARD log lines found across all Lambda log groups in either run's time window."
+  },
+  "log_signature_search": {
+    "search_windows_utc": {
+      "kentucky": "2026-08-29T18:43:00Z to 2026-08-29T18:57:00Z",
+      "colorado": "2026-08-29T18:40:00Z to 2026-08-29T18:51:00Z"
+    },
+    "log_groups_searched": [
+      "/aws/lambda/els-detect-batch-dev",
+      "/aws/lambda/els-merge-detection-results-dev",
+      "/aws/lambda/els-parse-batch-dev",
+      "/aws/lambda/els-merge-parse-results-dev",
+      "/aws/lambda/els-validator-dev",
+      "/aws/lambda/els-persistence-dev",
+      "/aws/lambda/els-text-extractor-dev",
+      "/aws/lambda/els-prepare-detection-batches-dev",
+      "/aws/lambda/els-prepare-parse-batches-dev",
+      "/aws/lambda/els-ingester-dev"
+    ],
+    "methodology_note": "els-detect-batch-dev and els-parse-batch-dev are SHARED Lambda functions invoked by both the KY and CO Step Functions executions concurrently (CO's parsing stage 11:44-11:49 overlaps KY's 11:47-11:55), so raw time-window filtering cross-contaminates the two runs. Every log line was therefore re-classified by the Lambda request ID (the GUID field in the log line), cross-referenced against the exact request IDs recorded in each Step Functions execution's TaskSucceeded SdkResponseMetadata.RequestId for every DetectSingleBatch/ParseSingleBatch task. This produced 0 unclassifiable ('UNKNOWN') log lines across all three high-volume patterns.",
+    "counts": {
+      "Throttl": 0,
+      "TooManyRequests": 0,
+      "Rate exceeded": 0,
+      "CODE_SHAPE_GUARD": 0,
+      "BARE_INDICATOR_CODE": {
+        "total": 48,
+        "kentucky": 48,
+        "colorado": 0
+      },
+      "DUPLICATED_PARENT_SEGMENT": {
+        "total": 57,
+        "kentucky": 57,
+        "colorado": 0
+      },
+      "PRE_NORMALIZATION_CODES": {
+        "total": 454,
+        "kentucky": 214,
+        "colorado": 240
+      },
+      "stage_status_partial_or_error": 0
+    },
+    "interpretation": {
+      "BARE_INDICATOR_CODE_and_DUPLICATED_PARENT_SEGMENT": "Both fired exclusively on Kentucky (48 and 57 times respectively) and never on Colorado. This matches the documented CLAUDE.md finding that these two parser code-repair helpers exist specifically for KY's 'Benchmark N.N' label-form headings and are a complete no-op on CO's plain numbered strand/indicator scheme. Consistent with prior production observations, not a new defect.",
+      "PRE_NORMALIZATION_CODES": "Fired exactly once per final persisted row in each run (214 for KY = total_validated, 240 for CO = total_validated), exactly matching the documented 'logged for every row' behavior in CLAUDE.md.",
+      "no_throttling_no_code_shape_rejections": "Confirms neither run hit Bedrock rate limits nor produced a single malformed standard_id that the validator's shape guard caught."
+    }
+  },
+  "llm_call_metrics": {
+    "methodology_note": "PipelineRunMetrics/log_pipeline_run_summary (the aggregate 'PIPELINE_METRICS:' log line documented in metrics.py) is DEAD CODE -- grep confirms it is defined but never instantiated or called anywhere in the codebase. Zero 'PIPELINE_METRICS' log lines were found in any Lambda log group for either run. Per-call 'LLM_METRICS:' log lines (from log_llm_call_metrics) DO exist and were used to reconstruct these tables by manual aggregation, classified per-run by Lambda request ID as described above.",
+    "attribution_defect_found": {
+      "description": "LLMCallMetrics.run_id / .country / .state / .batch_index / .chunk_index are ALL BLANK in every logged LLM_METRICS line for the per-chunk detection call and the per-domain parsing call, because the call sites never populate metrics_context.",
+      "evidence": "detection_batching.py line 243 calls `call_bedrock_llm(prompt, prefill=\"[\")` with NO metrics_context argument (detector.py's call_bedrock_llm defaults metrics_context to None, so ctx.get(...) always returns '' / None). Likewise parse_batching.py line 232 calls `call_bedrock_llm(prompt)` with no metrics_context. The ONLY call site that correctly threads metrics_context through is detection_batching.py line 85 (`infer_depth_map(blocks, metrics_context=metrics_ctx)`), used for the once-per-document Pass-1 Haiku call in the PrepareDetectionBatches step -- its LLM_METRICS lines DO carry the correct run_id/country/state.",
+      "impact": "The 88 per-chunk/per-domain LLM_METRICS log lines (35 detection + 53 parsing) across both runs cannot be attributed to a specific pipeline run from their own JSON payload. This investigation had to reconstruct attribution externally via Step Functions execution history + Lambda request-ID cross-referencing. Any future automated cost-per-run dashboard built directly on these logs will silently mix runs together.",
+      "stage_mislabeling_defect_also_found": "call_bedrock_llm in detector.py hardcodes `stage=\"detection\"` on EVERY LLMCallMetrics it constructs, including when it is invoked (via infer_depth_map) with model_id=Config.BEDROCK_DEPTH_MAP_LLM_MODEL_ID for the Pass-1 Haiku call. So Pass-1's Haiku tokens are logged under stage='detection' indistinguishable-by-field from the real per-chunk Opus detection calls; the only way to separate them in this investigation was by model_id and by which Lambda function's log group emitted the line."
+    },
+    "kentucky": {
+      "run_id": "pipeline-US-KY-2021-full08292026",
+      "depth_map_pass1": {
+        "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "calls": 1,
+        "input_tokens": 12153,
+        "output_tokens": 438,
+        "latency_ms": 4851.2,
+        "estimated_cost_usd": 0.014343,
+        "cost_computed_correctly": true
+      },
+      "detection": {
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "calls": 18,
+        "input_tokens": 201574,
+        "output_tokens": 64530,
+        "total_latency_ms": 505495.5,
+        "avg_latency_ms_per_call": 28083.1,
+        "estimated_cost_usd": 2.6211200000000003,
+        "cost_computed_correctly": true
+      },
+      "parsing": {
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "calls": 26,
+        "input_tokens": 164783,
+        "output_tokens": 85205,
+        "total_latency_ms": 1294768.7000000002,
+        "avg_latency_ms_per_call": 49798.8,
+        "estimated_cost_usd": 1.7724239999999996,
+        "cost_computed_correctly": true,
+        "note_on_model_id": "Deployed parser used 'us.anthropic.claude-sonnet-4-6' (matches BEDROCK_PRICING key exactly), NOT 'us.anthropic.claude-sonnet-4-5-v1' as the task brief hypothesized. Cost is NOT silently zero for this run."
+      },
+      "run_totals": {
+        "llm_calls": 45,
+        "input_tokens": 378510,
+        "output_tokens": 150173,
+        "total_tokens": 528683,
+        "estimated_cost_usd": 4.407887
+      }
+    },
+    "colorado": {
+      "run_id": "pipeline-US-CO-2020-full08292026",
+      "depth_map_pass1": {
+        "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "calls": 1,
+        "input_tokens": 19613,
+        "output_tokens": 415,
+        "latency_ms": 4851.9,
+        "estimated_cost_usd": 0.021688,
+        "cost_computed_correctly": true
+      },
+      "detection": {
+        "model_id": "us.anthropic.claude-opus-4-6-v1",
+        "calls": 17,
+        "input_tokens": 223276,
+        "output_tokens": 47125,
+        "total_latency_ms": 490661.4,
+        "avg_latency_ms_per_call": 28862.4,
+        "estimated_cost_usd": 2.2945049999999996,
+        "cost_computed_correctly": true
+      },
+      "parsing": {
+        "model_id": "us.anthropic.claude-sonnet-4-6",
+        "calls": 27,
+        "input_tokens": 147315,
+        "output_tokens": 83862,
+        "total_latency_ms": 790462.6000000001,
+        "avg_latency_ms_per_call": 29276.4,
+        "estimated_cost_usd": 1.699875,
+        "cost_computed_correctly": true
+      },
+      "run_totals": {
+        "llm_calls": 45,
+        "input_tokens": 390204,
+        "output_tokens": 131402,
+        "total_tokens": 521606,
+        "estimated_cost_usd": 4.016068
+      }
+    },
+    "combined_pipeline_totals_ky_plus_co": {
+      "llm_calls": 90,
+      "input_tokens": 768714,
+      "output_tokens": 281575,
+      "total_tokens": 1050289,
+      "estimated_cost_usd": 8.423955
+    }
+  },
+  "cloudwatch_bedrock_account_metrics_2026_08_29": {
+    "source": "AWS/Bedrock namespace, GetMetricStatistics, Sum, Period=86400, dimensioned by ModelId, 2026-08-29T00:00:00Z to 2026-08-30T00:00:00Z",
+    "us.anthropic.claude-opus-4-6-v1": {
+      "input_tokens": 727798,
+      "output_tokens": 198073,
+      "invocations": 62
+    },
+    "us.anthropic.claude-sonnet-4-6": {
+      "input_tokens": 496219,
+      "output_tokens": 292307,
+      "invocations": 84
+    },
+    "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+      "input_tokens": 138769,
+      "output_tokens": 4960,
+      "invocations": 10
+    }
+  },
+  "cloudtrail_reconciliation": {
+    "method": "aws cloudtrail lookup-events, LookupAttributes EventName=InvokeModel, 2026-08-29T00:00:00Z to 2026-08-30T00:00:00Z, paginated fully (156 total events). additionalEventData on each event includes inputTokens/outputTokens directly, so exact per-caller token sums were computed without needing the Lambda logs at all -- this independently corroborates the LLM_METRICS-based per-run figures above.",
+    "invoke_model_events_by_caller": {
+      "els-parse-batch-dev": 53,
+      "els-detect-batch-dev": 35,
+      "els-prepare-detection-batches-dev": 2,
+      "kinder-ready-dev-cli": 66
+    },
+    "total_events": 156,
+    "reconciliation_check": "35 (detect-batch) + 53 (parse-batch) + 2 (prepare-detection-batches depth-map) = 90 Lambda-originated calls, EXACTLY matching combined_pipeline_totals_ky_plus_co.llm_calls (90) above. Token sums also match exactly.",
+    "non_pipeline_caller_kinder_ready_dev_cli": {
+      "identity": "arn:aws:iam::390888050716:user/kinder-ready-dev-cli -- the SAME IAM user/CLI profile used for this entire investigation, i.e. a human/local script running under the developer's own AWS credentials, NOT a Lambda function.",
+      "source_ip": "68.98.27.221",
+      "user_agent_sample": "Boto3/1.42.46 md/Botocore#1.42.46 ua/2.1 os/macos#23.6.0 md/arch#x86_64 lang/python#3.14.3 md/pyimpl#CPython",
+      "time_range": "2026-08-29T10:15:23-07:00 to 2026-08-29T10:59:06-07:00",
+      "relation_to_pipeline_runs": "Entirely BEFORE both Step Functions executions started (KY 11:43:25, CO 11:40:36 -07:00). This is NOT part of either full08292026 run.",
+      "by_model": {
+        "us.anthropic.claude-opus-4-6-v1": {
+          "calls": 27,
+          "input_tokens": 302948,
+          "output_tokens": 86418
+        },
+        "us.anthropic.claude-sonnet-4-6": {
+          "calls": 31,
+          "input_tokens": 184121,
+          "output_tokens": 123240
+        },
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "calls": 8,
+          "input_tokens": 107003,
+          "output_tokens": 4107
+        }
+      },
+      "exact_gap_closure": "Opus: 302,948 in + 86,418 out from this local block, plus 424,850 in + 111,655 out from the two pipeline runs, equals 727,798 in + 198,073 out -- the FULL account-wide CloudWatch Opus total for the day, with zero residual. The gap between the day's aggregate Bedrock spend and the pipeline runs' own spend is fully and exactly explained by this local/CLI activity; nothing is unaccounted for.",
+      "what_this_activity_was_could_not_be_determined": "CloudTrail management-event records for bedrock:InvokeModel do not capture prompt/response content, only modelId and (via additionalEventData) token counts and inference region. This investigation could not determine from AWS-side evidence alone what script or command generated these 66 local calls (most plausibly a local/direct-path detector or evaluation run against KY/CO shortly before triggering the two Step Functions executions, but this is inference, not confirmed)."
+    }
+  },
+  "model_ids_used_at_runtime": {
+    "detection_stage": "us.anthropic.claude-opus-4-6-v1 (matches config.py default BEDROCK_DETECTOR_LLM_MODEL_ID; matches a BEDROCK_PRICING key; cost computed correctly, not $0)",
+    "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0 (matches config.py default BEDROCK_DEPTH_MAP_LLM_MODEL_ID; matches a BEDROCK_PRICING key; cost computed correctly)",
+    "parsing_stage": "us.anthropic.claude-sonnet-4-6 (matches config.py default BEDROCK_PARSER_LLM_MODEL_ID; matches the BEDROCK_PRICING key 'us.anthropic.claude-sonnet-4-6' EXACTLY; cost computed correctly). The task brief's concern about a 'us.anthropic.claude-sonnet-4-5-v1' zero-cost blind spot does NOT apply to these two runs -- the deployed env var was not overridden to that id.",
+    "text_extraction_stage": "Uses Amazon Textract (AWS OCR service), not a Bedrock LLM call -- 0 LLM_METRICS lines in els-text-extractor-dev is expected, not a gap.",
+    "validation_and_persistence_stages": "No LLM calls (deterministic Python/pydantic validation and Aurora writes) -- 0 LLM_METRICS lines expected."
+  },
+  "things_not_determined": [
+    "The exact reason/script behind the 66 local kinder-ready-dev-cli Bedrock calls preceding the two runs -- CloudTrail management events do not log prompt content, so their target document/purpose could not be confirmed, only their existence, timing, model, and token counts.",
+    "Whether the true 120pp KY / 187pp CO full documents would process successfully end-to-end (all Pass-1/absent-code/composition defects documented in CLAUDE.md were measured on documents at or above the 6000-token depth-map sampling threshold; the 52pp/41pp trimmed documents used here are far short of the page counts where some of those defects were originally found, e.g. the 52-page KY document IS the same 'kentucky_all_standards_2021_trimmed.pdf' used in the 2026-08-24/25 investigations, so its behavior here is a re-confirmation of already-fixed defects on a known document, not a first-time full-scale (120pp) test).",
+    "Aurora persistence content verification -- records_persisted counts (214, 240) and errors=0 were taken from the persistence Lambda's own success payload; this investigation did not separately query the Aurora database to confirm 214/240 rows actually exist there with correct content (out of scope: read-only AWS API/log investigation only, no DB access performed).",
+    "CloudWatch custom 'ELS/Pipeline' namespace metrics (emit_cloudwatch_metrics) were not queried -- the investigation relied on the equivalent 'LLM_METRICS:' structured log lines instead, which carry the same data and were sufficient to fully reconstruct token/cost/latency tables and cross-validate against both CloudWatch AWS/Bedrock metrics and CloudTrail."
+  ]
+}

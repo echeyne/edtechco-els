@@ -1,0 +1,186 @@
+{
+  "task": "Task 6 \u2014 batched-path cost / latency / scale on multi-batch documents",
+  "date": "2026-08-30 (harvest and verification); runs executed 2026-08-29",
+  "git_commit": "a160593346316d2eff0a168ec608f0f37d83288e",
+  "code_version_hash": "14374dba",
+  "\u26a0\ufe0f_CORPUS_TIER": {
+    "tier": "_trimmed \u2014 NOT the full published PDF, but 100% of the standards",
+    "detail": "The run_id is `full08292026` and that name is WRONG: neither execution processed the full published PDF. Verified two independent ways (Step Functions execution input names the file; PyMuPDF gives the page count): KY ran kentucky_all_standards_2021_trimmed.pdf (52pp) rather than kentucky_all_standards_2021.pdf (120pp), and CO ran colorado_3_5_trimmed_2020.pdf (41pp) rather than colorado_birth_to_8_2020.pdf (187pp).",
+    "\u26a0\ufe0f_page_ratio_is_not_a_coverage_ratio": "CORRECTED 2026-08-31 by Emily, who performed the trimming: the _trimmed tier retains 100% OF THE STANDARDS. What was removed is non-standards matter \u2014 preamble, introductions, guiding-principles essays, appendices, acknowledgements. The first version of this manifest read 52/120 and 41/187 as coverage fractions (43% / 22%) and framed full-document scale as a stated coverage limitation. Both readings are WITHDRAWN. Corroborated by this recording's own integrity checks: 50 of KY's 52 pages and 37 of CO's 41 carry detected elements, and every gap was read and confirmed content-free.",
+    "\u26a0\ufe0f_colorado_qualification": "CO's 41pp is not a trim at all: corpus_tiers.json records the full Ages 3-5 document as 41pp, the same number. The 187pp birth-to-8 file is the WIDER PUBLICATION the Ages 3-5 band is drawn from (its TOC puts 'Ages 3-5' at p77; the 3-5 file's p3 is that document's p113 verbatim). Every CO golden and every CO number in the paper is the Ages 3-5 band, so coverage is complete within the scope the paper measures; the birth-to-3 and 5-8 bands are out of scope, not trimmed away.",
+    "guardrail_1": "EVERY table built from this recording must be labelled _trimmed tier \u2014 it is neither _only_subset nor the full published PDF \u2014 AND must say what that tier means (complete standards content, non-standards matter removed). A bare '_trimmed' label reads as 'excerpt' and puts a false coverage claim in the paper.",
+    "what_remains_a_limitation": "Page-count scale, which is a cost/batching question rather than a coverage one. These runs exercise 18 and 17 detection chunks over 4 Map iterations. A document with its non-standards matter left in, or a larger standards corpus such as AZ (217pp published), would chunk further and cost proportionally more, so the per-document token/latency figures here must not be extrapolated to untrimmed page counts.",
+    "still_valid": "Task 6 step 2 asks for 'at least one full OR _trimmed document through the batched production path', so this satisfies the task as written \u2014 and, given complete standards coverage, more strongly than first recorded."
+  },
+  "executions": {
+    "KY": {
+      "arn_name": "kentucky-execution-1788029003",
+      "run_id": "pipeline-US-KY-2021-full08292026",
+      "file": "US/KY/2021/kentucky_all_standards_2021_trimmed.pdf",
+      "pages": 52,
+      "status": "SUCCEEDED",
+      "start": "2026-08-29T11:43:25-07:00",
+      "stop": "2026-08-29T11:56:45-07:00",
+      "wall_clock": "13m19s"
+    },
+    "CO": {
+      "arn_name": "colorado-execution-1788028830",
+      "run_id": "pipeline-US-CO-2020-full08292026",
+      "file": "US/CO/2020/colorado_3_5_trimmed_2020.pdf",
+      "pages": 41,
+      "status": "SUCCEEDED",
+      "start": "2026-08-29T11:40:36-07:00",
+      "stop": "2026-08-29T11:50:28-07:00",
+      "wall_clock": "9m52s"
+    }
+  },
+  "integrity_checks": {
+    "_why": "A green Step Functions status proves nothing here \u2014 CLAUDE.md documents a run that reported SUCCEEDED while 31 of 52 pages had zero surviving coverage. All three documented silent-failure signatures were checked explicitly.",
+    "page_coverage": {
+      "KY": "50 of 52 pages carry detected elements. Missing p1 (title page) and p14 (anecdote only) \u2014 both read and confirmed content-free.",
+      "CO": "37 of 41. Missing p1 (cover), p2 (section divider), p40 ('intentionally left blank'), p41 (acknowledgments) \u2014 all read and confirmed content-free."
+    },
+    "pass1_depth_map": {
+      "KY": "4 levels (domain > strand > sub_strand > indicator) \u2014 matches golden",
+      "CO": "3 levels (no sub_strand) \u2014 matches golden"
+    },
+    "zero_element_chunks": {
+      "KY": 0,
+      "CO": 0,
+      "_signature_of": "the absent-code defect"
+    },
+    "validator_rejections": {
+      "KY": 0,
+      "CO": 0
+    },
+    "throttling_events": {
+      "KY": 0,
+      "CO": 0
+    },
+    "step_functions_tasks": "17/17 succeeded, zero retries, both runs"
+  },
+  "batching_evidence": {
+    "_why_this_is_the_point": "At the _only_subset tier every state produces <=5 chunks against MAX_CHUNKS_PER_BATCH=5 and <=3 domains against MAX_DOMAINS_PER_BATCH=3, so both batching layers collapse to a single batch, the Map has one iteration and the merge is a no-op. That is why the batching claim could not be supported by the subset-tier tables. These runs break that, which is what Task 6 existed to establish.",
+    "KY": {
+      "detection_chunks": 18,
+      "detection_batches": 4,
+      "parse_batches": 9,
+      "raw_elements": 363,
+      "after_merge_dedup": 329,
+      "merged_away": 34
+    },
+    "CO": {
+      "detection_chunks": 17,
+      "detection_batches": 4,
+      "parse_batches": 9,
+      "raw_elements": 390,
+      "after_merge_dedup": 300,
+      "merged_away": 90
+    }
+  },
+  "per_stage_metrics": {
+    "_units": "tokens are the hard number; USD is derived and its rates are UNVERIFIED (see cost_caveat)",
+    "KY": {
+      "depth_map_pass1": {
+        "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "calls": 1,
+        "input_tokens": 12153,
+        "output_tokens": 438
+      },
+      "detection": {
+        "model": "us.anthropic.claude-opus-4-6-v1",
+        "calls": 18,
+        "input_tokens": 201574,
+        "output_tokens": 64530
+      },
+      "parsing": {
+        "model": "us.anthropic.claude-sonnet-4-6",
+        "calls": 26,
+        "input_tokens": 164783,
+        "output_tokens": 85205
+      },
+      "total": {
+        "calls": 45,
+        "input_tokens": 378510,
+        "output_tokens": 150173
+      }
+    },
+    "CO": {
+      "depth_map_pass1": {
+        "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "calls": 1,
+        "input_tokens": 19613,
+        "output_tokens": 415
+      },
+      "detection": {
+        "model": "us.anthropic.claude-opus-4-6-v1",
+        "calls": 17,
+        "input_tokens": 223276,
+        "output_tokens": 47125
+      },
+      "parsing": {
+        "model": "us.anthropic.claude-sonnet-4-6",
+        "calls": 27,
+        "input_tokens": 147315,
+        "output_tokens": 83862
+      },
+      "total": {
+        "calls": 45,
+        "input_tokens": 390204,
+        "output_tokens": 131402
+      }
+    },
+    "combined": {
+      "calls": 90,
+      "input_tokens": 768714,
+      "output_tokens": 281575,
+      "all_tokens": 1050289
+    }
+  },
+  "models_verified_at_runtime": {
+    "detection": "us.anthropic.claude-opus-4-6-v1",
+    "depth_map_pass1": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+    "parsing": "us.anthropic.claude-sonnet-4-6",
+    "_note": "All three have BEDROCK_PRICING entries, so the feared silent-$0 stage did NOT occur. Independently corroborated by CloudWatch list-metrics, which knows exactly these three model ids in this account over the trailing ~14 days."
+  },
+  "\u26a0\ufe0f_how_these_numbers_were_OBTAINED": {
+    "problem": "Task 6 step 3 says to pull per-stage metrics from PipelineRunMetrics.summary(). That method NEVER RUNS: PipelineRunMetrics and log_pipeline_run_summary are defined in src/els_pipeline/metrics.py and referenced nowhere else in src/ (verified by grep, 2026-08-30). They are dead code. The Key Background section of tasking/arxiv_paper.md asserted 'cost data already exists' on this basis and has been corrected.",
+    "method_actually_used": "Per-call `LLM_METRICS:` log lines emitted by call_bedrock_llm, read from the stage Lambdas' CloudWatch log groups, cross-referenced against CloudTrail InvokeModel events for per-run attribution, and separated into stages BY model_id.",
+    "why_by_model_id": "`stage` is hardcoded to \"detection\" in detector.py:1235, so the Haiku depth-map call is logged as a detection call; and metrics_context is never passed at the real per-chunk detection call site (detection_batching.py:243) or per-domain parse call site (parse_batching.py:232), so run_id/state/batch_index are blank on every production line. Separating by model_id works only because the three stages happen to use three different models \u2014 it would break if two stages shared one.",
+    "guardrail_6": "This reconstruction method IS the regeneration procedure. Anyone reproducing these numbers must follow it, not step 3 as written."
+  },
+  "cost_caveat": {
+    "status": "PARTIALLY RESOLVED 2026-08-31 \u2014 Opus 4.6 and Sonnet 4.6 confirmed; Haiku 4.5 ambiguous.",
+    "detail": "BEDROCK_PRICING is hardcoded as of April 2026 and none of its five entries could be confirmed on 2026-08-30. The AWS Price List API's AmazonBedrock service code catalogs only legacy Claude 2.x/3.x (confirmed against the full 1032-product bulk offer file); a second service code carries partial current-gen pricing but has no entry for Opus 4.6 or Sonnet 4.6, and its only Haiku 4.5 entry is a `mantle`-endpoint rate ~10% above the hardcoded one and for a different endpoint than the pipeline calls.",
+    "derived_usd_if_rates_are_right": {
+      "KY": 4.408,
+      "CO": 4.016,
+      "combined": 8.42
+    },
+    "action": "Detection and parsing dollar figures are now publishable with the date and source cited. Keep tokens as the primary hard number (Task 6 step 4).",
+    "see": "paper/results/task6_20260830/pricing_verification.md",
+    "confirmed_by": "Emily Cheyne, 2026-08-31, https://aws.amazon.com/bedrock/pricing/",
+    "confirmed_rates_per_1k": {
+      "us.anthropic.claude-opus-4-6-v1": {
+        "input": 0.005,
+        "output": 0.025
+      },
+      "us.anthropic.claude-sonnet-4-6": {
+        "input": 0.003,
+        "output": 0.015
+      }
+    },
+    "haiku_open": "The Haiku 4.5 entry holds two competing numbers (code 0.001/0.005 vs a mantle-endpoint 0.0011/0.0055) and the confirmation does not say which. Worth ~$0.004 of the $8.42 combined total, since the depth-map stage is ~3% of input tokens. Resolve before publishing a per-stage dollar column."
+  },
+  "token_reconciliation": {
+    "question": "The day's account-wide Opus spend was 727,798 in / 198,073 out, while these two runs account for only 424,850 / 111,655. The gap prompted a suspicion of missing coverage.",
+    "answer": "Closed with no residual. The remainder \u2014 302,948 in / 86,418 out across 27 direct Opus calls \u2014 was made under the kinder-ready-dev-cli IAM user from a local machine between 10:15 and 10:59 -07:00, entirely BEFORE either execution started. Confirmed via CloudTrail InvokeModel events; the two pieces sum to the CloudWatch total exactly.",
+    "so_the_forecast_gap_was": "not missing coverage, but a forecast scaled from PUBLISHED page counts (120pp and 187pp) rather than standards-content page counts (52pp and 41pp), plus an unrelated local Opus block earlier that morning."
+  },
+  "artifacts": {
+    "raw_harvest.json": "full per-stage/per-run harvest",
+    "raw_harvest_notes.md": "ambiguities and not-founds from the harvest",
+    "pricing_verification.json": "per-model rate verification attempt",
+    "pricing_verification.md": "prose summary of the pricing findings"
+  }
+}

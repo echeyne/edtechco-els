@@ -1,0 +1,104 @@
+[
+  {
+    "state": "TX",
+    "coverage": 1.0,
+    "field_accuracy": 1.0,
+    "matched": 8,
+    "fully_correct": 8,
+    "n_golden": 8,
+    "n_parsed": 25,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 8,
+        "total": 8
+      },
+      "country": {
+        "ok": 8,
+        "total": 8
+      },
+      "state": {
+        "ok": 8,
+        "total": 8
+      },
+      "version_year": {
+        "ok": 8,
+        "total": 8
+      },
+      "age_band": {
+        "ok": 8,
+        "total": 8
+      },
+      "source_page": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "domain.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "sub_strand.description": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.code": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.name": {
+        "ok": 8,
+        "total": 8
+      },
+      "indicator.description": {
+        "ok": 8,
+        "total": 8
+      }
+    },
+    "mismatches": [],
+    "regressions": [
+      {
+        "id": "TX-PK3-PK4-DISTINCT-IDS",
+        "status": "PASS",
+        "detail": "10 multi-variant indicator group(s) all kept distinct standard_ids"
+      },
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 25 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

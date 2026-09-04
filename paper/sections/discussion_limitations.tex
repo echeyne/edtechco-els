@@ -5,6 +5,29 @@
 % Subset-scoped quality metrics; 4 golden + 2 held-out states; English/
 % US-only; LLM nondeterminism; Textract dependence; trimming as favorable
 % preprocessing (guardrail 3 — disclose with retained page ranges, don't bury).
+%
+% ⚠️ CORRECTED 2026-08-31 — do NOT write the scale limitation as a COVERAGE
+% limitation. An earlier draft of Task 6's findings read KY 52/120pp and CO
+% 41/187pp as coverage fractions and made full-document scale a stated
+% limitation on that basis. It is not: the _trimmed tier removes only
+% non-standards matter (front matter, essays, appendices) and retains 100% of
+% the standards, so Task 6's runs cover every standard in both documents.
+%
+% What IS still a limitation, and the honest way to write it:
+%   1. PAGE-COUNT scale, as a cost/batching claim rather than a coverage one.
+%      Task 6 exercises 18 and 17 detection chunks over 4 Map iterations; its
+%      token and latency figures must not be extrapolated to untrimmed page
+%      counts, and no document as large as AZ (217pp published) has been run
+%      end to end.
+%   2. Trimming is still preprocessing a deployment would have to do or absorb
+%      — the pipeline was never asked to ignore 68pp of Kentucky preamble on
+%      its own. Say that plainly; it is the real residual cost of the tier.
+%   3. QUALITY at the trimmed tier is measured only where a golden reaches it.
+%      KY's detector golden is detection-exhaustive, which is the one avenue to
+%      quality-at-scale evidence without new annotation (Task 6 step 4, owed).
+%   4. CO's out-of-scope content is other AGE BANDS (birth-to-3 and 5-8 of the
+%      187pp birth-to-8 publication), not trimmed-away standards. Every CO
+%      number in the paper is the Ages 3-5 band.
 
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}

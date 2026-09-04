@@ -1,0 +1,157 @@
+{
+  "task": "Re-verify BEDROCK_PRICING rates in src/els_pipeline/metrics.py against current Bedrock pricing (arXiv paper Task 6, step 1)",
+  "verification_date": "2026-08-30",
+  "verifier": "read-only AWS audit, AWS_PROFILE=kinder-readiness-dev-cli, region us-east-1",
+  "methodology": [
+    "1. AWS Price List API (`pricing` service, us-east-1 endpoint) via `aws pricing get-products` / `get-attribute-values`, checked against service codes AmazonBedrock, AmazonBedrockService, AmazonBedrockFoundationModels.",
+    "2. Direct fetch of the public bulk offer file https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrock/current/us-east-1/index.json to rule out CLI pagination/filter gaps (1032 products enumerated, cross-checked against get-attribute-values).",
+    "3. AWS Bedrock pricing documentation (https://aws.amazon.com/bedrock/pricing/) and per-model 'model card' pages via the AWS documentation search/read tools.",
+    "4. AWS 'now available' / ML blog announcement posts, which sometimes state exact per-model rates that the model-card pages defer elsewhere."
+  ],
+  "code_location": "src/els_pipeline/metrics.py lines 23-29 (BEDROCK_PRICING dict), comment claims rates are 'as of April 2026'",
+  "models": {
+    "us.anthropic.claude-opus-4-6-v1": {
+      "code_rate_input_per_1k": 0.005,
+      "code_rate_output_per_1k": 0.025,
+      "verified_rate_input_per_1k": 0.005,
+      "verified_rate_output_per_1k": 0.025,
+      "match": true,
+      "confidence_note": "No Price List API entry exists for 'Claude Opus 4.6' under AmazonBedrock, AmazonBedrockService, or AmazonBedrockFoundationModels in us-east-1 (confirmed by direct enumeration of all 'model' attribute values in each service code, and by downloading the full AmazonBedrock bulk offer file: 1032 products, zero Claude Opus 4.x entries). The Bedrock pricing page (aws.amazon.com/bedrock/pricing/) renders the current-model on-demand table via client-side JS/accordion that the documentation-reader tool could not expand -- only a legacy 'Models with extended access' table (Claude 3.5 Sonnet) came through as static text. The model card page (model-card-anthropic-claude-opus-4-6.html) explicitly defers pricing to the pricing page and states this is a third-party AWS Marketplace-billed model, which is consistent with it being absent from both classic Price List services. The only concrete number found is for the PREDECESSOR model, Claude Opus 4.5: an AWS ML blog post states it is priced at $5/million input tokens and $25/million output tokens ($0.005/$0.025 per 1K) -- numerically IDENTICAL to the code's Opus 4.6 entry. This is suggestive (AWS sometimes holds a price point flat across a minor version bump) but is NOT a citation for Opus 4.6 itself and must not be reported as a match.",
+      "sources": [
+        "aws pricing get-attribute-values --service-code AmazonBedrock --attribute-name model (86 values, no Opus 4.x)",
+        "aws pricing get-attribute-values --service-code AmazonBedrockService --attribute-name model (4 values: Claude Haiku 4.5, Claude Sonnet 4.5, Claude Sonnet 4, Ray v2 -- no Opus)",
+        "aws pricing get-attribute-values --service-code AmazonBedrockFoundationModels --attribute-name model (0 values)",
+        "https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrock/current/us-east-1/index.json (bulk offer file, 1032 products, no Opus 4.x)",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-opus-4-6.html (defers to pricing page; confirms third-party Marketplace billing)",
+        "https://aws.amazon.com/bedrock/pricing/ (current on-demand table not extractable as text; only legacy extended-access table rendered)",
+        "https://aws.amazon.com/blogs/machine-learning/claude-opus-4-5-now-in-amazon-bedrock/ (predecessor model only: $5/M input, $25/M output)"
+      ],
+      "source": "https://aws.amazon.com/bedrock/pricing/",
+      "verification_date": "2026-08-31",
+      "verified_by": "Emily Cheyne",
+      "note": "CONFIRMED BY EMILY CHEYNE 2026-08-31 against https://aws.amazon.com/bedrock/pricing/ (read in a browser; the current-model table is behind a JS accordion that the automated audit of 2026-08-30 could not expand, which is why this entry was UNVERIFIED). The rate hardcoded in BEDROCK_PRICING is correct."
+    },
+    "us.anthropic.claude-sonnet-4-6": {
+      "code_rate_input_per_1k": 0.003,
+      "code_rate_output_per_1k": 0.015,
+      "verified_rate_input_per_1k": 0.003,
+      "verified_rate_output_per_1k": 0.015,
+      "match": true,
+      "confidence_note": "No Price List API entry exists for 'Claude Sonnet 4.6' specifically. AmazonBedrockService DOES carry 'Claude Sonnet 4' (an older model) at standard on-demand cross-region-global rates of exactly $0.0030/1K input and $0.0150/1K output -- numerically IDENTICAL to the code's Sonnet 4.6 entry -- but this is a citation for Sonnet 4, not Sonnet 4.6. 'Claude Sonnet 4.5' IS present as a catalog model but its ONLY priced usagetypes in the catalog are reserved-tier per-minute-capacity SKUs (e.g. USE1-Claude4.5Sonnet-reserved-1-month-input-tokens-per-minute-cross-region-global); no standard on-demand per-token entry for Sonnet 4.5 exists in either service code checked, so even the immediate predecessor's on-demand rate could not be confirmed. As with Opus, the Bedrock pricing page's current-model table did not render as extractable text, and the model card defers pricing there while confirming third-party Marketplace billing.",
+      "sources": [
+        "aws pricing get-products --service-code AmazonBedrockService --filters model='Claude Sonnet 4' region=us-east-1 (USE1-Claude4Sonnet-input-tokens-cross-region-global = $0.0030/1K; USE1-Claude4Sonnet-output-tokens-cross-region-global = $0.0150/1K)",
+        "aws pricing get-products --service-code AmazonBedrockService --filters model='Claude Sonnet 4.5' region=us-east-1 (reserved-tier per-minute SKUs only; no standard on-demand token price present)",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-sonnet-4-6.html (defers to pricing page)",
+        "https://aws.amazon.com/bedrock/pricing/ (current on-demand table not extractable as text)"
+      ],
+      "source": "https://aws.amazon.com/bedrock/pricing/",
+      "verification_date": "2026-08-31",
+      "verified_by": "Emily Cheyne",
+      "note": "CONFIRMED BY EMILY CHEYNE 2026-08-31 against https://aws.amazon.com/bedrock/pricing/ (read in a browser; the current-model table is behind a JS accordion that the automated audit of 2026-08-30 could not expand, which is why this entry was UNVERIFIED). The rate hardcoded in BEDROCK_PRICING is correct."
+    },
+    "anthropic.claude-sonnet-4-6": {
+      "code_rate_input_per_1k": 0.003,
+      "code_rate_output_per_1k": 0.015,
+      "verified_rate_input_per_1k": 0.003,
+      "verified_rate_output_per_1k": 0.015,
+      "match": true,
+      "confidence_note": "Same model as us.anthropic.claude-sonnet-4-6 (bare in-region id vs. the 'us.' cross-region inference-profile id); same evidence and same UNVERIFIED conclusion applies.",
+      "sources": [
+        "see us.anthropic.claude-sonnet-4-6"
+      ],
+      "source": "https://aws.amazon.com/bedrock/pricing/",
+      "verification_date": "2026-08-31",
+      "verified_by": "Emily Cheyne",
+      "note": "CONFIRMED BY EMILY CHEYNE 2026-08-31 against https://aws.amazon.com/bedrock/pricing/ (read in a browser; the current-model table is behind a JS accordion that the automated audit of 2026-08-30 could not expand, which is why this entry was UNVERIFIED). The rate hardcoded in BEDROCK_PRICING is correct."
+    },
+    "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+      "code_rate_input_per_1k": 0.001,
+      "code_rate_output_per_1k": 0.005,
+      "verified_rate_input_per_1k": 0.0011,
+      "verified_rate_output_per_1k": 0.0055,
+      "match": "NEEDS_ONE_MORE_WORD",
+      "confidence_note": "AWS Price List API DOES carry a 'Claude Haiku 4.5' entry under AmazonBedrockService, us-east-1, but every priced usagetype for it is tagged 'mantle' (e.g. USE1-anthropic.claude-haiku-4-5-mantle-input-tokens-standard = $0.0011/1K, USE1-anthropic.claude-haiku-4-5-mantle-output-tokens-standard = $0.0055/1K). 'mantle' is the bedrock-mantle endpoint (Anthropic's own Messages-API-compatible surface hosted on Bedrock), NOT the bedrock-runtime InvokeModel/Converse surface this pipeline actually calls (config.py and detector.py invoke via a bedrock-runtime client using the 'us.anthropic.claude-haiku-4-5-20251001-v1:0' cross-region inference-profile id, which the model card lists specifically under the bedrock-runtime endpoint's Programmatic Access table). No bedrock-runtime on-demand per-token entry for Haiku 4.5 was found in either service code searched. So this is the only concrete current-generation rate found in the whole exercise, but it prices a different API surface than the one in use, and it is ~10% higher than the code's rate ($1.10/$5.50 per million vs. the code's $1.00/$5.00 per million). Reported as a MISMATCH against the best available data, with the important caveat that it may not be the applicable rate for this pipeline's actual call path.",
+      "sources": [
+        "aws pricing get-products --service-code AmazonBedrockService --filters model='Claude Haiku 4.5' region=us-east-1 -> 5 SKUs, all 'mantle': input $0.0011/1K, output $0.0055/1K, cache-read $0.00011/1K, cache-write $0.001375/1K (5min TTL) / $0.0022/1K (1hr TTL)",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-anthropic-claude-haiku-4-5.html (confirms 'us.anthropic.claude-haiku-4-5-20251001-v1:0' is the bedrock-runtime Geo inference id; 'anthropic.claude-haiku-4-5' without the date stamp is the separate bedrock-mantle id)"
+      ],
+      "verification_date": "2026-08-31",
+      "note": "\u26a0\ufe0f AMBIGUOUS \u2014 NOT RESOLVED. Emily confirmed 'the pricing in pricing_verification.json' on 2026-08-31, but THIS entry carries two competing numbers and the confirmation does not say which: the hardcoded code rate 0.001/0.005, and a verified_rate of 0.0011/0.0055 that the 2026-08-30 audit found for the `mantle` endpoint (NOT bedrock-runtime, which is what the pipeline calls). The two differ by 10%. The most likely reading is that the code rate is correct and the mantle figure was simply the wrong endpoint, but a 10% error on a published cost figure is not worth guessing at. Opus and Sonnet had no such conflict and are marked confirmed. Blast radius is small: the depth-map stage is ~3% of input tokens, so the whole ambiguity is worth roughly $0.004 on a $8.42 two-run total."
+    },
+    "anthropic.claude-haiku-4-5-20251001-v1:0": {
+      "code_rate_input_per_1k": 0.001,
+      "code_rate_output_per_1k": 0.005,
+      "verified_rate_input_per_1k": 0.0011,
+      "verified_rate_output_per_1k": 0.0055,
+      "match": "NEEDS_ONE_MORE_WORD",
+      "confidence_note": "Same model/endpoint ambiguity as us.anthropic.claude-haiku-4-5-20251001-v1:0 above (bare in-region id vs. cross-region inference-profile id); same evidence and same caveat about mantle-vs-runtime pricing applies.",
+      "sources": [
+        "see us.anthropic.claude-haiku-4-5-20251001-v1:0"
+      ],
+      "verification_date": "2026-08-31",
+      "note": "\u26a0\ufe0f AMBIGUOUS \u2014 NOT RESOLVED. Emily confirmed 'the pricing in pricing_verification.json' on 2026-08-31, but THIS entry carries two competing numbers and the confirmation does not say which: the hardcoded code rate 0.001/0.005, and a verified_rate of 0.0011/0.0055 that the 2026-08-30 audit found for the `mantle` endpoint (NOT bedrock-runtime, which is what the pipeline calls). The two differ by 10%. The most likely reading is that the code rate is correct and the mantle figure was simply the wrong endpoint, but a 10% error on a published cost figure is not worth guessing at. Opus and Sonnet had no such conflict and are marked confirmed. Blast radius is small: the depth-map stage is ~3% of input tokens, so the whole ambiguity is worth roughly $0.004 on a $8.42 two-run total."
+    }
+  },
+  "overall_job1_verdict": "Of the 5 distinct model ids in BEDROCK_PRICING, ZERO could be confirmed as an exact, current, authoritative on-demand bedrock-runtime rate. Two (the Opus and Sonnet entries) have no Price List API entry at all for their exact generation and are UNVERIFIED; the Haiku entries have a Price List API entry but only for a different API endpoint (mantle, not runtime) and that entry's rate does not match the code (10% higher). The April-2026-dated comment in metrics.py cannot be substantiated as still accurate.",
+  "deployed_model_ids": {
+    "note": "Determined via `aws lambda get-function-configuration` on every els-*-dev Lambda in AWS_PROFILE=kinder-readiness-dev-cli, us-east-1, cross-checked against infra/cdk/lib/pipeline-stack.ts and src/els_pipeline/config.py.",
+    "detector": {
+      "config_default": "us.anthropic.claude-opus-4-6-v1",
+      "cdk_source_override": "us.anthropic.claude-opus-4-6-v1 (explicit BEDROCK_DETECTOR_LLM_MODEL_ID env var on StructureDetectorLambda and DetectBatchLambda)",
+      "deployed_lambda_env_var": "us.anthropic.claude-opus-4-6-v1 (confirmed on els-structure-detector-dev and els-detect-batch-dev)",
+      "actual_runtime_id": "us.anthropic.claude-opus-4-6-v1",
+      "priced_in_BEDROCK_PRICING": true
+    },
+    "depth_map_pass1": {
+      "config_default": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "cdk_source_override": "none -- no BEDROCK_DEPTH_MAP_LLM_MODEL_ID env var is set anywhere in infra/cdk/lib/pipeline-stack.ts",
+      "deployed_lambda_env_var": "none (confirmed absent on els-prepare-detection-batches-dev, the Lambda that runs Pass-1 depth-map inference per CLAUDE.md)",
+      "actual_runtime_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0 (falls back to the config.py default)",
+      "priced_in_BEDROCK_PRICING": true,
+      "note_on_pricing_confidence": "Priced in the dict, but see the model-level UNVERIFIED/mismatch findings above for this exact id -- being 'priced' does not mean the rate is confirmed correct."
+    },
+    "parser": {
+      "config_default": "us.anthropic.claude-sonnet-4-6",
+      "cdk_source_override": "none -- no BEDROCK_PARSER_LLM_MODEL_ID env var is set anywhere in infra/cdk/lib/pipeline-stack.ts",
+      "deployed_lambda_env_var": "none (confirmed absent on els-hierarchy-parser-dev and els-parse-batch-dev)",
+      "actual_runtime_id": "us.anthropic.claude-sonnet-4-6 (falls back to the config.py default)",
+      "priced_in_BEDROCK_PRICING": true,
+      "note_on_pricing_confidence": "Priced in the dict, but see the model-level UNVERIFIED finding above for this exact id.",
+      "arxiv_paper_suspicion_status": "NOT CONFIRMED for the currently deployed dev Lambda. .env.example, config.py's default, and every deployed Lambda's live environment variables all agree on 'us.anthropic.claude-sonnet-4-6'. HOWEVER: paper/results/task1_20260826/manifest.json and task2_20260826/manifest.json both record the model actually invoked during that eval run as 'us.anthropic.claude-sonnet-4-5-v1' -- a THIRD id, distinct from both the deployed default and the code's dict key. Those manifests reflect a local `evaluation/eval_parser.py` invocation (not the deployed Lambda), which reads Config.BEDROCK_PARSER_LLM_MODEL_ID = os.getenv(...) at call time -- so whoever produced those manifests had BEDROCK_PARSER_LLM_MODEL_ID=us.anthropic.claude-sonnet-4-5-v1 set in their own shell/.env at that time. That override is not present in the tracked .env.example and was not found in any deployed Lambda config today, so it appears to be a transient local-environment condition from that recording session rather than a standing deployment default -- but it is real, it happened, and it produced exactly the $0 silent-mispricing trap described in tasking/arxiv_paper.md."
+    }
+  },
+  "unpriced_model_ids": [
+    "us.anthropic.claude-sonnet-4-5-v1"
+  ],
+  "unpriced_model_ids_detail": {
+    "us.anthropic.claude-sonnet-4-5-v1": {
+      "absent_from_BEDROCK_PRICING": true,
+      "impact": "LLMCallMetrics.estimated_cost_usd does BEDROCK_PRICING.get(self.model_id, {}) then .get('input_per_1k', 0) / .get('output_per_1k', 0) -- a call recorded under this id prices at exactly $0.00 for both input and output, silently, with success=True and no error/warning.",
+      "where_observed": [
+        "paper/results/task1_20260826/manifest.json (models.parser field)",
+        "paper/results/task2_20260826/manifest.json (per tasking/arxiv_paper.md's own citation; not independently re-opened in this audit)"
+      ],
+      "where_NOT_observed": [
+        "src/els_pipeline/config.py (default is us.anthropic.claude-sonnet-4-6)",
+        ".env.example (BEDROCK_PARSER_LLM_MODEL_ID=us.anthropic.claude-sonnet-4-6)",
+        "infra/cdk/lib/pipeline-stack.ts (no BEDROCK_PARSER_LLM_MODEL_ID env var set at all for any Lambda)",
+        "any of the 10 deployed els-*-dev Lambda configurations inspected live on 2026-08-30 (els-structure-detector-dev, els-detect-batch-dev, els-hierarchy-parser-dev, els-parse-batch-dev, els-prepare-detection-batches-dev, els-prepare-parse-batches-dev, els-merge-detection-results-dev, els-merge-parse-results-dev, els-validator-dev, els-persistence-dev)"
+      ],
+      "conclusion": "The trap is real and already fired once (in the 2026-08-26/29 eval recordings) but is not currently live in the deployed dev pipeline. Any past cost figure computed from a parser eval run recorded around 2026-08-26 to 2026-08-29 should be treated as suspect until the actual model_id logged for those calls is checked against BEDROCK_PRICING's keys."
+    }
+  },
+  "recommendation": {
+    "trustworthy_for_publication_now": false,
+    "reasoning": "Every entry in BEDROCK_PRICING is either unverifiable against an authoritative AWS source under its exact model id (Opus 4.6, both Sonnet 4.6 keys), or verifiable only against a different API endpoint's rate that does not match the hardcoded value (both Haiku 4.5 keys, mantle vs. runtime, ~10% off). Additionally, at least one real pipeline invocation (the 2026-08-26 parser eval) ran under a model id that has no pricing entry at all and would have silently cost $0.00.",
+    "minimum_changes_needed": [
+      "Do not cite a dollar cost figure in the paper without a first-party source: request or obtain the current Anthropic-on-Bedrock on-demand rate card from AWS (account team / AWS Support / the AWS console's Bedrock pricing page rendered in a real browser, since the documentation-fetch tool cannot expand its JS accordion) for exactly claude-opus-4-6-v1, claude-sonnet-4-6, and claude-haiku-4-5-20251001-v1:0 on the bedrock-runtime endpoint, us-east-1.",
+      "Add a startup/import-time or per-call assertion in LLMCallMetrics (or wherever model ids are read from Config) that raises or logs loudly if model_id is not a key in BEDROCK_PRICING, instead of silently defaulting cost to $0 via .get(..., {}).get(..., 0). This is the direct fix for the Job 2 trap and should ship regardless of the pricing-verification outcome.",
+      "Log the resolved model_id together with every PipelineRunMetrics summary so a paper table can be cross-checked against BEDROCK_PRICING's keys after the fact, the way this audit had to reconstruct it from manifests.",
+      "Report tokens (input/output counts) as the paper's primary hard number, exactly as tasking/arxiv_paper.md's Task 6 notes already recommend, and present any dollar figure as clearly derived and dated, with the verification date and source cited inline in the table footnote -- not as a bare number.",
+      "If a dollar figure is required for Task 6's full-document cost table, prefer the one number this audit COULD confirm with a live citation (Claude Sonnet 4, a distinct but adjacent model, at $3/$15 per million on-demand cross-region-global) only as an order-of-magnitude sanity check, never as the headline number for a different model generation.",
+      "Re-run this verification after obtaining a real quote/screenshot of the Bedrock console pricing page (which does render the JS accordion) for the three exact model ids before the paper goes out; this audit's tooling could not do so."
+    ],
+    "status_2026_08_31": "Opus 4.6 and Sonnet 4.6 rates are CONFIRMED, so the detection and parsing cost columns can be published with the date and source cited. Haiku 4.5 needs one more word from Emily (see the model entry). Tokens remain the primary hard number either way, per Task 6 step 4."
+  },
+  "sonnet_4_5_note": "Emily, 2026-08-31: Sonnet 4.5 pricing is IDENTICAL to Sonnet 4.6 (0.003/0.015). This closes the theoretical $0 trap for us.anthropic.claude-sonnet-4-5-v1 \u2014 had that id ever been used, the correct rate would be the same as the id already in the dict. Note it was NOT used: CloudWatch list-metrics knows only sonnet-4-6 in this account over the trailing ~14 days, and the sonnet-4-5-v1 string in task1_20260826/manifest.json was a transcription error, corrected 2026-08-30. Adding the id to BEDROCK_PRICING would still be cheap insurance (metrics.py is NOT covered by eval_common.code_version_hash, so it changes no recorded number) but is not done here because no code change was requested."
+}

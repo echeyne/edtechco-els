@@ -4,13 +4,19 @@
     "detector": {
       "per_state": {
         "AZ": {
-          "n_observations": 2,
+          "n_observations": 5,
           "observation_labels": [
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
             74,
+            77,
+            77,
+            77,
             77
           ],
           "size_range": [
@@ -28,14 +34,17 @@
             "age_band": 0,
             "source_page": 0
           },
-          "n_observations_differing_from_run1": 1,
+          "n_observations_differing_from_run1": 4,
           "examples": [
             {
               "identity": "attachment",
               "dimension": "presence",
               "detail": {
                 "run1": "MISSING",
-                "run2": "present"
+                "run2": "present",
+                "run3": "present",
+                "run4": "present",
+                "run5": "present"
               }
             },
             {
@@ -43,7 +52,10 @@
               "dimension": "presence",
               "detail": {
                 "run1": "MISSING",
-                "run2": "present"
+                "run2": "present",
+                "run3": "present",
+                "run4": "present",
+                "run5": "present"
               }
             },
             {
@@ -51,7 +63,10 @@
               "dimension": "presence",
               "detail": {
                 "run1": "MISSING",
-                "run2": "present"
+                "run2": "present",
+                "run3": "present",
+                "run4": "present",
+                "run5": "present"
               }
             }
           ],
@@ -59,12 +74,18 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "CA": {
-          "n_observations": 2,
+          "n_observations": 5,
           "observation_labels": [
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            122,
+            122,
+            122,
             122,
             122
           ],
@@ -89,12 +110,18 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "CO": {
-          "n_observations": 2,
+          "n_observations": 5,
           "observation_labels": [
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            61,
+            61,
+            61,
             61,
             61
           ],
@@ -119,12 +146,18 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "KY": {
-          "n_observations": 2,
+          "n_observations": 5,
           "observation_labels": [
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            44,
+            44,
+            44,
             44,
             44
           ],
@@ -149,31 +182,37 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "NV": {
-          "n_observations": 2,
+          "n_observations": 5,
           "observation_labels": [
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
             54,
-            54
+            54,
+            54,
+            53,
+            53
           ],
           "size_range": [
-            54,
+            53,
             54
           ],
           "n_identities_compared": 48,
-          "n_distinct_unstable_identities": 1,
-          "disagreement_rate": 0.020833,
+          "n_distinct_unstable_identities": 2,
+          "disagreement_rate": 0.041667,
           "n_dimension_disagreements": {
-            "presence_or_multiplicity": 0,
+            "presence_or_multiplicity": 1,
             "level": 0,
             "code": 1,
             "description": 0,
             "age_band": 0,
             "source_page": 0
           },
-          "n_observations_differing_from_run1": 1,
+          "n_observations_differing_from_run1": 3,
           "examples": [
             {
               "identity": "science",
@@ -184,7 +223,27 @@
                 ],
                 "run2": [
                   "S"
+                ],
+                "run3": [
+                  "Science"
+                ],
+                "run4": [
+                  "Science"
+                ],
+                "run5": [
+                  "Science"
                 ]
+              }
+            },
+            {
+              "identity": "show curiosity and ask questions about objects, living things, and natural events.",
+              "dimension": "presence",
+              "detail": {
+                "run1": "present",
+                "run2": "present",
+                "run3": "present",
+                "run4": "MISSING",
+                "run5": "MISSING"
               }
             }
           ],
@@ -192,12 +251,18 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "TX": {
-          "n_observations": 2,
+          "n_observations": 5,
           "observation_labels": [
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            33,
+            33,
+            33,
             33,
             33
           ],
@@ -235,10 +300,10 @@
         ],
         "states_not_measurable": [],
         "n_identities_compared": 304,
-        "n_distinct_unstable_identities": 4,
-        "disagreement_rate": 0.013158,
+        "n_distinct_unstable_identities": 5,
+        "disagreement_rate": 0.016447,
         "n_dimension_disagreements": {
-          "presence_or_multiplicity": 3,
+          "presence_or_multiplicity": 4,
           "level": 0,
           "code": 1,
           "description": 0,
@@ -251,13 +316,19 @@
     "parser": {
       "per_state": {
         "AZ": {
-          "n_observations": 3,
+          "n_observations": 6,
           "observation_labels": [
             "frozen(task1_20260826)",
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            45,
+            45,
+            45,
             45,
             45,
             45
@@ -296,13 +367,19 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "CA": {
-          "n_observations": 3,
+          "n_observations": 6,
           "observation_labels": [
             "frozen(task1_20260826)",
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            94,
+            94,
+            94,
             94,
             94,
             94
@@ -335,7 +412,7 @@
             "indicator.name": 0,
             "indicator.description": 0
           },
-          "n_observations_differing_from_run1": 1,
+          "n_observations_differing_from_run1": 2,
           "examples": [
             {
               "identity": "understanding words",
@@ -355,6 +432,21 @@
                   "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.BROA",
                   "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DEVE",
                   "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DISC"
+                ],
+                "run3": [
+                  "US-CA-2021-ELD.1.0.VOCA.1.1.BROA",
+                  "US-CA-2021-ELD.1.0.VOCA.1.1.DEVE",
+                  "US-CA-2021-ELD.1.0.VOCA.1.1.DISC"
+                ],
+                "run4": [
+                  "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.BROA",
+                  "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DEVE",
+                  "US-CA-2021-ELD.1.0.VOCA.Foundation 1.1.DISC"
+                ],
+                "run5": [
+                  "US-CA-2021-ELD.1.0.VOCA.1.1.BROA",
+                  "US-CA-2021-ELD.1.0.VOCA.1.1.DEVE",
+                  "US-CA-2021-ELD.1.0.VOCA.1.1.DISC"
                 ]
               }
             },
@@ -376,6 +468,21 @@
                   "ELD.1.0.VOCA.Foundation 1.1.BROA",
                   "ELD.1.0.VOCA.Foundation 1.1.DEVE",
                   "ELD.1.0.VOCA.Foundation 1.1.DISC"
+                ],
+                "run3": [
+                  "ELD.1.0.VOCA.1.1.BROA",
+                  "ELD.1.0.VOCA.1.1.DEVE",
+                  "ELD.1.0.VOCA.1.1.DISC"
+                ],
+                "run4": [
+                  "ELD.1.0.VOCA.Foundation 1.1.BROA",
+                  "ELD.1.0.VOCA.Foundation 1.1.DEVE",
+                  "ELD.1.0.VOCA.Foundation 1.1.DISC"
+                ],
+                "run5": [
+                  "ELD.1.0.VOCA.1.1.BROA",
+                  "ELD.1.0.VOCA.1.1.DEVE",
+                  "ELD.1.0.VOCA.1.1.DISC"
                 ]
               }
             },
@@ -397,6 +504,21 @@
                   "US-CA-2021-ELD.1.0.GRAM.Foundation 1.4.BROA",
                   "US-CA-2021-ELD.1.0.GRAM.Foundation 1.4.DEVE",
                   "US-CA-2021-ELD.1.0.GRAM.Foundation 1.4.DISC"
+                ],
+                "run3": [
+                  "US-CA-2021-ELD.1.0.GRAM.1.4.BROA",
+                  "US-CA-2021-ELD.1.0.GRAM.1.4.DEVE",
+                  "US-CA-2021-ELD.1.0.GRAM.1.4.DISC"
+                ],
+                "run4": [
+                  "US-CA-2021-ELD.1.0.GRAM.Foundation 1.4.BROA",
+                  "US-CA-2021-ELD.1.0.GRAM.Foundation 1.4.DEVE",
+                  "US-CA-2021-ELD.1.0.GRAM.Foundation 1.4.DISC"
+                ],
+                "run5": [
+                  "US-CA-2021-ELD.1.0.GRAM.1.4.BROA",
+                  "US-CA-2021-ELD.1.0.GRAM.1.4.DEVE",
+                  "US-CA-2021-ELD.1.0.GRAM.1.4.DISC"
                 ]
               }
             },
@@ -418,6 +540,21 @@
                   "ELD.1.0.GRAM.Foundation 1.4.BROA",
                   "ELD.1.0.GRAM.Foundation 1.4.DEVE",
                   "ELD.1.0.GRAM.Foundation 1.4.DISC"
+                ],
+                "run3": [
+                  "ELD.1.0.GRAM.1.4.BROA",
+                  "ELD.1.0.GRAM.1.4.DEVE",
+                  "ELD.1.0.GRAM.1.4.DISC"
+                ],
+                "run4": [
+                  "ELD.1.0.GRAM.Foundation 1.4.BROA",
+                  "ELD.1.0.GRAM.Foundation 1.4.DEVE",
+                  "ELD.1.0.GRAM.Foundation 1.4.DISC"
+                ],
+                "run5": [
+                  "ELD.1.0.GRAM.1.4.BROA",
+                  "ELD.1.0.GRAM.1.4.DEVE",
+                  "ELD.1.0.GRAM.1.4.DISC"
                 ]
               }
             },
@@ -439,6 +576,21 @@
                   "US-CA-2021-ELD.1.0.GRAM.Foundation 1.3.BROA",
                   "US-CA-2021-ELD.1.0.GRAM.Foundation 1.3.DEVE",
                   "US-CA-2021-ELD.1.0.GRAM.Foundation 1.3.DISC"
+                ],
+                "run3": [
+                  "US-CA-2021-ELD.1.0.GRAM.1.3.BROA",
+                  "US-CA-2021-ELD.1.0.GRAM.1.3.DEVE",
+                  "US-CA-2021-ELD.1.0.GRAM.1.3.DISC"
+                ],
+                "run4": [
+                  "US-CA-2021-ELD.1.0.GRAM.Foundation 1.3.BROA",
+                  "US-CA-2021-ELD.1.0.GRAM.Foundation 1.3.DEVE",
+                  "US-CA-2021-ELD.1.0.GRAM.Foundation 1.3.DISC"
+                ],
+                "run5": [
+                  "US-CA-2021-ELD.1.0.GRAM.1.3.BROA",
+                  "US-CA-2021-ELD.1.0.GRAM.1.3.DEVE",
+                  "US-CA-2021-ELD.1.0.GRAM.1.3.DISC"
                 ]
               }
             },
@@ -460,6 +612,21 @@
                   "ELD.1.0.GRAM.Foundation 1.3.BROA",
                   "ELD.1.0.GRAM.Foundation 1.3.DEVE",
                   "ELD.1.0.GRAM.Foundation 1.3.DISC"
+                ],
+                "run3": [
+                  "ELD.1.0.GRAM.1.3.BROA",
+                  "ELD.1.0.GRAM.1.3.DEVE",
+                  "ELD.1.0.GRAM.1.3.DISC"
+                ],
+                "run4": [
+                  "ELD.1.0.GRAM.Foundation 1.3.BROA",
+                  "ELD.1.0.GRAM.Foundation 1.3.DEVE",
+                  "ELD.1.0.GRAM.Foundation 1.3.DISC"
+                ],
+                "run5": [
+                  "ELD.1.0.GRAM.1.3.BROA",
+                  "ELD.1.0.GRAM.1.3.DEVE",
+                  "ELD.1.0.GRAM.1.3.DISC"
                 ]
               }
             },
@@ -481,6 +648,21 @@
                   "US-CA-2021-ELD.1.0.VOCA.Foundation 1.2.BROA",
                   "US-CA-2021-ELD.1.0.VOCA.Foundation 1.2.DEVE",
                   "US-CA-2021-ELD.1.0.VOCA.Foundation 1.2.DISC"
+                ],
+                "run3": [
+                  "US-CA-2021-ELD.1.0.VOCA.1.2.BROA",
+                  "US-CA-2021-ELD.1.0.VOCA.1.2.DEVE",
+                  "US-CA-2021-ELD.1.0.VOCA.1.2.DISC"
+                ],
+                "run4": [
+                  "US-CA-2021-ELD.1.0.VOCA.Foundation 1.2.BROA",
+                  "US-CA-2021-ELD.1.0.VOCA.Foundation 1.2.DEVE",
+                  "US-CA-2021-ELD.1.0.VOCA.Foundation 1.2.DISC"
+                ],
+                "run5": [
+                  "US-CA-2021-ELD.1.0.VOCA.1.2.BROA",
+                  "US-CA-2021-ELD.1.0.VOCA.1.2.DEVE",
+                  "US-CA-2021-ELD.1.0.VOCA.1.2.DISC"
                 ]
               }
             },
@@ -502,6 +684,21 @@
                   "ELD.1.0.VOCA.Foundation 1.2.BROA",
                   "ELD.1.0.VOCA.Foundation 1.2.DEVE",
                   "ELD.1.0.VOCA.Foundation 1.2.DISC"
+                ],
+                "run3": [
+                  "ELD.1.0.VOCA.1.2.BROA",
+                  "ELD.1.0.VOCA.1.2.DEVE",
+                  "ELD.1.0.VOCA.1.2.DISC"
+                ],
+                "run4": [
+                  "ELD.1.0.VOCA.Foundation 1.2.BROA",
+                  "ELD.1.0.VOCA.Foundation 1.2.DEVE",
+                  "ELD.1.0.VOCA.Foundation 1.2.DISC"
+                ],
+                "run5": [
+                  "ELD.1.0.VOCA.1.2.BROA",
+                  "ELD.1.0.VOCA.1.2.DEVE",
+                  "ELD.1.0.VOCA.1.2.DISC"
                 ]
               }
             }
@@ -510,13 +707,19 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "CO": {
-          "n_observations": 3,
+          "n_observations": 6,
           "observation_labels": [
             "frozen(task1_20260826)",
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            48,
+            48,
+            48,
             48,
             48,
             48
@@ -555,13 +758,19 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "KY": {
-          "n_observations": 3,
+          "n_observations": 6,
           "observation_labels": [
             "frozen(task2_20260826)",
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            26,
+            26,
+            26,
             26,
             26,
             26
@@ -600,13 +809,19 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "NV": {
-          "n_observations": 3,
+          "n_observations": 6,
           "observation_labels": [
             "frozen(task2_20260826)",
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            24,
+            24,
+            24,
             24,
             24,
             24
@@ -616,8 +831,8 @@
             24
           ],
           "n_identities_compared": 24,
-          "n_distinct_unstable_identities": 4,
-          "disagreement_rate": 0.166667,
+          "n_distinct_unstable_identities": 5,
+          "disagreement_rate": 0.208333,
           "n_dimension_disagreements": {
             "presence_or_multiplicity": 0,
             "standard_id": 0,
@@ -633,15 +848,39 @@
             "strand.name": 4,
             "strand.description": 0,
             "sub_strand.code": 0,
-            "sub_strand.name": 0,
+            "sub_strand.name": 1,
             "sub_strand.description": 0,
             "indicator.code": 0,
             "indicator.name": 0,
             "indicator.description": 0
           },
-          "n_observations_differing_from_run1": 2,
+          "n_observations_differing_from_run1": 3,
           "examples": [
             {
+              "identity": "describe some of the steps and/or materials needed for an investigation or experiment.",
+              "dimension": "sub_strand.name",
+              "detail": {
+                "frozen(task2_20260826)": [
+                  "Scientific Investigation"
+                ],
+                "run1": [
+                  "Scientific Investigation"
+                ],
+                "run2": [
+                  "Scientific Investigation"
+                ],
+                "run3": [
+                  "Scientific Investigation"
+                ],
+                "run4": [
+                  "Exploration, Observation, and Hypotheses"
+                ],
+                "run5": [
+                  "Scientific Investigation"
+                ]
+              }
+            },
+            {
               "identity": "identify classroom teachers/practitioners and peers by name.",
               "dimension": "strand.code",
               "detail": {
@@ -652,6 +891,15 @@
                   "SS.1"
                 ],
                 "run2": [
+                  "SS.2"
+                ],
+                "run3": [
+                  "SS.2"
+                ],
+                "run4": [
+                  "SS.2"
+                ],
+                "run5": [
                   "SS.2"
                 ]
               }
@@ -667,6 +915,15 @@
                   "Demonstrate a basic awareness of self as an individual, within the context of a group and community."
                 ],
                 "run2": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run3": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run4": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run5": [
                   "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
                 ]
               }
@@ -683,6 +940,15 @@
                 ],
                 "run2": [
                   "SS.2"
+                ],
+                "run3": [
+                  "SS.2"
+                ],
+                "run4": [
+                  "SS.2"
+                ],
+                "run5": [
+                  "SS.2"
                 ]
               }
             },
@@ -697,6 +963,15 @@
                   "Demonstrate a basic awareness of self as an individual, within the context of a group and community."
                 ],
                 "run2": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run3": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run4": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run5": [
                   "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
                 ]
               }
@@ -713,6 +988,15 @@
                 ],
                 "run2": [
                   "SS.2"
+                ],
+                "run3": [
+                  "SS.2"
+                ],
+                "run4": [
+                  "SS.2"
+                ],
+                "run5": [
+                  "SS.2"
                 ]
               }
             },
@@ -727,6 +1011,15 @@
                   "Demonstrate a basic awareness of self as an individual, within the context of a group and community."
                 ],
                 "run2": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run3": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run4": [
+                  "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
+                ],
+                "run5": [
                   "Demonstrate a basic understanding of roles, rights, and responsibilities in their classroom and home."
                 ]
               }
@@ -743,6 +1036,15 @@
                 ],
                 "run2": [
                   "S.1"
+                ],
+                "run3": [
+                  "S.2"
+                ],
+                "run4": [
+                  "S.2"
+                ],
+                "run5": [
+                  "S.2"
                 ]
               }
             },
@@ -758,6 +1060,15 @@
                 ],
                 "run2": [
                   "Demonstrate the ability to use senses and tools to explore, make observations, and make predictions."
+                ],
+                "run3": [
+                  "Demonstrate the ability to use information gathered in different ways to conduct investigations."
+                ],
+                "run4": [
+                  "Demonstrate the ability to use information gathered in different ways to conduct investigations."
+                ],
+                "run5": [
+                  "Demonstrate the ability to use information gathered in different ways to conduct investigations."
                 ]
               }
             }
@@ -766,13 +1077,19 @@
           "interpretation_warning": "A disagreement_rate of 0.000 at small N is NOT evidence of determinism. A defect that fires in a minority of runs (the malformed-code defect this instrument was built to catch fired in roughly 1 of 6 KY parser runs in earlier evidence) can easily produce several clean observations in a row. This measurement is a LOWER BOUND on true run-to-run variance, not an estimate of it -- read the denominators (n_identities_compared, n_observations) alongside the rate, never the rate alone."
         },
         "TX": {
-          "n_observations": 3,
+          "n_observations": 6,
           "observation_labels": [
             "frozen(task1_20260826)",
             "run1",
-            "run2"
+            "run2",
+            "run3",
+            "run4",
+            "run5"
           ],
           "size_by_observation": [
+            25,
+            25,
+            25,
             25,
             25,
             25
@@ -824,8 +1141,8 @@
         ],
         "states_not_measurable": [],
         "n_identities_compared": 201,
-        "n_distinct_unstable_identities": 8,
-        "disagreement_rate": 0.039801,
+        "n_distinct_unstable_identities": 9,
+        "disagreement_rate": 0.044776,
         "n_dimension_disagreements": {
           "presence_or_multiplicity": 0,
           "standard_id": 12,
@@ -841,7 +1158,7 @@
           "strand.name": 4,
           "strand.description": 0,
           "sub_strand.code": 0,
-          "sub_strand.name": 0,
+          "sub_strand.name": 1,
           "sub_strand.description": 0,
           "indicator.code": 12,
           "indicator.name": 0,

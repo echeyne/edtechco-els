@@ -12,7 +12,9 @@
 %   - Depth-map on/off ablation (Task 3).
 %   - Rule-based baseline comparison (Task 4) — DONE.
 %   - Stability/determinism (Task 5).
-%   - Cost/latency/scale, full-document tier, clearly separated from the
+%   - Cost/latency/scale, _trimmed tier (complete standards content, NOT the
+%     full published PDF and NOT an excerpt -- see
+%     paper/results/task6_20260830/findings.md), clearly separated from the
 %     subset-tier quality tables above (Task 6, guardrail 1).
 %   - Model tier / chunk overlap / two-stage ablations (Task 7).
 %   - Dataset descriptive stats + re-measured confidence distribution
@@ -160,3 +162,68 @@
 % ⚠️ Keep the caption short (see the warning above Table~4).
 
 \input{tables/confidence_distribution}
+
+\subsection{Scale: the Batched Path on Multi-Batch Documents}
+\label{sec:experiments-scale}
+
+% TODO(Task 12): prose.
+%
+% ⚠️ GUARDRAIL 1 IS THE WHOLE POINT OF THIS SUBSECTION. Table~\ref{tab:scale} is
+% the ONLY table in the paper that is not the _only_subset tier. It is _trimmed:
+% Kentucky 52 pages, Colorado 41. The pipeline run_id literally says
+% "full08292026" and that name is WRONG -- verified against the Step Functions
+% execution input and PyMuPDF page counts. NEVER call these full-document
+% numbers, and never let a reader carry a quality number from the subset tables
+% into this table or vice versa.
+%
+% ⚠️ BUT THE OTHER MISREADING IS NOW THE LIKELIER ONE (corrected 2026-08-31).
+% _trimmed removes NON-STANDARDS matter only -- front matter, essays,
+% appendices -- and retains 100% OF THE STANDARDS. 52/120 and 41/187 are NOT
+% coverage fractions, and an earlier draft of task6_20260830/findings.md read
+% them as such. The prose must say what the tier means in the same breath as
+% the label, or "trimmed" reads as "excerpt" and these become partial-document
+% numbers in the reader's head. Kentucky's 52 pages are all of Kentucky's
+% standards; Colorado's 41 are the COMPLETE Ages 3-5 document (identical to its
+% full page count -- nothing was cut), the band every CO number in this paper
+% uses, drawn from a wider 187pp birth-to-8 publication whose other age bands
+% are out of scope rather than trimmed away.
+%
+% THE CLAIM THIS TABLE SUPPORTS, and the only one it supports: the
+% prepare -> Map -> merge batching path is genuinely exercised. At the subset
+% tier every state produces <=5 chunks against MAX_CHUNKS_PER_BATCH=5 and <=3
+% domains against MAX_DOMAINS_PER_BATCH=3, so both batching layers collapse to a
+% single batch, the Map has ONE iteration and the merge is a NO-OP. That is why
+% no subset-tier measurement could support the batching claim at all. Here the
+% Map iterates 4 times per run and the merge removes 34 (KY) and 90 (CO)
+% duplicate elements. Say that contrast explicitly -- it is the reason the
+% table exists.
+%
+% DO NOT claim quality at scale from this table. The runs were not graded
+% against goldens. (KY's golden IS detection-exhaustive so it COULD be graded
+% inside a full run -- that was the original motivation for choosing KY -- but
+% it was not done here and must not be implied.)
+%
+% NO COST COLUMN, DELIBERATELY. None of the five hardcoded BEDROCK_PRICING rates
+% could be verified on 2026-08-30: the AWS Price List API's AmazonBedrock
+% service code carries only legacy Claude 2.x/3.x models, and the current-gen
+% code has no entry for Opus 4.6 or Sonnet 4.6. Report tokens. If Emily later
+% supplies verified rates, add cost WITH the rate date cited inline (guardrail:
+% "report real measured per-run cost", not an invented one).
+%
+% WORTH ONE SENTENCE, ties back to \S\ref{sec:method-model-assignment}: the
+% depth-map pass costs about 3% of detection's input tokens and runs ONCE per
+% document, while detection -- the hard classification -- is the only stage
+% invoked once per chunk. That is the "cheapest model that suffices" principle
+% showing up in the token budget rather than being asserted.
+%
+% LIMITATION TO CARRY INTO \S\ref{sec:discussion-limitations}, and write it as
+% a PAGE-COUNT limitation, not a coverage one: these runs chunk 18 and 17 times
+% over 4 Map iterations, so the token and latency figures must not be
+% extrapolated to untrimmed page counts, and no document as large as AZ (217pp
+% published) has been run end to end. Trimming is also still preprocessing a
+% deployment would have to do or absorb -- the pipeline was never asked to
+% ignore 68pp of Kentucky preamble on its own. State both; do not bury them.
+% Do NOT write "full documents remain unmeasured" without that qualification:
+% every standard in both documents WAS processed.
+
+\input{tables/scale_batched}

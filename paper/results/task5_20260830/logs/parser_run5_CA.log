@@ -1,0 +1,153 @@
+== CA ==
+  [parser] running on 122 detected elements…
+Split 122 elements into 9 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6007, "output_tokens": 2638, "total_tokens": 8645, "latency_ms": 21005.4, "estimated_cost_usd": 0.057591, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8078 chars, 6007 in / 2638 out tokens, 21005ms
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.CI.1.1.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.CI', 'indicator': 'AL.1.0.CI.1.1.36-54'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.CI'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.CI.1.1.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.CI', 'indicator': 'AL.1.0.CI.1.1.48-66'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.CI'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.INIT.1.2.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.INIT', 'indicator': 'AL.1.0.INIT.1.2.36-54'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.INIT'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.INIT.1.2.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.INIT', 'indicator': 'AL.1.0.INIT.1.2.48-66'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.INIT'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.ENGA.1.3.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.ENGA', 'indicator': 'AL.1.0.ENGA.1.3.36-54'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.ENGA'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.ENGA.1.3.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.ENGA', 'indicator': 'AL.1.0.ENGA.1.3.48-66'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.ENGA'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.PERS.1.4.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.PERS', 'indicator': 'AL.1.0.PERS.1.4.36-54'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.PERS'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.1.0.PERS.1.4.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.PERS', 'indicator': 'AL.1.0.PERS.1.4.48-66'} anchored={'domain': 'AL', 'strand': 'AL.1.0', 'sub_strand': 'AL.1.0.PERS'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.WM.2.1.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.WM', 'indicator': 'AL.2.0.WM.2.1.36-54'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.WM'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.WM.2.1.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.WM', 'indicator': 'AL.2.0.WM.2.1.48-66'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.WM'}
+Chunk 1/9: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5804, "output_tokens": 2933, "total_tokens": 8737, "latency_ms": 23847.5, "estimated_cost_usd": 0.061407, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 8616 chars, 5804 in / 2933 out tokens, 23848ms
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.IC.2.2.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC', 'indicator': 'AL.2.0.IC.2.2.36-54'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.IC.2.2.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC', 'indicator': 'AL.2.0.IC.2.2.48-66'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.IC.2.3.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC', 'indicator': 'AL.2.0.IC.2.3.36-54'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.IC.2.3.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC', 'indicator': 'AL.2.0.IC.2.3.48-66'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.IC'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.FLEX.2.4.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.FLEX', 'indicator': 'AL.2.0.FLEX.2.4.36-54'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.FLEX'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.2.0.FLEX.2.4.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.FLEX', 'indicator': 'AL.2.0.FLEX.2.4.48-66'} anchored={'domain': 'AL', 'strand': 'AL.2.0', 'sub_strand': 'AL.2.0.FLEX'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.PROB.3.1.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB', 'indicator': 'AL.3.0.PROB.3.1.36-54'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.PROB.3.1.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB', 'indicator': 'AL.3.0.PROB.3.1.48-66'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.PROB.3.2.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB', 'indicator': 'AL.3.0.PROB.3.2.36-54'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.PROB.3.2.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB', 'indicator': 'AL.3.0.PROB.3.2.48-66'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.PROB'}
+Chunk 2/9: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 4783, "output_tokens": 1434, "total_tokens": 6217, "latency_ms": 14727.0, "estimated_cost_usd": 0.035859, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 4139 chars, 4783 in / 1434 out tokens, 14727ms
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.CE.3.3.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE', 'indicator': 'AL.3.0.CE.3.3.36-54'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.CE.3.3.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE', 'indicator': 'AL.3.0.CE.3.3.48-66'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.CE.3.4.36-54: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE', 'indicator': 'AL.3.0.CE.3.4.36-54'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE'}
+PRE_NORMALIZATION_CODES US-CA-2021-AL.3.0.CE.3.4.48-66: llm_emitted={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE', 'indicator': 'AL.3.0.CE.3.4.48-66'} anchored={'domain': 'AL', 'strand': 'AL.3.0', 'sub_strand': 'AL.3.0.CE'}
+Chunk 3/9: parsed 4 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5837, "output_tokens": 3539, "total_tokens": 9376, "latency_ms": 29602.5, "estimated_cost_usd": 0.070596, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10714 chars, 5837 in / 3539 out tokens, 29602ms
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.VOCA.1.1.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA', 'indicator': 'FLD.1.0.VOCA.1.1.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.VOCA.1.1.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA', 'indicator': 'FLD.1.0.VOCA.1.1.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.VOCA.1.2.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA', 'indicator': 'FLD.1.0.VOCA.1.2.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.VOCA.1.2.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA', 'indicator': 'FLD.1.0.VOCA.1.2.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.VOCA.1.3.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA', 'indicator': 'FLD.1.0.VOCA.1.3.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.VOCA.1.3.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA', 'indicator': 'FLD.1.0.VOCA.1.3.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.4.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.4.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.4.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.4.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.5.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.5.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.5.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.5.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.6.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.6.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.6.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.6.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+Chunk 4/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5754, "output_tokens": 3261, "total_tokens": 9015, "latency_ms": 24883.0, "estimated_cost_usd": 0.066177, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 9483 chars, 5754 in / 3261 out tokens, 24883ms
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.7.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.7.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.7.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.7.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.8.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.8.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.1.0.GRAM.1.8.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM', 'indicator': 'FLD.1.0.GRAM.1.8.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.1.0', 'sub_strand': 'FLD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.2.0.PA.2.1.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA', 'indicator': 'FLD.2.0.PA.2.1.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.2.0.PA.2.1.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA', 'indicator': 'FLD.2.0.PA.2.1.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.2.0.PA.2.2.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA', 'indicator': 'FLD.2.0.PA.2.2.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.2.0.PA.2.2.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA', 'indicator': 'FLD.2.0.PA.2.2.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.2.0.PA.2.3.36-54: llm_emitted={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA', 'indicator': 'FLD.2.0.PA.2.3.36-54'} anchored={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-FLD.2.0.PA.2.3.48-66: llm_emitted={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA', 'indicator': 'FLD.2.0.PA.2.3.48-66'} anchored={'domain': 'FLD', 'strand': 'FLD.2.0', 'sub_strand': 'FLD.2.0.PA'}
+Chunk 5/9: parsed 10 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5768, "output_tokens": 3568, "total_tokens": 9336, "latency_ms": 29390.9, "estimated_cost_usd": 0.070824, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10886 chars, 5768 in / 3568 out tokens, 29391ms
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.VOCA.1.1.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA', 'indicator': 'ELD.1.0.VOCA.1.1.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.VOCA.1.1.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA', 'indicator': 'ELD.1.0.VOCA.1.1.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.VOCA.1.1.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA', 'indicator': 'ELD.1.0.VOCA.1.1.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.VOCA.1.2.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA', 'indicator': 'ELD.1.0.VOCA.1.2.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.VOCA.1.2.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA', 'indicator': 'ELD.1.0.VOCA.1.2.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.VOCA.1.2.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA', 'indicator': 'ELD.1.0.VOCA.1.2.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.VOCA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.GRAM.1.3.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM', 'indicator': 'ELD.1.0.GRAM.1.3.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.GRAM.1.3.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM', 'indicator': 'ELD.1.0.GRAM.1.3.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.GRAM.1.3.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM', 'indicator': 'ELD.1.0.GRAM.1.3.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.GRAM.1.4.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM', 'indicator': 'ELD.1.0.GRAM.1.4.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.GRAM.1.4.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM', 'indicator': 'ELD.1.0.GRAM.1.4.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.GRAM.1.4.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM', 'indicator': 'ELD.1.0.GRAM.1.4.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.GRAM'}
+Chunk 6/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5617, "output_tokens": 3268, "total_tokens": 8885, "latency_ms": 26451.5, "estimated_cost_usd": 0.065871, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10106 chars, 5617 in / 3268 out tokens, 26452ms
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.5.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.5.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.5.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.5.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.5.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.5.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.6.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.6.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.6.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.6.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.6.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.6.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.7.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.7.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.7.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.7.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.7.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.7.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.8.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.8.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.8.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.8.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.8.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.8.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+Chunk 7/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5879, "output_tokens": 3515, "total_tokens": 9394, "latency_ms": 27210.5, "estimated_cost_usd": 0.070362, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10790 chars, 5879 in / 3515 out tokens, 27210ms
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.9.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.9.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.9.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.9.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.9.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.9.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.10.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.10.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.10.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.10.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.1.0.LU.1.10.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU', 'indicator': 'ELD.1.0.LU.1.10.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.1.0', 'sub_strand': 'ELD.1.0.LU'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.1.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.1.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.1.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.1.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.1.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.1.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.2.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.2.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.2.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.2.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.2.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.2.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+Chunk 8/9: parsed 12 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5803, "output_tokens": 3507, "total_tokens": 9310, "latency_ms": 27767.3, "estimated_cost_usd": 0.070014, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 10804 chars, 5803 in / 3507 out tokens, 27767ms
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.3.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.3.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.3.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.3.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.PA.2.3.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA', 'indicator': 'ELD.2.0.PA.2.3.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.PA'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.AP.2.4.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP', 'indicator': 'ELD.2.0.AP.2.4.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.AP.2.4.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP', 'indicator': 'ELD.2.0.AP.2.4.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.AP.2.4.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP', 'indicator': 'ELD.2.0.AP.2.4.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.AP.2.5.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP', 'indicator': 'ELD.2.0.AP.2.5.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.AP.2.5.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP', 'indicator': 'ELD.2.0.AP.2.5.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.AP.2.5.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP', 'indicator': 'ELD.2.0.AP.2.5.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.AP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.CP.2.6.DISC: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.CP', 'indicator': 'ELD.2.0.CP.2.6.DISC'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.CP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.CP.2.6.DEVE: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.CP', 'indicator': 'ELD.2.0.CP.2.6.DEVE'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.CP'}
+PRE_NORMALIZATION_CODES US-CA-2021-ELD.2.0.CP.2.6.BROA: llm_emitted={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.CP', 'indicator': 'ELD.2.0.CP.2.6.BROA'} anchored={'domain': 'ELD', 'strand': 'ELD.2.0', 'sub_strand': 'ELD.2.0.CP'}
+Chunk 9/9: parsed 12 standards
+  [parser] produced 94 standards (status=success)
+
+=== CA ===
+  golden standards: 21
+  parsed:           94
+  matched:          21  (coverage 1.000)
+  fully correct:    21/21
+  field accuracy:   1.000
+  per-field (ok/total) — only fields with a mismatch shown:
+    (all graded fields matched)
+  dropped: 0
+  standard_id collisions: 0
+  regression cases:
+    [PASS] CA-EARLY-LATER-DISTINCT-IDS — 39 multi-variant indicator group(s) all kept distinct standard_ids
+    [PASS] NO-ID-COLLISION — all 94 standard_ids unique
+
+Review files written to paper/results/task5_20260830/review/parser_run5/
+
+Full report written to paper/results/task5_20260830/reports/parser_run5_CA.json

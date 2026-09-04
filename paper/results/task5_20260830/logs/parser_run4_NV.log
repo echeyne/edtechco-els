@@ -1,0 +1,66 @@
+== NV ==
+  [parser] running on 52 detected elements…
+Split 52 elements into 4 domain chunk(s)
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6925, "output_tokens": 6850, "total_tokens": 13775, "latency_ms": 55114.0, "estimated_cost_usd": 0.123525, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 31705 chars, 6925 in / 6850 out tokens, 55114ms
+PRE_NORMALIZATION_CODES US-NV-2023-SS.ID.PK1: llm_emitted={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID', 'indicator': 'SS.ID.PK1'} anchored={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.ID.PK2: llm_emitted={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID', 'indicator': 'SS.ID.PK2'} anchored={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.ID.PK3: llm_emitted={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID', 'indicator': 'SS.ID.PK3'} anchored={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.ID.PK4: llm_emitted={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID', 'indicator': 'SS.ID.PK4'} anchored={'domain': 'SS', 'strand': 'SS.1', 'sub_strand': 'SS.ID'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK1: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK1'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK2: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK2'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK3: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK3'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK4: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK4'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK5: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK5'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK6: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK6'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.CI.PK7: llm_emitted={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI', 'indicator': 'SS.CI.PK7'} anchored={'domain': 'SS', 'strand': 'SS.2', 'sub_strand': 'SS.CI'}
+Chunk 1/4: parsed 11 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 5235, "output_tokens": 1126, "total_tokens": 6361, "latency_ms": 14794.5, "estimated_cost_usd": 0.032595, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 5324 chars, 5235 in / 1126 out tokens, 14794ms
+PRE_NORMALIZATION_CODES US-NV-2023-SS.GH.PK1: llm_emitted={'domain': 'SS', 'strand': 'SS.3', 'sub_strand': 'SS.GH', 'indicator': 'SS.GH.PK1'} anchored={'domain': 'SS', 'strand': 'SS.3', 'sub_strand': 'SS.GH'}
+PRE_NORMALIZATION_CODES US-NV-2023-SS.GH.PK2: llm_emitted={'domain': 'SS', 'strand': 'SS.3', 'sub_strand': 'SS.GH', 'indicator': 'SS.GH.PK2'} anchored={'domain': 'SS', 'strand': 'SS.3', 'sub_strand': 'SS.GH'}
+Chunk 2/4: parsed 2 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6555, "output_tokens": 5792, "total_tokens": 12347, "latency_ms": 51958.8, "estimated_cost_usd": 0.106545, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 26815 chars, 6555 in / 5792 out tokens, 51959ms
+PRE_NORMALIZATION_CODES US-NV-2023-S.EO.PK1: llm_emitted={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO', 'indicator': 'S.EO.PK1'} anchored={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO'}
+PRE_NORMALIZATION_CODES US-NV-2023-S.EO.PK2: llm_emitted={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO', 'indicator': 'S.EO.PK2'} anchored={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO'}
+PRE_NORMALIZATION_CODES US-NV-2023-S.EO.PK3: llm_emitted={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO', 'indicator': 'S.EO.PK3'} anchored={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO'}
+PRE_NORMALIZATION_CODES US-NV-2023-S.EO.PK4: llm_emitted={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO', 'indicator': 'S.EO.PK4'} anchored={'domain': 'S', 'strand': 'S.1', 'sub_strand': 'S.EO'}
+PRE_NORMALIZATION_CODES US-NV-2023-S.SI.PK1: llm_emitted={'domain': 'S', 'strand': 'S.2', 'sub_strand': 'S.SI', 'indicator': 'S.SI.PK1'} anchored={'domain': 'S', 'strand': 'S.2', 'sub_strand': 'S.SI'}
+PRE_NORMALIZATION_CODES US-NV-2023-S.SI.PK2: llm_emitted={'domain': 'S', 'strand': 'S.2', 'sub_strand': 'S.EO', 'indicator': 'S.SI.PK2'} anchored={'domain': 'S', 'strand': 'S.2', 'sub_strand': 'S.SI'}
+Chunk 3/4: parsed 6 standards
+Calling Bedrock with model: us.anthropic.claude-sonnet-4-6
+LLM_METRICS: {"metric_type": "llm_call", "stage": "parsing", "model_id": "us.anthropic.claude-sonnet-4-6", "input_tokens": 6326, "output_tokens": 6007, "total_tokens": 12333, "latency_ms": 53482.4, "estimated_cost_usd": 0.109083, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 28104 chars, 6326 in / 6007 out tokens, 53482ms
+PRE_NORMALIZATION_CODES US-NV-2023-T.TT.PK1: llm_emitted={'domain': 'T', 'strand': 'T.1', 'sub_strand': 'T.TT', 'indicator': 'T.TT.PK1'} anchored={'domain': 'T', 'strand': 'T.1', 'sub_strand': 'T.TT'}
+PRE_NORMALIZATION_CODES US-NV-2023-T.TT.PK2: llm_emitted={'domain': 'T', 'strand': 'T.1', 'sub_strand': 'T.TT', 'indicator': 'T.TT.PK2'} anchored={'domain': 'T', 'strand': 'T.1', 'sub_strand': 'T.TT'}
+PRE_NORMALIZATION_CODES US-NV-2023-T.TT.PK3: llm_emitted={'domain': 'T', 'strand': 'T.1', 'sub_strand': 'T.TT', 'indicator': 'T.TT.PK3'} anchored={'domain': 'T', 'strand': 'T.1', 'sub_strand': 'T.TT'}
+PRE_NORMALIZATION_CODES US-NV-2023-T.CT.PK1: llm_emitted={'domain': 'T', 'strand': 'T.2', 'sub_strand': 'T.CT', 'indicator': 'T.CT.PK1'} anchored={'domain': 'T', 'strand': 'T.2', 'sub_strand': 'T.CT'}
+PRE_NORMALIZATION_CODES US-NV-2023-T.CT.PK2: llm_emitted={'domain': 'T', 'strand': 'T.2', 'sub_strand': 'T.CT', 'indicator': 'T.CT.PK2'} anchored={'domain': 'T', 'strand': 'T.2', 'sub_strand': 'T.CT'}
+Chunk 4/4: parsed 5 standards
+  [parser] produced 24 standards (status=success)
+
+=== NV ===
+  golden standards: 24
+  parsed:           24
+  matched:          24  (coverage 1.000)
+  fully correct:    23/24
+  field accuracy:   0.998
+  per-field (ok/total) — only fields with a mismatch shown:
+    sub_strand.name         23/24  (0.96)  ← MISMATCH
+  dropped: 0
+  standard_id collisions: 0
+  field mismatches (1):
+    NV-STD-19 sub_strand.name: expected 'Scientific Investigation' got 'Exploration, Observation, and Hypotheses'
+  regression cases:
+    [PASS] NO-ID-COLLISION — all 24 standard_ids unique
+    [FAIL] NV-STRAND-PARENT-BY-HEADING — 1/7 indicator group(s) split across strands, e.g. 'Exploration, Observation, and Hypotheses' (Science) parented by 2: ['Demonstrate the ability to use information ga', 'Demonstrate the ability to use senses and too']
+    [PASS] NV-DOCUMENT-CODE-PRESERVED — all 24 standards keep the document's printed code at indicator, sub_strand and domain
+
+Review files written to paper/results/task5_20260830/review/parser_run4/
+
+Full report written to paper/results/task5_20260830/reports/parser_run4_NV.json

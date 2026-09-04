@@ -1,0 +1,106 @@
+[
+  {
+    "state": "AZ",
+    "coverage": 1.0,
+    "field_accuracy": 0.9969135802469136,
+    "matched": 18,
+    "fully_correct": 17,
+    "n_golden": 18,
+    "n_parsed": 45,
+    "dropped": [],
+    "duplicated": [],
+    "id_collisions": [],
+    "field_stats": {
+      "standard_id": {
+        "ok": 18,
+        "total": 18
+      },
+      "country": {
+        "ok": 18,
+        "total": 18
+      },
+      "state": {
+        "ok": 18,
+        "total": 18
+      },
+      "version_year": {
+        "ok": 18,
+        "total": 18
+      },
+      "age_band": {
+        "ok": 18,
+        "total": 18
+      },
+      "source_page": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "domain.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "sub_strand.description": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.code": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.name": {
+        "ok": 18,
+        "total": 18
+      },
+      "indicator.description": {
+        "ok": 17,
+        "total": 18
+      }
+    },
+    "mismatches": [
+      {
+        "test_case_id": "AZ-IND-15",
+        "field": "indicator.description",
+        "expected": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [I].\" Paints the letter L like in her friend's name, while at the easel.",
+        "got": "Names some letters while playing with alphabet stamps, magnets, cards, or puzzles. Says, \"My name starts with an [1].\" Paints the letter L like in her friend's name, while at the easel."
+      }
+    ],
+    "regressions": [
+      {
+        "id": "NO-ID-COLLISION",
+        "status": "PASS",
+        "detail": "all 45 standard_ids unique"
+      }
+    ],
+    "stability_runs": 0,
+    "stability_disagreement_rate": null,
+    "stability_size_stdev": null
+  }
+]

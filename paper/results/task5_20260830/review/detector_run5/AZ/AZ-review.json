@@ -1,0 +1,208 @@
+{
+  "state": "AZ",
+  "summary": {
+    "golden": 5,
+    "detected": 77,
+    "matched": 5,
+    "ignored_out_of_scope": 65,
+    "precision": 0.4167,
+    "recall": 1.0,
+    "f1": 0.5882,
+    "code_accuracy": 1.0,
+    "code_matches": 4,
+    "code_total": 4,
+    "code_mismatches": [],
+    "description_accuracy": 1.0,
+    "description_matches": 4,
+    "description_total": 4,
+    "description_truncations": 0,
+    "description_mismatches": []
+  },
+  "matched": [
+    {
+      "golden": {
+        "test_case_id": "AZ-DOM-SED",
+        "level": "domain",
+        "code": null,
+        "title": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place. Children's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive. To grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment. Established social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "source_page": 4
+      },
+      "detected": {
+        "level": "domain",
+        "code": "SED",
+        "title": "Social Emotional Development",
+        "description": "Social emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place.\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive.\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "confidence": 0.97,
+        "source_page": 2,
+        "source_text": "SOCIAL EMOTIONAL DEVELOPMENT STANDARD\nSocial emotional development is the core of early care and education because it sets a firm foundation on which all other learning will take place.\nChildren's emotional development is built into the architecture of their brains. Relationships that provide social, emotional, and physical security promote and enhance a child's ability to learn and thrive.\nTo grow socially and emotionally, children need to develop an increasing capacity to experience, express, and gain self-control over their emotions and social interactions. This development is enhanced by nurturing relationships and positive early learning experiences. A consistent, predictable, and engaging environment strengthens a child's confidence in approaching new challenges, interacting with others, and exploring their environment.\nEstablished social-emotional skills have a significant, positive impact on a child's learning, particularly in cognitive development. It sets the foundation for life-long success. This Standard articulates the ways in which a child can demonstrate their understanding of themselves and others, form positive social relationships, and relate to the world at large. Well-developed, strong, social emotional skills are critical when a child encounters a stressful life challenge. These hardships may include neglect, trauma, poverty, cultural and language differences, bias, and disabilities.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-STR-SE-1",
+        "level": "strand",
+        "code": "Strand 1",
+        "title": "Self-Awareness and Emotional Skills",
+        "description": null,
+        "source_page": 5
+      },
+      "detected": {
+        "level": "strand",
+        "code": "Strand 1",
+        "title": "Self-Awareness and Emotional Skills",
+        "description": null,
+        "confidence": 0.97,
+        "source_page": 2,
+        "source_text": "Strand 1: Self-Awareness and Emotional Skills",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-SUB-SE-1-1",
+        "level": "sub_strand",
+        "code": "Concept 1",
+        "title": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self. Children develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+        "source_page": 5
+      },
+      "detected": {
+        "level": "sub_strand",
+        "code": "Concept 1",
+        "title": "Self-Awareness",
+        "description": "The child demonstrates an awareness of self.\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+        "confidence": 0.97,
+        "source_page": 3,
+        "source_text": "Concept 1: Self-Awareness\nThe child demonstrates an awareness of self.\nChildren develop a sense of personal identity as they begin to recognize the characteristics that make them unique as individuals and to build self-esteem.",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-SE-1-1-a",
+        "level": "indicator",
+        "code": "a",
+        "title": "Demonstrates self-confidence.",
+        "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\" Explains, \"I'm learning how to take care of myself and my friends.\" Signs, \"I can do it myself.\"",
+        "source_page": 5
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "a",
+        "title": "Demonstrates self-confidence.",
+        "description": "Acknowledges her own accomplishments and says, \"I can hit the ball.\"\nExplains, \"I'm learning how to take care of myself and my friends.\"\nSigns, \"I can do it myself.\"",
+        "confidence": 0.95,
+        "source_page": 3,
+        "source_text": "a.\nDemonstrates self-confidence.\nAcknowledges her own accomplishments and says, \"I can hit the ball.\"\nExplains, \"I'm learning how to take care of myself and my friends.\"\nSigns, \"I can do it myself.\"",
+        "age_band": null
+      }
+    },
+    {
+      "golden": {
+        "test_case_id": "AZ-IND-LL-1-2-b",
+        "level": "indicator",
+        "code": "b",
+        "title": "Speaks clearly and understandably to express ideas, feelings, and needs.",
+        "description": "Combines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\" Says, \"I want to go play at the water table.\"",
+        "source_page": 5
+      },
+      "detected": {
+        "level": "indicator",
+        "code": "b",
+        "title": "Speaks clearly and understandably to express ideas, feelings, and needs.",
+        "description": "Combines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\"\nSays, \"I want to go play at the water table.\"",
+        "confidence": 0.95,
+        "source_page": 6,
+        "source_text": "b. Speaks clearly and understandably to express ideas, feelings, and needs.\nCombines words into simple sentences - \"Is it time to go home?\" Or \"More milk please.\"\nSays, \"I want to go play at the water table.\"",
+        "age_band": null
+      }
+    }
+  ],
+  "missing_from_detected": [],
+  "extra_in_detected": [
+    {
+      "level": "indicator",
+      "code": "b",
+      "title": "Makes personal preferences known to others.",
+      "description": "Chooses carrots over celery during mealtime.\nTells friends, \"I don't like that.\"",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "b. Makes personal preferences known to others.\nChooses carrots over celery during mealtime.\nTells friends, \"I don't like that.\"",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "c",
+      "title": "Demonstrates knowledge of self-identity/autonomy.",
+      "description": "Declares, \"I'm the big brother,\" while looking at a family picture.\nTells the teacher, \"I'm at school while mommy is at work.\"\nHolds up three fingers and says, \"I am this many.\"",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "C.\nDemonstrates knowledge of self-identity/autonomy.\nDeclares, \"I'm the big brother,\" while looking at a family picture.\nTells the teacher, \"I'm at school while mommy is at work.\"\nHolds up three fingers and says, \"I am this many.\"",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "d",
+      "title": "Displays an awareness of similarities and differences between self and others.",
+      "description": "Says, \"My hair is curly and yours is straight.\"\nPoints to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt.",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "d. Displays an awareness of similarities and differences between self and others.\nSays, \"My hair is curly and yours is straight.\"\nPoints to shirt and then to friend's shirt, indicating that they are wearing the same color of shirt.",
+      "age_band": null
+    },
+    {
+      "level": "indicator",
+      "code": "e",
+      "title": "Demonstrates developmentally appropriate cultural curiosity and responsiveness.",
+      "description": "Wonders about a friend's seaweed snack and asks for a taste.\nThe group widens the story time circle to make room for the child and their wheelchair.\nA guest speaker (parent) shares a storybook and song in their home language to the class.",
+      "confidence": 0.95,
+      "source_page": 3,
+      "source_text": "e. Demonstrates developmentally appropriate cultural curiosity and responsiveness.\nWonders about a friend's seaweed snack and asks for a taste.\nThe group widens the story time circle to make room for the child and their wheelchair.\nA guest speaker (parent) shares a storybook and song in their home language to the class.",
+      "age_band": null
+    },
+    {
+      "level": "strand",
+      "code": "Strand 2",
+      "title": "Relationships and Skills",
+      "description": null,
+      "confidence": 0.97,
+      "source_page": 2,
+      "source_text": "Strand 2: Relationships and Skills",
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 2",
+      "title": "Recognizes and Expresses Feelings",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 2,
+      "source_text": "Concept 2: Recognizes and Expresses Feelings",
+      "age_band": null
+    },
+    {
+      "level": "sub_strand",
+      "code": "Concept 3",
+      "title": "Self-Regulation",
+      "description": null,
+      "confidence": 0.95,
+      "source_page": 2,
+      "source_text": "Concept 3: Self-Regulation",
+      "age_band": null
+    }
+  ],
+  "regressions": [
+    {
+      "id": "AZ-NO-EXAMPLES-HEADER-AS-ELEMENT",
+      "status": "PASS",
+      "detail": "no examples-section headers emitted"
+    },
+    {
+      "id": "AZ-FOUR-LEVEL-HIERARCHY",
+      "status": "PASS",
+      "detail": "all four levels present"
+    }
+  ]
+}

@@ -1,16 +1,72 @@
-% schema.tex — Task 10 stub. Reconstructed section (see ../OUTLINE_NOTES.md).
-% Draft at Task 12. Outline:
-%   - The canonical target hierarchy: domain -> strand -> sub_strand (optional)
-%     -> indicator, each level with code/name/description/age_band.
-%   - standard_id format: {country}-{state}-{year}-{indicator_code}, fully
-%     qualified, deterministic, no separate domain_code component
-%     (src/els_pipeline/parser.py generate_standard_id; models.py is the
-%     Python source of truth, packages/shared/src/types.ts mirrors it).
-%   - Why a single canonical schema across 50+ independently-formatted state
-%     documents is itself a nontrivial contribution — most states do not
-%     share a level count (CO has no sub_strand) or a code namespace shape.
-%   - Point forward to Appendix~\ref{sec:appendix-schema} for the full
-%     schema and Appendix~\ref{sec:appendix-goldens} for annotated examples.
+% schema.tex — drafted Task 12 (2026-08-30).
+% Facts verified against the live tree: models.py (HierarchyLevelEnum,
+% NormalizedStandard, HierarchyLevel), parser.py generate_standard_id,
+% infra/migrations/005_add_verification_columns.sql. Guardrail 2 observed:
+% human_verified is a separate per-element workflow and is NOT a confidence
+% gate -- see \S\ref{sec:method-confidence}.
 
 \section{Canonical Schema}
 \label{sec:schema}
+
+The target of the pipeline is a single schema that every state's document is
+resolved into, regardless of how that document organizes itself. It defines
+four hierarchy levels --- \emph{domain}, \emph{strand}, \emph{sub-strand}, and
+\emph{indicator} --- of which strand and sub-strand are optional. Each level
+carries a code, a name, and an optional free-text description; the indicator
+additionally carries an age band, a source page, and the verbatim source text
+it was extracted from. A normalized standard is one indicator together with its
+full resolved ancestry, so the unit of storage is a leaf-with-lineage rather
+than a node in a tree.
+
+Two properties of this schema do real work and are worth stating explicitly.
+
+\paragraph{Optionality is not decoration.} A four-level schema is not a
+four-level document. Colorado publishes no sub-strand tier, and Texas realizes
+almost none; Nevada uses all four but prints a code namespace that skips the
+strand entirely, coding indicators as
+\texttt{\{domain\}.\{sub\_strand\}.PK\emph{n}}. Requiring every level to be
+populated would force the pipeline to invent structure, which is the specific
+failure the depth-map ablation induces when it is disabled
+(\S\ref{sec:experiments-ablation}). The schema instead records how many levels a
+document actually uses, and the evaluation grades that decision rather than
+assuming it.
+
+\paragraph{Identifiers are deterministic and self-contained.} Every standard
+receives an identifier of the form
+%
+\begin{quote}
+\texttt{\{country\}-\{state\}-\{year\}-}\\
+\texttt{\{indicator\_code\}}
+\end{quote}
+%
+\noindent where the indicator
+code is already fully qualified --- it carries its own ancestry, and it carries
+whatever disambiguator distinguishes side-by-side variants of the same outcome.
+Texas prints the same expectation once per age column, so the age token lives
+inside the code (\texttt{PK3.I.A.2} against \texttt{PK4.I.A.2}); California
+prints the same foundation once per proficiency column, so the column token does
+(\texttt{ELD.1.0.VOCA.1.1.DISC}). There is no separate domain component in the
+identifier and no age band appended after the fact: the derivation is one rule
+over an already-qualified code, which is what makes the identifier reproducible
+from the document rather than from the order in which the pipeline happened to
+process it. Identifier collisions are therefore a measured quantity rather than
+an assumed absence, and we report the count
+(\S\ref{sec:experiments-results}).
+
+Building a canonical schema across independently-formatted jurisdictions is
+itself a nontrivial part of the contribution, because the states do not agree on
+the two things a naive schema would take for granted: how many levels there are,
+and what a code means. Nevada's namespace skipping a level and Kentucky's
+dotted sub-level identifiers, which restate their parent's position inside the
+child's own code, are not exceptions to be special-cased --- they are the normal
+condition of the corpus, and \S\ref{sec:method-parsing} describes the
+shape-based rules that resolve them without reference to any document's
+vocabulary.
+
+Finally, the schema carries per-element human verification state
+(\texttt{human\_verified}, \texttt{verified\_at}, \texttt{verified\_by}) at all
+four levels, supporting an editorial review workflow over the extracted corpus.
+This is a separate concept from the model's confidence score, and the two are
+never combined; \S\ref{sec:method-confidence} explains why. The full schema is
+given in Appendix~\ref{sec:appendix-schema} and annotated examples in
+Appendix~\ref{sec:appendix-goldens}.

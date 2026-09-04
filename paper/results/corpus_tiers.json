@@ -3,17 +3,54 @@
   "verification_command": "python -c \"import fitz; print(fitz.open(path).page_count)\"  # run once per PDF under standards/",
   "verified_date": "2026-08-16",
   "tiers": {
-    "AZ": {"role": "golden", "full": 217, "trimmed": 65, "only_subset": 15},
-    "CA": {"role": "golden", "full": 68, "trimmed": null, "only_subset": 13},
-    "CO": {"role": "golden", "full_birth_to_8": 187, "full_3_5": 41, "trimmed": 41, "only_subset": 10},
-    "TX": {"role": "golden", "full": 87, "trimmed": 71, "only_subset": 9},
-    "NV_2023": {"role": "held-out", "full": 98, "trimmed": 71, "only_subset": 15},
-    "KY": {"role": "held-out", "full": 120, "trimmed": 52, "only_subset": 8}
+    "AZ": {
+      "role": "golden",
+      "full": 217,
+      "trimmed": 65,
+      "only_subset": 15
+    },
+    "CA": {
+      "role": "golden",
+      "full": 68,
+      "trimmed": null,
+      "only_subset": 13
+    },
+    "CO": {
+      "role": "golden",
+      "full_birth_to_8": 187,
+      "full_3_5": 41,
+      "trimmed": 41,
+      "only_subset": 10
+    },
+    "TX": {
+      "role": "golden",
+      "full": 87,
+      "trimmed": 71,
+      "only_subset": 9
+    },
+    "NV_2023": {
+      "role": "held-out",
+      "full": 98,
+      "trimmed": 71,
+      "only_subset": 15
+    },
+    "KY": {
+      "role": "held-out",
+      "full": 120,
+      "trimmed": 52,
+      "only_subset": 8
+    }
   },
   "notes": [
     "CO has no single 'full' page count: the birth-to-8 document is 187pp, the 3-5-only document is 41pp; the _only_subset (10pp) and _trimmed (41pp) tiers both derive from the 3-5 document.",
+    "CO's _trimmed file is not trimmed at all: colorado_3_5_trimmed_2020.pdf (41pp) equals full_3_5 (41pp). The 187pp birth-to-8 file is the wider publication the Ages 3-5 band is drawn from (its TOC puts 'Ages 3-5' at p77), so CO's out-of-scope content is other AGE BANDS, not trimmed-away standards.",
     "CA has no _trimmed tier — its full (68pp) PTKLF 'at a glance' document was cut directly to the 13pp _only_subset.",
     "The held-out canary is NV-2023 (nevada_standards_2023_only_subset.pdf, multi-domain), not NV-SES-2025 (single-domain, too narrow for a generalization claim).",
     "All current eval numbers in paper/results/task{1,2}_20260816/ are from the _only_subset tier only — no table anywhere in this paper may present them as full-document numbers (guardrail 1)."
-  ]
+  ],
+  "tier_definitions": {
+    "full": "The published PDF as downloaded, unmodified.",
+    "trimmed": "Non-standards matter removed — front matter, preamble, guiding-principles essays, appendices, acknowledgements. Retains 100% OF THE STANDARDS (confirmed 2026-08-31 by Emily, who performed the trimming). It reduces page count and therefore cost, NOT coverage: KY's 52pp of a 120pp publication is all of Kentucky's standards. Do not present a trimmed/full page ratio as a coverage fraction.",
+    "only_subset": "A genuine coverage reduction: ~1-2 domains per state, fully annotated, cheap to iterate on. This is the tier guardrail 3's 'favorable preprocessing' disclosure is about, and the tier every quality table uses."
+  }
 }

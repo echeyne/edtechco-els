@@ -20,7 +20,7 @@ These were established by verifying the live tree during planning. Several contr
 
 1. **State the corpus tier for every table.** All current eval numbers come from 9–15pp `_only_subset` PDFs — *not* full documents. No reader may mistake a subset metric for a full-document one.
 2. **Confidence gates nothing.** The detector emits a `confidence` float on `DetectedElement`, but nothing thresholds it and there is no `needs_review` field anywhere in `src/`. Human verification is a **separate** concept — `human_verified` / `verified_at` / `verified_by` on all four levels (`infra/migrations/005_add_verification_columns.sql`). Never describe a confidence-based review gate; older doc revisions did, and were wrong.
-3. **Disclose the manual PDF trimming.** Front matter, introductions, and acknowledgements were removed to produce the `_trimmed` tier. This is favorable preprocessing and must be stated with retained page ranges, not buried.
+3. **Disclose the manual PDF trimming.** Front matter, introductions, essays, appendices and acknowledgements were removed to produce the `_trimmed` tier. This is favorable preprocessing and must be stated with retained page ranges, not buried. ⚠️ **But do not overstate it either (corrected 2026-08-31 by Emily, who did the trimming): the `_trimmed` tier retains 100% of the STANDARDS.** It reduces page count and therefore cost, not coverage — KY's 52pp of a 120pp publication is all of Kentucky's standards, so a trimmed/full page ratio is never a coverage fraction. The genuine coverage reduction is `_only_subset` (~1–2 domains), and that is the tier this guardrail's "favorable preprocessing" framing is really about.
 4. **No unmeasured numbers from the Medium articles.** `documentation/medium-articles/01..05` are prose seed only. Every factual/numeric claim from them must be re-verified against code or re-measured — notably "85–90% of indicators at 0.95+ confidence."
 5. **Never invent a fine-tuning cost to compare against.** Argue cost on **no-labeled-corpus** grounds — the dominant cost of the fine-tuning alternative is annotation, not compute — and report real measured per-run cost.
 6. **Every number must be regenerable.** Record each result as JSON under `paper/results/` alongside the exact command that produced it, plus the model IDs and `outputs/` run used. Tables regenerate from those files; they are never hand-typed.
@@ -29,9 +29,9 @@ These were established by verifying the live tree during planning. Several contr
 
    ⚠️ **NV does NOT qualify, despite the 2026-08-22 exhaustive pass — measured, not assumed.** `HELD_OUT_ANNOTATION_GUIDE.md` states that both held-out goldens are now exhaustive and that NV's raw precision is therefore a real hallucination rate. The first half is true in one sense and the second does not follow. Two different properties are involved:
    - **Content-exhaustive** — the golden annotates every distinct structural element the subset prints. NV is now this: 46 elements, up from 41, including all twelve `<Domain> Standard N:` headings.
-   - **Detection-exhaustive** — every in-scope detection is accounted for by a golden entry. NV is **not** this, and cannot be while the golden holds one entry per element: the detector emits **53** in-scope elements for NV because the document reprints 6 headings on a second page spread (verified: 6 duplicate `(level, title)` pairs in the detection, 0 in the golden) and one is the known `SS.CI.PK3` hallucination.
+   - **Detection-exhaustive** — every in-scope detection is accounted for by a golden entry. NV is **not** this, and cannot be while the golden holds one entry per element: the detector emits **52** in-scope elements for NV because the document reprints 5 headings on a second page spread (verified: 5 duplicate `(level, title)` pairs in the detection, 0 in the golden) and one is the known `SS.CI.PK3` hallucination.
 
-   So NV's ceiling is **46/53 = 0.8679**, and reporting its raw precision as a hallucination rate would count 6 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now 7 verdicts instead of 12, because the 5 previously-unannotated standards are annotated. Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
+   So NV's ceiling is **46/52 = 0.8846**, and reporting its raw precision as a hallucination rate would count 5 *correct re-detections of genuinely reprinted headings* as hallucinations. **NV keeps the verified-precision path**: (in-scope − hallucinations)/in-scope. The audit is now **6 verdicts** (⚠️ updated 2026-08-30 — it was 7 at `288c64f1`, and 12 before the exhaustive golden pass; NV's detection count fell 53 → 52 at `14374dba`). Only `golden_is_exhaustive` in the `n_golden == n_in_scope` sense licenses this carve-out — content coverage alone does not. The detector goldens are partial spot-checks (5–25 elements) while the detector emits 9–122 elements inside annotated domains; the suite counts every unmatched in-scope detection as a false positive even when it is correct document content, so raw precision mostly measures annotation coverage (verified: all of AZ's "FPs" are real unannotated elements). The paper reports **recall (per-level) from the suite** plus a **verified precision / hallucination rate from the manual FP audit (Task 1b)**. Decision made: no exhaustive golden extension, no further PDF trimming — trimming smaller invalidates the frozen measurement chain and weakens the eval without fixing the artifact.
 
 ### Evidence FOR the guardrails argument, found in the pipeline itself (2026-08-24/25)
 
@@ -76,39 +76,67 @@ mismatch visible).
 composed code double-counts or loses a parent". Do not re-derive them here; cite
 them.
 
-## Next session — the run queue (as of 2026-08-24)
+## Next session — the run queue (as of 2026-08-30)
 
 Probe the Opus quota first (see the Compute budget section); the reset boundary
 is not UTC midnight.
+
+**Everything measurable at the `_only_subset` tier is now recorded at the
+current hash.** Tasks 1, 1b, 2, 3 and 4 were re-recorded across 2026-08-26/29 at
+`code_version_hash` **`14374dba`**, `generate_tables.py` reads them
+(`RUN_TAG = ABLATION_TAG = BASELINE_TAG = "20260826"`), and the FP audits are
+re-signed at that hash. Task 8's descriptive stats stay pinned at
+`STATS_TAG = "20260823"` deliberately — they describe the corpus, not a model
+result, and nothing in the hash chain touched them.
 
 1. ~~**Finish Task 3's stability run 3**~~ — ✅ **DONE 2026-08-24.** 9 runs
    (CA off-arm, plus CO/TX/NV/KY in both arms) in 14 min for **454,113 Opus
    tokens, 17.5% of the daily quota, $4.04**. All six states are now n=3 per
    arm. It changed a finding: `CO-NO-SUB-STRAND` is unstable (`FAIL, FAIL,
    PASS`), so the categorical evidence is two KY cases, not three — see Task 3.
-2. **Task 6 — full documents, KY + CO first** (Emily's call, 2026-08-23).
-   **~1.9M tokens.** KY 8pp→120pp is the largest relative jump AND its golden is
-   detection-exhaustive, so the 44 annotated elements can be graded *inside* the
-   full run — the only quality-at-scale evidence available without new
-   annotation. CO 10pp→187pp is the other state carrying the Task 3 effect, so it
-   also informs the framing question. AZ (217pp, the real batching stress test)
-   and the remaining three follow on a later day; all six is ~3.5M, over one
-   day's cap.
+   ⚠️ Recorded at `288c64f1`, i.e. against the OLD Pass-1 sampler, and
+   **deliberately not re-recorded** — see the `status_at_2026_08_29` block in its
+   own manifest for why the claim survives the sampler change.
+2. **Task 6 — full documents, KY + CO** (Emily's call, 2026-08-23).
+   ▶️ **EXECUTIONS RUN 2026-08-29 by Emily — run id `full08292026`.** The
+   pipeline half is done; **the recording half is not**. Still owed before Task 6
+   can be called complete:
+   - re-verify `BEDROCK_PRICING` in `src/els_pipeline/metrics.py` against live
+     Bedrock rates and cite the date (step 1, never done — rates are hardcoded as
+     of April 2026);
+   - pull per-stage tokens/cost/latency/call-counts from
+     `PipelineRunMetrics.summary()` for both runs;
+   - write `paper/results/task6_2026MMDD/` with manifest + findings, and extend
+     `generate_tables.py` with a `_trimmed`-tier cost/scale table kept
+     **separate** from the subset-tier quality tables (guardrail 1). The caption
+     must say both halves of what `_trimmed` means — complete standards
+     content, not the full published PDF — or a reader takes it for an excerpt.
 
-   ⚠️ **Budget check for 2026-08-24 specifically:** Task 3's completion already
-   spent **454K** of today's 2,592,000. Task 6's KY+CO at ~1.9M brings the day
-   to ~2.35M, **~91% of the cap** — it fits, but with only ~240K of headroom, so
-   nothing else Opus-heavy should run today and a mid-run throttle is a real
-   risk. Rule 2 from the Compute budget section applies with full force: **one
-   invocation per state, separate `--report-json`**, so a throttle costs one
-   state rather than recording the rest as `n_detected=0`.
+   ⚠️ **A pricing trap to check while doing step 1.** `BEDROCK_PRICING` keys the
+   parser on `us.anthropic.claude-sonnet-4-6`, which matches `config.py`'s
+   default — but `task{1,2}_20260826/manifest.json` records the parser model as
+   `us.anthropic.claude-sonnet-4-5-v1`. `LLMCallMetrics.estimated_cost` does a
+   `.get(model_id, {})`, so a deployed env var carrying the 4-5 id prices the
+   entire parsing stage at **$0** silently. Confirm the deployed Lambda's env var
+   before trusting the cost column, and report **tokens as the primary hard
+   number** either way (step 4).
+
+   AZ (217pp, the real batching stress test) and the remaining three follow on a
+   later day; all six is ~3.5M, over one day's cap.
+3. ~~**Task 5 — stability/determinism**~~ — ✅ **DONE 2026-08-31.** n=5 detector /
+   n=6 parser at `14374dba`, ~772K Opus tokens across three days.
+   `paper/results/task5_20260830/`. **It found that Task 2's NV code accuracy
+   46/46 does not reproduce** (five runs: 44, 45, 44, 44, 44) and that the NV
+   sampler attribution is not established at n=1 per arm — see Task 5.
+4. **Task 7 — secondary ablations.** Optional; drop the two-stage-vs-single-stage
+   arm first if time runs short.
 
 **Zero-Opus work available any time** (does not compete for quota): ~~Task 8~~
 **(done 2026-08-23)**, Task 11's local figures and the corpus appendix table —
 note it should now EXTEND Task 8's dataset table rather than duplicate it — and
-Task 12 drafting for every section whose numbers are recorded (Tasks 1, 1b, 2,
-3, 4, 8, 9 are all done). The `measure_stability` repair that blocked Task 5 has
-also landed (`fa0b0ed`).
+**Task 12 drafting, which is now the critical path**: every section except the
+Task 5 and Task 6 subsections of §Experiments has its numbers frozen and
+regenerating. Tasks 1, 1b, 2, 3, 4, 8, 9 and 10 are all done.
 
 ## Compute budget — the Bedrock Opus daily token quota (measured 2026-08-23)
 
@@ -131,6 +159,12 @@ estimate — 782,419 on 2026-08-23 + 454,113 on 2026-08-24, and it landed within
 | ablation stability, 2 extra runs × both arms × 6 states | **1,236,532 (measured)** | **47.7%** |
 | **Task 6, all six FULL documents** | **~3,500,000** | **135% — needs two days** |
 
+⚠️ **The 2026-08-26/29 re-record of Tasks 1-4 did not record its own token
+spend**, so there is no measured row for it here. Task 4 is the exception and is
+recorded as **0** — the rule-based arm is pure Python and its LLM arm was read
+from the frozen Task 1/2 reports rather than re-run. Record the spend for Task 6
+and Task 5, so this table keeps being usable for planning.
+
 Full documents are **777pp against 70pp of subsets, 11.1x**: AZ 217, CO 187,
 KY 120, NV 98, TX 87, CA 68.
 
@@ -152,8 +186,10 @@ KY 120, NV 98, TX 87, CA 68.
 
 ## How to run evaluations
 
-Use **`outputs/08-22-26-4/`** (set 2026-08-22) — it supersedes every earlier `outputs/` folder, including `08-16-26`, `08-22-26`, `-2` and `-3`. Cache is on by default; use `--no-cache` for final recorded numbers.
+Use **`outputs/08-26-26-2/`** (pipeline run 044, set 2026-08-26) — it supersedes every earlier `outputs/` folder. It ran AFTER the `20cf2f7` deploy, so its detections were produced by current code, and it is the extraction source every `*_20260826` recording cites. Cache is on by default; use `--no-cache` for final recorded numbers.
 
+> ⚠️ **`outputs/08-22-26-4/` is now HISTORICAL.** It is the extraction source for every `*_20260822`/`*_20260823` recording and for the Task 3 stability sweep, so it is still what those manifests reproduce against — but new work runs on `08-26-26-2`. The rationale for preferring `-4` over its siblings is retained below because it still governs which of the 08-22 folders a reproduction uses.
+>
 > **Why `-4` and not `08-22-26`.** `-4` is run 040, the first carrying `detector._splice_overlapping_prose`. Its NV detection differs from `08-22-26` in **exactly one field** — the Science `domain.description`, 2410 → **3500 chars**, byte-exact against the golden — and is otherwise identical across all 53 elements. `ground_truth_parser/NV.json` still names `outputs/08-22-26/NV-detection.json` in `source_detection`; the drift is in the favorable direction and needs a one-line provenance update, **not** re-annotation.
 >
 > **Do NOT use `08-22-26-2`** — its KY detection is 38 elements against the other runs' 44, which breaks KY's exhaustive detector golden and drops parser coverage to 21/26. `-4` restores KY to 44 with levels matching the golden exactly (3/5/10/26).
@@ -207,7 +243,7 @@ python -m evaluation.eval_parser --detection-dir outputs/08-22-26-4 --state CA
 - **California's source is the PTKLF "at a glance" document** (`ptklfataglance.pdf`, 68pp) — confirmed correct, not an error in `standards/standards_tracking.md`. Name it precisely in the paper.
 - **Batched vs. direct path.** The detector eval runs the direct path; the parser eval and production run on the batched path's output (`detection_batching.py`, `parse_batching.py`). ⚠️ **The chunk/domain counts below were measured on `outputs/08-16-26` and are stale for AZ** — its detection grew 66 → 77 elements in `08-22-26-4`, so re-derive them during the re-record. **Measured 2026-08-16:** at the `_only_subset` tier every state produces ≤5 chunks (AZ 4, CA 3, CO 4, TX 3, NV 5, KY 3) against `MAX_CHUNKS_PER_BATCH=5` and ≤3 domains against `MAX_DOMAINS_PER_BATCH=3`, so **both** batching layers run as exactly one batch per state — the Map has a single iteration and the merge is a no-op. Detection consequently converges almost exactly (CA/CO/TX identical, AZ differs by two footnote characters), but that is structural, not evidence. Parsing does **not** converge (12 of CA's 94 `standard_id`s differ). The batching claim needs a full-document run (Task 6).
 - **Model assignment is deliberate** — Haiku 4.5 for the depth map, Opus 4.6 for detection, Sonnet 4.6 for parsing (`config.py:15-21`). The principle is "cheapest model that suffices per stage"; the model-tier ablation (Task 7) is its evidence.
-- **Cost data already exists.** `PipelineRunMetrics.summary()` (`src/els_pipeline/metrics.py`) gives per-stage tokens/cost/latency/call-counts; the `els-pipeline-metrics-{env}` CloudWatch dashboard (`infra/cdk/lib/constructs/pipeline-dashboard.ts`) is the cross-check. `BEDROCK_PRICING` rates are hardcoded as of April 2026 — re-verify and cite the date.
+- ~~**Cost data already exists.** `PipelineRunMetrics.summary()` (`src/els_pipeline/metrics.py`) gives per-stage tokens/cost/latency/call-counts~~ ⚠️ **FALSE — corrected 2026-08-30.** `PipelineRunMetrics` and `log_pipeline_run_summary` are **dead code**: defined in `metrics.py` and referenced nowhere else in `src/`. `summary()` never runs in production, so there is no per-stage cost artifact to pull. What DOES exist is the per-call `LLM_METRICS:` log line emitted by `call_bedrock_llm`, plus CloudTrail `InvokeModel` events; stages must be separated by `model_id`, since `stage` is hardcoded to `"detection"` (`detector.py:1235`) and `metrics_context` is never passed at the real call sites, leaving `run_id`/`state` blank. The `els-pipeline-metrics-{env}` CloudWatch dashboard (`infra/cdk/lib/constructs/pipeline-dashboard.ts`) remains a cross-check. ⚠️ `BEDROCK_PRICING` rates are hardcoded as of April 2026 and **could NOT be verified on 2026-08-30** — see `paper/results/task6_20260830/pricing_verification.md`; the AWS Price List API does not catalog current-generation Claude models. Report tokens as the hard number.
 
 ---
 
@@ -217,6 +253,16 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 ### Task 1 — Run headline evals on the 4 golden states and sanity-check every metric
 
+> ✅ **RE-RECORDED AGAIN 2026-08-26/29 at `14374dba` — CURRENT. Results: `paper/results/task1_20260826/`.** Detector arms recorded at `7da92182`; **parser arms re-run live at `14374dba` on 2026-08-29** after `_delabel_parent_code` landed. Extraction source `outputs/08-26-26-2` (run 044), `--no-cache` on both arms.
+>
+> **Headline: nothing moved.** Recall **1.0000** on all four states and at every level; code accuracy 4/4, 25/25, 7/7, 8/8; description 4/4, 14/14, 4/4, 3/3; depth map PASS ×4. Parser byte-identical to the `288c64f1` baseline on every state and field — coverage 1.0000 ×4, field accuracy AZ 0.9969 / CA, CO, TX 1.0000, fully correct 17/18, 21/21, 9/9, 8/8, zero collisions. **The single differing cell in the whole re-record is AZ's total detection count, 66 → 67**, and it landed outside the annotated domains so in-scope precision did not move (0.4167, 5 of 12).
+>
+> **That null is load-bearing, not filler.** Seven code-version moves — three detection-prompt changes and six new deterministic repairs — changed nothing on the four states the system was tuned against. That is what licenses reading `task2_20260826`'s held-out *gain* (NV code 44/46 → 46/46) as a real improvement rather than as drift.
+>
+> ⚠️ **A batched-path prediction did NOT transfer.** Pipeline run 043 showed AZ detection falling 77 → 65, all listing-page duplicate sub_strands, prompting a prediction that AZ raw precision would rise. On the direct path AZ went 66 → **67** and in-scope precision did not move at all. The paths disagree, as they repeatedly have; the caution in "How to run evaluations" stands unmodified for the eval numbers.
+>
+> `paper/results/task1_20260822/` is retained as the reproducibility record only. `RUN_TAG` is now `20260826`.
+>
 > ✅ **RE-RECORDED 2026-08-22/23 at `288c64f1` — COMPLETE. Results: `paper/results/task1_20260822/`.** Recall **1.000 in all four states and at every level** (`fn=0` per level); code accuracy 4/4, 25/25, 7/7, 8/8; description 4/4, 14/14, 4/4, 3/3; depth map PASS ×4; all 18 regression cases PASS. Parser: coverage 100% in all four, field accuracy AZ 0.9969 / CA, CO, TX 1.0000, **zero `standard_id` collisions**. `paper/results/task1_20260816/` is retained ONLY as the reproducibility record and every figure in it is historical — its hash was `3b445471`, then `2ac17ac2` (commit `92c8288`), now **`288c64f1`**. ⚠️ `paper/analysis/generate_tables.py` was hard-pinned to the superseded folder and rendered its numbers into the paper until 2026-08-23; it now carries a `RUN_TAG` constant and refuses a superseded tag.
 > 1. **pipeline source** (hash above);
 > 2. **inputs** — AZ detection 66 → **77** elements (sub_strands 11 → **21**), which is unmeasured and is the single most important thing the re-record must explain;
@@ -258,6 +304,16 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Deliverable:** verified-precision numbers, Emily-signed.
 
+> ✅ **RE-SIGNED 2026-08-29 at `14374dba` — CURRENT. `paper/results/task1_20260826/task1b_fp_audit_SIGNED.json`** (golden four) and **`paper/results/task2_20260826/nv_fp_audit_SIGNED.json`** (held-out), both annotated by Emily Cheyne. Per-state sign-off sheets sit beside them as `{state}_fp_audit_signoff.md`.
+>
+> **Verified precision 1.000 for AZ, CA, CO, TX and KY; NV 51/52 = 0.9808.** Corpus-wide: **296 in-scope detections, ONE hallucination, verified precision 0.9966** — unchanged to four decimals from the `288c64f1` recording, though the denominator moved 297 → 296 (NV detected 52 rather than 53).
+>
+> Verdict counts: AZ 7, CA 97, CO 35, TX 17 (**156** for the golden four, unchanged) and NV **6** (down from 7 — one of the reprinted-heading re-detections is gone with the 53 → 52 move). KY needs no audit; its golden is detection-exhaustive with 0 extras.
+>
+> **`verdicts_changed` is 0 everywhere except a CA classification correction:** six ELD proficiency-column rows (`Foundation 1.9` ×3, `Foundation 1.10` ×3) were first presented as Group B repeats; Emily identified them as distinct indicators and the classifier was corrected to key on `(level, title, code, …)` rather than on title alone (commit `eb3952e`). No verdict changed as a result — the rows are real either way.
+>
+> ⚠️ **`heldout_evidence.py` hardcodes `verified_by='claude-first-pass-UNSIGNED'`, so re-running it OVERWRITES the signature in the evidence JSON.** The `*_SIGNED.json` files are authoritative and are never regenerated; re-apply from them if the evidence is rebuilt.
+>
 > ✅ **DONE 2026-08-23. Signed by Emily Cheyne, 156 verdicts, 0 changed.** Artifacts: `paper/results/task1_20260822/task1b_fp_audit_SIGNED.json` (authoritative — the evidence JSON's `verified_by` is reset by regeneration), `task1b_evidence.json`, and per-state sheets in `task1_20260822/signoff/`.
 >
 > **Verified precision 1.000 for AZ, CA, CO and TX — zero hallucinations.** Combined with NV (53 in-scope, 1) and KY (44, 0): **297 in-scope detections corpus-wide, ONE hallucination, verified precision 0.9966.** The methodology sentence is now true for all six states.
@@ -272,6 +328,20 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Risk:** HIGH + LONG POLE. This is the main net-new effort and it gates the paper's strongest claim. **Start early; it can run in parallel with Task 1.**
 
+> ✅ **RE-RECORDED AGAIN 2026-08-26/29 at `14374dba` — CURRENT. Results: `paper/results/task2_20260826/`.** Detector arms at `7da92182`; **parser arms re-run live at `14374dba` on 2026-08-29** after `_delabel_parent_code`. Goldens unchanged (NV 46 detector / 24 parser, KY 44 / 26), so every moved cell is a code result rather than a denominator artifact.
+>
+> ⚠️ **QUALIFIED 2026-08-31 BY TASK 5 — READ BEFORE QUOTING THE NV NUMBER.** The 46/46 below is ONE DRAW and does not reproduce: five fresh runs on identical detector code give **44, 45, 44, 44, 44**. Report NV code accuracy as a range (44-45 of 46), and treat the sampler attribution as suggested rather than confirmed. See `paper/results/task5_20260830/findings.md`. KY's numbers, and both states' recall and parser results, are unaffected.
+>
+> **Headline — the held-out states got BETTER, and the golden four did not move.** NV detector code accuracy **44/46 (0.9565) → 46/46 (1.0000)** and description **2/3 → 3/3**; both recorded domain mismatches are gone (`NV-DOM-02` golden `S`, was detecting `Science`; `NV-DOM-03` golden `T`, was detecting `TECH`). KY unchanged at 44/44 on every dimension. Recall **1.0000** at every level in both, depth map PASS ×2, 3/3 regression cases PASS each. NV detected 53 → **52**, raw precision 0.8679 → 0.8846.
+>
+> **Parser at `14374dba`: NV 24/24 and KY 26/26, both at field accuracy 1.0000, zero collisions.**
+>
+> ⚠️ **Do not quote the intermediate `7da92182` parser numbers as a regression without saying which arm.** At `7da92182` KY parsed 17/26 at field accuracy 0.9423 — nine rows where the parser failed to convert a detector label-form parent code (`Benchmark N.N`) into the domain-prefixed `LEL.N.N`, after which the leaf went bare. The detection input was byte-identical and the parser prompt did not change, so it was sampling, not a code regression; in production `validator._validate_code_shape` would have rejected all nine rather than storing them. `_delabel_parent_code` (2026-08-26) repairs it deterministically. `findings.md` keeps that section as the diagnosis that motivated the repair — **the numbers in the paper's tables are the live `14374dba` ones.**
+>
+> ✅ **Attribution settled by A/B, not assumed: the Pass-1 SAMPLER fixed NV.** A controlled three-arm test on one frozen NV extraction, all at `14374dba`, all `--no-cache`, same grader — new layout-stratified sampler gives code **46/46** and description **3/3**; reverting ONLY the sampler to the stride version gives **43/46** and **2/3**, reproducing the same two domain mismatches; disabling the depth map entirely gives 44/46 with the same pair. Record: `paper/results/task2_20260826/nv_attribution_ab.json`. This retires CLAUDE.md's standing caution that NV's domains were expected to keep coming back as `SCIE`/`TECH`.
+>
+> `paper/results/task2_20260822/` is retained as the reproducibility record only.
+>
 > ✅ **RE-RECORDED 2026-08-22/23 at `288c64f1` against the NEW goldens — COMPLETE. Results: `paper/results/task2_20260822/`.** **Generalization holds, and the parser half is perfect on both held-out states.** Detector recall **1.000** at every level in both; NV code 44/46, description 2/3, verified precision **0.9811**; KY code 44/44, description 26/26, raw precision **1.000** (its golden is detection-exhaustive). Parser: NV **24/24** and KY **26/26** fully correct at field accuracy **1.0000**, zero collisions, all 7 parser regression cases PASS. The NV FP audit is **7 verdicts, signed by Emily 2026-08-23, 0 changed**. `paper/results/task2_20260816/` is retained only as the reproducibility record; its `nv_fp_audit_signoff.md` is the OLD 12-verdict sheet and carries a DO-NOT-SIGN banner. Still true and unchanged below: the NV golden moved 41→46 (detector) and 15→24 (parser), so
 > - **NV detector golden 41 → 46 elements**, **NV parser golden 15 → 24 standards** (exhaustive pass, Emily, 2026-08-22). NV's annotation-coverage ceiling therefore moves **0.7736 → 0.8679** and its raw precision moves with it — **that is an annotation-coverage change, not a quality improvement, and must be labelled as such.**
 > - KY goldens unchanged (44 / 26).
@@ -312,6 +382,35 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Deliverable:** the on/off delta table in `paper/results/`.
 
+> ✅ **RE-RECORDED 2026-08-26 at `14374dba` — CURRENT. Results: `paper/results/task3_20260826/`.** `ABLATION_TAG` is `20260826`.
+>
+> **This is the one task that HAD to be re-recorded rather than merely being stale.** Task 3 measures what Pass-1 buys, and `99b853cc` replaced the Pass-1 **sampler** (stride → layout-stratified). The old baseline's "depth map ON" arm therefore exercised the sampler that read Kentucky as a 3-level document — it was measuring a component that changed underneath it. The ON arm here is the frozen `task1_20260826` + `task2_20260826` detector reports (depth map PASS in all six); the OFF arm is a fresh six-invocation sweep with `ELS_DEPTH_MAP_ENABLED=false`, `--no-cache`.
+>
+> **Headline: the gap WIDENED.** Mean recall off **0.9610 → 0.9573** against an ON arm at 1.0000 in both, so the measured cost of removing the depth map grew **0.0390 → 0.0427**. The prediction that a re-record would be conservative rather than favourable is confirmed.
+>
+> **Pooled by level — this is the table to lead on, and it is sharper than before:**
+>
+> | level | recall on → off |
+> |---|---|
+> | domain | 1.0000 → 1.0000 |
+> | **strand** | **1.0000 → 0.9200** |
+> | **sub_strand** | **1.0000 → 0.8333** |
+> | indicator | 1.0000 → 1.0000 |
+>
+> Domain and indicator untouched; the entire effect sits at strand and sub_strand — exactly the mechanism CLAUDE.md documents. `sub_strand` recall **0.8333** is the single sharpest number in the ablation.
+>
+> ⚠️ **NEW AND IMPORTANT: the ablation has TWO distinct failure modes, and an aggregate hides it.**
+> - **CO and KY lose RECALL** — CO 1.0000 → 0.8571, KY 1.0000 → 0.8864 (code 44/44 → 35/39), with both KY structural regression cases newly failing.
+> - **TX and NV keep recall 1.0000 and lose CODE accuracy instead** — TX **8/8 → 5/8 on the identical 33 detections**, NV 46/46 → 44/46 and description 3/3 → 2/3. The depth map is not changing *what* TX finds; it is changing whether the codes come out right.
+>
+> ⚠️ **AZ and CA are insensitive on every metric, and that is an ARTEFACT of their goldens, not a result.** Both are small spot checks (5 and 25 elements) against 67 and 122 in-scope detections, so recall saturates either way. Do not write them up as evidence the depth map does not matter — they are the states least able to show it.
+>
+> ⚠️ **NV's off arm reproduces the old domain-code defect** (`Science`/`TECH` return), which is the ablation independently corroborating the Task 2 attribution above.
+>
+> **`CO-NO-SUB-STRAND` now SURVIVES the off arm** — a small real improvement in the ON arm attributable to the new sampler, CO being one of the two states that samples at all. The two reproducible cases remain `KY-BENCHMARK-IS-SUB-STRAND` and `KY-STRAND-CODE-KEEPS-FULL-LABEL`.
+>
+> **The n=3 stability sweep was NOT re-recorded, deliberately** — see `paper/results/task3_stability_20260823/manifest.json` → `status_at_2026_08_29`. It describes the old sampler and is nominally stale, but its *claim* survives: the ON arm was 1.0000 with stdev 0.0 across all 18 runs (which the new sampler cannot improve on) and CO/KY degraded in every off-arm run. The single `task3_20260826` off-arm run lands inside that recorded envelope. **Report off-arm recall as a RANGE, never a point value**, and keep sourcing the case list from `stability_analysis.json`.
+>
 > ✅ **BOTH ARMS RECORDED 2026-08-23 across all six states. Results: `paper/results/task3_20260822/`; repeated-run stability in `paper/results/task3_stability_20260823/`.**
 >
 > ✅ **THE STABILITY SWEEP IS COMPLETE (2026-08-24). n=3 per arm per state, all six states, 36 graded runs. NOTHING OUTSTANDING.** The 9 runs the 2026-08-23 throttle left behind finished in 14 min for **454,113 Opus tokens (17.5% of the daily quota), $4.04** — close to the ~400K estimate. Driver: `paper/results/task3_stability_20260823/finish_run3.sh`. `off_run3_CA` was re-executed cleanly; the throttled attempt stays quarantined as `INVALID_THROTTLED_*` (report and review dir both).
@@ -367,6 +466,12 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Risk:** medium. Closes the "no external baseline" gap — the codebase currently reports no comparison against anything, so the LLM lift is unquantified.
 
+> ✅ **REFRESHED 2026-08-26 at `14374dba` — CURRENT. Results: `paper/results/task4_20260826/`.** `BASELINE_TAG` is `20260826`. **Zero Bedrock tokens** — the rule-based arm is deterministic Python and the LLM arm is read from the frozen, superseding Task 1/2 detector reports rather than re-run. Both arms now sit on one extraction (`outputs/08-26-26-2`), which the 20260823 recording did not.
+>
+> **The conclusion is unchanged and the headline numbers are identical:** mean recall LLM **1.0000** vs baseline **0.4995**; pooled by level LLM 13/13 domain, 25/25 strand, 24/24 sub_strand, 73/73 indicator against rule-based 13/13, **6/25**, **16/24**, **10/73**. Only the LLM column's NV cells moved — code 44/46 → 46/46 and raw precision 86.8 → 88.5 — tracking the superseding Task 2 recording.
+>
+> ⚠️ **The three caveats in `task4_20260823/findings.md` were NOT re-derived and still travel with these numbers** — the backwards verified-precision result, AZ's higher baseline raw precision, and the brittleness probe. Read that file, not just the refreshed JSON.
+>
 > ✅ **DONE 2026-08-23 at `288c64f1`. Results: `paper/results/task4_20260823/`.** Zero Bedrock spend — the baseline is pure Python and the LLM arm is the frozen Task 1/Task 2 record, so no Opus quota was touched. Table: `paper/tables/baseline_comparison.tex`, generated by `build_baseline_table` in `generate_tables.py` (new `BASELINE_TAG`); wired into `sections/experiments_results.tex` as `sec:experiments-baseline` with a Task 12 prose brief.
 >
 > **The headline is the per-level row, not the mean.** The rule-based arm ties the LLM exactly at **domain (13/13 both)** and collapses below it — strand 0.240, sub_strand 0.667, indicator 0.137, against 1.000 at every level. Per state 1.000 → AZ 0.800, CA 0.640, CO 0.571, TX 0.625, NV **0.065**, KY **0.295**. Reporting a mean ("1.000 vs 0.500") hides exactly the gradient that makes the point: typography identifies a document's top division in all six states and nothing below it.
@@ -395,11 +500,30 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 
 **Risk:** low. Supports the determinism claim; a known reviewer question for any LLM pipeline.
 
+> ✅ **COMPLETE 2026-08-31 at `14374dba`. n=5 detector / n=6 parser, six states, both suites. Results: `paper/results/task5_20260830/`.** Runs 1-3 on 2026-08-30 (one session), runs 4-5 on 2026-08-31 (~18h later); the parser suite folds in the 2026-08-29 Task 1/2 parser arms as observation 0 at zero cost, since they share hash, extraction and `--no-cache`. Analyzer `paper/analysis/task5_stability.py` (`--self-check` pins 20 blind-spot assertions). Total cost ~772K Opus tokens across three days, well inside quota.
+>
+> **Detector 0.0164 over 304 identities; parser 0.0448 over 201.** Instability is concentrated, not diffuse: **CA, CO, KY, TX are perfectly stable on the detector across all 5 runs**, and **AZ, CO, KY, TX on the parser across all 6**. All movement is AZ (detector), CA (parser), NV (both).
+>
+> ⚠️ **THE HEADLINE FINDING IS NEGATIVE AND IT QUALIFIES TASK 2.** `task2_20260826` records **NV detector code accuracy 46/46 (1.0000)** as the held-out generalization gain. **It does not reproduce** — five fresh runs give **44, 45, 44, 44, 44**, with `n_golden`=46 and `matched`=46 in every one, so no denominator moved. The recorded `n_detected` of 52 is likewise below all five (54, 54, 54, 53, 53). The confound is ruled out: the frozen arm is at `7da92182` and these at `14374dba`, but the only commit between them (`42dd8d3`) touches **`parser.py` alone** — `git diff 42dd8d3^ 42dd8d3 -- src/els_pipeline/detector.py` is empty. Mechanism is the documented drift: run 2 emitted `S` (the golden value), the rest emitted `Science`.
+>
+> ⚠️ **Consequence: `nv_attribution_ab.json`'s "THE SAMPLER, confirmed by controlled A/B" is NOT established.** Its three arms (new sampler 46/46, old stride 43/46, depth map off 44/46) are each a **single draw**, and the new-sampler arm's own measured range is 44-45 — so its 46 was the top of its distribution and the 3-point gap sits inside that spread. **Repeat each arm before citing it.** This does NOT overturn Task 3, a different experiment at n=3 across six states whose effect never changes sign.
+>
+> **Paper treatment (guardrail 7):** report NV detector code accuracy as a RANGE (44-45 of 46), never 1.000; downgrade the sampler attribution to "suggested, not established at n=1 per arm".
+>
+> ✅ **Blocker 2 is vindicated by direct evidence.** NV's detector output splits exactly on the session boundary — [54, 54, 54] for same-session runs 1-3, [53, 53] for next-day runs 4-5 — with one indicator present in all three same-session runs and missing from both next-day runs. Five back-to-back runs would have called it perfectly stable.
+>
+> **Two other results worth the paper:** CA's parser fired the documented structural-label-in-code defect in 2 of 5 comparisons (12 rows, `ELD.1.0.VOCA.Foundation 1.1.BROA`), and **all 12 carry whitespace so `validator._validate_code_shape` rejects them before Aurora** — the cleanest live demonstration that the guard is load-bearing. NV's parser failed `NV-STRAND-PARENT-BY-HEADING` in runs 1, 2, 4 and passed in 3, 5. ⚠️ That failure makes the eval exit non-zero; it is a QUALITY signal, not an infrastructure failure, and those reports are valid — excluding them would have hidden the finding.
+>
+> **Still owed:** a `build_stability_table` in `generate_tables.py` reading `task5_20260830/stability_analysis.json`, and §Experiments prose.
+>
+> ⚠️ **Do not confuse this with the Task 3 stability sweep.** `paper/results/task3_stability_20260823/` is n=3 of the *depth-map ablation arms* on the detector only. Task 5 is n=5 of *both suites* under normal configuration, and it is what the paper's determinism claim rests on.
+>
 > ✅ **BLOCKER 1 CLEARED 2026-08-23 — `measure_stability` is repaired and Task 5 is unblocked.**
 > `evaluation/eval_detector.py::measure_stability` was rewritten; 9 tests in
 > `tests/unit/test_measure_stability.py` pin each fixed blind spot. Full suite: 475 pass.
-> **This does NOT invalidate any recorded measurement** — `eval_common.code_version_hash`
-> covers `detector.py` and `parser.py` only, and it is still `288c64f1`.
+> **This did NOT invalidate any recorded measurement** — `eval_common.code_version_hash`
+> covers `detector.py` and `parser.py` only, and the repair touched neither; the hash was
+> `288c64f1` at the time and is **`14374dba`** as of 2026-08-30.
 >
 > Three blind spots fixed, all three of which the old code needed simultaneously to
 > report its misleading 0.000:
@@ -455,13 +579,68 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 3. Pull per-stage tokens/cost/latency/call-counts from `PipelineRunMetrics.summary()`; cross-check totals against the `els-pipeline-metrics-{env}` CloudWatch dashboard.
 4. Report **tokens as the primary hard number**, cost as derived with the pricing date stated. Confirm depth-map cost is now non-zero.
 
-**Deliverable:** a cost/latency/scale table, explicitly labelled as full-document tier and separate from the subset-tier quality tables.
+**Deliverable:** a cost/latency/scale table, explicitly labelled with its corpus tier and separate from the subset-tier quality tables.
 
-> 🔗 **This task carries an attached chore list — do it in the same window.** `detector.py` and `parser.py` are cost-gated between re-records: `eval_common.code_version_hash` hashes their raw bytes, currently **`288c64f1`**, and every recorded manifest under `paper/results/` cites it. So a docstring fix that would otherwise cost ~315K Opus tokens (12% of a daily quota) to re-validate is free once you are re-recording anyway.
+> ▶️ **EXECUTIONS RUN 2026-08-29 by Emily, run id `full08292026`. Harvested and verified 2026-08-30 → `paper/results/task6_20260830/`.**
+>
+> ⚠️ **THEY ARE `_trimmed`-TIER RUNS, NOT THE FULL PUBLISHED PDFs. The run id says `full` and it is wrong.** Verified two independent ways — the Step Functions execution input, and PyMuPDF page counts on the local files:
+>
+> | | file actually processed | pages | wider publication | pages |
+> |---|---|---|---|---|
+> | KY (`kentucky-execution-1788029003`) | `kentucky_all_standards_2021_trimmed.pdf` | **52** | `kentucky_all_standards_2021.pdf` | 120 |
+> | CO (`colorado-execution-1788028830`) | `colorado_3_5_trimmed_2020.pdf` | **41** | `colorado_birth_to_8_2020.pdf` | 187 |
+>
+> ✅ **BUT THE PAGE RATIO IS NOT A COVERAGE RATIO — corrected 2026-08-31 by Emily, who did the trimming.** The `_trimmed` tier retains **100% of the standards**; what was cut is preamble, introductions, essays, appendices and acknowledgements. So these runs cover **every standard in both documents**, and the earlier readings here — "43%" / "22%", and full-document scale as a stated *coverage* limitation — are **withdrawn**. Corroborated by the recording's own integrity checks: 50 of KY's 52 pages and 37 of CO's 41 carry detected elements, every gap read and confirmed content-free.
+>
+> ⚠️ **CO needs one further qualification and it is not trimming.** `colorado_3_5_trimmed_2020.pdf` (41pp) equals the **full** Ages 3–5 document (41pp per `corpus_tiers.json`) — nothing was cut from it. The 187pp birth-to-8 file is the wider publication that band is drawn from (its TOC puts "Ages 3–5" at p77; the 3–5 file's p3 is that document's p113 verbatim). Every CO golden and every CO number in the paper is the Ages 3–5 band, so CO's out-of-scope content is other **age bands**, not trimmed-away standards.
+>
+> **Guardrail 1 still applies, in both directions: every table built from these must be labelled `_trimmed` tier — never "full document", and never in a way that reads as "excerpt".** The run queue's rationale ("KY 8pp→120pp is the largest relative jump") still does not describe what ran — it is 8pp→52pp, and those 52pp are all of Kentucky's standards.
+>
+> ✅ **BUT THE RUNS ARE CLEAN AND THEY DO SATISFY TASK 6's STEP 2, which says "full **or `_trimmed`**".** All three of this file's documented silent-failure signatures were checked and are absent:
+> - **Page coverage complete.** KY 50 of 52 pages carry detected elements (missing: p1 title page, p14 anecdote-only); CO 37 of 41 (missing: cover, section divider, an intentionally-blank page, acknowledgments). Every gap was read and confirmed content-free.
+> - **Pass-1 correct.** KY reports **4** levels (`domain > strand > sub_strand > indicator`), CO reports **3** — both matching their goldens. This is the check that catches the depth-map sampler defect.
+> - **Zero** detection chunks producing zero elements (the absent-code signature), **zero** validator rejections, **zero** throttling events, 17/17 tasks succeeded.
+>
+> ✅ **The batching/scale claim is now SUPPORTED, which is what Task 6 existed for.** At the subset tier both batching layers collapse to one batch and the merge is a no-op. Not here:
+>
+> | | detection chunks | detection batches | parse batches | raw elements → after merge |
+> |---|---|---|---|---|
+> | KY | 18 | **4** | **9** | 363 → **329** |
+> | CO | 17 | **4** | **9** | 390 → **300** |
+>
+> The Map genuinely iterated four times and the merge genuinely deduplicated (34 and 90 elements). That is the prepare → Map → merge path exercised for real.
+>
+> **Measured cost/latency** (rates UNVERIFIED — see below): KY 45 LLM calls, 378,510 in / 150,173 out, 13m19s; CO 45 calls, 390,204 in / 131,402 out, 9m52s. Combined 1,050,289 tokens. Model ids confirmed at runtime as Opus 4.6 / Sonnet 4.6 / Haiku 4.5, all three priced.
+>
+> ⚠️ **STEP 3's STATED METHOD DOES NOT EXIST.** This task says to pull metrics from `PipelineRunMetrics.summary()`, and the Key Background section says "Cost data already exists" on the same basis. **`PipelineRunMetrics` and `log_pipeline_run_summary` are DEAD CODE** — defined in `src/els_pipeline/metrics.py` and referenced nowhere else in `src/` (verified by grep 2026-08-30). The per-stage numbers above were reconstructed instead from `LLM_METRICS:` log lines plus CloudTrail `InvokeModel` events, separated by `model_id`. Record that method in the manifest or the numbers are not regenerable (guardrail 6).
+>
+> ⚠️ **Two more instrumentation defects, both verified, both affecting auditability only:** `metrics_context` is never passed at the real per-chunk detection call site (`detection_batching.py:243`) or per-domain parse call site (`parse_batching.py:232`), so every production `LLM_METRICS:` line has a blank `run_id`/`state`/`batch_index`; and `stage` is hardcoded to `"detection"` in `detector.py:1235`, so the Haiku depth-map call is logged as a detection call. Stage separation therefore has to be done by `model_id`, which works only because the three stages happen to use three different models.
+>
+> ✅ **DECIDED 2026-08-30 by Emily: ACCEPT THE `_trimmed` TIER**, and **strengthened 2026-08-31** once the tier's meaning was corrected. These runs are Task 6's recording, and with complete standards coverage they support the scale claim more strongly than first recorded. What remains for §Discussion is a **page-count** limitation, not a coverage one: the token and latency figures must not be extrapolated to untrimmed page counts, no document as large as AZ (217pp published) has been run end to end, and trimming is still preprocessing a deployment would have to do or absorb. Recorded in `paper/results/task6_20260830/` (`manifest.json`, `findings.md`, plus the harvest and pricing artifacts).
+>
+> **Still owed for Task 6:** (a) Emily reads the three on-demand bedrock-runtime rates off the AWS Bedrock pricing page so a dollar column can be published — until then report TOKENS ONLY; (c) §Experiments prose at Task 12 — `\S`\,Scale exists with `\input{tables/scale_batched}` and a full outline comment, but no prose yet.
+>
+> ✅ **(b) DONE:** `build_scale_table` in `generate_tables.py` reads `task6_20260830/manifest.json` and writes `paper/tables/scale_batched.tex`. Its caption states both halves of the tier (complete standards content; not the full published PDF), per the 2026-08-31 correction — do not shorten it back to a bare `_trimmed` label.
+>
+> **Superseded planning note (kept for the record):** the original text below said the pipeline half was done and the recording half was not. The recording half is now done for what actually ran.
+>
+> Still owed before this task is complete:
+> 1. **Step 1 has never been done** — re-verify `BEDROCK_PRICING` in `src/els_pipeline/metrics.py` against live Bedrock rates and cite the verification date. The rates are hardcoded as of April 2026.
+> 2. Pull per-stage tokens/cost/latency/call-counts from `PipelineRunMetrics.summary()` for both runs; confirm depth-map cost is now non-zero (step 4).
+> 3. Write `paper/results/task6_2026MMDD/` with manifest + findings, and extend `generate_tables.py` with a **full-document-tier** cost/scale table kept separate from the subset-tier quality tables (guardrail 1).
+> 4. KY's detector golden is **detection-exhaustive**, so its 44 annotated elements can be graded *inside* the full run — the only quality-at-scale evidence available without new annotation. Do this; it is the whole reason KY was chosen first.
+>
+> ⚠️ **A pricing trap for step 1.** `BEDROCK_PRICING` keys the parser on `us.anthropic.claude-sonnet-4-6`, matching `config.py`'s default — but `task{1,2}_20260826/manifest.json` records the parser as `us.anthropic.claude-sonnet-4-5-v1`. `LLMCallMetrics.estimated_cost` does `.get(model_id, {})`, so a deployed env var carrying the 4-5 id prices the whole parsing stage at **$0**, silently. Check the deployed Lambda's env var before trusting any cost column.
+>
+> ⚠️ **Read CLAUDE.md's "Where the model supplies NO code" and "Where Pass-1 loses a LEVEL" before interpreting these runs.** Both defects were found at exactly this scale on exactly this document, both were invisible at the subset tier, and both produced runs that reported `SUCCEEDED`. If a run comes back thin, read `total_elements` and the merge `error` string before reaching for a quota explanation.
+>
+> ✅ **The attached chore list below is DISCHARGED.** All four deferred items landed 2026-08-24 in the window opened by the absent-code fix, which busted the hash on its own merits. CLAUDE.md's queue table is now empty and kept only as the record of what that batch contained. The paragraph below is retained because its *reasoning* — batch cosmetic edits into a hash-busting window — still governs the next such window.
+>
+> 🔗 **This task carries an attached chore list — do it in the same window.** `detector.py` and `parser.py` are cost-gated between re-records: `eval_common.code_version_hash` hashes their raw bytes, currently **`14374dba`** (⚠️ was `288c64f1` when this paragraph was written), and every current recorded manifest under `paper/results/` cites it. So a docstring fix that would otherwise cost ~315K Opus tokens (12% of a daily quota) to re-validate is free once you are re-recording anyway.
 >
 > **The queue lives in [CLAUDE.md](../CLAUDE.md), "These two files are COST-GATED right now"** — that is the canonical copy, because it is the file a session reads *before* deciding to edit. As of 2026-08-23 it holds four items: three stale/missing claims in `detect_structure`'s docstring (wrong model, a confidence review-gate that does not exist, and Pass-1 depth-map inference omitted entirely) plus adding pre-normalization code logging inside `parser.py` so `validator._validate_code_shape` rejections can be localized.
 >
-> **Order matters.** Apply the queue, re-run, and record the **new** hash in this run's manifest — do not carry `288c64f1` forward. Then update `RUN_TAG`/`STATS_TAG` in `paper/analysis/generate_tables.py` and add the superseded tag to `SUPERSEDED_TAGS`, or the tables will silently keep rendering the old freeze (that failure has happened once already — see Task 1).
+> **Order matters.** Apply the queue, re-run, and record the **new** hash in this run's manifest — do not carry the old one forward. Then update `RUN_TAG`/`ABLATION_TAG`/`BASELINE_TAG`/`STATS_TAG` in `paper/analysis/generate_tables.py` and add the superseded tag to `SUPERSEDED_TAGS`, or the tables will silently keep rendering the old freeze (that failure has happened once already — see Task 1). ✅ **Done for the 2026-08-26 cycle**: all four tags are current and `SUPERSEDED_TAGS = {"20260816"}`.
 
 ---
 
@@ -496,7 +675,7 @@ Priority = risk first. Tasks 1–2 are the two real risks: Task 1 validates the 
 >
 > **Guardrail 2 re-verified against the live tree**, with a trap recorded: a repo-wide grep hits `needs_review`/`CONFIDENCE_THRESHOLD` under `infra/cdk/dist/` and `infra/cdk/cdk.out.deploy-dev/`. Those are stale build artifacts of a pre-2026 revision that really did gate; both are gitignored and untracked, so absent from a clean checkout and the arXiv tarball.
 >
-> **Repairs identified and deliberately deferred.** A sweep of both frozen files found `detector.detect_structure`'s docstring carries **three** defects: it names the wrong model ("Claude Sonnet 4.5"; it is Opus 4.6), it claims a step that does not exist ("Flags low-confidence elements for review" — precisely the false claim guardrail 2 exists to catch, in the function a reader opens first), and it **omits Pass-1 depth-map inference entirely** despite `detect_structure` calling `infer_depth_map` before chunking — the paper's central method claim, missing from the docstring of the function that implements it. `parser.py` swept clean; its one item is an addition (pre-normalization code logging). Fixing any of them changes `code_version_hash` `288c64f1`, which every recorded manifest cites, so they wait for the next hash-busting window — **Task 6**, which now carries the pointer. **Canonical queue: [CLAUDE.md](../CLAUDE.md), "These two files are COST-GATED right now."**
+> **Repairs identified and deliberately deferred.** A sweep of both frozen files found `detector.detect_structure`'s docstring carries **three** defects: it names the wrong model ("Claude Sonnet 4.5"; it is Opus 4.6), it claims a step that does not exist ("Flags low-confidence elements for review" — precisely the false claim guardrail 2 exists to catch, in the function a reader opens first), and it **omits Pass-1 depth-map inference entirely** despite `detect_structure` calling `infer_depth_map` before chunking — the paper's central method claim, missing from the docstring of the function that implements it. `parser.py` swept clean; its one item is an addition (pre-normalization code logging). ✅ **All four were APPLIED 2026-08-24**, in the window opened by the absent-code defect fix (which busted the hash on its own merits), so they did not have to wait for Task 6 after all. CLAUDE.md's queue table is now empty and is kept only as the record of what that batch contained — **do not re-do those items.** **Canonical queue: [CLAUDE.md](../CLAUDE.md), "These two files are COST-GATED right now."**
 >
 > **Note for Task 11:** the dataset table already carries the guardrail-1 tier columns, so the "corpus appendix table" should EXTEND it (adding `_trimmed` and source document names) rather than restate the same page counts in a second table.
 
@@ -552,13 +731,17 @@ Cover: document structure/layout extraction; LLM information extraction, in-cont
 
 **Risk:** low. **Has a dependency on Emily.**
 
-1. Generate locally from `paper/results/`: confidence distribution, level-confusion matrix, cost-by-tier. Plus a canonical-schema tree diagram. **Still to do.**
+1. Generate locally from `paper/results/`: confidence distribution, level-confusion matrix, cost-by-tier. Plus a canonical-schema tree diagram. **Still to do — `paper/figures/` holds only `fig_architecture.{pdf,png}`.** Zero Opus, so this competes with nothing. ⚠️ **cost-by-tier needs Task 6's recording**, which does not exist yet; the other three do not, and the confidence-distribution data is already frozen in `paper/results/task8_20260823/confidence_distribution.json`.
 
    > **PROPOSED, decide during Task 12 when the figure budget is known: a small eval-methodology figure showing the DIRECT-vs-BATCHED split.** This is the hardest part of the methodology to convey in prose and it is load-bearing: `eval_detector` **re-runs detection live in-process** (direct path) against `{STATE}-extraction.json`, while `eval_parser` reads `{STATE}-detection.json`, the **deployed batched** detection. So the detector and parser tables in the same results folder are **not describing the same detection of the same document** — for AZ that is literally 66 elements vs 77. It also explains a result the paper must otherwise assert without mechanism: NV's Science description grades as `truncated 2410/3500` in the detector eval while the batched pipeline produces the full 3500 byte-exact, same code and same document. The figure would also carry the two-decoupled-goldens point (flat element list vs nested `NormalizedStandard`, annotated independently), currently documented only in `evaluation/README.md`. **Draw it in TikZ, not `diagrams`** — it is boxes and arrows with no AWS services, so icons add nothing — and place it in §Experiments rather than §System Architecture. If the figure budget forces a cut, this one outranks cost-by-tier: it is a correctness caveat rather than a nice-to-have.
 2. ~~**Request from Emily:** the AWS architecture diagram, and any Standards Explorer / CloudWatch dashboard screenshots.~~ **RESOLVED 2026-08-23, with one item still OUTSTANDING:**
    - **Architecture diagram — DONE, and it is generated, not hand-drawn.** `paper/analysis/make_architecture_figure.py` renders `paper/figures/fig_architecture.{pdf,png}` from `documentation/ARCHITECTURE.md` using `diagrams` + graphviz with official AWS icons (`brew install graphviz && pip install diagrams`). Embedded as `\label{fig:architecture}` in `sections/system_architecture.tex`; the paper builds to 6pp with 0 undefined refs. Emily confirmed the stage order and that validation → persistence → Aurora is correct (see `persister.py`: `_load_validation_summary` reads the validation summary from the processed bucket, `_persist_single_record` loads each canonical record from S3, then `persist_standard` writes to Aurora). Model labels carry versions and were checked against `config.py`: Opus 4.6 (detection), **Haiku 4.5** (depth map — NOT 4.6), Sonnet 4.6 (parsing).
    - **CloudWatch dashboards — DROPPED, by Emily's call (2026-08-23).** They carry a lot of errors and support no claim the paper makes. Do not reinstate without a specific claim that needs them.
-   - ⚠️ **OUTSTANDING — EMILY: retake the Standards Explorer screenshot once standards without the `SUBSET - ` prefix exist.** The current screenshot (AZ, `LL` → `LL.1` → `LL.1.1` → `LL.1.1.a`, age bands, page numbers, `Unverified` status) is good and shows no account IDs, ARNs, internal URLs or emails — but its document title reads **`SUBSET - Arizona Early Learning Standards`**. In a paper that already discloses subset-tier *evaluation*, a screenshot captioned SUBSET invites the reader to conclude the *product* only ever holds subsets, which is a stronger and false claim. **Task 6 produces full-document runs, so retake it after Task 6 lands.** The screenshot is worth keeping regardless: its `Unverified` status column is the `human_verified` workflow, which guardrail 2 requires be kept distinct from confidence scores.
+   - ✅ **RESOLVED 2026-08-30 — Emily supplied the retaken screenshot.** It shows **`Colorado Early Learning & Development Guidelines`, US / CO — 2020**, with no `SUBSET - ` prefix, expanded through `AL` → `AL.1` → `AL.1.1`…`AL.1.7` and on to `AL.2` and `CAE`, carrying age ranges (`36-60`), source page numbers (24, 25) and the `Unverified` status column. No account IDs, ARNs, internal URLs or emails are visible. The `Unverified` column is exactly the `human_verified` workflow that guardrail 2 requires be kept distinct from confidence scores — caption it that way.
+>
+>     ⚠️ **Still to do mechanically:** save the image into `paper/figures/` as a flat filename (Task 13 flattens `figures/` into the paper root anyway) and `\includegraphics` it from `sections/system_architecture.tex`. Prefer PDF or a high-DPI PNG; the ACL template's column width is narrow, so plan on a full-width `figure*`.
+>
+>     ⚠️ **The old AZ screenshot is superseded and must not ship.** Its title read `SUBSET - Arizona Early Learning Standards`, and in a paper that already discloses subset-tier *evaluation*, a screenshot captioned SUBSET invites the reader to conclude the *product* only ever holds subsets — a stronger and false claim.
 3. **Emily confirmed every row of `standards/standards_tracking.md` is accurate (2026-08-23)**, so the source URLs are ready to use. Build the table from the **seven `File Cleaned: true` rows** (CA, AZ, TX, CO, NV-2023, KY — plus NV-2025, which is collected but has no golden); the two Florida rows and NV-2025 are `false` and are **not** in the six-state corpus. List them as collected-but-unused rather than dropping them silently, so the table does not imply the corpus is larger than it is. Build the corpus appendix table from `standards/standards_tracking.md` — source URL, year, retained page ranges after trimming. **This is what replaces shipping the PDFs** (they are third-party state-agency documents; only US *federal* works are automatically public domain under 17 USC §105, so redistributing them isn't ours to grant). Name California's source precisely.
 4. All figures: vector PDF, fonts embedded, flat filenames (they get flattened to root in Task 13).
 
@@ -573,6 +756,35 @@ Cover: document structure/layout extraction; LLM information extraction, in-cont
 Draft sections 1–12 per the outline in the plan file. Re-read **all seven guardrails** before writing, and again before considering a section done. The ones most likely to be violated in prose: corpus tier on every table (1), no confidence-based review gate (2), trimming disclosed (3), no unmeasured Medium numbers (4).
 
 **Deliverable:** a complete draft.
+
+> ▶️ **STARTED 2026-08-30. This is now the critical path** — every section except the Task 5 and Task 6 subsections of §Experiments has its numbers frozen at `14374dba` and regenerating through `generate_tables.py`.
+>
+> **Drafting state as of 2026-08-30** (`paper/sections/`, all `\input` from `main.tex`):
+>
+> | section | state |
+> |---|---|
+> | `related_work.tex` | **drafted** (Task 9, 124 lines) |
+> | `corpus.tex` | partial — has the dataset table, 1 TODO |
+> | `system_architecture.tex` | partial — has `fig:architecture` |
+> | `experiments_results.tex` | tables wired, **prose is 3 TODOs** (ablation, baseline, confidence) |
+> | `introduction.tex` | **stub** — outline comments only |
+> | `method.tex` | **stub** — outline recovered verbatim from the lost plan file |
+> | `schema.tex` | **stub** |
+> | `pipeline_overview.tex` | **stub** |
+> | `discussion_limitations.tex` | **stub** |
+> | `conclusion.tex` | **stub** |
+> | `ethics.tex` | **stub** |
+> | `artifacts_statement.tex` | **stub** |
+> | abstract (in `main.tex`) | **stub — draft LAST** |
+>
+> ⚠️ **The outline for sections 1, 3, 4 and 5 is a RECONSTRUCTION, not the original.** `~/.claude/plans/i-want-to-create-silly-pnueli.md` was deleted by an automatic cleanup on 2026-08-17 before Task 10 ran; sections 6–12 were recovered verbatim from a session transcript, 1/3/4/5 were not. Provenance in `paper/OUTLINE_NOTES.md`. Reordering or renaming a section is cheap — `main.tex` only `\input`s.
+>
+> ⚠️ **Three prose traps specific to this draft, all already documented and all easy to get wrong:**
+> 1. **Never write "no regression case changed status across runs"** — true at n=2, REFUTED at n=3 (`CO-NO-SUB-STRAND` went FAIL/FAIL/PASS). Two reproducible cases, both KY.
+> 2. **Never report a mean where the per-level or per-state breakdown is the finding** — this bites the depth-map ablation (four of six states unaffected; TX/NV lose *code accuracy*, not recall) and the rule-based baseline (which ties at domain and collapses below it).
+> 3. **Never put the baseline's verified precision in a table beside the LLM's.** A rule-based extractor copies text verbatim, so it scores 1.000 in five of six states — real, and substantively backwards. Report **raw** precision for both arms with guardrail 8 attached to both columns.
+>
+> **Task 9 left three items to reconcile here:** its citations point at sections that did not exist when it was written; Emily should read the related-work draft for framing and voice; and the page-number sweep waits for Task 13's `.bbl` build.
 
 ---
 
