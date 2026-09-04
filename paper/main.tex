@@ -13,7 +13,28 @@
 \usepackage{inconsolata}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{array}
 \usepackage{tikz}
+\usepackage{listings}
+% Prompt listings. The prompts contain very long lines (single rules run to
+% several hundred characters), so breaklines is essential -- without it the
+% appendix silently runs off the page edge rather than erroring.
+\lstdefinestyle{promptstyle}{
+  basicstyle=\scriptsize\ttfamily,
+  breaklines=true,
+  breakatwhitespace=false,
+  breakindent=0pt,
+  postbreak=\mbox{$\hookrightarrow$\space},
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  frame=none,
+  xleftmargin=0pt,
+  aboveskip=4pt, belowskip=4pt,
+  literate={—}{{---}}1 {–}{{--}}1 {≤}{{$\leq$}}1 {→}{{$\rightarrow$}}1
+           {“}{{``}}1 {”}{{''}}1 {‘}{{`}}1 {’}{{'}}1 {…}{{\ldots}}1
+           {≥}{{$\geq$}}1 {×}{{$\times$}}1 {½}{{$\frac{1}{2}$}}1
+}
 
 \title{Classify by Position, Not by Label: LLM-Driven Extraction of Hierarchical Structure from Fragmented US Early Learning Standards}
 
@@ -92,6 +113,8 @@ on an annotated subset tier, stated as such throughout.
 
 \section{Prompts}
 \label{sec:appendix-prompts}
+
+\input{tables/appendix_prompts}
 % TODO(Task 11/12): representative detector and parser prompts, in-paper
 % disclosure only (no code/dataset release — see sections/artifacts_statement.tex).
 
@@ -104,6 +127,8 @@ on an annotated subset tier, stated as such throughout.
 
 \section{Representative Golden Examples}
 \label{sec:appendix-goldens}
+
+\input{tables/appendix_goldens}
 % TODO(Task 11/12): a handful of annotated examples per guardrail-safe
 % state, illustrating the code/title/hierarchy conventions.
 
