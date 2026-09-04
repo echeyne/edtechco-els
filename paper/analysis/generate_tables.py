@@ -41,9 +41,11 @@ Usage (from repo root):
 """
 
 import json
+import pathlib
 from pathlib import Path
 
 PAPER_DIR = Path(__file__).resolve().parent.parent
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 RESULTS_DIR = PAPER_DIR / "results"
 TABLES_DIR = PAPER_DIR / "tables"
 
@@ -425,6 +427,178 @@ def build_scale_table(scale):
     return "\n".join(L) + "\n"
 
 
+def build_corpus_appendix_table(tiers):
+    """Appendix corpus table — Task 11.
+
+    EXTENDS the dataset table rather than restating it: that one carries counts
+    and the subset page numbers, this one carries provenance (publisher, year,
+    document) and the tier page counts, which is what replaces shipping the PDFs.
+    They are third-party state-agency publications and not ours to redistribute
+    (only US FEDERAL works are automatically public domain), so a reader obtains
+    them from the issuing agency using this table.
+
+    Built from standards/standards_tracking.md and paper/results/corpus_tiers.json.
+    ⚠️ The plan said to build it from "the seven File Cleaned: true rows". There
+    are SIX (CA, AZ, TX, CO, NV-2023, KY) and they are exactly the corpus; NV-2025
+    is marked false, not true. The three collected-but-unused documents are listed
+    below the rule rather than dropped, so the table cannot imply a larger corpus
+    than was actually used.
+    """
+    # ⚠️ NOT csv.DictReader. The Website and PDF columns contain unquoted commas
+    # (Florida's URL has a `#d=I,II,III,...` fragment), so a naive comma split
+    # overflows into DictReader's restkey and the row dict stops being strings.
+    # Only the two URL columns are ambiguous, so parse from the RIGHT: the last
+    # three fields are Year, PDF, File Cleaned regardless of URL contents.
+    rows, extras = [], []
+    track = REPO_ROOT / "standards" / "standards_tracking.md"
+    for line in track.read_text().splitlines()[1:]:
+        line = line.strip()
+        if not line:
+            continue
+        parts = [x.strip() for x in line.split(",")]
+        if len(parts) < 5:
+            continue
+        r = {"State": parts[0], "Year": parts[-3], "PDF": parts[-2],
+             "File Cleaned": parts[-1], "Website": ",".join(parts[1:-3])}
+        (rows if r["File Cleaned"] == "true" else extras).append(r)
+
+    # "Flordia" is a typo in standards_tracking.md. Mapped here rather than
+    # edited in place: that file is the operator's own record and correcting it
+    # is their call, but the misspelling must not reach a published table.
+    ABBR = {"California": "CA", "Arizona": "AZ", "Texas": "TX", "Colorado": "CO",
+            "Nevada": "NV", "Kentucky": "KY", "Flordia": "FL", "Florida": "FL"}
+    TIERKEY = {"NV": "NV_2023"}
+    ROLE = {"AZ": "dev", "CA": "dev", "CO": "dev", "TX": "dev",
+            "NV": "held-out", "KY": "held-out"}
+
+    L = header("standards/standards_tracking.md", "paper/results/corpus_tiers.json")
+    L += [r"\begin{table*}[t]", r"\centering", r"\small",
+          r"\begin{tabular}{llrlrrr}", r"\toprule",
+          r"\textbf{State} & \textbf{Role} & \textbf{Year} & \textbf{Publisher} & "
+          r"\textbf{Full} & \textbf{Trim.} & \textbf{Subset} \\",
+          r"\midrule"]
+    PUB = {"CA": "CA Dept.\ of Education", "AZ": "AZ Dept.\ of Education",
+           "TX": "TX Education Agency", "CO": "CO Dept.\ of Early Childhood",
+           "NV": "NV Dept.\ of Education", "KY": "Governor's Office of Early Childhood"}
+    for r in rows:
+        st = ABBR.get(r["State"], r["State"])
+        t = tiers["tiers"].get(TIERKEY.get(st, st), {})
+        full = t.get("full") or t.get("full_3_5") or "--"
+        trim, sub = t.get("trimmed") or "--", t.get("only_subset") or "--"
+        L.append(rf"{st} & {ROLE.get(st,'')} & {r['Year']} & {PUB.get(st, '')} & "
+                 rf"{full} & {trim} & {sub} \\")
+    L += [r"\midrule",
+          rf"\multicolumn{{7}}{{l}}{{\emph{{Collected but not used --- no golden "
+          rf"annotation, excluded from every measurement}}}} \\"]
+    # The two Florida rows are the SAME PDF listed at two age scopes, so they
+    # would render as duplicate lines. Collapse on (state, year, pdf).
+    seen = {}
+    for r in extras:
+        st = ABBR.get(r["State"], r["State"])
+        seen.setdefault((st, r["Year"], r["PDF"]), []).append(r)
+    for (st, year, _pdf), group in seen.items():
+        scope = "" if len(group) == 1 else rf" ({len(group)} age scopes)"
+        L.append(rf"{st} & -- & {year} & \multicolumn{{4}}{{l}}{{collected, not prepared{scope}}} \\")
+    L += [r"\bottomrule", r"\end{tabular}",
+          r"\caption{Corpus provenance. \emph{Full} is the published PDF; "
+          r"\emph{Trim.}\ removes non-standards matter (front matter, expository "
+          r"essays, appendices) while retaining every standard; \emph{Subset} is the "
+          r"one-to-two-domain excerpt that all quality measurements in this paper use "
+          r"and is a genuine reduction in coverage. Colorado's \emph{Full} figure is "
+          r"its 41-page Ages 3--5 publication, the scope every Colorado measurement "
+          r"here uses; that document is itself drawn from a 187-page birth-to-eight "
+          r"volume covering other age bands. The source documents are third-party "
+          r"state-agency publications and are not redistributed with this paper --- "
+          r"only US federal works are automatically in the public domain --- so each "
+          r"is identified here well enough to be obtained from its issuing agency. "
+          r"Page counts verified with PyMuPDF. Source: "
+          r"\texttt{standards/standards\_tracking.md}, "
+          r"\texttt{paper/results/corpus\_tiers.json}.}",
+          r"\label{tab:corpus-appendix}", r"\end{table*}"]
+    return "\n".join(L) + "\n"
+
+
+def build_levels_figure(t2, t3):
+    """Figure — the depth-map ablation as a LEVEL DISTRIBUTION, on Kentucky.
+
+    ⚠️ WHY NOT A CONFUSION MATRIX. Task 11 originally proposed a level-confusion
+    matrix. It cannot show this effect and would actively understate it: the
+    evaluation matcher pairs a detection to a golden entry only when their levels
+    agree, so an element emitted at the WRONG level fails to match at all and is
+    recorded as a miss, never as an off-diagonal cell. Measured on the recorded
+    runs, both arms produce a perfectly diagonal matrix -- ON 13/25/24/73 and OFF
+    13/23/20/73 -- so the figure a reader would see is two clean diagonals and no
+    visible failure. The distribution of EMITTED levels is where the collapse is
+    legible.
+
+    Kentucky is the right state for it: its golden is detection-exhaustive, so
+    the golden column is a true target rather than a spot check, and it is one of
+    the two states whose recall degrades under the ablation.
+
+    Counts are read from the recorded review outputs, never typed here.
+    """
+    import collections, json as _json
+
+    def levels_of(path):
+        d = _json.loads(pathlib.Path(path).read_text())
+        els = d.get("elements", d) if isinstance(d, dict) else d
+        return collections.Counter(e["level"] for e in els)
+
+    golden_path = REPO_ROOT / "evaluation" / "ground_truth_detector" / "KY.json"
+    g = _json.loads(golden_path.read_text())
+    gels = g.get("elements", g) if isinstance(g, dict) else g
+    golden = collections.Counter(e["level"] for e in gels)
+
+    on = levels_of(RESULTS_DIR / f"task2_{RUN_TAG}" / "review_detector" / "KY" / "KY-detected.json")
+    off = levels_of(RESULTS_DIR / f"task3_{ABLATION_TAG}" / "review_detector_off" / "KY" / "KY-detected.json")
+
+    LEVELS = ["domain", "strand", "sub_strand", "indicator"]
+    series = [("Golden", golden, "black!55"), ("Depth map ON", on, "black!25"),
+              ("Depth map OFF", off, "black!80")]
+    peak = max(max(c.get(l, 0) for l in LEVELS) for _, c, _ in series)
+
+    UNIT, BW, GAP, GRP = 3.0, 0.34, 0.07, 1.70
+    L = header(f"evaluation/ground_truth_detector/KY.json",
+               f"task2_{RUN_TAG}/review_detector/KY/",
+               f"task3_{ABLATION_TAG}/review_detector_off/KY/", tier="_only_subset")
+    L += [r"\begin{figure}[t]", r"\centering",
+          r"\begin{tikzpicture}[x=1cm, y=1cm]"]
+    # axis
+    L.append(rf"\draw[gray!50] (0,0) -- ({len(LEVELS)*GRP:.2f},0);")
+    for gi, lvl in enumerate(LEVELS):
+        base = gi * GRP + 0.16
+        for si, (name, counts, shade) in enumerate(series):
+            v = counts.get(lvl, 0)
+            x = base + si * (BW + GAP)
+            h = v / peak * UNIT
+            L.append(rf"\fill[{shade}] ({x:.2f},0) rectangle ({x+BW:.2f},{h:.3f});")
+            L.append(rf"\node[font=\tiny, anchor=south] at ({x+BW/2:.2f},{h:.3f}) {{{v}}};")
+        L.append(rf"\node[font=\scriptsize, anchor=north] at "
+                 rf"({base + 1.5*(BW+GAP):.2f},-0.06) {{\texttt{{{lvl.replace('_', chr(92)+'_')}}}}};")
+    # Legend, upper LEFT. The indicator group sits at full height on the right and
+    # the first version put the legend there, overlapping those bars and their value
+    # labels. The domain group is the shortest, so the space above it is free at any
+    # plausible scale.
+    for si, (name, _, shade) in enumerate(series):
+        y = UNIT - si * 0.30
+        L.append(rf"\fill[{shade}] (0.16,{y:.2f}) rectangle (0.34,{y+0.16:.2f});")
+        L.append(rf"\node[font=\scriptsize, anchor=west] at (0.40,{y+0.08:.2f}) {{{name}}};")
+    L += [r"\end{tikzpicture}",
+          r"\caption{Elements emitted per hierarchy level on Kentucky, whose detector "
+          r"golden is the corpus's only \emph{detection-exhaustive} one, with the "
+          r"depth-map pass enabled and ablated. With the pass enabled the detector "
+          r"reproduces the golden distribution exactly. Ablated, it emits an extra "
+          r"domain, doubles the strand count and loses four sub-strands, while the "
+          r"indicator count is untouched --- the failure is level \emph{collapse} at "
+          r"the two levels whose identity is positional rather than typographic. "
+          r"\textbf{This is not visible in a level-confusion matrix}: the evaluation "
+          r"matcher pairs on level, so an element emitted at the wrong level is "
+          r"recorded as a miss rather than an off-diagonal entry, and both arms "
+          r"render as clean diagonals. \texttt{\_only\_subset} corpus tier.}",
+          r"\label{fig:levels}", r"\end{figure}"]
+    return "\n".join(L) + "\n"
+
+
 def build_stability_table(t5):
     """Task 5 — run-to-run stability of both suites.
 
@@ -681,6 +855,8 @@ def main():
         written.append(("scale_batched.tex", build_scale_table(scale)))
     if t5:
         written.append(("stability.tex", build_stability_table(t5)))
+    written.append(("fig_levels.tex", build_levels_figure(t2, abl)))
+    written.append(("corpus_appendix.tex", build_corpus_appendix_table(tiers)))
     if stats:
         written.append(("dataset_stats.tex", build_dataset_table(stats)))
     if conf:

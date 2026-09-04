@@ -13,6 +13,7 @@
 \usepackage{inconsolata}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{tikz}
 
 \title{Classify by Position, Not by Label: LLM-Driven Extraction of Hierarchical Structure from Fragmented US Early Learning Standards}
 
@@ -96,6 +97,8 @@ on an annotated subset tier, stated as such throughout.
 
 \section{Canonical Schema}
 \label{sec:appendix-schema}
+
+\input{tables/fig_schema}
 % TODO(Task 11/12): the full Pydantic/TS schema, or a rendered tree diagram
 % (Task 11 deliverable).
 
@@ -106,6 +109,8 @@ on an annotated subset tier, stated as such throughout.
 
 \section{Corpus}
 \label{sec:appendix-corpus}
+
+\input{tables/corpus_appendix}
 % TODO(Task 11): the corpus appendix table (source URL, year, retained page
 % ranges after trimming) built from standards/standards_tracking.md — this
 % is what replaces shipping the source PDFs (guardrail: third-party
