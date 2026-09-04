@@ -28,3 +28,35 @@
   \texttt{python paper/analysis/make\_architecture\_figure.py}.}
   \label{fig:architecture}
 \end{figure*}
+
+% Standards Explorer screenshot — supplied by Emily 2026-09-04 as
+% figures/colorado_els.png, replacing an earlier Arizona capture whose document
+% title read "SUBSET - Arizona Early Learning Standards". That title would have
+% invited the reader to conclude the PRODUCT only ever holds subsets, which is a
+% stronger and false claim than the subset-tier EVALUATION the paper discloses.
+% This capture is Colorado at the _trimmed tier: the complete Ages 3-5 document.
+% Checked before inclusion: no account IDs, ARNs, internal URLs or email
+% addresses are visible.
+Figure~\ref{fig:explorer} shows the end of that pipeline as a user meets it:
+extracted standards resolved into the canonical schema and served through the
+Standards Explorer, where the per-element verification workflow of
+\S\ref{sec:method-confidence} is carried out.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/colorado_els.png}
+  \caption{The Standards Explorer, showing extracted Colorado standards resolved
+  into the canonical schema of \S\ref{sec:schema}. The hierarchy is navigable to
+  its full depth --- domain \texttt{AL} (Approaches to Learning), strand
+  \texttt{AL.1}, and the indicators \texttt{AL.1.1}--\texttt{AL.1.7} beneath it
+  --- with each row carrying the age range in months and the page of the source
+  PDF it was extracted from, so any record can be checked against the document
+  that produced it. The \emph{Status} column is the per-element human
+  verification state described in \S\ref{sec:method-confidence}: every row here
+  reads \texttt{Unverified}, which is the system's default and is
+  \textbf{independent of the model's confidence score}. Confidence gates nothing
+  and never sets this field; verification is a separate editorial action
+  recorded per element. Colorado realizes three levels rather than four, which
+  is why indicators attach directly to strands here.}
+  \label{fig:explorer}
+\end{figure*}

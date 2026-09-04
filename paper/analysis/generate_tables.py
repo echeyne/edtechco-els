@@ -72,6 +72,11 @@ STATS_TAG = "20260823"
 # caption or a reader gets one of the two false readings.
 SCALE_TAG = "20260830"
 
+# Task 5 stability. Distinct from STABILITY_TAG above, which is Task 3's
+# ABLATION-arm stability (detector only, n=3). This one is both suites under
+# normal configuration and is what the determinism claim rests on.
+TASK5_TAG = "20260830"
+
 # Runs that have been superseded. Pointing RUN_TAG at one of these is almost
 # always a mistake -- the whole reason this constant exists.
 SUPERSEDED_TAGS = {"20260816"}
@@ -357,9 +362,10 @@ def build_scale_table(scale):
         r"\midrule",
         r"\multicolumn{3}{l}{\emph{Input / output tokens by stage}} \\",
     ]
-    for key, label in [("depth_map_pass1", "Depth map (Haiku 4.5)"),
-                       ("detection", "Detection (Opus 4.6)"),
-                       ("parsing", "Parsing (Sonnet 4.6)")]:
+    STAGES = [("depth_map_pass1", "Depth map (Haiku 4.5)"),
+              ("detection", "Detection (Opus 4.6)"),
+              ("parsing", "Parsing (Sonnet 4.6)")]
+    for key, label in STAGES:
         k, c = per["KY"][key], per["CO"][key]
         L.append(rf"{label} & {k['input_tokens']:,} / {k['output_tokens']:,} & "
                  rf"{c['input_tokens']:,} / {c['output_tokens']:,} \\")
@@ -370,6 +376,28 @@ def build_scale_table(scale):
         rf"\textbf{{{ct['input_tokens']:,} / {ct['output_tokens']:,}}} \\",
         rf"LLM calls & {kt['calls']} & {ct['calls']} \\",
         rf"Wall clock & {ex['KY']['wall_clock']} & {ex['CO']['wall_clock']} \\",
+        r"\midrule",
+        r"\multicolumn{3}{l}{\emph{Cost (USD)}} \\",
+    ]
+    # Derived, never hand-typed (guardrail 6): recomputed here from the recorded
+    # token counts and the pipeline's OWN BEDROCK_PRICING table, so the paper and
+    # the code cannot drift apart. Every rate in that table was confirmed against
+    # https://aws.amazon.com/bedrock/pricing/ -- Opus 4.6 and Sonnet 4.6 on
+    # 2026-08-31, Haiku 4.5 on 2026-09-04.
+    from els_pipeline.metrics import BEDROCK_PRICING
+    totals = {}
+    for key, label in STAGES:
+        cells = []
+        for st in ("KY", "CO"):
+            d = per[st][key]
+            rate = BEDROCK_PRICING[d["model"]]
+            usd = (d["input_tokens"] / 1000 * rate["input_per_1k"]
+                   + d["output_tokens"] / 1000 * rate["output_per_1k"])
+            totals[st] = totals.get(st, 0.0) + usd
+            cells.append(usd)
+        L.append(rf"\quad {label.split(' (')[0]} & \${cells[0]:.4f} & \${cells[1]:.4f} \\")
+    L += [
+        rf"\textbf{{Total}} & \textbf{{\${totals['KY']:.2f}}} & \textbf{{\${totals['CO']:.2f}}} \\",
         r"\bottomrule",
         r"\end{tabular}",
         r"\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier}: each "
@@ -382,12 +410,87 @@ def build_scale_table(scale):
         r"At the subset tier both batching layers collapse to a single batch and the "
         r"merge is a no-op; here the Step Functions \texttt{Map} iterates four times per "
         r"run and the merge removes 34 and 90 duplicate elements respectively, so the "
-        r"prepare--map--merge path is genuinely exercised. Tokens are reported as the "
-        r"primary measure; no cost column is given because the hardcoded Bedrock rates "
-        r"could not be verified against an authoritative current source. "
+        r"prepare--map--merge path is genuinely exercised. \textbf{Tokens are the primary "
+        r"measure}; the cost rows are derived from them using published Bedrock "
+        r"on-demand rates, each confirmed against the vendor pricing page (Opus~4.6 and "
+        r"Sonnet~4.6 on 2026-08-31, Haiku~4.5 on 2026-09-04) and recomputed at table-build "
+        r"time from the pipeline's own pricing constants rather than transcribed. "
+        r"Note the model assignment paying off: the depth-map pass is under 0.4\% of "
+        r"each run's cost, while detection --- the only stage invoked once per chunk --- "
+        r"is roughly 60\%. "
         rf"Source: \texttt{{paper/results/task6\_{SCALE_TAG}/}}.}}",
         r"\label{tab:scale}",
         r"\end{table*}",
+    ]
+    return "\n".join(L) + "\n"
+
+
+def build_stability_table(t5):
+    """Task 5 — run-to-run stability of both suites.
+
+    Reports DENOMINATORS beside every rate, because a bare 0.000 is the single
+    most misleading number this measurement can produce: a defect firing in a
+    minority of runs survives five clean draws easily. The caption therefore
+    states the rate is a lower bound rather than an estimate.
+
+    Identity is the normalized title (detector) / indicator name (parser);
+    level, code, description and standard_id are COMPARED FIELDS and never part
+    of the identity key -- the predecessor instrument keyed on (code, title) and
+    was blind to exactly the malformed-code defect it existed to catch.
+    """
+    det = t5["suites"]["detector"]
+    par = t5["suites"]["parser"]
+    L = header(f"paper/results/task5_{TASK5_TAG}/stability_analysis.json",
+               tier="_only_subset")
+    L += [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\small",
+        r"\begin{tabular}{lrrr}",
+        r"\toprule",
+        r"& \textbf{ids} & \textbf{unstable} & \textbf{rate} \\",
+        r"\midrule",
+        r"\multicolumn{4}{l}{\emph{Detector} (n=%d runs)} \\" % det["n_observations_max"]
+        if "n_observations_max" in det else
+        r"\multicolumn{4}{l}{\emph{Detector}} \\",
+    ]
+
+    def rows(suite):
+        out = []
+        for st in ALL_STATES:
+            r = suite["per_state"].get(st)
+            if not r or r.get("status") == "NOT_MEASURABLE":
+                out.append(rf"\quad {st} & -- & -- & n/a \\")
+                continue
+            out.append(rf"\quad {st} & {r['n_identities_compared']} & "
+                       rf"{r['n_distinct_unstable_identities']} & "
+                       rf"{r['disagreement_rate']:.4f} \\")
+        c = suite["corpus"]
+        out.append(rf"\quad \textbf{{pooled}} & \textbf{{{c['n_identities_compared']}}} & "
+                   rf"\textbf{{{c['n_distinct_unstable_identities']}}} & "
+                   rf"\textbf{{{c['disagreement_rate']:.4f}}} \\")
+        return out
+
+    L += rows(det)
+    L += [r"\midrule", r"\multicolumn{4}{l}{\emph{Parser}} \\"]
+    L += rows(par)
+    L += [
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\caption{Run-to-run stability, \textbf{\texttt{\_only\_subset} corpus tier}. "
+        r"Five independent detector runs and six parser observations per state, all "
+        r"\texttt{-{}-no-cache}, split across two days: repeated runs within one session "
+        r"understate variance, and Nevada demonstrates it here --- its detector output is "
+        r"identical across the three same-session runs and drops one indicator in both "
+        r"next-day runs. \emph{ids} is the number of distinct element identities compared "
+        r"and \emph{unstable} how many differed in any graded field, so the rate is bounded "
+        r"in $[0,1]$. Four of six states are perfectly reproducible on each suite. "
+        r"\textbf{These rates are lower bounds, not estimates}: a defect that fires in a "
+        r"minority of runs survives five clean draws easily, which is why denominators are "
+        r"reported beside every rate. Source: "
+        r"\texttt{paper/results/task5\_%s/}.}" % TASK5_TAG,
+        r"\label{tab:stability}",
+        r"\end{table}",
     ]
     return "\n".join(L) + "\n"
 
@@ -553,6 +656,8 @@ def main():
     baseline = load_json(bp) if bp.exists() else None
     scp = RESULTS_DIR / f"task6_{SCALE_TAG}" / "manifest.json"
     scale = load_json(scp) if scp.exists() else None
+    t5p = RESULTS_DIR / f"task5_{TASK5_TAG}" / "stability_analysis.json"
+    t5 = load_json(t5p) if t5p.exists() else None
     sd = RESULTS_DIR / f"task8_{STATS_TAG}"
     stats = load_json(sd / "dataset_stats.json") if (sd / "dataset_stats.json").exists() else None
     conf = (load_json(sd / "confidence_distribution.json")
@@ -574,6 +679,8 @@ def main():
         written.append(("baseline_comparison.tex", build_baseline_table(baseline)))
     if scale:
         written.append(("scale_batched.tex", build_scale_table(scale)))
+    if t5:
+        written.append(("stability.tex", build_stability_table(t5)))
     if stats:
         written.append(("dataset_stats.tex", build_dataset_table(stats)))
     if conf:

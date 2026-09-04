@@ -79,7 +79,7 @@
     }
   },
   "per_stage_metrics": {
-    "_units": "tokens are the hard number; USD is derived and its rates are UNVERIFIED (see cost_caveat)",
+    "_units": "Tokens are the primary hard number. USD is derived from BEDROCK_PRICING, every entry of which was confirmed against the AWS Bedrock pricing page (Opus 4.6 and Sonnet 4.6 on 2026-08-31, Haiku 4.5 on 2026-09-04).",
     "KY": {
       "depth_map_pass1": {
         "model": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
@@ -150,16 +150,16 @@
     "guardrail_6": "This reconstruction method IS the regeneration procedure. Anyone reproducing these numbers must follow it, not step 3 as written."
   },
   "cost_caveat": {
-    "status": "PARTIALLY RESOLVED 2026-08-31 \u2014 Opus 4.6 and Sonnet 4.6 confirmed; Haiku 4.5 ambiguous.",
+    "status": "RESOLVED \u2014 all five BEDROCK_PRICING entries confirmed.",
     "detail": "BEDROCK_PRICING is hardcoded as of April 2026 and none of its five entries could be confirmed on 2026-08-30. The AWS Price List API's AmazonBedrock service code catalogs only legacy Claude 2.x/3.x (confirmed against the full 1032-product bulk offer file); a second service code carries partial current-gen pricing but has no entry for Opus 4.6 or Sonnet 4.6, and its only Haiku 4.5 entry is a `mantle`-endpoint rate ~10% above the hardcoded one and for a different endpoint than the pipeline calls.",
     "derived_usd_if_rates_are_right": {
       "KY": 4.408,
       "CO": 4.016,
       "combined": 8.42
     },
-    "action": "Detection and parsing dollar figures are now publishable with the date and source cited. Keep tokens as the primary hard number (Task 6 step 4).",
+    "action": "Dollar figures are publishable with source and date cited. Tokens remain the primary hard number (Task 6 step 4).",
     "see": "paper/results/task6_20260830/pricing_verification.md",
-    "confirmed_by": "Emily Cheyne, 2026-08-31, https://aws.amazon.com/bedrock/pricing/",
+    "confirmed_by": "Emily Cheyne against https://aws.amazon.com/bedrock/pricing/: Opus 4.6 and Sonnet 4.6 on 2026-08-31, Haiku 4.5 on 2026-09-04.",
     "confirmed_rates_per_1k": {
       "us.anthropic.claude-opus-4-6-v1": {
         "input": 0.005,
@@ -168,9 +168,12 @@
       "us.anthropic.claude-sonnet-4-6": {
         "input": 0.003,
         "output": 0.015
+      },
+      "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+        "input": 0.001,
+        "output": 0.005
       }
-    },
-    "haiku_open": "The Haiku 4.5 entry holds two competing numbers (code 0.001/0.005 vs a mantle-endpoint 0.0011/0.0055) and the confirmation does not say which. Worth ~$0.004 of the $8.42 combined total, since the depth-map stage is ~3% of input tokens. Resolve before publishing a per-stage dollar column."
+    }
   },
   "token_reconciliation": {
     "question": "The day's account-wide Opus spend was 727,798 in / 198,073 out, while these two runs account for only 424,850 / 111,655. The gap prompted a suspicion of missing coverage.",
