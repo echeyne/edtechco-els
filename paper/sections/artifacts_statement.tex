@@ -10,3 +10,32 @@
 
 \section{Artifacts Statement}
 \label{sec:artifacts-statement}
+
+Neither the implementation nor the evaluation corpus is released. Disclosure is
+in-paper: the appendices give the detector and parser prompts
+(Appendix~\ref{sec:appendix-prompts}), the canonical schema
+(Appendix~\ref{sec:appendix-schema}), representative annotated examples
+(Appendix~\ref{sec:appendix-goldens}), and the corpus table naming every source
+document with its publisher, year and retained page ranges
+(Appendix~\ref{sec:appendix-corpus}). Those are the parts a reader needs to
+evaluate or reimplement the method; the rest is engineering around them.
+
+The source documents are third-party state-agency publications. Only US
+\emph{federal} works are automatically in the public domain, so these are not
+ours to redistribute, and the corpus appendix cites each document's origin so it
+can be obtained from its issuing agency instead. The hand-annotated golden sets
+are derived from those documents and are withheld for the same reason.
+
+We state the consequence plainly: this limits direct reproducibility. A reader
+can reimplement the method from the prompts and schema and apply it to documents
+they obtain themselves, but cannot re-run our exact measurements. To make the
+reported numbers as checkable as the constraint allows, every result in this
+paper is generated from a recorded JSON artifact rather than transcribed by
+hand, each carries the pipeline source version and model identifiers that
+produced it, and each table is regenerated from those artifacts at build time.
+Where a figure could not be verified against an authoritative source we say so
+rather than reporting it.
+
+This paper is distributed under the arXiv non-exclusive license to distribute.
+Copyright is retained by the author; no redistribution or derivative use of the
+text is granted.

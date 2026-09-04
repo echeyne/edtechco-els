@@ -26,14 +26,37 @@
 \maketitle
 
 \begin{abstract}
-% TODO(Task 12): draft abstract last, after all sections are written.
-% Framing (tasking/arxiv_paper.md): method + system paper, cs.CL primary /
-% cs.AI cross-list, leading with the LLM-first methodology (depth-map
-% inference, classify-by-nesting-position prompting, two-stage
-% detection-then-parsing, serverless batching), evaluation supporting the
-% method claims. State the headline generalization result (detector recall
-% 1.000 at every level across 4 golden + 2 held-out states) and the corpus
-% tier (subset-scoped) plainly.
+Every US state publishes early learning standards --- the developmental
+expectations that shape curriculum and assessment from birth to kindergarten ---
+and more than fifty jurisdictions each design their own document. The result is
+public policy that software cannot read: multi-column tables, age-banded grids
+and prose narratives whose typography is shared by no two states. The obstacle
+is not text recovery but hierarchy recovery, because a standard is meaningful
+only through its ancestry, and the surface cues that would reveal that ancestry
+are exactly what varies. Arizona writes \texttt{Strand 1:}, Kentucky writes
+\texttt{Benchmark 1.1}, Nevada's printed code namespace skips a level, and
+Colorado publishes no sub-strand tier at all.
+
+We present an LLM-driven method that classifies each element by its
+\emph{nesting position} rather than its label vocabulary. A first pass infers a
+per-document depth map --- how many levels this document uses and what each
+looks like in it --- and a second classifies every element against that map as
+authority; a decoupled parsing stage then resolves the flat result into one
+canonical schema with deterministic, collision-free identifiers, and a
+serverless batching architecture applies it to whole documents. The system
+contains no per-state rule.
+
+Evaluated on four development states and two held out entirely, detector recall
+is 1.000 at every hierarchy level in all six, and a manual audit of all 296
+in-scope detections finds a single hallucinated element. Ablating the depth-map
+pass leaves domain and indicator recall untouched while strand falls to 0.920
+and sub-strand to 0.833 --- degrading exactly the levels whose identity is
+positional --- and a rule-based extractor matches the method at a document's top
+division while collapsing beneath it. Repeated runs show the pipeline is not
+deterministic: instability is concentrated in three known places, and one
+previously recorded result of our own failed to reproduce, which we report along
+with what it implies for single-run evidence. All quality figures are computed
+on an annotated subset tier, stated as such throughout.
 \end{abstract}
 
 % ---------------------------------------------------------------------

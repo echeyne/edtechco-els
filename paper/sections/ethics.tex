@@ -5,3 +5,40 @@
 
 \section{Ethics and Broader Impact}
 \label{sec:ethics}
+
+\paragraph{No personal data.} This work processes published policy documents
+issued by state education agencies. It involves no student, teacher or family
+data, no personally identifying information of any kind, and no human subjects.
+The only people named anywhere in the pipeline are the authenticated editors who
+verify extracted records, whose identity is bound from their session rather than
+supplied by a model.
+
+\paragraph{Stewardship of what the system produces.} Early learning standards
+shape curriculum, assessment and teacher preparation, so a misextracted standard
+is not a neutral error --- it could propagate into materials that reach
+children. This is the reason the system emits a confidence score but gates
+nothing on it (\S\ref{sec:method-confidence}), and the reason every record
+carries the page of the source PDF it came from: the design assumes a human will
+check, and makes checking cheap, rather than assuming the extraction is right.
+Our own measurements support that stance. The pipeline is not deterministic, its
+stability figures are lower bounds rather than guarantees, and we found a
+recorded result of our own that did not reproduce. We would regard deploying
+these outputs into anything carrying regulatory or assessment weight without
+expert verification as a misuse of them.
+
+\paragraph{Not a substitute for the source.} The normalized corpus is a
+navigation aid over documents that remain authoritative. Nothing here
+reinterprets a standard, changes its wording, or merges jurisdictions into a
+common framework --- the canonical schema records how each state organizes
+itself, including where a state uses fewer levels than the schema allows.
+Treating a normalized record as the standard, rather than as a pointer into the
+document that issues it, would be a misreading of what the system does.
+
+\paragraph{Who benefits, and a caution.} Making fragmented standards queryable
+mainly helps those without the resources to do it by hand: small districts,
+individual educators, and developers building for them, as against large
+publishers who can afford manual normalization. That is the impact we intend.
+The corresponding risk is that a machine-readable corpus makes cross-state
+comparison easy enough to invite comparisons the documents do not support ---
+states differ in what they choose to make explicit, and a state with fewer
+recorded indicators has not thereby set a lower bar.

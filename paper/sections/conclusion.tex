@@ -8,3 +8,36 @@
 
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
+
+US early learning standards are public policy that software cannot read. We have
+shown that the obstacle is not text recovery but hierarchy recovery, and that an
+LLM can recover the hierarchy by classifying each element's nesting position
+against a depth map inferred per document, rather than by recognizing label
+vocabulary that no two states share. Across four development states and two held
+out entirely, detector recall is 1.000 at every level, a manual audit of all 296
+in-scope detections finds one hallucinated element, and parsing resolves those
+elements into a single canonical schema with no identifier collisions. Ablating
+the depth map degrades exactly the levels whose identity is positional and
+leaves the others untouched; a rule-based extractor matches the method at a
+document's top division and collapses beneath it. The system carries no
+per-state rule, which is what allows a new state to be added without new code.
+
+The most valuable immediate extension is also the cheapest. Kentucky's golden is
+detection-exhaustive, so grading it inside a trimmed-tier run would yield
+quality-at-scale evidence without any new annotation --- the one measurement
+this work most conspicuously lacks. Beyond that, the corpus is six states of
+more than fifty, and the obvious direction is breadth: each state added tests
+generalization again, and enough of them would constitute the national
+machine-readable dataset that does not currently exist.
+
+Two further directions follow from the artifact rather than the method. The
+normalized store is already served through a browsing and verification
+interface; exposing it through a tool-callable interface would let external
+applications and agents query standards directly, which is the form in which
+curriculum and planning tools actually need them. And the human verification
+state the schema carries per element invites a targeted-review question we have
+deliberately not answered here: given that confidence is uninformative
+(\S\ref{sec:experiments-confidence}), what \emph{would} identify the records
+most worth an expert's attention? Our stability measurements suggest one
+candidate --- disagreement across repeated runs is cheap to compute and, unlike
+confidence, is concentrated in exactly the places where our own defects live.
