@@ -74,9 +74,9 @@ REPO_ROOT = PAPER_DIR.parent
 RESULTS_DIR = PAPER_DIR / "results"
 
 # The recorded freeze this task describes. Keep in step with generate_tables.py.
-RUN_TAG = "20260822"
+RUN_TAG = "20260826"
 OUT_TAG = "20260823"
-OUTPUTS_TAG = "08-22-26-4"
+OUTPUTS_TAG = "08-26-26-2"
 
 GOLDEN_STATES = ["AZ", "CA", "CO", "TX"]
 HELDOUT_STATES = ["NV", "KY"]

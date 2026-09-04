@@ -1,0 +1,27 @@
+{
+  "task": "Task 8 re-measurement \u2014 descriptive stats + confidence distribution at the current freeze",
+  "date": "2026-09-04",
+  "supersedes": "paper/results/task8_20260823/ (outputs/08-22-26-4, code_version_hash 288c64f1)",
+  "git_commit": "44d2dca2a67b82a76be70841289a7d6896221e21",
+  "code_version_hash": "14374dba",
+  "corpus_tier": "_only_subset \u2014 guardrail 1",
+  "extraction_source": "outputs/08-26-26-2 (pipeline run 044)",
+  "bedrock_tokens_spent": 0,
+  "why_rerecorded": "The 20260823 recording was measured on outputs/08-22-26-4 at 288c64f1 \u2014 a superseded folder and hash \u2014 while every other quality number in the paper is outputs/08-26-26-2 at 14374dba. The confidence distribution is a MODEL result, not a corpus property: it is the detector's self-reported score on a particular run, and the detection sets changed between the two freezes (AZ 66->67, NV 53->52). Leaving STATS_TAG pinned would have put a superseded model result in a paper whose every other figure is current. Re-measuring costs ZERO Bedrock tokens \u2014 dataset_stats.py only reads detection JSON already on disk.",
+  "regenerate_with": "python paper/analysis/dataset_stats.py",
+  "what_changed": {
+    "distinct_values": "7 in [0.85, 0.97] -> 5 in [0.90, 0.97]",
+    "overall_at_0.95_plus": "-> 357/379 = 0.9420",
+    "indicator_at_0.95_plus": "236/263 = 89.7% -> 246/263 = 93.5%",
+    "middle_band_0.80_0.94": "32 -> 22 occurrences",
+    "states_with_no_sub_0.95_element": "4 -> 3 (CA, CO, TX)",
+    "global_minimum": "0.85 -> 0.90, and it is STILL NV's SS.CI.PK3, the one confirmed hallucination, still the unique minimum. Next lowest is 0.92."
+  },
+  "\u26a0\ufe0f_a_claim_STOPPED_reproducing": "The Medium-era claim '85-90% of indicators score 0.95+' reproduced at 89.7% on the superseded recording and does NOT reproduce here: 93.5% is ABOVE the claimed band. Guardrail 4 \u2014 the paper must report the measurement, not the article, and must now say the claim does not reproduce rather than that it does. The movement between two recordings of the same corpus is itself a datapoint for the nondeterminism discussion.",
+  "unchanged": {
+    "below_0.80": "0 elements, both recordings \u2014 the prompt's 'guessing' band is never used",
+    "gating": "nothing thresholds confidence; no needs_review field exists (guardrail 2)",
+    "id_collisions": 0,
+    "age_band_coverage": 1.0
+  }
+}

@@ -196,10 +196,10 @@ field marking an element as requiring attention; all elements flow through
 detection, parsing, validation, and persistence regardless of score. We are
 explicit about this because it is easy to assume otherwise, and because our own
 measurement of the score's distribution argues against building such a gate: the
-scores occupy seven distinct values in $[0.85, 0.97]$, the band the prompt
+scores occupy five distinct values in $[0.90, 0.97]$, the band the prompt
 describes as indicating uncertainty is used zero times, and the score varies
 more by document than by whether an element is correct
-(\S\ref{sec:experiments-results}).
+(\S\ref{sec:experiments-confidence}).
 
 Human verification is a separate mechanism. The schema carries per-element
 verification state at all four levels, and an editorial interface lets a

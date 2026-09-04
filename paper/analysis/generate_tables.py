@@ -60,7 +60,7 @@ RUN_TAG = "20260826"
 ABLATION_TAG = "20260826"
 STABILITY_TAG = "20260823"
 BASELINE_TAG = "20260826"
-STATS_TAG = "20260823"
+STATS_TAG = "20260904"
 
 # Task 6's batched-path scale recording. ⚠️ SEPARATE TIER: this is the only
 # recording in the paper that is NOT _only_subset. It is _trimmed (KY 52pp,

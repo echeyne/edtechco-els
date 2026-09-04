@@ -1,0 +1,1058 @@
+{
+  "_meta": {
+    "task": "Task 8 -- dataset descriptive stats + confidence distribution",
+    "description": "Detector self-reported confidence, re-measured from scratch (guardrail 4). Confidence gates nothing (guardrail 2).",
+    "generated_by": "paper/analysis/dataset_stats.py",
+    "regenerate_with": "python paper/analysis/dataset_stats.py",
+    "run_tag": "20260826",
+    "outputs_dir": "outputs/08-26-26-2",
+    "corpus_tier": "_only_subset (manually trimmed subset PDFs, NOT full documents) -- guardrail 1",
+    "git_commit": "44d2dca2a67b82a76be70841289a7d6896221e21",
+    "code_version_hash": "14374dba",
+    "bedrock_tokens_spent": 0,
+    "inputs": [
+      "outputs/08-26-26-2/{STATE}-detection.json (batched)",
+      "paper/results/task{1,2}_20260826/review_detector/{STATE}/ (direct, plus the review that supplies matched/extra)",
+      "paper/results/task1_20260826/task1b_fp_audit_SIGNED.json",
+      "paper/results/task2_20260826/nv_fp_audit_SIGNED.json"
+    ]
+  },
+  "prompt_rubric": {
+    "0.95+": "the depth map clearly applies",
+    "0.80-0.94": "the chunk is ambiguous but the answer is likely",
+    "<0.70": "you are guessing"
+  },
+  "gating": {
+    "elements_dropped_or_gated_by_confidence": 0,
+    "needs_review_field_exists": false,
+    "human_verification_mechanism": "human_verified / verified_at / verified_by columns on all four levels (infra/migrations/005_add_verification_columns.sql), set by a reviewer in the Explorer app -- entirely independent of the confidence score.",
+    "verified_against_live_tree": "2026-08-23: zero hits for needs_review or CONFIDENCE_THRESHOLD in src/, evaluation/ or infra/cdk/lib/. Hits under infra/cdk/dist/ and infra/cdk/cdk.out.deploy-dev/ are stale build artifacts of a pre-2026 revision; both paths are gitignored and untracked, so they are absent from a clean checkout and from the arXiv tarball."
+  },
+  "direct_path": {
+    "overall": {
+      "n": 379,
+      "min": 0.9,
+      "max": 0.97,
+      "mean": 0.9572,
+      "median": 0.96,
+      "stdev": 0.0126,
+      "distinct_values": [
+        0.9,
+        0.92,
+        0.95,
+        0.96,
+        0.97
+      ],
+      "n_distinct_values": 5,
+      "histogram": {
+        "0.9": 1,
+        "0.92": 21,
+        "0.95": 138,
+        "0.96": 96,
+        "0.97": 123
+      },
+      "at_or_above_0.95": 357,
+      "frac_at_or_above_0.95": 0.942,
+      "below_0.80": 0,
+      "below_0.70": 0,
+      "prompt_band_occupancy": {
+        "0.95+ (depth map clearly applies)": 357,
+        "0.80-0.94 (ambiguous but likely)": 22,
+        "below 0.70 (guessing)": 0,
+        "unassigned gap 0.70-0.79": 0
+      }
+    },
+    "by_level": {
+      "domain": {
+        "n": 16,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9556,
+        "median": 0.95,
+        "stdev": 0.0079,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 10,
+          "0.96": 3,
+          "0.97": 3
+        },
+        "at_or_above_0.95": 16,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 16,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "strand": {
+        "n": 51,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9612,
+        "median": 0.97,
+        "stdev": 0.0132,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 3,
+          "0.95": 12,
+          "0.96": 6,
+          "0.97": 30
+        },
+        "at_or_above_0.95": 48,
+        "frac_at_or_above_0.95": 0.9412,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 48,
+          "0.80-0.94 (ambiguous but likely)": 3,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "sub_strand": {
+        "n": 49,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9553,
+        "median": 0.95,
+        "stdev": 0.0114,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 2,
+          "0.95": 29,
+          "0.96": 4,
+          "0.97": 14
+        },
+        "at_or_above_0.95": 47,
+        "frac_at_or_above_0.95": 0.9592,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 47,
+          "0.80-0.94 (ambiguous but likely)": 2,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "indicator": {
+        "n": 263,
+        "min": 0.9,
+        "max": 0.97,
+        "mean": 0.9569,
+        "median": 0.96,
+        "stdev": 0.0128,
+        "distinct_values": [
+          0.9,
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 5,
+        "histogram": {
+          "0.9": 1,
+          "0.92": 16,
+          "0.95": 87,
+          "0.96": 83,
+          "0.97": 76
+        },
+        "at_or_above_0.95": 246,
+        "frac_at_or_above_0.95": 0.9354,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 246,
+          "0.80-0.94 (ambiguous but likely)": 17,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      }
+    },
+    "by_state": {
+      "AZ": {
+        "n": 67,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9619,
+        "median": 0.97,
+        "stdev": 0.0122,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 3,
+          "0.95": 15,
+          "0.96": 9,
+          "0.97": 40
+        },
+        "at_or_above_0.95": 64,
+        "frac_at_or_above_0.95": 0.9552,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 64,
+          "0.80-0.94 (ambiguous but likely)": 3,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "CA": {
+        "n": 122,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9601,
+        "median": 0.96,
+        "stdev": 0.0083,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 42,
+          "0.96": 37,
+          "0.97": 43
+        },
+        "at_or_above_0.95": 122,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 122,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "CO": {
+        "n": 61,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9551,
+        "median": 0.95,
+        "stdev": 0.0062,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 34,
+          "0.96": 23,
+          "0.97": 4
+        },
+        "at_or_above_0.95": 61,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 61,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "TX": {
+        "n": 33,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9576,
+        "median": 0.96,
+        "stdev": 0.007,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 13,
+          "0.96": 15,
+          "0.97": 5
+        },
+        "at_or_above_0.95": 33,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 33,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "NV": {
+        "n": 52,
+        "min": 0.9,
+        "max": 0.97,
+        "mean": 0.9587,
+        "median": 0.96,
+        "stdev": 0.0141,
+        "distinct_values": [
+          0.9,
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 5,
+        "histogram": {
+          "0.9": 1,
+          "0.92": 2,
+          "0.95": 15,
+          "0.96": 12,
+          "0.97": 22
+        },
+        "at_or_above_0.95": 49,
+        "frac_at_or_above_0.95": 0.9423,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 49,
+          "0.80-0.94 (ambiguous but likely)": 3,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "KY": {
+        "n": 44,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9432,
+        "median": 0.95,
+        "stdev": 0.019,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.92": 16,
+          "0.95": 19,
+          "0.97": 9
+        },
+        "at_or_above_0.95": 28,
+        "frac_at_or_above_0.95": 0.6364,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 28,
+          "0.80-0.94 (ambiguous but likely)": 16,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      }
+    }
+  },
+  "batched_path": {
+    "overall": {
+      "n": 377,
+      "min": 0.9,
+      "max": 0.97,
+      "mean": 0.9578,
+      "median": 0.96,
+      "stdev": 0.0129,
+      "distinct_values": [
+        0.9,
+        0.92,
+        0.95,
+        0.96,
+        0.97
+      ],
+      "n_distinct_values": 5,
+      "histogram": {
+        "0.9": 1,
+        "0.92": 19,
+        "0.95": 152,
+        "0.96": 55,
+        "0.97": 150
+      },
+      "at_or_above_0.95": 357,
+      "frac_at_or_above_0.95": 0.9469,
+      "below_0.80": 0,
+      "below_0.70": 0,
+      "prompt_band_occupancy": {
+        "0.95+ (depth map clearly applies)": 357,
+        "0.80-0.94 (ambiguous but likely)": 20,
+        "below 0.70 (guessing)": 0,
+        "unassigned gap 0.70-0.79": 0
+      }
+    },
+    "by_level": {
+      "domain": {
+        "n": 16,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9556,
+        "median": 0.95,
+        "stdev": 0.0079,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 10,
+          "0.96": 3,
+          "0.97": 3
+        },
+        "at_or_above_0.95": 16,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 16,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "strand": {
+        "n": 51,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9612,
+        "median": 0.97,
+        "stdev": 0.0132,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 3,
+          "0.95": 12,
+          "0.96": 6,
+          "0.97": 30
+        },
+        "at_or_above_0.95": 48,
+        "frac_at_or_above_0.95": 0.9412,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 48,
+          "0.80-0.94 (ambiguous but likely)": 3,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "sub_strand": {
+        "n": 47,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.956,
+        "median": 0.95,
+        "stdev": 0.0087,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 31,
+          "0.96": 4,
+          "0.97": 12
+        },
+        "at_or_above_0.95": 47,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 47,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "indicator": {
+        "n": 263,
+        "min": 0.9,
+        "max": 0.97,
+        "mean": 0.9576,
+        "median": 0.96,
+        "stdev": 0.0135,
+        "distinct_values": [
+          0.9,
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 5,
+        "histogram": {
+          "0.9": 1,
+          "0.92": 16,
+          "0.95": 99,
+          "0.96": 42,
+          "0.97": 105
+        },
+        "at_or_above_0.95": 246,
+        "frac_at_or_above_0.95": 0.9354,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 246,
+          "0.80-0.94 (ambiguous but likely)": 17,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      }
+    },
+    "by_state": {
+      "AZ": {
+        "n": 65,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9606,
+        "median": 0.96,
+        "stdev": 0.0099,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 1,
+          "0.95": 20,
+          "0.96": 16,
+          "0.97": 28
+        },
+        "at_or_above_0.95": 64,
+        "frac_at_or_above_0.95": 0.9846,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 64,
+          "0.80-0.94 (ambiguous but likely)": 1,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "CA": {
+        "n": 122,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9631,
+        "median": 0.97,
+        "stdev": 0.0095,
+        "distinct_values": [
+          0.95,
+          0.97
+        ],
+        "n_distinct_values": 2,
+        "histogram": {
+          "0.95": 42,
+          "0.97": 80
+        },
+        "at_or_above_0.95": 122,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 122,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "CO": {
+        "n": 61,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9551,
+        "median": 0.95,
+        "stdev": 0.0062,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 34,
+          "0.96": 23,
+          "0.97": 4
+        },
+        "at_or_above_0.95": 61,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 61,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "TX": {
+        "n": 33,
+        "min": 0.95,
+        "max": 0.97,
+        "mean": 0.9576,
+        "median": 0.96,
+        "stdev": 0.007,
+        "distinct_values": [
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.95": 13,
+          "0.96": 15,
+          "0.97": 5
+        },
+        "at_or_above_0.95": 33,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 33,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "NV": {
+        "n": 52,
+        "min": 0.9,
+        "max": 0.97,
+        "mean": 0.9573,
+        "median": 0.95,
+        "stdev": 0.0147,
+        "distinct_values": [
+          0.9,
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 5,
+        "histogram": {
+          "0.9": 1,
+          "0.92": 2,
+          "0.95": 24,
+          "0.96": 1,
+          "0.97": 24
+        },
+        "at_or_above_0.95": 49,
+        "frac_at_or_above_0.95": 0.9423,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 49,
+          "0.80-0.94 (ambiguous but likely)": 3,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "KY": {
+        "n": 44,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9432,
+        "median": 0.95,
+        "stdev": 0.019,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.97
+        ],
+        "n_distinct_values": 3,
+        "histogram": {
+          "0.92": 16,
+          "0.95": 19,
+          "0.97": 9
+        },
+        "at_or_above_0.95": 28,
+        "frac_at_or_above_0.95": 0.6364,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 28,
+          "0.80-0.94 (ambiguous but likely)": 16,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      }
+    }
+  },
+  "batched_path_caveat": "Biased UPWARD by construction: detector._merge_duplicate keeps max(keep.confidence, other.confidence) when folding two views of one element together. A direct-vs-batched difference here is an artifact of merging, not a statement about the model.",
+  "by_audit_verdict": {
+    "path": "DIRECT (the frozen detections the recorded evals graded)",
+    "in_scope_detections_audited": 297,
+    "by_verdict": {
+      "matched_golden": {
+        "n": 135,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9547,
+        "median": 0.96,
+        "stdev": 0.0159,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 18,
+          "0.95": 45,
+          "0.96": 27,
+          "0.97": 45
+        },
+        "at_or_above_0.95": 117,
+        "frac_at_or_above_0.95": 0.8667,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 117,
+          "0.80-0.94 (ambiguous but likely)": 18,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "real_unannotated": {
+        "n": 117,
+        "min": 0.92,
+        "max": 0.97,
+        "mean": 0.9595,
+        "median": 0.96,
+        "stdev": 0.0096,
+        "distinct_values": [
+          0.92,
+          0.95,
+          0.96,
+          0.97
+        ],
+        "n_distinct_values": 4,
+        "histogram": {
+          "0.92": 2,
+          "0.95": 37,
+          "0.96": 39,
+          "0.97": 39
+        },
+        "at_or_above_0.95": 115,
+        "frac_at_or_above_0.95": 0.9829,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 115,
+          "0.80-0.94 (ambiguous but likely)": 2,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "real_split_title": {
+        "n": 39,
+        "min": 0.95,
+        "max": 0.96,
+        "mean": 0.9546,
+        "median": 0.95,
+        "stdev": 0.005,
+        "distinct_values": [
+          0.95,
+          0.96
+        ],
+        "n_distinct_values": 2,
+        "histogram": {
+          "0.95": 21,
+          "0.96": 18
+        },
+        "at_or_above_0.95": 39,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 39,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "real_repeat_of_matched": {
+        "n": 5,
+        "min": 0.95,
+        "max": 0.95,
+        "mean": 0.95,
+        "median": 0.95,
+        "stdev": 0.0,
+        "distinct_values": [
+          0.95
+        ],
+        "n_distinct_values": 1,
+        "histogram": {
+          "0.95": 5
+        },
+        "at_or_above_0.95": 5,
+        "frac_at_or_above_0.95": 1.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 5,
+          "0.80-0.94 (ambiguous but likely)": 0,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      },
+      "hallucinated": {
+        "n": 1,
+        "min": 0.9,
+        "max": 0.9,
+        "mean": 0.9,
+        "median": 0.9,
+        "stdev": 0.0,
+        "distinct_values": [
+          0.9
+        ],
+        "n_distinct_values": 1,
+        "histogram": {
+          "0.9": 1
+        },
+        "at_or_above_0.95": 0,
+        "frac_at_or_above_0.95": 0.0,
+        "below_0.80": 0,
+        "below_0.70": 0,
+        "prompt_band_occupancy": {
+          "0.95+ (depth map clearly applies)": 0,
+          "0.80-0.94 (ambiguous but likely)": 1,
+          "below 0.70 (guessing)": 0,
+          "unassigned gap 0.70-0.79": 0
+        }
+      }
+    },
+    "verdict_counts": {
+      "matched_golden": 135,
+      "real_unannotated": 117,
+      "real_split_title": 39,
+      "real_repeat_of_matched": 5,
+      "hallucinated": 1
+    },
+    "verified_precision_corpus_wide": 0.9966,
+    "threshold_analysis": [
+      {
+        "threshold": 0.7,
+        "elements_flagged": 0,
+        "hallucinations_caught": 0,
+        "hallucinations_missed": 1,
+        "correct_elements_flagged": 0,
+        "precision_of_the_flag": null
+      },
+      {
+        "threshold": 0.8,
+        "elements_flagged": 0,
+        "hallucinations_caught": 0,
+        "hallucinations_missed": 1,
+        "correct_elements_flagged": 0,
+        "precision_of_the_flag": null
+      },
+      {
+        "threshold": 0.9,
+        "elements_flagged": 0,
+        "hallucinations_caught": 0,
+        "hallucinations_missed": 1,
+        "correct_elements_flagged": 0,
+        "precision_of_the_flag": null
+      },
+      {
+        "threshold": 0.93,
+        "elements_flagged": 21,
+        "hallucinations_caught": 1,
+        "hallucinations_missed": 0,
+        "correct_elements_flagged": 20,
+        "precision_of_the_flag": 0.0476
+      },
+      {
+        "threshold": 0.95,
+        "elements_flagged": 21,
+        "hallucinations_caught": 1,
+        "hallucinations_missed": 0,
+        "correct_elements_flagged": 20,
+        "precision_of_the_flag": 0.0476
+      },
+      {
+        "threshold": 0.96,
+        "elements_flagged": 129,
+        "hallucinations_caught": 1,
+        "hallucinations_missed": 0,
+        "correct_elements_flagged": 128,
+        "precision_of_the_flag": 0.0078
+      }
+    ]
+  },
+  "separation_stability": {
+    "cut": 0.9,
+    "samples_per_state": {
+      "AZ": [
+        "sample1_eval_freeze",
+        "on_run2",
+        "on_run3"
+      ],
+      "CA": [
+        "sample1_eval_freeze",
+        "on_run2",
+        "on_run3"
+      ],
+      "CO": [
+        "sample1_eval_freeze",
+        "on_run2",
+        "on_run3"
+      ],
+      "KY": [
+        "sample1_eval_freeze",
+        "on_run2",
+        "on_run3"
+      ],
+      "NV": [
+        "sample1_eval_freeze",
+        "on_run2",
+        "on_run3"
+      ],
+      "TX": [
+        "sample1_eval_freeze",
+        "on_run2",
+        "on_run3"
+      ]
+    },
+    "n_samples": 18,
+    "elements_examined": 1157,
+    "elements_below_cut": 2,
+    "distinct_elements_below_cut": 1,
+    "rows": [
+      {
+        "state": "NV",
+        "sample": "on_run2",
+        "confidence": 0.85,
+        "level": "indicator",
+        "code": "SS.CI.PK3",
+        "title": "Recognize and resolve conflicts with peers with adult guidance."
+      },
+      {
+        "state": "NV",
+        "sample": "on_run3",
+        "confidence": 0.85,
+        "level": "indicator",
+        "code": "SS.CI.PK3",
+        "title": "Recognize and resolve conflicts with peers with adult guidance."
+      }
+    ],
+    "audited_hallucination_max_confidence": 0.9,
+    "reading": "Across these same-configuration repeats the only elements below 0.9 are 1 distinct element(s), and the audit calls that element invented. So the separation is not an artifact of one draw. It is still NOT a validated detector: the audited corpus contains exactly one distinct hallucination, so the false-negative rate of such a cut is unmeasured and unmeasurable from this data. The detector prompt's own rubric puts its boundary at 0.80, which catches nothing here -- a cut at 0.90 is fitted after the fact to a single positive case."
+  },
+  "sub_threshold_concentration": {
+    "per_state": {
+      "AZ": {
+        "indicators": 45,
+        "below_0.95": 0,
+        "frac_below_0.95": 0.0,
+        "values_below_0.95": []
+      },
+      "CA": {
+        "indicators": 94,
+        "below_0.95": 0,
+        "frac_below_0.95": 0.0,
+        "values_below_0.95": []
+      },
+      "CO": {
+        "indicators": 48,
+        "below_0.95": 0,
+        "frac_below_0.95": 0.0,
+        "values_below_0.95": []
+      },
+      "TX": {
+        "indicators": 25,
+        "below_0.95": 0,
+        "frac_below_0.95": 0.0,
+        "values_below_0.95": []
+      },
+      "NV": {
+        "indicators": 25,
+        "below_0.95": 1,
+        "frac_below_0.95": 0.04,
+        "values_below_0.95": [
+          0.9
+        ]
+      },
+      "KY": {
+        "indicators": 26,
+        "below_0.95": 16,
+        "frac_below_0.95": 0.6154,
+        "values_below_0.95": [
+          0.92
+        ]
+      }
+    },
+    "indicators_total": 263,
+    "indicators_below_0.95": 17,
+    "states_with_no_low_indicator": [
+      "AZ",
+      "CA",
+      "CO",
+      "TX"
+    ],
+    "states_where_every_indicator_is_low": [],
+    "finding": "The low tail is not spread across documents: 4 of 6 states have no sub-0.95 indicator at all, and the tail is almost entirely  -- where EVERY indicator scores below the line. The score moves at the level of a whole document, not at the level of a hard passage inside one, which is the opposite of what the published claim describes."
+  },
+  "medium_article_claim": {
+    "claim_as_published": "\"In practice, most documents produce 85-90% of their indicators at 0.95+ confidence. The remaining 10-15% are typically from tables, footnotes, or sections with unusual formatting.\"",
+    "source": "documentation/medium-articles/02-teaching-ai-to-read-curriculum.md line 100 -- prose seed only, never measured (guardrail 4).",
+    "remeasured_direct_path": "246/263 = 0.9354",
+    "remeasured_batched_path": "246/263 = 0.9354",
+    "first_sentence_verdict": "REPRODUCES. The paper must still cite the measurement rather than the claim: landing inside the published band is a property of this corpus, not a validation of a number that was never measured.",
+    "second_sentence_verdict": "REFUTED -- see sub_threshold_concentration. The low tail is not spread across documents: 4 of 6 states have no sub-0.95 indicator at all, and the tail is almost entirely  -- where EVERY indicator scores below the line. The score moves at the level of a whole document, not at the level of a hard passage inside one, which is the opposite of what the published claim describes.",
+    "third_claim_in_the_same_article": "Article 02 line 98 also states that elements below a 0.70 threshold are flagged for human review and that this 'creates a quality gate'. That gate does not exist in the live code (guardrail 2), and this corpus shows it would have been inert if it did: ZERO of the 379 recorded elements -- and zero across all same-configuration repeats -- score below 0.70. Even the historical gate could never have fired on any document measured here.",
+    "why_it_is_not_a_quality_signal": "The score is self-reported by the detector against its own prompt rubric, and it barely leaves the top of that rubric: no element in either path falls below 0.85, the band the rubric reserves for a guess is never used at all, and the corpus takes only a handful of distinct values. A high 0.95+ share therefore measures how the model was asked to fill in a field, not how often it was right. Kentucky makes the point at the state level: it is the one state with a detection-exhaustive golden, and it scores recall 1.000, code accuracy 1.000 and verified precision 1.000 -- while every one of its indicators sits BELOW 0.95. California scores the same recall and code accuracy with all 94 indicators at or above it."
+  },
+  "headline": {
+    "distinct_values_direct": 5,
+    "distinct_values_batched": 5,
+    "range_direct": [
+      0.9,
+      0.97
+    ],
+    "elements_below_0.80": 0,
+    "hallucinations": 1,
+    "prompt_band_occupancy": {
+      "0.95+ (depth map clearly applies)": 357,
+      "0.80-0.94 (ambiguous but likely)": 22,
+      "below 0.70 (guessing)": 0,
+      "unassigned gap 0.70-0.79": 0
+    },
+    "statement": "Across the 379 elements of the recorded run the score takes 5 distinct values in [0.9, 0.97]. It never enters the prompt's bottom band -- 0 elements score below 0.70, the value the rubric reserves for a guess -- and it uses the middle 0.80-0.94 band for only 22 of them. Of those 379 elements, 297 are in scope for a golden and every one has been human-audited; exactly 1 is invented, and it also holds the lowest score. That separation survives 18 same-configuration repeats (1157 elements, 1 distinct element below 0.9), so it is not an artifact of one draw -- but it is still an observation rather than a validated threshold, because one positive case cannot establish a false-negative rate. That is why the system gates on explicit human verification instead of on this score.",
+    "what_the_score_does_not_register": "The audit's 39 real_split_title rows are real content whose titles were broken by multi-column interleaving, the layout condition that most degrades transcription in this corpus. Every one of them scores at or above 0.95. Whatever the low end of the score tracks, it is not layout difficulty."
+  }
+}

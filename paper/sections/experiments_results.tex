@@ -217,6 +217,13 @@ deterministic, so one run suffices.
 %    write a sentence that could be read as "the model knows when it is
 %    uncertain" -- the measurement says close to the opposite.
 %
+% ⚠️ FIGURES BELOW ARE SUPERSEDED (2026-09-04). This brief was written against
+% task8_20260823 (outputs/08-22-26-4, hash 288c64f1). Task 8 was re-measured at
+% the current freeze -- see task8_20260904 -- and several numbers moved: 5 distinct
+% values in [0.90,0.97] not 7 in [0.85,0.97]; middle band 22 not 32; indicators at
+% 0.95+ 93.5%% not 89.7%%, which means the '85-90%%' claim NO LONGER REPRODUCES;
+% three states clean, not four. The REASONING below still stands; the numbers do
+% not. The prose above carries the current figures.
 % 2. THE DISTRIBUTION IS DEGENERATE. 7 distinct values in [0.85, 0.97] over
 %    379 elements; the band the prompt reserves for a guess (<0.70) is never
 %    used once; the middle band is used 32 times. A score that never exercises
@@ -261,21 +268,29 @@ why we consider that the right decision rather than an oversight.
 \input{tables/confidence_distribution}
 
 \textbf{The distribution is degenerate.} Across 379 elements the score takes
-seven distinct values, all within $[0.85, 0.97]$. The band the prompt explicitly
-reserves for a guess ($<0.70$) is never used once, and the middle band
-($0.80$--$0.94$) is used 32 times. A score that never exercises two thirds of
-the range it was given is not carrying much information about difficulty, and
-building a review gate on it would mostly be building a gate on noise.
+just five distinct values --- 0.90, 0.92, 0.95, 0.96 and 0.97 --- and 357 of
+them, 94.2\%, fall at 0.95 or above. The band the prompt explicitly reserves for
+a guess ($<0.70$) is never used once; the whole of the range below 0.80 is
+empty; and the middle band ($0.80$--$0.94$) accounts for 22 elements. A score
+that never exercises two thirds of the interval it was given is not carrying
+much information about difficulty, and a review gate built on it would mostly be
+a gate on noise.
 
-\textbf{The score tracks the document, not the difficulty of the passage.} We
-re-measured a claim from our own earlier informal write-ups that ``85--90\% of
-indicators score 0.95 or above''. The headline reproduces --- 236 of 263, or
-89.7\% --- and we cite the measurement rather than the write-up. The
-accompanying explanation does not reproduce. That tail was attributed to tables,
-footnotes and unusually formatted sections; in fact four of the six states
-contain no sub-0.95 indicator at all, and the tail is almost entirely Kentucky,
-where every one of the 26 indicators falls below the line. Whatever moves the
-score, it moves per document rather than per hard passage.
+\textbf{The score tracks the document, not the difficulty of the passage.} Our
+own earlier informal write-ups claimed that ``85--90\% of indicators score 0.95
+or above''. Re-measured here the figure is 246 of 263, or \textbf{93.5\%} ---
+\emph{above} the claimed band, so the claim does not reproduce, and we report
+the measurement rather than the write-up. Its accompanying explanation fails
+more clearly still. The low tail was attributed to tables, footnotes and
+unusually formatted sections; in fact three of the six states contain no
+sub-0.95 element whatsoever, and the tail is concentrated in Kentucky, where 16
+of 44 elements sit below the line. Whatever moves this score moves per document,
+not per difficult passage.
+
+That the same quantity measured 89.7\% on an earlier freeze of the same corpus
+and 93.5\% here is itself worth noting: the score is not stable enough across
+runs to support the kind of fine-grained claim the original write-up made of
+it.
 
 Kentucky makes the point sharply, because it is the state we can say the most
 about. Its detector golden is the only exhaustive one in the corpus, and against
@@ -286,10 +301,11 @@ all of its indicators at 0.95 or above. Confidence separates these two states;
 correctness does not.
 
 \textbf{One observation that should not be over-read.} The single confirmed
-hallucination in the corpus is also its lowest-scoring element, and that holds
-across fourteen same-configuration runs covering 966 elements, in which no
-correct element scores below 0.90. It is tempting to present this as a working
-detector for fabrication. It is not one. There is exactly \emph{one} distinct
+hallucination in the corpus is also its lowest-scoring element. It is the only
+element scoring 0.90; nothing correct falls below 0.92; and it holds that
+position across recordings, having been the unique minimum on an earlier freeze
+as well. It is tempting to present this as a working detector for fabrication.
+It is not one. There is exactly \emph{one} distinct
 invented element in the audited corpus, so the false-negative rate of any such
 cut is unmeasurable here; the threshold the prompt itself defines would catch
 nothing; and the score is blind to the corpus's other non-verbatim category ---
