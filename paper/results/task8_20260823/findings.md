@@ -151,7 +151,7 @@ It is still **not a validated detector**, and the paper must say so in the same
 breath:
 
 - There is exactly **one distinct invented element** in the audited corpus. One
-  positive case cannot establish a false-negative rate — we have no way to know
+  positive case cannot establish a false-negative rate — I have no way to know
   what fraction of *other* hallucinations would score low.
 - The prompt's own boundary is 0.80, and **0.80 catches nothing**. A cut at 0.90
   is fitted after the fact to that single case.

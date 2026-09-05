@@ -66,7 +66,7 @@
 
 The claim this paper leads with is that hierarchy should be recovered from
 nesting \emph{position} rather than from label vocabulary. The depth-map pass is
-where that claim is implemented, so we ablate it: an environment flag
+where that claim is implemented, so I ablate it: an environment flag
 neutralizes Pass~1 and the detector falls back to the no-depth-map path it
 already uses when inference fails, meaning the off arm is the system's real
 graceful-degradation behavior rather than a strawman built for the paper.
@@ -89,7 +89,7 @@ annotates 3~domains, 5~strands, 10~sub-strands and 26~indicators. In the
 recorded run the on arm reproduces that distribution exactly, while the off arm
 emits 4, 10, 6 and 26. Three repeated runs per arm --- recorded at an earlier
 version of the detector code, before the Pass-1 sampler was replaced, which is
-why we keep them distinct from the single-run columns of
+why I keep them distinct from the single-run columns of
 Table~\ref{tab:ablation-depthmap} --- show the same shape every time: the on
 arm reproduces the golden distribution in all three, and the off arm inflates
 strand and deflates sub-strand in all three (5~$\rightarrow$~8/7/10 and
@@ -113,7 +113,7 @@ and Kentucky 0.89--0.98, and the recorded run at the current version (0.86 and
 0.89) falls inside both ranges. The
 direction never reverses in any sample, and the on arm is 1.000 with zero
 variance across all eighteen runs, but the magnitude on any single run is a
-draw. One regression case that failed at $n{=}2$ passed at $n{=}3$; we report it
+draw. One regression case that failed at $n{=}2$ passed at $n{=}3$; I report it
 as unstable rather than as evidence.
 
 \subsection{Comparison: A Rule-Based Structure Extractor}
@@ -164,7 +164,7 @@ as unstable rather than as evidence.
 % first version carried all of the above and ran to 13 lines, which made the
 % float overflow page 4 -- bottom margin 2pt, bibliography off the sheet edge.
 
-To quantify what the language model contributes, we compare against a
+To quantify what the language model contributes, I compare against a
 rule-based structure extractor built on the cues such documents actually
 provide: numbering patterns, capitalization, indentation and line shape. It is
 graded by the same suite against the same goldens, through the same code path,
@@ -182,7 +182,7 @@ worth knowing. Typography identifies a document's top division in all six
 states and identifies nothing reliably below it, because below the top division
 the distinctions are positional.
 
-The failure is also not the one we expected. Elements the baseline misses are
+The failure is also not the one I expected. Elements the baseline misses are
 overwhelmingly \emph{never emitted at all} rather than emitted at the wrong
 level --- 43 of Nevada's 46 and 31 of Kentucky's 44 --- and where it does find a
 golden title it usually places it correctly. The rules do not mislabel the
@@ -193,7 +193,7 @@ most dramatic number in the table and the least trustworthy as stated: it is
 dominated by a single token shape (\texttt{SS.ID.PK1}, a multi-letter code
 segment) that none of the four development documents prints. Widening the
 pattern after the fact recovers 0.522, and a comparable repair takes Kentucky
-from 0.295 to 0.409. We adopt neither, because both were motivated by inspecting
+from 0.295 to 0.409. I adopt neither, because both were motivated by inspecting
 held-out documents after the recorded run. The claim that survives the repair is
 the one worth making: rules encode the shapes their author has seen, and even
 generously repaired they reach roughly half the language model's recall on
@@ -204,7 +204,7 @@ both arms and, per \S\ref{sec:experiments-headline}, is largely a measure of
 annotation coverage. It is not a quality ordering here: Arizona shows the
 rule-based arm \emph{above} the language model (0.500 versus 0.417) purely
 because it emits fewer in-scope detections against a five-element spot-check
-golden. We also deliberately omit verified precision from this table. That
+golden. I also deliberately omit verified precision from this table. That
 metric asks whether a detected title appears in the source text --- a test for
 \emph{invention} --- and an extractor that copies text verbatim cannot invent,
 so the baseline scores 1.000 in five of six states against the language model's
@@ -273,7 +273,7 @@ deterministic, so one run suffices.
 
 The detector emits a confidence score on every element, and nothing in the
 pipeline thresholds it (\S\ref{sec:method-confidence}). This subsection reports
-why we consider that the right decision rather than an oversight.
+why I consider that the right decision rather than an oversight.
 
 \input{tables/confidence_distribution}
 
@@ -289,7 +289,7 @@ a gate on noise.
 \textbf{The score tracks the document, not the difficulty of the passage.} Our
 own earlier informal write-ups claimed that ``85--90\% of indicators score 0.95
 or above''. Re-measured here the figure is 246 of 263, or \textbf{93.5\%} ---
-\emph{above} the claimed band, so the claim does not reproduce, and we report
+\emph{above} the claimed band, so the claim does not reproduce, and I report
 the measurement rather than the write-up. Its accompanying explanation fails
 more clearly still. The low tail was attributed to tables, footnotes and
 unusually formatted sections; in fact three of the six states contain no
@@ -302,10 +302,10 @@ and 93.5\% here is itself worth noting: the score is not stable enough across
 runs to support the kind of fine-grained claim the original write-up made of
 it.
 
-Kentucky makes the point sharply, because it is the state we can say the most
+Kentucky makes the point sharply, because it is the state I can say the most
 about. Its detector golden is the only exhaustive one in the corpus, and against
 it Kentucky achieves recall 1.000, code accuracy 1.000 and verified precision
-1.000 --- the best-evidenced detection we have --- while carrying the lowest
+1.000 --- the best-evidenced detection I have --- while carrying the lowest
 confidence of any state. California earns the same recall and code accuracy with
 all of its indicators at 0.95 or above. Confidence separates these two states;
 correctness does not.
@@ -320,14 +320,14 @@ invented element in the audited corpus, so the false-negative rate of any such
 cut is unmeasurable here; the threshold the prompt itself defines would catch
 nothing; and the score is blind to the corpus's other non-verbatim category ---
 all 39 real-but-split titles, produced by column interleaving rather than by the
-model, score at or above 0.95. We report the observation and decline to build on
+model, score at or above 0.95. I report the observation and decline to build on
 it.
 
 \subsection{Stability: What Changes Between Identical Runs}
 \label{sec:experiments-stability}
 
 Every number reported so far is a single run of a sampling model, so the
-question a reader should ask is how much of it survives re-running. We ran the
+question a reader should ask is how much of it survives re-running. I ran the
 detector five times and the parser six times per state on identical frozen
 inputs with caching disabled, deliberately split across two days.
 
@@ -339,7 +339,7 @@ First, \textbf{instability is concentrated rather than diffuse}. Four of six
 states reproduce perfectly on each suite --- California, Colorado, Texas and
 Kentucky show zero detector disagreements across five runs, and Arizona,
 Colorado, Texas and Kentucky zero parser disagreements across six. The movement
-that exists is confined to three places, and each is a mechanism we can name.
+that exists is confined to three places, and each is a mechanism I can name.
 Arizona's detector alternates on whether it emits three of its sub-strands
 (present in four runs, absent in one), which changes output size without
 touching any graded element. California's parser intermittently leaves the structural label inside
@@ -363,17 +363,17 @@ code), then dropped one indicator in \emph{both} runs executed the following
 day. Five back-to-back runs would have reported that element as
 perfectly stable.
 
-\paragraph{A single run is not a safe basis for a claim, and we found that the
+\paragraph{A single run is not a safe basis for a claim, and I found that the
 hard way.} An earlier recording of this system measured Nevada's detector code
-accuracy at $46/46$ and we reported it as a held-out gain. It does not
+accuracy at $46/46$ and I reported it as a held-out gain. It does not
 reproduce: five fresh runs on identical code, the same extraction and the same
 golden give $44$, $45$, $44$, $44$, $44$. Nevada's code accuracy is properly
 reported as a \emph{range} of 44--45 of 46, and the earlier point value was the
-top of its distribution rather than its center. We report this because the same
+top of its distribution rather than its center. I report this because the same
 caution applies to any single-run ablation arm, including one of our own: the
 attribution of Nevada's domain-code behavior to the depth-map sampler rests on
 one draw per arm, with an arm-to-arm gap no larger than the run-to-run spread
-measured here, and we therefore describe it as suggested rather than
+measured here, and I therefore describe it as suggested rather than
 established. The depth-map ablation of \S\ref{sec:experiments-ablation} is not
 affected --- it is three runs per arm across six states and its direction never
 changes sign.
@@ -384,7 +384,7 @@ clean draws comfortably --- the California defect above appears in two of five
 comparisons, and an earlier investigation of a different parser defect, the
 bare indicator code of \S\ref{sec:method-parsing}, found it in one graded run
 of six within a single invocation and in ten of twenty cached runs across code
-versions. A zero in Table~\ref{tab:stability} means we did not
+versions. A zero in Table~\ref{tab:stability} means I did not
 observe instability at $n{=}5$, not that the component is deterministic. This is
 why the table reports denominators beside every rate, and why the pipeline's
 correctness argument rests on the validation boundary rather than on the model
@@ -491,7 +491,7 @@ Colorado. The most load-bearing
 component in the method is very nearly the cheapest one, which is the outcome
 the assignment was designed for.
 
-We report tokens as the primary measure and derive cost from them at published
+I report tokens as the primary measure and derive cost from them at published
 on-demand rates, recomputed at table-build time from the pipeline's own pricing
 constants rather than transcribed by hand. Neither run was throttled, no
 detection chunk returned empty, and the validator rejected no records, so these

@@ -9,7 +9,7 @@ appendix follows the source.
 
 The document content each prompt appends is replaced by a placeholder; that is
 per-run input, not part of the instruction, and reproducing one chunk of a
-third-party PDF here would be a redistribution we cannot grant.
+third-party PDF here would be a redistribution I cannot grant.
 
 Run: python paper/analysis/make_prompt_appendix.py
 """

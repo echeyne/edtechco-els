@@ -44,7 +44,7 @@ is global: an element's parent may be several pages back, may be printed only
 once at the top of a section that runs for forty pages, or may not be printed at
 all and must be recovered from the codes of its own descendants.
 
-We therefore split the work. \textbf{Detection} reads the document in
+I therefore split the work. \textbf{Detection} reads the document in
 overlapping chunks and emits a flat list of typed elements, each labeled with
 its hierarchy level but not linked to a parent. \textbf{Parsing} takes that flat
 list, groups it by domain, and resolves each indicator's full ancestry and
@@ -66,7 +66,7 @@ single cheap model call infers the document's \emph{depth map}: how many nesting
 levels this document uses, and what an element at each level looks like in it.
 This is the paper's central move. Rather than asking the model to recognize
 ``strand'' or ``benchmark'' as level names --- vocabulary that no two states
-share --- we ask it once, per document, to characterize that document's own
+share --- I ask it once, per document, to characterize that document's own
 nesting scheme, and then treat the answer as authority for every subsequent
 classification.
 
@@ -80,7 +80,7 @@ rarest lines in a standards document are precisely the headings that open a
 section --- the evidence for the top of the hierarchy --- while body prose
 survives on volume alone.
 
-We instead stratify by layout. A block's normalized left edge is already
+I instead stratify by layout. A block's normalized left edge is already
 available from extraction and is already given to the model, and indentation
 tracks nesting, so a rare horizontal position \emph{is} a rare depth. Blocks are
 bucketed by left edge; every bucket is guaranteed a floor of twelve blocks
@@ -181,14 +181,14 @@ break the chain.
 \subsection{Model Assignment}
 \label{sec:method-model-assignment}
 
-The three model calls in the pipeline are not equally difficult, and we assign
+The three model calls in the pipeline are not equally difficult, and I assign
 the cheapest model that suffices for each. The depth-map pass produces a short
 structural summary from a sampled fraction of the document and runs on Claude
 Haiku 4.5. Detection is the hard classification problem and runs on Claude Opus
 4.6. Parsing operates on already-typed elements with the ancestry constraints
 supplied explicitly, and runs on Claude Sonnet 4.6. Since detection is the only
 stage invoked once per chunk of the whole document, this assignment also
-concentrates spend where the difficulty is. We state the principle here as a
+concentrates spend where the difficulty is. I state the principle here as a
 design commitment; \S\ref{sec:experiments-results} reports what the assignment
 costs, and a model-tier ablation is identified as future work rather than
 claimed as evidence.
@@ -199,7 +199,7 @@ claimed as evidence.
 Every detected element carries a confidence score, and \textbf{nothing in the
 pipeline thresholds it}. There is no review gate, no minimum score, and no
 field marking an element as requiring attention; all elements flow through
-detection, parsing, validation, and persistence regardless of score. We are
+detection, parsing, validation, and persistence regardless of score. I are
 explicit about this because it is easy to assume otherwise, and because our own
 measurement of the score's distribution argues against building such a gate: the
 scores occupy five distinct values in $[0.90, 0.97]$, the band the prompt

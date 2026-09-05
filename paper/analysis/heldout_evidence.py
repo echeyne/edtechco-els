@@ -138,7 +138,7 @@ def _inorder_window(probe: str, text: str):
 
     The window is REPORTED, not thresholded -- the real/invented split here is
     None-vs-not-None, and picking a character cutoff would be fitting the four
-    documents we happen to have.
+    documents I happen to have.
     """
     spans = [s["span"] for s in _greedy_spans(probe, text) if s["found"]]
     if not spans:

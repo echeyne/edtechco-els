@@ -17,7 +17,7 @@ and adds paper-facing context the raw reports omit:
 2. Annotation-coverage context for precision: the detector goldens are
    partial spot-checks (5-25 elements), so every unmatched detection inside
    an annotated domain counts as a false positive even when it is correct
-   document content. We record n_detected_in_annotated_domains and the
+   document content. I record n_detected_in_annotated_domains and the
    ceiling precision = n_golden / n_in_scope so no table can present the
    raw "precision" as a hallucination rate.
 3. A level-agnostic confusion analysis: the suite's built-in confusion

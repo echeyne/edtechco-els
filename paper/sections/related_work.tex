@@ -75,14 +75,14 @@ exists, so the dominant cost of the fine-tuning alternative would be
 annotation itself, not compute.
 
 Two further lines of work inform the system design. Constrained decoding
-can guarantee schema-valid output~\citep{willard2023efficient}; we instead
+can guarantee schema-valid output~\citep{willard2023efficient}; I instead
 validate generated JSON against a typed schema and repair deterministically,
 keeping the model API-agnostic. Positional degradation in long
 contexts~\citep{liu2024lost} motivates our domain-scoped chunking over
 whole-document prompting, and sampling variance at fixed
 prompts~\citep{wang2023selfconsistency} motivates the run-to-run stability
-measurements we report. Hallucinated content remains a structural risk of
-generative extraction~\citep{ji2023survey}; we quantify it directly via a
+measurements I report. Hallucinated content remains a structural risk of
+generative extraction~\citep{ji2023survey}; I quantify it directly via a
 manual audit of unmatched detections. Closest to our setting as an applied
 system, \citet{aggarwal2025fiscal} convert long government fiscal PDFs
 into a research database with a multi-stage LLM pipeline, exploiting the
