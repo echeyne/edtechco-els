@@ -4,6 +4,7 @@
 % Corpus tier (guardrail 1): every row is the _only_subset tier, never full-document.
 \begin{table*}
   \centering
+  \small
   \begin{tabular}{lrrrrrrl}
     \hline
     \textbf{State} & \textbf{Role} & \textbf{Subset pp} & \textbf{Recall} & \textbf{Verified prec.} & \textbf{Code acc.} & \textbf{Desc. acc.} & \textbf{Depth map} \\
@@ -16,6 +17,6 @@
     KY & held-out & 8 & 100.0 & 100.0 & 100.0 (44/44) & 100.0 (26/26) & PASS \\
     \hline
   \end{tabular}
-  \caption{Detector recall, verified precision, code and description accuracy, and depth-map pass/fail, per state. \textbf{Verified precision} is (in-scope detections $-$ hallucinations) / in-scope detections, from the manual false-positive audit; every unmatched in-scope detection in all six states was audited and signed by the author. Raw suite precision is NOT reported: the detector goldens are partial spot-checks, so it measures annotation coverage rather than correctness (\S\ref{sec:discussion-limitations}). All numbers are on the \emph{\_only\_subset} corpus tier (8--15pp manually trimmed subsets; see \S\ref{sec:corpus}), never full documents. Source: \texttt{paper/results/task1\_20260826/}, \texttt{task2\_20260826/}.}
+  \caption{Detector recall, verified precision, code and description accuracy, and depth-map pass/fail, per state. \textbf{Verified precision} is (in-scope detections $-$ hallucinations) / in-scope detections, from the manual false-positive audit; every unmatched in-scope detection in all six states was audited and signed by the author. Raw suite precision is NOT reported: the detector goldens are partial spot-checks, so it measures annotation coverage rather than correctness (\S\ref{sec:discussion-limitations}). All numbers are on the \emph{\_only\_subset} corpus tier (8--15pp manually trimmed subsets; see \S\ref{sec:corpus}), never full documents. Code accuracy is that of the recorded run and is not a stable point value where repeats disagree: NV 44--45/46 across 5 repeat runs against 46/46 recorded (\S\ref{sec:experiments-stability}). Source: \texttt{paper/results/task1\_20260826/}, \texttt{task2\_20260826/}.}
   \label{tab:detector-headline}
 \end{table*}

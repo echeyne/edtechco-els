@@ -10,6 +10,9 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
+% xurl lets the two long agency URLs in the bibliography break at any character
+% instead of overflowing the column (two of the four pre-existing overfull boxes).
+\usepackage{xurl}
 \usepackage{inconsolata}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -69,7 +72,7 @@ serverless batching architecture applies it to whole documents. The system
 contains no per-state rule.
 
 Evaluated on four development states and two held out entirely, detector recall
-is 1.000 at every hierarchy level in all six, and a manual audit of all 296
+is 1.000 at every hierarchy level in all six, and a manual audit of all 297
 in-scope detections finds a single hallucinated element. Ablating the depth-map
 pass leaves domain and indicator recall untouched while strand falls to 0.920
 and sub-strand to 0.833 --- degrading exactly the levels whose identity is
@@ -121,6 +124,13 @@ on an annotated subset tier, stated as such throughout.
 \section{Canonical Schema}
 \label{sec:appendix-schema}
 
+Figure~\ref{fig:schema} gives the canonical schema of \S\ref{sec:schema} as a
+tree. Field names are those of the implementation's typed model, which every
+parsed record is validated against before persistence; the per-element human
+verification state (\texttt{human\_verified}, \texttt{verified\_at},
+\texttt{verified\_by}) is stored alongside each level and is omitted from the
+figure because it is editorial state rather than extracted content.
+
 \input{tables/fig_schema}
 % TODO(Task 11/12): the full Pydantic/TS schema, or a rendered tree diagram
 % (Task 11 deliverable).
@@ -135,7 +145,15 @@ on an annotated subset tier, stated as such throughout.
 \section{Corpus}
 \label{sec:appendix-corpus}
 
+Table~\ref{tab:corpus-appendix} identifies every source document by publisher,
+year and page count at each tier, and Table~\ref{tab:corpus-pages} gives the
+pages of each published PDF that the \texttt{\_trimmed} and
+\texttt{\_only\_subset} tiers retain, in the published document's own page
+numbering, so that the trimming can be reproduced exactly from the issuing
+agency's copy (\S\ref{sec:corpus}).
+
 \input{tables/corpus_appendix}
+\input{tables/corpus_pages}
 % TODO(Task 11): the corpus appendix table (source URL, year, retained page
 % ranges after trimming) built from standards/standards_tracking.md — this
 % is what replaces shipping the source PDFs (guardrail: third-party

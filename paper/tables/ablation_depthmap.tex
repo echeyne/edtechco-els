@@ -4,9 +4,10 @@
 % Corpus tier (guardrail 1): every row is the _only_subset tier, never full-document.
 \begin{table}
   \centering
+  \small
   \begin{tabular}{lrr}
     \hline
-    \textbf{Level} & \textbf{Recall, depth map on} & \textbf{Recall, depth map off} \\
+    \textbf{Level} & \textbf{Map on} & \textbf{Map off} \\
     \hline
     domain & 100.0 & 100.0 \\
     strand & 100.0 & 92.0 \\
@@ -14,6 +15,6 @@
     indicator & 100.0 & 100.0 \\
     \hline
   \end{tabular}
-  \caption{Depth-map ablation, pooled over all six states. Removing the Pass-1 depth map leaves \emph{domain} recall untouched and degrades the levels whose identity depends on nesting position. Per state, CO, KY degrade while AZ, CA, TX, NV are unaffected. The categorical evidence is \texttt{KY-BENCHMARK-IS-SUB-STRAND}, \texttt{KY-STRAND-CODE-KEEPS-FULL-LABEL}, which fail with the depth map disabled and pass with it enabled. Repeated runs ($n{=}3$ per arm per state) reproduce the \emph{direction} in every sample and never flip its sign, but the \emph{magnitude} varies: off-arm recall spans CO 71--86\%, KY 89--98\%. Point estimates from a single run are therefore not reported. No regression case changed status in any run. All numbers are on the \emph{\_only\_subset} corpus tier.}
+  \caption{Depth-map ablation: recall (\%) with the Pass-1 depth map on and off, pooled over all six states. Removing the Pass-1 depth map leaves \emph{domain} recall untouched and degrades the levels whose identity depends on nesting position. Per state, CO, KY degrade while AZ, CA, TX, NV are unaffected. The categorical evidence is \texttt{KY-BENCHMARK-IS-SUB-STRAND}, \texttt{KY-STRAND-CODE-KEEPS-FULL-LABEL}, which fail with the depth map disabled and pass with it enabled. Repeated runs ($n{=}3$ per arm per state) reproduce the \emph{direction} in every sample and never flip its sign, but the \emph{magnitude} varies: off-arm recall spans CO 71--86\%, KY 89--98\%. Point estimates from a single run are therefore not reported. One further case, \texttt{CO-NO-SUB-STRAND} (CO, off arm FAIL/FAIL/PASS), changed status between repeats and is reported as unstable rather than as evidence. The repeated runs were recorded at an earlier version of the detector code than the single-run columns, before the Pass-1 sampler was replaced (\S\ref{sec:experiments-ablation}). All numbers are on the \emph{\_only\_subset} corpus tier.}
   \label{tab:ablation-depthmap}
 \end{table}

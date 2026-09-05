@@ -29,10 +29,20 @@ HRDoc~\citep{ma2023hrdoc} and the Comp-HRDoc benchmark with its
 Detect-Order-Construct system~\citep{wang2024detect} decompose the problem
 into page-object detection, reading-order prediction, and tree
 construction; HiPS~\citep{wehnert2025hips} segments deeply nested legal
-books using table-of-contents metadata with LLM refinement. All of these
-are trained or tuned on corpora with consistent typography --- scholarly
-articles or books --- and rely on layout supervision (line-level labels,
-TOC metadata, bounding boxes). US early learning standards offer neither:
+books using table-of-contents metadata with LLM refinement;
+DocHieNet~\citep{xing2024dochienet} broadens hierarchy parsing to a
+multi-domain dataset, and UniHDSA~\citep{wang2025unihdsa} unifies the
+subtasks as relation prediction. All of these rely on layout supervision
+--- line-level labels, bounding boxes, TOC metadata, or text--layout
+models pre-trained on labeled pages --- over corpora whose typography is
+consistent within a genre (scholarly articles, books, reports). At the
+other end, training-free LLM approaches such as
+DocsRay~\citep{jeong2025docsray} prompt a model to build a pseudo table of
+contents over a long document; that shares our zero-shot stance, but it
+produces a segmentation to guide retrieval for question answering rather
+than a typed hierarchy carrying codes and ancestry, and it is not graded
+against structural annotations. US early learning standards offer neither
+layout supervision nor a consistent genre:
 each of the 50-plus issuing jurisdictions designs its document
 independently~\citep{ncecqa_elgs}, so there is no shared typography to
 learn, and no annotated corpus exists at any scale. Our detector instead
@@ -110,8 +120,9 @@ CASE is a format, not an extractor. In education research, alignment
 between standards, assessments, and instruction is measured by trained
 human panels using content-analysis frameworks such as the Surveys of
 Enacted Curriculum~\citep{porter2002measuring,polikoff2011howwell};
-recent NLP work automates the alignment of assessment items or content
-\emph{to} known standards~\citep{xu2025automated}. Across this literature
+NLP work from the ASN era onward automates the assignment of resources
+\emph{to} known standards~\citep{devaul2011computer}, and recent work does
+the same for assessment items~\citep{xu2025automated}. Across this literature
 the standards themselves are assumed available in normalized form. For
 early childhood, that assumption fails: unlike K--12, no national
 framework spans the age band --- the federal ELOF covers only Head Start

@@ -13,8 +13,10 @@
 \begin{figure*}
   \centering
   \includegraphics[width=\textwidth]{figures/fig_architecture.pdf}
-  \caption{Pipeline architecture. Documents flow through eight serverless
-  stages; solid arrows carry data, dashed arrows are model calls, and dotted
+  \caption{Pipeline architecture. Documents flow through the six pipeline
+  stages of \S\ref{sec:pipeline-overview}, numbered 1--8 here because the two
+  batched stages each occupy two positions (prepare, then map and merge) and are
+  realized as ten Lambda handlers in all; solid arrows carry data, dashed arrows are model calls, and dotted
   arrows show that stages exchange JSON through S3 rather than direct payloads.
   Detection and parsing are batched through a prepare $\rightarrow$ Step
   Functions \texttt{Map} $\rightarrow$ merge pattern (at most three concurrent

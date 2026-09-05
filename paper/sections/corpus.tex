@@ -35,7 +35,53 @@
 \section{Corpus}
 \label{sec:corpus}
 
-% TODO(Task 12): prose. The table below is Task 8's deliverable and it already
+% DRAFTED 2026-09-04 (review pass). The section previously held only the table
+% and the TODO below; the introduction promised that this section states the
+% tiers and the RETAINED PAGE RANGES (guardrail 3), which nothing in the repo
+% recorded. paper/analysis/corpus_page_ranges.py now derives them from the
+% PDFs themselves (text match of every tier page back to the published PDF)
+% into paper/results/corpus_page_ranges.json, rendered as
+% tables/corpus_pages.tex in Appendix D.
+
+The corpus is the early learning standards documents of six US states: four
+used for development (Arizona, California, Colorado, Texas) and two held out
+entirely (Nevada, Kentucky). Table~\ref{tab:dataset-stats} summarizes what the
+annotated portion of each contains; Appendix~\ref{sec:appendix-corpus} names
+every source document and lists the pages retained at each tier.
+
+Each document exists at up to three tiers, and the two reductions are not the
+same kind of reduction. The \emph{full} tier is the published PDF as issued.
+The \emph{trimmed} tier removes non-standards matter --- front matter,
+introductions, guiding-principles essays, appendices, acknowledgements --- and
+\textbf{retains every standard}; it reduces page count, and therefore cost, but
+not coverage, and it is the tier the scale measurements of
+\S\ref{sec:experiments-scale} run on. Kentucky's 52 trimmed pages are all of
+Kentucky's standards. The \emph{subset} tier is a genuine reduction in
+coverage: one to two domains per state, 8--15 pages each and 70 in total,
+chosen to be cheap to iterate on and to annotate exhaustively. \textbf{Every
+quality number in this paper is computed at this tier.} Both cuts were made by
+hand, which is favorable preprocessing; Table~\ref{tab:corpus-pages} lists the
+retained pages in each published document's own numbering so that either tier
+can be reconstructed from the issuing agency's copy.
+
+Two sources need naming precisely. California's document is the state's
+Preschool/Transitional Kindergarten Learning Foundations ``at a glance''
+publication (68 pages), which was cut directly to its 13-page subset with no
+trimmed tier. Colorado's is the 41-page Ages~3--5 volume of the state's
+birth-to-eight guidelines; its trimmed tier is the whole document, so nothing
+was cut from it, and its out-of-scope content is other age bands rather than
+standards removed by trimming. The held-out canary is Nevada's 2023
+pre-kindergarten standards, a multi-domain document; a separate single-domain
+Nevada publication from 2025 was collected but is too narrow to support a
+generalization claim and is excluded from every measurement.
+
+Two properties of Table~\ref{tab:dataset-stats} are results rather than
+document facts. Its age-band column counts the distinct bands a state uses,
+not coverage: every one of the 262 standards carries an age band. And
+identifier collisions are zero in every state, which matters because the
+identifier is the key under which a standard is stored (\S\ref{sec:schema}).
+
+% Earlier brief, retained: The table below is Task 8's deliverable and it already
 % carries the guardrail-1 tier columns (Subset pp / Full pp), so Task 11's
 % "corpus appendix table" should EXTEND this one -- adding the _trimmed tier
 % and the source document names -- rather than introduce a second table that

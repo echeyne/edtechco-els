@@ -90,7 +90,7 @@ can establish. In the four development states they are deliberate spot checks
 33. Because the evaluation suite counts every unmatched in-scope detection as a
 false positive, \emph{raw} precision on those states largely measures annotation
 coverage rather than detector quality, and we do not report it as quality.
-Precision instead comes from a manual audit of all 296 in-scope detections
+Precision instead comes from a manual audit of all 297 in-scope detections
 across the corpus, which found a single hallucinated element.
 
 The two held-out states are annotated densely rather than as spot checks, and
@@ -117,9 +117,9 @@ means we did not observe instability at $n{=}5$, not that a component is stable.
 We take our own experience as the cautionary case. An earlier recording measured
 Nevada's detector code accuracy at $46/46$ and we reported it as a held-out
 gain; five fresh runs on identical code give 44, 45, 44, 44, 44. The point value
-was the top of a distribution, not its centre. The same caution applies to
+was the top of a distribution, not its center. The same caution applies to
 single-run ablation arms generally, including our attribution of Nevada's
-domain-code behaviour to the Pass-1 sampler, which rests on one draw per arm
+domain-code behavior to the Pass-1 sampler, which rests on one draw per arm
 with an arm-to-arm gap no larger than the run-to-run spread we later measured.
 We report that attribution as suggested rather than established. Where an
 experiment is repeated --- the depth-map ablation, at three runs per arm across

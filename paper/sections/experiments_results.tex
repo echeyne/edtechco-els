@@ -69,7 +69,7 @@ nesting \emph{position} rather than from label vocabulary. The depth-map pass is
 where that claim is implemented, so we ablate it: an environment flag
 neutralizes Pass~1 and the detector falls back to the no-depth-map path it
 already uses when inference fails, meaning the off arm is the system's real
-graceful-degradation behaviour rather than a strawman built for the paper.
+graceful-degradation behavior rather than a strawman built for the paper.
 
 \input{tables/ablation_depthmap}
 
@@ -85,13 +85,19 @@ from what they sit between.
 \input{tables/fig_levels}
 
 The mechanism is visible in Kentucky (Figure~\ref{fig:levels}), whose golden
-annotates 3~domains, 5~strands, 10~sub-strands and 26~indicators. The on arm reproduces that
-distribution exactly in all three runs. The off arm inflates strand and deflates
-sub-strand in all three (5~$\rightarrow$~8/7/10 and 10~$\rightarrow$~7/9/6)
-while leaving domain and indicator untouched at 3 and 26. The failure is level
-\emph{collapse}, and it is legible in the regression cases: with the map off,
+annotates 3~domains, 5~strands, 10~sub-strands and 26~indicators. In the
+recorded run the on arm reproduces that distribution exactly, while the off arm
+emits 4, 10, 6 and 26. Three repeated runs per arm --- recorded at an earlier
+version of the detector code, before the Pass-1 sampler was replaced, which is
+why we keep them distinct from the single-run columns of
+Table~\ref{tab:ablation-depthmap} --- show the same shape every time: the on
+arm reproduces the golden distribution in all three, and the off arm inflates
+strand and deflates sub-strand in all three (5~$\rightarrow$~8/7/10 and
+10~$\rightarrow$~7/9/6) while leaving the indicator count at 26. The domain
+count held at 3 in those repeats and rose to 4 in the recorded run. The failure
+is level \emph{collapse}, and it is legible in the regression cases: with the map off,
 elements printed as \texttt{Benchmark N.N} are promoted to strand --- classified
-by their label rather than by their position, which is precisely the behaviour
+by their label rather than by their position, which is precisely the behavior
 the method exists to avoid.
 
 Two honest qualifications. First, \textbf{the effect is conditional, not
@@ -102,7 +108,9 @@ every metric, but that is an artifact of their goldens rather than a result ---
 both are small spot checks against far larger detection sets, so recall
 saturates either way, and they are the states least able to show the effect.
 Second, \textbf{off-arm recall is a range, never a point value}: across three
-runs per arm per state, Colorado spans 0.71--0.86 and Kentucky 0.89--0.98. The
+runs per arm per state at the earlier code version, Colorado spans 0.71--0.86
+and Kentucky 0.89--0.98, and the recorded run at the current version (0.86 and
+0.89) falls inside both ranges. The
 direction never reverses in any sample, and the on arm is 1.000 with zero
 variance across all eighteen runs, but the magnitude on any single run is a
 draw. One regression case that failed at $n{=}2$ passed at $n{=}3$; we report it
@@ -332,12 +340,12 @@ states reproduce perfectly on each suite --- California, Colorado, Texas and
 Kentucky show zero detector disagreements across five runs, and Arizona,
 Colorado, Texas and Kentucky zero parser disagreements across six. The movement
 that exists is confined to three places, and each is a mechanism we can name.
-Arizona's detector alternates on whether it emits the duplicate headings its
-contents page reprints, which changes output size without touching any graded
-element. California's parser intermittently leaves the structural label inside
+Arizona's detector alternates on whether it emits three of its sub-strands
+(present in four runs, absent in one), which changes output size without
+touching any graded element. California's parser intermittently leaves the structural label inside
 an indicator code, emitting \texttt{ELD.1.0.VOCA.Foundation 1.1.BROA} in two of
 five comparisons. Nevada moves on both suites: a domain code that drifts between
-the document's \texttt{S} and an abbreviation of its title, and a strand
+the document's \texttt{S} and the domain's full name \texttt{Science}, and a strand
 attachment that changes which of two headings three standards hang from.
 
 Second, \textbf{the California case is caught rather than stored}. All twelve of
@@ -349,9 +357,10 @@ run, and when it fires the records do not reach the database.
 
 \paragraph{Why the runs were split across days.} Repeated runs inside one
 session understate variance, and this measurement demonstrates it directly.
-Nevada's detector produced byte-identical output across the three runs executed
-in one evening, then dropped one indicator in \emph{both} runs executed the
-following day. Five back-to-back runs would have reported that element as
+Nevada's detector emitted the same set of 54 elements in each of the three runs
+executed in one evening (one of them differing only in the Science domain's
+code), then dropped one indicator in \emph{both} runs executed the following
+day. Five back-to-back runs would have reported that element as
 perfectly stable.
 
 \paragraph{A single run is not a safe basis for a claim, and we found that the
@@ -360,9 +369,9 @@ accuracy at $46/46$ and we reported it as a held-out gain. It does not
 reproduce: five fresh runs on identical code, the same extraction and the same
 golden give $44$, $45$, $44$, $44$, $44$. Nevada's code accuracy is properly
 reported as a \emph{range} of 44--45 of 46, and the earlier point value was the
-top of its distribution rather than its centre. We report this because the same
+top of its distribution rather than its center. We report this because the same
 caution applies to any single-run ablation arm, including one of our own: the
-attribution of Nevada's domain-code behaviour to the depth-map sampler rests on
+attribution of Nevada's domain-code behavior to the depth-map sampler rests on
 one draw per arm, with an arm-to-arm gap no larger than the run-to-run spread
 measured here, and we therefore describe it as suggested rather than
 established. The depth-map ablation of \S\ref{sec:experiments-ablation} is not
@@ -372,8 +381,10 @@ changes sign.
 \paragraph{What this does and does not license.} These rates are \textbf{lower
 bounds, not estimates}. A defect firing in a minority of runs survives five
 clean draws comfortably --- the California defect above appears in two of five
-comparisons, and an earlier investigation of a different parser defect found it
-in roughly one run in six. A zero in Table~\ref{tab:stability} means we did not
+comparisons, and an earlier investigation of a different parser defect, the
+bare indicator code of \S\ref{sec:method-parsing}, found it in one graded run
+of six within a single invocation and in ten of twenty cached runs across code
+versions. A zero in Table~\ref{tab:stability} means we did not
 observe instability at $n{=}5$, not that the component is deterministic. This is
 why the table reports denominators beside every rate, and why the pipeline's
 correctness argument rests on the validation boundary rather than on the model
@@ -429,8 +440,9 @@ agreeing with itself.
 % "report real measured per-run cost", not an invented one).
 %
 % WORTH ONE SENTENCE, ties back to \S\ref{sec:method-model-assignment}: the
-% depth-map pass costs about 3% of detection's input tokens and runs ONCE per
-% document, while detection -- the hard classification -- is the only stage
+% depth-map pass costs about 6-9% of detection's input tokens (12,153/201,574 KY,
+% 19,613/223,276 CO; an earlier draft of this comment said 3%, which is wrong)
+% and runs ONCE per document, while detection -- the hard classification -- is the only stage
 % invoked once per chunk. That is the "cheapest model that suffices" principle
 % showing up in the token budget rather than being asserted.
 %
@@ -471,10 +483,11 @@ performs is doing real work rather than passing data through.
 
 \textbf{The stage breakdown is where the model-assignment principle of
 \S\ref{sec:method-model-assignment} is tested.} Detection is the only stage
-invoked once per chunk and accounts for roughly 60\% of each run's cost. The
+invoked once per chunk and accounts for 57--60\% of each run's cost. The
 depth-map pass --- the component the ablation above shows carries the
 intermediate levels --- runs once per document on the cheapest model and costs
-under 0.4\% of the total, about 1.4 cents on Kentucky. The most load-bearing
+between 0.3\% and 0.6\% of a run, about 1.4 cents on Kentucky and 2.2 on
+Colorado. The most load-bearing
 component in the method is very nearly the cheapest one, which is the outcome
 the assignment was designed for.
 

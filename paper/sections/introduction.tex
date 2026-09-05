@@ -11,11 +11,11 @@
 Every US state publishes early learning standards: the developmental
 expectations that shape curriculum, assessment, and teacher preparation for
 children from birth through kindergarten entry. More than fifty jurisdictions
-issue them independently~\citep{ncecqa_elgs,ohs2015elof}, and each designs its
+issue them independently~\citep{ncecqa_elgs,ecs2024governance}, and each designs its
 own document. The result is a body of policy that is public, consequential, and
 almost entirely unavailable to software. Unlike K--12 academic standards, which
 have machine-readable distribution
-formats~\citep{1edtech2017case,ecs2024governance}, early learning standards
+formats~\citep{sutton2008achievement,1edtech2017case}, early learning standards
 exist as PDFs --- multi-column tables, age-banded grids, and prose narratives
 whose typography is shared by no two states.
 
@@ -73,7 +73,7 @@ approach available without first solving a different problem
     documents rather than excerpts (\S\ref{sec:system-architecture}).
   \item An evaluation over four development states and two held-out states.
     Detector recall is 1.000 at every hierarchy level in all six states, and a
-    manual audit of all 296 in-scope detections finds a single hallucinated
+    manual audit of all 297 in-scope detections finds a single hallucinated
     element (verified precision 0.997). An ablation shows the depth-map pass is
     what carries the intermediate levels: removing it leaves domain and
     indicator recall untouched while strand falls to 0.920 and sub-strand to
