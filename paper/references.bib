@@ -29,7 +29,7 @@
 }
 
 % Verified: ICLR 2023 (arXiv:2203.11171). Cited for run-to-run sampling
-% variance at fixed prompts — context for our determinism/stability measurements.
+% variance at fixed prompts — context for my determinism/stability measurements.
 @inproceedings{wang2023selfconsistency,
   title     = {Self-Consistency Improves Chain of Thought Reasoning in Language Models},
   author    = {Wang, Xuezhi and Wei, Jason and Schuurmans, Dale and Le, Quoc V. and Chi, Ed H. and Narang, Sharan and Chowdhery, Aakanksha and Zhou, Denny},
@@ -89,7 +89,7 @@
 }
 
 % Verified: arXiv:2307.09702 (the Outlines library paper). Cited for
-% constrained/schema-guided generation as the alternative to our
+% constrained/schema-guided generation as the alternative to my
 % generate-then-validate (Pydantic) approach.
 @misc{willard2023efficient,
   title  = {Efficient Guided Generation for Large Language Models},
@@ -158,11 +158,14 @@
 }
 
 % Verified: ECCV 2022 (arXiv:2111.15664).
+% pages 498-517, LNCS 13688, DOI confirmed via CrossRef 2026-09-05.
 @inproceedings{kim2022donut,
   title     = {{OCR}-Free Document Understanding Transformer},
   author    = {Kim, Geewook and Hong, Teakgyu and Yim, Moonbin and Nam, JeongYeon and Park, Jinyoung and Yim, Jinyeong and Hwang, Wonseok and Yun, Sangdoo and Han, Dongyoon and Park, Seunghyun},
   booktitle = {European Conference on Computer Vision (ECCV)},
-  year      = {2022}
+  pages     = {498--517},
+  year      = {2022},
+  doi       = {10.1007/978-3-031-19815-1_29}
 }
 
 % Verified: arXiv:2308.13418.
@@ -193,7 +196,7 @@
 
 % Verified: AAAI 2021 (arXiv:1911.01702); vol. 35 (issue 5), pages 4328–4338 confirmed
 % against ojs.aaai.org article 16558 on 2026-09-04. No `number` field: acl_natbib.bst
-% rejects volume+number on @inproceedings.
+% rejects volume+number on inproceedings entries.
 @inproceedings{rausch2021docparser,
   title     = {{DocParser}: Hierarchical Document Structure Parsing from Renderings},
   author    = {Rausch, Johannes and Martinez, Octavio and Bissig, Fabian and Zhang, Ce and Feuerriegel, Stefan},
@@ -258,7 +261,7 @@
 }
 
 % Verified: arXiv:2507.23217, checked 2026-09-04. Training-free LLM pseudo-TOC
-% construction for long-document QA -- the closest zero-shot neighbor to our
+% construction for long-document QA -- the closest zero-shot neighbor to my
 % depth-map pass, cited so the "layout supervision" gap claim is stated precisely.
 @misc{jeong2025docsray,
   title  = {Zero-Shot Document Understanding using Pseudo Table of Contents-Guided Retrieval-Augmented Generation},
@@ -370,7 +373,7 @@
 }
 
 % Classic; Educational Researcher 31(7):3–14 (confirmed via CrossRef 2026-09-04). The SEC content-analysis
-% methodology — the manual-expert-panel baseline our pipeline replaces the
+% methodology — the manual-expert-panel baseline my pipeline replaces the
 % extraction step of.
 @article{porter2002measuring,
   title   = {Measuring the Content of Instruction: Uses in Research and Practice},
@@ -403,9 +406,15 @@
 
 % Verified: childcareta.acf.hhs.gov (title confirmed via search; PDF itself
 % returns 403 to non-browser fetches).
+% year = {n.d.} added 2026-09-05: the entry had NO year field, which BibTeX
+% warned on ("empty year in ncecqa_elgs") and which rendered every inline
+% \citep as "(National Center on Early Childhood Quality Assurance, )" with a
+% dangling comma. The PDF's publication year could not be established (the 403
+% above), so the undated convention is used rather than a guessed date.
 @misc{ncecqa_elgs,
   title        = {Early Learning Standards and Guidelines},
   author       = {{National Center on Early Childhood Quality Assurance}},
+  year         = {n.d.},
   howpublished = {\url{https://childcareta.acf.hhs.gov/sites/default/files/state_elgs_web_final_2.pdf}},
   note         = {Office of Child Care, Administration for Children and Families, U.S. Department of Health and Human Services. Accessed August 2026}
 }

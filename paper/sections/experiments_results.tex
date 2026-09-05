@@ -28,9 +28,32 @@
 \subsection{Headline Quality: Golden and Held-Out States}
 \label{sec:experiments-headline}
 
+Tables~\ref{tab:detector-headline} and~\ref{tab:parser-headline} report the two
+suites on all six states, four developed against and two held out entirely. All
+numbers are on the \texttt{\_only\_subset} corpus tier (\S\ref{sec:corpus}),
+never on full documents.
+
 \input{tables/detector_headline}
 
 \input{tables/parser_headline}
+
+\textbf{The precision column needs its definition stated.}
+\emph{Verified precision} is (in-scope detections $-$ hallucinations) divided by
+in-scope detections, taken from the manual false-positive audit: every unmatched
+in-scope detection in all six states was examined and the verdict signed by the
+author. I deliberately do not report the suites' own raw precision here. The
+detector goldens are partial spot-checks rather than exhaustive annotations, so
+an unmatched detection is far more often a gap in the annotation than an error
+by the model, and raw precision therefore measures annotation coverage rather
+than correctness (\S\ref{sec:discussion-limitations}). Kentucky is the single
+exception, being the one state whose detector golden is exhaustive.
+
+Recall is 1.000 at every level in all six states, on both the developed and the
+held-out pair, and the parser emits no \texttt{standard\_id} collision anywhere.
+The per-state code and description figures are single-run values and should be
+read with \S\ref{sec:experiments-stability} in view: Nevada's code accuracy in
+particular is properly a range rather than the point value a single recording
+suggests.
 
 \subsection{Ablation: Does the Depth-Map Pass Do Real Work?}
 \label{sec:experiments-ablation}
@@ -216,58 +239,26 @@ deterministic, so one run suffices.
 \subsection{What the Confidence Score Measures}
 \label{sec:experiments-confidence}
 
-% DRAFTED 2026-09-04. The brief below is RETAINED as the reasoning behind the
-% prose above -- it records which readings were rejected and why, which the
-% prose itself cannot carry. Task 13 strips all comments before submission. This subsection exists to RETIRE a claim, not to
-% support one. Four points, in this order.
+% DRAFTING BRIEF. Trimmed 2026-09-05 to the constraints the prose cannot carry;
+% every figure lives in paper/results/task8_20260904/confidence_distribution.json
+% -- take numbers from there, never from an older brief or write-up. Task 13
+% strips all comments before submission.
 %
-% 1. THE FRAMING IS NEGATIVE AND MUST STAY NEGATIVE. The detector emits a
+% 1. THE CASE IS NEGATIVE AND MUST STAY NEGATIVE. The detector emits a
 %    confidence float on every element and NOTHING GATES ON IT (guardrail 2).
-%    This table is the evidence that not gating is the right call. Do not
-%    write a sentence that could be read as "the model knows when it is
-%    uncertain" -- the measurement says close to the opposite.
+%    This table is the evidence that not gating is the right call. Do not write
+%    a sentence that could be read as "the model knows when it is uncertain" --
+%    the measurement says close to the opposite.
 %
-% ⚠️ FIGURES BELOW ARE SUPERSEDED (2026-09-04). This brief was written against
-% task8_20260823 (outputs/08-22-26-4, hash 288c64f1). Task 8 was re-measured at
-% the current freeze -- see task8_20260904 -- and several numbers moved: 5 distinct
-% values in [0.90,0.97] not 7 in [0.85,0.97]; middle band 22 not 32; indicators at
-% 0.95+ 93.5%% not 89.7%%, which means the '85-90%%' claim NO LONGER REPRODUCES;
-% three states clean, not four. The REASONING below still stands; the numbers do
-% not. The prose above carries the current figures.
-% 2. THE DISTRIBUTION IS DEGENERATE. 7 distinct values in [0.85, 0.97] over
-%    379 elements; the band the prompt reserves for a guess (<0.70) is never
-%    used once; the middle band is used 32 times. A score that never exercises
-%    two thirds of the range it was given is not carrying information about
-%    difficulty.
-%
-% 3. THE MEDIUM ARTICLES' NUMBER IS RE-MEASURED, AND HALF OF IT IS WRONG
-%    (guardrail 4). "85-90% of indicators at 0.95+" reproduces at 89.7%
-%    (236/263) -- cite the measurement, never the article. But the SECOND half
-%    of that sentence, that the low tail comes from "tables, footnotes, or
-%    sections with unusual formatting", is REFUTED: four of six states have no
-%    sub-0.95 indicator at all and the tail is essentially all of Kentucky,
-%    where every one of the 26 indicators scores below the line. The score
-%    moves per DOCUMENT, not per hard passage. The same article's claim of a
-%    0.70 review gate is doubly dead -- no such gate exists, and zero elements
-%    in the corpus would have tripped it.
-%
-% 4. KENTUCKY IS THE CLEANEST SINGLE ILLUSTRATION and it belongs in the prose,
-%    not the caption. KY is the one state with a detection-exhaustive golden;
-%    it scores recall 1.000, code accuracy 1.000 and verified precision 1.000
-%    -- the best-evidenced detection in the corpus -- while carrying the
-%    LOWEST confidence of any state. CA earns the same recall and code
-%    accuracy with all 94 indicators at 0.95+.
-%
-% ⚠️ Be careful with the one hallucination. It IS the lowest-scoring element,
-% and that reproduces across 14 same-configuration runs (966 elements, no
-% correct element below 0.90). It is tempting to present that as a working
-% detector. It is not one: there is exactly ONE distinct invented element in
-% the audited corpus, so the false-negative rate of such a cut is unmeasurable
-% here, and the prompt's own boundary (0.80) catches nothing. Report it as an
-% observation and say why it cannot be promoted -- that honesty is the point of
-% the subsection. Note too that the score is blind to the corpus's other
-% non-verbatim category: all 39 real_split_title rows, real titles broken by
-% column interleaving, score at or above 0.95.
+% 2. DO NOT PROMOTE THE HALLUCINATION OBSERVATION INTO A DETECTOR. The one
+%    invented element is the lowest-scoring one, and that survives repeats, so
+%    it is tempting. It is not a detector: exactly ONE distinct invented element
+%    is audited, so the false-negative rate of such a cut is unmeasurable here;
+%    the prompt's own 0.80 boundary catches nothing; and the score is blind to
+%    the corpus's other non-verbatim category (all 39 real_split_title rows,
+%    real titles broken by column interleaving, score at or above 0.95). Report
+%    it and decline to build on it -- that restraint is the point of the
+%    subsection.
 %
 % ⚠️ Keep the caption short (see the warning above Table~4).
 
@@ -286,26 +277,27 @@ that never exercises two thirds of the interval it was given is not carrying
 much information about difficulty, and a review gate built on it would mostly be
 a gate on noise.
 
-\textbf{The score tracks the document, not the difficulty of the passage.} Our
-own earlier informal write-ups claimed that ``85--90\% of indicators score 0.95
-or above''. Re-measured here the figure is 246 of 263, or \textbf{93.5\%} ---
-\emph{above} the claimed band, so the claim does not reproduce, and I report
-the measurement rather than the write-up. Its accompanying explanation fails
-more clearly still. The low tail was attributed to tables, footnotes and
-unusually formatted sections; in fact three of the six states contain no
-sub-0.95 element whatsoever, and the tail is concentrated in Kentucky, where 16
-of 44 elements sit below the line. Whatever moves this score moves per document,
+\textbf{What little variation there is tracks the document, not the difficulty
+of the passage.} If the score registered how hard a passage was to read, the
+elements below 0.95 would be scattered through the corpus wherever the layout is
+worst --- tables, footnotes, sections set in an unusual format. They are not.
+Three of the six states contain no sub-0.95 element whatsoever, and of the 22
+elements in the middle band, 16 belong to Kentucky alone, where 16 of 44
+elements sit below the line; the remaining six are split evenly between Arizona
+and Nevada. At indicator level the concentration is sharper still: 246 of 263
+indicators score 0.95 or above, and all 17 exceptions come from those same two
+states, 16 of them from Kentucky. Whatever moves this score moves per document,
 not per difficult passage.
 
-That the same quantity measured 89.7\% on an earlier freeze of the same corpus
-and 93.5\% here is itself worth noting: the score is not stable enough across
-runs to support the kind of fine-grained claim the original write-up made of
-it.
+Nor is the quantity stable between runs. On an earlier freeze of the same corpus
+under the same configuration, 89.7\% of indicators scored 0.95 or above; on the
+freeze reported here it is 93.5\%. A four-point swing on an unchanged corpus is
+wider than most of the distinctions a review threshold would be asked to draw.
 
 Kentucky makes the point sharply, because it is the state I can say the most
 about. Its detector golden is the only exhaustive one in the corpus, and against
 it Kentucky achieves recall 1.000, code accuracy 1.000 and verified precision
-1.000 --- the best-evidenced detection I have --- while carrying the lowest
+1.000 --- the best-evidenced detection I have --- while carrying the lowest mean
 confidence of any state. California earns the same recall and code accuracy with
 all of its indicators at 0.95 or above. Confidence separates these two states;
 correctness does not.
@@ -333,9 +325,7 @@ inputs with caching disabled, deliberately split across two days.
 
 \input{tables/stability}
 
-Two things in Table~\ref{tab:stability} matter more than the pooled rates.
-
-First, \textbf{instability is concentrated rather than diffuse}. Four of six
+\textbf{The instability is concentrated rather than diffuse.} Four of six
 states reproduce perfectly on each suite --- California, Colorado, Texas and
 Kentucky show zero detector disagreements across five runs, and Arizona,
 Colorado, Texas and Kentucky zero parser disagreements across six. The movement
@@ -348,7 +338,7 @@ five comparisons. Nevada moves on both suites: a domain code that drifts between
 the document's \texttt{S} and the domain's full name \texttt{Science}, and a strand
 attachment that changes which of two headings three standards hang from.
 
-Second, \textbf{the California case is caught rather than stored}. All twelve of
+\textbf{The California case is caught rather than stored.} All twelve of
 those malformed codes contain whitespace, so the shape check at the validation
 boundary (\S\ref{sec:method-parsing}) rejects every one before persistence. This
 is the clearest evidence available that the check is load-bearing rather than
@@ -370,7 +360,7 @@ reproduce: five fresh runs on identical code, the same extraction and the same
 golden give $44$, $45$, $44$, $44$, $44$. Nevada's code accuracy is properly
 reported as a \emph{range} of 44--45 of 46, and the earlier point value was the
 top of its distribution rather than its center. I report this because the same
-caution applies to any single-run ablation arm, including one of our own: the
+caution applies to any single-run ablation arm, including one of my own: the
 attribution of Nevada's domain-code behavior to the depth-map sampler rests on
 one draw per arm, with an arm-to-arm gap no larger than the run-to-run spread
 measured here, and I therefore describe it as suggested rather than

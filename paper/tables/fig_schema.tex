@@ -39,14 +39,8 @@
   {solid = required \quad dashed = optional};
 \end{tikzpicture}
 \caption{The canonical schema. Four hierarchy levels, of which
-\texttt{strand} and \texttt{sub\_strand} are optional --- Colorado publishes no
-sub-strand tier and Texas realizes almost none, so requiring every level would
-force the pipeline to invent structure. Each level carries a code, a name and an
-optional description. A stored record is one indicator together with its fully
-resolved ancestry, not a node in a tree, which is why the identifier embeds the
-indicator's already-qualified code and carries any disambiguator itself
-(\S\ref{sec:schema}). Every record also retains the source page and the verbatim
-text it was extracted from, so any row can be checked against the document that
-produced it.}
+\texttt{strand} and \texttt{sub\_strand} are optional; each carries a code, a
+name and an optional description. A stored record is one indicator together
+with its fully resolved ancestry, not a node in a tree (\S\ref{sec:schema}).}
 \label{fig:schema}
 \end{figure}

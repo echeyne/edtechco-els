@@ -41,6 +41,6 @@
 \fill[black!80] (0.16,2.40) rectangle (0.34,2.56);
 \node[font=\scriptsize, anchor=west] at (0.40,2.48) {Depth map OFF};
 \end{tikzpicture}
-\caption{Elements emitted per hierarchy level on Kentucky, whose detector golden is the corpus's only \emph{detection-exhaustive} one, with the depth-map pass enabled and ablated. With the pass enabled the detector reproduces the golden distribution exactly. Ablated, it emits an extra domain, doubles the strand count and loses four sub-strands, while the indicator count is untouched --- the failure is level \emph{collapse} at the two levels whose identity is positional rather than typographic. \textbf{This is not visible in a level-confusion matrix}: the evaluation matcher pairs on level, so an element emitted at the wrong level is recorded as a miss rather than an off-diagonal entry, and both arms render as clean diagonals. \texttt{\_only\_subset} corpus tier.}
+\caption{Elements emitted per hierarchy level on Kentucky, whose detector golden is the corpus's only \emph{detection-exhaustive} one, with the depth-map pass enabled and ablated. The enabled arm reproduces the golden distribution exactly; ablated, strand inflates and sub-strand deflates while domain and indicator hold --- level \emph{collapse}. \texttt{\_only\_subset} corpus tier.}
 \label{fig:levels}
 \end{figure}

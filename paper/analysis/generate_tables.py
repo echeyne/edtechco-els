@@ -16,6 +16,18 @@ experiments_results.tex -- NV code accuracy read 39/41 against a golden that had
 become 46 elements. SUPERSEDED_TAGS below makes that failure loud instead of
 silent.
 
+CAPTION LENGTH IS A CONVENTION HERE, NOT AN ACCIDENT (set 2026-09-05). The
+captions had drifted to a 120-word average -- roughly 2.5 pages of the paper
+living inside floats, and one of them had already caused an overfull \\vbox that
+pushed the bibliography off the sheet (see the warning above the baseline
+caption). A caption now carries only what must never be separated from the
+numbers: what the table shows, guardrail 1's corpus tier, any caveat that would
+mislead if read off the table alone (guardrail 8's precision note), and the
+source path. Everything else -- interpretation, per-state breakdowns, ranges,
+methodology -- belongs in the prose of sections/experiments_results.tex, which
+already carried all of it. Target 25--70 words; if a caption needs more, the
+prose is missing a paragraph.
+
 Inputs (all under paper/results/):
     task1_<RUN_TAG>/summary.json                 (AZ, CA, CO, TX)
     task2_<RUN_TAG>/summary.json                 (NV, KY)
@@ -184,14 +196,10 @@ def build_detector_table(det, tiers, verified):
                  f"{desc if dt else '--'} & {bool_mark(d['depth_map_passed'])} \\\\")
     L += [r"    \hline", r"  \end{tabular}",
           r"  \caption{Detector recall, verified precision, code and description "
-          r"accuracy, and depth-map pass/fail, per state. \textbf{Verified precision} "
-          r"is (in-scope detections $-$ hallucinations) / in-scope detections, from the "
-          r"manual false-positive audit; every unmatched in-scope detection in all six "
-          r"states was audited and signed by the author. Raw suite precision is NOT "
-          r"reported: the detector goldens are partial spot-checks, so it measures "
-          r"annotation coverage rather than correctness (\S\ref{sec:discussion-limitations}). All "
-          r"numbers are on the \emph{\_only\_subset} corpus tier (8--15pp manually "
-          r"trimmed subsets; see \S\ref{sec:corpus}), never full documents. "
+          r"accuracy, and depth-map pass/fail, per state; column definitions and the "
+          r"reason raw suite precision is omitted are in the text. All numbers are on "
+          r"the \emph{\_only\_subset} corpus tier (\S\ref{sec:corpus}), never full "
+          r"documents. "
           + repeat_note +
           rf"Source: \texttt{{paper/results/task1\_{RUN_TAG}/}}, "
           rf"\texttt{{task2\_{RUN_TAG}/}}.}}",
@@ -290,14 +298,11 @@ def build_ablation_table(abl, stab):
                       r"detector code than the single-run columns, before the Pass-1 "
                       r"sampler was replaced (\S\ref{sec:experiments-ablation}).")
 
-    L += [r"  \caption{Depth-map ablation: recall (\%) with the Pass-1 depth map on "
-          r"and off, pooled over all six states. Removing the "
-          r"Pass-1 depth map leaves \emph{domain} recall untouched and degrades the "
-          r"levels whose identity depends on nesting position. Per state, "
-          rf"{', '.join(degraded)} degrade while {', '.join(unaffected)} are unaffected. "
-          rf"The categorical evidence is {cases}, which fail with the depth map "
-          rf"disabled and pass with it enabled." + extra +
-          r" All numbers are on the \emph{\_only\_subset} corpus tier.}",
+    L += [r"  \caption{Depth-map ablation: detector recall (\%) with the Pass-1 "
+          r"depth map on and off, pooled over all six states. Read by level, not by "
+          r"its mean; per-state behaviour, off-arm ranges and the regression cases "
+          r"are in the text. \emph{\_only\_subset} corpus tier. "
+          rf"Source: \texttt{{paper/results/task3\_{ABLATION_TAG}/}}.}}",
           r"  \label{tab:ablation-depthmap}", r"\end{table}"]
     return "\n".join(L) + "\n"
 
@@ -359,17 +364,11 @@ def build_baseline_table(cmp_):
     # argument and the brittleness probe in full.
     L += [r"  \caption{Rule-based baseline versus the LLM detector, graded by the "
           r"\emph{same} suite against the \emph{same} goldens as "
-          r"Table~\ref{tab:detector-headline}. The baseline uses numbering depth, "
-          r"structural label words, and typography and column geometry from the "
-          r"bounding boxes; it was developed against the four golden states only, "
-          r"with NV and KY first scored in the recorded run. \textbf{Raw precision "
-          r"is shown for both arms and is not a quality measure} except for KY, "
-          r"whose golden is detection-exhaustive; elsewhere it tracks annotation "
-          r"coverage and rewards under-emission, which is why the rule-based arm "
-          r"exceeds the LLM on AZ while finding fewer elements "
-          r"(\S\ref{sec:discussion-limitations}). All numbers are on the "
-          r"\emph{\_only\_subset} corpus tier (8--15pp manually trimmed subsets), "
-          r"never full documents. "
+          r"Table~\ref{tab:detector-headline}. \textbf{Raw precision is shown for "
+          r"both arms and is not a quality measure} except for KY, whose golden is "
+          r"detection-exhaustive; elsewhere it tracks annotation coverage and rewards "
+          r"under-emission (\S\ref{sec:experiments-baseline}). "
+          r"\emph{\_only\_subset} corpus tier, never full documents. "
           rf"Source: \texttt{{paper/results/task4\_{BASELINE_TAG}/}}.}}",
           r"  \label{tab:baseline-comparison}", r"\end{table*}"]
     return "\n".join(L) + "\n"
@@ -450,24 +449,14 @@ def build_scale_table(scale):
         rf"\textbf{{Total}} & \textbf{{\${totals['KY']:.2f}}} & \textbf{{\${totals['CO']:.2f}}} \\",
         r"\bottomrule",
         r"\end{tabular}",
-        r"\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier}: each "
-        r"document's standards content \emph{in full}, with front matter, expository "
-        r"essays and appendices removed --- not the \texttt{\_only\_subset} tier of the "
-        r"quality tables, and not the published PDFs (Kentucky 120 pages, of which these "
-        r"52 hold all of its standards; Colorado a 187-page birth-to-8 publication, of "
-        r"which these 41 are the complete Ages 3--5 document every Colorado measurement "
-        r"in this paper uses). "
-        r"At the subset tier both batching layers collapse to a single batch and the "
-        r"merge is a no-op; here the Step Functions \texttt{Map} iterates four times per "
-        r"run and the merge removes 34 and 90 duplicate elements respectively, so the "
-        r"prepare--map--merge path is genuinely exercised. \textbf{Tokens are the primary "
-        r"measure}; the cost rows are derived from them using published Bedrock "
-        r"on-demand rates, each confirmed against the vendor pricing page (Opus~4.6 and "
-        r"Sonnet~4.6 on 2026-08-31, Haiku~4.5 on 2026-09-04) and recomputed at table-build "
-        r"time from the pipeline's own pricing constants rather than transcribed. "
-        rf"Note the model assignment paying off: the depth-map pass is "
-        rf"{min(depth_share):.1f}--{max(depth_share):.1f}\% of a run's cost, while "
-        r"detection --- the only stage invoked once per chunk --- is "
+        r"\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier} --- "
+        r"each document's standards content \emph{in full}, and the only table here "
+        r"not at the \texttt{\_only\_subset} tier (\S\ref{sec:experiments-scale}). "
+        r"\textbf{Tokens are the primary measure}; cost is derived from them at "
+        r"published Bedrock on-demand rates, recomputed at table-build time from the "
+        r"pipeline's own pricing constants. The depth-map pass is "
+        rf"{min(depth_share):.1f}--{max(depth_share):.1f}\% of a run's cost, "
+        r"detection "
         rf"{min(det_share):.0f}--{max(det_share):.0f}\%. "
         rf"Source: \texttt{{paper/results/task6\_{SCALE_TAG}/}}.}}",
         r"\label{tab:scale}",
@@ -489,16 +478,31 @@ def build_corpus_appendix_table(tiers):
     Built from standards/standards_tracking.md and paper/results/corpus_tiers.json.
     ⚠️ The plan said to build it from "the seven File Cleaned: true rows". There
     are SIX (CA, AZ, TX, CO, NV-2023, KY) and they are exactly the corpus; NV-2025
-    is marked false, not true. The three collected-but-unused documents are listed
-    below the rule rather than dropped, so the table cannot imply a larger corpus
-    than was actually used.
+    is marked false, not true.
+
+    ⚠️ NV-2025 IS LISTED ANYWAY, below its own rule, and must stay there. It was
+    dropped 2026-09-05 as "irrelevant to the paper" and restored the same day:
+    irrelevance is the wrong test for it. The paper names Nevada as its held-out
+    canary in the abstract and throughout, and Nevada is the ONE state with two
+    published pre-K documents -- so a reader who goes to the agency finds both
+    and cannot tell which one every Nevada number refers to. Listing it under a
+    "collected, not used" rule answers that question in the same table that
+    raises it, and states the narrowness (social-emotional domain only) that is
+    the actual reason for excluding it. This is a provenance disclosure, not a
+    corpus row; it is separated by a rule and carries no role, and the corpus
+    section states the same exclusion in prose.
+
+    The two Florida rows are also File Cleaned: false and are NOT listed. That is
+    deliberate and not an inconsistency: no Florida document is referenced
+    anywhere in the paper, so listing one raises a question the paper never asks.
+    NV-2025 is listed precisely because the paper does discuss Nevada.
     """
     # ⚠️ NOT csv.DictReader. The Website and PDF columns contain unquoted commas
     # (Florida's URL has a `#d=I,II,III,...` fragment), so a naive comma split
     # overflows into DictReader's restkey and the row dict stops being strings.
     # Only the two URL columns are ambiguous, so parse from the RIGHT: the last
     # three fields are Year, PDF, File Cleaned regardless of URL contents.
-    rows, extras = [], []
+    rows, uncollected = [], []
     track = REPO_ROOT / "standards" / "standards_tracking.md"
     for line in track.read_text().splitlines()[1:]:
         line = line.strip()
@@ -509,7 +513,11 @@ def build_corpus_appendix_table(tiers):
             continue
         r = {"State": parts[0], "Year": parts[-3], "PDF": parts[-2],
              "File Cleaned": parts[-1], "Website": ",".join(parts[1:-3])}
-        (rows if r["File Cleaned"] == "true" else extras).append(r)
+        if r["File Cleaned"] == "true":
+            rows.append(r)
+        elif r["State"] == "Nevada" and r["Year"] == "2025":
+            # Collected, not used -- rendered below the rule. See the docstring.
+            uncollected.append(r)
 
     # "Flordia" is a typo in standards_tracking.md. Mapped here rather than
     # edited in place: that file is the operator's own record and correcting it
@@ -536,31 +544,35 @@ def build_corpus_appendix_table(tiers):
         trim, sub = t.get("trimmed") or "--", t.get("only_subset") or "--"
         L.append(rf"{st} & {ROLE.get(st,'')} & {r['Year']} & {PUB.get(st, '')} & "
                  rf"{full} & {trim} & {sub} \\")
-    L += [r"\midrule",
-          rf"\multicolumn{{7}}{{l}}{{\emph{{Collected but not used --- no golden "
-          rf"annotation, excluded from every measurement}}}} \\"]
-    # The two Florida rows are the SAME PDF listed at two age scopes, so they
-    # would render as duplicate lines. Collapse on (state, year, pdf).
-    seen = {}
-    for r in extras:
-        st = ABBR.get(r["State"], r["State"])
-        seen.setdefault((st, r["Year"], r["PDF"]), []).append(r)
-    for (st, year, _pdf), group in seen.items():
-        scope = "" if len(group) == 1 else rf" ({len(group)} age scopes)"
-        L.append(rf"{st} & -- & {year} & \multicolumn{{4}}{{l}}{{collected, not prepared{scope}}} \\")
+    if uncollected:
+        L += [r"\midrule",
+              r"\multicolumn{7}{l}{\emph{Collected, not used --- excluded from every "
+              r"measurement in this paper}} \\"]
+        for r_ in uncollected:
+            st = ABBR.get(r_["State"], r_["State"])
+            t = tiers["tiers"].get(f"{st}_{r_['Year']}", {})
+            # Only the published page count is shown. The Trim./Subset columns
+            # mean CORPUS TIER -- the caption defines Subset as the excerpt every
+            # quality measurement uses -- and this document has neither, so a
+            # number there would contradict the rule it sits under. NV-2025 does
+            # have an 8pp _only_subset file on disk from an exploratory pass; it
+            # was never annotated, and corpus_tiers.json records it with that
+            # caveat rather than this table implying it is corpus.
+            L.append(rf"{st} & -- & {r_['Year']} & {PUB.get(st, '')} & "
+                     rf"{t.get('full') or '--'} & -- & -- \\")
     L += [r"\bottomrule", r"\end{tabular}",
           r"\caption{Corpus provenance. \emph{Full} is the published PDF; "
-          r"\emph{Trim.}\ removes non-standards matter (front matter, expository "
-          r"essays, appendices) while retaining every standard; \emph{Subset} is the "
-          r"one-to-two-domain excerpt that all quality measurements in this paper use "
-          r"and is a genuine reduction in coverage. Colorado's \emph{Full} figure is "
-          r"its 41-page Ages 3--5 publication, the scope every Colorado measurement "
-          r"here uses; that document is itself drawn from a 187-page birth-to-eight "
-          r"volume covering other age bands. The source documents are third-party "
-          r"state-agency publications and are not redistributed with this paper --- "
-          r"only US federal works are automatically in the public domain --- so each "
-          r"is identified here well enough to be obtained from its issuing agency. "
-          r"Page counts verified with PyMuPDF. Source: "
+          r"\emph{Trim.}\ removes non-standards matter while retaining every standard; "
+          r"\emph{Subset} is the one-to-two-domain excerpt all quality measurements "
+          r"use, and is a genuine reduction in coverage. Colorado's \emph{Full} is its "
+          r"41-page Ages~3--5 publication (\S\ref{sec:corpus}). These are "
+          r"third-party state-agency documents, identified here rather than "
+          r"redistributed (\S\ref{sec:artifacts-statement}). Nevada's 2025 "
+          r"publication covers the \textbf{social-emotional domain only}; it is "
+          r"listed because Nevada is the only state with two published documents, "
+          r"and every Nevada number in this paper refers to the 2023 one. "
+          r"Page counts verified with PyMuPDF. "
+          r"Source: "
           r"\texttt{standards/standards\_tracking.md}, "
           r"\texttt{paper/results/corpus\_tiers.json}.}",
           r"\label{tab:corpus-appendix}", r"\end{table*}"]
@@ -602,15 +614,13 @@ def build_corpus_pages_table(pr):
     match_note = (r" Every tier page matched a published page." if unmatched == 0 else
                   rf" {unmatched} tier page(s) matched no published page and are listed "
                   r"in the source file rather than guessed.")
-    L += [r"\caption{Pages retained at each corpus tier, so the hand trimming can be "
-          r"reproduced from the issuing agency's copy. Ranges are in the published "
-          r"document's own page numbering and were recovered by matching every tier "
-          r"page's text back to the published PDF (exact match first, then a "
-          r"$\geq 0.90$ similarity fallback); no annotation or model call is involved."
-          + match_note + co_note +
+    L += [r"\caption{Pages retained at each corpus tier, in the published document's "
+          r"own page numbering, so the hand trimming can be reproduced from the "
+          r"issuing agency's copy. Recovered by matching each tier page's text back to "
+          r"the published PDF; no annotation or model call is involved."
+          + match_note +
           r" California has no \texttt{\_trimmed} tier and Colorado's is the whole "
-          r"document. Source: \texttt{paper/results/corpus\_page\_ranges.json}; "
-          r"regenerate with \texttt{python paper/analysis/corpus\_page\_ranges.py}.}",
+          r"document. Source: \texttt{paper/results/corpus\_page\_ranges.json}.}",
           r"\label{tab:corpus-pages}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -683,15 +693,10 @@ def build_levels_figure(t2, t3):
     L += [r"\end{tikzpicture}",
           r"\caption{Elements emitted per hierarchy level on Kentucky, whose detector "
           r"golden is the corpus's only \emph{detection-exhaustive} one, with the "
-          r"depth-map pass enabled and ablated. With the pass enabled the detector "
-          r"reproduces the golden distribution exactly. Ablated, it emits an extra "
-          r"domain, doubles the strand count and loses four sub-strands, while the "
-          r"indicator count is untouched --- the failure is level \emph{collapse} at "
-          r"the two levels whose identity is positional rather than typographic. "
-          r"\textbf{This is not visible in a level-confusion matrix}: the evaluation "
-          r"matcher pairs on level, so an element emitted at the wrong level is "
-          r"recorded as a miss rather than an off-diagonal entry, and both arms "
-          r"render as clean diagonals. \texttt{\_only\_subset} corpus tier.}",
+          r"depth-map pass enabled and ablated. The enabled arm reproduces the golden "
+          r"distribution exactly; ablated, strand inflates and sub-strand deflates "
+          r"while domain and indicator hold --- level \emph{collapse}. "
+          r"\texttt{\_only\_subset} corpus tier.}",
           r"\label{fig:levels}", r"\end{figure}"]
     return "\n".join(L) + "\n"
 
@@ -749,17 +754,11 @@ def build_stability_table(t5):
         r"\bottomrule",
         r"\end{tabular}",
         r"\caption{Run-to-run stability, \textbf{\texttt{\_only\_subset} corpus tier}. "
-        r"Five independent detector runs and six parser observations per state, all "
-        r"\texttt{-{}-no-cache}, split across two days: repeated runs within one session "
-        r"understate variance, and Nevada demonstrates it here --- its detector output "
-        r"has the same element set in all three same-session runs (one of them differing "
-        r"only in the Science domain's code) and drops one indicator in both next-day "
-        r"runs. \emph{ids} is the number of distinct element identities compared "
-        r"and \emph{unstable} how many differed in any graded field, so the rate is bounded "
-        r"in $[0,1]$. Four of six states are perfectly reproducible on each suite. "
-        r"\textbf{These rates are lower bounds, not estimates}: a defect that fires in a "
-        r"minority of runs survives five clean draws easily, which is why denominators are "
-        r"reported beside every rate. Source: "
+        r"Five detector runs and six parser observations per state, all "
+        r"\texttt{-{}-no-cache}, split across two days. \emph{ids} is the number of "
+        r"distinct element identities compared, \emph{unstable} how many differed in "
+        r"any graded field. \textbf{These rates are lower bounds, not estimates} "
+        r"(\S\ref{sec:experiments-stability}). Source: "
         r"\texttt{paper/results/task5\_%s/}.}" % TASK5_TAG,
         r"\label{tab:stability}",
         r"\end{table}",
@@ -801,18 +800,13 @@ def build_dataset_table(stats):
           rf"\textbf{{{t['standard_id_collisions_corpus_wide']}}} \\",
           r"    \hline", r"  \end{tabular}",
           r"  \caption{Corpus descriptive statistics. Domain, strand and "
-          r"sub-strand columns count \emph{distinct} nodes appearing in at least "
-          r"one standard's ancestor chain, so they are smaller than the "
-          r"detector's element counts in Table~\ref{tab:detector-headline}. "
-          r"\textbf{\texttt{standard\_id} collisions are 0 everywhere}, which "
-          r"matters because \texttt{standard\_id} is the primary key under which "
-          r"a standard is stored. \textbf{Age bands} counts the state's distinct "
-          r"bands, and every standard in every state carries one; its total is "
-          r"the union across states, not a column sum. "
-          r"CO's subsets derive from the 41pp ages-3--5 document, not "
-          r"the separate 187pp birth-to-8 one ($\dagger$). All quality numbers "
-          r"elsewhere in this paper are measured on the \emph{\_only\_subset} "
-          r"tier shown here (\S\ref{sec:corpus}), never on the full documents. "
+          r"sub-strand columns count \emph{distinct} nodes in at least one "
+          r"standard's ancestor chain, so they are smaller than the detector's "
+          r"element counts in Table~\ref{tab:detector-headline}. \textbf{Age bands} "
+          r"is the state's distinct bands; its total is the union across states, not "
+          r"a column sum. CO's subsets derive from the 41pp ages-3--5 document "
+          r"($\dagger$). All quality numbers in this paper are measured on the "
+          r"\emph{\_only\_subset} tier shown here (\S\ref{sec:corpus}). "
           rf"Source: \texttt{{paper/results/task8\_{STATS_TAG}/}}.}}",
           r"  \label{tab:dataset-stats}", r"\end{table*}"]
     return "\n".join(L) + "\n"
@@ -874,21 +868,13 @@ def build_confidence_table(conf):
     guess = bands["below 0.70 (guessing)"]
     L += [r"  \caption{Detector self-reported confidence, re-measured over the "
           rf"{o['n']} elements of the recorded run. The prompt asks for "
-          r"$\geq 0.95$ when the depth map clearly applies, $0.80$--$0.94$ when "
-          r"the chunk is ambiguous, and $<0.70$ when guessing; in practice the "
-          rf"score takes {o['n_distinct_values']} distinct values in "
-          rf"$[{o['min']:.2f}, {o['max']:.2f}]$ (mean {o['mean']:.3f}), uses the "
-          r"middle band for "
-          rf"{mid} of {o['n']} elements and the bottom band "
-          rf"{'never' if guess == 0 else f'{guess} times'}. The audit's "
-          rf"{n_hall} confirmed invented element also holds the lowest score, "
-          rf"and no correct element falls below $0.90$ in "
-          rf"{stab['n_samples']} same-configuration runs "
-          rf"({stab['elements_examined']} elements); with a single positive "
-          r"case that is an observation, not a validated threshold. "
-          r"\textbf{Nothing in the pipeline thresholds this score} -- human "
-          r"verification is a separate, explicit mechanism "
-          r"(\S\ref{sec:discussion-limitations}). \emph{\_only\_subset} tier. "
+          r"$\geq 0.95$ when the depth map clearly applies, $0.80$--$0.94$ when the "
+          rf"chunk is ambiguous, and $<0.70$ when guessing; the score in fact takes "
+          rf"{o['n_distinct_values']} distinct values in "
+          rf"$[{o['min']:.2f}, {o['max']:.2f}]$ and uses the bottom band "
+          rf"{'never' if guess == 0 else f'{guess} times'}. "
+          r"\textbf{Nothing in the pipeline thresholds this score} "
+          r"(\S\ref{sec:experiments-confidence}). \emph{\_only\_subset} tier. "
           rf"Source: \texttt{{paper/results/task8\_{STATS_TAG}/}}.}}",
           r"  \label{tab:confidence-distribution}", r"\end{table}"]
     return "\n".join(L) + "\n"

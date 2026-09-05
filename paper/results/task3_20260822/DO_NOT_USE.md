@@ -67,7 +67,7 @@ minutes in.
 
 ## How the re-run avoided this (kept for future reference)
 Done 2026-08-23T16:05Z. Tasks 1 and 2 were NOT re-run (they are frozen).
-Measured at the time: our own Task 1 + Task 2 arms consumed only 407,044 Opus
+Measured at the time: my own Task 1 + Task 2 arms consumed only 407,044 Opus
 tokens, ~15.7% of the 2,592,000/day cross-region Opus 4.6 quota — so the day had
 already been ~84% consumed by earlier activity before the first attempt started.
 The off-arm was never the expensive part.

@@ -41,8 +41,12 @@ conflate and better kept apart: \emph{what is on the page}, and \emph{what it
 is a child of}. The first is local --- a heading, a numbered item, a paragraph
 of prose --- and can be judged from the text in front of the reader. The second
 is global: an element's parent may be several pages back, may be printed only
-once at the top of a section that runs for forty pages, or may not be printed at
-all and must be recovered from the codes of its own descendants.
+once at the top of a section that runs for multiple pages, or may not be printed at
+all and must be recovered from the codes of its own descendants. Detection is
+accordingly forbidden from reconstructing an absent parent out of the position
+identifiers inside a child's code, and emits the children alone
+(Appendix~\ref{rule:emit-what-you-see}); recovering that parent is parsing's
+work, not detection's.
 
 I therefore split the work. \textbf{Detection} reads the document in
 overlapping chunks and emits a flat list of typed elements, each labeled with
@@ -68,29 +72,37 @@ This is the paper's central move. Rather than asking the model to recognize
 ``strand'' or ``benchmark'' as level names --- vocabulary that no two states
 share --- I ask it once, per document, to characterize that document's own
 nesting scheme, and then treat the answer as authority for every subsequent
-classification.
+classification. Appendix~\ref{sec:prompt-depthmap} gives that prompt in full;
+it is short, and it is the only one reproduced whole.
 
-The pass runs over a sample of blocks rather than the whole document, under a
-6{,}000-token budget. How that sample is drawn turns out to matter a great deal,
-because \emph{a level missing from the sample is a level missing from the entire
-run}: every element's level is assigned against the map, so an under-counted
-depth propagates to all downstream output. Sampling every $n$th block keeps a
-line with probability $1/n$ regardless of how load-bearing it is, and the
-rarest lines in a standards document are precisely the headings that open a
-section --- the evidence for the top of the hierarchy --- while body prose
-survives on volume alone.
+The pass runs on a sample of blocks rather than the whole document, under a
+6{,}000-token budget, and how that sample is drawn turns out to matter a great
+deal. Because every element's level is assigned against the map, \emph{a level
+missing from the sample is a level missing from the entire run}: if the sample
+contains no evidence that a document nests four deep, the map reports three, and
+every element below the missing level is shifted up one.
 
-I instead stratify by layout. A block's normalized left edge is already
-available from extraction and is already given to the model, and indentation
-tracks nesting, so a rare horizontal position \emph{is} a rare depth. Blocks are
-bucketed by left edge; every bucket is guaranteed a floor of twelve blocks
-spread across the document, with the rarest buckets filled first, so when the
-budget binds it is the structurally distinctive levels that survive rather than
-the bulk. The guarantee is cheap because the interesting buckets are small: in
-Kentucky's complete standards document, the handful of heading buckets together
-hold only a tiny fraction of the document's blocks (an observation from the
-project's engineering notes rather than a recorded experiment). Pages with unusable geometry fall back to a coarse text-shape key
-that reads word count and final character only. The rule reads layout position
+The obvious sampler --- keep every $n$th block --- is the wrong one here. It
+keeps each line with the same probability $1/n$ however much structural evidence
+that line carries, and in a standards document evidence and frequency run
+opposite to one another: a section heading appears once per section, while the
+body prose beneath it is repeated on every page. Uniform sampling therefore
+drops precisely the headings that establish the top of the hierarchy and keeps
+the prose, which establishes nothing, on volume alone.
+
+I stratify by layout instead. Extraction already records each block's normalized
+left edge, and that edge is already part of what the model is shown; since
+indentation tracks nesting, a rare horizontal position \emph{is} a rare depth.
+Blocks are therefore bucketed by left edge, and each bucket is guaranteed a
+floor of twelve blocks spread across the document. Buckets are filled
+rarest-first, so when the budget binds, what it truncates is the bulk of the
+document rather than the structurally distinctive levels. The guarantee is cheap
+for the same reason it is needed: those levels are rare, and in Kentucky's
+complete standards document the heading buckets together hold only a small
+fraction of all blocks.\footnote{An observation from the project's engineering
+notes rather than a recorded experiment.} Blocks whose page geometry is unusable
+have no left edge to group on, and fall back to a coarse text-shape key reading
+word count and final character only. Either way the rule reads layout position
 and counts, never any document's words.
 
 \paragraph{Pass 2: classification against the map.} The document is then chunked
@@ -102,7 +114,8 @@ recovers passages that neither chunk holds whole.
 
 The prompt states general document-structure principles rather than per-state
 rules. Its central instruction is positional: classify an element by where it
-sits in the depth map, not by the word its label happens to use. Supporting
+sits in the depth map, not by the word its label happens to use
+(Appendix~\ref{rule:positional}). Supporting
 rules are stated at the same level of generality --- that a heading of the form
 \texttt{<Label> <id>: <Title>} has the label-and-id as its code and the text
 after the colon as its title, for \emph{any} structural label word rather than a
@@ -110,16 +123,20 @@ fixed list; that a code, when the document prints one, is authoritative and may
 appear inline, in a caption beside the heading, or as the shared leading prefix
 of its descendants' codes; and that when the document prints none, a code is
 derived from the title by a stated abbreviation procedure capped at five
-characters.
+characters. All three are one rule, reproduced at
+Appendix~\ref{rule:code-resolution}.
 
-\paragraph{Where determinism is enforced in code.} That last rule is a
-deterministic string algorithm, and a sampling model executes it inconsistently.
-In an engineering measurement on Kentucky --- three runs at temperature zero
-against one frozen extraction, recorded in the project's design notes rather
-than as a paper artifact --- roughly a quarter of the elements received a
-different code on at least one run, while level, source page, and age band
-never varied. Because the code becomes
-part of a database primary key, a rate near zero is not good enough. The
+\paragraph{Where determinism is enforced in code.} The last of those rules ---
+deriving a code from the element's title when the document prints none --- is
+different in kind from the others. The rest ask the model for a judgement about
+a document; this one asks it to execute a deterministic string algorithm, and a
+sampling model executes such an algorithm inconsistently. In an engineering
+measurement on Kentucky --- three runs at temperature zero against one frozen
+extraction, recorded in the project's design notes rather than as a paper
+artifact --- roughly a quarter of the elements received a different code on at
+least one run, while level, source page, and age band never varied. Because the
+code becomes part of a database primary key, a rate near zero is not good
+enough. The
 abbreviation is therefore also executed in Python --- but only where the
 document supplied no code of its own, decided by two independent guards: a
 \emph{shape} guard, since the abbreviation branch emits uppercase letters and
@@ -149,13 +166,15 @@ the chain at exactly that level. A sub-level identifier may be
 \texttt{Benchmark 1.1}, whose leading \texttt{1} \emph{is} Standard~1 --- so
 composing it onto the full parent code counts that parent twice. And a heading
 may print a label-and-id form that must be converted into the domain-qualified
-form before it can be composed at all.
+form before it can be composed at all (Appendix~\ref{rule:label-identifier}).
 
 Each is handled by a rule keyed on structure rather than vocabulary. Peeling an
 ancestor's code from a descendant's stops where the namespace stops: if a level's
 anchored code would equal the code of the level directly below it, the peel has
 run past the end of the namespace and that level keeps its own heading's
-identifier. A dotted child whose added segment repeats its parent's last segment
+identifier (Appendix~\ref{rule:namespace-skip}). A code that already carries its
+own qualification is used as it stands and is never qualified a second time, at
+any level (Appendix~\ref{rule:already-qualified}). A dotted child whose added segment repeats its parent's last segment
 is collapsed, but only when the added tail is itself dotted, since a single added
 segment is an ordinary child index. A repair that cannot demonstrably improve the
 row's own ancestry is not made, and a repair that would introduce whitespace into
@@ -199,8 +218,10 @@ claimed as evidence.
 Every detected element carries a confidence score, and \textbf{nothing in the
 pipeline thresholds it}. There is no review gate, no minimum score, and no
 field marking an element as requiring attention; all elements flow through
-detection, parsing, validation, and persistence regardless of score. I are
-explicit about this because it is easy to assume otherwise, and because our own
+detection, parsing, validation, and persistence regardless of score. The prompt
+does ask for a band, and Appendix~\ref{rule:confidence-bands} reproduces what it
+asks for; nothing downstream reads the answer. I am
+explicit about this because it is easy to assume otherwise, and because my own
 measurement of the score's distribution argues against building such a gate: the
 scores occupy five distinct values in $[0.90, 0.97]$, the band the prompt
 describes as indicating uncertainty is used zero times, and the score varies
@@ -214,7 +235,7 @@ workflow over the stored corpus, not a filter applied during extraction, and it
 is blanket rather than score-triggered.
 
 This leaves a real question for deployment in education: must every standard be
-human-verified before it is useful? Our position is that verification is a
+human-verified before it is useful? My position is that verification is a
 cost-and-trust dial rather than a precondition. The durable win is that fifty
 independently-formatted documents become one queryable, consistently-structured
 corpus, and that value is available --- for search, for curriculum mapping, for

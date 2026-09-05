@@ -1,135 +1,114 @@
-% related_work.tex — Task 9 deliverable (drafted 2026-08-17, before the Task 10
-% skeleton exists; wire in via \input{sections/related_work} once main.tex is
-% scaffolded). Citations use natbib (\citep/\citet) against ../references.bib.
+% related_work.tex — Task 9 deliverable (drafted 2026-08-17); condensed and
+% re-argued 2026-09-05. The 2026-08-17 draft enumerated systems roughly one per
+% sentence and ran ~940 words. Each subsection now carries a single claim and
+% groups its citations under it, at ~735 words (-22%). Citation COVERAGE is
+% unchanged — every key cited by the earlier draft is still cited here, and
+% nothing else in the paper cites a key that this section dropped.
+% Citations use natbib (\citep/\citet) against ../references.bib.
 % Guardrails observed: no unmeasured Medium numbers; no confidence-gate claim
 % (verification is blanket, confidence gates nothing); no invented fine-tuning
 % cost comparison — the in-context argument is made on no-labeled-corpus grounds.
+% One factual softening vs. the 2026-08-17 draft: aggarwal2025fiscal is credited
+% with validating against the documents' "own internal consistency", not
+% specifically their "arithmetic structure", which REVIEW_references.md
+% (2026-09-04) could not confirm from the abstract.
 
 \section{Related Work}
 \label{sec:related}
 
-\subsection{Document structure and layout analysis}
+\subsection{Hierarchy recovery from documents}
 
-Recovering logical structure from visually formatted documents is a
-long-standing problem. Pipelines for scholarly documents such as
-GROBID~\citep{lopez2009grobid} established the pattern of segmenting a PDF
-into typed structural units, and large layout datasets such as
-PubLayNet~\citep{zhong2019publaynet} enabled supervised page-object
-detectors. Layout-aware pretrained encoders --- LayoutLM and its
-successors~\citep{xu2020layoutlm,huang2022layoutlmv3} --- and OCR-free
-vision--encoder--decoder models such as Donut~\citep{kim2022donut} and
-Nougat~\citep{blecher2023nougat} learn joint text--layout representations,
-but target flat extraction tasks (classification, key--value extraction,
-markup transcription) rather than deep hierarchy recovery.
+Recovering logical structure from formatted documents has a long lineage ---
+scholarly-PDF pipelines~\citep{lopez2009grobid}, page-object
+datasets~\citep{zhong2019publaynet}, layout-aware
+encoders~\citep{xu2020layoutlm,huang2022layoutlmv3}, OCR-free
+vision--encoder--decoder models~\citep{kim2022donut,blecher2023nougat} --- but
+its targets are flat: classification, key--value extraction and markup
+transcription rather than a tree. Work that does reconstruct the tree parses it
+from renderings~\citep{rausch2021docparser}, decomposes it into page-object
+detection, reading order and tree
+construction~\citep{ma2023hrdoc,wang2024detect}, recasts those subtasks as
+relation prediction~\citep{wang2025unihdsa}, extends them to multi-domain
+corpora~\citep{xing2024dochienet}, or reads table-of-contents metadata from
+deeply nested legal books~\citep{wehnert2025hips}.
 
-Closer to our task, a line of work reconstructs a document's
-\emph{hierarchical} structure explicitly. DocParser parses complete
-document trees from renderings~\citep{rausch2021docparser};
-HRDoc~\citep{ma2023hrdoc} and the Comp-HRDoc benchmark with its
-Detect-Order-Construct system~\citep{wang2024detect} decompose the problem
-into page-object detection, reading-order prediction, and tree
-construction; HiPS~\citep{wehnert2025hips} segments deeply nested legal
-books using table-of-contents metadata with LLM refinement;
-DocHieNet~\citep{xing2024dochienet} broadens hierarchy parsing to a
-multi-domain dataset, and UniHDSA~\citep{wang2025unihdsa} unifies the
-subtasks as relation prediction. All of these rely on layout supervision
---- line-level labels, bounding boxes, TOC metadata, or text--layout
-models pre-trained on labeled pages --- over corpora whose typography is
-consistent within a genre (scholarly articles, books, reports). At the
-other end, training-free LLM approaches such as
-DocsRay~\citep{jeong2025docsray} prompt a model to build a pseudo table of
-contents over a long document; that shares our zero-shot stance, but it
-produces a segmentation to guide retrieval for question answering rather
-than a typed hierarchy carrying codes and ancestry, and it is not graded
-against structural annotations. US early learning standards offer neither
-layout supervision nor a consistent genre:
-each of the 50-plus issuing jurisdictions designs its document
-independently~\citep{ncecqa_elgs}, so there is no shared typography to
-learn, and no annotated corpus exists at any scale. Our detector instead
-reasons over OCR-extracted text with an LLM, classifying each element by
-its \emph{nesting position} in a per-document depth map rather than by
-learned visual features or vocabulary-specific labels. The depth-map pass
-is functionally analogous to the table-of-contents subtask of
-\citet{wang2024detect}, but is inferred zero-shot from content rather than
-predicted by a trained component.
+These systems differ in architecture but share a premise, and it is the
+premise rather than any individual design that my setting violates: hierarchy
+can be \emph{learned}, because supervision exists --- line labels, bounding
+boxes, TOC metadata, pretraining on labeled pages --- over a genre whose
+typography is internally consistent. Early learning standards offer neither.
+With every jurisdiction designing its own document~\citep{ncecqa_elgs}, there
+is no shared typography to learn and no annotated corpus, at any scale, to
+learn it from.
+What the documents do share is not appearance but nesting: whatever a level is
+called, it sits at a fixed depth relative to its neighbors. My depth-map pass
+is functionally the table-of-contents subtask of \citet{wang2024detect}, but
+inferred zero-shot from content rather than predicted by a trained component,
+then treated as the authority against which every element is classified. The
+closest zero-shot neighbor, DocsRay~\citep{jeong2025docsray}, likewise prompts
+for a pseudo table of contents with no training, but targets a segmentation
+guiding retrieval for question answering rather than a typed hierarchy carrying
+codes and ancestry, and is not graded against structural annotations.
 
-\subsection{LLMs for information extraction}
+\subsection{In-context extraction without a labeled corpus}
 
-\citet{brown2020language} established that sufficiently capable language
-models perform many tasks from prompts alone, and chain-of-thought
-prompting~\citep{wei2022chain} extended this to multi-step structural
-reasoning. In-context information extraction has since been demonstrated
-in domains where labeled corpora are scarce, notably clinical
-text~\citep{agrawal2022large}, and generative LLMs are now competitive
-across classic IE tasks~\citep{wadhwa2023revisiting,xu2024large}.
-GoLLIE~\citep{sainz2024gollie} showed that models fine-tuned to follow
-annotation \emph{guidelines} generalize to unseen extraction schemas; our
-prompts operationalize the same insight without fine-tuning, expressing
-document-agnostic structural principles (e.g., ``a structural label and
-identifier constitute the code; the text after the colon is the title'')
-that a frozen commercial model applies to unseen state documents.
-Parameter-efficient fine-tuning can outperform in-context learning when
-labeled data exists~\citep{liu2022fewshot}; our setting is the complement
-of that premise --- no annotated corpus of parsed early learning standards
-exists, so the dominant cost of the fine-tuning alternative would be
-annotation itself, not compute.
+Prompting alone carries many tasks~\citep{brown2020language}, including
+multi-step reasoning~\citep{wei2022chain}, and generative extraction is now
+competitive across classic IE
+tasks~\citep{wadhwa2023revisiting,xu2024large}, notably where labeled corpora
+are scarce~\citep{agrawal2022large}. GoLLIE~\citep{sainz2024gollie} is the
+closest methodological analogue: fine-tuning a model to follow annotation
+\emph{guidelines} makes it generalize to unseen schemas. My prompts
+operationalize that insight without fine-tuning, stating document-agnostic
+structural principles (e.g., a structural label and its identifier constitute
+the code; the text after the colon is the title) that a frozen model applies to
+unseen states. This is the available move rather than merely the cheap one: no
+annotated corpus of parsed early learning standards exists, so the supervised
+alternative's dominant cost would be annotation, not compute
+\citep[cf.][where labels do exist]{liu2022fewshot}.
 
-Two further lines of work inform the system design. Constrained decoding
-can guarantee schema-valid output~\citep{willard2023efficient}; I instead
-validate generated JSON against a typed schema and repair deterministically,
-keeping the model API-agnostic. Positional degradation in long
-contexts~\citep{liu2024lost} motivates our domain-scoped chunking over
-whole-document prompting, and sampling variance at fixed
-prompts~\citep{wang2023selfconsistency} motivates the run-to-run stability
-measurements I report. Hallucinated content remains a structural risk of
-generative extraction~\citep{ji2023survey}; I quantify it directly via a
-manual audit of unmatched detections. Closest to our setting as an applied
-system, \citet{aggarwal2025fiscal} convert long government fiscal PDFs
-into a research database with a multi-stage LLM pipeline, exploiting the
-documents' internal arithmetic structure for validation; our pipeline
-analogously exploits the internal \emph{hierarchical} consistency of
-standards documents (codes as namespace paths, parent--child prefix
-relations) to normalize and cross-check extractions.
+Three system choices follow: schema-validated JSON with deterministic repair
+rather than constrained decoding~\citep{willard2023efficient}, which keeps the
+method API-agnostic; domain-scoped chunking
+(\S\ref{sec:system-architecture}) rather than whole-document prompting, given
+positional degradation in long contexts~\citep{liu2024lost}; and reported
+run-to-run stability (\S\ref{sec:experiments-stability}) rather than a single
+run, given sampling variance at fixed prompts~\citep{wang2023selfconsistency}.
+Hallucination, the residual risk of generative extraction~\citep{ji2023survey},
+I quantify by auditing every unmatched detection by hand. The nearest applied
+system~\citep{aggarwal2025fiscal} converts government fiscal PDFs into a
+research database with a multi-stage LLM pipeline validated against the
+documents' own internal consistency; standards documents afford the analogous
+check on their \emph{hierarchical} consistency --- codes as namespace paths,
+parent--child prefix relations.
 
-\subsection{Human-in-the-loop information extraction}
+The absence of labels also decides where human effort goes: to verification
+rather than annotation. Every extracted record is human-reviewed at all four
+hierarchy levels --- the model drafts, humans supply the correctness guarantees
+it cannot --- following the machine-teaching paradigm of experts controlling
+the process rather than labeling
+data~\citep{mosqueirarey2023human,monarch2021human}. It differs from active
+learning~\citep{settles2009active} and from work allocating annotation between
+models and humans~\citep{gilardi2023chatgpt,li2023coannotating,tan2024large} in
+that verification is blanket, not selective: nothing decides \emph{which}
+records a human sees, and the detector's confidence scores are recorded but
+gate nothing.
 
-Our pipeline is human-in-the-loop by design: every extracted record is
-subject to human verification, tracked per record at all four hierarchy
-levels. This follows the machine-teaching paradigm, in which domain
-experts retain control of the process rather than merely labeling
-data~\citep{mosqueirarey2023human,monarch2021human}, and differs from
-active-learning regimes that select \emph{which} items receive human
-attention~\citep{settles2009active}: verification here is blanket, and the
-detector's confidence scores are recorded but gate nothing. Recent work
-positions LLMs as annotators in their own
-right~\citep{gilardi2023chatgpt,tan2024large} and studies how to allocate
-annotation work between humans and models~\citep{li2023coannotating}; our
-division of labor is the draft-and-verify variant, with the model
-producing complete structured drafts and humans providing correctness
-guarantees the model cannot.
+\subsection{Machine-readable education standards}
 
-\subsection{NLP for educational standards and curricula}
-
-Machine-readable learning standards have a two-decade history. The
-Achievement Standards Network modeled US K--12 standards in RDF to support
-resource correlation~\citep{sutton2008achievement}, and the CASE
-specification defines an exchange format for competency
-frameworks~\citep{1edtech2017case}. Both presuppose that standards are
-\emph{already} structured --- ASN was populated by manual modeling, and
-CASE is a format, not an extractor. In education research, alignment
-between standards, assessments, and instruction is measured by trained
-human panels using content-analysis frameworks such as the Surveys of
-Enacted Curriculum~\citep{porter2002measuring,polikoff2011howwell};
-NLP work from the ASN era onward automates the assignment of resources
-\emph{to} known standards~\citep{devaul2011computer}, and recent work does
-the same for assessment items~\citep{xu2025automated}. Across this literature
-the standards themselves are assumed available in normalized form. For
-early childhood, that assumption fails: unlike K--12, no national
-framework spans the age band --- the federal ELOF covers only Head Start
-programs~\citep{ohs2015elof} --- and each state publishes its own
-guidelines as independently designed PDF
-documents~\citep{ncecqa_elgs,ecs2024governance}. The extraction step ---
-from heterogeneous PDF to canonical hierarchy --- is the unaddressed
-bottleneck this paper automates, and is complementary to the alignment
-work above: normalized, hierarchical standards are the input that
-cross-state alignment methods require.
+Two decades of work on standards as data share one assumption. The Achievement
+Standards Network modeled US K--12 standards in
+RDF~\citep{sutton2008achievement} and the CASE specification defines an
+exchange format for competency frameworks~\citep{1edtech2017case}, but ASN was
+populated by manual modeling and CASE is a format, not an extractor.
+Downstream, alignment between standards, assessments and instruction is
+measured by trained human
+panels~\citep{porter2002measuring,polikoff2011howwell}, while NLP from the ASN
+era onward assigns learning resources~\citep{devaul2011computer} and, more
+recently, assessment items~\citep{xu2025automated} \emph{to} standards already
+normalized. For early childhood the assumption fails outright: no national
+framework spans the age band --- the federal ELOF covers Head Start programs
+only~\citep{ohs2015elof} --- and each state publishes its own guidelines as an
+independently designed PDF~\citep{ncecqa_elgs,ecs2024governance}. The extraction
+step this paper automates is not a competitor to that literature but its
+missing input.

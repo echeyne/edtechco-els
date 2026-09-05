@@ -13,23 +13,32 @@
 \begin{figure*}
   \centering
   \includegraphics[width=\textwidth]{figures/fig_architecture.pdf}
-  \caption{Pipeline architecture. Documents flow through the six pipeline
-  stages of \S\ref{sec:pipeline-overview}, numbered 1--8 here because the two
-  batched stages each occupy two positions (prepare, then map and merge) and are
-  realized as ten Lambda handlers in all; solid arrows carry data, dashed arrows are model calls, and dotted
-  arrows show that stages exchange JSON through S3 rather than direct payloads.
-  Detection and parsing are batched through a prepare $\rightarrow$ Step
-  Functions \texttt{Map} $\rightarrow$ merge pattern (at most three concurrent
-  workers) so that large documents do not exhaust the Lambda timeout; detection
-  batches by text-block chunk and parsing by domain, which keeps related
-  elements together. Detection is two-pass: a depth-map pass infers the
-  document's nesting hierarchy before elements are classified against it.
-  \textbf{Note that the evaluation suites exercise the direct path rather than
-  this batched one, and the two are known to diverge}
-  (\S\ref{sec:discussion-limitations}). Regenerate with
+  \caption{Pipeline architecture. Solid arrows carry data, dashed arrows are
+  model calls, and dotted arrows mark JSON exchanged through S3. Regenerate with
   \texttt{python paper/analysis/make\_architecture\_figure.py}.}
   \label{fig:architecture}
 \end{figure*}
+
+Figure~\ref{fig:architecture} shows the deployed system. Documents flow through
+the six pipeline stages of \S\ref{sec:pipeline-overview}, numbered 1--8 in the
+figure because the two batched stages each occupy two positions --- prepare,
+then map and merge --- and are realized as ten Lambda handlers in all. Stages
+communicate by writing JSON to S3 rather than by passing payloads directly, so
+each stage's input and output can be inspected in isolation when a run is
+debugged.
+
+Detection and parsing are batched through a prepare $\rightarrow$ Step Functions
+\texttt{Map} $\rightarrow$ merge pattern, with at most three concurrent workers,
+so that a long document does not exhaust the Lambda timeout. Detection batches
+by text-block chunk and parsing by domain, which keeps related elements in the
+same call. Detection is itself two-pass: the depth-map pass infers the
+document's nesting hierarchy before any element is classified against it.
+
+\textbf{The evaluation suites exercise the direct path rather than this batched
+one, and the two are known to diverge} (\S\ref{sec:discussion-limitations}).
+Every quality number in this paper is therefore a measurement of the direct
+path, and Table~\ref{tab:scale} is the only evidence here that the batched path
+behaves as intended.
 
 % Standards Explorer screenshot — supplied by Emily 2026-09-04 as
 % figures/colorado_els.png, replacing an earlier Arizona capture whose document
@@ -48,17 +57,10 @@ Standards Explorer, where the per-element verification workflow of
   \centering
   \includegraphics[width=\textwidth]{figures/colorado_els.png}
   \caption{The Standards Explorer, showing extracted Colorado standards resolved
-  into the canonical schema of \S\ref{sec:schema}. The hierarchy is navigable to
-  its full depth --- domain \texttt{AL} (Approaches to Learning), strand
-  \texttt{AL.1}, and the indicators \texttt{AL.1.1}--\texttt{AL.1.7} beneath it
-  --- with each row carrying the age range in months and the page of the source
-  PDF it was extracted from, so any record can be checked against the document
-  that produced it. The \emph{Status} column is the per-element human
-  verification state described in \S\ref{sec:method-confidence}: every row here
-  reads \texttt{Unverified}, which is the system's default and is
-  \textbf{independent of the model's confidence score}. Confidence gates nothing
-  and never sets this field; verification is a separate editorial action
-  recorded per element. Colorado realizes three levels rather than four, which
-  is why indicators attach directly to strands here.}
+  into the canonical schema of \S\ref{sec:schema}: domain \texttt{AL}, strand
+  \texttt{AL.1}, and the indicators beneath it, each row carrying its age range
+  and source page. The \emph{Status} column is the per-element human
+  verification state of \S\ref{sec:method-confidence}, which is
+  \textbf{independent of the model's confidence score}.}
   \label{fig:explorer}
 \end{figure*}

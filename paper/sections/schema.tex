@@ -45,7 +45,10 @@ whatever disambiguator distinguishes side-by-side variants of the same outcome.
 Texas prints the same expectation once per age column, so the age token lives
 inside the code (\texttt{PK3.I.A.2} against \texttt{PK4.I.A.2}); California
 prints the same foundation once per proficiency column, so the column token does
-(\texttt{ELD.1.0.VOCA.1.1.DISC}). There is no separate domain component in the
+(\texttt{ELD.1.0.VOCA.1.1.DISC}). Detection is told to emit one element per
+column rather than one element with several descriptions
+(Appendix~\ref{rule:age-columns}), and parsing is told which suffix each kind of
+column takes (Appendix~\ref{rule:disambiguate}). There is no separate domain component in the
 identifier and no age band appended after the fact: the derivation is one rule
 over an already-qualified code, which is what makes the identifier reproducible
 from the document rather than from the order in which the pipeline happened to

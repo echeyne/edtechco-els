@@ -30,9 +30,9 @@ question are exactly what varies between states. Arizona writes
 entirely; Colorado publishes no sub-strand tier at all. A rule tuned to one
 document's vocabulary is, by construction, a rule that fails on the next.
 
-Our central claim is that a language model can recover this structure by
+My central claim is that a language model can recover this structure by
 classifying each element's \textbf{nesting position} rather than its
-document-specific label, and that doing so is what generalizes. Concretely, we
+document-specific label, and that doing so is what generalizes. Concretely, I
 first infer a per-document \emph{depth map} --- how many nesting levels this
 particular document uses, and what each looks like --- and then classify every
 element against that map as an authority, rather than against a fixed
@@ -53,7 +53,7 @@ The absence of a labeled corpus is what rules out the obvious supervised
 alternative. There is no annotated dataset of hierarchically-parsed early
 learning standards at any scale, so a fine-tuned model would first require one
 to be built, and the dominant cost of that path is annotation rather than
-compute. Our own goldens took expert effort to produce and cover six states;
+compute. My own goldens took expert effort to produce and cover six states;
 they are an evaluation instrument, not a training set. An in-context approach
 that needs no labeled data is therefore not merely cheaper here, it is the only
 approach available without first solving a different problem
