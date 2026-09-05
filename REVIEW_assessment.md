@@ -117,7 +117,7 @@ it is rarer than novelty.
 | Venue | Fit | Verdict |
 |---|---|---|
 | ACL / EMNLP / NAACL **main** | Poor. Novelty modest, evaluation small, no artifacts. | Do not submit as a long paper. |
-| **EMNLP / NAACL / ACL Industry Track** | **Good.** A deployed system, engineering lessons (silent failures, nondeterminism, validation boundary), real cost figures, honest limitations. Industry-track reviewers weigh deployment evidence over novelty and do not require released code. Proceedings are in the ACL Anthology. | **First choice.** |
+| **EMNLP / [NAACL](https://2027.naacl.org/)  / ACL Industry Track** | **Good.** A deployed system, engineering lessons (silent failures, nondeterminism, validation boundary), real cost figures, honest limitations. Industry-track reviewers weigh deployment evidence over novelty and do not require released code. Proceedings are in the ACL Anthology. | **First choice.** |
 | ACL / EMNLP **Findings** | Possible via ARR, but a Findings reject-to-Findings decision on a main-track submission is not something to aim for. | Only as a fallback from an ARR cycle. |
 | **COLING 2027** main | Moderate. COLING is friendlier to applied and resource-adjacent work; the absence of a released resource hurts. | Second choice among NLP venues. |
 | ICDAR / DAS | Weak. The document-analysis community will ask for layout-model baselines on standard benchmarks (Comp-HRDoc, DocHieNet) and the paper's stance is precisely not to use layout models. | Do not. |
