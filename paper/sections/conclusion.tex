@@ -24,10 +24,14 @@ per-state code path, which is what allows a new state to be added without new
 code; the prompts' worked examples are the one place the corpus's own documents
 appear, and they are itemized rather than left implicit.
 
-The most valuable immediate extension is also the cheapest. Kentucky's golden is
-detection-exhaustive, so grading it inside a trimmed-tier run would yield
-quality-at-scale evidence without any new annotation --- the one measurement
-this work most conspicuously lacks. Beyond that, the corpus is six states of
+Quality at full-document scale, which an earlier draft named as the measurement
+this work most conspicuously lacked, is now reported: on Kentucky's trimmed tier
+all 277 elements of a verified reference set are recovered in each of three
+independent runs, with no hallucination, and parser field accuracy is $0.995$.
+What that leaves is a bounded and stateable gap rather than an absence --- the
+reference set was verified by inspecting what the system emitted, so it
+establishes precision and not recall, and a cold read of a random sample of
+pages is the cheap way to close it. Beyond that, the corpus is six states of
 more than fifty, and the obvious direction is breadth: each state added tests
 generalization again, and enough of them would constitute the national
 machine-readable dataset that does not currently exist.

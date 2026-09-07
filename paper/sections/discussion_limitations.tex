@@ -94,6 +94,7 @@ eight portions of a 187-page publication, not standards removed by trimming. Eve
 Colorado figure in this paper is the Ages 3--5 band.
 
 \subsection{What the goldens can and cannot establish}
+\label{sec:discussion-goldens}
 
 The detector goldens vary a great deal in density, and that governs what each
 can establish. In the four development states they are deliberate spot checks
@@ -112,11 +113,39 @@ document reprints several headings on a second page spread and the detector
 correctly finds them twice; at 46 golden against 52 in-scope detections its raw
 precision has a ceiling below 1 no matter how well it performs. Kentucky's
 golden is the one that is detection-exhaustive, 44 against 44, so its precision
-is a genuine hallucination rate rather than a coverage figure. It is also, for that reason, the only avenue to
-quality-at-scale evidence that does not require new annotation --- its 44
-annotated elements could be graded inside a trimmed-tier run. I have not yet
-done so, and that measurement is the most valuable single addition available to
-this work.
+is a genuine hallucination rate rather than a coverage figure. It is also, for
+that reason, what made quality-at-scale evidence available without new
+annotation: those 44 elements are graded inside a trimmed-tier run in
+\S\ref{sec:experiments-scale-quality}.
+
+\paragraph{The trimmed-tier goldens support precision and not recall, and the
+distinction is not a technicality.} The two Kentucky goldens used at that scale
+--- 277 elements and 207 standards --- were produced by seeding each row from a
+recorded run and then checking it against the published PDF. Verifying emitted
+rows establishes that what the system produced is correct, which is a precision
+claim. It cannot establish recall, because it never searches for what the system
+\emph{omitted}: an element no run emits is absent from the golden as well, and
+invisible to any measurement made against it. Recall at that scale is therefore
+reported against a verified reference set of 277 elements rather than against
+the document, and the ceiling travels with the number wherever it appears.
+
+Independent evidence bounds the gap at the middle levels without closing it.
+Every \texttt{Benchmark N.N} identifier the document prints (17 of 17) and every
+\texttt{<Domain> Standard N} heading (15 of 15) appears in the golden, recovered
+from the document text rather than from any run. The 202 indicators carry no
+equivalent check, and that is where an omission would hide. Closing it needs a
+cold read of the pages --- reading a random sample without reference to the
+golden and diffing --- which would cost a fraction of annotating the document
+and is the obvious next measurement.
+
+\paragraph{Colorado deliberately carries only half of this.} Its golden remains
+a seven-element spot check and is not being extended, so at the trimmed tier it
+contributes recall and duplication evidence --- zero elements absent, zero
+duplicates, across four detection batches on the corpus's hardest layout --- and
+no precision figure at all. Its raw precision there is an annotation-coverage
+artifact and is labeled as one in the recorded output. The corpus therefore has
+exactly one state whose precision is a quality figure, at either tier, and that
+is a real limit on how far the evidence generalizes.
 
 \subsection{Nondeterminism, and why I do not claim determinism}
 
@@ -146,6 +175,34 @@ boundary rather than on the model agreeing with itself. The clearest instance is
 California's intermittent structural-label defect: when it fires it produces
 twelve malformed identifiers, all of which contain whitespace and are rejected
 on shape before persistence.
+
+\subsection{A known defect, measured and deliberately not repaired}
+\label{sec:discussion-agebandevfect}
+
+\S\ref{sec:experiments-scale-quality} reports that one field accounts for every
+anomaly the trimmed tier introduces: the detector attributes a page banner to
+individual elements, which defeats the deduplication key, which produces
+duplicate standards, which the identifier resolver separates with fabricated
+suffixes. I know the cause, I know the fix, and I have not applied it.
+
+The fix is a prompt rule stating what the goldens already encode across all six
+states --- that an element's age band comes from a side-by-side column that
+distinguishes it from its siblings, never from a banner or running header that
+applies to a whole page. That is a general document-structure principle rather
+than a per-state rule, so it belongs in the prompt by the discipline of
+\S\ref{sec:method-llm-first}. Applying it changes a prompt, which changes the
+hash that every recorded measurement in this paper is keyed to, and would
+require re-recording the headline, ablation and comparison arms.
+
+I report the defect rather than repair it, and state the reason plainly: the
+cost of the repair is the invalidation of the evidence. That is the same
+cost-gating that governs every other change to these two files, applied to a
+finding of my own, and a reader is entitled to weigh it. Two things make the
+deferral defensible rather than convenient. The defect does not affect any
+subset-tier number, where the banner is not attributed at all. And it is
+systematic rather than random --- the same 164 elements in three consecutive
+runs --- so its effect is bounded and reproducible rather than a source of
+unquantified noise.
 
 \subsection{Limitations of the measuring instruments}
 

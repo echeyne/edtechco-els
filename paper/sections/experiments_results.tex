@@ -236,6 +236,56 @@ the language model's would mislead. Finally, the baseline has no Pass~1, so its
 depth-map column reads \textsc{ablated} rather than failed, and it is
 deterministic, so one run suffices.
 
+\subsection{Comparison: A Single Whole-Document Prompt}
+\label{sec:experiments-wholedoc}
+
+The rule-based extractor of \S\ref{sec:experiments-baseline} answers what a
+regular-expression approach cannot do. It does not answer the other obvious
+question: why not hand the model the entire document in one prompt and read the
+JSON back? \S\ref{sec:method-two-stage} argues against that; this measures it.
+
+The arm is built to be as strong as it honestly can be. One call per document
+over the whole extraction, with no Pass-1 depth map, no chunking and therefore
+no chunk-overlap or merge, and none of the deterministic repairs of
+\S\ref{sec:method-parsing}. The prompt body, the model, the temperature, the
+extractions and the grader are identical to the full method's, so a difference
+is attributable to the architecture rather than to prompting. Only JSON
+extraction survives, because an unparseable response cannot be graded at all.
+
+\textbf{It is not a strawman: on two states it matches.} Arizona and Nevada come
+back at recall $1.000$ with full code accuracy and no depth map, no chunking and
+no repairs. Nevada is one of the two held-out states and its printed code
+namespace skips a level, so this is not an easy case.
+
+\textbf{Where it loses, it loses in two distinct ways.} On Kentucky and Texas
+recall holds while code accuracy falls --- $44/44$ to $28/44$ and $8/8$ to
+$5/8$ --- and the failures are precisely the repairs' absence: the model
+sampling its own abbreviation rule, and codes left unanchored to their parents.
+Since a code composes the identifier, each is a different primary key for the
+same standard. On Colorado recall itself falls to $0.429$, both strands lost,
+with the level-collapse signature the depth-map ablation produces.
+
+\textbf{California is lost entirely, and that failure is architectural rather
+than statistical.} Its single call emitted exactly 16{,}000 output tokens ---
+the configured maximum --- truncating the JSON mid-object so that nothing parsed
+and \emph{none} of its 25 golden elements were recovered, against $25/25$ for
+the full method. One prompt has one output budget for an entire document, so
+exceeding it loses the document; chunking bounds the same overflow to a chunk.
+Arizona is the uncomfortable corroboration: it succeeded while emitting 14{,}292
+tokens, within 11\% of the same ceiling, so a success here does not predict the
+next document and the margin is invisible in the score.
+
+\textbf{Scope, and the weight this carries.} Every subset extraction is between
+3.7K and 7.9K tokens and fits in one prompt, so a good score here would mean the
+architecture is unnecessary \emph{at this tier}, for documents that fit. It
+would say nothing about the trimmed or full tiers, where a document does not fit
+and chunking is not optional. This arm is a single draw per state and I report
+it as such: the accuracy figures above are observations, not estimates, and I do
+not tabulate them. The California result is reported with more confidence than
+the rest because its mechanism is identified rather than inferred --- the output
+length equals the configured cap exactly. Source:
+\texttt{paper/results/task10\_20260905/}.
+
 \subsection{What the Confidence Score Measures}
 \label{sec:experiments-confidence}
 
@@ -428,10 +478,13 @@ agreeing with itself.
 % duplicate elements. Say that contrast explicitly -- it is the reason the
 % table exists.
 %
-% DO NOT claim quality at scale from this table. The runs were not graded
-% against goldens. (KY's golden IS detection-exhaustive so it COULD be graded
-% inside a full run -- that was the original motivation for choosing KY -- but
-% it was not done here and must not be implied.)
+% DO NOT claim quality at scale from THIS table -- it carries cost, latency and
+% batching evidence only, and its runs are not graded against goldens.
+% ⚠️ UPDATED 2026-09-07: quality at scale IS now measured, but in
+% \S\ref{sec:experiments-scale-quality} and from different runs. Keep the two
+% apart: this table says the batching path is exercised, that subsection says
+% what the output is worth. Neither number may be carried into the other's
+% table.
 %
 % NO COST COLUMN, DELIBERATELY. None of the five hardcoded BEDROCK_PRICING rates
 % could be verified on 2026-08-30: the AWS Price List API's AmazonBedrock
@@ -497,3 +550,88 @@ on-demand rates, recomputed at table-build time from the pipeline's own pricing
 constants rather than transcribed by hand. Neither run was throttled, no
 detection chunk returned empty, and the validator rejected no records, so these
 figures describe a clean pass rather than a degraded one.
+
+\subsection{Quality at Full-Document Scale}
+\label{sec:experiments-scale-quality}
+
+Every quality figure above is computed at the \emph{\_only\_subset} tier, and
+the obvious objection is that subset-tier quality may not survive a whole
+document: a larger run chunks further, and chunk boundaries are where a
+detector can duplicate an element or lose one. \S\ref{sec:experiments-scale}
+establishes that the batching path is genuinely exercised at the
+\emph{\_trimmed} tier but grades nothing. This subsection grades it.
+
+\paragraph{Two measurements, and why the second was necessary.} The first
+regrades the existing \emph{\_only\_subset} goldens \emph{inside} the
+trimmed-tier run, translating page numbers through the recorded page map of
+\S\ref{sec:corpus}. It needs no new annotation, and it isolates the variable
+that matters: the same pages, the same golden, a larger neighborhood. Kentucky
+and Colorado both come back with \textbf{zero elements absent} and \textbf{zero
+ungrounded detections}; every unmatched detection is verifiably present in the
+extraction.
+
+That measurement cannot speak to the rest of the document, so a second one was
+built. Both Kentucky trimmed-tier goldens are new: 277 detected elements and 207
+normalized standards, seeded from one recorded run and then checked page by page
+against the published PDF. \textbf{Three further runs were then executed and
+graded against them.} Because the goldens were verified against a document
+rather than against the run being graded, a miss is a real miss.
+
+\paragraph{Detection is complete at scale.} All \textbf{277 of 277} verified
+elements are found by all three runs. Not one is missed, and not one ungrounded
+element is emitted, across a $6.5\times$ increase in page count and four
+detection batches per run. Parser field accuracy over the same three runs is
+$0.995$ with a standard deviation of $0.002$.
+
+\paragraph{One field accounts for every anomaly.} Kentucky prints a
+\texttt{THREE AND FOUR YEAR OLDS} banner at the head of each page. At the subset
+tier the detector ignores it and every element comes back with a null age band,
+matching the golden. At the trimmed tier it does not: \textbf{164 elements carry
+the banner as their own \texttt{age\_band} in each of the three runs, with a
+standard deviation of zero} --- the same elements every time, which makes this a
+systematic misreading rather than sampling noise. Three consequences follow, and
+together they are the entire difference between the strict figures and the ones
+above:
+
+\begin{enumerate}
+  \item elements fail the evaluation's matching key on that field alone, which
+    is why strict recall reads $0.59$ while recall by level and title is
+    $1.000$;
+  \item \texttt{\_dedup\_elements} keys on \texttt{age\_band}, so the two
+    spellings of one element never merge --- \textbf{50 to 52 surplus duplicate
+    detections} survive per run, roughly 15\% of detector output;
+  \item those duplicates collide in parsing and are separated by the
+    identifier resolver's numeric fallback, so \textbf{7 to 11 fabricated
+    primary keys} per run reach persistence, naming standards that do not
+    exist.
+\end{enumerate}
+
+\textbf{Colorado is the control.} Its document has no age-band column and no
+such banner, and in the same measurement it produces \textbf{zero} duplicates
+and zero fabricated keys over 240 standards. That contrast is what makes the
+attribution a measurement rather than a hypothesis.
+
+\paragraph{Parser coverage is a range; parser field accuracy is not.} The same
+three runs give parser coverage $0.807$, $0.927$ and $0.841$ --- a spread of
+twelve points, standard deviation $0.062$ --- against field accuracy of $0.995
+\pm 0.002$. The swing tracks the dropped-standard count exactly, and the dropped
+standards are those the run assigned a narrower age band than the document
+carries. \textbf{A single coverage figure for this document would be a draw from
+that range}, and I report both numbers rather than their mean.
+
+\paragraph{Two figures that look reassuring and are not.} Identifier collisions
+are reported as zero, and are zero by construction: the resolver renames every
+collision before any check runs, so the informative count is the fabricated
+keys above. And recall here is measured \emph{against a verified reference set},
+not against the document --- an element that no run emits is absent from the
+golden too, and invisible to this measurement
+(\S\ref{sec:discussion-goldens}).
+
+\paragraph{What this establishes.} Detection quality survives full-document
+scale on the one document where it can be checked: complete recovery of a
+verified reference set, no hallucination, in three independent runs. The
+defects that scale introduces are concentrated in one field, are systematic
+rather than random, and are documented rather than repaired --- the repair
+changes a prompt and would invalidate every frozen measurement in this paper
+(\S\ref{sec:discussion-limitations}). Source:
+\texttt{paper/results/task9\_20260905/} and \texttt{task13\_20260907/}.
