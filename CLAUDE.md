@@ -224,22 +224,53 @@ headings sampled **9 of 9**, sample spans pages **1-52**, and Pass-1 reports
 `domain > strand > sub_strand > indicator` — matching the golden — **stably
 across 3 runs**.
 
-**It also fixed Nevada, and that is now measured rather than assumed
-(2026-08-26).** A three-arm A/B on one frozen NV extraction, everything else at
-`14374dba`: the new sampler gives detector code accuracy **46/46** and
-description **3/3**; reverting ONLY the sampler to the old stride version gives
-**43/46** and **2/3**, reproducing the same two domain mismatches
-(`NV-DOM-02` `S`→`Science`, `NV-DOM-03` `T`→`TECH`) that the 2026-08-16 and
--08-22 recordings both carried; disabling the depth map entirely gives 44/46
-with the same pair. So NV's long-standing domain-code failure was
-depth-map-mediated, the sampler determines whether the map is good enough to
-prevent it, and rule 4's `code is REQUIRED` prompt clarification is exonerated.
-Record: `paper/results/task2_20260826/nv_attribution_ab.json`.
+⚠️ **The Nevada half of this was WRONG, and was retired on 2026-09-05 by
+repeating the A/B at n=5 per arm.** The paragraph that stood here claimed the
+sampler *fixed* NV's two domain codes, on the strength of a three-arm A/B with
+**one draw per arm** (`paper/results/task2_20260826/nv_attribution_ab.json`,
+now marked superseded). It does not survive five draws, and it does not survive
+them in the most basic way: the failure it claimed to fix is still there in the
+arm that was supposed to fix it.
 
-⚠️ This retires the caution in "Where rule 4 looks for a code" that NV's domains
-were expected to keep coming back as `SCIE`/`TECH`. They do not, provided Pass-1
-sees a good sample. The `source_text` citation coupling described there is still
-real — it is simply no longer the binding constraint on this document.
+| | arm A (layout sampler) | arm B (old stride sampler) |
+|---|---|---|
+| code accuracy per draw | 44/46, 44/45, 44/46, 44/45, 44/46 | 43/46 ×5 |
+| mean / stdev | **0.965** / 0.0116 | **0.935** / **0.0** |
+| recall per draw | 1.000, **0.978**, 1.000, **0.978**, 1.000 | 1.000 ×5 |
+| `NV-DOM-02` fails | **3/5** | 5/5 |
+| `NV-DOM-03` fails | **5/5** | 5/5 |
+| `NV-SUB-06` fails | **0/5** | 5/5 |
+
+**`NV-DOM-03` fails in every draw of BOTH arms.** The old paragraph's `46/46`
+was a single lucky draw — the same `46/46` the paper's stability section already
+reports as the top of a distribution rather than its centre. Do not cite it.
+
+**What is actually true about the sampler on Nevada**, stated as a rate rather
+than a cause: mean code accuracy **0.965 against 0.935**, with arm A's *worst*
+draw beating arm B's every draw; it **eliminates `NV-SUB-06`** (`T.TT` → `TT`)
+outright, 0/5 against 5/5, which is its one reproducible fix on this document;
+and it roughly halves `NV-DOM-02` without fixing it.
+
+⚠️ **And it costs something the n=1 study could not see.** Arm A drops a golden
+element in **2 of 5** draws (recall 0.978); arm B holds recall 1.000 in all five
+and has **stdev 0.0** on code accuracy — effectively deterministic on this
+document. The layout-stratified sampler is better on average and **not better in
+every respect**. Do not describe it as strictly better, and if a future change
+here is judged on NV alone, judge it on five draws, not one.
+
+Record: `paper/results/task11_20260905/`.
+
+⚠️ **None of this touches the Kentucky evidence above, which is why the sampler
+exists.** KY's failure is categorically larger — a four-level document reported
+as three, `sub_strand` elements 0 in 267, 102 of 202 standards rejected — and it
+is reproduced stably across 3 runs. Nevada was always the smaller,
+two-code corroboration; it is the corroboration that failed, not the finding.
+
+⚠️ This also **restores** the caution in "Where rule 4 looks for a code" that
+NV's domains keep coming back as `SCIE`/`TECH`-shaped codes. The paragraph that
+stood here retired that caution on the strength of the same single draw. Treat
+the `source_text` citation coupling described there as live: on the n=5
+evidence, `NV-DOM-03` is wrong in every run regardless of sampler.
 
 ⚠️ **`DEPTH_MAP_SAMPLE_TOKENS` (6000) is a CLIFF, and Arizona sits on it.** AZ
 has landed on both sides across runs — 6205 tokens in the 06-13/06-14 runs
@@ -299,6 +330,8 @@ Four shape-based guards keep (3) off the goldens, and the CA/KY cases are why ea
 - ⚠️ **`Social Studies` passes for the wrong reason and must not be read as evidence the clause works.** `SS` is ungrounded in its `source_text`, was recomputed, and `derive_code_from_title("Social Studies")` happens to return `SS`. The recovery clause did not fire; the abbreviation collided with the right answer. A future change to `derive_code_from_title` or the connector list would silently turn this pass into a failure.
 
 Blast radius is bounded and worth knowing before prioritizing: NV indicator codes are the document's own (`SS.ID.PK1`), so **no NV `standard_id` is affected**. The cost is `domain.code` plus the 4 `strand.code` cells it propagates into (`TECH.1`/`TECH.2` where the golden has `T.1`/`T.2`).
+
+⚠️ **Still live as of 2026-09-05, and the note that said otherwise is withdrawn.** Between 2026-08-26 and 2026-09-05 the "Where Pass-1 loses a LEVEL" section carried a line retiring this caution — it claimed the layout-stratified sampler fixed NV's domain codes, on the strength of a single draw per arm. Repeating that A/B at **n=5 per arm** refutes it: `NV-DOM-03` fails in **5 of 5 draws of BOTH arms** and `NV-DOM-02` in 3 of 5 of the new-sampler arm (`paper/results/task11_20260905/`). So the diagnosis in the three bullets above is the current one, the `source_text` citation coupling is the binding constraint, and a fix has to come from the citation rather than from Pass-1. Do not retire this caution again on fewer than five draws per arm.
 
 The parser prompt got the matching half, since the detector now hands it dotted codes at sub_strand level: an **already-qualified** code (a dotted path whose first segment is its own domain's code) is used as-is at every level and never re-prefixed (`AB.CD`, not `AB.2.AB.CD`), and peeling parents off a qualified code **stops where the namespace stops** — if the next peel would equal the parent's own code, that level is outside the namespace and takes its heading's identifier instead (`AB.2`). One consequence is deliberate and documented in `ground_truth_parser/NV.json`: the sub_strand's code does not extend the strand's, because the printed identifier outranks chain continuity.
 
@@ -481,6 +514,96 @@ description that starts mid-sentence.
 premise — "the chunk that saw the element whole captured more of its prose" —
 holds for a plain repeat but not for a head/tail split, which is why the splice
 runs first.
+
+### Where `age_band` destabilizes at scale (2026-09-06) — OPEN DEFECT, deliberately unfixed
+
+⚠️ **This is a known, measured, currently-unfixed defect.** It is documented
+here rather than repaired because the fix moves `code_version_hash` and would
+invalidate every frozen measurement in the arXiv paper. Read this before
+editing `_dedup_elements`, `_merge_duplicate`, or anything that keys on
+`age_band` — the surviving duplicates it produces are NOT a merge bug.
+
+Kentucky's document carries a `THREE AND FOUR YEAR OLDS` **page banner**. At the
+`_only_subset` tier the detector ignores it: all 44 elements come back
+`age_band: null`, matching the golden. At the `_trimmed` tier (52 pages, 18
+chunks, 4 detection batches) it does not — **152 of 329 elements** carry the
+banner value, and it is not even a per-page decision: **5 of the 7 content pages
+in the graded window emit BOTH spellings** (p4 is 5 banded / 4 null, p22 is
+5 / 8, p15 is 1 / 7).
+
+**The whole failure chain follows from that one field**, and every link is
+measured (`paper/results/task9_20260905/`):
+
+| # | symptom | 8-page window | **whole document, n=4 runs** |
+|---|---|---|---|
+| 1 | elements carrying the spurious band | 31 of 55 | **152–164 of ~328 (46–50%)** |
+| 2 | **duplicates surviving `_dedup_elements`** | 11 | **50–52** (4 strand, 9 sub_strand, 39 indicator) |
+| 3 | parser standards dropped by `eval_parser._match_key` | 7 of 26 | **15–40 of 207** |
+| 4 | **fabricated `.N` primary keys reaching persistence** | 7 | **7–11** |
+
+⚠️ **The window under-stated the duplication roughly FIVEFOLD.** Task 9 measured
+11 surviving duplicates inside Kentucky's 8 annotated pages; document-wide it is
+50–52, about **15% of detector output**, reproducible to ±1 across four runs
+(`paper/results/task13_20260907/`). Do not size this defect from a page window
+again.
+
+⚠️ **It is systematic, not sampling variance.** Three independent runs on
+2026-09-07 emitted the spurious band on **exactly 164 elements each, stdev
+0.0** — the same elements every time. A prompt rule would therefore have a
+deterministic effect here rather than a rate reduction, which is unusual for
+this codebase and worth knowing before the fix is attempted.
+
+⚠️ **It makes parser coverage a range, not a number.** Those same three runs
+give parser coverage 0.807 / 0.927 / 0.841 (stdev 0.062) against a fixed
+golden, while field accuracy stays 0.995 (stdev 0.002). The entire swing is
+this defect.
+
+(2) is the one that matters for future work. The element is emitted twice, once
+banded and once null; **`_dedup_elements` does not merge them because its key
+includes `age_band`**, so both survive. The parser then applies the document's
+single `default_age_band`, at which point the two rows are identical, collide,
+and `disambiguate_colliding_standards` breaks the tie with its numeric last
+resort — producing `US-KY-2021-AL.2.1.FNWUF.2` beside
+`US-KY-2021-AL.2.1.FNWUF`, same page, same parents, same name. **`.2` names a
+standard that does not exist.**
+
+⚠️ **`grade_parser.id_collisions` cannot see this**, because it runs *after* the
+resolver. KY's trimmed run reports 214 standards and 214 distinct
+`standard_id`s — true, and misleading: uniqueness there is achieved by
+**renaming** a collision, not by the absence of one. Check for rows sharing
+parents and indicator name instead. The same trap caught the scale grade's own
+duplicate audit, which was first keyed on `_match_key` and therefore reported
+zero; **a duplicate check must be keyed more loosely than the merge it audits.**
+
+**Colorado is the control.** Same build, same measurement, 4 detection batches,
+240 standards — and **0 duplicates, 0 fabricated keys**. CO's document has no
+age-band column and no banner. That is what makes the attribution to `age_band` a
+measurement rather than a hypothesis.
+
+**Verdict (2026-09-06): the RUN is wrong, not the goldens.** Three reasons, and
+they are the rule to apply if this is ever revisited:
+
+1. KY's own golden `expected_depth_map` already calls the banner page furniture
+   — depth 1 is a domain name in the page header *above* it.
+2. The band already has a document-level home one stage later:
+   `ground_truth_parser/KY.json` sets `default_age_band: 36-60` and
+   `parse_hierarchy` applies it. The detector stamping the banner onto elements
+   is a second, competing mechanism for the same fact.
+3. **All six goldens draw one line: a detector `age_band` comes from a
+   side-by-side COLUMN that distinguishes siblings** — CA `Early`/`Later`, TX
+   `PK3`/`PK4` — and is `null` everywhere else (KY, CO, NV, AZ). A banner that
+   applies to every element on a page carries no distinguishing information and
+   is not an element property.
+
+**The fix, when the hash can move.** A rule-8 prompt clause stating (3) directly:
+`age_band` records what distinguishes an element from its siblings, so a
+side-by-side column supplies it and a page banner or running header never does.
+That is one general document-structure principle, not a per-state rule, so it
+belongs in the prompt — and per this file's standing pairing argument it will
+lower the rate without reaching zero, which means `_dedup_elements` should ALSO
+stop keying on a field that is this unstable. Do not do one without the other.
+⚠️ A/B it against **CA and TX**, whose real age-band columns it must not
+suppress; those two states are the whole risk of this change.
 
 ### Where the composed code double-counts or loses a parent (2026-08-25) — three repairs in `parser.py`
 
@@ -764,6 +887,18 @@ which is why it remains a last resort and is logged as one. The
 underlying cause is rule 4's 5-char cap, not the resolver — and per the
 2026-08-01 measurements, changing the cap or the connector list rewrites golden
 codes for no net gain, so this is a known limitation rather than an open bug.
+
+⚠️ **The 5-char cap is not the only thing that reaches this fallback, and at
+scale it is not even the main one.** The KY `_trimmed` run of 2026-08-29 fires
+the numeric fallback **7 times**, and none of the seven is a cap collision: each
+is one element the detector emitted twice, once age-banded and once null, that
+`_dedup_elements` could not merge — see "Where `age_band` destabilizes at scale"
+above. So a `.N` suffix in production is more likely to mean *an upstream
+duplicate survived the merge* than *two distinct standards abbreviated
+identically*. Check for a same-page sibling with the same parents and indicator
+name before reaching for the cap explanation, and do not read the resolver's
+output as a resolver defect: it did its job on input that should never have
+contained two rows.
 
 **The NV `SS.CI.PK3` duplicate is a DETECTOR defect, not a collision
 (2026-08-15).** The detector emits 25 NV indicators where the document has 24

@@ -105,7 +105,8 @@ looks like in it --- and a second classifies every element against that map as
 authority; a decoupled parsing stage then resolves the flat result into one
 canonical schema with deterministic, collision-free identifiers, and a
 serverless batching architecture applies it to whole documents. The system
-contains no per-state rule.
+contains no per-state code path; the prompts carry worked examples drawn
+from the corpus, itemized in \S\ref{sec:method-discipline}.
 
 Evaluated on four development states and two held out entirely, detector recall
 is 1.000 at every hierarchy level in all six, and a manual audit of all 297
@@ -115,9 +116,14 @@ and sub-strand to 0.833 --- degrading exactly the levels whose identity is
 positional --- and a rule-based extractor matches the method at a document's top
 division while collapsing beneath it. Repeated runs show the pipeline is not
 deterministic: instability is concentrated in three known places, and one
-previously recorded result of my own failed to reproduce, which I report along
-with what it implies for single-run evidence. All quality figures are computed
-on an annotated subset tier, stated as such throughout.
+previously recorded result of my own failed to reproduce, which I report as a
+non-reproduction rather than quietly replace. That reporting discipline is
+deliberate and is offered as a contribution in its own right: every table names
+the corpus tier it was computed at, every unmatched detection is audited by hand
+and signed, every number is regenerated from a recorded artifact, and each
+validation guard is shown catching a live defect rather than asserted to work.
+All quality figures are computed on an annotated subset tier, stated as such
+throughout.
 \end{abstract}
 
 % ---------------------------------------------------------------------

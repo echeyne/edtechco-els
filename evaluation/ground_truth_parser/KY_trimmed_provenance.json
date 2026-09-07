@@ -1,0 +1,1145 @@
+{
+  "_what_this_is": "Annotation provenance for KY_trimmed.json. Not a golden and never graded: these are the working keys the annotation was built with, kept because they record HOW the golden was produced, which the golden itself no longer shows.",
+  "golden": "evaluation/ground_truth_parser/KY_trimmed.json",
+  "generated_from": "outputs/scale-08-29-26/ (pipeline-US-KY-2021-full08292026, _trimmed tier)",
+  "⚠️_derivation_and_its_limit": "Every row was seeded from the pipeline's own output and then checked against kentucky_all_standards_2021_trimmed.pdf by the annotator. That supports a PRECISION claim — every emitted element was inspected — and it does NOT support a RECALL claim, because verifying emitted rows cannot find omissions. An element the detector never emitted is absent here too, invisibly. Independent structural evidence bounds that gap at the middle levels: all 17 printed 'Benchmark N.N:' ids and all 15 '<Domain> Standard N:' headings in the document appear in the detector golden. The 202 indicators carry no equivalent check.",
+  "page_numbering": "⚠️ THREE PAGE NUMBERINGS APPEAR BELOW AND THEY ARE NOT THE SAME NUMBER. `source_page` is the page in the _trimmed PDF the pipeline actually processed (1-52). `_published_pdf_page` is that page's index in the 120-page published PDF. `_printed_page_number` is what is PRINTED at the bottom of the page, which is what you see when annotating from the document — it runs 13 behind the PDF index because the front matter is unnumbered. Trimmed p2 = PDF p52 = printed p39. An earlier version of this file carried only `_published_page`, which read as the printed number and was the PDF index; that field is renamed and the printed number added.",
+  "retired_top_level_notes": {},
+  "rows": [
+    {
+      "test_case_id": "KY-TRIM-STD-001",
+      "_subset_test_case_id": "KY-STD-01",
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-002",
+      "_subset_test_case_id": "KY-STD-02",
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-003",
+      "_subset_test_case_id": "KY-STD-03",
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-004",
+      "_subset_test_case_id": "KY-STD-04",
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-005",
+      "_subset_test_case_id": "KY-STD-05",
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-006",
+      "_subset_test_case_id": "KY-STD-06",
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-007",
+      "_subset_test_case_id": "KY-STD-07",
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-008",
+      "_subset_test_case_id": "KY-STD-08",
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-009",
+      "_subset_test_case_id": "KY-STD-09",
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-010",
+      "_subset_test_case_id": "KY-STD-10",
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-011",
+      "_subset_test_case_id": "KY-STD-11",
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-015",
+      "_subset_test_case_id": "KY-STD-12",
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-016",
+      "_subset_test_case_id": "KY-STD-13",
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-017",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-018",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-019",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-020",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-021",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-022",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-023",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-024",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-025",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-026",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-027",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-028",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-029",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-030",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-031",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-032",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-033",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-034",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-036",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-037",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-038",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-039",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-040",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-041",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-042",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-043",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-044",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-045",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-046",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-047",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-048",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-049",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-052",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-053",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-054",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-055",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-056",
+      "_subset_test_case_id": "KY-STD-14",
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-057",
+      "_subset_test_case_id": "KY-STD-15",
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-058",
+      "_subset_test_case_id": "KY-STD-16",
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-059",
+      "_subset_test_case_id": "KY-STD-17",
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-060",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-061",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-062",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-063",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-064",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-065",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-066",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-067",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-068",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-069",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-070",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-071",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-072",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-073",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-074",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-075",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-076",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 70,
+      "_printed_page_number": 57
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-077",
+      "_subset_test_case_id": "KY-STD-18",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-078",
+      "_subset_test_case_id": "KY-STD-19",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-079",
+      "_subset_test_case_id": "KY-STD-20",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-080",
+      "_subset_test_case_id": "KY-STD-21",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-081",
+      "_subset_test_case_id": "KY-STD-22",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-082",
+      "_subset_test_case_id": "KY-STD-23",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-083",
+      "_subset_test_case_id": "KY-STD-24",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-084",
+      "_subset_test_case_id": "KY-STD-25",
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-085",
+      "_status": "DRAFT — subset golden disagrees: indicator",
+      "_subset_test_case_id": "KY-STD-26",
+      "_subset_golden_values": {
+        "indicator": {
+          "code": "LEL.2.2.UWSPS",
+          "name": "Uses words, signs, pictures, and/or symbols to communicate.",
+          "description": "Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside."
+        }
+      },
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-086",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-087",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-088",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-089",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-090",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-091",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-092",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-093",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-094",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-095",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-096",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-097",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-098",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-099",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-100",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-101",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-102",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-103",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-104",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-105",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-106",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-107",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-108",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-109",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-110",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-111",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-112",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-113",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-114",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-115",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-116",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-117",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-118",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-119",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-120",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-121",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-122",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-123",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-124",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-125",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-126",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-127",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-128",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-129",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-130",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-131",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-132",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-133",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-134",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-135",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-136",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-137",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-138",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-139",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-140",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-141",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-142",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-143",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-144",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-145",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-146",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-147",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-148",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-149",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-150",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-151",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-152",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-153",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-154",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-155",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-156",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-157",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-158",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-159",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-160",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-161",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-162",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-163",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-164",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-165",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-166",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-167",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-168",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-169",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-170",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-171",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-172",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-173",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-174",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-175",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-176",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-177",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-178",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-179",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-180",
+      "_published_pdf_page": 93,
+      "_printed_page_number": 80
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-181",
+      "_published_pdf_page": 93,
+      "_printed_page_number": 80
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-182",
+      "_published_pdf_page": 93,
+      "_printed_page_number": 80
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-183",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 94,
+      "_printed_page_number": 81
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-184",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-185",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-186",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-187",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-188",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-189",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-190",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-191",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-192",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-193",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-194",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-195",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-196",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-197",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-198",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-199",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-200",
+      "_age_band_flag": "The run emitted '36-48' here; normalized to the document's '36-60' band. This normalization is CORRECT per the age_band verdict of 2026-09-06 (RUN): the run over-attributes and the documented single band is right. Informational — no action needed.",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-201",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-202",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-203",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-204",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-205",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-206",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-207",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-208",
+      "_published_pdf_page": 100,
+      "_printed_page_number": 87
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-209",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-211",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-212",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-213",
+      "_published_pdf_page": 102,
+      "_printed_page_number": 89
+    },
+    {
+      "test_case_id": "KY-TRIM-STD-214",
+      "_published_pdf_page": 102,
+      "_printed_page_number": 89
+    }
+  ]
+}

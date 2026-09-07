@@ -61,8 +61,14 @@ coverage: one to two domains per state, 8--15 pages each and 70 in total,
 chosen to be cheap to iterate on and to annotate exhaustively. \textbf{Every
 quality number in this paper is computed at this tier.} Both cuts were made by
 hand, which is favorable preprocessing; Table~\ref{tab:corpus-pages} lists the
-retained pages in each published document's own numbering so that either tier
-can be reconstructed from the issuing agency's copy.
+retained pages so that either tier can be reconstructed from the issuing
+agency's copy. It gives two numberings, because they are not the same number: a
+page's index in the PDF file, and the page number printed on the page, which
+differ by each document's unnumbered front matter. Kentucky's PDF page 52 is
+printed page 39, and its subset also contains PDF page 65, whose printed number
+is 52 --- so ``page 52'' is ambiguous on that document alone. Printed numbers
+are recovered automatically and are reported only for the two documents where
+that recovery is reliable across the whole tier.
 
 Two sources need naming precisely. California's document is the state's
 Preschool/Transitional Kindergarten Learning Foundations ``at a glance''

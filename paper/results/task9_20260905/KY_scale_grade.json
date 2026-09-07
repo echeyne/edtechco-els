@@ -1,0 +1,1909 @@
+{
+  "state": "KY",
+  "source_tier": "only_subset",
+  "target_tier": "trimmed",
+  "detection_file": "outputs/scale-08-29-26/KY-detection.json",
+  "golden_file": "evaluation/ground_truth_detector/KY.json",
+  "golden_is_detection_exhaustive": true,
+  "page_window": {
+    "source_tier_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "target_tier_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      15,
+      21,
+      22
+    ],
+    "mapping_source_to_target": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 15,
+      "7": 21,
+      "8": 22
+    },
+    "unmappable_source_pages": [],
+    "golden_pages_outside_the_map": []
+  },
+  "run_totals": {
+    "elements_in_whole_run": 329,
+    "pages_in_run": 50
+  },
+  "arms": {
+    "page_tolerance_0": {
+      "state": "KY",
+      "precision": 0.43636363636363634,
+      "recall": 0.5454545454545454,
+      "f1": 0.48484848484848486,
+      "code_accuracy": 1.0,
+      "code_matches": 24,
+      "code_total": 24,
+      "code_mismatches": [],
+      "description_accuracy": 0.9333333333333333,
+      "description_matches": 14,
+      "description_total": 15,
+      "description_truncations": 0,
+      "description_mismatches": [
+        {
+          "test_case_id": "KY-IND-26",
+          "level": "indicator",
+          "status": "mismatch",
+          "detail": "mismatch (431 vs 166 golden chars, diverges at char 166): golden '…' != detected '… When broccoli is put on his plate, Peter signs, \"I don\\'t li…'"
+        }
+      ],
+      "matched": 24,
+      "n_golden": 44,
+      "n_detected": 55,
+      "per_level": {
+        "domain": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 3
+        },
+        "strand": {
+          "tp": 3,
+          "fp": 4,
+          "fn": 2
+        },
+        "sub_strand": {
+          "tp": 6,
+          "fp": 6,
+          "fn": 4
+        },
+        "indicator": {
+          "tp": 15,
+          "fp": 18,
+          "fn": 11
+        }
+      },
+      "confusion": {
+        "strand": {
+          "strand": 3
+        },
+        "sub_strand": {
+          "sub_strand": 6
+        },
+        "indicator": {
+          "indicator": 15
+        }
+      },
+      "missing_test_cases": [
+        "KY-DOM-01",
+        "KY-STR-01",
+        "KY-SUB-01",
+        "KY-IND-01",
+        "KY-IND-02",
+        "KY-IND-03",
+        "KY-SUB-02",
+        "KY-IND-04",
+        "KY-IND-05",
+        "KY-IND-06",
+        "KY-SUB-03",
+        "KY-IND-07",
+        "KY-IND-08",
+        "KY-DOM-02",
+        "KY-DOM-03",
+        "KY-STR-04",
+        "KY-SUB-08",
+        "KY-IND-18",
+        "KY-IND-19",
+        "KY-IND-20"
+      ],
+      "extra_elements": [
+        [
+          "domain",
+          "AL"
+        ],
+        [
+          "strand",
+          "Approaches to Learning Standard 1"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.1"
+        ],
+        [
+          "indicator",
+          "EASPT"
+        ],
+        [
+          "indicator",
+          "MFAAD"
+        ],
+        [
+          "indicator",
+          "SADGA"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.2"
+        ],
+        [
+          "indicator",
+          "PSAUC"
+        ],
+        [
+          "indicator",
+          "CWSAD"
+        ],
+        [
+          "indicator",
+          "PATSN"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.3"
+        ],
+        [
+          "indicator",
+          "PSDSP"
+        ],
+        [
+          "indicator",
+          "DPTET"
+        ],
+        [
+          "strand",
+          "Approaches to Learning Standard 2"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 2.1"
+        ],
+        [
+          "indicator",
+          "FNWUF"
+        ],
+        [
+          "indicator",
+          "INMUC"
+        ],
+        [
+          "indicator",
+          "ECOMN"
+        ],
+        [
+          "domain",
+          "HMW"
+        ],
+        [
+          "domain",
+          "LEL"
+        ],
+        [
+          "strand",
+          "Language and Early Literacy Standard 1"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.1"
+        ],
+        [
+          "indicator",
+          "AAPWI"
+        ],
+        [
+          "indicator",
+          "FSD"
+        ],
+        [
+          "indicator",
+          "GILPC"
+        ],
+        [
+          "indicator",
+          "IAISE"
+        ],
+        [
+          "strand",
+          "Language and Early Literacy Standard 2"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 2.1"
+        ],
+        [
+          "indicator",
+          "UNCCE"
+        ],
+        [
+          "indicator",
+          "ICOPP"
+        ],
+        [
+          "indicator",
+          "UGMII"
+        ]
+      ],
+      "ignored_out_of_scope": 0,
+      "age_band_drops": [],
+      "depth_map_passed": null,
+      "depth_map_detail": "",
+      "regressions": [],
+      "stability_runs": 0,
+      "stability_disagreement_rate": null,
+      "stability_detail": null,
+      "stability_size_stdev": null,
+      "in_scope_elements_at_scale": 55,
+      "duplicates": {
+        "duplicate_groups": 11,
+        "surplus_detections": 11,
+        "by_level": {
+          "strand": 2,
+          "sub_strand": 2,
+          "indicator": 7
+        },
+        "examples": [
+          {
+            "level": "strand",
+            "title": "Approaches learning with flexibility, creativity, and imagination.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "Approaches to Learning Standard 2",
+              "Approaches to Learning Standard 2"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "sub_strand",
+            "title": "Uses creative approaches for learning.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "Benchmark 2.1",
+              "Benchmark 2.1"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Finds new ways to use familiar objects and materials.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "FNWUF",
+              "FNWUF"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Identifies new materials to use in completing a task.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "INMUC",
+              "INMUC"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Experiments with combining objects and materials in new and imaginative ways.",
+            "n": 2,
+            "pages": [
+              5,
+              5
+            ],
+            "codes": [
+              "ECOMN",
+              "ECOMN"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Interprets or applies information someone else communicates verbally or nonverba",
+            "n": 2,
+            "pages": [
+              21,
+              21
+            ],
+            "codes": [
+              "IAISE",
+              "IAISE"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "strand",
+            "title": "Demonstrates the knowledge, skills and strategies needed for expressive communic",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "Language and Early Literacy Standard 2",
+              "Language and Early Literacy Standard 2"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "sub_strand",
+            "title": "Uses non-verbal communication for a variety of purposes.",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "Benchmark 2.1",
+              "Benchmark 2.1"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Uses non-verbal communication to convey emotions.",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "UNCCE",
+              "UNCCE"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Identifies or chooses an object or person by pointing, physically touching, or m",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "ICOPP",
+              "ICOPP"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Uses gestures and/or movements to initiate interactions or to get needs met.",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "UGMII",
+              "UGMII"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          }
+        ],
+        "_key": "(level, title) — a duplicate is one element emitted twice",
+        "strict_key_for_comparison": {
+          "duplicate_groups": 0,
+          "surplus_detections": 0,
+          "by_level": {},
+          "examples": [],
+          "_key": "(domain, level, title, age_band) — the grader's own key"
+        },
+        "hidden_by_age_band": 11,
+        "_reading": "`surplus_detections` is the number of extra copies surviving the merge. `hidden_by_age_band` is how many of them the grader's own key cannot see, because the copies disagree on age_band -- which is also why _dedup_elements did not merge them."
+      },
+      "recall_decomposition": {
+        "found_by_level_and_title": 44,
+        "n_golden": 44,
+        "recall_ignoring_age_band": 1.0,
+        "recall_ignoring_age_band_and_title_composition": 1.0,
+        "absent_from_window": [],
+        "age_band_attribution_drift": [
+          {
+            "test_case_id": "KY-DOM-01",
+            "level": "domain",
+            "title": "Approaches to Learning",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-STR-01",
+            "level": "strand",
+            "title": "Sustains attention and persists with challenging activities ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-01",
+            "level": "sub_strand",
+            "title": "Maintains focus and sustains attention.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-01",
+            "level": "indicator",
+            "title": "Engages in an activity for a sustained period of time.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-02",
+            "level": "indicator",
+            "title": "Maintains focus and attention on activities despite distract",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-03",
+            "level": "indicator",
+            "title": "Sustains attention during group activities that last a short",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-02",
+            "level": "sub_strand",
+            "title": "Persists at challenging tasks.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-04",
+            "level": "indicator",
+            "title": "Persists with self-selected activities until completed.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-05",
+            "level": "indicator",
+            "title": "Continues working on self-selected activities despite setbac",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-06",
+            "level": "indicator",
+            "title": "Persists with adult-directed tasks with support as needed.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-03",
+            "level": "sub_strand",
+            "title": "Makes a plan and engages in the planned activity or project ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-07",
+            "level": "indicator",
+            "title": "With prompting and support, develops a simple plan and works",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-08",
+            "level": "indicator",
+            "title": "Develops plans that extend over time and follows through to ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              4
+            ]
+          },
+          {
+            "test_case_id": "KY-DOM-02",
+            "level": "domain",
+            "title": "Health/Mental Wellness",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              15
+            ]
+          },
+          {
+            "test_case_id": "KY-DOM-03",
+            "level": "domain",
+            "title": "Language and Early Literacy",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-STR-04",
+            "level": "strand",
+            "title": "Demonstrates skills and strategies needed for receptive comm",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-08",
+            "level": "sub_strand",
+            "title": "Attends and responds to nonverbal and verbal communication o",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-18",
+            "level": "indicator",
+            "title": "Attends to an adult or peer who is communicating verbally or",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-19",
+            "level": "indicator",
+            "title": "Follows simple directions.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-20",
+            "level": "indicator",
+            "title": "Gains information by listening to/processing communications ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          }
+        ],
+        "title_composition_drift": [],
+        "_reading": "`absent_from_window` is detection loss at scale -- the failure the scale objection is about. `age_band_attribution_drift` is an element that WAS found, carrying a different age_band than the golden annotates; it fails the strict key but is not a lost element, and the fix is an annotation or canonicalization question, not a detection one. `title_composition_drift` is an element found at the right level whose `title` swallowed trailing text -- also found, also not lost."
+      },
+      "unmatched_adjudication": {
+        "n_in_window": 55,
+        "n_accounted_for_by_golden": 44,
+        "precision_ignoring_age_band": 0.8,
+        "n_grounded_unannotated": 11,
+        "n_ungrounded": 0,
+        "n_unadjudicated": 0,
+        "hallucination_candidates": [],
+        "annotation_worklist": [
+          {
+            "level": "strand",
+            "code": "Approaches to Learning Standard 2",
+            "title": "Approaches learning with flexibility, creativity, and imagination.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "sub_strand",
+            "code": "Benchmark 2.1",
+            "title": "Uses creative approaches for learning.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "FNWUF",
+            "title": "Finds new ways to use familiar objects and materials.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "INMUC",
+            "title": "Identifies new materials to use in completing a task.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "ECOMN",
+            "title": "Experiments with combining objects and materials in new and imaginative ways.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "IAISE",
+            "title": "Interprets or applies information someone else communicates verbally or nonverbally.",
+            "target_tier_page": 21,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "Language and Early Literacy Standard 2",
+            "title": "Demonstrates the knowledge, skills and strategies needed for expressive communication.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "sub_strand",
+            "code": "Benchmark 2.1",
+            "title": "Uses non-verbal communication for a variety of purposes.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "UNCCE",
+            "title": "Uses non-verbal communication to convey emotions.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "ICOPP",
+            "title": "Identifies or chooses an object or person by pointing, physically touching, or moving toward another.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "UGMII",
+            "title": "Uses gestures and/or movements to initiate interactions or to get needs met.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          }
+        ],
+        "unadjudicated": [],
+        "_reading": "`hallucination_candidates` is the only bucket that can contain a false positive in the quality sense. `annotation_worklist` is real page content the golden does not cover; it BOUNDS how far that golden is from page-exhaustive, and a precision figure must not be published from a state where it is non-empty. It is a diagnostic, not a work queue: a golden is extended by annotating the document, never by accepting rows this system emitted."
+      },
+      "age_band_consistency": {
+        "distinct_values_in_window": {
+          "three and four year olds": 31,
+          "null": 24
+        },
+        "pages_emitting_more_than_one_value": {
+          "4": {
+            "three and four year olds": 5,
+            "null": 4
+          },
+          "5": {
+            "three and four year olds": 1,
+            "null": 4
+          },
+          "15": {
+            "three and four year olds": 1,
+            "null": 7
+          },
+          "21": {
+            "three and four year olds": 7,
+            "null": 1
+          },
+          "22": {
+            "three and four year olds": 5,
+            "null": 8
+          }
+        },
+        "n_pages_split": 5
+      }
+    },
+    "page_tolerance_1": {
+      "state": "KY",
+      "precision": 0.3380281690140845,
+      "recall": 0.5454545454545454,
+      "f1": 0.41739130434782606,
+      "code_accuracy": 1.0,
+      "code_matches": 24,
+      "code_total": 24,
+      "code_mismatches": [],
+      "description_accuracy": 0.9333333333333333,
+      "description_matches": 14,
+      "description_total": 15,
+      "description_truncations": 0,
+      "description_mismatches": [
+        {
+          "test_case_id": "KY-IND-26",
+          "level": "indicator",
+          "status": "mismatch",
+          "detail": "mismatch (431 vs 166 golden chars, diverges at char 166): golden '…' != detected '… When broccoli is put on his plate, Peter signs, \"I don\\'t li…'"
+        }
+      ],
+      "matched": 24,
+      "n_golden": 44,
+      "n_detected": 71,
+      "per_level": {
+        "domain": {
+          "tp": 0,
+          "fp": 3,
+          "fn": 3
+        },
+        "strand": {
+          "tp": 3,
+          "fp": 5,
+          "fn": 2
+        },
+        "sub_strand": {
+          "tp": 6,
+          "fp": 8,
+          "fn": 4
+        },
+        "indicator": {
+          "tp": 15,
+          "fp": 31,
+          "fn": 11
+        }
+      },
+      "confusion": {
+        "strand": {
+          "strand": 3
+        },
+        "sub_strand": {
+          "sub_strand": 6
+        },
+        "indicator": {
+          "indicator": 15
+        }
+      },
+      "missing_test_cases": [
+        "KY-DOM-01",
+        "KY-STR-01",
+        "KY-SUB-01",
+        "KY-IND-01",
+        "KY-IND-02",
+        "KY-IND-03",
+        "KY-SUB-02",
+        "KY-IND-04",
+        "KY-IND-05",
+        "KY-IND-06",
+        "KY-SUB-03",
+        "KY-IND-07",
+        "KY-IND-08",
+        "KY-DOM-02",
+        "KY-DOM-03",
+        "KY-STR-04",
+        "KY-SUB-08",
+        "KY-IND-18",
+        "KY-IND-19",
+        "KY-IND-20"
+      ],
+      "extra_elements": [
+        [
+          "domain",
+          "AL"
+        ],
+        [
+          "strand",
+          "Approaches to Learning Standard 1"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.1"
+        ],
+        [
+          "indicator",
+          "EASPT"
+        ],
+        [
+          "indicator",
+          "MFAAD"
+        ],
+        [
+          "indicator",
+          "SADGA"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.2"
+        ],
+        [
+          "indicator",
+          "PSAUC"
+        ],
+        [
+          "indicator",
+          "CWSAD"
+        ],
+        [
+          "indicator",
+          "PATSN"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.3"
+        ],
+        [
+          "indicator",
+          "PSDSP"
+        ],
+        [
+          "indicator",
+          "DPTET"
+        ],
+        [
+          "strand",
+          "Approaches to Learning Standard 2"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 2.1"
+        ],
+        [
+          "indicator",
+          "FNWUF"
+        ],
+        [
+          "indicator",
+          "INMUC"
+        ],
+        [
+          "indicator",
+          "ECOMN"
+        ],
+        [
+          "indicator",
+          "UVPIC"
+        ],
+        [
+          "indicator",
+          "EESPT"
+        ],
+        [
+          "strand",
+          "Approaches to Learning Standard 3"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 3.1"
+        ],
+        [
+          "indicator",
+          "ITIIL"
+        ],
+        [
+          "indicator",
+          "UVSDA"
+        ],
+        [
+          "domain",
+          "HMW"
+        ],
+        [
+          "indicator",
+          "MMFLO"
+        ],
+        [
+          "indicator",
+          "PSGAT"
+        ],
+        [
+          "indicator",
+          "CEAM"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.3"
+        ],
+        [
+          "indicator",
+          "FRISW"
+        ],
+        [
+          "indicator",
+          "SSTGM"
+        ],
+        [
+          "domain",
+          "LEL"
+        ],
+        [
+          "strand",
+          "Language and Early Literacy Standard 1"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 1.1"
+        ],
+        [
+          "indicator",
+          "AAPWI"
+        ],
+        [
+          "indicator",
+          "FSD"
+        ],
+        [
+          "indicator",
+          "GILPC"
+        ],
+        [
+          "indicator",
+          "IAISE"
+        ],
+        [
+          "strand",
+          "Language and Early Literacy Standard 2"
+        ],
+        [
+          "sub_strand",
+          "Benchmark 2.1"
+        ],
+        [
+          "indicator",
+          "UNCCE"
+        ],
+        [
+          "indicator",
+          "ICOPP"
+        ],
+        [
+          "indicator",
+          "UGMII"
+        ],
+        [
+          "indicator",
+          "UDTWC"
+        ],
+        [
+          "indicator",
+          "RACDP"
+        ],
+        [
+          "indicator",
+          "AMTQ"
+        ],
+        [
+          "indicator",
+          "APIPV"
+        ]
+      ],
+      "ignored_out_of_scope": 0,
+      "age_band_drops": [],
+      "depth_map_passed": null,
+      "depth_map_detail": "",
+      "regressions": [],
+      "stability_runs": 0,
+      "stability_disagreement_rate": null,
+      "stability_detail": null,
+      "stability_size_stdev": null,
+      "in_scope_elements_at_scale": 71,
+      "duplicates": {
+        "duplicate_groups": 11,
+        "surplus_detections": 11,
+        "by_level": {
+          "strand": 2,
+          "sub_strand": 2,
+          "indicator": 7
+        },
+        "examples": [
+          {
+            "level": "strand",
+            "title": "Approaches learning with flexibility, creativity, and imagination.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "Approaches to Learning Standard 2",
+              "Approaches to Learning Standard 2"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "sub_strand",
+            "title": "Uses creative approaches for learning.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "Benchmark 2.1",
+              "Benchmark 2.1"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Finds new ways to use familiar objects and materials.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "FNWUF",
+              "FNWUF"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Identifies new materials to use in completing a task.",
+            "n": 2,
+            "pages": [
+              4,
+              4
+            ],
+            "codes": [
+              "INMUC",
+              "INMUC"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Experiments with combining objects and materials in new and imaginative ways.",
+            "n": 2,
+            "pages": [
+              5,
+              5
+            ],
+            "codes": [
+              "ECOMN",
+              "ECOMN"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Interprets or applies information someone else communicates verbally or nonverba",
+            "n": 2,
+            "pages": [
+              21,
+              21
+            ],
+            "codes": [
+              "IAISE",
+              "IAISE"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "strand",
+            "title": "Demonstrates the knowledge, skills and strategies needed for expressive communic",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "Language and Early Literacy Standard 2",
+              "Language and Early Literacy Standard 2"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "sub_strand",
+            "title": "Uses non-verbal communication for a variety of purposes.",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "Benchmark 2.1",
+              "Benchmark 2.1"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Uses non-verbal communication to convey emotions.",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "UNCCE",
+              "UNCCE"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Identifies or chooses an object or person by pointing, physically touching, or m",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "ICOPP",
+              "ICOPP"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          },
+          {
+            "level": "indicator",
+            "title": "Uses gestures and/or movements to initiate interactions or to get needs met.",
+            "n": 2,
+            "pages": [
+              22,
+              22
+            ],
+            "codes": [
+              "UGMII",
+              "UGMII"
+            ],
+            "age_bands": [
+              "THREE AND FOUR YEAR OLDS",
+              null
+            ]
+          }
+        ],
+        "_key": "(level, title) — a duplicate is one element emitted twice",
+        "strict_key_for_comparison": {
+          "duplicate_groups": 0,
+          "surplus_detections": 0,
+          "by_level": {},
+          "examples": [],
+          "_key": "(domain, level, title, age_band) — the grader's own key"
+        },
+        "hidden_by_age_band": 11,
+        "_reading": "`surplus_detections` is the number of extra copies surviving the merge. `hidden_by_age_band` is how many of them the grader's own key cannot see, because the copies disagree on age_band -- which is also why _dedup_elements did not merge them."
+      },
+      "recall_decomposition": {
+        "found_by_level_and_title": 44,
+        "n_golden": 44,
+        "recall_ignoring_age_band": 1.0,
+        "recall_ignoring_age_band_and_title_composition": 1.0,
+        "absent_from_window": [],
+        "age_band_attribution_drift": [
+          {
+            "test_case_id": "KY-DOM-01",
+            "level": "domain",
+            "title": "Approaches to Learning",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-STR-01",
+            "level": "strand",
+            "title": "Sustains attention and persists with challenging activities ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-01",
+            "level": "sub_strand",
+            "title": "Maintains focus and sustains attention.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-01",
+            "level": "indicator",
+            "title": "Engages in an activity for a sustained period of time.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-02",
+            "level": "indicator",
+            "title": "Maintains focus and attention on activities despite distract",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-03",
+            "level": "indicator",
+            "title": "Sustains attention during group activities that last a short",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              2
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-02",
+            "level": "sub_strand",
+            "title": "Persists at challenging tasks.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-04",
+            "level": "indicator",
+            "title": "Persists with self-selected activities until completed.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-05",
+            "level": "indicator",
+            "title": "Continues working on self-selected activities despite setbac",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-06",
+            "level": "indicator",
+            "title": "Persists with adult-directed tasks with support as needed.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-03",
+            "level": "sub_strand",
+            "title": "Makes a plan and engages in the planned activity or project ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-07",
+            "level": "indicator",
+            "title": "With prompting and support, develops a simple plan and works",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              3
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-08",
+            "level": "indicator",
+            "title": "Develops plans that extend over time and follows through to ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              4
+            ]
+          },
+          {
+            "test_case_id": "KY-DOM-02",
+            "level": "domain",
+            "title": "Health/Mental Wellness",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              15
+            ]
+          },
+          {
+            "test_case_id": "KY-DOM-03",
+            "level": "domain",
+            "title": "Language and Early Literacy",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-STR-04",
+            "level": "strand",
+            "title": "Demonstrates skills and strategies needed for receptive comm",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-SUB-08",
+            "level": "sub_strand",
+            "title": "Attends and responds to nonverbal and verbal communication o",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-18",
+            "level": "indicator",
+            "title": "Attends to an adult or peer who is communicating verbally or",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-19",
+            "level": "indicator",
+            "title": "Follows simple directions.",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          },
+          {
+            "test_case_id": "KY-IND-20",
+            "level": "indicator",
+            "title": "Gains information by listening to/processing communications ",
+            "golden_age_band": null,
+            "run_age_band": [
+              "three and four year olds"
+            ],
+            "target_tier_pages": [
+              21
+            ]
+          }
+        ],
+        "title_composition_drift": [],
+        "_reading": "`absent_from_window` is detection loss at scale -- the failure the scale objection is about. `age_band_attribution_drift` is an element that WAS found, carrying a different age_band than the golden annotates; it fails the strict key but is not a lost element, and the fix is an annotation or canonicalization question, not a detection one. `title_composition_drift` is an element found at the right level whose `title` swallowed trailing text -- also found, also not lost."
+      },
+      "unmatched_adjudication": {
+        "n_in_window": 71,
+        "n_accounted_for_by_golden": 44,
+        "precision_ignoring_age_band": 0.6197,
+        "n_grounded_unannotated": 11,
+        "n_ungrounded": 16,
+        "n_unadjudicated": 0,
+        "hallucination_candidates": [
+          {
+            "level": "indicator",
+            "code": "UVPIC",
+            "title": "Uses a variety of props and invented characters as part of pretend play.",
+            "target_tier_page": 6,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.75
+          },
+          {
+            "level": "indicator",
+            "code": "EESPT",
+            "title": "Engages in elaborate and sustained play themes with self and others.",
+            "target_tier_page": 6,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.8
+          },
+          {
+            "level": "strand",
+            "code": "Approaches to Learning Standard 3",
+            "title": "Demonstrates eagerness to explore, investigate, and learn about their world.",
+            "target_tier_page": 6,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.5
+          },
+          {
+            "level": "sub_strand",
+            "code": "Benchmark 3.1",
+            "title": "Explores a wide range of topics, ideas, and interests.",
+            "target_tier_page": 6,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.556
+          },
+          {
+            "level": "indicator",
+            "code": "ITIIL",
+            "title": "Investigates topics, ideas, and interests to learn new information.",
+            "target_tier_page": 6,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.667
+          },
+          {
+            "level": "indicator",
+            "code": "UVSDA",
+            "title": "Uses a variety of strategies to discover answers to questions about topics, ideas, and interests.",
+            "target_tier_page": 6,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.786
+          },
+          {
+            "level": "indicator",
+            "code": "MMFLO",
+            "title": "Makes and maintains a friendship with at least one other child.",
+            "target_tier_page": 16,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.818
+          },
+          {
+            "level": "indicator",
+            "code": "PSGAT",
+            "title": "Participates in small group activities with teacher support.",
+            "target_tier_page": 16,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.875
+          },
+          {
+            "level": "indicator",
+            "code": "CEAM",
+            "title": "Communicates emotions in an appropriate manner.",
+            "target_tier_page": 16,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.667
+          },
+          {
+            "level": "sub_strand",
+            "code": "Benchmark 1.3",
+            "title": "Demonstrates the ability to participate in classroom activities and follow classroom rules.",
+            "target_tier_page": 16,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.818
+          },
+          {
+            "level": "indicator",
+            "code": "FRISW",
+            "title": "Follows routines independently with support when needed.",
+            "target_tier_page": 16,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.714
+          },
+          {
+            "level": "indicator",
+            "code": "SSTGM",
+            "title": "Sets short term goals, makes plans, and follows through.",
+            "target_tier_page": 20,
+            "age_band": "THREE AND FOUR YEAR OLDS",
+            "grounding": "not found",
+            "grounding_coverage": 0.778
+          },
+          {
+            "level": "indicator",
+            "code": "UDTWC",
+            "title": "Uses different types of words to communicate about people, objects and activities that are familiar as well as new.",
+            "target_tier_page": 23,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.833
+          },
+          {
+            "level": "indicator",
+            "code": "RACDP",
+            "title": "Responds appropriately in conversations and discussions with peers and adults.",
+            "target_tier_page": 23,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.556
+          },
+          {
+            "level": "indicator",
+            "code": "AMTQ",
+            "title": "Asks many types of questions.",
+            "target_tier_page": 23,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.4
+          },
+          {
+            "level": "indicator",
+            "code": "APIPV",
+            "title": "Adjusts the pitch, intonation, pace, and volume of their communication based on the situation.",
+            "target_tier_page": 23,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.615
+          }
+        ],
+        "annotation_worklist": [
+          {
+            "level": "strand",
+            "code": "Approaches to Learning Standard 2",
+            "title": "Approaches learning with flexibility, creativity, and imagination.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "sub_strand",
+            "code": "Benchmark 2.1",
+            "title": "Uses creative approaches for learning.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "FNWUF",
+            "title": "Finds new ways to use familiar objects and materials.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "INMUC",
+            "title": "Identifies new materials to use in completing a task.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "ECOMN",
+            "title": "Experiments with combining objects and materials in new and imaginative ways.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "IAISE",
+            "title": "Interprets or applies information someone else communicates verbally or nonverbally.",
+            "target_tier_page": 21,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "Language and Early Literacy Standard 2",
+            "title": "Demonstrates the knowledge, skills and strategies needed for expressive communication.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "sub_strand",
+            "code": "Benchmark 2.1",
+            "title": "Uses non-verbal communication for a variety of purposes.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "UNCCE",
+            "title": "Uses non-verbal communication to convey emotions.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "ICOPP",
+            "title": "Identifies or chooses an object or person by pointing, physically touching, or moving toward another.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "UGMII",
+            "title": "Uses gestures and/or movements to initiate interactions or to get needs met.",
+            "target_tier_page": 22,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          }
+        ],
+        "unadjudicated": [],
+        "_reading": "`hallucination_candidates` is the only bucket that can contain a false positive in the quality sense. `annotation_worklist` is real page content the golden does not cover; it BOUNDS how far that golden is from page-exhaustive, and a precision figure must not be published from a state where it is non-empty. It is a diagnostic, not a work queue: a golden is extended by annotating the document, never by accepting rows this system emitted."
+      },
+      "age_band_consistency": {
+        "distinct_values_in_window": {
+          "three and four year olds": 32,
+          "null": 39
+        },
+        "pages_emitting_more_than_one_value": {
+          "4": {
+            "three and four year olds": 5,
+            "null": 4
+          },
+          "5": {
+            "three and four year olds": 1,
+            "null": 4
+          },
+          "15": {
+            "three and four year olds": 1,
+            "null": 7
+          },
+          "21": {
+            "three and four year olds": 7,
+            "null": 1
+          },
+          "22": {
+            "three and four year olds": 5,
+            "null": 8
+          }
+        },
+        "n_pages_split": 5
+      }
+    }
+  },
+  "headline": {
+    "recall": 0.5454545454545454,
+    "precision": 0.43636363636363634,
+    "matched": 24,
+    "n_golden": 44,
+    "in_scope_elements_at_scale": 55,
+    "false_positives": 31,
+    "ignored_out_of_annotated_domain": 0,
+    "surplus_duplicate_detections": 11,
+    "recall_ignoring_age_band": 1.0,
+    "elements_absent_at_scale": 0,
+    "elements_lost_to_title_composition_drift": 0,
+    "elements_lost_to_age_band_drift": 20,
+    "precision_ignoring_age_band": 0.8,
+    "hallucination_candidates": 0,
+    "grounded_but_unannotated": 11,
+    "source_extraction_supplied": true,
+    "precision_reading": "quality figure -- golden is detection-exhaustive over this window"
+  },
+  "code_version_hash": "14374dba"
+}

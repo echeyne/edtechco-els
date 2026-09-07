@@ -1,0 +1,82 @@
+{
+  "method": "Every annotated golden title of >= 12 characters, checked case-folded against the verbatim source of the detection and parsing prompts. A title annotated by more than one state is reported as SHARED (a domain name many states use, which carries no provenance); a title annotated by exactly one is reported as DISTINCTIVE.",
+  "prompt_sources": [
+    "src/els_pipeline/detector.py",
+    "src/els_pipeline/parser.py"
+  ],
+  "min_title_chars": 12,
+  "states": {
+    "AZ": {
+      "role": "development",
+      "annotated_titles": 5,
+      "titles_appearing_in_prompts": 4,
+      "distinctive_to_this_state": [
+        "Demonstrates self-confidence",
+        "Self-Awareness",
+        "Self-Awareness and Emotional Skills",
+        "Social Emotional Development"
+      ],
+      "shared_with_another_state": []
+    },
+    "CA": {
+      "role": "development",
+      "annotated_titles": 11,
+      "titles_appearing_in_prompts": 4,
+      "distinctive_to_this_state": [
+        "English Language Development",
+        "Foundational Language Development",
+        "Listening and Speaking"
+      ],
+      "shared_with_another_state": [
+        "Approaches to Learning"
+      ]
+    },
+    "CO": {
+      "role": "development",
+      "annotated_titles": 7,
+      "titles_appearing_in_prompts": 1,
+      "distinctive_to_this_state": [
+        "Social & Emotional Development"
+      ],
+      "shared_with_another_state": []
+    },
+    "KY": {
+      "role": "held-out",
+      "annotated_titles": 44,
+      "titles_appearing_in_prompts": 5,
+      "distinctive_to_this_state": [
+        "Attends to an adult or peer who is communicating verbally or nonverbally",
+        "Engages in an activity for a sustained period of time",
+        "Health/Mental Wellness",
+        "Language and Early Literacy"
+      ],
+      "shared_with_another_state": [
+        "Approaches to Learning"
+      ]
+    },
+    "NV": {
+      "role": "held-out",
+      "annotated_titles": 44,
+      "titles_appearing_in_prompts": 1,
+      "distinctive_to_this_state": [
+        "Social Studies"
+      ],
+      "shared_with_another_state": []
+    },
+    "TX": {
+      "role": "development",
+      "annotated_titles": 8,
+      "titles_appearing_in_prompts": 2,
+      "distinctive_to_this_state": [
+        "Self-Concept",
+        "Social and Emotional Development"
+      ],
+      "shared_with_another_state": []
+    }
+  },
+  "totals": {
+    "distinctive_strings_from_development_states": 10,
+    "distinctive_strings_from_held_out_states": 5
+  },
+  "_reading": "Shared strings are not evidence of anything. Distinctive strings show the document was in view when the rule was written: ordinary few-shot practice for a development state, and a disclosure question for a held-out one."
+}

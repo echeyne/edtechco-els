@@ -32,6 +32,17 @@
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}
 
+This section is not an apology, and it should not be read as one. A deployed
+system's limits are the part of it a practitioner most needs, and stating them
+precisely is the same discipline that produced the results above: corpus tiers
+named on every table, every unmatched detection audited by hand and signed,
+every number regenerated from a recorded artifact by a named script, each
+validation guard shown catching a live defect rather than asserted to work, and
+a previously recorded result of my own reported as a non-reproduction rather
+than quietly replaced. What follows is that discipline applied to the boundary
+of what I can claim. Where a limit is a measurement I have not made, I say so;
+where it is one I made and did not like, I report it.
+
 \subsection{What the results support}
 
 The central claim survives its strongest available test. Classifying by nesting
@@ -117,11 +128,15 @@ means I did not observe instability at $n{=}5$, not that a component is stable.
 I take my own experience as the cautionary case. An earlier recording measured
 Nevada's detector code accuracy at $46/46$ and I reported it as a held-out
 gain; five fresh runs on identical code give 44, 45, 44, 44, 44. The point value
-was the top of a distribution, not its center. The same caution applies to
-single-run ablation arms generally, including my attribution of Nevada's
-domain-code behavior to the Pass-1 sampler, which rests on one draw per arm
-with an arm-to-arm gap no larger than the run-to-run spread I later measured.
-I report that attribution as suggested rather than established. Where an
+was the top of a distribution, not its center. The same caution applied to a
+single-run ablation arm of my own, and repeating it at $n{=}5$ per arm retired
+the claim: my attribution of Nevada's domain-code behavior to the Pass-1 sampler
+does not survive, one of the two codes failing in every draw of both arms. What
+survives is a rate --- mean code accuracy $0.965$ against $0.935$, and one
+sub-strand failure eliminated in five draws of five --- alongside a cost the
+single draw could not show, the sampler dropping a golden element in two draws
+of five where the arm it replaced drops none. I report that as measured rather
+than as either confirmed or abandoned. Where an
 experiment is repeated --- the depth-map ablation, at three runs per arm across
 six states --- I report the range and note that the direction never reverses,
 rather than quoting a single number.

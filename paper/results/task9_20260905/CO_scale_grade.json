@@ -1,0 +1,1805 @@
+{
+  "state": "CO",
+  "source_tier": "only_subset",
+  "target_tier": "trimmed",
+  "detection_file": "outputs/scale-08-29-26/CO-detection.json",
+  "golden_file": "evaluation/ground_truth_detector/CO.json",
+  "golden_is_detection_exhaustive": false,
+  "page_window": {
+    "source_tier_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "target_tier_pages": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12
+    ],
+    "mapping_source_to_target": {
+      "1": 1,
+      "2": 3,
+      "3": 4,
+      "4": 5,
+      "5": 6,
+      "6": 7,
+      "7": 8,
+      "8": 9,
+      "9": 11,
+      "10": 12
+    },
+    "unmappable_source_pages": [],
+    "golden_pages_outside_the_map": []
+  },
+  "run_totals": {
+    "elements_in_whole_run": 300,
+    "pages_in_run": 37
+  },
+  "arms": {
+    "page_tolerance_0": {
+      "state": "CO",
+      "precision": 0.14285714285714285,
+      "recall": 0.8571428571428571,
+      "f1": 0.24489795918367344,
+      "code_accuracy": 1.0,
+      "code_matches": 6,
+      "code_total": 6,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 3,
+      "description_total": 3,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "matched": 6,
+      "n_golden": 7,
+      "n_detected": 61,
+      "per_level": {
+        "domain": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 1,
+          "fp": 6,
+          "fn": 1
+        },
+        "indicator": {
+          "tp": 3,
+          "fp": 30,
+          "fn": 0
+        }
+      },
+      "confusion": {
+        "domain": {
+          "domain": 2
+        },
+        "indicator": {
+          "indicator": 3
+        },
+        "strand": {
+          "strand": 1
+        }
+      },
+      "missing_test_cases": [
+        "CO-STR-01"
+      ],
+      "extra_elements": [
+        [
+          "strand",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "indicator",
+          "5"
+        ],
+        [
+          "indicator",
+          "7"
+        ],
+        [
+          "indicator",
+          "8"
+        ],
+        [
+          "indicator",
+          "9"
+        ],
+        [
+          "indicator",
+          "10"
+        ],
+        [
+          "indicator",
+          "11"
+        ],
+        [
+          "indicator",
+          "12"
+        ],
+        [
+          "strand",
+          "2"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "strand",
+          "3"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "strand",
+          "1"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "indicator",
+          "5"
+        ],
+        [
+          "strand",
+          "2"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "strand",
+          "3"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ]
+      ],
+      "ignored_out_of_scope": 19,
+      "age_band_drops": [],
+      "depth_map_passed": null,
+      "depth_map_detail": "",
+      "regressions": [],
+      "stability_runs": 0,
+      "stability_disagreement_rate": null,
+      "stability_detail": null,
+      "stability_size_stdev": null,
+      "in_scope_elements_at_scale": 61,
+      "duplicates": {
+        "duplicate_groups": 0,
+        "surplus_detections": 0,
+        "by_level": {},
+        "examples": [],
+        "_key": "(level, title) — a duplicate is one element emitted twice",
+        "strict_key_for_comparison": {
+          "duplicate_groups": 0,
+          "surplus_detections": 0,
+          "by_level": {},
+          "examples": [],
+          "_key": "(domain, level, title, age_band) — the grader's own key"
+        },
+        "hidden_by_age_band": 0,
+        "_reading": "`surplus_detections` is the number of extra copies surviving the merge. `hidden_by_age_band` is how many of them the grader's own key cannot see, because the copies disagree on age_band -- which is also why _dedup_elements did not merge them."
+      },
+      "recall_decomposition": {
+        "found_by_level_and_title": 6,
+        "n_golden": 7,
+        "recall_ignoring_age_band": 0.8571,
+        "recall_ignoring_age_band_and_title_composition": 1.0,
+        "absent_from_window": [],
+        "age_band_attribution_drift": [],
+        "title_composition_drift": [
+          {
+            "test_case_id": "CO-STR-01",
+            "level": "strand",
+            "golden_title": "Health, Safety and Nutrition",
+            "run_title": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habi",
+            "target_tier_page": 4
+          }
+        ],
+        "_reading": "`absent_from_window` is detection loss at scale -- the failure the scale objection is about. `age_band_attribution_drift` is an element that WAS found, carrying a different age_band than the golden annotates; it fails the strict key but is not a lost element, and the fix is an annotation or canonicalization question, not a detection one. `title_composition_drift` is an element found at the right level whose `title` swallowed trailing text -- also found, also not lost."
+      },
+      "unmatched_adjudication": {
+        "n_in_window": 61,
+        "n_accounted_for_by_golden": 6,
+        "precision_ignoring_age_band": 0.0984,
+        "n_grounded_unannotated": 55,
+        "n_ungrounded": 0,
+        "n_unadjudicated": 0,
+        "hallucination_candidates": [],
+        "annotation_worklist": [
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of h",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by he",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Get sufficient rest and exercise to support healthy development.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "7",
+            "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "8",
+            "title": "Distinguish food on a continuum from most healthy to less healthy.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "9",
+            "title": "Eat a variety of nutritious foods.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "10",
+            "title": "Participate in structured and unstructured physical activities.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "11",
+            "title": "Recognize the importance of doctor and dentist visits.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "12",
+            "title": "Cooperate during doctor and dentist visits and health and developmental screening.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Gross Motor Skills: The control of large muscles for movement, navigation, and balance.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobili",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, cat",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directi",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "3",
+            "title": "Fine Motor Skills: The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Develop hand strength and dexterity.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Manipulate a range of objects, such as blocks or books.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Manipulate writing, drawing, and art tools.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Relationships with Adults and Peers",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Engage in and maintains positive relationships and interactions with adults.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Engage in prosocial and cooperative behavior with adults.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Engage in and maintains positive interactions and relationships with other children.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Engage in cooperative play with other children.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Sense of Identity and Belonging",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Express confidence in own skills and positive feelings about self.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Have a sense of belonging to family, community, and other groups.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "3",
+            "title": "Emotional Functioning",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Express a broad range of emotions and recognize these emotions in self and others.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Express care and concern toward others.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Manage emotions with increasing independence.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Follow classroom rules and routines with increasing independence.",
+            "target_tier_page": 9,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Appropriately handle and take care of classroom materials.",
+            "target_tier_page": 9,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "target_tier_page": 11,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Receptive English Language Skills: The ability to comprehend or understand the English language.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Participate with movement and gestures while other children and the teachers dance and sing in English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Follow multi-step directions in English with minimal cues or assistance.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Expressive English Language Skills: The ability to speak or use English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Use increasingly complex and varied English vocabulary.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "3",
+            "title": "Engagement in English Literacy Activities",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Learn part of a song or poem in English and repeat it.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Talk with peers or adults about a story read in English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          }
+        ],
+        "unadjudicated": [],
+        "_reading": "`hallucination_candidates` is the only bucket that can contain a false positive in the quality sense. `annotation_worklist` is real page content the golden does not cover; it BOUNDS how far that golden is from page-exhaustive, and a precision figure must not be published from a state where it is non-empty. It is a diagnostic, not a work queue: a golden is extended by annotating the document, never by accepting rows this system emitted."
+      },
+      "age_band_consistency": {
+        "distinct_values_in_window": {
+          "null": 61
+        },
+        "pages_emitting_more_than_one_value": {},
+        "n_pages_split": 0
+      }
+    },
+    "page_tolerance_1": {
+      "state": "CO",
+      "precision": 0.125,
+      "recall": 0.8571428571428571,
+      "f1": 0.21818181818181817,
+      "code_accuracy": 1.0,
+      "code_matches": 6,
+      "code_total": 6,
+      "code_mismatches": [],
+      "description_accuracy": 1.0,
+      "description_matches": 3,
+      "description_total": 3,
+      "description_truncations": 0,
+      "description_mismatches": [],
+      "matched": 6,
+      "n_golden": 7,
+      "n_detected": 83,
+      "per_level": {
+        "domain": {
+          "tp": 2,
+          "fp": 0,
+          "fn": 0
+        },
+        "strand": {
+          "tp": 1,
+          "fp": 7,
+          "fn": 1
+        },
+        "indicator": {
+          "tp": 3,
+          "fp": 35,
+          "fn": 0
+        }
+      },
+      "confusion": {
+        "domain": {
+          "domain": 2
+        },
+        "indicator": {
+          "indicator": 3
+        },
+        "strand": {
+          "strand": 1
+        }
+      },
+      "missing_test_cases": [
+        "CO-STR-01"
+      ],
+      "extra_elements": [
+        [
+          "strand",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "indicator",
+          "5"
+        ],
+        [
+          "indicator",
+          "7"
+        ],
+        [
+          "indicator",
+          "8"
+        ],
+        [
+          "indicator",
+          "9"
+        ],
+        [
+          "indicator",
+          "10"
+        ],
+        [
+          "indicator",
+          "11"
+        ],
+        [
+          "indicator",
+          "12"
+        ],
+        [
+          "strand",
+          "2"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "strand",
+          "3"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "strand",
+          "1"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "indicator",
+          "5"
+        ],
+        [
+          "strand",
+          "2"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "strand",
+          "3"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "strand",
+          "5"
+        ],
+        [
+          "indicator",
+          "1"
+        ],
+        [
+          "indicator",
+          "2"
+        ],
+        [
+          "indicator",
+          "3"
+        ],
+        [
+          "indicator",
+          "4"
+        ],
+        [
+          "indicator",
+          "5"
+        ]
+      ],
+      "ignored_out_of_scope": 35,
+      "age_band_drops": [],
+      "depth_map_passed": null,
+      "depth_map_detail": "",
+      "regressions": [],
+      "stability_runs": 0,
+      "stability_disagreement_rate": null,
+      "stability_detail": null,
+      "stability_size_stdev": null,
+      "in_scope_elements_at_scale": 83,
+      "duplicates": {
+        "duplicate_groups": 0,
+        "surplus_detections": 0,
+        "by_level": {},
+        "examples": [],
+        "_key": "(level, title) — a duplicate is one element emitted twice",
+        "strict_key_for_comparison": {
+          "duplicate_groups": 0,
+          "surplus_detections": 0,
+          "by_level": {},
+          "examples": [],
+          "_key": "(domain, level, title, age_band) — the grader's own key"
+        },
+        "hidden_by_age_band": 0,
+        "_reading": "`surplus_detections` is the number of extra copies surviving the merge. `hidden_by_age_band` is how many of them the grader's own key cannot see, because the copies disagree on age_band -- which is also why _dedup_elements did not merge them."
+      },
+      "recall_decomposition": {
+        "found_by_level_and_title": 6,
+        "n_golden": 7,
+        "recall_ignoring_age_band": 0.8571,
+        "recall_ignoring_age_band_and_title_composition": 1.0,
+        "absent_from_window": [],
+        "age_band_attribution_drift": [],
+        "title_composition_drift": [
+          {
+            "test_case_id": "CO-STR-01",
+            "level": "strand",
+            "golden_title": "Health, Safety and Nutrition",
+            "run_title": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habi",
+            "target_tier_page": 4
+          }
+        ],
+        "_reading": "`absent_from_window` is detection loss at scale -- the failure the scale objection is about. `age_band_attribution_drift` is an element that WAS found, carrying a different age_band than the golden annotates; it fails the strict key but is not a lost element, and the fix is an annotation or canonicalization question, not a detection one. `title_composition_drift` is an element found at the right level whose `title` swallowed trailing text -- also found, also not lost."
+      },
+      "unmatched_adjudication": {
+        "n_in_window": 83,
+        "n_accounted_for_by_golden": 6,
+        "precision_ignoring_age_band": 0.0723,
+        "n_grounded_unannotated": 65,
+        "n_ungrounded": 12,
+        "n_unadjudicated": 0,
+        "hallucination_candidates": [
+          {
+            "level": "strand",
+            "code": "5",
+            "title": "Cognitive Self-Regulation (Executive Functioning): The ability to regulate attention and impulses.",
+            "target_tier_page": 10,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.833
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Maintain focus and sustain attention with minimal adult support.",
+            "target_tier_page": 10,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.778
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Persist in tasks.",
+            "target_tier_page": 10,
+            "age_band": null,
+            "grounding": "too few distinct words to test",
+            "grounding_coverage": 0.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Hold information in mind and manipulate it to perform tasks.",
+            "target_tier_page": 10,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.7
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Demonstrate flexibility in thinking and behavior.",
+            "target_tier_page": 10,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.667
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Comprehend different grammatical structures or rules for using language.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.778
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Communicating and Speaking",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "too few distinct words to test",
+            "grounding_coverage": 0.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Vary the amount of information provided to meet the demands of the situation.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.5
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Understand, follow, and use appropriate social and conversational rules.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.875
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Express self in increasingly long, detailed, and sophisticated ways.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.778
+          },
+          {
+            "level": "indicator",
+            "code": "6",
+            "title": "Understand the difference between a question and a statement.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.625
+          },
+          {
+            "level": "indicator",
+            "code": "8",
+            "title": "Speak in sentences of five or six words.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "not found",
+            "grounding_coverage": 0.875
+          }
+        ],
+        "annotation_worklist": [
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of h",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Participate in prevention and management of chronic health conditions and avoid toxins, such as lead.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Maintain physical growth within the Centers for Disease Control and Prevention (CDC) recommended ranges for weight by he",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Get sufficient rest and exercise to support healthy development.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Complete personal care tasks, such as dressing, brushing teeth, toileting, and washing hands independently from adults.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "7",
+            "title": "Follow basic health and safety rules and respond appropriately to harmful or unsafe situations.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "8",
+            "title": "Distinguish food on a continuum from most healthy to less healthy.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "9",
+            "title": "Eat a variety of nutritious foods.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "10",
+            "title": "Participate in structured and unstructured physical activities.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "11",
+            "title": "Recognize the importance of doctor and dentist visits.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "12",
+            "title": "Cooperate during doctor and dentist visits and health and developmental screening.",
+            "target_tier_page": 4,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Gross Motor Skills: The control of large muscles for movement, navigation, and balance.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Develop motor control and balance for a range of physical activities, such as walking, propelling a wheelchair or mobili",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Develop motor coordination and skill in using objects for a range of physical activities, such as pulling, throwing, cat",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Understand movement concepts, such as control of the body, how the body moves (such as an awareness of space and directi",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "3",
+            "title": "Fine Motor Skills: The control of small muscles for such purposes as using utensils, self-care, building, and exploring.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Develop hand strength and dexterity.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Develop eye-hand coordination to use everyday tools, such as pitchers for pouring or utensils for eating.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Manipulate a range of objects, such as blocks or books.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Manipulate writing, drawing, and art tools.",
+            "target_tier_page": 5,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Relationships with Adults and Peers",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Engage in and maintains positive relationships and interactions with adults.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Engage in prosocial and cooperative behavior with adults.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Engage in and maintains positive interactions and relationships with other children.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Engage in cooperative play with other children.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Use basic problem-solving skills to resolve conflicts with other children.",
+            "target_tier_page": 7,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Sense of Identity and Belonging",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Recognize self as a unique individual having own abilities, characteristics, emotions, and interests.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Express confidence in own skills and positive feelings about self.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Have a sense of belonging to family, community, and other groups.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "3",
+            "title": "Emotional Functioning",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Express a broad range of emotions and recognize these emotions in self and others.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Express care and concern toward others.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Manage emotions with increasing independence.",
+            "target_tier_page": 8,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Follow classroom rules and routines with increasing independence.",
+            "target_tier_page": 9,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Appropriately handle and take care of classroom materials.",
+            "target_tier_page": 9,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Demonstrate an increasing ability to control impulses.",
+            "target_tier_page": 10,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "domain",
+            "code": "ELD",
+            "title": "English Language Development",
+            "target_tier_page": 11,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Receptive English Language Skills: The ability to comprehend or understand the English language.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Participate with movement and gestures while other children and the teachers dance and sing in English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Acknowledge or respond nonverbally to common words or phrases, such as \"hello,\" \"good bye,\" \"snack time,\" or \"bathroom,\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Point to body parts when asked, \"Where is your nose, hand, leg...?\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Comprehend and respond to increasingly complex and varied English vocabulary, such as \"Which stick is the longest?\" \"Why",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Follow multi-step directions in English with minimal cues or assistance.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "2",
+            "title": "Expressive English Language Skills: The ability to speak or use English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Repeat word or phrase to self, such as \"bus\" while group sings the \"Wheels on the Bus\" or \"brush teeth\" after lunch.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Request items in English, such as \"car,\" \"milk,\" \"book,\" \"ball.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Use one or two English words, sometimes joined to represent a bigger idea, such as \"throwball.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Use increasingly complex and varied English vocabulary.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Construct sentences, such as \"The apple is round,\" or \"I see a fire truck with lights on.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "3",
+            "title": "Engagement in English Literacy Activities",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Demonstrate eagerness to participate in songs, rhymes, and stories in English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Point to pictures and says the word in English, such as \"frog,\" \"baby,\" \"run.\"",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Learn part of a song or poem in English and repeat it.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Talk with peers or adults about a story read in English.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Tell a story in English with a beginning, middle, and end from a book or about a personal experience.",
+            "target_tier_page": 12,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "domain",
+            "code": "LD",
+            "title": "Language Development",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "exact",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "strand",
+            "code": "1",
+            "title": "Attending and Understanding",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage (source_text)",
+            "grounding_coverage": 0.909
+          },
+          {
+            "level": "indicator",
+            "code": "1",
+            "title": "Attend to language during conversations, songs, stories, or other learning experiences.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "2",
+            "title": "Comprehend increasingly complex and varied vocabulary.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "3",
+            "title": "Comprehend different forms of language, such as questions or exclamations.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 0.9
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Follow two- to three-step directions.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "4",
+            "title": "Participate in conversations of more than three exchanges with peers and adults.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "5",
+            "title": "Use language to express ideas and needs.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          },
+          {
+            "level": "indicator",
+            "code": "7",
+            "title": "Practice asking questions and making statements.",
+            "target_tier_page": 13,
+            "age_band": null,
+            "grounding": "token coverage",
+            "grounding_coverage": 1.0
+          }
+        ],
+        "unadjudicated": [],
+        "_reading": "`hallucination_candidates` is the only bucket that can contain a false positive in the quality sense. `annotation_worklist` is real page content the golden does not cover; it BOUNDS how far that golden is from page-exhaustive, and a precision figure must not be published from a state where it is non-empty. It is a diagnostic, not a work queue: a golden is extended by annotating the document, never by accepting rows this system emitted."
+      },
+      "age_band_consistency": {
+        "distinct_values_in_window": {
+          "null": 83
+        },
+        "pages_emitting_more_than_one_value": {},
+        "n_pages_split": 0
+      }
+    }
+  },
+  "headline": {
+    "recall": 0.8571428571428571,
+    "precision": 0.14285714285714285,
+    "matched": 6,
+    "n_golden": 7,
+    "in_scope_elements_at_scale": 61,
+    "false_positives": 36,
+    "ignored_out_of_annotated_domain": 19,
+    "surplus_duplicate_detections": 0,
+    "recall_ignoring_age_band": 0.8571,
+    "elements_absent_at_scale": 0,
+    "elements_lost_to_title_composition_drift": 1,
+    "elements_lost_to_age_band_drift": 0,
+    "precision_ignoring_age_band": 0.0984,
+    "hallucination_candidates": 0,
+    "grounded_but_unannotated": 55,
+    "source_extraction_supplied": true,
+    "precision_reading": "COVERAGE ARTIFACT, not a quality figure -- this golden is not detection-exhaustive, so an unmatched detection is more likely unannotated content than a false positive"
+  },
+  "code_version_hash": "14374dba"
+}

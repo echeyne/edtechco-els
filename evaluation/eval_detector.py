@@ -56,6 +56,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
@@ -383,7 +384,23 @@ class StateReport:
                    if status == "truncated")
 
 
-def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
+def grade_elements(
+    golden: List[dict],
+    detected: List[dict],
+    detected_pretagged: bool = False,
+) -> StateReport:
+    """Grade one detection list against one golden list.
+
+    ``detected_pretagged`` exists for scale grading (arXiv paper Task 9), where
+    ``detected`` is a PAGE-FILTERED slice of a larger-tier run. ``_tag_domains``
+    reads the enclosing domain by walking a list in document order, so a slice
+    that opens part-way through a domain -- or that jumps a gap between two
+    page windows -- would tag its elements with the wrong domain, or with None.
+    The caller therefore tags the FULL run first and passes the slice with
+    ``_domain`` already set. Nothing else about the grading changes: the same
+    ``_match_key``, the same domain-scoped precision, the same goldens. Default
+    False, so every existing caller is unaffected.
+    """
     rep = StateReport(state="")
     rep.n_golden = len(golden)
     rep.n_detected = len(detected)
@@ -391,7 +408,8 @@ def grade_elements(golden: List[dict], detected: List[dict]) -> StateReport:
     # Tag both lists with their enclosing domain (in document order) so we can
     # match domain-scoped and scope false positives to annotated domains.
     _tag_domains(golden)
-    _tag_domains(detected)
+    if not detected_pretagged:
+        _tag_domains(detected)
 
     # Domains the golden set actually annotates. A detected element only counts
     # toward precision if it falls inside one of these.
@@ -936,7 +954,15 @@ def main() -> int:
     if args.state:
         states = args.state
     else:
-        states = sorted(p.stem for p in golden_dir.glob("*.json"))
+        # ⚠️ Only a bare two-letter state code names a state. The golden directories
+        # also hold tier-scoped goldens (KY_trimmed.json), their _provenance siblings,
+        # and any work-in-progress draft; enumerating those sends the suite hunting for
+        # a nonexistent "<name>-extraction.json", and it is the same glob that once
+        # silently broke the prompt-provenance scan. So the rule is shape-based rather
+        # than a list of names to exclude. Tier-scoped goldens are graded by
+        # paper/analysis/scale_grade*.py, which take explicit paths.
+        states = sorted(p.stem for p in golden_dir.glob("*.json")
+                        if re.fullmatch(r"[A-Z]{2}", p.stem))
 
     output_dir = Path(args.output_dir) if args.output_dir else None
 

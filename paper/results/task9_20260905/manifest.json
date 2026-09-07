@@ -1,0 +1,115 @@
+{
+  "task": "Task 9 — quality at scale: subset goldens graded inside the trimmed-tier run",
+  "date": "2026-09-05",
+  "git_commit": "47048d584d3a5eeab66d76fc690e4504c1026513",
+  "code_version_hash": "14374dba",
+  "⚠️_CORPUS_TIER": {
+    "graded_run_tier": "_trimmed — 100% of the standards, not the full published PDF (see corpus_tiers.json)",
+    "golden_tier": "_only_subset — the goldens are unchanged; only the RUN they are graded against is bigger",
+    "what_this_does_and_does_not_measure": "It measures the SUBSET PAGES inside a larger run. It is NOT a full-document quality number: elements outside the page window are counted and reported but never scored, because no golden annotates them.",
+    "guardrail_1": "Any table drawn from this file must name BOTH tiers — the golden's and the run's."
+  },
+  "inputs": {
+    "detection": "s3://els-processed-json-dev-390888050716/US/{KY,CO}/{2021,2020}/intermediate/detection/pipeline-US-{KY,CO}-{2021,2020}-full08292026.json  (Task 6 run, 2026-08-29)",
+    "source_tier_extraction": "…/intermediate/extraction/test-pipeline-US-{KY,CO}-{2021,2020}-044.json",
+    "goldens": "evaluation/ground_truth_detector/{KY,CO}.json (unchanged)",
+    "page_translation": "paper/results/corpus_page_ranges.json",
+    "local_copies": [
+      "outputs/scale-08-29-26/",
+      "outputs/subset-for-scale/"
+    ]
+  },
+  "method": {
+    "script": "paper/analysis/scale_grade.py",
+    "grader": "evaluation.eval_detector.grade_elements — the SAME grader, matcher and goldens as every other detector number in this paper",
+    "grader_change": "one additive parameter, grade_elements(detected_pretagged=True). A page-filtered slice cannot recover its own enclosing domain by walking itself, so the FULL run is tagged first. No other caller is affected.",
+    "model_calls": 0,
+    "new_annotation": 0
+  },
+  "headline": {
+    "KY": {
+      "recall": 0.5454545454545454,
+      "precision": 0.43636363636363634,
+      "matched": 24,
+      "n_golden": 44,
+      "in_scope_elements_at_scale": 55,
+      "false_positives": 31,
+      "ignored_out_of_annotated_domain": 0,
+      "surplus_duplicate_detections": 11,
+      "recall_ignoring_age_band": 1.0,
+      "elements_absent_at_scale": 0,
+      "elements_lost_to_title_composition_drift": 0,
+      "elements_lost_to_age_band_drift": 20,
+      "precision_ignoring_age_band": 0.8,
+      "hallucination_candidates": 0,
+      "grounded_but_unannotated": 11,
+      "source_extraction_supplied": true,
+      "precision_reading": "quality figure -- golden is detection-exhaustive over this window"
+    },
+    "CO": {
+      "recall": 0.8571428571428571,
+      "precision": 0.14285714285714285,
+      "matched": 6,
+      "n_golden": 7,
+      "in_scope_elements_at_scale": 61,
+      "false_positives": 36,
+      "ignored_out_of_annotated_domain": 19,
+      "surplus_duplicate_detections": 0,
+      "recall_ignoring_age_band": 0.8571,
+      "elements_absent_at_scale": 0,
+      "elements_lost_to_title_composition_drift": 1,
+      "elements_lost_to_age_band_drift": 0,
+      "precision_ignoring_age_band": 0.0984,
+      "hallucination_candidates": 0,
+      "grounded_but_unannotated": 55,
+      "source_extraction_supplied": true,
+      "precision_reading": "COVERAGE ARTIFACT, not a quality figure -- this golden is not detection-exhaustive, so an unmatched detection is more likely unannotated content than a false positive"
+    }
+  },
+  "findings": {
+    "1_nothing_is_lost_at_scale": "0 golden elements absent in either state; 0 hallucination candidates. Recall by level and title is 1.000 in both, across a 6.5x (KY) and 4.1x (CO) page increase and 4 detection batches.",
+    "2_precision_drops_at_scale_from_surviving_duplicates": "KY's 55 in-window detections are 44 distinct elements + 11 duplicate copies, so precision is 44/55 = 0.800 and the whole shortfall is duplication. Every duplicate is one element emitted twice on one page, once banded and once null. _dedup_elements did not merge them because the copies disagree on age_band. CO — no age-band column — shows 0 duplicates in the same measurement, which is what makes the attribution to age_band rather than to chunking credible.",
+    "3_age_band_attribution_is_unstable_three_ways": "In KY's window: 20 elements banded-only (the entire strict-recall shortfall), 11 emitted twice (finding 2), 13 null-only. 5 of 7 content pages emit BOTH values. Document-wide 152/329 banded; the subset run emitted null for all 44. VERDICT OPEN — golden, run, or schema.",
+    "4_KY_golden_is_vindicated": "All 11 KY unmatched detections are duplicates of elements the golden already covers; 0 are unannotated content. The golden accounts for every DISTINCT element the larger run finds on its pages, at 4 batches as at 1. Two independent scans on 2026-09-06 confirm the subset golden has no missing test cases at all: the union of all 13 KY detection files contains no (level, title) it lacks, and no block of text on subset pages 2-8 is unaccounted for by one of its titles or descriptions at >=0.9 word coverage.",
+    "5_CO_recall_only": "CO gives 0 absent / 0 duplicates / 0 hallucinations across 4 detection batches on the corpus's hardest layout — that is its whole contribution, and it is the recall half only. Its 7-element spot-check golden leaves 55 of 61 in-window detections unannotated (none duplicates, none ungrounded), so its precision is a coverage artifact and is labelled as one in the output. DO NOT report CO precision and do not describe CO as exhaustive.",
+    "6_chain_closes_at_fabricated_primary_keys": "KY's trimmed run produces 214 standards with 214 distinct standard_ids, of which 7 are DUPLICATES — pairs sharing parents and indicator name, separated only by disambiguate_colliding_standards' numeric `.N` fallback (US-KY-2021-AL.2.1.FNWUF beside ...FNWUF.2, same page, same parents, same name). 'Distinct' is not 'collision-free': grade_parser.id_collisions runs AFTER the resolver, so it reports zero by construction. Chain: detector emits the element twice (banded + null) -> _dedup_elements cannot merge (its key includes age_band) -> parser canonicalizes both bands to the document's single band -> identical -> collide -> `.2` reaches persistence. CO has 0 duplicates in 240 standards and no age-band column, which is the control."
+  },
+  "traps_avoided": {
+    "domain_tagging_before_filtering": "Otherwise domain-scoped precision discards real false positives as out-of-scope.",
+    "layout_robust_grounding": "Contiguous-substring grounding reported 39 nonexistent hallucinations on CO, purely because extraction interleaves multi-column reading order. Grounding is exact-substring OR >=0.9 distinct-word coverage.",
+    "page_tolerance_reported_at_0_and_1": "Recall conclusions identical at both. Grounding is meaningless at tolerance 1 (it admits pages the subset PDF never held) — read tolerance 1 for recall only.",
+    "duplicate_check_keyed_more_loosely_than_the_merge": "The one that actually bit. See ⚠️_CORRECTION_20260906."
+  },
+  "open_items_for_the_author": [
+    "KY: the exhaustive grading of ground_truth_detector/KY.json against the PDF (author, in progress). ONLY open item.",
+    "Re-run scale_grade.py and scale_grade_parser.py after any golden change, and re-record Tasks 1 and 2 for any state whose golden moves."
+  ],
+  "regenerate": "python -m paper.analysis.scale_grade --state KY --state CO --detection-dir outputs/scale-08-29-26 --source-extraction-dir outputs/subset-for-scale --out paper/results/task9_20260905 && python -m paper.analysis.make_review_sheets",
+  "⚠️_STATUS": "PROVISIONAL — ONE open item: the author is grading ground_truth_detector/KY.json exhaustively against the PDF. Re-run scale_grade.py AND scale_grade_parser.py after any golden change; if a golden moves, Tasks 1 and 2 must be re-recorded too. The age_band verdict is CLOSED (RUN, 2026-09-06) and needs no re-run — it changes no code and no golden. COLORADO IS NOT BEING ANNOTATED EXHAUSTIVELY — its golden stays a 7-element spot check and it contributes recall and duplication evidence only.",
+  "⚠️_CORRECTION_20260906": "The first recording of this task reported 0 duplicates surviving the merge and read KY's 11 unmatched detections as an annotation gap. BOTH ARE WITHDRAWN. duplicate_analysis was keyed on eval_detector._match_key, which ends in age_band — the field the duplicates differ in — so all eleven were hidden, in the direction that flatters the system. Corrected: 11 duplicates survive the merge on KY, they are the entire precision shortfall, and KY's golden does NOT under-annotate. Generalizable lesson, now in duplicate_analysis's docstring: a duplicate check must be keyed more loosely than the merge it audits, or it can only confirm that merge's opinion of itself.",
+  "artifacts": {
+    "1_annotation_EDITABLE": "evaluation/ground_truth_detector/{KY,CO}.json — the golden; a review verdict edits THIS",
+    "2_run": "outputs/scale-08-29-26/{KY,CO}-detection.json — trimmed-tier detection, fetched from S3 unmodified",
+    "3_graded_input": "graded_input/{KY,CO}_graded_input_tol{0,1}.json — the EXACT pair handed to grade_elements: golden verbatim + the run filtered to the page window, carrying the _domain tag it was graded with. Added 2026-09-06; before that the graded slice existed only in memory, which made a row un-auditable without re-deriving the window and the tagging by hand.",
+    "4_result": "{KY,CO}_scale_grade.json",
+    "5_review_sheets": "review/*.md — human adjudication, page context included"
+  },
+  "⚠️_WITHDRAWN_20260906": "An earlier version of this manifest proposed annotating Colorado's 10-page window exhaustively to obtain a second precision-bearing state. That is WITHDRAWN. Colorado's golden is not changing.",
+  "age_band_verdict": {
+    "verdict": "RUN",
+    "decided": "2026-09-06",
+    "decided_by": "Emily Cheyne",
+    "meaning": "The run over-attributes the page banner onto individual elements. The golden is right and does not change. Reported as a detector defect at scale (paper §8).",
+    "no_code_change": "code_version_hash stays at 14374dba; no recorded result is invalidated.",
+    "rationale": [
+      "KY's expected_depth_map already describes the 'THREE AND FOUR YEAR OLDS' banner as page furniture the domain heading sits above — context, not a property.",
+      "The band already has a home one stage later: ground_truth_parser/KY.json sets default_age_band 36-60 and parse_hierarchy applies it document-wide. The detector stamping the banner on elements is a second, competing mechanism for the same fact.",
+      "All six goldens draw the same line: a detector age_band comes from a side-by-side COLUMN that distinguishes siblings (CA Early/Later, TX PK3/PK4). KY, CO, NV, AZ annotate null throughout. A banner applying to every element carries no distinguishing information."
+    ],
+    "⚠️_deliberately_left_in_place": "11 detector duplicates surviving _dedup_elements and 7 fabricated `.N` primary keys in the KY parser output. Fixing them needs the rejected SCHEMA option (a prompt rule that a page banner is not an element's age_band), which moves code_version_hash and forces a re-record of Tasks 1-4. Deferred on purpose, not overlooked.",
+    "rejected": {
+      "GOLDEN": "would set 44 KY elements to the banner value — contradicts the other five states, and would not fix the duplicates since the run also emits null for 24 elements in the same window.",
+      "SCHEMA": "the principled fix and the strongest §6 finding, but it moves code_version_hash and forces a re-record of Tasks 1-4. Out of scope for this arXiv round."
+    }
+  }
+}

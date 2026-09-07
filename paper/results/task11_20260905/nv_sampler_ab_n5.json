@@ -1,0 +1,449 @@
+{
+  "question": "Does the Pass-1 layout-stratified sampler CAUSE Nevada's two domain-code fixes, at n>1 per arm?",
+  "supersedes": "paper/results/task2_20260826/nv_attribution_ab.json (n=1 per arm)",
+  "code_version_hash": "14374dba",
+  "extraction": "/Users/emilycheyne/Development/kinder-readiness/outputs/08-26-26-2/NV-extraction.json",
+  "golden": "/Users/emilycheyne/Development/kinder-readiness/evaluation/ground_truth_detector/NV.json",
+  "runs_per_arm": 5,
+  "method": "Two arms on ONE frozen extraction, same code version, same prompts, same grader, use_cache=False on every draw. The ONLY difference is which blocks Pass-1 sees: arm B monkeypatches detector._sample_blocks_for_depth_map back to the pre-99b853cc stride implementation. Rule 4's 'code is REQUIRED' clarification is present in BOTH arms, which is what exonerates it.",
+  "summary": {
+    "A_new_layout_sampler": {
+      "n_draws": 5,
+      "code_accuracy_mean": 0.965,
+      "code_accuracy_min": 0.9565217391304348,
+      "code_accuracy_max": 0.9777777777777777,
+      "code_accuracy_stdev": 0.0116,
+      "code_matches_per_draw": [
+        "44/46",
+        "44/45",
+        "44/46",
+        "44/45",
+        "44/46"
+      ],
+      "recall_per_draw": [
+        1.0,
+        0.9782608695652174,
+        1.0,
+        0.9782608695652174,
+        1.0
+      ],
+      "description_per_draw": [
+        "3/3",
+        "3/3",
+        "3/3",
+        "3/3",
+        "3/3"
+      ],
+      "mismatch_frequency": {
+        "NV-DOM-03": "5/5",
+        "NV-DOM-02": "3/5"
+      },
+      "depth_map_passed_per_draw": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "B_old_stride_sampler": {
+      "n_draws": 5,
+      "code_accuracy_mean": 0.9348,
+      "code_accuracy_min": 0.9347826086956522,
+      "code_accuracy_max": 0.9347826086956522,
+      "code_accuracy_stdev": 0.0,
+      "code_matches_per_draw": [
+        "43/46",
+        "43/46",
+        "43/46",
+        "43/46",
+        "43/46"
+      ],
+      "recall_per_draw": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "description_per_draw": [
+        "3/3",
+        "3/3",
+        "3/3",
+        "3/3",
+        "3/3"
+      ],
+      "mismatch_frequency": {
+        "NV-DOM-02": "5/5",
+        "NV-SUB-06": "5/5",
+        "NV-DOM-03": "5/5"
+      },
+      "depth_map_passed_per_draw": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "verdict": {
+    "domain_mismatches_in_arm_A": {
+      "NV-DOM-02": 3,
+      "NV-DOM-03": 5
+    },
+    "domain_mismatches_in_arm_B": {
+      "NV-DOM-02": 5,
+      "NV-DOM-03": 5
+    },
+    "established": false,
+    "reading": "NOT ESTABLISHED at this n — the mismatches do not separate the arms cleanly. Report the per-draw frequencies and keep the hedge, or state the effect as a rate rather than as a cause."
+  },
+  "draws": {
+    "A_new_layout_sampler": [
+      {
+        "n_detected": 54,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8518518518518519,
+        "code_matches": 44,
+        "code_total": 46,
+        "code_accuracy": 0.9565217391304348,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "Science"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 52,
+        "matched": 45,
+        "n_golden": 46,
+        "recall": 0.9782608695652174,
+        "precision": 0.8653846153846154,
+        "code_matches": 44,
+        "code_total": 45,
+        "code_accuracy": 0.9777777777777777,
+        "code_mismatch_ids": [
+          "NV-DOM-03"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 53,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8679245283018868,
+        "code_matches": 44,
+        "code_total": 46,
+        "code_accuracy": 0.9565217391304348,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "Science"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 52,
+        "matched": 45,
+        "n_golden": 46,
+        "recall": 0.9782608695652174,
+        "precision": 0.8653846153846154,
+        "code_matches": 44,
+        "code_total": 45,
+        "code_accuracy": 0.9777777777777777,
+        "code_mismatch_ids": [
+          "NV-DOM-03"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 53,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8679245283018868,
+        "code_matches": 44,
+        "code_total": 46,
+        "code_accuracy": 0.9565217391304348,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "Science"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      }
+    ],
+    "B_old_stride_sampler": [
+      {
+        "n_detected": 53,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8679245283018868,
+        "code_matches": 43,
+        "code_total": 46,
+        "code_accuracy": 0.9347826086956522,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03",
+          "NV-SUB-06"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "SCIE"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ],
+          [
+            "NV-SUB-06",
+            "sub_strand",
+            "T.TT",
+            "TT"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 53,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8679245283018868,
+        "code_matches": 43,
+        "code_total": 46,
+        "code_accuracy": 0.9347826086956522,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03",
+          "NV-SUB-06"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "SCIE"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ],
+          [
+            "NV-SUB-06",
+            "sub_strand",
+            "T.TT",
+            "TT"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 52,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8846153846153846,
+        "code_matches": 43,
+        "code_total": 46,
+        "code_accuracy": 0.9347826086956522,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03",
+          "NV-SUB-06"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "SCIE"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ],
+          [
+            "NV-SUB-06",
+            "sub_strand",
+            "T.TT",
+            "TT"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 52,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8846153846153846,
+        "code_matches": 43,
+        "code_total": 46,
+        "code_accuracy": 0.9347826086956522,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03",
+          "NV-SUB-06"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "Science"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ],
+          [
+            "NV-SUB-06",
+            "sub_strand",
+            "T.TT",
+            "TT"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      },
+      {
+        "n_detected": 53,
+        "matched": 46,
+        "n_golden": 46,
+        "recall": 1.0,
+        "precision": 0.8679245283018868,
+        "code_matches": 43,
+        "code_total": 46,
+        "code_accuracy": 0.9347826086956522,
+        "code_mismatch_ids": [
+          "NV-DOM-02",
+          "NV-DOM-03",
+          "NV-SUB-06"
+        ],
+        "code_mismatches": [
+          [
+            "NV-DOM-02",
+            "domain",
+            "S",
+            "SCIE"
+          ],
+          [
+            "NV-DOM-03",
+            "domain",
+            "T",
+            "TECH"
+          ],
+          [
+            "NV-SUB-06",
+            "sub_strand",
+            "T.TT",
+            "TT"
+          ]
+        ],
+        "description_matches": 3,
+        "description_total": 3,
+        "depth_map_passed": true,
+        "depth_map_detail": "matched canonical-level sequence ['domain', 'strand', 'sub_strand', 'indicator']"
+      }
+    ]
+  }
+}

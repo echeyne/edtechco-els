@@ -230,6 +230,58 @@ def _match_key(std: dict) -> Tuple[str, Optional[str]]:
     )
 
 
+def _parent_codes(std: dict) -> Tuple[Optional[str], Optional[str], Optional[str]]:
+    """(sub_strand, strand, domain) codes, for tie-breaking between candidates."""
+    return tuple(
+        ((std.get(level) or {}).get("code") or None)
+        for level in ("sub_strand", "strand", "domain")
+    )
+
+
+def _narrow_by_ancestry(golden_exp: dict, cands: List[dict]) -> List[dict]:
+    """Pick the candidate that sits under the SAME parents as the golden.
+
+    ⚠️ Why this is needed, and why it is a tie-break rather than part of the key
+    (found 2026-09-06 grading Kentucky's trimmed tier). `_match_key` is
+    `(indicator name, age_band)`, and at full-document scale that is not unique
+    on real documents: Kentucky prints "Attempts challenging experiences." under
+    BOTH `AL.4.1` and `AL.4.2`, and the same indicator name under Creative Arts'
+    dance (`CA.1.2`) and music (`CA.1.3`) sub-strands. These are distinct
+    standards, not duplicates. Without this, `grade_parser` took `cands[0]`,
+    paired the golden's `CA.1.2` row with the run's `CA.1.3` row, and then
+    reported every differing field — **12 of 17 field mismatches in that grade
+    were phantom**, artifacts of pairing the wrong twin.
+
+    ⚠️ It is not in `_match_key` for the reason that key's own docstring gives:
+    a code the parser got WRONG must still pair, so the error is graded as the
+    wrong code it is rather than vanishing into `dropped` and out of
+    `field_accuracy`. Narrowing on ancestry as a key would reintroduce exactly
+    that failure. So this only ever runs when several candidates already share
+    the key, and it returns the original list unchanged when no candidate
+    matches on ancestry -- a wrong parent code is then still graded as a
+    mismatch, never as a drop.
+
+    Tried in order of specificity, stopping at the first level that separates
+    them: sub_strand, then strand, then domain.
+
+    ⚠️ Already live at the _only_subset tier: the recorded California parsing
+    output has 16 colliding keys among 94 standards. No recorded number moves,
+    because every recorded report shows `duplicated: []` -- the goldens are too
+    small to have hit a collision -- but the defect was present, not merely
+    latent.
+    """
+    want = _parent_codes(golden_exp)
+    for depth in range(3):
+        if want[depth] is None:
+            continue
+        exact = [c for c in cands if _parent_codes(c)[depth] == want[depth]]
+        if len(exact) == 1:
+            return exact
+        if exact:
+            cands = exact
+    return cands
+
+
 def _index_standards(standards: List[dict]) -> Dict[Tuple[str, Optional[str]], List[dict]]:
     idx: Dict[Tuple[str, Optional[str]], List[dict]] = defaultdict(list)
     for s in standards:
@@ -309,6 +361,11 @@ def grade_parser(golden: dict, standards: List[dict]) -> ParserStateReport:
             exact = [c for c in cands if _variant_suffix(c) == want]
             if exact:
                 cands = exact
+
+        # Second tie-break: same name, same band, same proficiency column, but
+        # genuinely different parents. See _narrow_by_ancestry.
+        if len(cands) > 1:
+            cands = _narrow_by_ancestry(expected, cands)
 
         if not cands:
             rep.dropped.append(gid)
@@ -530,7 +587,15 @@ def main() -> int:
 
     detection_dir = Path(args.detection_dir)
     golden_dir = Path(args.golden_dir)
-    states = args.state or sorted(p.stem for p in golden_dir.glob("*.json"))
+    # ⚠️ Only a bare two-letter state code names a state. The golden directories
+    # also hold tier-scoped goldens (KY_trimmed.json), their _provenance siblings,
+    # and any work-in-progress draft; enumerating those sends the suite hunting for
+    # a nonexistent "<name>-extraction.json", and it is the same glob that once
+    # silently broke the prompt-provenance scan. So the rule is shape-based rather
+    # than a list of names to exclude. Tier-scoped goldens are graded by
+    # paper/analysis/scale_grade*.py, which take explicit paths.
+    states = args.state or sorted(p.stem for p in golden_dir.glob("*.json")
+                                  if re.fullmatch(r"[A-Z]{2}", p.stem))
     output_dir = Path(args.output_dir) if args.output_dir else None
 
     reports: List[ParserStateReport] = []

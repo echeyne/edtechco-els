@@ -580,20 +580,37 @@ def build_corpus_appendix_table(tiers):
 
 
 def build_corpus_pages_table(pr):
-    """Appendix -- the pages each tier RETAINS, in the published PDF's numbering.
+    """Appendix -- the pages each tier RETAINS, in BOTH page numberings.
 
     Guardrail 3 asks for the manual trimming to be disclosed with retained page
     ranges, and until 2026-09-04 nothing in the repo recorded them. They are now
     derived from the PDFs by paper/analysis/corpus_page_ranges.py (text match of
     every tier page back to the published document), so they are regenerable.
+
+    ⚠️ **Corrected 2026-09-06.** Until then this table's header said "in the
+    published PDF's numbering" and its caption promised "the published
+    document's own page numbering, so the hand trimming can be reproduced from
+    the issuing agency's copy" -- while printing PDF FILE indices. Those are not
+    the same number, and the gap is the size of the front matter: Kentucky's PDF
+    page 52 carries printed page **39**. A reader following the caption's own
+    instruction, opening the agency's copy and turning to page 52, lands 13
+    pages past the retained range. Kentucky also supplies the ambiguity in its
+    purest form -- its subset includes PDF page 65, whose printed number is 52.
+
+    Both numberings are now printed, and the printed column is populated only
+    where folio extraction is reliable (see `printed_numbering_reliability` in
+    the source file); it is left blank rather than guessed for the four
+    documents where it is not.
     """
     L = header("paper/results/corpus_page_ranges.json", tier="describes_tiers")
     L += [r"\begin{table*}[t]", r"\centering", r"\small",
-          r"\begin{tabular}{llrp{0.62\textwidth}}", r"\toprule",
+          r"\begin{tabular}{llrp{0.40\textwidth}p{0.22\textwidth}}", r"\toprule",
           r"\textbf{State} & \textbf{Tier} & \textbf{pp} & "
-          r"\textbf{Pages retained, in the published PDF's numbering} \\",
+          r"\textbf{Retained, by PDF page index} & "
+          r"\textbf{Same pages, as printed} \\",
           r"\midrule"]
     unmatched = 0
+    n_printed = 0
     for st in ALL_STATES:
         e = pr["states"][st]
         for tier in ("trimmed", "only_subset"):
@@ -601,9 +618,15 @@ def build_corpus_pages_table(pr):
             if not t:
                 continue
             unmatched += len(t["unmatched_tier_pages"])
+            pr_range = t.get("retained_ranges_printed")
+            if pr_range:
+                n_printed += 1
+                printed = pr_range.replace("-", "--")
+            else:
+                printed = r"\emph{not recovered}"
             L.append(rf"{st} & \texttt{{\_{esc(tier)}}} & {t['pages']} & "
-                     rf"{t['retained_ranges'].replace('-', '--')} "
-                     rf"(of {e['published_pages']}) \\")
+                     rf"{t['retained_ranges_pdf_index'].replace('-', '--')} "
+                     rf"(of {e['published_pages']}) & {printed} \\")
     co = pr["states"]["CO"].get("ages_3_5_within_birth_to_8")
     L += [r"\bottomrule", r"\end{tabular}"]
     co_note = ""
@@ -614,10 +637,16 @@ def build_corpus_pages_table(pr):
     match_note = (r" Every tier page matched a published page." if unmatched == 0 else
                   rf" {unmatched} tier page(s) matched no published page and are listed "
                   r"in the source file rather than guessed.")
-    L += [r"\caption{Pages retained at each corpus tier, in the published document's "
-          r"own page numbering, so the hand trimming can be reproduced from the "
-          r"issuing agency's copy. Recovered by matching each tier page's text back to "
-          r"the published PDF; no annotation or model call is involved."
+    L += [r"\caption{Pages retained at each corpus tier, so the hand trimming can be "
+          r"reproduced from the issuing agency's copy. \textbf{Two numberings are "
+          r"given and they are not interchangeable}: the PDF page index counts pages "
+          r"in the file, while the printed number is what appears on the page, and "
+          r"they differ by each document's unnumbered front matter (Kentucky's PDF "
+          r"page 52 is printed page 39). Navigate a file by the first and a paper "
+          r"copy by the second. Ranges were recovered by matching each tier page's "
+          r"text back to the published PDF; no annotation or model call is involved. "
+          r"The printed column is populated only where page-number extraction is "
+          r"reliable across the tier, and left blank rather than guessed otherwise."
           + match_note +
           r" California has no \texttt{\_trimmed} tier and Colorado's is the whole "
           r"document. Source: \texttt{paper/results/corpus\_page\_ranges.json}.}",

@@ -20,7 +20,9 @@ elements into a single canonical schema with no identifier collisions. Ablating
 the depth map degrades exactly the levels whose identity is positional and
 leaves the others untouched; a rule-based extractor matches the method at a
 document's top division and collapses beneath it. The system carries no
-per-state rule, which is what allows a new state to be added without new code.
+per-state code path, which is what allows a new state to be added without new
+code; the prompts' worked examples are the one place the corpus's own documents
+appear, and they are itemized rather than left implicit.
 
 The most valuable immediate extension is also the cheapest. Kentucky's golden is
 detection-exhaustive, so grading it inside a trimmed-tier run would yield

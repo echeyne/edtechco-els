@@ -1,0 +1,225 @@
+{
+  "state": "KY",
+  "source_tier": "only_subset",
+  "target_tier": "trimmed",
+  "golden_file": "evaluation/ground_truth_parser/KY.json",
+  "parsing_file": "outputs/scale-08-29-26/KY-parsing.json",
+  "code_version_hash": "14374dba",
+  "page_translation": {
+    "standards_translated": 26,
+    "map_source_to_target": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 15,
+      "7": 21,
+      "8": 22
+    },
+    "unmappable_source_pages": [],
+    "_why": "source_page is a GRADED field recorded in _only_subset numbering in the golden and in target-tier numbering in the run. Without this translation every matched standard reports a false source_page mismatch."
+  },
+  "corrected": {
+    "_arm": "source_page translated — THIS IS THE REAL FIGURE",
+    "n_golden": 26,
+    "n_parsed_in_run": 214,
+    "matched": 19,
+    "coverage": 0.7308,
+    "field_accuracy": 0.9942,
+    "standards_all_fields_ok": 17,
+    "dropped": [
+      "KY-STD-18",
+      "KY-STD-19",
+      "KY-STD-20",
+      "KY-STD-21",
+      "KY-STD-22",
+      "KY-STD-23",
+      "KY-STD-24"
+    ],
+    "duplicated": [],
+    "mismatches_by_field": {
+      "indicator.description": 2
+    },
+    "mismatches": [
+      {
+        "test_case_id": "KY-STD-11",
+        "field": "indicator.description",
+        "expected": "After Joshua sets plates, cups, and food from Dramatic Play on the tray of Abigail's wheelchair, they go out to the playground so they can pretend to have a picnic outside. Connor and Nicholas use cardboard building blocks to create holding pens, then place animal figures in the pens and collect play food from Dramatic Play to feed the animals. Natalie takes a pot to the Writing Center, drops all of the magnetic alphabet letters in the pot, and puts the pot on the stove to make soup. Julian takes a maraca from the Music Center to Dramatic Play, where he sets it in the lap of the baby doll, pretending the baby is shaking a rattle.",
+        "got": "After Joshua sets plates, cups, and food from Dramatic Play on the tray of Abigail's wheelchair, they go out to the playground so they can pretend to have a picnic outside. Connor and Nicholas use cardboard building blocks to create holding pens, then place"
+      },
+      {
+        "test_case_id": "KY-STD-26",
+        "field": "indicator.description",
+        "expected": "Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside.",
+        "got": "Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside. When broccoli is put on his plate, Peter signs, \"I don't like that\" and pushes his plate away. Allison puts the music center picture on her visual schedule to let her teacher know where she wants to go. Singe says, \"Elly took my blocks. She should give them back.\""
+      }
+    ]
+  },
+  "coverage_decomposition": {
+    "n_absent": 0,
+    "n_age_band_drift": 7,
+    "coverage_ignoring_age_band": 1.0,
+    "absent": [],
+    "age_band_drift": [
+      {
+        "test_case_id": "KY-STD-18",
+        "golden_standard_id": "US-KY-2021-LEL.1.1.AAPWI",
+        "run_standard_id": "US-KY-2021-LEL.1.1.AAPWI",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Attends to an adult or peer who is communicating verbally or nonverbally."
+      },
+      {
+        "test_case_id": "KY-STD-19",
+        "golden_standard_id": "US-KY-2021-LEL.1.1.FSD",
+        "run_standard_id": "US-KY-2021-LEL.1.1.FSD",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Follows simple directions."
+      },
+      {
+        "test_case_id": "KY-STD-20",
+        "golden_standard_id": "US-KY-2021-LEL.1.1.GILPC",
+        "run_standard_id": "US-KY-2021-LEL.1.1.GILPC",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Gains information by listening to/processing communications from others."
+      },
+      {
+        "test_case_id": "KY-STD-21",
+        "golden_standard_id": "US-KY-2021-LEL.1.1.IAISE",
+        "run_standard_id": "US-KY-2021-LEL.1.1.IAISE",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Interprets or applies information someone else communicates verbally or nonverba"
+      },
+      {
+        "test_case_id": "KY-STD-22",
+        "golden_standard_id": "US-KY-2021-LEL.2.1.UNCCE",
+        "run_standard_id": "US-KY-2021-LEL.2.1.UNCCE",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Uses non-verbal communication to convey emotions."
+      },
+      {
+        "test_case_id": "KY-STD-23",
+        "golden_standard_id": "US-KY-2021-LEL.2.1.ICOPP",
+        "run_standard_id": "US-KY-2021-LEL.2.1.ICOPP",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Identifies or chooses an object or person by pointing, physically touching, or m"
+      },
+      {
+        "test_case_id": "KY-STD-24",
+        "golden_standard_id": "US-KY-2021-LEL.2.1.UGMII",
+        "run_standard_id": "US-KY-2021-LEL.2.1.UGMII",
+        "standard_id_matches": true,
+        "golden_age_band": "36-60",
+        "run_age_band": [
+          "36-48"
+        ],
+        "name": "Uses gestures and/or movements to initiate interactions or to get needs met."
+      }
+    ],
+    "_reading": "`absent` is a standard the parser genuinely failed to produce at scale. `age_band_drift` is one it produced -- check `standard_id_matches` -- that fails the (name, age_band) match key on its band alone. Only the first is a parsing loss."
+  },
+  "uncorrected": {
+    "_arm": "source_page NOT translated — artifact size only",
+    "n_golden": 26,
+    "n_parsed_in_run": 214,
+    "matched": 19,
+    "coverage": 0.7308,
+    "field_accuracy": 0.9766,
+    "standards_all_fields_ok": 12,
+    "dropped": [
+      "KY-STD-18",
+      "KY-STD-19",
+      "KY-STD-20",
+      "KY-STD-21",
+      "KY-STD-22",
+      "KY-STD-23",
+      "KY-STD-24"
+    ],
+    "duplicated": [],
+    "mismatches_by_field": {
+      "source_page": 6,
+      "indicator.description": 2
+    },
+    "mismatches": [
+      {
+        "test_case_id": "KY-STD-11",
+        "field": "indicator.description",
+        "expected": "After Joshua sets plates, cups, and food from Dramatic Play on the tray of Abigail's wheelchair, they go out to the playground so they can pretend to have a picnic outside. Connor and Nicholas use cardboard building blocks to create holding pens, then place animal figures in the pens and collect play food from Dramatic Play to feed the animals. Natalie takes a pot to the Writing Center, drops all of the magnetic alphabet letters in the pot, and puts the pot on the stove to make soup. Julian takes a maraca from the Music Center to Dramatic Play, where he sets it in the lap of the baby doll, pretending the baby is shaking a rattle.",
+        "got": "After Joshua sets plates, cups, and food from Dramatic Play on the tray of Abigail's wheelchair, they go out to the playground so they can pretend to have a picnic outside. Connor and Nicholas use cardboard building blocks to create holding pens, then place"
+      },
+      {
+        "test_case_id": "KY-STD-14",
+        "field": "source_page",
+        "expected": 6,
+        "got": 15
+      },
+      {
+        "test_case_id": "KY-STD-15",
+        "field": "source_page",
+        "expected": 6,
+        "got": 15
+      },
+      {
+        "test_case_id": "KY-STD-16",
+        "field": "source_page",
+        "expected": 6,
+        "got": 15
+      },
+      {
+        "test_case_id": "KY-STD-17",
+        "field": "source_page",
+        "expected": 6,
+        "got": 15
+      },
+      {
+        "test_case_id": "KY-STD-25",
+        "field": "source_page",
+        "expected": 8,
+        "got": 22
+      },
+      {
+        "test_case_id": "KY-STD-26",
+        "field": "source_page",
+        "expected": 8,
+        "got": 22
+      },
+      {
+        "test_case_id": "KY-STD-26",
+        "field": "indicator.description",
+        "expected": "Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside.",
+        "got": "Samantha gets her PECS (Picture Exchange Communication System) board and shows the picture of the outdoors to the teacher to communicate that she wants to go outside. When broccoli is put on his plate, Peter signs, \"I don't like that\" and pushes his plate away. Allison puts the music center picture on her visual schedule to let her teacher know where she wants to go. Singe says, \"Elly took my blocks. She should give them back.\""
+      }
+    ]
+  },
+  "identifier_uniqueness_over_whole_run": {
+    "n_standards": 214,
+    "n_distinct_standard_ids": 214,
+    "collisions": [],
+    "_why_this_matters": "Consults NO golden, so it is as strong as the run is large. The paper's collision-free identifier claim is measured over tens of standards at the _only_subset tier; this measures it over 214."
+  },
+  "⚠️_precision_not_reported": "grade_parser measures coverage and per-field accuracy over matched pairs. A golden of 26 against a run of 214 says nothing about the other 188. Coverage is NOT precision."
+}

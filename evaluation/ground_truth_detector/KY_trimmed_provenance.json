@@ -1,0 +1,1483 @@
+{
+  "_what_this_is": "Annotation provenance for KY_trimmed.json. Not a golden and never graded: these are the working keys the annotation was built with, kept because they record HOW the golden was produced, which the golden itself no longer shows.",
+  "golden": "evaluation/ground_truth_detector/KY_trimmed.json",
+  "generated_from": "outputs/scale-08-29-26/ (pipeline-US-KY-2021-full08292026, _trimmed tier)",
+  "⚠️_derivation_and_its_limit": "Every row was seeded from the pipeline's own output and then checked against kentucky_all_standards_2021_trimmed.pdf by the annotator. That supports a PRECISION claim — every emitted element was inspected — and it does NOT support a RECALL claim, because verifying emitted rows cannot find omissions. An element the detector never emitted is absent here too, invisibly. Independent structural evidence bounds that gap at the middle levels: all 17 printed 'Benchmark N.N:' ids and all 15 '<Domain> Standard N:' headings in the document appear in the detector golden. The 202 indicators carry no equivalent check.",
+  "page_numbering": "⚠️ THREE PAGE NUMBERINGS APPEAR BELOW AND THEY ARE NOT THE SAME NUMBER. `source_page` is the page in the _trimmed PDF the pipeline actually processed (1-52). `_published_pdf_page` is that page's index in the 120-page published PDF. `_printed_page_number` is what is PRINTED at the bottom of the page, which is what you see when annotating from the document — it runs 13 behind the PDF index because the front matter is unnumbered. Trimmed p2 = PDF p52 = printed p39. An earlier version of this file carried only `_published_page`, which read as the printed number and was the PDF index; that field is renamed and the printed number added.",
+  "retired_top_level_notes": {},
+  "rows": [
+    {
+      "test_case_id": "KY-DOM-001",
+      "_subset_test_case_id": "KY-DOM-01",
+      "_subset_source_page": 2,
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-STR-001",
+      "_subset_test_case_id": "KY-STR-01",
+      "_subset_source_page": 2,
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-SUB-001",
+      "_subset_test_case_id": "KY-SUB-01",
+      "_subset_source_page": 2,
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-IND-001",
+      "_subset_test_case_id": "KY-IND-01",
+      "_subset_source_page": 2,
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-IND-002",
+      "_subset_test_case_id": "KY-IND-02",
+      "_subset_source_page": 2,
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-IND-003",
+      "_subset_test_case_id": "KY-IND-03",
+      "_subset_source_page": 2,
+      "_published_pdf_page": 52,
+      "_printed_page_number": 39
+    },
+    {
+      "test_case_id": "KY-SUB-002",
+      "_subset_test_case_id": "KY-SUB-02",
+      "_subset_source_page": 3,
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-IND-004",
+      "_subset_test_case_id": "KY-IND-04",
+      "_subset_source_page": 3,
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-IND-005",
+      "_subset_test_case_id": "KY-IND-05",
+      "_subset_source_page": 3,
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-IND-006",
+      "_subset_test_case_id": "KY-IND-06",
+      "_subset_source_page": 3,
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-SUB-003",
+      "_subset_test_case_id": "KY-SUB-03",
+      "_subset_source_page": 3,
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-IND-007",
+      "_subset_test_case_id": "KY-IND-07",
+      "_subset_source_page": 3,
+      "_published_pdf_page": 53,
+      "_printed_page_number": 40
+    },
+    {
+      "test_case_id": "KY-IND-008",
+      "_subset_test_case_id": "KY-IND-08",
+      "_subset_source_page": 4,
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-STR-002",
+      "_subset_test_case_id": "KY-STR-02",
+      "_subset_source_page": 4,
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-SUB-004",
+      "_subset_test_case_id": "KY-SUB-04",
+      "_subset_source_page": 4,
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-IND-009",
+      "_subset_test_case_id": "KY-IND-09",
+      "_subset_source_page": 4,
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-IND-010",
+      "_subset_test_case_id": "KY-IND-10",
+      "_subset_source_page": 4,
+      "_published_pdf_page": 54,
+      "_printed_page_number": 41
+    },
+    {
+      "test_case_id": "KY-IND-011",
+      "_subset_test_case_id": "KY-IND-11",
+      "_subset_source_page": 5,
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-SUB-005",
+      "_subset_test_case_id": "KY-SUB-05",
+      "_subset_source_page": 5,
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-IND-012",
+      "_subset_test_case_id": "KY-IND-12",
+      "_subset_source_page": 5,
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-IND-013",
+      "_subset_test_case_id": "KY-IND-13",
+      "_subset_source_page": 5,
+      "_published_pdf_page": 55,
+      "_printed_page_number": 42
+    },
+    {
+      "test_case_id": "KY-IND-014",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-IND-015",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-STR-003",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-SUB-006",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-IND-016",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-IND-017",
+      "_published_pdf_page": 56,
+      "_printed_page_number": 43
+    },
+    {
+      "test_case_id": "KY-IND-018",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-IND-019",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-SUB-007",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-IND-020",
+      "_published_pdf_page": 57,
+      "_printed_page_number": 44
+    },
+    {
+      "test_case_id": "KY-IND-021",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-IND-022",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-IND-023",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-STR-004",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-SUB-008",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-IND-024",
+      "_published_pdf_page": 58,
+      "_printed_page_number": 45
+    },
+    {
+      "test_case_id": "KY-IND-025",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-IND-026",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-IND-027",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-IND-028",
+      "_published_pdf_page": 59,
+      "_printed_page_number": 46
+    },
+    {
+      "test_case_id": "KY-SUB-009",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-IND-029",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-IND-030",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-IND-031",
+      "_published_pdf_page": 60,
+      "_printed_page_number": 47
+    },
+    {
+      "test_case_id": "KY-DOM-002",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-STR-005",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-SUB-010",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-IND-032",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-IND-033",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-IND-034",
+      "_published_pdf_page": 61,
+      "_printed_page_number": 48
+    },
+    {
+      "test_case_id": "KY-SUB-011",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-IND-035",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-IND-036",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-IND-037",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-IND-038",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-SUB-012",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-IND-039",
+      "_published_pdf_page": 62,
+      "_printed_page_number": 49
+    },
+    {
+      "test_case_id": "KY-IND-040",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-IND-041",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-SUB-013",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-IND-042",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-IND-043",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-IND-044",
+      "_published_pdf_page": 63,
+      "_printed_page_number": 50
+    },
+    {
+      "test_case_id": "KY-DOM-003",
+      "_subset_test_case_id": "KY-DOM-02",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-STR-006",
+      "_subset_test_case_id": "KY-STR-03",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-SUB-014",
+      "_subset_test_case_id": "KY-SUB-06",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-IND-045",
+      "_subset_test_case_id": "KY-IND-14",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-IND-046",
+      "_subset_test_case_id": "KY-IND-15",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-SUB-015",
+      "_subset_test_case_id": "KY-SUB-07",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-IND-047",
+      "_subset_test_case_id": "KY-IND-16",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-IND-048",
+      "_subset_test_case_id": "KY-IND-17",
+      "_subset_source_page": 6,
+      "_published_pdf_page": 65,
+      "_printed_page_number": 52
+    },
+    {
+      "test_case_id": "KY-IND-049",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-IND-050",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-IND-051",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-SUB-016",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-IND-052",
+      "_published_pdf_page": 66,
+      "_printed_page_number": 53
+    },
+    {
+      "test_case_id": "KY-IND-053",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-IND-054",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-IND-055",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-IND-056",
+      "_published_pdf_page": 67,
+      "_printed_page_number": 54
+    },
+    {
+      "test_case_id": "KY-SUB-017",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-IND-057",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-IND-058",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-IND-059",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-SUB-018",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-IND-060",
+      "_published_pdf_page": 68,
+      "_printed_page_number": 55
+    },
+    {
+      "test_case_id": "KY-IND-061",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-IND-062",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-SUB-019",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-IND-063",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-IND-064",
+      "_published_pdf_page": 69,
+      "_printed_page_number": 56
+    },
+    {
+      "test_case_id": "KY-IND-065",
+      "_published_pdf_page": 70,
+      "_printed_page_number": 57
+    },
+    {
+      "test_case_id": "KY-DOM-004",
+      "_subset_test_case_id": "KY-DOM-03",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-STR-007",
+      "_subset_test_case_id": "KY-STR-04",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-SUB-020",
+      "_subset_test_case_id": "KY-SUB-08",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-IND-066",
+      "_subset_test_case_id": "KY-IND-18",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-IND-067",
+      "_subset_test_case_id": "KY-IND-19",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-IND-068",
+      "_subset_test_case_id": "KY-IND-20",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-IND-069",
+      "_subset_test_case_id": "KY-IND-21",
+      "_subset_source_page": 7,
+      "_published_pdf_page": 71,
+      "_printed_page_number": 58
+    },
+    {
+      "test_case_id": "KY-STR-008",
+      "_subset_test_case_id": "KY-STR-05",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-SUB-021",
+      "_subset_test_case_id": "KY-SUB-09",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-IND-070",
+      "_subset_test_case_id": "KY-IND-22",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-IND-071",
+      "_subset_test_case_id": "KY-IND-23",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-IND-072",
+      "_subset_test_case_id": "KY-IND-24",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-SUB-022",
+      "_subset_test_case_id": "KY-SUB-10",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-IND-073",
+      "_subset_test_case_id": "KY-IND-25",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-IND-074",
+      "_subset_test_case_id": "KY-IND-26",
+      "_subset_source_page": 8,
+      "_published_pdf_page": 72,
+      "_printed_page_number": 59
+    },
+    {
+      "test_case_id": "KY-IND-075",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-IND-076",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-IND-077",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-IND-078",
+      "_published_pdf_page": 73,
+      "_printed_page_number": 60
+    },
+    {
+      "test_case_id": "KY-SUB-023",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-IND-079",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-IND-080",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-IND-081",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-IND-082",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-STR-009",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-SUB-024",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-IND-083",
+      "_published_pdf_page": 74,
+      "_printed_page_number": 61
+    },
+    {
+      "test_case_id": "KY-IND-084",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-IND-085",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-SUB-025",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-IND-086",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-IND-087",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-IND-088",
+      "_published_pdf_page": 75,
+      "_printed_page_number": 62
+    },
+    {
+      "test_case_id": "KY-SUB-026",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-IND-089",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-IND-090",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-IND-091",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-SUB-027",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-IND-092",
+      "_published_pdf_page": 76,
+      "_printed_page_number": 63
+    },
+    {
+      "test_case_id": "KY-IND-093",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-IND-094",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-IND-095",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-IND-096",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-IND-097",
+      "_published_pdf_page": 77,
+      "_printed_page_number": 64
+    },
+    {
+      "test_case_id": "KY-IND-098",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-SUB-028",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-IND-099",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-IND-100",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-IND-101",
+      "_published_pdf_page": 78,
+      "_printed_page_number": 65
+    },
+    {
+      "test_case_id": "KY-SUB-029",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-IND-102",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-IND-103",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-IND-104",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-IND-105",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-STR-010",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-SUB-030",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-IND-106",
+      "_published_pdf_page": 79,
+      "_printed_page_number": 66
+    },
+    {
+      "test_case_id": "KY-IND-107",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-IND-108",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-SUB-031",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-IND-109",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-IND-110",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-IND-111",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-IND-112",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-IND-113",
+      "_published_pdf_page": 80,
+      "_printed_page_number": 67
+    },
+    {
+      "test_case_id": "KY-SUB-032",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-IND-114",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-IND-115",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-IND-116",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-IND-117",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-IND-118",
+      "_published_pdf_page": 81,
+      "_printed_page_number": 68
+    },
+    {
+      "test_case_id": "KY-DOM-005",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-STR-011",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-SUB-033",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-IND-119",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-IND-120",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-IND-121",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-IND-122",
+      "_published_pdf_page": 82,
+      "_printed_page_number": 69
+    },
+    {
+      "test_case_id": "KY-IND-123",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-IND-124",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-IND-125",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-IND-126",
+      "_published_pdf_page": 83,
+      "_printed_page_number": 70
+    },
+    {
+      "test_case_id": "KY-IND-127",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-SUB-034",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-IND-128",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-IND-129",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-IND-130",
+      "_published_pdf_page": 84,
+      "_printed_page_number": 71
+    },
+    {
+      "test_case_id": "KY-IND-131",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-IND-132",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-IND-133",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-IND-134",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-IND-135",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-SUB-035",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-IND-136",
+      "_published_pdf_page": 85,
+      "_printed_page_number": 72
+    },
+    {
+      "test_case_id": "KY-IND-137",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-IND-138",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-IND-139",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-IND-140",
+      "_published_pdf_page": 86,
+      "_printed_page_number": 73
+    },
+    {
+      "test_case_id": "KY-SUB-036",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-IND-141",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-IND-142",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-IND-143",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-IND-144",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-IND-145",
+      "_published_pdf_page": 87,
+      "_printed_page_number": 74
+    },
+    {
+      "test_case_id": "KY-DOM-006",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-STR-012",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-SUB-037",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-IND-146",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-IND-147",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-IND-148",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-IND-149",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-IND-150",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-IND-151",
+      "_published_pdf_page": 88,
+      "_printed_page_number": 75
+    },
+    {
+      "test_case_id": "KY-SUB-038",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-IND-152",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-IND-153",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-SUB-039",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-IND-154",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-IND-155",
+      "_published_pdf_page": 89,
+      "_printed_page_number": 76
+    },
+    {
+      "test_case_id": "KY-SUB-040",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-IND-156",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-IND-157",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-IND-158",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-IND-159",
+      "_published_pdf_page": 90,
+      "_printed_page_number": 77
+    },
+    {
+      "test_case_id": "KY-DOM-007",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-STR-013",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-SUB-041",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-IND-160",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-IND-161",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-IND-162",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-IND-163",
+      "_published_pdf_page": 91,
+      "_printed_page_number": 78
+    },
+    {
+      "test_case_id": "KY-IND-164",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-SUB-042",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-IND-165",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-IND-166",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-SUB-043",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-IND-167",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-IND-168",
+      "_published_pdf_page": 92,
+      "_printed_page_number": 79
+    },
+    {
+      "test_case_id": "KY-IND-169",
+      "_published_pdf_page": 93,
+      "_printed_page_number": 80
+    },
+    {
+      "test_case_id": "KY-IND-170",
+      "_published_pdf_page": 93,
+      "_printed_page_number": 80
+    },
+    {
+      "test_case_id": "KY-IND-171",
+      "_published_pdf_page": 93,
+      "_printed_page_number": 80
+    },
+    {
+      "test_case_id": "KY-IND-172",
+      "_published_pdf_page": 94,
+      "_printed_page_number": 81
+    },
+    {
+      "test_case_id": "KY-DOM-008",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-STR-014",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-SUB-044",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-IND-173",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-IND-174",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-IND-175",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-IND-176",
+      "_published_pdf_page": 95,
+      "_printed_page_number": 82
+    },
+    {
+      "test_case_id": "KY-IND-177",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-IND-178",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-IND-179",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-SUB-045",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-IND-180",
+      "_published_pdf_page": 96,
+      "_printed_page_number": 83
+    },
+    {
+      "test_case_id": "KY-IND-181",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-IND-182",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-SUB-046",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-IND-183",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-IND-184",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-IND-185",
+      "_published_pdf_page": 97,
+      "_printed_page_number": 84
+    },
+    {
+      "test_case_id": "KY-SUB-047",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-186",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-187",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-188",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-189",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-SUB-048",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-190",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-191",
+      "_published_pdf_page": 98,
+      "_printed_page_number": 85
+    },
+    {
+      "test_case_id": "KY-IND-192",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-IND-193",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-SUB-049",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-IND-194",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-IND-195",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-IND-196",
+      "_published_pdf_page": 99,
+      "_printed_page_number": 86
+    },
+    {
+      "test_case_id": "KY-IND-197",
+      "_published_pdf_page": 100,
+      "_printed_page_number": 87
+    },
+    {
+      "test_case_id": "KY-DOM-009",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-STR-015",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-SUB-050",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-IND-198",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-IND-199",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-SUB-051",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-IND-200",
+      "_published_pdf_page": 101,
+      "_printed_page_number": 88
+    },
+    {
+      "test_case_id": "KY-IND-201",
+      "_published_pdf_page": 102,
+      "_printed_page_number": 89
+    },
+    {
+      "test_case_id": "KY-IND-202",
+      "_published_pdf_page": 102,
+      "_printed_page_number": 89
+    }
+  ]
+}

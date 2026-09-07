@@ -1,0 +1,154 @@
+{
+  "task": "Task 13 — three fresh KY trimmed runs vs the verified trimmed goldens",
+  "date": "2026-09-07",
+  "git_commit": "47048d584d3a5eeab66d76fc690e4504c1026513",
+  "code_version_hash": "14374dba",
+  "runs": [
+    "pipeline-US-KY-2021-full09072026-1",
+    "-2",
+    "-3"
+  ],
+  "corpus_tier": "_trimmed (52pp, 100% of KY's standards)",
+  "goldens": {
+    "detector": "/Users/emilycheyne/Development/kinder-readiness/evaluation/ground_truth_detector/KY_trimmed.json",
+    "parser": "/Users/emilycheyne/Development/kinder-readiness/evaluation/ground_truth_parser/KY_trimmed.json",
+    "n_elements": 277,
+    "n_standards": 207
+  },
+  "⚠️_recall_ceiling": "These goldens were seeded from the 2026-08-29 run and verified against the PDF. Recall is therefore measured AGAINST A VERIFIED REFERENCE SET, not against the document: an element no run emits is missing from the golden too and cannot be detected here. Report it as such.",
+  "headline": {
+    "detector": {
+      "elements": {
+        "per_run": [
+          328,
+          327,
+          328
+        ],
+        "mean": 327.6667,
+        "min": 327,
+        "max": 328,
+        "stdev": 0.5774
+      },
+      "age_band_emitted": {
+        "per_run": [
+          164,
+          164,
+          164
+        ],
+        "mean": 164.0,
+        "min": 164,
+        "max": 164,
+        "stdev": 0.0
+      },
+      "recall_strict": {
+        "per_run": [
+          0.592057761732852,
+          0.5884476534296029,
+          0.592057761732852
+        ],
+        "mean": 0.5909,
+        "min": 0.5884476534296029,
+        "max": 0.592057761732852,
+        "stdev": 0.0021
+      },
+      "recall_ignoring_age_band": {
+        "per_run": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "mean": 1.0,
+        "min": 1.0,
+        "max": 1.0,
+        "stdev": 0.0
+      },
+      "absent": {
+        "per_run": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0.0,
+        "min": 0,
+        "max": 0,
+        "stdev": 0.0
+      },
+      "surplus_duplicates": {
+        "per_run": [
+          51,
+          50,
+          51
+        ],
+        "mean": 50.6667,
+        "min": 50,
+        "max": 51,
+        "stdev": 0.5774
+      },
+      "hallucination_candidates": {
+        "per_run": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0.0,
+        "min": 0,
+        "max": 0,
+        "stdev": 0.0
+      }
+    },
+    "parser": {
+      "coverage": {
+        "per_run": [
+          0.8068,
+          0.9275,
+          0.8406
+        ],
+        "mean": 0.8583,
+        "min": 0.8068,
+        "max": 0.9275,
+        "stdev": 0.0623
+      },
+      "field_accuracy": {
+        "per_run": [
+          0.9973,
+          0.9939,
+          0.9939
+        ],
+        "mean": 0.995,
+        "min": 0.9939,
+        "max": 0.9973,
+        "stdev": 0.002
+      },
+      "fabricated_keys": {
+        "per_run": [
+          10,
+          11,
+          11
+        ],
+        "mean": 10.6667,
+        "min": 10,
+        "max": 11,
+        "stdev": 0.5774
+      },
+      "id_collisions": {
+        "per_run": [
+          0,
+          0,
+          0
+        ],
+        "mean": 0.0,
+        "min": 0,
+        "max": 0,
+        "stdev": 0.0
+      }
+    }
+  },
+  "findings": {
+    "1_detection_complete_at_scale": "277/277 verified elements found by all three runs; 0 absent, 0 hallucination candidates. Non-circular, because the goldens were seeded from a DIFFERENT run (2026-08-29) and verified against the PDF.",
+    "2_age_band_is_systematic_not_variance": "164 elements carry the spurious band in every one of the three runs — stdev 0.0. It lands on the same elements each time, so it is a systematic misreading of the page banner rather than sampling noise.",
+    "3_duplication_is_15pct_not_the_window_figure": "50-52 surplus duplicate detections document-wide across all four runs (seed 52: 4 strand, 9 sub_strand, 39 indicator). Task 9's 8-page window showed 11 and under-stated it roughly fivefold.",
+    "4_parser_coverage_is_a_range_not_a_point": "0.807 / 0.927 / 0.841, stdev 0.062, tracking dropped counts of 40/15/33 — all age_band. Field accuracy by contrast is 0.995 stdev 0.002.",
+    "5_id_collisions_are_zero_by_construction": "disambiguate_colliding_standards renames collisions before grade_parser checks. The honest figure is 10-11 fabricated `.N` keys per run."
+  },
+  "regenerate": "python -m paper.analysis.grade_ky_trimmed --run outputs/ky-3runs-09-07-26/run1 --run outputs/ky-3runs-09-07-26/run2 --run outputs/ky-3runs-09-07-26/run3 --out paper/results/task13_20260907"
+}

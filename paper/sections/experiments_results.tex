@@ -359,14 +359,25 @@ accuracy at $46/46$ and I reported it as a held-out gain. It does not
 reproduce: five fresh runs on identical code, the same extraction and the same
 golden give $44$, $45$, $44$, $44$, $44$. Nevada's code accuracy is properly
 reported as a \emph{range} of 44--45 of 46, and the earlier point value was the
-top of its distribution rather than its center. I report this because the same
-caution applies to any single-run ablation arm, including one of my own: the
-attribution of Nevada's domain-code behavior to the depth-map sampler rests on
-one draw per arm, with an arm-to-arm gap no larger than the run-to-run spread
-measured here, and I therefore describe it as suggested rather than
-established. The depth-map ablation of \S\ref{sec:experiments-ablation} is not
-affected --- it is three runs per arm across six states and its direction never
-changes sign.
+top of its distribution rather than its center.
+
+The same caution applied to a single-run ablation arm of my own, and repeating
+it at $n{=}5$ per arm \emph{retired} the claim rather than confirming it. I had
+attributed Nevada's two domain-code failures to the Pass-1 sampler on one draw
+per arm. Across five draws, one of those codes fails in \emph{every} draw of
+\emph{both} arms, and the other fails in three of five draws of the arm that was
+supposed to fix it; at $n{=}1$ that arm had simply drawn the $46/46$ run above.
+What survives is a rate rather than a cause: the layout-stratified sampler gives
+mean code accuracy $0.965$ against the stride sampler's $0.935$, its worst draw
+beating the stride sampler's best, and it eliminates one sub-strand failure in
+five draws of five. It also introduces instability the stride sampler does not
+have, dropping a golden element in two draws of five where the stride sampler
+drops none, so it is better on average and not better in every respect. The
+sampler's motivating evidence is unaffected, because that evidence is a
+different and far larger failure --- a four-level document reported as three
+(\S\ref{sec:method-detection}) --- not these two codes. The depth-map ablation
+of \S\ref{sec:experiments-ablation} is likewise unaffected: it is three runs per
+arm across six states and its direction never changes sign.
 
 \paragraph{What this does and does not license.} These rates are \textbf{lower
 bounds, not estimates}. A defect firing in a minority of runs survives five

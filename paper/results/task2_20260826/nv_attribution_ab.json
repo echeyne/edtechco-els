@@ -70,5 +70,6 @@
     "Arm B scores 43/46, slightly WORSE than the 44/46 that 288c64f1 recorded, because of a third mismatch (NV-SUB-06 T.TT -> TT) that is ordinary detector sampling variance. The two DOMAIN mismatches are the stable, reproducible part and are what the A/B turns on."
   ],
   "supersedes": "The 'ATTRIBUTION IS NOT ISOLATED' caveat in paper/results/task2_20260826/manifest.json.",
-  "reproduce": "python /tmp/nv_ab_detector.py (script body recorded in this file's sibling findings.md)"
+  "reproduce": "python /tmp/nv_ab_detector.py (script body recorded in this file's sibling findings.md)",
+  "⚠️_SUPERSEDED_20260905": "SUPERSEDED by paper/results/task11_20260905/. This file's answer ('THE SAMPLER. Confirmed by controlled A/B') rests on ONE draw per arm and does not survive five: NV-DOM-03 fails in 5/5 draws of BOTH arms, and NV-DOM-02 fails 3/5 in the new-sampler arm. At n=1 this arm drew the 46/46 run the paper's own stability section reports as the top of a distribution. Kept unedited as the record of what was measured; do not cite its conclusion."
 }

@@ -1,0 +1,70 @@
+{
+  "task": "Task 11 — Nevada Pass-1 sampler A/B at n=5 per arm",
+  "date": "2026-09-05",
+  "git_commit": "47048d584d3a5eeab66d76fc690e4504c1026513",
+  "code_version_hash": "14374dba",
+  "verdict": "RETIRED, not established. The n=1 attribution is withdrawn.",
+  "supersedes": "paper/results/task2_20260826/nv_attribution_ab.json",
+  "headline": {
+    "arm_A_new_layout_sampler": {
+      "code_per_draw": [
+        "44/46",
+        "44/45",
+        "44/46",
+        "44/45",
+        "44/46"
+      ],
+      "mean": 0.965,
+      "stdev": 0.0116,
+      "recall_per_draw": [
+        1.0,
+        0.9782608695652174,
+        1.0,
+        0.9782608695652174,
+        1.0
+      ],
+      "mismatch_frequency": {
+        "NV-DOM-03": "5/5",
+        "NV-DOM-02": "3/5"
+      }
+    },
+    "arm_B_old_stride_sampler": {
+      "code_per_draw": [
+        "43/46",
+        "43/46",
+        "43/46",
+        "43/46",
+        "43/46"
+      ],
+      "mean": 0.9348,
+      "stdev": 0.0,
+      "recall_per_draw": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "mismatch_frequency": {
+        "NV-DOM-02": "5/5",
+        "NV-SUB-06": "5/5",
+        "NV-DOM-03": "5/5"
+      }
+    }
+  },
+  "findings": {
+    "1_causal_claim_refuted": "NV-DOM-03 fails in 5/5 draws of BOTH arms. The n=1 A/B's claim that reverting the sampler reintroduces the two domain-code failures is false for NV-DOM-03 and only partly true for NV-DOM-02 (3/5 in arm A vs 5/5 in arm B). At n=1 arm A drew the 46/46 run the paper already reports as the top of a distribution.",
+    "2_what_the_sampler_actually_does": "Mean code accuracy 0.965 vs 0.935 — arm A's WORST draw beats arm B's every draw. It eliminates NV-SUB-06 outright (0/5 vs 5/5) and roughly halves NV-DOM-02. It does not touch NV-DOM-03. State it as a rate, not a cause.",
+    "3_a_finding_AGAINST_the_sampler": "Arm A loses a golden element in 2 of 5 draws (recall 0.978); arm B holds 1.000 in all five and has stdev 0.0 on code accuracy. The layout sampler buys a modest consistent code gain at the cost of run-to-run instability the stride sampler does not have. Not currently in the paper; the sampler must not be described as strictly better."
+  },
+  "⚠️_contradicts": {
+    "paper/results/task2_20260826/nv_attribution_ab.json": "its answer and conclusion are superseded by this file; marked, not edited",
+    "CLAUDE.md §'Where Pass-1 loses a LEVEL (2026-08-24)'": "states the new sampler gives 46/46 on NV and that NV's domain-code failure is sampler-mediated. The 46/46 does not reproduce and the attribution is refuted for NV-DOM-03. NEEDS AN AUTHOR DECISION — it is a measurement claim in a design document, and the Kentucky level-collapse argument around it is unaffected."
+  },
+  "does_NOT_affect": [
+    "The paper's existing NV disclosure — its caption already says 'NV 44-45/46 across 5 repeat runs against 46/46 recorded', which arm A reproduces exactly.",
+    "The Kentucky level-collapse evidence for the sampler (4 levels reported as 3) — a different and much larger failure that this measurement does not touch.",
+    "The KY/CO goldens — independent, so no re-run needed after the Task 9 annotation work."
+  ],
+  "regenerate": "python -m paper.analysis.nv_sampler_ab_n5 --runs 5 --out paper/results/task11_20260905/nv_sampler_ab_n5.json"
+}

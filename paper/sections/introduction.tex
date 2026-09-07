@@ -62,8 +62,9 @@ approach available without first solving a different problem
 \paragraph{Contributions.}
 \begin{enumerate}
   \item A two-stage detection method built on per-document depth-map inference
-    and classify-by-nesting-position prompting, with no per-state rules
-    (\S\ref{sec:method-detection}).
+    and classify-by-nesting-position prompting, with no per-state code path
+    (\S\ref{sec:method-detection}; what the prompts do carry is itemized in
+    \S\ref{sec:method-discipline}).
   \item A parsing stage that resolves detected elements into a single canonical
     schema across documents that do not agree on level count or code namespace,
     producing deterministic, collision-free identifiers
@@ -78,6 +79,15 @@ approach available without first solving a different problem
     what carries the intermediate levels: removing it leaves domain and
     indicator recall untouched while strand falls to 0.920 and sub-strand to
     0.833 (\S\ref{sec:experiments-ablation}).
+  \item A reporting discipline that the rest of the evaluation is built to
+    satisfy, and which I offer as a contribution rather than as a caveat: every
+    table is labelled with the corpus tier it was computed at; every unmatched
+    detection is audited by hand and signed rather than assumed to be a false
+    positive; every number is regenerated from a recorded artifact by a named
+    script; a validation guard is shown catching a live defect rather than
+    asserted to work; and a previously recorded result of my own that failed to
+    reproduce is reported as a non-reproduction instead of quietly replaced
+    (\S\ref{sec:experiments-stability}, \S\ref{sec:discussion-limitations}).
 \end{enumerate}
 
 \paragraph{Scope of the reported numbers.} All quality measurements in this

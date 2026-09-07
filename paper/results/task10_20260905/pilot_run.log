@@ -1,0 +1,238 @@
+== AZ ==
+  [whole-document] AZ: 388 blocks, one call, ~14881 prompt tokens, model=us.anthropic.claude-opus-4-6-v1
+Found credentials in shared credentials file: ~/.aws/credentials
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 17663, "output_tokens": 14292, "total_tokens": 31955, "latency_ms": 195264.9, "estimated_cost_usd": 0.445615, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 52548 chars, 17663 in / 14292 out tokens, 195265ms
+  [whole-document] AZ: 67 elements
+== CA ==
+  [whole-document] CA: 659 blocks, one call, ~14561 prompt tokens, model=us.anthropic.claude-opus-4-6-v1
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 19940, "output_tokens": 16000, "total_tokens": 35940, "latency_ms": 142938.4, "estimated_cost_usd": 0.4997, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 52596 chars, 19940 in / 16000 out tokens, 142938ms
+No valid JSON array found. Response text: [
+  {
+    "level": "domain",
+    "code": "AL",
+    "title": "Approaches to Learning",
+    "description": null,
+    "age_band": null,
+    "confidence": 0.92,
+    "source_page": 2,
+    "source_text": "Approaches to Learning"
+  },
+  {
+    "level": "strand",
+    "code": "Strand 1.0",
+    "title": "Motivation to Learn",
+    "description": null,
+    "age_band": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Strand: 1.0 — Motivation to Learn"
+  },
+  {
+    "level": "sub_strand",
+    "code": "CI",
+    "title": "Curiosity and Interest",
+    "description": null,
+    "age_band": null,
+    "confidence": 0.95,
+    "source_page": 2,
+    "source_text": "Sub-Strand — Curiosity and Interest"
+  },
+  {
+    "level": "indicator",
+    "code": "Foundation 1.1",
+    "title": "Curiosity and Interest",
+    "description": "Express interest in some familiar and new objects, people, and activities in their immediate environment. Seek information by exploring with their senses, describing th
+  [whole-document] CA: response did not parse: No valid JSON array found in response
+  [whole-document] CA: 0 elements
+== CO ==
+  [whole-document] CO: 893 blocks, one call, ~17726 prompt tokens, model=us.anthropic.claude-opus-4-6-v1
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 24405, "output_tokens": 7842, "total_tokens": 32247, "latency_ms": 74983.1, "estimated_cost_usd": 0.318075, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 27062 chars, 24405 in / 7842 out tokens, 74983ms
+  [whole-document] CO: 61 elements
+== KY ==
+  [whole-document] KY: 252 blocks, one call, ~12081 prompt tokens, model=us.anthropic.claude-opus-4-6-v1
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 14073, "output_tokens": 7698, "total_tokens": 21771, "latency_ms": 93898.8, "estimated_cost_usd": 0.262815, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 27224 chars, 14073 in / 7698 out tokens, 93899ms
+  [whole-document] KY: 44 elements
+== NV ==
+  [whole-document] NV: 752 blocks, one call, ~18721 prompt tokens, model=us.anthropic.claude-opus-4-6-v1
+Calling Bedrock with model: us.anthropic.claude-opus-4-6-v1
+LLM_METRICS: {"metric_type": "llm_call", "stage": "detection", "model_id": "us.anthropic.claude-opus-4-6-v1", "input_tokens": 23497, "output_tokens": 8218, "total_tokens": 31715, "latency_ms": 97372.8, "estimated_cost_usd": 0.322935, "retry_count": 0, "run_id": "", "country": "", "state": "", "batch_index": null, "chunk_index": null, "success": true}
+Bedrock response received: 31425 chars, 23497 in / 8218 out tokens, 97373ms
+  [whole-document] NV: 46 elements
+== TX ==
+  [cache hit] wholedoc-TX-3bf3c81bb4c17ea5-14374dba.json
+
+=== AZ ===
+  golden:   5
+  detected: 67
+  matched:  5
+  precision: 0.333  recall: 1.000  f1: 0.500
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=2   fp=4   fn=0   p=0.33 r=1.00
+    strand      tp=1   fp=1   fn=0   p=0.50 r=1.00
+    sub_strand  tp=1   fp=5   fn=0   p=0.17 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 2
+    strand     → strand     : 1
+    sub_strand → sub_strand : 1
+  code accuracy: 4/4 (1.000) — graded over matched pairs only
+  description accuracy: 4/4 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — ABLATED — the whole-document single-prompt arm has no Pass-1 stage to grade
+  age-band drops: 0
+  extra detected (in-scope FPs) (10): [('strand', 'Strand 2'), ('indicator', 'b'), ('indicator', 'c'), ('indicator', 'd'), ('indicator', 'e'), ('sub_strand', 'Concept 2'), ('sub_strand', 'Concept 3'), ('sub_strand', 'Concept 1'), ('sub_strand', 'Concept 2'), ('sub_strand', 'Concept 3')]
+  ignored (out-of-scope domains): 52
+  regression cases:
+    [PASS] AZ-NO-EXAMPLES-HEADER-AS-ELEMENT — no examples-section headers emitted
+    [PASS] AZ-FOUR-LEVEL-HIERARCHY — all four levels present
+
+=== CA ===
+  golden:   25
+  detected: 0
+  matched:  0
+  precision: 0.000  recall: 0.000  f1: 0.000
+  per-level:
+    domain      tp=0   fp=0   fn=3   p=0.00 r=0.00
+    indicator   tp=0   fp=0   fn=14  p=0.00 r=0.00
+    strand      tp=0   fp=0   fn=3   p=0.00 r=0.00
+    sub_strand  tp=0   fp=0   fn=5   p=0.00 r=0.00
+  code accuracy: n/a (golden asserts no codes)
+  description accuracy: n/a (golden annotates no descriptions)
+  depth-map: ABLATED — ABLATED — the whole-document single-prompt arm has no Pass-1 stage to grade
+  age-band drops (14): ['CA-IND-01-EARLY', 'CA-IND-01-LATER', 'CA-IND-02-EARLY', 'CA-IND-02-LATER', 'CA-IND-05-EARLY', 'CA-IND-05-LATER', 'CA-IND-06-EARLY', 'CA-IND-06-LATER']…
+  missing test cases (25): ['CA-DOM-01', 'CA-STR-01', 'CA-SUB-01', 'CA-IND-01-EARLY', 'CA-IND-01-LATER', 'CA-DOM-02', 'CA-STR-02', 'CA-SUB-02', 'CA-IND-02-EARLY', 'CA-IND-02-LATER']…
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] CA-AGE-COLUMNS-EMITTED — all 0 Early/Later foundations emit both columns
+    [PASS] CA-AGE-LABEL-NOT-IN-TITLE — no age-band labels in titles
+    [PASS] CA-NO-LETTERED-EXAMPLES-AS-INDICATORS — no lettered examples emitted as indicators
+    [FAIL] CA-FOUR-LEVEL-HIERARCHY — missing levels: ['domain', 'indicator', 'strand', 'sub_strand']
+
+=== CO ===
+  golden:   7
+  detected: 61
+  matched:  3
+  precision: 0.071  recall: 0.429  f1: 0.122
+  per-level:
+    domain      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=1   fp=32  fn=2   p=0.03 r=0.33
+    strand      tp=0   fp=7   fn=2   p=0.00 r=0.00
+  level confusion (golden → detected):
+    domain     → domain     : 2
+    indicator  → indicator  : 1
+  code accuracy: 3/3 (1.000) — graded over matched pairs only
+  description accuracy: 2/2 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — ABLATED — the whole-document single-prompt arm has no Pass-1 stage to grade
+  age-band drops: 0
+  missing test cases (4): ['CO-STR-01', 'CO-IND-02', 'CO-STR-02', 'CO-IND-03']
+  extra detected (in-scope FPs) (39): [('strand', '1'), ('indicator', '2'), ('indicator', '3'), ('indicator', '4'), ('indicator', '5'), ('indicator', '6'), ('indicator', '7'), ('indicator', '8'), ('indicator', '9'), ('indicator', '10')]…
+  ignored (out-of-scope domains): 19
+  regression cases:
+    [PASS] CO-NO-SUB-STRAND — no sub_strands (correct for CO)
+    [PASS] CO-NUMERIC-STRANDS — all numeric-prefixed sections correctly classified as strand
+
+=== KY ===
+  golden:   44
+  detected: 44
+  matched:  44
+  precision: 1.000  recall: 1.000  f1: 1.000
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=26  fp=0   fn=0   p=1.00 r=1.00
+    strand      tp=5   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=10  fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 26
+    strand     → strand     : 5
+    sub_strand → sub_strand : 10
+  code accuracy: 28/44 (0.636) — graded over matched pairs only
+    [CODE] KY-STR-01 (strand): golden 'Approaches to Learning Standard 1' != detected 'Standard 1'
+    [CODE] KY-IND-02 (indicator): golden 'MFAAD' != detected 'MFAAA'
+    [CODE] KY-IND-04 (indicator): golden 'PSAUC' != detected 'PSSAU'
+    [CODE] KY-IND-05 (indicator): golden 'CWSAD' != detected 'CWSSA'
+    [CODE] KY-IND-06 (indicator): golden 'PATSN' != detected 'PWADT'
+    [CODE] KY-IND-07 (indicator): golden 'PSDSP' != detected 'WPSDS'
+    [CODE] KY-STR-02 (strand): golden 'Approaches to Learning Standard 2' != detected 'Standard 2'
+    [CODE] KY-IND-11 (indicator): golden 'ECOMN' != detected 'EWCOM'
+    [CODE] KY-IND-12 (indicator): golden 'UMNDW' != detected 'UMNDD'
+    [CODE] KY-IND-13 (indicator): golden 'ESSDP' != detected 'EISSD'
+    [CODE] KY-STR-03 (strand): golden 'Health/Mental Wellness Standard 1' != detected 'Standard 1'
+    [CODE] KY-IND-16 (indicator): golden 'PARTO' != detected 'PARTW'
+    [CODE] KY-STR-04 (strand): golden 'Language and Early Literacy Standard 1' != detected 'Standard 1'
+    [CODE] KY-STR-05 (strand): golden 'Language and Early Literacy Standard 2' != detected 'Standard 2'
+    [CODE] KY-IND-23 (indicator): golden 'ICOPP' != detected 'ICOBP'
+    [CODE] KY-IND-26 (indicator): golden 'UWSPS' != detected 'UWSPC'
+  description accuracy: 26/26 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — ABLATED — the whole-document single-prompt arm has no Pass-1 stage to grade
+  age-band drops: 0
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] KY-BENCHMARK-IS-SUB-STRAND — all 10 Benchmark elements classified as sub_strand
+    [PASS] KY-FOUR-LEVEL-HIERARCHY — all four levels present
+    [FAIL] KY-STRAND-CODE-KEEPS-FULL-LABEL — 5/13 labelled heading(s) lost part of their label, e.g. strand code='Standard 1' should be 'Approaches to Learning Standard 1'
+
+=== NV ===
+  golden:   46
+  detected: 46
+  matched:  46
+  precision: 1.000  recall: 1.000  f1: 1.000
+  per-level:
+    domain      tp=3   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=24  fp=0   fn=0   p=1.00 r=1.00
+    strand      tp=12  fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=7   fp=0   fn=0   p=1.00 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 3
+    indicator  → indicator  : 24
+    strand     → strand     : 12
+    sub_strand → sub_strand : 7
+  code accuracy: 46/46 (1.000) — graded over matched pairs only
+  description accuracy: 2/3 (0.667) — graded over matched pairs whose golden annotates one
+    [DESC/MISMATCH] NV-DOM-03 (domain): mismatch (3408 vs 4627 golden chars, diverges at char 2382): golden '…NAEYC and the Fred Rogers Center (2012) also offer several g…' != detected '…These standards define technology broadly as the creation an…'
+  depth-map: ABLATED — ABLATED — the whole-document single-prompt arm has no Pass-1 stage to grade
+  age-band drops: 0
+  ignored (out-of-scope domains): 0
+  regression cases:
+    [PASS] NV-NO-COLUMN-HEADER-AS-ELEMENT — 46 elements: no column headers, captions or footnotes emitted, no age_band set
+    [PASS] NV-SUB-STRAND-CODE-FROM-DOCUMENT — all 7 sub_strands use the document's XX.YY caption code and prefix their indicators
+    [PASS] NV-FOUR-LEVEL-HIERARCHY — all four levels present
+
+=== TX ===
+  golden:   8
+  detected: 33
+  matched:  8
+  precision: 0.320  recall: 1.000  f1: 0.485
+  per-level:
+    domain      tp=1   fp=0   fn=0   p=1.00 r=1.00
+    indicator   tp=4   fp=16  fn=0   p=0.20 r=1.00
+    strand      tp=2   fp=0   fn=0   p=1.00 r=1.00
+    sub_strand  tp=1   fp=1   fn=0   p=0.50 r=1.00
+  level confusion (golden → detected):
+    domain     → domain     : 1
+    indicator  → indicator  : 4
+    strand     → strand     : 2
+    sub_strand → sub_strand : 1
+  code accuracy: 5/8 (0.625) — graded over matched pairs only
+    [CODE] TX-STR-01 (strand): golden 'A' != detected 'I.A'
+    [CODE] TX-STR-02 (strand): golden 'B' != detected 'I.B'
+    [CODE] TX-SUB-01 (sub_strand): golden '2' != detected 'I.B.2'
+  description accuracy: 3/3 (1.000) — graded over matched pairs whose golden annotates one
+  depth-map: ABLATED — ABLATED — the whole-document single-prompt arm has no Pass-1 stage to grade
+  age-band drops: 0
+  extra detected (in-scope FPs) (17): [('indicator', 'PK3.I.A.1'), ('indicator', 'PK4.I.A.1'), ('indicator', 'PK3.I.A.3'), ('indicator', 'PK4.I.A.3'), ('indicator', 'PK3.I.A.4'), ('indicator', 'PK4.I.A.4'), ('sub_strand', 'I.B.1'), ('indicator', 'PK3.I.B.1.a'), ('indicator', 'PK4.I.B.1.a'), ('indicator', 'PK3.I.B.1.b')]…
+  ignored (out-of-scope domains): 8
+  regression cases:
+    [PASS] TX-PK3-PK4-DISTINCT — PK3 count=10, PK4 count=15
+    [PASS] TX-AGE-BAND-SET — all 25 indicators have a valid age_band
+    [PASS] TX-NO-COLUMN-HEADER-AS-INDICATOR — no column headers emitted as indicators
+
+wrote paper/results/task10_20260905/whole_document_pilot.json

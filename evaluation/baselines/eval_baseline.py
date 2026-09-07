@@ -29,6 +29,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import re
 import sys
 from pathlib import Path
 from typing import List
@@ -81,7 +82,15 @@ def main() -> int:
 
     extraction_dir = Path(args.extraction_dir)
     golden_dir = Path(args.golden_dir)
-    states = args.state or sorted(q.stem for q in golden_dir.glob("*.json"))
+    # ⚠️ Only a bare two-letter state code names a state. The golden directories
+    # also hold tier-scoped goldens (KY_trimmed.json), their _provenance siblings,
+    # and any work-in-progress draft; enumerating those sends the suite hunting for
+    # a nonexistent "<name>-extraction.json", and it is the same glob that once
+    # silently broke the prompt-provenance scan. So the rule is shape-based rather
+    # than a list of names to exclude. Tier-scoped goldens are graded by
+    # paper/analysis/scale_grade*.py, which take explicit paths.
+    states = args.state or sorted(q.stem for q in golden_dir.glob("*.json")
+                                  if re.fullmatch(r"[A-Z]{2}", q.stem))
     output_dir = Path(args.output_dir) if args.output_dir else None
 
     reports: List[StateReport] = []

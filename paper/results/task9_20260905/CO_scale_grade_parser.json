@@ -1,0 +1,189 @@
+{
+  "state": "CO",
+  "source_tier": "only_subset",
+  "target_tier": "trimmed",
+  "golden_file": "evaluation/ground_truth_parser/CO.json",
+  "parsing_file": "outputs/scale-08-29-26/CO-parsing.json",
+  "code_version_hash": "14374dba",
+  "page_translation": {
+    "standards_translated": 9,
+    "map_source_to_target": {
+      "1": 1,
+      "2": 3,
+      "3": 4,
+      "4": 5,
+      "5": 6,
+      "6": 7,
+      "7": 8,
+      "8": 9,
+      "9": 11,
+      "10": 12
+    },
+    "unmappable_source_pages": [],
+    "_why": "source_page is a GRADED field recorded in _only_subset numbering in the golden and in target-tier numbering in the run. Without this translation every matched standard reports a false source_page mismatch."
+  },
+  "corrected": {
+    "_arm": "source_page translated — THIS IS THE REAL FIGURE",
+    "n_golden": 9,
+    "n_parsed_in_run": 240,
+    "matched": 9,
+    "coverage": 1.0,
+    "field_accuracy": 0.9691,
+    "standards_all_fields_ok": 6,
+    "dropped": [],
+    "duplicated": [],
+    "mismatches_by_field": {
+      "strand.name": 3,
+      "strand.description": 2
+    },
+    "mismatches": [
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "strand.name",
+        "expected": "Health, Safety and Nutrition",
+        "got": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "strand.description",
+        "expected": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "got": null
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "strand.name",
+        "expected": "Health, Safety and Nutrition",
+        "got": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "strand.description",
+        "expected": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "got": null
+      },
+      {
+        "test_case_id": "CO-IND-09",
+        "field": "strand.name",
+        "expected": "Expressive English Language Skills",
+        "got": "Expressive English Language Skills: The ability to speak or use English."
+      }
+    ]
+  },
+  "coverage_decomposition": {
+    "n_absent": 0,
+    "n_age_band_drift": 0,
+    "coverage_ignoring_age_band": 1.0,
+    "absent": [],
+    "age_band_drift": [],
+    "_reading": "`absent` is a standard the parser genuinely failed to produce at scale. `age_band_drift` is one it produced -- check `standard_id_matches` -- that fails the (name, age_band) match key on its band alone. Only the first is a parsing loss."
+  },
+  "uncorrected": {
+    "_arm": "source_page NOT translated — artifact size only",
+    "n_golden": 9,
+    "n_parsed_in_run": 240,
+    "matched": 9,
+    "coverage": 1.0,
+    "field_accuracy": 0.9136,
+    "standards_all_fields_ok": 0,
+    "dropped": [],
+    "duplicated": [],
+    "mismatches_by_field": {
+      "source_page": 9,
+      "strand.name": 3,
+      "strand.description": 2
+    },
+    "mismatches": [
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "source_page",
+        "expected": 3,
+        "got": 4
+      },
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "strand.name",
+        "expected": "Health, Safety and Nutrition",
+        "got": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      {
+        "test_case_id": "CO-IND-01",
+        "field": "strand.description",
+        "expected": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "got": null
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "source_page",
+        "expected": 3,
+        "got": 4
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "strand.name",
+        "expected": "Health, Safety and Nutrition",
+        "got": "Health, Safety and Nutrition: The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits."
+      },
+      {
+        "test_case_id": "CO-IND-02",
+        "field": "strand.description",
+        "expected": "The maintenance of healthy and age appropriate physical well-being, and understanding of healthy and safe habits and practicing healthy habits.",
+        "got": null
+      },
+      {
+        "test_case_id": "CO-IND-03",
+        "field": "source_page",
+        "expected": 7,
+        "got": 8
+      },
+      {
+        "test_case_id": "CO-IND-04",
+        "field": "source_page",
+        "expected": 7,
+        "got": 8
+      },
+      {
+        "test_case_id": "CO-IND-05",
+        "field": "source_page",
+        "expected": 7,
+        "got": 8
+      },
+      {
+        "test_case_id": "CO-IND-06",
+        "field": "source_page",
+        "expected": 7,
+        "got": 8
+      },
+      {
+        "test_case_id": "CO-IND-07",
+        "field": "source_page",
+        "expected": 7,
+        "got": 8
+      },
+      {
+        "test_case_id": "CO-IND-08",
+        "field": "source_page",
+        "expected": 8,
+        "got": 9
+      },
+      {
+        "test_case_id": "CO-IND-09",
+        "field": "source_page",
+        "expected": 10,
+        "got": 12
+      },
+      {
+        "test_case_id": "CO-IND-09",
+        "field": "strand.name",
+        "expected": "Expressive English Language Skills",
+        "got": "Expressive English Language Skills: The ability to speak or use English."
+      }
+    ]
+  },
+  "identifier_uniqueness_over_whole_run": {
+    "n_standards": 240,
+    "n_distinct_standard_ids": 240,
+    "collisions": [],
+    "_why_this_matters": "Consults NO golden, so it is as strong as the run is large. The paper's collision-free identifier claim is measured over tens of standards at the _only_subset tier; this measures it over 240."
+  },
+  "⚠️_precision_not_reported": "grade_parser measures coverage and per-field accuracy over matched pairs. A golden of 9 against a run of 240 says nothing about the other 231. Coverage is NOT precision."
+}

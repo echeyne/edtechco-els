@@ -1,0 +1,81 @@
+{
+  "task": "Task 10 — whole-document single-prompt arm (PILOT, n=1 per state)",
+  "date": "2026-09-05",
+  "git_commit": "47048d584d3a5eeab66d76fc690e4504c1026513",
+  "code_version_hash": "14374dba",
+  "⚠️_STATUS": "PROVISIONAL on TWO counts, both blocking. (1) n=1 per state — this arm is a single nondeterministic call per document and is MORE exposed to sampling than the chunked method; re-run at --stability-runs 3. (2) The KY and CO columns are graded against goldens now under review in paper/results/task9_20260905/review/; a golden change moves those denominators. The CA finding is NOT affected — zero elements were produced, so no golden is consulted.",
+  "arm": "whole-document single prompt: one call per document, no Pass-1 depth map, no chunking, no deterministic repairs",
+  "graded_by": "evaluation.eval_detector.evaluate_state — the same grader, matcher and goldens as the full method",
+  "corpus_tier": "_only_subset (outputs/08-26-26)",
+  "⚠️_scope": "Every state's subset extraction is 3.7K-7.9K tokens and fits in one prompt. A result here therefore speaks to the _only_subset tier ONLY; it says nothing about the trimmed or full tiers, where the document does not fit and chunking is not optional.",
+  "comparison": {
+    "AZ": {
+      "full_method_recall": 1.0,
+      "arm_recall": 1.0,
+      "full_method_code_accuracy": "4/4",
+      "arm_code_accuracy": "4/4",
+      "arm_elements": 67
+    },
+    "CA": {
+      "full_method_recall": 1.0,
+      "arm_recall": 0.0,
+      "full_method_code_accuracy": "25/25",
+      "arm_code_accuracy": null,
+      "arm_elements": 0
+    },
+    "CO": {
+      "full_method_recall": 1.0,
+      "arm_recall": 0.42857142857142855,
+      "full_method_code_accuracy": "7/7",
+      "arm_code_accuracy": "3/3",
+      "arm_elements": 61
+    },
+    "KY": {
+      "full_method_recall": 1.0,
+      "arm_recall": 1.0,
+      "full_method_code_accuracy": "44/44",
+      "arm_code_accuracy": "28/44",
+      "arm_elements": 44
+    },
+    "NV": {
+      "full_method_recall": 1.0,
+      "arm_recall": 1.0,
+      "full_method_code_accuracy": "46/46",
+      "arm_code_accuracy": "46/46",
+      "arm_elements": 46
+    },
+    "TX": {
+      "full_method_recall": 1.0,
+      "arm_recall": 1.0,
+      "full_method_code_accuracy": "8/8",
+      "arm_code_accuracy": "5/8",
+      "arm_elements": 33
+    }
+  },
+  "⚠️_code_accuracy_denominators": "Code accuracy is graded over MATCHED PAIRS ONLY. Where recall differs the denominators differ: CO's arm figure 3/3 covers three of seven golden elements and must never be printed beside the full method's 7/7 unqualified. AZ/KY/NV/TX match on every element, so those columns are directly comparable.",
+  "findings": {
+    "1_categorical_failure_on_CA": "CA's single call emitted EXACTLY 16,000 output tokens = detector.LLM_MAX_TOKENS. The JSON array was truncated mid-object and never closed, nothing parsed, 0 of 25 golden elements recovered — against 25/25 for the chunked method. A single prompt has ONE output budget for the whole document, so overflow loses the DOCUMENT; chunking bounds the same overflow to a CHUNK. AZ was within 11% of the same cliff (14,292/16,000) and scored 1.000, so a success here does not predict the next document.",
+    "2_code_accuracy_tracks_the_missing_repairs": "KY 44/44 -> 28/44 and TX 8/8 -> 5/8, with recall unchanged. KY's failures are the model sampling its own abbreviation rule (MFAAA/MFAAD, PSSAU/PSAUC, WPSDS/PSDSP, EWCOM/ECOMN) — the 25% churn measured on this document on 2026-08-01 that put derive_code_from_title in Python — plus the missing de-label repair (Standard 1 vs Approaches to Learning Standard 1). TX's three are the missing anchoring (I.A vs A, I.B vs B, I.B.2 vs 2). Each is a different Aurora primary key for the same standard.",
+    "3_not_a_strawman": "AZ and NV score 1.000 recall with full code accuracy and no depth map, no chunking and no repairs. NV — the held-out canary whose printed namespace skips a level — comes back 46/46. Report this plainly.",
+    "4_CO_level_collapse": "CO recall 0.429; four of seven golden elements lost, including BOTH strands (strand tp=0 fn=2 fp=7) while emitting 61 elements. Same level-collapse signature the Task 3 depth-map ablation produces, from the same cause: no Pass-1."
+  },
+  "cost": {
+    "calls": 6,
+    "input_tokens_approx": 113000,
+    "output_tokens_approx": 55000,
+    "model": "us.anthropic.claude-opus-4-6-v1"
+  },
+  "artifacts": {
+    "report": "whole_document_pilot.json",
+    "per_state_review": "review/",
+    "run_log": "pilot_run.log",
+    "unparsed_CA_response": "evaluation/.cache/wholedoc-CA-7e5f254c800917cf-14374dba.unparsed.txt"
+  },
+  "regenerate": "python -m evaluation.baselines.eval_whole_document --extraction-dir outputs/08-26-26 --stability-runs 3 --report-json paper/results/task10_YYYYMMDD/whole_document.json --output-dir paper/results/task10_YYYYMMDD/review",
+  "golden_dependency": {
+    "CA_total_loss": "independent of the goldens — 0 elements parsed, no golden consulted. Citable now.",
+    "KY_code_accuracy_28_of_44": "depends on evaluation/ground_truth_detector/KY.json. HOLD until the KY age_band verdict is applied.",
+    "CO_recall_0_429": "depends on evaluation/ground_truth_detector/CO.json. HOLD until CO's 55 rows are adjudicated.",
+    "AZ_NV_at_1_000": "depends only on the AZ/NV goldens, which the current review does not touch."
+  }
+}

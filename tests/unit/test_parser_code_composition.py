@@ -29,6 +29,8 @@ annotated standards in the six goldens. `TestGoldenShapesAreUntouched` and
 """
 
 import glob
+from pathlib import Path
+import re
 import json
 
 import pytest
@@ -126,7 +128,13 @@ class TestGoldenShapesAreUntouched:
     all three repairs byte-identically — they exist to move malformed output
     toward the goldens, never to rewrite a hand-annotated code."""
 
-    @pytest.mark.parametrize("path", sorted(glob.glob("evaluation/ground_truth_parser/*.json")))
+    # ⚠️ Only a bare two-letter state code names a golden. The directory also
+    # holds tier-scoped goldens (KY_trimmed.json) and their _provenance
+    # siblings; a provenance file has no `standards` key and fails this test on
+    # a shape it was never meant to satisfy.
+    @pytest.mark.parametrize("path", sorted(
+        f for f in glob.glob("evaluation/ground_truth_parser/*.json")
+        if re.fullmatch(r"[A-Z]{2}", Path(f).stem)))
     def test_no_golden_row_changes(self, path):
         changed = []
         for case in json.load(open(path))["standards"]:
