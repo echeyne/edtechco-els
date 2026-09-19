@@ -1,66 +1,26 @@
-% discussion_limitations.tex — Task 10 stub. Outline recovered verbatim
-% from the original plan file fragment (see ../OUTLINE_NOTES.md). Draft at
-% Task 12; re-read all guardrails in tasking/arxiv_paper.md before writing.
-%
-% Subset-scoped quality metrics; 4 golden + 2 held-out states; English/
-% US-only; LLM nondeterminism; Textract dependence; trimming as favorable
-% preprocessing (guardrail 3 — disclose with retained page ranges, don't bury).
-%
-% ⚠️ CORRECTED 2026-08-31 — do NOT write the scale limitation as a COVERAGE
-% limitation. An earlier draft of Task 6's findings read KY 52/120pp and CO
-% 41/187pp as coverage fractions and made full-document scale a stated
-% limitation on that basis. It is not: the _trimmed tier removes only
-% non-standards matter (front matter, essays, appendices) and retains 100% of
-% the standards, so Task 6's runs cover every standard in both documents.
-%
-% What IS still a limitation, and the honest way to write it:
-%   1. PAGE-COUNT scale, as a cost/batching claim rather than a coverage one.
-%      Task 6 exercises 18 and 17 detection chunks over 4 Map iterations; its
-%      token and latency figures must not be extrapolated to untrimmed page
-%      counts, and no document as large as AZ (217pp published) has been run
-%      end to end.
-%   2. Trimming is still preprocessing a deployment would have to do or absorb
-%      — the pipeline was never asked to ignore 68pp of Kentucky preamble on
-%      its own. Say that plainly; it is the real residual cost of the tier.
-%   3. QUALITY at the trimmed tier is measured only where a golden reaches it.
-%      KY's detector golden is detection-exhaustive, which is the one avenue to
-%      quality-at-scale evidence without new annotation (Task 6 step 4, owed).
-%   4. CO's out-of-scope content is other AGE BANDS (birth-to-3 and 5-8 of the
-%      187pp birth-to-8 publication), not trimmed-away standards. Every CO
-%      number in the paper is the Ages 3-5 band.
-
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}
 
-This section is not an apology, and it should not be read as one. A deployed
-system's limits are the part of it a practitioner most needs, and stating them
-precisely is the same discipline that produced the results above: corpus tiers
-named on every table, every unmatched detection audited by hand and signed,
-every number regenerated from a recorded artifact by a named script, each
-validation guard shown catching a live defect rather than asserted to work, and
-a previously recorded result of my own reported as a non-reproduction rather
-than quietly replaced. What follows is that discipline applied to the boundary
-of what I can claim. Where a limit is a measurement I have not made, I say so;
-where it is one I made and did not like, I report it.
+This section is not an apology. A deployed system's limits are the part of it a
+practitioner most needs, and stating them precisely is the same discipline that
+produced the results above, applied to the boundary of what I can claim. Where
+a limit is a measurement I have not made, I say so; where it is one I made and
+did not like, I report it.
 
 \subsection{What the results support}
 
 The central claim survives its strongest available test. Classifying by nesting
 position rather than by label vocabulary yields recall of 1.000 at every
-hierarchy level in all six states, including the two held out from development
-entirely --- states whose documents print label words, code namespaces and level
-counts that appear nowhere in the four the prompts were written against. Nevada
-skips a level in its printed namespace and Kentucky names its sub-strands
-\texttt{Benchmark N.N}; neither is special-cased anywhere in the system.
-
-The two comparisons locate that result rather than merely asserting it.
-Ablating the depth-map pass leaves domain and indicator recall untouched while
-strand and sub-strand degrade, which is what the claim predicts: the levels that
-survive are those with a distinctive surface form, and the levels that fail are
-those whose identity is purely positional. The rule-based comparison shows the
-same boundary from the other side, matching the language model exactly at domain
-and collapsing beneath it. Typography identifies a document's top division
-reliably and identifies almost nothing below it.
+hierarchy level in all six states, including the two held out entirely --- whose
+documents print label words, code namespaces and level counts that appear
+nowhere in the four the prompts were written against, and neither of which is
+special-cased anywhere in the system. The two comparisons locate that result
+rather than merely asserting it, and they locate it at the same boundary from
+opposite sides: ablating the depth map degrades exactly the levels whose
+identity is positional and leaves the others untouched, while the rule-based
+extractor matches the language model at a document's top division and collapses
+beneath it. Typography identifies that top division reliably and identifies
+almost nothing below it.
 
 \subsection{Corpus scope, and what the tiers do and do not mean}
 
@@ -78,7 +38,7 @@ matter, guiding-principles essays, appendices, acknowledgements --- and
 \textbf{retains every standard in the document}. Kentucky's 52 processed pages
 are all of Kentucky's standards, not 43\% of them, and Colorado's 41 are the
 complete Ages 3--5 publication. A trimmed-to-published page ratio is therefore
-never a coverage fraction, and I are explicit about this because the opposite
+never a coverage fraction, and I am explicit about this because the opposite
 reading is the more natural one and would understate the result.
 
 What remains limited about scale is \textbf{page count, as a cost and batching
@@ -103,7 +63,8 @@ can establish. In the four development states they are deliberate spot checks
 false positive, \emph{raw} precision on those states largely measures annotation
 coverage rather than detector quality, and I do not report it as quality.
 Precision instead comes from a manual audit of all 297 in-scope detections
-across the corpus, which found a single hallucinated element.
+across the six subset-tier documents, which found a single hallucinated
+element.
 
 The two held-out states are annotated densely rather than as spot checks, and
 they separate two properties that are easily conflated. Nevada's golden is
@@ -154,21 +115,14 @@ as \textbf{lower bounds rather than estimates}. A defect firing in a minority of
 runs survives five clean draws comfortably, so a zero in my stability table
 means I did not observe instability at $n{=}5$, not that a component is stable.
 
-I take my own experience as the cautionary case. An earlier recording measured
-Nevada's detector code accuracy at $46/46$ and I reported it as a held-out
-gain; five fresh runs on identical code give 44, 45, 44, 44, 44. The point value
-was the top of a distribution, not its center. The same caution applied to a
-single-run ablation arm of my own, and repeating it at $n{=}5$ per arm retired
-the claim: my attribution of Nevada's domain-code behavior to the Pass-1 sampler
-does not survive, one of the two codes failing in every draw of both arms. What
-survives is a rate --- mean code accuracy $0.965$ against $0.935$, and one
-sub-strand failure eliminated in five draws of five --- alongside a cost the
-single draw could not show, the sampler dropping a golden element in two draws
-of five where the arm it replaced drops none. I report that as measured rather
-than as either confirmed or abandoned. Where an
-experiment is repeated --- the depth-map ablation, at three runs per arm across
-six states --- I report the range and note that the direction never reverses,
-rather than quoting a single number.
+Two of my own recorded results are the cautionary cases, and
+\S\ref{sec:experiments-stability} reports both: a held-out code accuracy of
+$46/46$ that five fresh runs give as 44, 45, 44, 44, 44, and a single-draw
+attribution of Nevada's domain-code behavior to the Pass-1 sampler that $n{=}5$
+per arm retired rather than confirmed. Both were the top of a distribution read
+as its center. Where an experiment is repeated --- the depth-map ablation, at
+three runs per arm across six states --- I report the range and note that the
+direction never reverses, rather than quoting a single number.
 
 The practical consequence is that correctness here rests on the validation
 boundary rather than on the model agreeing with itself. The clearest instance is

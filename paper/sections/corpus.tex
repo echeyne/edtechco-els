@@ -1,47 +1,5 @@
-% corpus.tex — Task 10 stub. Reconstructed section (see ../OUTLINE_NOTES.md).
-% Draft at Task 12. Outline:
-%   - Three corpus tiers, not two: full -> _trimmed -> _only_subset. The two
-%     reductions are NOT the same kind of reduction and the prose must not
-%     blur them (correction of 2026-08-31):
-%       * _trimmed removes NON-STANDARDS matter only -- front matter, preamble,
-%         guiding-principles essays, appendices, acknowledgements -- and
-%         retains 100% of the standards. It reduces page count and therefore
-%         cost, NOT coverage. KY's 52pp of a 120pp publication is all of
-%         Kentucky's standards.
-%       * _only_subset is a genuine coverage reduction: ~1-2 domains, fully
-%         annotated, cheap to iterate on. THIS is the tier guardrail 3's
-%         "favorable preprocessing" disclosure is really about.
-%     Both get disclosed with retained page ranges (guardrail 3); only
-%     _only_subset gets the "favorable preprocessing" framing.
-%   - CO is a special case worth one sentence: colorado_3_5_trimmed_2020.pdf
-%     (41pp) equals the FULL Ages 3-5 document (41pp) -- nothing was cut from
-%     it. The 187pp birth-to-8 file is the wider publication that band is drawn
-%     from (its TOC puts "Ages 3-5" at p77), so CO's out-of-scope content is
-%     other AGE BANDS, not trimmed-away standards.
-%   - The corpus tier table (Task 11 deliverable, sourced from
-%     paper/results/corpus_tiers.json) belongs here.
-%   - Name California's source precisely: the PTKLF "at a glance" document
-%     (ptklfataglance.pdf, 68pp), not an error in standards_tracking.md.
-%   - The held-out canary is NV-2023 (nevada_standards_2023_only_subset.pdf,
-%     multi-domain) — explicitly NOT NV-SES-2025 (single-domain, too narrow
-%     to support a generalization claim).
-%   - State which numbers in the paper are subset-tier vs. trimmed-tier
-%     (guardrail 1) — this section is the one place that distinction gets
-%     explained once, rather than re-derived at every table. Say explicitly
-%     that the trimmed tier is COMPLETE in standards content, or a reader
-%     takes the word "trimmed" for "excerpt" and reads Task 6's cost/scale
-%     numbers as partial-document numbers.
-
 \section{Corpus}
 \label{sec:corpus}
-
-% DRAFTED 2026-09-04 (review pass). The section previously held only the table
-% and the TODO below; the introduction promised that this section states the
-% tiers and the RETAINED PAGE RANGES (guardrail 3), which nothing in the repo
-% recorded. paper/analysis/corpus_page_ranges.py now derives them from the
-% PDFs themselves (text match of every tier page back to the published PDF)
-% into paper/results/corpus_page_ranges.json, rendered as
-% tables/corpus_pages.tex in Appendix D.
 
 The corpus is the early learning standards documents of six US states: four
 used for development (Arizona, California, Colorado, Texas) and two held out
@@ -87,25 +45,5 @@ document facts. Its age-band column counts the distinct bands a state uses,
 not coverage: every one of the 262 standards carries an age band. And
 identifier collisions are zero in every state, which matters because the
 identifier is the key under which a standard is stored (\S\ref{sec:schema}).
-
-% Earlier brief, retained: The table below is Task 8's deliverable and it already
-% carries the guardrail-1 tier columns (Subset pp / Full pp), so Task 11's
-% "corpus appendix table" should EXTEND this one -- adding the _trimmed tier
-% and the source document names -- rather than introduce a second table that
-% restates the same page counts.
-%
-% Three things the prose must do that the table cannot:
-%   1. Disclose the manual trimming (guardrail 3) with retained page ranges.
-%      The subset tier is favourable preprocessing and must be stated plainly,
-%      not inferred from a page-count column.
-%   2. Name California's source precisely: the PTKLF "at a glance" document
-%      (ptklfataglance.pdf, 68pp).
-%   3. Say that the held-out canary is NV-2023, explicitly NOT NV-SES-2025.
-%
-% Read the "Age bands" column carefully before writing about it: it is the
-% count of DISTINCT bands in that state, not coverage. Coverage is 1.000
-% everywhere -- every one of the 262 standards carries an age band -- which is
-% worth a sentence because it is a schema-completeness result, not a document
-% property.
 
 \input{tables/dataset_stats}

@@ -122,28 +122,21 @@ deliberate and is offered as a contribution in its own right: every table names
 the corpus tier it was computed at, every unmatched detection is audited by hand
 and signed, every number is regenerated from a recorded artifact, and each
 validation guard is shown catching a live defect rather than asserted to work.
-All quality figures are computed on an annotated subset tier, stated as such
-throughout.
+The headline quality figures above are computed on an annotated subset tier;
+one whole-document arm is reported separately at a larger tier, and the two are
+never mixed.
 \end{abstract}
 
-% ---------------------------------------------------------------------
-% Section order below is Task 10's reconstruction of the 12-part outline
-% that used to live in ~/.claude/plans/i-want-to-create-silly-pnueli.md.
-% That file was removed by an automatic cleanup before this task started
-% and could not be recovered in full (see paper/OUTLINE_NOTES.md). Sections
-% 6-12 below are recovered verbatim from a partial fragment of the original
-% plan (found in an old session transcript); sections 1, 3, 4 and 5 are a
-% reasonable reconstruction, not the original wording. Cheap to reorder —
-% these are \input'd stubs, not inlined text.
-% ---------------------------------------------------------------------
+% Section order reconstructed from the original outline (paper/OUTLINE_NOTES.md)
+% and shortened 2026-09-07 (REVIEW_assessment.md §2): the standalone pipeline
+% overview is folded into \S\ref{sec:method}, and the system architecture is
+% Appendix~\ref{sec:appendix-architecture}.
 
 \input{sections/introduction}
 \input{sections/related_work}
 \input{sections/corpus}
 \input{sections/schema}
-\input{sections/pipeline_overview}
 \input{sections/method}
-\input{sections/system_architecture}
 \input{sections/experiments_results}
 \input{sections/discussion_limitations}
 \input{sections/conclusion}
@@ -177,15 +170,25 @@ verification state (\texttt{human\_verified}, \texttt{verified\_at},
 figure because it is editorial state rather than extracted content.
 
 \input{tables/fig_schema}
-% TODO(Task 11/12): the full Pydantic/TS schema, or a rendered tree diagram
-% (Task 11 deliverable).
 
 \section{Representative Golden Examples}
 \label{sec:appendix-goldens}
 
 \input{tables/appendix_goldens}
-% TODO(Task 11/12): a handful of annotated examples per guardrail-safe
-% state, illustrating the code/title/hierarchy conventions.
+
+\section{Confidence Score Distribution}
+\label{sec:appendix-confidence}
+
+Table~\ref{tab:confidence-distribution} gives the detector's confidence
+distribution by state and by hierarchy level, read by
+\S\ref{sec:experiments-confidence}. It is in the appendix because the score
+gates nothing in the pipeline and the section's conclusion --- that the
+distribution is too degenerate to threshold on --- is carried by the prose.
+
+\input{tables/confidence_distribution}
+% Moved out of the body 2026-09-07: Table 6 was the least load-bearing table in
+% \S6, and the confidence finding is negative -- the table's job is to let a
+% reader check the degeneracy claim, not to carry it.
 
 \section{Corpus}
 \label{sec:appendix-corpus}
@@ -199,9 +202,11 @@ agency's copy (\S\ref{sec:corpus}).
 
 \input{tables/corpus_appendix}
 \input{tables/corpus_pages}
-% TODO(Task 11): the corpus appendix table (source URL, year, retained page
-% ranges after trimming) built from standards/standards_tracking.md — this
-% is what replaces shipping the source PDFs (guardrail: third-party
-% state-agency documents, not ours to redistribute).
+
+\input{sections/system_architecture}
+% Moved out of the body 2026-09-07 (REVIEW_assessment.md §2): the architecture
+% figure and the Explorer screenshot are deployment detail, and the two claims
+% the body needs from them -- the batching pattern and the direct-vs-batched
+% divergence -- are stated in \S\ref{sec:method-deployment}.
 
 \end{document}

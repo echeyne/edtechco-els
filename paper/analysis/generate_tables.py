@@ -28,6 +28,15 @@ methodology -- belongs in the prose of sections/experiments_results.tex, which
 already carried all of it. Target 25--70 words; if a caption needs more, the
 prose is missing a paragraph.
 
+A CAPTION'S `Source:` NAMES THE RECORDING, NOT A PATH (set 2026-09-07). It reads
+`task8_20260904`, not `paper/results/task8_20260904/`. Nothing in this repo is
+released, so the directory prefix was 13 repetitions of a path no reader can
+resolve; the part that does work is the tag, which identifies WHICH freeze
+produced the number and is exactly what SUPERSEDED_TAGS above exists to keep
+honest. The Artifacts Statement explains the scheme once. Note the LaTeX comment
+provenance emitted by header() still carries the full path -- that is for
+someone standing in the repo, and should stay resolvable.
+
 Inputs (all under paper/results/):
     task1_<RUN_TAG>/summary.json                 (AZ, CA, CO, TX)
     task2_<RUN_TAG>/summary.json                 (NV, KY)
@@ -38,6 +47,7 @@ Inputs (all under paper/results/):
     task3_stability_<STABILITY_TAG>/stability_analysis.json   (optional)
     task8_<STATS_TAG>/dataset_stats.json           descriptive stats
     task8_<STATS_TAG>/confidence_distribution.json re-measured confidence
+    task13_<SCALE_QUALITY_TAG>/ky_trimmed_3runs.json  quality at scale, n=3 (_trimmed)
     corpus_tiers.json
 
 Outputs:
@@ -47,6 +57,7 @@ Outputs:
     paper/tables/baseline_comparison.tex
     paper/tables/dataset_stats.tex
     paper/tables/confidence_distribution.tex
+    paper/tables/scale_quality.tex          quality at scale, n=3 (_trimmed tier)
     paper/tables/corpus_pages.tex           retained pages per tier (guardrail 3)
 
 Usage (from repo root):
@@ -86,6 +97,14 @@ STATS_TAG = "20260904"
 # cover every standard in both documents. Both halves of that go in the
 # caption or a reader gets one of the two false readings.
 SCALE_TAG = "20260830"
+
+# Task 13's quality-at-scale recording: three fresh KY runs graded against the
+# _trimmed-tier goldens. ⚠️ SAME SEPARATE TIER as SCALE_TAG above and subject to
+# the same guardrail-1 caption rule. It is a DIFFERENT recording from Task 6:
+# Task 6 measures cost/latency/batching on the 2026-08-29 run and grades
+# nothing; this one grades three later runs against goldens that were verified
+# against the published PDF rather than against the run being graded.
+SCALE_QUALITY_TAG = "20260907"
 
 # Task 5 stability. Distinct from STABILITY_TAG above, which is Task 3's
 # ABLATION-arm stability (detector only, n=3). This one is both suites under
@@ -201,8 +220,8 @@ def build_detector_table(det, tiers, verified):
           r"the \emph{\_only\_subset} corpus tier (\S\ref{sec:corpus}), never full "
           r"documents. "
           + repeat_note +
-          rf"Source: \texttt{{paper/results/task1\_{RUN_TAG}/}}, "
-          rf"\texttt{{task2\_{RUN_TAG}/}}.}}",
+          rf"Source: \texttt{{task1\_{RUN_TAG}}}, "
+          rf"\texttt{{task2\_{RUN_TAG}}}.}}",
           r"  \label{tab:detector-headline}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -226,8 +245,8 @@ def build_parser_table(par, tiers):
           r"standards emitted, and \texttt{standard\_id} collisions, per state. All "
           r"numbers are on the \emph{\_only\_subset} corpus tier "
           r"(\S\ref{sec:corpus}), never full documents. "
-          rf"Source: \texttt{{paper/results/task1\_{RUN_TAG}/}}, "
-          rf"\texttt{{task2\_{RUN_TAG}/}}.}}",
+          rf"Source: \texttt{{task1\_{RUN_TAG}}}, "
+          rf"\texttt{{task2\_{RUN_TAG}}}.}}",
           r"  \label{tab:parser-headline}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -302,7 +321,7 @@ def build_ablation_table(abl, stab):
           r"depth map on and off, pooled over all six states. Read by level, not by "
           r"its mean; per-state behaviour, off-arm ranges and the regression cases "
           r"are in the text. \emph{\_only\_subset} corpus tier. "
-          rf"Source: \texttt{{paper/results/task3\_{ABLATION_TAG}/}}.}}",
+          rf"Source: \texttt{{task3\_{ABLATION_TAG}}}.}}",
           r"  \label{tab:ablation-depthmap}", r"\end{table}"]
     return "\n".join(L) + "\n"
 
@@ -369,7 +388,7 @@ def build_baseline_table(cmp_):
           r"detection-exhaustive; elsewhere it tracks annotation coverage and rewards "
           r"under-emission (\S\ref{sec:experiments-baseline}). "
           r"\emph{\_only\_subset} corpus tier, never full documents. "
-          rf"Source: \texttt{{paper/results/task4\_{BASELINE_TAG}/}}.}}",
+          rf"Source: \texttt{{task4\_{BASELINE_TAG}}}.}}",
           r"  \label{tab:baseline-comparison}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -378,7 +397,9 @@ def build_scale_table(scale):
     """Task 6 — batched-path cost/latency/scale, _trimmed tier.
 
     Kept structurally separate from the quality tables because it is a different
-    corpus tier (guardrail 1). Reports TOKENS as the hard number; the dollar rows
+    corpus tier (guardrail 1). Single-column (2026-09-07): it has three columns
+    and fits, and as a table* its twenty rows blocked both columns for the same
+    height, costing roughly a third of a page. Reports TOKENS as the hard number; the dollar rows
     are derived from them at build time (the rates were unverifiable on
     2026-08-30 and were confirmed against the vendor pricing page on 2026-08-31
     and 2026-09-04). The caption's cost SHARES are computed here too -- an earlier
@@ -389,9 +410,10 @@ def build_scale_table(scale):
     ex, batch, per = scale["executions"], scale["batching_evidence"], scale["per_stage_metrics"]
     L = header(f"paper/results/task6_{SCALE_TAG}/manifest.json", tier="_trimmed")
     L += [
-        r"\begin{table*}[t]",
+        r"\begin{table}[t]",
         r"\centering",
         r"\small",
+        r"\setlength{\tabcolsep}{4pt}",
         r"\begin{tabular}{lrr}",
         r"\toprule",
         r"& \textbf{KY} & \textbf{CO} \\",
@@ -405,21 +427,28 @@ def build_scale_table(scale):
         rf"Elements, raw $\rightarrow$ merged & "
         rf"{batch['KY']['raw_elements']} $\rightarrow$ {batch['KY']['after_merge_dedup']} & "
         rf"{batch['CO']['raw_elements']} $\rightarrow$ {batch['CO']['after_merge_dedup']} \\",
-        r"\midrule",
-        r"\multicolumn{3}{l}{\emph{Input / output tokens by stage}} \\",
     ]
-    STAGES = [("depth_map_pass1", "Depth map (Haiku 4.5)"),
-              ("detection", "Detection (Opus 4.6)"),
-              ("parsing", "Parsing (Sonnet 4.6)")]
-    for key, label in STAGES:
-        k, c = per["KY"][key], per["CO"][key]
-        L.append(rf"{label} & {k['input_tokens']:,} / {k['output_tokens']:,} & "
-                 rf"{c['input_tokens']:,} / {c['output_tokens']:,} \\")
+    # ⚠️ Labels are bare stage names, NOT "Detection (Opus 4.6)", and input and
+    # output tokens are SEPARATE BLOCKS rather than one "in / out" cell. Both
+    # exist to fit a single column: with the model names in the label and both
+    # counts in one cell, the bold Total row overfull it by 28pt even at
+    # \footnotesize. The model assignment is stated in the caption, which points
+    # at the section that argues for it. Splitting also reads better -- input
+    # tokens now compare down a column instead of across a slash.
+    STAGES = [("depth_map_pass1", "Depth map"),
+              ("detection", "Detection"),
+              ("parsing", "Parsing")]
     kt, ct = per["KY"]["total"], per["CO"]["total"]
+    for field, title in (("input_tokens", "Input tokens"),
+                         ("output_tokens", "Output tokens")):
+        L += [r"\midrule", rf"\multicolumn{{3}}{{l}}{{\emph{{{title}}}}} \\"]
+        for key, label in STAGES:
+            L.append(rf"\quad {label} & {per['KY'][key][field]:,} & "
+                     rf"{per['CO'][key][field]:,} \\")
+        L.append(rf"\quad \textbf{{Total}} & \textbf{{{kt[field]:,}}} & "
+                 rf"\textbf{{{ct[field]:,}}} \\")
     L += [
         r"\midrule",
-        rf"\textbf{{Total}} & \textbf{{{kt['input_tokens']:,} / {kt['output_tokens']:,}}} & "
-        rf"\textbf{{{ct['input_tokens']:,} / {ct['output_tokens']:,}}} \\",
         rf"LLM calls & {kt['calls']} & {ct['calls']} \\",
         rf"Wall clock & {ex['KY']['wall_clock']} & {ex['CO']['wall_clock']} \\",
         r"\midrule",
@@ -452,15 +481,99 @@ def build_scale_table(scale):
         r"\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier} --- "
         r"each document's standards content \emph{in full}, and the only table here "
         r"not at the \texttt{\_only\_subset} tier (\S\ref{sec:experiments-scale}). "
+        r"Each stage runs on the model assigned in "
+        r"\S\ref{sec:method-model-assignment}. "
         r"\textbf{Tokens are the primary measure}; cost is derived from them at "
         r"published Bedrock on-demand rates, recomputed at table-build time from the "
         r"pipeline's own pricing constants. The depth-map pass is "
         rf"{min(depth_share):.1f}--{max(depth_share):.1f}\% of a run's cost, "
         r"detection "
         rf"{min(det_share):.0f}--{max(det_share):.0f}\%. "
-        rf"Source: \texttt{{paper/results/task6\_{SCALE_TAG}/}}.}}",
+        rf"Source: \texttt{{task6\_{SCALE_TAG}}}.}}",
         r"\label{tab:scale}",
-        r"\end{table*}",
+        r"\end{table}",
+    ]
+    return "\n".join(L) + "\n"
+
+
+def build_scale_quality_table(sq):
+    """Task 13 — detector and parser quality on three fresh whole-document runs.
+
+    ⚠️ _trimmed tier, like Task 6's scale table and unlike every quality table in
+    the paper. Guardrail 1 requires that to be in the caption, and it is the only
+    reason this is not folded into the headline tables.
+
+    Every cell is one draw, and the sd column exists because §8.8's whole point is
+    that two of these rows are ranges and the rest are not. Parser coverage in
+    particular must never be reduced to a single value -- 0.807/0.927/0.841 is
+    the finding, and a mean alone hides it, which is why the per-run columns are
+    the table and the sd is only the summary.
+
+    ⚠️ WIDTH IS TIGHT. Five columns in a 3.15in ACL column: a mean$\\pm$sd column
+    overfull it by 80pt, so the summary is the sd alone, the row labels are
+    abbreviated, and \\tabcolsep is halved. That combination fits at \\small with
+    little slack. Re-check main.log for an Overfull \\hbox naming
+    tables/scale_quality.tex after any edit to a row label.
+    """
+    det, par = sq["detector"], sq["parser"]
+    n_el = sq["golden"]["n_elements"]
+    n_std = sq["golden"]["n_standards"]
+    n_parsed = [a["parser"]["n_parsed"] for a in sq["arms"]]
+
+    def row(label, block, dp=0):
+        """dp=0 renders counts, dp>0 renders rates. Reads per_run/mean/stdev as
+        recorded rather than recomputing, so the table cannot disagree with the
+        manifest it cites."""
+        if dp:
+            cells = [f"{v:.{dp}f}" for v in block["per_run"]]
+            sd = f"{block['stdev']:.{dp}f}"
+        else:
+            cells = [f"{int(round(v)):,}" for v in block["per_run"]]
+            sd = f"{block['stdev']:.1f}"
+        return rf"\quad {label} & " + " & ".join(cells) + rf" & {sd} \\"
+
+    L = header(f"paper/results/task13_{SCALE_QUALITY_TAG}/ky_trimmed_3runs.json",
+               tier="_trimmed")
+    L += [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\small",
+        r"\setlength{\tabcolsep}{4pt}",
+        r"\begin{tabular}{lrrrr}",
+        r"\toprule",
+        r"& \textbf{1} & \textbf{2} & \textbf{3} & \textbf{sd} \\",
+        r"\midrule",
+        rf"\multicolumn{{5}}{{l}}{{\emph{{Detector}} --- {n_el} verified elements}} \\",
+        row("Elements emitted", det["elements"]),
+        row("Absent from run", det["absent"]),
+        row("Hallucinations", det["hallucination_candidates"]),
+        row("Recall (level+title)", det["recall_ignoring_age_band"], dp=3),
+        row("Recall (strict key)", det["recall_strict"], dp=3),
+        row(r"Spurious \texttt{age\_band}", det["age_band_emitted"]),
+        row("Surplus duplicates", det["surplus_duplicates"]),
+        r"\midrule",
+        rf"\multicolumn{{5}}{{l}}{{\emph{{Parser}} --- {n_std} verified standards}} \\",
+        r"\quad Standards parsed & " + " & ".join(f"{v:,}" for v in n_parsed) + r" & \\",
+        row("Coverage", par["coverage"], dp=3),
+        row("Field accuracy", par["field_accuracy"], dp=3),
+        row(r"Fabricated \texttt{.N} keys", par["fabricated_keys"]),
+        row(r"Collisions$^{\dagger}$", par["id_collisions"]),
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\caption{Quality at whole-document scale: Kentucky, three independent "
+        r"runs, \textbf{\texttt{\_trimmed} corpus tier} --- the document's "
+        r"standards content \emph{in full}, and not the \texttt{\_only\_subset} "
+        r"tier every other quality table uses "
+        r"(\S\ref{sec:experiments-scale-quality}). \textbf{Recall is measured "
+        r"against a verified reference set, not against the document}, so an "
+        r"element no run emits is invisible here "
+        r"(\S\ref{sec:discussion-goldens}). \textbf{Coverage is a range and must "
+        r"not be read as its mean.} $\dagger$~zero by construction: the resolver "
+        r"renames every collision before the check runs, so the informative "
+        r"count is the fabricated-key row above. "
+        rf"Source: \texttt{{task13\_{SCALE_QUALITY_TAG}}}.}}",
+        r"\label{tab:scale-quality}",
+        r"\end{table}",
     ]
     return "\n".join(L) + "\n"
 
@@ -573,8 +686,8 @@ def build_corpus_appendix_table(tiers):
           r"and every Nevada number in this paper refers to the 2023 one. "
           r"Page counts verified with PyMuPDF. "
           r"Source: "
-          r"\texttt{standards/standards\_tracking.md}, "
-          r"\texttt{paper/results/corpus\_tiers.json}.}",
+          r"\texttt{standards\_tracking.md}, "
+          r"\texttt{corpus\_tiers.json}.}",
           r"\label{tab:corpus-appendix}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -649,7 +762,7 @@ def build_corpus_pages_table(pr):
           r"reliable across the tier, and left blank rather than guessed otherwise."
           + match_note +
           r" California has no \texttt{\_trimmed} tier and Colorado's is the whole "
-          r"document. Source: \texttt{paper/results/corpus\_page\_ranges.json}.}",
+          r"document. Source: \texttt{corpus\_page\_ranges.json}.}",
           r"\label{tab:corpus-pages}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -788,7 +901,7 @@ def build_stability_table(t5):
         r"distinct element identities compared, \emph{unstable} how many differed in "
         r"any graded field. \textbf{These rates are lower bounds, not estimates} "
         r"(\S\ref{sec:experiments-stability}). Source: "
-        r"\texttt{paper/results/task5\_%s/}.}" % TASK5_TAG,
+        r"\texttt{task5\_%s}.}" % TASK5_TAG,
         r"\label{tab:stability}",
         r"\end{table}",
     ]
@@ -836,7 +949,7 @@ def build_dataset_table(stats):
           r"a column sum. CO's subsets derive from the 41pp ages-3--5 document "
           r"($\dagger$). All quality numbers in this paper are measured on the "
           r"\emph{\_only\_subset} tier shown here (\S\ref{sec:corpus}). "
-          rf"Source: \texttt{{paper/results/task8\_{STATS_TAG}/}}.}}",
+          rf"Source: \texttt{{task8\_{STATS_TAG}}}.}}",
           r"  \label{tab:dataset-stats}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -904,7 +1017,7 @@ def build_confidence_table(conf):
           rf"{'never' if guess == 0 else f'{guess} times'}. "
           r"\textbf{Nothing in the pipeline thresholds this score} "
           r"(\S\ref{sec:experiments-confidence}). \emph{\_only\_subset} tier. "
-          rf"Source: \texttt{{paper/results/task8\_{STATS_TAG}/}}.}}",
+          rf"Source: \texttt{{task8\_{STATS_TAG}}}.}}",
           r"  \label{tab:confidence-distribution}", r"\end{table}"]
     return "\n".join(L) + "\n"
 
@@ -943,6 +1056,8 @@ def main():
     baseline = load_json(bp) if bp.exists() else None
     scp = RESULTS_DIR / f"task6_{SCALE_TAG}" / "manifest.json"
     scale = load_json(scp) if scp.exists() else None
+    sqp = RESULTS_DIR / f"task13_{SCALE_QUALITY_TAG}" / "ky_trimmed_3runs.json"
+    scale_quality = load_json(sqp) if sqp.exists() else None
     t5p = RESULTS_DIR / f"task5_{TASK5_TAG}" / "stability_analysis.json"
     t5 = load_json(t5p) if t5p.exists() else None
     sd = RESULTS_DIR / f"task8_{STATS_TAG}"
@@ -966,6 +1081,8 @@ def main():
         written.append(("baseline_comparison.tex", build_baseline_table(baseline)))
     if scale:
         written.append(("scale_batched.tex", build_scale_table(scale)))
+    if scale_quality:
+        written.append(("scale_quality.tex", build_scale_quality_table(scale_quality)))
     if t5:
         written.append(("stability.tex", build_stability_table(t5)))
     written.append(("fig_levels.tex", build_levels_figure(t2, abl)))

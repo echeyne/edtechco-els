@@ -2,9 +2,10 @@
 % Source: paper/results/task6_20260830/manifest.json
 % Regenerate with: python paper/analysis/generate_tables.py
 % Corpus tier (guardrail 1): every row is the _trimmed tier -- a document's standards content IN FULL (KY 52pp, CO 41pp) with non-standards matter removed. NOT the full published PDF (KY 120pp, CO 187pp), and NOT the _only_subset tier the quality tables use.
-\begin{table*}[t]
+\begin{table}[t]
 \centering
 \small
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{lrr}
 \toprule
 & \textbf{KY} & \textbf{CO} \\
@@ -17,12 +18,18 @@ Detection batches & 4 & 4 \\
 Parse batches & 9 & 9 \\
 Elements, raw $\rightarrow$ merged & 363 $\rightarrow$ 329 & 390 $\rightarrow$ 300 \\
 \midrule
-\multicolumn{3}{l}{\emph{Input / output tokens by stage}} \\
-Depth map (Haiku 4.5) & 12,153 / 438 & 19,613 / 415 \\
-Detection (Opus 4.6) & 201,574 / 64,530 & 223,276 / 47,125 \\
-Parsing (Sonnet 4.6) & 164,783 / 85,205 & 147,315 / 83,862 \\
+\multicolumn{3}{l}{\emph{Input tokens}} \\
+\quad Depth map & 12,153 & 19,613 \\
+\quad Detection & 201,574 & 223,276 \\
+\quad Parsing & 164,783 & 147,315 \\
+\quad \textbf{Total} & \textbf{378,510} & \textbf{390,204} \\
 \midrule
-\textbf{Total} & \textbf{378,510 / 150,173} & \textbf{390,204 / 131,402} \\
+\multicolumn{3}{l}{\emph{Output tokens}} \\
+\quad Depth map & 438 & 415 \\
+\quad Detection & 64,530 & 47,125 \\
+\quad Parsing & 85,205 & 83,862 \\
+\quad \textbf{Total} & \textbf{150,173} & \textbf{131,402} \\
+\midrule
 LLM calls & 45 & 45 \\
 Wall clock & 13m19s & 9m52s \\
 \midrule
@@ -33,6 +40,6 @@ Wall clock & 13m19s & 9m52s \\
 \textbf{Total} & \textbf{\$4.41} & \textbf{\$4.02} \\
 \bottomrule
 \end{tabular}
-\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier} --- each document's standards content \emph{in full}, and the only table here not at the \texttt{\_only\_subset} tier (\S\ref{sec:experiments-scale}). \textbf{Tokens are the primary measure}; cost is derived from them at published Bedrock on-demand rates, recomputed at table-build time from the pipeline's own pricing constants. The depth-map pass is 0.3--0.5\% of a run's cost, detection 57--59\%. Source: \texttt{paper/results/task6\_20260830/}.}
+\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier} --- each document's standards content \emph{in full}, and the only table here not at the \texttt{\_only\_subset} tier (\S\ref{sec:experiments-scale}). Each stage runs on the model assigned in \S\ref{sec:method-model-assignment}. \textbf{Tokens are the primary measure}; cost is derived from them at published Bedrock on-demand rates, recomputed at table-build time from the pipeline's own pricing constants. The depth-map pass is 0.3--0.5\% of a run's cost, detection 57--59\%. Source: \texttt{task6\_20260830}.}
 \label{tab:scale}
-\end{table*}
+\end{table}

@@ -1,11 +1,3 @@
-% conclusion.tex — Task 10 stub. Outline recovered verbatim from the
-% original plan file fragment (see ../OUTLINE_NOTES.md). Draft at Task 12.
-%
-% More states toward a national dataset; an MCP server exposing the
-% normalized DB so external applications and agents can query standards
-% directly, extending the existing els-explorer-api / agentcore-agent;
-% downstream apps (Standards Explorer, Planning).
-
 \section{Conclusion and Future Work}
 \label{sec:conclusion}
 
@@ -14,8 +6,9 @@ shown that the obstacle is not text recovery but hierarchy recovery, and that an
 LLM can recover the hierarchy by classifying each element's nesting position
 against a depth map inferred per document, rather than by recognizing label
 vocabulary that no two states share. Across four development states and two held
-out entirely, detector recall is 1.000 at every level, a manual audit of all 297
-in-scope detections finds one hallucinated element, and parsing resolves those
+out entirely, detector recall at the annotated subset tier is 1.000 at every
+level, a manual audit of all 297 in-scope detections there finds one
+hallucinated element, and parsing resolves those
 elements into a single canonical schema with no identifier collisions. Ablating
 the depth map degrades exactly the levels whose identity is positional and
 leaves the others untouched; a rule-based extractor matches the method at a
@@ -36,14 +29,13 @@ more than fifty, and the obvious direction is breadth: each state added tests
 generalization again, and enough of them would constitute the national
 machine-readable dataset that does not currently exist.
 
-Two further directions follow from the artifact rather than the method. The
-normalized store is already served through a browsing and verification
-interface; exposing it through a tool-callable interface would let external
-applications and agents query standards directly, which is the form in which
-curriculum and planning tools actually need them. And the human verification
-state the schema carries per element invites a targeted-review question I have
-deliberately not answered here: given that confidence is uninformative
-(\S\ref{sec:experiments-confidence}), what \emph{would} identify the records
-most worth an expert's attention? My stability measurements suggest one
-candidate --- disagreement across repeated runs is cheap to compute and, unlike
-confidence, is concentrated in exactly the places where my own defects live.
+Two further directions follow from the artifact rather than the method.
+Exposing the normalized store through a tool-callable interface would let
+external applications query standards directly, which is the form curriculum
+and planning tools need them in. And the per-element verification state invites
+a targeted-review question I have deliberately not answered: given that
+confidence is uninformative (\S\ref{sec:experiments-confidence}), what
+\emph{would} identify the records most worth an expert's attention? My
+stability measurements suggest one candidate --- disagreement across repeated
+runs is cheap to compute and, unlike confidence, is concentrated in exactly the
+places where my own defects live.

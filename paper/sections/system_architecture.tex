@@ -1,14 +1,5 @@
-% system_architecture.tex — Task 10 stub. Outline recovered verbatim from
-% the original plan file fragment (see ../OUTLINE_NOTES.md). Draft at Task 12.
-%
-% Serverless stages ingestion -> extraction -> detection -> parsing ->
-% validation -> persistence; prepare -> Step Functions Map -> merge
-% batching; S3-as-bus intermediates. Note the batched production path
-% differs from the direct path the evals use — say so (see
-% tasking/arxiv_paper.md's batched-vs-direct background note).
-
-\section{System Architecture}
-\label{sec:system-architecture}
+\section{Deployed Architecture}
+\label{sec:appendix-architecture}
 
 \begin{figure*}
   \centering
@@ -20,7 +11,7 @@
 \end{figure*}
 
 Figure~\ref{fig:architecture} shows the deployed system. Documents flow through
-the six pipeline stages of \S\ref{sec:pipeline-overview}, numbered 1--8 in the
+the six pipeline stages of \S\ref{sec:method}, numbered 1--8 in the
 figure because the two batched stages each occupy two positions --- prepare,
 then map and merge --- and are realized as ten Lambda handlers in all. Stages
 communicate by writing JSON to S3 rather than by passing payloads directly, so
@@ -34,20 +25,6 @@ by text-block chunk and parsing by domain, which keeps related elements in the
 same call. Detection is itself two-pass: the depth-map pass infers the
 document's nesting hierarchy before any element is classified against it.
 
-\textbf{The evaluation suites exercise the direct path rather than this batched
-one, and the two are known to diverge} (\S\ref{sec:discussion-limitations}).
-Every quality number in this paper is therefore a measurement of the direct
-path, and Table~\ref{tab:scale} is the only evidence here that the batched path
-behaves as intended.
-
-% Standards Explorer screenshot — supplied by Emily 2026-09-04 as
-% figures/colorado_els.png, replacing an earlier Arizona capture whose document
-% title read "SUBSET - Arizona Early Learning Standards". That title would have
-% invited the reader to conclude the PRODUCT only ever holds subsets, which is a
-% stronger and false claim than the subset-tier EVALUATION the paper discloses.
-% This capture is Colorado at the _trimmed tier: the complete Ages 3-5 document.
-% Checked before inclusion: no account IDs, ARNs, internal URLs or email
-% addresses are visible.
 Figure~\ref{fig:explorer} shows the end of that pipeline as a user meets it:
 extracted standards resolved into the canonical schema and served through the
 Standards Explorer, where the per-element verification workflow of

@@ -1,10 +1,3 @@
-% introduction.tex — drafted Task 12 (2026-08-30).
-% Guardrails observed: corpus tier stated explicitly for every quality number
-% (1); no confidence-gate language (2); trimming disclosed here and in
-% \S\ref{sec:corpus} (3); no unmeasured Medium numbers (4); the in-context
-% argument is made on no-labeled-corpus grounds, with no invented fine-tuning
-% cost (5); held-out results reported as measured (7).
-
 \section{Introduction}
 \label{sec:introduction}
 
@@ -71,7 +64,8 @@ approach available without first solving a different problem
     (\S\ref{sec:method-parsing}).
   \item A serverless architecture that batches detection and parsing through a
     prepare--map--merge pattern so the method applies to whole standards
-    documents rather than excerpts (\S\ref{sec:system-architecture}).
+    documents rather than excerpts (\S\ref{sec:method-deployment},
+    Appendix~\ref{sec:appendix-architecture}).
   \item An evaluation over four development states and two held-out states.
     Detector recall is 1.000 at every hierarchy level in all six states, and a
     manual audit of all 297 in-scope detections finds a single hallucinated
@@ -90,13 +84,14 @@ approach available without first solving a different problem
     (\S\ref{sec:experiments-stability}, \S\ref{sec:discussion-limitations}).
 \end{enumerate}
 
-\paragraph{Scope of the reported numbers.} All quality measurements in this
-paper are computed at the \emph{subset} corpus tier: hand-trimmed excerpts of
-one to two domains per state, 70 pages in total, fully annotated. This is
-favorable preprocessing and I state it plainly rather than leaving it to be
-inferred; \S\ref{sec:corpus} gives the tiers and retained page ranges, and
+\paragraph{Scope of the reported numbers.} Every headline quality measurement
+in this paper is computed at the \emph{subset} corpus tier: hand-trimmed
+excerpts of one to two domains per state, 70 pages in total, fully annotated.
+This is favorable preprocessing and I state it plainly rather than leaving it to
+be inferred; \S\ref{sec:corpus} gives the tiers and retained page ranges, and
 \S\ref{sec:discussion-limitations} discusses what does and does not transfer to
-whole documents. Cost and scale figures are reported separately, at the
-\emph{trimmed} tier---a document's standards content in full, with front
-matter, expository essays and appendices removed---and are never mixed with the
-quality tables.
+whole documents. Cost, scale and one quality measurement are reported at the
+\emph{trimmed} tier instead---a document's standards content in full, with front
+matter, expository essays and appendices removed. The tiers are never mixed
+within a table, and each table names its own
+(\S\ref{sec:experiments-scale}, \S\ref{sec:experiments-scale-quality}).

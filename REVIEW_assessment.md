@@ -5,6 +5,28 @@ Written 2026-09-04 after the reference and claim reviews
 This is a researcher's judgement of the paper, its venues and its audience.
 It is not legal advice and does not assess any petition.
 
+> **Status note, 2026-09-07 — §4's experiments are DONE. Read this file as a
+> record, not as outstanding work.** All three of the measurements §4 ranks
+> have been run and are in the paper:
+>
+> - the Kentucky quality-at-scale grade (§4's top recommendation) — now
+>   §6.8 and Table 9, and carried further than §4 asked: two new
+>   trimmed-tier Kentucky goldens (277 elements / 207 standards) verified
+>   against the published PDF, then three fresh runs graded against them.
+>   `paper/results/task9_20260905/`, `task13_20260907/`.
+> - the whole-document single-prompt arm — now §6.4.
+>   `paper/results/task10_20260905/`.
+> - the Nevada sampler A/B at n=5 per arm — run, and it **retired** the
+>   attribution rather than establishing it, which the paper reports as a
+>   non-reproduction. `paper/results/task11_20260905/`.
+>
+> §4's precision prediction was correct: duplicates do survive chunk
+> boundaries at scale. §2's length verdict has been acted on in part — the
+> body is 19 pages rather than 22, with the pipeline overview folded into the
+> method section and the architecture moved to an appendix — but the paper is
+> not cut to 8 pages, which was a deliberate decision. What remains open is
+> tracked in `paper/TODO_remaining.md`, not here.
+
 ---
 
 ## 1. Is this a good paper?
