@@ -1,17 +1,16 @@
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}
 
-This section is not an apology. A deployed system's limits are the part of it a
-practitioner most needs, and stating them precisely is the same discipline that
-produced the results above, applied to the boundary of what I can claim. Where
-a limit is a measurement I have not made, I say so; where it is one I made and
-did not like, I report it.
+A deployed system's limits are the part of it a practitioner most needs, and
+stating them precisely is the same discipline that produced the results above,
+applied to the boundary of what I can claim. Where a limit is a measurement I
+have not made, I say so; where it is one I made and did not like, I report it.
 
 \subsection{What the results support}
 
 The central claim survives its strongest available test. Classifying by nesting
 position rather than by label vocabulary yields recall of 1.000 at every
-hierarchy level in all six states, including the two held out entirely --- whose
+hierarchy level in all six states, including the two held out entirely, whose
 documents print label words, code namespaces and level counts that appear
 nowhere in the four the prompts were written against, and neither of which is
 special-cased anywhere in the system. The two comparisons locate that result
@@ -24,17 +23,19 @@ almost nothing below it.
 
 \subsection{Corpus scope, and what the tiers do and do not mean}
 
-\textbf{Every quality number in this paper is computed at the
-\texttt{\_only\_subset} tier} --- roughly one to two domains per state, 70 pages
+\textbf{Every headline quality number in this paper is computed at the
+\texttt{\_only\_subset} tier}: roughly one to two domains per state, 70 pages
 in total, hand-trimmed and exhaustively annotated. This is favorable
 preprocessing and I state it rather than leaving it to be inferred. It is the
 tier that makes annotation affordable, and it is a genuine reduction in
-coverage: a subset metric is not a whole-document metric, and no table here
-should be read as one.
+coverage: a subset metric is not a whole-document metric, and no table at that
+tier should be read as one. The one exception,
+\S\ref{sec:experiments-scale-quality}, grades whole-document runs against a
+golden of its own and is kept in its own table.
 
 The scale measurements are a different tier and a different kind of claim. They
-run at \texttt{\_trimmed}, which removes only non-standards matter --- front
-matter, guiding-principles essays, appendices, acknowledgements --- and
+run at \texttt{\_trimmed}, which removes only non-standards matter (front
+matter, guiding-principles essays, appendices, acknowledgements) and
 \textbf{retains every standard in the document}. Kentucky's 52 processed pages
 are all of Kentucky's standards, not 43\% of them, and Colorado's 41 are the
 complete Ages 3--5 publication. A trimmed-to-published page ratio is therefore
@@ -48,7 +49,7 @@ extrapolated to untrimmed page counts, and no document as large as Arizona's
 217-page publication has been run end to end. Trimming also remains
 preprocessing that a deployment would have to perform or absorb: the pipeline
 was never asked to ignore 68 pages of Kentucky preamble on its own, and I do
-not claim it would. Colorado carries one further qualification --- its
+not claim it would. Colorado carries one further qualification. Its
 out-of-scope content is other \emph{age bands}, the birth-to-three and five-to-
 eight portions of a 187-page publication, not standards removed by trimming. Every
 Colorado figure in this paper is the Ages 3--5 band.
@@ -57,8 +58,8 @@ Colorado figure in this paper is the Ages 3--5 band.
 \label{sec:discussion-goldens}
 
 The detector goldens vary a great deal in density, and that governs what each
-can establish. In the four development states they are deliberate spot checks
---- 5, 25, 7 and 8 annotated elements against detection sets of 67, 122, 61 and
+can establish. In the four development states they are deliberate spot checks:
+5, 25, 7 and 8 annotated elements against detection sets of 67, 122, 61 and
 33. Because the evaluation suite counts every unmatched in-scope detection as a
 false positive, \emph{raw} precision on those states largely measures annotation
 coverage rather than detector quality, and I do not report it as quality.
@@ -68,8 +69,8 @@ element.
 
 The two held-out states are annotated densely rather than as spot checks, and
 they separate two properties that are easily conflated. Nevada's golden is
-content-exhaustive --- 46 elements covering every distinct structural element
-the document prints --- but not \emph{detection}-exhaustive, because the
+content-exhaustive (46 elements covering every distinct structural element
+the document prints) but not \emph{detection}-exhaustive, because the
 document reprints several headings on a second page spread and the detector
 correctly finds them twice; at 46 golden against 52 in-scope detections its raw
 precision has a ceiling below 1 no matter how well it performs. Kentucky's
@@ -81,7 +82,7 @@ annotation: those 44 elements are graded inside a trimmed-tier run in
 
 \paragraph{The trimmed-tier goldens support precision and not recall, and the
 distinction is not a technicality.} The two Kentucky goldens used at that scale
---- 277 elements and 207 standards --- were produced by seeding each row from a
+(277 elements and 207 standards) were produced by seeding each row from a
 recorded run and then checking it against the published PDF. Verifying emitted
 rows establishes that what the system produced is correct, which is a precision
 claim. It cannot establish recall, because it never searches for what the system
@@ -91,18 +92,18 @@ reported against a verified reference set of 277 elements rather than against
 the document, and the ceiling travels with the number wherever it appears.
 
 Independent evidence bounds the gap at the middle levels without closing it.
-Every \texttt{Benchmark N.N} identifier the document prints (17 of 17) and every
-\texttt{<Domain> Standard N} heading (15 of 15) appears in the golden, recovered
-from the document text rather than from any run. The 202 indicators carry no
-equivalent check, and that is where an omission would hide. Closing it needs a
-cold read of the pages --- reading a random sample without reference to the
-golden and diffing --- which would cost a fraction of annotating the document
+Every distinct \texttt{Benchmark N.N} identifier the document prints (18 of 18)
+and every \texttt{<Domain> Standard N} heading (15 of 15) appears in the golden,
+recovered from the document text rather than from any run. The 202 indicators
+carry no equivalent check, and that is where an omission would hide. Closing it
+needs a cold read of the pages, reading a random sample without reference to
+the golden and diffing, which would cost a fraction of annotating the document
 and is the obvious next measurement.
 
 \paragraph{Colorado deliberately carries only half of this.} Its golden remains
 a seven-element spot check and is not being extended, so at the trimmed tier it
-contributes recall and duplication evidence --- zero elements absent, zero
-duplicates, across four detection batches on the corpus's hardest layout --- and
+contributes recall and duplication evidence (zero elements absent, zero
+duplicates, across four detection batches on the corpus's hardest layout) and
 no precision figure at all. Its raw precision there is an annotation-coverage
 artifact and is labeled as one in the recorded output. The corpus therefore has
 exactly one state whose precision is a quality figure, at either tier, and that
@@ -120,8 +121,8 @@ Two of my own recorded results are the cautionary cases, and
 $46/46$ that five fresh runs give as 44, 45, 44, 44, 44, and a single-draw
 attribution of Nevada's domain-code behavior to the Pass-1 sampler that $n{=}5$
 per arm retired rather than confirmed. Both were the top of a distribution read
-as its center. Where an experiment is repeated --- the depth-map ablation, at
-three runs per arm across six states --- I report the range and note that the
+as its center. Where an experiment is repeated (the depth-map ablation, at
+three runs per arm across six states) I report the range and note that the
 direction never reverses, rather than quoting a single number.
 
 The practical consequence is that correctness here rests on the validation
@@ -131,7 +132,7 @@ twelve malformed identifiers, all of which contain whitespace and are rejected
 on shape before persistence.
 
 \subsection{A known defect, measured and deliberately not repaired}
-\label{sec:discussion-agebandevfect}
+\label{sec:discussion-ageband-defect}
 
 \S\ref{sec:experiments-scale-quality} reports that one field accounts for every
 anomaly the trimmed tier introduces: the detector attributes a page banner to
@@ -140,7 +141,7 @@ duplicate standards, which the identifier resolver separates with fabricated
 suffixes. I know the cause, I know the fix, and I have not applied it.
 
 The fix is a prompt rule stating what the goldens already encode across all six
-states --- that an element's age band comes from a side-by-side column that
+states: that an element's age band comes from a side-by-side column that
 distinguishes it from its siblings, never from a banner or running header that
 applies to a whole page. That is a general document-structure principle rather
 than a per-state rule, so it belongs in the prompt by the discipline of
@@ -154,9 +155,9 @@ cost-gating that governs every other change to these two files, applied to a
 finding of my own, and a reader is entitled to weigh it. Two things make the
 deferral defensible rather than convenient. The defect does not affect any
 subset-tier number, where the banner is not attributed at all. And it is
-systematic rather than random --- the same 164 elements in three consecutive
-runs --- so its effect is bounded and reproducible rather than a source of
-unquantified noise.
+systematic rather than random: the count is 164 in each of three consecutive
+runs, and 159 of those elements are common to all three, so its effect is
+bounded and reproducible rather than a source of unquantified noise.
 
 \subsection{Limitations of the measuring instruments}
 
@@ -165,7 +166,7 @@ otherwise.
 
 \textbf{The false-positive audit tests for invention.} Its verdicts turn on
 whether a detected title appears in the source text, which is the right question
-for a generative system and the wrong one for a copier --- a rule-based
+for a generative system and the wrong one for a copier: a rule-based
 extractor cannot invent and therefore scores near 1.000 by construction. Applied
 to the baseline the metric also detects something other than hallucination:
 California's five flagged rows are column \emph{fusion}, where a table header
@@ -174,8 +175,8 @@ precision for both arms instead, and treat the audit as informative only about
 the language-model arm.
 
 \textbf{The two evaluation suites do not grade the same detection.} The detector
-suite re-runs detection in process against a frozen extraction --- the direct
-path --- while the parser suite grades the deployed batched path's stored
+suite re-runs detection in process against a frozen extraction (the direct
+path) while the parser suite grades the deployed batched path's stored
 output. On the recording this paper uses, Arizona's direct-path detection holds
 67 elements where the batched output the parser suite reads holds 65; earlier
 recordings have differed by more. The two suites also use

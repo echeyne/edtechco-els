@@ -20,10 +20,10 @@ structure are the subject of this section.
 
 Recovering a standards hierarchy involves two decisions that are easy to
 conflate and better kept apart: \emph{what is on the page}, and \emph{what it
-is a child of}. The first is local --- a heading, a numbered item, a paragraph
-of prose --- and can be judged from the text in front of the reader. The second
-is global: an element's parent may be several pages back, may be printed only
-once at the top of a section that runs for multiple pages, or may not be printed at
+is a child of}. The first is local (a heading, a numbered item, a paragraph of
+prose) and can be judged from the text in front of the reader. The second is
+global: an element's parent may be several pages back, may be printed only once
+at the top of a section that runs for multiple pages, or may not be printed at
 all and must be recovered from the codes of its own descendants. Detection is
 accordingly forbidden from reconstructing an absent parent out of the position
 identifiers inside a child's code, and emits the children alone
@@ -51,8 +51,8 @@ Detection is two passes over the extracted text blocks.
 single cheap model call infers the document's \emph{depth map}: how many nesting
 levels this document uses, and what an element at each level looks like in it.
 This is the paper's central move. Rather than asking the model to recognize
-``strand'' or ``benchmark'' as level names --- vocabulary that no two states
-share --- I ask it once, per document, to characterize that document's own
+``strand'' or ``benchmark'' as level names, vocabulary that no two states
+share, I ask it once, per document, to characterize that document's own
 nesting scheme, and then treat the answer as authority for every subsequent
 classification. Appendix~\ref{sec:prompt-depthmap} gives that prompt in full;
 it is short, and it is the only one reproduced whole.
@@ -64,7 +64,7 @@ missing from the sample is a level missing from the entire run}: if the sample
 contains no evidence that a document nests four deep, the map reports three, and
 every element below the missing level is shifted up one.
 
-The obvious sampler --- keep every $n$th block --- is the wrong one here. It
+The obvious sampler, keeping every $n$th block, is the wrong one here. It
 keeps each line with the same probability $1/n$ however much structural evidence
 that line carries, and in a standards document evidence and frequency run
 opposite to one another: a section heading appears once per section, while the
@@ -98,29 +98,28 @@ The prompt states general document-structure principles rather than per-state
 rules. Its central instruction is positional: classify an element by where it
 sits in the depth map, not by the word its label happens to use
 (Appendix~\ref{rule:positional}). Supporting
-rules are stated at the same level of generality --- that a heading of the form
+rules are stated at the same level of generality: a heading of the form
 \texttt{<Label> <id>: <Title>} has the label-and-id as its code and the text
 after the colon as its title, for \emph{any} structural label word rather than a
-fixed list; that a code, when the document prints one, is authoritative and may
+fixed list; a code, when the document prints one, is authoritative and may
 appear inline, in a caption beside the heading, or as the shared leading prefix
-of its descendants' codes; and that when the document prints none, a code is
+of its descendants' codes; and when the document prints none, a code is
 derived from the title by a stated abbreviation procedure capped at five
 characters. All three are one rule, reproduced at
 Appendix~\ref{rule:code-resolution}.
 
-\paragraph{Where determinism is enforced in code.} The last of those rules ---
-deriving a code from the element's title when the document prints none --- is
+\paragraph{Where determinism is enforced in code.} The last of those rules,
+deriving a code from the element's title when the document prints none, is
 different in kind from the others. The rest ask the model for a judgement about
 a document; this one asks it to execute a deterministic string algorithm, and a
 sampling model executes such an algorithm inconsistently. In an engineering
-measurement on Kentucky --- three runs at temperature zero against one frozen
+measurement on Kentucky (three runs at temperature zero against one frozen
 extraction, recorded in the project's design notes rather than as a paper
-artifact --- roughly a quarter of the elements received a different code on at
+artifact) roughly a quarter of the elements received a different code on at
 least one run, while level, source page, and age band never varied. Because the
 code becomes part of a database primary key, a rate near zero is not good
-enough. The
-abbreviation is therefore also executed in Python --- but only where the
-document supplied no code of its own, decided by two independent guards: a
+enough. The abbreviation is therefore also executed in Python, but only where
+the document supplied no code of its own, decided by two independent guards: a
 \emph{shape} guard, since the abbreviation branch emits uppercase letters and
 nothing else, so a code carrying a digit, separator, or lowercase letter is
 positional and is never touched; and a \emph{grounding} guard, since a code read
@@ -144,8 +143,8 @@ uniform. Three shapes recur. A namespace may \emph{skip} a level, as Nevada's
 does: its sub-strand code does not extend its strand code, and requiring it to
 would corrupt every one of the 24 annotated Nevada standards, all of which break
 the chain at exactly that level. A sub-level identifier may be
-\emph{dotted}, restating its parent's position inside its own id --- Kentucky's
-\texttt{Benchmark 1.1}, whose leading \texttt{1} \emph{is} Standard~1 --- so
+\emph{dotted}, restating its parent's position inside its own id, as Kentucky's
+\texttt{Benchmark 1.1} does, whose leading \texttt{1} \emph{is} Standard~1; so
 composing it onto the full parent code counts that parent twice. And a heading
 may print a label-and-id form that must be converted into the domain-qualified
 form before it can be composed at all (Appendix~\ref{rule:label-identifier}).
@@ -169,14 +168,14 @@ can span batches. Colliding standards are re-qualified using their own ancestors
 segments, and \emph{every} member of a colliding set is rewritten, including the
 first one seen, so the result does not depend on the order in which chunks
 arrived. Where two standards share every ancestor and remain indistinguishable, a
-numeric suffix is assigned in document order --- reproducible, but carrying no
-information, which is why it is a last resort and is logged as one.
+numeric suffix is assigned in document order. That is reproducible, but it
+carries no information, which is why it is a last resort and is logged as one.
 
 Finally, a validation stage rejects any record whose codes are structurally
 impossible before it reaches the database: no code may contain whitespace, the
 indicator's code must extend its nearest present ancestor's, and the identifier
 must end with the indicator code. The middle condition is deliberately scoped to
-the leaf, because --- as Nevada shows --- an intermediate level may legitimately
+the leaf, because, as Nevada shows, an intermediate level may legitimately
 break the chain.
 
 \subsection{Model Assignment}
@@ -253,7 +252,7 @@ per-document branch}.
 
 This was adopted in response to a measured failure. An earlier revision achieved
 strong scores on the states it had been developed against by accumulating
-targeted logic for each --- regular expressions for particular label words, a
+targeted logic for each: regular expressions for particular label words, a
 special case for one state's collision behavior, an abbreviation helper tuned to
 another's conventions. The scores were real and the generalization was not. A
 migration removed that logic and re-expressed each rule as a general principle in
@@ -270,7 +269,7 @@ cross-chunk reconciliation of codes that disagree between chunks; the
 canonicalization of absence to a single spelling; the layout-stratified sampler;
 the code repairs of \S\ref{sec:method-parsing}. Each is paired with a prompt rule
 rather than substituted for one, and each exists because a model sampling at
-temperature zero emits both spellings of some decision intermittently --- a
+temperature zero emits both spellings of some decision intermittently. A
 prompt rule lowers that rate but cannot drive it to zero, and a primary key needs
 zero.
 
@@ -286,12 +285,12 @@ can be measured rather than asserted.
 \label{sec:method-discipline}
 The discipline above is a claim about \emph{code paths}, and it should not be
 read as a claim that the prompts are free of the corpus. They are not. Both
-prompts state their rules generally --- for any structural label word, at any
-nesting depth --- but each rule is illustrated with worked examples, and those
+prompts state their rules generally, for any structural label word and at any
+nesting depth, but each rule is illustrated with worked examples, and those
 examples were written while looking at real documents. Checking every annotated
 golden title of at least twelve characters against the verbatim prompt source
-finds fifteen that appear, of which ten are distinctive to a single state's
-golden and five are domain names shared across states and therefore carry no
+finds fifteen that are distinctive to a single state's golden, plus one domain
+name that several states share and that therefore carries no
 provenance.\footnote{\raggedright Regenerated by
 \texttt{paper/\allowbreak analysis/\allowbreak prompt\_\allowbreak
 example\_\allowbreak provenance.py}; record at
@@ -311,4 +310,3 @@ from those states. But the honest description of Kentucky and Nevada is
 therefore \emph{not annotated during development, and never fitted to} rather
 than \emph{never seen}, and the held-out results in
 \S\ref{sec:experiments-headline} should be read with that distinction in view.
-

@@ -571,6 +571,17 @@ def measure_stability(
     differed in 8 cells" can both be true of one invocation, and only the second
     is informative. ⚠️ **A 0.000 at small N is NOT a null result** for a defect
     that fires in a minority of runs -- report the denominator alongside it.
+
+    ⚠️ **It always measures the CHUNKED detector, whatever was graded.** The
+    probe runs call ``run_detector_cached`` directly and ignore any
+    ``detect_fn`` injected into ``evaluate_state``, so ``--stability-runs N``
+    on the rule-based baseline (``evaluation.baselines``) or the whole-document
+    arm silently measures the production detector instead -- and costs roughly
+    six times more doing it -- while ``graded_elements`` (observation 0) came
+    from the injected arm, so the comparison mixes two systems. No recorded
+    number is affected: that combination has never been run. Until this takes
+    a ``detect_fn`` of its own, do not pass ``--stability-runs`` with an
+    injected detector.
     """
     import statistics
 

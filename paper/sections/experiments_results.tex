@@ -46,33 +46,34 @@ graceful-degradation behavior rather than a strawman built for the paper.
 \textbf{Read Table~\ref{tab:ablation-depthmap} by level, not by its mean.} Removing the
 depth map leaves domain recall untouched at 1.000 and indicator recall untouched
 at 1.000, while strand falls to 0.920 and sub-strand to 0.833. That is the
-thesis stated as a measurement: the levels that survive are the ones with a
-distinctive surface form --- a document's top division is typographically
-obvious, and its leaves are the numbered or lettered items --- and the levels
-that degrade are exactly those whose identity is positional, recoverable only
-from what they sit between.
+claim, measured: the levels that survive are the ones with a distinctive
+surface form (a document's top division is typographically obvious, and its
+leaves are the numbered or lettered items), and the levels that degrade are
+exactly those whose identity is positional, recoverable only from what they sit
+between.
 
 \input{tables/fig_levels}
 
 The mechanism is visible in Kentucky (Figure~\ref{fig:levels}), whose golden
 annotates 3~domains, 5~strands, 10~sub-strands and 26~indicators. The on arm
 reproduces that distribution exactly and the off arm emits 4, 10, 6 and 26.
-Three repeated runs per arm --- recorded at an earlier version of the detector
-code, before the Pass-1 sampler was replaced, which is why I keep them distinct
-from the single-run columns of Table~\ref{tab:ablation-depthmap} --- show the
-same shape every time: the on arm reproduces the golden distribution in all
-three, while the off arm inflates strand and deflates sub-strand in all three
-(5~$\rightarrow$~8/7/10 and 10~$\rightarrow$~7/9/6) and leaves the indicator
-count at 26. The failure is level \emph{collapse}, and it is legible in the
-regression cases: with the map off, elements printed as \texttt{Benchmark N.N}
-are promoted to strand --- classified by their label rather than by their
-position, which is precisely the behavior the method exists to avoid.
+Three repeated runs per arm show the same shape every time. Those repeats were
+recorded at an earlier version of the detector code, before the Pass-1 sampler
+was replaced, which is why I keep them distinct from the single-run columns of
+Table~\ref{tab:ablation-depthmap}. In them the on arm reproduces the golden
+distribution in all three, while the off arm inflates strand and deflates
+sub-strand in all three (5~$\rightarrow$~8/7/10 and 10~$\rightarrow$~7/9/6) and
+leaves the indicator count at 26. The failure is level \emph{collapse}, and it
+is legible in the regression cases: with the map off, elements printed as
+\texttt{Benchmark N.N} are promoted to strand, classified by their label rather
+than by their position, which is precisely the behavior the method exists to
+avoid.
 
-Two honest qualifications. First, \textbf{the effect is conditional, not
+Two qualifications. First, \textbf{the effect is conditional, not
 uniform}: only Colorado and Kentucky lose recall, while Texas and Nevada keep
 recall 1.000 and lose \emph{code} accuracy instead (Texas 8/8~$\rightarrow$~5/8
 on an identical set of detections). Arizona and California are insensitive on
-every metric, but that is an artifact of their goldens rather than a result ---
+every metric, but that is an artifact of their goldens rather than a result:
 both are small spot checks against far larger detection sets, so recall
 saturates either way, and they are the states least able to show the effect.
 Second, \textbf{off-arm recall is a range, never a point value}: across three
@@ -98,7 +99,7 @@ per-document branch.
 \input{tables/baseline_comparison}
 
 \textbf{The per-level row is the result.} The rule-based arm ties the language
-model exactly at domain --- 13 of 13 in both --- and then collapses: strand
+model exactly at domain (13 of 13 in both) and then collapses: strand
 0.240, sub-strand 0.667, indicator 0.137, against 1.000 at every level. Reported
 as a mean this would read ``1.000 versus 0.500'' and would hide the only thing
 worth knowing. Typography identifies a document's top division in all six
@@ -107,7 +108,7 @@ the distinctions are positional.
 
 The failure is also not the one I expected: elements the baseline misses are
 overwhelmingly \emph{never emitted at all} rather than emitted at the wrong
-level --- 43 of Nevada's 46 and 31 of Kentucky's 44. The rules do not mislabel
+level (43 of Nevada's 46 and 31 of Kentucky's 44). The rules do not mislabel
 the structure so much as fail to see it.
 
 \textbf{The held-out collapse needs its repair attached.} Nevada at 0.065 is the
@@ -125,7 +126,7 @@ documents they were not written against.
 quality ordering here: Arizona shows the rule-based arm \emph{above} the
 language model (0.500 versus 0.417) purely because it emits fewer in-scope
 detections against a five-element spot-check golden. I also omit verified
-precision from this table deliberately --- it asks whether a detected title
+precision from this table deliberately. It asks whether a detected title
 appears in the source text, a test for \emph{invention}, and an extractor that
 copies verbatim cannot invent, so the baseline scores 1.000 in five of six
 states against the language model's 0.9966. That number is real and
@@ -147,7 +148,7 @@ and grader are identical to the full method's, so a difference is attributable
 to the architecture rather than to prompting.
 
 \textbf{It is not a strawman: on Arizona and Nevada it matches}, at recall
-$1.000$ with full code accuracy --- and Nevada is one of the two held-out states
+$1.000$ with full code accuracy, and Nevada is one of the two held-out states
 and prints a namespace that skips a level, so this is not an easy case. Where it
 loses, it loses in two distinct ways. On Kentucky and Texas recall holds while
 code accuracy falls, $44/44$ to $28/44$ and $8/8$ to $5/8$, and the failures are
@@ -158,14 +159,14 @@ recall itself falls to $0.429$, with the level-collapse signature the depth-map
 ablation produces.
 
 \textbf{California is lost entirely, and that failure is architectural rather
-than statistical.} Its single call emitted exactly 16{,}000 output tokens ---
-the configured maximum --- truncating the JSON mid-object so that nothing parsed
+than statistical.} Its single call emitted exactly 16{,}000 output tokens, the
+configured maximum, truncating the JSON mid-object so that nothing parsed
 and \emph{none} of its 25 golden elements were recovered, against $25/25$ for
 the full method. One prompt has one output budget for an entire document, so
 exceeding it loses the document; chunking bounds the same overflow to a chunk.
-Arizona is the uncomfortable corroboration: it succeeded while emitting 14{,}292
+Arizona shows how narrow the margin is: it succeeded while emitting 14{,}292
 tokens, within 11\% of the same ceiling, so a success here does not predict the
-next document and the margin is invisible in the score.
+next document, and the margin is invisible in the score.
 
 Scope bounds what this carries. Every subset extraction is between 3.7K and 7.9K
 tokens and fits in one prompt, so a good score here would mean the architecture
@@ -173,7 +174,7 @@ is unnecessary \emph{at this tier} and would say nothing about the tiers where a
 document does not fit and chunking is not optional. This arm is a single draw
 per state, which is why I do not tabulate it; the California result is reported
 with more confidence than the rest because its mechanism is identified rather
-than inferred --- the output length equals the configured cap exactly. Source:
+than inferred, the output length equaling the configured cap exactly. Source:
 \texttt{task10\_20260905}.
 
 \subsection{What the Confidence Score Measures}
@@ -187,7 +188,7 @@ Table~\ref{tab:confidence-distribution} in
 Appendix~\ref{sec:appendix-confidence}.
 
 \textbf{The distribution is degenerate.} Across 379 elements the score takes
-just five distinct values --- 0.90, 0.92, 0.95, 0.96 and 0.97 --- and 94.2\% of
+just five distinct values (0.90, 0.92, 0.95, 0.96 and 0.97), and 94.2\% of
 them fall at 0.95 or above. The band the prompt explicitly reserves for a guess
 ($<0.70$) is never used once, and the whole of the range below 0.80 is empty. A
 score that never exercises two thirds of the interval it was given is not
@@ -200,7 +201,7 @@ the 22 elements in the middle band, 16 belong to Kentucky alone; at indicator
 level, 246 of 263 score 0.95 or above and all 17 exceptions come from two
 states. Nor is the quantity stable between runs: on an earlier freeze of the
 same corpus under the same configuration, 89.7\% of indicators scored 0.95 or
-above against 93.5\% here --- a four-point swing on an unchanged corpus, wider
+above against 93.5\% here, a four-point swing on an unchanged corpus, wider
 than most of the distinctions a review threshold would be asked to draw.
 Kentucky makes the point sharply, because it is the state I can say the most
 about: its detector golden is the corpus's only exhaustive one, and against it
@@ -209,13 +210,13 @@ carrying the lowest mean confidence of any state. Confidence separates Kentucky
 from California; correctness does not.
 
 \textbf{One observation that should not be over-read.} The single confirmed
-hallucination in the corpus is also its lowest-scoring element --- the only one
-at 0.90, with nothing correct below 0.92 --- and it holds that position across
+hallucination in the corpus is also its lowest-scoring element, the only one
+at 0.90, with nothing correct below 0.92, and it holds that position across
 recordings. It is tempting to present this as a working detector for
 fabrication. It is not one. There is exactly \emph{one} distinct invented
 element in the audited corpus, so the false-negative rate of any such cut is
 unmeasurable here; the threshold the prompt itself defines would catch nothing;
-and the score is blind to the corpus's other non-verbatim category --- all 39
+and the score is blind to the corpus's other non-verbatim category, since all 39
 real-but-split titles, produced by column interleaving rather than by the model,
 score at or above 0.95. I report the observation and decline to build on it.
 
@@ -230,7 +231,7 @@ inputs with caching disabled, deliberately split across two days.
 \input{tables/stability}
 
 \textbf{The instability is concentrated rather than diffuse.} Four of six
-states reproduce perfectly on each suite --- California, Colorado, Texas and
+states reproduce perfectly on each suite: California, Colorado, Texas and
 Kentucky show zero detector disagreements across five runs, and Arizona,
 Colorado, Texas and Kentucky zero parser disagreements across six. The movement
 that exists is confined to three places, and each is a mechanism I can name.
@@ -272,7 +273,7 @@ per arm; across five draws, one of those codes fails in \emph{every} draw of
 \emph{both} arms, and at $n{=}1$ that arm had simply drawn the $46/46$ run
 above. What survives is a rate rather than a cause: the layout-stratified
 sampler gives mean code accuracy $0.965$ against the stride sampler's $0.935$,
-its worst draw beating the stride sampler's best --- but it also drops a golden
+its worst draw beating the stride sampler's best. But it also drops a golden
 element in two draws of five where the stride sampler drops none, so it is
 better on average and not better in every respect. Neither the sampler's
 motivating evidence nor the depth-map ablation is affected: the first is a far
@@ -282,7 +283,7 @@ states whose direction never changes sign.
 
 \paragraph{What this does and does not license.} These rates are \textbf{lower
 bounds, not estimates}. A defect firing in a minority of runs survives five
-clean draws comfortably --- the California defect above appears in two of five
+clean draws comfortably. The California defect above appears in two of five
 comparisons, and an earlier investigation of a different parser defect, the
 bare indicator code of \S\ref{sec:method-parsing}, found it in one graded run
 of six within a single invocation and in ten of twenty cached runs across code
@@ -298,20 +299,20 @@ agreeing with itself.
 Every quality measurement above is computed at the \texttt{\_only\_subset}
 tier, where each document produces at most five chunks and three domains. Both
 batching layers therefore collapse to a single batch, the Step Functions
-\texttt{Map} runs one iteration, and the merge is a no-op --- so those tables,
+\texttt{Map} runs one iteration, and the merge is a no-op, so those tables,
 whatever else they show, cannot support a claim about batching. This subsection
 reports the one measurement that can.
 
 \input{tables/scale_batched}
 
-\textbf{Table~\ref{tab:scale} is the only table in this paper that is not the
-subset tier, and the distinction is easy to misread in both directions.} These
-runs are the \texttt{\_trimmed} tier: each document's standards content in full,
-with front matter, expository essays and appendices removed. Kentucky's 52 pages
-are all of Kentucky's standards, not 43\% of them. What the tier reduces is page
-count, and therefore cost; it does not reduce coverage. Equally, these are not
-numbers for the published PDFs, and the token and latency figures should not be
-extrapolated to them.
+\textbf{Table~\ref{tab:scale} is not the subset tier, and the distinction is
+easy to misread in both directions.} These runs are the \texttt{\_trimmed}
+tier: each document's standards content in full, with front matter, expository
+essays and appendices removed. Kentucky's 52 pages are all of Kentucky's
+standards, not 43\% of them. What the tier reduces is page count, and therefore
+cost; it does not reduce coverage. Equally, these are not numbers for the
+published PDFs, and the token and latency figures should not be extrapolated to
+them.
 
 At this tier the batching path is genuinely exercised: 18 and 17 detection
 chunks resolve into four \texttt{Map} iterations per run, parsing into nine
@@ -321,10 +322,10 @@ performs is doing real work rather than passing data through.
 
 \textbf{The stage breakdown is where the model-assignment principle of
 \S\ref{sec:method-model-assignment} is tested.} Detection is the only stage
-invoked once per chunk and accounts for 57--60\% of each run's cost. The
-depth-map pass --- the component the ablation above shows carries the
-intermediate levels --- runs once per document on the cheapest model and costs
-between 0.3\% and 0.6\% of a run, about 1.4 cents on Kentucky and 2.2 on
+invoked once per chunk and accounts for 57--59\% of each run's cost. The
+depth-map pass, the component the ablation above shows carries the
+intermediate levels, runs once per document on the cheapest model and costs
+between 0.3\% and 0.5\% of a run, about 1.4 cents on Kentucky and 2.2 on
 Colorado. The most load-bearing
 component in the method is very nearly the cheapest one, which is the outcome
 the assignment was designed for.
@@ -354,14 +355,14 @@ trimmed-tier run, translating page numbers through the recorded page map of
 that matters: the same pages, the same golden, a larger neighborhood. Kentucky
 and Colorado both come back with zero elements absent and zero ungrounded
 detections. That measurement cannot speak to the rest of the document, so a
-second one was built: both Kentucky trimmed-tier goldens are new --- 277
+second one was built: both Kentucky trimmed-tier goldens are new (277
 detected elements and 207 normalized standards, seeded from one recorded run
-and then checked page by page against the published PDF --- and three further
+and then checked page by page against the published PDF), and three further
 runs were executed and graded against them (Table~\ref{tab:scale-quality}).
 Because the goldens were verified against a document rather than against the
 run being graded, a miss is a real miss.
 
-\paragraph{Detection is complete at scale.} All \textbf{277 of 277} verified
+\paragraph{Detection recovers the whole reference set at scale.} All \textbf{277 of 277} verified
 elements are found by all three runs. Not one is missed, and not one ungrounded
 element is emitted, across a $6.5\times$ increase in page count and four
 detection batches per run.
@@ -371,17 +372,18 @@ detection batches per run.
 tier the detector ignores it and every element comes back with a null age band,
 matching the golden. At the trimmed tier it does not: 164 elements carry the
 banner as their own \texttt{age\_band} in each of the three runs, with a
-standard deviation of zero --- the same elements every time, which makes this a
-\textbf{systematic misreading rather than sampling noise}. Three consequences
-follow, and together they are the entire difference between the strict figures
-in Table~\ref{tab:scale-quality} and the ones above:
+standard deviation of zero on the count, and 159 of those elements are the
+same in all three runs (two runs agree exactly; the third differs on five). That
+makes this a \textbf{systematic misreading rather than sampling noise}. Three
+consequences follow, and together they are the entire difference between the
+strict figures in Table~\ref{tab:scale-quality} and the ones above:
 
 \begin{enumerate}
   \item elements fail the evaluation's matching key on that field alone, which
     is why strict recall reads $0.59$ while recall by level and title is
     $1.000$;
   \item \texttt{\_dedup\_elements} keys on \texttt{age\_band}, so the two
-    spellings of one element never merge --- roughly 15\% of detector output
+    spellings of one element never merge, and roughly 15\% of detector output
     survives as surplus duplicates;
   \item those duplicates collide in parsing and are separated by the
     identifier resolver's numeric fallback, so ten to eleven fabricated primary
@@ -401,7 +403,7 @@ document carries. \textbf{A single coverage figure for this document would be a
 draw from that range}, and I report all three rather than their mean.
 
 \paragraph{Two figures that look reassuring and are not.} Identifier collisions
-are zero by construction --- the resolver renames every collision before any
+are zero by construction: the resolver renames every collision before any
 check runs, so the informative count is the fabricated keys above. And recall
 here is measured \emph{against a verified reference set}, not against the
 document: an element that no run emits is absent from the golden too, and
@@ -411,7 +413,7 @@ invisible to this measurement (\S\ref{sec:discussion-goldens}).
 scale on the one document where it can be checked: complete recovery of a
 verified reference set, no hallucination, in three independent runs. The
 defects that scale introduces are concentrated in one field, are systematic
-rather than random, and are documented rather than repaired --- the repair
+rather than random, and are documented rather than repaired, because the repair
 changes a prompt and would invalidate every frozen measurement in this paper
 (\S\ref{sec:discussion-limitations}). Source:
 \texttt{task9\_20260905} and \texttt{task13\_20260907}.

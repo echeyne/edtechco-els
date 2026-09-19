@@ -2,45 +2,48 @@
 \label{sec:related}
 
 \paragraph{Hierarchy recovery from documents.} Logical-structure recovery has a
-long lineage --- pipelines, page-object datasets, layout-aware encoders,
-OCR-free
-models~\citep{lopez2009grobid,zhong2019publaynet,xu2020layoutlm,huang2022layoutlmv3,kim2022donut,blecher2023nougat}
---- but its targets are flat. Work that does reconstruct the tree parses
-renderings, decomposes the task into page-object detection, reading order and
-tree construction, or reads table-of-contents
-metadata~\citep{rausch2021docparser,ma2023hrdoc,wang2024detect,wang2025unihdsa,xing2024dochienet,wehnert2025hips}.
-All share a premise my setting violates: hierarchy can be \emph{learned},
-because supervision exists over a genre whose typography is internally
-consistent. Where every jurisdiction designs its own
-document~\citep{ncecqa_elgs} there is neither. What these documents share is not
+long lineage: metadata pipelines, page-object datasets, layout-aware encoders,
+and OCR-free
+transcribers~\citep{lopez2009grobid,zhong2019publaynet,xu2020layoutlm,huang2022layoutlmv3,kim2022donut,blecher2023nougat}.
+None of them targets a typed tree carrying codes and ancestry. Work that does
+reconstruct the tree parses renderings, or decomposes the task into page-object
+detection, reading order and tree
+construction~\citep{rausch2021docparser,ma2023hrdoc,wang2024detect,wang2025unihdsa,xing2024dochienet}.
+That line shares a premise my setting violates: hierarchy can be
+\emph{learned}, because supervision exists over a genre whose typography is
+internally consistent. Where every jurisdiction designs its own
+document~\citep{ncecqa_elgs} there is neither. Two training-free neighbors
+come closer. HiPS~\citep{wehnert2025hips} segments law books from
+table-of-contents metadata, falling back to typographic cues refined by an LLM,
+within one genre; DocsRay~\citep{jeong2025docsray} prompts for a pseudo table
+of contents, but targets retrieval segmentation rather than a typed hierarchy
+graded against structural annotations. What these documents share is not
 appearance but nesting, so my depth-map pass is functionally the
-table-of-contents subtask of \citet{wang2024detect} --- inferred zero-shot from
-content, then treated as the authority every element is classified against. The
-nearest zero-shot neighbor~\citep{jeong2025docsray} also prompts for a pseudo
-table of contents, but targets retrieval segmentation, not a typed hierarchy
-carrying codes and ancestry.
+table-of-contents subtask of \citet{wang2024detect}, inferred zero-shot from
+content and then treated as the authority every element is classified against.
 
 \paragraph{Extraction without a labeled corpus.} Generative extraction is
 competitive across classic IE tasks, especially where labeled corpora are
-scarce~\citep{wadhwa2023revisiting,xu2024large,agrawal2022large,liu2022fewshot}.
-GoLLIE~\citep{sainz2024gollie} is the closest analogue: training a model to
-follow annotation \emph{guidelines} makes it generalize to unseen schemas. My
-prompts do this without fine-tuning, stating document-agnostic structural
-principles a frozen model applies to unseen states --- the available move rather
-than the cheap one, since no annotated corpus of parsed early learning standards
-exists. Three choices follow: schema-validated JSON with
-deterministic repair rather than constrained
+scarce~\citep{wadhwa2023revisiting,xu2024large,agrawal2022large}, though where
+labels do exist, parameter-efficient fine-tuning can beat in-context
+learning~\citep{liu2022fewshot}. GoLLIE~\citep{sainz2024gollie} is the closest
+analogue: training a model to follow annotation \emph{guidelines} makes it
+generalize to unseen schemas. My prompts do this without fine-tuning, stating
+document-agnostic structural principles a frozen model applies to unseen
+states. That is the available move rather than the cheap one, since no
+annotated corpus of parsed early learning standards exists. Three choices
+follow: schema-validated JSON with deterministic repair rather than constrained
 decoding~\citep{willard2023efficient}; domain-scoped chunking rather than
 whole-document prompting, given positional degradation in long
 contexts~\citep{liu2024lost}; and reported run-to-run
 stability~\citep{wang2023selfconsistency} rather than a single run.
 Hallucination~\citep{ji2023survey} I quantify by auditing every unmatched
-detection by hand --- for hierarchical consistency, the analogue of the
+detection by hand; for hierarchical consistency, this is the analogue of the
 internal-consistency checks \citet{aggarwal2025fiscal} apply to fiscal PDFs.
 Absent labels, human effort goes to verification rather than annotation: every
-record is reviewed at all four levels, following machine teaching rather than
-active learning or selective
-allocation~\citep{mosqueirarey2023human,monarch2021human,settles2009active,gilardi2023chatgpt,li2023coannotating,tan2024large}.
+record is reviewed at all four levels, in the manner of machine teaching rather
+than active learning, uncertainty-guided allocation, or the model as
+annotator~\citep{mosqueirarey2023human,monarch2021human,settles2009active,li2023coannotating,gilardi2023chatgpt,tan2024large}.
 Review is blanket; confidence gates nothing.
 
 \paragraph{Machine-readable education standards.} Two decades of work assume a
@@ -50,7 +53,8 @@ format~\citep{1edtech2017case}, but ASN was populated by hand and CASE
 is a format, not an extractor; downstream work measures alignment and assigns
 resources and items \emph{to} standards already
 normalized~\citep{porter2002measuring,polikoff2011howwell,devaul2011computer,xu2025automated}.
-For early childhood the assumption fails outright: no national framework spans
-the age band~\citep{ohs2015elof} and each state publishes its own
-PDF~\citep{ncecqa_elgs,ecs2024governance}. The step this paper automates is not
-a competitor to that literature but its missing input.
+For early childhood the assumption fails outright: the one federal framework
+for the age band binds Head Start programs alone~\citep{ohs2015elof}, and each
+state publishes its own PDF~\citep{ncecqa_elgs,ecs2024governance}. The step
+this paper automates is not a competitor to that literature but its missing
+input.

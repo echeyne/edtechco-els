@@ -478,7 +478,7 @@ def build_scale_table(scale):
         rf"\textbf{{Total}} & \textbf{{\${totals['KY']:.2f}}} & \textbf{{\${totals['CO']:.2f}}} \\",
         r"\bottomrule",
         r"\end{tabular}",
-        r"\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier} --- "
+        r"\caption{Batched-path scale, \textbf{\texttt{\_trimmed} corpus tier}: "
         r"each document's standards content \emph{in full}, and the only table here "
         r"not at the \texttt{\_only\_subset} tier (\S\ref{sec:experiments-scale}). "
         r"Each stage runs on the model assigned in "
@@ -543,7 +543,7 @@ def build_scale_quality_table(sq):
         r"\toprule",
         r"& \textbf{1} & \textbf{2} & \textbf{3} & \textbf{sd} \\",
         r"\midrule",
-        rf"\multicolumn{{5}}{{l}}{{\emph{{Detector}} --- {n_el} verified elements}} \\",
+        rf"\multicolumn{{5}}{{l}}{{\emph{{Detector}}, {n_el} verified elements}} \\",
         row("Elements emitted", det["elements"]),
         row("Absent from run", det["absent"]),
         row("Hallucinations", det["hallucination_candidates"]),
@@ -552,7 +552,7 @@ def build_scale_quality_table(sq):
         row(r"Spurious \texttt{age\_band}", det["age_band_emitted"]),
         row("Surplus duplicates", det["surplus_duplicates"]),
         r"\midrule",
-        rf"\multicolumn{{5}}{{l}}{{\emph{{Parser}} --- {n_std} verified standards}} \\",
+        rf"\multicolumn{{5}}{{l}}{{\emph{{Parser}}, {n_std} verified standards}} \\",
         r"\quad Standards parsed & " + " & ".join(f"{v:,}" for v in n_parsed) + r" & \\",
         row("Coverage", par["coverage"], dp=3),
         row("Field accuracy", par["field_accuracy"], dp=3),
@@ -561,9 +561,9 @@ def build_scale_quality_table(sq):
         r"\bottomrule",
         r"\end{tabular}",
         r"\caption{Quality at whole-document scale: Kentucky, three independent "
-        r"runs, \textbf{\texttt{\_trimmed} corpus tier} --- the document's "
+        r"runs, \textbf{\texttt{\_trimmed} corpus tier}: the document's "
         r"standards content \emph{in full}, and not the \texttt{\_only\_subset} "
-        r"tier every other quality table uses "
+        r"tier the headline quality tables use "
         r"(\S\ref{sec:experiments-scale-quality}). \textbf{Recall is measured "
         r"against a verified reference set, not against the document}, so an "
         r"element no run emits is invisible here "
@@ -659,7 +659,7 @@ def build_corpus_appendix_table(tiers):
                  rf"{full} & {trim} & {sub} \\")
     if uncollected:
         L += [r"\midrule",
-              r"\multicolumn{7}{l}{\emph{Collected, not used --- excluded from every "
+              r"\multicolumn{7}{l}{\emph{Collected, not used; excluded from every "
               r"measurement in this paper}} \\"]
         for r_ in uncollected:
             st = ABBR.get(r_["State"], r_["State"])
@@ -676,8 +676,8 @@ def build_corpus_appendix_table(tiers):
     L += [r"\bottomrule", r"\end{tabular}",
           r"\caption{Corpus provenance. \emph{Full} is the published PDF; "
           r"\emph{Trim.}\ removes non-standards matter while retaining every standard; "
-          r"\emph{Subset} is the one-to-two-domain excerpt all quality measurements "
-          r"use, and is a genuine reduction in coverage. Colorado's \emph{Full} is its "
+          r"\emph{Subset} is the one-to-two-domain excerpt the headline quality "
+          r"measurements use, and is a genuine reduction in coverage. Colorado's \emph{Full} is its "
           r"41-page Ages~3--5 publication (\S\ref{sec:corpus}). These are "
           r"third-party state-agency documents, identified here rather than "
           r"redistributed (\S\ref{sec:artifacts-statement}). Nevada's 2025 "
@@ -837,7 +837,7 @@ def build_levels_figure(t2, t3):
           r"golden is the corpus's only \emph{detection-exhaustive} one, with the "
           r"depth-map pass enabled and ablated. The enabled arm reproduces the golden "
           r"distribution exactly; ablated, strand inflates and sub-strand deflates "
-          r"while domain and indicator hold --- level \emph{collapse}. "
+          r"while domain and indicator hold: level \emph{collapse}. "
           r"\texttt{\_only\_subset} corpus tier.}",
           r"\label{fig:levels}", r"\end{figure}"]
     return "\n".join(L) + "\n"
@@ -947,8 +947,10 @@ def build_dataset_table(stats):
           r"element counts in Table~\ref{tab:detector-headline}. \textbf{Age bands} "
           r"is the state's distinct bands; its total is the union across states, not "
           r"a column sum. CO's subsets derive from the 41pp ages-3--5 document "
-          r"($\dagger$). All quality numbers in this paper are measured on the "
-          r"\emph{\_only\_subset} tier shown here (\S\ref{sec:corpus}). "
+          r"($\dagger$). All headline quality numbers in this paper are measured on "
+          r"the \emph{\_only\_subset} tier shown here (\S\ref{sec:corpus}); the one "
+          r"quality measurement at the \emph{\_trimmed} tier is "
+          r"Table~\ref{tab:scale-quality}. "
           rf"Source: \texttt{{task8\_{STATS_TAG}}}.}}",
           r"  \label{tab:dataset-stats}", r"\end{table*}"]
     return "\n".join(L) + "\n"

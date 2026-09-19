@@ -9,14 +9,14 @@ own document. The result is a body of policy that is public, consequential, and
 almost entirely unavailable to software. Unlike K--12 academic standards, which
 have machine-readable distribution
 formats~\citep{sutton2008achievement,1edtech2017case}, early learning standards
-exist as PDFs --- multi-column tables, age-banded grids, and prose narratives
+exist as PDFs: multi-column tables, age-banded grids, and prose narratives
 whose typography is shared by no two states.
 
 The obstacle is not optical character recognition. It is that a standards
 document is a \emph{tree} rendered as a page. A single indicator is meaningful
 only through its ancestry: which domain, which strand, which sub-strand it sits
 under, and at what age band. Recovering that tree requires deciding, for every
-line, how deeply it is nested --- and the surface cues that would answer the
+line, how deeply it is nested, and the surface cues that would answer the
 question are exactly what varies between states. Arizona writes
 \texttt{Strand 1: Language and Literacy}; Kentucky writes
 \texttt{Benchmark 1.1}; Nevada prints a code namespace that skips a level
@@ -26,8 +26,8 @@ document's vocabulary is, by construction, a rule that fails on the next.
 My central claim is that a language model can recover this structure by
 classifying each element's \textbf{nesting position} rather than its
 document-specific label, and that doing so is what generalizes. Concretely, I
-first infer a per-document \emph{depth map} --- how many nesting levels this
-particular document uses, and what each looks like --- and then classify every
+first infer a per-document \emph{depth map} (how many nesting levels this
+particular document uses, and what each looks like) and then classify every
 element against that map as an authority, rather than against a fixed
 vocabulary of level names. The label \texttt{Benchmark 1.1} then does not have
 to be recognized as a sub-strand; it has to be recognized as sitting one level
@@ -39,8 +39,8 @@ document principles, not in Python as per-document branches. That discipline
 was adopted after an earlier rule-driven revision scored well on the states it
 had been developed against and failed to transfer; the migration that removed
 those rules is described in \S\ref{sec:method-llm-first}. Deterministic code is
-retained only where it reads the \emph{shape} of an output --- dot-segment
-structure, whitespace, string containment --- and never any document's words.
+retained only where it reads the \emph{shape} of an output (dot-segment
+structure, whitespace, string containment) and never any document's words.
 
 The absence of a labeled corpus is what rules out the obvious supervised
 alternative. There is no annotated dataset of hierarchically-parsed early
@@ -60,19 +60,20 @@ approach available without first solving a different problem
     \S\ref{sec:method-discipline}).
   \item A parsing stage that resolves detected elements into a single canonical
     schema across documents that do not agree on level count or code namespace,
-    producing deterministic, collision-free identifiers
-    (\S\ref{sec:method-parsing}).
+    producing deterministic identifiers whose collisions are measured rather
+    than assumed (\S\ref{sec:method-parsing}).
   \item A serverless architecture that batches detection and parsing through a
     prepare--map--merge pattern so the method applies to whole standards
     documents rather than excerpts (\S\ref{sec:method-deployment},
     Appendix~\ref{sec:appendix-architecture}).
-  \item An evaluation over four development states and two held-out states.
-    Detector recall is 1.000 at every hierarchy level in all six states, and a
-    manual audit of all 297 in-scope detections finds a single hallucinated
-    element (verified precision 0.997). An ablation shows the depth-map pass is
-    what carries the intermediate levels: removing it leaves domain and
-    indicator recall untouched while strand falls to 0.920 and sub-strand to
-    0.833 (\S\ref{sec:experiments-ablation}).
+  \item An evaluation over four development states and two held-out states, at
+    an annotated subset tier of each document. Detector recall is 1.000 at every
+    hierarchy level in all six states, and a manual audit of all 297 in-scope
+    detections at that tier finds a single hallucinated element (verified
+    precision 0.997). An ablation shows the depth-map pass is what carries the
+    intermediate levels: removing it leaves domain and indicator recall
+    untouched while strand falls to 0.920 and sub-strand to 0.833
+    (\S\ref{sec:experiments-ablation}).
   \item A reporting discipline that the rest of the evaluation is built to
     satisfy, and which I offer as a contribution rather than as a caveat: every
     table is labelled with the corpus tier it was computed at; every unmatched
@@ -91,7 +92,7 @@ This is favorable preprocessing and I state it plainly rather than leaving it to
 be inferred; \S\ref{sec:corpus} gives the tiers and retained page ranges, and
 \S\ref{sec:discussion-limitations} discusses what does and does not transfer to
 whole documents. Cost, scale and one quality measurement are reported at the
-\emph{trimmed} tier instead---a document's standards content in full, with front
+\emph{trimmed} tier instead: a document's standards content in full, with front
 matter, expository essays and appendices removed. The tiers are never mixed
 within a table, and each table names its own
 (\S\ref{sec:experiments-scale}, \S\ref{sec:experiments-scale-quality}).

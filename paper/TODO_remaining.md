@@ -152,8 +152,8 @@ baseline or the whole-document arm would silently measure the chunked detector
 instead --- and cost roughly six times more while doing it. No recorded number
 is affected, because that combination has never been run.
 
-- [ ] Add the warning to its docstring now (two minutes); fix it properly
-  whenever the harness is next opened.
+- [x] Warning added to `measure_stability`'s docstring 2026-09-19. The proper
+  fix (give it a `detect_fn` of its own) waits until the harness is next opened.
 
 ## 7. ✅ Housekeeping — done 2026-09-07
 
@@ -179,6 +179,32 @@ is affected, because that combination has never been run.
   have to trip a warning to look broken.
 
 ---
+
+## 8. ✅ Abstract shortened for arXiv — 2026-09-19
+
+arXiv's abstract field allows at most 1,920 characters, and the abstract was
+~2,630. It was shortened **in the paper too**, not just for the form, so the two
+match. The form copy is `paper/arxiv_abstract.txt` (1,888 chars, ASCII `--`
+for dashes, no `\S\ref`); paste that, not the LaTeX.
+
+What was cut: the depth-map gloss, "every validation guard is shown catching a
+live defect", "signed", and the closing tier sentence. The tier qualifier moved
+into the results sentence ("On an annotated subset of…"), so the headline
+figures still name their tier; the one-arm-at-a-larger-tier detail lives in §1.
+The "prompts carry worked examples from the corpus" disclosure is **kept**.
+
+## 9. ⬜ Submission logistics
+
+- [ ] **Endorsement — required.** Since 2026-01-21 arXiv auto-endorses only
+  authors with BOTH an academic institutional email AND a prior claimed arXiv
+  paper in the domain. Neither applies, so a personal endorsement from an
+  established cs.CL author is needed. Start the submission to get the
+  endorsement code/link, then send it to an endorser.
+- [x] **License: DECIDED — arXiv perpetual non-exclusive license** (confirmed by Emily 2026-09-19; select it on the submission form —
+  retains all rights; irrevocable per version).
+- [ ] Build a clean source bundle (tex, sections, tables, figures, sty/bst,
+  pre-built `main.bbl`, `anc/prompts.txt`) and compile it from an empty dir.
+- [ ] Read the PDF through once end to end.
 
 ## What is explicitly NOT on this list, and why
 

@@ -5,7 +5,7 @@
 
 Both suites are graded against independently annotated golden sets with different shapes: the detector golden is a flat list of elements, the parser golden a nested record per standard. The examples below were each chosen to show one convention the body of the paper turns on. Free-text descriptions are elided for length; codes, levels and identifiers are reproduced in full.
 
-\paragraph{KY \textnormal{---} a \texttt{<Label> <id>} heading, where the label-and-id \emph{is} the code}
+\paragraph{KY: a \texttt{<Label> <id>} heading, where the label-and-id \emph{is} the code}
 \noindent\scriptsize\begin{tabular}{@{}p{0.22\linewidth}p{0.72\linewidth}@{}}
 \toprule
 \texttt{level} & \texttt{sub\_\allowbreak{}strand} \\
@@ -18,7 +18,7 @@ Both suites are graded against independently annotated golden sets with differen
 
 \noindent{\scriptsize\raggedright Golden entry \texttt{KY-SUB-01}, \texttt{evaluation/ground\_truth\_detector/KY.json}.\par}
 
-\paragraph{KY \textnormal{---} the same element after parsing, its label form resolved to a domain-qualified code}
+\paragraph{KY: the same element after parsing, its label form resolved to a domain-qualified code}
 \noindent\scriptsize\begin{tabular}{@{}p{0.26\linewidth}p{0.68\linewidth}@{}}
 \toprule
 \texttt{standard\_id} & \texttt{US-\allowbreak{}KY-\allowbreak{}2021-\allowbreak{}AL.\allowbreak{}1.\allowbreak{}1.\allowbreak{}EASPT} \\
@@ -36,7 +36,7 @@ Both suites are graded against independently annotated golden sets with differen
 
 \noindent{\scriptsize\raggedright Golden entry \texttt{KY-STD-01}, \texttt{evaluation/ground\_truth\_parser/KY.json}. Descriptions elided.\par}
 
-\paragraph{NV \textnormal{---} a printed namespace that skips a level: the sub-strand code does \emph{not} extend the strand's}
+\paragraph{NV: a printed namespace that skips a level: the sub-strand code does \emph{not} extend the strand's}
 \noindent\scriptsize\begin{tabular}{@{}p{0.26\linewidth}p{0.68\linewidth}@{}}
 \toprule
 \texttt{standard\_id} & \texttt{US-\allowbreak{}NV-\allowbreak{}2023-\allowbreak{}SS.\allowbreak{}ID.\allowbreak{}PK1} \\
@@ -54,7 +54,7 @@ Both suites are graded against independently annotated golden sets with differen
 
 \noindent{\scriptsize\raggedright Golden entry \texttt{NV-STD-01}, \texttt{evaluation/ground\_truth\_parser/NV.json}. Descriptions elided.\par}
 
-\paragraph{CO \textnormal{---} a three-level document --- \texttt{sub\_strand} is absent by design, not missing}
+\paragraph{CO: a three-level document, where \texttt{sub\_strand} is absent by design, not missing}
 \noindent\scriptsize\begin{tabular}{@{}p{0.26\linewidth}p{0.68\linewidth}@{}}
 \toprule
 \texttt{standard\_id} & \texttt{US-\allowbreak{}CO-\allowbreak{}2020-\allowbreak{}PDH.\allowbreak{}1.\allowbreak{}1} \\
@@ -62,7 +62,7 @@ Both suites are graded against independently annotated golden sets with differen
 \texttt{domain.name} & Physical Development \& Health \\
 \texttt{strand.code} & \texttt{PDH.\allowbreak{}1} \\
 \texttt{strand.name} & Health, Safety and Nutrition \\
-\texttt{sub\_strand} & \textit{absent --- this document has no such level} \\
+\texttt{sub\_strand} & \textit{absent; this document has no such level} \\
 \texttt{indicator.code} & \texttt{PDH.\allowbreak{}1.\allowbreak{}1} \\
 \texttt{indicator.name} & Possess good overall health, including oral, visual, and auditory health, and be free from communicable or pre [...] \\
 \texttt{age\_band} & 36-60 \\
@@ -71,7 +71,7 @@ Both suites are graded against independently annotated golden sets with differen
 
 \noindent{\scriptsize\raggedright Golden entry \texttt{CO-IND-01}, \texttt{evaluation/ground\_truth\_parser/CO.json}. Descriptions elided.\par}
 
-\paragraph{CA \textnormal{---} a side-by-side column variant, disambiguated inside the indicator code}
+\paragraph{CA: a side-by-side column variant, disambiguated inside the indicator code}
 \noindent\scriptsize\begin{tabular}{@{}p{0.26\linewidth}p{0.68\linewidth}@{}}
 \toprule
 \texttt{standard\_id} & \texttt{US-\allowbreak{}CA-\allowbreak{}2021-\allowbreak{}AL.\allowbreak{}1.\allowbreak{}0.\allowbreak{}INIT.\allowbreak{}1.\allowbreak{}2.\allowbreak{}36-\allowbreak{}54} \\

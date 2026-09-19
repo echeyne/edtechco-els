@@ -268,8 +268,8 @@ def main():
         r"This appendix and the schema of Appendix~\ref{sec:appendix-schema} are what this",
         r"paper discloses in place of a code release (\S\ref{sec:artifacts-statement}).",
         rf"Pass~1 is short and is given whole. The detection and parsing prompts are long"
-        rf" --- together roughly {round((len(detect) + len(parse)) / 1000):,}{{,}}000"
-        rf" characters --- so rather than print them end to"
+        rf" (together roughly {round((len(detect) + len(parse)) / 1000):,}{{,}}000"
+        rf" characters), so rather than print them end to"
         r" end I reproduce the individual rules the body of the paper argues about, each"
         r" verbatim and each labeled so it can be cited from \S\ref{sec:method}."
         r" \textbf{The complete text of all three prompts, unabridged, ships with this"

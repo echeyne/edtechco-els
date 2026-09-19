@@ -488,3 +488,107 @@ _lines 38--45_
 % Checked before inclusion: no account IDs, ARNs, internal URLs or email
 % addresses are visible.
 ```
+
+
+## Pass-2 review edits (2026-09-19)
+
+Recorded here because the sections carry no comments. Each entry names the
+section, what changed, and the artifact that decided it. The pass also removed
+every em dash from `main.tex`, `sections/*.tex`, the three generators and the
+review deliverables; the 26 literal em dashes inside the verbatim prompt
+listings of `tables/appendix_prompts.tex` are the prompts' own text and were
+left as the system emits them.
+
+### `sections/introduction.tex`
+
+Contribution 4 now says the 297 in-scope detections were audited "at an
+annotated subset tier". `TODO_remaining.md` item 3 records that all four
+occurrences of 297 were tier-qualified on 2026-09-07; this one was not, and it
+sits two paragraphs from the 277 trimmed-tier count.
+
+### `sections/related_work.tex`
+
+Three citation clusters were carrying a member that does not support the
+sentence, a hazard the regrouping of 2026-09-07 created:
+
+- `wehnert2025hips` sat inside the cluster whose shared premise is that
+  "hierarchy can be learned, because supervision exists". Its arXiv abstract
+  (2509.00909) describes a table-of-contents path and an LLM-refined
+  typography path, neither trained. It is now named with `jeong2025docsray` as
+  a training-free neighbor, scoped to one genre.
+- `liu2022fewshot` sat inside the cluster supporting "generative extraction is
+  competitive ... where labeled corpora are scarce". The paper argues the
+  opposite where labels exist, which is how the introduction already cites it.
+  It now carries its own clause.
+- `ohs2015elof` supported "no national framework spans the age band". The ELOF
+  does span birth to five; what it does not do is bind states. The sentence now
+  says the one federal framework binds Head Start programs alone.
+- "its targets are flat" for the six-paper lineage cluster was not verifiable
+  for Nougat (markup output) or GROBID (sectioned TEI). It now says none of
+  them targets a typed tree carrying codes and ancestry, which is the claim the
+  gap argument needs.
+- `gilardi2023chatgpt` and `tan2024large` are about the model as annotator, not
+  selective allocation; the sentence now names that alternative too.
+
+### `sections/corpus.tex`, `sections/discussion_limitations.tex`, dataset and corpus-appendix captions
+
+"Every quality number in this paper is computed at this tier" was false once
+\S6.8 began grading the trimmed tier. `TODO_remaining.md` item 3 fixed the
+abstract and \S1 but not \S3, \S7.2, or the two generated captions. All four
+now say "headline" and point at the trimmed-tier exception.
+
+### `sections/method.tex`, \S5.7
+
+"finds fifteen that appear, of which ten are distinctive ... and five are
+domain names shared across states" did not match
+`results/task12_20260905/prompt_example_provenance.json`, which records 15
+distinctive strings (10 development, 5 held-out) and one shared title,
+"Approaches to Learning". The next sentence already said ten plus five. The
+count is now fifteen distinctive plus one shared.
+
+### `sections/experiments_results.tex`, \S6.7
+
+The prose said the depth-map pass costs 0.3--0.6% and detection 57--60%; the
+caption, computed at build time, says 0.3--0.5% and 57--59% (KY 0.32% and
+59.4%, CO 0.54% and 57.1%). The prose now matches the computed figures.
+
+### `sections/experiments_results.tex` \S6.8 and `discussion_limitations.tex` \S7.5
+
+"164 elements ... with a standard deviation of zero, the same elements every
+time" was checked directly against the three detection files under
+`outputs/ky-3runs-09-07-26/`. The count is 164 in each run, but the sets are
+not identical: runs 1 and 3 agree exactly and run 2 differs on five elements,
+so 159 are common to all three. `task13_20260907/findings.md` asserted identity
+from the count alone. Both sites now state the count and the 159. The
+"systematic rather than sampling noise" reading survives; the identity claim
+did not. `CLAUDE.md`'s "Where `age_band` destabilizes at scale" section and
+`task13_20260907/findings.md` made the same identity claim; at the author's
+request both now carry a dated correction (the findings file keeps its original
+sentence with a superseding note, per the repo's rule that a recording is the
+record of what was measured).
+
+### `sections/discussion_limitations.tex`, \S7.3
+
+"Every `Benchmark N.N` identifier the document prints (17 of 17)" was measured
+against `ground_truth_detector/KY_trimmed.json` and the run-1 extraction: 18
+distinct identifiers printed, 18 in the golden. "15 of 15" checked. The
+sentence now says 18 of 18 and "distinct".
+
+The label `sec:discussion-agebandevfect` was renamed
+`sec:discussion-ageband-defect`; nothing referenced it.
+
+### `sections/experiments_results.tex`, \S6.8 paragraph heading
+
+"Detection is complete at scale" became "Detection recovers the whole
+reference set at scale", since the paragraph two below states the recall
+ceiling and the heading should not outrun it.
+
+### `main.tex` abstract and `sections/introduction.tex` contribution 2
+
+"deterministic, collision-free identifiers" became "deterministic
+identifiers" in the abstract, and "deterministic identifiers whose collisions
+are measured rather than assumed" in contribution 2, at the author's request
+after pass 2. Collision-free is true at the subset tier and true by
+construction at scale, where \S6.8 says the zero is uninformative because the
+resolver renames every collision; the abstract should not lean on a property
+the paper itself discounts. `arxiv_abstract.txt` regenerated: 1,864 characters.

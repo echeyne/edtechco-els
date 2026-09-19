@@ -10,7 +10,7 @@
 \toprule
 & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{sd} \\
 \midrule
-\multicolumn{5}{l}{\emph{Detector} --- 277 verified elements} \\
+\multicolumn{5}{l}{\emph{Detector}, 277 verified elements} \\
 \quad Elements emitted & 328 & 327 & 328 & 0.6 \\
 \quad Absent from run & 0 & 0 & 0 & 0.0 \\
 \quad Hallucinations & 0 & 0 & 0 & 0.0 \\
@@ -19,7 +19,7 @@
 \quad Spurious \texttt{age\_band} & 164 & 164 & 164 & 0.0 \\
 \quad Surplus duplicates & 51 & 50 & 51 & 0.6 \\
 \midrule
-\multicolumn{5}{l}{\emph{Parser} --- 207 verified standards} \\
+\multicolumn{5}{l}{\emph{Parser}, 207 verified standards} \\
 \quad Standards parsed & 214 & 220 & 220 & \\
 \quad Coverage & 0.807 & 0.927 & 0.841 & 0.062 \\
 \quad Field accuracy & 0.997 & 0.994 & 0.994 & 0.002 \\
@@ -27,6 +27,6 @@
 \quad Collisions$^{\dagger}$ & 0 & 0 & 0 & 0.0 \\
 \bottomrule
 \end{tabular}
-\caption{Quality at whole-document scale: Kentucky, three independent runs, \textbf{\texttt{\_trimmed} corpus tier} --- the document's standards content \emph{in full}, and not the \texttt{\_only\_subset} tier every other quality table uses (\S\ref{sec:experiments-scale-quality}). \textbf{Recall is measured against a verified reference set, not against the document}, so an element no run emits is invisible here (\S\ref{sec:discussion-goldens}). \textbf{Coverage is a range and must not be read as its mean.} $\dagger$~zero by construction: the resolver renames every collision before the check runs, so the informative count is the fabricated-key row above. Source: \texttt{task13\_20260907}.}
+\caption{Quality at whole-document scale: Kentucky, three independent runs, \textbf{\texttt{\_trimmed} corpus tier}: the document's standards content \emph{in full}, and not the \texttt{\_only\_subset} tier the headline quality tables use (\S\ref{sec:experiments-scale-quality}). \textbf{Recall is measured against a verified reference set, not against the document}, so an element no run emits is invisible here (\S\ref{sec:discussion-goldens}). \textbf{Coverage is a range and must not be read as its mean.} $\dagger$~zero by construction: the resolver renames every collision before the check runs, so the informative count is the fabricated-key row above. Source: \texttt{task13\_20260907}.}
 \label{tab:scale-quality}
 \end{table}

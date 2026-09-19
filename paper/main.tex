@@ -20,7 +20,7 @@
 \usepackage{tikz}
 \usepackage{listings}
 % Prompt listings. The prompts contain very long lines (single rules run to
-% several hundred characters), so breaklines is essential -- without it the
+% several hundred characters), so breaklines is essential; without it the
 % appendix silently runs off the page edge rather than erroring.
 \lstdefinestyle{promptstyle}{
   basicstyle=\scriptsize\ttfamily,
@@ -87,44 +87,36 @@
 \maketitle
 
 \begin{abstract}
-Every US state publishes early learning standards --- the developmental
-expectations that shape curriculum and assessment from birth to kindergarten ---
-and more than fifty jurisdictions each design their own document. The result is
-public policy that software cannot read: multi-column tables, age-banded grids
-and prose narratives whose typography is shared by no two states. The obstacle
-is not text recovery but hierarchy recovery, because a standard is meaningful
-only through its ancestry, and the surface cues that would reveal that ancestry
-are exactly what varies. Arizona writes \texttt{Strand 1:}, Kentucky writes
-\texttt{Benchmark 1.1}, Nevada's printed code namespace skips a level, and
-Colorado publishes no sub-strand tier at all.
+Every US state publishes early learning standards, the developmental
+expectations for children from birth to kindergarten, and each designs its
+own document, so software cannot read this public policy. The obstacle is not
+text recovery but hierarchy recovery: a standard is meaningful only through its
+ancestry, and the surface cues that reveal ancestry are exactly what varies.
+Arizona writes \texttt{Strand 1:}, Kentucky writes \texttt{Benchmark 1.1},
+Nevada's code namespace skips a level, and Colorado has no sub-strand tier at
+all.
 
 I present an LLM-driven method that classifies each element by its
 \emph{nesting position} rather than its label vocabulary. A first pass infers a
-per-document depth map --- how many levels this document uses and what each
-looks like in it --- and a second classifies every element against that map as
-authority; a decoupled parsing stage then resolves the flat result into one
-canonical schema with deterministic, collision-free identifiers, and a
-serverless batching architecture applies it to whole documents. The system
-contains no per-state code path; the prompts carry worked examples drawn
-from the corpus, itemized in \S\ref{sec:method-discipline}.
+per-document depth map and a second classifies every element against it; a
+decoupled parser resolves the result into one canonical schema with
+deterministic identifiers, and a serverless batching
+architecture applies it to whole documents. There is no per-state code path,
+though the prompts carry worked examples from the corpus
+(\S\ref{sec:method-discipline}).
 
-Evaluated on four development states and two held out entirely, detector recall
-is 1.000 at every hierarchy level in all six, and a manual audit of all 297
-in-scope detections finds a single hallucinated element. Ablating the depth-map
-pass leaves domain and indicator recall untouched while strand falls to 0.920
-and sub-strand to 0.833 --- degrading exactly the levels whose identity is
-positional --- and a rule-based extractor matches the method at a document's top
-division while collapsing beneath it. Repeated runs show the pipeline is not
-deterministic: instability is concentrated in three known places, and one
-previously recorded result of my own failed to reproduce, which I report as a
-non-reproduction rather than quietly replace. That reporting discipline is
-deliberate and is offered as a contribution in its own right: every table names
-the corpus tier it was computed at, every unmatched detection is audited by hand
-and signed, every number is regenerated from a recorded artifact, and each
-validation guard is shown catching a live defect rather than asserted to work.
-The headline quality figures above are computed on an annotated subset tier;
-one whole-document arm is reported separately at a larger tier, and the two are
-never mixed.
+On an annotated subset of four development states and two held out entirely,
+detector recall is 1.000 at every hierarchy level in all six, and a manual audit
+of all 297 in-scope detections finds one hallucinated element. Ablating the
+depth map leaves domain and indicator recall untouched while strand falls to
+0.920 and sub-strand to 0.833, exactly the levels whose identity is positional,
+and a rule-based extractor matches the method at the top division but collapses
+beneath it. Repeated runs show the pipeline is not deterministic, with
+instability concentrated in three known places, and one of my own earlier
+results failed to reproduce; I report it as a non-reproduction. That reporting
+discipline is offered as a contribution: every table names its corpus tier,
+every unmatched detection is audited by hand, and every number is regenerated
+from a recorded artifact.
 \end{abstract}
 
 % Section order reconstructed from the original outline (paper/OUTLINE_NOTES.md)
@@ -182,12 +174,12 @@ figure because it is editorial state rather than extracted content.
 Table~\ref{tab:confidence-distribution} gives the detector's confidence
 distribution by state and by hierarchy level, read by
 \S\ref{sec:experiments-confidence}. It is in the appendix because the score
-gates nothing in the pipeline and the section's conclusion --- that the
-distribution is too degenerate to threshold on --- is carried by the prose.
+gates nothing in the pipeline and the section's conclusion, that the
+distribution is too degenerate to threshold on, is carried by the prose.
 
 \input{tables/confidence_distribution}
 % Moved out of the body 2026-09-07: Table 6 was the least load-bearing table in
-% \S6, and the confidence finding is negative -- the table's job is to let a
+% \S6, and the confidence finding is negative; the table's job is to let a
 % reader check the degeneracy claim, not to carry it.
 
 \section{Corpus}
@@ -206,7 +198,7 @@ agency's copy (\S\ref{sec:corpus}).
 \input{sections/system_architecture}
 % Moved out of the body 2026-09-07 (REVIEW_assessment.md §2): the architecture
 % figure and the Explorer screenshot are deployment detail, and the two claims
-% the body needs from them -- the batching pattern and the direct-vs-batched
-% divergence -- are stated in \S\ref{sec:method-deployment}.
+% the body needs from them (the batching pattern and the direct-vs-batched
+% divergence) are stated in \S\ref{sec:method-deployment}.
 
 \end{document}

@@ -549,9 +549,16 @@ again.
 
 ⚠️ **It is systematic, not sampling variance.** Three independent runs on
 2026-09-07 emitted the spurious band on **exactly 164 elements each, stdev
-0.0** — the same elements every time. A prompt rule would therefore have a
-deterministic effect here rather than a rate reduction, which is unusual for
-this codebase and worth knowing before the fix is attempted.
+0.0**. ⚠️ **Corrected 2026-09-19: the SET is not identical, only the count.**
+Checked directly against `outputs/ky-3runs-09-07-26/run{1,2,3}/KY-detection.json`
+by level and title: runs 1 and 3 carry the same 164 elements, run 2 differs
+from them on five, so **159 elements are common to all three**. The
+"same elements every time" wording that stood here (and in
+`paper/results/task13_20260907/findings.md`) was inferred from the count
+alone. The systematic reading still holds at 159 of 164, so a prompt rule
+would still have a largely deterministic effect here rather than a rate
+reduction, which is unusual for this codebase and worth knowing before the
+fix is attempted.
 
 ⚠️ **It makes parser coverage a range, not a number.** Those same three runs
 give parser coverage 0.807 / 0.927 / 0.841 (stdev 0.062) against a fixed

@@ -97,3 +97,15 @@ python -m paper.analysis.grade_ky_trimmed \
     --run outputs/ky-3runs-09-07-26/run3 \
     --out paper/results/task13_20260907
 ```
+
+## ⚠️ Correction, 2026-09-19: "the same elements every time" was inferred, not measured
+
+The sentence above ("a systematic misreading of the page banner that lands on
+the same elements every time") was written from the count alone. Checked
+against the three detection files by `(level, title)` of every element with a
+non-null `age_band`: runs 1 and 3 carry an identical set of 164, run 2 differs
+from them on five elements, and **159 elements are common to all three runs**.
+The count is identical; the set is not. The systematic reading survives at
+159 of 164, and the paper (§6.8, §7.5) now states the count and the 159
+rather than identity. The original sentence is left in place above as the
+record of what was claimed; this note supersedes it.

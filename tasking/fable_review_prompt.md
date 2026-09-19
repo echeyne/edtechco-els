@@ -1,238 +1,316 @@
-# Review brief: arXiv paper, ELS Platform
+# Review brief, pass 2: arXiv paper, ELS Platform
 
-You are reviewing a finished-draft academic paper for a solo author who intends
-to post it to arXiv (cs.CL primary, cs.AI cross-list). Work in the repo at
-`/Users/emilycheyne/Development/kinder-readiness`. The paper is in `paper/`,
-entry point `paper/main.tex`, currently 27 pages: ~17pp body, 2pp references
-(36 entries), 8pp appendices.
+You are doing the **second** review of an academic paper by a solo author who
+intends to post it to arXiv (cs.CL primary, cs.AI cross-list). Work in the repo
+at `/Users/emilycheyne/Development/kinder-readiness`. The paper is in `paper/`,
+entry point `paper/main.tex`, currently **28 pages**: ~19.5pp body, ~2pp
+references (40 entries), ~6pp appendices (A prompts, B schema, C goldens,
+D confidence table, E corpus, F system architecture).
+
+⚠️ **Section numbers moved in the length cut.** The current body is §1 Intro,
+§2 Related Work, §3 Corpus, §4 Schema, §5 Method (§5.6 Deployment, §5.7
+LLM-first discipline), §6 Experiments (§6.4 whole-document arm, §6.5
+confidence, §6.6 stability, §6.7 scale, §6.8 quality at scale), §7 Discussion
+and Limitations (§7.5 the `age_band` defect), §8 Conclusion. The TODO files,
+`DRAFTING_NOTES.md` and pass 1's reviews often use the **pre-cut** numbering
+(for example "§8.8" for today's §6.8). Map by `\label`, not by number.
+
+**The goal of this pass is narrow: is the paper good enough to post to arXiv
+now, and if not, exactly what stops it?** It is not to redesign the paper,
+retarget it at a venue, or add experiments. A first review ran on 2026-09-04;
+since then the paper changed a lot (new evidence, a length cut, restructured
+sections). Your job is to check that the new material holds up to the same
+standard, and that the fixes from pass 1 survived the rewrite.
 
 Read these first, in this order, before touching anything:
 
 1. `tasking/arxiv_paper.md` — the working plan. Its **"non-negotiable
    guardrails"** section is the standard this paper must be held to. Every one
-   of the eight exists because a specific false claim nearly reached the page.
-2. `CLAUDE.md` — the system's design constraints and a long record of measured
+   exists because a specific false claim nearly reached the page.
+2. `paper/TODO_remaining.md` — what was done after pass 1 and why, including
+   the decisions listed under "Decided — do not relitigate" below.
+3. The pass-1 deliverables at the repo root: `REVIEW_references.md`,
+   `REVIEW_claims.md`, `REVIEW_assessment.md` (the last has a 2026-09-07 status
+   note at the top). **Do not overwrite these**; they are the record.
+4. `CLAUDE.md` — the system's design constraints and a long record of measured
    defects. Most of the paper's claims trace back to a section in here.
-3. `paper/results/*/findings.md` and `manifest.json` — the recorded
+5. `paper/DRAFTING_NOTES.md` — every LaTeX comment that used to live in
+   `paper/sections/*.tex`, archived when they were stripped on 2026-09-07. It
+   records why each section says what it says and which readings were
+   rejected. Read the note for a section before changing that section.
+6. `paper/results/*/findings.md` and `manifest.json` — the recorded
    measurements. **Every number in the paper is supposed to be regenerable from
    these.**
 
-Build with (no local LaTeX toolchain; Docker is the supported path):
+Build (a local TeX Live is installed now; Docker is no longer needed):
 
 ```
-cd paper && docker run --rm -v "$PWD":/paper -w /paper texlive/texlive:latest bash -c \
-  "pdflatex -interaction=nonstopmode main.tex && bibtex main && \
-   pdflatex -interaction=nonstopmode main.tex && pdflatex -interaction=nonstopmode main.tex"
+cd paper && latexmk -pdf -interaction=nonstopmode main.tex
 ```
 
-Baseline before your changes: **0 errors, 0 undefined references, 4 overfull
-hboxes.** Those 4 are pre-existing and live in generated tables. If your edits
-add a fifth, fix it or say why you left it.
+Baseline before your changes (2026-09-19): **exit 0, 28 pages, 0 undefined
+references or citations, 0 overfull boxes, 27 underfull boxes, and one
+pre-existing font warning** (`T1/zi4/m/it` undefined — inconsolata has no
+italic). If your edits add an overfull box, fix it. Underfull boxes are
+cosmetic, but look at any in text you touched.
 
 ---
 
-## Task 1 — Investigate the references
+## What changed since pass 1 (focus here)
 
-`paper/references.bib` has 36 entries. Each carries a provenance comment
-recording where it was verified (publisher page, ACL Anthology, arXiv abs page,
-or dblp), checked 2026-08-17. Entries whose page numbers could not be confirmed
-deliberately omit them rather than guessing.
+Pass 1 checked the paper as it stood on 2026-09-04. Everything below is newer
+and has **not** had an independent review:
 
-For each entry, establish:
-
-- **Does the work exist as described?** Correct title, authors, year, venue.
-  Flag anything you cannot confirm against an authoritative source, and say
-  "unverified" rather than assuming the entry is right.
-- **Is the citation used correctly in the text?** Read where it is cited in
-  `paper/sections/related_work.tex` and elsewhere. The failure mode to hunt for
-  is a real paper cited for a claim it does not make.
-- **Is anything important missing?** The survey covers four areas: document
-  structure/layout extraction; LLM information extraction and in-context vs
-  fine-tuning; human-in-the-loop IE; and education-standards/curriculum NLP.
-  The author's note is that the last area was thin as of 2026-08. Confirm or
-  refute that, and name specific missing work if you find it.
-- **Is the positioning defensible?** The paper's gap claim is that prior
-  hierarchical-document work needs layout supervision and typographically
-  consistent corpora, and that education-standards work presupposes
-  already-structured standards. If a paper defeats that claim, that is the most
-  valuable thing you can find.
+- **Quality at scale, §6.8 and Table 9** (`tables/scale_quality.tex`): Kentucky
+  graded at the `_trimmed` tier against two new trimmed-tier goldens (277
+  elements / 207 standards), three runs, with parser coverage reported as a
+  range (0.807 / 0.927 / 0.841). Recordings: `results/task9_20260905/`,
+  `results/task13_20260907/`. ⚠️ Those goldens were verified by inspecting what
+  the system emitted, so they **cannot find omissions**: any recall claim at
+  that tier must say so.
+- **The whole-document single-prompt arm, §6.4.** `results/task10_20260905/`.
+  California is truncated at the configured output cap; that claim rests on one
+  draw.
+- **The Nevada non-reproduction.** An earlier result claiming the
+  layout-stratified sampler fixed NV's domain codes was re-run at n=5 per arm
+  and did not reproduce (`results/task11_20260905/`; the old
+  `results/task2_20260826/nv_attribution_ab.json` is superseded). The paper
+  reports it as a non-reproduction. CLAUDE.md's "Where Pass-1 loses a LEVEL"
+  section has the per-draw table.
+- **The `age_band` defect at scale, §7.5.** Kentucky's page banner leaks into
+  `age_band`, duplicates survive `_dedup_elements`, and the collision resolver
+  gives them fabricated `.N` primary keys. It is reported and deliberately
+  **not** fixed, because the fix would change `code_version_hash` and invalidate
+  every frozen measurement. Colorado is the control. See CLAUDE.md, "Where
+  `age_band` destabilizes at scale".
+- **The length cut.** The old §5 Pipeline Overview was folded into §Method; the
+  old §7 System Architecture moved to Appendix F, with a short §5.6 Deployment
+  left in the body; the confidence table moved to Appendix D; §Related Work and
+  several results subsections were compressed. **Check that no argument lost
+  its evidence in the cut**, that forward and backward references still point
+  at the right thing, and that nothing now says "above" or "below" about
+  material that moved.
+- **Captions** now cite a recording by its tag (`task8_20260904`), not by path.
+  The Artifacts Statement explains the scheme.
+- **The abstract was shortened on 2026-09-19** to fit arXiv's 1,920-character
+  abstract field. `paper/arxiv_abstract.txt` is the plain-text copy for the
+  submission form (1,888 characters). Confirm it matches the LaTeX abstract word
+  for word apart from dashes and the dropped `\S\ref`, that it is still under
+  1,920 characters, and that every number in it is correct. The cut removed the
+  closing sentence about corpus tiers and moved the tier into the results
+  sentence ("On an annotated subset of…"). Check that is still honest, given
+  that §6.8 reports quality at a second tier.
 
 ---
 
-## Task 2 — Validate every claim
+## Task 1 — References: delta check only
+
+Pass 1 verified all entries (`REVIEW_references.md`). Since then the list grew
+from 36 to 40 and §Related Work was compressed, with citations regrouped into
+single `\citep{}` clusters.
+
+- Verify **every entry pass 1 did not cover**: existence, correct title,
+  authors, year and venue, against an authoritative source. Say "unverified"
+  rather than assuming.
+- For **every** citation, re-check the claim it supports in the compressed
+  text. Regrouping into clusters is exactly how a paper ends up cited for a
+  claim it does not make: a cluster supports its whole sentence, so every
+  member must.
+- Flag any citation made redundant by the cut, and any work cited only in the
+  bibliography.
+- Do not re-run pass 1's literature search. If you know of a paper that
+  defeats the gap claim (prior hierarchical-document work needs layout
+  supervision and typographically consistent corpora; education-standards work
+  presupposes already-structured standards), that is still the most valuable
+  thing you can report.
+
+---
+
+## Task 2 — Validate the claims
 
 This is the highest-value task. **Do not take a number in the prose at face
 value; trace it to the artifact that produced it.**
 
-Method that works in this repo:
-
-- Numbers live in `paper/results/task{1,1b,2,3,4,5,6,8}_*/`. Tables in
-  `paper/tables/*.tex` are **auto-generated** by `paper/analysis/generate_tables.py`
-  from those JSON files. Appendices A and C are generated by
-  `make_prompt_appendix.py` and `make_goldens_appendix.py`.
-- Re-run the generators and confirm the tables are unchanged. If a table moves,
-  the paper and its recordings have drifted.
-- For prose claims, find the recording and check the field yourself.
+- Tables in `paper/tables/*.tex` are **generated** by
+  `paper/analysis/generate_tables.py` from `paper/results/`. Appendices A and C
+  come from `make_prompt_appendix.py` and `make_goldens_appendix.py`. Re-run all
+  three and confirm every table regenerates byte-identically. If one moves, the
+  paper and its recordings have drifted: say which, and why.
+- `SUPERSEDED_TAGS` in `generate_tables.py` lists recordings that must never
+  feed a table. Check that no **prose** number comes from a superseded
+  recording either. The generator cannot police prose.
+- For each prose claim, find the recording and check the field yourself.
+  Prioritize the sections listed under "What changed since pass 1".
+- Re-check pass 1's corrections still hold after the rewrite: **297** in-scope
+  detections, not 296 (and tier-qualified wherever it appears, since 277, the
+  Kentucky trimmed count, now sits nearby); the depth-map cost share is 0.3% KY
+  / 0.5% CO; NV chain-break is 24/24. `REVIEW_claims.md` lists the rest.
 
 ### Traps that have already caught someone
 
 - **`per_level` in the detector reports holds `{tp, fp, fn}` counts, not a
   recall float.** A check that filters for numeric recall values silently
   compares nothing and reports success. Compute `tp/(tp+fn)`.
-- **`main.log` is ISO-8859**, so `grep` treats it as binary and prints nothing.
-  Use `grep -a`. A warning count of "0" from a plain grep is meaningless.
-- **A clean LaTeX exit code does not mean a figure rendered correctly.**
-  Rasterize the page (`gs -sDEVICE=png16m -dFirstPage=N -dLastPage=N`) and look.
-  Two layout defects here produced clean builds.
-- **`outputs/08-22-26-4/` and `paper/results/*_20260822/` are SUPERSEDED.** The
-  current freeze is `outputs/08-26-26-2` at `code_version_hash 14374dba`. A
-  number carried from a superseded folder has already reached this draft once
-  (an Arizona figure that was wrong by a factor of five). Check that every cited
-  number comes from the current freeze, and flag any that do not.
+- **`main.log` is ISO-8859**, so plain `grep` treats it as binary and prints
+  nothing. Use `grep -a`. A warning count of "0" from a plain grep means
+  nothing.
+- **A clean LaTeX exit does not mean a float rendered correctly.** Rasterize
+  the page (`gs -sDEVICE=png16m -r110 -dFirstPage=N -dLastPage=N -o p.png
+  main.pdf`) and look. Table 8 and Table 9 were both restructured to fit one
+  column, so look at those pages specifically.
+- **Superseded freezes.** `outputs/08-22-26-4/` and any
+  `paper/results/*_20260822/` or `*_20260816/` recording are superseded unless
+  the prose explicitly says it is reporting a historical value (the Task 3
+  ablation repeats are the one disclosed case). A number carried from a
+  superseded folder has reached this draft before (an Arizona figure that was
+  wrong by a factor of five).
+- **A duplicate check must be keyed more loosely than the merge it audits.**
+  `grade_parser.id_collisions` reports zero on Kentucky's trimmed run because
+  it runs *after* the collision resolver renamed the duplicates. If the paper
+  anywhere reads "no collisions" as "no duplicates", it is wrong.
+- **A zero at small n is not a null result.** Any claim that something "never"
+  happens must state its denominator.
 
-### Known-weak claims to scrutinize hardest
+### Guardrails to re-check across the whole paper
 
-- **Three numbers in `paper/sections/method.tex` are NOT regenerable from
-  `paper/results/`** — they come from `CLAUDE.md`'s engineering record with no
-  recorded JSON or generating command. They are flagged in a comment at the top
-  of that file. This is a live guardrail-6 violation. Decide whether each should
-  be recorded, rephrased qualitatively, or cut.
-- **The Nevada 46/46 detector result does not reproduce** (five runs give 44,
-  45, 44, 44, 44). §Experiments and §Discussion both report this. Verify the
-  paper never quotes 46/46 as a stable result anywhere.
+- **Guardrail 1: corpus tier on every table and headline number.** Quality
+  numbers are `_only_subset` except §6.8 and Table 9, which are `_trimmed`. No
+  table may mix tiers, and no reader should be able to carry a number across
+  them.
 - **Guardrail 2: confidence gates nothing.** There is no `needs_review` field
-  in `src/`. Any sentence implying a confidence-based review gate is a false
-  claim about the system. Grep the whole paper for it.
-- **Guardrail 1: corpus tier on every table.** Quality numbers are
-  `_only_subset`; the scale table alone is `_trimmed`. Confirm no table is
-  unlabelled and no reader could carry a number across tiers.
-- **The `_trimmed` tier retains 100% of the standards.** A trimmed-to-published
-  page ratio (KY 52/120, CO 41/187) is *not* a coverage fraction. An earlier
-  draft got this backwards and stated a false limitation. Check the current text
-  does not relapse.
+  in `src/`. Grep the whole paper, appendices included, for any sentence
+  implying a confidence-based review gate.
+- **Guardrail 6: every number is regenerable.** Pass 1 found three §Method
+  numbers that were not; they were made qualitative (see the guardrail-6 note
+  in `DRAFTING_NOTES.md`). Check they have not crept back in as figures, and
+  look for any **new** unregenerable number the post-pass-1 material
+  introduced.
 - **Guardrail 8: raw precision is not detector quality** except for Kentucky,
-  whose golden is detection-exhaustive. Verify the paper never reports raw
-  precision as quality for the other five states.
+  whose golden is detection-exhaustive.
+- **The `_trimmed` tier keeps 100% of the standards.** A trimmed-to-published
+  page ratio is not a coverage fraction.
+- **The NV 46/46 result must never appear as a stable result.** At n=5 it is
+  44/46 or 44/45 per draw, and `NV-DOM-03` fails in every draw of both arms.
+- **The `.N` suffixes are not a resolver defect.** They come from upstream
+  duplicates the resolver correctly separated.
 
-Report every claim you could not verify, separately from claims you found
-wrong. "I could not confirm this" is a useful finding; guessing is not.
+Report claims you could not verify **separately** from claims you found wrong.
+"I could not confirm this" is a useful finding; guessing is not.
 
 ---
 
 ## Task 3 — Edit the paper
 
-Spelling, grammar, clarity, consistency of terminology and notation.
+Spelling, grammar, clarity, consistency of terminology and notation, and above
+all the **seams left by the length cut**: section and table numbering, stale
+cross-references, a term defined in a section that moved to an appendix but
+still used in the body, and the same thing said twice in §Experiments and
+§Discussion.
 
 Constraints:
 
-- **Never hand-edit `paper/tables/*.tex`.** They are generated and your changes
-  will be overwritten. Edit the generator in `paper/analysis/` instead, then
-  re-run it.
+- **Never hand-edit `paper/tables/*.tex`.** They are generated. Edit the
+  generator in `paper/analysis/` and re-run it.
 - **Never edit anything under `paper/results/`.** Those are recorded
-  measurements with provenance; they are evidence, not prose.
-- `paper/sections/*.tex` carry long LaTeX comments recording *why* each section
-  says what it says — which readings were rejected and on what evidence. Do not
-  delete them; Task 13 strips all comments before submission. If you change
-  prose that a comment governs, update the comment too.
-- Preserve every hedge. Where the paper says "suggested rather than
-  established", or reports a range instead of a point value, that phrasing was
-  chosen deliberately after a measurement contradicted a stronger claim.
-  Tightening it into a cleaner assertion would reintroduce the error.
-- Keep the build clean. Re-run the build after editing and report the numbers.
-
-Beyond mechanics, look for: passages where the argument is hard to follow,
-places where a claim's evidence is not adjacent to it, redundancy between
-§Method and §Experiments, and any paragraph that asserts something the paper
-does not actually show.
+  measurements with provenance: evidence, not prose.
+- **Do not add LaTeX comments to `paper/sections/*.tex`.** They were stripped
+  deliberately for submission. If an edit needs its reasoning recorded, add it
+  to `paper/DRAFTING_NOTES.md` under that section's heading.
+- **Keep every hedge.** Where the paper says "suggested rather than
+  established", reports a range rather than a point value, or reports a
+  non-reproduction, that wording was chosen after a measurement contradicted a
+  stronger claim. Tightening it into a cleaner assertion would reintroduce the
+  error.
+- **Keep the abstract under 1,920 characters.** If you edit it, update
+  `paper/arxiv_abstract.txt` to match and report the new length.
+- **Do not change the byline.** "Founder, EdTech Co." with `emily@edtechco.org`
+  is confirmed.
+- Keep the build clean. Re-run it after editing and report the numbers against
+  the baseline above.
 
 ---
 
-## Task 4 — Your honest assessment
+## Task 4 — arXiv submission readiness
 
-Answer four questions, and be genuinely critical. The author would rather hear
-that this is not ready than post something weak under their own name. Flattery
-here is a disservice.
+arXiv compiles from source, so check the package as arXiv will see it:
 
-1. **Is this a good paper?** Judge the contribution, not the effort. Is the
-   central claim — recover document hierarchy by classifying nesting *position*
-   rather than label vocabulary — novel, or is it a competent application of
-   known technique? Is the evidence sufficient for the claims made? What would a
-   hostile reviewer attack first?
+- Copy only what a submission needs into an empty directory: `main.tex`,
+  `sections/`, `tables/`, `figures/`, `acl.sty`, `acl_natbib.bst`, the
+  pre-built `main.bbl`, and `anc/prompts.txt`. Compile there with `pdflatex`
+  only (no `bibtex`, which is how arXiv handles a supplied `.bbl`). Report any
+  missing file, absolute path, or dependency on something outside that set.
+- Flag anything in that set that should not be published: stray TODOs, author
+  notes, internal paths, AWS account or resource identifiers, or unreleased
+  data beyond what the Artifacts Statement says is disclosed.
+- Check that `figures/` holds nothing unused, and that no file is too large for
+  arXiv.
+- Check that metadata is consistent across the title, abstract, byline and
+  Artifacts Statement.
 
-2. **Should it go to a conference, and which?** Consider ACL, EMNLP, NAACL,
-   COLING, the document-analysis venues (ICDAR, DAS), applied/industry tracks,
-   and education-technology venues (AIED, EDM, L@S, LAK). Weigh the actual
-   fit — note that the body is ~17 pages against ACL's 8-page limit, so a
-   conference version would need substantial cutting, and say what you would
-   cut. If your honest answer is "arXiv only", say that.
+---
 
-3. **Who else would want this?** Organizations working on education data
-   standards and interoperability, state education agencies, early-childhood
-   policy bodies, curriculum and assessment vendors, open-education-data
-   projects. Be specific about named organizations and why each would care,
-   rather than listing categories.
+## Task 5 — Your honest assessment
 
-4. **What is the single highest-value thing to do next?** The paper itself
-   identifies one candidate: Kentucky's golden is the only detection-exhaustive
-   one, so grading it inside a full-scale run would produce quality-at-scale
-   evidence with no new annotation. Agree or propose better.
+Answer these, and be genuinely critical. The author would rather hear that this
+is not ready than post something weak under their own name. Flattery here does
+them a disservice.
 
-### Context for question 2 and 3
+1. **Is it ready to post to arXiv?** Answer yes, or no. If no, list the
+   **blockers**, meaning things that would embarrass the author or constitute
+   a false claim, separately from **improvements**. The bar is a careful,
+   honest arXiv preprint, not a main-track acceptance.
+2. **Did the new evidence strengthen the paper or dilute it?** Judge §6.4,
+   §6.8, the NV non-reproduction and the `age_band` disclosure specifically.
+   Does the reporting-discipline contribution, now claimed in the abstract,
+   read as a contribution or as defensiveness?
+3. **What would a hostile reader attack first**, now that the paper states its
+   own defects so openly? Is any limitation stated in a way that undercuts the
+   central claim more than the data does?
+4. **Is anything still over-claimed?** Especially the abstract, which was just
+   compressed, and the conclusion.
 
-The author is a solo founder, non-anonymous submission, no institutional
-affiliation. Code and corpus are deliberately **not** released — the source
-documents are third-party state-agency publications that are not the author's
-to redistribute — so in-paper disclosure via the appendices substitutes for it.
-Factor that into venue advice: some venues weigh artifact availability heavily.
+Keep your answer to question 1 short and put it first.
 
-**This paper forms part of the author's EB-2 National Interest Waiver
-portfolio.** That should change your venue and outreach advice in specific ways,
-so weigh it explicitly rather than treating all publication as equivalent:
+### Decided — do not relitigate
 
-- **Peer review and indexing carry evidentiary weight that a preprint does
-  not.** An arXiv posting establishes priority and is citable, but a paper
-  accepted at a venue indexed in the ACL Anthology, DBLP or Scopus is a
-  materially different kind of record. If your honest answer to question 2 is
-  still "arXiv only", say so — but say what it costs in this context, and name
-  the strongest venue that would plausibly accept the work as it stands.
-- **The "national importance" prong is unusually well served by this subject
-  matter.** The work is about making US state education policy machine-readable
-  — public infrastructure, across more than fifty jurisdictions, with no
-  existing national dataset. Say plainly whether the paper currently *makes*
-  that case or merely implies it, and where it could be stated without
-  overclaiming.
-- **Question 3 matters more than it normally would.** Documented interest or
-  adoption from a named organization — a state education agency, an
-  education-data standards body, a curriculum or assessment vendor, an
-  open-education-data project — is independently valuable evidence. So be
-  concrete: name organizations, name the person or team whose remit covers this
-  where you can, and say what a first approach would reasonably ask for.
-- **Timing and cadence are worth a sentence.** If a strong venue's deadline is
-  far out, say whether posting to arXiv now and submitting later is compatible
-  with that venue's preprint policy, or whether it forecloses submission.
+These were decided by the author with the trade-offs in view. Note a concern in
+one line if you must, but do not argue for reversing them:
 
-Two boundaries on this, and hold both:
+- **Length.** The paper is deliberately not cut to 8 pages. The structural cuts
+  were taken; the evidence was kept.
+- **Venue.** Pass 1's venue and outreach advice stands (`REVIEW_assessment.md`
+  §2–3). This pass is about arXiv readiness only.
+- **Artifacts.** Code and corpus are not released. The source documents are
+  third-party state-agency publications, and in-paper disclosure through the
+  appendices stands in for release.
+- **The `age_band` fix** waits until after posting (it would invalidate every
+  frozen measurement).
+- **No exhaustive Colorado annotation, no second annotator, no second frontier
+  model, no off-the-shelf converter baseline.**
+- **License:** the arXiv perpetual non-exclusive license.
+- **EduTeach 2026 is not being pursued.** Do not suggest it.
 
-1. **This must not change what the paper claims.** Venue strategy and outreach
-   are in scope; the findings are not. Any suggestion that the paper assert more
-   than it measured — soften a limitation, quote a point value where the data
-   support a range, drop the non-reproduction result — is out of bounds, and
-   would in any case be the easiest thing for a reviewer to attack.
-2. **You are not giving legal advice and should not attempt to.** Do not assess
-   the petition's strength or interpret the criteria. Confine yourself to what
-   you can judge as a researcher: venue quality, fit, indexing, timelines, and
-   which organizations have a genuine stake in this work. An immigration
-   attorney evaluates the rest.
+Optional items the author may still do before posting, which you may comment on
+but should not run: California ×3 on the whole-document arm (TODO item 4), and a
+cold-read recall check on Kentucky's trimmed tier (TODO item 5).
 
 ---
 
 ## Deliverables
 
-1. `REVIEW_references.md` — per-entry verdict table plus missing-work findings.
-2. `REVIEW_claims.md` — three sections: claims verified, claims that are wrong
-   (with the correct value and its source), claims you could not verify.
-3. Edits applied directly to `paper/sections/*.tex` and the generators, with a
-   summary of what changed and a final build report.
-4. `REVIEW_assessment.md` — your answers to the four questions above.
+Write new files; do not overwrite pass 1's.
+
+1. `REVIEW_references_pass2.md` — verdicts on entries new since pass 1, plus
+   every citation-claim mismatch found in the compressed text.
+2. `REVIEW_claims_pass2.md` — three sections: claims verified, claims that are
+   wrong (with the correct value and its source), and claims you could not
+   verify. Also include the table-regeneration result, and whether pass 1's
+   corrections held.
+3. Edits applied directly to `paper/sections/*.tex`, `paper/main.tex` and the
+   generators, with a summary of what changed and a final build report against
+   the baseline.
+4. `REVIEW_submission_pass2.md` — the Task 4 package check.
+5. `REVIEW_assessment_pass2.md` — your answers to Task 5, with the verdict on
+   readiness first.
 
 Do not commit anything. Leave changes in the working tree for review.

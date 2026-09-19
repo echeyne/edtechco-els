@@ -3,8 +3,8 @@
 
 The target of the pipeline is a single schema that every state's document is
 resolved into, regardless of how that document organizes itself. It defines
-four hierarchy levels --- \emph{domain}, \emph{strand}, \emph{sub-strand}, and
-\emph{indicator} --- of which strand and sub-strand are optional. Each level
+four hierarchy levels, \emph{domain}, \emph{strand}, \emph{sub-strand}, and
+\emph{indicator}, of which strand and sub-strand are optional. Each level
 carries a code, a name, and an optional free-text description; the indicator
 additionally carries an age band, a source page, and the verbatim source text
 it was extracted from. A normalized standard is one indicator together with its
@@ -31,7 +31,7 @@ receives an identifier of the form
 \texttt{\{indicator\_code\}}
 \end{quote}
 \noindent where the indicator
-code is already fully qualified --- it carries its own ancestry, and it carries
+code is already fully qualified: it carries its own ancestry, and it carries
 whatever disambiguator distinguishes side-by-side variants of the same outcome.
 Texas prints the same expectation once per age column, so the age token lives
 inside the code (\texttt{PK3.I.A.2} against \texttt{PK4.I.A.2}); California
@@ -52,7 +52,7 @@ itself a nontrivial part of the contribution, because the states do not agree on
 the two things a naive schema would take for granted: how many levels there are,
 and what a code means. Nevada's namespace skipping a level and Kentucky's
 dotted sub-level identifiers, which restate their parent's position inside the
-child's own code, are not exceptions to be special-cased --- they are the normal
+child's own code, are not exceptions to be special-cased. They are the normal
 condition of the corpus, and \S\ref{sec:method-parsing} describes the
 shape-based rules that resolve them without reference to any document's
 vocabulary.

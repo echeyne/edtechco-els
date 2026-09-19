@@ -145,7 +145,7 @@
   },
   "findings": {
     "1_detection_complete_at_scale": "277/277 verified elements found by all three runs; 0 absent, 0 hallucination candidates. Non-circular, because the goldens were seeded from a DIFFERENT run (2026-08-29) and verified against the PDF.",
-    "2_age_band_is_systematic_not_variance": "164 elements carry the spurious band in every one of the three runs — stdev 0.0. It lands on the same elements each time, so it is a systematic misreading of the page banner rather than sampling noise.",
+    "2_age_band_is_systematic_not_variance": "164 elements carry the spurious band in every one of the three runs — stdev 0.0. CORRECTED 2026-09-19: the count is identical but the set is not; runs 1 and 3 agree exactly, run 2 differs on five elements, and 159 elements are common to all three (checked by level and title against the three detection files). It remains a systematic misreading of the page banner rather than sampling noise.",
     "3_duplication_is_15pct_not_the_window_figure": "50-52 surplus duplicate detections document-wide across all four runs (seed 52: 4 strand, 9 sub_strand, 39 indicator). Task 9's 8-page window showed 11 and under-stated it roughly fivefold.",
     "4_parser_coverage_is_a_range_not_a_point": "0.807 / 0.927 / 0.841, stdev 0.062, tracking dropped counts of 40/15/33 — all age_band. Field accuracy by contrast is 0.995 stdev 0.002.",
     "5_id_collisions_are_zero_by_construction": "disambiguate_colliding_standards renames collisions before grade_parser checks. The honest figure is 10-11 fabricated `.N` keys per run."

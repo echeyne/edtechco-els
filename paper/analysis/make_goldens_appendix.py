@@ -29,7 +29,7 @@ def esc(x):
         s = s[:DESC_CAP].rstrip() + " [...]"
     for a, b in [("\\", r"\textbackslash{}"), ("&", r"\&"), ("%", r"\%"), ("$", r"\$"),
                  ("#", r"\#"), ("_", r"\_"), ("{", r"\{"), ("}", r"\}"), ("~", r"\textasciitilde{}"),
-                 ("^", r"\textasciicircum{}"), ("—", "---"), ("’", "'"), ("“", "``"), ("”", "''")]:
+                 ("^", r"\textasciicircum{}"), ("—", "--"), ("’", "'"), ("“", "``"), ("”", "''")]:
         s = s.replace(a, b)
     return s
 
@@ -65,7 +65,7 @@ def detector_block(state, tid, caption):
             rf"\texttt{{description}} & {esc(e.get('description'))} \\",
             rf"\texttt{{source\_page}} & {e['source_page']} \\"]
     return "\n".join([
-        rf"\paragraph{{{state} \textnormal{{---}} {caption}}}",
+        rf"\paragraph{{{state}: {caption}}}",
         rf"\noindent\scriptsize\begin{{tabular}}{{@{{}}p{{0.22\linewidth}}p{{0.72\linewidth}}@{{}}}}",
         r"\toprule", *rows, r"\bottomrule", r"\end{tabular}", "",
         rf"\noindent{{\scriptsize\raggedright Golden entry \texttt{{{esc(tid)}}}, "
@@ -79,14 +79,14 @@ def parser_block(state, tid, caption):
     for lvl in ("domain", "strand", "sub_strand", "indicator"):
         v = x.get(lvl)
         if v is None:
-            rows.append(rf"\texttt{{{esc(lvl)}}} & \textit{{absent --- this document has no "
+            rows.append(rf"\texttt{{{esc(lvl)}}} & \textit{{absent; this document has no "
                         rf"such level}} \\")
         else:
             rows.append(rf"\texttt{{{esc(lvl)}.code}} & {tt(v['code'])} \\")
             rows.append(rf"\texttt{{{esc(lvl)}.name}} & {esc(v['name'])} \\")
     rows.append(rf"\texttt{{age\_band}} & {esc(x.get('age_band'))} \\")
     return "\n".join([
-        rf"\paragraph{{{state} \textnormal{{---}} {caption}}}",
+        rf"\paragraph{{{state}: {caption}}}",
         rf"\noindent\scriptsize\begin{{tabular}}{{@{{}}p{{0.26\linewidth}}p{{0.68\linewidth}}@{{}}}}",
         r"\toprule", *rows, r"\bottomrule", r"\end{tabular}", "",
         rf"\noindent{{\scriptsize\raggedright Golden entry \texttt{{{esc(tid)}}}, "
@@ -116,7 +116,7 @@ def main():
                      r"a printed namespace that skips a level: the sub-strand code does "
                      r"\emph{not} extend the strand's"),
         parser_block("CO", "CO-IND-01",
-                     r"a three-level document --- \texttt{sub\_strand} is absent by design, "
+                     r"a three-level document, where \texttt{sub\_strand} is absent by design, "
                      r"not missing"),
         parser_block("CA", "CA-IND-01-EARLY",
                      r"a side-by-side column variant, disambiguated inside the indicator code"),
