@@ -37,9 +37,13 @@ decoding~\citep{willard2023efficient}; domain-scoped chunking rather than
 whole-document prompting, given positional degradation in long
 contexts~\citep{liu2024lost}; and reported run-to-run
 stability~\citep{wang2023selfconsistency} rather than a single run.
-Hallucination~\citep{ji2023survey} I quantify by auditing every unmatched
-detection by hand; for hierarchical consistency, this is the analogue of the
-internal-consistency checks \citet{aggarwal2025fiscal} apply to fiscal PDFs.
+A generative extractor can emit content that is not in its source
+\citep{ji2023survey}; I measure that directly, by auditing every unmatched
+detection by hand rather than assuming it is a false positive. Structural
+consistency is enforced separately, at the validation boundary, where an
+indicator's code must extend its ancestor's; that check is the analogue of
+the totals-at-each-level validation \citet{aggarwal2025fiscal} apply to
+fiscal tables.
 Absent labels, human effort goes to verification rather than annotation: every
 record is reviewed at all four levels, in the manner of machine teaching rather
 than active learning, uncertainty-guided allocation, or the model as

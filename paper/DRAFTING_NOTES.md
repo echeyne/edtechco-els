@@ -592,3 +592,18 @@ after pass 2. Collision-free is true at the subset tier and true by
 construction at scale, where \S6.8 says the zero is uninformative because the
 resolver renames every collision; the abstract should not lean on a property
 the paper itself discounts. `arxiv_abstract.txt` regenerated: 1,864 characters.
+
+### `sections/related_work.tex`, hallucination sentence (2026-09-19, after pass 2)
+
+"Hallucination~\citep{ji2023survey} I quantify by auditing ... for hierarchical
+consistency, this is the analogue of the internal-consistency checks
+\citet{aggarwal2025fiscal} apply" was rewritten at the author's request. Two
+problems: the fronted object read badly and left the survey citation hanging
+off a bare noun, and the Aggarwal analogy was attached to the manual audit,
+which tests invention (\S7.4), not hierarchical consistency. Aggarwal et al.
+validate with totals at each level of the hierarchy (abstract, arXiv
+2511.10659); the analogue in this system is the validator's structural
+invariant of \S5.3, and the sentence now says so. The survey is now cited for
+the claim it makes, that generative models emit content unfaithful to their
+source.
+
