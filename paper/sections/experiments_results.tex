@@ -1,11 +1,13 @@
 \section{Experiments and Results}
 \label{sec:experiments-results}
 
-\subsection{Headline Quality: Golden and Held-Out States}
+\subsection{Headline Quality: Development and Validation States}
 \label{sec:experiments-headline}
 
 Tables~\ref{tab:detector-headline} and~\ref{tab:parser-headline} report the two
-suites on all six states, four developed against and two held out entirely. All
+suites on all six states, four developed against and two used for validation
+(\S\ref{sec:method-validation-use} describes what that role did and did not
+include). All
 numbers are on the \texttt{\_only\_subset} corpus tier (\S\ref{sec:corpus}),
 never on full documents.
 
@@ -24,8 +26,13 @@ by the model, and raw precision therefore measures annotation coverage rather
 than correctness (\S\ref{sec:discussion-limitations}). Kentucky is the single
 exception, being the one state whose detector golden is exhaustive.
 
-Recall is 1.000 at every level in all six states, on both the developed and the
-held-out pair, and the parser emits no \texttt{standard\_id} collision anywhere.
+Recall is 1.000 at every level in all six states, on both the development and
+the validation pair. The parser's collision column is zero by construction,
+because the identifier resolver of \S\ref{sec:method-parsing} renames any
+collision before it is counted. The informative fact is that the resolver
+found nothing to rename: it logs every time it acts, and in the 29 parser runs
+of \S\ref{sec:experiments-stability} whose logs were retained (same tier, same
+code version) it never did.
 The per-state code and description figures are single-run values and should be
 read with \S\ref{sec:experiments-stability} in view: Nevada's code accuracy in
 particular is properly a range rather than the point value a single recording
@@ -90,7 +97,7 @@ rule-based structure extractor built on the cues such documents actually
 provide: numbering patterns, capitalization, indentation and line shape. It is
 graded by the same suite against the same goldens, through the same code path,
 so the two columns are directly comparable. It was developed against the four
-development states with the held-out pair untouched, and it carries no
+development states with Nevada and Kentucky untouched, and it carries no
 per-document branch.
 
 \input{tables/baseline_comparison}
@@ -108,16 +115,20 @@ elements the baseline misses are never emitted at all, rather than emitted at
 the wrong level (43 of 46 in Nevada, 31 of 44 in Kentucky). The rules do not
 so much mislabel the hierarchy as fail to detect it.
 
-\textbf{The held-out collapse needs its repair attached.} Nevada at 0.065 is the
+\textbf{The validation-state collapse needs its repair attached.} Nevada at 0.065 is the
 most dramatic number in the table and the least trustworthy as stated: it is
 dominated by a single token shape (\texttt{SS.ID.PK1}, a multi-letter code
 segment) that none of the four development documents prints. Widening the
 pattern after the fact recovers 0.522, and a comparable repair takes Kentucky
 from 0.295 to 0.409. I adopt neither, because both were motivated by inspecting
-held-out documents after the recorded run. The claim that survives the repair is
+the two documents after the recorded run. The claim that survives the repair is
 the one worth making: rules encode the shapes their author has seen, and even
 generously repaired they reach roughly half the language model's recall on
-documents they were not written against.
+documents they were not written against. The comparison on these two states is
+not symmetric: their failures informed general fixes to the pipeline
+(\S\ref{sec:method-validation-use}) and none to the baseline. The development
+states carry no such asymmetry, and the baseline falls short there too, at
+57--80\% recall against 100\%.
 
 \textbf{Two cautions about the precision columns.} Raw precision is not a
 quality ordering here: Arizona shows the rule-based arm \emph{above} the
@@ -145,7 +156,7 @@ and grader are identical to the full method's, so a difference is attributable
 to the architecture rather than to prompting.
 
 \textbf{It is not a strawman: on Arizona and Nevada it matches}, at recall
-$1.000$ with full code accuracy, and Nevada is one of the two held-out states
+$1.000$ with full code accuracy, and Nevada is one of the two validation states
 and prints a namespace that skips a level, so this is not an easy case. Where it
 loses, it loses in two distinct ways. On Kentucky and Texas recall holds while
 code accuracy falls, $44/44$ to $28/44$ and $8/8$ to $5/8$, and the failures are
@@ -228,7 +239,7 @@ day. Five back-to-back runs would have reported that element as
 perfectly stable.
 
 \paragraph{A single run is not a safe basis for a claim.} An earlier recording of this system measured Nevada's detector code
-accuracy at $46/46$ and I reported it as a held-out gain. It does not
+accuracy at $46/46$ and I initially recorded it as a gain. It does not
 reproduce: five fresh runs on identical code, the same extraction and the same
 golden give $44$, $45$, $44$, $44$, $44$. Nevada's code accuracy is properly
 reported as a \emph{range} of 44--45 of 46, and the earlier point value was the

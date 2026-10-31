@@ -2,8 +2,10 @@
 \label{sec:corpus}
 
 The corpus is the early learning standards documents of six US states: four
-used for development (Arizona, California, Colorado, Texas) and two held out
-for validation (Nevada, Kentucky). Table~\ref{tab:dataset-stats} summarizes what the
+used for development (Arizona, California, Colorado, Texas) and two used for
+validation (Nevada, Kentucky). No code path names the validation states, but
+their failures did prompt general fixes, so they are not a clean held-out test
+(\S\ref{sec:method-validation-use}). Table~\ref{tab:dataset-stats} summarizes what the
 annotated portion of each contains; Appendix~\ref{sec:appendix-corpus} names
 each source document and lists the pages retained at each tier.
 
@@ -41,8 +43,12 @@ pre-kindergarten standards, a multi-domain document.
 
 Two properties of Table~\ref{tab:dataset-stats} are results rather than
 document facts. Its age-band column counts the distinct bands a state uses,
-not coverage: every one of the 262 standards carries an age band. And
-identifier collisions are zero in every state, which matters because the
-identifier is the key under which a standard is stored (\S\ref{sec:schema}).
+not coverage: every one of the 262 standards carries an age band. And the
+identifier resolver never had to separate two standards in any state in any
+logged subset-tier run, which
+matters because the identifier is the key under which a standard is stored
+(\S\ref{sec:schema}). The table's collision column is counted after that
+resolver and so is zero by construction; the evidence that it had nothing to
+resolve is given in \S\ref{sec:experiments-headline}.
 
 \input{tables/dataset_stats}

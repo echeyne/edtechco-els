@@ -62,6 +62,17 @@ forces a re-record of Tasks 1–4 at ~315K Opus tokens, and is only worth it for
 an ACL main-track submission, which is **not** the target — see venue note
 below). **No further action on this item.**
 
+**REVISITED 2026-10-31 — "held out" wording REMOVED.** A later review found a
+larger issue than the prompt strings: NV/KY goldens (added `0b222f7`,
+2026-08-15) were used to check every change, and several general fixes were
+written from their failures (rule-4 caption/descendant-prefix clause and
+`_anchor_parent_chain` from NV; the Pass-1 sampler and `_delabel_parent_code`
+from KY, the latter taking KY parser 17/26 → the tabulated 26/26). NV/KY are
+now "validation states" throughout; the new `\paragraph{How the validation
+states were used}` (`sec:method-validation-use`) discloses this, and
+`generate_tables.py` prints role `held-out` as `validation` (recorded JSON left
+unchanged).
+
 ---
 
 ## 2. Lead with the measurement discipline — ✅ DONE

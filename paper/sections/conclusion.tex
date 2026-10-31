@@ -5,11 +5,12 @@ US early learning standards are public policy that software cannot read. I have
 shown that the obstacle is not text recovery but hierarchy recovery, and that an
 LLM can recover the hierarchy by classifying each element's nesting position
 against a depth map inferred per document, rather than by recognizing label
-vocabulary that no two states share. Across four development states and two held
-out entirely, detector recall at the annotated subset tier is 1.000 at every
-level, a manual audit of all 297 in-scope detections there finds one
+vocabulary that no two states share. Across four development states and two
+validation states, detector recall at the annotated subset tier is 1.000 at
+every level, a manual audit of all 297 in-scope detections there finds one
 hallucinated element, and parsing resolves those
-elements into a single canonical schema with no identifier collisions. Ablating
+elements into a single canonical schema without the identifier resolver ever
+having to separate two standards. Ablating
 the depth map degrades exactly the levels whose identity is positional and
 leaves the others untouched; a rule-based extractor matches the method at a
 document's top division and collapses beneath it. The system carries no
@@ -17,13 +18,17 @@ per-state code path, which is what allows a new state to be added without new
 code; the prompts' worked examples are the one place the corpus's own documents
 appear, and they are itemized rather than left implicit.
 
-Quality at full-document scale, which an earlier draft named as the measurement
-this work most conspicuously lacked, is now reported: on Kentucky's trimmed tier
-all 277 elements of the document's verified golden are recovered in each of
-three independent runs, with no hallucination, and parser field accuracy is
-$0.995$. What remains is breadth. The corpus is six states of more than fifty;
-each state added tests generalization again, and enough of them would
-constitute the national machine-readable dataset that does not currently exist.
+Quality at full-document scale is reported for one document. On Kentucky's
+trimmed tier, all 277 elements of the document's verified golden are recovered
+in each of three independent runs, with no hallucination, and parser field
+accuracy is $0.995$. Scale also brings a defect the subset tier never shows: a
+page banner read as an age band leaves parser coverage between $0.81$ and
+$0.93$ across the three runs and produces ten or eleven fabricated primary keys
+per run (\S\ref{sec:discussion-ageband-defect}). What remains is breadth. The
+corpus is six states of more than fifty. The first state examined only after
+development is frozen would be the paper's first true held-out test, and enough
+states would constitute the national machine-readable dataset that does not
+currently exist.
 
 Two further directions follow from the artifact rather than the method.
 Exposing the normalized store through a tool-callable interface would let

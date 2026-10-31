@@ -122,6 +122,17 @@ ALL_STATES = GOLDEN_STATES + HELDOUT_STATES
 STATE_TIER_KEY = {"AZ": "AZ", "CA": "CA", "CO": "CO", "TX": "TX",
                   "NV": "NV_2023", "KY": "KY"}
 
+# How a recorded role is PRINTED. The recorded JSON says "golden"/"held-out" and
+# is left as recorded; the paper calls NV/KY "validation" states because their
+# goldens were used to check, and motivated, general fixes during development
+# (\S Method, "How the validation states were used"). "held-out" would claim
+# an untouched test set the corpus does not have.
+ROLE_LABEL = {"golden": "dev", "dev": "dev", "held-out": "validation"}
+
+
+def role_label(role):
+    return ROLE_LABEL.get(role, role)
+
 
 def load_json(path):
     with open(path) as f:
@@ -209,7 +220,7 @@ def build_detector_table(det, tiers, verified):
         dt = d["description_total"]
         desc = fmt_pct(d["description_accuracy"]) + (f" ({d['description_matches']}/{dt})" if dt else "")
         vp = verified.get(st)
-        L.append(f"    {st} & {tier['role']} & {tier['only_subset']} & "
+        L.append(f"    {st} & {role_label(tier['role'])} & {tier['only_subset']} & "
                  f"{fmt_pct(d['recall'])} & {fmt_pct(vp)} & "
                  f"{fmt_pct(d['code_accuracy'])} ({d['code_matches']}/{d['code_total']}) & "
                  f"{desc if dt else '--'} & {bool_mark(d['depth_map_passed'])} \\\\")
@@ -236,13 +247,17 @@ def build_parser_table(par, tiers):
     for st in ALL_STATES:
         p = par[st]
         tier = tiers["tiers"][STATE_TIER_KEY[st]]
-        L.append(f"    {st} & {tier['role']} & {fmt_pct(p['coverage'])} "
+        L.append(f"    {st} & {role_label(tier['role'])} & {fmt_pct(p['coverage'])} "
                  f"({p['matched']}/{p['n_golden']}) & {fmt_pct(p['field_accuracy'])} & "
                  f"{p['fully_correct']}/{p['n_golden']} & {p['n_parsed']} & "
                  f"{len(p['id_collisions'])} \\\\")
     L += [r"    \hline", r"  \end{tabular}",
           r"  \caption{Parser coverage, per-field accuracy, fully-correct standards, "
-          r"standards emitted, and \texttt{standard\_id} collisions, per state. All "
+          r"standards emitted, and \texttt{standard\_id} collisions, per state. "
+          r"Collisions are counted after the identifier resolver "
+          r"(\S\ref{sec:method-parsing}), which renames any it finds, so that column "
+          r"is zero by construction; whether the resolver had to act is reported in "
+          r"\S\ref{sec:experiments-headline}. All "
           r"numbers are on the \emph{\_only\_subset} corpus tier "
           r"(\S\ref{sec:corpus}), never full documents. "
           rf"Source: \texttt{{task1\_{RUN_TAG}}}, "
@@ -622,7 +637,7 @@ def build_corpus_appendix_table(tiers):
             "Nevada": "NV", "Kentucky": "KY", "Flordia": "FL", "Florida": "FL"}
     TIERKEY = {"NV": "NV_2023"}
     ROLE = {"AZ": "dev", "CA": "dev", "CO": "dev", "TX": "dev",
-            "NV": "held-out", "KY": "held-out"}
+            "NV": "validation", "KY": "validation"}
 
     L = header("standards/standards_tracking.md", "paper/results/corpus_tiers.json")
     L += [r"\begin{table*}[t]", r"\centering", r"\small",
@@ -882,7 +897,10 @@ def build_dataset_table(stats):
     """
     L = header(f"paper/results/task8_{STATS_TAG}/dataset_stats.json")
     ps, t = stats["per_state"], stats["totals"]
-    L += [r"\begin{table*}", r"  \centering", r"  \begin{tabular}{llrrrrrrrr}", r"    \hline",
+    # tabcolsep 5pt: the printed role "validation" is wider than the recorded
+    # "held-out" and pushed this ten-column table 5pt past the text width.
+    L += [r"\begin{table*}", r"  \centering", r"  \setlength{\tabcolsep}{5pt}",
+          r"  \begin{tabular}{llrrrrrrrr}", r"    \hline",
           r"    \textbf{State} & \textbf{Role} & \textbf{Subset pp} & "
           r"\textbf{Full pp} & \textbf{Dom.} & \textbf{Str.} & \textbf{Sub.} & "
           r"\textbf{Standards} & \textbf{Age bands} & \textbf{ID coll.} \\",
@@ -893,7 +911,7 @@ def build_dataset_table(stats):
         # CO's subset comes from the 41pp 3-5 document, not the 187pp
         # birth-to-8 one; flag it rather than printing a bare number.
         mark = r"$^{\dagger}$" if d.get("pages_full_note") else ""
-        L.append(f"    {st} & {d['role']} & {d['pages_subset']} & {full}{mark} & "
+        L.append(f"    {st} & {role_label(d['role'])} & {d['pages_subset']} & {full}{mark} & "
                  f"{d['distinct_domains']} & {d['distinct_strands']} & "
                  f"{d['distinct_sub_strands']} & {d['standards']} & "
                  f"{len([k for k in d['age_bands'] if k])} & "
@@ -910,7 +928,9 @@ def build_dataset_table(stats):
           r"standard's ancestor chain, so they are smaller than the detector's "
           r"element counts in Table~\ref{tab:detector-headline}. \textbf{Age bands} "
           r"is the state's distinct bands; its total is the union across states, not "
-          r"a column sum. CO's subsets derive from the 41pp ages-3--5 document "
+          r"a column sum. \textbf{ID coll.} is counted after the identifier "
+          r"resolver and is zero by construction (\S\ref{sec:experiments-headline}). "
+          r"CO's subsets derive from the 41pp ages-3--5 document "
           r"($\dagger$). All headline quality numbers in this paper are measured on "
           r"the \emph{\_only\_subset} tier shown here (\S\ref{sec:corpus}); the one "
           r"quality measurement at the \emph{\_trimmed} tier is "

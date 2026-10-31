@@ -43,9 +43,11 @@ column takes (Appendix~\ref{rule:disambiguate}). There is no separate domain com
 identifier and no age band appended after the fact: the derivation is one rule
 over an already-qualified code, which is what makes the identifier reproducible
 from the document rather than from the order in which the pipeline happened to
-process it. Identifier collisions are therefore a measured quantity rather than
-an assumed absence, and I report the count
-(\S\ref{sec:experiments-results}).
+process it. Two standards can still compose the same code, so uniqueness is
+enforced by a resolver after parsing (\S\ref{sec:method-parsing}). A collision
+count taken after that resolver is zero by construction, so what I report is
+how often the resolver had to act (\S\ref{sec:experiments-headline},
+\S\ref{sec:experiments-scale-quality}).
 
 Building a canonical schema across independently-formatted jurisdictions is
 itself a nontrivial part of the contribution, because the states do not agree on

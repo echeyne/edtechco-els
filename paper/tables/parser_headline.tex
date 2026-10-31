@@ -8,14 +8,14 @@
     \hline
     \textbf{State} & \textbf{Role} & \textbf{Coverage} & \textbf{Field acc.} & \textbf{Fully correct} & \textbf{Standards} & \textbf{ID collisions} \\
     \hline
-    AZ & golden & 100.0 (18/18) & 99.7 & 17/18 & 45 & 0 \\
-    CA & golden & 100.0 (21/21) & 100.0 & 21/21 & 94 & 0 \\
-    CO & golden & 100.0 (9/9) & 100.0 & 9/9 & 48 & 0 \\
-    TX & golden & 100.0 (8/8) & 100.0 & 8/8 & 25 & 0 \\
-    NV & held-out & 100.0 (24/24) & 100.0 & 24/24 & 24 & 0 \\
-    KY & held-out & 100.0 (26/26) & 100.0 & 26/26 & 26 & 0 \\
+    AZ & dev & 100.0 (18/18) & 99.7 & 17/18 & 45 & 0 \\
+    CA & dev & 100.0 (21/21) & 100.0 & 21/21 & 94 & 0 \\
+    CO & dev & 100.0 (9/9) & 100.0 & 9/9 & 48 & 0 \\
+    TX & dev & 100.0 (8/8) & 100.0 & 8/8 & 25 & 0 \\
+    NV & validation & 100.0 (24/24) & 100.0 & 24/24 & 24 & 0 \\
+    KY & validation & 100.0 (26/26) & 100.0 & 26/26 & 26 & 0 \\
     \hline
   \end{tabular}
-  \caption{Parser coverage, per-field accuracy, fully-correct standards, standards emitted, and \texttt{standard\_id} collisions, per state. All numbers are on the \emph{\_only\_subset} corpus tier (\S\ref{sec:corpus}), never full documents. Source: \texttt{task1\_20260826}, \texttt{task2\_20260826}.}
+  \caption{Parser coverage, per-field accuracy, fully-correct standards, standards emitted, and \texttt{standard\_id} collisions, per state. Collisions are counted after the identifier resolver (\S\ref{sec:method-parsing}), which renames any it finds, so that column is zero by construction; whether the resolver had to act is reported in \S\ref{sec:experiments-headline}. All numbers are on the \emph{\_only\_subset} corpus tier (\S\ref{sec:corpus}), never full documents. Source: \texttt{task1\_20260826}, \texttt{task2\_20260826}.}
   \label{tab:parser-headline}
 \end{table*}

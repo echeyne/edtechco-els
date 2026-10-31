@@ -105,7 +105,7 @@ architecture applies it to whole documents. There is no per-state code path,
 though the prompts carry worked examples from the corpus
 (\S\ref{sec:method-discipline}).
 
-On an annotated subset of four development states and two held out entirely,
+On an annotated subset of four development states and two validation states,
 detector recall is 1.000 at every hierarchy level in all six, and a manual audit
 of all 297 in-scope detections finds one hallucinated element. Ablating the
 depth map leaves domain and indicator recall untouched while strand falls to
@@ -115,8 +115,8 @@ beneath it. Repeated runs show the pipeline is not deterministic, with
 instability concentrated in three known places, and one of my own earlier
 results failed to reproduce; I report it as a non-reproduction. That reporting
 discipline is offered as a contribution: every table names its corpus tier,
-every unmatched detection is audited by hand, and every number is regenerated
-from a recorded artifact.
+every unmatched detection is audited by hand, and every tabulated number is
+regenerated from a recorded artifact.
 \end{abstract}
 
 % Section order reconstructed from the original outline (paper/OUTLINE_NOTES.md)

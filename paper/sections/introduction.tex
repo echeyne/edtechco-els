@@ -46,7 +46,7 @@ The absence of a labeled corpus is what rules out the obvious supervised
 alternative. There is no annotated dataset of hierarchically-parsed early
 learning standards at any scale, so a fine-tuned model would first require one
 to be built, and the dominant cost of that path is annotation rather than
-compute. My own goldens took a high level effort to produce and cover six states;
+compute. My own goldens took a high level of effort to produce and cover six states;
 they are an evaluation instrument, not a training set. An in-context approach
 that needs no labeled data is therefore not merely cheaper here, it is the only
 approach available without first solving a different problem
@@ -60,14 +60,16 @@ approach available without first solving a different problem
     \S\ref{sec:method-discipline}).
   \item A parsing stage that resolves detected elements into a single canonical
     schema across documents that do not agree on level count or code namespace,
-    producing deterministic identifiers whose collisions are measured rather
-    than assumed (\S\ref{sec:method-parsing}).
+    producing deterministic identifiers whose uniqueness is enforced by a
+    resolver, and reporting how often that resolver has to act rather than
+    assuming it never does (\S\ref{sec:method-parsing}).
   \item A serverless architecture that batches detection and parsing through a
     prepare--map--merge pattern so the method applies to whole standards
     documents rather than excerpts (\S\ref{sec:method-deployment},
     Appendix~\ref{sec:appendix-architecture}).
-  \item An evaluation over four development states and two held-out states, at
-    an annotated subset tier of each document. Detector recall is 1.000 at every
+  \item An evaluation over four development states and two validation states
+    (\S\ref{sec:method-validation-use}), at an annotated subset tier of each
+    document. Detector recall is 1.000 at every
     hierarchy level in all six states, and a manual audit of all 297 in-scope
     detections at that tier finds a single hallucinated element (verified
     precision 0.997). An ablation shows the depth-map pass is what carries the
@@ -78,7 +80,7 @@ approach available without first solving a different problem
     satisfy, and which I offer as a contribution rather than as a caveat: every
     table is labelled with the corpus tier it was computed at; every unmatched
     detection is audited by hand and signed rather than assumed to be a false
-    positive; every number is regenerated from a recorded artifact by a named
+    positive; every tabulated number is regenerated from a recorded artifact by a named
     script; a validation guard is shown catching a live defect rather than
     asserted to work; and a previously recorded result of my own that failed to
     reproduce is reported as a non-reproduction instead of quietly replaced
