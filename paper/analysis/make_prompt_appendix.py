@@ -95,8 +95,8 @@ DETECTION_EXCERPTS = [
     (
         "rule:code-resolution",
         "Code resolution and the derived abbreviation",
-        r"The longest rule in the prompt, and the one \S\ref{sec:method-detection} draws "
-        r"on most. It orders three places a printed code may live -- inline, in a caption, "
+        r"This is the longest rule in the prompt, and \S\ref{sec:method-detection} "
+        r"relies on it more than on any other rule. It orders three places a printed code may live -- inline, in a caption, "
         r"or as the shared leading prefix of its descendants' codes -- and only then falls "
         r"back to deriving one from the title. The abbreviation procedure at the end is the "
         r"rule that is additionally executed in Python, for the determinism reasons given "
@@ -106,10 +106,11 @@ DETECTION_EXCERPTS = [
     (
         "rule:confidence-bands",
         "Confidence",
-        r"Reproduced because \S\ref{sec:method-confidence} and "
-        r"\S\ref{sec:experiments-confidence} report what the score does in practice. Note "
-        r"that the prompt asks for a band and nothing downstream reads the answer: no "
-        r"threshold, no review gate, no field marking an element for attention.",
+        r"This rule asks the model for a confidence band, but nothing downstream uses "
+        r"it: there is no threshold, no review gate, and no field marking an element "
+        r"for attention. It is reproduced so the bands can be compared with the scores "
+        r"the model actually emits (\S\ref{sec:method-confidence}, "
+        r"\S\ref{sec:experiments-confidence}).",
         "5. `confidence`:",
     ),
 ]

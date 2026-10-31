@@ -564,10 +564,9 @@ def build_scale_quality_table(sq):
         r"runs, \textbf{\texttt{\_trimmed} corpus tier}: the document's "
         r"standards content \emph{in full}, and not the \texttt{\_only\_subset} "
         r"tier the headline quality tables use "
-        r"(\S\ref{sec:experiments-scale-quality}). \textbf{Recall is measured "
-        r"against a verified reference set, not against the document}, so an "
-        r"element no run emits is invisible here "
-        r"(\S\ref{sec:discussion-goldens}). \textbf{Coverage is a range and must "
+        r"(\S\ref{sec:experiments-scale-quality}). Recall is measured against "
+        r"goldens checked against the document for omissions as well as for "
+        r"correctness (\S\ref{sec:discussion-goldens}). \textbf{Coverage is a range and must "
         r"not be read as its mean.} $\dagger$~zero by construction: the resolver "
         r"renames every collision before the check runs, so the informative "
         r"count is the fabricated-key row above. "
@@ -593,29 +592,16 @@ def build_corpus_appendix_table(tiers):
     are SIX (CA, AZ, TX, CO, NV-2023, KY) and they are exactly the corpus; NV-2025
     is marked false, not true.
 
-    ⚠️ NV-2025 IS LISTED ANYWAY, below its own rule, and must stay there. It was
-    dropped 2026-09-05 as "irrelevant to the paper" and restored the same day:
-    irrelevance is the wrong test for it. The paper names Nevada as its held-out
-    canary in the abstract and throughout, and Nevada is the ONE state with two
-    published pre-K documents -- so a reader who goes to the agency finds both
-    and cannot tell which one every Nevada number refers to. Listing it under a
-    "collected, not used" rule answers that question in the same table that
-    raises it, and states the narrowness (social-emotional domain only) that is
-    the actual reason for excluding it. This is a provenance disclosure, not a
-    corpus row; it is separated by a rule and carries no role, and the corpus
-    section states the same exclusion in prose.
-
-    The two Florida rows are also File Cleaned: false and are NOT listed. That is
-    deliberate and not an inconsistency: no Florida document is referenced
-    anywhere in the paper, so listing one raises a question the paper never asks.
-    NV-2025 is listed precisely because the paper does discuss Nevada.
+    Only File Cleaned: true rows are listed. NV-2025 and the two Florida rows are
+    false and are deliberately left out (NV-2025 removed by the author
+    2026-10-31); the Year column identifies Nevada's document as the 2023 one.
     """
     # ⚠️ NOT csv.DictReader. The Website and PDF columns contain unquoted commas
     # (Florida's URL has a `#d=I,II,III,...` fragment), so a naive comma split
     # overflows into DictReader's restkey and the row dict stops being strings.
     # Only the two URL columns are ambiguous, so parse from the RIGHT: the last
     # three fields are Year, PDF, File Cleaned regardless of URL contents.
-    rows, uncollected = [], []
+    rows = []
     track = REPO_ROOT / "standards" / "standards_tracking.md"
     for line in track.read_text().splitlines()[1:]:
         line = line.strip()
@@ -628,9 +614,6 @@ def build_corpus_appendix_table(tiers):
              "File Cleaned": parts[-1], "Website": ",".join(parts[1:-3])}
         if r["File Cleaned"] == "true":
             rows.append(r)
-        elif r["State"] == "Nevada" and r["Year"] == "2025":
-            # Collected, not used -- rendered below the rule. See the docstring.
-            uncollected.append(r)
 
     # "Flordia" is a typo in standards_tracking.md. Mapped here rather than
     # edited in place: that file is the operator's own record and correcting it
@@ -657,22 +640,6 @@ def build_corpus_appendix_table(tiers):
         trim, sub = t.get("trimmed") or "--", t.get("only_subset") or "--"
         L.append(rf"{st} & {ROLE.get(st,'')} & {r['Year']} & {PUB.get(st, '')} & "
                  rf"{full} & {trim} & {sub} \\")
-    if uncollected:
-        L += [r"\midrule",
-              r"\multicolumn{7}{l}{\emph{Collected, not used; excluded from every "
-              r"measurement in this paper}} \\"]
-        for r_ in uncollected:
-            st = ABBR.get(r_["State"], r_["State"])
-            t = tiers["tiers"].get(f"{st}_{r_['Year']}", {})
-            # Only the published page count is shown. The Trim./Subset columns
-            # mean CORPUS TIER -- the caption defines Subset as the excerpt every
-            # quality measurement uses -- and this document has neither, so a
-            # number there would contradict the rule it sits under. NV-2025 does
-            # have an 8pp _only_subset file on disk from an exploratory pass; it
-            # was never annotated, and corpus_tiers.json records it with that
-            # caveat rather than this table implying it is corpus.
-            L.append(rf"{st} & -- & {r_['Year']} & {PUB.get(st, '')} & "
-                     rf"{t.get('full') or '--'} & -- & -- \\")
     L += [r"\bottomrule", r"\end{tabular}",
           r"\caption{Corpus provenance. \emph{Full} is the published PDF; "
           r"\emph{Trim.}\ removes non-standards matter while retaining every standard; "
@@ -680,10 +647,7 @@ def build_corpus_appendix_table(tiers):
           r"measurements use, and is a genuine reduction in coverage. Colorado's \emph{Full} is its "
           r"41-page Ages~3--5 publication (\S\ref{sec:corpus}). These are "
           r"third-party state-agency documents, identified here rather than "
-          r"redistributed (\S\ref{sec:artifacts-statement}). Nevada's 2025 "
-          r"publication covers the \textbf{social-emotional domain only}; it is "
-          r"listed because Nevada is the only state with two published documents, "
-          r"and every Nevada number in this paper refers to the 2023 one. "
+          r"redistributed (\S\ref{sec:artifacts-statement}). "
           r"Page counts verified with PyMuPDF. "
           r"Source: "
           r"\texttt{standards\_tracking.md}, "
