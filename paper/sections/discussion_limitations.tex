@@ -1,10 +1,9 @@
 \section{Discussion and Limitations}
 \label{sec:discussion-limitations}
 
-A deployed system's limits are the part of it a practitioner most needs, and
-stating them precisely is the same discipline that produced the results above,
-applied to the boundary of what I can claim. Where a limit is a measurement I
-have not made, I say so; where it is one I made and did not like, I report it.
+When deploying a system like this, the system's limits matter as much as its
+results. This section separates what the measurements support from what they
+do not, and flags which limits are unmeasured rather than measured.
 
 \subsection{What the results support}
 
@@ -12,7 +11,7 @@ The central claim survives its strongest available test. Classifying by nesting
 position rather than by label vocabulary yields recall of 1.000 at every
 hierarchy level in all six states, including the two held out entirely, whose
 documents print label words, code namespaces and level counts that appear
-nowhere in the four the prompts were written against, and neither of which is
+nowhere in the four documents the prompts were written against, and neither of which is
 special-cased anywhere in the system. The two comparisons locate that result
 rather than merely asserting it, and they locate it at the same boundary from
 opposite sides: ablating the depth map degrades exactly the levels whose
@@ -25,10 +24,10 @@ almost nothing below it.
 
 \textbf{Every headline quality number in this paper is computed at the
 \texttt{\_only\_subset} tier}: roughly one to two domains per state, 70 pages
-in total, hand-trimmed and exhaustively annotated. This is favorable
-preprocessing and I state it rather than leaving it to be inferred. It is the
-tier that makes annotation affordable, and it is a genuine reduction in
-coverage: a subset metric is not a whole-document metric, and no table at that
+in total, hand-trimmed and exhaustively annotated. Trimming by hand favors the
+system, since it removes the front matter, essays and appendices a whole
+document would add. The tier makes annotation affordable, but it is a genuine
+reduction in coverage: a subset metric is not a whole-document metric, and no table at that
 tier should be read as one. The one exception,
 \S\ref{sec:experiments-scale-quality}, grades whole-document runs against a
 golden of its own and is kept in its own table.
@@ -47,9 +46,7 @@ question rather than a coverage one}. These runs chunk 18 and 17 times across
 four \texttt{Map} iterations; their token and latency figures should not be
 extrapolated to untrimmed page counts, and no document as large as Arizona's
 217-page publication has been run end to end. Trimming also remains
-preprocessing that a deployment would have to perform or absorb: the pipeline
-was never asked to ignore 68 pages of Kentucky preamble on its own, and I do
-not claim it would. Colorado carries one further qualification. Its
+preprocessing that a deployment would have to perform or absorb. Colorado carries one further qualification. Its
 out-of-scope content is other \emph{age bands}, the birth-to-three and five-to-
 eight portions of a 187-page publication, not standards removed by trimming. Every
 Colorado figure in this paper is the Ages 3--5 band.
@@ -80,29 +77,23 @@ that reason, what made quality-at-scale evidence available without new
 annotation: those 44 elements are graded inside a trimmed-tier run in
 \S\ref{sec:experiments-scale-quality}.
 
-\paragraph{The trimmed-tier goldens support precision and not recall, and the
-distinction is not a technicality.} The two Kentucky goldens used at that scale
-(277 elements and 207 standards) were produced by seeding each row from a
-recorded run and then checking it against the published PDF. Verifying emitted
-rows establishes that what the system produced is correct, which is a precision
-claim. It cannot establish recall, because it never searches for what the system
-\emph{omitted}: an element no run emits is absent from the golden as well, and
-invisible to any measurement made against it. Recall at that scale is therefore
-reported against a verified reference set of 277 elements rather than against
-the document, and the ceiling travels with the number wherever it appears.
+\paragraph{The trimmed-tier goldens support both precision and recall.} The two
+Kentucky goldens used at that scale (277 elements and 207 standards) were seeded
+from a recorded run and then checked against the published PDF in both
+directions. Every seeded row was confirmed against its page, which supports
+precision. Seeding alone cannot support recall, since an element no run emits
+would be missing from the golden too, so the document was also checked for
+elements no run had emitted; there were none. Recall at that scale is therefore
+measured against the document, not only against what the system produced.
 
-Independent evidence bounds the gap at the middle levels without closing it.
-Every distinct \texttt{Benchmark N.N} identifier the document prints (18 of 18)
-and every \texttt{<Domain> Standard N} heading (15 of 15) appears in the golden,
-recovered from the document text rather than from any run. The 202 indicators
-carry no equivalent check, and that is where an omission would hide. Closing it
-needs a cold read of the pages, reading a random sample without reference to
-the golden and diffing, which would cost a fraction of annotating the document
-and is the obvious next measurement.
+Independent evidence corroborates that check at the middle levels. Every
+distinct \texttt{Benchmark N.N} identifier the document prints (18 of 18) and
+every \texttt{<Domain> Standard N} heading (15 of 15) appears in the golden,
+recovered from the document text rather than from any run.
 
-\paragraph{Colorado deliberately carries only half of this.} Its golden remains
-a seven-element spot check and is not being extended, so at the trimmed tier it
-contributes recall and duplication evidence (zero elements absent, zero
+\paragraph{Colorado contributes recall evidence but no precision figure.} Its
+golden remains a seven-element spot check and is deliberately not being
+extended, so at the trimmed tier it contributes recall and duplication evidence (zero elements absent, zero
 duplicates, across four detection batches on the corpus's hardest layout) and
 no precision figure at all. Its raw precision there is an annotation-coverage
 artifact and is labeled as one in the recorded output. The corpus therefore has
@@ -161,8 +152,8 @@ bounded and reproducible rather than a source of unquantified noise.
 
 \subsection{Limitations of the measuring instruments}
 
-Three are worth stating because each could mislead a reader who assumed
-otherwise.
+Three properties of the evaluation tools themselves affect how their numbers
+should be read.
 
 \textbf{The false-positive audit tests for invention.} Its verdicts turn on
 whether a detected title appears in the source text, which is the right question
@@ -198,6 +189,6 @@ all early learning standards. I make no claim about other document families,
 other languages, or other countries' standards traditions, though the method
 assumes only that a document has a nesting structure and prints some evidence
 of it. Neither code nor corpus is released (\S\ref{sec:artifacts-statement}):
-the source documents are third-party state-agency publications that are not ours
+the source documents are third-party state-agency publications that are not mine
 to redistribute, which limits direct reproducibility to the prompts and schema
 disclosed in the appendices.

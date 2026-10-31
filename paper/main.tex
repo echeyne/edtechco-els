@@ -173,14 +173,30 @@ figure because it is editorial state rather than extracted content.
 
 Table~\ref{tab:confidence-distribution} gives the detector's confidence
 distribution by state and by hierarchy level, read by
-\S\ref{sec:experiments-confidence}. It is in the appendix because the score
-gates nothing in the pipeline and the section's conclusion, that the
-distribution is too degenerate to threshold on, is carried by the prose.
+\S\ref{sec:experiments-confidence}, together with two observations cut from
+that section. They are here because the score gates nothing in the pipeline
+and the section's conclusion, that the distribution is too degenerate to
+threshold on, is carried by the prose.
 
 \input{tables/confidence_distribution}
 % Moved out of the body 2026-09-07: Table 6 was the least load-bearing table in
 % \S6, and the confidence finding is negative; the table's job is to let a
 % reader check the degeneracy claim, not to carry it.
+
+\paragraph{Run-to-run drift.} The score is not stable between runs either. On
+an earlier freeze of the same corpus under the same configuration, 89.7\% of
+indicators scored 0.95 or above, against 93.5\% in the recorded run: a
+four-point swing on an unchanged corpus, wider than most of the distinctions a
+review threshold would be asked to draw.
+
+\paragraph{The lowest-scoring element.} The single confirmed hallucination in
+the corpus is also its lowest-scoring element, the only one at 0.90, and it
+holds that position across recordings. This is not evidence of a working
+fabrication detector. There is exactly one invented element in the audited
+corpus, so the false-negative rate of any cut is unmeasurable; the threshold
+the prompt defines would not catch it; and all 39 real-but-split titles,
+produced by column interleaving rather than by the model, score at or above
+0.95.
 
 \section{Corpus}
 \label{sec:appendix-corpus}
