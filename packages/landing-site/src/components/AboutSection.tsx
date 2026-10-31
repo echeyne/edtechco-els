@@ -19,6 +19,31 @@ export default function AboutSection() {
           between complex standards data and everyday decision-making, helping
           communities use evidence to give every child a stronger start.
         </p>
+
+        <h3 className="mb-6 mt-12 text-2xl font-bold tracking-tight text-foreground">
+          Our Team
+        </h3>
+
+        <div className="mx-auto max-w-md rounded-lg border border-border bg-background p-6 shadow-sm">
+          <p className="text-lg font-semibold text-foreground">Emily Cheyne</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Founder & Independent Researcher, EdTech Co.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Emily's research
+            focuses on how software engineering and AI can improve early
+            learning outcomes and inform public policy, including building
+            pipelines that turn state early learning standards into
+            machine-readable data. She holds a degree in Computer Science with
+            a minor in Data Science from the University of British Columbia.
+          </p>
+          <a
+            href="mailto:emily@edtechco.org"
+            className="mt-3 inline-block text-sm font-medium text-primary transition-colors hover:text-primary/80"
+          >
+            emily@edtechco.org
+          </a>
+        </div>
       </div>
     </section>
   );
