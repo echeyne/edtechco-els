@@ -134,15 +134,15 @@ Not required. The California claim is architectural rather than statistical and
 the mechanism is identified (output length equals the configured cap exactly),
 which is why §8.4 reports it with more confidence than the rest of that arm.
 
-## 5. 🟢 Optional measurement: the cold read
+## 5. ✅ The cold read --- done
 
-Read a random sample of Kentucky's trimmed pages without reference to the
-golden, list every element present, and diff. It is the only route to a genuine
-recall claim at scale --- the trimmed goldens were verified by inspecting what
-the system emitted, which cannot find omissions.
+Check Kentucky's trimmed pages for elements no run emitted, the only route to a
+genuine recall claim at scale (seeding from a run cannot find omissions).
 
-Deferred by decision. If it stays deferred, §8.8 and §9 already state the
-ceiling wherever the recall figure appears; nothing further is required.
+- [x] Done by the annotator: the published PDF was checked for elements no run
+  had emitted, and there were none. Recorded 2026-10-31; this entry previously
+  said the check was deferred, which was stale. The papers' wording ("checked
+  ... for elements no run emitted") stands.
 
 ## 6. 🟢 Known trap, no number affected
 

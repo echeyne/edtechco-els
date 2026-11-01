@@ -12,11 +12,13 @@ PDF. Grading *that* run against them measured self-consistency. These three runs
 are independent draws, so a miss is a real miss and an extra element is either a
 real false positive or a golden gap.
 
-⚠️ **Recall still has a ceiling.** The golden's coverage is bounded by what the
-seeding run emitted, so an element **no** run produces is absent from the golden
-too and cannot be detected here. Every recall figure below is *against a
-verified reference set of 277 elements*, never against the document. Closing
-that gap needs a cold read of the pages; it has not been done.
+**The recall ceiling is closed (updated 2026-10-31).** Seeding alone bounds the
+golden by what the seeding run emitted, so an element **no** run produces would
+be absent from the golden too. The annotator also checked the published PDF for
+elements no run had emitted and found none, so the recall figures below are
+against the document, not only against a reference set seeded from system
+output. This note previously said that check had not been done; it had been,
+and the note was stale.
 
 ## Detector — complete, clean, and stable
 
@@ -80,8 +82,9 @@ standards per run whose id exists only to break a collision.
 ## What this establishes for the paper
 
 1. **Detection quality survives full-document scale**: 277/277 verified elements
-   found, zero hallucinations, three independent runs. Report with the ceiling
-   caveat.
+   found, zero hallucinations, three independent runs. The golden was checked
+   against the PDF for unemitted elements, so this is recall against the
+   document.
 2. **`age_band` is a systematic defect, not variance** — identical count across
    three runs, and it accounts for the entire strict-recall shortfall, the ~51
    surviving duplicates and the 12-point parser coverage swing.
