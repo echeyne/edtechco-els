@@ -87,7 +87,7 @@ That Makes US Early Learning Standards Machine-Readable}
 
 \begin{abstract}
   Every US state publishes early learning standards for preschool-age children,
-  each in its own design, mostly as PDF, so this public policy is unavailable
+  each in its own design, mostly as PDFs, so this public policy is unavailable
   as structured data. We describe a deployed pipeline that converts them into
   one queryable schema. The difficulty is hierarchy,
   not text: a standard is meaningful only through its ancestry, and the cues that
@@ -129,19 +129,9 @@ namespace that skips a level; Colorado has no sub-strand tier at all. A rule
 tuned to one document's vocabulary is a rule that fails on the next, and no
 annotated corpus of parsed standards exists from which to learn the mapping.
 
-We describe a system that recovers this structure with in-context LLM calls and
-is deployed as a serverless pipeline on AWS. Its central idea is to classify
-each element by its \textbf{nesting position} rather than its label: a first,
-cheap pass infers a per-document \emph{depth map} (how many levels this
-document uses and what each looks like), and every element is then classified
-against that map. \texttt{Benchmark 1.1} need not be recognized as a
-``sub-strand''; it must be recognized as sitting one level below
-\texttt{Language and Early Literacy Standard 1}. A parser resolves the detected
-elements into one canonical schema with deterministic identifiers, a validator
-guards the database, and every stored record can be reviewed by a human in an
-editorial interface. The system runs end to end in production infrastructure
-and is in pre-launch use as the data layer behind a standards explorer and a
-curriculum-planning application.
+We describe a system that recovers this structure with in-context LLM calls and is deployed as a serverless pipeline on AWS. Its central claim is that nesting position, not label, should drive structure recovery: a first, cheap pass infers a per-document depth map, and every element is then classified against that map.
+
+\texttt{Benchmark 1.1} does not need to be recognized as a ``sub-strand''; it must be recognized as sitting one level below \texttt{Language and Early Literacy Standard 1}. A parser resolves the detected elements into one canonical schema with deterministic identifiers, a validator guards the database, and a human can review every stored record in an editorial interface. The system runs end to end in production infrastructure and is in pre-launch use as the data layer behind a standards explorer and a curriculum-planning application.
 
 \paragraph{Contributions.} (1)~A two-pass detection method based on
 per-document depth-map inference, with no per-state code path, and a parser
@@ -210,18 +200,7 @@ must be reproducible from the document, not from the order in which the
 pipeline processed it. Every level also carries human-verification state
 (Appendix~\ref{sec:appendix-schema}).
 
-\paragraph{Corpus and tiers.} We use the documents of six states: four used for
-development (AZ, CA, CO, TX) and two for validation (NV, KY). No code path names
-any state, but the validation states' failures prompted several general fixes
-during development, so they are \emph{not} a clean held-out test
-(\S\ref{sec:limitations}). Each document exists at up to three tiers. The
-\emph{full} tier is the published PDF. The \emph{trimmed} tier removes front
-matter, essays, and appendices but \textbf{retains every standard}, so it reduces
-cost but not coverage. The \emph{subset} tier is one to two domains per state,
-70 pages and 262 standards in total, annotated exhaustively enough to grade;
-\textbf{all headline quality numbers are at this tier}. Both cuts were made by
-hand, which favors the system; Appendix~\ref{sec:appendix-corpus} lists every
-source document and the retained pages.
+\paragraph{Corpus and tiers.} We use documents from six states: four for development (AZ, CA, CO, TX) and two for validation (NV, KY). No code path names any state, but validation-state failures prompted several general fixes during development, so the set is \emph{not} a clean held-out test (\S\ref{sec:limitations}). Each document exists at up to three tiers. The \emph{full} tier is the published PDF. The \emph{trimmed} tier removes front matter, essays, and appendices but \textbf{retains every standard}, so it reduces cost but not coverage. The \emph{subset} tier is one to two domains per state, 70 pages and 262 standards in total, annotated exhaustively enough to grade; \textbf{all headline quality numbers are at this tier}. Both cuts were made by hand, which favors the system; Appendix~\ref{sec:appendix-corpus} lists every source document and the retained pages.
 
 % =====================================================================
 \section{System}
@@ -239,28 +218,12 @@ are batched through a prepare~$\rightarrow$~Step Functions
 that a long document does not exhaust a function timeout
 (Appendix~\ref{sec:appendix-architecture}).
 
-\paragraph{Two stages, two questions.} Detection answers \emph{what is on the
-page}, a local judgement; parsing answers \emph{what it is a child of}, a global
-one, since a parent may be printed pages earlier. Separating the stages
-lets each see the context it needs (parsing reasons over a whole domain at
-once), lets each be graded against its own golden, and lets each run on the
-cheapest adequate model: the depth-map pass on Claude Haiku~4.5, detection on
-Claude Opus~4.6, parsing on Claude Sonnet~4.6, all at temperature zero.
+\paragraph{Two stages, two questions.} Detection answers \emph{what is on the page}: a local judgment. Parsing answers \emph{what it is a child of}: a global one, since a parent may be printed pages earlier. Separating the stages sharpens the distinction: each sees the context it needs (parsing reasons over a whole domain at once), each is graded against its own golden, and each runs on the cheapest adequate model: the depth-map pass on Claude Haiku~4.5, detection on Claude Opus~4.6, parsing on Claude Sonnet~4.6, all at temperature zero.
 
 \subsection{Detection}
 \label{sec:method-detection}
 
-\paragraph{Pass 1: depth map.} One call infers how many nesting levels the
-document uses and how each is rendered (Appendix~\ref{sec:prompt-depthmap}).
-Every element's level is later assigned against this map, so \emph{a level
-missing from Pass~1's input is missing from the whole run}. The pass sees a
-6{,}000-token sample, and how that sample is drawn is important: headings are rare
-and prose is abundant, so uniform every-$n$th sampling drops the lines
-that establish the top of the hierarchy (\S\ref{sec:lessons}). We instead bucket
-blocks by their normalized left edge, since indentation tracks nesting and a
-rare x-position is a rare depth; each bucket receives a floor of twelve blocks
-spread across the document, rarest buckets first, and the remaining budget goes
-to the bulk.
+\paragraph{Pass 1: depth map.} One call infers how many nesting levels the document uses and how each is rendered (Appendix~\ref{sec:prompt-depthmap}). Every element's level is later assigned against this map, so \emph{a level missing from Pass~1's input is missing from the whole run}. The pass sees a 6{,}000-token sample, and sampling matters: headings are rare, and prose is abundant, so uniform every-$n$th sampling drops the lines that establish the top of the hierarchy (\S\ref{sec:lessons}). We instead bucket blocks by their normalized left edge, since indentation tracks nesting and a rare x-position is a rare depth; each bucket receives a floor of twelve blocks spread across the document, rarest buckets first, and the remaining budget goes to the bulk.
 
 \paragraph{Pass 2: classification.} The document is chunked into ${\sim}$2{,}000
 token windows with 500 tokens of overlap, and each chunk is classified with the
@@ -283,7 +246,7 @@ abbreviation procedure (Appendix~\ref{rule:code-resolution}).
 Parsing composes each indicator's qualified code from its ancestors, and printed namespaces are not uniform. Nevada's sub-strand code does not extend its strand's, so requiring it would corrupt all 24 Nevada standards; Kentucky's \texttt{Benchmark 1.1} restates its parent inside its own id, so naive composition counts the parent twice. Each case is handled by a rule over \emph{shape} rather than vocabulary: first peel an ancestor's code from a descendant's until the namespace stops; then keep a level's own id when its peeled code matches the level below it; next do not re-qualify an already-qualified code; then collapse a dotted child that repeats its parent's last segment; and finally decline any repair that cannot be verified against the row's own ancestry, or would introduce whitespace (Appendix~\ref{sec:prompt-parsing}).
 Uniqueness is enforced after the batch merge, since collisions span batches: first, colliding rows are re-qualified with their own ancestors' segments, all members are rewritten so the result is order-independent, and a numeric suffix in document order is a logged last resort. Finally, the validator rejects any record whose codes contain whitespace, whose indicator code does not extend its nearest ancestor's, or whose identifier does not end in that code.
 
-\subsection{Design discipline: prompts for judgement, code for shape}
+\subsection{Design discipline: prompts for judgment, code for shape}
 \label{sec:method-llm-first}
 
 An earlier revision reached strong scores on the development states by accumulating per-state logic: regular expressions for label words, a collision special case, and an abbreviation helper tuned to one state. It transferred poorly to new documents. We removed that logic and adopted a rule: keep structural decisions in the prompt as general document principles; Python may only read the \emph{shape} of an output (dot segments, whitespace, containment, layout position), never a document's words. When the two conflict, the prompt rule takes precedence; a new per-state branch is a regression even if it raises a score.
