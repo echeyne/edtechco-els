@@ -316,7 +316,8 @@ def main():
 
     OUT_ANC.parent.mkdir(parents=True, exist_ok=True)
     anc = [
-        "Prompts for \"Recovering Hierarchy from Early Learning Standards Documents\"",
+        "Prompts for \"Classify by Position, Not by Label: LLM-Driven Extraction of",
+        "Hierarchical Structure from Fragmented US Early Learning Standards\"",
         "=" * 76,
         "",
         "Ancillary file. The complete text of all three prompts, exactly as the system",

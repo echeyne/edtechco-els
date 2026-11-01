@@ -202,9 +202,12 @@ The "prompts carry worked examples from the corpus" disclosure is **kept**.
   endorsement code/link, then send it to an endorser.
 - [x] **License: DECIDED — arXiv perpetual non-exclusive license** (confirmed by Emily 2026-09-19; select it on the submission form —
   retains all rights; irrevocable per version).
-- [ ] Build a clean source bundle (tex, sections, tables, figures, sty/bst,
+- [x] Build a clean source bundle (tex, sections, tables, figures, sty/bst,
   pre-built `main.bbl`, `anc/prompts.txt`) and compile it from an empty dir.
-- [ ] Read the PDF through once end to end.
+  Done 2026-11-01: `python paper/analysis/build_arxiv_bundle.py` writes
+  `paper/arxiv_submission/arxiv_upload.tar.gz`; checks and form fields are in
+  `paper/arxiv_submission/SUBMISSION.md`. Re-run it after any paper edit.
+- [x] Read the PDF through once end to end.
 
 ## What is explicitly NOT on this list, and why
 
