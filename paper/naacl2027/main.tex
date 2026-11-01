@@ -87,8 +87,8 @@ That Makes US Early Learning Standards Machine-Readable}
 
 \begin{abstract}
   Every US state publishes early learning standards for preschool-age children,
-  each in its own PDF design, so this public policy is unavailable
-  to software. We describe a deployed pipeline that converts them into
+  each in its own design, mostly as PDF, so this public policy is unavailable
+  as structured data. We describe a deployed pipeline that converts them into
   one queryable schema. The difficulty is hierarchy,
   not text: a standard is meaningful only through its ancestry, and the cues that
   reveal ancestry (label words, code namespaces, even the number of levels)
@@ -110,13 +110,12 @@ That Makes US Early Learning Standards Machine-Readable}
 \label{sec:introduction}
 
 Early learning standards are the developmental expectations that shape
-curriculum, assessment and teacher preparation for children before
+curriculum, assessment, and teacher preparation for children before
 kindergarten entry. More than fifty US jurisdictions issue them for
-preschool-age children, some also for infants and
-toddlers~\citep{ncecqa_elgs}, and each designs its own document. Unlike K--12 academic standards, which have machine-readable exchange
+preschool-age children~\citep{ncecqa_elgs} and each designs its own document. Unlike K--12 academic standards, which have machine-readable exchange
 formats~\citep{sutton2008achievement,1edtech2017case}, early learning standards
 exist almost entirely as PDFs: multi-column tables, age-banded grids and prose
-whose typography no two states share. Curriculum-planning tools, alignment
+whose typography is not commonly shared. Curriculum-planning tools, alignment
 studies and cross-state comparisons all need them as structured data, and
 today that data is produced by hand, if at all.
 
@@ -139,7 +138,7 @@ against that map. \texttt{Benchmark 1.1} need not be recognized as a
 ``sub-strand''; it must be recognized as sitting one level below
 \texttt{Language and Early Literacy Standard 1}. A parser resolves the detected
 elements into one canonical schema with deterministic identifiers, a validator
-guards the database, and every stored record is reviewed by a human in an
+guards the database, and every stored record can be reviewed by a human in an
 editorial interface. The system runs end to end in production infrastructure
 and is in pre-launch use as the data layer behind a standards explorer and a
 curriculum-planning application.
@@ -150,7 +149,7 @@ that resolves six independently designed documents into one schema with
 reproducible primary keys (\S\ref{sec:method}). (2)~An evaluation on six
 states covering quality, an ablation, a rule-based baseline, run-to-run
 stability, and whole-document scale and cost (\S\ref{sec:eval}). (3)~Lessons
-from deploying it, centred on where a sampling model must not be trusted and
+from deploying it, centered on where a sampling model must not be trusted and
 where failures hide (\S\ref{sec:lessons}).
 
 % =====================================================================
@@ -188,7 +187,7 @@ confidence-guided review~\citep{monarch2021human,settles2009active,li2023coannot
 CASE~\citep{1edtech2017case} model and exchange K--12 standards, and alignment
 work assumes a normalized set already
 exists~\citep{porter2002measuring,polikoff2011howwell,devaul2011computer,xu2025automated}.
-For early childhood it does not: the one federal framework binds only Head
+For early childhood, it does not: the one federal framework binds only Head
 Start~\citep{ohs2015elof}. This paper automates that missing input.
 
 % =====================================================================
@@ -204,9 +203,9 @@ the indicator also carries an age band, a source page and the verbatim source
 text. The unit of storage is a leaf with its full lineage, identified by
 \texttt{\{country\}-\{state\}-\{year\}-\{indicator\_code\}}, where the indicator
 code is fully qualified and carries any side-by-side disambiguator itself:
-Texas prints one expectation per age column (\texttt{PK3.I.A.2} vs.\
-\texttt{PK4.I.A.2}), and California one per proficiency column
-(\texttt{ELD.1.0.VOCA.1.1.DISC}). Because the identifier is a primary key, it
+an age column appends its month range (Texas \texttt{I.A.2.36-48} vs.\
+\texttt{I.A.2.48-60}, and likewise California's age columns), and a
+proficiency column its label (California \texttt{ELD.1.0.VOCA.1.1.DISC}). Because the identifier is a primary key, it
 must be reproducible from the document, not from the order in which the
 pipeline processed it. Every level also carries human-verification state
 (Appendix~\ref{sec:appendix-schema}).
@@ -217,7 +216,7 @@ any state, but the validation states' failures prompted several general fixes
 during development, so they are \emph{not} a clean held-out test
 (\S\ref{sec:limitations}). Each document exists at up to three tiers. The
 \emph{full} tier is the published PDF. The \emph{trimmed} tier removes front
-matter, essays and appendices but \textbf{retains every standard}, so it reduces
+matter, essays, and appendices but \textbf{retains every standard}, so it reduces
 cost but not coverage. The \emph{subset} tier is one to two domains per state,
 70 pages and 262 standards in total, annotated exhaustively enough to grade;
 \textbf{all headline quality numbers are at this tier}. Both cuts were made by
@@ -242,7 +241,7 @@ that a long document does not exhaust a function timeout
 
 \paragraph{Two stages, two questions.} Detection answers \emph{what is on the
 page}, a local judgement; parsing answers \emph{what it is a child of}, a global
-one, since a parent may be printed pages earlier or not at all. Separating them
+one, since a parent may be printed pages earlier. Separating the stages
 lets each see the context it needs (parsing reasons over a whole domain at
 once), lets each be graded against its own golden, and lets each run on the
 cheapest adequate model: the depth-map pass on Claude Haiku~4.5, detection on
@@ -255,8 +254,8 @@ Claude Opus~4.6, parsing on Claude Sonnet~4.6, all at temperature zero.
 document uses and how each is rendered (Appendix~\ref{sec:prompt-depthmap}).
 Every element's level is later assigned against this map, so \emph{a level
 missing from Pass~1's input is missing from the whole run}. The pass sees a
-6{,}000-token sample, and how that sample is drawn matters: headings are rare
-and prose is abundant, so uniform every-$n$th sampling drops exactly the lines
+6{,}000-token sample, and how that sample is drawn is important: headings are rare
+and prose is abundant, so uniform every-$n$th sampling drops the lines
 that establish the top of the hierarchy (\S\ref{sec:lessons}). We instead bucket
 blocks by their normalized left edge, since indentation tracks nesting and a
 rare x-position is a rare depth; each bucket receives a floor of twelve blocks
@@ -270,127 +269,67 @@ element by where it sits in the map, not by its label word
 (Appendix~\ref{rule:positional}). Supporting rules are equally general: in a
 \texttt{<Label> <id>: <Title>} heading, for \emph{any} label word, the label and
 id are the code; a printed code is authoritative and may appear inline, in a
-caption, or as the shared prefix of the element's descendants' codes; and where
-the document prints none, a code is derived from the title by a fixed
+caption, or as the shared prefix of the element's descendants' codes. If the document does not print a code, one is derived from the title by a fixed
 abbreviation procedure (Appendix~\ref{rule:code-resolution}).
 
 \subsection{Parsing and identifiers}
 \label{sec:method-parsing}
 
+% Table 1 belongs to Section 5, but a full-width float can appear at the
+% earliest on the page after the one that defines it, so it is input here to
+% land at the top of the page where Section 5 begins.
 \input{tables/headline}
 
-Parsing composes each indicator's qualified code from its ancestors, and
-printed namespaces are not uniform. Nevada's sub-strand code does not extend its
-strand's, so requiring it would corrupt all 24 Nevada standards; Kentucky's
-\texttt{Benchmark 1.1} restates its parent inside its own id, so naive
-composition counts the parent twice. Each case is handled by a rule over
-\emph{shape} rather than vocabulary: peeling an ancestor's code from a
-descendant's stops where the namespace stops (a level whose peeled code equals
-the level below it keeps its own heading's id); an already-qualified code is
-never re-qualified; a dotted child repeating its parent's last segment is
-collapsed; and a repair that cannot be verified against the row's own ancestry,
-or would introduce whitespace, is declined (Appendix~\ref{sec:prompt-parsing}).
-Uniqueness is enforced after the batch merge, since collisions span batches:
-colliding rows are re-qualified with their own ancestors' segments, all members
-rewritten so the result is order-independent, and a numeric suffix in document
-order is a logged last resort. Finally, the validator rejects any record whose
-codes contain whitespace, whose indicator code does not extend its nearest
-ancestor's, or whose identifier does not end in that code.
+Parsing composes each indicator's qualified code from its ancestors, and printed namespaces are not uniform. Nevada's sub-strand code does not extend its strand's, so requiring it would corrupt all 24 Nevada standards; Kentucky's \texttt{Benchmark 1.1} restates its parent inside its own id, so naive composition counts the parent twice. Each case is handled by a rule over \emph{shape} rather than vocabulary: first peel an ancestor's code from a descendant's until the namespace stops; then keep a level's own id when its peeled code matches the level below it; next do not re-qualify an already-qualified code; then collapse a dotted child that repeats its parent's last segment; and finally decline any repair that cannot be verified against the row's own ancestry, or would introduce whitespace (Appendix~\ref{sec:prompt-parsing}).
+Uniqueness is enforced after the batch merge, since collisions span batches: first, colliding rows are re-qualified with their own ancestors' segments, all members are rewritten so the result is order-independent, and a numeric suffix in document order is a logged last resort. Finally, the validator rejects any record whose codes contain whitespace, whose indicator code does not extend its nearest ancestor's, or whose identifier does not end in that code.
 
 \subsection{Design discipline: prompts for judgement, code for shape}
 \label{sec:method-llm-first}
 
-An earlier revision reached strong scores on the development states by
-accumulating per-state logic: regular expressions for particular label words, a
-collision special case, an abbreviation helper tuned to one state. It
-transferred poorly to new documents. We removed that logic and adopted a rule:
-structural decisions live in the prompt as general document principles; Python
-may only read the \emph{shape} of an output (dot segments, whitespace,
-containment, layout position), never a document's words. A new per-state branch
-is treated as a regression even if it raises a score.
+An earlier revision reached strong scores on the development states by accumulating per-state logic: regular expressions for label words, a collision special case, and an abbreviation helper tuned to one state. It transferred poorly to new documents. We removed that logic and adopted a rule: keep structural decisions in the prompt as general document principles; Python may only read the \emph{shape} of an output (dot segments, whitespace, containment, layout position), never a document's words. When the two conflict, the prompt rule takes precedence; a new per-state branch is a regression even if it raises a score.
 
-Deterministic code survives only where a prompt rule cannot reach zero error,
-and is \emph{paired} with that rule rather than replacing it: the prompt lowers
-the error rate and the code makes its floor zero (\S\ref{sec:lessons}). The
-prompts are not free of the corpus: fifteen of their worked examples are
-distinctive to one state's golden, including four Kentucky strings and one
-Nevada string illustrating the abbreviation procedure.
+Deterministic code survives only where a prompt rule cannot reach zero error, and it is \emph{paired} with that rule rather than replacing it: the prompt lowers the error rate and the code makes its floor zero (\S\ref{sec:lessons}). That ordering matters: the prompt rule comes first, and the code only closes the remaining gap. The prompts are not free of the corpus: fifteen of their worked examples are distinctive to one state's golden, including four Kentucky strings and one Nevada string illustrating the abbreviation procedure.
 
 % =====================================================================
 \section{Evaluation}
 \label{sec:eval}
 
-\paragraph{Protocol.} Two suites grade the stages separately: the detector
-against flat element goldens, the parser against nested normalized-standard
-goldens. Development-state detector goldens are spot checks (5--25 elements),
-so an unmatched detection is usually an annotation gap rather than an error;
-raw precision there measures annotation coverage. We therefore report
-\emph{verified precision} from a manual audit of every in-scope detection
-the golden does not match (162 of the 297 in-scope detections), counting as
-errors only elements not present in the source. Kentucky's golden is exhaustive and its precision is a true
-hallucination rate. The suites exercise the direct, unbatched path; the batched
-production path is evaluated separately at scale (\S\ref{sec:eval-scale}).
+\paragraph{Protocol.} Two suites grade the stages separately: the detector against flat-element goldens, and the parser against nested normalized-standard goldens. Development-state detector goldens are spot checks (5--25 elements), so an unmatched detection is usually an annotation gap rather than an error; raw precision there measures annotation coverage. We therefore report \emph{verified precision} from a manual audit of every in-scope detection the golden does not match (162 of the 297 in-scope detections), counting as errors only elements absent from the source. Kentucky's golden is exhaustive, and its precision is a true hallucination rate. The suites exercise the direct, unbatched path; the batched production path is evaluated separately at scale (\S\ref{sec:eval-scale}).
 Every tabulated number is regenerated by script from a recorded run artifact.
 
 \subsection{Quality on six states}
 \label{sec:eval-headline}
 
-Table~\ref{tab:headline} gives the results. Detector recall is 1.000 at every
-level in all six states, including both validation states; Pass~1 infers the
-annotated level count in all six, including Colorado's three. The audit finds
-one hallucinated element (verified precision 0.997 pooled): a Nevada indicator
-emitted a second time from a truncated transcription of a multi-column table
-with an invented clause appended. The parser covers every annotated standard
-and its uniqueness resolver, which logs whenever it acts, never had to separate
-two standards in the 29 subset-tier runs whose logs were retained.
+Table~\ref{tab:headline} gives the results. Detector recall is 1.000 at every level in all six states, including both validation states; Pass~1 infers the annotated level count in all six, including Colorado's three. The audit finds one hallucinated element (verified precision 0.997 pooled): a Nevada indicator emitted a second time from a truncated transcription of a multi-column table, with an invented clause appended. The parser covers every annotated standard, and its uniqueness resolver, which logs when it acts, never had to separate two standards in the 29 subset-tier runs whose logs were retained.
 
 \subsection{Ablation and baselines}
 \label{sec:eval-ablation}
 
 \input{tables/levels}
 
-\paragraph{Depth map.} Disabling Pass~1 makes the detector fall back to the
-no-map path it already uses when inference fails. Table~\ref{tab:levels} must be
-read by level: domain and indicator recall are untouched, while strand falls to
-0.920 and sub-strand to 0.833. The levels that survive have distinctive surface
-forms (a document's top division; its numbered leaves), and the levels that
-degrade are exactly those identifiable only by what they sit between. On
-Kentucky the map-on arm reproduces the golden's 3/5/10/26 elements per level
-exactly, while the map-off arm emits 4/10/6/26: \texttt{Benchmark N.N} items are
-promoted to strand because of their label. The direction never reverses across
-three runs per arm per state, but the magnitude is a draw (Kentucky off-arm
-recall 0.89--0.98; Colorado 0.71--0.86); Texas and Nevada keep recall and lose
-code accuracy instead (Texas 8/8~$\rightarrow$~5/8).
+\paragraph{Depth map.} Disabling Pass~1 makes the detector fall back to the no-map path it already uses when inference fails. Table~\ref{tab:levels} must be read by level: domain and indicator recall are untouched, while strand falls to 0.920 and sub-strand to 0.833. The levels that survive have distinctive surface forms (a document's top division; its numbered leaves), and the levels that degrade are exactly those identifiable only by what they sit between.
+On Kentucky, the map-on arm reproduces the golden's 3/5/10/26 elements per level exactly, while the map-off arm emits 4/10/6/26: \texttt{Benchmark N.N} items are promoted to strand because of their label. The precedence is fixed across the three runs per arm per state, but the magnitude is a draw (Kentucky off-arm recall 0.89--0.98; Colorado 0.71--0.86); Texas and Nevada keep recall and lose code accuracy instead (Texas 8/8~$\rightarrow$~5/8).
 
 \paragraph{Rule-based extractor.} A deterministic extractor built on numbering
-patterns, capitalization, indentation and line shape, developed against the
+patterns, capitalization, indentation, and line shape, developed against the
 four development states and graded by the same suite, ties the LLM at domain
 (13/13) and collapses below it (Table~\ref{tab:levels}). Its misses are
 omissions, not mislabelings (31 of 44 on Kentucky). Even on the development
-states its recall is 0.57--0.80.
+states, its recall is 0.57--0.80.
 
-\paragraph{One whole-document prompt.} Using the same prompt, model and
-grader, but one call per document with no depth map, chunking or repairs,
-matches the method on Arizona and Nevada. It loses code accuracy on Kentucky
-(44/44~$\rightarrow$~28/44) and Texas (8/8~$\rightarrow$~5/8), each miss a
-different primary key for the same standard, and recall on Colorado (0.429).
-California fails entirely: its call stopped at exactly the 16{,}000-token
-output cap, truncating the JSON so nothing parsed. Arizona succeeded within 11\%
-of the same cap. One prompt has one output budget, so exceeding it loses the
-document; chunking bounds the loss to a chunk, and at full-document scale is not
-optional. This arm is one draw per state.
+\paragraph{One whole-document prompt.} Using the same prompt, model, and grader, but one call per document with no depth map, chunking, or repairs, matches the method on Arizona and Nevada. It loses code accuracy on Kentucky (44/44~$\rightarrow$~28/44) and Texas (8/8~$\rightarrow$~5/8), each miss a different primary key for the same standard, and recall on Colorado (0.429). California fails entirely: its call stopped at exactly the 16{,}000-token output cap, truncating the JSON so nothing parsed. Arizona succeeded within 11\% of the same cap. One prompt has one output budget, so exceeding it loses the document; chunking bounds the loss to a chunk, and at full-document scale is not optional. This arm is one draw per state.
 
 \subsection{Stability}
 \label{sec:eval-stability}
 
 We re-ran the detector five times and the parser six times per state on frozen
 inputs with caching disabled, split across two days. Instability is
-concentrated: pooled, 5 of 304 detector identities and 9 of 201 parser
-identities differ in some graded field, all in three places. Arizona's detector
-intermittently omits three sub-strands outside the golden; Nevada's domain
-code alternates between \texttt{S} and \texttt{Science}; and California's
-parser intermittently leaves a structural label inside an indicator code
-(\texttt{ELD.1.0.VOCA.Foundation 1.1.BROA}). All twelve of those malformed codes
+concentrated: in the pooled runs, 5 of 304 detector identities and 9 of 201
+parser identities differ in graded fields, all in three places. Arizona's
+detector intermittently omits three sub-strands outside the golden; Nevada's
+domain code alternates between \texttt{S} and \texttt{Science}; and
+California's parser intermittently leaves a structural label inside an indicator
+code (\texttt{ELD.1.0.VOCA.Foundation 1.1.BROA}). All twelve malformed codes
 contain whitespace, and the validator rejected every one before persistence.
 Splitting across days mattered: Nevada's detector was identical in three runs
 one evening and dropped an indicator in both runs the next day. One earlier
@@ -405,28 +344,9 @@ instability was observed at $n{=}5$.
 \input{tables/scale}
 
 The subset tier never exercises batching (every document fits in one batch).
-Table~\ref{tab:scale} reports one production run each on Kentucky's and
-Colorado's complete standards (trimmed tier): 17--18 detection chunks across
-four \texttt{Map} iterations, merges that remove 34 and 90 duplicate elements,
-about \$4 of model inference (Textract OCR adds \$0.6--0.8) and 10--13 minutes
-per document, with no throttling and no rejected records. Detection dominates cost (57--59\%), while the depth-map pass, the
-component the ablation shows carries the intermediate levels, costs 0.3--0.5\%
-of a run, about two cents.
+Table~\ref{tab:scale} reports one production run each on Kentucky's and Colorado's complete standards (trimmed tier): 17--18 detection chunks across four \texttt{Map} iterations, merges that remove 34 and 90 duplicate elements, about \$4 of model inference (Textract OCR adds \$0.6--0.8), and 10--13 minutes per document, with no throttling or rejected records. Detection dominates cost (57--59\%), while the depth-map pass, the component the ablation shows carries the intermediate levels, costs 0.3--0.5\% of a run, about two cents.
 
-To grade quality at this scale we annotated Kentucky's complete trimmed tier
-(277 elements, 207 standards), checking the published PDF both for each seeded
-row and for elements no run emitted. Across three further runs, all
-\textbf{277 of 277} elements are found every time and no ungrounded element is
-emitted, a $6.5\times$ increase in page count over the subset. Scale does
-introduce one defect the subset never shows. Kentucky prints a
-\texttt{THREE AND FOUR YEAR OLDS} page banner, which the detector attaches to
-164 elements as their own age band in each of three runs (159 of them the same
-elements). Deduplication keys on age band, so ${\sim}$15\% of detector output
-survives as banded/unbanded duplicates, which collide in parsing and receive
-numeric-suffix identifiers: 10--11 fabricated primary keys per run, naming
-standards that do not exist. Parser field accuracy holds at $0.995\pm0.002$ but
-coverage ranges 0.81--0.93. Colorado, which has no banner, shows zero
-duplicates and zero fabricated keys over 240 standards.
+To grade quality at this scale, we annotated Kentucky's complete trimmed tier (277 elements, 207 standards), checking the published PDF for each seeded row and for elements no run emitted. Across three further runs, all \textbf{277 of 277} elements are found every time and no ungrounded element is emitted, a $6.5\times$ increase in page count over the subset. Scale does introduce one defect the subset never shows. Kentucky prints a \texttt{THREE AND FOUR YEAR OLDS} page banner, which the detector attaches to 164 elements as their own age band in each of three runs (159 of them the same elements). Deduplication keys on age band, so ${\sim}$15\% of detector output survives as banded/unbanded duplicates, which collide in parsing and receive numeric-suffix identifiers: 10--11 fabricated primary keys per run, naming standards that do not exist. Parser field accuracy holds at $0.995\pm0.002$, but coverage ranges 0.81--0.93. Colorado, which has no banner, shows zero duplicates and zero fabricated keys over 240 standards.
 
 % =====================================================================
 \section{Lessons from Deployment}
@@ -436,18 +356,7 @@ Figures marked \elog\ come from production logs and engineering notes kept
 during development, not from the recorded evaluation artifacts behind
 \S\ref{sec:eval}.
 
-\paragraph{1. Do not let the model execute an algorithm that feeds a key.} The
-title-abbreviation procedure (\S\ref{sec:method-detection}) is a deterministic
-string algorithm, and a temperature-zero model samples it: across three detector runs on one frozen Kentucky extraction,
-11 of 44 elements received a different code at least once\elog, while level,
-page and age band never varied; 58\% of Kentucky \texttt{standard\_id}s moved
-across three parser runs\elog. Since the identifier is a database key, the same
-standard would be stored under different keys depending on the run. We now
-execute the procedure in Python, but only where the document printed no code,
-decided by two shape guards (the code is uppercase letters only, and it does
-not appear in the element's own source text). It reproduces all 40 hand-annotated
-derived codes. The general rule: let the model make judgements, and move
-anything with a single correct output into code, paired with the prompt rule.
+\paragraph{1. Do not let the model execute an algorithm that feeds a key.} The title-abbreviation procedure (\S\ref{sec:method-detection}) is a deterministic string algorithm, and a temperature-zero model samples it: across three detector runs on one frozen Kentucky extraction, 11 of 44 elements received a different code at least once\elog, while level, page and age band never varied; 58\% of Kentucky \texttt{standard\_id}s moved across three parser runs\elog. Since the identifier is a database key, the same standard would be stored under different keys depending on the run. We now execute the procedure in Python, but only where the document printed no code, as determined by two shape guards: the code is uppercase letters only, and it does not appear in the element's own source text. It reproduces all 40 hand-annotated derived codes. The general rule: let the model make judgments, and move anything with a single correct output into code, paired with the prompt rule.
 
 \paragraph{2. Enforce correctness where data is persisted, not by agreement.}
 Composed codes are right most of the time, which is not good enough for a key.
@@ -455,24 +364,13 @@ Rather than relying on the model agreeing with itself, the validator rejects
 structurally impossible records. It had zero false positives on all 262 subset
 standards and blocked every historical defect row\elog, and in our stability
 runs it caught every malformed California code (\S\ref{sec:eval-stability}).
-Its rules are scoped deliberately: requiring every level, not just the leaf, to
-extend its parent would reject all of Nevada. A rejection can also be a symptom:
+Its rules are deliberately scoped: requiring every level, not just the leaf, to
+extend its parent would reject all of Nevada. Rejection can also signal an error:
 when Pass~1 lost a level on Kentucky's complete document, the validator rejected
 102 of 202 standards\elog\ because codes had nothing to be qualified against.
 The validator was right; the fault lay two stages upstream.
 
-\paragraph{3. ``Succeeded'' is not success.} A temperature-zero model
-intermittently answers \texttt{"code": null} for a field the schema requires,
-and retrying cannot help: the retry resends the identical prompt. On one
-Kentucky production run, one such element per chunk raised a schema error
-inside the per-element loop, discarding every valid element in its chunk, and
-the worker's three retries failed identically. The execution reported
-\texttt{SUCCEEDED}, with no Step Functions retries and no throttling, while
-12 of 18 detection chunks were lost and records were persisted from only 40\%
-of the document\elog. The fixes were small (derive an absent code; isolate
-per-element failures), but stage status still does not propagate into
-execution status. We now check element and page coverage by hand after every
-run rather than trusting task status; automating that check is open work.
+\paragraph{3. ``Succeeded'' is not success.} A temperature-zero model intermittently returns \texttt{"code": null} for a required field, and retries cannot help because they resend the identical prompt. On one Kentucky production run, one such element per chunk raised a schema error inside the per-element loop, discarding every valid element in its chunk, and the worker's three retries failed identically. The execution reported \texttt{SUCCEEDED}, with no Step Functions retries and no throttling, while 12 of 18 detection chunks were lost, and records were persisted from only 40\% of the document\elog. The fixes were small (derive an absent code; isolate per-element failures), but stage status still does not propagate into execution status. We now check element and page coverage by hand after every run rather than trusting task status; automating that check is open work.
 
 \paragraph{4. The evaluated path is not the deployed path.} Evaluation runs
 detection and parsing directly; production batches them. The two diverged more
@@ -488,7 +386,7 @@ by an integration test that places colliding rows in \emph{separate} batches.
 sampler worked on every subset document, because each fell under the token
 budget and was never sampled. On Kentucky's complete document it kept 2 of 9
 section headings, Pass~1 reported three levels for a four-level document, and
-zero sub-strands were emitted among 267 elements\elog. Layout-stratified
+zero sub-strands were emitted among 267 elements\elog. By contrast, layout-stratified
 sampling keeps 9 of 9 and reports four levels stably across three runs\elog.
 The age-band defect (\S\ref{sec:eval-scale}) is the same lesson: whole documents
 must be in the evaluation, not only in production.
@@ -507,17 +405,18 @@ verification state travels with the data.
 \section{Conclusion}
 \label{sec:conclusion}
 
-US early learning standards are public policy that software cannot read. An
-LLM pipeline that classifies elements by nesting position against a
-per-document depth map recovers their hierarchy on six independently designed
-documents without per-state code, for about \$4 of model inference per
-document. The method was
-the easier half. The work that made the system deployable was deciding where a
-sampling model must not be trusted (keys, invariants, health checks) and
-measuring the system the way it actually runs: batched, on whole documents, and
-more than once. The next step is a state examined only after development is
-frozen, the first true held-out test, and ultimately all fifty-plus
-jurisdictions.
+US early learning standards are published as documents, mostly PDFs, whose
+hierarchy software cannot recover. Classifying
+elements by nesting position rather than by label recovers the hierarchy of
+six independently designed documents with no per-state code: recall 1.000 at
+every level, one hallucination in 297 audited detections, and about \$4 of model
+inference per document. The model was the easier half. Deployment depended on
+never trusting a sampling model with anything that has one right answer (keys,
+invariants, run health), and on testing the system as it runs. Our worst
+failures, a lost hierarchy level, most of a document discarded behind a
+\texttt{SUCCEEDED} status, and fabricated primary keys, never appeared on the
+evaluation subsets. The next test is a state seen only after development is
+frozen; the goal is every jurisdiction.
 
 % =====================================================================
 \section*{Limitations}
@@ -539,7 +438,7 @@ graded only at scale. \textbf{Models.} All stages use one model family; a
 model-tier ablation and other providers are untested. \textbf{Extraction.} A
 heading that OCR fuses or drops cannot be recovered downstream; the one
 hallucination arose this way. \textbf{Known defect.} The age-band defect of
-\S\ref{sec:eval-scale} is deliberately unrepaired. Every recorded result is
+\S\ref{sec:eval-scale} is deliberately not repaired. Every recorded result is
 keyed to a hash of the detector and parser source, and the fix, a prompt rule
 that a band comes from a column distinguishing siblings and never from a page
 banner, would invalidate every measurement reported here; deduplication should

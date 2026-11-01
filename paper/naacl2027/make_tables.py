@@ -82,14 +82,12 @@ def headline(det, par, tiers, verified):
         if group is G.GOLDEN_STATES:
             L.append(r"    \midrule")
     L += [r"    \bottomrule", r"  \end{tabular}",
-          r"  \caption{Detector and parser quality per state at the "
-          r"\emph{subset} corpus tier (\S\ref{sec:data}): development states "
-          r"above the rule, validation states below it. \emph{pp} is subset "
-          r"pages, \emph{Std.}\ the standards parsed. Detector recall is 1.000 "
-          r"at every level and Pass~1 inferred the golden level count in every "
-          r"state, so neither is tabulated. \emph{Ver.\ prec.}\ is verified "
-          r"precision from the manual audit (\S\ref{sec:eval}). Single recorded "
-          r"run; NV code accuracy is 44--45/46 across five repeats.}",
+          r"  \caption{Quality per state at the \emph{subset} tier "
+          r"(\S\ref{sec:data}); validation states below the rule. \emph{pp}: "
+          r"subset pages; \emph{Std.}: standards parsed; \emph{Ver.\ prec.}: "
+          r"verified precision (\S\ref{sec:eval}). Recall (1.000) and the Pass-1 "
+          r"level count (correct) are uniform across states and omitted. One "
+          r"recorded run; NV code accuracy is 44--45/46 over five repeats.}",
           r"  \label{tab:headline}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
