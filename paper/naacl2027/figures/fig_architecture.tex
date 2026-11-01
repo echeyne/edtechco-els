@@ -1,0 +1,102 @@
+% Deployed architecture, full width, read left to right. Hand-authored TikZ:
+% it depicts the deployed topology, not measured data. Replaces the review
+% build's use of ../figures/fig_architecture.pdf
+% (paper/analysis/make_architecture_figure.py), whose labels shrank to 1.9pt at
+% text width. Keep in sync with documentation/ARCHITECTURE.md: ten Lambda
+% handlers (the gray boxes), Pass 1 runs in the detection prepare handler, and
+% every stage boundary is an S3 write and read.
+%
+% Geometry is explicit so the six cards fit \textwidth (16cm) at 8pt text:
+% four single-handler cards 1.95cm wide, two batched cards 2.8cm, 0.38cm gaps.
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+  x=1cm, y=1cm,
+  card/.style={draw=black!55, rounded corners=2pt, fill=black!2},
+  ctitle/.style={font=\footnotesize\bfseries, anchor=north, inner sep=0pt},
+  fn/.style={draw, rounded corners=1.5pt, fill=black!10, font=\scriptsize,
+    align=center, text width=#1, minimum height=6.5mm, inner sep=1.5pt},
+  fn/.default=15mm,
+  mapfn/.style={fn=#1, double copy shadow={shadow xshift=1.3pt,
+    shadow yshift=-1.3pt, fill=black!10, draw}},
+  mapfn/.default=15mm,
+  svc/.style={draw, rounded corners=1.5pt, fill=white, font=\scriptsize,
+    align=center, text width=#1, minimum height=8mm, inner sep=1.5pt},
+  svc/.default=17mm,
+  flow/.style={-{Stealth[length=3.5pt]}, semithick},
+  call/.style={-{Stealth[length=3pt]}, densely dashed},
+  s3/.style={font=\scriptsize, text=black!60, above, inner sep=1.5pt},
+]
+% Card spans (left, right) and centers.
+\def\cardA{0}     \def\cardAr{1.95}   \def\cA{0.975}
+\def\cardB{2.33}  \def\cardBr{4.28}   \def\cB{3.305}
+\def\cardC{4.66}  \def\cardCr{7.46}   \def\cC{6.06}
+\def\cardD{7.84}  \def\cardDr{10.64}  \def\cD{9.24}
+\def\cardE{11.02} \def\cardEr{12.97}  \def\cE{11.995}
+\def\cardF{13.35} \def\cardFr{15.30}  \def\cF{14.325}
+\def\ctop{0}      \def\cbot{-3.25}    \def\cmid{-1.8}
+
+% Orchestration frame.
+\draw[black!50, densely dashed, rounded corners=3pt]
+  (-0.15, 0.55) rectangle (15.45, -3.4);
+\node[font=\footnotesize\itshape, anchor=west] at (-0.05, 0.3)
+  {AWS Step Functions state machine};
+
+% Stage cards.
+\foreach \l/\r/\c/\t in {\cardA/\cardAr/\cA/1\enspace Ingestion,
+                         \cardB/\cardBr/\cB/2\enspace Extraction,
+                         \cardC/\cardCr/\cC/3\enspace Detection,
+                         \cardD/\cardDr/\cD/4\enspace Parsing,
+                         \cardE/\cardEr/\cE/5\enspace Validation,
+                         \cardF/\cardFr/\cF/6\enspace Persistence} {
+  \draw[card] (\l, \ctop) rectangle (\r, \cbot);
+  \node[ctitle] at (\c, \ctop - 0.12) {\t};
+}
+
+% Lambda handlers: one per single-handler card, three per batched card.
+\node[fn] (ing) at (\cA, \cmid) {register\\ the PDF};
+\node[fn] (ext) at (\cB, \cmid) {text blocks\\ + coordinates};
+\node[fn=23mm] (dprep) at (\cC, -0.85) {prepare batches\\ + Pass 1 depth map};
+\node[mapfn=23mm] (dmap) at (\cC, \cmid) {classify chunks};
+\node[fn=23mm] (dmerge) at (\cC, -2.75) {merge + deduplicate};
+\node[fn=23mm] (pprep) at (\cD, -0.85) {prepare batches\\ by domain};
+\node[mapfn=23mm] (pmap) at (\cD, \cmid) {parse domains};
+\node[fn=23mm] (pmerge) at (\cD, -2.75) {merge + resolve\\ identifiers};
+\node[fn] (val) at (\cE, \cmid) {code-shape\\ guard};
+\node[fn] (per) at (\cF, \cmid) {write valid\\ records};
+
+\draw[flow] (dprep) -- (dmap);
+\draw[flow] (dmap) -- (dmerge);
+\draw[flow] (pprep) -- (pmap);
+\draw[flow] (pmap) -- (pmerge);
+
+% Stage to stage: every hand-off is a JSON write and read through S3.
+\foreach \a/\b in {\cardAr/\cardB, \cardBr/\cardC, \cardCr/\cardD,
+                   \cardDr/\cardE, \cardEr/\cardF} {
+  \draw[flow] (\a, \cmid) -- node[s3] {S3} (\b, \cmid);
+}
+
+% External services. The Bedrock label sits at the bottom of its box so the
+% call arrows from above never cross it.
+\node[svc=21mm] (ocr) at (\cB, -4.3) {Amazon Textract\\ (OCR)};
+\draw[black!55, rounded corners=2pt] (\cardC, -3.7) rectangle (\cardDr, -5.05);
+\node[font=\scriptsize\bfseries, anchor=south, inner sep=2pt]
+  at ({(\cardC+\cardDr)/2}, -5.05) {Amazon Bedrock};
+\node[svc=14mm, minimum height=6mm] (haiku) at (5.5, -4.2) {Haiku 4.5\\ Pass 1};
+\node[svc=14mm, minimum height=6mm] (opus) at (7.05, -4.2) {Opus 4.6\\ Pass 2};
+\node[svc=14mm, minimum height=6mm] (sonnet) at (\cD, -4.2) {Sonnet 4.6\\ parsing};
+\node[svc=21mm] (db) at (\cF, -4.3) {Amazon Aurora\\ PostgreSQL};
+
+\draw[call] (\cB, \cbot) -- (ocr);
+\draw[call] (5.5, \cbot) -- (haiku);
+\draw[call] (7.05, \cbot) -- (opus);
+\draw[call] (\cD, \cbot) -- (sonnet);
+\draw[call] (\cF, \cbot) -- (db);
+\end{tikzpicture}
+\caption{Deployed architecture, read left to right. Each gray box is one of the
+ten AWS Lambda handlers; stacked boxes fan out through a Step Functions
+\texttt{Map} state with at most three concurrent workers. Every hand-off between
+stages is a JSON write and read through Amazon S3. Dashed arrows are calls to
+external services; only records that pass validation are persisted.}
+\label{fig:architecture}
+\end{figure*}
