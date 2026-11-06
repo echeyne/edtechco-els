@@ -18,7 +18,7 @@ The detection and parsing stages are deliberately **LLM-driven rather than rule-
 On top of the pipeline, there are three web applications:
 
 - **Standards Explorer** — Browse, search, edit, and verify the normalized standards hierarchy
-- **Planning App** — AI-powered chat interface for generating personalized learning plans using Bedrock AgentCore
+- **Planning App** — AI-powered chat interface for generating personalized learning plans using Bedrock AgentCore. **Not currently deployed or supported**: the code is kept so it can be redeployed, but there is no live instance.
 - **Landing Site** — Project landing page
 
 The whole thing is orchestrated by AWS Step Functions and deployed via AWS CDK.
@@ -126,7 +126,7 @@ There are four independent CDK stacks, each with its own deploy script:
 # Standards Explorer app (API + frontend)
 DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_els_app.sh -e dev
 
-# Planning app (API + AgentCore + frontend)
+# Planning app (API + AgentCore + frontend) — not currently deployed or supported
 DESCOPE_PROJECT_ID=<your-id> ./scripts/deploy_planning_app.sh -e dev
 
 # Landing site

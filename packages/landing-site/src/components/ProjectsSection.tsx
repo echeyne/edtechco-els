@@ -13,7 +13,13 @@ export default function ProjectsSection({
       <h2 className="mb-10 text-center text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
         Our Projects
       </h2>
-      <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+      <div
+        className={
+          projects.length > 1
+            ? "mx-auto grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2"
+            : "mx-auto grid max-w-xl grid-cols-1 gap-6"
+        }
+      >
         {projects.map((project) => (
           <ProjectCard key={project.title} project={project} />
         ))}

@@ -19,13 +19,6 @@ export const articles: Article[] = [
   },
   {
     title:
-      "From Standards to Story Time: Building an AI Planning Assistant Grounded in Real Early Learning Data",
-    description:
-      "How a conversational agent turns state-specific learning standards into personalized activity plans for families",
-    url: "https://medium.com/@emilycheyne/from-standards-to-story-time-building-an-ai-planning-assistant-grounded-in-real-early-learning-68af26d83591",
-  },
-  {
-    title:
       "Why a Human Verification Layer is Necessary in Addition to the AI Pipeline",
     description:
       "AI can extract early learning standards at scale. But production data quality requires human oversight and engineering to make that oversight fast enough for realistic usage.",

@@ -11,10 +11,4 @@ export const projects: Project[] = [
       "A tool for exploring early learning standards across states, helping parents, educators and policymakers compare and navigate developmental benchmarks.",
     url: "https://els-explorer.edtechco.org",
   },
-  {
-    title: "Parent Planning Tool",
-    description:
-      "A tool for parents to create personalized learning plans for their children, aligned with state early learning standards.",
-    url: "https://planning.edtechco.org",
-  },
 ];
