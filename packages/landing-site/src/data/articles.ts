@@ -2,11 +2,14 @@ export interface Article {
   title: string;
   description: string;
   url: string;
+  /** Shown on the home page. Every article is listed on /about#writing. */
+  featured?: boolean;
 }
 
 export const articles: Article[] = [
   {
     title: "Early Childhood Education Has a Data Problem",
+    featured: true,
     description:
       "How fragmented early learning standards are quietly undermining the P-3 pipeline — and what software engineering can do about it",
     url: "https://medium.com/@emilycheyne/early-childhood-education-has-a-data-problem-2e1a758764be",
@@ -26,6 +29,7 @@ export const articles: Article[] = [
   },
   {
     title: "The Case for a National Early Learning Data Layer",
+    featured: true,
     description:
       "Exploring the implications of every early learning standard in America being machine-readable, queryable, and interoperable, and why this scenario is closer than you might think.",
     url: "https://emilycheyne.medium.com/the-case-for-a-national-early-learning-data-layer-8bcd48e139f0",

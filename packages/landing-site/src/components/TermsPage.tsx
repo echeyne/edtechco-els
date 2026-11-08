@@ -1,22 +1,17 @@
-import { useEffect } from "react";
+import { Link } from "../router";
+import { useDocumentTitle } from "./ui";
 
-interface TermsPageProps {
-  onBack: () => void;
-}
-
-export default function TermsPage({ onBack }: TermsPageProps) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+export default function TermsPage() {
+  useDocumentTitle("Terms of Service");
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-16">
-      <button
-        onClick={onBack}
+      <Link
+        href="/"
         className="mb-8 inline-flex items-center text-sm font-medium text-primary hover:underline"
       >
         &larr; Back to Home
-      </button>
+      </Link>
 
       <h1 className="text-3xl font-bold text-foreground">Terms of Service</h1>
       <p className="mt-2 text-sm text-muted-foreground">
@@ -80,12 +75,12 @@ export default function TermsPage({ onBack }: TermsPageProps) {
         <h2 className="text-xl font-semibold text-foreground">Contact Us</h2>
         <p>
           If you have questions about these Terms or our Privacy Policy, please{" "}
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="text-foreground underline underline-offset-4 hover:text-primary"
           >
             contact us
-          </a>{" "}
+          </Link>{" "}
           through the information provided on our website.
         </p>
       </div>

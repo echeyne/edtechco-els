@@ -1,6 +1,47 @@
-import { useState, useRef, FormEvent } from "react";
+import { useState, useRef, type FormEvent } from "react";
+import { Link, useLocation } from "../router";
+import { useDocumentTitle } from "./ui";
+import {
+  CONTACT_REASONS,
+  contactReasonLabel,
+  isContactReason,
+  type ContactReasonKey,
+} from "../data/contactReasons";
+import { CONTACT_EMAIL } from "../data/site";
 
-export default function ContactPage({ onBack }: { onBack: () => void }) {
+const inputClass =
+  "w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring";
+
+/** Build the mailto: URL the form opens. Exported for tests. */
+export function buildMailto(fields: {
+  name: string;
+  email: string;
+  organization: string;
+  reason: ContactReasonKey;
+  message: string;
+}) {
+  const label = contactReasonLabel(fields.reason);
+  const subject = encodeURIComponent(`[${label}] Contact from ${fields.name}`);
+  const header = [
+    `Name: ${fields.name}`,
+    `Email: ${fields.email}`,
+    fields.organization && `Organization: ${fields.organization}`,
+    `Reason: ${label}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  const body = encodeURIComponent(`${header}\n\n${fields.message}`);
+  return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+}
+
+export default function ContactPage() {
+  useDocumentTitle("Contact Us");
+  const { search } = useLocation();
+  const requested = new URLSearchParams(search).get("reason");
+  const initialReason: ContactReasonKey = isContactReason(requested)
+    ? requested
+    : "general";
+
   const [submitted, setSubmitted] = useState(false);
   const loadTimeRef = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
@@ -14,37 +55,34 @@ export default function ContactPage({ onBack }: { onBack: () => void }) {
     // Bot detection: form submitted too fast (< 3 seconds)
     if (Date.now() - loadTimeRef.current < 3000) return;
 
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const name = data.get("name") as string;
-    const email = data.get("email") as string;
-    const message = data.get("message") as string;
-
-    const subject = encodeURIComponent(`Contact from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    );
-
-    window.location.href = `mailto:info@edtechco.org?subject=${subject}&body=${body}`;
+    const data = new FormData(e.currentTarget);
+    const reason = String(data.get("reason") ?? "general");
+    window.location.href = buildMailto({
+      name: String(data.get("name") ?? ""),
+      email: String(data.get("email") ?? ""),
+      organization: String(data.get("organization") ?? ""),
+      reason: isContactReason(reason) ? reason : "general",
+      message: String(data.get("message") ?? ""),
+    });
     setSubmitted(true);
   };
 
   return (
     <section className="px-4 py-16 sm:py-24">
       <div className="mx-auto max-w-xl">
-        <button
-          onClick={onBack}
+        <Link
+          href="/"
           className="mb-8 inline-flex items-center text-sm font-medium text-primary hover:underline"
         >
           &larr; Back to Home
-        </button>
+        </Link>
 
         <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
           Contact Us
         </h1>
         <p className="mb-8 text-muted-foreground">
           Have a question or want to get in touch? Fill out the form below and
-          we'll hear from you via email.
+          your email app will open with the message ready to send.
         </p>
 
         {submitted ? (
@@ -56,10 +94,10 @@ export default function ContactPage({ onBack }: { onBack: () => void }) {
               Your email client should have opened with the message. If it
               didn't, you can email us directly at{" "}
               <a
-                href="mailto:info@edtechco.org"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="text-foreground underline underline-offset-4"
               >
-                info@edtechco.org
+                {CONTACT_EMAIL}
               </a>
               .
             </p>
@@ -81,6 +119,30 @@ export default function ContactPage({ onBack }: { onBack: () => void }) {
 
             <div>
               <label
+                htmlFor="reason"
+                className="mb-1 block text-sm font-medium text-foreground"
+              >
+                What's this about?
+              </label>
+              <select
+                id="reason"
+                name="reason"
+                // Re-mount when the URL's ?reason= changes, so a second
+                // in-site link to /contact preselects its own reason.
+                key={initialReason}
+                defaultValue={initialReason}
+                className={inputClass}
+              >
+                {CONTACT_REASONS.map((r) => (
+                  <option key={r.key} value={r.key}>
+                    {r.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label
                 htmlFor="name"
                 className="mb-1 block text-sm font-medium text-foreground"
               >
@@ -91,7 +153,7 @@ export default function ContactPage({ onBack }: { onBack: () => void }) {
                 id="name"
                 name="name"
                 required
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className={inputClass}
                 placeholder="Your name"
               />
             </div>
@@ -108,8 +170,27 @@ export default function ContactPage({ onBack }: { onBack: () => void }) {
                 id="email"
                 name="email"
                 required
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className={inputClass}
                 placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="organization"
+                className="mb-1 block text-sm font-medium text-foreground"
+              >
+                Organization{" "}
+                <span className="font-normal text-muted-foreground">
+                  (optional)
+                </span>
+              </label>
+              <input
+                type="text"
+                id="organization"
+                name="organization"
+                className={inputClass}
+                placeholder="Agency, university or company"
               />
             </div>
 
@@ -125,7 +206,7 @@ export default function ContactPage({ onBack }: { onBack: () => void }) {
                 name="message"
                 required
                 rows={5}
-                className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className={inputClass}
                 placeholder="How can we help?"
               />
             </div>

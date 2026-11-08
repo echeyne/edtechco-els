@@ -21,10 +21,10 @@ The project uses a multi-tier testing approach:
 | `@els/frontend`          | vitest + Testing Library | React component rendering and interaction          |
 | `@els/planning-api`      | vitest                   | Planning API routes, auth middleware, plan queries |
 | `@els/planning-frontend` | vitest + Testing Library | Chat UI components                                 |
-| `@els/landing-site`      | vitest (configured)      | **No test files yet** — `pnpm test` is a no-op     |
+| `@els/landing-site`      | vitest + Testing Library | Path routing, legacy-hash redirects, contact form  |
 | `@els/shared`            | —                        | Types only; no test script                         |
 
-Property-based testing is not Python-only: both API packages use `fast-check` for invariants that unit tests miss — `verifyRoundTrip`, `editAudit`, `cascadeDelete`, and `filters` in `@els/api`, and `plans.property` / `plans.referential-integrity` in `@els/planning-api`.
+Property-based testing is not Python-only: both API packages use `fast-check` for invariants that unit tests miss — `verifyRoundTrip`, `editAudit`, `cascadeDelete`, and `filters` in `@els/api`, and `plans.property` / `plans.referential-integrity` in `@els/planning-api`. `@els/landing-site` uses it for `normalizePath` invariants in `src/router.test.tsx`.
 
 ## Running Tests
 

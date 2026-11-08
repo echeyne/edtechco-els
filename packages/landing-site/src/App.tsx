@@ -1,53 +1,78 @@
-import { useState, useEffect } from "react";
+import { useEffect, type ComponentType } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ProjectsSection from "./components/ProjectsSection";
+import HomeProof from "./components/HomeProof";
+import HomeExample from "./components/HomeExample";
 import ArticlesSection from "./components/ArticlesSection";
 import AboutSection from "./components/AboutSection";
 import Footer from "./components/Footer";
 import PrivacyPage from "./components/PrivacyPage";
 import TermsPage from "./components/TermsPage";
 import ContactPage from "./components/ContactPage";
+import ResearchPage from "./pages/ResearchPage";
+import DataPage from "./pages/DataPage";
+import ForStatesPage from "./pages/ForStatesPage";
+import ForResearchersPage from "./pages/ForResearchersPage";
+import ForCurriculumPage from "./pages/ForCurriculumPage";
+import AboutPage from "./pages/AboutPage";
+import BriefPage from "./pages/BriefPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import { useDocumentTitle } from "./components/ui";
+import {
+  matchRoute,
+  scrollToHash,
+  useLocation,
+  type RoutePath,
+} from "./router";
 
-type Page = "home" | "privacy" | "terms" | "contact";
-
-function hashToPage(hash: string): Page {
-  if (hash === "#privacy") return "privacy";
-  if (hash === "#terms") return "terms";
-  if (hash === "#contact") return "contact";
-  return "home";
+function HomePage() {
+  useDocumentTitle(null);
+  return (
+    <>
+      <Hero />
+      <HomeProof />
+      <HomeExample />
+      <ArticlesSection />
+      <AboutSection />
+    </>
+  );
 }
 
+const PAGES: Record<RoutePath, ComponentType> = {
+  "/": HomePage,
+  "/research": ResearchPage,
+  "/data": DataPage,
+  "/for-states": ForStatesPage,
+  "/for-researchers": ForResearchersPage,
+  "/for-curriculum": ForCurriculumPage,
+  "/about": AboutPage,
+  "/brief": BriefPage,
+  "/contact": ContactPage,
+  "/privacy": PrivacyPage,
+  "/terms": TermsPage,
+};
+
 function App() {
-  const [page, setPage] = useState<Page>(hashToPage(window.location.hash));
+  const { pathname, hash } = useLocation();
+  const route = matchRoute(pathname);
+  const Page = route ? PAGES[route] : NotFoundPage;
 
+  // New page: jump to the anchor if there is one, otherwise to the top.
   useEffect(() => {
-    const onHashChange = () => setPage(hashToPage(window.location.hash));
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
-
-  const goHome = () => {
-    window.location.hash = "#hero";
-  };
+    if (!scrollToHash(hash)) window.scrollTo(0, 0);
+  }, [pathname, hash]);
 
   return (
     <>
-      <Navbar />
+      <div className="print:hidden">
+        <Navbar />
+      </div>
       <main>
-        {page === "privacy" && <PrivacyPage onBack={goHome} />}
-        {page === "terms" && <TermsPage onBack={goHome} />}
-        {page === "contact" && <ContactPage onBack={goHome} />}
-        {page === "home" && (
-          <>
-            <Hero />
-            <ProjectsSection />
-            <ArticlesSection />
-            <AboutSection />
-          </>
-        )}
+        <Page />
       </main>
-      <Footer />
+      <div className="print:hidden">
+        <Footer />
+      </div>
     </>
   );
 }

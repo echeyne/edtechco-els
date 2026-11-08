@@ -1,22 +1,17 @@
-import { useEffect } from "react";
+import { Link } from "../router";
+import { useDocumentTitle } from "./ui";
 
-interface PrivacyPageProps {
-  onBack: () => void;
-}
-
-export default function PrivacyPage({ onBack }: PrivacyPageProps) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+export default function PrivacyPage() {
+  useDocumentTitle("Privacy Policy");
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-16">
-      <button
-        onClick={onBack}
+      <Link
+        href="/"
         className="mb-8 inline-flex items-center text-sm font-medium text-primary hover:underline"
       >
         &larr; Back to Home
-      </button>
+      </Link>
 
       <h1 className="text-3xl font-bold text-foreground">Privacy Policy</h1>
       <p className="mt-2 text-sm text-muted-foreground">

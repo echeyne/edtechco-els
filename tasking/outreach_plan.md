@@ -9,7 +9,7 @@ Inputs set:
 - 15+ hours a week.
 - Explorer is public, but **every state is currently subset data**, so full data is a prerequisite for outreach.
 - **FL can be added easily.**
-- **The Planning app is being dropped** (child-safety liability).
+- **The Planning app has been dropped** (child-safety liability). Done 2026-11-06; see 0.2.
 - **AIED 2027 is the primary paper target.**
 
 **Guiding rule: every touch aims at one NIW artifact.** These are (a) proof of use, (b) a data-accuracy validation, (c) a future letter writer, (d) an invitation to speak or present, (e) a citation, publication, or press mention. Confirm the evidence mix with an immigration attorney before Month 3. In particular, ask how independent letters weigh against letters from collaborators, and which publications count most (this plan is not legal advice).
@@ -35,25 +35,40 @@ Inputs set:
 - **Post arXiv v1.** Upload `paper/arxiv_submission/arxiv_upload.tar.gz` (built 2026-11-01). It is the credibility anchor every email links to, and it timestamps priority before the AIED rework.
 - **Submit to AAAI-27 Deployable AI Workshop** (deadline 2026-11-20, `paper/dai2027/` already drafted). It is non-archival, so it does not block AIED, and it may give you a presentation at an AAAI-affiliated event. Check `paper/dai2027/main.tex` for any Planning-app mention before submitting.
 
-### 0.2 Drop the Planning app (site, docs, infra, articles)
-- **Site:** remove "Parent Planning Tool" from `packages/landing-site/src/data/projects.ts` and article 3 from `data/articles.ts`. Check `PrivacyPage.tsx` / `TermsPage.tsx` for planning or child-data language and remove it.
-- **Live deployment:** take `planning.edtechco.org` offline, because a live public URL is where the liability sits. Tear down the deployed planning stack and the AgentCore agent (`infra/cdk/lib/planning-stack.ts`, deployed with `scripts/deploy_planning_app.sh`). First confirm there is no stored user or child data that has to be exported or deleted under the privacy policy. This step needs your explicit go-ahead.
-- **Code and docs stay.** `packages/planning-*`, `packages/agentcore-agent`, and the existing docs are left as they are, so the app could still be redeployed. Optionally add one line to `README.md` marking the Planning app as "not currently deployed or supported".
-- **Paper:** `paper/sections/conclusion.tex:36` only says "planning tools" generically, so no change is needed.
+### 0.2 Drop the Planning app (site, docs, infra, articles) ✅ Done 2026-11-06
+- ✅ **Site:** removed "Parent Planning Tool" from `packages/landing-site/src/data/projects.ts` and article 3 from `data/articles.ts`. `ProjectsSection.tsx` now centers a single project card. `PrivacyPage.tsx` / `TermsPage.tsx` had no planning or child-data language, so they were left alone. Deployed to edtechco.org (frontend only) and committed.
+- ✅ **Live deployment torn down:** `planning.edtechco.org` no longer resolves. Deleted:
+  - the 2 saved plans (child names and ages) in Aurora's `plans` table. The `plans` and `plan_activities` tables stay, empty.
+  - the `els-planning-dev` stack: API Lambda, API Gateway, CloudFront, AgentCore runtime, guardrail, and roles.
+  - resources created outside the stack: the Route 53 records (A, AAAA, and the certificate-validation CNAME), the API Gateway custom domain, the ACM certificate, the frontend S3 bucket, 6 log groups, and an old IAM role (`els-planning-agentcore-role-dev`).
+- ✅ **Code and docs stay.** `packages/planning-*`, `packages/agentcore-agent`, the deploy script, and the existing docs are unchanged, so the app could still be redeployed. `README.md` marks the Planning app as "not currently deployed or supported".
+- ✅ **Medium:** article 3 is unpublished.
+- **Paper:** `paper/sections/conclusion.tex:36` only says "planning tools" generically, so no change was needed.
 
 ### 0.3 Medium cleanup (~4-6 hrs)
-- **Article 3** ("From Standards to Story Time") is entirely about the Planning app. **Unpublish it** rather than just unlisting it, so it no longer reads as an offered product.
-- **Articles 1, 2, 4, 5**: remove or reword Planning-app references. Article 5's "Automated Plan Generation" section gets cut or recast as a general downstream use, with no product. Fix the `link-to-article-N` placeholders in the local copies (`documentation/medium-articles/`) and link each article to `/research`.
+- ✅ **Article 3** ("From Standards to Story Time") is unpublished (2026-11-06). It was entirely about the Planning app.
+- ✅ **Articles 1, 2, 4, 5**: remove or reword Planning-app references. Article 5's "Automated Plan Generation" section gets cut or recast as a general downstream use, with no product. Fix the `link-to-article-N` placeholders in the local copies (`documentation/medium-articles/`) and link each article to `/research`.
 - Bring numbers in line with the paper (e.g. 297 audited detections, the corpus-tier wording), so nothing public contradicts it.
 - **No new Medium articles.** New writing goes to edited publications (see "NIW-meaningful channels").
 
-### 0.4 Website overhaul (`packages/landing-site`)
+### 0.4 Website overhaul (`packages/landing-site`) (in progress, started 2026-11-06)
+
+**Status 2026-11-06 (local only: not committed, not deployed):**
+- ✅ Real-path routing (`src/router.tsx`, no new dependency), a 404 page, a title for each page, and the old `#privacy`/`#terms`/`#contact` links redirected.
+- ✅ All 6 pages plus `/brief`. The new Hero has 3 audience buttons.
+- ✅ `data/publications.ts`, `data/site.ts` (paper facts, BibTeX, the arXiv ID slot), `data/coverage.ts`, and the contact-reason dropdown. Pages link to `/contact?reason=…` to preselect a reason.
+- ✅ Home page cleaned up (2026-11-07): an evidence strip under the hero, the Kentucky PDF-to-record example, two featured articles (set by `featured` in `data/articles.ts`) with a link to `/about#writing`, and a short "Who's behind this" note. The Projects card and the mission copy are gone.
+- ✅ 52 tests; build passes.
+- ⏳ **Waiting on other work:** set `PAPER.arxivId` once v1 is posted; set `DEMO_VIDEO_EMBED_URL` once the video exists; flip states to `"full"` in `coverage.ts` after each one passes its quality gate.
+- ❌ **Worked examples dropped (2026-11-08):** the cross-state comparison (`/for-researchers`) and the crosswalk (`/for-curriculum`) are no longer promised on the site. Both "in preparation" sections were removed; `AudiencePage`'s `example` is now optional, so one can be added back when a finished example exists.
+- ❌ **Analytics dropped (decided 2026-11-07):** no analytics on the site or the Explorer, so `PrivacyPage.tsx` needs no new disclosure. Usage evidence and `/brief` opens will have to come from replies and the contact tracker instead.
+- ⏳ Deploy to dev and check that a deep link loads on CloudFront.
 Switch from hash routing (`App.tsx` `hashToPage`) to **real paths**. CloudFront already sends 403/404 back to `index.html` (`infra/cdk/lib/landing-site-stack.ts:104`), so no infra change is needed. Redirect the old `#privacy`/`#terms`/`#contact` links.
 
 | Path | Purpose | Key content |
 |---|---|---|
 | `/research` | Paper landing page | Plain-language summary. Headline numbers: recall 1.000 at every level across 6 states; 297 detections audited by hand, 1 hallucinated. Method figure, then arXiv link and BibTeX. |
-| `/data` | What "machine-readable" means | Side-by-side: a PDF snippet and its structured record (e.g. KY `Benchmark 1.1` → `US-KY-2021-AL.1.1.EASPT`). Schema diagram, coverage map (full vs. coming soon), sample JSON/CSV, **"Request your state"** button. |
+| `/data` | What "machine-readable" means | Side-by-side: a PDF snippet and its structured record (AZ Language Strand 1, Concept 1, page 67 → `US-AZ-2018-LL.1.1.a`/`.b`/`.c`; was KY `Benchmark 1.1` until 2026-11-08). Schema diagram, coverage map (full vs. coming soon), ~~sample JSON/CSV~~ (dropped 2026-11-07), **"Request your state"** button. |
 | `/for-states` | State agencies | QRIS/alignment pain point, your state in the Explorer, **"Validate your state's data"** request |
 | `/for-researchers` | Policy researchers | A worked cross-state comparison (e.g. self-regulation at age 4 across the loaded states), data access, collaboration invite |
 | `/for-curriculum` | Curriculum/edtech | A worked alignment crosswalk, data-access interest form, pilot invite |
@@ -63,9 +78,9 @@ Also:
 - New Hero tagline ("Every state's early learning standards, as structured data") with 3 audience buttons.
 - `data/publications.ts`.
 - Contact-reason dropdown in `ContactPage.tsx`.
-- Analytics that respect privacy on the site and the Explorer, because usage is type-(a) evidence. Disclose it in `PrivacyPage.tsx`.
+- ~~Analytics that respect privacy on the site and the Explorer, because usage is type-(a) evidence. Disclose it in `PrivacyPage.tsx`.~~ Dropped 2026-11-07: no analytics.
 - A 2-3 minute demo video, embedded on `/research` and `/data`.
-- **A `/brief` page instead of a PDF attachment.** Cold emails with attachments are often caught by spam filters, and security-trained recipients (state agencies especially) are told not to open them. Put the one-page summary (problem, what it does, proof, ask) on a printable web page. The link also shows up in analytics, so you can see who opened it.
+- **A `/brief` page instead of a PDF attachment.** Cold emails with attachments are often caught by spam filters, and security-trained recipients (state agencies especially) are told not to open them. Put the one-page summary (problem, what it does, proof, ask) on a printable web page. (With no analytics, you won't see who opened it.)
 
 ### 0.5 Outreach infrastructure
 - **Contact tracker** (an artifact with a shared database, or a spreadsheet). Columns: name, org, role, tier, audience, why them, source, channel, dates, response, outcome type (a-e), letter candidate, independent (Y/N), evidence link.
@@ -178,8 +193,8 @@ Pitch the first piece in December, timed to "full data for 7 states" as the news
 ---
 
 ## Build work I'd implement after approval (in order)
-1. Remove the Planning app from the landing site. Take the live deployment down only with your go-ahead. Code and docs stay.
-2. Landing-site routing, the 6 new pages plus `/brief`, Hero copy, contact-reason dropdown, analytics, and tests.
+1. ✅ Remove the Planning app from the landing site and tear down the live deployment (done 2026-11-06). Code and docs stay.
+2. Landing-site routing, the 6 new pages plus `/brief`, Hero copy, contact-reason dropdown, and tests (analytics dropped 2026-11-07).
 3. Edits to the Medium article copies in `documentation/medium-articles/`. You apply them on Medium.
 4. Fix the `age_band` defect after arXiv v1 is posted, A/B it on CA, TX, KY, and CO, and update CLAUDE.md.
 5. Full-data runs, round 1: the 5 `_trimmed` PDFs, CA's own document, and FL. Run the pipeline with the per-state quality gate and load the results to the Explorer.
@@ -189,7 +204,7 @@ Pitch the first piece in December, timed to "full data for 7 states" as the news
 
 ## Verification
 - **Site:** `pnpm --filter @els/landing-site test && pnpm --filter @els/landing-site build`, then a browser-pane preview of every route, deep-path loads, old hash redirects, and mobile width. Deploy to dev and confirm a deep link works on CloudFront.
-- **Planning removal:** no Planning link or article is left on the landing site, and `planning.edtechco.org` no longer serves once teardown is approved.
+- ✅ **Planning removal (verified 2026-11-06):** the live edtechco.org bundle has no Planning references, `planning.edtechco.org` no longer resolves, and the account has no planning stack, DNS record, certificate, bucket, runtime, guardrail, log group, or role left.
 - **`age_band` fix:** `pytest tests/ -v` passes; the A/B shows KY duplicates and `.N` keys at 0, CA and TX age bands unchanged, and CO unchanged.
 - **Full data:** the per-state quality gate above, recorded in the tracker before a state is shown to anyone.
 - **Outreach:** phase gates and weekly metrics.

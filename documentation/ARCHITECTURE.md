@@ -255,7 +255,7 @@ See [evaluation/README.md](../evaluation/README.md) for annotation conventions a
 
 ### Landing Site
 
-- **Frontend** (`packages/landing-site/`): Static React landing page deployed to S3 + CloudFront.
+- **Frontend** (`packages/landing-site/`): Static React site deployed to S3 + CloudFront, at edtechco.org. It routes on real paths (`/research`, `/data`, `/for-states`, `/for-researchers`, `/for-curriculum`, `/about`, `/brief`, `/contact`, `/privacy`, `/terms`) through a small History-API router in `src/router.tsx`, with no router dependency. Deep links work because the CloudFront distribution maps S3's 403/404 to `/index.html` with a 200 (`infra/cdk/lib/landing-site-stack.ts`). The old hash links `#privacy`, `#terms` and `#contact` are rewritten to their paths at startup, so links already sent out keep working.
 
 ## AWS Services
 
