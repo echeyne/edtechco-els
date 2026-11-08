@@ -53,7 +53,7 @@ Inputs set:
 
 ### 0.4 Website overhaul (`packages/landing-site`) (in progress, started 2026-11-06)
 
-**Status 2026-11-06 (local only: not committed, not deployed):**
+**Status 2026-11-08 (deployed to edtechco.org; not committed):**
 - ✅ Real-path routing (`src/router.tsx`, no new dependency), a 404 page, a title for each page, and the old `#privacy`/`#terms`/`#contact` links redirected.
 - ✅ All 6 pages plus `/brief`. The new Hero has 3 audience buttons.
 - ✅ `data/publications.ts`, `data/site.ts` (paper facts, BibTeX, the arXiv ID slot), `data/coverage.ts`, and the contact-reason dropdown. Pages link to `/contact?reason=…` to preselect a reason.
@@ -62,7 +62,7 @@ Inputs set:
 - ⏳ **Waiting on other work:** set `PAPER.arxivId` once v1 is posted; set `DEMO_VIDEO_EMBED_URL` once the video exists; flip states to `"full"` in `coverage.ts` after each one passes its quality gate.
 - ❌ **Worked examples dropped (2026-11-08):** the cross-state comparison (`/for-researchers`) and the crosswalk (`/for-curriculum`) are no longer promised on the site. Both "in preparation" sections were removed; `AudiencePage`'s `example` is now optional, so one can be added back when a finished example exists.
 - ❌ **Analytics dropped (decided 2026-11-07):** no analytics on the site or the Explorer, so `PrivacyPage.tsx` needs no new disclosure. Usage evidence and `/brief` opens will have to come from replies and the contact tracker instead.
-- ⏳ Deploy to dev and check that a deep link loads on CloudFront.
+- ✅ Deployed 2026-11-08 (`deploy_landing_site.sh -e dev --skip-infra`; the dev stack serves edtechco.org). Every route returns 200 through CloudFront, `/research` renders as a deep link, `/#contact` lands on `/contact`, and an unknown path shows the 404 page.
 Switch from hash routing (`App.tsx` `hashToPage`) to **real paths**. CloudFront already sends 403/404 back to `index.html` (`infra/cdk/lib/landing-site-stack.ts:104`), so no infra change is needed. Redirect the old `#privacy`/`#terms`/`#contact` links.
 
 | Path | Purpose | Key content |
