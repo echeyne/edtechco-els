@@ -8,9 +8,11 @@ moves RUN_TAG there moves these tables too. Nothing here is hand-typed.
 
 The appendix tables are rebuilt here too rather than copied from the arXiv
 build, because the review version differs from it: no internal artifact names
-in captions (reviewers cannot open them), a shorter prompt appendix (the full
-prompts ship as supplementary material), and two golden examples instead of
-five. paper/tables/ and the arXiv build are left untouched.
+in captions (reviewers cannot open them), the COMPLETE prompts in the appendix
+(the NAACL 2027 Industry Track OpenReview form offers no supplementary-material
+upload, so the appendix carries the full text that arXiv ships as the ancillary
+file anc/prompts.txt), and two golden examples instead of five. paper/tables/
+and the arXiv build are left untouched.
 
 Usage (from repo root, venv active -- the cost rows import the pipeline's own
 pricing constants):
@@ -83,12 +85,18 @@ def headline(det, par, tiers, verified):
             L.append(r"    \midrule")
     L += [r"    \bottomrule", r"  \end{tabular}",
           r"  \caption{Quality per state at the \emph{subset} tier "
-          r"(\S\ref{sec:data}); validation states below the rule. \emph{pp}: "
-          r"subset pages; \emph{Std.}: standards parsed; \emph{Ver.\ prec.}: "
-          r"verified precision (\S\ref{sec:eval}). One recorded run; its recall "
-          r"(1.000) and Pass-1 level count (correct) are uniform and omitted. Over "
-          r"repeats (\S\ref{sec:eval-stability}), NV detector recall is 45--46/46, "
-          r"code accuracy 44--45/46, and 4 NV parser strand codes vary.}",
+          r"(\S\ref{sec:data}), from one recorded run. NV and KY, below the line, "
+          r"are the validation states. \emph{pp}: subset pages. \emph{Std.}: "
+          r"standards the parser produced. \emph{Ver.\ prec.}: verified precision "
+          r"(\S\ref{sec:eval}). The fractions count golden items. "
+          r"\emph{Code acc.} is matched golden elements whose code is correct, "
+          r"\emph{Coverage} is golden standards the parser produced, and "
+          r"\emph{Fully corr.} is golden standards with every field correct. "
+          r"\emph{Field acc.} is the share of graded fields that match. "
+          r"Development-state goldens are spot checks, so their counts are small. "
+          r"Detector recall (1.000) and the Pass-1 level count (matching the "
+          r"golden) were the same in every state and are not shown. NV results vary "
+          r"across repeat runs (\S\ref{sec:eval-stability}).}",
           r"  \label{tab:headline}", r"\end{table*}"]
     return "\n".join(L) + "\n"
 
@@ -108,10 +116,10 @@ def levels(abl, cmp_):
                  rf"{prop(a[lv]['off_recall'])} & "
                  rf"{prop(b[lv]['baseline_recall'])} \\")
     L += [r"    \bottomrule", r"  \end{tabular}",
-          r"  \caption{Detector recall by hierarchy level, pooled over six "
-          r"states: the full method, the method with the Pass-1 depth map "
-          r"ablated, and a rule-based extractor graded by the same suite. Subset "
-          r"tier; ablation off-arm recall varies by run (\S\ref{sec:eval-ablation}).}",
+          r"  \caption{Detector recall by level, pooled over six states (subset "
+          r"tier): the full method, the method without the Pass-1 depth map, and a "
+          r"rule-based extractor. No-map recall varies by run "
+          r"(\S\ref{sec:eval-ablation}).}",
           r"  \label{tab:levels}", r"\end{table}"]
     return "\n".join(L) + "\n"
 
@@ -168,12 +176,10 @@ def scale(m):
               share("parsing", "CO", ".0f")),
           r"    \bottomrule", r"  \end{tabular}",
           r"  \caption{One batched production run per document at the "
-          r"\emph{trimmed} tier: every standard in the document, front matter and "
-          r"essays removed (\S\ref{sec:data}). Cost is model inference only, from "
-          rf"recorded tokens at Bedrock on-demand rates confirmed in {RATES_CONFIRMED}. "
-          rf"Textract OCR (\${TEXTRACT_TABLES_USD_PER_PAGE:.3f} per page, "
-          rf"\${ocr['KY']:.2f} and \${ocr['CO']:.2f} here) and fixed infrastructure "
-          r"are excluded.}",
+          r"\emph{trimmed} tier, which keeps every standard (\S\ref{sec:data}). "
+          rf"Cost is model inference only, at Bedrock on-demand rates confirmed in "
+          rf"{RATES_CONFIRMED}, excluding Textract OCR and fixed infrastructure."
+          r"}",
           r"  \label{tab:scale}", r"\end{table}"]
     return "\n".join(L) + "\n"
 
@@ -329,30 +335,79 @@ def goldens():
     return "\n".join(parts)
 
 
-def listing_after(src, label):
-    """The first lstlisting following \\label{label} in the arXiv prompt appendix,
-    which make_prompt_appendix.py renders from the live prompt builders."""
-    i = src.index(rf"\label{{{label}}}")
-    j = src.index(r"\begin{lstlisting}", i)
-    k = src.index(r"\end{lstlisting}", j) + len(r"\end{lstlisting}")
-    return src[j:k]
+# Where the full Pass-2 text is broken into consecutive listings, so that the
+# rules the body cites (rule:positional, rule:code-resolution) each start under
+# a heading a \ref can land on. Matched as line prefixes; a missing anchor is a
+# hard failure rather than a silently shorter appendix.
+DETECTION_SPLITS = (
+    ("Role, hierarchy and layout conventions", None, None),
+    ("Classification rule", "rule:positional", "CLASSIFICATION RULE:"),
+    ("Extraction rules 1--3", None, "EXTRACTION RULES:"),
+    ("Rule 4: code resolution", "rule:code-resolution", "4. `code`:"),
+    ("Rules 5--9 and output schema", None, "5. `confidence`:"),
+)
+
+
+def full_prompts():
+    """The three complete prompts, keyed by section number, from the arXiv
+    ancillary file -- which paper/analysis/make_prompt_appendix.py renders from
+    the live prompt builders, so this appendix cannot drift from the code."""
+    src = (G.PAPER_DIR / "anc" / "prompts.txt").read_text()
+    heads = list(re.finditer(r"^=+\n(\d)\. [^\n]*\n=+\n", src, re.M))
+    if [h.group(1) for h in heads] != ["1", "2", "3"]:
+        raise SystemExit("anc/prompts.txt: expected sections 1, 2 and 3")
+    out = {}
+    for n, h in enumerate(heads):
+        end = heads[n + 1].start() if n + 1 < len(heads) else len(src)
+        out[h.group(1)] = src[h.end():end].strip("\n")
+    # The ancillary file renders the parsing prompt with an empty element list
+    # ("[]") where the per-run detections go. Show it as a placeholder, the same
+    # convention as the two detection prompts' document content.
+    slot = "Here are the detected elements:\n\n[]\n"
+    if out["3"].count(slot) != 1:
+        raise SystemExit("anc/prompts.txt: parsing prompt's element slot not found")
+    out["3"] = out["3"].replace(
+        slot, "Here are the detected elements:\n\n<<serialized detected elements>>\n")
+    return out
+
+
+def listing(text):
+    if r"\end{lstlisting}" in text:
+        raise SystemExit("prompt text would terminate its own listing")
+    return "\\begin{lstlisting}[style=promptstyle]\n" + text + "\n\\end{lstlisting}"
+
+
+def split_at(text, anchors):
+    """Cut text at the first line starting with each anchor, in order."""
+    cuts = [0]
+    for a in anchors:
+        m = re.search(r"^" + re.escape(a), text[cuts[-1]:], re.M)
+        if not m:
+            raise SystemExit(f"anc/prompts.txt: Pass-2 anchor not found: {a!r}")
+        cuts.append(cuts[-1] + m.start())
+    cuts.append(len(text))
+    return [text[a:b].strip("\n") for a, b in zip(cuts, cuts[1:])]
 
 
 def prompt_appendix():
     src = (G.TABLES_DIR / "appendix_prompts.tex").read_text()
     n_rules = re.search(r"states (\d+) numbered extraction rules", src).group(1)
     words = {"9": "nine", "10": "ten", "8": "eight"}.get(n_rules, n_rules)
+    prompts = full_prompts()
+    pieces = split_at(prompts["2"], [a for _, _, a in DETECTION_SPLITS[1:]])
     parts = [
         "% AUTO-GENERATED by paper/naacl2027/make_tables.py -- do not hand-edit.",
-        "% The two listings are lifted verbatim from paper/tables/appendix_prompts.tex,",
-        "% which paper/analysis/make_prompt_appendix.py renders from the live prompts.",
+        "% The listings are the complete text of paper/anc/prompts.txt, which",
+        "% paper/analysis/make_prompt_appendix.py renders from the live prompts.",
         "",
         r"This appendix and the schema of Appendix~\ref{sec:appendix-schema} are what "
         r"this paper discloses in place of a code release (see Ethical Considerations). "
-        r"The Pass-1 prompt and the classification rule are reproduced verbatim, as the "
-        r"system emits them with the document content replaced by a placeholder; the "
-        r"other rules the body cites are summarized. \textbf{The complete text of all "
-        r"three prompts is provided as supplementary material (\texttt{prompts.txt}).}",
+        r"It reproduces the \textbf{complete text of all three prompts}, verbatim, "
+        r"exactly as the system emits them, with only the per-run document content "
+        r"replaced by a placeholder in angle brackets. The detection prompt is split "
+        r"into consecutive listings at the rules the body cites; nothing is omitted "
+        r"between them. Long lines are wrapped at the column edge "
+        r"(marked~$\hookrightarrow$).",
         "",
         r"\subsection{Pass 1: depth-map inference}",
         r"\label{sec:prompt-depthmap}",
@@ -360,78 +415,41 @@ def prompt_appendix():
         r"(\S\ref{sec:method-detection}). Its output is supplied to every detection "
         r"call as the authority for what each nesting level is.",
         "",
-        listing_after(src, "sec:prompt-depthmap"),
+        listing(prompts["1"]),
         "",
         r"\subsection{Pass 2: per-chunk detection}",
         r"\label{sec:prompt-detection}",
         r"The prompt opens with the canonical hierarchy, the layout-coordinate "
         rf"convention and the classification rule, then states {words} numbered "
-        r"extraction rules and the output schema. Rule 1 requires every element to "
-        r"be backed by a heading line that literally appears in the chunk, so a chunk "
-        r"that opens part-way through a section emits the children alone and the "
-        r"parent is recovered in parsing.",
-        "",
-        r"\subsubsection{Classification is positional}",
-        r"\label{rule:positional}",
-        listing_after(src, "rule:positional"),
-        "",
-        r"\subsubsection{Code resolution (rule 4)}",
-        r"\label{rule:code-resolution}",
-        r"The longest rule. \texttt{code} is required and never \texttt{null}. A "
-        r"printed code always wins, and the rule orders three places to look for one: "
-        r"(i)~inline on the heading line, including the \texttt{<Label> <id>} form for "
-        r"any label word; (ii)~a caption beside the heading, such as a parenthetical "
-        r"or column header, copied verbatim; (iii)~the shared leading prefix of the "
-        r"element's descendants' dotted codes, peeled one whole segment per level, "
-        r"agreed by at least two descendants, and never taken from a code that "
-        r"carries a structural label word. Only when all three fail is a code of at "
-        r"most five characters derived from the title: split on spaces and slashes, "
-        r"drop a fixed list of connector words, then take the first four letters of a "
-        r"single remaining word or the initials of up to five. That derivation is "
+        r"extraction rules and the output schema. It is shown with an example "
+        r"two-level depth map in place of the one Pass~1 supplies. Rule~1 requires "
+        r"every element to be backed by a heading line that literally appears in the "
+        r"chunk, so a chunk that opens part-way through a section emits the children "
+        r"alone and the parent is recovered in parsing. Rule~4, the longest, orders "
+        r"three places to look for a printed code (inline, a caption beside the "
+        r"heading, the shared prefix of the descendants' dotted codes) before a code "
+        r"of at most five characters is derived from the title; that derivation is "
         r"also executed in Python (\S\ref{sec:lessons}, lesson~1).",
         "",
+    ]
+    for (heading, label, _), piece in zip(DETECTION_SPLITS, pieces):
+        parts.append(rf"\subsubsection{{{heading}}}")
+        if label:
+            parts.append(rf"\label{{{label}}}")
+        parts += [listing(piece), ""]
+    parts += [
         r"\subsection{Parsing}",
         r"\label{sec:prompt-parsing}",
-        r"The parsing prompt states the output schema, then rules for composing each "
-        r"indicator's fully qualified code from its chain of ancestors. A code that is "
-        r"already a dotted path beginning with its own domain's code is used as is and "
-        r"never re-prefixed, at every level. A \texttt{<Label> <id>} code "
-        r"(\texttt{Benchmark 1.1}) contributes only its identifier, for any label word. "
-        r"Peeling ancestors off a descendant's code stops where the printed namespace "
-        r"stops, so a level outside it builds its code from its own heading's "
-        r"identifier (Nevada's strand \texttt{SS.1} above sub-strand \texttt{SS.ID}). "
-        r"Side-by-side columns are disambiguated by a suffix on the indicator code "
-        r"only: a month range for age columns (\texttt{.36-48}), otherwise the column "
-        r"label's first four letters (\texttt{.DISC}). The shape repairs of "
-        r"\S\ref{sec:method-parsing} that collapse a duplicated parent segment or "
-        r"decline an unverifiable repair are deterministic Python applied to the "
-        r"model's output, not prompt text.",
+        r"Shown as rendered for one document (country, state and year are filled in "
+        r"per run). The rules compose each indicator's fully qualified code from its "
+        r"chain of ancestors. The shape repairs of \S\ref{sec:method-parsing} that "
+        r"collapse a duplicated parent segment or decline an unverifiable repair are "
+        r"deterministic Python applied to the model's output, not prompt text.",
+        "",
+        listing(prompts["3"]),
         "",
     ]
     return "\n".join(parts)
-
-
-PROMPTS_HEADER = """\
-Supplementary material: complete prompts
-========================================
-
-The complete text of the three prompts the system sends, exactly as the
-pipeline emits them, with only the per-run document content replaced by a
-placeholder. Appendix A of the submission reproduces the Pass-1 prompt and the
-classification rule verbatim and summarizes the other rules it cites; this
-file is the unabridged text of all three.
-
-
-"""
-
-
-def prompts_txt():
-    """The arXiv ancillary file with a header written for the review version."""
-    src = (G.PAPER_DIR / "anc" / "prompts.txt").read_text()
-    m = re.search(r"^=+\n1\. PASS 1", src, re.M)
-    if not m:
-        raise SystemExit("prompts.txt: could not find the Pass 1 section")
-    return PROMPTS_HEADER + src[m.start():]
 
 
 def main():
@@ -462,8 +480,6 @@ def main():
     for name, body in outputs:
         (OUT / name).write_text(body)
         print(f"wrote {OUT / name}")
-    (HERE / "prompts.txt").write_text(prompts_txt())
-    print(f"wrote {HERE / 'prompts.txt'}")
 
 
 if __name__ == "__main__":
