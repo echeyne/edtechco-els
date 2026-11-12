@@ -89,12 +89,12 @@ def headline(det, par, tiers, verified):
           r"are the validation states. \emph{pp}: subset pages. \emph{Std.}: "
           r"standards the parser produced. \emph{Ver.\ prec.}: verified precision "
           r"(\S\ref{sec:eval}). The fractions count golden items. "
-          r"\emph{Code acc.} is matched golden elements whose code is correct, "
-          r"\emph{Coverage} is golden standards the parser produced, and "
+          r"\emph{Code acc.} is matched golden elements whose code is correct. "
+          r"\emph{Coverage} is golden standards the parser produced. "
           r"\emph{Fully corr.} is golden standards with every field correct. "
           r"\emph{Field acc.} is the share of graded fields that match. "
           r"Development-state goldens are spot checks, so their counts are small. "
-          r"Detector recall (1.000) and the Pass-1 level count (matching the "
+          r"Detector recall (1.000) and the Pass~1 level count (matching the "
           r"golden) were the same in every state and are not shown. NV results vary "
           r"across repeat runs (\S\ref{sec:eval-stability}).}",
           r"  \label{tab:headline}", r"\end{table*}"]
@@ -117,7 +117,7 @@ def levels(abl, cmp_):
                  rf"{prop(b[lv]['baseline_recall'])} \\")
     L += [r"    \bottomrule", r"  \end{tabular}",
           r"  \caption{Detector recall by level, pooled over six states (subset "
-          r"tier): the full method, the method without the Pass-1 depth map, and a "
+          r"tier): the full method, the method without the Pass~1 depth map, and a "
           r"rule-based extractor. No-map recall varies by run "
           r"(\S\ref{sec:eval-ablation}).}",
           r"  \label{tab:levels}", r"\end{table}"]

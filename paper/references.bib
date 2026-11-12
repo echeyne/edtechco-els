@@ -428,7 +428,10 @@
   doi = {10.3102/0002831211410684}
 }
 
-% Verified: arXiv:2510.05129 (submitted 2025-09-30, cs.CL).
+% Verified: arXiv:2510.05129 (submitted 2025-09-30, cs.CL), preprint of the
+% journal version cited here. Crossref 10.1111/emip.70038 (checked 2026-11-08):
+% EMIP 45(3), article e70038, published online 2026-07-06, print 2026-09.
+% The key says 2025 (the preprint year); the cited year 2026 is correct.
 @article{xu2025automated,
   title   = {Automated Alignment of Math Items to Content Standards in Large-Scale Assessments Using Language Models},
   author  = {Xu, Qingshu and Jiao, Hong and Zhou, Tianyi and Li, Ming and Zhang, Nan and Peters, Sydney and Fu, Yanbin},
@@ -447,10 +450,13 @@
 % \citep as "(National Center on Early Childhood Quality Assurance, )" with a
 % dangling comma. The PDF's publication year could not be established (the 403
 % above), so the undated convention is used rather than a guessed date.
+% 2026-11-11: dated February 2016, read off the PDF by the author (who also
+% counted its 51 listed jurisdictions, D.C. included). Replaces {n.d.}.
 @misc{ncecqa_elgs,
   title        = {Early Learning Standards and Guidelines},
   author       = {{National Center on Early Childhood Quality Assurance}},
-  year         = {n.d.},
+  year         = {2016},
+  month        = feb,
   howpublished = {\url{https://childcareta.acf.hhs.gov/sites/default/files/state_elgs_web_final_2.pdf}},
   note         = {Office of Child Care, Administration for Children and Families, U.S. Department of Health and Human Services. Accessed August 2026}
 }
@@ -481,7 +487,7 @@
 % comments "Docling v1 report"). Open-source PDF-to-structure converter.
 @article{auer2024docling,
   title   = {Docling Technical Report},
-  author  = {Auer, Christoph and Lysak, Maksym and Nassar, Ahmed and others},
+  author  = {Auer, Christoph and Lysak, Maksym and Nassar, Ahmed and Dolfi, Michele and Livathinos, Nikolaos and Vagenas, Panos and Berrospi Ramis, Cesar and Omenetti, Matteo and Lindlbauer, Fabian and Dinkla, Kasper and Mishra, Lokesh and Kim, Yusik and Gupta, Shubham and Teixeira de Lima, Rafael and Weber, Valery and Morin, Lucas and Meijer, Ingmar and Kuropiatnyk, Viktor and Staar, Peter W. J.},
   year    = {2024},
   url     = {https://arxiv.org/abs/2408.09869},
   journal = {arXiv preprint arXiv:2408.09869}
@@ -491,7 +497,7 @@
 % comments "MinerU Technical Report").
 @article{wang2024mineru,
   title   = {{MinerU}: An Open-Source Solution for Precise Document Content Extraction},
-  author  = {Wang, Bin and Xu, Chao and Zhao, Xiaomeng and others},
+  author  = {Wang, Bin and Xu, Chao and Zhao, Xiaomeng and Ouyang, Linke and Wu, Fan and Zhao, Zhiyuan and Xu, Rui and Liu, Kaiwen and Qu, Yuan and Shang, Fukai and Zhang, Bo and Wei, Liqun and Sui, Zhihao and Li, Wei and Shi, Botian and Qiao, Yu and Lin, Dahua and He, Conghui},
   year    = {2024},
   url     = {https://arxiv.org/abs/2409.18839},
   journal = {arXiv preprint arXiv:2409.18839}
@@ -548,4 +554,79 @@
   year    = {2022},
   url     = {https://arxiv.org/abs/2209.09125},
   journal = {arXiv preprint arXiv:2209.09125}
+}
+
+% ---------------------------------------------------------------------------
+% Added 2026-11-10 by the NAACL 2027 pre-submission citation pass. Metadata for
+% every entry below was checked on that date against the source its comment
+% names. Emily: read each NEW work (SPADE, Tam, Scott-Little) before submitting
+% -- the claims they are cited for have not been checked against the full text.
+% The same pass replaced the truncated "and others" author lists on
+% auer2024docling and wang2024mineru with the full lists from their arXiv
+% records (19 and 18 authors).
+
+% Published version of shankar2022operationalizing (arXiv:2209.09125), which
+% the arXiv and DAI versions still cite under the old key. Verified: Crossref
+% 10.1145/3653697 -- PACMHCI 8(CSCW1), pages 1-34, published 2024-04-17.
+@article{shankar2024operationalize,
+  title   = {``{W}e Have No Idea How Models will Behave in Production until Production'': How Engineers Operationalize Machine Learning},
+  author  = {Shankar, Shreya and Garcia, Rolando and Hellerstein, Joseph M. and Parameswaran, Aditya G.},
+  journal = {Proceedings of the ACM on Human-Computer Interaction},
+  volume  = {8},
+  number  = {CSCW1},
+  pages   = {1--34},
+  year    = {2024},
+  doi     = {10.1145/3653697}
+}
+
+% Published version of blecher2023nougat (arXiv:2308.13418), which the arXiv
+% and DAI versions still cite under the old key. Verified: ICLR 2024
+% proceedings page (URL below) lists it as a conference paper.
+@inproceedings{blecher2024nougat,
+  title     = {Nougat: Neural Optical Understanding for Academic Documents},
+  author    = {Blecher, Lukas and Cucurull, Guillem and Scialom, Thomas and Stojnic, Robert},
+  booktitle = {The Twelfth International Conference on Learning Representations},
+  year      = {2024},
+  url       = {https://proceedings.iclr.cc/paper_files/paper/2024/hash/a39a9aceda771cded859ae7560530e09-Abstract-Conference.html}
+}
+
+% Verified: Crossref 10.14778/3685800.3685835 -- PVLDB 17(12):4173-4186,
+% 2024-08. Assertions for production LLM pipelines; cited so the lessons
+% section does not claim to be the first account of validating LLM output.
+@article{shankar2024spade,
+  title   = {{SPADE}: Synthesizing Data Quality Assertions for Large Language Model Pipelines},
+  author  = {Shankar, Shreya and Li, Haotian and Asawa, Parth and Hulsebos, Madelon and Lin, Yiming and Zamfirescu-Pereira, J. D. and Chase, Harrison and Fu-Hinthorn, Will and Parameswaran, Aditya G. and Wu, Eugene},
+  journal = {Proceedings of the VLDB Endowment},
+  volume  = {17},
+  number  = {12},
+  pages   = {4173--4186},
+  year    = {2024},
+  doi     = {10.14778/3685800.3685835}
+}
+
+% Verified: Crossref 10.18653/v1/2024.emnlp-industry.91 -- EMNLP 2024 Industry
+% Track, pages 1218-1236, Miami. Format restrictions (JSON mode, constrained
+% decoding) can degrade LLM reasoning; cited for validate-and-repair instead.
+@inproceedings{tam2024speak,
+  title     = {Let Me Speak Freely? {A} Study on the Impact of Format Restrictions on Large Language Model Performance},
+  author    = {Tam, Zhi Rui and Wu, Cheng-Kuang and Tsai, Yi-Lin and Lin, Chieh-Yen and Lee, Hung-yi and Chen, Yun-Nung},
+  booktitle = {Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing: Industry Track},
+  pages     = {1218--1236},
+  year      = {2024},
+  address   = {Miami, Florida, US},
+  doi       = {10.18653/v1/2024.emnlp-industry.91}
+}
+
+% Verified: Crossref 10.1016/j.ecresq.2006.04.003 -- ECRQ 21(2):153-173,
+% 2006-04. Hand-coded cross-state content analysis of early learning
+% standards; cited for "produced by hand".
+@article{scottlittle2006conceptualization,
+  title   = {Conceptualization of Readiness and the Content of Early Learning Standards: The Intersection of Policy and Research?},
+  author  = {Scott-Little, Catherine and Kagan, Sharon Lynn and Frelow, Victoria Stebbins},
+  journal = {Early Childhood Research Quarterly},
+  volume  = {21},
+  number  = {2},
+  pages   = {153--173},
+  year    = {2006},
+  doi     = {10.1016/j.ecresq.2006.04.003}
 }
